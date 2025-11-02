@@ -22,6 +22,26 @@ class Gym {
   int currentCrowdLevel;
   DateTime? lastCrowdUpdate;
 
+  // パートナー機能
+  final bool isPartner;            // β版パートナーかどうか
+  final String? partnerBenefit;    // パートナー特典テキスト（例: 入会金50%OFF）
+  final DateTime? partnerSince;    // パートナー開始日
+  
+  // キャンペーン情報 (オーナーが自由編集)
+  final String? campaignTitle;       // キャンペーンタイトル
+  final String? campaignDescription; // キャンペーン詳細
+  final DateTime? campaignValidUntil; // キャンペーン期限
+  final String? campaignCouponCode;  // クーポンコード
+  final String? campaignBannerUrl;   // キャンペーンバナー画像URL
+  final List<String>? photos;        // 店舗画像リスト (オーナーがアップロード)
+
+  // 予約機能
+  final bool acceptsVisitors;        // ビジター利用可能フラグ
+  final String? reservationEmail;    // 予約通知先メールアドレス（複数店舗対応）
+
+  // マシン・設備情報（オーナーが編集）
+  final Map<String, int>? equipment; // マシン種類と台数 (例: {'レッグプレス': 2, 'スミスマシン': 1})
+
   Gym({
     required this.id,
     required this.name,
@@ -40,6 +60,18 @@ class Gym {
     required this.updatedAt,
     this.currentCrowdLevel = 3,
     this.lastCrowdUpdate,
+    this.isPartner = false,
+    this.partnerBenefit,
+    this.partnerSince,
+    this.campaignTitle,
+    this.campaignDescription,
+    this.campaignValidUntil,
+    this.campaignCouponCode,
+    this.campaignBannerUrl,
+    this.photos,
+    this.acceptsVisitors = false,
+    this.reservationEmail,
+    this.equipment,
   });
 
   /// Firestoreからジムデータを生成
@@ -63,6 +95,20 @@ class Gym {
       updatedAt: (data['updatedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
       currentCrowdLevel: data['currentCrowdLevel'] ?? 3,
       lastCrowdUpdate: (data['lastCrowdUpdate'] as Timestamp?)?.toDate(),
+      isPartner: data['isPartner'] ?? false,
+      partnerBenefit: data['partnerBenefit'],
+      partnerSince: (data['partnerSince'] as Timestamp?)?.toDate(),
+      campaignTitle: data['campaignTitle'],
+      campaignDescription: data['campaignDescription'],
+      campaignValidUntil: (data['campaignValidUntil'] as Timestamp?)?.toDate(),
+      campaignCouponCode: data['campaignCouponCode'],
+      campaignBannerUrl: data['campaignBannerUrl'],
+      photos: data['photos'] != null ? List<String>.from(data['photos']) : null,
+      acceptsVisitors: data['acceptsVisitors'] ?? false,
+      reservationEmail: data['reservationEmail'],
+      equipment: data['equipment'] != null 
+          ? Map<String, int>.from(data['equipment']) 
+          : null,
     );
   }
 
@@ -87,6 +133,22 @@ class Gym {
       'lastCrowdUpdate': lastCrowdUpdate != null 
           ? Timestamp.fromDate(lastCrowdUpdate!) 
           : null,
+      'isPartner': isPartner,
+      'partnerBenefit': partnerBenefit,
+      'partnerSince': partnerSince != null
+          ? Timestamp.fromDate(partnerSince!)
+          : null,
+      'campaignTitle': campaignTitle,
+      'campaignDescription': campaignDescription,
+      'campaignValidUntil': campaignValidUntil != null
+          ? Timestamp.fromDate(campaignValidUntil!)
+          : null,
+      'campaignCouponCode': campaignCouponCode,
+      'campaignBannerUrl': campaignBannerUrl,
+      'photos': photos,
+      'acceptsVisitors': acceptsVisitors,
+      'reservationEmail': reservationEmail,
+      'equipment': equipment,
     };
   }
 

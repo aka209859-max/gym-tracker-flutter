@@ -43,15 +43,15 @@ class DefaultFirebaseOptions {
     }
   }
 
-  // Web Platform Configuration (Demo - 後で本番設定に置き換え)
+  // Web Platform Configuration (GYM MATCH Production)
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDemoWeb-FitSync-Key-Replace-With-Real',
-    appId: '1:123456789:web:abcdef123456',
-    messagingSenderId: '123456789',
-    projectId: 'fitsync-demo',
-    authDomain: 'fitsync-demo.firebaseapp.com',
-    storageBucket: 'fitsync-demo.appspot.com',
-    measurementId: 'G-DEMO123456',
+    apiKey: 'AIzaSyDYwD-_fz9m4vSQsbdXuQpKtbHguIl4LaM',
+    appId: '1:506175392633:web:046d7c7a6a8ac7e606fda8',
+    messagingSenderId: '506175392633',
+    projectId: 'gym-match-e560d',
+    authDomain: 'gym-match-e560d.firebaseapp.com',
+    storageBucket: 'gym-match-e560d.firebasestorage.app',
+    measurementId: 'G-DXGP9WX0Z8',
   );
 
   // Android Platform Configuration (後で本番設定に置き換え)

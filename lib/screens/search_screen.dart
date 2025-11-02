@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +33,12 @@ class _SearchScreenState extends State<SearchScreen> {
   
   List<Gym> _filteredGyms = [];
   List<GooglePlace> _googlePlaces = [];
-  bool _useGooglePlaces = true; // Google Places APIを使用
+  bool _useGooglePlaces = false; // デモモード: サンプルデータを使用（Google Places APIエラー回避）
+
+  // ページネーション関連
+  int _currentPage = 1;
+  static const int _itemsPerPage = 20;
+  int get _totalPages => (_filteredGyms.length / _itemsPerPage).ceil();
 
   // デバウンスタイマー（API呼び出し最適化）
   Timer? _debounceTimer;
@@ -320,12 +326,68 @@ class _SearchScreenState extends State<SearchScreen> {
       );
     }
 
-    // 検索結果リスト
-    return ListView.builder(
-      padding: const EdgeInsets.all(16),
-      itemCount: _filteredGyms.length,
+    // 検索結果リスト（パートナージム優先ソート）
+    final sortedGyms = List<Gym>.from(_filteredGyms);
+    sortedGyms.sort((a, b) {
+      // パートナージムを優先
+      if (a.isPartner && !b.isPartner) return -1;
+      if (!a.isPartner && b.isPartner) return 1;
+      // 同じ優先度の場合は距離でソート
+      if (_currentPosition != null) {
+        final distA = _locationService.calculateDistance(
+          _currentPosition!.latitude,
+          _currentPosition!.longitude,
+          a.latitude,
+          a.longitude,
+        );
+        final distB = _locationService.calculateDistance(
+          _currentPosition!.latitude,
+          _currentPosition!.longitude,
+          b.latitude,
+          b.longitude,
+        );
+        return distA.compareTo(distB);
+      }
+      return 0;
+    });
+
+    // ページネーション適用（20件ずつ表示）
+    final startIndex = (_currentPage - 1) * _itemsPerPage;
+    final endIndex = startIndex + _itemsPerPage;
+    final paginatedGyms = sortedGyms.sublist(
+      startIndex, 
+      endIndex > sortedGyms.length ? sortedGyms.length : endIndex,
+    );
+
+    return Column(
+      children: [
+        // ページ情報表示
+        if (sortedGyms.length > _itemsPerPage)
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            color: Colors.grey[100],
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '全${sortedGyms.length}件中 ${startIndex + 1}-${endIndex > sortedGyms.length ? sortedGyms.length : endIndex}件を表示',
+                  style: const TextStyle(fontSize: 12, color: Colors.black87),
+                ),
+                Text(
+                  'ページ $_currentPage / $_totalPages',
+                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        
+        // 検索結果リスト
+        Expanded(
+          child: ListView.builder(
+            padding: const EdgeInsets.all(16),
+            itemCount: paginatedGyms.length,
       itemBuilder: (context, index) {
-        final gym = _filteredGyms[index];
+        final gym = paginatedGyms[index];
         final distance = _currentPosition != null
             ? _locationService.calculateDistance(
                 _currentPosition!.latitude,
@@ -337,6 +399,74 @@ class _SearchScreenState extends State<SearchScreen> {
 
         return _buildGymCard(gym, distance);
       },
+          ),
+        ),
+        
+        // ページネーションコントロール
+        if (sortedGyms.length > _itemsPerPage)
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.1),
+                  blurRadius: 4,
+                  offset: const Offset(0, -2),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // 前へボタン
+                ElevatedButton.icon(
+                  onPressed: _currentPage > 1
+                      ? () {
+                          setState(() {
+                            _currentPage--;
+                          });
+                        }
+                      : null,
+                  icon: const Icon(Icons.chevron_left),
+                  label: const Text('前へ'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue[600],
+                    foregroundColor: Colors.white,
+                    disabledBackgroundColor: Colors.grey[300],
+                  ),
+                ),
+                
+                // ページ番号表示
+                Text(
+                  '$_currentPage / $_totalPages',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                
+                // 次へボタン
+                ElevatedButton.icon(
+                  onPressed: _currentPage < _totalPages
+                      ? () {
+                          setState(() {
+                            _currentPage++;
+                          });
+                        }
+                      : null,
+                  icon: const Icon(Icons.chevron_right),
+                  label: const Text('次へ'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue[600],
+                    foregroundColor: Colors.white,
+                    disabledBackgroundColor: Colors.grey[300],
+                  ),
+                ),
+              ],
+            ),
+          ),
+      ],
     );
   }
 
@@ -382,14 +512,49 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      gym.name,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                    // パートナーバッジ + ジム名
+                    Row(
+                      children: [
+                        if (gym.isPartner) ...[
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: Colors.amber[700],
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  '🏆',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                                SizedBox(width: 2),
+                                Text(
+                                  '広告',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                        ],
+                        Expanded(
+                          child: Text(
+                            gym.name,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 4),
                     Row(
@@ -425,6 +590,115 @@ class _SearchScreenState extends State<SearchScreen> {
                     const SizedBox(height: 8),
                     // 混雑度
                     _buildCrowdIndicator(gym),
+                    // パートナー特典表示
+                    if (gym.isPartner && gym.partnerBenefit != null) ...[
+                      const SizedBox(height: 6),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                        decoration: BoxDecoration(
+                          color: Colors.green[50],
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(color: Colors.green[300]!, width: 1),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.local_offer, size: 12, color: Colors.green[700]),
+                            const SizedBox(width: 4),
+                            Flexible(
+                              child: Text(
+                                gym.partnerBenefit!,
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  color: Colors.green[800],
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                    // ビジター可バッジ
+                    if (gym.acceptsVisitors) ...[
+                      const SizedBox(height: 4),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                        decoration: BoxDecoration(
+                          color: Colors.blue[600],
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.check_circle, size: 12, color: Colors.white),
+                            SizedBox(width: 4),
+                            Text(
+                              'ビジター可',
+                              style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                    // キャンペーン表示
+                    if (gym.isPartner && gym.campaignTitle != null && gym.campaignTitle!.isNotEmpty) ...[
+                      const SizedBox(height: 6),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: Colors.amber[50],
+                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(color: Colors.amber[600]!, width: 1.5),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.campaign, size: 14, color: Colors.amber[900]),
+                            const SizedBox(width: 6),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    gym.campaignTitle!,
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.amber[900],
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  if (gym.campaignValidUntil != null) ...[
+                                    const SizedBox(height: 2),
+                                    Row(
+                                      children: [
+                                        Icon(Icons.access_time, size: 10, color: Colors.red[700]),
+                                        const SizedBox(width: 2),
+                                        Text(
+                                          '${gym.campaignValidUntil!.month}/${gym.campaignValidUntil!.day}まで',
+                                          style: TextStyle(
+                                            fontSize: 9,
+                                            color: Colors.red[700],
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               ),
@@ -494,10 +768,38 @@ class _SearchScreenState extends State<SearchScreen> {
         }
       } else {
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('位置情報の取得に失敗しました'),
-              backgroundColor: Colors.red,
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Row(
+                children: [
+                  Icon(Icons.location_off, color: Colors.orange),
+                  SizedBox(width: 8),
+                  Text('位置情報の取得に失敗'),
+                ],
+              ),
+              content: const Text(
+                '位置情報を取得できませんでした。\n\n'
+                '【解決方法】\n'
+                '1. ブラウザのアドレスバー左側の🔒マークをクリック\n'
+                '2. 「位置情報」を「許可」に変更\n'
+                '3. ページをリロードして再度お試しください\n\n'
+                '※位置情報なしでもキーワード検索は利用できます',
+                style: TextStyle(fontSize: 14),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('閉じる'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    _getCurrentLocation(); // 再試行
+                  },
+                  child: const Text('再試行'),
+                ),
+              ],
             ),
           );
         }
@@ -547,17 +849,28 @@ class _SearchScreenState extends State<SearchScreen> {
     }
 
     try {
-      List<GooglePlace> places = [];
+      // 🔥 NEW: パートナー情報統合版APIを使用
+      List<Gym> googleGyms = [];
 
       // 🔥 優先順位変更: テキスト検索を最優先
+      List<Gym> localGyms = [];
       if (_searchQuery.isNotEmpty) {
-        // テキスト検索（全国対応）
+        // テキスト検索（全国対応 - エリア名 or ジム名）
         if (kDebugMode) {
           print('📝 テキスト検索: "$_searchQuery"');
         }
-        places = await _placesService.searchGymsByText(_searchQuery);
+        // 🏆 パートナー情報統合版API使用
+        googleGyms = await _placesService.searchGymsByTextWithPartners(_searchQuery);
+        
+        // 🔥 ローカルデータも検索（トレーニーの聖地など）
+        final provider = Provider.of<GymProvider>(context, listen: false);
+        localGyms = provider.searchGyms(_searchQuery);
+        
         if (kDebugMode) {
-          print('✅ テキスト検索結果: ${places.length}件');
+          print('✅ Google Places検索: ${googleGyms.length}件');
+          final partnerCount = googleGyms.where((g) => g.isPartner).length;
+          print('   🏆 パートナージム: ${partnerCount}件');
+          print('✅ ローカルデータ検索: ${localGyms.length}件');
         }
       }
       // GPS検索（テキスト入力がない場合のみ）
@@ -565,42 +878,62 @@ class _SearchScreenState extends State<SearchScreen> {
         if (kDebugMode) {
           print('📍 GPS検索: Lat=${_currentPosition!.latitude}, Lng=${_currentPosition!.longitude}, Radius=${_searchRadius}km');
         }
-        places = await _placesService.searchNearbyGyms(
+        // 🏆 パートナー情報統合版API使用
+        googleGyms = await _placesService.searchNearbyGymsWithPartners(
           latitude: _currentPosition!.latitude,
           longitude: _currentPosition!.longitude,
           radiusMeters: (_searchRadius * 1000).toInt(),
         );
         if (kDebugMode) {
-          print('✅ GPS検索結果: ${places.length}件');
+          print('✅ GPS検索結果: ${googleGyms.length}件');
+          final partnerCount = googleGyms.where((g) => g.isPartner).length;
+          print('   🏆 パートナージム: ${partnerCount}件');
         }
       }
 
-      // GooglePlaceをGymモデルに変換
-      final gyms = places.map((place) {
-        final gymData = place.toGymCompatible();
-        return Gym(
-          id: gymData['id'],
-          name: gymData['name'],
-          address: gymData['address'],
-          latitude: gymData['latitude'],
-          longitude: gymData['longitude'],
-          rating: gymData['rating'],
-          reviewCount: gymData['reviewCount'],
-          currentCrowdLevel: gymData['crowdLevel'],
-          monthlyFee: gymData['monthlyFee'],
-          facilities: List<String>.from(gymData['facilities']),
-          phoneNumber: gymData['phoneNumber'],
-          openingHours: gymData['openingHours'],
-          imageUrl: gymData['imageUrl'],
-          createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
-        );
-      }).toList();
+      // 🔥 NOTE: googleGyms は既に Gym オブジェクト（変換不要）
+
+      // 🔥 ローカルジム + Google Places検索結果をマージ
+      final mergedGyms = [...localGyms, ...googleGyms];
+      
+      if (kDebugMode) {
+        print('🎯 マージ結果: 合計 ${mergedGyms.length}件 (ローカル: ${localGyms.length}件, Google: ${googleGyms.length}件)');
+      }
+
+      // 🏆 パートナージム優先表示：GPS検索時は距離に関係なくパートナージムを最上位に
+      if (_currentPosition != null) {
+        mergedGyms.sort((a, b) {
+          // パートナージムを優先
+          if (a.isPartner && !b.isPartner) return -1;
+          if (!a.isPartner && b.isPartner) return 1;
+          
+          // 同じグループ内では距離順（近い順）
+          final distA = _calculateDistance(
+            _currentPosition!.latitude,
+            _currentPosition!.longitude,
+            a.latitude,
+            a.longitude,
+          );
+          final distB = _calculateDistance(
+            _currentPosition!.latitude,
+            _currentPosition!.longitude,
+            b.latitude,
+            b.longitude,
+          );
+          return distA.compareTo(distB);
+        });
+        
+        if (kDebugMode) {
+          final partnerCount = mergedGyms.where((g) => g.isPartner).length;
+          print('🏆 パートナージム優先ソート完了: ${partnerCount}件のパートナージムを最上位に配置');
+        }
+      }
 
       setState(() {
-        _filteredGyms = gyms;
-        _googlePlaces = places;
+        _filteredGyms = mergedGyms;
+        _googlePlaces = []; // GooglePlace is no longer used
         _isSearching = false;
+        _currentPage = 1; // 検索実行時にページ番号をリセット
       });
     } catch (e) {
       if (kDebugMode) {
@@ -638,5 +971,26 @@ class _SearchScreenState extends State<SearchScreen> {
         );
       }
     }
+  }
+
+  /// 2点間の距離を計算（ヒュベニの公式）単位: km
+  double _calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+    const double earthRadius = 6371.0; // 地球の半径（km）
+    
+    final dLat = _toRadians(lat2 - lat1);
+    final dLon = _toRadians(lon2 - lon1);
+    
+    final a = sin(dLat / 2) * sin(dLat / 2) +
+        cos(_toRadians(lat1)) * cos(_toRadians(lat2)) *
+        sin(dLon / 2) * sin(dLon / 2);
+    
+    final c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    
+    return earthRadius * c;
+  }
+
+  /// 度をラジアンに変換
+  double _toRadians(double degrees) {
+    return degrees * pi / 180;
   }
 }

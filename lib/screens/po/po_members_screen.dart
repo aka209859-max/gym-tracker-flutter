@@ -1,0 +1,376 @@
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../models/pt_member.dart';
+import 'po_member_detail_screen.dart';
+
+/// PO会員管理画面
+class POMembersScreen extends StatefulWidget {
+  final String partnerId;
+
+  const POMembersScreen({super.key, required this.partnerId});
+
+  @override
+  State<POMembersScreen> createState() => _POMembersScreenState();
+}
+
+class _POMembersScreenState extends State<POMembersScreen> {
+  String _filterStatus = 'all'; // 'all', 'active', 'dormant'
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          // フィルタ
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: SegmentedButton<String>(
+              segments: const [
+                ButtonSegment(value: 'all', label: Text('全会員')),
+                ButtonSegment(value: 'active', label: Text('アクティブ')),
+                ButtonSegment(value: 'dormant', label: Text('休眠中')),
+              ],
+              selected: {_filterStatus},
+              onSelectionChanged: (Set<String> newSelection) {
+                setState(() {
+                  _filterStatus = newSelection.first;
+                });
+              },
+            ),
+          ),
+
+          // 会員リスト
+          Expanded(
+            child: StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('personalTrainingMembers')
+                  .where('partnerId', isEqualTo: widget.partnerId)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                if (snapshot.hasError) {
+                  return Center(child: Text('エラー: ${snapshot.error}'));
+                }
+
+                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.people_outline,
+                            size: 64, color: Colors.grey[400]),
+                        const SizedBox(height: 16),
+                        Text(
+                          'まだパーソナル会員がいません',
+                          style:
+                              TextStyle(fontSize: 16, color: Colors.grey[600]),
+                        ),
+                        const SizedBox(height: 24),
+                        ElevatedButton.icon(
+                          onPressed: () {
+                            // デモデータ追加機能（開発用）
+                            _addDemoMembers();
+                          },
+                          icon: const Icon(Icons.add),
+                          label: const Text('デモデータを追加'),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+
+                var members = snapshot.data!.docs
+                    .map((doc) => PTMember.fromFirestore(
+                        doc.data() as Map<String, dynamic>, doc.id))
+                    .toList();
+
+                // フィルタ適用
+                if (_filterStatus == 'active') {
+                  members = members.where((m) => m.isActive).toList();
+                } else if (_filterStatus == 'dormant') {
+                  members = members.where((m) => !m.isActive).toList();
+                }
+
+                // サマリーカード
+                final activeCount =
+                    members.where((m) => m.isActive).length;
+                final dormantCount =
+                    members.where((m) => !m.isActive).length;
+
+                return Column(
+                  children: [
+                    // サマリー
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: _SummaryCard(
+                              label: '全会員',
+                              value: '${members.length}名',
+                              color: Colors.blue,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: _SummaryCard(
+                              label: 'アクティブ',
+                              value: '$activeCount名',
+                              color: Colors.green,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: _SummaryCard(
+                              label: '休眠中',
+                              value: '$dormantCount名',
+                              color: Colors.orange,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+
+                    // 会員リスト
+                    Expanded(
+                      child: ListView.builder(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        itemCount: members.length,
+                        itemBuilder: (context, index) {
+                          final member = members[index];
+                          return _MemberCard(
+                            member: member,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => POMemberDetailScreen(
+                                    member: member,
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // 会員追加機能（今後実装）
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('会員追加機能は近日公開予定です')),
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+
+  // デモデータ追加（開発用）
+  Future<void> _addDemoMembers() async {
+    final demoMembers = [
+      PTMember(
+        id: '',
+        userId: 'demo_user_1',
+        partnerId: widget.partnerId,
+        name: '山田太郎',
+        email: 'yamada@example.com',
+        phoneNumber: '090-1234-5678',
+        joinedAt: DateTime.now().subtract(const Duration(days: 60)),
+        trainerName: '田中トレーナー',
+        planName: '月8回コース',
+        totalSessions: 16,
+        remainingSessions: 5,
+        lastSessionAt: DateTime.now().subtract(const Duration(days: 2)),
+        status: 'active',
+      ),
+      PTMember(
+        id: '',
+        userId: 'demo_user_2',
+        partnerId: widget.partnerId,
+        name: '佐藤花子',
+        email: 'sato@example.com',
+        phoneNumber: '090-9876-5432',
+        joinedAt: DateTime.now().subtract(const Duration(days: 90)),
+        trainerName: '鈴木トレーナー',
+        planName: '月4回コース',
+        totalSessions: 12,
+        remainingSessions: 2,
+        lastSessionAt: DateTime.now().subtract(const Duration(days: 5)),
+        status: 'active',
+      ),
+      PTMember(
+        id: '',
+        userId: 'demo_user_3',
+        partnerId: widget.partnerId,
+        name: '高橋一郎',
+        email: 'takahashi@example.com',
+        phoneNumber: '080-1111-2222',
+        joinedAt: DateTime.now().subtract(const Duration(days: 120)),
+        trainerName: '田中トレーナー',
+        planName: '月8回コース',
+        totalSessions: 32,
+        remainingSessions: 1,
+        lastSessionAt: DateTime.now().subtract(const Duration(days: 18)),
+        status: 'active',
+      ),
+    ];
+
+    for (final member in demoMembers) {
+      await FirebaseFirestore.instance
+          .collection('personalTrainingMembers')
+          .add(member.toFirestore());
+    }
+
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('デモデータを追加しました')),
+      );
+    }
+  }
+}
+
+class _SummaryCard extends StatelessWidget {
+  final String label;
+  final String value;
+  final Color color;
+
+  const _SummaryCard({
+    required this.label,
+    required this.value,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: color.withOpacity(0.1),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          children: [
+            Text(label,
+                style: TextStyle(fontSize: 12, color: Colors.grey[700])),
+            const SizedBox(height: 4),
+            Text(value,
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MemberCard extends StatelessWidget {
+  final PTMember member;
+  final VoidCallback onTap;
+
+  const _MemberCard({
+    required this.member,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final daysSince = member.lastSessionAt != null
+        ? DateTime.now().difference(member.lastSessionAt!).inDays
+        : null;
+
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    child: Text(member.name[0]),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          member.name,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          '担当: ${member.trainerName}',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: member.isActive
+                          ? Colors.green[100]
+                          : Colors.orange[100],
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      member.isActive ? 'アクティブ' : '休眠中',
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        color: member.isActive
+                            ? Colors.green[800]
+                            : Colors.orange[800],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      '${member.planName} (残り${member.remainingSessions}回)',
+                      style: TextStyle(fontSize: 12, color: Colors.grey[700]),
+                    ),
+                  ),
+                  if (daysSince != null)
+                    Text(
+                      '最終: $daysSince日前',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: daysSince > 14 ? Colors.red : Colors.grey[700],
+                      ),
+                    ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

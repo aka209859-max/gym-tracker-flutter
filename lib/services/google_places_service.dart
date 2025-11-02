@@ -3,16 +3,21 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import '../config/api_keys.dart';
 import '../models/google_place.dart';
+import '../models/gym.dart';
 import 'search_cache_service.dart';
+import 'partner_merge_service.dart';
 
 /// Google Places API検索サービス（プロキシ経由）
 /// 全国のジム・フィットネス施設を検索
 class GooglePlacesService {
   // プロキシサーバーのURL（サンドボックス公開URL）
-  static const String _proxyBaseUrl = 'https://8080-i1wzdi6c2urpgehncb6jg-5634da27.sandbox.novita.ai/api/places';
+  static const String _proxyBaseUrl = 'https://8080-i1wzdi6c2urpgehncb6jg-5c13a017.sandbox.novita.ai/api/places';
   
   // 検索キャッシュサービス
   final SearchCacheService _cacheService = SearchCacheService();
+  
+  // パートナー情報統合サービス
+  final PartnerMergeService _partnerMergeService = PartnerMergeService();
   /// GPS位置ベースでジムを検索（Nearby Search API）
   /// 
   /// [latitude] 緯度
@@ -78,10 +83,17 @@ class GooglePlacesService {
               .map((json) => GooglePlace.fromJson(json as Map<String, dynamic>))
               .toList();
           
-          // 結果をキャッシュに保存
-          _cacheService.cacheNearbySearch(latitude, longitude, radiusMeters, places);
+          // 🔍 フィットネスジム以外の施設を除外
+          final filteredPlaces = _filterNonGymFacilities(places);
           
-          return places;
+          if (kDebugMode) {
+            print('   🔍 Filtered: ${places.length} → ${filteredPlaces.length} (removed ${places.length - filteredPlaces.length} non-gym facilities)');
+          }
+          
+          // 結果をキャッシュに保存
+          _cacheService.cacheNearbySearch(latitude, longitude, radiusMeters, filteredPlaces);
+          
+          return filteredPlaces;
         } else if (data['status'] == 'ZERO_RESULTS') {
           if (kDebugMode) {
             print('   ℹ️ No results found');
@@ -99,6 +111,55 @@ class GooglePlacesService {
     } catch (e) {
       throw Exception('Failed to search nearby gyms: $e');
     }
+  }
+
+  /// フィットネスジム以外の施設を除外するフィルター
+  /// 
+  /// 公共体育館、直売所、公民館など無関係な施設を除外
+  List<GooglePlace> _filterNonGymFacilities(List<GooglePlace> places) {
+    // 除外キーワードリスト（施設名に含まれていたら除外）
+    const excludeKeywords = [
+      '体育館',
+      '公園',
+      '直売所',
+      '市民センター',
+      '公民館',
+      '図書館',
+      '役所',
+      '学校',
+      '武道館',
+      '陸上競技場',
+      '野球場',
+      'テニスコート',
+      '市役所',
+      '町役場',
+      '村役場',
+      '区役所',
+      '保健所',
+      '病院',
+      'クリニック',
+      '歯科',
+      'ホテル',
+      '旅館',
+      '温泉',
+      '銭湯',
+      'マッサージ',
+      '整体',
+      '接骨院',
+    ];
+    
+    return places.where((place) {
+      final nameLower = place.name.toLowerCase();
+      
+      // 除外キーワードが含まれていたら除外
+      final shouldExclude = excludeKeywords.any((keyword) => nameLower.contains(keyword));
+      
+      if (shouldExclude && kDebugMode) {
+        print('   ❌ Excluded: ${place.name} (non-gym facility)');
+      }
+      
+      return !shouldExclude;
+    }).toList();
   }
 
   /// テキストベースでジムを検索（Text Search API）
@@ -156,10 +217,17 @@ class GooglePlacesService {
               .map((json) => GooglePlace.fromJson(json as Map<String, dynamic>))
               .toList();
           
-          // 結果をキャッシュに保存
-          _cacheService.cacheTextSearch(query, places);
+          // 🔍 フィットネスジム以外の施設を除外
+          final filteredPlaces = _filterNonGymFacilities(places);
           
-          return places;
+          if (kDebugMode) {
+            print('   🔍 Filtered: ${places.length} → ${filteredPlaces.length} (removed ${places.length - filteredPlaces.length} non-gym facilities)');
+          }
+          
+          // 結果をキャッシュに保存
+          _cacheService.cacheTextSearch(query, filteredPlaces);
+          
+          return filteredPlaces;
         } else {
           throw Exception('Google Places API error: ${data['status']} - ${data['error_message'] ?? "No details"}');
         }
@@ -234,6 +302,59 @@ class GooglePlacesService {
     // テキスト検索
     if (textQuery != null && textQuery.isNotEmpty) {
       return await searchGymsByText(textQuery);
+    }
+    
+    // どちらも指定されていない場合はエラー
+    throw Exception('Either GPS coordinates or text query must be provided');
+  }
+
+  // ==================== 🔥 NEW: パートナー情報統合版API ====================
+
+  /// GPS位置ベースでジムを検索（パートナー情報統合版）
+  /// 
+  /// Google Places APIの結果とFirestoreパートナー情報を統合
+  Future<List<Gym>> searchNearbyGymsWithPartners({
+    required double latitude,
+    required double longitude,
+    int radiusMeters = 5000,
+  }) async {
+    final places = await searchNearbyGyms(
+      latitude: latitude,
+      longitude: longitude,
+      radiusMeters: radiusMeters,
+    );
+    return await _partnerMergeService.mergePartnerData(places);
+  }
+
+  /// テキストベースでジムを検索（パートナー情報統合版）
+  /// 
+  /// Google Places APIの結果とFirestoreパートナー情報を統合
+  Future<List<Gym>> searchGymsByTextWithPartners(String query) async {
+    final places = await searchGymsByText(query);
+    return await _partnerMergeService.mergePartnerData(places);
+  }
+
+  /// GPS検索とテキスト検索の複合検索（パートナー情報統合版）
+  /// 
+  /// GPS優先 → テキスト検索でフォールバック
+  Future<List<Gym>> searchGymsWithPartners({
+    double? latitude,
+    double? longitude,
+    int? radiusMeters,
+    String? textQuery,
+  }) async {
+    // GPS位置が指定されている場合
+    if (latitude != null && longitude != null) {
+      return await searchNearbyGymsWithPartners(
+        latitude: latitude,
+        longitude: longitude,
+        radiusMeters: radiusMeters ?? ApiKeys.defaultSearchRadius,
+      );
+    }
+    
+    // テキスト検索
+    if (textQuery != null && textQuery.isNotEmpty) {
+      return await searchGymsByTextWithPartners(textQuery);
     }
     
     // どちらも指定されていない場合はエラー

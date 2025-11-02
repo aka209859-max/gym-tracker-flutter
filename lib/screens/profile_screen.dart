@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'theme_selector_screen.dart';
 import 'favorites_screen.dart';
 import 'subscription_screen.dart';
+import 'partner_login_screen.dart';
 import '../services/favorites_service.dart';
 import '../services/subscription_service.dart';
 
@@ -142,6 +143,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _buildMenuList(BuildContext context) {
     return Column(
       children: [
+        // パートナーオーナー専用ログイン
+        Card(
+          elevation: 2,
+          color: Colors.amber[50],
+          child: ListTile(
+            leading: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.amber[700],
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.business_center, color: Colors.white),
+            ),
+            title: const Text(
+              '🏆 パートナーオーナー専用',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: const Text(
+              '店舗情報・キャンペーンをリアルタイム更新',
+              style: TextStyle(fontSize: 12),
+            ),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PartnerLoginScreen()),
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: 12),
         _buildMenuCard(
           context,
           icon: Icons.palette,

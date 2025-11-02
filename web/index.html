@@ -25,21 +25,21 @@
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="FitSync - 全国ジム検索アプリ">
-  <meta property="og:description" content="全国47都道府県対応のジム検索アプリ。あなたにぴったりのジムを見つけよう。">
+  <meta property="og:title" content="GYM MATCH - ジム検索アプリ">
+  <meta property="og:description" content="全国47都道府県対応のジム検索アプリ。リアルタイム混雑度・パートナージム優先表示。">
   <meta property="og:image" content="icons/Icon-512.png">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="FitSync - 全国ジム検索アプリ">
-  <meta name="twitter:description" content="全国47都道府県対応のジム検索アプリ。あなたにぴったりのジムを見つけよう。">
+  <meta name="twitter:title" content="GYM MATCH - ジム検索アプリ">
+  <meta name="twitter:description" content="全国47都道府県対応のジム検索アプリ。リアルタイム混雑度・パートナージム優先表示。">
   <meta name="twitter:image" content="icons/Icon-512.png">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="FitSync">
+  <meta name="apple-mobile-web-app-title" content="GYM MATCH">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
@@ -48,10 +48,31 @@
   <!-- Theme Color -->
   <meta name="theme-color" content="#1E88E5">
 
-  <title>FitSync - 全国ジム検索アプリ</title>
+  <!-- Cache Busting: Force browser to fetch new version -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <title>GYM MATCH - ジム検索アプリ</title>
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <!-- Version timestamp for cache busting -->
+  <script>
+    // Add timestamp to force fresh loads - DEBUG LOGGING
+    window.APP_VERSION = 'v5.4-debug-logging-' + Date.now();
+    console.log('🚀 GYM MATCH ' + window.APP_VERSION);
+    console.log('💪 部位別トレーニングシステム実装（胸/脚/背中/肩/二頭/三頭）');
+    console.log('📱 iOS風スクロールピッカーで時間選択（iPhone時計風）');
+    console.log('📊 統計カードにミニグラフ表示');
+    console.log('🔥 Firestore連携: 保存データが履歴に反映');
+    console.log('📅 カレンダー連動: 日付クリックでその日の履歴表示');
+    console.log('⏱️ トレーニング時間: 全体のセッション時間として記録');
+    console.log('🏋️ セット入力画面に選択中の種目名を表示');
+    console.log('🔄 保存後自動でホーム画面に遷移');
+    console.log('✅ スマホでのローディング問題修正');
+    console.log('🐛 デバッグログ追加版');
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

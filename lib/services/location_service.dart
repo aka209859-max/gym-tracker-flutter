@@ -1,13 +1,18 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:flutter/foundation.dart' show kIsWeb, debugPrint;
 
 /// 位置情報検索サービス
 class LocationService {
-  /// 現在地を取得
+  /// 現在地を取得（モバイル専用版）
   Future<Position?> getCurrentLocation() async {
     try {
+      // Web環境の場合はgeolocatorを使用（Web対応版）
+      // モバイル環境の場合もgeolocatorを使用
+      
       // 位置情報サービスが有効かチェック
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
+        debugPrint('❌ Location service is disabled');
         return null;
       }
 
@@ -16,11 +21,13 @@ class LocationService {
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.denied) {
+          debugPrint('❌ Location permission denied');
           return null;
         }
       }
 
       if (permission == LocationPermission.deniedForever) {
+        debugPrint('❌ Location permission denied forever');
         return null;
       }
 
@@ -31,6 +38,7 @@ class LocationService {
         ),
       );
     } catch (e) {
+      debugPrint('❌ Location error: $e');
       return null;
     }
   }

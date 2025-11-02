@@ -83,7 +83,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   _buildPlanCard(
                     type: SubscriptionType.premium,
                     name: 'プレミアムプラン',
-                    price: '¥980',
+                    price: '¥500',
                     priceUnit: '月額',
                     features: [
                       '✨ 無料プランの全機能',
@@ -103,16 +103,13 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   _buildPlanCard(
                     type: SubscriptionType.pro,
                     name: 'プロプラン',
-                    price: '¥1,980',
+                    price: '¥980',
                     priceUnit: '月額',
                     features: [
                       '✨ プレミアムプランの全機能',
                       '👥 トレーニングパートナー検索',
                       '💬 メッセージング機能',
-                      '📅 トレーニングスケジュール管理',
-                      '📈 トレーニング記録と分析',
-                      '🏆 実績バッジ取得',
-                      '🎁 提携ジム特別割引',
+                      '📊 トレーニング記録と分析',
                     ],
                     color: Colors.amber,
                     icon: Icons.emoji_events,

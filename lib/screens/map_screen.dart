@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
@@ -5,7 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geolocator/geolocator.dart';
 import '../providers/gym_provider.dart';
 import '../models/gym.dart';
-import '../models/google_place.dart';
 import '../services/location_service.dart';
 import '../services/google_places_service.dart';
 import 'gym_detail_screen.dart';
@@ -25,7 +25,7 @@ class _MapScreenState extends State<MapScreen> {
   // GPS検索関連
   final LocationService _locationService = LocationService();
   final GooglePlacesService _placesService = GooglePlacesService();
-  List<GooglePlace> _nearbyPlaces = [];
+  List<Gym> _nearbyGyms = [];
   bool _isLoadingGPS = false;
   Position? _userPosition;
   bool _hasSearchedGPS = false;
@@ -115,10 +115,37 @@ class _MapScreenState extends State<MapScreen> {
       
       if (position == null) {
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('位置情報の取得に失敗しました。設定で位置情報を有効にしてください。'),
-              backgroundColor: Colors.red,
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Row(
+                children: [
+                  Icon(Icons.location_off, color: Colors.orange),
+                  SizedBox(width: 8),
+                  Text('位置情報の取得に失敗'),
+                ],
+              ),
+              content: const Text(
+                '位置情報を取得できませんでした。\n\n'
+                '【解決方法】\n'
+                '1. ブラウザのアドレスバー左側の🔒マークをクリック\n'
+                '2. 「位置情報」を「許可」に変更\n'
+                '3. ページをリロードして再度お試しください',
+                style: TextStyle(fontSize: 14),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('閉じる'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    _acquireLocationAndSearch(); // 再試行
+                  },
+                  child: const Text('再試行'),
+                ),
+              ],
             ),
           );
         }
@@ -132,20 +159,57 @@ class _MapScreenState extends State<MapScreen> {
         debugPrint('✅ GPS取得成功: ${position.latitude}, ${position.longitude}');
       }
 
-      // 近くのジムを検索（半径5km）
-      final places = await _placesService.searchNearbyGyms(
-        latitude: position.latitude,
-        longitude: position.longitude,
-        radiusMeters: 5000,
-      );
+      // 近くのジムを検索（半径5km）- パートナーデータ統合版
+      // デモモード: Google Places APIを使用せず、常にサンプルデータを使用
+      List<Gym> gyms;
+      
+      if (kDebugMode) {
+        debugPrint('🎯 デモモード: サンプルデータを使用します');
+      }
+      
+      final provider = Provider.of<GymProvider>(context, listen: false);
+      gyms = provider.gyms;
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('デモモード: サンプルジムデータを表示しています'),
+            backgroundColor: Colors.blue,
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+
+      // 🏆 パートナージム優先表示：距離に関係なく最上位に
+      gyms.sort((a, b) {
+        // パートナージムを優先
+        if (a.isPartner && !b.isPartner) return -1;
+        if (!a.isPartner && b.isPartner) return 1;
+        
+        // 同じグループ内では距離順（近い順）
+        final distA = _calculateDistance(
+          position.latitude,
+          position.longitude,
+          a.latitude,
+          a.longitude,
+        );
+        final distB = _calculateDistance(
+          position.latitude,
+          position.longitude,
+          b.latitude,
+          b.longitude,
+        );
+        return distA.compareTo(distB);
+      });
 
       if (kDebugMode) {
-        debugPrint('✅ 検索完了: ${places.length}件のジムが見つかりました');
+        final partnerCount = gyms.where((g) => g.isPartner).length;
+        debugPrint('🏆 パートナージム優先ソート完了: ${partnerCount}件を最上位に配置');
       }
 
       setState(() {
         _userPosition = position;
-        _nearbyPlaces = places;
+        _nearbyGyms = gyms;
         _isLoadingGPS = false;
         _hasSearchedGPS = true;
       });
@@ -153,7 +217,7 @@ class _MapScreenState extends State<MapScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${places.length}件のジムが見つかりました'),
+            content: Text('${gyms.length}件のジムが見つかりました'),
             backgroundColor: Colors.green,
           ),
         );
@@ -254,7 +318,7 @@ class _MapScreenState extends State<MapScreen> {
             ),
           
           // GPS検索成功バナー
-          if (_hasSearchedGPS && !_isLoadingGPS && _nearbyPlaces.isNotEmpty)
+          if (_hasSearchedGPS && !_isLoadingGPS && _nearbyGyms.isNotEmpty)
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(12),
@@ -265,7 +329,7 @@ class _MapScreenState extends State<MapScreen> {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      'あなたの近くのジム ${_nearbyPlaces.length}件を表示中',
+                      'あなたの近くのジム ${_nearbyGyms.length}件を表示中',
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
@@ -299,9 +363,9 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
-  /// GPS検索結果を表示
+  /// GPS検索結果を表示（パートナーデータ統合済み）
   Widget _buildGPSSearchResults() {
-    if (_nearbyPlaces.isEmpty) {
+    if (_nearbyGyms.isEmpty) {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -325,9 +389,9 @@ class _MapScreenState extends State<MapScreen> {
 
     return ListView.builder(
       padding: const EdgeInsets.all(16),
-      itemCount: _nearbyPlaces.length,
+      itemCount: _nearbyGyms.length,
       itemBuilder: (context, index) {
-        return _buildGooglePlaceCard(_nearbyPlaces[index]);
+        return _buildGymCard(_nearbyGyms[index]);
       },
     );
   }
@@ -373,116 +437,7 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
-  /// GooglePlaceカード（GPS検索結果用）
-  Widget _buildGooglePlaceCard(GooglePlace place) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 12),
-      child: InkWell(
-        onTap: () {
-          // TODO: GooglePlace用の詳細画面に遷移
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('${place.name} の詳細画面（近日公開）')),
-          );
-        },
-        borderRadius: BorderRadius.circular(12),
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // ジム画像
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: place.photoReference != null
-                    ? Image.network(
-                        _placesService.getPhotoUrl(place.photoReference!),
-                        width: 80,
-                        height: 80,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return _buildPlaceholderImage();
-                        },
-                      )
-                    : _buildPlaceholderImage(),
-              ),
-              const SizedBox(width: 12),
-              // ジム情報
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      place.name,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 4),
-                    if (place.rating != null) ...[
-                      Row(
-                        children: [
-                          const Icon(Icons.star, size: 16, color: Colors.amber),
-                          const SizedBox(width: 4),
-                          Text(
-                            '${place.rating} (${place.userRatingsTotal ?? 0}件)',
-                            style: const TextStyle(fontSize: 12),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 4),
-                    ],
-                    Text(
-                      place.address,
-                      style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 8),
-                    // 営業状況
-                    if (place.openNow != null)
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: place.openNow! 
-                              ? Colors.green.withValues(alpha: 0.1)
-                              : Colors.red.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(4),
-                          border: Border.all(
-                            color: place.openNow! ? Colors.green : Colors.red,
-                            width: 1.5,
-                          ),
-                        ),
-                        child: Text(
-                          place.openNow! ? '営業中' : '営業時間外',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: place.openNow! ? Colors.green : Colors.red,
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
-  /// プレースホルダー画像
-  Widget _buildPlaceholderImage() {
-    return Container(
-      width: 80,
-      height: 80,
-      color: Colors.grey[300],
-      child: const Icon(Icons.fitness_center, size: 32),
-    );
-  }
 
   /// 混雑度フィルターバー
   Widget _buildCrowdFilterBar() {
@@ -570,14 +525,49 @@ class _MapScreenState extends State<MapScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      gym.name,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                    // パートナーバッジ + ジム名
+                    Row(
+                      children: [
+                        if (gym.isPartner) ...[
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: Colors.amber[700],
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  '🏆',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                                SizedBox(width: 2),
+                                Text(
+                                  '広告',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                        ],
+                        Expanded(
+                          child: Text(
+                            gym.name,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 4),
                     Row(
@@ -708,5 +698,26 @@ class _MapScreenState extends State<MapScreen> {
       default:
         return '不明';
     }
+  }
+
+  /// 2点間の距離を計算（ヒュベニの公式）単位: km
+  double _calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+    const double earthRadius = 6371.0; // 地球の半径（km）
+    
+    final dLat = _toRadians(lat2 - lat1);
+    final dLon = _toRadians(lon2 - lon1);
+    
+    final a = sin(dLat / 2) * sin(dLat / 2) +
+        cos(_toRadians(lat1)) * cos(_toRadians(lat2)) *
+        sin(dLon / 2) * sin(dLon / 2);
+    
+    final c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    
+    return earthRadius * c;
+  }
+
+  /// 度をラジアンに変換
+  double _toRadians(double degrees) {
+    return degrees * pi / 180;
   }
 }

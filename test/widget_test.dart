@@ -8,12 +8,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:fitsync/main.dart';
+import 'package:gym_match/main.dart';
 
 void main() {
-  testWidgets('FitSync app smoke test', (WidgetTester tester) async {
+  testWidgets('GYM MATCH app smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const FitSyncApp());
+    await tester.pumpWidget(const GymMatchApp());
 
     // Verify that the app starts with MapScreen
     expect(find.text('ジムマップ'), findsOneWidget);

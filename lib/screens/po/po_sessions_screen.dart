@@ -1,0 +1,46 @@
+import 'package:flutter/material.dart';
+
+/// POセッション管理画面
+class POSessionsScreen extends StatelessWidget {
+  final String partnerId;
+
+  const POSessionsScreen({super.key, required this.partnerId});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.calendar_today, size: 64, color: Colors.grey[400]),
+            const SizedBox(height: 16),
+            Text(
+              'セッション管理',
+              style: TextStyle(fontSize: 20, color: Colors.grey[700]),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'カレンダー表示とセッション予約管理',
+              style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+            ),
+            const SizedBox(height: 24),
+            const Chip(
+              label: Text('近日公開予定'),
+              backgroundColor: Colors.blue,
+              labelStyle: TextStyle(color: Colors.white),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('セッション追加は近日公開予定です')),
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
