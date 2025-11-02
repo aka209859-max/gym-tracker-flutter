@@ -8,7 +8,7 @@ import 'screens/home_screen.dart';
 import 'screens/map_screen.dart';
 import 'screens/gym_list_screen.dart';
 import 'screens/profile_screen.dart';
-import 'screens/workout/workout_log_screen.dart';
+
 import 'screens/password_gate_screen.dart';
 import 'providers/gym_provider.dart';
 import 'providers/theme_provider.dart';
