@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'theme_selector_screen.dart';
 import 'favorites_screen.dart';
 import 'subscription_screen.dart';
-import 'partner_login_screen.dart';
+import 'po/po_login_screen.dart';
 import '../services/favorites_service.dart';
 import '../services/subscription_service.dart';
 
@@ -143,32 +143,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _buildMenuList(BuildContext context) {
     return Column(
       children: [
-        // パートナーオーナー専用ログイン
+        // PO管理者専用ログイン
         Card(
           elevation: 2,
-          color: Colors.amber[50],
+          color: Colors.blue[50],
           child: ListTile(
             leading: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Colors.amber[700],
+                color: Colors.blue[700],
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.business_center, color: Colors.white),
+              child: const Icon(Icons.admin_panel_settings, color: Colors.white),
             ),
             title: const Text(
-              '🏆 パートナーオーナー専用',
+              '👑 PO管理者専用ログイン',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             subtitle: const Text(
-              '店舗情報・キャンペーンをリアルタイム更新',
+              '会員管理・セッション管理・分析機能',
               style: TextStyle(fontSize: 12),
             ),
             trailing: const Icon(Icons.chevron_right),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const PartnerLoginScreen()),
+                MaterialPageRoute(builder: (context) => const POLoginScreen()),
               );
             },
           ),
