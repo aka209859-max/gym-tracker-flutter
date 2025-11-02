@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'theme_selector_screen.dart';
 import 'favorites_screen.dart';
 import 'subscription_screen.dart';
-import 'po/po_login_screen.dart';
 import '../services/favorites_service.dart';
 import '../services/subscription_service.dart';
 
@@ -164,12 +164,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
               '会員管理・セッション管理・分析機能',
               style: TextStyle(fontSize: 12),
             ),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const POLoginScreen()),
-              );
+            trailing: const Icon(Icons.open_in_new),
+            onTap: () async {
+              // PO管理Webアプリへの外部リンク
+              final poAdminUrl = Uri.parse('https://3000-i1wzdi6c2urpgehncb6jg-5634da27.sandbox.novita.ai');
+              if (await canLaunchUrl(poAdminUrl)) {
+                await launchUrl(poAdminUrl, mode: LaunchMode.externalApplication);
+              } else {
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('PO管理ページを開けませんでした')),
+                  );
+                }
+              }
             },
           ),
         ),
