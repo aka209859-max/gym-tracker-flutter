@@ -159,25 +159,80 @@ class _MapScreenState extends State<MapScreen> {
         debugPrint('✅ GPS取得成功: ${position.latitude}, ${position.longitude}');
       }
 
-      // 近くのジムを検索（半径5km）- パートナーデータ統合版
-      // デモモード: Google Places APIを使用せず、常にサンプルデータを使用
+      // 近くのジムを検索（半径5km）- Google Places API使用
       List<Gym> gyms;
       
-      if (kDebugMode) {
-        debugPrint('🎯 デモモード: サンプルデータを使用します');
-      }
-      
-      final provider = Provider.of<GymProvider>(context, listen: false);
-      gyms = provider.gyms;
-      
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('デモモード: サンプルジムデータを表示しています'),
-            backgroundColor: Colors.blue,
-            duration: Duration(seconds: 2),
-          ),
+      try {
+        if (kDebugMode) {
+          debugPrint('🌐 Google Places APIで周辺のジムを検索中...');
+        }
+        
+        final places = await _placesService.searchNearbyGyms(
+          latitude: position.latitude,
+          longitude: position.longitude,
+          radiusMeters: 5000,
         );
+        
+        // GooglePlaceをGymモデルに変換
+        gyms = places.map((place) {
+          return Gym(
+            id: place.placeId,
+            name: place.name,
+            address: place.address,
+            latitude: place.latitude,
+            longitude: place.longitude,
+            description: place.types.join(', '),
+            facilities: place.types,
+            phoneNumber: '',
+            openingHours: place.openNow != null 
+                ? (place.openNow! ? '営業中' : '営業時間外')
+                : '営業時間不明',
+            monthlyFee: 0,
+            rating: place.rating ?? 0.0,
+            reviewCount: place.userRatingsTotal ?? 0,
+            imageUrl: place.photoReference != null 
+                ? 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photoReference}&key=YOUR_API_KEY'
+                : 'https://via.placeholder.com/400x200?text=${Uri.encodeComponent(place.name)}',
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+            currentCrowdLevel: 3,
+            lastCrowdUpdate: DateTime.now(),
+            isPartner: false,
+          );
+        }).toList();
+        
+        if (kDebugMode) {
+          debugPrint('✅ ${gyms.length}件の実際のジムを取得しました');
+        }
+        
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('周辺の${gyms.length}件のジムを検索しました'),
+              backgroundColor: Colors.green,
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        }
+      } catch (e) {
+        if (kDebugMode) {
+          debugPrint('⚠️ Google Places API検索エラー: $e');
+          debugPrint('   フォールバック: サンプルデータを使用します');
+        }
+        
+        // エラー時はサンプルデータをフォールバック
+        final provider = Provider.of<GymProvider>(context, listen: false);
+        gyms = provider.gyms;
+        
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('検索エラー: サンプルデータを表示しています'),
+              backgroundColor: Colors.orange,
+              duration: Duration(seconds: 2),
+            ),
+          );
+        }
       }
 
       // 🏆 パートナージム優先表示：距離に関係なく最上位に
