@@ -8,6 +8,7 @@ import '../providers/gym_provider.dart';
 import '../models/gym.dart';
 import '../services/location_service.dart';
 import '../services/google_places_service.dart';
+import '../services/partner_merge_service.dart';
 import 'gym_detail_screen.dart';
 import 'search_screen.dart';
 
@@ -25,6 +26,7 @@ class _MapScreenState extends State<MapScreen> {
   // GPS検索関連
   final LocationService _locationService = LocationService();
   final GooglePlacesService _placesService = GooglePlacesService();
+  final PartnerMergeService _partnerMergeService = PartnerMergeService();
   List<Gym> _nearbyGyms = [];
   bool _isLoadingGPS = false;
   Position? _userPosition;
@@ -173,33 +175,16 @@ class _MapScreenState extends State<MapScreen> {
           radiusMeters: 5000,
         );
         
-        // GooglePlaceをGymモデルに変換
-        gyms = places.map((place) {
-          return Gym(
-            id: place.placeId,
-            name: place.name,
-            address: place.address,
-            latitude: place.latitude,
-            longitude: place.longitude,
-            description: place.types.join(', '),
-            facilities: place.types,
-            phoneNumber: '',
-            openingHours: place.openNow != null 
-                ? (place.openNow! ? '営業中' : '営業時間外')
-                : '営業時間不明',
-            monthlyFee: 0,
-            rating: place.rating ?? 0.0,
-            reviewCount: place.userRatingsTotal ?? 0,
-            imageUrl: place.photoReference != null 
-                ? 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photoReference}&key=YOUR_API_KEY'
-                : 'https://via.placeholder.com/400x200?text=${Uri.encodeComponent(place.name)}',
-            createdAt: DateTime.now(),
-            updatedAt: DateTime.now(),
-            currentCrowdLevel: 3,
-            lastCrowdUpdate: DateTime.now(),
-            isPartner: false,
-          );
-        }).toList();
+        // 🔥 パートナージム統合処理
+        if (kDebugMode) {
+          debugPrint('🏆 パートナージム統合処理開始...');
+        }
+        gyms = await _partnerMergeService.mergePartnerData(places);
+        
+        if (kDebugMode) {
+          final partnerCount = gyms.where((g) => g.isPartner).length;
+          debugPrint('✅ パートナージム統合完了: ${partnerCount}件のPOジム検出');
+        }
         
         if (kDebugMode) {
           debugPrint('✅ ${gyms.length}件の実際のジムを取得しました');
