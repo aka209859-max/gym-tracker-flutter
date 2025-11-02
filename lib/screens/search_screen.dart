@@ -33,7 +33,7 @@ class _SearchScreenState extends State<SearchScreen> {
   
   List<Gym> _filteredGyms = [];
   List<GooglePlace> _googlePlaces = [];
-  bool _useGooglePlaces = false; // デモモード: サンプルデータを使用（Google Places APIエラー回避）
+  bool _useGooglePlaces = true; // 通常モード: Google Places API使用
 
   // ページネーション関連
   int _currentPage = 1;
