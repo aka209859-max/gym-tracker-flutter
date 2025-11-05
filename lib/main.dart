@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'firebase_options.dart';
 import 'screens/home_screen.dart';
 import 'screens/map_screen.dart';
-import 'screens/gym_list_screen.dart';
 import 'screens/profile_screen.dart';
 
 import 'screens/password_gate_screen.dart';
@@ -100,8 +99,7 @@ class _MainScreenState extends State<MainScreen> {
   bool _showInstallPrompt = true;
 
   final List<Widget> _screens = [
-    const MapScreen(),
-    const GymListScreen(),
+    const MapScreen(),  // ジム検索（GPS + リスト表示）
     const HomeScreen(),  // トレーニング記録画面（筋トレMEMO風）
     const ProfileScreen(),
   ];
@@ -148,12 +146,7 @@ class _MainScreenState extends State<MainScreen> {
           NavigationDestination(
             icon: Icon(Icons.map_outlined),
             selectedIcon: Icon(Icons.map),
-            label: 'マップ',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.fitness_center_outlined),
-            selectedIcon: Icon(Icons.fitness_center),
-            label: 'ジム一覧',
+            label: 'ジムマップ',
           ),
           NavigationDestination(
             icon: Icon(Icons.event_note_outlined),
