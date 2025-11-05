@@ -287,10 +287,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
             ),
             const Divider(),
             const SizedBox(height: 8),
-            Text(
-              _generatedMenu!,
-              style: const TextStyle(fontSize: 14, height: 1.6),
-            ),
+            _buildFormattedText(_generatedMenu!),
           ],
         ),
       ),
@@ -370,12 +367,92 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
         children: [
           Padding(
             padding: const EdgeInsets.all(16),
-            child: Text(
-              menu,
-              style: const TextStyle(fontSize: 14, height: 1.6),
-            ),
+            child: _buildFormattedText(menu),
           ),
         ],
+      ),
+    );
+  }
+
+  /// Markdown形式テキストをフォーマット済みウィジェットに変換
+  /// 
+  /// 変換ルール:
+  /// - `## 見出し` → 太字見出し（##は削除）
+  /// - `**太字**` → 太字テキスト
+  /// - `* 箇条書き` → `・箇条書き`
+  Widget _buildFormattedText(String text) {
+    final lines = text.split('\n');
+    final List<InlineSpan> spans = [];
+
+    for (int i = 0; i < lines.length; i++) {
+      String line = lines[i];
+
+      // 1. 見出し処理（## Text → 太字テキスト）
+      if (line.trim().startsWith('##')) {
+        final headingText = line.replaceFirst(RegExp(r'^##\s*'), '');
+        spans.add(
+          TextSpan(
+            text: headingText,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              height: 1.8,
+            ),
+          ),
+        );
+        if (i < lines.length - 1) spans.add(const TextSpan(text: '\n'));
+        continue;
+      }
+
+      // 2. 箇条書き処理（* → ・）
+      if (line.trim().startsWith('*')) {
+        line = line.replaceFirst(RegExp(r'^\*\s*'), '・');
+      }
+
+      // 3. 太字処理（**text** → 太字）
+      final boldPattern = RegExp(r'\*\*(.+?)\*\*');
+      final matches = boldPattern.allMatches(line);
+
+      if (matches.isEmpty) {
+        // 太字なし → 通常テキスト
+        spans.add(TextSpan(text: line));
+      } else {
+        // 太字あり → パースして分割
+        int lastIndex = 0;
+        for (final match in matches) {
+          // 太字前のテキスト
+          if (match.start > lastIndex) {
+            spans.add(TextSpan(text: line.substring(lastIndex, match.start)));
+          }
+          // 太字テキスト
+          spans.add(
+            TextSpan(
+              text: match.group(1),
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          );
+          lastIndex = match.end;
+        }
+        // 太字後のテキスト
+        if (lastIndex < line.length) {
+          spans.add(TextSpan(text: line.substring(lastIndex)));
+        }
+      }
+
+      // 改行追加（最終行以外）
+      if (i < lines.length - 1) {
+        spans.add(const TextSpan(text: '\n'));
+      }
+    }
+
+    return RichText(
+      text: TextSpan(
+        style: const TextStyle(
+          fontSize: 14,
+          height: 1.6,
+          color: Colors.black87,
+        ),
+        children: spans,
       ),
     );
   }
