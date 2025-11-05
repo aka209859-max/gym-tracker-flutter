@@ -18,7 +18,7 @@ class AICoachingScreen extends StatefulWidget {
 }
 
 class _AICoachingScreenState extends State<AICoachingScreen> {
-  // 部位選択状態（有酸素追加）
+  // 部位選択状態（有酸素・初心者追加）
   final Map<String, bool> _selectedBodyParts = {
     '胸': false,
     '背中': false,
@@ -27,6 +27,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
     '腕': false,
     '体幹': false,
     '有酸素': false,
+    '初心者': false,
   };
 
   // UI状態
@@ -210,16 +211,34 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
           runSpacing: 8,
           children: _selectedBodyParts.keys.map((part) {
             final isSelected = _selectedBodyParts[part]!;
+            final isBeginner = part == '初心者';
+            
             return FilterChip(
-              label: Text(part),
+              label: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (isBeginner) ...[
+                    const Icon(Icons.school, size: 16, color: Colors.green),
+                    const SizedBox(width: 4),
+                  ],
+                  Text(part),
+                ],
+              ),
               selected: isSelected,
               onSelected: (selected) {
                 setState(() {
                   _selectedBodyParts[part] = selected;
                 });
               },
-              selectedColor: Colors.blue.shade100,
-              checkmarkColor: Colors.blue.shade700,
+              selectedColor: isBeginner 
+                  ? Colors.green.shade100 
+                  : Colors.blue.shade100,
+              checkmarkColor: isBeginner 
+                  ? Colors.green.shade700 
+                  : Colors.blue.shade700,
+              backgroundColor: isBeginner 
+                  ? Colors.green.shade50 
+                  : null,
             );
           }).toList(),
         ),
@@ -515,7 +534,76 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
 
   /// プロンプト構築
   String _buildPrompt(List<String> bodyParts) {
-    return '''
+    // 初心者モード判定
+    final isBeginner = bodyParts.contains('初心者');
+    
+    // 初心者以外の部位を抽出
+    final targetParts = bodyParts.where((part) => part != '初心者').toList();
+    
+    if (isBeginner) {
+      // 初心者向け専用プロンプト
+      if (targetParts.isEmpty) {
+        // 初心者のみ選択 → 全身トレーニング
+        return '''
+あなたはプロのパーソナルトレーナーです。筋トレ初心者向けの全身トレーニングメニューを提案してください。
+
+【対象者】
+- 筋トレ初心者（ジム通い始めて1〜3ヶ月程度）
+- 基礎体力づくりを目指す方
+- トレーニングフォームを学びたい方
+
+【提案形式】
+各種目について以下の情報を含めてください：
+- 種目名
+- セット数（少なめ: 2-3セット）
+- 回数（軽い重量で: 10-15回）
+- 休憩時間（長め: 90-120秒）
+- 初心者向けフォームのポイント
+- よくある間違いと注意事項
+
+【条件】
+- 全身をバランスよく鍛える（胸・背中・脚・肩・腕）
+- 基本種目中心（マシンとフリーウェイト組み合わせ）
+- 30-45分で完了
+- 怪我のリスクが少ない種目
+- フォーム習得を重視
+- 日本語で丁寧に説明
+
+初心者が安全に取り組める全身トレーニングメニューを提案してください。
+''';
+      } else {
+        // 初心者 + 部位指定 → その部位に特化した初心者メニュー
+        return '''
+あなたはプロのパーソナルトレーナーです。筋トレ初心者向けの「${targetParts.join('、')}」トレーニングメニューを提案してください。
+
+【対象者】
+- 筋トレ初心者（ジム通い始めて1〜3ヶ月程度）
+- ${targetParts.join('、')}を重点的に鍛えたい方
+- トレーニングフォームを学びたい方
+
+【提案形式】
+各種目について以下の情報を含めてください：
+- 種目名
+- セット数（少なめ: 2-3セット）
+- 回数（軽い重量で: 10-15回）
+- 休憩時間（長め: 90-120秒）
+- 初心者向けフォームのポイント
+- よくある間違いと注意事項
+
+【条件】
+- ${targetParts.join('、')}を重点的にトレーニング
+- 基本種目中心（マシンとフリーウェイト組み合わせ）
+- 30-45分で完了
+- 怪我のリスクが少ない種目
+- フォーム習得を重視
+- 日本語で丁寧に説明
+
+初心者が安全に取り組める${targetParts.join('、')}トレーニングメニューを提案してください。
+''';
+      }
+    } else {
+      // 通常モード（初心者選択なし）
+      return '''
 あなたはプロのパーソナルトレーナーです。以下の部位をトレーニングするための最適なメニューを提案してください。
 
 【トレーニング部位】
@@ -538,6 +626,7 @@ ${bodyParts.join('、')}
 
 メニューを提案してください。
 ''';
+    }
   }
 
   /// メニュー保存
