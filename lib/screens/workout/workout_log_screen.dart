@@ -3,12 +3,12 @@ import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
-import '../../models/workout_log.dart';
 import 'add_workout_screen.dart';
-import 'workout_detail_screen.dart';
+import 'simple_workout_detail_screen.dart';
 import 'weekly_reports_screen.dart';
 import 'personal_records_screen.dart';
 import 'body_part_tracking_screen.dart';
+import 'workout_memo_list_screen.dart';
 
 /// トレーニング記録一覧画面
 class WorkoutLogScreen extends StatefulWidget {
@@ -311,23 +311,31 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
             );
           }
 
-          final workouts = snapshot.data!.docs
-              .map((doc) => WorkoutLog.fromFirestore(
-                  doc.data() as Map<String, dynamic>, doc.id))
-              .toList();
+          // workout_logsデータを直接使用
+          final workoutDocs = snapshot.data!.docs;
           
-          // メモリ内でソート（Firestoreインデックス不要）
-          workouts.sort((a, b) => b.date.compareTo(a.date));
+          // メモリ内で日付ソート（Firestoreインデックス不要）
+          workoutDocs.sort((a, b) {
+            final dataA = a.data() as Map<String, dynamic>;
+            final dataB = b.data() as Map<String, dynamic>;
+            final dateA = (dataA['date'] as Timestamp?)?.toDate() ?? DateTime(2000);
+            final dateB = (dataB['date'] as Timestamp?)?.toDate() ?? DateTime(2000);
+            return dateB.compareTo(dateA);
+          });
           
           // 最新30件のみ表示
-          final displayWorkouts = workouts.take(30).toList();
+          final displayDocs = workoutDocs.take(30).toList();
 
           return ListView.builder(
             padding: const EdgeInsets.all(16),
-            itemCount: displayWorkouts.length,
+            itemCount: displayDocs.length,
             itemBuilder: (context, index) {
-              final workout = displayWorkouts[index];
-              return _WorkoutCard(workout: workout);
+              final doc = displayDocs[index];
+              final data = doc.data() as Map<String, dynamic>;
+              return _SimpleWorkoutCard(
+                workoutId: doc.id,
+                workoutData: data,
+              );
             },
           );
         },
@@ -359,7 +367,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
         children: [
           _QuickAccessCard(
             title: '週次レポート',
-            subtitle: 'Layer 2',
+            subtitle: '統計分析',
             icon: Icons.bar_chart,
             color: Colors.blue,
             onTap: () {
@@ -374,7 +382,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
           const SizedBox(width: 12),
           _QuickAccessCard(
             title: 'PR記録',
-            subtitle: 'Layer 3',
+            subtitle: '最高記録',
             icon: Icons.trending_up,
             color: Colors.green,
             onTap: () {
@@ -389,7 +397,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
           const SizedBox(width: 12),
           _QuickAccessCard(
             title: '部位別',
-            subtitle: 'Layer 4',
+            subtitle: '部位分析',
             icon: Icons.accessibility_new,
             color: Colors.orange,
             onTap: () {
@@ -403,14 +411,16 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
           ),
           const SizedBox(width: 12),
           _QuickAccessCard(
-            title: 'AIコーチ',
-            subtitle: 'Layer 5',
-            icon: Icons.psychology,
+            title: 'メモ',
+            subtitle: 'トレーニングメモ',
+            icon: Icons.note_add,
             color: Colors.purple,
             onTap: () {
-              // Layer 5実装後に有効化
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('まもなく実装予定です！')),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const WorkoutMemoListScreen(),
+                ),
               );
             },
           ),
@@ -477,24 +487,41 @@ class _QuickAccessCard extends StatelessWidget {
   }
 }
 
-/// トレーニングカード
-class _WorkoutCard extends StatelessWidget {
-  final WorkoutLog workout;
+/// シンプルなトレーニングカード（workout_logsデータ用）
+class _SimpleWorkoutCard extends StatelessWidget {
+  final String workoutId;
+  final Map<String, dynamic> workoutData;
 
-  const _WorkoutCard({required this.workout});
+  const _SimpleWorkoutCard({
+    required this.workoutId,
+    required this.workoutData,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final totalSets = workout.exercises.fold<int>(
-      0,
-      (sum, exercise) => sum + exercise.sets.length,
-    );
-
-    // 実施部位を取得
-    final bodyParts = workout.exercises
-        .map((e) => e.bodyPart)
-        .toSet()
-        .toList();
+    // データ解析
+    final muscleGroup = workoutData['muscle_group'] as String? ?? '不明';
+    final date = (workoutData['date'] as Timestamp?)?.toDate() ?? DateTime.now();
+    final startTime = (workoutData['start_time'] as Timestamp?)?.toDate();
+    final endTime = (workoutData['end_time'] as Timestamp?)?.toDate();
+    final sets = workoutData['sets'] as List<dynamic>? ?? [];
+    
+    // トレーニング時間計算
+    int? duration;
+    if (startTime != null && endTime != null) {
+      duration = endTime.difference(startTime).inMinutes;
+    }
+    
+    // 種目数とセット数を計算
+    final exerciseNames = <String>{};
+    for (final set in sets) {
+      if (set is Map<String, dynamic>) {
+        final exerciseName = set['exercise_name'] as String?;
+        if (exerciseName != null) {
+          exerciseNames.add(exerciseName);
+        }
+      }
+    }
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
@@ -503,7 +530,10 @@ class _WorkoutCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => WorkoutDetailScreen(workout: workout),
+              builder: (context) => SimpleWorkoutDetailScreen(
+                workoutId: workoutId,
+                workoutData: workoutData,
+              ),
             ),
           );
         },
@@ -522,7 +552,7 @@ class _WorkoutCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    DateFormat('yyyy/MM/dd (E)', 'ja').format(workout.date),
+                    DateFormat('yyyy/MM/dd (E)', 'ja').format(date),
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -530,7 +560,7 @@ class _WorkoutCard extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  if (workout.duration != null)
+                  if (duration != null)
                     Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 4),
@@ -541,7 +571,7 @@ class _WorkoutCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
-                        '${workout.duration}分',
+                        '$duration分',
                         style: TextStyle(
                           fontSize: 12,
                           color: Theme.of(context)
@@ -553,17 +583,10 @@ class _WorkoutCard extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              Wrap(
-                spacing: 6,
-                runSpacing: 6,
-                children: bodyParts
-                    .map((part) => Chip(
-                          label: Text(part),
-                          padding: EdgeInsets.zero,
-                          materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
-                        ))
-                    .toList(),
+              Chip(
+                label: Text(muscleGroup),
+                padding: EdgeInsets.zero,
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
               const SizedBox(height: 12),
               Row(
@@ -572,20 +595,11 @@ class _WorkoutCard extends StatelessWidget {
                       size: 16, color: Colors.grey[600]),
                   const SizedBox(width: 8),
                   Text(
-                    '${workout.exercises.length}種目 • $totalSets セット',
+                    '${exerciseNames.length}種目 • ${sets.length} セット',
                     style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                   ),
                 ],
               ),
-              if (workout.notes != null && workout.notes!.isNotEmpty) ...[
-                const SizedBox(height: 8),
-                Text(
-                  workout.notes!,
-                  style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
             ],
           ),
         ),

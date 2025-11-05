@@ -80,41 +80,33 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     _applyTemplateDataIfProvided();
   }
   
-  // 既存workout_idを保持
-  String? _existingWorkoutId;
-  
   void _applyTemplateDataIfProvided() {
     if (widget.templateData != null) {
       print('📋 テンプレートデータを適用: ${widget.templateData}');
       
       final muscleGroup = widget.templateData!['muscle_group'] as String?;
-      final exerciseName = widget.templateData!['exercise_name'] as String?;
-      final lastWeight = widget.templateData!['last_weight'] as double?;
-      final lastReps = widget.templateData!['last_reps'] as int?;
-      _existingWorkoutId = widget.templateData!['existing_workout_id'] as String?;
-      
-      setState(() {
-        // 部位選択を適用
-        if (muscleGroup != null) {
+      if (muscleGroup != null) {
+        setState(() {
           _selectedMuscleGroup = muscleGroup;
-        }
-        
-        // 該当種目に1セット追加（前回の重量・回数を初期値として）
-        if (exerciseName != null) {
-          _sets.add(WorkoutSet(
-            exerciseName: exerciseName,
-            weight: lastWeight ?? 0.0,
-            reps: lastReps ?? 10,
-            isCompleted: false,
-          ));
-          print('✅ $exerciseName に1セット追加（前回: ${lastWeight}kg × ${lastReps}reps）');
-        }
-      });
+        });
+      }
       
-      if (_existingWorkoutId != null) {
-        print('✅ 既存記録に追記モード: $_existingWorkoutId');
-      } else {
-        print('✅ 新規記録モード');
+      final sets = widget.templateData!['sets'] as List<dynamic>?;
+      if (sets != null) {
+        setState(() {
+          for (var setData in sets) {
+            final exerciseName = setData['exercise_name'] as String;
+            final weight = (setData['weight'] as num?)?.toDouble() ?? 0.0;
+            final reps = setData['reps'] as int? ?? 10;
+            
+            _sets.add(WorkoutSet(
+              exerciseName: exerciseName,
+              weight: weight,
+              reps: reps,
+            ));
+          }
+          print('✅ ${_sets.length}セットをテンプレートから適用しました');
+        });
       }
     }
   }
@@ -224,106 +216,6 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     );
   }
 
-  void _copyLastWorkout(String exerciseName) {
-    final lastData = _lastWorkoutData[exerciseName];
-    if (lastData == null) return;
-
-    final weight = lastData['weight']?.toDouble() ?? 0.0;
-    final reps = lastData['reps'] ?? 10;
-
-    setState(() {
-      // この種目の全セットに前回のデータをコピー
-      for (var set in _sets) {
-        if (set.exerciseName == exerciseName) {
-          set.weight = weight;
-          set.reps = reps;
-        }
-      }
-    });
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('前回の記録をコピーしました: $weight kg × $reps reps'),
-        duration: const Duration(seconds: 2),
-      ),
-    );
-  }
-
-  Future<void> _showBulkInputDialog(String exerciseName) async {
-    final weightController = TextEditingController();
-    final repsController = TextEditingController();
-
-    // 最初のセットから初期値を取得
-    final firstSet = _sets.firstWhere(
-      (set) => set.exerciseName == exerciseName,
-      orElse: () => WorkoutSet(exerciseName: exerciseName, weight: 0.0, reps: 10),
-    );
-    weightController.text = firstSet.weight.toString();
-    repsController.text = firstSet.reps.toString();
-
-    final result = await showDialog<Map<String, double>>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('$exerciseNameの一括入力'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: weightController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: '重量 (kg)',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: repsController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: '回数 (reps)',
-                border: OutlineInputBorder(),
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('キャンセル'),
-          ),
-          TextButton(
-            onPressed: () {
-              final weight = double.tryParse(weightController.text) ?? 0.0;
-              final reps = double.tryParse(repsController.text) ?? 10.0;
-              Navigator.pop(context, {'weight': weight, 'reps': reps});
-            },
-            child: const Text('適用'),
-          ),
-        ],
-      ),
-    );
-
-    if (result != null) {
-      setState(() {
-        // この種目の全セットに一括入力
-        for (var set in _sets) {
-          if (set.exerciseName == exerciseName) {
-            set.weight = result['weight']!;
-            set.reps = result['reps']!.toInt();
-          }
-        }
-      });
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('一括入力完了: ${result['weight']} kg × ${result['reps']!.toInt()} reps'),
-          duration: const Duration(seconds: 2),
-        ),
-      );
-    }
-  }
-
   Future<void> _showAddCustomExerciseDialog() async {
     if (_selectedMuscleGroup == null) return;
     
@@ -392,89 +284,47 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       final user = firebase_auth.FirebaseAuth.instance.currentUser;
       if (user == null) return;
 
-      // 既存記録に追記モード
-      if (_existingWorkoutId != null) {
-        print('🔄 既存記録に追加セットを追記: $_existingWorkoutId');
-        
-        // 既存ドキュメントを取得
-        final docSnapshot = await FirebaseFirestore.instance
-            .collection('workout_logs')
-            .doc(_existingWorkoutId)
-            .get();
-        
-        if (docSnapshot.exists) {
-          final existingData = docSnapshot.data() as Map<String, dynamic>;
-          final existingSets = List<Map<String, dynamic>>.from(existingData['sets'] ?? []);
-          
-          // 新しいセットを既存セットの下に追加
-          final newSets = _sets.map((set) => {
-            'exercise_name': set.exerciseName,
-            'weight': set.weight,
-            'reps': set.reps,
-            'is_completed': set.isCompleted,
-            'has_assist': set.hasAssist,
-            'set_type': set.setType.toString().split('.').last,
-          }).toList();
-          
-          existingSets.addAll(newSets);
-          
-          // 既存ドキュメントを更新
-          await FirebaseFirestore.instance
-              .collection('workout_logs')
-              .doc(_existingWorkoutId)
-              .update({
-            'sets': existingSets,
-            'updated_at': FieldValue.serverTimestamp(),
-          });
-          
-          print('✅ 既存記録に${newSets.length}セット追加しました');
-        }
-      } else {
-        // 新規記録モード
-        print('➕ 新規記録を作成');
-        
-        final startTime = DateTime(
-          _selectedDate.year,
-          _selectedDate.month,
-          _selectedDate.day,
-          _startHour,
-          _startMinute,
-        );
-        
-        final endTime = DateTime(
-          _selectedDate.year,
-          _selectedDate.month,
-          _selectedDate.day,
-          _endHour,
-          _endMinute,
-        );
+      final startTime = DateTime(
+        _selectedDate.year,
+        _selectedDate.month,
+        _selectedDate.day,
+        _startHour,
+        _startMinute,
+      );
+      
+      final endTime = DateTime(
+        _selectedDate.year,
+        _selectedDate.month,
+        _selectedDate.day,
+        _endHour,
+        _endMinute,
+      );
 
-        final workoutDoc = await FirebaseFirestore.instance.collection('workout_logs').add({
+      final workoutDoc = await FirebaseFirestore.instance.collection('workout_logs').add({
+        'user_id': user.uid,
+        'muscle_group': _selectedMuscleGroup,
+        'date': Timestamp.fromDate(_selectedDate),
+        'start_time': Timestamp.fromDate(startTime),
+        'end_time': Timestamp.fromDate(endTime),
+        'sets': _sets.map((set) => {
+          'exercise_name': set.exerciseName,
+          'weight': set.weight,
+          'reps': set.reps,
+          'is_completed': set.isCompleted,
+          'has_assist': set.hasAssist,
+          'set_type': set.setType.toString().split('.').last,
+        }).toList(),
+        'created_at': FieldValue.serverTimestamp(),
+      });
+
+      if (_memoController.text.isNotEmpty) {
+        await FirebaseFirestore.instance.collection('workout_notes').add({
           'user_id': user.uid,
-          'muscle_group': _selectedMuscleGroup,
-          'date': Timestamp.fromDate(_selectedDate),
-          'start_time': Timestamp.fromDate(startTime),
-          'end_time': Timestamp.fromDate(endTime),
-          'sets': _sets.map((set) => {
-            'exercise_name': set.exerciseName,
-            'weight': set.weight,
-            'reps': set.reps,
-            'is_completed': set.isCompleted,
-            'has_assist': set.hasAssist,
-            'set_type': set.setType.toString().split('.').last,
-          }).toList(),
-          'created_at': FieldValue.serverTimestamp(),
+          'workout_session_id': workoutDoc.id,
+          'content': _memoController.text,
+          'created_at': Timestamp.now(),
+          'updated_at': Timestamp.now(),
         });
-
-        if (_memoController.text.isNotEmpty) {
-          await FirebaseFirestore.instance.collection('workout_notes').add({
-            'user_id': user.uid,
-            'workout_session_id': workoutDoc.id,
-            'content': _memoController.text,
-            'created_at': Timestamp.now(),
-            'updated_at': Timestamp.now(),
-          });
-        }
       }
 
       if (mounted) {
@@ -502,27 +352,21 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         backgroundColor: theme.colorScheme.primary,
         foregroundColor: Colors.white,
         actions: [
-          if (_isResting) ...[
+          if (_isResting)
             Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
                   '休憩 $_restSeconds秒',
                   style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
-            IconButton(
-              icon: const Icon(Icons.stop),
-              onPressed: _stopRestTimer,
-              tooltip: 'タイマー停止',
-            ),
-          ] else
-            IconButton(
-              icon: const Icon(Icons.timer),
-              onPressed: _showRestTimerSettings,
-              tooltip: '休憩時間設定',
-            ),
+          IconButton(
+            icon: const Icon(Icons.timer),
+            onPressed: _showRestTimerSettings,
+            tooltip: '休憩時間設定',
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -532,24 +376,16 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             // 部位選択（横スクロール）
             Container(
               color: Colors.grey.shade100,
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Row(
                   children: _muscleGroupExercises.keys.map((muscleGroup) {
                     final isSelected = _selectedMuscleGroup == muscleGroup;
                     return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      padding: const EdgeInsets.only(right: 8),
                       child: ChoiceChip(
-                        label: Text(
-                          muscleGroup,
-                          style: TextStyle(
-                            color: isSelected ? Colors.white : Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
-                          ),
-                        ),
+                        label: Text(muscleGroup),
                         selected: isSelected,
                         onSelected: (selected) {
                           setState(() {
@@ -557,9 +393,11 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                           });
                         },
                         selectedColor: theme.colorScheme.primary,
-                        backgroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        labelStyle: TextStyle(
+                          color: isSelected ? Colors.white : Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       ),
                     );
                   }).toList(),
@@ -716,36 +554,6 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               ],
             ),
             
-            // 前回をコピー & 一括入力ボタン（画像2の配置）
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: lastData != null ? () => _copyLastWorkout(exerciseName) : null,
-                    icon: const Icon(Icons.history, size: 18),
-                    label: const Text('前回'),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.purple,
-                      side: BorderSide(color: lastData != null ? Colors.purple : Colors.grey),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: () => _showBulkInputDialog(exerciseName),
-                    icon: const Icon(Icons.edit, size: 18),
-                    label: const Text('一括入力'),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.blue,
-                      side: const BorderSide(color: Colors.blue),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            
             // 💡前回記録バナー
             if (lastData != null) ...[
               const SizedBox(height: 8),
@@ -824,45 +632,45 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               ),
               const SizedBox(width: 12),
               
-              // 重量入力（0も消せるように修正）
+              // 重量入力
               Expanded(
-                child: TextFormField(
-                  decoration: const InputDecoration(
+                child: TextField(
+                  decoration: InputDecoration(
                     labelText: '重量 (kg)',
-                    border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    border: const OutlineInputBorder(),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   ),
                   keyboardType: TextInputType.number,
-                  initialValue: set.weight == 0.0 ? '' : set.weight.toString(),
+                  controller: TextEditingController(text: set.weight.toString())
+                    ..selection = TextSelection.fromPosition(
+                      TextPosition(offset: set.weight.toString().length),
+                    ),
                   onChanged: (value) {
-                    // 空文字列または無効な値の場合は0に
-                    if (value.isEmpty) {
-                      set.weight = 0.0;
-                    } else {
+                    setState(() {
                       set.weight = double.tryParse(value) ?? 0.0;
-                    }
+                    });
                   },
                 ),
               ),
               const SizedBox(width: 8),
               
-              // 回数入力（0も消せるように修正）
+              // 回数入力
               Expanded(
-                child: TextFormField(
-                  decoration: const InputDecoration(
+                child: TextField(
+                  decoration: InputDecoration(
                     labelText: '回数',
-                    border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    border: const OutlineInputBorder(),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   ),
                   keyboardType: TextInputType.number,
-                  initialValue: set.reps == 0 ? '' : set.reps.toString(),
+                  controller: TextEditingController(text: set.reps.toString())
+                    ..selection = TextSelection.fromPosition(
+                      TextPosition(offset: set.reps.toString().length),
+                    ),
                   onChanged: (value) {
-                    // 空文字列または無効な値の場合は0に
-                    if (value.isEmpty) {
-                      set.reps = 0;
-                    } else {
+                    setState(() {
                       set.reps = int.tryParse(value) ?? 0;
-                    }
+                    });
                   },
                 ),
               ),
@@ -908,7 +716,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               ),
               const SizedBox(width: 8),
               
-              // インターバル開始ボタン
+              // 完了ボタン
               Expanded(
                 child: ElevatedButton.icon(
                   onPressed: () {
@@ -923,7 +731,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     set.isCompleted ? Icons.check_circle : Icons.check_circle_outline,
                     size: 18,
                   ),
-                  label: const Text('インターバル開始'),
+                  label: const Text('完了'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: set.isCompleted ? Colors.green : Colors.grey.shade300,
                     foregroundColor: set.isCompleted ? Colors.white : Colors.black,

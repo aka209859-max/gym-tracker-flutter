@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'theme_selector_screen.dart';
 import 'favorites_screen.dart';
 import 'subscription_screen.dart';
+import 'body_measurement_screen.dart';
 import '../services/favorites_service.dart';
 import '../services/subscription_service.dart';
 
@@ -204,6 +205,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
               context,
               MaterialPageRoute(builder: (context) => const FavoritesScreen()),
             ).then((_) => _loadUserData());
+          },
+        ),
+        const SizedBox(height: 12),
+        _buildMenuCard(
+          context,
+          icon: Icons.monitor_weight,
+          title: '体重・体脂肪率',
+          subtitle: '身体の記録と管理',
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const BodyMeasurementScreen()),
+            );
           },
         ),
         const SizedBox(height: 12),

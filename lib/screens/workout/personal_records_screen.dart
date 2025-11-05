@@ -16,17 +16,11 @@ class PersonalRecordsScreen extends StatefulWidget {
 class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  String _selectedExercise = 'ベンチプレス';
+  String? _selectedExercise;
+  bool _isLoadingExercises = true;
 
   final List<String> _periods = ['月別', '3ヶ月', '6ヶ月', '9ヶ月', '1年'];
-  final List<String> _exercises = [
-    'ベンチプレス',
-    'スクワット',
-    'デッドリフト',
-    'ショルダープレス',
-    'バーベルロウ',
-    'ラットプルダウン',
-  ];
+  List<String> _exercises = [];
 
   @override
   void initState() {
@@ -34,6 +28,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
     _tabController = TabController(length: _periods.length, vsync: this);
     _tabController.index = 1; // デフォルト3ヶ月
     _autoLoginIfNeeded();
+    _loadExercisesFromHistory();
   }
 
   Future<void> _autoLoginIfNeeded() async {
@@ -43,6 +38,64 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
         await FirebaseAuth.instance.signInAnonymously();
       } catch (e) {
         debugPrint('Auto login failed: $e');
+      }
+    }
+  }
+
+  /// Firestoreからトレーニング履歴を読み取り、種目リストを作成
+  Future<void> _loadExercisesFromHistory() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        setState(() {
+          _isLoadingExercises = false;
+        });
+        return;
+      }
+
+      // workout_logs コレクションから全トレーニングを取得
+      final workoutSnapshot = await FirebaseFirestore.instance
+          .collection('workout_logs')
+          .where('user_id', isEqualTo: user.uid)
+          .get();
+
+      // 全種目名をSetで収集（重複除外）
+      final exerciseSet = <String>{};
+
+      for (final doc in workoutSnapshot.docs) {
+        final data = doc.data();
+        final sets = data['sets'] as List<dynamic>? ?? [];
+        
+        for (final set in sets) {
+          if (set is Map<String, dynamic>) {
+            final name = set['exercise_name'] as String?;
+            if (name != null && name.isNotEmpty) {
+              exerciseSet.add(name);
+            }
+          }
+        }
+      }
+
+      // SetをListに変換してソート
+      final exerciseList = exerciseSet.toList()..sort();
+
+      if (mounted) {
+        setState(() {
+          _exercises = exerciseList;
+          if (_exercises.isNotEmpty) {
+            _selectedExercise = _exercises.first;
+          }
+          _isLoadingExercises = false;
+        });
+      }
+
+      debugPrint('✅ 種目リスト読み込み完了: ${_exercises.length}種目');
+    } catch (e) {
+      debugPrint('⚠️ 種目リスト読み込みエラー: $e');
+      if (mounted) {
+        setState(() {
+          _isLoadingExercises = false;
+        });
       }
     }
   }
@@ -100,6 +153,48 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
   }
 
   Widget _buildMainContent(User user) {
+    // 種目リスト読み込み中
+    if (_isLoadingExercises) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('パーソナルレコード')),
+        body: const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(height: 16),
+              Text('種目を読み込み中...'),
+            ],
+          ),
+        ),
+      );
+    }
+
+    // 種目がない場合
+    if (_exercises.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('パーソナルレコード')),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.fitness_center, size: 64, color: Colors.grey[400]),
+              const SizedBox(height: 16),
+              Text(
+                'まだトレーニング記録がありません',
+                style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'トレーニングを記録すると、ここに表示されます',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 14, color: Colors.grey[500]),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -107,6 +202,9 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.white70,
+          indicatorColor: Colors.white,
           tabs: _periods.map((p) => Tab(text: p)).toList(),
         ),
       ),
@@ -120,6 +218,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
               decoration: const InputDecoration(
                 labelText: '種目を選択',
                 border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.fitness_center),
               ),
               items: _exercises
                   .map((ex) => DropdownMenuItem(value: ex, child: Text(ex)))
@@ -137,7 +236,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
               children: _periods.map((period) {
                 return _PeriodView(
                   userId: user.uid,
-                  exercise: _selectedExercise,
+                  exercise: _selectedExercise ?? '',
                   period: period,
                 );
               }).toList(),
@@ -297,19 +396,25 @@ class _PeriodView extends StatelessWidget {
         startDate = DateTime(now.year, now.month - 3, now.day);
     }
 
+    // インデックス不要のシンプルなクエリ（where 1つのみ）
     final snapshot = await FirebaseFirestore.instance
         .collection('users')
         .doc(userId)
         .collection('personalRecords')
         .where('exerciseName', isEqualTo: exercise)
-        .where('achievedAt', isGreaterThan: Timestamp.fromDate(startDate))
-        .orderBy('achievedAt')
         .get();
 
-    return snapshot.docs
+    // メモリ内でフィルタリングとソート
+    final records = snapshot.docs
         .map((doc) => PersonalRecord.fromFirestore(
             doc.data() as Map<String, dynamic>, doc.id))
+        .where((record) => record.achievedAt.isAfter(startDate))
         .toList();
+    
+    // 日付順にソート
+    records.sort((a, b) => a.achievedAt.compareTo(b.achievedAt));
+    
+    return records;
   }
 
   Widget _buildGrowthStats(List<PersonalRecord> data) {

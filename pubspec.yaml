@@ -61,6 +61,7 @@ dependencies:
   image_picker: ^1.1.2
   fl_chart: ^0.69.0  # For workout progress charts
   table_calendar: ^3.1.2  # Calendar widget for home screen
+  vibration: ^2.0.0  # Vibration for rest timer notifications
 
 dev_dependencies:
   flutter_test:

@@ -163,7 +163,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
               segments: const [
                 ButtonSegment(
                   value: 'fullbody',
-                  label: Text('全身トレーニング'),
+                  label: Text('全身法'),
                   icon: Icon(Icons.accessibility_new),
                 ),
                 ButtonSegment(

@@ -3,6 +3,7 @@ import '../models/gym.dart';
 import '../models/review.dart';
 import '../models/crowd_report.dart';
 import '../models/user_profile.dart';
+import '../models/workout_log.dart';
 
 /// Firestore操作を管理するサービスクラス
 class FirestoreService {
@@ -159,5 +160,53 @@ class FirestoreService {
     await _db.collection('users').doc(userId).update({
       'favoriteGymIds': FieldValue.arrayRemove([gymId]),
     });
+  }
+
+  // ========== ワークアウトログ関連 ==========
+
+  /// 前回の同種目ワークアウトを取得 (リアルタイム前回比較用)
+  Future<Exercise?> getPreviousExercise(String userId, String exerciseName) async {
+    try {
+      // 過去30日以内の同種目ワークアウトを検索
+      final querySnapshot = await _db
+          .collection('workout_logs')
+          .where('userId', isEqualTo: userId)
+          .where('date', isLessThan: Timestamp.now())
+          .orderBy('date', descending: true)
+          .limit(20) // 最近20件を取得
+          .get();
+
+      // 同じ種目を含むワークアウトを検索
+      for (var doc in querySnapshot.docs) {
+        final workoutLog = WorkoutLog.fromFirestore(doc.data(), doc.id);
+        for (var exercise in workoutLog.exercises) {
+          if (exercise.name == exerciseName) {
+            return exercise;
+          }
+        }
+      }
+
+      return null;
+    } catch (e) {
+      print('前回ワークアウト取得エラー: $e');
+      return null;
+    }
+  }
+
+  /// ワークアウトログを保存
+  Future<void> saveWorkoutLog(WorkoutLog log) async {
+    await _db.collection('workout_logs').add(log.toFirestore());
+  }
+
+  /// ユーザーのワークアウトログ一覧を取得
+  Stream<List<WorkoutLog>> getUserWorkoutLogs(String userId, {int limit = 30}) {
+    return _db
+        .collection('workout_logs')
+        .where('userId', isEqualTo: userId)
+        .orderBy('date', descending: true)
+        .limit(limit)
+        .snapshots()
+        .map((snapshot) => 
+            snapshot.docs.map((doc) => WorkoutLog.fromFirestore(doc.data(), doc.id)).toList());
   }
 }

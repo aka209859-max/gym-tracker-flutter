@@ -1,0 +1,813 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'dart:async';
+
+// SetType enum
+enum SetType {
+  normal,     // 通常
+  warmup,     // ウォームアップ
+  superset,   // スーパーセット
+  dropset,    // ドロップセット
+  failure,    // フェイラー（限界まで）
+}
+
+// WorkoutSet class
+class WorkoutSet {
+  final String exerciseName;
+  double weight;
+  int reps;
+  bool isCompleted;
+  bool hasAssist;        // 補助あり
+  SetType setType;
+  
+  // 有酸素用
+  double? distance;
+  int? duration;
+  double? speed;
+  
+  WorkoutSet({
+    required this.exerciseName,
+    required this.weight,
+    required this.reps,
+    this.isCompleted = false,
+    this.hasAssist = false,
+    this.setType = SetType.normal,
+    this.distance,
+    this.duration,
+    this.speed,
+  });
+}
+
+class AddWorkoutScreen extends StatefulWidget {
+  // テンプレートからのデータを受け取る
+  final Map<String, dynamic>? templateData;
+  
+  const AddWorkoutScreen({super.key, this.templateData});
+
+  @override
+  State<AddWorkoutScreen> createState() => _AddWorkoutScreenState();
+}
+
+class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
+  DateTime _selectedDate = DateTime.now();
+  String? _selectedMuscleGroup;
+  int _startHour = 9;
+  int _startMinute = 0;
+  int _endHour = 11;
+  int _endMinute = 0;
+  final List<WorkoutSet> _sets = [];
+  
+  // タイマー関連
+  Timer? _restTimer;
+  int _restSeconds = 0;
+  bool _isResting = false;
+  int _selectedRestDuration = 90;
+  final List<int> _restDurations = [30, 60, 90, 120];
+  
+  // 前回記録データ
+  Map<String, Map<String, dynamic>> _lastWorkoutData = {};
+  
+  // メモ機能
+  final TextEditingController _memoController = TextEditingController();
+  
+  final Map<String, List<String>> _muscleGroupExercises = {
+    '胸': ['ベンチプレス', 'ダンベルプレス', 'インクラインプレス', 'ケーブルフライ', 'ディップス'],
+    '脚': ['スクワット', 'レッグプレス', 'レッグエクステンション', 'レッグカール', 'カーフレイズ'],
+    '背中': ['デッドリフト', 'ラットプルダウン', 'ベントオーバーロウ', 'シーテッドロウ', '懸垂'],
+    '肩': ['ショルダープレス', 'サイドレイズ', 'フロントレイズ', 'リアデルトフライ', 'アップライトロウ'],
+    '二頭': ['バーベルカール', 'ダンベルカール', 'ハンマーカール', 'プリチャーカール', 'ケーブルカール'],
+    '三頭': ['トライセプスエクステンション', 'スカルクラッシャー', 'ケーブルプッシュダウン', 'ディップス', 'キックバック'],
+    '有酸素': ['ランニング', 'サイクリング', 'エアロバイク', 'ステッパー', '水泳'],
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLastWorkoutData();
+    _applyTemplateDataIfProvided();
+  }
+  
+  // テンプレートデータを適用
+  void _applyTemplateDataIfProvided() {
+    if (widget.templateData != null) {
+      print('📋 テンプレートデータを適用: ${widget.templateData}');
+      
+      // 部位を設定
+      final muscleGroup = widget.templateData!['muscle_group'] as String?;
+      if (muscleGroup != null) {
+        setState(() {
+          _selectedMuscleGroup = muscleGroup;
+        });
+      }
+      
+      // セットデータを適用
+      final sets = widget.templateData!['sets'] as List<dynamic>?;
+      if (sets != null) {
+        setState(() {
+          for (var setData in sets) {
+            final exerciseName = setData['exercise_name'] as String;
+            final weight = (setData['weight'] as num?)?.toDouble() ?? 0.0;
+            final reps = setData['reps'] as int? ?? 10;
+            
+            _sets.add(WorkoutSet(
+              exerciseName: exerciseName,
+              weight: weight,
+              reps: reps,
+            ));
+          }
+          print('✅ ${_sets.length}セットをテンプレートから適用しました');
+        });
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _restTimer?.cancel();
+    _memoController.dispose();
+    super.dispose();
+  }
+
+  // 前回のワークアウトデータを読み込み
+  Future<void> _loadLastWorkoutData() async {
+    try {
+      final user = firebase_auth.FirebaseAuth.instance.currentUser;
+      if (user == null) return;
+
+      final snapshot = await FirebaseFirestore.instance
+          .collection('workout_logs')
+          .where('user_id', isEqualTo: user.uid)
+          .orderBy('date', descending: true)
+          .limit(1)
+          .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        final data = snapshot.docs.first.data();
+        final sets = data['sets'] as List<dynamic>? ?? [];
+        
+        for (final set in sets) {
+          if (set is Map<String, dynamic>) {
+            final exerciseName = set['exercise_name'] as String?;
+            if (exerciseName != null) {
+              _lastWorkoutData[exerciseName] = {
+                'weight': (set['weight'] as num?)?.toDouble() ?? 0.0,
+                'reps': set['reps'] as int? ?? 10,
+              };
+            }
+          }
+        }
+        if (mounted) setState(() {});
+      }
+    } catch (e) {
+      debugPrint('前回データ読み込みエラー: $e');
+    }
+  }
+
+  // 休憩タイマー設定ダイアログ
+  void _showRestTimerSettings() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('休憩時間を設定'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: _restDurations.map((duration) {
+            return RadioListTile<int>(
+              title: Text('${duration}秒'),
+              value: duration,
+              groupValue: _selectedRestDuration,
+              onChanged: (value) {
+                setState(() => _selectedRestDuration = value!);
+                Navigator.pop(context);
+              },
+            );
+          }).toList(),
+        ),
+      ),
+    );
+  }
+
+  // カスタム種目追加ダイアログ
+  Future<void> _showAddCustomExerciseDialog() async {
+    final controller = TextEditingController();
+    final result = await showDialog<String>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('種目を追加（カスタム）'),
+        content: TextField(
+          controller: controller,
+          decoration: const InputDecoration(
+            hintText: '種目名を入力',
+            border: OutlineInputBorder(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('キャンセル'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context, controller.text),
+            child: const Text('追加'),
+          ),
+        ],
+      ),
+    );
+    if (result != null && result.isNotEmpty) {
+      setState(() {
+        if (!_muscleGroupExercises[_selectedMuscleGroup]!.contains(result)) {
+          _muscleGroupExercises[_selectedMuscleGroup]!.add(result);
+        }
+        _addSet(result);
+      });
+    }
+  }
+
+  // セット追加
+  void _addSet(String exerciseName) {
+    setState(() {
+      // 前回のデータを引き継ぎ
+      WorkoutSet? lastSet;
+      for (int i = _sets.length - 1; i >= 0; i--) {
+        if (_sets[i].exerciseName == exerciseName) {
+          lastSet = _sets[i];
+          break;
+        }
+      }
+      
+      _sets.add(WorkoutSet(
+        exerciseName: exerciseName,
+        weight: lastSet?.weight ?? 0.0,
+        reps: lastSet?.reps ?? 10,
+        setType: SetType.normal,
+      ));
+    });
+  }
+
+  // タイマー開始
+  void _startRestTimer() {
+    setState(() {
+      _isResting = true;
+      _restSeconds = _selectedRestDuration;
+    });
+    
+    _restTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_restSeconds > 0) {
+          _restSeconds--;
+        } else {
+          _stopRestTimer();
+        }
+      });
+    });
+  }
+
+  // タイマー停止
+  void _stopRestTimer() {
+    _restTimer?.cancel();
+    setState(() {
+      _isResting = false;
+      _restSeconds = 0;
+    });
+  }
+
+  // 保存処理
+  Future<void> _saveWorkout() async {
+    if (_selectedMuscleGroup == null || _sets.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('部位と種目を選択してください')),
+      );
+      return;
+    }
+
+    try {
+      final user = firebase_auth.FirebaseAuth.instance.currentUser;
+      if (user == null) return;
+
+      final startTime = DateTime(
+        _selectedDate.year,
+        _selectedDate.month,
+        _selectedDate.day,
+        _startHour,
+        _startMinute,
+      );
+      
+      final endTime = DateTime(
+        _selectedDate.year,
+        _selectedDate.month,
+        _selectedDate.day,
+        _endHour,
+        _endMinute,
+      );
+
+      final setsData = _sets.map((set) => {
+        'exercise_name': set.exerciseName,
+        'weight': set.weight,
+        'reps': set.reps,
+        'type': set.setType.toString().split('.').last,
+        'has_assist': set.hasAssist,
+        'is_completed': set.isCompleted,
+      }).toList();
+
+      final workoutDoc = await FirebaseFirestore.instance.collection('workout_logs').add({
+        'user_id': user.uid,
+        'muscle_group': _selectedMuscleGroup,
+        'date': Timestamp.fromDate(_selectedDate),
+        'start_time': Timestamp.fromDate(startTime),
+        'end_time': Timestamp.fromDate(endTime),
+        'sets': setsData,
+      });
+
+      // メモが入力されていれば保存
+      if (_memoController.text.isNotEmpty) {
+        await FirebaseFirestore.instance.collection('workout_notes').add({
+          'user_id': user.uid,
+          'workout_session_id': workoutDoc.id,
+          'content': _memoController.text,
+          'created_at': Timestamp.now(),
+          'updated_at': Timestamp.now(),
+        });
+      }
+
+      if (mounted) {
+        Navigator.pop(context, true);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('トレーニングを保存しました'), backgroundColor: Colors.green),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('保存に失敗しました: $e')),
+        );
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('トレーニング記録'),
+        actions: [
+          if (_isResting)
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Text(
+                  '休憩: ${_restSeconds}秒',
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          IconButton(
+            icon: const Icon(Icons.timer),
+            onPressed: _showRestTimerSettings,
+            tooltip: '休憩時間設定',
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          // 部位選択
+          if (_selectedMuscleGroup == null)
+            Expanded(child: _buildMuscleGroupSelection())
+          else
+            Expanded(
+              child: Column(
+                children: [
+                  _buildSelectedMuscleGroupHeader(),
+                  Expanded(child: _buildExerciseList()),
+                ],
+              ),
+            ),
+        ],
+      ),
+      bottomNavigationBar: _selectedMuscleGroup != null && _sets.isNotEmpty
+          ? SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: ElevatedButton(
+                  onPressed: _saveWorkout,
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    backgroundColor: Colors.blue.shade700,
+                  ),
+                  child: const Text('記録を保存', style: TextStyle(fontSize: 18, color: Colors.white)),
+                ),
+              ),
+            )
+          : null,
+    );
+  }
+
+  // 部位選択画面
+  Widget _buildMuscleGroupSelection() {
+    return GridView.builder(
+      padding: const EdgeInsets.all(16),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 1.5,
+        crossAxisSpacing: 12,
+        mainAxisSpacing: 12,
+      ),
+      itemCount: _muscleGroupExercises.keys.length,
+      itemBuilder: (context, index) {
+        final muscleGroup = _muscleGroupExercises.keys.elementAt(index);
+        return Card(
+          child: InkWell(
+            onTap: () => setState(() => _selectedMuscleGroup = muscleGroup),
+            child: Center(
+              child: Text(
+                muscleGroup,
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  // 選択された部位のヘッダー
+  Widget _buildSelectedMuscleGroupHeader() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      color: Colors.blue.shade700,
+      child: Row(
+        children: [
+          Text(
+            _selectedMuscleGroup!,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          const Spacer(),
+          TextButton(
+            onPressed: () => setState(() {
+              _selectedMuscleGroup = null;
+              _sets.clear();
+            }),
+            child: const Text('変更', style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // 種目リスト
+  Widget _buildExerciseList() {
+    final exercises = _muscleGroupExercises[_selectedMuscleGroup] ?? [];
+    final exerciseGroups = <String, List<WorkoutSet>>{};
+    
+    for (final set in _sets) {
+      exerciseGroups.putIfAbsent(set.exerciseName, () => []).add(set);
+    }
+
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          // 種目選択
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('種目を選択', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 12),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    ...exercises.map((exercise) {
+                      return ActionChip(
+                        label: Text(exercise),
+                        onPressed: () => _addSet(exercise),
+                        backgroundColor: exerciseGroups.containsKey(exercise) 
+                            ? Colors.blue.shade100 
+                            : null,
+                      );
+                    }).toList(),
+                    ActionChip(
+                      label: const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.add, size: 16),
+                          SizedBox(width: 4),
+                          Text('種目を追加（カスタム）'),
+                        ],
+                      ),
+                      onPressed: _showAddCustomExerciseDialog,
+                      backgroundColor: Colors.green.shade100,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          
+          // セットリスト
+          ...exerciseGroups.entries.map((entry) {
+            return _buildExerciseCard(entry.key, entry.value);
+          }).toList(),
+          
+          // メモ入力欄
+          if (exerciseGroups.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    '📝 トレーニングメモ',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: _memoController,
+                    maxLines: 5,
+                    decoration: InputDecoration(
+                      hintText: '今日のトレーニングについてメモを残しましょう\n例: 調子が良かった、フォームを意識した、重量を上げた など',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey.shade50,
+                      contentPadding: const EdgeInsets.all(16),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'メモは後から確認・編集できます',
+                    style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                  ),
+                ],
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  // 種目カード
+  Widget _buildExerciseCard(String exerciseName, List<WorkoutSet> sets) {
+    final lastData = _lastWorkoutData[exerciseName];
+    
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.fitness_center, color: Colors.blue),
+                const SizedBox(width: 8),
+                Text(exerciseName, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                const Spacer(),
+                IconButton(
+                  icon: const Icon(Icons.add_circle, color: Colors.blue),
+                  onPressed: () => _addSet(exerciseName),
+                ),
+              ],
+            ),
+            if (lastData != null) ...[
+              const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.purple.shade50,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.purple.shade200),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.lightbulb, size: 16, color: Colors.purple),
+                    const SizedBox(width: 8),
+                    Text('💡 前回記録', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.purple.shade700)),
+                    const SizedBox(width: 8),
+                    Text('今日の記録が次回の目標になります。全力で挑戦しましょう！', style: TextStyle(fontSize: 11, color: Colors.purple.shade600)),
+                  ],
+                ),
+              ),
+            ],
+            const SizedBox(height: 12),
+            ...sets.asMap().entries.map((entry) {
+              final index = entry.key;
+              final globalIndex = _sets.indexOf(entry.value);
+              return _buildSetRow(globalIndex, entry.value, index + 1);
+            }).toList(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // セット行
+  Widget _buildSetRow(int globalIndex, WorkoutSet set, int setNumber) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        children: [
+          // セット番号
+          Container(
+            width: 32,
+            height: 32,
+            decoration: BoxDecoration(
+              color: set.isCompleted ? Colors.green : Colors.grey.shade300,
+              shape: BoxShape.circle,
+            ),
+            child: Center(
+              child: Text(
+                '$setNumber',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: set.isCompleted ? Colors.white : Colors.black,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+          
+          // SetType選択（有酸素以外）
+          if (_selectedMuscleGroup != '有酸素') ...[
+            InkWell(
+              onTap: () => _showSetTypeDialog(globalIndex),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  border: Border.all(color: _getSetTypeColor(set.setType)),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(_getSetTypeIcon(set.setType), size: 16, color: _getSetTypeColor(set.setType)),
+                    const SizedBox(width: 4),
+                    Text(
+                      _getSetTypeLabel(set.setType),
+                      style: TextStyle(fontSize: 12, color: _getSetTypeColor(set.setType)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
+          ],
+          
+          // 重量入力
+          SizedBox(
+            width: 70,
+            child: TextField(
+              decoration: const InputDecoration(
+                labelText: 'kg',
+                border: OutlineInputBorder(),
+                contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              ),
+              keyboardType: TextInputType.number,
+              controller: TextEditingController(text: set.weight.toString()),
+              onChanged: (value) {
+                setState(() {
+                  set.weight = double.tryParse(value) ?? 0.0;
+                });
+              },
+            ),
+          ),
+          const SizedBox(width: 8),
+          
+          // 回数入力
+          SizedBox(
+            width: 60,
+            child: TextField(
+              decoration: const InputDecoration(
+                labelText: '回',
+                border: OutlineInputBorder(),
+                contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              ),
+              keyboardType: TextInputType.number,
+              controller: TextEditingController(text: set.reps.toString()),
+              onChanged: (value) {
+                setState(() {
+                  set.reps = int.tryParse(value) ?? 0;
+                });
+              },
+            ),
+          ),
+          const SizedBox(width: 8),
+          
+          // 補助トグル
+          IconButton(
+            icon: Icon(
+              set.hasAssist ? Icons.handshake : Icons.person,
+              color: set.hasAssist ? Colors.orange : Colors.grey,
+            ),
+            onPressed: () {
+              setState(() {
+                set.hasAssist = !set.hasAssist;
+              });
+            },
+            tooltip: set.hasAssist ? '補助あり' : '補助なし',
+          ),
+          
+          // 完了トグル
+          IconButton(
+            icon: Icon(
+              set.isCompleted ? Icons.check_circle : Icons.check_circle_outline,
+              color: set.isCompleted ? Colors.green : Colors.grey,
+            ),
+            onPressed: () {
+              setState(() {
+                set.isCompleted = !set.isCompleted;
+                if (set.isCompleted && !_isResting) {
+                  _startRestTimer();
+                }
+              });
+            },
+          ),
+          
+          // 削除
+          IconButton(
+            icon: const Icon(Icons.delete, color: Colors.red),
+            onPressed: () {
+              setState(() {
+                _sets.removeAt(globalIndex);
+              });
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  // SetType選択ダイアログ
+  void _showSetTypeDialog(int setIndex) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('セットタイプを選択'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: SetType.values.map((type) {
+            return ListTile(
+              leading: Icon(_getSetTypeIcon(type), color: _getSetTypeColor(type)),
+              title: Text(_getSetTypeLabel(type)),
+              onTap: () {
+                setState(() {
+                  _sets[setIndex].setType = type;
+                });
+                Navigator.pop(context);
+              },
+            );
+          }).toList(),
+        ),
+      ),
+    );
+  }
+
+  // SetType関連のヘルパー
+  Color _getSetTypeColor(SetType type) {
+    switch (type) {
+      case SetType.warmup:
+        return Colors.orange;
+      case SetType.superset:
+        return Colors.purple;
+      case SetType.dropset:
+        return Colors.red;
+      case SetType.failure:
+        return Colors.pink;
+      default:
+        return Colors.blue;
+    }
+  }
+
+  IconData _getSetTypeIcon(SetType type) {
+    switch (type) {
+      case SetType.warmup:
+        return Icons.thermostat;
+      case SetType.superset:
+        return Icons.bolt;
+      case SetType.dropset:
+        return Icons.trending_down;
+      case SetType.failure:
+        return Icons.warning;
+      default:
+        return Icons.fitness_center;
+    }
+  }
+
+  String _getSetTypeLabel(SetType type) {
+    switch (type) {
+      case SetType.warmup:
+        return 'ウォームアップ';
+      case SetType.superset:
+        return 'スーパーセット';
+      case SetType.dropset:
+        return 'ドロップセット';
+      case SetType.failure:
+        return 'フェイラー';
+      default:
+        return '通常';
+    }
+  }
+}
