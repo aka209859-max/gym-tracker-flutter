@@ -728,6 +728,20 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
           ),
         ),
         const SizedBox(height: 12),
+        // シェアボタン
+        SizedBox(
+          width: double.infinity,
+          child: OutlinedButton.icon(
+            onPressed: _shareGym,
+            icon: const Icon(Icons.share),
+            label: const Text('このジムをシェア'),
+            style: OutlinedButton.styleFrom(
+              side: BorderSide(color: Colors.blue[600]!),
+              foregroundColor: Colors.blue[600],
+            ),
+          ),
+        ),
+        const SizedBox(height: 12),
         Row(
           children: [
             Expanded(
@@ -759,6 +773,51 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
         ),
       ],
     );
+  }
+
+  /// ジムをシェアする（正直な「作りました！」スタイル）
+  Future<void> _shareGym() async {
+    try {
+      final gym = widget.gym;
+      
+      // シンプルで正直なツイート文
+      final tweetText = '''GPS×混雑度でジム探しアプリ作りました💪
+
+GYM MATCH
+
+📍 ${gym.name}
+⭐ ${gym.rating.toStringAsFixed(1)}/5.0 (${gym.reviewCount}件のレビュー)
+📍 ${gym.address}
+
+まだβ版ですが、使ってみてください！
+
+#個人開発 #Flutter #GYM_MATCH #ジム''';
+
+      // テキストのみシェア（画像生成は将来実装）
+      await _shareService.shareText(
+        tweetText,
+        subject: 'GYM MATCH - ${gym.name}',
+      );
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('シェアしました！'),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('シェアに失敗しました: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 
   Widget _buildReviewsSection() {
