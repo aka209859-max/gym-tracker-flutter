@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -35,9 +36,9 @@ class _MapScreenState extends State<MapScreen> {
   @override
   void initState() {
     super.initState();
-    // アプリ起動後にGPS検索ダイアログを表示
+    // アプリ起動後に自動的にGPS検索を実行（ダイアログなし）
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _checkAndShowLocationDialog();
+      _acquireLocationAndSearch();
     });
   }
 
@@ -162,7 +163,8 @@ class _MapScreenState extends State<MapScreen> {
       }
 
       // 近くのジムを検索（半径5km）- Google Places API使用
-      List<Gym> gyms;
+      List<Gym> gyms = [];
+      bool searchSucceeded = false;
       
       try {
         if (kDebugMode) {
@@ -173,48 +175,133 @@ class _MapScreenState extends State<MapScreen> {
           latitude: position.latitude,
           longitude: position.longitude,
           radiusMeters: 5000,
+        ).timeout(
+          const Duration(seconds: 15),
+          onTimeout: () {
+            if (kDebugMode) {
+              debugPrint('⏱️ Google Places API timeout - フォールバックします');
+            }
+            throw TimeoutException('Google Places API timeout');
+          },
         );
         
-        // 🔥 パートナージム統合処理
+        if (places.isEmpty) {
+          if (kDebugMode) {
+            debugPrint('⚠️ Google Places APIからの結果が空 - フォールバックします');
+          }
+          throw Exception('No gyms found from Google Places API');
+        }
+        
+        // 🔥 パートナージム統合処理（エラー時は通常のジム情報のみ返す）
         if (kDebugMode) {
           debugPrint('🏆 パートナージム統合処理開始...');
         }
-        gyms = await _partnerMergeService.mergePartnerData(places);
         
-        if (kDebugMode) {
-          final partnerCount = gyms.where((g) => g.isPartner).length;
-          debugPrint('✅ パートナージム統合完了: ${partnerCount}件のPOジム検出');
+        try {
+          gyms = await _partnerMergeService.mergePartnerData(places);
+          
+          if (kDebugMode) {
+            final partnerCount = gyms.where((g) => g.isPartner).length;
+            debugPrint('✅ パートナージム統合完了: ${partnerCount}件のPOジム検出');
+          }
+        } catch (mergeError) {
+          // パートナー統合失敗時もGoogle Placesデータをそのまま使用
+          if (kDebugMode) {
+            debugPrint('⚠️ パートナー統合失敗: $mergeError');
+            debugPrint('   Google Placesデータをそのまま使用します');
+          }
+          
+          // Google PlaceをGymに変換（パートナー情報なし）
+          gyms = places.map((place) => Gym(
+            id: place.placeId,
+            name: place.name,
+            address: place.address,
+            latitude: place.latitude,
+            longitude: place.longitude,
+            description: place.types.join(', '),
+            facilities: place.types,
+            phoneNumber: '',
+            openingHours: place.openNow != null 
+                ? (place.openNow! ? '営業中' : '営業時間外')
+                : '営業時間不明',
+            monthlyFee: 0,
+            rating: place.rating ?? 0.0,
+            reviewCount: place.userRatingsTotal ?? 0,
+            imageUrl: place.photoReference != null 
+                ? 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${place.photoReference}&key=AIzaSyA9XmQSHA1llGg7gihqjmOOIaLA856fkLc'
+                : 'https://via.placeholder.com/400x300?text=No+Image',
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+            currentCrowdLevel: 3,
+            lastCrowdUpdate: DateTime.now(),
+            isPartner: false,
+          )).toList();
         }
+        
+        searchSucceeded = true;
         
         if (kDebugMode) {
           debugPrint('✅ ${gyms.length}件の実際のジムを取得しました');
         }
         
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('周辺の${gyms.length}件のジムを検索しました'),
-              backgroundColor: Colors.green,
-              duration: const Duration(seconds: 2),
-            ),
-          );
+      } on TimeoutException catch (e) {
+        if (kDebugMode) {
+          debugPrint('⏱️ Google Places APIタイムアウト: $e');
+          debugPrint('   フォールバック: サンプルデータを使用します');
         }
       } catch (e) {
         if (kDebugMode) {
           debugPrint('⚠️ Google Places API検索エラー: $e');
           debugPrint('   フォールバック: サンプルデータを使用します');
         }
+      }
+      
+      // 【完全フォールバック】API失敗時はサンプルデータを表示
+      if (!searchSucceeded || gyms.isEmpty) {
+        if (kDebugMode) {
+          debugPrint('🛡️ フォールバック処理: サンプルデータを読み込み中...');
+        }
         
-        // エラー時はサンプルデータをフォールバック
-        final provider = Provider.of<GymProvider>(context, listen: false);
-        gyms = provider.gyms;
+        try {
+          final provider = Provider.of<GymProvider>(context, listen: false);
+          gyms = provider.gyms;
+          
+          if (kDebugMode) {
+            debugPrint('✅ サンプルデータ ${gyms.length}件を読み込みました');
+          }
+        } catch (fallbackError) {
+          if (kDebugMode) {
+            debugPrint('❌ サンプルデータの読み込みに失敗: $fallbackError');
+          }
+          gyms = []; // 最終的なフォールバックは空リスト
+        }
         
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('検索エラー: サンプルデータを表示しています'),
+            SnackBar(
+              content: Text(
+                gyms.isEmpty 
+                  ? '現在、ジム検索が利用できません'
+                  : '現在、近くのジム検索が利用できません。サンプルデータを表示しています'
+              ),
               backgroundColor: Colors.orange,
-              duration: Duration(seconds: 2),
+              duration: const Duration(seconds: 3),
+              action: SnackBarAction(
+                label: '再試行',
+                textColor: Colors.white,
+                onPressed: _acquireLocationAndSearch,
+              ),
+            ),
+          );
+        }
+      } else {
+        // 検索成功時
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('周辺の${gyms.length}件のジムを検索しました'),
+              backgroundColor: Colors.green,
+              duration: const Duration(seconds: 2),
             ),
           );
         }

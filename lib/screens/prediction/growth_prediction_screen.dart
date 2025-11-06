@@ -6,7 +6,9 @@ library;
 
 import 'package:flutter/material.dart';
 import '../../services/ai_prediction_service.dart';
+import '../../services/subscription_service.dart';
 import '../../widgets/scientific_citation_card.dart';
+import '../../screens/subscription_screen.dart';
 
 /// AI成長予測画面
 class GrowthPredictionScreen extends StatefulWidget {
@@ -28,7 +30,7 @@ class _GrowthPredictionScreenState extends State<GrowthPredictionScreen> {
 
   // 予測結果
   Map<String, dynamic>? _predictionResult;
-  bool _isLoading = false;
+  bool _isLoading = true;  // 初期状態でローディング中
 
   // レベル選択肢
   final List<String> _levels = ['初心者', '中級者', '上級者'];
@@ -44,6 +46,15 @@ class _GrowthPredictionScreenState extends State<GrowthPredictionScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    // 画面表示時に自動で予測実行
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _executePrediction();
+    });
+  }
+
+  @override
   void dispose() {
     _weightController.dispose();
     super.dispose();
@@ -53,12 +64,28 @@ class _GrowthPredictionScreenState extends State<GrowthPredictionScreen> {
   Future<void> _executePrediction() async {
     if (!_formKey.currentState!.validate()) return;
 
+    // 🔒 課金チェック: AI機能はプレミアム以上
+    final subscriptionService = SubscriptionService();
+    final hasAIAccess = await subscriptionService.isAIFeatureAvailable();
+    
+    if (!hasAIAccess) {
+      // 無料プランユーザーは課金画面へ誘導
+      if (mounted) {
+        _showUpgradeDialog();
+      }
+      setState(() {
+        _isLoading = false;
+      });
+      return;
+    }
+
     setState(() {
       _isLoading = true;
       _predictionResult = null;
     });
 
     try {
+      print('🚀 成長予測開始...');
       final result = await AIPredictionService.predictGrowth(
         currentWeight: double.parse(_weightController.text),
         level: _selectedLevel,
@@ -68,19 +95,24 @@ class _GrowthPredictionScreenState extends State<GrowthPredictionScreen> {
         bodyPart: _selectedBodyPart,
         monthsAhead: 4,
       );
+      print('✅ 成長予測完了: ${result['success']}');
 
-      setState(() {
-        _predictionResult = result;
-        _isLoading = false;
-      });
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-      });
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('予測の生成に失敗しました: $e')),
-        );
+        setState(() {
+          _predictionResult = result;
+          _isLoading = false;
+        });
+      }
+    } catch (e) {
+      print('❌ 成長予測例外: $e');
+      if (mounted) {
+        setState(() {
+          _predictionResult = {
+            'success': false,
+            'error': '予測の生成に失敗しました: $e',
+          };
+          _isLoading = false;
+        });
       }
     }
   }
@@ -422,14 +454,61 @@ class _GrowthPredictionScreenState extends State<GrowthPredictionScreen> {
 
   /// 予測結果表示
   Widget _buildPredictionResult() {
-    if (_predictionResult == null || !_predictionResult!['success']) {
+    // nullチェック
+    if (_predictionResult == null) {
+      return Card(
+        color: Colors.grey.shade100,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text('予測結果がありません'),
+        ),
+      );
+    }
+
+    // エラーチェック
+    if (_predictionResult!['success'] != true) {
       return Card(
         color: Colors.red.shade50,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.error_outline, color: Colors.red),
+                  SizedBox(width: 8),
+                  Text(
+                    '予測エラー',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8),
+              Text(
+                _predictionResult!['error']?.toString() ?? '不明なエラーが発生しました',
+                style: TextStyle(color: Colors.red.shade700),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    // 必須フィールドの存在チェック
+    if (!_predictionResult!.containsKey('currentWeight') ||
+        !_predictionResult!.containsKey('predictedWeight')) {
+      return Card(
+        color: Colors.orange.shade50,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Text(
-            _predictionResult?['error'] ?? '予測の生成に失敗しました',
-            style: const TextStyle(color: Colors.red),
+            '予測データが不完全です。もう一度お試しください。',
+            style: TextStyle(color: Colors.orange.shade900),
           ),
         ),
       );
@@ -675,6 +754,69 @@ class _GrowthPredictionScreenState extends State<GrowthPredictionScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: widgets,
+    );
+  }
+  
+  /// 🔒 アップグレードダイアログ表示
+  void _showUpgradeDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(Icons.lock, color: Colors.orange),
+            SizedBox(width: 8),
+            Text('プレミアム機能'),
+          ],
+        ),
+        content: const Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'AI成長予測はプレミアムプラン以上でご利用いただけます。',
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 16),
+            Text(
+              '✨ プレミアムプランの特典:',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 8),
+            Text('• AI成長予測（3ヶ月先の重量予測）'),
+            Text('• AI効果分析（科学的根拠付き）'),
+            Text('• トレーニングパートナー検索'),
+            SizedBox(height: 16),
+            Text(
+              '月額 ¥980',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('キャンセル'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              // サブスクリプション画面へ遷移
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SubscriptionScreen(),
+                ),
+              );
+            },
+            child: const Text('プランを見る'),
+          ),
+        ],
+      ),
     );
   }
 }

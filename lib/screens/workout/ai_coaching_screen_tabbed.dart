@@ -776,7 +776,16 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
 
   // 予測結果
   Map<String, dynamic>? _predictionResult;
-  bool _isLoading = false;
+  bool _isLoading = true;  // 初期状態でローディング中
+
+  @override
+  void initState() {
+    super.initState();
+    // 画面表示時に自動で予測実行
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _executePrediction();
+    });
+  }
 
   // レベル選択肢
   final List<String> _levels = ['初心者', '中級者', '上級者'];
@@ -807,6 +816,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     });
 
     try {
+      print('🚀 成長予測開始...');
       final result = await AIPredictionService.predictGrowth(
         currentWeight: double.parse(_weightController.text),
         level: _selectedLevel,
@@ -816,19 +826,24 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         bodyPart: _selectedBodyPart,
         monthsAhead: 4,
       );
+      print('✅ 成長予測完了: ${result['success']}');
 
-      setState(() {
-        _predictionResult = result;
-        _isLoading = false;
-      });
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-      });
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('予測の生成に失敗しました: $e')),
-        );
+        setState(() {
+          _predictionResult = result;
+          _isLoading = false;
+        });
+      }
+    } catch (e) {
+      print('❌ 成長予測例外: $e');
+      if (mounted) {
+        setState(() {
+          _predictionResult = {
+            'success': false,
+            'error': '予測の生成に失敗しました: $e',
+          };
+          _isLoading = false;
+        });
       }
     }
   }
@@ -943,7 +958,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.fitness_center),
               ),
-              keyboardType: TextInputType.number,
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return '1RMを入力してください';
@@ -1142,73 +1157,202 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
 
   /// 予測結果表示
   Widget _buildPredictionResult() {
+    // nullチェック
+    if (_predictionResult == null) {
+      return Card(
+        color: Colors.grey.shade100,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text('予測結果がありません'),
+        ),
+      );
+    }
+
+    // エラーチェック
+    if (_predictionResult!['success'] != true) {
+      return Card(
+        color: Colors.red.shade50,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.error_outline, color: Colors.red),
+                  SizedBox(width: 8),
+                  Text(
+                    '予測エラー',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8),
+              Text(
+                _predictionResult!['error']?.toString() ?? '不明なエラーが発生しました',
+                style: TextStyle(color: Colors.red.shade700),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     final result = _predictionResult!;
-    final curve = result['curve'] as List<Map<String, dynamic>>;
-    final scientificBasis = result['scientificBasis'] as String;
-    final citations = result['citations'] as List<Map<String, dynamic>>;
+    
+    // 必須フィールドチェック
+    if (!result.containsKey('currentWeight') || 
+        !result.containsKey('predictedWeight') ||
+        !result.containsKey('aiAnalysis')) {
+      return Card(
+        color: Colors.orange.shade50,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            '予測データが不完全です。もう一度お試しください。',
+            style: TextStyle(color: Colors.orange.shade900),
+          ),
+        ),
+      );
+    }
+    
+    final currentWeight = result['currentWeight'] as double;
+    final predictedWeight = result['predictedWeight'] as double;
+    final growthPercentage = result['growthPercentage'] as int;
+    final confidenceInterval = result['confidenceInterval'] as Map<String, dynamic>;
+    final monthlyRate = result['monthlyRate'] as int;
+    final weeklyRate = result['weeklyRate'] as double;
+    final aiAnalysis = result['aiAnalysis'] as String;
+    final scientificBasis = result['scientificBasis'] as List;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // 予測カード
+        // 予測結果サマリー
         Card(
-          color: Colors.purple.shade50,
+          color: Colors.green.shade50,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                Icon(
+                  Icons.trending_up,
+                  size: 48,
+                  color: Colors.green.shade700,
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  '4ヶ月後の予測',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  '${predictedWeight.round()}kg',
+                  style: TextStyle(
+                    fontSize: 48,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green.shade700,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  '現在: ${currentWeight.round()}kg → +$growthPercentage%の成長',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.info_outline, size: 16, color: Colors.blue.shade700),
+                      const SizedBox(width: 8),
+                      Text(
+                        '信頼区間: ${confidenceInterval['lower'].round()}-${confidenceInterval['upper'].round()}kg',
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.grey.shade700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+
+        // 成長率カード
+        Card(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '📊 4ヶ月後の予測',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.purple.shade900,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                ...curve.map((point) {
-                  final month = point['month'] as int;
-                  final predicted = point['predicted'] as double;
-                  final lower = point['confidenceLower'] as double;
-                  final upper = point['confidenceUpper'] as double;
-
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '${month}ヶ月後',
-                          style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              '${predicted.toStringAsFixed(1)} kg',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.purple.shade700,
-                              ),
-                            ),
-                            Text(
-                              '信頼区間: ${lower.toStringAsFixed(1)}-${upper.toStringAsFixed(1)} kg',
-                              style: TextStyle(
-                                fontSize: 11,
-                                color: Colors.grey.shade600,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                Row(
+                  children: [
+                    Icon(Icons.show_chart, color: Colors.blue.shade700),
+                    const SizedBox(width: 8),
+                    const Text(
+                      '成長率',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  );
-                }),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _buildStatItem('月次成長', '+$monthlyRate%', Colors.blue),
+                    _buildStatItem('週次成長', '+${weeklyRate.toStringAsFixed(1)}%', Colors.green),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+
+        // AI分析
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(Icons.psychology, color: Colors.purple.shade700),
+                    const SizedBox(width: 8),
+                    const Text(
+                      'AI詳細分析',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                _buildFormattedText(aiAnalysis),
               ],
             ),
           ),
@@ -1216,49 +1360,112 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         const SizedBox(height: 16),
 
         // 科学的根拠
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  '🔬 科学的根拠',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  scientificBasis,
-                  style: const TextStyle(fontSize: 14, height: 1.6),
-                ),
-              ],
-            ),
+        ScientificBasisSection(
+          basis: scientificBasis.cast<Map<String, String>>(),
+        ),
+        const SizedBox(height: 8),
+
+        // 信頼度インジケーター
+        Center(
+          child: ConfidenceIndicator(paperCount: scientificBasis.length),
+        ),
+      ],
+    );
+  }
+
+  /// 統計アイテム
+  Widget _buildStatItem(String label, String value, Color color) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: color,
           ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            color: Colors.grey.shade600,
+          ),
+        ),
+      ],
+    );
+  }
 
-        // 引用論文
-        if (citations.isNotEmpty) ...[
-          const Text(
-            '📚 参考文献',
-            style: TextStyle(
-              fontSize: 16,
+  /// Markdown形式テキストをフォーマット済みウィジェットに変換
+  Widget _buildFormattedText(String text) {
+    final lines = text.split('\n');
+    final List<InlineSpan> spans = [];
+
+    for (int i = 0; i < lines.length; i++) {
+      String line = lines[i];
+
+      // 1. 見出し処理（## Text → 太字テキスト）
+      if (line.trim().startsWith('##')) {
+        final headingText = line.replaceFirst(RegExp(r'^##\s*'), '');
+        spans.add(
+          TextSpan(
+            text: headingText,
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
+              fontSize: 16,
+              height: 1.8,
             ),
           ),
-          const SizedBox(height: 8),
-          ...citations.map((citation) {
-            return ScientificCitationCard(
-              citation: citation['citation'] as String,
-              finding: citation['finding'] as String,
-              effectSize: citation['effectSize'] as String,
-            );
-          }),
-        ],
-      ],
+        );
+        if (i < lines.length - 1) spans.add(const TextSpan(text: '\n'));
+        continue;
+      }
+
+      // 2. 箇条書き処理（* → ・）
+      if (line.trim().startsWith('*')) {
+        line = line.replaceFirst(RegExp(r'^\*\s*'), '・');
+      }
+
+      // 3. 太字処理（**text** → 太字）
+      final boldPattern = RegExp(r'\*\*(.+?)\*\*');
+      final matches = boldPattern.allMatches(line);
+
+      if (matches.isEmpty) {
+        spans.add(TextSpan(text: line));
+      } else {
+        int lastIndex = 0;
+        for (final match in matches) {
+          if (match.start > lastIndex) {
+            spans.add(TextSpan(text: line.substring(lastIndex, match.start)));
+          }
+          spans.add(
+            TextSpan(
+              text: match.group(1),
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          );
+          lastIndex = match.end;
+        }
+        if (lastIndex < line.length) {
+          spans.add(TextSpan(text: line.substring(lastIndex)));
+        }
+      }
+
+      if (i < lines.length - 1) {
+        spans.add(const TextSpan(text: '\n'));
+      }
+    }
+
+    return RichText(
+      text: TextSpan(
+        style: const TextStyle(
+          fontSize: 14,
+          height: 1.6,
+          color: Colors.black87,
+        ),
+        children: spans,
+      ),
     );
   }
 }
@@ -1288,7 +1495,16 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
 
   // 分析結果
   Map<String, dynamic>? _analysisResult;
-  bool _isLoading = false;
+  bool _isLoading = true;  // 初期状態でローディング中
+
+  @override
+  void initState() {
+    super.initState();
+    // 画面表示時に自動で分析実行
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _executeAnalysis();
+    });
+  }
 
   // 部位選択肢
   final List<String> _bodyParts = [
@@ -1313,6 +1529,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
     });
 
     try {
+      print('🚀 効果分析開始...');
       final result = await TrainingAnalysisService.analyzeTrainingEffect(
         bodyPart: _selectedBodyPart,
         currentSetsPerWeek: _currentSets,
@@ -1322,19 +1539,24 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         age: _selectedAge,
         recentHistory: [], // 空リストで提供（履歴なし）
       );
+      print('✅ 効果分析完了: ${result['success']}');
 
-      setState(() {
-        _analysisResult = result;
-        _isLoading = false;
-      });
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-      });
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('分析の生成に失敗しました: $e')),
-        );
+        setState(() {
+          _analysisResult = result;
+          _isLoading = false;
+        });
+      }
+    } catch (e) {
+      print('❌ 効果分析例外: $e');
+      if (mounted) {
+        setState(() {
+          _analysisResult = {
+            'success': false,
+            'error': '分析の生成に失敗しました: $e',
+          };
+          _isLoading = false;
+        });
       }
     }
   }
@@ -1653,59 +1875,559 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
 
   /// 分析結果表示
   Widget _buildAnalysisResult() {
+    // nullチェック
+    if (_analysisResult == null) {
+      return Card(
+        color: Colors.grey.shade100,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text('分析結果がありません'),
+        ),
+      );
+    }
+
+    // エラーチェック
+    if (_analysisResult!['success'] != true) {
+      return Card(
+        color: Colors.red.shade50,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.error_outline, color: Colors.red),
+                  SizedBox(width: 8),
+                  Text(
+                    '分析エラー',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8),
+              Text(
+                _analysisResult!['error']?.toString() ?? '不明なエラーが発生しました',
+                style: TextStyle(color: Colors.red.shade700),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     final result = _analysisResult!;
-    final analysis = result['analysis'] as String;
-    final citations = result['citations'] as List<Map<String, dynamic>>;
+    
+    // 必須フィールドチェック
+    if (!result.containsKey('volumeAnalysis') || 
+        !result.containsKey('frequencyAnalysis') ||
+        !result.containsKey('aiAnalysis')) {
+      return Card(
+        color: Colors.orange.shade50,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            '分析データが不完全です。もう一度お試しください。',
+            style: TextStyle(color: Colors.orange.shade900),
+          ),
+        ),
+      );
+    }
+    
+    final volumeAnalysis = result['volumeAnalysis'] as Map<String, dynamic>;
+    final frequencyAnalysis = result['frequencyAnalysis'] as Map<String, dynamic>;
+    final plateauDetected = result['plateauDetected'] as bool;
+    final growthTrend = result['growthTrend'] as Map<String, dynamic>;
+    final recommendations = result['recommendations'] as List;
+    final scientificBasis = result['scientificBasis'] as List;
+    final aiAnalysis = result['aiAnalysis'] as String;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // 分析結果カード
+        // ステータスサマリー
+        _buildStatusSummary(volumeAnalysis, frequencyAnalysis, plateauDetected, growthTrend),
+        const SizedBox(height: 16),
+
+        // ボリューム分析
+        _buildVolumeAnalysis(volumeAnalysis),
+        const SizedBox(height: 16),
+
+        // 頻度分析
+        _buildFrequencyAnalysis(frequencyAnalysis),
+        const SizedBox(height: 16),
+
+        // プラトー警告
+        if (plateauDetected) ...[
+          _buildPlateauWarning(),
+          const SizedBox(height: 16),
+        ],
+
+        // 推奨アクション
+        _buildRecommendations(recommendations),
+        const SizedBox(height: 16),
+
+        // AI分析
         Card(
-          color: Colors.orange.shade50,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '📊 AI分析結果',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.orange.shade900,
-                  ),
+                Row(
+                  children: [
+                    Icon(Icons.psychology, color: Colors.purple.shade700),
+                    const SizedBox(width: 8),
+                    const Text(
+                      'AI詳細分析',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 16),
-                Text(
-                  analysis,
-                  style: const TextStyle(fontSize: 14, height: 1.8),
-                ),
+                const SizedBox(height: 12),
+                _buildFormattedText(aiAnalysis),
               ],
             ),
           ),
         ),
         const SizedBox(height: 16),
 
-        // 引用論文
-        if (citations.isNotEmpty) ...[
-          const Text(
-            '📚 科学的根拠',
-            style: TextStyle(
-              fontSize: 16,
+        // 科学的根拠
+        ScientificBasisSection(
+          basis: scientificBasis.cast<Map<String, String>>(),
+        ),
+        const SizedBox(height: 8),
+
+        // 信頼度インジケーター
+        Center(
+          child: ConfidenceIndicator(paperCount: scientificBasis.length),
+        ),
+      ],
+    );
+  }
+
+  /// ステータスサマリー
+  Widget _buildStatusSummary(
+    Map<String, dynamic> volume,
+    Map<String, dynamic> frequency,
+    bool plateau,
+    Map<String, dynamic> trend,
+  ) {
+    Color statusColor;
+    IconData statusIcon;
+    String statusMessage;
+
+    if (plateau) {
+      statusColor = Colors.orange;
+      statusIcon = Icons.warning;
+      statusMessage = 'プラトー検出：改善が必要';
+    } else if (volume['status'] == 'optimal' && frequency['status'] == 'optimal') {
+      statusColor = Colors.green;
+      statusIcon = Icons.check_circle;
+      statusMessage = '最適なトレーニング中';
+    } else {
+      statusColor = Colors.blue;
+      statusIcon = Icons.info;
+      statusMessage = '改善の余地あり';
+    }
+
+    return Card(
+      color: statusColor.withValues(alpha: 0.1),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
+          children: [
+            Icon(statusIcon, size: 48, color: statusColor),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    statusMessage,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: statusColor,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '成長トレンド: ${trend['trend']}',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey.shade700,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// ボリューム分析
+  Widget _buildVolumeAnalysis(Map<String, dynamic> analysis) {
+    final status = analysis['status'] as String;
+    final advice = analysis['advice'] as String;
+    
+    Color statusColor;
+    String statusLabel;
+    
+    switch (status) {
+      case 'optimal':
+        statusColor = Colors.green;
+        statusLabel = '最適';
+        break;
+      case 'suboptimal':
+        statusColor = Colors.blue;
+        statusLabel = '最適以下';
+        break;
+      case 'insufficient':
+        statusColor = Colors.orange;
+        statusLabel = '不足';
+        break;
+      case 'excessive':
+        statusColor = Colors.red;
+        statusLabel = '過剰';
+        break;
+      default:
+        statusColor = Colors.grey;
+        statusLabel = '不明';
+    }
+
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.bar_chart, color: Colors.blue.shade700),
+                const SizedBox(width: 8),
+                const Text(
+                  'ボリューム分析',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: statusColor.withValues(alpha: 0.2),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Text(
+                    statusLabel,
+                    style: TextStyle(
+                      color: statusColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Text(
+              advice,
+              style: const TextStyle(fontSize: 14, height: 1.6),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// 頻度分析
+  Widget _buildFrequencyAnalysis(Map<String, dynamic> analysis) {
+    final status = analysis['status'] as String;
+    final advice = analysis['advice'] as String;
+    
+    Color statusColor;
+    String statusLabel;
+    
+    switch (status) {
+      case 'optimal':
+        statusColor = Colors.green;
+        statusLabel = '最適';
+        break;
+      case 'suboptimal':
+        statusColor = Colors.blue;
+        statusLabel = '最適以下';
+        break;
+      case 'insufficient':
+        statusColor = Colors.orange;
+        statusLabel = '不足';
+        break;
+      case 'excessive':
+        statusColor = Colors.red;
+        statusLabel = '過剰';
+        break;
+      default:
+        statusColor = Colors.grey;
+        statusLabel = '不明';
+    }
+
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.calendar_month, color: Colors.green.shade700),
+                const SizedBox(width: 8),
+                const Text(
+                  '頻度分析',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: statusColor.withValues(alpha: 0.2),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Text(
+                    statusLabel,
+                    style: TextStyle(
+                      color: statusColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Text(
+              advice,
+              style: const TextStyle(fontSize: 14, height: 1.6),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// プラトー警告
+  Widget _buildPlateauWarning() {
+    return Card(
+      color: Colors.orange.shade50,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            Icon(Icons.warning_amber, size: 40, color: Colors.orange.shade700),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'プラトー検出',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.orange.shade900,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '成長が停滞しています。トレーニングを変更しましょう。',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.grey.shade700,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// 推奨アクション
+  Widget _buildRecommendations(List recommendations) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.recommend, color: Colors.purple.shade700),
+                const SizedBox(width: 8),
+                const Text(
+                  '推奨アクション',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            ...recommendations.map((rec) {
+              final action = rec['action'] as String;
+              final category = rec['category'] as String;
+              final priority = rec['priority'] as String;
+              
+              Color priorityColor;
+              switch (priority) {
+                case 'high':
+                  priorityColor = Colors.red;
+                  break;
+                case 'medium':
+                  priorityColor = Colors.orange;
+                  break;
+                default:
+                  priorityColor = Colors.blue;
+              }
+              
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 6,
+                      height: 6,
+                      margin: const EdgeInsets.only(top: 6),
+                      decoration: BoxDecoration(
+                        color: priorityColor,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            category,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey.shade600,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            action,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              height: 1.4,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Markdown形式テキストをフォーマット済みウィジェットに変換
+  Widget _buildFormattedText(String text) {
+    final lines = text.split('\n');
+    final List<InlineSpan> spans = [];
+
+    for (int i = 0; i < lines.length; i++) {
+      String line = lines[i];
+
+      // 1. 見出し処理（## Text → 太字テキスト）
+      if (line.trim().startsWith('##')) {
+        final headingText = line.replaceFirst(RegExp(r'^##\s*'), '');
+        spans.add(
+          TextSpan(
+            text: headingText,
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
+              fontSize: 16,
+              height: 1.8,
             ),
           ),
-          const SizedBox(height: 8),
-          ...citations.map((citation) {
-            return ScientificCitationCard(
-              citation: citation['citation'] as String,
-              finding: citation['finding'] as String,
-              effectSize: citation['effectSize'] as String,
-            );
-          }),
-        ],
-      ],
+        );
+        if (i < lines.length - 1) spans.add(const TextSpan(text: '\n'));
+        continue;
+      }
+
+      // 2. 箇条書き処理（* → ・）
+      if (line.trim().startsWith('*')) {
+        line = line.replaceFirst(RegExp(r'^\*\s*'), '・');
+      }
+
+      // 3. 太字処理（**text** → 太字）
+      final boldPattern = RegExp(r'\*\*(.+?)\*\*');
+      final matches = boldPattern.allMatches(line);
+
+      if (matches.isEmpty) {
+        spans.add(TextSpan(text: line));
+      } else {
+        int lastIndex = 0;
+        for (final match in matches) {
+          if (match.start > lastIndex) {
+            spans.add(TextSpan(text: line.substring(lastIndex, match.start)));
+          }
+          spans.add(
+            TextSpan(
+              text: match.group(1),
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          );
+          lastIndex = match.end;
+        }
+        if (lastIndex < line.length) {
+          spans.add(TextSpan(text: line.substring(lastIndex)));
+        }
+      }
+
+      if (i < lines.length - 1) {
+        spans.add(const TextSpan(text: '\n'));
+      }
+    }
+
+    return RichText(
+      text: TextSpan(
+        style: const TextStyle(
+          fontSize: 14,
+          height: 1.6,
+          color: Colors.black87,
+        ),
+        children: spans,
+      ),
     );
   }
 }

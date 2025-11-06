@@ -87,7 +87,9 @@ class AIPredictionService {
         'aiAnalysis': aiAnalysis,
         'scientificBasis': _getScientificBasis(level, gender, bodyPart),
       };
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print('❌❌❌ predictGrowth全体エラー: $e');
+      print('スタックトレース: $stackTrace');
       return {
         'success': false,
         'error': 'AI予測の生成に失敗しました: $e',
@@ -167,17 +169,54 @@ ${ScientificDatabase.getSystemPrompt()}
             'topK': 40,
           },
         }),
-      );
+      ).timeout(const Duration(seconds: 5)); // 5秒タイムアウト（高速フォールバック）
 
       if (response.statusCode == 200) {
         final data = jsonDecode(utf8.decode(response.bodyBytes));
-        return data['candidates'][0]['content']['parts'][0]['text'];
+        final text = data['candidates']?[0]?['content']?['parts']?[0]?['text'];
+        if (text != null && text.toString().isNotEmpty) {
+          return text.toString();
+        } else {
+          return _getFallbackPrediction(currentWeight, predictedWeight, level, bodyPart, monthlyRate, weeklyRate, recommendedVolume, recommendedFreq);
+        }
       } else {
-        return '科学的根拠データベースに基づく予測を実行しました。';
+        print('❌ Gemini API エラー (成長予測): ${response.statusCode} - ${response.body}');
+        return _getFallbackPrediction(currentWeight, predictedWeight, level, bodyPart, monthlyRate, weeklyRate, recommendedVolume, recommendedFreq);
       }
     } catch (e) {
-      return '科学的根拠データベースに基づく予測を実行しました。';
+      print('❌ AI予測エラー: $e');
+      return _getFallbackPrediction(currentWeight, predictedWeight, level, bodyPart, monthlyRate, weeklyRate, recommendedVolume, recommendedFreq);
     }
+  }
+
+  /// フォールバック予測（AI失敗時）
+  static String _getFallbackPrediction(
+    double currentWeight,
+    double predictedWeight,
+    String level,
+    String bodyPart,
+    double monthlyRate,
+    double weeklyRate,
+    Map<String, int> recommendedVolume,
+    Map<String, dynamic> recommendedFreq,
+  ) {
+    final buffer = StringBuffer();
+    
+    buffer.writeln('## 成長予測の科学的根拠');
+    buffer.writeln('あなたの$level レベルでは、月+${(monthlyRate * 100).round()}%の成長が期待できます。');
+    buffer.writeln('現在${currentWeight.round()}kg → 4ヶ月後${predictedWeight.round()}kg（+${(predictedWeight - currentWeight).round()}kg）の成長が科学的に見込まれます。');
+    
+    buffer.writeln('\n## 推奨アクションプラン');
+    buffer.writeln('* $bodyPart のトレーニング: 週${recommendedFreq['frequency']}回');
+    buffer.writeln('* $bodyPart のボリューム: 週${recommendedVolume['optimal']}セット（${recommendedVolume['min']}-${recommendedVolume['max']}セット）');
+    buffer.writeln('* 負荷増加: 週+${(weeklyRate * 100 * 10).round() / 10}%のペースで重量を上げる');
+    
+    buffer.writeln('\n## 成功のカギ');
+    buffer.writeln('* プログレッシブオーバーロード（漸進的過負荷）の実践');
+    buffer.writeln('* 十分な休息（$bodyPartは最低48時間空ける）');
+    buffer.writeln('* 適切な栄養摂取（タンパク質1.6-2.2g/kg/日）');
+    
+    return buffer.toString();
   }
 
   /// 科学的根拠の取得

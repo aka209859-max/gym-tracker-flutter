@@ -4,6 +4,7 @@ import 'theme_selector_screen.dart';
 import 'favorites_screen.dart';
 import 'subscription_screen.dart';
 import 'body_measurement_screen.dart';
+import 'partner/partner_search_screen.dart';
 import '../services/favorites_service.dart';
 import '../services/subscription_service.dart';
 
@@ -237,8 +238,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
           icon: Icons.people,
           title: 'トレーニングパートナー',
           subtitle: 'マッチング機能',
-          badge: '有料プラン',
-          onTap: () => _checkPremiumFeature(context, 'トレーニングパートナー'),
+          badge: _currentPlan == SubscriptionType.pro ? null : 'Pro限定',
+          onTap: () {
+            if (_currentPlan == SubscriptionType.pro) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PartnerSearchScreen()),
+              );
+            } else {
+              _checkPremiumFeature(context, 'トレーニングパートナー');
+            }
+          },
         ),
         const SizedBox(height: 12),
         _buildMenuCard(

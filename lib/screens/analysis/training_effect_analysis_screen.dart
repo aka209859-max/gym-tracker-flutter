@@ -6,7 +6,9 @@ library;
 
 import 'package:flutter/material.dart';
 import '../../services/training_analysis_service.dart';
+import '../../services/subscription_service.dart';
 import '../../widgets/scientific_citation_card.dart';
+import '../../screens/subscription_screen.dart';
 
 /// トレーニング効果分析画面
 class TrainingEffectAnalysisScreen extends StatefulWidget {
@@ -38,7 +40,16 @@ class _TrainingEffectAnalysisScreenState
 
   // 分析結果
   Map<String, dynamic>? _analysisResult;
-  bool _isLoading = false;
+  bool _isLoading = true;  // 初期状態でローディング中
+
+  @override
+  void initState() {
+    super.initState();
+    // 画面表示時に自動で分析実行
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _executeAnalysis();
+    });
+  }
 
   // 選択肢
   final List<String> _bodyParts = [
@@ -55,12 +66,28 @@ class _TrainingEffectAnalysisScreenState
   Future<void> _executeAnalysis() async {
     if (!_formKey.currentState!.validate()) return;
 
+    // 🔒 課金チェック: AI機能はプレミアム以上
+    final subscriptionService = SubscriptionService();
+    final hasAIAccess = await subscriptionService.isAIFeatureAvailable();
+    
+    if (!hasAIAccess) {
+      // 無料プランユーザーは課金画面へ誘導
+      if (mounted) {
+        _showUpgradeDialog();
+      }
+      setState(() {
+        _isLoading = false;
+      });
+      return;
+    }
+
     setState(() {
       _isLoading = true;
       _analysisResult = null;
     });
 
     try {
+      print('🚀 効果分析開始...');
       final result = await TrainingAnalysisService.analyzeTrainingEffect(
         bodyPart: _selectedBodyPart,
         level: _selectedLevel,
@@ -70,19 +97,24 @@ class _TrainingEffectAnalysisScreenState
         gender: _selectedGender,
         age: _selectedAge,
       );
+      print('✅ 効果分析完了: ${result['success']}');
 
-      setState(() {
-        _analysisResult = result;
-        _isLoading = false;
-      });
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-      });
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('分析に失敗しました: $e')),
-        );
+        setState(() {
+          _analysisResult = result;
+          _isLoading = false;
+        });
+      }
+    } catch (e) {
+      print('❌ 効果分析例外: $e');
+      if (mounted) {
+        setState(() {
+          _analysisResult = {
+            'success': false,
+            'error': '分析に失敗しました: $e',
+          };
+          _isLoading = false;
+        });
       }
     }
   }
@@ -429,14 +461,61 @@ class _TrainingEffectAnalysisScreenState
 
   /// 分析結果表示
   Widget _buildAnalysisResult() {
-    if (_analysisResult == null || !_analysisResult!['success']) {
+    // nullチェック
+    if (_analysisResult == null) {
+      return Card(
+        color: Colors.grey.shade100,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text('分析結果がありません'),
+        ),
+      );
+    }
+
+    // エラーチェック
+    if (_analysisResult!['success'] != true) {
       return Card(
         color: Colors.red.shade50,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.error_outline, color: Colors.red),
+                  SizedBox(width: 8),
+                  Text(
+                    '分析エラー',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8),
+              Text(
+                _analysisResult!['error']?.toString() ?? '不明なエラーが発生しました',
+                style: TextStyle(color: Colors.red.shade700),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    // 必須フィールドの存在チェック
+    if (!_analysisResult!.containsKey('volumeAnalysis') ||
+        !_analysisResult!.containsKey('frequencyAnalysis')) {
+      return Card(
+        color: Colors.orange.shade50,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Text(
-            _analysisResult?['error'] ?? '分析に失敗しました',
-            style: const TextStyle(color: Colors.red),
+            '分析データが不完全です。もう一度お試しください。',
+            style: TextStyle(color: Colors.orange.shade900),
           ),
         ),
       );
@@ -995,6 +1074,69 @@ class _TrainingEffectAnalysisScreenState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: widgets,
+    );
+  }
+  
+  /// 🔒 アップグレードダイアログ表示
+  void _showUpgradeDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(Icons.lock, color: Colors.orange),
+            SizedBox(width: 8),
+            Text('プレミアム機能'),
+          ],
+        ),
+        content: const Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'AI効果分析はプレミアムプラン以上でご利用いただけます。',
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 16),
+            Text(
+              '✨ プレミアムプランの特典:',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 8),
+            Text('• AI成長予測（3ヶ月先の重量予測）'),
+            Text('• AI効果分析（科学的根拠付き）'),
+            Text('• トレーニングパートナー検索'),
+            SizedBox(height: 16),
+            Text(
+              '月額 ¥980',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('キャンセル'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              // サブスクリプション画面へ遷移
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SubscriptionScreen(),
+                ),
+              );
+            },
+            child: const Text('プランを見る'),
+          ),
+        ],
+      ),
     );
   }
 }

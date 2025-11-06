@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import '../models/gym.dart';
@@ -15,6 +16,8 @@ class PartnerMergeService {
   static const _cacheDuration = Duration(minutes: 5);
 
   /// Firestoreからパートナージム情報を取得（キャッシュ付き）
+  /// 
+  /// 【堅牢性強化】エラー時は空リストを返し、GPS検索を継続可能にする
   Future<List<Map<String, dynamic>>> _getPartnerGyms() async {
     // キャッシュが有効な場合はそれを返す
     if (_partnerGymsCache != null && _cacheTime != null) {
@@ -35,7 +38,16 @@ class PartnerMergeService {
       final snapshot = await _firestore
           .collection('gyms')
           .where('isPartner', isEqualTo: true)
-          .get();
+          .get()
+          .timeout(
+            const Duration(seconds: 10),
+            onTimeout: () {
+              if (kDebugMode) {
+                print('⏱️ Firestore timeout - continuing without partner data');
+              }
+              throw TimeoutException('Firestore query timeout');
+            },
+          );
       
       final partnerGyms = snapshot.docs.map((doc) {
         final data = doc.data();
@@ -52,10 +64,22 @@ class PartnerMergeService {
       }
       
       return partnerGyms;
+    } on TimeoutException catch (e) {
+      if (kDebugMode) {
+        print('⚠️ Firestore timeout: $e - GPS検索は継続します');
+      }
+      // 空のキャッシュを設定して次回以降のタイムアウトを回避
+      _partnerGymsCache = [];
+      _cacheTime = DateTime.now();
+      return [];
     } catch (e) {
       if (kDebugMode) {
         print('⚠️ Failed to fetch partner gyms from Firestore: $e');
+        print('   GPS検索は通常通り継続されます（パートナージム情報なし）');
       }
+      // エラー時も空のキャッシュを設定
+      _partnerGymsCache = [];
+      _cacheTime = DateTime.now();
       return [];
     }
   }

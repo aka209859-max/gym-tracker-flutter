@@ -100,7 +100,9 @@ class TrainingAnalysisService {
         'aiAnalysis': aiAnalysis,
         'scientificBasis': _getScientificBasis(level),
       };
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print('❌❌❌ analyzeTrainingEffect全体エラー: $e');
+      print('スタックトレース: $stackTrace');
       return {
         'success': false,
         'error': 'トレーニング効果分析に失敗しました: $e',
@@ -348,17 +350,60 @@ ${ScientificDatabase.getSystemPrompt()}
             'topK': 40,
           },
         }),
-      );
+      ).timeout(const Duration(seconds: 5)); // 5秒タイムアウト（高速フォールバック）
 
       if (response.statusCode == 200) {
         final data = jsonDecode(utf8.decode(response.bodyBytes));
-        return data['candidates'][0]['content']['parts'][0]['text'];
+        final text = data['candidates']?[0]?['content']?['parts']?[0]?['text'];
+        if (text != null && text.toString().isNotEmpty) {
+          return text.toString();
+        } else {
+          return _getFallbackAnalysis(bodyPart, level, volumeAnalysis, frequencyAnalysis, plateauDetected);
+        }
       } else {
-        return '科学的根拠に基づく分析を実行しました。';
+        print('❌ Gemini API エラー: ${response.statusCode} - ${response.body}');
+        return _getFallbackAnalysis(bodyPart, level, volumeAnalysis, frequencyAnalysis, plateauDetected);
       }
     } catch (e) {
-      return '科学的根拠に基づく分析を実行しました。';
+      print('❌ AI分析エラー: $e');
+      return _getFallbackAnalysis(bodyPart, level, volumeAnalysis, frequencyAnalysis, plateauDetected);
     }
+  }
+
+  /// フォールバック分析（AI失敗時）
+  static String _getFallbackAnalysis(
+    String bodyPart,
+    String level,
+    Map<String, dynamic> volumeAnalysis,
+    Map<String, dynamic> frequencyAnalysis,
+    bool plateauDetected,
+  ) {
+    final buffer = StringBuffer();
+    
+    buffer.writeln('## トレーニング効果の評価');
+    if (volumeAnalysis['status'] == 'optimal' && frequencyAnalysis['status'] == 'optimal') {
+      buffer.writeln('現在のプログラムは科学的に最適な範囲内です。このまま継続することで効果的な成長が期待できます。');
+    } else {
+      buffer.writeln('改善の余地があります。以下の推奨事項に従うことで、より効果的なトレーニングが可能です。');
+    }
+    
+    buffer.writeln('\n## 最優先改善ポイント');
+    if (volumeAnalysis['status'] == 'insufficient') {
+      buffer.writeln('週${volumeAnalysis['suggestedChange']}セット追加で、筋肥大効果が向上します（Schoenfeld 2017）。');
+    } else if (volumeAnalysis['status'] == 'excessive') {
+      buffer.writeln('現在のボリュームは過剰です。週${-volumeAnalysis['suggestedChange']}セット削減で回復時間を確保しましょう。');
+    } else if (plateauDetected) {
+      buffer.writeln('プラトー期を検出しました。プログラム変更（種目変更、強度変更）を推奨します。');
+    } else {
+      buffer.writeln('${volumeAnalysis['advice']}');
+    }
+    
+    buffer.writeln('\n## 具体的アクションプラン');
+    buffer.writeln('* 今週から: ${volumeAnalysis['advice']}');
+    buffer.writeln('* トレーニング頻度: ${frequencyAnalysis['advice']}');
+    buffer.writeln('* 回復時間: $bodyPartは${ScientificDatabase.getRecommendedRestDays(level, bodyPart)}日空ける');
+    
+    return buffer.toString();
   }
 
   /// 科学的根拠の取得

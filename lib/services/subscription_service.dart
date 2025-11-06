@@ -81,10 +81,22 @@ class SubscriptionService {
   /// プラン説明を取得
   String getPlanDescription(SubscriptionType plan) {
     return switch (plan) {
-      SubscriptionType.free => '基本機能のみ利用可能',
-      SubscriptionType.premium => 'トレーニングパートナー + メッセージング',
-      SubscriptionType.pro => 'すべての機能 + 優先サポート',
+      SubscriptionType.free => 'トレーニング記録 + 基本統計',
+      SubscriptionType.premium => 'AI成長予測 + AI効果分析 + トレーニングパートナー',
+      SubscriptionType.pro => 'AI週次レポート + パーソナルコーチング + 優先サポート',
     };
+  }
+  
+  /// AI機能が利用可能かチェック（新課金モデル）
+  Future<bool> isAIFeatureAvailable() async {
+    final plan = await getCurrentPlan();
+    return plan == SubscriptionType.premium || plan == SubscriptionType.pro;
+  }
+  
+  /// AI週次レポートが利用可能かチェック
+  Future<bool> isAIWeeklyReportAvailable() async {
+    final plan = await getCurrentPlan();
+    return plan == SubscriptionType.pro;
   }
   
   /// プラン価格を取得

@@ -34,6 +34,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   // 種目ごとの展開状態を管理
   Map<String, bool> _expandedExercises = {};
   
+  // 統計データ
+  double _last7DaysVolume = 0.0;
+  double _currentMonthVolume = 0.0;
+  double _totalVolume = 0.0;
+  
   // Task 14: 検索・フィルター機能
   final TextEditingController _searchController = TextEditingController();
   String? _selectedMuscleGroupFilter;
@@ -61,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       _loadWorkoutsForSelectedDay();
       _loadBadgeStats();
       _loadActiveGoals();
+      _loadStatistics(); // 統計データを読み込む
     });
   }
   
@@ -118,6 +124,95 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       // アプリが foreground に戻った時に自動リフレッシュ
       print('🔄 アプリがアクティブになりました - データを再読み込み');
       _loadWorkoutsForSelectedDay();
+      _loadStatistics(); // 統計データも再読み込み
+    }
+  }
+  
+  /// 統計データを計算して読み込む
+  Future<void> _loadStatistics() async {
+    final user = firebase_auth.FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+    
+    try {
+      print('📊 統計データを計算中...');
+      
+      // 全トレーニング記録を取得
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('workout_logs')
+          .where('user_id', isEqualTo: user.uid)
+          .get();
+      
+      print('📊 全記録件数: ${querySnapshot.docs.length}');
+      
+      if (querySnapshot.docs.isEmpty) {
+        setState(() {
+          _last7DaysVolume = 0.0;
+          _currentMonthVolume = 0.0;
+          _totalVolume = 0.0;
+        });
+        return;
+      }
+      
+      // 基準日
+      final now = DateTime.now();
+      final last7DaysStart = now.subtract(const Duration(days: 7));
+      final currentMonthStart = DateTime(now.year, now.month, 1);
+      
+      double last7DaysVolume = 0.0;
+      double currentMonthVolume = 0.0;
+      double totalVolume = 0.0;
+      
+      // 各トレーニング記録を処理
+      for (final doc in querySnapshot.docs) {
+        final data = doc.data();
+        final date = (data['date'] as Timestamp?)?.toDate();
+        final sets = data['sets'] as List<dynamic>? ?? [];
+        
+        if (date == null) continue;
+        
+        // この記録の総負荷量を計算
+        double workoutVolume = 0.0;
+        for (final set in sets) {
+          if (set is Map<String, dynamic>) {
+            final weight = (set['weight'] as num?)?.toDouble() ?? 0.0;
+            final reps = (set['reps'] as num?)?.toInt() ?? 0;
+            workoutVolume += (weight * reps);
+          }
+        }
+        
+        // トンに変換
+        workoutVolume = workoutVolume / 1000.0;
+        
+        // 期間別に集計
+        totalVolume += workoutVolume;
+        
+        if (date.isAfter(last7DaysStart)) {
+          last7DaysVolume += workoutVolume;
+        }
+        
+        if (date.isAfter(currentMonthStart)) {
+          currentMonthVolume += workoutVolume;
+        }
+      }
+      
+      print('✅ 統計計算完了:');
+      print('   7日間: ${last7DaysVolume.toStringAsFixed(2)}t');
+      print('   今月: ${currentMonthVolume.toStringAsFixed(2)}t');
+      print('   全期間: ${totalVolume.toStringAsFixed(2)}t');
+      
+      setState(() {
+        _last7DaysVolume = last7DaysVolume;
+        _currentMonthVolume = currentMonthVolume;
+        _totalVolume = totalVolume;
+      });
+      
+    } catch (e) {
+      print('❌ 統計データの計算エラー: $e');
+      setState(() {
+        _last7DaysVolume = 0.0;
+        _currentMonthVolume = 0.0;
+        _totalVolume = 0.0;
+      });
     }
   }
 
@@ -294,7 +389,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 Expanded(
                   child: _buildMiniStatCard(
                     title: '7日間',
-                    value: '42.78',
+                    value: _last7DaysVolume.toStringAsFixed(2),
                     unit: 't',
                     theme: theme,
                   ),
@@ -303,7 +398,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 Expanded(
                   child: _buildMiniStatCard(
                     title: '合計負荷量',
-                    value: '137.38',
+                    value: _currentMonthVolume.toStringAsFixed(2),
                     unit: 't',
                     theme: theme,
                   ),
@@ -312,7 +407,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 Expanded(
                   child: _buildMiniStatCard(
                     title: '総負荷量',
-                    value: '3116.27',
+                    value: _totalVolume.toStringAsFixed(2),
                     unit: 't',
                     theme: theme,
                   ),
@@ -584,6 +679,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 // 保存が成功した場合、データを再読み込み
                 if (result == true) {
                   _loadWorkoutsForSelectedDay();
+                  _loadStatistics(); // 統計データも即座に更新
                 }
               },
               icon: const Icon(Icons.add, size: 24),

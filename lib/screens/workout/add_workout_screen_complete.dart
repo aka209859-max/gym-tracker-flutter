@@ -640,7 +640,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     border: const OutlineInputBorder(),
                     contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   ),
-                  keyboardType: TextInputType.number,
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
                   controller: TextEditingController(text: set.weight.toString())
                     ..selection = TextSelection.fromPosition(
                       TextPosition(offset: set.weight.toString().length),

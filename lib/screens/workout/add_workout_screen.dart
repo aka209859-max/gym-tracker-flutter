@@ -88,6 +88,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       print('📋 テンプレートデータを適用: ${widget.templateData}');
       
       final muscleGroup = widget.templateData!['muscle_group'] as String?;
+      final exercises = widget.templateData!['exercises'] as List<dynamic>?;
       final exerciseName = widget.templateData!['exercise_name'] as String?;
       final lastWeight = widget.templateData!['last_weight'] as double?;
       final lastReps = widget.templateData!['last_reps'] as int?;
@@ -99,8 +100,33 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           _selectedMuscleGroup = muscleGroup;
         }
         
-        // 該当種目に1セット追加（前回の重量・回数を初期値として）
-        if (exerciseName != null) {
+        // ケース1: テンプレートから複数種目を追加
+        if (exercises != null && exercises.isNotEmpty) {
+          print('📋 テンプレートから${exercises.length}種目を読み込み');
+          
+          for (var exercise in exercises) {
+            final name = exercise['exercise_name'] as String;
+            final targetSets = exercise['target_sets'] as int? ?? 3;
+            final targetReps = exercise['target_reps'] as int? ?? 10;
+            final targetWeight = exercise['target_weight'] as double? ?? 0.0;
+            
+            print('  ✅ $name: ${targetSets}セット × ${targetReps}回 @ ${targetWeight}kg');
+            
+            // 各種目のtargetSets数だけセットを追加
+            for (int i = 0; i < targetSets; i++) {
+              _sets.add(WorkoutSet(
+                exerciseName: name,
+                weight: targetWeight,
+                reps: targetReps,
+                isCompleted: false,
+              ));
+            }
+          }
+          
+          print('✅ テンプレートから合計${_sets.length}セットを追加');
+        }
+        // ケース2: 単一種目を追加（履歴から「もう一度」の場合）
+        else if (exerciseName != null) {
           _sets.add(WorkoutSet(
             exerciseName: exerciseName,
             weight: lastWeight ?? 0.0,
@@ -270,7 +296,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           children: [
             TextField(
               controller: weightController,
-              keyboardType: TextInputType.number,
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
               decoration: const InputDecoration(
                 labelText: '重量 (kg)',
                 border: OutlineInputBorder(),
@@ -832,7 +858,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     border: OutlineInputBorder(),
                     contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   ),
-                  keyboardType: TextInputType.number,
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
                   initialValue: set.weight == 0.0 ? '' : set.weight.toString(),
                   onChanged: (value) {
                     // 空文字列または無効な値の場合は0に
