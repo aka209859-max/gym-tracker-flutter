@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/gym.dart';
 import '../services/realtime_user_service.dart';
 import '../services/favorites_service.dart';
+import '../services/share_service.dart';
 import 'crowd_report_screen.dart';
 import 'reservation_form_screen.dart';
 
@@ -18,6 +19,7 @@ class GymDetailScreen extends StatefulWidget {
 class _GymDetailScreenState extends State<GymDetailScreen> {
   final RealtimeUserService _userService = RealtimeUserService();
   final FavoritesService _favoritesService = FavoritesService();
+  final ShareService _shareService = ShareService();
   bool _isCheckedIn = false;
   bool _isFavorite = false;
 
