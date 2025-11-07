@@ -103,8 +103,94 @@ class SubscriptionService {
   String getPlanPrice(SubscriptionType plan) {
     return switch (plan) {
       SubscriptionType.free => '¥0',
-      SubscriptionType.premium => '¥980/月',
-      SubscriptionType.pro => '¥1,980/月',
+      SubscriptionType.premium => '¥500/月',
+      SubscriptionType.pro => '¥980/月',
     };
+  }
+  
+  /// AI使用回数上限を取得
+  int getAIUsageLimit(SubscriptionType plan) {
+    return switch (plan) {
+      SubscriptionType.free => 0,
+      SubscriptionType.premium => 10,
+      SubscriptionType.pro => 30,
+    };
+  }
+  
+  /// 今月のAI使用回数を取得
+  Future<int> getCurrentMonthAIUsage() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final lastResetDate = prefs.getString('ai_usage_reset_date');
+      final now = DateTime.now();
+      final currentMonth = '${now.year}-${now.month.toString().padLeft(2, '0')}';
+      
+      // 月が変わっていたらリセット
+      if (lastResetDate != currentMonth) {
+        await prefs.setInt('ai_usage_count', 0);
+        await prefs.setString('ai_usage_reset_date', currentMonth);
+        return 0;
+      }
+      
+      return prefs.getInt('ai_usage_count') ?? 0;
+    } catch (e) {
+      print('❌ AI使用回数取得エラー: $e');
+      return 0;
+    }
+  }
+  
+  /// AI使用回数をインクリメント
+  Future<bool> incrementAIUsage() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final currentUsage = await getCurrentMonthAIUsage();
+      await prefs.setInt('ai_usage_count', currentUsage + 1);
+      print('✅ AI使用回数: ${currentUsage + 1}');
+      return true;
+    } catch (e) {
+      print('❌ AI使用回数更新エラー: $e');
+      return false;
+    }
+  }
+  
+  /// AI機能が使用可能かチェック（回数制限含む）
+  Future<bool> canUseAIFeature() async {
+    final plan = await getCurrentPlan();
+    final limit = getAIUsageLimit(plan);
+    
+    // 無料プランはAI機能なし
+    if (limit == 0) {
+      return false;
+    }
+    
+    final currentUsage = await getCurrentMonthAIUsage();
+    return currentUsage < limit;
+  }
+  
+  /// 残りAI使用回数を取得
+  Future<int> getRemainingAIUsage() async {
+    final plan = await getCurrentPlan();
+    final limit = getAIUsageLimit(plan);
+    final currentUsage = await getCurrentMonthAIUsage();
+    return (limit - currentUsage).clamp(0, limit);
+  }
+  
+  /// AI使用状況メッセージを取得
+  Future<String> getAIUsageStatus() async {
+    final plan = await getCurrentPlan();
+    final limit = getAIUsageLimit(plan);
+    
+    if (limit == 0) {
+      return 'AI機能は有料プランで利用可能です';
+    }
+    
+    final currentUsage = await getCurrentMonthAIUsage();
+    final remaining = limit - currentUsage;
+    
+    if (remaining <= 0) {
+      return '今月のAI使用回数を使い切りました (${currentUsage}/${limit}回)';
+    }
+    
+    return '残り${remaining}回 (${currentUsage}/${limit}回使用)';
   }
 }

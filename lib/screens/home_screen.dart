@@ -285,6 +285,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       });
 
       print('✅ フィルタ後: ${filteredWorkouts.length}件');
+      
+      // 詳細ログ: 各ワークアウトの情報を表示
+      for (var i = 0; i < filteredWorkouts.length; i++) {
+        final workout = filteredWorkouts[i];
+        print('   [$i] ID=${workout['id']}, muscle_group=${workout['muscle_group']}, sets=${(workout['sets'] as List).length}');
+      }
 
       setState(() {
         _selectedDayWorkouts = filteredWorkouts;
@@ -1336,9 +1342,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
               ),
               confirmDismiss: (direction) async {
+                print('🔔 削除確認ダイアログ表示: $exerciseName (ID: $workoutId)');
                 return await _showDeleteConfirmDialog(exerciseName);
               },
               onDismissed: (direction) {
+                print('👆 スワイプ削除実行: $exerciseName (ID: $workoutId)');
                 _deleteWorkout(workoutId);
               },
               child: Container(
@@ -1357,23 +1365,30 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         _showEditDeleteMenu(workoutId, exerciseName);
                       },
                     child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
                       decoration: BoxDecoration(
-                        color: Colors.red[600],
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xFF2E3192), // 深い青紫
+                            Color(0xFFE85D75), // オレンジがかった赤
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
                       ),
                       child: Row(
                         children: [
                           Icon(
                             isExpanded ? Icons.expand_less : Icons.expand_more,
                             color: Colors.white,
-                            size: 24,
+                            size: 20,
                           ),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
                               exerciseName,
                               style: const TextStyle(
-                                fontSize: 16,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),
@@ -1381,7 +1396,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           ),
                           // シェアボタン
                           IconButton(
-                            icon: const Icon(Icons.share, color: Colors.white),
+                            icon: const Icon(Icons.share, color: Colors.white, size: 18),
+                            padding: const EdgeInsets.all(4),
+                            constraints: const BoxConstraints(),
                             onPressed: () async {
                               await _shareWorkout(exerciseName, sets);
                             },
@@ -1389,7 +1406,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           ),
                           // 詳細・メモ表示ボタンを追加
                           IconButton(
-                            icon: const Icon(Icons.note_alt, color: Colors.white),
+                            icon: const Icon(Icons.note_alt, color: Colors.white, size: 18),
+                            padding: const EdgeInsets.all(4),
+                            constraints: const BoxConstraints(),
                             onPressed: () async {
                               await _openWorkoutDetail(workoutId);
                             },
@@ -1487,7 +1506,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       final dropsetLevel = set['dropsetLevel'] as int?;
                       
                       return Container(
-                        padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 8),
+                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border(
@@ -2180,10 +2199,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               leading: const Icon(Icons.delete, color: Colors.red),
               title: const Text('削除', style: TextStyle(color: Colors.red)),
               onTap: () async {
+                print('👆 メニューから削除選択: $exerciseName (ID: $workoutId)');
                 Navigator.pop(context);
                 final confirmed = await _showDeleteConfirmDialog(exerciseName);
                 if (confirmed == true) {
+                  print('✅ 削除確認OK: $exerciseName (ID: $workoutId)');
                   _deleteWorkout(workoutId);
+                } else {
+                  print('❌ 削除キャンセル: $exerciseName');
                 }
               },
             ),
@@ -2195,13 +2218,47 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   
   /// 記録を削除
   Future<void> _deleteWorkout(String? workoutId) async {
-    if (workoutId == null) return;
+    if (workoutId == null) {
+      print('❌ 削除失敗: workoutId is null');
+      return;
+    }
     
     try {
+      print('🗑️ 削除開始: Workout ID = $workoutId');
+      
+      // 削除前にドキュメントが存在するか確認
+      final docSnapshot = await FirebaseFirestore.instance
+          .collection('workout_logs')
+          .doc(workoutId)
+          .get();
+      
+      if (!docSnapshot.exists) {
+        print('❌ ドキュメントが見つかりません: $workoutId');
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('削除対象の記録が見つかりませんでした'),
+              backgroundColor: Colors.orange,
+            ),
+          );
+        }
+        return;
+      }
+      
+      // ドキュメント情報をログ出力
+      final data = docSnapshot.data();
+      print('📄 削除対象ドキュメント:');
+      print('   - muscle_group: ${data?['muscle_group']}');
+      print('   - sets: ${(data?['sets'] as List?)?.length ?? 0}セット');
+      print('   - date: ${data?['date']}');
+      
+      // 削除実行
       await FirebaseFirestore.instance
           .collection('workout_logs')
           .doc(workoutId)
           .delete();
+      
+      print('✅ Firestore削除完了: $workoutId');
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -2213,9 +2270,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       }
       
       // データを再読み込み
-      _loadWorkoutsForSelectedDay();
-    } catch (e) {
+      print('🔄 データ再読み込み開始...');
+      await _loadWorkoutsForSelectedDay();
+      print('✅ データ再読み込み完了');
+      
+    } catch (e, stackTrace) {
       print('❌ 削除エラー: $e');
+      print('Stack Trace: $stackTrace');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('削除に失敗しました: $e')),

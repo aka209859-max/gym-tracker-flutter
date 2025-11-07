@@ -15,6 +15,7 @@ import 'providers/theme_provider.dart';
 import 'providers/auth_provider.dart';
 import 'widgets/install_prompt.dart';
 import 'services/subscription_service.dart';
+import 'services/revenue_cat_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,6 +59,18 @@ void main() async {
   
   // 🔥 マスターユーザー権限設定（CEO専用）
   await _setMasterUserPrivileges();
+  
+  // 💰 RevenueCat初期化（iOS課金統合）
+  if (firebaseInitialized) {
+    try {
+      print('💰 RevenueCat初期化開始...');
+      final revenueCatService = RevenueCatService();
+      await revenueCatService.initialize();
+      print('✅ RevenueCat初期化成功');
+    } catch (revenueCatError) {
+      print('❌ RevenueCat初期化エラー（ローカルモードで動作）: $revenueCatError');
+    }
+  }
   
   print('🚀 アプリ起動開始 (Firebase: ${firebaseInitialized ? "有効" : "無効"})');
   

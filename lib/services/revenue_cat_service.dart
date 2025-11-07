@@ -1,0 +1,323 @@
+import 'dart:async';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'subscription_service.dart';
+
+/// RevenueCat統合サービス - iOS App Store課金管理
+/// 
+/// 機能:
+/// - App Store In-App Purchase管理
+/// - サブスクリプション状態同期
+/// - Firebase認証との連携
+/// - ローカルSubscriptionServiceとの同期
+class RevenueCatService {
+  static final RevenueCatService _instance = RevenueCatService._internal();
+  factory RevenueCatService() => _instance;
+  RevenueCatService._internal();
+  
+  // RevenueCat API Keys (App Store Connect設定後に入力)
+  static const String _appleApiKey = 'YOUR_REVENUECAT_APPLE_API_KEY';
+  static const String _googleApiKey = 'YOUR_REVENUECAT_GOOGLE_API_KEY';
+  
+  // Product IDs (App Store Connectで登録する商品ID)
+  static const String premiumMonthlyProductId = 'gym_match_premium_monthly';
+  static const String proMonthlyProductId = 'gym_match_pro_monthly';
+  
+  // Entitlement IDs (RevenueCatで設定する権限ID)
+  static const String premiumEntitlementId = 'premium';
+  static const String proEntitlementId = 'pro';
+  
+  bool _isInitialized = false;
+  final SubscriptionService _localSubscriptionService = SubscriptionService();
+  
+  /// RevenueCat SDKを初期化
+  Future<void> initialize() async {
+    if (_isInitialized) {
+      if (kDebugMode) {
+        debugPrint('✅ RevenueCat already initialized');
+      }
+      return;
+    }
+    
+    try {
+      if (kDebugMode) {
+        debugPrint('🚀 RevenueCat初期化開始...');
+      }
+      
+      // プラットフォームごとのAPIキー設定
+      PurchasesConfiguration configuration;
+      if (defaultTargetPlatform == TargetPlatform.iOS) {
+        configuration = PurchasesConfiguration(_appleApiKey);
+      } else if (defaultTargetPlatform == TargetPlatform.android) {
+        configuration = PurchasesConfiguration(_googleApiKey);
+      } else {
+        if (kDebugMode) {
+          debugPrint('⚠️ Web/Desktop platform - RevenueCat not available');
+        }
+        return;
+      }
+      
+      // Firebase AuthのユーザーIDを設定
+      final firebaseUser = FirebaseAuth.instance.currentUser;
+      if (firebaseUser != null) {
+        // purchases_flutter 8.5.0ではconfiguration作成時にappUserIDを指定
+        if (defaultTargetPlatform == TargetPlatform.iOS) {
+          configuration = PurchasesConfiguration(_appleApiKey)..appUserID = firebaseUser.uid;
+        } else {
+          configuration = PurchasesConfiguration(_googleApiKey)..appUserID = firebaseUser.uid;
+        }
+        if (kDebugMode) {
+          debugPrint('👤 Firebase User ID: ${firebaseUser.uid}');
+        }
+      }
+      
+      // RevenueCat初期化
+      await Purchases.configure(configuration);
+      
+      // デバッグログ有効化 (リリース時はfalse)
+      await Purchases.setLogLevel(LogLevel.debug);
+      
+      _isInitialized = true;
+      
+      if (kDebugMode) {
+        debugPrint('✅ RevenueCat初期化成功');
+      }
+      
+      // 初回同期
+      await syncSubscriptionStatus();
+      
+      // リスナー設定（購入状態変化を検知）
+      _setupPurchaseListener();
+      
+    } catch (e) {
+      if (kDebugMode) {
+        debugPrint('❌ RevenueCat初期化エラー: $e');
+      }
+      // 初期化失敗時はローカルモードで動作
+    }
+  }
+  
+  /// 購入状態変化リスナーを設定
+  void _setupPurchaseListener() {
+    Purchases.addCustomerInfoUpdateListener((customerInfo) {
+      if (kDebugMode) {
+        debugPrint('📱 購入状態が更新されました');
+      }
+      syncSubscriptionStatus();
+    });
+  }
+  
+  /// 現在のサブスクリプション状態を同期
+  Future<SubscriptionType> syncSubscriptionStatus() async {
+    try {
+      if (!_isInitialized) {
+        if (kDebugMode) {
+          debugPrint('⚠️ RevenueCat not initialized, using local status');
+        }
+        return await _localSubscriptionService.getCurrentPlan();
+      }
+      
+      // RevenueCatから顧客情報を取得
+      final customerInfo = await Purchases.getCustomerInfo();
+      
+      // Entitlementを確認してプランを判定
+      SubscriptionType currentPlan = SubscriptionType.free;
+      
+      if (customerInfo.entitlements.all[proEntitlementId]?.isActive == true) {
+        currentPlan = SubscriptionType.pro;
+        if (kDebugMode) {
+          debugPrint('✅ Pro Entitlement active');
+        }
+      } else if (customerInfo.entitlements.all[premiumEntitlementId]?.isActive == true) {
+        currentPlan = SubscriptionType.premium;
+        if (kDebugMode) {
+          debugPrint('✅ Premium Entitlement active');
+        }
+      } else {
+        if (kDebugMode) {
+          debugPrint('ℹ️ No active subscription - Free plan');
+        }
+      }
+      
+      // ローカルSubscriptionServiceと同期
+      await _localSubscriptionService.setPlan(currentPlan);
+      
+      if (kDebugMode) {
+        debugPrint('🔄 Subscription synced: $currentPlan');
+      }
+      
+      return currentPlan;
+      
+    } catch (e) {
+      if (kDebugMode) {
+        debugPrint('❌ Subscription sync error: $e');
+      }
+      // エラー時はローカル状態を返す
+      return await _localSubscriptionService.getCurrentPlan();
+    }
+  }
+  
+  /// 利用可能な商品を取得
+  Future<List<StoreProduct>> getAvailableProducts() async {
+    try {
+      if (!_isInitialized) {
+        throw Exception('RevenueCat not initialized');
+      }
+      
+      final offerings = await Purchases.getOfferings();
+      
+      if (offerings.current == null) {
+        if (kDebugMode) {
+          debugPrint('⚠️ No offerings available');
+        }
+        return [];
+      }
+      
+      // 現在のOfferingから商品リストを取得
+      final packages = offerings.current!.availablePackages;
+      final products = packages.map((package) => package.storeProduct).toList();
+      
+      if (kDebugMode) {
+        debugPrint('📦 Available products: ${products.length}');
+        for (var product in products) {
+          debugPrint('  - ${product.identifier}: ${product.priceString}');
+        }
+      }
+      
+      return products;
+      
+    } catch (e) {
+      if (kDebugMode) {
+        debugPrint('❌ Failed to get products: $e');
+      }
+      return [];
+    }
+  }
+  
+  /// サブスクリプションを購入
+  Future<bool> purchaseSubscription(String productId) async {
+    try {
+      if (!_isInitialized) {
+        throw Exception('RevenueCat not initialized');
+      }
+      
+      if (kDebugMode) {
+        debugPrint('🛒 購入開始: $productId');
+      }
+      
+      // 商品を取得
+      final offerings = await Purchases.getOfferings();
+      if (offerings.current == null) {
+        throw Exception('No offerings available');
+      }
+      
+      // Product IDに対応するPackageを検索
+      final package = offerings.current!.availablePackages.firstWhere(
+        (pkg) => pkg.storeProduct.identifier == productId,
+        orElse: () => throw Exception('Product not found: $productId'),
+      );
+      
+      // 購入実行
+      final customerInfo = await Purchases.purchasePackage(package);
+      
+      if (kDebugMode) {
+        debugPrint('✅ 購入完了');
+      }
+      
+      // サブスクリプション状態を同期
+      await syncSubscriptionStatus();
+      
+      // 購入成功判定
+      final isPro = customerInfo.entitlements.all[proEntitlementId]?.isActive == true;
+      final isPremium = customerInfo.entitlements.all[premiumEntitlementId]?.isActive == true;
+      
+      return isPro || isPremium;
+      
+    } on PlatformException catch (e) {
+      if (kDebugMode) {
+        debugPrint('❌ 購入エラー: ${e.code} - ${e.message}');
+      }
+      
+      // ユーザーキャンセルは正常系として扱う
+      if (e.code == '1' || e.code == 'purchase_cancelled') {
+        if (kDebugMode) {
+          debugPrint('ℹ️ ユーザーが購入をキャンセルしました');
+        }
+        return false;
+      }
+      
+      rethrow;
+      
+    } catch (e) {
+      if (kDebugMode) {
+        debugPrint('❌ 予期しない購入エラー: $e');
+      }
+      rethrow;
+    }
+  }
+  
+  /// サブスクリプションを復元
+  Future<bool> restorePurchases() async {
+    try {
+      if (!_isInitialized) {
+        throw Exception('RevenueCat not initialized');
+      }
+      
+      if (kDebugMode) {
+        debugPrint('🔄 購入履歴を復元中...');
+      }
+      
+      final customerInfo = await Purchases.restorePurchases();
+      
+      // サブスクリプション状態を同期
+      await syncSubscriptionStatus();
+      
+      // 有効なサブスクリプションがあるか確認
+      final hasActiveSub = customerInfo.entitlements.active.isNotEmpty;
+      
+      if (kDebugMode) {
+        if (hasActiveSub) {
+          debugPrint('✅ 購入履歴を復元しました');
+        } else {
+          debugPrint('ℹ️ 復元可能な購入履歴がありません');
+        }
+      }
+      
+      return hasActiveSub;
+      
+    } catch (e) {
+      if (kDebugMode) {
+        debugPrint('❌ 復元エラー: $e');
+      }
+      return false;
+    }
+  }
+  
+  /// 現在のプランを取得（ローカルサービスから）
+  Future<SubscriptionType> getCurrentPlan() async {
+    return await _localSubscriptionService.getCurrentPlan();
+  }
+  
+  /// AI機能が使用可能かチェック（ローカルサービス経由）
+  Future<bool> canUseAIFeature() async {
+    final plan = await _localSubscriptionService.getCurrentPlan();
+    return plan != SubscriptionType.free;
+  }
+  
+  /// AI使用回数をインクリメント（ローカルサービス経由）
+  Future<bool> incrementAIUsage() async {
+    return await _localSubscriptionService.incrementAIUsage();
+  }
+  
+  /// 残りAI使用回数を取得（ローカルサービス経由）
+  Future<int> getRemainingAIUsage() async {
+    return await _localSubscriptionService.getRemainingAIUsage();
+  }
+  
+  /// AI使用状況メッセージを取得（ローカルサービス経由）
+  Future<String> getAIUsageStatus() async {
+    return await _localSubscriptionService.getAIUsageStatus();
+  }
+}

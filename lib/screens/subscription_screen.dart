@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import '../services/subscription_service.dart';
+import '../services/revenue_cat_service.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 /// サブスクリプション管理画面
 class SubscriptionScreen extends StatefulWidget {
@@ -11,8 +14,10 @@ class SubscriptionScreen extends StatefulWidget {
 
 class _SubscriptionScreenState extends State<SubscriptionScreen> {
   final SubscriptionService _subscriptionService = SubscriptionService();
+  final RevenueCatService _revenueCatService = RevenueCatService();
   SubscriptionType _currentPlan = SubscriptionType.free;
   bool _isLoading = true;
+  List<StoreProduct> _availableProducts = [];
 
   @override
   void initState() {
@@ -25,12 +30,34 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       _isLoading = true;
     });
 
-    final plan = await _subscriptionService.getCurrentPlan();
-    
-    setState(() {
-      _currentPlan = plan;
-      _isLoading = false;
-    });
+    try {
+      // RevenueCatから最新のサブスクリプション状態を同期
+      final plan = await _revenueCatService.syncSubscriptionStatus();
+      
+      // 利用可能な商品を取得（iOS/Android課金用）
+      if (defaultTargetPlatform == TargetPlatform.iOS ||
+          defaultTargetPlatform == TargetPlatform.android) {
+        final products = await _revenueCatService.getAvailableProducts();
+        setState(() {
+          _availableProducts = products;
+        });
+      }
+      
+      setState(() {
+        _currentPlan = plan;
+        _isLoading = false;
+      });
+    } catch (e) {
+      if (kDebugMode) {
+        debugPrint('❌ プラン読み込みエラー: $e');
+      }
+      // エラー時はローカルプランを使用
+      final plan = await _subscriptionService.getCurrentPlan();
+      setState(() {
+        _currentPlan = plan;
+        _isLoading = false;
+      });
+    }
   }
 
   @override
@@ -49,7 +76,22 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 children: [
                   // 現在のプラン表示
                   _buildCurrentPlanCard(),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 16),
+                  
+                  // 購入復元ボタン（iOS/Androidのみ）
+                  if (defaultTargetPlatform == TargetPlatform.iOS ||
+                      defaultTargetPlatform == TargetPlatform.android)
+                    Center(
+                      child: TextButton.icon(
+                        onPressed: _restorePurchases,
+                        icon: const Icon(Icons.restore),
+                        label: const Text('購入履歴を復元'),
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.blue,
+                        ),
+                      ),
+                    ),
+                  const SizedBox(height: 16),
                   
                   // プラン選択セクション
                   const Text(
@@ -83,10 +125,11 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   _buildPlanCard(
                     type: SubscriptionType.premium,
                     name: 'プレミアムプラン',
-                    price: '¥500',
+                    price: _getPriceForPlan(SubscriptionType.premium),
                     priceUnit: '月額',
                     features: [
                       '✨ 無料プランの全機能',
+                      '🤖 AI機能 月10回',
                       '❤️ お気に入り無制限',
                       '📊 詳細な混雑度統計',
                       '🔔 混雑度アラート通知',
@@ -103,10 +146,11 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   _buildPlanCard(
                     type: SubscriptionType.pro,
                     name: 'プロプラン',
-                    price: '¥980',
+                    price: _getPriceForPlan(SubscriptionType.pro),
                     priceUnit: '月額',
                     features: [
                       '✨ プレミアムプランの全機能',
+                      '🤖 AI機能 月30回',
                       '👥 トレーニングパートナー検索',
                       '💬 メッセージング機能',
                       '📊 トレーニング記録と分析',
@@ -470,7 +514,29 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     );
   }
 
-  /// プラン変更処理
+  /// プランの価格を取得（RevenueCatから実際の価格、またはデフォルト価格）
+  String _getPriceForPlan(SubscriptionType plan) {
+    // iOS/Android課金の場合、RevenueCatから取得した実際の価格を使用
+    if (_availableProducts.isNotEmpty) {
+      final productId = plan == SubscriptionType.premium
+          ? RevenueCatService.premiumMonthlyProductId
+          : RevenueCatService.proMonthlyProductId;
+      
+      try {
+        final product = _availableProducts.firstWhere(
+          (p) => p.identifier == productId,
+        );
+        return product.priceString;
+      } catch (e) {
+        // 商品が見つからない場合はデフォルト価格
+      }
+    }
+    
+    // デフォルト価格を返す
+    return plan == SubscriptionType.premium ? '¥500' : '¥980';
+  }
+
+  /// プラン変更処理（iOS/Android課金統合版）
   Future<void> _changePlan(SubscriptionType newPlan) async {
     final confirmed = await showDialog<bool>(
       context: context,
@@ -495,29 +561,195 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     );
 
     if (confirmed == true) {
-      // プラン変更処理
-      final success = await _subscriptionService.changePlan(newPlan);
-      
-      if (success && mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              '${_subscriptionService.getPlanName(newPlan)}に変更しました！',
+      // ダウングレード（無料プランに変更）の場合
+      if (newPlan == SubscriptionType.free) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('無料プランへの変更は、App Store設定でサブスクリプションをキャンセルしてください'),
+              duration: Duration(seconds: 4),
+              backgroundColor: Colors.orange,
             ),
-            backgroundColor: Colors.green,
+          );
+        }
+        return;
+      }
+      
+      // iOS/Androidの場合、RevenueCatで購入処理
+      if (defaultTargetPlatform == TargetPlatform.iOS ||
+          defaultTargetPlatform == TargetPlatform.android) {
+        await _purchaseWithRevenueCat(newPlan);
+      } else {
+        // Web/Desktopの場合、ローカル変更（デモモード）
+        await _changePlanLocal(newPlan);
+      }
+    }
+  }
+  
+  /// RevenueCatでサブスクリプションを購入
+  Future<void> _purchaseWithRevenueCat(SubscriptionType plan) async {
+    try {
+      // ローディング表示
+      if (mounted) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => const Center(
+            child: CircularProgressIndicator(),
           ),
         );
-        
-        // 現在のプランを再読み込み
-        _loadCurrentPlan();
-      } else if (mounted) {
+      }
+      
+      // Product IDを決定
+      final productId = plan == SubscriptionType.premium
+          ? RevenueCatService.premiumMonthlyProductId
+          : RevenueCatService.proMonthlyProductId;
+      
+      // RevenueCatで購入実行
+      final success = await _revenueCatService.purchaseSubscription(productId);
+      
+      // ローディング閉じる
+      if (mounted) {
+        Navigator.pop(context);
+      }
+      
+      if (success) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                '${_subscriptionService.getPlanName(plan)}の購入が完了しました！',
+              ),
+              backgroundColor: Colors.green,
+            ),
+          );
+          
+          // プラン状態を再読み込み
+          _loadCurrentPlan();
+        }
+      } else {
+        // ユーザーがキャンセルした場合など
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('購入がキャンセルされました'),
+              backgroundColor: Colors.grey,
+            ),
+          );
+        }
+      }
+      
+    } catch (e) {
+      // ローディング閉じる
+      if (mounted) {
+        Navigator.pop(context);
+      }
+      
+      if (kDebugMode) {
+        debugPrint('❌ 購入エラー: $e');
+      }
+      
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('プラン変更に失敗しました'),
+          SnackBar(
+            content: Text('購入に失敗しました: ${e.toString()}'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 4),
+          ),
+        );
+      }
+    }
+  }
+  
+  /// 購入履歴を復元
+  Future<void> _restorePurchases() async {
+    try {
+      // ローディング表示
+      if (mounted) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => const Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      }
+      
+      // RevenueCatで購入復元
+      final hasActiveSub = await _revenueCatService.restorePurchases();
+      
+      // ローディング閉じる
+      if (mounted) {
+        Navigator.pop(context);
+      }
+      
+      if (hasActiveSub) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('購入履歴を復元しました！'),
+              backgroundColor: Colors.green,
+            ),
+          );
+          
+          // プラン状態を再読み込み
+          _loadCurrentPlan();
+        }
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('復元可能な購入履歴がありませんでした'),
+              backgroundColor: Colors.orange,
+            ),
+          );
+        }
+      }
+      
+    } catch (e) {
+      // ローディング閉じる
+      if (mounted) {
+        Navigator.pop(context);
+      }
+      
+      if (kDebugMode) {
+        debugPrint('❌ 復元エラー: $e');
+      }
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('復元に失敗しました: ${e.toString()}'),
             backgroundColor: Colors.red,
           ),
         );
       }
+    }
+  }
+  
+  /// ローカルでプラン変更（デモモード・Web用）
+  Future<void> _changePlanLocal(SubscriptionType newPlan) async {
+    final success = await _subscriptionService.changePlan(newPlan);
+    
+    if (success && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            '${_subscriptionService.getPlanName(newPlan)}に変更しました！（デモモード）',
+          ),
+          backgroundColor: Colors.green,
+        ),
+      );
+      
+      // 現在のプランを再読み込み
+      _loadCurrentPlan();
+    } else if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('プラン変更に失敗しました'),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 }
