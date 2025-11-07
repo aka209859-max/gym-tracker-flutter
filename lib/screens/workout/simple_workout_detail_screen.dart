@@ -445,41 +445,44 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
       // 🔍 デバッグ: データ構造を確認
       if (kDebugMode) {
         debugPrint('🔍 Firestore data keys: ${data.keys.toList()}');
-        debugPrint('🔍 Exercises type: ${data['exercises']?.runtimeType}');
-        debugPrint('🔍 Exercises content: ${data['exercises']}');
+        debugPrint('🔍 Data structure: ${data.runtimeType}');
       }
       
-      // exercisesフィールドを取得（Map型を期待）
-      final exercisesData = data['exercises'];
-      Map<String, dynamic> exercises;
-      
-      if (exercisesData is Map<String, dynamic>) {
-        // 正常なMap型
-        exercises = Map<String, dynamic>.from(exercisesData);
-      } else if (exercisesData is Map) {
-        // 型変換が必要な場合
-        exercises = Map<String, dynamic>.from(exercisesData.map(
-          (key, value) => MapEntry(key.toString(), value),
-        ));
-      } else {
-        throw Exception('exercisesフィールドがMap型ではありません: ${exercisesData.runtimeType}');
-      }
+      // 🔧 sets配列から該当種目のセットだけを削除
+      final sets = data['sets'] as List<dynamic>? ?? [];
       
       if (kDebugMode) {
-        debugPrint('🔍 Before delete - exercises keys: ${exercises.keys.toList()}');
+        debugPrint('🔍 Before delete - total sets: ${sets.length}');
+        final exerciseNames = sets
+            .where((s) => s is Map)
+            .map((s) => s['exercise_name'])
+            .toSet()
+            .toList();
+        debugPrint('🔍 Before delete - exercises: $exerciseNames');
         debugPrint('🔍 Deleting exercise: $exerciseName');
       }
       
-      // 指定された種目だけを削除
-      exercises.remove(exerciseName);
+      // 指定された種目のセットだけをフィルタリング（削除）
+      final remainingSets = sets.where((set) {
+        if (set is Map<String, dynamic>) {
+          final setExerciseName = set['exercise_name'] as String? ?? '';
+          return setExerciseName != exerciseName;
+        }
+        return true;
+      }).toList();
       
       if (kDebugMode) {
-        debugPrint('🔍 After delete - exercises keys: ${exercises.keys.toList()}');
-        debugPrint('🔍 Remaining exercises count: ${exercises.length}');
+        debugPrint('🔍 After delete - total sets: ${remainingSets.length}');
+        final remainingExerciseNames = remainingSets
+            .where((s) => s is Map)
+            .map((s) => s['exercise_name'])
+            .toSet()
+            .toList();
+        debugPrint('🔍 After delete - exercises: $remainingExerciseNames');
       }
       
-      // 🔥 重要: 種目が全て削除された場合は記録全体を削除
-      if (exercises.isEmpty) {
+      // 🔥 重要: 全セットが削除された場合は記録全体を削除
+      if (remainingSets.isEmpty) {
         await docRef.delete();
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -491,17 +494,25 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
           Navigator.pop(context); // 詳細画面を閉じる
         }
       } else {
-        // まだ他の種目がある場合は、exercisesフィールドだけを更新
-        await docRef.update({'exercises': exercises});
+        // まだ他のセットがある場合は、setsフィールドだけを更新
+        await docRef.update({'sets': remainingSets});
+        
+        // 残った種目数を計算
+        final remainingExerciseNames = remainingSets
+            .where((s) => s is Map)
+            .map((s) => s['exercise_name'])
+            .toSet()
+            .length;
         
         if (kDebugMode) {
-          debugPrint('✅ Firestore updated - remaining exercises: ${exercises.keys.toList()}');
+          debugPrint('✅ Firestore updated - remaining sets: ${remainingSets.length}');
+          debugPrint('✅ Remaining exercises: $remainingExerciseNames');
         }
         
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('「$exerciseName」を削除しました（残り${exercises.length}種目）'),
+              content: Text('「$exerciseName」を削除しました（残り${remainingExerciseNames}種目）'),
               backgroundColor: Colors.green,
             ),
           );
@@ -512,7 +523,13 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
             final updatedData = updatedDoc.data()!;
             
             if (kDebugMode) {
-              debugPrint('🔄 Reloading with updated data: ${updatedData['exercises']?.keys.toList()}');
+              final updatedSets = updatedData['sets'] as List<dynamic>? ?? [];
+              final updatedExercises = updatedSets
+                  .where((s) => s is Map)
+                  .map((s) => s['exercise_name'])
+                  .toSet()
+                  .toList();
+              debugPrint('🔄 Reloading with updated data: $updatedExercises');
             }
             
             // 画面を再読み込み（Firestoreから取得した最新データを使用）

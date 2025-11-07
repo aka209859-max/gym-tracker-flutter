@@ -234,7 +234,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
             child: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('workout_logs')
-            .where('userId', isEqualTo: user.uid)
+            .where('user_id', isEqualTo: user.uid)
             .snapshots(), // リアルタイム更新（自動反映）
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
