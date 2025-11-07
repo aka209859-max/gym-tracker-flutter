@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'firebase_options.dart';
 import 'screens/home_screen.dart';
 import 'screens/map_screen.dart';
@@ -19,6 +20,9 @@ import 'services/revenue_cat_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // 日本語ロケール初期化（日付フォーマット用）
+  await initializeDateFormatting('ja_JP', null);
   
   // Firebase初期化（エラー時はスキップしてデモモード）
   bool firebaseInitialized = false;
@@ -123,6 +127,11 @@ class GymMatchApp extends StatelessWidget {
             title: 'GYM MATCH - ジム検索アプリ',
             debugShowCheckedModeBanner: false,
             theme: themeProvider.currentTheme,
+            locale: const Locale('ja', 'JP'),
+            supportedLocales: const [
+              Locale('ja', 'JP'),
+              Locale('en', 'US'),
+            ],
             // β版テスト運用: パスワードゲート追加
             home: const PasswordGateScreen(
               child: MainScreen(),

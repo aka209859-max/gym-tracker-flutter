@@ -309,14 +309,14 @@ class _MapScreenState extends State<MapScreen> {
         
         // 同じグループ内では距離順（近い順）
         final distA = _calculateDistance(
-          position.latitude,
-          position.longitude,
+          position!.latitude,
+          position!.longitude,
           a.latitude,
           a.longitude,
         );
         final distB = _calculateDistance(
-          position.latitude,
-          position.longitude,
+          position!.latitude,
+          position!.longitude,
           b.latitude,
           b.longitude,
         );
