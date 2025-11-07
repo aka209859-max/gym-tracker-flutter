@@ -266,19 +266,22 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                 children: const [
                   Icon(Icons.people, size: 32, color: Colors.blue),
                   SizedBox(width: 12),
-                  Text(
-                    'あなたの報告が、リアルな混雑度に',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue,
+                  Flexible(
+                    child: Text(
+                      'あなたの報告が、\nリアルな混雑度に',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 12),
               Text(
-                'みんなの報告が集まるほど、より正確な混雑度データになります💪',
+                'みんなの報告が集まるほど、\nより正確な混雑度データになります💪',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 14, color: Colors.grey[600]),
               ),
@@ -296,7 +299,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                     );
                   },
                   icon: const Icon(Icons.send),
-                  label: const Text('今の混雑度を報告（30秒）'),
+                  label: const Text('混雑度を報告する（30秒）'),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
