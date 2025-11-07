@@ -771,11 +771,16 @@ class _SearchScreenState extends State<SearchScreen> {
           showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              title: const Row(
+              title: Row(
                 children: [
-                  Icon(Icons.location_off, color: Colors.orange),
-                  SizedBox(width: 8),
-                  Text('位置情報の取得に失敗'),
+                  const Icon(Icons.location_off, color: Colors.orange),
+                  const SizedBox(width: 8),
+                  Flexible(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: const Text('位置情報の取得に失敗'),
+                    ),
+                  ),
                 ],
               ),
               content: const Text(

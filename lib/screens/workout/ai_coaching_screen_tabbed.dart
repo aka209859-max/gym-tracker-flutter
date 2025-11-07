@@ -1025,15 +1025,32 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             const SizedBox(height: 16),
 
             // 性別
-            _buildDropdownField(
-              label: '性別',
-              value: _selectedGender,
-              items: ['男性', '女性'],
-              onChanged: (value) {
-                setState(() {
-                  _selectedGender = value!;
-                });
-              },
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildDropdownField(
+                  label: '性別',
+                  value: _selectedGender,
+                  items: ['男性', '女性'],
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedGender = value!;
+                    });
+                  },
+                ),
+                const SizedBox(height: 4),
+                Padding(
+                  padding: const EdgeInsets.only(left: 4),
+                  child: Text(
+                    '※ 女性は上半身の相対的筋力向上率が男性より高い（Roberts 2020）',
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Colors.grey.shade600,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 16),
 
@@ -1743,15 +1760,32 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
             const SizedBox(height: 16),
 
             // 性別
-            _buildDropdownField(
-              label: '性別',
-              value: _selectedGender,
-              items: ['男性', '女性'],
-              onChanged: (value) {
-                setState(() {
-                  _selectedGender = value!;
-                });
-              },
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildDropdownField(
+                  label: '性別',
+                  value: _selectedGender,
+                  items: ['男性', '女性'],
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedGender = value!;
+                    });
+                  },
+                ),
+                const SizedBox(height: 4),
+                Padding(
+                  padding: const EdgeInsets.only(left: 4),
+                  child: Text(
+                    '※ 女性は上半身の相対的筋力向上率が男性より高い（Roberts 2020）',
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Colors.grey.shade600,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 16),
 
