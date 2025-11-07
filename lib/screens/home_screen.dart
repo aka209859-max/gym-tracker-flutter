@@ -1977,12 +1977,19 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   const SizedBox(height: 8),
                   Wrap(
                     spacing: 8,
+                    runSpacing: 8,
                     children: ['胸', '脚', '背中', '肩', '二頭', '三頭', '有酸素', 'すべて'].map((group) {
                       final isSelected = group == 'すべて' 
                           ? _selectedMuscleGroupFilter == null
                           : _selectedMuscleGroupFilter == group;
                       return FilterChip(
-                        label: Text(group),
+                        label: Text(
+                          group,
+                          style: const TextStyle(fontSize: 13),
+                        ),
+                        labelPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         selected: isSelected,
                         onSelected: (selected) {
                           setDialogState(() {
