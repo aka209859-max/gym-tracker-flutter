@@ -388,6 +388,19 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     }
   }
 
+  /// 日付を日本語フォーマットで表示（Web環境対応）
+  String _formatDate(DateTime date) {
+    try {
+      // intlパッケージを使用（ロケール初期化成功時）
+      return DateFormat('yyyy年M月d日(E)', 'ja_JP').format(date);
+    } catch (e) {
+      // Web環境やロケール初期化失敗時のフォールバック
+      const weekdays = ['月', '火', '水', '木', '金', '土', '日'];
+      final weekday = weekdays[(date.weekday - 1) % 7];
+      return '${date.year}年${date.month}月${date.day}日($weekday)';
+    }
+  }
+
   /// 日付選択ダイアログを表示
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -395,7 +408,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       initialDate: _selectedDate,
       firstDate: DateTime(2020), // 2020年から選択可能
       lastDate: DateTime.now(), // 今日まで選択可能（未来の日付は選択不可）
-      locale: const Locale('ja', 'JP'),
+      // locale: Web環境では指定しない（システムロケールを使用）
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
@@ -612,7 +625,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          DateFormat('yyyy年M月d日(E)', 'ja_JP').format(_selectedDate),
+                          _formatDate(_selectedDate),
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,

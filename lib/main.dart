@@ -22,7 +22,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   // 日本語ロケール初期化（日付フォーマット用）
-  await initializeDateFormatting('ja_JP', null);
+  try {
+    await initializeDateFormatting('ja_JP', null);
+    print('✅ 日本語ロケール初期化成功');
+  } catch (e) {
+    print('⚠️ 日本語ロケール初期化失敗（継続可能）: $e');
+    // Web環境では失敗する可能性があるが、アプリ起動は継続
+  }
   
   // Firebase初期化（エラー時はスキップしてデモモード）
   bool firebaseInitialized = false;
@@ -127,11 +133,7 @@ class GymMatchApp extends StatelessWidget {
             title: 'GYM MATCH - ジム検索アプリ',
             debugShowCheckedModeBanner: false,
             theme: themeProvider.currentTheme,
-            locale: const Locale('ja', 'JP'),
-            supportedLocales: const [
-              Locale('ja', 'JP'),
-              Locale('en', 'US'),
-            ],
+            // locale: Web環境では指定しない（システムロケールを使用）
             // β版テスト運用: パスワードゲート追加
             home: const PasswordGateScreen(
               child: MainScreen(),
