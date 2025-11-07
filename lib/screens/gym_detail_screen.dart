@@ -264,10 +264,10 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  Icon(Icons.hourglass_empty, size: 32, color: Colors.blue),
+                  Icon(Icons.people, size: 32, color: Colors.blue),
                   SizedBox(width: 12),
                   Text(
-                    '混雑度データ収集中',
+                    'あなたの報告が、リアルな混雑度に',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -278,7 +278,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
               ),
               const SizedBox(height: 12),
               Text(
-                'リアルタイム混雑度機能は近日公開予定です',
+                'みんなの報告が集まるほど、より正確な混雑度データになります💪',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 14, color: Colors.grey[600]),
               ),
@@ -295,8 +295,11 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                       ),
                     );
                   },
-                  icon: const Icon(Icons.edit),
-                  label: const Text('混雑度を報告する'),
+                  icon: const Icon(Icons.send),
+                  label: const Text('今の混雑度を報告（30秒）'),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
                 ),
               ),
             ],
