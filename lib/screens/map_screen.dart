@@ -114,53 +114,42 @@ class _MapScreenState extends State<MapScreen> {
         debugPrint('🌍 GPS位置情報を取得中...');
       }
 
-      final position = await _locationService.getCurrentLocation();
+      Position? position = await _locationService.getCurrentLocation();
       
       if (position == null) {
+        // GPS取得失敗時はデフォルト位置（東京駅）を使用
+        if (kDebugMode) {
+          debugPrint('⚠️ GPS取得失敗 → デフォルト位置（東京駅）で検索');
+        }
+        
+        // 東京駅の座標をデフォルトとして使用
+        position = Position(
+          latitude: 35.6812,
+          longitude: 139.7671,
+          timestamp: DateTime.now(),
+          accuracy: 0,
+          altitude: 0,
+          altitudeAccuracy: 0,
+          heading: 0,
+          headingAccuracy: 0,
+          speed: 0,
+          speedAccuracy: 0,
+        );
+        
         if (mounted) {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Row(
-                children: [
-                  const Icon(Icons.location_off, color: Colors.orange),
-                  const SizedBox(width: 8),
-                  Flexible(
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: const Text('位置情報の取得に失敗'),
-                    ),
-                  ),
-                ],
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text('位置情報を取得できませんでした。東京駅周辺のジムを表示しています。'),
+              backgroundColor: Colors.orange,
+              duration: const Duration(seconds: 3),
+              action: SnackBarAction(
+                label: '再試行',
+                textColor: Colors.white,
+                onPressed: _acquireLocationAndSearch,
               ),
-              content: const Text(
-                '位置情報を取得できませんでした。\n\n'
-                '【解決方法】\n'
-                '1. ブラウザのアドレスバー左側の🔒マークをクリック\n'
-                '2. 「位置情報」を「許可」に変更\n'
-                '3. ページをリロードして再度お試しください',
-                style: TextStyle(fontSize: 14),
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('閉じる'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    _acquireLocationAndSearch(); // 再試行
-                  },
-                  child: const Text('再試行'),
-                ),
-              ],
             ),
           );
         }
-        setState(() {
-          _isLoadingGPS = false;
-        });
-        return;
       }
 
       if (kDebugMode) {

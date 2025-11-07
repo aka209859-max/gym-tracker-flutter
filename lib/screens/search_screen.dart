@@ -748,65 +748,53 @@ class _SearchScreenState extends State<SearchScreen> {
     });
 
     try {
-      final position = await _locationService.getCurrentLocation();
-      if (position != null) {
-        setState(() {
-          _currentPosition = position;
-        });
-        
+      Position? position = await _locationService.getCurrentLocation();
+      
+      if (position == null) {
+        // GPS取得失敗時はデフォルト位置（東京駅）を使用
         if (kDebugMode) {
-          print('✅ GPS位置取得成功: ${position.latitude}, ${position.longitude}');
+          print('⚠️ GPS取得失敗 → デフォルト位置（東京駅）を使用');
         }
         
-        // テキスト検索中でない場合のみ、GPS検索を実行
-        if (_searchQuery.isEmpty) {
-          _applyFilters();
-        } else {
-          if (kDebugMode) {
-            print('ℹ️ テキスト検索が優先されるため、GPS検索はスキップ');
-          }
-        }
-      } else {
+        position = Position(
+          latitude: 35.6812,
+          longitude: 139.7671,
+          timestamp: DateTime.now(),
+          accuracy: 0,
+          altitude: 0,
+          altitudeAccuracy: 0,
+          heading: 0,
+          headingAccuracy: 0,
+          speed: 0,
+          speedAccuracy: 0,
+        );
+        
         if (mounted) {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Row(
-                children: [
-                  const Icon(Icons.location_off, color: Colors.orange),
-                  const SizedBox(width: 8),
-                  Flexible(
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: const Text('位置情報の取得に失敗'),
-                    ),
-                  ),
-                ],
-              ),
-              content: const Text(
-                '位置情報を取得できませんでした。\n\n'
-                '【解決方法】\n'
-                '1. ブラウザのアドレスバー左側の🔒マークをクリック\n'
-                '2. 「位置情報」を「許可」に変更\n'
-                '3. ページをリロードして再度お試しください\n\n'
-                '※位置情報なしでもキーワード検索は利用できます',
-                style: TextStyle(fontSize: 14),
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('閉じる'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    _getCurrentLocation(); // 再試行
-                  },
-                  child: const Text('再試行'),
-                ),
-              ],
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('位置情報を取得できませんでした。東京駅周辺で検索します。'),
+              backgroundColor: Colors.orange,
+              duration: Duration(seconds: 3),
             ),
           );
+        }
+      }
+      
+      // 位置情報を設定（GPS取得成功 or デフォルト位置）
+      setState(() {
+        _currentPosition = position;
+      });
+      
+      if (kDebugMode) {
+        print('✅ 位置情報設定完了: ${position!.latitude}, ${position.longitude}');
+      }
+      
+      // テキスト検索中でない場合のみ、GPS検索を実行
+      if (_searchQuery.isEmpty) {
+        _applyFilters();
+      } else {
+        if (kDebugMode) {
+          print('ℹ️ テキスト検索が優先されるため、GPS検索はスキップ');
         }
       }
     } finally {
