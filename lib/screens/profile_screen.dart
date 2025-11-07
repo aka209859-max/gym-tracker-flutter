@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'favorites_screen.dart';
 import 'subscription_screen.dart';
 import 'body_measurement_screen.dart';
+import 'visit_history_screen.dart';
 import 'partner/partner_search_screen.dart';
 import '../services/favorites_service.dart';
 import '../services/subscription_service.dart';
@@ -214,9 +215,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           icon: Icons.history,
           title: '訪問履歴',
           subtitle: '過去の訪問ジム',
-          badge: 'Coming Soon',
           onTap: () {
-            _showComingSoonDialog(context, '訪問履歴');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const VisitHistoryScreen()),
+            );
           },
         ),
         const SizedBox(height: 12),

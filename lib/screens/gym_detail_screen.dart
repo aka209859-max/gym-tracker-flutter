@@ -3,6 +3,7 @@ import '../models/gym.dart';
 import '../services/realtime_user_service.dart';
 import '../services/favorites_service.dart';
 import '../services/share_service.dart';
+import '../services/visit_history_service.dart';
 import 'crowd_report_screen.dart';
 import 'reservation_form_screen.dart';
 
@@ -20,6 +21,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
   final RealtimeUserService _userService = RealtimeUserService();
   final FavoritesService _favoritesService = FavoritesService();
   final ShareService _shareService = ShareService();
+  final VisitHistoryService _visitHistoryService = VisitHistoryService();
   bool _isCheckedIn = false;
   bool _isFavorite = false;
 
@@ -86,6 +88,35 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
           ),
         );
       }
+    }
+  }
+
+  /// チェックイン機能
+  Future<void> _checkInToGym() async {
+    final success = await _visitHistoryService.checkIn(widget.gym);
+    if (success && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              const Icon(Icons.check_circle, color: Colors.white),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text('${widget.gym.name}にチェックインしました'),
+              ),
+            ],
+          ),
+          backgroundColor: Colors.green,
+          duration: const Duration(seconds: 3),
+        ),
+      );
+    } else if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('チェックインに失敗しました'),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 
@@ -464,6 +495,24 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
               Icons.open_in_new,
               '料金・詳細情報',
               '最新の料金プランや設備情報は、ジムの公式サイトでご確認ください',
+            ),
+            const SizedBox(height: 16),
+            // チェックインボタン
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: _checkInToGym,
+                icon: const Icon(Icons.check_circle_outline),
+                label: const Text('このジムにチェックイン'),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
