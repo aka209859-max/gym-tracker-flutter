@@ -4,9 +4,11 @@ import 'favorites_screen.dart';
 import 'subscription_screen.dart';
 import 'body_measurement_screen.dart';
 import 'visit_history_screen.dart';
+import 'messaging_screen.dart';
 import 'partner/partner_search_screen.dart';
 import '../services/favorites_service.dart';
 import '../services/subscription_service.dart';
+import '../services/messaging_service.dart';
 
 /// プロフィール画面
 class ProfileScreen extends StatefulWidget {
@@ -19,8 +21,10 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   final FavoritesService _favoritesService = FavoritesService();
   final SubscriptionService _subscriptionService = SubscriptionService();
+  final MessagingService _messagingService = MessagingService();
   
   int _favoriteCount = 0;
+  int _unreadMessageCount = 0;
   SubscriptionType _currentPlan = SubscriptionType.free;
 
   @override
@@ -32,10 +36,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> _loadUserData() async {
     final favoriteCount = await _favoritesService.getFavoriteCount();
     final currentPlan = await _subscriptionService.getCurrentPlan();
+    final unreadCount = await _messagingService.getUnreadCount();
     
     setState(() {
       _favoriteCount = favoriteCount;
       _currentPlan = currentPlan;
+      _unreadMessageCount = unreadCount;
     });
   }
 
@@ -240,9 +246,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
           context,
           icon: Icons.message,
           title: 'メッセージ',
-          subtitle: '0件の未読メッセージ',
-          badge: '有料プラン',
-          onTap: () => _checkPremiumFeature(context, 'メッセージング'),
+          subtitle: _unreadMessageCount > 0
+              ? '$_unreadMessageCount件の未読メッセージ'
+              : '新着メッセージなし',
+          badge: _unreadMessageCount > 0 ? '$_unreadMessageCount' : null,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const MessagingScreen()),
+            ).then((_) => _loadUserData());
+          },
         ),
         const SizedBox(height: 12),
         _buildMenuCard(
