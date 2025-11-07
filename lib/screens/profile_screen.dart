@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'theme_selector_screen.dart';
 import 'favorites_screen.dart';
 import 'subscription_screen.dart';
 import 'body_measurement_screen.dart';
@@ -183,19 +182,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
         const SizedBox(height: 12),
-        _buildMenuCard(
-          context,
-          icon: Icons.palette,
-          title: 'デザインテーマ',
-          subtitle: 'アプリの見た目を変更',
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ThemeSelectorScreen()),
-            ).then((_) => setState(() {}));
-          },
-        ),
-        const SizedBox(height: 12),
+        // デザインテーマ選択は削除（Energetic系に固定）
         _buildMenuCard(
           context,
           icon: Icons.favorite,
