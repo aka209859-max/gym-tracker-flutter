@@ -250,52 +250,48 @@ class _MapScreenState extends State<MapScreen> {
         }
       }
       
-      // 【完全フォールバック】API失敗時はサンプルデータを表示
-      if (!searchSucceeded || gyms.isEmpty) {
+      // 【完全フォールバック】API失敗時は空リストを表示（ダミーデータは使用しない）
+      if (!searchSucceeded) {
         if (kDebugMode) {
-          debugPrint('🛡️ フォールバック処理: サンプルデータを読み込み中...');
+          debugPrint('⚠️ Google Places API検索失敗 → 空リストを表示');
         }
-        
-        try {
-          final provider = Provider.of<GymProvider>(context, listen: false);
-          gyms = provider.gyms;
-          
-          if (kDebugMode) {
-            debugPrint('✅ サンプルデータ ${gyms.length}件を読み込みました');
-          }
-        } catch (fallbackError) {
-          if (kDebugMode) {
-            debugPrint('❌ サンプルデータの読み込みに失敗: $fallbackError');
-          }
-          gyms = []; // 最終的なフォールバックは空リスト
+        gyms = []; // API失敗時は空リストを表示（ダミーデータは使用しない）
+      } else if (gyms.isEmpty) {
+        if (kDebugMode) {
+          debugPrint('ℹ️ 検索結果が0件です（この地域にジムが存在しない可能性）');
         }
+      }
         
-        if (mounted) {
+      
+      // 検索結果の通知
+      if (mounted) {
+        if (searchSucceeded && gyms.isNotEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(
-                gyms.isEmpty 
-                  ? '現在、ジム検索が利用できません'
-                  : '現在、近くのジム検索が利用できません。サンプルデータを表示しています'
-              ),
+              content: Text('周辺の${gyms.length}件のジムを検索しました'),
+              backgroundColor: Colors.green,
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        } else if (searchSucceeded && gyms.isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('この地域にはジムが見つかりませんでした'),
               backgroundColor: Colors.orange,
+              duration: Duration(seconds: 3),
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text('ジム検索に失敗しました。もう一度お試しください'),
+              backgroundColor: Colors.red,
               duration: const Duration(seconds: 3),
               action: SnackBarAction(
                 label: '再試行',
                 textColor: Colors.white,
                 onPressed: _acquireLocationAndSearch,
               ),
-            ),
-          );
-        }
-      } else {
-        // 検索成功時
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('周辺の${gyms.length}件のジムを検索しました'),
-              backgroundColor: Colors.green,
-              duration: const Duration(seconds: 2),
             ),
           );
         }

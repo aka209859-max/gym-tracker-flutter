@@ -47,8 +47,8 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
-    // デモモード用にサンプルデータも保持
-    _filteredGyms = Provider.of<GymProvider>(context, listen: false).gyms;
+    // 初期表示は空リスト（検索実行時に実データ取得）
+    _filteredGyms = [];
   }
 
   @override
