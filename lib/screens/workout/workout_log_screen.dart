@@ -233,10 +233,9 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection('users')
-            .doc(user.uid)
-            .collection('workouts')
-            .snapshots(), // orderByを削除してインデックス不要に
+            .collection('workout_logs')
+            .where('userId', isEqualTo: user.uid)
+            .snapshots(), // リアルタイム更新（自動反映）
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());

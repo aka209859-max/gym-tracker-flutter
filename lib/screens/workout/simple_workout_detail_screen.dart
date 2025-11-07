@@ -441,10 +441,42 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
       }
       
       final data = doc.data()!;
-      final exercises = data['exercises'] as Map<String, dynamic>? ?? {};
+      
+      // 🔍 デバッグ: データ構造を確認
+      if (kDebugMode) {
+        debugPrint('🔍 Firestore data keys: ${data.keys.toList()}');
+        debugPrint('🔍 Exercises type: ${data['exercises']?.runtimeType}');
+        debugPrint('🔍 Exercises content: ${data['exercises']}');
+      }
+      
+      // exercisesフィールドを取得（Map型を期待）
+      final exercisesData = data['exercises'];
+      Map<String, dynamic> exercises;
+      
+      if (exercisesData is Map<String, dynamic>) {
+        // 正常なMap型
+        exercises = Map<String, dynamic>.from(exercisesData);
+      } else if (exercisesData is Map) {
+        // 型変換が必要な場合
+        exercises = Map<String, dynamic>.from(exercisesData.map(
+          (key, value) => MapEntry(key.toString(), value),
+        ));
+      } else {
+        throw Exception('exercisesフィールドがMap型ではありません: ${exercisesData.runtimeType}');
+      }
+      
+      if (kDebugMode) {
+        debugPrint('🔍 Before delete - exercises keys: ${exercises.keys.toList()}');
+        debugPrint('🔍 Deleting exercise: $exerciseName');
+      }
       
       // 指定された種目だけを削除
       exercises.remove(exerciseName);
+      
+      if (kDebugMode) {
+        debugPrint('🔍 After delete - exercises keys: ${exercises.keys.toList()}');
+        debugPrint('🔍 Remaining exercises count: ${exercises.length}');
+      }
       
       // 🔥 重要: 種目が全て削除された場合は記録全体を削除
       if (exercises.isEmpty) {
@@ -462,24 +494,38 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
         // まだ他の種目がある場合は、exercisesフィールドだけを更新
         await docRef.update({'exercises': exercises});
         
+        if (kDebugMode) {
+          debugPrint('✅ Firestore updated - remaining exercises: ${exercises.keys.toList()}');
+        }
+        
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('「$exerciseName」を削除しました'),
+              content: Text('「$exerciseName」を削除しました（残り${exercises.length}種目）'),
               backgroundColor: Colors.green,
             ),
           );
           
-          // 画面を再読み込み（削除後の状態を表示）
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => SimpleWorkoutDetailScreen(
-                workoutId: widget.workoutId,
-                workoutData: {...data, 'exercises': exercises},
+          // Firestoreから最新データを再取得して画面を更新
+          final updatedDoc = await docRef.get();
+          if (updatedDoc.exists) {
+            final updatedData = updatedDoc.data()!;
+            
+            if (kDebugMode) {
+              debugPrint('🔄 Reloading with updated data: ${updatedData['exercises']?.keys.toList()}');
+            }
+            
+            // 画面を再読み込み（Firestoreから取得した最新データを使用）
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SimpleWorkoutDetailScreen(
+                  workoutId: widget.workoutId,
+                  workoutData: updatedData,
+                ),
               ),
-            ),
-          );
+            );
+          }
         }
       }
     } catch (e) {
