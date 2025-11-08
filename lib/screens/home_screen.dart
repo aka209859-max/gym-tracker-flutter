@@ -1318,6 +1318,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             final sets = entry.value;
             final isExpanded = _expandedExercises[exerciseName] ?? true;
             
+            // muscle_groupを取得（有酸素判定用）
+            final muscleGroup = sets.isNotEmpty ? (sets.first['muscle_group'] as String? ?? '') : '';
+            final isCardio = muscleGroup == '有酸素';
+            
             // 合計セット数、合計レップ数を計算
             final totalSets = sets.length;
             final totalReps = sets.fold<int>(0, (sum, set) => sum + (set['reps'] as int));
@@ -1438,24 +1442,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               ),
                             ),
                           ),
-                          const Expanded(
+                          Expanded(
                             flex: 2,
                             child: Text(
-                              '重さ',
+                              isCardio ? '時間' : '重さ',
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 9,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black54,
-                              ),
-                            ),
-                          ),
-                          const Expanded(
-                            flex: 2,
-                            child: Text(
-                              '回数',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 9,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black54,
@@ -1465,15 +1457,29 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           Expanded(
                             flex: 2,
                             child: Text(
-                              'RM',
+                              isCardio ? '距離' : '回数',
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 9,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.grey[700],
+                                color: Colors.black54,
                               ),
                             ),
                           ),
+                          if (!isCardio)
+                            Expanded(
+                              flex: 2,
+                              child: Text(
+                                'RM',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 9,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[700],
+                                ),
+                              ),
+                            ),
+                          if (isCardio) const Spacer(flex: 2),
                           const SizedBox(
                             width: 24,
                             child: Text(
@@ -1539,7 +1545,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    '${set['weight']} Kg',
+                                    isCardio ? '${set['weight']} 分' : '${set['weight']} Kg',
                                     style: const TextStyle(
                                       fontSize: 11,
                                       fontWeight: FontWeight.bold,
@@ -1554,7 +1560,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    '${set['reps']} 回',
+                                    isCardio ? '${set['reps']} km' : '${set['reps']} 回',
                                     style: const TextStyle(
                                       fontSize: 11,
                                       fontWeight: FontWeight.bold,
@@ -1563,17 +1569,19 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                 ],
                               ),
                             ),
-                            Expanded(
-                              flex: 2,
-                              child: Text(
-                                '${oneRM.toStringAsFixed(1)}Kg',
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 9,
-                                  fontWeight: FontWeight.w600,
+                            if (!isCardio)
+                              Expanded(
+                                flex: 2,
+                                child: Text(
+                                  '${oneRM.toStringAsFixed(1)}Kg',
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                               ),
-                            ),
+                            if (isCardio) const Spacer(flex: 2),
                             SizedBox(
                               width: 24,
                               child: set['has_assist'] == true
@@ -1623,7 +1631,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         };
                         
                         print('📋 追加セット準備（＋ボタンから）: $exerciseName');
-                        print('   前回: ${lastWeight}kg × ${lastReps}reps');
+                        if (isCardio) {
+                          print('   前回: ${lastWeight}分 × ${lastReps}km');
+                        } else {
+                          print('   前回: ${lastWeight}kg × ${lastReps}回');
+                        }
                         print('   既存workout_id: $workoutId');
                         
                         // AddWorkoutScreenにテンプレートデータを渡して遷移
@@ -1846,13 +1858,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                             ...sets.take(3).map((set) {
                               final exerciseName = set['exercise_name'] as String?;
                               final weight = set['weight'] as num?;
-                              final reps = set['reps'] as int?;
+                              final reps = set['reps'] as num?;
                               
                               // 有酸素運動の場合は「時間(分) × 距離(km)」表示
                               final isCardio = muscleGroup == '有酸素';
                               final displayText = isCardio
-                                  ? '• $exerciseName: ${weight}分 × ${reps}km'
-                                  : '• $exerciseName: ${weight}kg × ${reps}回';
+                                  ? '• $exerciseName: ${weight?.toInt() ?? 0}分 × ${reps?.toInt() ?? 0}km'
+                                  : '• $exerciseName: ${weight?.toInt() ?? 0}kg × ${reps?.toInt() ?? 0}回';
                               
                               return Padding(
                                 padding: const EdgeInsets.only(left: 8, bottom: 4),
