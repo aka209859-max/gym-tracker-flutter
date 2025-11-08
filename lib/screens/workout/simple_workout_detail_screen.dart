@@ -403,12 +403,56 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
   }
 
   // 🗑️ 種目削除確認ダイアログ
-  void _confirmDeleteExercise(String exerciseName) {
+  void _confirmDeleteExercise(String exerciseName) async {
+    // 🔍 デバッグ: 現在のデータ構造を確認
+    final data = widget.workoutData;
+    final sets = data['sets'] as List<dynamic>? ?? [];
+    final exercises = data['exercises'];
+    
+    // 現在の種目数を計算
+    final currentExerciseNames = sets
+        .where((s) => s is Map)
+        .map((s) => s['exercise_name'])
+        .toSet()
+        .toList();
+    
+    final afterDeleteSets = sets.where((set) {
+      if (set is Map<String, dynamic>) {
+        final setExerciseName = set['exercise_name'] as String? ?? '';
+        return setExerciseName != exerciseName;
+      }
+      return true;
+    }).toList();
+    
+    final afterDeleteExerciseNames = afterDeleteSets
+        .where((s) => s is Map)
+        .map((s) => s['exercise_name'])
+        .toSet()
+        .toList();
+    
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('記録を削除'),
-        content: Text('「$exerciseName」の記録を削除しますか？\nこの種目だけが削除されます。'),
+        title: const Text('種目を削除'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('「$exerciseName」を削除しますか？'),
+            const SizedBox(height: 16),
+            const Divider(),
+            const SizedBox(height: 8),
+            Text('🔍 デバッグ情報:', style: TextStyle(fontSize: 12, color: Colors.grey[600])),
+            const SizedBox(height: 4),
+            Text('現在の種目: ${currentExerciseNames.join(", ")}', style: const TextStyle(fontSize: 12)),
+            Text('削除後の種目: ${afterDeleteExerciseNames.join(", ")}', style: const TextStyle(fontSize: 12)),
+            Text('現在のセット数: ${sets.length}', style: const TextStyle(fontSize: 12)),
+            Text('削除後のセット数: ${afterDeleteSets.length}', style: const TextStyle(fontSize: 12)),
+            if (exercises != null)
+              Text('⚠️ exercises フィールド検出: ${exercises.runtimeType}', 
+                style: const TextStyle(fontSize: 12, color: Colors.orange)),
+          ],
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -466,22 +510,37 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
       final remainingSets = sets.where((set) {
         if (set is Map<String, dynamic>) {
           final setExerciseName = set['exercise_name'] as String? ?? '';
-          return setExerciseName != exerciseName;
+          final shouldKeep = setExerciseName != exerciseName;
+          
+          // 各セットの判定をログ出力（Releaseビルドでも表示）
+          print('🔍 Set: $setExerciseName, Delete target: $exerciseName, Keep: $shouldKeep');
+          
+          return shouldKeep;
         }
         return true;
       }).toList();
       
+      // 削除後の状態を常に表示（Releaseビルドでも）
+      print('🔍 After filter - total sets: ${remainingSets.length}');
+      final remainingExerciseNames = remainingSets
+          .where((s) => s is Map)
+          .map((s) => s['exercise_name'])
+          .toSet()
+          .toList();
+      print('🔍 After filter - exercises: $remainingExerciseNames');
+      
       if (kDebugMode) {
         debugPrint('🔍 After delete - total sets: ${remainingSets.length}');
-        final remainingExerciseNames = remainingSets
-            .where((s) => s is Map)
-            .map((s) => s['exercise_name'])
-            .toSet()
-            .toList();
         debugPrint('🔍 After delete - exercises: $remainingExerciseNames');
       }
       
       // 🔥 重要: 全セットが削除された場合は記録全体を削除
+      if (remainingSets.isEmpty) {
+        print('⚠️ remainingSets is empty - deleting entire workout');
+      } else {
+        print('✅ remainingSets has ${remainingSets.length} sets - updating Firestore');
+      }
+      
       if (remainingSets.isEmpty) {
         await docRef.delete();
         if (mounted) {
