@@ -1319,8 +1319,15 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             final isExpanded = _expandedExercises[exerciseName] ?? true;
             
             // muscle_groupを取得（有酸素判定用）
-            final muscleGroup = sets.isNotEmpty ? (sets.first['muscle_group'] as String? ?? '') : '';
+            // ワークアウト全体のmuscle_groupを取得（セットではなくワークアウトレベル）
+            final muscleGroup = _selectedDayWorkouts.isNotEmpty 
+                ? (_selectedDayWorkouts.first['muscle_group'] as String? ?? '') 
+                : '';
             final isCardio = muscleGroup == '有酸素';
+            
+            if (kDebugMode) {
+              print('🏋️ 種目: $exerciseName, muscle_group: $muscleGroup, isCardio: $isCardio');
+            }
             
             // 合計セット数、合計レップ数を計算
             final totalSets = sets.length;
