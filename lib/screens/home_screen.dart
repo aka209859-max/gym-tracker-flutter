@@ -247,25 +247,24 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         return;
       }
 
-      // 種目ごとにグループ化
+      // 種目ごとにグループ化（home_screen表示ロジックと同じ構造）
       final exerciseMap = <String, List<Map<String, dynamic>>>{};
       
       for (final workout in _selectedDayWorkouts) {
-        final exercises = workout['exercises'] as List<dynamic>?;
+        final sets = workout['sets'] as List<dynamic>?;
         
-        if (exercises != null) {
-          for (final exercise in exercises) {
-            final exerciseData = exercise as Map<String, dynamic>;
-            final name = exerciseData['name'] as String? ?? '不明な種目';
+        if (sets != null) {
+          for (final set in sets) {
+            final setData = set as Map<String, dynamic>;
+            final name = setData['exercise_name'] as String? ?? '不明な種目';
             
             if (!exerciseMap.containsKey(name)) {
               exerciseMap[name] = [];
             }
             
             exerciseMap[name]!.add({
-              'weight': exerciseData['weight'],
-              'reps': exerciseData['reps'],
-              'sets': exerciseData['sets'] ?? 1,
+              'weight': setData['weight'] ?? 0,
+              'reps': setData['reps'] ?? 0,
             });
           }
         }
