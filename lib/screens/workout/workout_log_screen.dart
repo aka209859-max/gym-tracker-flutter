@@ -216,7 +216,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
   /// シェア処理
   Future<void> _handleShare(User user) async {
     try {
-      // 今日の自己記録を取得
+      // 今日の自己記録を取得（インデックス不要のシンプルクエリ）
       final today = DateTime.now();
       final todayStart = DateTime(today.year, today.month, today.day);
       final todayEnd = todayStart.add(const Duration(days: 1));
@@ -225,10 +225,15 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
           .collection('workout_logs')
           .where('userId', isEqualTo: user.uid)
           .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(todayStart))
-          .where('date', isLessThan: Timestamp.fromDate(todayEnd))
           .get();
+      
+      // メモリ内で日付フィルタリング（インデックス不要）
+      final todayDocs = snapshot.docs.where((doc) {
+        final date = (doc.data()['date'] as Timestamp).toDate();
+        return date.isBefore(todayEnd);
+      }).toList();
 
-      if (snapshot.docs.isEmpty) {
+      if (todayDocs.isEmpty) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -243,7 +248,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
       // 種目ごとにグループ化
       final exerciseMap = <String, List<Map<String, dynamic>>>{};
       
-      for (final doc in snapshot.docs) {
+      for (final doc in todayDocs) {
         final data = doc.data();
         final exercises = data['exercises'] as List<dynamic>?;
         

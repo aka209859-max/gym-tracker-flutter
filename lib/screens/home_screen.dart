@@ -16,7 +16,9 @@ import '../models/goal.dart';
 import '../services/achievement_service.dart';
 import '../services/goal_service.dart';
 import '../services/share_service.dart';
+import '../services/workout_share_service.dart';
 import '../widgets/workout_share_card.dart';
+import '../widgets/workout_share_image.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -214,6 +216,97 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         _currentMonthVolume = 0.0;
         _totalVolume = 0.0;
       });
+    }
+  }
+
+  // トレーニング記録をシェア
+  Future<void> _handleShare() async {
+    try {
+      final user = firebase_auth.FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('ログインが必要です'),
+              backgroundColor: Colors.orange,
+            ),
+          );
+        }
+        return;
+      }
+
+      if (_selectedDay == null || _selectedDayWorkouts.isEmpty) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('シェアできるトレーニング記録がありません'),
+              backgroundColor: Colors.orange,
+            ),
+          );
+        }
+        return;
+      }
+
+      // 種目ごとにグループ化
+      final exerciseMap = <String, List<Map<String, dynamic>>>{};
+      
+      for (final workout in _selectedDayWorkouts) {
+        final exercises = workout['exercises'] as List<dynamic>?;
+        
+        if (exercises != null) {
+          for (final exercise in exercises) {
+            final exerciseData = exercise as Map<String, dynamic>;
+            final name = exerciseData['name'] as String? ?? '不明な種目';
+            
+            if (!exerciseMap.containsKey(name)) {
+              exerciseMap[name] = [];
+            }
+            
+            exerciseMap[name]!.add({
+              'weight': exerciseData['weight'],
+              'reps': exerciseData['reps'],
+              'sets': exerciseData['sets'] ?? 1,
+            });
+          }
+        }
+      }
+
+      // WorkoutExerciseGroupリストに変換
+      final exerciseGroups = exerciseMap.entries.map((entry) {
+        return WorkoutExerciseGroup(
+          name: entry.key,
+          sets: entry.value,
+        );
+      }).toList();
+
+      if (exerciseGroups.isEmpty) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('シェアできる種目がありません'),
+              backgroundColor: Colors.orange,
+            ),
+          );
+        }
+        return;
+      }
+
+      // シェア実行
+      final shareService = WorkoutShareService();
+      await shareService.shareWorkout(
+        context: context,
+        date: _selectedDay!,
+        exercises: exerciseGroups,
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('シェアに失敗しました: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     }
   }
 
@@ -1297,15 +1390,26 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       size: 20,
                     ),
                     const SizedBox(width: 8),
-                    Text(
-                      _selectedDay != null && _isSameDay(_selectedDay!, DateTime.now())
-                          ? '今日のトレーニング'
-                          : '${_selectedDay!.month}月${_selectedDay!.day}日のトレーニング',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Text(
+                        _selectedDay != null && _isSameDay(_selectedDay!, DateTime.now())
+                            ? '今日のトレーニング'
+                            : '${_selectedDay!.month}月${_selectedDay!.day}日のトレーニング',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
+                    // シェアボタン
+                    if (_selectedDayWorkouts.isNotEmpty)
+                      IconButton(
+                        icon: const Icon(Icons.share, size: 20),
+                        onPressed: () => _handleShare(),
+                        tooltip: 'トレーニングをシェア',
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                      ),
                   ],
                 ),
                 const SizedBox(height: 12),
