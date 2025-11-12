@@ -18,12 +18,21 @@ workflows:
     scripts:
       - name: Set up keychain with App Store Connect credentials
         script: |
+          set +e  # エラーでも続行
           app-store-connect fetch-signing-files \
             --apple-id $APP_STORE_CONNECT_APPLE_ID \
             --password $APP_STORE_CONNECT_PASSWORD \
             --team-id 7V5DA99X2M \
             --create \
             com.nexa.gymmatch
+          exit_code=$?
+          echo "Exit code: $exit_code"
+          echo "Checking environment variables..."
+          echo "APPLE_ID: $APP_STORE_CONNECT_APPLE_ID"
+          echo "PASSWORD is set: $([ -n "$APP_STORE_CONNECT_PASSWORD" ] && echo "YES" || echo "NO")"
+          echo "Waiting 300 seconds for SSH access..."
+          sleep 300
+          exit $exit_code
       - name: Set up code signing settings on Xcode project
         script: |
           xcode-project use-profiles
