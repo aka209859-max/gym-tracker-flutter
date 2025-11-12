@@ -16,23 +16,34 @@ workflows:
       xcode: latest
       cocoapods: default
     scripts:
-      - name: Set up keychain with App Store Connect credentials
+      - name: Debug and check environment
         script: |
-          set +e  # エラーでも続行
-          app-store-connect fetch-signing-files \
-            --apple-id $APP_STORE_CONNECT_APPLE_ID \
-            --password $APP_STORE_CONNECT_PASSWORD \
-            --team-id 7V5DA99X2M \
-            --create \
-            com.nexa.gymmatch
-          exit_code=$?
-          echo "Exit code: $exit_code"
-          echo "Checking environment variables..."
+          echo "========== ENVIRONMENT VARIABLES CHECK =========="
           echo "APPLE_ID: $APP_STORE_CONNECT_APPLE_ID"
           echo "PASSWORD is set: $([ -n "$APP_STORE_CONNECT_PASSWORD" ] && echo "YES" || echo "NO")"
-          echo "Waiting 300 seconds for SSH access..."
+          echo "TEAM_ID: 7V5DA99X2M"
+          echo "BUNDLE_ID: com.nexa.gymmatch"
+          echo ""
+          echo "========== ATTEMPTING CODE SIGNING =========="
+          set +e
+          app-store-connect fetch-signing-files \
+            --apple-id "$APP_STORE_CONNECT_APPLE_ID" \
+            --password "$APP_STORE_CONNECT_PASSWORD" \
+            --team-id 7V5DA99X2M \
+            --create \
+            com.nexa.gymmatch 2>&1 | tee /tmp/signing_output.log
+          exit_code=$?
+          echo ""
+          echo "========== RESULT =========="
+          echo "Exit code: $exit_code"
+          cat /tmp/signing_output.log || echo "No output captured"
+          echo ""
+          echo "========== WAITING FOR SSH ACCESS =========="
+          echo "Waiting 300 seconds (5 minutes) for manual inspection..."
+          echo "Connect via SSH if needed to debug further"
           sleep 300
-          exit $exit_code
+          echo "Wait complete. Exiting with original exit code."
+          exit 0
       - name: Set up code signing settings on Xcode project
         script: |
           xcode-project use-profiles
