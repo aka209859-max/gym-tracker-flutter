@@ -350,8 +350,8 @@ class PartnerMergeService {
       gymId: partnerData?['gymId'] as String? ?? partnerData?['id'] as String?,
       name: partnerData?['name'] as String? ?? place.name,
       address: partnerData?['address'] as String? ?? place.address,
-      latitude: (partnerData?['latitude'] as num?)?.toDouble() ?? place.latitude,
-      longitude: (partnerData?['longitude'] as num?)?.toDouble() ?? place.longitude,
+      latitude: (partnerData?['lat'] as num?)?.toDouble() ?? (partnerData?['latitude'] as num?)?.toDouble() ?? place.latitude,
+      longitude: (partnerData?['lng'] as num?)?.toDouble() ?? (partnerData?['longitude'] as num?)?.toDouble() ?? place.longitude,
       phoneNumber: partnerData?['phoneNumber'] as String? ?? '',
       description: partnerData?['description'] as String? ?? '',
       facilities: partnerData?['facilities'] != null 

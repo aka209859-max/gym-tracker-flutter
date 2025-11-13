@@ -237,31 +237,89 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   Future<void> _loadLastWorkoutData() async {
     try {
       final user = firebase_auth.FirebaseAuth.instance.currentUser;
-      if (user == null) return;
+      if (user == null) {
+        print('⚠️ ユーザー未ログイン - 前回データなし');
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('ログインが必要です'), backgroundColor: Colors.orange),
+          );
+        }
+        return;
+      }
 
+      print('🔍 ユーザーID: ${user.uid}');
+      
+      // 🔧 修正: シンプルクエリ（インデックス不要）で取得してメモリ内でソート
       final snapshot = await FirebaseFirestore.instance
           .collection('workout_logs')
           .where('user_id', isEqualTo: user.uid)
-          .orderBy('date', descending: true)
-          .limit(1)
           .get();
+      
+      // メモリ内で日付順にソート（新しい順）
+      final docs = snapshot.docs.toList();
+      docs.sort((a, b) {
+        final dateA = (a.data()['date'] as Timestamp?)?.toDate() ?? DateTime(2000);
+        final dateB = (b.data()['date'] as Timestamp?)?.toDate() ?? DateTime(2000);
+        return dateB.compareTo(dateA);  // 降順
+      });
+      
+      // 最新50件に制限
+      final limitedDocs = docs.take(50).toList();
 
-      if (snapshot.docs.isNotEmpty) {
-        final data = snapshot.docs.first.data();
+      print('📊 前回記録取得: ${snapshot.docs.length}件のワークアウト履歴');
+      
+      if (snapshot.docs.isEmpty) {
+        print('⚠️ ワークアウト履歴が1件もありません');
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('まだ記録がありません。最初のワークアウトを記録しましょう！')),
+          );
+        }
+        return;
+      }
+
+      // 種目ごとの最新記録を抽出
+      final Map<String, Map<String, dynamic>> exerciseLatest = {};
+      
+      for (var doc in limitedDocs) {
+        final data = doc.data();
         final sets = data['sets'] as List<dynamic>? ?? [];
+        final docDate = (data['date'] as Timestamp).toDate();
+        
+        print('  📄 ドキュメント: ${doc.id}, 日付: ${DateFormat('M/d').format(docDate)}, セット数: ${sets.length}');
         
         for (var set in sets) {
           final exerciseName = set['exercise_name'] as String?;
           if (exerciseName != null) {
-            _lastWorkoutData[exerciseName] = {
-              'weight': set['weight'],
-              'reps': set['reps'],
-            };
+            // まだ記録されていない種目、または今回の記録の方が新しい場合
+            if (!exerciseLatest.containsKey(exerciseName)) {
+              exerciseLatest[exerciseName] = {
+                'weight': set['weight'],
+                'reps': set['reps'],
+                'date': docDate,
+              };
+              print('  ✅ $exerciseName: ${set['weight']}kg × ${set['reps']}reps (${DateFormat('M/d').format(docDate)})');
+            }
           }
         }
       }
-    } catch (e) {
-      print('前回データ読み込みエラー: $e');
+      
+      if (mounted) {
+        setState(() {
+          _lastWorkoutData = exerciseLatest;
+        });
+      }
+      
+      print('🎯 前回記録ロード完了: ${_lastWorkoutData.length}種目');
+      print('🔑 種目キー: ${_lastWorkoutData.keys.toList()}');
+    } catch (e, stackTrace) {
+      print('❌ 前回データ読み込みエラー: $e');
+      print('📍 スタックトレース: $stackTrace');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('データ読み込みエラー: $e'), backgroundColor: Colors.red),
+        );
+      }
     }
   }
 
@@ -336,29 +394,137 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     );
   }
 
-  void _copyLastWorkout(String exerciseName) {
-    final lastData = _lastWorkoutData[exerciseName];
-    if (lastData == null) return;
-
-    final weight = lastData['weight']?.toDouble() ?? 0.0;
-    final reps = lastData['reps'] ?? 10;
-
-    setState(() {
-      // この種目の全セットに前回のデータをコピー
-      for (var set in _sets) {
-        if (set.exerciseName == exerciseName) {
-          set.weight = weight;
-          set.reps = reps;
-        }
+  // 🆕 過去5回分の履歴を表示して選択するダイアログ
+  Future<void> _showWorkoutHistoryDialog(String exerciseName) async {
+    try {
+      final user = firebase_auth.FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('ログインが必要です'), backgroundColor: Colors.orange),
+        );
+        return;
       }
-    });
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('前回の記録をコピーしました: $weight kg × $reps reps'),
-        duration: const Duration(seconds: 2),
-      ),
-    );
+      // この種目の過去5回分の記録を取得（シンプルクエリ）
+      final snapshot = await FirebaseFirestore.instance
+          .collection('workout_logs')
+          .where('user_id', isEqualTo: user.uid)
+          .get();
+      
+      // メモリ内で日付順にソート（新しい順）
+      final docs = snapshot.docs.toList();
+      docs.sort((a, b) {
+        final dateA = (a.data()['date'] as Timestamp?)?.toDate() ?? DateTime(2000);
+        final dateB = (b.data()['date'] as Timestamp?)?.toDate() ?? DateTime(2000);
+        return dateB.compareTo(dateA);  // 降順
+      });
+      
+      // 最新50件に制限
+      final limitedDocs = docs.take(50).toList();
+
+      // この種目のセットを抽出
+      final List<Map<String, dynamic>> exerciseHistory = [];
+      
+      for (var doc in limitedDocs) {
+        final data = doc.data();
+        final sets = data['sets'] as List<dynamic>? ?? [];
+        final docDate = (data['date'] as Timestamp).toDate();
+        
+        for (var set in sets) {
+          if (set['exercise_name'] == exerciseName) {
+            exerciseHistory.add({
+              'weight': set['weight'],
+              'reps': set['reps'],
+              'date': docDate,
+              'setType': set['set_type'] ?? 'normal',
+            });
+          }
+        }
+        
+        // 過去5回分見つかったら終了
+        if (exerciseHistory.length >= 5) break;
+      }
+
+      if (exerciseHistory.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('$exerciseNameの履歴がありません')),
+        );
+        return;
+      }
+
+      // ダイアログで選択肢を表示
+      if (!mounted) return;
+      
+      final selected = await showDialog<Map<String, dynamic>>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('$exerciseNameの過去記録'),
+          content: SizedBox(
+            width: double.maxFinite,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: exerciseHistory.length,
+              itemBuilder: (context, index) {
+                final record = exerciseHistory[index];
+                final date = record['date'] as DateTime;
+                final weight = record['weight'];
+                final reps = record['reps'];
+                
+                return ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.purple.shade100,
+                    child: Text('${index + 1}', style: const TextStyle(color: Colors.purple)),
+                  ),
+                  title: Text(
+                    '$weight kg × $reps reps',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(DateFormat('yyyy/M/d (E)', 'ja').format(date)),
+                  trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                  onTap: () => Navigator.pop(context, record),
+                );
+              },
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('キャンセル'),
+            ),
+          ],
+        ),
+      );
+
+      if (selected != null && mounted) {
+        final weight = (selected['weight'] ?? 0).toDouble();
+        final reps = selected['reps'] ?? 10;
+        
+        setState(() {
+          // この種目の全セットに選択した記録をコピー
+          for (var set in _sets) {
+            if (set.exerciseName == exerciseName) {
+              set.weight = weight;
+              set.reps = reps;
+            }
+          }
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('記録を反映しました: $weight kg × $reps reps'),
+            duration: const Duration(seconds: 2),
+            backgroundColor: Colors.green,
+          ),
+        );
+      }
+    } catch (e) {
+      print('❌ 履歴表示エラー: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('履歴の取得に失敗しました: $e'), backgroundColor: Colors.red),
+        );
+      }
+    }
   }
 
   Future<void> _showBulkInputDialog(String exerciseName) async {
@@ -1040,12 +1206,17 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               children: [
                 Expanded(
                   child: OutlinedButton.icon(
-                    onPressed: lastData != null ? () => _copyLastWorkout(exerciseName) : null,
+                    onPressed: () {
+                      print('🔘 前回ボタンタップ: $exerciseName');
+                      print('🔍 lastData: $lastData');
+                      print('🔍 _lastWorkoutData: $_lastWorkoutData');
+                      _showWorkoutHistoryDialog(exerciseName);
+                    },
                     icon: const Icon(Icons.history, size: 18),
                     label: const Text('前回'),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.purple,
-                      side: BorderSide(color: lastData != null ? Colors.purple : Colors.grey),
+                      side: const BorderSide(color: Colors.purple),
                     ),
                   ),
                 ),
@@ -1296,6 +1467,71 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   setState(() {
                     _sets.removeAt(globalIndex);
                   });
+                },
+              ),
+            ],
+          ),
+          
+          const SizedBox(height: 8),
+          
+          // セット種別選択
+          Wrap(
+            spacing: 8,
+            runSpacing: 4,
+            children: [
+              ChoiceChip(
+                label: const Text('通常', style: TextStyle(fontSize: 12)),
+                selected: set.setType == SetType.normal,
+                onSelected: (selected) {
+                  if (selected) {
+                    setState(() {
+                      set.setType = SetType.normal;
+                    });
+                  }
+                },
+              ),
+              ChoiceChip(
+                label: const Text('W-UP', style: TextStyle(fontSize: 12)),
+                selected: set.setType == SetType.warmup,
+                onSelected: (selected) {
+                  if (selected) {
+                    setState(() {
+                      set.setType = SetType.warmup;
+                    });
+                  }
+                },
+              ),
+              ChoiceChip(
+                label: const Text('SS', style: TextStyle(fontSize: 12)),
+                selected: set.setType == SetType.superset,
+                onSelected: (selected) {
+                  if (selected) {
+                    setState(() {
+                      set.setType = SetType.superset;
+                    });
+                  }
+                },
+              ),
+              ChoiceChip(
+                label: const Text('Drop', style: TextStyle(fontSize: 12)),
+                selected: set.setType == SetType.dropset,
+                onSelected: (selected) {
+                  if (selected) {
+                    setState(() {
+                      set.setType = SetType.dropset;
+                    });
+                  }
+                },
+              ),
+              ChoiceChip(
+                label: const Text('限界', style: TextStyle(fontSize: 12)),
+                selected: set.setType == SetType.failure,
+                onSelected: (selected) {
+                  if (selected) {
+                    setState(() {
+                      set.setType = SetType.failure;
+                    });
+                  }
                 },
               ),
             ],

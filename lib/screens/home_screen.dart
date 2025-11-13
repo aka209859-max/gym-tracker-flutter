@@ -42,6 +42,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   double _currentMonthVolume = 0.0;
   double _totalVolume = 0.0;
   
+  // 日数カウンター（MONTHLY ARCHIVE & TOTAL）
+  int _monthlyActiveDays = 0;  // 今月のワークアウト日数
+  int _totalDaysFromStart = 0;  // 初回記録からの経過日数
+  
   // Task 14: 検索・フィルター機能
   final TextEditingController _searchController = TextEditingController();
   String? _selectedMuscleGroupFilter;
@@ -131,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     }
   }
   
-  /// 統計データを計算して読み込む
+  /// 統計データと日数カウンターを計算して読み込む
   Future<void> _loadStatistics() async {
     final user = firebase_auth.FirebaseAuth.instance.currentUser;
     if (user == null) return;
@@ -139,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     try {
       print('📊 統計データを計算中...');
       
-      // 全トレーニング記録を取得
+      // 全トレーニング記録を取得（シンプルクエリ - インデックス不要）
       final querySnapshot = await FirebaseFirestore.instance
           .collection('workout_logs')
           .where('user_id', isEqualTo: user.uid)
@@ -152,6 +156,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           _last7DaysVolume = 0.0;
           _currentMonthVolume = 0.0;
           _totalVolume = 0.0;
+          _monthlyActiveDays = 0;
+          _totalDaysFromStart = 0;
         });
         return;
       }
@@ -165,6 +171,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       double currentMonthVolume = 0.0;
       double totalVolume = 0.0;
       
+      // 🆕 日数カウンター用の変数
+      DateTime? firstWorkoutDate;
+      Set<String> monthlyWorkoutDates = {};  // 今月のワークアウト日（重複除去）
+      
       // 各トレーニング記録を処理
       for (final doc in querySnapshot.docs) {
         final data = doc.data();
@@ -172,6 +182,17 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         final sets = data['sets'] as List<dynamic>? ?? [];
         
         if (date == null) continue;
+        
+        // 🆕 最初のワークアウト日を記録
+        if (firstWorkoutDate == null || date.isBefore(firstWorkoutDate)) {
+          firstWorkoutDate = date;
+        }
+        
+        // 🆕 今月のワークアウト日をカウント
+        if (date.year == now.year && date.month == now.month) {
+          final dateKey = '${date.year}-${date.month}-${date.day}';
+          monthlyWorkoutDates.add(dateKey);
+        }
         
         // この記録の総負荷量を計算
         double workoutVolume = 0.0;
@@ -198,6 +219,18 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         }
       }
       
+      // 🆕 日数計算
+      int totalDaysFromStart = 0;
+      if (firstWorkoutDate != null) {
+        // 初回記録から今日までの日数
+        totalDaysFromStart = now.difference(firstWorkoutDate).inDays;
+        print('📅 初回ワークアウト: ${firstWorkoutDate.year}/${firstWorkoutDate.month}/${firstWorkoutDate.day}');
+        print('📅 経過日数: $totalDaysFromStart日');
+      }
+      
+      final monthlyActiveDays = monthlyWorkoutDates.length;
+      print('📅 今月のアクティブ日数: $monthlyActiveDays日');
+      
       print('✅ 統計計算完了:');
       print('   7日間: ${last7DaysVolume.toStringAsFixed(2)}t');
       print('   今月: ${currentMonthVolume.toStringAsFixed(2)}t');
@@ -207,6 +240,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         _last7DaysVolume = last7DaysVolume;
         _currentMonthVolume = currentMonthVolume;
         _totalVolume = totalVolume;
+        _monthlyActiveDays = monthlyActiveDays;
+        _totalDaysFromStart = totalDaysFromStart;
       });
       
     } catch (e) {
@@ -215,6 +250,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         _last7DaysVolume = 0.0;
         _currentMonthVolume = 0.0;
         _totalVolume = 0.0;
+        _monthlyActiveDays = 0;
+        _totalDaysFromStart = 0;
       });
     }
   }
@@ -1216,9 +1253,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               const SizedBox(height: 16),
               Row(
                 children: [
-                  const Text(
-                    '2',
-                    style: TextStyle(
+                  Text(
+                    '$_monthlyActiveDays',
+                    style: const TextStyle(
                       fontSize: 48,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
@@ -1242,19 +1279,19 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: const Row(
+                    child: Row(
                       children: [
-                        Text(
+                        const Text(
                           'TOTAL',
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Text(
-                          '432 days',
-                          style: TextStyle(
+                          '$_totalDaysFromStart days',
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
@@ -1623,34 +1660,52 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       );
                       final dropsetLevel = set['dropsetLevel'] as int?;
                       
+                      // 🆕 SetTypeによる背景色の色分け
+                      Color backgroundColor;
+                      switch (setType) {
+                        case workout_models.SetType.warmup:
+                          backgroundColor = Colors.orange.withValues(alpha: 0.05);
+                          break;
+                        case workout_models.SetType.superset:
+                          backgroundColor = Colors.purple.withValues(alpha: 0.05);
+                          break;
+                        case workout_models.SetType.dropset:
+                          backgroundColor = Colors.blue.withValues(alpha: 0.05);
+                          break;
+                        case workout_models.SetType.failure:
+                          backgroundColor = Colors.red.withValues(alpha: 0.05);
+                          break;
+                        default:
+                          backgroundColor = Colors.white;
+                      }
+                      
                       return Container(
                         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: backgroundColor,
                           border: Border(
                             bottom: BorderSide(color: Colors.grey[200]!, width: 0.5),
                           ),
                         ),
                         child: Row(
                           children: [
-                            // SetTypeバッジ + セット番号
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                _buildSetTypeBadge(setType, dropsetLevel),
-                                if (setType != workout_models.SetType.normal) const SizedBox(width: 4),
-                                SizedBox(
-                                  width: setType == workout_models.SetType.normal ? 24 : 16,
-                                  child: Text(
-                                    '$setNumber',
-                                    style: const TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
+                            // セット番号（左端）
+                            SizedBox(
+                              width: 24,
+                              child: Text(
+                                '$setNumber',
+                                style: const TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                              ],
+                              ),
                             ),
+                            // SetTypeバッジ（通常セットは表示しない）
+                            if (setType != workout_models.SetType.normal) ...[
+                              _buildSetTypeBadge(setType, dropsetLevel),
+                              const SizedBox(width: 4),
+                            ],
+                            // 重量
                             Expanded(
                               flex: 2,
                               child: Row(

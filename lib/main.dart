@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
@@ -179,19 +178,6 @@ class GymMatchApp extends StatelessWidget {
             title: 'GYM MATCH - ジム検索アプリ',
             debugShowCheckedModeBanner: false,
             theme: themeProvider.currentTheme,
-            
-            // 🌐 多言語対応設定
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: const [
-              Locale('ja', 'JP'), // 日本語
-              Locale('en', 'US'), // 英語
-            ],
-            // デフォルトはシステム言語、フォールバックは日本語
-            locale: const Locale('ja', 'JP'),
             
             // β版テスト運用: パスワードゲート追加
             home: const PasswordGateScreen(

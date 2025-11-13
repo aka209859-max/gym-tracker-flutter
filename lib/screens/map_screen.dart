@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../providers/gym_provider.dart';
 import '../models/gym.dart';
 import '../services/location_service.dart';
@@ -250,12 +251,33 @@ class _MapScreenState extends State<MapScreen> {
         }
       }
       
-      // 【完全フォールバック】API失敗時は空リストを表示（ダミーデータは使用しない）
+      // 【フォールバック】API失敗時はFirestoreから直接ジムを取得
       if (!searchSucceeded) {
         if (kDebugMode) {
-          debugPrint('⚠️ Google Places API検索失敗 → 空リストを表示');
+          debugPrint('⚠️ Google Places API検索失敗 → Firestoreからジムを取得');
         }
-        gyms = []; // API失敗時は空リストを表示（ダミーデータは使用しない）
+        try {
+          // Firestoreから全ジムを取得
+          final firestoreGyms = await FirebaseFirestore.instance
+              .collection('gyms')
+              .get()
+              .timeout(const Duration(seconds: 10));
+          
+          gyms = firestoreGyms.docs
+              .map((doc) => Gym.fromFirestore(doc))
+              .toList();
+          
+          if (kDebugMode) {
+            debugPrint('✅ Firestoreから${gyms.length}件のジムを取得');
+          }
+          
+          searchSucceeded = true;
+        } catch (e) {
+          if (kDebugMode) {
+            debugPrint('❌ Firestore取得エラー: $e');
+          }
+          gyms = [];
+        }
       } else if (gyms.isEmpty) {
         if (kDebugMode) {
           debugPrint('ℹ️ 検索結果が0件です（この地域にジムが存在しない可能性）');

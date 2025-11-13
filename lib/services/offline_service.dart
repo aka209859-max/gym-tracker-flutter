@@ -60,6 +60,8 @@ class OfflineService {
       longitude: data['longitude'],
       description: data['description'] ?? '',
       facilities: List<String>.from(data['facilities'] ?? []),
+      createdAt: DateTime.parse(data['cachedAt']),
+      updatedAt: DateTime.parse(data['cachedAt']),
       isPartner: data['isPartner'] ?? false,
       partnerBenefit: data['partnerBenefit'],
       campaignTitle: data['campaignTitle'],
@@ -97,17 +99,20 @@ class OfflineService {
       'localId': localId,
       'userId': workout.userId,
       'date': workout.date.toIso8601String(),
+      'gymId': workout.gymId,
+      'gymName': workout.gymName,
       'exercises': workout.exercises.map((e) => {
         'name': e.name,
         'sets': e.sets.map((s) => {
           'weight': s.weight,
-          'reps': s.reps,
+          'targetReps': s.targetReps,
+          'actualReps': s.actualReps,
           'hasAssist': s.hasAssist,
         }).toList(),
         'bodyPart': e.bodyPart,
-        'note': e.note,
       }).toList(),
-      'totalDuration': workout.totalDuration,
+      'duration': workout.duration,
+      'notes': workout.notes,
       'needsSync': true,
     });
 

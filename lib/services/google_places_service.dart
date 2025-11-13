@@ -10,8 +10,8 @@ import 'partner_merge_service.dart';
 /// Google Places API検索サービス（プロキシ経由）
 /// 全国のジム・フィットネス施設を検索
 class GooglePlacesService {
-  // プロキシサーバーのURL（サンドボックス公開URL）
-  static const String _proxyBaseUrl = 'https://8080-i1wzdi6c2urpgehncb6jg-a402f90a.sandbox.novita.ai/api/places';
+  // プロキシサーバーURL（サンドボックス内部通信）
+  static const String _proxyBaseUrl = 'https://8080-i1wzdi6c2urpgehncb6jg-583b4d74.sandbox.novita.ai/api/places';
   
   // 検索キャッシュサービス
   final SearchCacheService _cacheService = SearchCacheService();
@@ -176,10 +176,10 @@ class GooglePlacesService {
         return cached;
       }
 
-      // プロキシサーバー経由でAPI呼び出し（「ジム」はプロキシ側で追加）
+      // プロキシサーバー経由でAPI呼び出し
       final url = Uri.parse(
         '$_proxyBaseUrl/textsearch'
-        '?query=$query'
+        '?query=$query ジム'
         '&type=gym'
         '&language=${ApiKeys.defaultLanguage}'
         '&region=${ApiKeys.defaultRegion}',
