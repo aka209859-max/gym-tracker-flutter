@@ -20,6 +20,14 @@ workflows:
       - name: Get Flutter packages
         script: |
           flutter packages pub get
+      - name: Clean CocoaPods cache and force fresh install
+        script: |
+          echo "🧹 Cleaning iOS Pod environment..."
+          cd ios
+          rm -rf Podfile.lock Pods
+          pod install --repo-update
+          cd ..
+          echo "✅ Pod environment cleanup and update completed"
       - name: Install pods
         script: |
           find . -name "Podfile" -execdir pod install \;
