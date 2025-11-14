@@ -132,6 +132,21 @@ class _WorkoutImportPreviewScreenState
       final date = DateTime.parse(dateString);
       print('✅ 日付パース: $date');
 
+      // 時刻情報を取得または推定
+      final startTimeString = widget.extractedData['start_time'] as String?;
+      final endTimeString = widget.extractedData['end_time'] as String?;
+      
+      // デフォルト値: dateの10:00から推定
+      final startTime = startTimeString != null && startTimeString.isNotEmpty
+          ? DateTime.parse('${dateString}T$startTimeString')
+          : DateTime(date.year, date.month, date.day, 10, 0);
+      
+      final endTime = endTimeString != null && endTimeString.isNotEmpty
+          ? DateTime.parse('${dateString}T$endTimeString')
+          : startTime.add(const Duration(hours: 1)); // デフォルトは1時間後
+      
+      print('✅ トレーニング時間: ${startTime.hour}:${startTime.minute} → ${endTime.hour}:${endTime.minute}');
+
       // 種目データを変換（既存のworkout_logs形式に完全一致させる）
       final exercises = widget.extractedData['exercises'] as List<dynamic>;
       print('✅ 種目数: ${exercises.length}');
@@ -168,7 +183,7 @@ class _WorkoutImportPreviewScreenState
         'date': Timestamp.fromDate(date),
         'start_time': Timestamp.fromDate(startTime),
         'end_time': Timestamp.fromDate(endTime),
-        'sets': allSets,
+        'exercises': convertedExercises,
         'created_at': FieldValue.serverTimestamp(),
       });
       
