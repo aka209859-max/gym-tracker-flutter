@@ -15,7 +15,6 @@ import 'screens/password_gate_screen.dart';
 import 'providers/gym_provider.dart';
 import 'providers/theme_provider.dart';
 import 'providers/auth_provider.dart';
-import 'widgets/install_prompt.dart';
 import 'widgets/trial_welcome_dialog.dart';
 import 'widgets/admob_banner.dart';
 import 'services/subscription_service.dart';
@@ -199,7 +198,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-  bool _showInstallPrompt = true;
 
   final List<Widget> _screens = [
     const HomeScreen(),  // トレーニング記録画面（筋トレMEMO風）
@@ -217,34 +215,13 @@ class _MainScreenState extends State<MainScreen> {
         TrialWelcomeDialog.showIfFirstLaunch(context);
       }
     });
-    
-    // インストールプロンプトを3秒後に表示
-    Future.delayed(const Duration(seconds: 3), () {
-      if (mounted) {
-        setState(() {
-          _showInstallPrompt = true;
-        });
-      }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          children: [
-            _screens[_selectedIndex],
-            // PWAインストールプロンプト
-            if (_showInstallPrompt && kIsWeb)
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 80, // BottomNavigationBarの上に表示
-                child: const InstallPrompt(),
-              ),
-          ],
-        ),
+        child: _screens[_selectedIndex],
       ),
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
