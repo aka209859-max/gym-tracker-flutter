@@ -7,8 +7,8 @@ import 'dart:convert';
 /// 筋トレMEMOなどの他アプリのスクリーンショットから
 /// トレーニングデータを自動抽出
 class WorkoutImportService {
-  // Gemini API設定
-  static const String _apiKey = 'AIzaSyDHkdyEIS-jvVIl4rGYAloQVHBajvkp0Ds';
+  // Gemini API設定（写真取り込み専用キー）
+  static const String _apiKey = 'AIzaSyAfVqMqcs4RP-gVPi_jh27FTGI2bJ6fQDo';
   static const String _apiUrl = 
       'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent';
 
