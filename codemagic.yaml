@@ -8,12 +8,18 @@ workflows:
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.nexa.gymmatch
+      
+      # 🔑 環境変数グループを明示的に読み込む
+      groups:
+        - app_store_credentials
+      
       vars:
         PROJECT_ROOT: $CM_BUILD_DIR
         # 🔑 App Store Connect API credentials (set in Codemagic UI)
         APP_STORE_CONNECT_ISSUER_ID: 089530c4-f36e-4828-8198-eec5ae23ad19
         APP_STORE_CONNECT_KEY_IDENTIFIER: DFXAU88R2R
         # APP_STORE_CONNECT_PRIVATE_KEY: Set as secure variable in Codemagic UI
+      
       flutter: stable
       xcode: latest
       cocoapods: default
