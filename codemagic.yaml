@@ -51,34 +51,32 @@ workflows:
         script: |
           xcode-project use-profiles
       
-      # 🚀 【重要】FlutterによるiOSアーカイブのビルド
-      # --release フラグが必須
-      # $PROJECT_BUILD_NUMBER はCodemagicが提供するビルド番号
-      - name: Flutter build iOS archive
+      # 🚀 【重要】Flutterビルドとアーカイブ作成
+      - name: Build and Archive iOS app
         script: |
-          flutter build ios --release \
+          # Flutter依存関係とアセットをビルド
+          flutter build ios --release --no-codesign \
             --build-name=1.0.$PROJECT_BUILD_NUMBER \
             --build-number=$PROJECT_BUILD_NUMBER
+          
+          # Xcodeでアーカイブを作成
+          ARCHIVE_PATH="$PROJECT_ROOT/build/ios/Runner.xcarchive"
+          
+          xcodebuild archive \
+            -workspace ios/Runner.xcworkspace \
+            -scheme Runner \
+            -configuration Release \
+            -archivePath "$ARCHIVE_PATH" \
+            -allowProvisioningUpdates \
+            CODE_SIGN_IDENTITY="Apple Distribution" \
+            DEVELOPMENT_TEAM=7V5DA99X2M
+          
+          echo "✅ Archive created at: $ARCHIVE_PATH"
       
-      # 📦 【手動エクスポート】XcodeでIPAファイルを生成
+      # 📦 【IPAエクスポート】
       - name: Export IPA from archive
         script: |
-          # 実際のアーカイブパスを検索
-          ARCHIVE_PATH=$(find ~/Library/Developer/Xcode/Archives -name "*.xcarchive" | head -n 1)
-          
-          if [ -z "$ARCHIVE_PATH" ]; then
-            echo "::error:: No .xcarchive found"
-            echo "Searching in alternative locations..."
-            ARCHIVE_PATH=$(find "$PROJECT_ROOT/build/ios" -name "*.xcarchive" | head -n 1)
-          fi
-          
-          if [ -z "$ARCHIVE_PATH" ]; then
-            echo "::error:: Cannot find .xcarchive file"
-            exit 1
-          fi
-          
-          echo "✅ Found archive at: $ARCHIVE_PATH"
-          
+          ARCHIVE_PATH="$PROJECT_ROOT/build/ios/Runner.xcarchive"
           EXPORT_PATH="$PROJECT_ROOT/build/ios/ipa"
           
           # ExportOptions.plistを作成
@@ -106,6 +104,8 @@ workflows:
             -exportPath "$EXPORT_PATH" \
             -exportOptionsPlist /tmp/ExportOptions.plist \
             -allowProvisioningUpdates
+          
+          echo "✅ IPA exported to: $EXPORT_PATH"
       
       # ✅ 【検証】ベストプラクティス：IPAが実際に生成されたか検証
       # これにより、アーティファクトが無いまま後続ステップに進むのを防ぐ
