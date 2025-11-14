@@ -47,5 +47,26 @@
 	<true/>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3940256099942544~1458002511</string>
+	
+	<!-- Privacy - Location (GPS機能用) -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>近くのジムを検索するために位置情報を使用します</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>近くのジムを検索するために位置情報を使用します</string>
+	
+	<!-- Privacy - Camera (写真取り込み機能用) -->
+	<key>NSCameraUsageDescription</key>
+	<string>トレーニング記録の写真を撮影するためにカメラを使用します</string>
+	
+	<!-- Privacy - Photo Library (写真取り込み機能用) -->
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>トレーニング記録の写真をアップロードするためにフォトライブラリにアクセスします</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>トレーニング記録の写真を保存するためにフォトライブラリにアクセスします</string>
+	
+	<!-- Privacy - Tracking (AdMob用) -->
+	<key>NSUserTrackingUsageDescription</key>
+	<string>より関連性の高い広告を表示するために、トラッキングを使用します</string>
+	
 </dict>
 </plist>

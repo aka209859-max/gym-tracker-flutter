@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:provider/provider.dart';
 import 'workout/add_workout_screen.dart';
 import 'workout/rm_calculator_screen.dart';
 import 'workout/ai_coaching_screen_tabbed.dart';
@@ -19,6 +20,7 @@ import '../services/share_service.dart';
 import '../services/workout_share_service.dart';
 import '../widgets/workout_share_card.dart';
 import '../widgets/workout_share_image.dart';
+import '../providers/navigation_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -75,6 +77,36 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       _loadActiveGoals();
       _loadStatistics(); // 統計データを読み込む
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    
+    // NavigationProviderのtargetDateを監視
+    final navigationProvider = Provider.of<NavigationProvider>(
+      context, 
+      listen: true,
+    );
+    
+    // 対象日付が設定されている場合、その日を選択
+    if (navigationProvider.targetDate != null) {
+      final targetDate = navigationProvider.targetDate!;
+      print('📅 [HomeScreen] 対象日付を受信: ${targetDate.year}/${targetDate.month}/${targetDate.day}');
+      
+      setState(() {
+        _selectedDay = targetDate;
+        _focusedDay = targetDate;
+      });
+      
+      // データを再読み込み
+      _loadWorkoutsForSelectedDay();
+      
+      // targetDateをクリア（次回の遷移のため）
+      Future.delayed(const Duration(milliseconds: 500), () {
+        navigationProvider.clearTargetDate();
+      });
+    }
   }
   
   // Task 16: バッジ統計を読み込む

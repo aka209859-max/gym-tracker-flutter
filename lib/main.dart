@@ -16,6 +16,7 @@ import 'screens/password_gate_screen.dart';
 import 'providers/gym_provider.dart';
 import 'providers/theme_provider.dart';
 import 'providers/auth_provider.dart';
+import 'providers/navigation_provider.dart';
 import 'widgets/trial_welcome_dialog.dart';
 import 'widgets/admob_banner.dart';
 import 'services/subscription_service.dart';
@@ -171,6 +172,7 @@ class GymMatchApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => GymProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => NavigationProvider()),
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
@@ -203,8 +205,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0;
-
   final List<Widget> _screens = [
     const HomeScreen(),  // トレーニング記録画面（筋トレMEMO風）
     const MapScreen(),  // ジム検索（GPS + リスト表示）
@@ -225,23 +225,23 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: _screens[_selectedIndex],
-      ),
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // AdMobバナー広告（無料プランのみ）
-          const AdMobBanner(),
-          // ナビゲーションバー
-          NavigationBar(
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
+    return Consumer<NavigationProvider>(
+      builder: (context, navigationProvider, child) {
+        return Scaffold(
+          body: SafeArea(
+            child: _screens[navigationProvider.selectedIndex],
+          ),
+          bottomNavigationBar: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // AdMobバナー広告（無料プランのみ）
+              const AdMobBanner(),
+              // ナビゲーションバー
+              NavigationBar(
+                selectedIndex: navigationProvider.selectedIndex,
+                onDestinationSelected: (index) {
+                  navigationProvider.selectTab(index);
+                },
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.event_note_outlined),
@@ -259,9 +259,11 @@ class _MainScreenState extends State<MainScreen> {
             label: 'プロフィール',
           ),
         ],
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

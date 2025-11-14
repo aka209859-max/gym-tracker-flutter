@@ -7,56 +7,80 @@ import 'dart:convert';
 /// 筋トレMEMOなどの他アプリのスクリーンショットから
 /// トレーニングデータを自動抽出
 class WorkoutImportService {
-  // Gemini API設定（写真取り込み専用キー）
-  static const String _apiKey = 'AIzaSyAfVqMqcs4RP-gVPi_jh27FTGI2bJ6fQDo';
+  // Gemini API設定（写真取り込み専用：本番用APIキー）
+  // Key name: workout_photo_import_key
+  static const String _apiKey = 'AIzaSyDkNfRxLJIPYx1UFEIZqXvao7rgl2OVc6s';
   static const String _apiUrl = 
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent';
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 
-  /// 画像からトレーニングデータを抽出
+  /// 画像からトレーニングデータを抽出（リトライロジック付き）
   /// 
   /// [imageBytes]: 画像のバイトデータ
   /// 戻り値: 抽出されたトレーニングデータのJSON
   static Future<Map<String, dynamic>> extractWorkoutFromImage(
     Uint8List imageBytes,
   ) async {
-    try {
-      if (kDebugMode) {
-        print('📸 画像解析開始...');
-      }
+    const maxRetries = 3;
+    const retryDelay = Duration(seconds: 2);
 
-      // 画像をBase64エンコード
-      final base64Image = base64Encode(imageBytes);
+    for (int attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        if (kDebugMode) {
+          print('📸 画像解析開始... (試行 $attempt/$maxRetries)');
+        }
 
-      // Gemini APIリクエスト
-      final response = await http.post(
-        Uri.parse('$_apiUrl?key=$_apiKey'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'contents': [
-            {
-              'parts': [
-                {
-                  'text': _buildPrompt(),
-                },
-                {
-                  'inline_data': {
-                    'mime_type': 'image/png',
-                    'data': base64Image,
-                  }
-                }
-              ]
-            }
-          ],
-          'generationConfig': {
-            'temperature': 0.1,
-            'topK': 1,
-            'topP': 1,
-            'maxOutputTokens': 2048,
+        // 画像をBase64エンコード
+        final base64Image = base64Encode(imageBytes);
+        
+        // 画像のMIME Typeを判定（バイトシグネチャから）
+        String mimeType = 'image/jpeg'; // デフォルトはJPEG
+        if (imageBytes.length >= 4) {
+          // PNG: 89 50 4E 47
+          if (imageBytes[0] == 0x89 && imageBytes[1] == 0x50 &&
+              imageBytes[2] == 0x4E && imageBytes[3] == 0x47) {
+            mimeType = 'image/png';
           }
-        }),
-      );
+          // JPEG: FF D8 FF
+          else if (imageBytes[0] == 0xFF && imageBytes[1] == 0xD8 &&
+                   imageBytes[2] == 0xFF) {
+            mimeType = 'image/jpeg';
+          }
+        }
+        
+        if (kDebugMode) {
+          print('📷 画像形式: $mimeType (サイズ: ${imageBytes.length} bytes)');
+        }
 
-      if (response.statusCode == 200) {
+        // Gemini APIリクエスト
+        final response = await http.post(
+          Uri.parse('$_apiUrl?key=$_apiKey'),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode({
+            'contents': [
+              {
+                'parts': [
+                  {
+                    'text': _buildPrompt(),
+                  },
+                  {
+                    'inline_data': {
+                      'mime_type': mimeType,
+                      'data': base64Image,
+                    }
+                  }
+                ]
+              }
+            ],
+            'generationConfig': {
+              'temperature': 0.1,
+              'topK': 1,
+              'topP': 1,
+              'maxOutputTokens': 2048,
+            }
+          }),
+        );
+
+        if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         final text = data['candidates'][0]['content']['parts'][0]['text'];
         
@@ -80,15 +104,48 @@ class WorkoutImportService {
           final result = jsonDecode(text) as Map<String, dynamic>;
           return result;
         }
+      } else if (response.statusCode == 503 && attempt < maxRetries) {
+        // 503エラー（サーバー過負荷）の場合はリトライ
+        if (kDebugMode) {
+          print('⚠️ API過負荷 (503)。${retryDelay.inSeconds}秒後に再試行...');
+        }
+        await Future.delayed(retryDelay);
+        continue; // 次の試行へ
       } else {
+        // エラーレスポンスの詳細をログ出力
+        if (kDebugMode) {
+          print('❌ API Error: HTTP ${response.statusCode}');
+          print('Response Headers: ${response.headers}');
+          print('Response Body (first 500 chars): ${response.body.substring(0, response.body.length > 500 ? 500 : response.body.length)}');
+        }
         throw Exception('API Error: ${response.statusCode} - ${response.body}');
       }
     } catch (e) {
-      if (kDebugMode) {
-        print('❌ 画像解析エラー: $e');
+      if (attempt == maxRetries) {
+        // 最後の試行でも失敗した場合
+        if (kDebugMode) {
+          print('❌ 画像解析エラー（最大試行回数到達）: $e');
+        }
+        rethrow;
+      } else if (e.toString().contains('503') || e.toString().contains('overloaded')) {
+        // 503エラーの場合はリトライ
+        if (kDebugMode) {
+          print('⚠️ API過負荷検出。${retryDelay.inSeconds}秒後に再試行...');
+        }
+        await Future.delayed(retryDelay);
+        continue;
+      } else {
+        // その他のエラーは即座に失敗
+        if (kDebugMode) {
+          print('❌ 画像解析エラー: $e');
+        }
+        rethrow;
       }
-      rethrow;
     }
+    }
+    
+    // ここには到達しないはずだが、念のため
+    throw Exception('画像解析に失敗しました（最大試行回数: $maxRetries）');
   }
 
   /// Gemini用プロンプト生成
