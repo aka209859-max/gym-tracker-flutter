@@ -10,6 +10,7 @@ import 'services/offline_service.dart';
 import 'screens/home_screen.dart';
 import 'screens/map_screen.dart';
 import 'screens/profile_screen.dart';
+import 'screens/splash_screen.dart';
 
 import 'screens/password_gate_screen.dart';
 import 'providers/gym_provider.dart';
@@ -178,10 +179,15 @@ class GymMatchApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: themeProvider.currentTheme,
             
-            // β版テスト運用: パスワードゲート追加
-            home: const PasswordGateScreen(
-              child: MainScreen(),
-            ),
+            // スプラッシュスクリーンを初期画面に設定
+            home: const SplashScreen(),
+            
+            // ルート設定
+            routes: {
+              '/main': (context) => const PasswordGateScreen(
+                child: MainScreen(),
+              ),
+            },
           );
         },
       ),
