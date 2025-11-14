@@ -63,7 +63,22 @@ workflows:
       # 📦 【手動エクスポート】XcodeでIPAファイルを生成
       - name: Export IPA from archive
         script: |
-          ARCHIVE_PATH="$PROJECT_ROOT/build/ios/archive/Runner.xcarchive"
+          # 実際のアーカイブパスを検索
+          ARCHIVE_PATH=$(find ~/Library/Developer/Xcode/Archives -name "*.xcarchive" | head -n 1)
+          
+          if [ -z "$ARCHIVE_PATH" ]; then
+            echo "::error:: No .xcarchive found"
+            echo "Searching in alternative locations..."
+            ARCHIVE_PATH=$(find "$PROJECT_ROOT/build/ios" -name "*.xcarchive" | head -n 1)
+          fi
+          
+          if [ -z "$ARCHIVE_PATH" ]; then
+            echo "::error:: Cannot find .xcarchive file"
+            exit 1
+          fi
+          
+          echo "✅ Found archive at: $ARCHIVE_PATH"
+          
           EXPORT_PATH="$PROJECT_ROOT/build/ios/ipa"
           
           # ExportOptions.plistを作成
