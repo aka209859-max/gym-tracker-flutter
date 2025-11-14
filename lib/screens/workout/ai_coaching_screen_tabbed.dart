@@ -1504,11 +1504,13 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
   // フォーム入力値
   final _formKey = GlobalKey<FormState>();
   String _selectedBodyPart = '大胸筋';
+  String _selectedExercise = 'ベンチプレス';  // 種目選択
   int _currentSets = 12;
   int _currentFrequency = 2;
   String _selectedLevel = '中級者';
   String _selectedGender = '女性';
   int _selectedAge = 25;
+  bool _enablePlateauDetection = true;  // プラトー検出ON/OFF
 
   // 分析結果
   Map<String, dynamic>? _analysisResult;
@@ -1533,8 +1535,21 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
     '三角筋',
   ];
 
+  // 種目選択肢（部位ごと）
+  final Map<String, List<String>> _exercisesByBodyPart = {
+    '大胸筋': ['ベンチプレス', 'インクラインベンチプレス', 'ダンベルフライ', 'ディップス'],
+    '広背筋': ['デッドリフト', 'ラットプルダウン', 'ベントオーバーロウ', 'チンニング'],
+    '大腿四頭筋': ['スクワット', 'レッグプレス', 'レッグエクステンション', 'ランジ'],
+    '上腕二頭筋': ['バーベルカール', 'ダンベルカール', 'ハンマーカール', 'プリーチャーカール'],
+    '上腕三頭筋': ['トライセプスプレスダウン', 'ライイングトライセプスエクステンション', 'ディップス', 'クローズグリップベンチプレス'],
+    '三角筋': ['ショルダープレス', 'サイドレイズ', 'フロントレイズ', 'リアレイズ'],
+  };
+
   // レベル選択肢
   final List<String> _levels = ['初心者', '中級者', '上級者'];
+
+  // 現在選択中の部位の種目リスト
+  List<String> get _availableExercises => _exercisesByBodyPart[_selectedBodyPart] ?? [];
 
   /// 効果分析を実行
   Future<void> _executeAnalysis() async {
@@ -1547,6 +1562,17 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
 
     try {
       print('🚀 効果分析開始...');
+      
+      // プラトー検出が有効な場合、Firestoreから履歴を取得
+      List<Map<String, dynamic>> recentHistory = [];
+      if (_enablePlateauDetection) {
+        final user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          recentHistory = await _fetchRecentExerciseHistory(user.uid, _selectedExercise);
+          print('📊 履歴取得: ${recentHistory.length}件');
+        }
+      }
+      
       final result = await TrainingAnalysisService.analyzeTrainingEffect(
         bodyPart: _selectedBodyPart,
         currentSetsPerWeek: _currentSets,
@@ -1554,7 +1580,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         level: _selectedLevel,
         gender: _selectedGender,
         age: _selectedAge,
-        recentHistory: [], // 空リストで提供（履歴なし）
+        recentHistory: recentHistory,
       );
       print('✅ 効果分析完了: ${result['success']}');
 
@@ -1575,6 +1601,85 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           _isLoading = false;
         });
       }
+    }
+  }
+
+  /// Firestoreから特定種目の直近4回のトレーニング記録を取得
+  Future<List<Map<String, dynamic>>> _fetchRecentExerciseHistory(
+    String userId,
+    String exerciseName,
+  ) async {
+    try {
+      // 直近30日間のworkoutログを取得
+      final thirtyDaysAgo = DateTime.now().subtract(const Duration(days: 30));
+      
+      final snapshot = await FirebaseFirestore.instance
+          .collection('workouts')
+          .where('userId', isEqualTo: userId)
+          .where('date', isGreaterThan: Timestamp.fromDate(thirtyDaysAgo))
+          .orderBy('date', descending: true)
+          .limit(20)  // 最大20件のワークアウトログを取得
+          .get();
+
+      final List<Map<String, dynamic>> exerciseRecords = [];
+      
+      // 各ワークアウトログから指定種目のデータを抽出
+      for (final doc in snapshot.docs) {
+        final data = doc.data();
+        final exercises = data['exercises'] as List<dynamic>?;
+        
+        if (exercises != null) {
+          // 指定種目を探す
+          for (final exercise in exercises) {
+            final exerciseMap = exercise as Map<String, dynamic>;
+            if (exerciseMap['name'] == exerciseName) {
+              // 最大重量を計算
+              final sets = exerciseMap['sets'] as List<dynamic>?;
+              double maxWeight = 0;
+              
+              if (sets != null) {
+                for (final set in sets) {
+                  final setMap = set as Map<String, dynamic>;
+                  final weight = setMap['weight']?.toDouble() ?? 0;
+                  if (weight > maxWeight) {
+                    maxWeight = weight;
+                  }
+                }
+              }
+              
+              // 記録を追加（4件に達したら終了）
+              exerciseRecords.add({
+                'date': (data['date'] as Timestamp).toDate(),
+                'weight': maxWeight,
+                'sets': sets?.length ?? 0,
+              });
+              
+              if (exerciseRecords.length >= 4) break;
+            }
+          }
+        }
+        
+        if (exerciseRecords.length >= 4) break;
+      }
+      
+      // 日付順にソート（新しい順）
+      exerciseRecords.sort((a, b) => 
+        (b['date'] as DateTime).compareTo(a['date'] as DateTime));
+      
+      // 週番号を付与（直近が week 1）
+      final result = <Map<String, dynamic>>[];
+      for (int i = 0; i < exerciseRecords.length; i++) {
+        result.add({
+          'week': exerciseRecords.length - i,
+          'weight': exerciseRecords[i]['weight'],
+          'sets': exerciseRecords[i]['sets'],
+        });
+      }
+      
+      return result;
+    } catch (e) {
+      print('❌ 履歴取得エラー: $e');
+      return [];
     }
   }
 
@@ -1675,8 +1780,60 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               onChanged: (value) {
                 setState(() {
                   _selectedBodyPart = value!;
+                  // 部位変更時に種目を自動選択
+                  _selectedExercise = _availableExercises.isNotEmpty 
+                      ? _availableExercises.first 
+                      : 'ベンチプレス';
                 });
               },
+            ),
+            const SizedBox(height: 16),
+
+            // 種目選択
+            _buildDropdownField(
+              label: '種目（プラトー検出用）',
+              value: _selectedExercise,
+              items: _availableExercises,
+              onChanged: (value) {
+                setState(() {
+                  _selectedExercise = value!;
+                });
+              },
+            ),
+            const SizedBox(height: 4),
+            Padding(
+              padding: const EdgeInsets.only(left: 4),
+              child: Text(
+                '※ 同じ種目で4回連続同じ重量の場合、停滞を検出',
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Colors.grey.shade600,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+
+            // プラトー検出トグル
+            SwitchListTile(
+              title: const Text(
+                'プラトー（停滞期）検出',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              ),
+              subtitle: Text(
+                _enablePlateauDetection 
+                    ? '実際のトレーニング記録から自動検出します' 
+                    : '検出機能をOFFにしています',
+                style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+              ),
+              value: _enablePlateauDetection,
+              onChanged: (value) {
+                setState(() {
+                  _enablePlateauDetection = value;
+                });
+              },
+              activeColor: Colors.orange.shade700,
+              contentPadding: EdgeInsets.zero,
             ),
             const SizedBox(height: 16),
 
@@ -1983,8 +2140,9 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // ステータスサマリー
-        _buildStatusSummary(volumeAnalysis, frequencyAnalysis, plateauDetected, growthTrend),
+        // ステータスサマリー（トグルOFFの場合はプラトー無視）
+        _buildStatusSummary(volumeAnalysis, frequencyAnalysis, 
+          _enablePlateauDetection && plateauDetected, growthTrend),
         const SizedBox(height: 16),
 
         // ボリューム分析
@@ -1995,8 +2153,8 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         _buildFrequencyAnalysis(frequencyAnalysis),
         const SizedBox(height: 16),
 
-        // プラトー警告
-        if (plateauDetected) ...[
+        // プラトー警告（トグルON かつ 検出された場合のみ表示）
+        if (_enablePlateauDetection && plateauDetected) ...[
           _buildPlateauWarning(),
           const SizedBox(height: 16),
         ],
