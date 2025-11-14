@@ -117,22 +117,30 @@ class _WorkoutImportPreviewScreenState
     });
 
     try {
+      print('🔄 データ取り込み開始...');
+      
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) {
         throw Exception('ユーザーが認証されていません');
       }
+      print('✅ ユーザー確認: ${user.uid}');
 
       // 日付をパース
       final dateString = widget.extractedData['date'] as String;
       final date = DateTime.parse(dateString);
+      print('✅ 日付パース: $date');
 
       // 種目データを変換
       final exercises = widget.extractedData['exercises'] as List<dynamic>;
+      print('✅ 種目数: ${exercises.length}');
+      
       final convertedExercises = <Map<String, dynamic>>[];
 
       for (int i = 0; i < exercises.length; i++) {
         final exercise = exercises[i] as Map<String, dynamic>;
         final sets = exercise['sets'] as List<dynamic>;
+        
+        print('📝 種目${i + 1}: ${exercise['name']} (${sets.length}セット)');
         
         convertedExercises.add({
           'name': exercise['name'],
@@ -149,13 +157,17 @@ class _WorkoutImportPreviewScreenState
         });
       }
 
+      print('🔄 Firestoreに保存中...');
+      
       // Firestoreに登録
-      await FirebaseFirestore.instance.collection('workouts').add({
+      final docRef = await FirebaseFirestore.instance.collection('workout_logs').add({
         'userId': user.uid,
         'date': Timestamp.fromDate(date),
         'exercises': convertedExercises,
         'createdAt': FieldValue.serverTimestamp(),
       });
+      
+      print('✅ Firestore保存完了: ${docRef.id}');
 
       if (mounted) {
         // 成功メッセージ
@@ -170,16 +182,22 @@ class _WorkoutImportPreviewScreenState
           ),
         );
 
+        print('🔙 画面を閉じます...');
+        
         // 画面を閉じる（2回: プレビュー画面 + 画像選択画面）
         Navigator.of(context).pop();
         Navigator.of(context).pop();
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print('❌❌❌ データ取り込みエラー: $e');
+      print('スタックトレース: $stackTrace');
+      
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('❌ データ取り込みエラー: $e'),
             backgroundColor: Colors.red.shade700,
+            duration: const Duration(seconds: 5),
           ),
         );
       }
