@@ -45,134 +45,80 @@ workflows:
           pod install
           cd ..
       
-      # 🔑 【重要】Xcodeの自動コード署名を使用
-      # App Store Connect APIを使って自動的に証明書とプロファイルを管理
-      - name: Set up code signing settings on Xcode project
+      # 🔐 【フルマニュアル署名】個人アカウントAPIキー制限の回避
+      - name: Set up keychain
         script: |
-          xcode-project use-profiles
+          keychain initialize
       
-      # 🚀 【重要】Flutterビルドとアーカイブ作成
-      - name: Build and Archive iOS app
+      - name: Decode and install Distribution Certificate
         script: |
-          # Flutter依存関係とアセットをビルド
+          # Base64エンコードされた証明書をデコードしてファイルに書き出します
+          echo $APP_STORE_CERTIFICATE | base64 --decode > $CM_BUILD_DIR/distribution_cert.p12
+          
+          # 証明書を一時キーチェーンにインストールします
+          keychain add-certificates \
+            --certificate $CM_BUILD_DIR/distribution_cert.p12 \
+            --certificate-password $CERTIFICATE_PASSWORD
+      
+      - name: Decode and install App Store Provisioning Profile
+        script: |
+          # Base64エンコードされたプロファイルをデコードしてファイルに書き出します
+          echo $APP_STORE_PROFILE | base64 --decode > $CM_BUILD_DIR/app_store.mobileprovision
+          
+          # xcodebuildが見つけられるように、プロファイルを正しいディレクトリにインストールします
+          mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
+          cp $CM_BUILD_DIR/app_store.mobileprovision "$HOME/Library/MobileDevice/Provisioning Profiles/"
+      
+      # 注: xcode-project use-profiles は「個人」APIキーでは機能しないため削除
+      
+      - name: Flutter build
+        script: |
           flutter build ios --release --no-codesign \
             --build-name=1.0.$PROJECT_BUILD_NUMBER \
             --build-number=$PROJECT_BUILD_NUMBER
-          
-          # Xcodeでアーカイブを作成
-          ARCHIVE_PATH="$PROJECT_ROOT/build/ios/Runner.xcarchive"
-          
+      
+      - name: Xcode archive
+        script: |
+          # 手動署名を強制
+          set -x
           xcodebuild archive \
             -workspace ios/Runner.xcworkspace \
             -scheme Runner \
             -configuration Release \
-            -archivePath "$ARCHIVE_PATH" \
-            -allowProvisioningUpdates \
+            -archivePath $CM_BUILD_DIR/Runner.xcarchive \
+            CODE_SIGN_STYLE=Manual \
             CODE_SIGN_IDENTITY="Apple Distribution" \
-            DEVELOPMENT_TEAM=7V5DA99X2M
-          
-          echo "✅ Archive created at: $ARCHIVE_PATH"
+            PROVISIONING_PROFILE_SPECIFIER="match AppStore com.nexa.gymmatch"
       
-      # 📦 【IPAエクスポート】
-      - name: Export IPA from archive
+      - name: Xcode export IPA
         script: |
-          set -e  # エラーで即座に停止
-          set -x  # コマンドをログ出力
-          
-          ARCHIVE_PATH="$PROJECT_ROOT/build/ios/Runner.xcarchive"
-          EXPORT_PATH="$PROJECT_ROOT/build/ios/ipa"
-          
-          # アーカイブの存在確認
-          if [ ! -d "$ARCHIVE_PATH" ]; then
-            echo "::error:: Archive not found at $ARCHIVE_PATH"
-            ls -la "$PROJECT_ROOT/build/ios/"
-            exit 1
-          fi
-          
-          echo "✅ Archive found at: $ARCHIVE_PATH"
-          
-          # ExportOptions.plistを作成
-          cat > /tmp/ExportOptions.plist <<EOF
-          <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0">
-          <dict>
-              <key>method</key>
-              <string>app-store</string>
-              <key>teamID</key>
-              <string>7V5DA99X2M</string>
-              <key>uploadSymbols</key>
-              <true/>
-              <key>compileBitcode</key>
-              <false/>
-              <key>signingStyle</key>
-              <string>automatic</string>
-              <key>provisioningProfiles</key>
-              <dict>
-                  <key>com.nexa.gymmatch</key>
-                  <string>match AppStore com.nexa.gymmatch</string>
-              </dict>
-          </dict>
-          </plist>
-          EOF
-          
-          echo "📄 ExportOptions.plist created:"
-          cat /tmp/ExportOptions.plist
-          
-          # IPAをエクスポート
-          mkdir -p "$EXPORT_PATH"
-          
-          echo "🚀 Starting xcodebuild -exportArchive..."
+          # 手動署名用のplistを使用（ios/ExportOptions.plist）
+          # -allowProvisioningUpdates は削除（API呼び出しを防ぐ）
+          set -x
           xcodebuild -exportArchive \
-            -archivePath "$ARCHIVE_PATH" \
-            -exportPath "$EXPORT_PATH" \
-            -exportOptionsPlist /tmp/ExportOptions.plist \
-            -allowProvisioningUpdates \
-            2>&1 | tee /tmp/export.log
+            -archivePath $CM_BUILD_DIR/Runner.xcarchive \
+            -exportPath $CM_BUILD_DIR/ipa \
+            -exportOptionsPlist ios/ExportOptions.plist
           
-          EXPORT_EXIT_CODE=${PIPESTATUS[0]}
-          
-          if [ $EXPORT_EXIT_CODE -ne 0 ]; then
-            echo "::error:: xcodebuild -exportArchive failed with exit code $EXPORT_EXIT_CODE"
-            echo "Export log:"
-            cat /tmp/export.log
-            exit $EXPORT_EXIT_CODE
-          fi
-          
-          # IPA存在確認
-          IPA_FILE=$(find "$EXPORT_PATH" -name "*.ipa" | head -n 1)
-          if [ -z "$IPA_FILE" ]; then
-            echo "::error:: IPA file not found after export"
-            ls -la "$EXPORT_PATH"
-            exit 1
-          fi
-          
-          echo "✅ IPA exported successfully: $IPA_FILE"
+          echo "✅ IPA export completed"
       
-      # ✅ 【検証】ベストプラクティス：IPAが実際に生成されたか検証
-      # これにより、アーティファクトが無いまま後続ステップに進むのを防ぐ
+      # ✅ 【検証】IPAが生成されたか確認
       - name: Verify IPA exists
         script: |
           echo "Verifying IPA file presence..."
-          # Flutter 3.xではIPAは複数の場所に生成される可能性がある
-          IPA_PATH=$(find "$PROJECT_ROOT/build/ios" -name "*.ipa" | head -n 1)
-          if [ -z "$IPA_PATH" ]; then
-            echo "::error:: IPA file was not generated"
-            echo "Checking build output structure:"
-            ls -R "$PROJECT_ROOT/build/ios/" || echo "build/ios directory not found"
+          IPA_FILE=$(find $CM_BUILD_DIR/ipa -name "*.ipa" | head -n 1)
+          if [ -z "$IPA_FILE" ]; then
+            echo "::error:: IPA file not found"
+            ls -la $CM_BUILD_DIR/ipa
             exit 1
-          else
-            echo "✅ IPA found at: $IPA_PATH"
-            # 標準的な場所にコピー（アーティファクト収集を確実にする）
-            mkdir -p "$PROJECT_ROOT/build/ios/ipa"
-            cp "$IPA_PATH" "$PROJECT_ROOT/build/ios/ipa/"
-            echo "✅ IPA copied to: $PROJECT_ROOT/build/ios/ipa/"
           fi
+          echo "✅ IPA found: $IPA_FILE"
+    
     artifacts:
-      - build/ios/ipa/*.ipa
-      - build/ios/**/*.ipa
+      - $CM_BUILD_DIR/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
       - flutter_drive.log
+    
     publishing:
       # 📧 Eメール通知 (アーティファクトが捕捉されるため、今度はリンクが送信される)
       email:
