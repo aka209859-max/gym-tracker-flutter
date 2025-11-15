@@ -6,13 +6,12 @@ workflows:
     
     environment:
       groups:
-        - app_store_credentials
+        - app_store_credentials      # TestFlight アップロード用
+        - manual_code_signing         # 手動署名用（新規追加）
       
       vars:
         PROJECT_ROOT: $CM_BUILD_DIR
-        # All App Store Connect credentials are loaded from app_store_credentials group
-        # Including: APP_STORE_CONNECT_ISSUER_ID, APP_STORE_CONNECT_KEY_IDENTIFIER,
-        # APP_STORE_CONNECT_PRIVATE_KEY, CERTIFICATE_PRIVATE_KEY
+        BUNDLE_ID: com.nexa.gymmatch
       
       flutter: stable
       xcode: latest
@@ -39,63 +38,39 @@ workflows:
           pod install
           cd ..
       
-      # 🔍 【デバッグ】環境変数の確認
-      - name: Verify environment variables
-        script: |
-          echo "🔍 Checking environment variables..."
-          echo "APP_STORE_CONNECT_ISSUER_ID: $APP_STORE_CONNECT_ISSUER_ID"
-          echo "APP_STORE_CONNECT_KEY_IDENTIFIER: $APP_STORE_CONNECT_KEY_IDENTIFIER"
-          if [ -z "$APP_STORE_CONNECT_PRIVATE_KEY" ]; then
-            echo "❌ ERROR: APP_STORE_CONNECT_PRIVATE_KEY is not set!"
-            exit 1
-          else
-            echo "✅ APP_STORE_CONNECT_PRIVATE_KEY is set (length: ${#APP_STORE_CONNECT_PRIVATE_KEY})"
-          fi
-          if [ -z "$CERTIFICATE_PRIVATE_KEY" ]; then
-            echo "❌ ERROR: CERTIFICATE_PRIVATE_KEY is not set!"
-            exit 1
-          else
-            echo "✅ CERTIFICATE_PRIVATE_KEY is set (length: ${#CERTIFICATE_PRIVATE_KEY})"
-          fi
-      
       # 🔐 【重要】Keychainを初期化
       - name: Set up keychain
         script: |
           keychain initialize
       
-      # 🔑 【重要】App Store Connect APIキーで署名ファイルを取得
-      # CERTIFICATE_PRIVATE_KEY環境変数が設定されている場合、
-      # Codemagicが自動的にDistribution Certificateを作成
-      - name: Fetch signing files
+      # 🔐 【重要】Provisioning Profileをインストール
+      - name: Decode and install provisioning profile
         script: |
-          app-store-connect fetch-signing-files com.nexa.gymmatch \
-            --issuer-id $APP_STORE_CONNECT_ISSUER_ID \
-            --key-id $APP_STORE_CONNECT_KEY_IDENTIFIER \
-            --private-key "$APP_STORE_CONNECT_PRIVATE_KEY" \
-            --type IOS_APP_STORE \
-            --create
+          set -x
+          PROFILES_HOME="$HOME/Library/MobileDevice/Provisioning Profiles"
+          mkdir -p "$PROFILES_HOME"
+          PROFILE_PATH="$(mktemp "$PROFILES_HOME"/$(uuidgen).mobileprovision)"
+          echo "${CM_PROVISIONING_PROFILE}" | base64 --decode > "$PROFILE_PATH"
+          echo "✅ Saved profile to $PROFILE_PATH"
       
-      # 🔐 【重要】署名証明書をKeychainに追加
-      - name: Set up signing certificate
+      # 🔐 【重要】証明書をKeychainにインストール
+      - name: Decode and install certificate
         script: |
-          keychain add-certificates
-      
-      # 🔐 【重要】Xcodeプロジェクトに署名設定を適用
-      - name: Set up code signing settings on Xcode project
-        script: |
-          xcode-project use-profiles
+          set -x
+          echo "$CM_CERTIFICATE" | base64 --decode > /tmp/certificate.p12
+          keychain add-certificates \
+            --certificate /tmp/certificate.p12 \
+            --certificate-password "$CM_CERTIFICATE_PASSWORD"
+          echo "✅ Certificate installed to keychain"
       
       # 🚀 【重要】FlutterによるIPAのビルド
-      # --release フラグが必須
-      # $PROJECT_BUILD_NUMBER はCodemagicが提供するビルド番号
       - name: Flutter build ipa
         script: |
           flutter build ipa --release \
             --build-name=1.0.$PROJECT_BUILD_NUMBER \
             --build-number=$PROJECT_BUILD_NUMBER
       
-      # ✅ 【検証】ベストプラクティス：IPAが実際に生成されたか検証
-      # これにより、アーティファクトが無いまま後続ステップに進むのを防ぐ
+      # ✅ 【検証】IPAが実際に生成されたか検証
       - name: Verify IPA exists
         script: |
           echo "Verifying IPA file presence..."
@@ -113,7 +88,7 @@ workflows:
       - flutter_drive.log
     
     publishing:
-      # 📧 Eメール通知 (アーティファクトが捕捉されるため、今度はリンクが送信される)
+      # 📧 Eメール通知
       email:
         recipients:
           - aka209859@gmail.com
