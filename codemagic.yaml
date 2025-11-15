@@ -39,16 +39,32 @@ workflows:
           pod install
           cd ..
       
+      # 🔐 【重要】Keychainを初期化
+      - name: Set up keychain
+        script: |
+          keychain initialize
+      
       # 🔑 【重要】App Store Connect APIキーで署名ファイルを取得
-      # Individual アカウントの制限により --create は使用不可
-      # 既存の署名ファイルをダウンロードして使用
+      # CERTIFICATE_PRIVATE_KEY環境変数が設定されている場合、
+      # Codemagicが自動的にDistribution Certificateを作成
       - name: Fetch signing files
         script: |
           app-store-connect fetch-signing-files com.nexa.gymmatch \
             --issuer-id $APP_STORE_CONNECT_ISSUER_ID \
             --key-id $APP_STORE_CONNECT_KEY_IDENTIFIER \
             --private-key "$APP_STORE_CONNECT_PRIVATE_KEY" \
-            --type IOS_APP_STORE
+            --type IOS_APP_STORE \
+            --create
+      
+      # 🔐 【重要】署名証明書をKeychainに追加
+      - name: Set up signing certificate
+        script: |
+          keychain add-certificates
+      
+      # 🔐 【重要】Xcodeプロジェクトに署名設定を適用
+      - name: Set up code signing settings on Xcode project
+        script: |
+          xcode-project use-profiles
       
       # 🚀 【重要】FlutterによるIPAのビルド
       # --release フラグが必須
