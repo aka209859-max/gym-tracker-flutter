@@ -67,18 +67,26 @@ workflows:
       - name: Configure manual code signing in Xcode project
         script: |
           set -x
-          cd ios
-          # Release設定（97C147071CF9000F007C117D）に手動署名設定を追加
-          # VERSIONING_SYSTEM行の後に署名設定を挿入
-          sed -i.bak '/97C147071CF9000F007C117D \/\* Release \*\//,/name = Release;/{
-            /VERSIONING_SYSTEM = "apple-generic";/a\
-\				CODE_SIGN_STYLE = Manual;\
-\				CODE_SIGN_IDENTITY = "Apple Distribution";\
-\				DEVELOPMENT_TEAM = AXZBK8B732;\
-\				PROVISIONING_PROFILE_SPECIFIER = "GymMatch AppStore Profile";
-          }' Runner.xcodeproj/project.pbxproj
-          cd ..
-          echo "✅ Xcode project configured for manual signing"
+          python3 << 'PYTHON_SCRIPT'
+          import re
+          
+          project_path = "ios/Runner.xcodeproj/project.pbxproj"
+          
+          with open(project_path, 'r') as f:
+              content = f.read()
+          
+          # Release設定（97C147071CF9000F007C117D）を探して手動署名設定を追加
+          pattern = r'(97C147071CF9000F007C117D /\* Release \*/.*?buildSettings = \{[^\}]*?VERSIONING_SYSTEM = "apple-generic";)'
+          
+          replacement = r'\1\n\t\t\t\tCODE_SIGN_STYLE = Manual;\n\t\t\t\tCODE_SIGN_IDENTITY = "Apple Distribution";\n\t\t\t\tDEVELOPMENT_TEAM = AXZBK8B732;\n\t\t\t\tPROVISIONING_PROFILE_SPECIFIER = "GymMatch AppStore Profile";'
+          
+          content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+          
+          with open(project_path, 'w') as f:
+              f.write(content)
+          
+          print("✅ Xcode project configured for manual signing")
+          PYTHON_SCRIPT
       
       # 🔐 【重要】ExportOptionsを生成
       - name: Create ExportOptions.plist
