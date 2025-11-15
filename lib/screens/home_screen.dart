@@ -486,6 +486,15 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         backgroundColor: theme.colorScheme.primary,
         elevation: 0,
         actions: [
+          // 開発者メニュー（デバッグモードのみ表示）
+          if (kDebugMode)
+            IconButton(
+              icon: const Icon(Icons.developer_mode),
+              tooltip: '開発者メニュー',
+              onPressed: () {
+                Navigator.pushNamed(context, '/developer_menu');
+              },
+            ),
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
