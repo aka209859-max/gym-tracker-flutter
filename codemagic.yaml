@@ -39,6 +39,25 @@ workflows:
           pod install
           cd ..
       
+      # 🔍 【デバッグ】環境変数の確認
+      - name: Verify environment variables
+        script: |
+          echo "🔍 Checking environment variables..."
+          echo "APP_STORE_CONNECT_ISSUER_ID: $APP_STORE_CONNECT_ISSUER_ID"
+          echo "APP_STORE_CONNECT_KEY_IDENTIFIER: $APP_STORE_CONNECT_KEY_IDENTIFIER"
+          if [ -z "$APP_STORE_CONNECT_PRIVATE_KEY" ]; then
+            echo "❌ ERROR: APP_STORE_CONNECT_PRIVATE_KEY is not set!"
+            exit 1
+          else
+            echo "✅ APP_STORE_CONNECT_PRIVATE_KEY is set (length: ${#APP_STORE_CONNECT_PRIVATE_KEY})"
+          fi
+          if [ -z "$CERTIFICATE_PRIVATE_KEY" ]; then
+            echo "❌ ERROR: CERTIFICATE_PRIVATE_KEY is not set!"
+            exit 1
+          else
+            echo "✅ CERTIFICATE_PRIVATE_KEY is set (length: ${#CERTIFICATE_PRIVATE_KEY})"
+          fi
+      
       # 🔐 【重要】Keychainを初期化
       - name: Set up keychain
         script: |
