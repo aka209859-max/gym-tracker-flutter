@@ -82,10 +82,7 @@ workflows:
           failure: true
       
       # 🚀 【最終目的】TestFlightへの自動アップロード
-      # integrations ブロックの 'app_store_connect' を使用
+      # integrations ブロックから認証情報を継承
       app_store_connect:
+        # 認証情報は integrations から自動継承される
         submit_to_testflight: true
-        # (オプション) 特定のベータグループに即時配布
-        # beta_groups:
-        #   - "Internal Testers"
-        #   - "External Testers"
