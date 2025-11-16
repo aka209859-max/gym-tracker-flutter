@@ -1,343 +1,378 @@
-# 📱 GYM MATCH iOS リリース完全ガイド
+# 🍎 iOS TestFlight リリースガイド
 
-## 📋 アプリ情報
-
-- **アプリ名**: GYM MATCH (Gymmap)
-- **Bundle ID**: `com.nexa.gymmatch`
-- **バージョン**: 1.0.0 (Build 1)
-- **カテゴリ**: ヘルスケア＆フィットネス
-- **対象**: iOS 13.0以上
+このドキュメントは、iOS TestFlightへの安全なリリース方法を説明します。
 
 ---
 
-## 🎯 リリース手順（8ステップ）
+## 🎯 リリース戦略：タグベース
 
-### ✅ Step 1: Apple Developer Program登録
+### なぜタグベース？
 
-**必須条件:**
-- Apple Developer Program加入（年間12,980円）
-- 登録URL: https://developer.apple.com/programs/
+**問題**:
+- ❌ mainブランチへのプッシュ = 即TestFlight配信
+- ❌ ドキュメント追加でもテスターに通知
+- ❌ テスト中のコードも配信される
 
-**登録内容:**
-- 会社名: 株式会社NexaJP
-- 担当者: CEO
-- メール: 登録用メールアドレス
-
----
-
-### ✅ Step 2: App Store Connect設定
-
-#### 2-1. 新規アプリ作成
-1. App Store Connect: https://appstoreconnect.apple.com/
-2. 「マイApp」→「+」→「新規App」
-3. 入力内容:
-   - **プラットフォーム**: iOS
-   - **名前**: GYM MATCH
-   - **主言語**: 日本語
-   - **Bundle ID**: com.nexa.gymmatch
-   - **SKU**: com.nexa.gymmatch.ios.v1
-   - **アクセス権限**: フルアクセス
-
-#### 2-2. アプリ情報入力
-- **カテゴリ**: ヘルスケア＆フィットネス
-- **サブカテゴリ**: フィットネス
-- **コンテンツ権利**: 自社開発
-- **年齢制限**: 4+（すべての年齢）
-
-#### 2-3. 価格設定
-- **価格**: 無料
-- **App内課金**: なし（将来的に有料プラン追加予定）
+**解決策**:
+- ✅ タグを作成したときだけTestFlight配信
+- ✅ CEOが意図的にリリースを決定
+- ✅ 余計なプッシュは配信されない
 
 ---
 
-### ✅ Step 3: Firebase iOS設定
+## 📋 リリースフロー
 
-#### 3-1. Firebase Consoleでアプリ追加
-1. https://console.firebase.google.com/
-2. プロジェクト「gym-match-e560d」選択
-3. 「アプリを追加」→「iOS」
-4. Bundle ID: `com.nexa.gymmatch`
-5. **GoogleService-Info.plist** をダウンロード
+### ステップ1: 通常の開発（自由にプッシュ）
 
-#### 3-2. ファイル配置
 ```bash
-# GoogleService-Info.plist を配置
-cp ~/Downloads/GoogleService-Info.plist /home/user/flutter_app/ios/Runner/
+# 機能追加・修正
+git add .
+git commit -m "新機能追加"
+git push origin main
+
+# ← TestFlightには配信されない！安全！
 ```
 
-#### 3-3. Xcode設定（Macで実行）
-1. Xcodeでプロジェクトを開く
-2. `ios/Runner.xcworkspace` を開く（`.xcodeproj` ではない）
-3. Runner → Runner → GoogleService-Info.plist が追加されていることを確認
+### ステップ2: リリース準備完了時
 
----
-
-### ✅ Step 4: アプリアイコン設定
-
-**必要なアイコンサイズ:**
-- 1024x1024 (App Store用)
-- 180x180 (iPhone Pro Max)
-- 120x120 (iPhone)
-- 87x87 (iPhone Settings)
-- 80x80 (iPad)
-- 58x58 (iPhone Settings)
-- 40x40 (iPad Spotlight)
-- 29x29 (Settings)
-- 20x20 (Notifications)
-
-**配置場所:**
+**バージョン番号の決定**:
 ```
-ios/Runner/Assets.xcassets/AppIcon.appiconset/
+メジャーバージョン.マイナーバージョン.パッチバージョン
+
+例:
+v1.0.17 - 次のリリース
+v1.1.0  - 新機能追加時
+v2.0.0  - 大幅な変更時
 ```
 
-**ツール推奨:**
-- https://appicon.co/ (自動生成)
-- https://makeappicon.com/ (自動生成)
+### ステップ3: タグ作成 & プッシュ（TestFlight配信トリガー）
 
----
-
-### ✅ Step 5: スクリーンショット準備
-
-**必須サイズ:**
-- iPhone 6.7" (1290x2796) - 3枚以上
-- iPhone 6.5" (1242x2688) - 3枚以上
-- iPad Pro 12.9" (2048x2732) - オプション
-
-**内容例:**
-1. ホーム画面（カレンダー表示）
-2. ジム検索マップ画面
-3. トレーニング記録画面
-4. 写真取り込み機能
-5. 統計・分析画面
-
-**ツール:**
-- iOS Simulator（Xcode内蔵）
-- Screenshot Generator Tools
-
----
-
-### ✅ Step 6: Provisioning Profile作成（Macで実行）
-
-#### 6-1. Xcodeで自動署名設定
 ```bash
-# Xcodeを開く
-open ios/Runner.xcworkspace
+cd /home/user/flutter_app
+
+# タグ作成
+git tag -a v1.0.17 -m "Release v1.0.17: 疲労管理とキャンペーン機能追加"
+
+# タグをプッシュ（これでTestFlight配信開始！）
+git push origin v1.0.17
 ```
 
-**設定項目:**
-1. Runner → Signing & Capabilities
-2. Team: 株式会社NexaJP を選択
-3. 「Automatically manage signing」にチェック
-4. Bundle Identifier: com.nexa.gymmatch を確認
+### ステップ4: GitHub Actions自動実行
 
-#### 6-2. 証明書の確認
-- Development Certificate（開発用）
-- Distribution Certificate（リリース用）
+```
+タグプッシュ検知
+    ↓
+GitHub Actions 自動起動 🤖
+    ↓
+iOSビルド作成
+    ↓
+App Store Connectアップロード
+    ↓
+TestFlight配信
+    ↓
+✅ テスターに通知
+```
 
 ---
 
-### ✅ Step 7: iOSアプリビルド（Macで実行）
+## 🎯 2つのリリース方法
 
-#### 7-1. リリースビルド作成
+### 方法1: タグベース自動リリース（推奨）⭐
+
+**いつ使う**: 本格的なリリース時
+
 ```bash
-# プロジェクトディレクトリに移動
-cd /path/to/flutter_app
+# 1. 最新コードをmainにプッシュ
+git add .
+git commit -m "Release準備完了"
+git push origin main
 
-# Flutter依存関係を更新
-flutter pub get
+# 2. タグ作成 & プッシュ
+git tag -a v1.0.17 -m "Release v1.0.17"
+git push origin v1.0.17
 
-# iOSビルド（リリースモード）
-flutter build ios --release
-
-# または Archive作成（Xcode使用）
-# 1. Xcode で ios/Runner.xcworkspace を開く
-# 2. Product → Archive
-# 3. Archiveが完了したら Organizer が開く
+# ← これでTestFlight配信開始！
 ```
 
-#### 7-2. App Store Connect へアップロード
+**メリット**:
+- ✅ リリース履歴が明確（タグで管理）
+- ✅ いつでもロールバック可能
+- ✅ バージョン管理が明確
+
+### 方法2: 手動実行（緊急時）
+
+**いつ使う**: 緊急修正、テスト配信
+
+```
+1. GitHub: https://github.com/aka209859-max/gym-tracker-flutter
+2. 「Actions」タブ
+3. 「iOS TestFlight Release」
+4. 「Run workflow」ボタン
+5. ブランチ選択（通常はmain）
+6. 「Run workflow」確定
+
+← GitHub Actionsが即座に実行！
+```
+
+**メリット**:
+- ✅ 即座に配信可能
+- ✅ タグ不要
+- ❌ バージョン履歴が不明確
+
+---
+
+## 📊 バージョン番号の管理
+
+### セマンティックバージョニング
+
+```
+v[メジャー].[マイナー].[パッチ]
+
+例:
+v1.0.17 → v1.0.18  パッチ（バグ修正）
+v1.0.18 → v1.1.0   マイナー（新機能追加）
+v1.1.0  → v2.0.0   メジャー（大幅変更）
+```
+
+### GitHub Actions ビルド番号
+
+```yaml
+--build-name=1.0.${{ github.run_number }}
+--build-number=${{ github.run_number }}
+```
+
+**自動インクリメント**:
+- Run #17 → 1.0.17 (17)
+- Run #18 → 1.0.18 (18)
+- Run #19 → 1.0.19 (19)
+
+---
+
+## 🔄 実例：今回のケース
+
+### 現状
+
 ```bash
-# Xcode Organizerから
-# 1. 作成したArchiveを選択
-# 2. 「Distribute App」をクリック
-# 3. 「App Store Connect」を選択
-# 4. 「Upload」を選択
-# 5. アップロード完了まで待機（5-10分）
+最新コミット: 8c63d0d
+内容: ドキュメント追加
+状態: まだタグなし
+
+→ TestFlight配信されない（安全）
+```
+
+### リリースしたい場合
+
+```bash
+cd /home/user/flutter_app
+
+# オプション1: 今すぐリリース
+git tag -a v1.0.17 -m "Release v1.0.17: キャンペーン機能追加"
+git push origin v1.0.17
+
+# オプション2: もう少し修正してからリリース
+# 普通にコード修正してプッシュ（配信されない）
+git add .
+git commit -m "細かい修正"
+git push origin main
+
+# 準備完了後にタグ作成
+git tag -a v1.0.17 -m "Release v1.0.17"
+git push origin v1.0.17
 ```
 
 ---
 
-### ✅ Step 8: App Store Connect で審査申請
+## 📱 テスターへの通知制御
 
-#### 8-1. ビルド選択
-1. App Store Connect → マイApp → GYM MATCH
-2. 「App Store」タブ
-3. 「ビルド」セクション → 先ほどアップロードしたビルドを選択
+### タグベースの利点
 
-#### 8-2. アプリ情報入力
-
-**アプリ説明文（日本語）:**
+**before（危険）**:
 ```
-【GYM MATCHとは】
-全国47都道府県のジム検索＆トレーニング記録アプリ。
-GPSで近くのジムを検索し、詳細なトレーニング記録を管理できます。
+ドキュメント追加 → プッシュ → TestFlight配信 → テスターに通知
+細かい修正     → プッシュ → TestFlight配信 → テスターに通知
+実験的機能     → プッシュ → TestFlight配信 → テスターに通知
 
-【主な機能】
-✅ GPS検索：現在地から近いジムを即座に表示
-✅ 詳細記録：種目・重量・セット数を簡単入力
-✅ 写真取り込み：他アプリの記録画像を自動データ化（AI搭載）
-✅ 統計分析：部位別・期間別のトレーニング分析
-✅ カレンダー：トレーニング履歴を一目で確認
-
-【こんな方におすすめ】
-・ジム通いを習慣化したい方
-・トレーニング記録を詳細に管理したい方
-・旅行先や出張先でもジムを探したい方
-・筋トレの進捗を可視化したい方
-
-【対応地域】
-全国47都道府県
-
-【サポート】
-ご質問・ご要望は以下までお問い合わせください。
-メール: support@nexa.jp
+→ テスターが混乱！
 ```
 
-**キーワード:**
+**after（安全）**:
 ```
-ジム,フィットネス,トレーニング,筋トレ,ワークアウト,記録,GPS,検索,ヘルスケア,フィットネス
-```
+ドキュメント追加 → プッシュ → 何も起きない
+細かい修正     → プッシュ → 何も起きない
+実験的機能     → プッシュ → 何も起きない
 
-**プライバシーポリシーURL:**
-```
-https://nexa.jp/gym-match/privacy-policy
-```
+【リリース準備完了】
+タグ作成 → プッシュ → TestFlight配信 → テスターに通知
 
-**サポートURL:**
+→ テスターは本当のリリースのみ受け取る！
 ```
-https://nexa.jp/gym-match/support
-```
-
-#### 8-3. 審査情報入力
-
-**連絡先情報:**
-- 名前: 株式会社NexaJP サポート担当
-- 電話: +81-XX-XXXX-XXXX
-- メール: support@nexa.jp
-
-**審査用メモ:**
-```
-【テストアカウント】
-不要（匿名ログインで自動的にアカウント作成されます）
-
-【特記事項】
-- 位置情報：ジム検索機能で使用
-- カメラ・フォトライブラリ：トレーニング記録の写真取り込み機能で使用
-- AdMob：広告表示に使用
-```
-
-#### 8-4. 審査提出
-1. 「審査に提出」ボタンをクリック
-2. 輸出コンプライアンス: 「いいえ」（暗号化なし）
-3. 広告識別子（IDFA）: 「はい」（AdMob使用のため）
-   - 「アプリ内の広告を配信」にチェック
-4. 最終確認 → 「送信」
 
 ---
 
-## 📱 審査期間
+## 🎯 リリースチェックリスト
 
-**通常の審査期間:**
-- 平均: 24-48時間
-- 最短: 数時間
-- 最長: 1週間
+### リリース前
 
-**審査ステータス:**
-1. 審査待ち（Waiting for Review）
-2. 審査中（In Review）
-3. 承認（Approved）または 却下（Rejected）
+- [ ] 全ての機能が完成している
+- [ ] flutter analyze でエラーなし
+- [ ] テストが通過
+- [ ] READMEやドキュメントが更新済み
+- [ ] バージョン番号を決定（例: v1.0.17）
 
----
+### リリース実行
 
-## ⚠️ 審査で注意すべきポイント
+```bash
+# 1. 最終コミット
+git add .
+git commit -m "Release v1.0.17 準備完了"
+git push origin main
 
-### 1. プライバシー設定
-- ✅ Info.plistに権限説明を記載済み
-- ✅ 位置情報、カメラ、フォトライブラリの使用目的を明確化
+# 2. タグ作成
+git tag -a v1.0.17 -m "Release v1.0.17: [機能説明]"
 
-### 2. 広告表示
-- ✅ AdMob統合済み
-- ⚠️ 審査時にテスト広告が表示されるため問題なし
+# 3. タグプッシュ（TestFlight配信トリガー）
+git push origin v1.0.17
+```
 
-### 3. Firebase設定
-- ⚠️ GoogleService-Info.plist の配置必須
-- ⚠️ Bundle ID の一致確認
+### リリース後
 
-### 4. スクリーンショット
-- ⚠️ 実機またはSimulatorで撮影
-- ⚠️ ステータスバーの時刻を9:41に設定推奨
-
----
-
-## 🚀 リリース後のタスク
-
-### 1. App Store最適化（ASO）
-- キーワード選定
-- アプリ説明文の改善
-- スクリーンショットの最適化
-
-### 2. ユーザーフィードバック対応
-- レビュー監視
-- バグ報告への迅速な対応
-
-### 3. アップデート計画
-- 新機能追加
-- バグ修正
-- パフォーマンス改善
+- [ ] GitHub Actions成功確認
+- [ ] App Store Connectでビルド確認
+- [ ] TestFlight配信完了確認（30-60分）
+- [ ] 自分のTestFlightアプリで更新確認
+- [ ] リリースノート更新（CHANGELOG.md等）
 
 ---
 
-## 📞 サポート・問い合わせ
+## 🔍 タグ管理コマンド
 
-**Apple Developer Support:**
-- https://developer.apple.com/support/
+### タグ一覧表示
 
-**Firebase Support:**
-- https://firebase.google.com/support
+```bash
+git tag
 
-**Flutter iOS Support:**
-- https://docs.flutter.dev/deployment/ios
+# 出力例:
+# v1.0.15
+# v1.0.16
+# v1.0.17
+```
+
+### タグの詳細表示
+
+```bash
+git show v1.0.17
+
+# 出力:
+# tag v1.0.17
+# Tagger: CEO <ceo@nexajp.com>
+# Date:   2024-11-16
+# 
+# Release v1.0.17: キャンペーン機能追加
+# 
+# commit 8c63d0d...
+```
+
+### タグの削除（間違えた場合）
+
+```bash
+# ローカルタグ削除
+git tag -d v1.0.17
+
+# リモートタグ削除
+git push origin :refs/tags/v1.0.17
+
+# または
+git push origin --delete v1.0.17
+```
 
 ---
 
-## ✅ リリースチェックリスト
+## 🚨 緊急ロールバック
 
-- [ ] Apple Developer Program登録完了
-- [ ] App Store Connect でアプリ作成
-- [ ] Firebase iOS設定完了（GoogleService-Info.plist配置）
-- [ ] Privacy設定完了（Info.plist更新済み ✅）
-- [ ] アプリアイコン準備（1024x1024他）
-- [ ] スクリーンショット準備（最低3枚）
-- [ ] Provisioning Profile作成
-- [ ] iOSビルド成功
-- [ ] App Store Connect へアップロード
-- [ ] アプリ説明文・キーワード入力
-- [ ] 審査提出
+### 問題のあるビルドを配信してしまった場合
 
----
+**App Store Connect側**:
+```
+1. App Store Connect → TestFlight
+2. 問題のあるビルドを選択
+3. 「テストを停止」
+```
 
-## 🎉 リリース成功後
+**GitHubリポジトリ側**:
+```bash
+# 前のバージョンにロールバック
+git checkout v1.0.16
 
-**祝🎊 App Store公開完了！**
+# 修正を加える
+# ...
 
-次のステップ:
-1. SNSで告知
-2. プレスリリース配信
-3. ユーザー獲得キャンペーン
-4. アプリ改善サイクル開始
+# 新しいパッチバージョンとしてリリース
+git tag -a v1.0.18 -m "Hotfix: v1.0.17の問題修正"
+git push origin v1.0.18
+```
 
 ---
 
-**作成日**: 2025-11-14
-**最終更新**: 2025-11-14
-**バージョン**: 1.0
+## 📊 リリース履歴の例
+
+```
+v1.0.15 (2024-11-10) - 初回TestFlightリリース
+v1.0.16 (2024-11-15) - Phase 2b/2c疲労管理追加
+v1.0.17 (2024-11-16) - キャンペーンシステム追加
+v1.0.18 (2024-11-17) - バグ修正
+v1.1.0  (2024-11-20) - 新機能：パートナー検索
+v2.0.0  (2024-12-01) - メジャーアップデート
+```
+
+---
+
+## 🎉 まとめ
+
+### タグベースリリースの利点
+
+1. **意図的なリリース**
+   - CEOが決めたタイミングでのみ配信
+   - 余計なプッシュは配信されない
+
+2. **明確なバージョン管理**
+   - タグでリリース履歴が明確
+   - いつでもロールバック可能
+
+3. **テスター体験の向上**
+   - 本当のリリースのみ通知
+   - 無駄な通知なし
+
+4. **柔軟性**
+   - 通常開発: 自由にプッシュ
+   - リリース時: タグ作成
+
+---
+
+## 📞 クイックリファレンス
+
+### 日常開発（自由にプッシュ）
+
+```bash
+git add .
+git commit -m "機能追加"
+git push origin main
+# ← TestFlight配信されない
+```
+
+### リリース時（TestFlight配信）
+
+```bash
+git tag -a v1.0.17 -m "Release v1.0.17"
+git push origin v1.0.17
+# ← TestFlight配信開始！
+```
+
+### 緊急リリース（手動実行）
+
+```
+GitHub → Actions → iOS TestFlight Release → Run workflow
+```
+
+---
+
+**CEO、これで安全にリリース管理ができます！余計なものが配信される心配はもうありません！** 🎯🛡️
