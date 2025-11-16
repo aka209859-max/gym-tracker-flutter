@@ -2996,14 +2996,22 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       final todayStart = DateTime(today.year, today.month, today.day);
       final todayEnd = todayStart.add(const Duration(days: 1));
 
+      // シンプルクエリ（インデックス不要）+ メモリ内フィルタ
       final querySnapshot = await FirebaseFirestore.instance
           .collection('workout_logs')
           .where('user_id', isEqualTo: user.uid)
-          .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(todayStart))
-          .where('date', isLessThan: Timestamp.fromDate(todayEnd))
           .get();
 
-      if (querySnapshot.docs.isEmpty) {
+      // メモリ内で本日のデータをフィルタ
+      final todayDocs = querySnapshot.docs.where((doc) {
+        final data = doc.data();
+        final date = (data['date'] as Timestamp?)?.toDate();
+        if (date == null) return false;
+        return date.isAfter(todayStart.subtract(const Duration(seconds: 1))) &&
+               date.isBefore(todayEnd);
+      }).toList();
+
+      if (todayDocs.isEmpty) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -3015,40 +3023,71 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         return;
       }
 
-      // トレーニング記録を分析
+      // トレーニング記録を分析（セット数、部位などを集計）
       int totalSets = 0;
-      double totalVolumeLoad = 0.0;
       Set<String> bodyParts = {};
+      DateTime? firstWorkoutTime;
+      DateTime? lastWorkoutTime;
 
-      for (final doc in querySnapshot.docs) {
+      for (final doc in todayDocs) {
         final data = doc.data();
-        final exercises = data['exercises'] as List<dynamic>? ?? [];
+        final sets = data['sets'] as List<dynamic>? ?? [];
+        totalSets += sets.length;
         
-        for (final exercise in exercises) {
-          final sets = exercise['sets'] as List<dynamic>? ?? [];
-          totalSets += sets.length;
-          
-          for (final set in sets) {
-            final weight = (set['weight_kg'] as num?)?.toDouble() ?? 0.0;
-            final reps = (set['reps'] as num?)?.toInt() ?? 0;
-            totalVolumeLoad += weight * reps;
+        // 部位情報を収集
+        final muscleGroup = data['muscle_group'] as String?;
+        if (muscleGroup != null && muscleGroup != '有酸素') {
+          bodyParts.add(muscleGroup);
+        }
+        
+        // 最初と最後のワークアウト時刻を記録
+        final date = (data['date'] as Timestamp?)?.toDate();
+        if (date != null) {
+          if (firstWorkoutTime == null || date.isBefore(firstWorkoutTime)) {
+            firstWorkoutTime = date;
           }
-          
-          final bodyPart = exercise['body_part'] as String? ?? '不明';
-          bodyParts.add(bodyPart);
+          if (lastWorkoutTime == null || date.isAfter(lastWorkoutTime)) {
+            lastWorkoutTime = date;
+          }
         }
       }
 
-      // 最後のトレーニング日を保存
-      await _fatigueService.saveLastWorkoutDate(DateTime.now());
+      // セッション時間を計算（分）
+      int sessionDuration = 60; // デフォルト60分
+      if (firstWorkoutTime != null && lastWorkoutTime != null) {
+        final duration = lastWorkoutTime.difference(firstWorkoutTime).inMinutes;
+        sessionDuration = duration > 0 ? duration : 60;
+      }
 
-      // 疲労度アドバイスダイアログを表示
+      // Phase 2a: セッションRPE入力ダイアログ表示
       if (mounted) {
-        _showFatigueAdviceDialog(
+        final sessionRPE = await _showRPEInputDialog();
+        if (sessionRPE == null) {
+          // ユーザーがキャンセルした場合
+          return;
+        }
+
+        // 科学的疲労度計算（Training Load）
+        final trainingLoad = _fatigueService.calculateTrainingLoad(
+          sessionRPE: sessionRPE,
+          durationMinutes: sessionDuration,
           totalSets: totalSets,
-          totalVolumeLoad: totalVolumeLoad,
           bodyParts: bodyParts.toList(),
         );
+
+        // セッションデータを保存
+        await _fatigueService.saveSessionData(
+          sessionRPE: sessionRPE,
+          durationMinutes: sessionDuration,
+        );
+        
+        // 最後のトレーニング日を保存
+        await _fatigueService.saveLastWorkoutDate(DateTime.now());
+
+        // 疲労度アドバイスダイアログを表示
+        if (mounted) {
+          _showFatigueAdviceDialog(trainingLoad);
+        }
       }
     } catch (e) {
       if (mounted) {
@@ -3063,52 +3102,221 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     }
   }
 
-  void _showFatigueAdviceDialog({
-    required int totalSets,
-    required double totalVolumeLoad,
-    required List<String> bodyParts,
-  }) {
-    // 簡易的な疲労度計算
-    double fatigueScore = 0.0;
+  /// Phase 2a: セッションRPE入力ダイアログ
+  /// 根拠: Foster et al. (2001) - sRPE method
+  Future<double?> _showRPEInputDialog() async {
+    double selectedRPE = 5.0; // デフォルト: 中間値
     
-    fatigueScore += totalSets * 2.0;
-    
-    if (bodyParts.contains('脚')) fatigueScore += 15.0;
-    if (bodyParts.contains('背中')) fatigueScore += 10.0;
-    if (bodyParts.contains('胸')) fatigueScore += 8.0;
-    
-    // 疲労度レベルを判定
-    String fatigueLevel;
-    Color levelColor;
-    String advice;
-    String recoveryTime;
-    IconData levelIcon;
-    
-    if (fatigueScore < 30) {
-      fatigueLevel = '軽度';
-      levelColor = Colors.green;
-      levelIcon = Icons.sentiment_satisfied;
-      advice = '良好なトレーニングでした！\n軽いストレッチと十分な水分補給をしましょう。';
-      recoveryTime = '24時間';
-    } else if (fatigueScore < 50) {
-      fatigueLevel = '中程度';
-      levelColor = Colors.blue;
-      levelIcon = Icons.sentiment_neutral;
-      advice = '適度な負荷のトレーニングでした。\n7-8時間の睡眠とタンパク質補給を心がけましょう。';
-      recoveryTime = '36-48時間';
-    } else if (fatigueScore < 70) {
-      fatigueLevel = '高め';
-      levelColor = Colors.orange;
-      levelIcon = Icons.sentiment_dissatisfied;
-      advice = '高強度のトレーニングでした。\n十分な休息と栄養補給が必要です。無理せず回復を優先しましょう。';
-      recoveryTime = '48-72時間';
-    } else {
-      fatigueLevel = '極めて高い';
-      levelColor = Colors.red;
-      levelIcon = Icons.warning;
-      advice = '非常に高強度のトレーニングでした。\n今日は完全休養を推奨します。睡眠・栄養・ストレッチを重視してください。';
-      recoveryTime = '72時間以上';
+    return showDialog<double>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setDialogState) {
+          return AlertDialog(
+            title: const Row(
+              children: [
+                Icon(Icons.psychology, color: Colors.blue, size: 28),
+                SizedBox(width: 12),
+                Text('🔬 セッションRPE入力'),
+              ],
+            ),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    '今日のトレーニング全体の主観的強度は？',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'セッション全体を振り返り、最も適切な値を選択してください',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  
+                  // RPE値と説明
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: _getRPEColor(selectedRPE).withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: _getRPEColor(selectedRPE),
+                        width: 2,
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          selectedRPE.toInt().toString(),
+                          style: TextStyle(
+                            fontSize: 48,
+                            fontWeight: FontWeight.bold,
+                            color: _getRPEColor(selectedRPE),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          _getRPELabel(selectedRPE.toInt()),
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: _getRPEColor(selectedRPE),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                  
+                  const SizedBox(height: 20),
+                  
+                  // スライダー
+                  Slider(
+                    value: selectedRPE,
+                    min: 0,
+                    max: 10,
+                    divisions: 10,
+                    activeColor: _getRPEColor(selectedRPE),
+                    label: selectedRPE.toInt().toString(),
+                    onChanged: (value) {
+                      setDialogState(() {
+                        selectedRPE = value;
+                      });
+                    },
+                  ),
+                  
+                  // RPEスケール説明
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(Icons.info_outline, size: 16, color: Colors.blue[700]),
+                            const SizedBox(width: 6),
+                            const Text(
+                              'RPEスケール参考',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        const Text(
+                          '0-1: 休息\n2-3: 軽い運動\n4-6: 中程度の運動\n7-8: きつい運動\n9-10: 最大努力',
+                          style: TextStyle(fontSize: 11, height: 1.4),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, null),
+                child: const Text('キャンセル'),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context, selectedRPE),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: _getRPEColor(selectedRPE),
+                ),
+                child: const Text('確定'),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+  
+  /// RPE値に対応する色を取得
+  Color _getRPEColor(double rpe) {
+    if (rpe <= 3) return Colors.green;
+    if (rpe <= 6) return Colors.blue;
+    if (rpe <= 8) return Colors.orange;
+    return Colors.red;
+  }
+  
+  /// RPE値に対応するラベルを取得
+  String _getRPELabel(int rpe) {
+    switch (rpe) {
+      case 0:
+      case 1:
+        return '休息レベル';
+      case 2:
+      case 3:
+        return '軽い運動';
+      case 4:
+      case 5:
+      case 6:
+        return '中程度の運動';
+      case 7:
+      case 8:
+        return 'きつい運動';
+      case 9:
+      case 10:
+        return '最大努力';
+      default:
+        return '中程度の運動';
     }
+  }
+
+  /// Phase 2a: TLベースの疲労度アドバイスダイアログ
+  void _showFatigueAdviceDialog(double trainingLoad) {
+    // FatigueManagementServiceから疲労度レベルを取得
+    final fatigueData = _fatigueService.getFatigueLevel(trainingLoad);
+    
+    final fatigueLevel = fatigueData['label'] as String;
+    final colorName = fatigueData['color'] as String;
+    final recoveryHours = fatigueData['recoveryHours'] as int;
+    final advice = fatigueData['advice'] as String;
+    
+    // 色名を実際のColorに変換
+    Color levelColor;
+    IconData levelIcon;
+    switch (colorName) {
+      case 'green':
+        levelColor = Colors.green;
+        levelIcon = Icons.sentiment_satisfied;
+        break;
+      case 'blue':
+        levelColor = Colors.blue;
+        levelIcon = Icons.sentiment_neutral;
+        break;
+      case 'orange':
+        levelColor = Colors.orange;
+        levelIcon = Icons.sentiment_dissatisfied;
+        break;
+      case 'red':
+        levelColor = Colors.red;
+        levelIcon = Icons.warning;
+        break;
+      default:
+        levelColor = Colors.grey;
+        levelIcon = Icons.help;
+    }
+    
+    final recoveryTime = recoveryHours >= 72 
+        ? '${recoveryHours}時間以上' 
+        : '$recoveryHours時間';
 
     showDialog(
       context: context,
@@ -3117,7 +3325,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           children: [
             Icon(levelIcon, color: levelColor, size: 32),
             const SizedBox(width: 12),
-            const Text('疲労度分析結果'),
+            const Text('🔬 疲労度分析結果'),
           ],
         ),
         content: SingleChildScrollView(
@@ -3152,7 +3360,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'スコア: ${fatigueScore.toInt()} / 100',
+                      'Training Load: ${trainingLoad.toInt()} AU',
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey[600],
@@ -3163,12 +3371,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ),
               const SizedBox(height: 20),
               
-              _buildInfoRow('総セット数', '$totalSets セット'),
-              const SizedBox(height: 8),
-              _buildInfoRow('総負荷量', '${totalVolumeLoad.toStringAsFixed(0)} kg'),
-              const SizedBox(height: 8),
-              _buildInfoRow('実施部位', bodyParts.join('、')),
-              const SizedBox(height: 8),
               _buildInfoRow('推奨回復時間', recoveryTime),
               
               const Divider(height: 32),
@@ -3197,8 +3399,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.grey[100],
+                  color: Colors.blue[50],
                   borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.blue[200]!, width: 1),
                 ),
                 child: Row(
                   children: [
@@ -3206,10 +3409,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        '※ 科学的根拠に基づく詳細分析機能は近日実装予定',
+                        'Phase 2a実装完了\nFoster et al. (2001)のSession RPE理論を採用',
                         style: TextStyle(
-                          fontSize: 11,
-                          color: Colors.grey[700],
+                          fontSize: 10,
+                          color: Colors.blue[900],
+                          height: 1.4,
                         ),
                       ),
                     ),
