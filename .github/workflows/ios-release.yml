@@ -47,14 +47,17 @@ jobs:
           security cms -D -i profile.mobileprovision > profile.plist
           UUID=$(/usr/libexec/PlistBuddy -c 'Print :UUID' profile.plist)
           PROFILE_NAME=$(/usr/libexec/PlistBuddy -c 'Print :Name' profile.plist)
+          TEAM_ID=$(/usr/libexec/PlistBuddy -c 'Print :TeamIdentifier:0' profile.plist)
           echo "📋 Extracted Profile UUID: $UUID"
           echo "📋 Extracted Profile Name: $PROFILE_NAME"
+          echo "📋 Extracted Team ID: $TEAM_ID"
           
           cp profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/$UUID.mobileprovision
           
           # Export UUID for later steps
           echo "PROFILE_UUID=$UUID" >> $GITHUB_ENV
           echo "PROFILE_NAME=$PROFILE_NAME" >> $GITHUB_ENV
+          echo "TEAM_ID=$TEAM_ID" >> $GITHUB_ENV
           
           echo "✅ Certificate and provisioning profile installed"
       
@@ -62,6 +65,7 @@ jobs:
         env:
           PROFILE_UUID: ${{ env.PROFILE_UUID }}
           PROFILE_NAME: ${{ env.PROFILE_NAME }}
+          TEAM_ID: ${{ env.TEAM_ID }}
         run: |
           pip3 install --break-system-packages pbxproj
           
@@ -71,12 +75,13 @@ jobs:
           from pbxproj import XcodeProject
           
           PROJECT_PATH = 'ios/Runner.xcodeproj/project.pbxproj'
-          TEAM_ID = 'AXZBK8B732'
+          TEAM_ID = os.environ.get('TEAM_ID', 'AXZBK8B732')
           PROFILE_UUID = os.environ.get('PROFILE_UUID', '')
           PROFILE_NAME = os.environ.get('PROFILE_NAME', 'GymMatch AppStore Profile')
           
           print(f'Using Profile UUID: {PROFILE_UUID}')
           print(f'Using Profile Name: {PROFILE_NAME}')
+          print(f'Using Team ID: {TEAM_ID}')
           
           try:
               print(f'Loading project: {PROJECT_PATH}')
@@ -113,6 +118,7 @@ jobs:
       - name: Create ExportOptions.plist
         env:
           PROFILE_UUID: ${{ env.PROFILE_UUID }}
+          TEAM_ID: ${{ env.TEAM_ID }}
         run: |
           cat > ExportOptions.plist <<EOF
           <?xml version="1.0" encoding="UTF-8"?>
@@ -131,11 +137,11 @@ jobs:
               <key>signingCertificate</key>
               <string>Apple Distribution</string>
               <key>teamID</key>
-              <string>AXZBK8B732</string>
+              <string>${TEAM_ID}</string>
           </dict>
           </plist>
           EOF
-          echo "✅ ExportOptions.plist created with Profile UUID: ${PROFILE_UUID}"
+          echo "✅ ExportOptions.plist created with Team ID: ${TEAM_ID}, Profile UUID: ${PROFILE_UUID}"
       
       - name: Build Flutter IPA
         run: |
