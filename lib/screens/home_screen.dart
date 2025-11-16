@@ -292,17 +292,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   Future<void> _handleShare() async {
     try {
       final user = firebase_auth.FirebaseAuth.instance.currentUser;
-      if (user == null) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('ログインが必要です'),
-              backgroundColor: Colors.orange,
-            ),
-          );
-        }
-        return;
-      }
+      // ログイン不要でシェア機能を利用可能にする
 
       if (_selectedDay == null || _selectedDayWorkouts.isEmpty) {
         if (mounted) {
@@ -476,6 +466,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
+        centerTitle: true,
         title: const Text(
           'トレーニング記録',
           style: TextStyle(
