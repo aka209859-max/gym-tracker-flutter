@@ -3,8 +3,10 @@ import 'package:flutter/foundation.dart';
 import '../services/subscription_service.dart';
 import '../services/revenue_cat_service.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'ai_addon_purchase_screen.dart';
 import 'campaign/campaign_registration_screen.dart';
+import 'auth_screen.dart';
 
 /// サブスクリプション管理画面
 class SubscriptionScreen extends StatefulWidget {
@@ -64,10 +66,29 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    final isAnonymous = currentUser?.isAnonymous ?? true;
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('プラン管理'),
         centerTitle: true,
+        actions: [
+          // ログイン/アカウント切り替えボタン（匿名ユーザーのみ表示）
+          if (isAnonymous)
+            IconButton(
+              icon: const Icon(Icons.login),
+              tooltip: 'ログイン',
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AuthScreen()),
+                );
+                // ログイン後、プランを再読み込み
+                _loadCurrentPlan();
+              },
+            ),
+        ],
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())

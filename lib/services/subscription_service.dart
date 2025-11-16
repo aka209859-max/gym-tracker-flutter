@@ -1,4 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// プラン種類
 enum SubscriptionType {
@@ -12,9 +14,39 @@ class SubscriptionService {
   static const String _subscriptionKey = 'subscription_status';
   static const String _subscriptionTypeKey = 'subscription_type';
   
-  /// 現在のプラン種類を取得
+  /// 現在のプラン種類を取得（Firestore優先）
   Future<SubscriptionType> getCurrentPlan() async {
     try {
+      // 1. Firestoreから取得を試行（ログインユーザー）
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null && !user.isAnonymous) {
+        try {
+          final userDoc = await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .get();
+          
+          if (userDoc.exists) {
+            final data = userDoc.data();
+            final isPremium = data?['isPremium'] as bool? ?? false;
+            final premiumType = data?['premiumType'] as String? ?? 'free';
+            
+            if (isPremium) {
+              if (premiumType == 'pro') {
+                print('✅ Firestoreからプラン取得: プロプラン');
+                return SubscriptionType.pro;
+              } else if (premiumType == 'premium') {
+                print('✅ Firestoreからプラン取得: プレミアムプラン');
+                return SubscriptionType.premium;
+              }
+            }
+          }
+        } catch (firestoreError) {
+          print('⚠️ Firestore取得エラー（SharedPreferencesにフォールバック）: $firestoreError');
+        }
+      }
+      
+      // 2. SharedPreferencesから取得（フォールバック）
       final prefs = await SharedPreferences.getInstance();
       final planString = prefs.getString(_subscriptionTypeKey);
       
