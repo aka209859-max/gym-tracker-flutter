@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import '../services/subscription_service.dart';
 import '../services/revenue_cat_service.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
+import 'ai_addon_purchase_screen.dart';
 
 /// サブスクリプション管理画面
 class SubscriptionScreen extends StatefulWidget {
@@ -77,6 +78,12 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   // 現在のプラン表示
                   _buildCurrentPlanCard(),
                   const SizedBox(height: 16),
+                  
+                  // AI追加購入カード（有料プランのみ）
+                  if (_currentPlan != SubscriptionType.free)
+                    _buildAIAddonCard(),
+                  if (_currentPlan != SubscriptionType.free)
+                    const SizedBox(height: 16),
                   
                   // 購入復元ボタン（iOS/Androidのみ）
                   if (defaultTargetPlatform == TargetPlatform.iOS ||
@@ -750,5 +757,99 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         ),
       );
     }
+  }
+  
+  /// AI追加購入カード
+  Widget _buildAIAddonCard() {
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: const BorderSide(color: Colors.blue, width: 2),
+      ),
+      child: InkWell(
+        onTap: () async {
+          // AI追加購入画面に遷移
+          final result = await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AIAddonPurchaseScreen(),
+            ),
+          );
+          
+          // 購入成功時はプラン情報を再読み込み
+          if (result == true) {
+            _loadCurrentPlan();
+          }
+        },
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.blue.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.bolt,
+                  color: Colors.blue,
+                  size: 32,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'AI追加パック',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'AI使用回数を追加購入',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: const Text(
+                        '¥100 / 5回',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.blue,
+                size: 20,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
