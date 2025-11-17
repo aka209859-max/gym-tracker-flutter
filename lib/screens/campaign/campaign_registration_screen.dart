@@ -178,6 +178,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
               ),
             ),
             const SizedBox(height: 16),
+            // キャンペーン期間表示
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
@@ -185,7 +186,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                 borderRadius: BorderRadius.circular(20),
               ),
               child: const Text(
-                '完全自動承認システム',
+                '期間限定キャンペーン',
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
@@ -298,7 +299,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      '完全自動承認！CEOによる手動確認なし',
+                      '条件達成後、即座に特典が適用されます',
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey[800],
