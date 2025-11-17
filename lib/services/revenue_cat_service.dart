@@ -18,12 +18,13 @@ class RevenueCatService {
   RevenueCatService._internal();
   
   // RevenueCat API Keys (App Store Connect設定後に入力)
-  static const String _appleApiKey = 'YOUR_REVENUECAT_APPLE_API_KEY';
+  static const String _appleApiKey = 'appl_QCxDcuCpNzWsfVJBzIQmBtszjmm';
   static const String _googleApiKey = 'YOUR_REVENUECAT_GOOGLE_API_KEY';
   
   // Product IDs (App Store Connectで登録する商品ID)
-  static const String premiumMonthlyProductId = 'gym_match_premium_monthly';
-  static const String proMonthlyProductId = 'gym_match_pro_monthly';
+  static const String premiumMonthlyProductId = 'com.nexa.gymmatch.premium.monthly';
+  static const String proMonthlyProductId = 'com.nexa.gymmatch.pro.monthly';
+  static const String aiAdditionalPackProductId = 'com.nexa.gymmatch.ai_pack_5';
   
   // Entitlement IDs (RevenueCatで設定する権限ID)
   static const String premiumEntitlementId = 'premium';
