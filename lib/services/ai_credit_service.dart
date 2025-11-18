@@ -10,17 +10,26 @@ class AICreditService {
   
   /// AI機能が使用可能かチェック（サブスクまたはクレジットあり）
   Future<bool> canUseAI() async {
-    // 有料プランなら直接OK
-    final plan = await _subscriptionService.getCurrentPlan();
-    if (plan != SubscriptionType.free) {
-      // 有料プランの月次制限チェック
-      final remaining = await _subscriptionService.getRemainingAIUsage();
-      return remaining > 0;
+    try {
+      // 有料プランなら直接OK
+      final plan = await _subscriptionService.getCurrentPlan();
+      print('🔍 [canUseAI] 現在のプラン: $plan');
+      
+      if (plan != SubscriptionType.free) {
+        // 有料プランの月次制限チェック
+        final remaining = await _subscriptionService.getRemainingAIUsage();
+        print('🔍 [canUseAI] 有料プラン残回数: $remaining');
+        return remaining > 0;
+      }
+      
+      // 無料プランはクレジット残高をチェック
+      final credits = await getAICredits();
+      print('🔍 [canUseAI] 無料プラン AIクレジット: $credits');
+      return credits > 0;
+    } catch (e) {
+      print('❌ [canUseAI] エラー: $e');
+      return false;
     }
-    
-    // 無料プランはクレジット残高をチェック
-    final credits = await getAICredits();
-    return credits > 0;
   }
   
   /// 現在のAIクレジット残高を取得（無料プランのみ）
@@ -74,16 +83,24 @@ class AICreditService {
   
   /// 動画視聴でAIクレジットを獲得可能か（月3回まで）
   Future<bool> canEarnCreditFromAd() async {
-    final plan = await _subscriptionService.getCurrentPlan();
-    
-    // 有料プランは動画視聴不要
-    if (plan != SubscriptionType.free) {
+    try {
+      final plan = await _subscriptionService.getCurrentPlan();
+      print('🔍 [canEarnCreditFromAd] 現在のプラン: $plan');
+      
+      // 有料プランは動画視聴不要
+      if (plan != SubscriptionType.free) {
+        print('🔍 [canEarnCreditFromAd] 有料プランのため広告不要');
+        return false;
+      }
+      
+      // 今月の動画視聴回数をチェック
+      final earnedThisMonth = await _getAdEarnedCountThisMonth();
+      print('🔍 [canEarnCreditFromAd] 今月の広告視聴回数: $earnedThisMonth/3');
+      return earnedThisMonth < 3; // CEO戦略: 月3回まで
+    } catch (e) {
+      print('❌ [canEarnCreditFromAd] エラー: $e');
       return false;
     }
-    
-    // 今月の動画視聴回数をチェック
-    final earnedThisMonth = await _getAdEarnedCountThisMonth();
-    return earnedThisMonth < 3; // CEO戦略: 月3回まで
   }
   
   /// 今月の動画視聴によるクレジット獲得回数

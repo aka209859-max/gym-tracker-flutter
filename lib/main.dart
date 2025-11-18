@@ -27,24 +27,27 @@ import 'services/trial_service.dart';
 import 'services/ad_service.dart';
 import 'services/interstitial_ad_manager.dart';
 import 'services/reward_ad_service.dart';
+import 'utils/console_logger.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
+  // ログシステム初期化（最優先 - JS Interop版）
+  ConsoleLogger.init();
+  
   // 日本語ロケール初期化（日付フォーマット用）
   try {
     await initializeDateFormatting('ja_JP', null);
-    print('✅ 日本語ロケール初期化成功');
+    ConsoleLogger.info('日本語ロケール初期化成功', tag: 'INIT');
   } catch (e) {
-    print('⚠️ 日本語ロケール初期化失敗（継続可能）: $e');
+    ConsoleLogger.warn('日本語ロケール初期化失敗（継続可能）', tag: 'INIT');
     // Web環境では失敗する可能性があるが、アプリ起動は継続
   }
   
   // Firebase初期化（エラー時はスキップしてデモモード）
   bool firebaseInitialized = false;
   try {
-    // リリースビルドでもログを出力（デバッグ用）
-    print('🔥 Firebase初期化開始...');
+    ConsoleLogger.info('Firebase初期化開始', tag: 'FIREBASE');
     
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
@@ -78,7 +81,11 @@ void main() async {
   }
   
   // 🔥 マスターユーザー権限設定（CEO専用）
-  await _setMasterUserPrivileges();
+  // NOTE: テスト用に一時的にコメントアウト（無料プランでテスト）
+  // await _setMasterUserPrivileges();
+  
+  // 🧪 デバッグ: 無料プランでテスト（SharedPreferencesを完全リセット）
+  await _resetToFreePlanForTesting();
   
   // 📱 AdMob初期化（広告表示）
   try {
@@ -173,6 +180,38 @@ Future<void> _setMasterUserPrivileges() async {
     
   } catch (e) {
     print('❌ マスターユーザー権限設定失敗: $e');
+  }
+}
+
+/// デバッグ: 無料プランでテスト（SharedPreferencesを完全リセット）
+Future<void> _resetToFreePlanForTesting() async {
+  print('🧪 [デバッグ] 無料プランリセット開始...');
+  
+  try {
+    final prefs = await SharedPreferences.getInstance();
+    final subscriptionService = SubscriptionService();
+    
+    // 🔥 サブスクリプション関連のデータをすべてクリア
+    await prefs.remove('subscription_type');
+    await prefs.remove('is_master_user');
+    await prefs.remove('ai_usage_count');
+    await prefs.remove('ai_usage_month');
+    await prefs.remove('ai_addon_count');
+    await prefs.remove('ai_credit_count');
+    await prefs.remove('ai_credit_last_reset_date');
+    await prefs.remove('ai_credit_count_earned_count');
+    
+    // 🔥 強制的にFreeプランに設定
+    await subscriptionService.setPlan(SubscriptionType.free);
+    
+    print('✅ [デバッグ] 無料プランリセット完了');
+    print('   プラン: Freeプラン（リワード広告テスト用）');
+    print('   AIクレジット: 0回');
+    print('   月間広告視聴回数: 0/3回');
+    print('   🎬 リワード広告ダイアログが表示されるはずです');
+    
+  } catch (e) {
+    print('❌ [デバッグ] リセット失敗: $e');
   }
 }
 

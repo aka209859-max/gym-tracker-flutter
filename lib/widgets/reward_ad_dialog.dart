@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import '../services/reward_ad_service.dart';
 import '../services/ai_credit_service.dart';
 
@@ -40,6 +41,39 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
       _isLoading = true;
     });
 
+    // Web環境の場合はモック広告（テスト用）
+    if (kIsWeb) {
+      debugPrint('🌐 Web環境: モック広告を表示');
+      await Future.delayed(const Duration(seconds: 2)); // 広告視聴をシミュレート
+      
+      // クレジット付与
+      await _creditService.addAICredit(1);
+      await _creditService.recordAdEarned();
+      
+      setState(() {
+        _isLoading = false;
+      });
+      
+      if (mounted) {
+        Navigator.of(context).pop(true); // trueを返して成功を通知
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Row(
+              children: [
+                Icon(Icons.check_circle, color: Colors.white),
+                SizedBox(width: 8),
+                Text('✅ AIクレジット1回分を獲得しました！（テストモード）'),
+              ],
+            ),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 3),
+          ),
+        );
+      }
+      return;
+    }
+
+    // モバイル環境: 実際のAdMob広告
     // 広告が読み込まれていなければ読み込む
     if (!_adService.isAdReady()) {
       await _adService.loadRewardedAd();
@@ -119,9 +153,11 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            '広告動画を1回視聴すると、AI機能を1回使えるクレジットを獲得できます',
-            style: TextStyle(fontSize: 14),
+          Text(
+            kIsWeb
+                ? '【Web版テストモード】\nボタンを押すと2秒後にAIクレジットを獲得できます'
+                : '広告動画を1回視聴すると、AI機能を1回使えるクレジットを獲得できます',
+            style: const TextStyle(fontSize: 14),
           ),
           const SizedBox(height: 16),
           Container(

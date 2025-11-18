@@ -14,6 +14,7 @@ import 'workout_import_preview_screen.dart';
 import 'achievements_screen.dart';
 import 'personal_factors_screen.dart';
 import 'campaign/campaign_registration_screen.dart';
+import 'ai_addon_purchase_screen.dart';
 import '../services/favorites_service.dart';
 import '../services/subscription_service.dart';
 import '../services/chat_service.dart';
@@ -500,6 +501,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
         const SizedBox(height: 12),
+        // 💰 AI追加購入（有料プラン会員のみ表示）
+        if (_currentPlan != SubscriptionType.free) ...[
+          Card(
+            elevation: 2,
+            color: Colors.blue[50],
+            child: ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.blue[700],
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.auto_awesome, color: Colors.white),
+              ),
+              title: const Text(
+                '💰 AI追加購入',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: const Text(
+                'AI機能をさらに5回追加（¥100）',
+                style: TextStyle(fontSize: 12),
+              ),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AIAddonPurchaseScreen()),
+                ).then((_) => _loadUserData());
+              },
+            ),
+          ),
+          const SizedBox(height: 12),
+        ],
         // デザインテーマ選択は削除（Energetic系に固定）
         _buildMenuCard(
           context,

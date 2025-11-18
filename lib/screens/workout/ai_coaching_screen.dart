@@ -6,6 +6,8 @@ import 'dart:convert';
 import '../../services/subscription_service.dart';
 import '../../services/ai_credit_service.dart';
 import '../../widgets/reward_ad_dialog.dart';
+import '../ai_addon_purchase_screen.dart';
+import '../../utils/console_logger.dart';
 
 /// Layer 5: AIコーチング画面
 /// 
@@ -194,6 +196,41 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
               'トレーニングしたい部位を選択すると、AIが最適なメニューを提案します。',
               style: TextStyle(fontSize: 14),
             ),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.orange.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.orange, width: 1),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.info_outline, color: Colors.orange.shade700, size: 20),
+                      const SizedBox(width: 8),
+                      Text(
+                        '無料プランの制限',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.orange.shade700,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    '• 動画広告を視聴すると、AI機能を1回使用できます\n'
+                    '• 月3回まで広告視聴可能\n'
+                    '• Premium/Proプランは無制限に使用可能',
+                    style: TextStyle(fontSize: 13),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -265,7 +302,10 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton.icon(
-        onPressed: isEnabled ? () => _generateMenu(selectedParts) : null,
+        onPressed: isEnabled ? () {
+          ConsoleLogger.userAction('AI_MENU_GENERATE_BUTTON_CLICKED', data: {'bodyParts': selectedParts});
+          _generateMenu(selectedParts);
+        } : null,
         icon: _isGenerating
             ? const SizedBox(
                 width: 20,
@@ -485,26 +525,36 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
 
   /// AIメニュー生成
   Future<void> _generateMenu(List<String> bodyParts) async {
+    ConsoleLogger.info('AIコーチング開始', tag: 'AI_COACHING');
+    
     // ステップ1: AI使用可能チェック（サブスク or クレジット）
     final canUse = await _creditService.canUseAI();
+    ConsoleLogger.debug('canUseAI結果: $canUse', tag: 'AI_COACHING');
     
     if (!canUse) {
       // ステップ2: 広告視聴可能かチェック（無料ユーザー & 月3回未満）
       final canEarnFromAd = await _creditService.canEarnCreditFromAd();
+      ConsoleLogger.debug('canEarnCreditFromAd結果: $canEarnFromAd', tag: 'AI_COACHING');
       
       if (canEarnFromAd && mounted) {
+        ConsoleLogger.info('リワード広告ダイアログを表示', tag: 'AI_COACHING');
         // ステップ3: リワード広告ダイアログ表示
         final watchedAd = await showDialog<bool>(
           context: context,
           builder: (context) => const RewardAdDialog(),
         );
         
+        ConsoleLogger.debug('広告視聴結果: $watchedAd', tag: 'AI_COACHING');
+        
         if (watchedAd != true) {
+          ConsoleLogger.warn('広告視聴キャンセルまたは失敗', tag: 'AI_COACHING');
           return; // キャンセルまたは失敗
         }
+        ConsoleLogger.info('広告視聴成功 → AI機能実行へ', tag: 'AI_COACHING');
         // 広告視聴成功 → クレジット付与済み → 処理続行
       } else {
         // 月3回上限到達 → サブスク誘導
+        ConsoleLogger.warn('月間上限到達 → アップグレードダイアログ表示', tag: 'AI_COACHING');
         if (mounted) {
           _showUpgradeDialog();
         }
@@ -519,7 +569,8 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
     });
 
     try {
-      debugPrint('🤖 Gemini APIでメニュー生成開始: ${bodyParts.join(', ')}');
+      final startTime = DateTime.now();
+      ConsoleLogger.info('Gemini APIでメニュー生成開始: ${bodyParts.join(', ')}', tag: 'AI_COACHING');
 
       // Gemini 2.0 Flash API呼び出し
       final response = await http.post(
@@ -554,9 +605,9 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
         // デバッグ情報
         final currentPlan = await _subscriptionService.getCurrentPlan();
         if (currentPlan != SubscriptionType.free) {
-          debugPrint('✅ AI使用回数: ${await _subscriptionService.getCurrentMonthAIUsage()}');
+          AppLogger.debug('AI使用回数: ${await _subscriptionService.getCurrentMonthAIUsage()}', tag: 'AI_COACHING');
         } else {
-          debugPrint('✅ AIクレジット残高: ${await _creditService.getAICredits()}');
+          AppLogger.debug('AIクレジット残高: ${await _creditService.getAICredits()}', tag: 'AI_COACHING');
         }
 
         setState(() {
@@ -564,12 +615,14 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
           _isGenerating = false;
         });
 
-        debugPrint('✅ メニュー生成成功');
+        final duration = DateTime.now().difference(startTime);
+        AppLogger.performance('AI Menu Generation', duration);
+        AppLogger.info('メニュー生成成功', tag: 'AI_COACHING');
       } else {
         throw Exception('API Error: ${response.statusCode}');
       }
     } catch (e) {
-      debugPrint('❌ メニュー生成エラー: $e');
+      AppLogger.error('メニュー生成エラー', tag: 'AI_COACHING', error: e);
       setState(() {
         _errorMessage = 'メニュー生成に失敗しました: $e';
         _isGenerating = false;
@@ -774,8 +827,18 @@ ${bodyParts.join('、')}
     );
   }
 
-  /// アップグレード誘導ダイアログ（月3回上限到達時）
-  void _showUpgradeDialog() {
+  /// アップグレード誘導ダイアログ（無料プラン: 月3回上限到達時）
+  void _showUpgradeDialog() async {
+    final currentPlan = await _subscriptionService.getCurrentPlan();
+    
+    // 有料プランユーザーには追加購入オプションを表示
+    if (currentPlan != SubscriptionType.free && mounted) {
+      _showAddonPurchaseDialog();
+      return;
+    }
+    
+    // 無料プランユーザーにはサブスク誘導
+    if (!mounted) return;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -808,7 +871,7 @@ ${bodyParts.join('、')}
             Text('• 30日間無料トライアル', style: TextStyle(fontSize: 13)),
             SizedBox(height: 8),
             Text(
-              '🏆 Proプランなら無制限！',
+              '🏆 Proプランなら月30回！',
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
@@ -833,6 +896,65 @@ ${bodyParts.join('、')}
               foregroundColor: Colors.white,
             ),
             child: const Text('プランを見る'),
+          ),
+        ],
+      ),
+    );
+  }
+  
+  /// 追加購入ダイアログ（有料プラン会員用）
+  void _showAddonPurchaseDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(Icons.info_outline, color: Colors.orange),
+            SizedBox(width: 12),
+            Text('月間上限に達しました'),
+          ],
+        ),
+        content: const Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '今月のAI使用回数が上限に達しました。',
+              style: TextStyle(fontSize: 14),
+            ),
+            SizedBox(height: 16),
+            Text(
+              '💰 AI追加パック（¥100）:',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text('• AI機能を5回追加', style: TextStyle(fontSize: 13)),
+            Text('• 今月末まで有効', style: TextStyle(fontSize: 13)),
+            Text('• いつでも追加購入可能', style: TextStyle(fontSize: 13)),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('閉じる'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              // AI追加購入画面へ遷移
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AIAddonPurchaseScreen()),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue.shade700,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('追加購入する'),
           ),
         ],
       ),

@@ -31,6 +31,15 @@ class AdMobService {
   Future<void> initialize() async {
     if (_isInitialized) return;
 
+    // Web環境ではAdMobをスキップ（MissingPluginException防止）
+    if (kIsWeb) {
+      if (kDebugMode) {
+        debugPrint('🌐 Web環境のためAdMob初期化をスキップ');
+      }
+      _isInitialized = true;
+      return;
+    }
+
     try {
       if (kDebugMode) {
         debugPrint('📱 AdMob初期化開始...');

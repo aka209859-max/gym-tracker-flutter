@@ -10,11 +10,14 @@ class RewardAdService {
   
   final AICreditService _creditService = AICreditService();
   
-  // AdMob Unit IDs (テスト用)
-  // 本番環境では実際のUnit IDに置き換える
+  // AdMob Unit IDs
+  // TODO: 本番広告IDを設定してください
   static const String _rewardAdUnitId = kDebugMode
-      ? 'ca-app-pub-3940256099942544/5224354917' // テスト用
-      : 'YOUR_PRODUCTION_REWARD_AD_UNIT_ID';
+      ? 'ca-app-pub-3940256099942544/5224354917' // テスト用（開発時）
+      : 'ca-app-pub-XXXXXXXXXXXX/YYYYYYYYYY'; // 本番用（TestFlight/App Store）
+  
+  // 注意: 本番IDが未設定の場合、TestFlightでは広告が表示されません
+  // AdMob管理画面でiOS用リワード広告ユニットIDを取得し、上記に設定してください
   
   RewardedAd? _rewardedAd;
   bool _isAdLoading = false;
@@ -22,6 +25,14 @@ class RewardAdService {
   
   /// AdMob SDKを初期化
   Future<void> initialize() async {
+    // Web環境ではAdMobをスキップ
+    if (kIsWeb) {
+      if (kDebugMode) {
+        debugPrint('🌐 Web環境のためAdMob初期化をスキップ');
+      }
+      return;
+    }
+    
     try {
       await MobileAds.instance.initialize();
       if (kDebugMode) {

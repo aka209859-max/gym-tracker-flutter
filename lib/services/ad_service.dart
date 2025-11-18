@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /// AdMob広告管理サービス
@@ -12,6 +13,13 @@ class AdService {
   /// AdMob初期化
   Future<void> initialize() async {
     if (_isInitialized) return;
+    
+    // Web環境ではAdMobをスキップ
+    if (kIsWeb) {
+      print('🌐 Web環境のためAdMob初期化をスキップ');
+      _isInitialized = true;
+      return;
+    }
     
     await MobileAds.instance.initialize();
     _isInitialized = true;
