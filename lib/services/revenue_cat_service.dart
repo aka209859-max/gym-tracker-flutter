@@ -22,8 +22,15 @@ class RevenueCatService {
   static const String _googleApiKey = 'YOUR_REVENUECAT_GOOGLE_API_KEY';
   
   // Product IDs (App Store Connectで登録する商品ID)
+  // 月額プラン
   static const String premiumMonthlyProductId = 'com.nexa.gymmatch.premium.monthly';
   static const String proMonthlyProductId = 'com.nexa.gymmatch.pro.monthly';
+  
+  // 年額プラン (CEO戦略: 大幅割引で年額選択率向上)
+  static const String premiumYearlyProductId = 'com.nexa.gymmatch.premium.yearly';  // ¥4,800 (20% OFF)
+  static const String proYearlyProductId = 'com.nexa.gymmatch.pro.yearly';          // ¥8,000 (32% OFF)
+  
+  // 追加課金
   static const String aiAdditionalPackProductId = 'com.nexa.gymmatch.ai_pack_5';
   
   // Entitlement IDs (RevenueCatで設定する権限ID)

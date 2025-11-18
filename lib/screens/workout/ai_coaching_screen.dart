@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../../services/subscription_service.dart';
+import '../../services/ai_credit_service.dart';
+import '../../widgets/reward_ad_dialog.dart';
 
 /// Layer 5: AIコーチング画面
 /// 
@@ -42,6 +44,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
   
   // サブスクリプションサービス
   final SubscriptionService _subscriptionService = SubscriptionService();
+  final AICreditService _creditService = AICreditService();
 
   @override
   void initState() {
@@ -482,13 +485,31 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
 
   /// AIメニュー生成
   Future<void> _generateMenu(List<String> bodyParts) async {
-    // AI使用可能チェック
-    final canUse = await _subscriptionService.canUseAIFeature();
+    // ステップ1: AI使用可能チェック（サブスク or クレジット）
+    final canUse = await _creditService.canUseAI();
+    
     if (!canUse) {
-      setState(() {
-        _errorMessage = 'AI機能の使用回数が上限に達しました。プランをアップグレードしてください。';
-      });
-      return;
+      // ステップ2: 広告視聴可能かチェック（無料ユーザー & 月3回未満）
+      final canEarnFromAd = await _creditService.canEarnCreditFromAd();
+      
+      if (canEarnFromAd && mounted) {
+        // ステップ3: リワード広告ダイアログ表示
+        final watchedAd = await showDialog<bool>(
+          context: context,
+          builder: (context) => const RewardAdDialog(),
+        );
+        
+        if (watchedAd != true) {
+          return; // キャンセルまたは失敗
+        }
+        // 広告視聴成功 → クレジット付与済み → 処理続行
+      } else {
+        // 月3回上限到達 → サブスク誘導
+        if (mounted) {
+          _showUpgradeDialog();
+        }
+        return;
+      }
     }
     
     setState(() {
@@ -527,9 +548,16 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
         final data = jsonDecode(response.body);
         final text = data['candidates'][0]['content']['parts'][0]['text'] as String;
 
-        // AI使用回数をインクリメント
-        await _subscriptionService.incrementAIUsage();
-        debugPrint('✅ AI使用回数: ${await _subscriptionService.getCurrentMonthAIUsage()}');
+        // AI使用回数/クレジット消費
+        await _creditService.consumeAICredit();
+        
+        // デバッグ情報
+        final currentPlan = await _subscriptionService.getCurrentPlan();
+        if (currentPlan != SubscriptionType.free) {
+          debugPrint('✅ AI使用回数: ${await _subscriptionService.getCurrentMonthAIUsage()}');
+        } else {
+          debugPrint('✅ AIクレジット残高: ${await _creditService.getAICredits()}');
+        }
 
         setState(() {
           _generatedMenu = text;
@@ -740,6 +768,71 @@ ${bodyParts.join('、')}
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: const Text('閉じる'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// アップグレード誘導ダイアログ（月3回上限到達時）
+  void _showUpgradeDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(Icons.info_outline, color: Colors.orange),
+            SizedBox(width: 12),
+            Text('月間上限に達しました'),
+          ],
+        ),
+        content: const Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '今月の無料動画視聴は上限（3回）に達しました。',
+              style: TextStyle(fontSize: 14),
+            ),
+            SizedBox(height: 16),
+            Text(
+              '💎 Premiumプランにアップグレードすると:',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text('• AI機能を月10回まで使用可能', style: TextStyle(fontSize: 13)),
+            Text('• 広告なしで快適に利用', style: TextStyle(fontSize: 13)),
+            Text('• 30日間無料トライアル', style: TextStyle(fontSize: 13)),
+            SizedBox(height: 8),
+            Text(
+              '🏆 Proプランなら無制限！',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('閉じる'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              // サブスク画面へ遷移
+              Navigator.pushNamed(context, '/subscription');
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue.shade700,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('プランを見る'),
           ),
         ],
       ),

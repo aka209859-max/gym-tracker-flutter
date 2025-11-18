@@ -26,6 +26,7 @@ import 'services/revenue_cat_service.dart';
 import 'services/trial_service.dart';
 import 'services/ad_service.dart';
 import 'services/interstitial_ad_manager.dart';
+import 'services/reward_ad_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -126,6 +127,18 @@ void main() async {
       print('✅ AdMob初期化完了');
     } catch (adMobError) {
       print('❌ AdMob初期化エラー（広告なしで動作）: $adMobError');
+    }
+    
+    // 🎬 リワード広告初期化（CEO戦略: 動画視聴でAIクレジット付与）
+    try {
+      print('🎬 リワード広告初期化...');
+      final rewardAdService = RewardAdService();
+      await rewardAdService.initialize();
+      // 初回の広告をプリロード
+      await rewardAdService.loadRewardedAd();
+      print('✅ リワード広告初期化完了');
+    } catch (rewardAdError) {
+      print('❌ リワード広告初期化エラー（広告なしで動作）: $rewardAdError');
     }
   }
   

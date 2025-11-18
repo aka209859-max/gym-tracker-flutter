@@ -6,7 +6,6 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'ai_addon_purchase_screen.dart';
 import 'campaign/campaign_registration_screen.dart';
-import 'auth_screen.dart';
 
 /// サブスクリプション管理画面
 class SubscriptionScreen extends StatefulWidget {
@@ -22,6 +21,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   SubscriptionType _currentPlan = SubscriptionType.free;
   bool _isLoading = true;
   List<StoreProduct> _availableProducts = [];
+  bool _isYearlySelected = true; // デフォルトで年額を選択（CEO戦略）
 
   @override
   void initState() {
@@ -66,29 +66,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final currentUser = FirebaseAuth.instance.currentUser;
-    final isAnonymous = currentUser?.isAnonymous ?? true;
-    
     return Scaffold(
       appBar: AppBar(
         title: const Text('プラン管理'),
         centerTitle: true,
-        actions: [
-          // ログイン/アカウント切り替えボタン（匿名ユーザーのみ表示）
-          if (isAnonymous)
-            IconButton(
-              icon: const Icon(Icons.login),
-              tooltip: 'ログイン',
-              onPressed: () async {
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AuthScreen()),
-                );
-                // ログイン後、プランを再読み込み
-                _loadCurrentPlan();
-              },
-            ),
-        ],
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -150,12 +131,19 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   ),
                   const SizedBox(height: 16),
                   
+                  // 月額/年額切り替えトグル
+                  _buildBillingPeriodToggle(),
+                  const SizedBox(height: 24),
+                  
                   // プレミアムプラン
                   _buildPlanCard(
                     type: SubscriptionType.premium,
                     name: 'プレミアムプラン',
                     price: _getPriceForPlan(SubscriptionType.premium),
-                    priceUnit: '月額',
+                    priceUnit: _isYearlySelected ? '年額' : '月額',
+                    monthlyEquivalent: _isYearlySelected ? '月換算 ¥400' : null,
+                    discount: _isYearlySelected ? '20% OFF' : null,
+                    savings: _isYearlySelected ? '¥1,200お得！' : null,
                     features: [
                       '✨ 無料プランの全機能',
                       '🤖 AI機能 月10回',
@@ -176,7 +164,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     type: SubscriptionType.pro,
                     name: 'プロプラン',
                     price: _getPriceForPlan(SubscriptionType.pro),
-                    priceUnit: '月額',
+                    priceUnit: _isYearlySelected ? '年額' : '月額',
+                    monthlyEquivalent: _isYearlySelected ? '月換算 ¥667' : null,
+                    discount: _isYearlySelected ? '32% OFF' : null,
+                    savings: _isYearlySelected ? '¥3,760お得！' : null,
                     features: [
                       '✨ プレミアムプランの全機能',
                       '🤖 AI機能 月30回',
@@ -254,12 +245,86 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     );
   }
 
+  /// 月額/年額切り替えトグル
+  Widget _buildBillingPeriodToggle() {
+    return Center(
+      child: Container(
+        padding: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildToggleButton(
+              label: '月額',
+              isSelected: !_isYearlySelected,
+              onTap: () {
+                setState(() {
+                  _isYearlySelected = false;
+                });
+              },
+            ),
+            _buildToggleButton(
+              label: '年額 (💥お得)',
+              isSelected: _isYearlySelected,
+              onTap: () {
+                setState(() {
+                  _isYearlySelected = true;
+                });
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildToggleButton({
+    required String label,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(8),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.white : Colors.transparent,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: isSelected
+              ? [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.1),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ]
+              : null,
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+            color: isSelected ? Colors.blue : Colors.grey[700],
+          ),
+        ),
+      ),
+    );
+  }
+
   /// プランカード
   Widget _buildPlanCard({
     required SubscriptionType type,
     required String name,
     required String price,
     required String priceUnit,
+    String? monthlyEquivalent,
+    String? discount,
+    String? savings,
     required List<String> features,
     required Color color,
     required IconData icon,
@@ -347,6 +412,45 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       ),
                     ],
                   ),
+                  if (monthlyEquivalent != null) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      monthlyEquivalent,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ],
+                  if (discount != null) ...[
+                    const SizedBox(height: 8),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        discount,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                  if (savings != null) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      savings,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.orange,
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ),
@@ -385,41 +489,37 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
               child: Column(
                 children: [
-                  // 乗り換え割ボタン（有料プランのみ）
+                  // トライアル期間表示（有料プランのみ）
                   if (!isCurrentPlan && type != SubscriptionType.free) ...[
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CampaignRegistrationScreen(
-                                planType: type == SubscriptionType.premium ? 'premium' : 'pro',
-                              ),
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.green.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.green, width: 1),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.celebration, color: Colors.green, size: 20),
+                          const SizedBox(width: 8),
+                          Text(
+                            type == SubscriptionType.premium
+                                ? '30日間無料トライアル'
+                                : '14日間無料トライアル',
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green,
                             ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.orange[700],
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                        ),
-                        child: Text(
-                          type == SubscriptionType.premium
-                              ? '🎉 乗り換え割で2ヶ月無料'
-                              : '🎉 乗り換え割で初月無料',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
                           ),
-                        ),
+                        ],
                       ),
                     ),
                     const SizedBox(height: 12),
                   ],
                   
-                  // 通常ボタン
+                  // 登録ボタン
                   SizedBox(
                     width: double.infinity,
                     child: isCurrentPlan
@@ -453,14 +553,15 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                   ),
                                 ),
                               )
-                            : OutlinedButton(
+                            : ElevatedButton(
                                 onPressed: () => _changePlan(type),
-                                style: OutlinedButton.styleFrom(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: color,
+                                  foregroundColor: Colors.white,
                                   padding: const EdgeInsets.symmetric(vertical: 14),
-                                  side: BorderSide(color: color, width: 2),
                                 ),
                                 child: const Text(
-                                  '通常登録',
+                                  '無料トライアルを始める',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -579,9 +680,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             ),
             const SizedBox(height: 12),
             Text(
-              '• 月額プランはいつでもキャンセル可能です\n'
-              '• キャンセル後も期間満了まで利用できます\n'
-              '• プラン変更は即座に反映されます',
+              '• 無料トライアル期間: Premium 30日間 / Pro 14日間\n'
+              '• トライアル終了後、自動的に有料プランに移行します\n'
+              '• いつでもキャンセル可能（期間満了まで利用可）',
               style: TextStyle(
                 fontSize: 13,
                 color: Colors.grey[700],
@@ -598,9 +699,19 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   String _getPriceForPlan(SubscriptionType plan) {
     // iOS/Android課金の場合、RevenueCatから取得した実際の価格を使用
     if (_availableProducts.isNotEmpty) {
-      final productId = plan == SubscriptionType.premium
-          ? RevenueCatService.premiumMonthlyProductId
-          : RevenueCatService.proMonthlyProductId;
+      String productId;
+      
+      if (_isYearlySelected) {
+        // 年額プラン
+        productId = plan == SubscriptionType.premium
+            ? RevenueCatService.premiumYearlyProductId
+            : RevenueCatService.proYearlyProductId;
+      } else {
+        // 月額プラン
+        productId = plan == SubscriptionType.premium
+            ? RevenueCatService.premiumMonthlyProductId
+            : RevenueCatService.proMonthlyProductId;
+      }
       
       try {
         final product = _availableProducts.firstWhere(
@@ -613,7 +724,13 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     }
     
     // デフォルト価格を返す
-    return plan == SubscriptionType.premium ? '¥500' : '¥980';
+    if (_isYearlySelected) {
+      // 年額価格 (CEO戦略)
+      return plan == SubscriptionType.premium ? '¥4,800' : '¥8,000';
+    } else {
+      // 月額価格
+      return plan == SubscriptionType.premium ? '¥500' : '¥980';
+    }
   }
 
   /// プラン変更処理（iOS/Android課金統合版）
@@ -680,10 +797,17 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         );
       }
       
-      // Product IDを決定
-      final productId = plan == SubscriptionType.premium
-          ? RevenueCatService.premiumMonthlyProductId
-          : RevenueCatService.proMonthlyProductId;
+      // Product IDを決定（月額/年額を区別）
+      String productId;
+      if (_isYearlySelected) {
+        productId = plan == SubscriptionType.premium
+            ? RevenueCatService.premiumYearlyProductId
+            : RevenueCatService.proYearlyProductId;
+      } else {
+        productId = plan == SubscriptionType.premium
+            ? RevenueCatService.premiumMonthlyProductId
+            : RevenueCatService.proMonthlyProductId;
+      }
       
       // RevenueCatで購入実行
       final success = await _revenueCatService.purchaseSubscription(productId);
