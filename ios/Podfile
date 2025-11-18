@@ -4,6 +4,9 @@ platform :ios, '14.0'
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
+# 🚨 CRITICAL: Use Git master repo instead of CDN (CDN is unstable in CI/CD)
+source 'https://github.com/CocoaPods/Specs.git'
+
 project 'Runner', {
   'Debug' => :debug,
   'Profile' => :release,
