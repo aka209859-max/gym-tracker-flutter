@@ -24,10 +24,11 @@ jobs:
         run: |
           flutter pub get
           cd ios
-          # 🚨 CRITICAL: Remove CDN trunk repo before pod install
-          pod repo remove trunk || true
+          pod repo remove trunk 2>/dev/null || true
           rm -rf ~/.cocoapods/repos/trunk
-          pod install --repo-update
+          export CP_REPOS_DIR="$HOME/.cocoapods/repos"
+          pod install --repo-update --verbose
+      
       - name: Install Apple Certificate and Provisioning Profile
         env:
           CERTIFICATE_BASE64: ${{ secrets.IOS_CERTIFICATE_BASE64 }}
@@ -56,7 +57,6 @@ jobs:
           
           cp profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/$UUID.mobileprovision
           
-          # Export UUID for later steps
           echo "PROFILE_UUID=$UUID" >> $GITHUB_ENV
           echo "PROFILE_NAME=$PROFILE_NAME" >> $GITHUB_ENV
           echo "TEAM_ID=$TEAM_ID" >> $GITHUB_ENV
@@ -168,7 +168,6 @@ jobs:
           mkdir -p ~/private_keys
           echo "$APP_STORE_CONNECT_KEY" > ~/private_keys/AuthKey_${APP_STORE_CONNECT_KEY_ID}.p8
           
-          # Find the actual IPA file path
           IPA_PATH=$(find build/ios/ipa -name "*.ipa" -type f | head -n 1)
           echo "📦 Found IPA: $IPA_PATH"
           
