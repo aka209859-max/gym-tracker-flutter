@@ -24,8 +24,10 @@ jobs:
         run: |
           flutter pub get
           cd ios
-          pod install
-      
+          # 🚨 CRITICAL: Remove CDN trunk repo before pod install
+          pod repo remove trunk || true
+          rm -rf ~/.cocoapods/repos/trunk
+          pod install --repo-update
       - name: Install Apple Certificate and Provisioning Profile
         env:
           CERTIFICATE_BASE64: ${{ secrets.IOS_CERTIFICATE_BASE64 }}
