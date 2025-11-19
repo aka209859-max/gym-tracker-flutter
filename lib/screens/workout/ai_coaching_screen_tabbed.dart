@@ -804,7 +804,7 @@ ${bodyParts.join('、')}
           children: [
             Icon(Icons.play_circle_outline, color: Colors.blue, size: 28),
             SizedBox(width: 12),
-            Text('動画視聴でAI機能を利用'),
+            Text('動画でAI機能解放'),
           ],
         ),
         content: Column(
@@ -838,11 +838,7 @@ ${bodyParts.join('、')}
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    '※ 動画は約30秒です',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
+
                 ],
               ),
             ),
@@ -1819,7 +1815,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           children: [
             Icon(Icons.play_circle_outline, color: Colors.blue, size: 28),
             SizedBox(width: 12),
-            Text('動画視聴でAI機能を利用'),
+            Text('動画でAI機能解放'),
           ],
         ),
         content: Column(
@@ -1853,11 +1849,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    '※ 動画は約30秒です',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
+
                 ],
               ),
             ),
@@ -3261,7 +3253,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           children: [
             Icon(Icons.play_circle_outline, color: Colors.blue, size: 28),
             SizedBox(width: 12),
-            Text('動画視聴でAI機能を利用'),
+            Text('動画でAI機能解放'),
           ],
         ),
         content: Column(
@@ -3295,11 +3287,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    '※ 動画は約30秒です',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
+
                 ],
               ),
             ),
