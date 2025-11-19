@@ -238,24 +238,76 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                 ),
                 const SizedBox(width: 8),
                 Expanded(
-                  child: DropdownButtonFormField<String>(
-                    value: exercise.exerciseName,
-                    decoration: const InputDecoration(
-                      labelText: '種目',
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    ),
-                    items: _muscleGroupExercises[_selectedMuscleGroup]!
-                        .map((name) => DropdownMenuItem(
-                              value: name,
-                              child: Text(name),
-                            ))
-                        .toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        exercise.exerciseName = value!;
-                      });
-                    },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // ドロップダウンまたはカスタム入力を表示
+                      if (exercise.isCustomExercise)
+                        TextFormField(
+                          initialValue: exercise.exerciseName,
+                          decoration: InputDecoration(
+                            labelText: 'カスタム種目名',
+                            border: const OutlineInputBorder(),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                            suffixIcon: IconButton(
+                              icon: const Icon(Icons.list, size: 20),
+                              tooltip: 'プリセットに戻る',
+                              onPressed: () {
+                                setState(() {
+                                  exercise.isCustomExercise = false;
+                                  exercise.exerciseName = _muscleGroupExercises[_selectedMuscleGroup]![0];
+                                });
+                              },
+                            ),
+                          ),
+                          onChanged: (value) {
+                            setState(() {
+                              exercise.exerciseName = value;
+                            });
+                          },
+                        )
+                      else
+                        DropdownButtonFormField<String>(
+                          value: exercise.exerciseName,
+                          decoration: const InputDecoration(
+                            labelText: '種目',
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          ),
+                          items: [
+                            // プリセット種目
+                            ..._muscleGroupExercises[_selectedMuscleGroup]!
+                                .map((name) => DropdownMenuItem(
+                                      value: name,
+                                      child: Text(name),
+                                    )),
+                            // カスタム種目追加オプション
+                            const DropdownMenuItem(
+                              value: '___custom___',
+                              child: Row(
+                                children: [
+                                  Icon(Icons.add_circle_outline, size: 18, color: Colors.blue),
+                                  SizedBox(width: 8),
+                                  Text('カスタム種目を追加', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+                                ],
+                              ),
+                            ),
+                          ],
+                          onChanged: (value) {
+                            if (value == '___custom___') {
+                              // カスタム種目モードに切り替え
+                              setState(() {
+                                exercise.isCustomExercise = true;
+                                exercise.exerciseName = '';
+                              });
+                            } else {
+                              setState(() {
+                                exercise.exerciseName = value!;
+                              });
+                            }
+                          },
+                        ),
+                    ],
                   ),
                 ),
                 IconButton(
@@ -407,11 +459,13 @@ class TemplateExerciseBuilder {
   int targetSets;
   int targetReps;
   double? targetWeight;
+  bool isCustomExercise;  // カスタム種目フラグ
 
   TemplateExerciseBuilder({
     required this.exerciseName,
     required this.targetSets,
     required this.targetReps,
     this.targetWeight,
+    this.isCustomExercise = false,  // デフォルトはプリセット種目
   });
 }
