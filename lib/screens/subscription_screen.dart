@@ -705,8 +705,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       if (_isYearlySelected) {
         // 年額プラン
         productId = plan == SubscriptionType.premium
-            ? RevenueCatService.premiumYearlyProductId
-            : RevenueCatService.proYearlyProductId;
+            ? RevenueCatService.premiumAnnualProductId
+            : RevenueCatService.proAnnualProductId;
       } else {
         // 月額プラン
         productId = plan == SubscriptionType.premium
@@ -802,8 +802,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       String productId;
       if (_isYearlySelected) {
         productId = plan == SubscriptionType.premium
-            ? RevenueCatService.premiumYearlyProductId
-            : RevenueCatService.proYearlyProductId;
+            ? RevenueCatService.premiumAnnualProductId
+            : RevenueCatService.proAnnualProductId;
       } else {
         productId = plan == SubscriptionType.premium
             ? RevenueCatService.premiumMonthlyProductId
