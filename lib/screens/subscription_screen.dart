@@ -39,9 +39,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       final plan = await _revenueCatService.syncSubscriptionStatus();
       
       // 利用可能な商品を取得（iOS/Android課金用）
+      // 🔄 キャッシュを無効化して最新の商品情報を取得（年額プラン対応）
       if (defaultTargetPlatform == TargetPlatform.iOS ||
           defaultTargetPlatform == TargetPlatform.android) {
-        final products = await _revenueCatService.getAvailableProducts();
+        final products = await _revenueCatService.getAvailableProducts(invalidateCache: true);
         setState(() {
           _availableProducts = products;
         });

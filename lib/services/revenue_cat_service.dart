@@ -27,8 +27,8 @@ class RevenueCatService {
   static const String proMonthlyProductId = 'com.nexa.gymmatch.pro.monthly';
   
   // 年額プラン (CEO戦略: 大幅割引で年額選択率向上)
-  static const String premiumYearlyProductId = 'com.nexa.gymmatch.premium.yearly';  // ¥4,800 (20% OFF)
-  static const String proYearlyProductId = 'com.nexa.gymmatch.pro.yearly';          // ¥8,000 (32% OFF)
+  static const String premiumAnnualProductId = 'com.nexa.gymmatch.premium.annual';  // ¥4,800 (20% OFF)
+  static const String proAnnualProductId = 'com.nexa.gymmatch.pro.annual';          // ¥8,000 (32% OFF)
   
   // 追加課金
   static const String aiAdditionalPackProductId = 'com.nexa.gymmatch.ai_pack_5';
@@ -167,11 +167,44 @@ class RevenueCatService {
     }
   }
   
-  /// 利用可能な商品を取得
-  Future<List<StoreProduct>> getAvailableProducts() async {
+  /// RevenueCatキャッシュを無効化（新商品読み込み用）
+  Future<void> invalidateCache() async {
+    try {
+      if (!_isInitialized) {
+        if (kDebugMode) {
+          debugPrint('⚠️ RevenueCat not initialized - cannot invalidate cache');
+        }
+        return;
+      }
+      
+      if (kDebugMode) {
+        debugPrint('🔄 RevenueCatキャッシュを無効化中...');
+      }
+      
+      // CustomerInfoキャッシュを無効化
+      await Purchases.invalidateCustomerInfoCache();
+      
+      if (kDebugMode) {
+        debugPrint('✅ RevenueCatキャッシュ無効化完了');
+      }
+      
+    } catch (e) {
+      if (kDebugMode) {
+        debugPrint('❌ キャッシュ無効化エラー: $e');
+      }
+    }
+  }
+  
+  /// 利用可能な商品を取得（キャッシュ無効化オプション付き）
+  Future<List<StoreProduct>> getAvailableProducts({bool invalidateCache = false}) async {
     try {
       if (!_isInitialized) {
         throw Exception('RevenueCat not initialized');
+      }
+      
+      // キャッシュ無効化が要求された場合
+      if (invalidateCache) {
+        await this.invalidateCache();
       }
       
       final offerings = await Purchases.getOfferings();

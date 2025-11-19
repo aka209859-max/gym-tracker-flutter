@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:shared_preferences/shared_preferences.dart';
 import '../services/reward_ad_service.dart';
 import '../services/ai_credit_service.dart';
 
@@ -30,10 +31,20 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
   }
 
   Future<void> _loadRemainingAds() async {
-    final earned = await _creditService.getAdEarnedCountThisMonth();
-    setState(() {
-      _remainingAds = 3 - earned;
-    });
+    // canEarnCreditFromAdを使って残り回数を計算
+    final canEarn = await _creditService.canEarnCreditFromAd();
+    if (!canEarn) {
+      setState(() {
+        _remainingAds = 0;
+      });
+    } else {
+      // 正確な残り回数を取得するため、SharedPreferencesを直接読む
+      final prefs = await SharedPreferences.getInstance();
+      final earned = prefs.getInt('ai_ad_earned_count') ?? 0;
+      setState(() {
+        _remainingAds = 3 - earned;
+      });
+    }
   }
 
   Future<void> _watchAd() async {

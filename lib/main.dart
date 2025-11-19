@@ -14,6 +14,8 @@ import 'screens/splash_screen.dart';
 
 import 'screens/password_gate_screen.dart';
 import 'screens/developer_menu_screen.dart';
+import 'screens/workout/workout_memo_list_screen.dart';
+import 'screens/personal_factors_screen.dart';
 import 'providers/gym_provider.dart';
 import 'providers/theme_provider.dart';
 import 'providers/auth_provider.dart';
@@ -243,6 +245,8 @@ class GymMatchApp extends StatelessWidget {
                 child: MainScreen(),
               ),
               '/developer_menu': (context) => const DeveloperMenuScreen(),
+              '/workout-memo': (context) => const WorkoutMemoListScreen(),
+              '/personal-factors': (context) => const PersonalFactorsScreen(),
             },
           );
         },

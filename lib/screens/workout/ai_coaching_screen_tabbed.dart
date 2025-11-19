@@ -62,6 +62,107 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
     }
   }
 
+  /// 設定メニューを表示
+  void _showSettingsMenu() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => Container(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // ハンドル
+            Container(
+              width: 40,
+              height: 4,
+              margin: const EdgeInsets.only(bottom: 20),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade300,
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            // タイトル
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Row(
+                children: [
+                  Icon(Icons.settings, color: Colors.deepPurple.shade700),
+                  const SizedBox(width: 12),
+                  const Text(
+                    '設定メニュー',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(height: 20),
+            // メニュー項目1: トレーニングメモ
+            ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade50,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(
+                  Icons.note_alt,
+                  color: Colors.blue.shade700,
+                ),
+              ),
+              title: const Text(
+                'トレーニングメモ',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              subtitle: const Text('過去のトレーニング記録を確認'),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed('/workout-memo');
+              },
+            ),
+            // メニュー項目2: 個人要因設定
+            ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.purple.shade50,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(
+                  Icons.person_outline,
+                  color: Colors.purple.shade700,
+                ),
+              ),
+              title: const Text(
+                '個人要因設定',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              subtitle: const Text('年齢・経験・睡眠・栄養などを編集'),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed('/personal-factors');
+              },
+            ),
+            const SizedBox(height: 10),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
@@ -99,6 +200,13 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
         ),
         backgroundColor: Colors.deepPurple.shade700,
         foregroundColor: Colors.white,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: _showSettingsMenu,
+            tooltip: '設定',
+          ),
+        ],
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: Colors.white,
