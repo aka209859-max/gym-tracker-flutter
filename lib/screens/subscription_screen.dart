@@ -149,7 +149,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     savings: _isYearlySelected ? '¥1,200お得！' : null,
                     features: [
                       '✨ 無料プランの全機能',
-                      '🤖 AI機能 月10回',
+                      '🤖 AI機能月10回（混雑度予測・AIコーチ・成長予測合計）',
                       '❤️ お気に入り無制限',
                       '📊 詳細な混雑度統計',
                       '⭐ ジムレビュー投稿',
@@ -173,7 +173,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     savings: _isYearlySelected ? '¥3,760お得！' : null,
                     features: [
                       '✨ プレミアムプランの全機能',
-                      '🤖 AI機能 月30回',
+                      '🤖 AI機能月30回（混雑度予測・AIコーチ・成長予測合計）',
                       '👥 トレーニングパートナー検索', // 検索条件: 距離・目標・経験・年齢・性別・曜日・時間帯でマッチング
                       '💬 メッセージング機能',
                       '🏆 優先サポート',
