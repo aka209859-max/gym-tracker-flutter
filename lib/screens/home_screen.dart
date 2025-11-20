@@ -74,6 +74,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   // 疲労管理システム
   final FatigueManagementService _fatigueService = FatigueManagementService();
   final AdvancedFatigueService _advancedFatigueService = AdvancedFatigueService();
+  
+  // 詳細セクションの表示/非表示状態
+  bool _isAdvancedSectionsExpanded = false;
 
   @override
   void initState() {
@@ -550,18 +553,26 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             
             const SizedBox(height: 16),
             
-            // Phase 2: 疲労管理を上位表示（意思決定支援強化）
-            _buildFatigueManagementSection(theme),
+            // トグルボタン（疲労管理・目標・アクションの表示/非表示切替）
+            _buildAdvancedSectionsToggle(theme),
             
-            const SizedBox(height: 16),
-            
-            // Phase 2: 目標を上位表示（目標勾配効果最大化）
-            _buildGoalsSection(theme),
-            
-            const SizedBox(height: 16),
-            
-            // Phase 2: サブアクションボタン（テンプレートのみ）
-            _buildActionButtons(theme),
+            // 展開可能な詳細セクション
+            if (_isAdvancedSectionsExpanded) ...[
+              const SizedBox(height: 16),
+              
+              // Phase 2: 疲労管理を上位表示（意思決定支援強化）
+              _buildFatigueManagementSection(theme),
+              
+              const SizedBox(height: 16),
+              
+              // Phase 2: 目標を上位表示（目標勾配効果最大化）
+              _buildGoalsSection(theme),
+              
+              const SizedBox(height: 16),
+              
+              // Phase 2: サブアクションボタン（テンプレートのみ）
+              _buildActionButtons(theme),
+            ],
             
             const SizedBox(height: 16),
             
@@ -601,6 +612,62 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         elevation: 6.0,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+    );
+  }
+
+  // 詳細セクションのトグルボタン
+  Widget _buildAdvancedSectionsToggle(ThemeData theme) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            _isAdvancedSectionsExpanded = !_isAdvancedSectionsExpanded;
+          });
+        },
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: theme.colorScheme.primary.withValues(alpha: 0.3),
+              width: 1.5,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.03),
+                blurRadius: 4,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                _isAdvancedSectionsExpanded
+                    ? Icons.expand_less
+                    : Icons.expand_more,
+                color: theme.colorScheme.primary,
+                size: 24,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                _isAdvancedSectionsExpanded
+                    ? '詳細セクションを閉じる'
+                    : '詳細セクションを表示（疲労管理・目標）',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: theme.colorScheme.primary,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -969,38 +1036,68 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
-          // Phase 2: サブアクションボタン1つのみ（テンプレート）
-          // RM計算・AIコーチは設定メニューへ移動（Hickの法則対応）
-          SizedBox(
-            width: double.infinity,
-            child: OutlinedButton.icon(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const TemplateScreen(),
+          // サブアクションボタン（トグル展開時のみ表示）
+          Row(
+            children: [
+              // テンプレート管理
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TemplateScreen(),
+                      ),
+                    );
+                  },
+                  icon: Icon(Icons.library_books, size: 18, color: theme.colorScheme.primary),
+                  label: const Text(
+                    'テンプレート',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                );
-              },
-              icon: Icon(Icons.library_books, size: 20, color: theme.colorScheme.primary),
-              label: Text(
-                'テンプレート管理',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: theme.colorScheme.primary,
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    side: BorderSide(color: theme.colorScheme.primary, width: 2),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
                 ),
               ),
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                side: BorderSide(color: theme.colorScheme.primary, width: 2),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+              const SizedBox(width: 8),
+              // RM計算機
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RMCalculatorScreen(),
+                      ),
+                    );
+                  },
+                  icon: Icon(Icons.calculate, size: 18, color: theme.colorScheme.primary),
+                  label: const Text(
+                    'RM計算',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    side: BorderSide(color: theme.colorScheme.primary, width: 2),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
-          // Phase 2: 統計ダッシュボードボタン削除（統計カードがクリッカブルで冗長）
           
           const SizedBox(height: 12),
           
