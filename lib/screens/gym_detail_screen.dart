@@ -42,15 +42,32 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
 
   /// 混雑度を読み込む（ユーザー報告 → キャッシュ → Google API）
   Future<void> _loadCrowdLevel() async {
+    if (kDebugMode) {
+      print('🔄 _loadCrowdLevel() called for gym: ${widget.gym.name}');
+      print('   Gym ID: ${widget.gym.id}');
+      print('   Current crowd level in gym object: ${widget.gym.currentCrowdLevel}');
+      print('   Last update: ${widget.gym.lastCrowdUpdate}');
+    }
+    
     final level = await _crowdLevelService.getCrowdLevel(
       gymId: widget.gym.id,
       placeId: widget.gym.id, // Google Places IDを使用
     );
     
+    if (kDebugMode) {
+      print('   Result from CrowdLevelService: $level');
+    }
+    
     if (mounted && level != null) {
       setState(() {
         _currentCrowdLevel = level;
       });
+      
+      if (kDebugMode) {
+        print('   ✅ Updated _currentCrowdLevel to: $level');
+      }
+    } else if (kDebugMode) {
+      print('   ⚠️ No crowd level data available');
     }
   }
 
@@ -282,14 +299,29 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
     int? displayLevel;
     String? dataSource;
     
+    if (kDebugMode) {
+      print('📊 _buildCrowdCard() called');
+      print('   gym.currentCrowdLevel: ${gym.currentCrowdLevel}');
+      print('   gym.lastCrowdUpdate: ${gym.lastCrowdUpdate}');
+      print('   _currentCrowdLevel: $_currentCrowdLevel');
+    }
+    
     // ユーザー報告があり、24時間以内ならそれを使用
     if (gym.currentCrowdLevel > 0 && gym.lastCrowdUpdate != null) {
       final updateTime = gym.lastCrowdUpdate!;
       final difference = DateTime.now().difference(updateTime);
       
+      if (kDebugMode) {
+        print('   User report age: ${difference.inHours} hours');
+      }
+      
       if (difference.inHours < 24) {
         displayLevel = gym.currentCrowdLevel;
         dataSource = 'ユーザー報告';
+        
+        if (kDebugMode) {
+          print('   ✅ Using user report: level $displayLevel');
+        }
       }
     }
     
@@ -297,6 +329,14 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
     if (displayLevel == null && _currentCrowdLevel != null) {
       displayLevel = _currentCrowdLevel;
       dataSource = 'Google統計';
+      
+      if (kDebugMode) {
+        print('   ✅ Using Google API data: level $displayLevel');
+      }
+    }
+    
+    if (kDebugMode && displayLevel == null) {
+      print('   ⚠️ No crowd data to display - showing report prompt');
     }
     
     // 混雑度データが無い場合：報告ボタンのみ表示

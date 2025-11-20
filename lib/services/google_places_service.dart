@@ -270,58 +270,30 @@ class GooglePlacesService {
     }
   }
 
-  /// 混雑度情報を取得（Place Details API - current_opening_hours含む）
+  /// 混雑度情報を取得（Google Places API経由）
+  /// 
+  /// ⚠️ 注意: Google Places APIの混雑度データ（popular_times）は
+  /// Place Details - Advanced APIが必要で、高額（$17/1,000リクエスト）
+  /// 
+  /// 現在の実装: ユーザー報告ベースのみ使用し、APIコスト削減
   /// 
   /// [placeId] Google Places ID
-  /// 戻り値: 現在の混雑度レベル（1-5）、null（データなし）
+  /// 戻り値: 常にnull（ユーザー報告システムを優先）
   Future<int?> getCurrentCrowdLevel(String placeId) async {
-    try {
-      // プロキシサーバー経由でPlace Details APIを呼び出し
-      final url = Uri.parse(
-        '$_proxyBaseUrl/details'
-        '?place_id=$placeId'
-        '&fields=current_opening_hours'
-        '&language=${ApiKeys.defaultLanguage}',
-      );
-
-      if (kDebugMode) {
-        print('🌐 Fetching crowd level for place: $placeId');
-      }
-
-      final response = await http.get(url);
-
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        
-        if (data['status'] == 'OK') {
-          final result = data['result'] as Map<String, dynamic>?;
-          
-          // current_opening_hoursから混雑度を推定
-          if (result != null && result.containsKey('current_opening_hours')) {
-            final openingHours = result['current_opening_hours'] as Map<String, dynamic>?;
-            
-            // Googleの混雑度データ（popular_times等）から5段階に変換
-            // 注: Google Places APIの混雑度は直接提供されないため、
-            // 営業時間や他の指標から推定する必要がある
-            
-            if (kDebugMode) {
-              print('   Opening hours data: $openingHours');
-            }
-            
-            // TODO: 実際の混雑度データ変換ロジック
-            // 現時点ではnullを返す（データ構造確認後に実装）
-            return null;
-          }
-        }
-      }
-      
-      return null; // データなし
-    } catch (e) {
-      if (kDebugMode) {
-        print('❌ Failed to get crowd level: $e');
-      }
-      return null;
+    if (kDebugMode) {
+      print('ℹ️ Google Places API crowd data disabled (high cost)');
+      print('ℹ️ Using user-reported crowd levels only');
     }
+    
+    // Google Places APIの混雑度データは高額なため、
+    // ユーザー報告システムのみを使用
+    // 
+    // 将来的にPlace Details - Advancedを有効化する場合:
+    // - fields=popular_times を使用
+    // - Realtime API（別料金）が必要
+    // - コスト分析を実施してから有効化
+    
+    return null; // APIコスト削減のため無効化
   }
 
   /// 写真URLを生成
