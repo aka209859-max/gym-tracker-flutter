@@ -743,7 +743,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         content: Text(
           '${_subscriptionService.getPlanName(newPlan)}に変更します。\n\n'
           '料金: ${_subscriptionService.getPlanPrice(newPlan)}\n\n'
-          '※現在は決済システム開発中のため、デモ動作です',
+          '※Web版ではプレビュー機能です。iOS/Android版で実際の課金が適用されます。',
         ),
         actions: [
           TextButton(
@@ -778,7 +778,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           defaultTargetPlatform == TargetPlatform.android) {
         await _purchaseWithRevenueCat(newPlan);
       } else {
-        // Web/Desktopの場合、ローカル変更（デモモード）
+        // Web/Desktopの場合、ローカル変更（プレビュー機能）
         await _changePlanLocal(newPlan);
       }
     }
@@ -932,7 +932,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     }
   }
   
-  /// ローカルでプラン変更（デモモード・Web用）
+  /// ローカルでプラン変更（プレビュー機能・Web用）
   Future<void> _changePlanLocal(SubscriptionType newPlan) async {
     final success = await _subscriptionService.changePlan(newPlan);
     
@@ -940,7 +940,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            '${_subscriptionService.getPlanName(newPlan)}に変更しました！（デモモード）',
+            '${_subscriptionService.getPlanName(newPlan)}に変更しました！',
           ),
           backgroundColor: Colors.green,
         ),

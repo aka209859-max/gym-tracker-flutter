@@ -77,8 +77,8 @@ void main() async {
     }
     
   } catch (e, stackTrace) {
-    // Firebase設定エラー時はデモモードで起動
-    print('❌ Firebase初期化エラー（デモモードで起動）: $e');
+    // Firebase設定エラー時はオフラインモードで起動
+    print('❌ Firebase初期化エラー（オフラインモードで起動）: $e');
     print('   StackTrace: $stackTrace');
   }
   

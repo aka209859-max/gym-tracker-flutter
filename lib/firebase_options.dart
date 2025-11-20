@@ -54,13 +54,13 @@ class DefaultFirebaseOptions {
     measurementId: 'G-DXGP9WX0Z8',
   );
 
-  // Android Platform Configuration (後で本番設定に置き換え)
+  // Android Platform Configuration (GYM MATCH Production)
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDemoAndroid-FitSync-Key-Replace-With-Real',
-    appId: '1:123456789:android:abcdef123456',
-    messagingSenderId: '123456789',
-    projectId: 'fitsync-demo',
-    storageBucket: 'fitsync-demo.appspot.com',
+    apiKey: 'AIzaSyDYwD-_fz9m4vSQsbdXuQpKtbHguIl4LaM',
+    appId: '1:506175392633:android:78f4e12b34567890fda8',
+    messagingSenderId: '506175392633',
+    projectId: 'gym-match-e560d',
+    storageBucket: 'gym-match-e560d.firebasestorage.app',
   );
 
   // iOS Platform Configuration (GYM MATCH Production - 正式設定)

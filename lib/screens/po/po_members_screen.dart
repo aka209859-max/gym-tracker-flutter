@@ -69,14 +69,6 @@ class _POMembersScreenState extends State<POMembersScreen> {
                               TextStyle(fontSize: 16, color: Colors.grey[600]),
                         ),
                         const SizedBox(height: 24),
-                        ElevatedButton.icon(
-                          onPressed: () {
-                            // デモデータ追加機能（開発用）
-                            _addDemoMembers();
-                          },
-                          icon: const Icon(Icons.add),
-                          label: const Text('デモデータを追加'),
-                        ),
                       ],
                     ),
                   );
@@ -177,68 +169,7 @@ class _POMembersScreenState extends State<POMembersScreen> {
     );
   }
 
-  // デモデータ追加（開発用）
-  Future<void> _addDemoMembers() async {
-    final demoMembers = [
-      PTMember(
-        id: '',
-        userId: 'demo_user_1',
-        partnerId: widget.partnerId,
-        name: '山田太郎',
-        email: 'yamada@example.com',
-        phoneNumber: '090-1234-5678',
-        joinedAt: DateTime.now().subtract(const Duration(days: 60)),
-        trainerName: '田中トレーナー',
-        planName: '月8回コース',
-        totalSessions: 16,
-        remainingSessions: 5,
-        lastSessionAt: DateTime.now().subtract(const Duration(days: 2)),
-        status: 'active',
-      ),
-      PTMember(
-        id: '',
-        userId: 'demo_user_2',
-        partnerId: widget.partnerId,
-        name: '佐藤花子',
-        email: 'sato@example.com',
-        phoneNumber: '090-9876-5432',
-        joinedAt: DateTime.now().subtract(const Duration(days: 90)),
-        trainerName: '鈴木トレーナー',
-        planName: '月4回コース',
-        totalSessions: 12,
-        remainingSessions: 2,
-        lastSessionAt: DateTime.now().subtract(const Duration(days: 5)),
-        status: 'active',
-      ),
-      PTMember(
-        id: '',
-        userId: 'demo_user_3',
-        partnerId: widget.partnerId,
-        name: '高橋一郎',
-        email: 'takahashi@example.com',
-        phoneNumber: '080-1111-2222',
-        joinedAt: DateTime.now().subtract(const Duration(days: 120)),
-        trainerName: '田中トレーナー',
-        planName: '月8回コース',
-        totalSessions: 32,
-        remainingSessions: 1,
-        lastSessionAt: DateTime.now().subtract(const Duration(days: 18)),
-        status: 'active',
-      ),
-    ];
 
-    for (final member in demoMembers) {
-      await FirebaseFirestore.instance
-          .collection('personalTrainingMembers')
-          .add(member.toFirestore());
-    }
-
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('デモデータを追加しました')),
-      );
-    }
-  }
 }
 
 class _SummaryCard extends StatelessWidget {
