@@ -130,6 +130,7 @@ class WorkoutShareImage extends StatelessWidget {
             final set = entry.value;
             final isMaxSet = index == maxSetIndex;
             final isBodyweightMode = set['is_bodyweight_mode'] as bool? ?? false;
+            final setType = set['setType'] as String? ?? 'normal';
             
             return _buildSetRow(
               index + 1,
@@ -137,6 +138,7 @@ class WorkoutShareImage extends StatelessWidget {
               set['reps']?.toInt() ?? 0,
               isMaxSet,
               isBodyweightMode,
+              setType,
             );
           }),
         ],
@@ -145,8 +147,32 @@ class WorkoutShareImage extends StatelessWidget {
   }
 
   /// セット行（筋トレMEMO並みに圧縮）
-  Widget _buildSetRow(int setNumber, double weight, int reps, bool isMax, bool isBodyweightMode) {
+  Widget _buildSetRow(int setNumber, double weight, int reps, bool isMax, bool isBodyweightMode, String setType) {
     final oneRM = OneRMCalculator.calculate(weight: weight, reps: reps);
+    
+    // SetTypeバッジの設定
+    String? setTypeBadge;
+    Color? badgeColor;
+    if (setType != 'normal') {
+      switch (setType) {
+        case 'warmup':
+          setTypeBadge = 'W';
+          badgeColor = Colors.orange;
+          break;
+        case 'superset':
+          setTypeBadge = 'SS';
+          badgeColor = Colors.purple;
+          break;
+        case 'dropset':
+          setTypeBadge = 'D';
+          badgeColor = Colors.blue;
+          break;
+        case 'failure':
+          setTypeBadge = 'F';
+          badgeColor = Colors.red;
+          break;
+      }
+    }
     
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2),
@@ -164,6 +190,26 @@ class WorkoutShareImage extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(width: 4),
+          
+          // SetTypeバッジ（通常セット以外）
+          if (setTypeBadge != null)
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+              decoration: BoxDecoration(
+                color: badgeColor,
+                borderRadius: BorderRadius.circular(3),
+              ),
+              child: Text(
+                setTypeBadge,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 9,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          
           const SizedBox(width: 8),
           
           // 重量×回数（自重モードまたは重量0の場合は「自重」と表示）

@@ -77,6 +77,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   
   // 詳細セクションの表示/非表示状態
   bool _isAdvancedSectionsExpanded = false;
+  
+  // SetType説明一覧の表示/非表示状態
+  bool _showSetTypeExplanation = false;
 
   @override
   void initState() {
@@ -1579,6 +1582,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           'weight': set['weight'],
           'reps': set['reps'],
           'has_assist': set['has_assist'] ?? false, // 補助有無を追加
+          'setType': set['set_type'] ?? 'normal', // スーパーセット等のタイプ（DBはsnake_case）
+          'dropsetLevel': set['dropset_level'] as int?, // ドロップセットレベル（DBはsnake_case、null許容）
           'muscle_group': workout['muscle_group'],
           'start_time': workout['start_time'],
           'end_time': workout['end_time'],
@@ -1642,6 +1647,98 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ],
             ),
           ),
+          
+          // SetType説明一覧（トグル表示）
+          if (_selectedDayWorkouts.isNotEmpty)
+            Column(
+              children: [
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      _showSetTypeExplanation = !_showSetTypeExplanation;
+                    });
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.info_outline,
+                          size: 16,
+                          color: theme.colorScheme.primary,
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          'セットタイプの見方',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: theme.colorScheme.primary,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const Spacer(),
+                        Icon(
+                          _showSetTypeExplanation 
+                            ? Icons.keyboard_arrow_up 
+                            : Icons.keyboard_arrow_down,
+                          size: 18,
+                          color: theme.colorScheme.primary,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                if (_showSetTypeExplanation)
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: theme.colorScheme.primaryContainer.withValues(alpha: 0.3),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: theme.colorScheme.primary.withValues(alpha: 0.2),
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildSetTypeExplanationRow(
+                          Icons.heat_pump,
+                          Colors.orange,
+                          'WU',
+                          'ウォームアップセット',
+                          '本番前の準備セット',
+                        ),
+                        const SizedBox(height: 8),
+                        _buildSetTypeExplanationRow(
+                          Icons.compare_arrows,
+                          Colors.purple,
+                          'SS',
+                          'スーパーセット',
+                          '連続で行う2種目',
+                        ),
+                        const SizedBox(height: 8),
+                        _buildSetTypeExplanationRow(
+                          Icons.trending_down,
+                          Colors.blue,
+                          'DS',
+                          'ドロップセット',
+                          '重量を落として限界まで',
+                        ),
+                        const SizedBox(height: 8),
+                        _buildSetTypeExplanationRow(
+                          Icons.local_fire_department,
+                          Colors.red,
+                          '限界',
+                          '限界セット',
+                          '完全に力尽きるまで',
+                        ),
+                      ],
+                    ),
+                  ),
+                const SizedBox(height: 8),
+              ],
+            ),
           
           // 種目ごとのセクション
           ...exerciseGroups.entries.map((entry) {
@@ -2448,6 +2545,65 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           );
         },
       ),
+    );
+  }
+  
+  /// SetType説明一覧の各行を生成
+  Widget _buildSetTypeExplanationRow(
+    IconData icon,
+    Color color,
+    String badge,
+    String title,
+    String description,
+  ) {
+    return Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+          decoration: BoxDecoration(
+            color: color.withValues(alpha: 0.15),
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(color: color, width: 1),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, size: 12, color: color),
+              const SizedBox(width: 3),
+              Text(
+                badge,
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  color: color,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Text(
+                description,
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Colors.grey[600],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
   
@@ -3829,6 +3985,182 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   // ==================== Task 17: 目標セクション ====================
   
   /// 目標セクション
+  // Smart Goal Card（カルーセル用の大きなビジュアルカード）
+  Widget _buildSmartGoalCard(Goal goal, ThemeData theme) {
+    final progress = goal.progress;
+    final remaining = goal.targetValue - goal.currentValue;
+    final progressColor = goal.isCompleted
+        ? Colors.green
+        : progress >= 0.85
+            ? Colors.orange
+            : theme.colorScheme.primary;
+    
+    // 動的メッセージ生成
+    String motivationMessage;
+    String motivationEmoji;
+    if (goal.isCompleted) {
+      motivationMessage = '達成おめでとう！';
+      motivationEmoji = '🎉';
+    } else if (progress >= 0.95) {
+      motivationMessage = 'あと少しで達成！今週中にいこう！';
+      motivationEmoji = '🎉';
+    } else if (progress >= 0.85) {
+      motivationMessage = 'あと${remaining.toStringAsFixed(0)}${goal.unit}で達成！';
+      motivationEmoji = '🔥';
+    } else if (progress >= 0.70) {
+      motivationMessage = 'もうすぐ達成！';
+      motivationEmoji = '💪';
+    } else if (progress >= 0.50) {
+      motivationMessage = '折り返し地点！その調子！';
+      motivationEmoji = '📈';
+    } else {
+      motivationMessage = 'スタートダッシュ成功！';
+      motivationEmoji = '🎯';
+    }
+    
+    // グラデーション色設定
+    List<Color> gradientColors;
+    if (goal.isCompleted) {
+      gradientColors = [Colors.green.shade400, Colors.green.shade600];
+    } else if (progress >= 0.85) {
+      gradientColors = [Colors.orange.shade400, Colors.deepOrange.shade600];
+    } else if (progress >= 0.70) {
+      gradientColors = [Colors.purple.shade400, Colors.purple.shade600];
+    } else {
+      gradientColors = [theme.colorScheme.primary, theme.colorScheme.primary.withValues(alpha: 0.7)];
+    }
+    
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 4),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: gradientColors,
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: progressColor.withValues(alpha: 0.3),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // 動的メッセージ
+            Row(
+              children: [
+                Text(
+                  motivationEmoji,
+                  style: const TextStyle(fontSize: 20),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    motivationMessage,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            
+            const SizedBox(height: 16),
+            
+            // 目標名
+            Row(
+              children: [
+                Icon(
+                  _getGoalIcon(goal.iconName),
+                  color: Colors.white,
+                  size: 24,
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    goal.name,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            
+            const SizedBox(height: 12),
+            
+            // 進捗表示
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '${goal.currentValue} → ${goal.targetValue} ${goal.unit}',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Text(
+                  '${goal.progressPercent}%',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            
+            const SizedBox(height: 12),
+            
+            // プログレスバー（太め）
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: LinearProgressIndicator(
+                value: progress,
+                minHeight: 10,
+                backgroundColor: Colors.white.withValues(alpha: 0.3),
+                valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+              ),
+            ),
+            
+            const SizedBox(height: 12),
+            
+            // 予測メッセージ
+            if (!goal.isCompleted)
+              Text(
+                '残り${goal.daysRemaining}日 | 現在のペースを維持しよう',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.white.withValues(alpha: 0.9),
+                ),
+              )
+            else
+              const Text(
+                '目標達成済み！次の目標を設定しましょう',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildGoalsSection(ThemeData theme) {
     if (_activeGoals.isEmpty) {
       // 目標が設定されていない場合
@@ -3900,7 +4232,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       );
     }
     
-    // アクティブな目標がある場合
+    // アクティブな目標がある場合 - Smart Carousel実装
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -3910,12 +4242,32 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                '目標進捗',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+              Row(
+                children: [
+                  const Text(
+                    '🎯 目標進捗',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      'スワイプで切替',
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: theme.colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               TextButton(
                 onPressed: () async {
@@ -3931,100 +4283,41 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           
-          // 目標カード
-          ..._activeGoals.take(2).map((goal) {
-            final progressColor = goal.isCompleted
-                ? Colors.green
-                : goal.progress >= 0.7
-                    ? Colors.orange
-                    : theme.colorScheme.primary;
-            
-            return Container(
-              margin: const EdgeInsets.only(bottom: 12),
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.05),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
+          // Smart Carousel
+          SizedBox(
+            height: 180,
+            child: PageView.builder(
+              itemCount: _activeGoals.length,
+              controller: PageController(viewportFraction: 0.92),
+              itemBuilder: (context, index) {
+                return _buildSmartGoalCard(_activeGoals[index], theme);
+              },
+            ),
+          ),
+          
+          // ページインジケーター
+          if (_activeGoals.length > 1) ...[
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                _activeGoals.length,
+                (index) => Container(
+                  width: 8,
+                  height: 8,
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: index == 0
+                        ? theme.colorScheme.primary
+                        : Colors.grey.shade300,
                   ),
-                ],
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        _getGoalIcon(goal.iconName),
-                        color: progressColor,
-                        size: 20,
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          goal.name,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      if (goal.isCompleted)
-                        const Icon(Icons.check_circle, color: Colors.green, size: 20),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '${goal.currentValue} / ${goal.targetValue} ${goal.unit}',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: progressColor,
-                        ),
-                      ),
-                      Text(
-                        '${goal.progressPercent}%',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: progressColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
-                    child: LinearProgressIndicator(
-                      value: goal.progress,
-                      minHeight: 6,
-                      backgroundColor: Colors.grey[200],
-                      valueColor: AlwaysStoppedAnimation<Color>(progressColor),
-                    ),
-                  ),
-                  if (!goal.isCompleted) ...[
-                    const SizedBox(height: 8),
-                    Text(
-                      '残り${goal.daysRemaining}日',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey[600],
-                      ),
-                    ),
-                  ],
-                ],
-              ),
-            );
-          }),
+            ),
+          ],
         ],
       ),
     );
