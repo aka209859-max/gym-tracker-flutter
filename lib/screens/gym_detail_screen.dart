@@ -11,6 +11,7 @@ import '../services/visit_history_service.dart';
 import '../services/crowd_level_service.dart';
 import 'crowd_report_screen.dart';
 import 'reservation_form_screen.dart';
+import 'gym_review_screen.dart';
 
 /// ジム詳細画面
 class GymDetailScreen extends StatefulWidget {
@@ -805,6 +806,31 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
             style: OutlinedButton.styleFrom(
               side: BorderSide(color: Colors.blue[600]!),
               foregroundColor: Colors.blue[600],
+            ),
+          ),
+        ),
+        const SizedBox(height: 12),
+        // レビュー投稿ボタン（Premium/Pro限定）
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton.icon(
+            onPressed: () async {
+              final result = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => GymReviewScreen(gym: widget.gym),
+                ),
+              );
+              // レビュー投稿成功時にページを更新
+              if (result == true && mounted) {
+                setState(() {});
+              }
+            },
+            icon: const Icon(Icons.rate_review),
+            label: const Text('レビューを投稿'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.amber[700],
+              foregroundColor: Colors.white,
             ),
           ),
         ),
