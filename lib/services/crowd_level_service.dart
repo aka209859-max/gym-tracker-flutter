@@ -1,19 +1,32 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'google_places_service.dart';
+import '../config/crowd_data_config.dart';
 
 /// 混雑度管理サービス
 /// 
+/// 📊 フェーズベースのデータ戦略:
+/// 
+/// フェーズ1 (0-100万円/月): 統計+ユーザー報告 (コスト$0)
+/// フェーズ2 (100-300万円/月): ハイブリッド (コスト$170/月)
+/// フェーズ3 (300万円/月以上): フルAPI (コスト$850/月)
+/// 
 /// データソース優先順位:
 /// 1. ユーザー報告（最優先）
-/// 2. Firebaseキャッシュ（24時間）
+/// 2. Firebaseキャッシュ（動的期限）
 /// 3. Google Places API統計データ
 class CrowdLevelService {
   final GooglePlacesService _placesService = GooglePlacesService();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   
-  /// キャッシュ有効期間（24時間）
-  static const Duration _cacheExpiration = Duration(hours: 24);
+  /// キャッシュ有効期間（動的に計算）
+  /// 
+  /// ピーク時: 1時間
+  /// 通常時: 4時間
+  /// 深夜: 8時間
+  Duration get _cacheExpiration => Duration(
+    seconds: CrowdDataConfig.getCacheDuration(),
+  );
 
   /// ジムの混雑度を取得
   /// 
