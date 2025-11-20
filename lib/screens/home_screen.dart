@@ -550,23 +550,18 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             
             const SizedBox(height: 16),
             
-            // アクションボタン
-            _buildActionButtons(theme),
-            
-            const SizedBox(height: 16),
-            
-            // Task 16: 疲労管理システムセクション
+            // Phase 2: 疲労管理を上位表示（意思決定支援強化）
             _buildFatigueManagementSection(theme),
             
             const SizedBox(height: 16),
             
-            // Task 17: 目標セクション
+            // Phase 2: 目標を上位表示（目標勾配効果最大化）
             _buildGoalsSection(theme),
             
             const SizedBox(height: 16),
             
-            // Task 14: 検索・フィルターUI
-            _buildSearchAndFilterSection(theme),
+            // Phase 2: サブアクションボタン（テンプレートのみ）
+            _buildActionButtons(theme),
             
             const SizedBox(height: 16),
             
@@ -974,101 +969,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
-          // サブアクション: テンプレート・RM計算・AIコーチ（3分割）
-          Row(
-            children: [
-              Expanded(
-                child: OutlinedButton.icon(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const TemplateScreen(),
-                      ),
-                    );
-                  },
-                  icon: Icon(Icons.library_books, size: 20, color: theme.colorScheme.primary),
-                  label: Text(
-                    'テンプレ',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: theme.colorScheme.primary,
-                    ),
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    side: BorderSide(color: theme.colorScheme.primary, width: 2),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: OutlinedButton.icon(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const RMCalculatorScreen(),
-                      ),
-                    );
-                  },
-                  icon: Icon(Icons.calculate, size: 20, color: theme.colorScheme.primary),
-                  label: Text(
-                    'RM計算',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: theme.colorScheme.primary,
-                    ),
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    side: BorderSide(color: theme.colorScheme.primary, width: 2),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AICoachingScreenTabbed(initialTabIndex: 0),
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.auto_awesome, size: 20),
-                  label: const Text(
-                    'AIコーチ',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    backgroundColor: Colors.deepPurple.shade700,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    elevation: 1,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          
-          // 統計ダッシュボードへのボタン（削除予定: 統計カードがクリッカブルなため冗長）
+          // Phase 2: サブアクションボタン1つのみ（テンプレート）
+          // RM計算・AIコーチは設定メニューへ移動（Hickの法則対応）
           SizedBox(
             width: double.infinity,
             child: OutlinedButton.icon(
@@ -1076,21 +978,21 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const StatisticsDashboardScreen(),
+                    builder: (context) => const TemplateScreen(),
                   ),
                 );
               },
-              icon: Icon(Icons.bar_chart, size: 20, color: theme.colorScheme.primary),
+              icon: Icon(Icons.library_books, size: 20, color: theme.colorScheme.primary),
               label: Text(
-                '統計ダッシュボード',
+                'テンプレート管理',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: theme.colorScheme.primary,
                 ),
               ),
               style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 14),
+                padding: const EdgeInsets.symmetric(vertical: 16),
                 side: BorderSide(color: theme.colorScheme.primary, width: 2),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -1098,10 +1000,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ),
             ),
           ),
+          // Phase 2: 統計ダッシュボードボタン削除（統計カードがクリッカブルで冗長）
           
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
           
-          // 新機能: 科学的AI機能への統合ナビゲーション
+          // AI科学的コーチング（統合版）
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
