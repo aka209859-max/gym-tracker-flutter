@@ -781,14 +781,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) => DraggableScrollableSheet(
-        initialChildSize: 0.7,
+        initialChildSize: 0.75,
         minChildSize: 0.5,
         maxChildSize: 0.95,
         expand: false,
         builder: (context, scrollController) => Container(
-          padding: const EdgeInsets.symmetric(vertical: 20),
+          padding: const EdgeInsets.only(top: 20, bottom: 40),
           child: ListView(
             controller: scrollController,
+            physics: const BouncingScrollPhysics(),
             children: [
             // ハンドル
             Container(
