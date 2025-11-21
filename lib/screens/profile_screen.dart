@@ -776,14 +776,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _showSettingsMenu(BuildContext context) {
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (context) => Container(
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.7,
+        minChildSize: 0.5,
+        maxChildSize: 0.95,
+        expand: false,
+        builder: (context, scrollController) => Container(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: ListView(
+            controller: scrollController,
+            children: [
             // ハンドル
             Container(
               width: 40,
@@ -982,6 +988,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(height: 10),
           ],
         ),
+      ),
       ),
     );
   }
