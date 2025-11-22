@@ -521,7 +521,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               subtitle: const Text(
-                'AI機能をさらに5回追加（¥100）',
+                'AI機能をさらに5回追加（¥300）',
                 style: TextStyle(fontSize: 12),
               ),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),

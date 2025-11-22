@@ -1140,7 +1140,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: const Text(
-                        '¥100 / 5回',
+                        '¥300 / 5回',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,

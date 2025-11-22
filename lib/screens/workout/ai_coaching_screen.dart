@@ -924,7 +924,7 @@ ${bodyParts.join('、')}
             ),
             SizedBox(height: 16),
             Text(
-              '💰 AI追加パック（¥100）:',
+              '💰 AI追加パック（¥300）:',
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,

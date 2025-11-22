@@ -226,7 +226,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
               icon: Icons.bolt,
               title: 'AI追加パック',
               subtitle: 'AI機能を5回追加',
-              price: '¥100',
+              price: '¥300',
               aiCount: 5,
               color: Colors.blue,
               isRecommended: true,
