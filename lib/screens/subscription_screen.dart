@@ -728,7 +728,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 Expanded(
                   child: TextButton.icon(
                     onPressed: () async {
-                      const url = 'https://www.nexa.co.jp/gym-match/terms';
+                      const url = 'https://gym-match-e560d.web.app/terms.html';
                       final uri = Uri.parse(url);
                       if (await canLaunchUrl(uri)) {
                         await launchUrl(uri, mode: LaunchMode.externalApplication);
@@ -759,7 +759,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 Expanded(
                   child: TextButton.icon(
                     onPressed: () async {
-                      const url = 'https://www.nexa.co.jp/gym-match/privacy';
+                      const url = 'https://gym-match-e560d.web.app/privacy_policy.html';
                       final uri = Uri.parse(url);
                       if (await canLaunchUrl(uri)) {
                         await launchUrl(uri, mode: LaunchMode.externalApplication);
