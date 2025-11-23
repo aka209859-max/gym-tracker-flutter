@@ -17,10 +17,13 @@ import 'achievements_screen.dart';
 import 'personal_factors_screen.dart';
 import 'campaign/campaign_registration_screen.dart';
 import 'ai_addon_purchase_screen.dart';
+import 'profile_edit_screen.dart';
 import '../services/favorites_service.dart';
 import '../services/subscription_service.dart';
 import '../services/chat_service.dart';
 import '../services/workout_import_service.dart';
+import '../services/training_partner_service.dart';
+import '../models/training_partner.dart';
 import 'dart:convert';
 
 /// プロフィール画面
@@ -35,10 +38,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final FavoritesService _favoritesService = FavoritesService();
   final SubscriptionService _subscriptionService = SubscriptionService();
   final ChatService _chatService = ChatService();
+  final TrainingPartnerService _trainingPartnerService = TrainingPartnerService();
   
   int _favoriteCount = 0;
   int _unreadMessages = 0;
   SubscriptionType _currentPlan = SubscriptionType.free;
+  TrainingPartner? _userProfile;
 
   @override
   void initState() {
@@ -50,10 +55,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> _loadUserData() async {
     final favoriteCount = await _favoritesService.getFavoriteCount();
     final currentPlan = await _subscriptionService.getCurrentPlan();
+    final userProfile = await _trainingPartnerService.getCurrentUserProfile();
     
     setState(() {
       _favoriteCount = favoriteCount;
       _currentPlan = currentPlan;
+      _userProfile = userProfile;
     });
   }
 
@@ -66,6 +73,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
         });
       }
     });
+  }
+
+  /// プロフィール編集画面へ遷移
+  Future<void> _navigateToProfileEdit() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProfileEditScreen(currentProfile: _userProfile),
+      ),
+    );
+    
+    if (result == true) {
+      // プロフィール更新後、データを再読み込み
+      _loadUserData();
+    }
   }
 
   /// 写真・CSVから取り込み機能（ファイル種類選択）
@@ -338,29 +360,73 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildProfileHeader(BuildContext context) {
+    // 🔓 テスト用：全ユーザーに編集権限を付与
+    final bool isProUser = true; // _currentPlan == SubscriptionType.pro;
+    
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            CircleAvatar(
-              radius: 50,
-              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-              child: Icon(
-                Icons.person,
-                size: 50,
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
+            // プロフィール画像 + 編集ボタン
+            GestureDetector(
+              onTap: isProUser ? _navigateToProfileEdit : null,
+              child: Stack(
+                children: [
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                    backgroundImage: _userProfile?.profileImageUrl != null
+                        ? NetworkImage(_userProfile!.profileImageUrl!)
+                        : null,
+                    child: _userProfile?.profileImageUrl == null
+                        ? Icon(
+                            Icons.person,
+                            size: 50,
+                            color: Theme.of(context).colorScheme.onPrimaryContainer,
+                          )
+                        : null,
+                  ),
+                  if (isProUser)
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: CircleAvatar(
+                        radius: 16,
+                        backgroundColor: Theme.of(context).primaryColor,
+                        child: const Icon(
+                          Icons.edit,
+                          size: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                ],
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
-              'トレーニングユーザー',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            GestureDetector(
+              onTap: isProUser ? _navigateToProfileEdit : null,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    _userProfile?.displayName ?? 'トレーニングユーザー',
+                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  if (isProUser) const SizedBox(width: 8),
+                  if (isProUser)
+                    Icon(Icons.edit, size: 18, color: Colors.grey[600]),
+                ],
+              ),
             ),
             const SizedBox(height: 4),
             Text(
-              'GYM MATCHへようこそ',
+              _userProfile?.bio ?? 'GYM MATCHへようこそ',
               style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
             const SizedBox(height: 16),
             // プランバッジ（タップ可能）

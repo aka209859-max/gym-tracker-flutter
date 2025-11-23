@@ -8,6 +8,7 @@ import '../../services/ai_credit_service.dart';
 import '../../widgets/reward_ad_dialog.dart';
 import '../ai_addon_purchase_screen.dart';
 import '../../utils/console_logger.dart';
+import '../../utils/app_logger.dart';
 
 /// Layer 5: AIコーチング画面
 /// 

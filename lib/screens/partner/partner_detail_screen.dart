@@ -1,51 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import '../../models/training_partner.dart';
-import '../../services/partner_service.dart';
+import '../../services/training_partner_service.dart';
 import '../../services/chat_service.dart';
-import '../messages/chat_detail_screen.dart';
+import '../../services/friend_request_service.dart';
+import 'chat_screen_partner.dart';
 
 /// パートナー詳細画面
 class PartnerDetailScreen extends StatefulWidget {
   final TrainingPartner partner;
-  final double? distance;
-  final bool isMyPartner;
 
-  const PartnerDetailScreen({
-    super.key,
-    required this.partner,
-    this.distance,
-    this.isMyPartner = false,
-  });
+  const PartnerDetailScreen({super.key, required this.partner});
 
   @override
   State<PartnerDetailScreen> createState() => _PartnerDetailScreenState();
 }
 
 class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
-  final PartnerService _partnerService = PartnerService();
+  final TrainingPartnerService _partnerService = TrainingPartnerService();
   final ChatService _chatService = ChatService();
+  final FriendRequestService _friendRequestService = FriendRequestService();
   bool _isLoading = false;
+  FriendshipStatus _friendshipStatus = FriendshipStatus.notFriends;
 
-  /// パートナーリクエストを送信
-  Future<void> _sendRequest() async {
-    setState(() => _isLoading = true);
+  @override
+  void initState() {
+    super.initState();
+    _loadFriendshipStatus();
+  }
+
+  /// 友達関係ステータスを読み込み
+  Future<void> _loadFriendshipStatus() async {
+    try {
+      final status = await _friendRequestService.getFriendshipStatus(widget.partner.userId);
+      if (mounted) {
+        setState(() {
+          _friendshipStatus = status;
+        });
+      }
+    } catch (e) {
+      // エラー時はnotFriendsのまま
+    }
+  }
+
+  /// 友達申請を送信
+  Future<void> _sendFriendRequest() async {
+    setState(() {
+      _isLoading = true;
+    });
 
     try {
-      await _partnerService.sendPartnerRequest(
-        targetId: widget.partner.id,
-        targetName: widget.partner.name,
-        targetPhotoUrl: widget.partner.photoUrl,
-      );
+      await _friendRequestService.sendFriendRequest(widget.partner.userId);
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('リクエストを送信しました'),
-            backgroundColor: Colors.green,
-          ),
+          const SnackBar(content: Text('友達申請を送信しました')),
         );
-        Navigator.pop(context);
+        await _loadFriendshipStatus();
       }
     } catch (e) {
       if (mounted) {
@@ -58,30 +68,49 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
       }
     } finally {
       if (mounted) {
-        setState(() => _isLoading = false);
+        setState(() {
+          _isLoading = false;
+        });
       }
     }
   }
 
-  /// メッセージを開始
-  Future<void> _startChat() async {
-    setState(() => _isLoading = true);
+  /// メッセージ画面へ移動
+  Future<void> _openChat() async {
+    setState(() {
+      _isLoading = true;
+    });
 
     try {
-      final conversationId = await _chatService.getOrCreateConversation(
-        otherUserId: widget.partner.id,
-        otherUserName: widget.partner.name,
-        otherUserPhotoUrl: widget.partner.photoUrl,
+      // 友達チェック
+      final isFriend = await _friendRequestService.areFriends(
+        widget.partner.userId,
+        widget.partner.userId,
       );
 
+      if (!isFriend) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('友達になってからメッセージを送信できます'),
+              backgroundColor: Colors.orange,
+            ),
+          );
+        }
+        return;
+      }
+
+      // チャットルーム作成または取得
+      final roomId = await _chatService.createChatRoom(widget.partner.userId);
+
       if (mounted) {
+        // チャット画面へ移動
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ChatDetailScreen(
-              conversationId: conversationId,
-              otherUserName: widget.partner.name,
-              otherUserPhotoUrl: widget.partner.photoUrl,
+            builder: (context) => ChatScreenPartner(
+              roomId: roomId,
+              partner: widget.partner,
             ),
           ),
         );
@@ -97,7 +126,9 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
       }
     } finally {
       if (mounted) {
-        setState(() => _isLoading = false);
+        setState(() {
+          _isLoading = false;
+        });
       }
     }
   }
@@ -105,216 +136,250 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: const Text(
-          'プロフィール',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text('パートナー詳細'),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             // ヘッダー
-            Container(
-              width: double.infinity,
-              color: Theme.of(context).colorScheme.primary,
-              padding: const EdgeInsets.only(bottom: 32),
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 60,
-                    backgroundColor: Colors.white,
-                    backgroundImage: widget.partner.photoUrl.isNotEmpty
-                        ? NetworkImage(widget.partner.photoUrl)
-                        : null,
-                    child: widget.partner.photoUrl.isEmpty
-                        ? Icon(Icons.person, size: 60, color: Colors.grey[400])
-                        : null,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    widget.partner.name,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    widget.partner.experienceLevelText,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white.withValues(alpha: 0.9),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            _buildHeader(),
+            const Divider(height: 1),
 
-            // 情報カード
+            // プロフィール詳細
             Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // 基本情報
-                  _buildInfoCard(
-                    title: '基本情報',
-                    children: [
-                      if (widget.distance != null)
-                        _buildInfoRow(Icons.location_on, '距離',
-                            '${widget.distance!.toStringAsFixed(1)} km'),
-                      if (widget.partner.gymName != null)
-                        _buildInfoRow(Icons.fitness_center, '所属ジム',
-                            widget.partner.gymName!),
-                    ],
-                  ),
+                  _buildInfoSection('基本情報', [
+                    if (widget.partner.location != null)
+                      _buildInfoRow(Icons.location_on, '居住地', widget.partner.location!),
+                    if (widget.partner.experienceLevel != null)
+                      _buildInfoRow(Icons.fitness_center, '経験レベル', widget.partner.experienceLevel!),
+                  ]),
 
-                  const SizedBox(height: 16),
-
-                  // 自己紹介
-                  if (widget.partner.bio.isNotEmpty)
-                    _buildInfoCard(
-                      title: '自己紹介',
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Text(
-                            widget.partner.bio,
-                            style: const TextStyle(fontSize: 15, height: 1.6),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                  const SizedBox(height: 16),
-
-                  // 好きな種目
-                  if (widget.partner.preferredExercises.isNotEmpty)
-                    _buildInfoCard(
-                      title: '好きな種目',
-                      children: [
-                        Wrap(
-                          spacing: 8,
-                          runSpacing: 8,
-                          children: widget.partner.preferredExercises
-                              .map((exercise) => Chip(
-                                    label: Text(exercise),
-                                    backgroundColor: Colors.blue.shade50,
-                                    labelStyle: TextStyle(color: Colors.blue.shade700),
-                                  ))
-                              .toList(),
-                        ),
-                      ],
-                    ),
-
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 24),
 
                   // 目標
                   if (widget.partner.goals.isNotEmpty)
-                    _buildInfoCard(
-                      title: '目標',
-                      children: [
-                        Wrap(
-                          spacing: 8,
-                          runSpacing: 8,
-                          children: widget.partner.goals
-                              .map((goal) => Chip(
-                                    label: Text(goal),
-                                    backgroundColor: Colors.green.shade50,
-                                    labelStyle: TextStyle(color: Colors.green.shade700),
-                                  ))
-                              .toList(),
-                        ),
-                      ],
-                    ),
+                    _buildInfoSection('目標', [
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: widget.partner.goals.map((goal) {
+                          return Chip(
+                            label: Text(goal),
+                            backgroundColor: Colors.orange[50],
+                            side: BorderSide(color: Colors.orange[200]!),
+                          );
+                        }).toList(),
+                      ),
+                    ]),
 
-                  const SizedBox(height: 80),
+                  const SizedBox(height: 24),
+
+                  // トレーニング種目
+                  if (widget.partner.preferredExercises.isNotEmpty)
+                    _buildInfoSection('好きな種目', [
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: widget.partner.preferredExercises.map((exercise) {
+                          return Chip(
+                            label: Text(exercise),
+                            backgroundColor: Colors.blue[50],
+                            side: BorderSide(color: Colors.blue[200]!),
+                          );
+                        }).toList(),
+                      ),
+                    ]),
+
+                  const SizedBox(height: 24),
+
+                  // 自己紹介
+                  if (widget.partner.bio != null && widget.partner.bio!.isNotEmpty)
+                    _buildInfoSection('自己紹介', [
+                      Text(
+                        widget.partner.bio!,
+                        style: const TextStyle(fontSize: 15, height: 1.6),
+                      ),
+                    ]),
                 ],
               ),
             ),
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
-              blurRadius: 10,
-              offset: const Offset(0, -2),
-            ),
-          ],
-        ),
-        child: SafeArea(
-          child: widget.isMyPartner
-              ? ElevatedButton.icon(
-                  onPressed: _isLoading ? null : _startChat,
-                  icon: const Icon(Icons.message),
-                  label: const Text('メッセージを送る'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                  ),
-                )
-              : ElevatedButton.icon(
-                  onPressed: _isLoading ? null : _sendRequest,
-                  icon: const Icon(Icons.person_add),
-                  label: const Text('パートナーリクエストを送る'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                  ),
-                ),
-        ),
-      ),
+      bottomNavigationBar: _buildBottomButtons(),
     );
   }
 
-  /// 情報カード
-  Widget _buildInfoCard({
-    required String title,
-    required List<Widget> children,
-  }) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+  /// 画面下部のボタンを構築
+  Widget _buildBottomButtons() {
+    if (_isLoading) {
+      return const SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Center(child: CircularProgressIndicator()),
+        ),
+      );
+    }
+
+    return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+            // 友達ステータスに応じたボタン表示
+            if (_friendshipStatus == FriendshipStatus.notFriends)
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: _sendFriendRequest,
+                  icon: const Icon(Icons.person_add),
+                  label: const Text('友達申請', style: TextStyle(fontSize: 16)),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    backgroundColor: Colors.blue,
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(height: 12),
-            ...children,
+
+            if (_friendshipStatus == FriendshipStatus.requestSent)
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: null,
+                  icon: const Icon(Icons.schedule),
+                  label: const Text('申請中', style: TextStyle(fontSize: 16)),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    backgroundColor: Colors.grey,
+                  ),
+                ),
+              ),
+
+            if (_friendshipStatus == FriendshipStatus.requestReceived)
+              Column(
+                children: [
+                  const Text(
+                    'この人から友達申請が届いています',
+                    style: TextStyle(fontSize: 14, color: Colors.orange),
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton(
+                          onPressed: () {
+                            // TODO: 拒否処理
+                          },
+                          child: const Text('拒否'),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        flex: 2,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            // TODO: 承認処理
+                          },
+                          child: const Text('承認'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+
+            if (_friendshipStatus == FriendshipStatus.friends)
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: _openChat,
+                  icon: const Icon(Icons.message),
+                  label: const Text('メッセージを送る', style: TextStyle(fontSize: 16)),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    backgroundColor: Colors.green,
+                  ),
+                ),
+              ),
           ],
         ),
       ),
     );
   }
 
-  /// 情報行
+  Widget _buildHeader() {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        children: [
+          // プロフィール画像
+          CircleAvatar(
+            radius: 60,
+            backgroundColor: Colors.grey[300],
+            backgroundImage: widget.partner.profileImageUrl != null
+                ? NetworkImage(widget.partner.profileImageUrl!)
+                : null,
+            child: widget.partner.profileImageUrl == null
+                ? const Icon(Icons.person, size: 60)
+                : null,
+          ),
+          const SizedBox(height: 16),
+
+          // 名前
+          Text(
+            widget.partner.displayName,
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 4),
+
+          // 居住地
+          if (widget.partner.location != null)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.location_on, size: 16, color: Colors.grey[600]),
+                const SizedBox(width: 4),
+                Text(
+                  widget.partner.location!,
+                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                ),
+              ],
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfoSection(String title, List<Widget> children) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 12),
+        ...children,
+      ],
+    );
+  }
+
   Widget _buildInfoRow(IconData icon, String label, String value) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.only(bottom: 12),
       child: Row(
         children: [
           Icon(icon, size: 20, color: Colors.grey[600]),
@@ -322,17 +387,16 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
           Text(
             label,
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 14,
               color: Colors.grey[600],
               fontWeight: FontWeight.w500,
             ),
           ),
-          const Spacer(),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
+          const SizedBox(width: 16),
+          Expanded(
+            child: Text(
+              value,
+              style: const TextStyle(fontSize: 15),
             ),
           ),
         ],

@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/chat_message.dart';
+import 'friend_request_service.dart';
 
 /// チャットサービス
 class ChatService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FriendRequestService _friendRequestService = FriendRequestService();
 
   /// 会話一覧を取得（リアルタイム）
   Stream<List<Conversation>> getConversations() {
@@ -87,6 +89,42 @@ class ChatService {
       'lastMessageSenderId': currentUser.uid,
       'unreadCount': unreadCount,
     });
+  }
+
+  /// チャットルーム作成（パートナー機能用）
+  Future<String> createChatRoom(String partnerId) async {
+    final currentUser = _auth.currentUser;
+    if (currentUser == null) throw Exception('ログインが必要です');
+
+    // 🔒 友達チェック
+    final isFriend = await _friendRequestService.areFriends(currentUser.uid, partnerId);
+    if (!isFriend) {
+      throw Exception('友達になってからメッセージを送信できます');
+    }
+
+    // 既存のチャットルームを検索
+    final existingRooms = await _firestore
+        .collection('chat_rooms')
+        .where('participants', arrayContains: currentUser.uid)
+        .get();
+
+    for (var doc in existingRooms.docs) {
+      final participants = List<String>.from(doc.data()['participants']);
+      if (participants.contains(partnerId)) {
+        return doc.id;
+      }
+    }
+
+    // 新しいチャットルームを作成
+    final roomRef = await _firestore.collection('chat_rooms').add({
+      'participants': [currentUser.uid, partnerId],
+      'last_message': '',
+      'last_message_time': FieldValue.serverTimestamp(),
+      'unread_count': {currentUser.uid: 0, partnerId: 0},
+      'created_at': FieldValue.serverTimestamp(),
+    });
+
+    return roomRef.id;
   }
 
   /// 会話を作成または取得
