@@ -734,10 +734,18 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 Expanded(
                   child: TextButton.icon(
                     onPressed: () async {
-                      const url = 'https://gym-match-e560d.web.app/terms.html';
+                      // Web版では相対パス、iOS/Androidでは完全URL
+                      final url = kIsWeb 
+                          ? '/terms.html'
+                          : 'https://gym-match-e560d.web.app/terms.html';
                       final uri = Uri.parse(url);
                       if (await canLaunchUrl(uri)) {
-                        await launchUrl(uri, mode: LaunchMode.externalApplication);
+                        // Web版では同じウィンドウで開く（LaunchMode.platformDefault）
+                        // iOS/Androidでは外部ブラウザで開く
+                        final mode = kIsWeb 
+                            ? LaunchMode.platformDefault 
+                            : LaunchMode.externalApplication;
+                        await launchUrl(uri, mode: mode);
                       } else {
                         if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -765,10 +773,18 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 Expanded(
                   child: TextButton.icon(
                     onPressed: () async {
-                      const url = 'https://gym-match-e560d.web.app/privacy_policy.html';
+                      // Web版では相対パス、iOS/Androidでは完全URL
+                      final url = kIsWeb 
+                          ? '/privacy_policy.html'
+                          : 'https://gym-match-e560d.web.app/privacy_policy.html';
                       final uri = Uri.parse(url);
                       if (await canLaunchUrl(uri)) {
-                        await launchUrl(uri, mode: LaunchMode.externalApplication);
+                        // Web版では同じウィンドウで開く（LaunchMode.platformDefault）
+                        // iOS/Androidでは外部ブラウザで開く
+                        final mode = kIsWeb 
+                            ? LaunchMode.platformDefault 
+                            : LaunchMode.externalApplication;
+                        await launchUrl(uri, mode: mode);
                       } else {
                         if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
