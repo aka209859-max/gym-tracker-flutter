@@ -28,6 +28,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   Uint8List? _selectedImageBytes;
   String? _currentImageUrl;
   bool _isLoading = false;
+  bool _isPickingImage = false; // 画像選択中フラグ
 
   // 都道府県リスト
   static const List<String> _prefectures = [
@@ -65,10 +66,22 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     super.dispose();
   }
 
-  /// 画像選択
+  /// 画像選択（安定化版）
   Future<void> _pickImage() async {
+    // 既に画像選択中の場合は処理をスキップ（連続タップ防止）
+    if (_isPickingImage) {
+      debugPrint('⚠️ 既に画像選択処理中です');
+      return;
+    }
+
+    // 画像選択開始フラグを立てる
+    if (mounted) {
+      setState(() {
+        _isPickingImage = true;
+      });
+    }
+
     if (kIsWeb) {
-      // Web版のログ
       debugPrint('🖼️ [Web] 画像選択を開始');
     }
     
@@ -76,6 +89,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       final picker = ImagePicker();
       
       // ギャラリーから選択
+      debugPrint('📱 ImagePicker.pickImage() 呼び出し中...');
       final pickedFile = await picker.pickImage(
         source: ImageSource.gallery,
         maxWidth: 512,
@@ -83,34 +97,74 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         imageQuality: 85,
       );
 
-      if (pickedFile != null) {
-        debugPrint('📸 画像選択成功: ${pickedFile.name}, サイズ読み込み中...');
-        final bytes = await pickedFile.readAsBytes();
-        debugPrint('✅ 画像読み込み完了: ${bytes.length} bytes');
-        
+      // ユーザーがキャンセルした場合
+      if (pickedFile == null) {
+        debugPrint('ℹ️ 画像選択がキャンセルされました');
         if (mounted) {
           setState(() {
-            _selectedImageBytes = bytes;
+            _isPickingImage = false;
           });
-          debugPrint('✅ UI更新完了');
-        } else {
-          debugPrint('⚠️ 警告: 画面が既に破棄されています');
         }
+        return;
+      }
+
+      // 画像選択成功
+      debugPrint('📸 画像選択成功: ${pickedFile.name}');
+      debugPrint('📏 ファイルパス: ${pickedFile.path}');
+      
+      // バイト配列読み込み（この部分で時間がかかる可能性あり）
+      debugPrint('💾 バイト配列読み込み中...');
+      final bytes = await pickedFile.readAsBytes();
+      debugPrint('✅ 画像読み込み完了: ${bytes.length} bytes (${(bytes.length / 1024).toStringAsFixed(2)} KB)');
+      
+      // UI更新
+      if (mounted) {
+        setState(() {
+          _selectedImageBytes = bytes;
+          _isPickingImage = false;
+        });
+        debugPrint('✅ UI更新完了');
+        
+        // 成功フィードバック
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('画像を選択しました'),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 2),
+          ),
+        );
       } else {
-        debugPrint('ℹ️ 画像選択がキャンセルされました');
+        debugPrint('⚠️ 警告: 画面が既に破棄されています');
       }
     } catch (e, stackTrace) {
       debugPrint('❌ 画像選択エラー: $e');
       debugPrint('📋 スタックトレース: $stackTrace');
       
       if (mounted) {
+        setState(() {
+          _isPickingImage = false;
+        });
+        
+        // エラーの詳細をユーザーに表示
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('画像の読み込みに失敗しました: $e'),
+            content: Text('画像の読み込みに失敗しました\n$e'),
             backgroundColor: Colors.red,
             duration: const Duration(seconds: 5),
+            action: SnackBarAction(
+              label: '再試行',
+              textColor: Colors.white,
+              onPressed: _pickImage,
+            ),
           ),
         );
+      }
+    } finally {
+      // 確実にフラグをリセット
+      if (mounted && _isPickingImage) {
+        setState(() {
+          _isPickingImage = false;
+        });
       }
     }
   }
@@ -235,20 +289,40 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                   children: [
                     // プロフィール画像
                     GestureDetector(
-                      onTap: _pickImage,
+                      onTap: _isPickingImage ? null : _pickImage, // 画像選択中は無効化
                       child: Stack(
                         children: [
-                          CircleAvatar(
-                            radius: 60,
-                            backgroundColor: Colors.grey[300],
-                            backgroundImage: _selectedImageBytes != null
-                                ? MemoryImage(_selectedImageBytes!)
-                                : (_currentImageUrl != null
-                                    ? NetworkImage(_currentImageUrl!)
-                                    : null) as ImageProvider?,
-                            child: _selectedImageBytes == null && _currentImageUrl == null
-                                ? const Icon(Icons.person, size: 60, color: Colors.white)
-                                : null,
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              CircleAvatar(
+                                radius: 60,
+                                backgroundColor: Colors.grey[300],
+                                backgroundImage: _selectedImageBytes != null
+                                    ? MemoryImage(_selectedImageBytes!)
+                                    : (_currentImageUrl != null
+                                        ? NetworkImage(_currentImageUrl!)
+                                        : null) as ImageProvider?,
+                                child: _selectedImageBytes == null && _currentImageUrl == null
+                                    ? const Icon(Icons.person, size: 60, color: Colors.white)
+                                    : null,
+                              ),
+                              // 画像選択中のローディング表示
+                              if (_isPickingImage)
+                                Container(
+                                  width: 120,
+                                  height: 120,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withValues(alpha: 0.6),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Center(
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                            ],
                           ),
                           Positioned(
                             bottom: 0,
