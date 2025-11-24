@@ -67,21 +67,51 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   /// 画像選択
   Future<void> _pickImage() async {
-    final picker = ImagePicker();
+    if (kIsWeb) {
+      // Web版のログ
+      debugPrint('🖼️ [Web] 画像選択を開始');
+    }
     
-    // ギャラリーから選択
-    final pickedFile = await picker.pickImage(
-      source: ImageSource.gallery,
-      maxWidth: 512,
-      maxHeight: 512,
-      imageQuality: 85,
-    );
+    try {
+      final picker = ImagePicker();
+      
+      // ギャラリーから選択
+      final pickedFile = await picker.pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 512,
+        maxHeight: 512,
+        imageQuality: 85,
+      );
 
-    if (pickedFile != null) {
-      final bytes = await pickedFile.readAsBytes();
-      setState(() {
-        _selectedImageBytes = bytes;
-      });
+      if (pickedFile != null) {
+        debugPrint('📸 画像選択成功: ${pickedFile.name}, サイズ読み込み中...');
+        final bytes = await pickedFile.readAsBytes();
+        debugPrint('✅ 画像読み込み完了: ${bytes.length} bytes');
+        
+        if (mounted) {
+          setState(() {
+            _selectedImageBytes = bytes;
+          });
+          debugPrint('✅ UI更新完了');
+        } else {
+          debugPrint('⚠️ 警告: 画面が既に破棄されています');
+        }
+      } else {
+        debugPrint('ℹ️ 画像選択がキャンセルされました');
+      }
+    } catch (e, stackTrace) {
+      debugPrint('❌ 画像選択エラー: $e');
+      debugPrint('📋 スタックトレース: $stackTrace');
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('画像の読み込みに失敗しました: $e'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+      }
     }
   }
 
