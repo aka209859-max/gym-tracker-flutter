@@ -110,27 +110,31 @@ class _WorkoutImportPreviewScreenState
     return mapping[exerciseName] ?? '胸'; // デフォルト: 胸
   }
 
-  /// データをFirestoreに登録
+  /// データをFirestoreに登録（安定化版）
   Future<void> _importData() async {
-    if (_isImporting) return;
+    if (_isImporting) {
+      debugPrint('⚠️ [IMPORT] 既にインポート処理中です');
+      return;
+    }
 
+    debugPrint('🔄 [IMPORT] データ取り込み開始...');
     setState(() {
       _isImporting = true;
     });
 
     try {
-      print('🔄 データ取り込み開始...');
+      debugPrint('🔄 [IMPORT] データ取り込み処理開始...');
       
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) {
         throw Exception('ユーザーが認証されていません');
       }
-      print('✅ ユーザー確認: ${user.uid}');
+      debugPrint('✅ [IMPORT] ユーザー確認: ${user.uid}');
 
       // 日付をパース
       final dateString = widget.extractedData['date'] as String;
       final date = DateTime.parse(dateString);
-      print('✅ 日付パース: $date');
+      debugPrint('✅ [IMPORT] 日付パース: $date');
 
       // 時刻情報を取得または推定
       final startTimeString = widget.extractedData['start_time'] as String?;
@@ -145,20 +149,19 @@ class _WorkoutImportPreviewScreenState
           ? DateTime.parse('${dateString}T$endTimeString')
           : startTime.add(const Duration(hours: 1)); // デフォルトは1時間後
       
-      print('✅ トレーニング時間: ${startTime.hour}:${startTime.minute} → ${endTime.hour}:${endTime.minute}');
+      debugPrint('✅ [IMPORT] トレーニング時間: ${startTime.hour}:${startTime.minute} → ${endTime.hour}:${endTime.minute}');
 
       // 種目データを変換（既存のworkout_logs形式に完全一致させる）
       final exercises = widget.extractedData['exercises'] as List<dynamic>;
-      print('✅ 種目数: ${exercises.length}');
+      debugPrint('✅ [IMPORT] 種目数: ${exercises.length}');
       
       final convertedExercises = <Map<String, dynamic>>[];
 
       for (int i = 0; i < exercises.length; i++) {
         final exercise = exercises[i] as Map<String, dynamic>;
-        final exerciseName = exercise['name'] as String;
         final sets = exercise['sets'] as List<dynamic>;
         
-        print('📝 種目${i + 1}: ${exercise['name']} (${sets.length}セット)');
+        debugPrint('📝 [IMPORT] 種目${i + 1}: ${exercise['name']} (${sets.length}セット)');
         
         convertedExercises.add({
           'name': exercise['name'],
@@ -175,7 +178,7 @@ class _WorkoutImportPreviewScreenState
         });
       }
 
-      print('🔄 Firestoreに保存中...');
+      debugPrint('🔄 [IMPORT] Firestoreに保存中...');
       
       // Firestoreに登録
       final docRef = await FirebaseFirestore.instance.collection('workout_logs').add({
@@ -187,10 +190,11 @@ class _WorkoutImportPreviewScreenState
         'created_at': FieldValue.serverTimestamp(),
       });
       
-      print('✅ Firestore保存完了: ${docRef.id}');
+      debugPrint('✅ [IMPORT] Firestore保存完了: ${docRef.id}');
 
       if (mounted) {
-        print('✅ [IMPORT] 成功メッセージ表示中...');
+        debugPrint('✅ [IMPORT] 成功 - SnackBar表示 + 画面遷移');
+        
         // 成功メッセージ
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -203,36 +207,61 @@ class _WorkoutImportPreviewScreenState
           ),
         );
 
-        print('🔙 画面を閉じます...');
+        debugPrint('🔙 [IMPORT] プレビュー画面を閉じて元の画面に戻ります');
         
-        // 画面を閉じる（2回: プレビュー画面 + 画像選択画面）
+        // 安全な画面遷移: まず現在の画面（プレビュー）を閉じる
         Navigator.of(context).pop();
-        Navigator.of(context).pop();
+        
+        // 少し遅延を入れて、次の画面遷移を実行
+        await Future.delayed(const Duration(milliseconds: 100));
+        
+        if (mounted) {
+          // ホーム画面に遷移（NavigationProvider使用）
+          final navigationProvider = Provider.of<NavigationProvider>(context, listen: false);
+          navigationProvider.selectTab(0); // ホーム画面に戻る
+          debugPrint('✅ [IMPORT] ホーム画面に遷移完了');
+        }
       }
     } catch (e, stackTrace) {
-      print('❌❌❌ データ取り込みエラー: $e');
-      print('スタックトレース: $stackTrace');
+      debugPrint('❌❌❌ [IMPORT] データ取り込みエラー: $e');
+      debugPrint('📋 [IMPORT] スタックトレース: $stackTrace');
       
       if (mounted) {
+        debugPrint('❌ [IMPORT] エラー発生 - エラーメッセージ表示');
+        
         final errorMsg = e.toString().length > 100 
             ? e.toString().substring(0, 100) 
             : e.toString();
             
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('❌ データ取り込みエラー: $errorMsg'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'データ取り込みエラー',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  errorMsg,
+                  style: const TextStyle(fontSize: 12),
+                ),
+              ],
+            ),
             backgroundColor: Colors.red.shade700,
             duration: const Duration(seconds: 5),
+            action: SnackBarAction(
+              label: '再試行',
+              textColor: Colors.white,
+              onPressed: _importData,
+            ),
           ),
         );
         
-        // エラー時も画面を閉じる（白い画面を防ぐ）
-        try {
-          Navigator.of(context).pop();
-          print('✅ [IMPORT] エラー後に画面を閉じました');
-        } catch (navError) {
-          print('❌ [IMPORT] Navigator.pop()エラー: $navError');
-        }
+        debugPrint('🔙 [IMPORT] エラー後もプレビュー画面に留まります（ユーザーが閉じるまで）');
+        // エラー時は画面を閉じない（ユーザーが再試行またはキャンセルを選択）
       }
     } finally {
       if (mounted) {
