@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../services/subscription_service.dart';
 
 /// 開発者専用メニュー画面（リリースビルドでは非表示）
@@ -16,6 +18,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
   SubscriptionType? _currentPlan;
   String? _aiUsageStatus;
   bool _isLoading = true;
+  String? _currentUserUid;
 
   @override
   void initState() {
@@ -28,12 +31,30 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
     
     final plan = await _subscriptionService.getCurrentPlan();
     final status = await _subscriptionService.getAIUsageStatus();
+    final user = FirebaseAuth.instance.currentUser;
     
     setState(() {
       _currentPlan = plan;
       _aiUsageStatus = status;
+      _currentUserUid = user?.uid;
       _isLoading = false;
     });
+  }
+
+  /// UIDをクリップボードにコピー
+  Future<void> _copyUidToClipboard() async {
+    if (_currentUserUid != null) {
+      await Clipboard.setData(ClipboardData(text: _currentUserUid!));
+      if (!mounted) return;
+      
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('✅ UIDをコピーしました\n$_currentUserUid'),
+          backgroundColor: Colors.green,
+          duration: const Duration(seconds: 3),
+        ),
+      );
+    }
   }
 
   // _changePlan関数は削除（Apple審査対応）
@@ -92,6 +113,77 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                     subtitle: Text(
                       'リリースビルド（App Store版）では表示されません\nTestFlightビルドのみで利用可能',
                       style: TextStyle(fontSize: 12),
+                    ),
+                  ),
+                ),
+                
+                const SizedBox(height: 24),
+                
+                // 🆔 現在のユーザーUID表示（CEO用）
+                Card(
+                  color: Colors.green.shade50,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Row(
+                          children: [
+                            Icon(Icons.fingerprint, color: Colors.green),
+                            SizedBox(width: 8),
+                            Text(
+                              '🆔 あなたのFirebase UID',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        if (_currentUserUid != null) ...[
+                          Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: Colors.green.shade300),
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: SelectableText(
+                                    _currentUserUid!,
+                                    style: const TextStyle(
+                                      fontFamily: 'monospace',
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.copy, color: Colors.green),
+                                  onPressed: _copyUidToClipboard,
+                                  tooltip: 'コピー',
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          const Text(
+                            '💡 このUIDを使ってFirestoreで開発者権限を設定できます',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.black87,
+                              height: 1.4,
+                            ),
+                          ),
+                        ] else
+                          const Text(
+                            'ログインが必要です',
+                            style: TextStyle(fontSize: 14, color: Colors.red),
+                          ),
+                      ],
                     ),
                   ),
                 ),

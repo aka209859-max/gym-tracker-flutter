@@ -18,6 +18,7 @@ import 'personal_factors_screen.dart';
 import 'campaign/campaign_registration_screen.dart';
 import 'ai_addon_purchase_screen.dart';
 import 'profile_edit_screen.dart';
+import 'redeem_invite_code_screen.dart';
 import '../services/favorites_service.dart';
 import '../services/subscription_service.dart';
 import '../services/chat_service.dart';
@@ -693,6 +694,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
               context,
               MaterialPageRoute(builder: (context) => const NotificationSettingsScreen()),
             );
+          },
+        ),
+        const SizedBox(height: 12),
+        _buildMenuCard(
+          context,
+          icon: Icons.card_giftcard,
+          title: '招待コードを使用',
+          subtitle: '特別招待コードで永年無料',
+          badge: '特典',
+          badgeColor: Colors.amber,
+          onTap: () async {
+            final result = await Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const RedeemInviteCodeScreen()),
+            );
+            
+            // 招待コード使用成功時はデータ再読み込み
+            if (result == true) {
+              _loadUserData();
+            }
           },
         ),
       ],

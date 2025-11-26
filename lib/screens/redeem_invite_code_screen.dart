@@ -1,0 +1,320 @@
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../services/privileged_user_service.dart';
+
+/// 招待コード入力画面
+class RedeemInviteCodeScreen extends StatefulWidget {
+  const RedeemInviteCodeScreen({super.key});
+
+  @override
+  State<RedeemInviteCodeScreen> createState() => _RedeemInviteCodeScreenState();
+}
+
+class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
+  final _codeController = TextEditingController();
+  final _privilegedUserService = PrivilegedUserService();
+  bool _isLoading = false;
+  String? _errorMessage;
+
+  @override
+  void dispose() {
+    _codeController.dispose();
+    super.dispose();
+  }
+
+  /// 招待コードを使用
+  Future<void> _redeemCode() async {
+    final code = _codeController.text.trim().toUpperCase();
+    
+    if (code.isEmpty) {
+      setState(() {
+        _errorMessage = '招待コードを入力してください';
+      });
+      return;
+    }
+
+    // ログイン確認
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      setState(() {
+        _errorMessage = 'ログインが必要です';
+      });
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
+
+    try {
+      // 招待コード使用
+      await _privilegedUserService.redeemInviteCode(code);
+
+      if (!mounted) return;
+
+      // 成功ダイアログ
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => AlertDialog(
+          title: const Row(
+            children: [
+              Icon(Icons.celebration, color: Colors.amber, size: 32),
+              SizedBox(width: 12),
+              Text('🎉 登録完了！'),
+            ],
+          ),
+          content: const Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '招待コードが正常に適用されました！',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 16),
+              Text('✅ Proプラン（永年無料）が適用されました'),
+              SizedBox(height: 8),
+              Text('✅ AI機能が月30回まで利用可能になりました'),
+              SizedBox(height: 8),
+              Text('✅ パートナー検索機能が利用可能になりました'),
+              SizedBox(height: 16),
+              Text(
+                'アプリを再起動すると、すべての機能が有効になります。',
+                style: TextStyle(fontSize: 12, color: Colors.grey),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // ダイアログを閉じる
+                Navigator.of(context).pop(true); // 画面を閉じる（成功を通知）
+              },
+              child: const Text('閉じる'),
+            ),
+          ],
+        ),
+      );
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+        _errorMessage = e.toString().replaceAll('Exception: ', '');
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('招待コードを使用'),
+        backgroundColor: Colors.deepPurple,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // アイコンとタイトル
+            const Icon(
+              Icons.card_giftcard,
+              size: 80,
+              color: Colors.deepPurple,
+            ),
+            const SizedBox(height: 24),
+            const Text(
+              '招待コードを入力',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'インフルエンサー向け特別招待コードを\nお持ちの方は、ここで入力してください',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey.shade700,
+                height: 1.5,
+              ),
+            ),
+            const SizedBox(height: 40),
+
+            // 招待コード入力欄
+            TextField(
+              controller: _codeController,
+              enabled: !_isLoading,
+              textCapitalization: TextCapitalization.characters,
+              maxLength: 8,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 4,
+                fontFamily: 'monospace',
+              ),
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                labelText: '招待コード',
+                hintText: 'ABC12345',
+                hintStyle: TextStyle(
+                  color: Colors.grey.shade400,
+                  letterSpacing: 4,
+                ),
+                prefixIcon: const Icon(Icons.vpn_key),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(width: 2),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade300,
+                    width: 2,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(
+                    color: Colors.deepPurple,
+                    width: 2,
+                  ),
+                ),
+                filled: true,
+                fillColor: Colors.grey.shade50,
+              ),
+            ),
+
+            // エラーメッセージ
+            if (_errorMessage != null) ...[
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.red.shade50,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.red.shade300),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.error_outline, color: Colors.red),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        _errorMessage!,
+                        style: const TextStyle(
+                          color: Colors.red,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+
+            const SizedBox(height: 32),
+
+            // 使用ボタン
+            ElevatedButton(
+              onPressed: _isLoading ? null : _redeemCode,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 2,
+              ),
+              child: _isLoading
+                  ? const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
+                    )
+                  : const Text(
+                      '招待コードを使用',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+            ),
+
+            const SizedBox(height: 40),
+
+            // 特典説明
+            Card(
+              color: Colors.amber.shade50,
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+                side: BorderSide(color: Colors.amber.shade300),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Row(
+                      children: [
+                        Icon(Icons.stars, color: Colors.amber),
+                        SizedBox(width: 8),
+                        Text(
+                          '招待コードの特典',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    _buildBenefitItem('✅ Proプラン（¥980/月）が永年無料'),
+                    _buildBenefitItem('✅ AI機能が月30回まで利用可能'),
+                    _buildBenefitItem('✅ パートナー検索機能が利用可能'),
+                    _buildBenefitItem('✅ メッセージング機能が利用可能'),
+                    _buildBenefitItem('✅ AI週次レポート機能が利用可能'),
+                  ],
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 24),
+
+            // 注意事項
+            Text(
+              '※ 招待コードは1回のみ使用可能です\n※ 既に他のユーザーが使用したコードは無効です',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.grey.shade600,
+                height: 1.5,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBenefitItem(String text) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontSize: 14,
+          height: 1.5,
+        ),
+      ),
+    );
+  }
+}
