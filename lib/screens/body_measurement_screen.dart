@@ -179,6 +179,8 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                               prefixIcon: Icon(Icons.monitor_weight),
                             ),
                             keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                            textInputAction: TextInputAction.next,
+                            onEditingComplete: () => FocusScope.of(context).nextFocus(),
                           ),
                           const SizedBox(height: 16),
                           
@@ -191,6 +193,8 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                               prefixIcon: Icon(Icons.analytics),
                             ),
                             keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                            textInputAction: TextInputAction.done,
+                            onEditingComplete: () => FocusScope.of(context).unfocus(),
                           ),
                           const SizedBox(height: 16),
                           

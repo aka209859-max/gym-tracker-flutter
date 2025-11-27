@@ -568,6 +568,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               TextField(
                 controller: weightController,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                textInputAction: TextInputAction.next,
+                onEditingComplete: () => FocusScope.of(context).nextFocus(),
                 decoration: const InputDecoration(
                   labelText: '重量 (kg)',
                   border: OutlineInputBorder(),
@@ -578,6 +580,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             TextField(
               controller: repsController,
               keyboardType: TextInputType.number,
+              textInputAction: TextInputAction.done,
+              onEditingComplete: () => FocusScope.of(context).unfocus(),
               decoration: const InputDecoration(
                 labelText: '回数 (reps)',
                 border: OutlineInputBorder(),

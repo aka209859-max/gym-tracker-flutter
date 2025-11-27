@@ -1455,6 +1455,8 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 prefixIcon: Icon(Icons.fitness_center),
               ),
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              textInputAction: TextInputAction.done,
+              onEditingComplete: () => FocusScope.of(context).unfocus(),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return '1RMを入力してください';

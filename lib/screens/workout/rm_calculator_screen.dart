@@ -118,6 +118,8 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
           TextField(
             controller: _weightController,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            textInputAction: TextInputAction.next,
+            onEditingComplete: () => FocusScope.of(context).nextFocus(),
             decoration: InputDecoration(
               labelText: '重量 (kg)',
               hintText: '例: 80',
@@ -135,6 +137,8 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
           TextField(
             controller: _repsController,
             keyboardType: TextInputType.number,
+            textInputAction: TextInputAction.done,
+            onEditingComplete: () => FocusScope.of(context).unfocus(),
             decoration: InputDecoration(
               labelText: '回数',
               hintText: '例: 5',
@@ -689,6 +693,8 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
           TextField(
             controller: _targetWeightController,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            textInputAction: TextInputAction.done,
+            onEditingComplete: () => FocusScope.of(context).unfocus(),
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             decoration: InputDecoration(
               labelText: '目標重量 (kg)',
