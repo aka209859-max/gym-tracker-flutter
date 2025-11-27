@@ -179,9 +179,9 @@ class _WorkoutImportPreviewScreenState
 
       debugPrint('🔄 [IMPORT] Firestoreに保存中...');
       
-      // Firestoreに登録
+      // Firestoreに登録（⚠️ 修正: userIdをuser_idに変更してクエリと一致させる）
       final docRef = await FirebaseFirestore.instance.collection('workout_logs').add({
-        'userId': user.uid,
+        'user_id': user.uid,  // ✅ 修正: 'userId' → 'user_id' (workout_log_screen.dartのクエリと一致)
         'date': Timestamp.fromDate(date),
         'start_time': Timestamp.fromDate(startTime),
         'end_time': Timestamp.fromDate(endTime),

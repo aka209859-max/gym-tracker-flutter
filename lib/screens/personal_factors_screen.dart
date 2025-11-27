@@ -247,6 +247,8 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
             TextFormField(
               controller: _ageController,
               keyboardType: TextInputType.number,
+              textInputAction: TextInputAction.next,
+              onEditingComplete: () => FocusScope.of(context).nextFocus(),
               decoration: const InputDecoration(
                 labelText: '年齢',
                 suffixText: '歳',
@@ -271,6 +273,8 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
             TextFormField(
               controller: _experienceController,
               keyboardType: TextInputType.number,
+              textInputAction: TextInputAction.next,
+              onEditingComplete: () => FocusScope.of(context).nextFocus(),
               decoration: const InputDecoration(
                 labelText: 'トレーニング経験年数',
                 suffixText: '年',
@@ -305,6 +309,8 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
             TextFormField(
               controller: _sleepController,
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              textInputAction: TextInputAction.next,
+              onEditingComplete: () => FocusScope.of(context).nextFocus(),
               decoration: const InputDecoration(
                 labelText: '昨晩の睡眠時間',
                 suffixText: '時間',
@@ -329,6 +335,8 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
             TextFormField(
               controller: _proteinController,
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              textInputAction: TextInputAction.next,
+              onEditingComplete: () => FocusScope.of(context).nextFocus(),
               decoration: const InputDecoration(
                 labelText: '1日のタンパク質摂取量',
                 suffixText: 'グラム',
@@ -353,6 +361,8 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
             TextFormField(
               controller: _alcoholController,
               keyboardType: TextInputType.number,
+              textInputAction: TextInputAction.done,
+              onEditingComplete: () => FocusScope.of(context).unfocus(),
               decoration: const InputDecoration(
                 labelText: '前日のアルコール摂取量',
                 suffixText: 'ユニット',
