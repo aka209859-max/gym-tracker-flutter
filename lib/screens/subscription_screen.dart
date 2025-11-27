@@ -41,8 +41,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       
       // 利用可能な商品を取得（アプリ内課金用）
       // 🔄 キャッシュを無効化して最新の商品情報を取得（年額プラン対応）
-      if (defaultTargetPlatform == TargetPlatform.iOS ||
-          defaultTargetPlatform == TargetPlatform.android) {
+      if (defaultTargetPlatform == TargetPlatform.iOS) {
         final products = await _revenueCatService.getAvailableProducts(invalidateCache: true);
         setState(() {
           _availableProducts = products;
@@ -907,8 +906,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       }
       
       // アプリ内課金の場合、RevenueCatで購入処理
-      if (defaultTargetPlatform == TargetPlatform.iOS ||
-          defaultTargetPlatform == TargetPlatform.android) {
+      if (defaultTargetPlatform == TargetPlatform.iOS) {
         await _purchaseWithRevenueCat(newPlan);
       } else {
         // Web/Desktopの場合、ローカル変更（プレビュー機能）
