@@ -189,10 +189,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
   }
 
   Widget _buildMainContent(User user) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      behavior: HitTestBehavior.translucent,
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
         title: const Row(
           children: [
@@ -241,7 +238,6 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
           // Tab 3: 効果分析
           _EffectAnalysisTab(),
         ],
-      ),
       ),
     );
   }
