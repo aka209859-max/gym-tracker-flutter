@@ -189,8 +189,10 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
   }
 
   Widget _buildMainContent(User user) {
-    return Scaffold(
-      appBar: AppBar(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
         title: const Row(
           children: [
             Icon(Icons.auto_awesome, size: 24),
@@ -238,6 +240,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
           // Tab 3: 効果分析
           _EffectAnalysisTab(),
         ],
+      ),
       ),
     );
   }

@@ -103,7 +103,11 @@ class AdMobService {
           },
           onAdFailedToLoad: (Ad ad, LoadAdError error) {
             if (kDebugMode) {
-              debugPrint('❌ バナー広告読み込み失敗: $error');
+              debugPrint('❌ [AdMob] バナー広告読み込み失敗');
+              debugPrint('   エラーコード: ${error.code}');
+              debugPrint('   エラー内容: ${error.message}');
+              debugPrint('   ドメイン: ${error.domain}');
+              debugPrint('   レスポンス情報: ${error.responseInfo}');
             }
             _isAdLoaded = false;
             ad.dispose();

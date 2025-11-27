@@ -91,9 +91,11 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
-      child: Column(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+        child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const Text(
@@ -345,6 +347,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
             ),
           ),
         ],
+        ),
       ),
     );
   }
@@ -478,9 +481,11 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(20),
-      child: Column(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // タイトル
@@ -986,6 +991,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
             ),
           ),
         ],
+        ),
       ),
     );
   }

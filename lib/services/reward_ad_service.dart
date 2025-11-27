@@ -68,7 +68,11 @@ class RewardAdService {
           },
           onAdFailedToLoad: (error) {
             if (kDebugMode) {
-              debugPrint('❌ Rewarded ad failed to load: $error');
+              debugPrint('❌ [AdMob] リワード広告読み込み失敗');
+              debugPrint('   エラーコード: ${error.code}');
+              debugPrint('   エラー内容: ${error.message}');
+              debugPrint('   ドメイン: ${error.domain}');
+              debugPrint('   レスポンス情報: ${error.responseInfo}');
             }
             _isAdLoading = false;
             _isAdReady = false;

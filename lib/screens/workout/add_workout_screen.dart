@@ -924,8 +924,10 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     
-    return Scaffold(
-      appBar: AppBar(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
         title: const Text('トレーニング記録'),
         backgroundColor: theme.colorScheme.primary,
         foregroundColor: Colors.white,
@@ -1602,6 +1604,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             ],
           ),
         ],
+      ),
       ),
     );
   }

@@ -125,8 +125,10 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
         title: const Text('🔬 個人要因設定'),
         actions: [
           IconButton(
@@ -181,6 +183,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                 ),
               ),
             ),
+      ),
     );
   }
 

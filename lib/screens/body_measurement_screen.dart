@@ -128,8 +128,10 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Scaffold(
-      appBar: AppBar(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
         title: const Text('体重・体脂肪率'),
         backgroundColor: theme.colorScheme.primary,
         foregroundColor: Colors.white,
@@ -354,6 +356,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
             },
           ),
         ],
+      ),
       ),
     );
   }
