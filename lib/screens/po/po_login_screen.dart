@@ -78,7 +78,12 @@ class _POLoginScreenState extends State<POLoginScreen> {
         throw Exception('このアカウントはPO管理者として登録されていません');
       }
 
-      final data = poDoc.data()!;
+      final data = poDoc.data();
+      if (data == null) {
+        await FirebaseAuth.instance.signOut();
+        throw Exception('管理者データの取得に失敗しました');
+      }
+      
       if (data['role'] != 'po') {
         await FirebaseAuth.instance.signOut();
         throw Exception('PO管理者権限がありません');

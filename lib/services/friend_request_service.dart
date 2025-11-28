@@ -75,7 +75,10 @@ class FriendRequestService {
       throw Exception('友達申請が見つかりません');
     }
 
-    final requestData = requestDoc.data()!;
+    final requestData = requestDoc.data();
+    if (requestData == null) {
+      throw Exception('データの取得に失敗しました');
+    }
     final requesterId = requestData['requester_id'] as String;
     final targetId = requestData['target_id'] as String;
 
@@ -109,7 +112,10 @@ class FriendRequestService {
       throw Exception('友達申請が見つかりません');
     }
 
-    final requestData = requestDoc.data()!;
+    final requestData = requestDoc.data();
+    if (requestData == null) {
+      throw Exception('データの取得に失敗しました');
+    }
     final targetId = requestData['target_id'] as String;
 
     // 自分宛の申請かチェック

@@ -52,7 +52,10 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
         throw Exception('PO情報が見つかりません');
       }
 
-      final poData = poDoc.data()!;
+      final poData = poDoc.data();
+      if (poData == null) {
+        throw Exception('POデータの取得に失敗しました');
+      }
       
       // 会員数集計（仮データ）
       final membersSnapshot = await FirebaseFirestore.instance

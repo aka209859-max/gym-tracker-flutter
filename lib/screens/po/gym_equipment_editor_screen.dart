@@ -60,7 +60,10 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
           .get();
 
       if (gymDoc.exists) {
-        final data = gymDoc.data()!;
+        final data = gymDoc.data();
+        if (data == null) {
+          throw Exception('データの取得に失敗しました');
+        }
         setState(() {
           _equipment = data['equipment'] != null
               ? Map<String, int>.from(data['equipment'])

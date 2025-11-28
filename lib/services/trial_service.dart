@@ -48,7 +48,10 @@ class TrialService {
         };
       }
       
-      final data = userDoc.data()!;
+      final data = userDoc.data();
+      if (data == null) {
+        throw Exception('データの取得に失敗しました');
+      }
       
       // 1. アカウント登録完了（ユーザードキュメント存在）
       final accountCreated = true;

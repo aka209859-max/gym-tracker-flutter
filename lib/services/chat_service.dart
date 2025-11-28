@@ -53,9 +53,13 @@ class ChatService {
       throw Exception('会話が見つかりません');
     }
 
-    final conversationData = conversationDoc.data()!;
-    final participants = List<String>.from(conversationData['participants']);
-    final participantNames = Map<String, String>.from(conversationData['participantNames']);
+    final conversationData = conversationDoc.data();
+    if (conversationData == null) {
+      throw Exception('会話データの取得に失敗しました');
+    }
+    
+    final participants = List<String>.from(conversationData['participants'] as List? ?? []);
+    final participantNames = Map<String, String>.from(conversationData['participantNames'] as Map? ?? {});
 
     // メッセージを追加
     final messageRef = conversationRef.collection('messages').doc();

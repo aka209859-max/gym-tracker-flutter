@@ -430,19 +430,23 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     print('🔍 トレーニング記録を読み込み開始...');
     print('📅 選択日: ${_selectedDay!.year}/${_selectedDay!.month}/${_selectedDay!.day}');
 
-    setState(() {
-      _isLoading = true;
-    });
+    if (mounted) {
+      setState(() {
+        _isLoading = true;
+      });
+    }
 
     try {
       final user = firebase_auth.FirebaseAuth.instance.currentUser;
       if (user == null) {
         print('❌ ユーザーが未ログインです');
         // ユーザーが未ログインの場合もローディング終了
-        setState(() {
-          _selectedDayWorkouts = [];
-          _isLoading = false;
-        });
+        if (mounted) {
+          setState(() {
+            _selectedDayWorkouts = [];
+            _isLoading = false;
+          });
+        }
         return;
       }
 
@@ -513,18 +517,22 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         print('   [$i] ID=${workout['id']}, muscle_group=${workout['muscle_group']}, sets=${(workout['sets'] as List).length}');
       }
 
-      setState(() {
-        _selectedDayWorkouts = filteredWorkouts;
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _selectedDayWorkouts = filteredWorkouts;
+          _isLoading = false;
+        });
+      }
 
       print('✅ データ読み込み完了: ${_selectedDayWorkouts.length}件');
     } catch (e) {
       print('❌ トレーニング記録の読み込みエラー: $e');
-      setState(() {
-        _selectedDayWorkouts = [];
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _selectedDayWorkouts = [];
+          _isLoading = false;
+        });
+      }
     }
   }
 
@@ -1246,15 +1254,25 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           .get();
       
       int cleanedCount = 0;
+      final now = DateTime.now();
+      final cleanupThreshold = now.subtract(const Duration(hours: 24)); // 24時間前
       
       for (var doc in querySnapshot.docs) {
         final data = doc.data();
-        final sets = List<Map<String, dynamic>>.from(data['sets'] as List);
+        final sets = List<Map<String, dynamic>>.from(data['sets'] as List? ?? []);
+        
+        // 作成日時を確認（24時間以内のデータはスキップ）
+        final createdAt = (data['created_at'] as Timestamp?)?.toDate();
+        if (createdAt != null && createdAt.isAfter(cleanupThreshold)) {
+          // 24時間以内のデータはクリーンアップしない（入力途中の可能性）
+          continue;
+        }
         
         // 有効なセットだけをフィルタ（重量または回数が0より大きい）
         final validSets = sets.where((set) {
-          final weight = (set['weight'] as num).toDouble();
-          final reps = set['reps'] as int;
+          final weight = (set['weight'] as num?)?.toDouble() ?? 0.0;
+          final reps = set['reps'] as int? ?? 0;
+          // 重量0かつ回数0のセットは無効
           return weight > 0 || reps > 0;
         }).toList();
         
@@ -1262,19 +1280,19 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           // 空セットが見つかった
           if (validSets.isEmpty) {
             // 全セットが空の場合、ドキュメント削除
+            print('   🗑️ 空データ削除: ${doc.id} (作成: ${createdAt?.toString() ?? "不明"})');
             await FirebaseFirestore.instance
                 .collection('workout_logs')
                 .doc(doc.id)
                 .delete();
-            print('   ドキュメント削除: ${doc.id}');
             cleanedCount++;
           } else {
             // 有効なセットだけを保存
+            print('   🧹 空セット削除: ${doc.id} (${sets.length} → ${validSets.length})');
             await FirebaseFirestore.instance
                 .collection('workout_logs')
                 .doc(doc.id)
                 .update({'sets': validSets});
-            print('   空セット削除: ${doc.id} (${sets.length} → ${validSets.length})');
             cleanedCount++;
           }
         }
@@ -1315,8 +1333,18 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         return;
       }
       
-      final data = docSnapshot.data()!;
-      final sets = List<Map<String, dynamic>>.from(data['sets'] as List);
+      final data = docSnapshot.data();
+      if (data == null) {
+        print('❌ ドキュメントデータが存在しません');
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('データの取得に失敗しました')),
+          );
+        }
+        return;
+      }
+      
+      final sets = List<Map<String, dynamic>>.from(data['sets'] as List? ?? []);
       
       // 指定されたセットを削除
       sets.removeAt(setIndex);
@@ -2791,7 +2819,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         return;
       }
       
-      final data = docSnapshot.data()!;
+      final data = docSnapshot.data();
+      if (data == null) {
+        print('❌ ドキュメントデータが存在しません');
+        return;
+      }
       
       // データ構造によって処理を分岐
       if (data['sets'] != null) {
@@ -2838,13 +2870,17 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             // 更新を確認（ベリフィケーション）
             final verifyDoc = await docRef.get();
             if (verifyDoc.exists) {
-              final verifyData = verifyDoc.data()!;
-              final verifySets = verifyData['sets'] as List<dynamic>;
-              print('✅ 更新確認: ${verifySets.length}セット（期待値: ${remainingSets.length}）');
-              
-              if (verifySets.length != remainingSets.length) {
-                print('⚠️ 警告: セット数が一致しません！');
-                throw Exception('Firestore更新の検証に失敗しました');
+              final verifyData = verifyDoc.data();
+              if (verifyData == null) {
+                print('⚠️ 検証データが取得できません');
+              } else {
+                final verifySets = verifyData['sets'] as List<dynamic>? ?? [];
+                print('✅ 更新確認: ${verifySets.length}セット（期待値: ${remainingSets.length}）');
+                
+                if (verifySets.length != remainingSets.length) {
+                  print('⚠️ 警告: セット数が一致しません！');
+                  throw Exception('Firestore更新の検証に失敗しました');
+                }
               }
             }
             

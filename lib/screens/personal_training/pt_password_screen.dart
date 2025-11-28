@@ -53,7 +53,10 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
         throw Exception('ユーザー情報が見つかりません');
       }
 
-      final userData = userDoc.data()!;
+      final userData = userDoc.data();
+      if (userData == null) {
+        throw Exception('データの取得に失敗しました');
+      }
       final useGymCommonPassword = userData['useGymCommonPassword'] as bool? ?? true;
       final gymId = userData['gymId'] as String?;
 
