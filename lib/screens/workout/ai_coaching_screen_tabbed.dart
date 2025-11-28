@@ -9,6 +9,7 @@ import '../../services/subscription_service.dart';
 import '../../services/reward_ad_service.dart';
 import '../../services/ai_credit_service.dart';
 import '../../widgets/scientific_citation_card.dart';
+import '../../main.dart'; // globalRewardAdService用
 
 /// Layer 5: AIコーチング画面（統合版）
 /// 
@@ -670,7 +671,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
     // ========================================
     final subscriptionService = SubscriptionService();
     final creditService = AICreditService();
-    final rewardAdService = RewardAdService();
+    final rewardAdService = globalRewardAdService;
     
     final currentPlan = await subscriptionService.getCurrentPlan();
     debugPrint('🔍 [AI生成] 現在のプラン: $currentPlan');
@@ -976,7 +977,8 @@ ${bodyParts.join('、')}
   
   /// リワード広告を表示してクレジット獲得
   Future<bool> _showRewardAdAndEarn() async {
-    final rewardAdService = RewardAdService();
+    // グローバルインスタンスを使用（main.dartで初期化済み）
+    final rewardAdService = globalRewardAdService;
     
     // 広告読み込み待機ダイアログ表示
     if (mounted) {
@@ -1225,7 +1227,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     // ========================================
     final subscriptionService = SubscriptionService();
     final creditService = AICreditService();
-    final rewardAdService = RewardAdService();
+    final rewardAdService = globalRewardAdService;
     
     final currentPlan = await subscriptionService.getCurrentPlan();
     debugPrint('🔍 [成長予測] 現在のプラン: $currentPlan');
@@ -1989,7 +1991,8 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
   
   /// リワード広告を表示してクレジット獲得
   Future<bool> _showRewardAdAndEarn() async {
-    final rewardAdService = RewardAdService();
+    // グローバルインスタンスを使用（main.dartで初期化済み）
+    final rewardAdService = globalRewardAdService;
     
     // 広告読み込み待機ダイアログ表示
     if (mounted) {
@@ -2273,7 +2276,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
     // ========================================
     final subscriptionService = SubscriptionService();
     final creditService = AICreditService();
-    final rewardAdService = RewardAdService();
+    final rewardAdService = globalRewardAdService;
     
     final currentPlan = await subscriptionService.getCurrentPlan();
     debugPrint('🔍 [効果分析] 現在のプラン: $currentPlan');
@@ -3427,7 +3430,8 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
   
   /// リワード広告を表示してクレジット獲得
   Future<bool> _showRewardAdAndEarn() async {
-    final rewardAdService = RewardAdService();
+    // グローバルインスタンスを使用（main.dartで初期化済み）
+    final rewardAdService = globalRewardAdService;
     
     // 広告読み込み待機ダイアログ表示
     if (mounted) {

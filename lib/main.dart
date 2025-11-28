@@ -32,6 +32,9 @@ import 'services/interstitial_ad_manager.dart';
 import 'services/reward_ad_service.dart';
 import 'utils/console_logger.dart';
 
+// 🎬 グローバルリワード広告サービス（全画面で共有）
+late RewardAdService globalRewardAdService;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
@@ -153,10 +156,10 @@ void main() async {
     // 🎬 リワード広告初期化（CEO戦略: 動画視聴でAIクレジット付与）
     try {
       print('🎬 リワード広告初期化...');
-      final rewardAdService = RewardAdService();
-      await rewardAdService.initialize();
+      globalRewardAdService = RewardAdService();
+      await globalRewardAdService.initialize();
       // 初回の広告をプリロード
-      await rewardAdService.loadRewardedAd();
+      await globalRewardAdService.loadRewardedAd();
       print('✅ リワード広告初期化完了');
     } catch (rewardAdError) {
       print('❌ リワード広告初期化エラー（広告なしで動作）: $rewardAdError');
