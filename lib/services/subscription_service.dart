@@ -14,10 +14,20 @@ enum SubscriptionType {
 class SubscriptionService {
   static const String _subscriptionKey = 'subscription_status';
   static const String _subscriptionTypeKey = 'subscription_type';
+  static const String _cachedPlanKey = 'cached_subscription_plan';
+  static const String _cacheTimestampKey = 'cached_plan_timestamp';
+  static const int _cacheValidityMinutes = 60; // キャッシュ有効期限: 60分
   
-  /// 現在のプラン種類を取得（Firestore優先）
+  SubscriptionType? _memoryCache; // メモリキャッシュ
+  
+  /// 現在のプラン種類を取得（Firestore優先、キャッシュフォールバック）
   Future<SubscriptionType> getCurrentPlan() async {
     try {
+      // 0. メモリキャッシュチェック（最速）
+      if (_memoryCache != null) {
+        return _memoryCache!;
+      }
+      
       // 1. Firestoreから取得を試行（ログインユーザー）
       final user = FirebaseAuth.instance.currentUser;
       if (user != null) {
@@ -27,35 +37,112 @@ class SubscriptionService {
           final userDoc = await FirebaseFirestore.instance
               .collection('users')
               .doc(user.uid)
-              .get();
+              .get(const GetOptions(source: Source.serverAndCache)); // キャッシュ利用
           
           if (userDoc.exists) {
             final data = userDoc.data();
             final isPremium = data?['isPremium'] as bool? ?? false;
             final premiumType = data?['premiumType'] as String? ?? 'free';
             
+            SubscriptionType plan = SubscriptionType.free;
+            
             if (isPremium) {
               if (premiumType == 'pro') {
+                plan = SubscriptionType.pro;
                 print('✅ Firestoreからプラン取得: プロプラン (UID: ${user.uid}, 匿名: ${user.isAnonymous})');
-                return SubscriptionType.pro;
               } else if (premiumType == 'premium') {
+                plan = SubscriptionType.premium;
                 print('✅ Firestoreからプラン取得: プレミアムプラン (UID: ${user.uid}, 匿名: ${user.isAnonymous})');
-                return SubscriptionType.premium;
               }
             }
+            
+            // メモリキャッシュに保存
+            _memoryCache = plan;
+            
+            // SharedPreferencesキャッシュに保存
+            await _savePlanCache(plan);
+            
+            return plan;
           }
         } catch (firestoreError) {
           print('⚠️ Firestore取得エラー: $firestoreError');
+          // キャッシュにフォールバック
+          final cachedPlan = await _loadPlanCache();
+          if (cachedPlan != null) {
+            print('📦 キャッシュからプラン取得: $cachedPlan');
+            _memoryCache = cachedPlan;
+            return cachedPlan;
+          }
         }
       }
       
       // 2. デフォルト: Freeプラン
-      // SharedPreferencesからのプラン取得機能は完全削除（Apple審査対応）
-      // プラン情報はRevenueCat→Firestoreの経路のみ有効
       return SubscriptionType.free;
     } catch (e) {
       print('❌ プラン取得エラー: $e');
+      // 最後の手段: キャッシュ
+      final cachedPlan = await _loadPlanCache();
+      if (cachedPlan != null) {
+        print('📦 エラー時キャッシュ使用: $cachedPlan');
+        _memoryCache = cachedPlan;
+        return cachedPlan;
+      }
       return SubscriptionType.free;
+    }
+  }
+  
+  /// プランをキャッシュに保存
+  Future<void> _savePlanCache(SubscriptionType plan) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_cachedPlanKey, plan.toString().split('.').last);
+      await prefs.setInt(_cacheTimestampKey, DateTime.now().millisecondsSinceEpoch);
+    } catch (e) {
+      print('⚠️ キャッシュ保存エラー: $e');
+    }
+  }
+  
+  /// キャッシュからプランを読み込み（有効期限チェック）
+  Future<SubscriptionType?> _loadPlanCache() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final cachedPlanStr = prefs.getString(_cachedPlanKey);
+      final cacheTimestamp = prefs.getInt(_cacheTimestampKey);
+      
+      if (cachedPlanStr != null && cacheTimestamp != null) {
+        final cacheAge = DateTime.now().millisecondsSinceEpoch - cacheTimestamp;
+        final cacheAgeMinutes = cacheAge / (1000 * 60);
+        
+        if (cacheAgeMinutes < _cacheValidityMinutes) {
+          // キャッシュが有効
+          switch (cachedPlanStr) {
+            case 'pro':
+              return SubscriptionType.pro;
+            case 'premium':
+              return SubscriptionType.premium;
+            default:
+              return SubscriptionType.free;
+          }
+        } else {
+          print('⚠️ キャッシュ期限切れ（${cacheAgeMinutes.toStringAsFixed(1)}分経過）');
+        }
+      }
+    } catch (e) {
+      print('⚠️ キャッシュ読み込みエラー: $e');
+    }
+    return null;
+  }
+  
+  /// キャッシュをクリア
+  Future<void> clearCache() async {
+    _memoryCache = null;
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(_cachedPlanKey);
+      await prefs.remove(_cacheTimestampKey);
+      print('🗑️ プランキャッシュクリア完了');
+    } catch (e) {
+      print('⚠️ キャッシュクリアエラー: $e');
     }
   }
   

@@ -1,4 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'subscription_service.dart';
 
 /// AI機能クレジット管理サービス（CEO戦略: 動画視聴で1回追加）
@@ -7,6 +9,9 @@ class AICreditService {
   static const String _lastResetDateKey = 'ai_credit_last_reset_date';
   
   final SubscriptionService _subscriptionService = SubscriptionService();
+  
+  /// Firestoreへのバックアップフラグ
+  static const bool _enableFirestoreBackup = true;
   
   /// AI機能が使用可能かチェック（サブスクまたはクレジットあり）
   Future<bool> canUseAI() async {
@@ -39,18 +44,67 @@ class AICreditService {
     }
   }
   
-  /// 現在のAIクレジット残高を取得（無料プランのみ）
+  /// 現在のAIクレジット残高を取得（Firestore優先、SharedPreferencesフォールバック）
   Future<int> getAICredits() async {
+    if (_enableFirestoreBackup) {
+      try {
+        final user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          final userDoc = await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .get(const GetOptions(source: Source.serverAndCache));
+          
+          if (userDoc.exists) {
+            final data = userDoc.data();
+            final firestoreCredits = data?['ai_credits'] as int? ?? 0;
+            
+            // Firestoreの値をローカルに同期
+            final prefs = await SharedPreferences.getInstance();
+            await prefs.setInt(_aiCreditKey, firestoreCredits);
+            
+            return firestoreCredits;
+          }
+        }
+      } catch (e) {
+        print('⚠️ Firestoreからのクレジット取得失敗、ローカルを使用: $e');
+      }
+    }
+    
+    // フォールバック: SharedPreferences
     final prefs = await SharedPreferences.getInstance();
     return prefs.getInt(_aiCreditKey) ?? 0;
   }
   
-  /// AIクレジットを追加（動画視聴報酬）
+  /// AIクレジットを追加（動画視聴報酬）- Firestoreとローカル両方に保存
   Future<void> addAICredit(int amount) async {
-    final prefs = await SharedPreferences.getInstance();
     final current = await getAICredits();
-    await prefs.setInt(_aiCreditKey, current + amount);
-    print('✅ AIクレジット追加: +$amount (合計: ${current + amount})');
+    final newTotal = current + amount;
+    
+    // SharedPreferencesに保存
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_aiCreditKey, newTotal);
+    
+    // Firestoreにバックアップ
+    if (_enableFirestoreBackup) {
+      try {
+        final user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .set({
+            'ai_credits': newTotal,
+            'ai_credits_updated_at': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true));
+          print('✅ AIクレジットFirestore保存: $newTotal');
+        }
+      } catch (e) {
+        print('⚠️ FirestoreへのAIクレジット保存失敗（ローカルは保存済み）: $e');
+      }
+    }
+    
+    print('✅ AIクレジット追加: +$amount (合計: $newTotal)');
   }
   
   /// AIクレジットを消費（無料プランのAI利用時）
@@ -78,9 +132,32 @@ class AICreditService {
       return false;
     }
     
+    final newTotal = credits - 1;
+    
+    // SharedPreferencesに保存
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(_aiCreditKey, credits - 1);
-    print('✅ AIクレジット消費: -1 (残り: ${credits - 1})');
+    await prefs.setInt(_aiCreditKey, newTotal);
+    
+    // Firestoreにバックアップ
+    if (_enableFirestoreBackup) {
+      try {
+        final user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .set({
+            'ai_credits': newTotal,
+            'ai_credits_updated_at': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true));
+          print('✅ AIクレジットFirestore保存: $newTotal');
+        }
+      } catch (e) {
+        print('⚠️ FirestoreへのAIクレジット保存失敗（ローカルは保存済み）: $e');
+      }
+    }
+    
+    print('✅ AIクレジット消費: -1 (残り: $newTotal)');
     return true;
   }
   

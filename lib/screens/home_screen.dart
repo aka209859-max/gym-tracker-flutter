@@ -1606,10 +1606,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     final Map<String, List<Map<String, dynamic>>> exerciseGroups = {};
     
     for (var workout in _selectedDayWorkouts) {
-      final sets = workout['sets'] as List<dynamic>;
+      final sets = workout['sets'] as List<dynamic>? ?? [];
       for (var i = 0; i < sets.length; i++) {
         final set = sets[i];
-        final exerciseName = set['exercise_name'] as String;
+        final exerciseName = set['exercise_name'] as String? ?? '不明な種目';
         
         if (!exerciseGroups.containsKey(exerciseName)) {
           exerciseGroups[exerciseName] = [];
@@ -2828,7 +2828,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       // データ構造によって処理を分岐
       if (data['sets'] != null) {
         // sets配列形式の場合
-        final sets = data['sets'] as List<dynamic>;
+        final sets = data['sets'] as List<dynamic>? ?? [];
         print('🔍 Before delete - total sets: ${sets.length}');
         
         // 指定された種目のセットだけをフィルタリング（削除）
@@ -2890,7 +2890,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               {},
               (names, workout) {
                 if (workout['sets'] != null) {
-                  final sets = workout['sets'] as List<dynamic>;
+                  final sets = workout['sets'] as List<dynamic>? ?? [];
                   for (var set in sets) {
                     if (set is Map<String, dynamic>) {
                       final exerciseName = set['exercise_name'] as String?;
@@ -2955,7 +2955,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             {},
             (names, workout) {
               if (workout['sets'] != null) {
-                final sets = workout['sets'] as List<dynamic>;
+                final sets = workout['sets'] as List<dynamic>? ?? [];
                 for (var set in sets) {
                   if (set is Map<String, dynamic>) {
                     final exerciseName = set['exercise_name'] as String?;

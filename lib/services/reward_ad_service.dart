@@ -20,6 +20,8 @@ class RewardAdService {
   RewardedAd? _rewardedAd;
   bool _isAdLoading = false;
   bool _isAdReady = false;
+  int _retryAttempt = 0;
+  static const int _maxRetryAttempt = 3;
   
   /// AdMob SDKを初期化
   Future<void> initialize() async {
@@ -60,6 +62,7 @@ class RewardAdService {
             _rewardedAd = ad;
             _isAdReady = true;
             _isAdLoading = false;
+            _retryAttempt = 0;  // リトライカウンターをリセット
             
             // 広告イベントリスナー設定
             _setupAdCallbacks(ad);
@@ -73,6 +76,23 @@ class RewardAdService {
             debugPrint('   レスポンス情報: ${error.responseInfo}');
             _isAdLoading = false;
             _isAdReady = false;
+            
+            // リトライロジック追加（収益最大化のため）
+            _retryAttempt++;
+            if (_retryAttempt < _maxRetryAttempt) {
+              debugPrint('🔄 リワード広告リトライ: $_retryAttempt/$_maxRetryAttempt');
+              // 指数バックオフでリトライ（1秒、2秒、4秒...）
+              Future.delayed(Duration(seconds: 1 << (_retryAttempt - 1)), () {
+                loadRewardedAd();
+              });
+            } else {
+              debugPrint('⚠️ リワード広告リトライ上限到達（$_maxRetryAttempt回）');
+              // リトライカウンターをリセット（次回のためトライに備える）
+              Future.delayed(const Duration(minutes: 5), () {
+                _retryAttempt = 0;
+                debugPrint('🔄 リワード広告リトライカウンターリセット');
+              });
+            }
           },
         ),
       );
