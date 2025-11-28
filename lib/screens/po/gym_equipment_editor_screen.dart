@@ -172,7 +172,11 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
           ),
         ],
       ),
-    );
+    ).then((_) {
+      // メモリリーク防止：Controllerを破棄
+      nameController.dispose();
+      countController.dispose();
+    });
   }
 
   @override

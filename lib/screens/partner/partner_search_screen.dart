@@ -83,6 +83,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
   }
 
   Future<void> _searchPartners() async {
+    if (!mounted) return;
     setState(() {
       _isLoading = true;
       _errorMessage = null;
@@ -99,11 +100,13 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
         genders: _selectedGenders.isEmpty ? null : _selectedGenders,
       );
 
+      if (!mounted) return;
       setState(() {
         _searchResults = results;
         _isLoading = false;
       });
     } catch (e) {
+      if (!mounted) return;
       setState(() {
         _errorMessage = e.toString();
         _isLoading = false;

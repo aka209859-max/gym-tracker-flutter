@@ -606,6 +606,10 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       ),
     );
 
+    // メモリリーク防止：Controllerを破棄
+    weightController.dispose();
+    repsController.dispose();
+
     if (result != null) {
       // 懸垂で自重モードかどうかを再確認
       final firstSet = _sets.firstWhere(
@@ -722,6 +726,9 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         ],
       ),
     );
+    
+    // メモリリーク防止：Controllerを破棄
+    controller.dispose();
     
     if (result != null && result.isNotEmpty) {
       setState(() {

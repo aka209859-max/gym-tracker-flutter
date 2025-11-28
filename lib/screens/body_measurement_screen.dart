@@ -34,6 +34,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
 
   /// 記録を読み込み
   Future<void> _loadMeasurements() async {
+    if (!mounted) return;
     setState(() => _isLoading = true);
 
     try {
@@ -47,6 +48,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
           .limit(30) // 最新30件
           .get();
 
+      if (!mounted) return;
       setState(() {
         _measurements = querySnapshot.docs.map((doc) {
           final data = doc.data();
@@ -61,6 +63,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
     } catch (e) {
       print('❌ 記録読み込みエラー: $e');
     } finally {
+      if (!mounted) return;
       setState(() => _isLoading = false);
     }
   }
@@ -77,6 +80,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
       return;
     }
 
+    if (!mounted) return;
     setState(() => _isLoading = true);
 
     try {
@@ -106,6 +110,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
         );
       }
     } finally {
+      if (!mounted) return;
       setState(() => _isLoading = false);
     }
   }

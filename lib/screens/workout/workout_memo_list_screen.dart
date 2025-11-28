@@ -68,7 +68,8 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
               .get();
 
           if (workoutDoc.exists) {
-            final workoutData = workoutDoc.data()!;
+            final workoutData = workoutDoc.data();
+            if (workoutData == null) continue;
             memosWithWorkouts.add({
               'note_id': noteDoc.id,
               'note': WorkoutNote.fromFirestore(noteDoc.data(), noteDoc.id),
@@ -121,6 +122,9 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
         ],
       ),
     );
+    
+    // メモリリーク防止：Controllerを破棄
+    controller.dispose();
 
     if (result != null && result.isNotEmpty && result != note.content) {
       try {

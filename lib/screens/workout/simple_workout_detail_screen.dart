@@ -352,7 +352,10 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
           ),
         ],
       ),
-    );
+    ).then((_) {
+      // メモリリーク防止：Controllerを破棄
+      controller.dispose();
+    });
   }
 
   // メモ保存

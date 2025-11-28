@@ -67,7 +67,8 @@ class _PartnerCampaignEditorScreenState
           .get();
 
       if (doc.exists) {
-        final data = doc.data()!;
+        final data = doc.data();
+        if (data == null) return;
         setState(() {
           _benefitController.text = data['partnerBenefit'] ?? '';
           _campaignTitleController.text = data['campaignTitle'] ?? '';

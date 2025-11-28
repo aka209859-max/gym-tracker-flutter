@@ -82,6 +82,9 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
         ],
       ),
     );
+    
+    // メモリリーク防止：Controllerを破棄
+    controller.dispose();
 
     if (result != null && mounted) {
       if (result == '__DELETE__') {

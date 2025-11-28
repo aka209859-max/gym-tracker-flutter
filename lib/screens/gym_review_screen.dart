@@ -37,6 +37,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
 
   Future<void> _checkPermission() async {
     final plan = await _subscriptionService.getCurrentPlan();
+    if (!mounted) return;
     setState(() {
       _hasPermission = plan != SubscriptionType.free;
     });
@@ -56,6 +57,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
       return;
     }
 
+    if (!mounted) return;
     setState(() {
       _isSubmitting = true;
     });

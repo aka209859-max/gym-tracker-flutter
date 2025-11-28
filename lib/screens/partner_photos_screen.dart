@@ -44,7 +44,8 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
           .get();
 
       if (doc.exists) {
-        final data = doc.data()!;
+        final data = doc.data();
+        if (data == null) return;
         setState(() {
           _photoUrls = data['photos'] != null
               ? List<String>.from(data['photos'])
