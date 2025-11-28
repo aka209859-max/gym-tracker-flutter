@@ -11,11 +11,12 @@ class RewardAdService {
   final AICreditService _creditService = AICreditService();
   
   // AdMob Unit IDs（iOS本番設定完了✅）
-  // ✅ 本番広告ID（常に本番IDを使用 - 収益化のため）
-  static const String _rewardAdUnitId = 'ca-app-pub-2887531479031819/6163055454'; // 本番用（iOS - AI使用回数+1）
+  // ⚠️ 一時的にテスト広告IDを使用（AdMobの「広告配信制限」回避のため）
+  // 本番配信前に本番IDに戻す必要あり
+  static const String _rewardAdUnitId = 'ca-app-pub-3940256099942544/5224354917'; // テスト用（iOS）
   
-  // ❌ テスト広告は削除（収益化のため常に本番広告を表示）
-  // static const String _testRewardAdUnitId = 'ca-app-pub-3940256099942544/5224354917';
+  // 📝 本番広告ID（App Store情報登録後に使用）
+  // static const String _rewardAdUnitId = 'ca-app-pub-2887531479031819/6163055454'; // 本番用（iOS - AI使用回数+1）
   
   RewardedAd? _rewardedAd;
   bool _isAdLoading = false;
