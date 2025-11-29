@@ -9,6 +9,7 @@ import '../../services/subscription_service.dart';
 import '../../services/reward_ad_service.dart';
 import '../../services/ai_credit_service.dart';
 import '../../widgets/scientific_citation_card.dart';
+import '../../widgets/paywall_dialog.dart';
 import '../../main.dart'; // globalRewardAdService用
 
 /// Layer 5: AIコーチング画面（統合版）
@@ -1043,80 +1044,8 @@ ${bodyParts.join('、')}
   
   /// アップグレード促進ダイアログ表示
   Future<void> _showUpgradeDialog(String message) async {
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Row(
-          children: [
-            Icon(Icons.workspace_premium, color: Colors.amber, size: 28),
-            SizedBox(width: 12),
-            Text('プレミアムプランにアップグレード'),
-          ],
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              message,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              'プレミアムプランなら:',
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              '• 月10回までAI機能が使い放題\n'
-              '• 広告なしで快適に利用\n'
-              '• お気に入りジム無制限\n'
-              '• レビュー投稿可能',
-              style: TextStyle(fontSize: 13, height: 1.6),
-            ),
-            const SizedBox(height: 16),
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.amber.shade50,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: const Text(
-                '月額 ¥500',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.amber,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('後で'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              // TODO: サブスクリプション画面へ遷移
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('サブスクリプション機能は準備中です'),
-                ),
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.amber.shade700,
-              foregroundColor: Colors.white,
-            ),
-            child: const Text('アップグレード'),
-          ),
-        ],
-      ),
-    );
+    // 🎯 新しいペイウォールダイアログを使用（AI追加パック訴求含む）
+    return PaywallDialog.show(context, PaywallType.aiLimitReached);
   }
   
   /// メニュー保存
