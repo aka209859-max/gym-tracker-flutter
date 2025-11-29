@@ -28,6 +28,8 @@ import '../services/admob_service.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../services/paywall_trigger_service.dart';
 import '../widgets/paywall_dialog.dart';
+import '../services/ai_credit_service.dart';
+import '../services/subscription_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -766,6 +768,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           
           const SizedBox(height: 12),
           
+          // 💡 今日のAI提案カード
+          _buildAISuggestionCard(theme),
+          
+          const SizedBox(height: 12),
+          
           // 統計カード（タブ切替式・タップで統計ダッシュボードへ）
           GestureDetector(
             onTap: () {
@@ -892,6 +899,147 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           ),
         ],
       ),
+    );
+  }
+  
+  // 💡 今日のAI提案カード
+  Widget _buildAISuggestionCard(ThemeData theme) {
+    return FutureBuilder<int>(
+      future: AICreditService().getAICredits().then((credits) async {
+        final plan = await SubscriptionService().getCurrentPlan();
+        if (plan != SubscriptionType.free) {
+          return await SubscriptionService().getRemainingAIUsage();
+        }
+        return credits;
+      }),
+      builder: (context, snapshot) {
+        final remainingCredits = snapshot.data ?? 0;
+        
+        return Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.purple.shade700, Colors.purple.shade500],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.purple.withValues(alpha: 0.3),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(
+                      Icons.auto_awesome,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  const Expanded(
+                    child: Text(
+                      '💡 今日のAI提案',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      'AI残回数: $remainingCredits回',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              const Text(
+                'あなた専用のトレーニングメニューを\nAIが科学的に分析します',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 13,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: remainingCredits > 0
+                          ? () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AICoachingScreenTabbed(initialTabIndex: 0),
+                                ),
+                              );
+                            }
+                          : () async {
+                              await PaywallDialog.show(
+                                context,
+                                PaywallType.aiLimitReached,
+                              );
+                            },
+                      icon: Icon(
+                        remainingCredits > 0
+                            ? Icons.psychology
+                            : Icons.lock,
+                        size: 18,
+                      ),
+                      label: Text(
+                        remainingCredits > 0
+                            ? 'AIメニューを作成'
+                            : 'AI回数を追加',
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.purple.shade700,
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
   
@@ -1222,6 +1370,59 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     fontSize: 11,
                     color: Colors.grey.shade700,
                   ),
+                ),
+                const SizedBox(height: 8),
+                // AI残回数表示
+                FutureBuilder<int>(
+                  future: AICreditService().getAICredits().then((credits) async {
+                    final plan = await SubscriptionService().getCurrentPlan();
+                    if (plan != SubscriptionType.free) {
+                      return await SubscriptionService().getRemainingAIUsage();
+                    }
+                    return credits;
+                  }),
+                  builder: (context, snapshot) {
+                    final remainingCredits = snapshot.data ?? 0;
+                    return Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: remainingCredits > 0
+                            ? Colors.green.shade50
+                            : Colors.orange.shade50,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: remainingCredits > 0
+                              ? Colors.green.shade200
+                              : Colors.orange.shade200,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            remainingCredits > 0
+                                ? Icons.check_circle
+                                : Icons.warning,
+                            size: 14,
+                            color: remainingCredits > 0
+                                ? Colors.green.shade700
+                                : Colors.orange.shade700,
+                          ),
+                          const SizedBox(width: 6),
+                          Text(
+                            'AI残回数: $remainingCredits回/月',
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.bold,
+                              color: remainingCredits > 0
+                                  ? Colors.green.shade900
+                                  : Colors.orange.shade900,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
                 const SizedBox(height: 10),
                 Row(
