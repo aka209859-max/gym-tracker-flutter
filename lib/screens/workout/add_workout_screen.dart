@@ -912,6 +912,9 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         }
       }
 
+      // Firestoreの書き込み完了を確実に待機（500ms）
+      await Future.delayed(const Duration(milliseconds: 500));
+
       if (mounted) {
         Navigator.pop(context, true);
         ScaffoldMessenger.of(context).showSnackBar(

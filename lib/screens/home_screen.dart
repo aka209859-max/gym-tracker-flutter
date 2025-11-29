@@ -658,8 +658,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           
           // 保存が成功した場合、データを再読み込み
           if (result == true) {
-            _loadWorkoutsForSelectedDay();
-            _loadStatistics(); // 統計データも即座に更新
+            await _loadWorkoutsForSelectedDay();
+            await _loadWorkoutDates(); // カレンダーのマーカーも更新
+            await _loadStatistics(); // 統計データも即座に更新
           }
         },
         icon: const Icon(Icons.add, size: 24),

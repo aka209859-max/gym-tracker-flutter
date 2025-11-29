@@ -334,13 +334,20 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          final result = await Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => const AddWorkoutScreen(),
             ),
           );
+          
+          // 保存が成功した場合、StreamBuilderが自動で更新されるため、
+          // 明示的なリフレッシュは不要（Firestoreのsnapshotsを使用しているため）
+          if (result == true && mounted) {
+            // 念のため、setState で画面を再構築
+            setState(() {});
+          }
         },
         child: const Icon(Icons.add),
       ),
