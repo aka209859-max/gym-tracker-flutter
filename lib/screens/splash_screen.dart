@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import '../services/onboarding_service.dart';
+import 'onboarding/onboarding_screen.dart';
 
 /// スプラッシュスクリーン
 /// 
 /// アプリ起動時にロゴをアニメーション表示し、
-/// 2秒後にホーム画面に遷移します
+/// 初回起動判定後、オンボーディングまたはホーム画面に遷移します
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -17,6 +19,7 @@ class _SplashScreenState extends State<SplashScreen>
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
   late Animation<double> _opacityAnimation;
+  final OnboardingService _onboardingService = OnboardingService();
 
   @override
   void initState() {
@@ -49,10 +52,24 @@ class _SplashScreenState extends State<SplashScreen>
     // アニメーション開始
     _animationController.forward();
 
-    // 2秒後にホーム画面に遷移
-    Timer(const Duration(seconds: 2), () {
+    // 2秒後に初回起動判定 → オンボーディングorホーム画面に遷移
+    Timer(const Duration(seconds: 2), () async {
       if (mounted) {
-        Navigator.of(context).pushReplacementNamed('/main');
+        final isCompleted = await _onboardingService.isOnboardingCompleted();
+        
+        if (!mounted) return;
+        
+        if (isCompleted) {
+          // 既存ユーザー → ホーム画面へ
+          Navigator.of(context).pushReplacementNamed('/main');
+        } else {
+          // 初回ユーザー → オンボーディング画面へ
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const OnboardingScreen(),
+            ),
+          );
+        }
       }
     });
   }
