@@ -7,6 +7,7 @@ library;
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'scientific_database.dart';
+import 'ai_response_optimizer.dart';
 
 /// トレーニング効果分析サービスクラス
 class TrainingAnalysisService {
@@ -293,6 +294,30 @@ class TrainingAnalysisService {
     required String gender,
     required int age,
   }) async {
+    // キャッシュキーを生成
+    final cacheKey = AIResponseOptimizer.generateCacheKey({
+      'type': 'training_analysis',
+      'bodyPart': bodyPart,
+      'level': level,
+      'currentSets': currentSetsPerWeek,
+      'currentFreq': currentFrequency,
+      'volumeStatus': volumeAnalysis['status'],
+      'freqStatus': frequencyAnalysis['status'],
+      'plateau': plateauDetected,
+      'trend': growthTrend['trend'],
+      'gender': gender,
+      'age': age,
+    });
+    
+    // キャッシュをチェック
+    final cachedResponse = await AIResponseOptimizer.getCachedResponse(cacheKey);
+    if (cachedResponse != null) {
+      print('✅ トレーニング分析: キャッシュヒット（即座に応答）');
+      return cachedResponse;
+    }
+    
+    print('⏳ トレーニング分析: API呼び出し中...');
+    
     final prompt = '''
 ${ScientificDatabase.getSystemPrompt()}
 
@@ -356,7 +381,11 @@ ${ScientificDatabase.getSystemPrompt()}
         final data = jsonDecode(utf8.decode(response.bodyBytes));
         final text = data['candidates']?[0]?['content']?['parts']?[0]?['text'];
         if (text != null && text.toString().isNotEmpty) {
-          return text.toString();
+          final responseText = text.toString();
+          // レスポンスをキャッシュに保存
+          await AIResponseOptimizer.cacheResponse(cacheKey, responseText);
+          print('✅ トレーニング分析: 成功（キャッシュ保存完了）');
+          return responseText;
         } else {
           return _getFallbackAnalysis(bodyPart, level, volumeAnalysis, frequencyAnalysis, plateauDetected);
         }

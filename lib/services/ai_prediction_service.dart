@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'dart:math' as math;
 import 'package:http/http.dart' as http;
 import 'scientific_database.dart';
+import 'ai_response_optimizer.dart';
 
 /// AI成長予測サービスクラス
 class AIPredictionService {
@@ -112,6 +113,27 @@ class AIPredictionService {
     required Map<String, int> recommendedVolume,
     required Map<String, dynamic> recommendedFreq,
   }) async {
+    // キャッシュキーを生成
+    final cacheKey = AIResponseOptimizer.generateCacheKey({
+      'type': 'growth_prediction',
+      'currentWeight': currentWeight.round(),
+      'level': level,
+      'frequency': frequency,
+      'gender': gender,
+      'age': age,
+      'bodyPart': bodyPart,
+      'monthsAhead': monthsAhead,
+    });
+    
+    // キャッシュをチェック
+    final cachedResponse = await AIResponseOptimizer.getCachedResponse(cacheKey);
+    if (cachedResponse != null) {
+      print('✅ AI分析: キャッシュヒット（即座に応答）');
+      return cachedResponse;
+    }
+    
+    print('⏳ AI分析: API呼び出し中...');
+    
     final prompt = '''
 ${ScientificDatabase.getSystemPrompt()}
 
@@ -175,7 +197,11 @@ ${ScientificDatabase.getSystemPrompt()}
         final data = jsonDecode(utf8.decode(response.bodyBytes));
         final text = data['candidates']?[0]?['content']?['parts']?[0]?['text'];
         if (text != null && text.toString().isNotEmpty) {
-          return text.toString();
+          final responseText = text.toString();
+          // レスポンスをキャッシュに保存
+          await AIResponseOptimizer.cacheResponse(cacheKey, responseText);
+          print('✅ AI分析: 成功（キャッシュ保存完了）');
+          return responseText;
         } else {
           return _getFallbackPrediction(currentWeight, predictedWeight, level, bodyPart, monthlyRate, weeklyRate, recommendedVolume, recommendedFreq);
         }
