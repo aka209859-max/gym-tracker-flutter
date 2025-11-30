@@ -521,9 +521,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       
       // 統計を取得
       final stats = await _achievementService.getBadgeStats(user.uid);
-      setState(() {
-        _badgeStats = stats;
-      });
+      if (mounted) {
+        setState(() {
+          _badgeStats = stats;
+        });
+      }
     } catch (e) {
       print('❌ バッジ統計の読み込みエラー: $e');
     }
@@ -540,9 +542,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       
       // アクティブな目標を取得
       final goals = await _goalService.getActiveGoals(user.uid);
-      setState(() {
-        _activeGoals = goals.where((g) => !g.isExpired).toList();
-      });
+      if (mounted) {
+        setState(() {
+          _activeGoals = goals.where((g) => !g.isExpired).toList();
+        });
+      }
     } catch (e) {
       print('❌ 目標の読み込みエラー: $e');
     }
@@ -4234,7 +4238,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       value: isEnabled,
                       onChanged: (value) async {
                         await _fatigueService.setFatigueManagementEnabled(value);
-                        setState(() {});
+                        if (mounted) {
+                          setState(() {});
+                        }
                         
                         if (mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
