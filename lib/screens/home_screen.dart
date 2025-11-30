@@ -1917,7 +1917,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               final result = await Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => AiCoachingScreenTabbed(),
+                                  builder: (context) => const AICoachingScreenTabbed(),
                                 ),
                               );
                               
