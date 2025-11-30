@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:math' show cos, sqrt, asin;
 import '../models/partner_profile.dart';
 import 'subscription_service.dart';
+import 'strength_matching_service.dart';
 
 /// パートナー検索サービス
 /// 
@@ -11,6 +12,7 @@ class PartnerSearchService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final SubscriptionService _subscriptionService = SubscriptionService();
+  final StrengthMatchingService _strengthService = StrengthMatchingService();
 
   /// 自分のパートナープロフィールを取得
   Future<PartnerProfile?> getMyProfile() async {
@@ -60,11 +62,15 @@ class PartnerSearchService {
     }
   }
 
-  /// パートナー検索（フィルター付き + Pro非対称可視性対応）
+  /// パートナー検索（フィルター付き + Pro非対称可視性対応 + 実力ベースマッチング）
   /// 
   /// Pro Plan非対称可視性:
   /// - Proユーザー: すべてのユーザー（Free/Premium/Pro）を検索可能
   /// - Free/Premiumユーザー: Proユーザーのみ検索可能
+  /// 
+  /// 実力ベースマッチング（±15% 1RM）:
+  /// - enableStrengthFilter = true: ±15%範囲内のみ表示
+  /// - enableStrengthFilter = false: 全ユーザー表示（実力差でソート）
   /// 
   /// 検索条件:
   /// - 場所（緯度経度からの距離）
@@ -73,6 +79,7 @@ class PartnerSearchService {
   /// - 年齢範囲
   /// - 性別
   /// - 曜日・時間帯の可用性
+  /// - 実力（±15% 1RM）
   Future<List<PartnerProfile>> searchPartners({
     double? latitude,
     double? longitude,
@@ -84,6 +91,7 @@ class PartnerSearchService {
     List<String>? genders,
     List<String>? availableDays,
     List<String>? availableTimeSlots,
+    bool enableStrengthFilter = false, // ✅ 実力フィルター有効化フラグ
   }) async {
     final userId = _auth.currentUser?.uid;
     if (userId == null) throw Exception('ログインが必要です');
@@ -92,6 +100,13 @@ class PartnerSearchService {
       // ✅ Pro Plan非対称可視性: 検索者のプランを取得
       final currentUserPlan = await _subscriptionService.getCurrentPlan();
       final isProUser = currentUserPlan == SubscriptionType.pro;
+      
+      // ✅ 実力ベースマッチング: 検索者の平均1RMを取得
+      double? userAverage1RM;
+      if (enableStrengthFilter) {
+        userAverage1RM = await _strengthService.calculateAverage1RM(userId);
+        print('💪 実力フィルター有効 - 検索者の平均1RM: ${userAverage1RM?.toStringAsFixed(1) ?? "記録なし"}kg');
+      }
       
       print('🔍 パートナー検索: ${currentUserPlan.toString().split(".").last}ユーザー (Pro非対称: ${isProUser ? "全員検索可能" : "Pro限定"})');
       
@@ -118,6 +133,14 @@ class PartnerSearchService {
           if (targetUserPlan != SubscriptionType.pro) {
             print('⏭️ Skip: ${doc.id} (Free/Premium) - 検索者がNon-Pro');
             continue; // Free/Premiumユーザーを除外
+          }
+        }
+        
+        // ✅ 実力ベースマッチングフィルター（±15% 1RM）
+        if (enableStrengthFilter && userAverage1RM != null) {
+          if (!_strengthService.isStrengthMatch(userAverage1RM, profile.average1RM)) {
+            print('⏭️ Skip: ${doc.id} - 実力差が大きい');
+            continue; // ±15%範囲外を除外
           }
         }
         
@@ -182,8 +205,20 @@ class PartnerSearchService {
         }
       }
 
-      // 距離でソート（近い順）
-      if (latitude != null && longitude != null) {
+      // ✅ ソート優先順位:
+      // 1. 実力フィルター有効時: 実力差（近い順）
+      // 2. 距離情報あり: 距離（近い順）
+      // 3. それ以外: レーティング（高い順）
+      if (enableStrengthFilter && userAverage1RM != null) {
+        // 実力差でソート（0% = 完全一致、100% = 最大差）
+        profiles.sort((a, b) {
+          final diffA = _strengthService.calculateStrengthDifference(userAverage1RM, a.average1RM);
+          final diffB = _strengthService.calculateStrengthDifference(userAverage1RM, b.average1RM);
+          return diffA.compareTo(diffB);
+        });
+        print('✅ 実力差でソート完了: ${profiles.length}件');
+      } else if (latitude != null && longitude != null) {
+        // 距離でソート（近い順）
         profiles.sort((a, b) {
           if (a.latitude == null || a.longitude == null) return 1;
           if (b.latitude == null || b.longitude == null) return -1;

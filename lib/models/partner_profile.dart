@@ -34,6 +34,10 @@ class PartnerProfile {
   final DateTime updatedAt;
   final int matchCount; // マッチング回数
   final double rating; // レーティング (0-5)
+  
+  // ✅ 実力ベースマッチング（±15% 1RM）
+  final double? average1RM; // BIG3の平均1RM（kg）
+  final DateTime? average1RMUpdatedAt; // 最終更新日時
 
   PartnerProfile({
     required this.userId,
@@ -59,6 +63,8 @@ class PartnerProfile {
     required this.updatedAt,
     this.matchCount = 0,
     this.rating = 0.0,
+    this.average1RM,
+    this.average1RMUpdatedAt,
   });
 
   /// Firestore からのデータ読み込み
@@ -87,6 +93,10 @@ class PartnerProfile {
       updatedAt: DateTime.parse(data['updated_at'] as String? ?? DateTime.now().toIso8601String()),
       matchCount: data['match_count'] as int? ?? 0,
       rating: (data['rating'] as num?)?.toDouble() ?? 0.0,
+      average1RM: (data['average_1rm'] as num?)?.toDouble(),
+      average1RMUpdatedAt: data['average_1rm_updated_at'] != null
+          ? DateTime.parse(data['average_1rm_updated_at'] as String)
+          : null,
     );
   }
 
@@ -115,6 +125,8 @@ class PartnerProfile {
       'updated_at': updatedAt.toIso8601String(),
       'match_count': matchCount,
       'rating': rating,
+      'average_1rm': average1RM,
+      'average_1rm_updated_at': average1RMUpdatedAt?.toIso8601String(),
     };
   }
 
@@ -141,6 +153,8 @@ class PartnerProfile {
     DateTime? updatedAt,
     int? matchCount,
     double? rating,
+    double? average1RM,
+    DateTime? average1RMUpdatedAt,
   }) {
     return PartnerProfile(
       userId: userId,
@@ -166,6 +180,8 @@ class PartnerProfile {
       updatedAt: updatedAt ?? DateTime.now(),
       matchCount: matchCount ?? this.matchCount,
       rating: rating ?? this.rating,
+      average1RM: average1RM ?? this.average1RM,
+      average1RMUpdatedAt: average1RMUpdatedAt ?? this.average1RMUpdatedAt,
     );
   }
 }

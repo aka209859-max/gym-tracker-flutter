@@ -39,6 +39,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
   List<String> _selectedGoals = [];
   String? _selectedExperienceLevel;
   List<String> _selectedGenders = [];
+  bool _enableStrengthFilter = false; // ✅ 実力フィルター（±15% 1RM）
 
   // 利用可能なオプション
   final Map<String, String> _trainingGoals = {
@@ -112,6 +113,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
         trainingGoals: _selectedGoals.isEmpty ? null : _selectedGoals,
         experienceLevel: _selectedExperienceLevel,
         genders: _selectedGenders.isEmpty ? null : _selectedGenders,
+        enableStrengthFilter: _enableStrengthFilter, // ✅ 実力フィルター
       );
 
       if (!mounted) return;
@@ -256,6 +258,41 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                 );
               }).toList(),
             ),
+            const SizedBox(height: 16),
+            
+            // ✅ 実力ベースマッチング（±15% 1RM）
+            Row(
+              children: [
+                Expanded(
+                  child: Row(
+                    children: [
+                      const Icon(Icons.fitness_center, size: 20, color: Colors.grey),
+                      const SizedBox(width: 8),
+                      const Text(
+                        '実力が近い人のみ（±15% 1RM）',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+                Switch(
+                  value: _enableStrengthFilter,
+                  onChanged: (value) {
+                    setState(() {
+                      _enableStrengthFilter = value;
+                    });
+                  },
+                ),
+              ],
+            ),
+            if (_enableStrengthFilter)
+              const Padding(
+                padding: EdgeInsets.only(top: 4),
+                child: Text(
+                  'あなたのBIG3平均1RMの±15%範囲内のユーザーのみ表示',
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+              ),
             const SizedBox(height: 16),
 
             // 検索ボタン
@@ -499,12 +536,43 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                       ],
                     ),
                     const SizedBox(height: 4),
-                    Text(
-                      _experienceLevels[profile.experienceLevel] ?? profile.experienceLevel,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey[700],
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          _experienceLevels[profile.experienceLevel] ?? profile.experienceLevel,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                        // ✅ 実力表示（平均1RM）
+                        if (profile.average1RM != null) ...[
+                          const SizedBox(width: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: Colors.blue[50],
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: Colors.blue[200]!),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Icon(Icons.fitness_center, size: 12, color: Colors.blue),
+                                const SizedBox(width: 4),
+                                Text(
+                                  '${profile.average1RM!.toStringAsFixed(0)}kg',
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ],
                     ),
                     const SizedBox(height: 8),
                     Wrap(
