@@ -80,11 +80,6 @@ jobs:
         echo "✅ pbxproj installed successfully"
         python3 -m pip show pbxproj || pip3 show pbxproj
         
-        python3 << 'PYTHON_SCRIPT'
-
-
-
-          
           python3 << 'PYTHON_SCRIPT'
           import sys
           import os
