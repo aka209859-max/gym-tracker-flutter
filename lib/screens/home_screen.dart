@@ -825,12 +825,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       // 選択した日のデータだけをフィルタ（時刻を無視して年月日のみで比較）
       final filteredWorkouts = allWorkouts.where((workout) {
         final workoutDate = workout['date'] as DateTime;
-        // 時刻を無視して日付のみで比較
-        final normalizedWorkoutDate = DateTime(workoutDate.year, workoutDate.month, workoutDate.day);
-        final isMatch = normalizedWorkoutDate.isAtSameMomentAs(selectedDate);
+        // 🔧 FIX: _isSameDay ヘルパーを使用して日付のみで正確に比較
+        final isMatch = _isSameDay(workoutDate, _selectedDay!);
         
         if (!isMatch) {
-          print('   ⚠️ 除外: ${workoutDate.toIso8601String()} (normalized: ${normalizedWorkoutDate.year}/${normalizedWorkoutDate.month}/${normalizedWorkoutDate.day})');
+          print('   ⚠️ 除外: ${workoutDate.toIso8601String()} (${workoutDate.year}/${workoutDate.month}/${workoutDate.day})');
+        } else {
+          print('   ✅ 一致: ${workoutDate.toIso8601String()} (${workoutDate.year}/${workoutDate.month}/${workoutDate.day})');
         }
         
         return isMatch;
