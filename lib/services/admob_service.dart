@@ -14,13 +14,12 @@ class AdMobService {
 
   final SubscriptionService _subscriptionService = SubscriptionService();
   
-  // iOS AdMob広告ユニットID
-  // ⚠️ 一時的にテスト広告IDを使用（AdMobの「広告配信制限」回避のため）
-  // 本番配信前に本番IDに戻す必要あり
-  static const String _iosBannerAdUnitId = 'ca-app-pub-3940256099942544/2934735716'; // テスト用（iOS）
+  // iOS AdMob広告ユニットID（本番設定完了✅）
+  // 本番広告ID使用中（収益化有効）
+  static const String _iosBannerAdUnitId = 'ca-app-pub-2887531479031819/1682429555'; // 本番用（iOS）
   
-  // 📝 本番広告ID（App Store情報登録後に使用）
-  // static const String _iosBannerAdUnitId = 'ca-app-pub-2887531479031819/1682429555'; // 本番用（iOS）
+  // テスト用広告ID（開発時のみ使用）
+  // static const String _iosBannerAdUnitId = 'ca-app-pub-3940256099942544/2934735716'; // テスト用（iOS）
   
   BannerAd? _bannerAd;
   bool _isAdLoaded = false;

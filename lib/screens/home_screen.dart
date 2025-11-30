@@ -814,28 +814,41 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         };
       }).toList();
 
-      print('📊 全ワークアウト詳細:');
-      for (var i = 0; i < allWorkouts.length; i++) {
+      DebugLogger.instance.log('📊 全ワークアウト詳細: ${allWorkouts.length}件');
+      for (var i = 0; i < allWorkouts.length && i < 5; i++) {
         final workout = allWorkouts[i];
         final workoutDate = workout['date'] as DateTime;
         final normalizedDate = DateTime(workoutDate.year, workoutDate.month, workoutDate.day);
-        print('   [$i] date=${workoutDate.toIso8601String()}, normalized=${normalizedDate.year}/${normalizedDate.month}/${normalizedDate.day}, muscle=${workout['muscle_group']}');
+        DebugLogger.instance.log('   [$i] date=${normalizedDate.year}/${normalizedDate.month}/${normalizedDate.day}, muscle=${workout['muscle_group']}');
       }
+      if (allWorkouts.length > 5) {
+        DebugLogger.instance.log('   ... 他 ${allWorkouts.length - 5}件');
 
       // 選択した日のデータだけをフィルタ（時刻を無視して年月日のみで比較）
+      DebugLogger.instance.log('🔍 フィルタリング開始: 選択日=${_selectedDay!.year}/${_selectedDay!.month}/${_selectedDay!.day}');
+      
+      int matchCount = 0;
+      int excludeCount = 0;
+      
       final filteredWorkouts = allWorkouts.where((workout) {
         final workoutDate = workout['date'] as DateTime;
         // 🔧 FIX: _isSameDay ヘルパーを使用して日付のみで正確に比較
         final isMatch = _isSameDay(workoutDate, _selectedDay!);
         
         if (!isMatch) {
-          print('   ⚠️ 除外: ${workoutDate.toIso8601String()} (${workoutDate.year}/${workoutDate.month}/${workoutDate.day})');
+          excludeCount++;
+          if (excludeCount <= 3) {
+            DebugLogger.instance.log('   ⚠️ 除外 [$excludeCount]: ${workoutDate.year}/${workoutDate.month}/${workoutDate.day}');
+          }
         } else {
-          print('   ✅ 一致: ${workoutDate.toIso8601String()} (${workoutDate.year}/${workoutDate.month}/${workoutDate.day})');
+          matchCount++;
+          DebugLogger.instance.log('   ✅ 一致 [$matchCount]: ${workoutDate.year}/${workoutDate.month}/${workoutDate.day} - ${workout['muscle_group']}');
         }
         
         return isMatch;
       }).toList();
+      
+      DebugLogger.instance.log('📊 フィルタリング結果: 一致=${matchCount}件, 除外=${excludeCount}件');
 
       // 日付で降順ソート
       filteredWorkouts.sort((a, b) {
@@ -844,12 +857,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         return dateB.compareTo(dateA);
       });
 
-      print('✅ フィルタ後: ${filteredWorkouts.length}件');
+      DebugLogger.instance.log('✅ フィルタ後: ${filteredWorkouts.length}件');
       
       // 詳細ログ: 各ワークアウトの情報を表示
       for (var i = 0; i < filteredWorkouts.length; i++) {
         final workout = filteredWorkouts[i];
-        print('   [$i] ID=${workout['id']}, muscle_group=${workout['muscle_group']}, sets=${(workout['sets'] as List).length}');
+        DebugLogger.instance.log('   [$i] muscle=${workout['muscle_group']}, sets=${(workout['sets'] as List).length}');
       }
 
       if (mounted) {
@@ -859,7 +872,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         });
       }
 
-      print('✅ データ読み込み完了: ${_selectedDayWorkouts.length}件');
+      DebugLogger.instance.log('🎉 データ読み込み完了: 画面表示=${_selectedDayWorkouts.length}件');
     } catch (e) {
       print('❌ トレーニング記録の読み込みエラー: $e');
       if (mounted) {
