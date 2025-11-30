@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:provider/provider.dart';
@@ -149,6 +152,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       
       // 🎁 紹介コードデータ読み込み（Task 10）
       _loadReferralData();
+      
+      // 🎁 紹介バナー表示チェック（週1回）
+      _checkAndShowReferralBanner();
     });
     
     // 📱 バナー広告をロード
@@ -1015,11 +1021,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             
             const SizedBox(height: 16),
             
-            // 🤖 AIカード（Phase 1: AI導線最適化）
-            _buildAICard(theme),
-            
-            const SizedBox(height: 16),
-            
             // 🔔 リマインダーカード
             if (_show48HourReminder)
               _build48HourReminderCard(theme),
@@ -1031,10 +1032,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               const SizedBox(height: 16),
               _buildMagicNumberCard(theme),
             ],
-            
-            // 🎁 紹介コードカード（Task 10: バイラルループ）
-            const SizedBox(height: 16),
-            _buildReferralCard(theme),
             
             // 🔥 習慣形成サポートカード
             if (_currentStreak > 0 || _weeklyProgress['current']! > 0)
@@ -1316,16 +1313,24 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   
   // 💡 今日のAI提案カード
   Widget _buildAISuggestionCard(ThemeData theme) {
-    return FutureBuilder<int>(
-      future: AICreditService().getAICredits().then((credits) async {
+    return FutureBuilder<Map<String, dynamic>>(
+      future: () async {
         final plan = await SubscriptionService().getCurrentPlan();
-        if (plan != SubscriptionType.free) {
-          return await SubscriptionService().getRemainingAIUsage();
-        }
-        return credits;
-      }),
+        final credits = plan == SubscriptionType.free
+            ? await AICreditService().getAICredits()
+            : await SubscriptionService().getRemainingAIUsage();
+        return {
+          'credits': credits,
+          'plan': plan,
+        };
+      }(),
       builder: (context, snapshot) {
-        final remainingCredits = snapshot.data ?? 0;
+        final data = snapshot.data;
+        final remainingCredits = data?['credits'] ?? 0;
+        final currentPlan = data?['plan'] ?? SubscriptionType.free;
+        final displayText = currentPlan == SubscriptionType.pro
+            ? 'AI残回数: ∞'
+            : 'AI残回数: $remainingCredits回';
         
         return Container(
           padding: const EdgeInsets.all(16),
@@ -1382,7 +1387,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      'AI残回数: $remainingCredits回',
+                      displayText,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 12,
@@ -1815,188 +1820,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     );
   }
   
-  // 🤖 AIカード（Phase 1: AI導線最適化）
-  Widget _buildAICard(ThemeData theme) {
-    return FutureBuilder<Map<String, dynamic>>(
-      future: _getAICardData(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return const SizedBox.shrink();
-        }
-        
-        final data = snapshot.data!;
-        final int remainingCredits = data['remaining'] ?? 0;
-        final String planName = data['planName'] ?? 'Free';
-        final bool canUseAI = remainingCredits > 0;
-        
-        return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Colors.purple.shade400,
-                Colors.deepPurple.shade600,
-              ],
-            ),
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.purple.withOpacity(0.3),
-                blurRadius: 12,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // ヘッダー
-              Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Icon(
-                      Icons.psychology,
-                      color: Colors.white,
-                      size: 28,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'AI疲労度分析',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          '残り$remainingCredits回 ($planName)',
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.9),
-                            fontSize: 13,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              
-              // 説明文
-              Text(
-                'トレーニング後にAIがあなたの疲労度を科学的に分析。最適な回復時間とトレーニング提案をお届けします。',
-                style: TextStyle(
-                  color: Colors.white.withOpacity(0.9),
-                  fontSize: 14,
-                  height: 1.5,
-                ),
-              ),
-              const SizedBox(height: 16),
-              
-              // ボタン
-              Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton.icon(
-                      onPressed: canUseAI
-                          ? () async {
-                              // AI画面へ遷移
-                              final result = await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const AICoachingScreenTabbed(),
-                                ),
-                              );
-                              
-                              if (result == true && mounted) {
-                                setState(() {
-                                  // データ再読み込み
-                                });
-                              }
-                            }
-                          : null,
-                      icon: const Icon(Icons.trending_up, size: 20),
-                      label: const Text(
-                        'AI分析を開始',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: Colors.purple.shade600,
-                        disabledBackgroundColor: Colors.white.withOpacity(0.3),
-                        disabledForegroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                  ),
-                  if (!canUseAI) ...[
-                    const SizedBox(width: 8),
-                    OutlinedButton(
-                      onPressed: () async {
-                        // AI使い切り時のペイウォール表示
-                        await PaywallDialog.show(context, PaywallType.aiLimitReached);
-                        if (mounted) {
-                          setState(() {
-                            // データ再読み込み
-                          });
-                        }
-                      },
-                      style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: Colors.white, width: 2),
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      child: const Text(
-                        '追加',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
-                ],
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-  
-  // AI残回数データを取得
-  Future<Map<String, dynamic>> _getAICardData() async {
-    final aiCreditService = AICreditService();
-    final subscriptionService = SubscriptionService();
-    
-    final remaining = await aiCreditService.getAICredits();
-    final currentPlan = await subscriptionService.getCurrentPlan();
-    final planName = subscriptionService.getPlanName(currentPlan);
-    
-    return {
-      'remaining': remaining,
-      'planName': planName,
-    };
-  }
+
 
   // ミニ統計カード（チャートなし・数値のみ）
   Widget _buildMiniStatCard({
@@ -5712,7 +5536,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         setState(() {
           _referralCode = stats['referralCode'] as String?;
           _totalReferrals = stats['successfulReferrals'] as int? ?? 0;
-          _discountCredits = stats['discountCredits'] as int? ?? 0;
+          _discountCredits = stats['aiPackCredits'] as int? ?? 0; // AI追加パック獲得数
         });
       }
     } catch (e) {
@@ -5720,6 +5544,156 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         print('紹介コードデータ読み込みエラー: $e');
       }
     }
+  }
+
+  /// 🎁 紹介バナーを週1回表示（Task 10: バイラルループ）
+  Future<void> _checkAndShowReferralBanner() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final lastShown = prefs.getString('last_referral_banner_date');
+      final now = DateTime.now();
+      
+      // 最後に表示した日付を取得
+      DateTime? lastDate;
+      if (lastShown != null) {
+        lastDate = DateTime.parse(lastShown);
+      }
+      
+      // 7日経過または初回表示の場合のみ表示
+      if (lastDate == null || now.difference(lastDate).inDays >= 7) {
+        // 表示日時を記録
+        await prefs.setString('last_referral_banner_date', now.toIso8601String());
+        
+        // 紹介コードが取得できている場合のみ表示
+        if (_referralCode.isNotEmpty && mounted) {
+          // 画面表示後に少し遅延してダイアログ表示
+          Future.delayed(const Duration(seconds: 1), () {
+            if (mounted) {
+              _showReferralBanner();
+            }
+          });
+        }
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('紹介バナーチェックエラー: $e');
+      }
+    }
+  }
+
+  /// 🎁 紹介バナーダイアログを表示
+  void _showReferralBanner() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(Icons.card_giftcard, color: Colors.orange, size: 28),
+            SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                '🎁 友達を招待してAI5回分ゲット！',
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'あなたの招待コード: $_referralCode',
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.orange.shade50,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.orange.shade200),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Row(
+                    children: [
+                      Icon(Icons.star, color: Colors.orange, size: 20),
+                      SizedBox(width: 8),
+                      Text(
+                        '紹介特典',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      const Icon(Icons.person_add, size: 18, color: Colors.green),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          '招待された側: AI無料利用×3回',
+                          style: TextStyle(color: Colors.grey.shade700),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Row(
+                    children: [
+                      const Icon(Icons.redeem, size: 18, color: Colors.deepOrange),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          '招待した側: AI追加パック×1個（5回分、¥300相当）',
+                          style: TextStyle(color: Colors.grey.shade700),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('後で'),
+          ),
+          ElevatedButton.icon(
+            onPressed: () {
+              Clipboard.setData(ClipboardData(text: _referralCode));
+              Share.share(
+                'GYM MATCHで一緒にトレーニングしよう！招待コード: $_referralCode\n\n'
+                'https://gym-match-e560d.web.app',
+              );
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('招待コードをコピーしました！'),
+                  duration: Duration(seconds: 2),
+                ),
+              );
+            },
+            icon: const Icon(Icons.share, size: 18),
+            label: const Text('今すぐシェア'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.orange,
+              foregroundColor: Colors.white,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   /// 🎁 紹介コードカードを構築（Task 10: バイラルループ）
@@ -5821,7 +5795,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 const SizedBox(height: 12),
                 _buildBenefitRow('招待された側', 'AI無料利用×3回', Icons.psychology),
                 const SizedBox(height: 8),
-                _buildBenefitRow('招待した側', 'Premium 50%割引×1ヶ月', Icons.discount),
+                _buildBenefitRow('招待した側', 'AI追加パック×1個（5回分、¥300相当）', Icons.redeem),
                 if (_discountCredits > 0) ...[
                   const SizedBox(height: 12),
                   Container(
@@ -5835,7 +5809,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         const Icon(Icons.celebration, color: Colors.deepOrange, size: 20),
                         const SizedBox(width: 8),
                         Text(
-                          '割引クレジット: $_discountCreditsヶ月分',
+                          'AI追加パック獲得数: $_discountCredits個',
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,

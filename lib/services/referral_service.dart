@@ -15,7 +15,7 @@ class ReferralService {
 
   // 紹介特典
   static const int _refereeAiBonus = 3; // 紹介された側のAI無料利用×3回
-  static const double _referrerDiscountPercent = 50.0; // 紹介した側のPremium割引50%
+  static const int _referrerAiBonus = 5; // 紹介した側のAI追加パック×1個（5回分、¥300相当）
 
   /// ユーザーの紹介コードを取得（なければ生成）
   Future<String> getReferralCode() async {
@@ -37,7 +37,7 @@ class ReferralService {
       'referralStats': {
         'totalReferrals': 0,
         'successfulReferrals': 0,
-        'discountCredits': 0,
+        'aiPackCredits': 0, // AI追加パックの獲得数
       },
       'referralCodeCreatedAt': FieldValue.serverTimestamp(),
     });
@@ -125,12 +125,13 @@ class ReferralService {
         'referredAt': FieldValue.serverTimestamp(),
       });
 
-      // 2. 紹介した側（referrer）に割引クレジット付与
+      // 2. 紹介した側（referrer）にAI追加パック付与（5回分）
       final referrerRef = _firestore.collection('users').doc(referrerId);
       transaction.update(referrerRef, {
         'referralStats.totalReferrals': FieldValue.increment(1),
         'referralStats.successfulReferrals': FieldValue.increment(1),
-        'referralStats.discountCredits': FieldValue.increment(1), // 50%割引×1回
+        'referralStats.aiPackCredits': FieldValue.increment(1), // AI追加パック×1個
+        'ai_credits': FieldValue.increment(_referrerAiBonus), // AI 5回分を直接付与
       });
 
       // 3. 紹介履歴を記録
@@ -143,7 +144,7 @@ class ReferralService {
         'status': 'completed',
         'bonuses': {
           'refereeAiCredits': _refereeAiBonus,
-          'referrerDiscountCredit': 1,
+          'referrerAiPackCredits': 1, // AI追加パック×1個（5回分）
         },
       });
     });
@@ -163,7 +164,7 @@ class ReferralService {
       return {
         'totalReferrals': 0,
         'successfulReferrals': 0,
-        'discountCredits': 0,
+        'aiPackCredits': 0,
         'referralCode': await getReferralCode(),
       };
     }
@@ -172,7 +173,7 @@ class ReferralService {
     return {
       'totalReferrals': stats['totalReferrals'] ?? 0,
       'successfulReferrals': stats['successfulReferrals'] ?? 0,
-      'discountCredits': stats['discountCredits'] ?? 0,
+      'aiPackCredits': stats['aiPackCredits'] ?? 0,
       'referralCode': data['referralCode'] ?? await getReferralCode(),
     };
   }
@@ -199,27 +200,18 @@ class ReferralService {
     });
   }
 
-  /// 紹介した側の割引クレジットを使用
-  Future<bool> useReferrerDiscountCredit() async {
+  /// 紹介した側のAI追加パック獲得数を取得
+  Future<int> getReferrerAiPackCredits() async {
     final user = _auth.currentUser;
-    if (user == null) throw Exception('User not authenticated');
+    if (user == null) return 0;
 
     final userDoc = await _firestore.collection('users').doc(user.uid).get();
     final data = userDoc.data();
 
-    if (data == null) return false;
+    if (data == null) return 0;
 
     final stats = data['referralStats'] as Map<String, dynamic>?;
-    final discountCredits = (stats?['discountCredits'] as int?) ?? 0;
-
-    if (discountCredits <= 0) return false;
-
-    await _firestore.collection('users').doc(user.uid).update({
-      'referralStats.discountCredits': FieldValue.increment(-1),
-      'referralStats.usedDiscountCredits': FieldValue.increment(1),
-    });
-
-    return true;
+    return (stats?['aiPackCredits'] as int?) ?? 0;
   }
 
   /// 紹介リストを取得（紹介した側用）
