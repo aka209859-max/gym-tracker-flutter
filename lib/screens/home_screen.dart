@@ -33,6 +33,7 @@ import '../services/subscription_service.dart';
 
 import '../services/reminder_service.dart';
 import '../services/habit_formation_service.dart';
+import '../services/magic_number_service.dart';
 import '../services/crowd_alert_service.dart';
 import 'debug_log_screen.dart';
 
@@ -99,6 +100,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   // 🔥 習慣形成システム
   final HabitFormationService _habitService = HabitFormationService();
   int _currentStreak = 0;
+  
+  // ✨ マジックナンバーシステム（5記録/30日）
+  final MagicNumberService _magicNumberService = MagicNumberService();
+  int _magicNumberCount = 0;
+  double _magicNumberProgress = 0.0;
+  bool _magicNumberAchieved = false;
   
   // 🔔 混雑度アラートシステム（Premium/Pro限定）
   final CrowdAlertService _crowdAlertService = CrowdAlertService();
@@ -310,15 +317,24 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     // 最もトレーニングしている曜日TOP3を取得
     final topDays = await _habitService.getTopTrainingDays();
     
+    // ✨ マジックナンバー進捗を取得（5記録/30日）
+    final magicData = await _magicNumberService.getProgress();
+    
     if (mounted) {
       setState(() {
         _currentStreak = streak;
         _weeklyProgress = weeklyProgress;
         _topTrainingDays = topDays;
+        _magicNumberCount = magicData['count'] as int;
+        _magicNumberProgress = magicData['progress'] as double;
+        _magicNumberAchieved = magicData['isAchieved'] as bool? ?? false;
       });
       
       // マイルストーン達成チェック
       await _checkMilestone();
+      
+      // ✨ マジックナンバー達成チェック
+      await _checkMagicNumberAchievement();
     }
   }
   
@@ -330,6 +346,16 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     if (milestone != null && mounted) {
       await _showMilestoneDialog(milestone);
       await _habitService.markMilestoneShown(milestone);
+    }
+  }
+  
+  /// ✨ マジックナンバー達成をチェックして表示
+  Future<void> _checkMagicNumberAchievement() async {
+    if (!mounted) return;
+    
+    final shouldShow = await _magicNumberService.checkAndMarkAchievement();
+    if (shouldShow && mounted) {
+      await _showMagicNumberDialog();
     }
   }
   
@@ -985,6 +1011,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               _build48HourReminderCard(theme),
             if (_show7DayInactiveReminder)
               _build7DayInactiveReminderCard(theme),
+            
+            // ✨ マジックナンバープログレスカード（5記録/30日）
+            if (_magicNumberCount > 0 && !_magicNumberAchieved) ...[
+              const SizedBox(height: 16),
+              _buildMagicNumberCard(theme),
+            ],
             
             // 🔥 習慣形成サポートカード
             if (_currentStreak > 0 || _weeklyProgress['current']! > 0)
@@ -5521,6 +5553,256 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             const SizedBox(height: 10),
           ],
         ),
+      ),
+    );
+  }
+  
+  /// ✨ マジックナンバー達成ダイアログを表示
+  Future<void> _showMagicNumberDialog() async {
+    await showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.purple.shade50,
+                Colors.deepPurple.shade50,
+              ],
+            ),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // 🎉 アイコン
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.purple.shade400, Colors.deepPurple.shade400],
+                  ),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.auto_awesome,
+                  size: 56,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 20),
+              
+              // タイトル
+              const Text(
+                '🎉 習慣化達成！',
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.deepPurple,
+                ),
+              ),
+              const SizedBox(height: 16),
+              
+              // メッセージ
+              const Text(
+                '30日間で5記録を達成しました！\n\nあなたは継続できる人です💪\nこのペースを維持すれば、\n80%の確率で習慣化できます！',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black87,
+                  height: 1.6,
+                ),
+              ),
+              const SizedBox(height: 24),
+              
+              // 統計情報
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.7),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.deepPurple.shade200),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.star, color: Colors.amber, size: 24),
+                        const SizedBox(width: 8),
+                        const Text(
+                          '継続率 80%',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepPurple,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'この調子で続ければ、長期的な習慣になります',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 13, color: Colors.black54),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 24),
+              
+              // 閉じるボタン
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text(
+                    '続ける！',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// ✨ マジックナンバープログレスカードを構築
+  Widget _buildMagicNumberCard(ThemeData theme) {
+    // 達成済みの場合は表示しない
+    if (_magicNumberAchieved) return const SizedBox.shrink();
+    
+    // 1記録もない場合も表示しない
+    if (_magicNumberCount == 0) return const SizedBox.shrink();
+
+    final message = _magicNumberService.getProgressMessage(_magicNumberCount);
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.purple.shade50, Colors.deepPurple.shade50],
+        ),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.deepPurple.shade200, width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.deepPurple.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.purple.shade400, Colors.deepPurple.shade400],
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.auto_awesome,
+                  color: Colors.white,
+                  size: 24,
+                ),
+              ),
+              const SizedBox(width: 12),
+              const Expanded(
+                child: Text(
+                  '習慣化への道',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.deepPurple,
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  '$_magicNumberCount/5記録',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          
+          // プログレスバー
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: LinearProgressIndicator(
+              value: _magicNumberProgress,
+              backgroundColor: Colors.grey[300],
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.deepPurple),
+              minHeight: 12,
+            ),
+          ),
+          const SizedBox(height: 12),
+          
+          // メッセージ
+          Text(
+            message,
+            style: const TextStyle(
+              fontSize: 15,
+              color: Colors.black87,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(height: 12),
+          
+          // 説明
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.7),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.info_outline, size: 18, color: Colors.deepPurple.shade700),
+                const SizedBox(width: 8),
+                const Expanded(
+                  child: Text(
+                    '30日間で5記録達成で習慣化！（継続率80%）',
+                    style: TextStyle(fontSize: 12, color: Colors.black87),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
