@@ -823,6 +823,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       }
       if (allWorkouts.length > 5) {
         DebugLogger.instance.log('   ... 他 ${allWorkouts.length - 5}件');
+      }
 
       // 選択した日のデータだけをフィルタ（時刻を無視して年月日のみで比較）
       DebugLogger.instance.log('🔍 フィルタリング開始: 選択日=${_selectedDay!.year}/${_selectedDay!.month}/${_selectedDay!.day}');
