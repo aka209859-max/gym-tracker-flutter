@@ -261,22 +261,13 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               const Divider(),
               const SizedBox(height: 12),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // 一時停止ボタン
-                  TextButton.icon(
-                    onPressed: _showPauseDialog,
-                    icon: const Icon(Icons.pause_circle_outline, size: 20),
-                    label: const Text('一時停止'),
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.orange,
-                    ),
-                  ),
                   // ダウングレードボタン
                   TextButton.icon(
                     onPressed: _showDowngradeDialog,
                     icon: const Icon(Icons.arrow_downward, size: 20),
-                    label: const Text('変更'),
+                    label: const Text('プラン変更'),
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.blue,
                     ),
@@ -1211,137 +1202,6 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  /// ✅ 一時停止ダイアログ
-  void _showPauseDialog() {
-    String? selectedReason;
-    int selectedDuration = 1;
-
-    showDialog(
-      context: context,
-      builder: (context) => StatefulBuilder(
-        builder: (context, setState) => AlertDialog(
-          title: Row(
-            children: [
-              Icon(Icons.pause_circle, color: Colors.orange),
-              const SizedBox(width: 8),
-              const Expanded(
-                child: Text(
-                  'サブスク一時停止',
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-            ],
-          ),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      '⚠️ 重要なお知らせ',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.orange,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.orange.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.orange.withOpacity(0.3)),
-                      ),
-                      child: const Text(
-                        '一時停止中もApp Storeからの課金は継続されます。\n'
-                        '課金を停止するには、App Storeから直接サブスクリプションをキャンセルしてください。\n\n'
-                        '一時停止機能は、アプリ内の有料機能へのアクセスを停止し、'
-                        '停止期間終了後にスムーズに再開できるようにするためのものです。',
-                        style: TextStyle(fontSize: 12, height: 1.5),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                
-                // 期間選択
-                const Text('停止期間', style: TextStyle(fontWeight: FontWeight.bold)),
-                const SizedBox(height: 8),
-                ...SubscriptionManagementService.pauseDurationMonths.map((months) {
-                  return RadioListTile<int>(
-                    title: Text('$months ヶ月'),
-                    value: months,
-                    groupValue: selectedDuration,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedDuration = value!;
-                      });
-                    },
-                  );
-                }).toList(),
-                
-                const SizedBox(height: 16),
-                
-                // 理由選択
-                const Text('停止理由（任意）', style: TextStyle(fontWeight: FontWeight.bold)),
-                const SizedBox(height: 8),
-                DropdownButtonFormField<String>(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: '選択してください',
-                  ),
-                  value: selectedReason,
-                  items: SubscriptionManagementService.churnReasons.map((reason) {
-                    return DropdownMenuItem(value: reason, child: Text(reason));
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      selectedReason = value;
-                    });
-                  },
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('キャンセル'),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                Navigator.pop(context);
-                
-                final success = await _managementService.pauseSubscription(
-                  durationMonths: selectedDuration,
-                  reason: selectedReason,
-                );
-                
-                if (success && mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('$selectedDuration ヶ月間一時停止しました'),
-                      backgroundColor: Colors.orange,
-                    ),
-                  );
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange,
-                foregroundColor: Colors.white,
-              ),
-              child: const Text('一時停止する'),
-            ),
-          ],
         ),
       ),
     );
