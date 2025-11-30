@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/partner_profile.dart';
 import '../../services/partner_search_service.dart';
+import '../subscription_screen.dart';
 
 /// パートナープロフィール詳細画面
 /// 
@@ -23,6 +24,8 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
   final PartnerSearchService _searchService = PartnerSearchService();
   final TextEditingController _messageController = TextEditingController();
   bool _isSending = false;
+  bool _canSendRequest = true;
+  String? _permissionMessage;
 
   final Map<String, String> _trainingGoals = {
     'muscle_gain': '筋力増強',
@@ -63,12 +66,35 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
   };
 
   @override
+  void initState() {
+    super.initState();
+    _checkPermissions();
+  }
+  
+  /// ✅ Pro Plan権限チェック
+  Future<void> _checkPermissions() async {
+    final result = await _searchService.canSendMatchRequest();
+    if (mounted) {
+      setState(() {
+        _canSendRequest = result['canSend'] == true;
+        _permissionMessage = result['reason'];
+      });
+    }
+  }
+
+  @override
   void dispose() {
     _messageController.dispose();
     super.dispose();
   }
 
   Future<void> _sendMatchRequest() async {
+    // ✅ Pro非対称可視性: Non-Proユーザーはアップグレード誘導
+    if (!_canSendRequest) {
+      _showProUpsellDialog();
+      return;
+    }
+    
     if (_messageController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('メッセージを入力してください')),
@@ -263,6 +289,87 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
     );
   }
 
+  /// ✅ Proプランアップグレード誘導ダイアログ
+  void _showProUpsellDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
+                ),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Icon(Icons.workspace_premium, color: Colors.white),
+            ),
+            const SizedBox(width: 12),
+            const Text('Pro限定機能'),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'マッチングリクエスト送信は\nProプラン限定機能です',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            const Text('✨ Proプランの特典'),
+            const SizedBox(height: 8),
+            _buildBenefitRow('パートナー検索 無制限'),
+            _buildBenefitRow('マッチングリクエスト送信'),
+            _buildBenefitRow('メッセージ機能'),
+            _buildBenefitRow('AI機能 無制限使用'),
+            _buildBenefitRow('全Premium機能'),
+            const SizedBox(height: 8),
+            const Text(
+              '月額¥980（年間プラン32% OFF）',
+              style: TextStyle(fontSize: 14, color: Colors.grey),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('キャンセル'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const SubscriptionScreen()),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.amber,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Proプランを見る'),
+          ),
+        ],
+      ),
+    );
+  }
+  
+  Widget _buildBenefitRow(String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        children: [
+          const Icon(Icons.check_circle, color: Colors.green, size: 20),
+          const SizedBox(width: 8),
+          Text(text, style: const TextStyle(fontSize: 14)),
+        ],
+      ),
+    );
+  }
+
   Widget _buildSection(String title, String content) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -293,12 +400,36 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'マッチングリクエスト',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              children: [
+                const Text(
+                  'マッチングリクエスト',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                // ✅ Pro限定バッジ
+                if (!_canSendRequest)
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Text(
+                      'PRO限定',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+              ],
             ),
             const SizedBox(height: 16),
             
@@ -313,10 +444,38 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
             ),
             const SizedBox(height: 16),
             
+            // ✅ Pro非対称可視性: Non-ProはアップグレードUIを表示
+            if (!_canSendRequest)
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.amber[50],
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.amber[300]!),
+                ),
+                child: Column(
+                  children: [
+                    const Icon(Icons.lock, color: Colors.amber, size: 32),
+                    const SizedBox(height: 8),
+                    Text(
+                      _permissionMessage ?? 'Pro限定機能です',
+                      style: const TextStyle(fontSize: 14),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: _isSending ? null : _sendMatchRequest,
+                style: !_canSendRequest
+                    ? ElevatedButton.styleFrom(
+                        backgroundColor: Colors.amber,
+                        foregroundColor: Colors.white,
+                      )
+                    : null,
                 icon: _isSending
                     ? const SizedBox(
                         width: 20,
@@ -326,8 +485,14 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                           valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                         ),
                       )
-                    : const Icon(Icons.send),
-                label: Text(_isSending ? '送信中...' : 'リクエストを送る'),
+                    : Icon(!_canSendRequest ? Icons.upgrade : Icons.send),
+                label: Text(
+                  _isSending
+                      ? '送信中...'
+                      : !_canSendRequest
+                          ? 'Proプランにアップグレード'
+                          : 'リクエストを送る'
+                ),
               ),
             ),
           ],

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:math' show cos, sqrt, asin;
 import '../models/partner_profile.dart';
+import 'subscription_service.dart';
 
 /// パートナー検索サービス
 /// 
@@ -9,6 +10,7 @@ import '../models/partner_profile.dart';
 class PartnerSearchService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final SubscriptionService _subscriptionService = SubscriptionService();
 
   /// 自分のパートナープロフィールを取得
   Future<PartnerProfile?> getMyProfile() async {
@@ -58,7 +60,11 @@ class PartnerSearchService {
     }
   }
 
-  /// パートナー検索（フィルター付き）
+  /// パートナー検索（フィルター付き + Pro非対称可視性対応）
+  /// 
+  /// Pro Plan非対称可視性:
+  /// - Proユーザー: すべてのユーザー（Free/Premium/Pro）を検索可能
+  /// - Free/Premiumユーザー: Proユーザーのみ検索可能
   /// 
   /// 検索条件:
   /// - 場所（緯度経度からの距離）
@@ -83,6 +89,12 @@ class PartnerSearchService {
     if (userId == null) throw Exception('ログインが必要です');
 
     try {
+      // ✅ Pro Plan非対称可視性: 検索者のプランを取得
+      final currentUserPlan = await _subscriptionService.getCurrentPlan();
+      final isProUser = currentUserPlan == SubscriptionType.pro;
+      
+      print('🔍 パートナー検索: ${currentUserPlan.toString().split(".").last}ユーザー (Pro非対称: ${isProUser ? "全員検索可能" : "Pro限定"})');
+      
       // 基本クエリ: 公開プロフィールのみ、自分以外
       Query query = _firestore.collection('partner_profiles')
           .where('is_visible', isEqualTo: true);
@@ -98,6 +110,16 @@ class PartnerSearchService {
         if (doc.id == userId) continue;
 
         final profile = PartnerProfile.fromFirestore(doc.data() as Map<String, dynamic>, doc.id);
+        
+        // ✅ Pro Plan非対称可視性フィルター
+        // Proユーザー以外は、Proユーザーのプロフィールのみ表示
+        if (!isProUser) {
+          final targetUserPlan = await _getTargetUserPlan(doc.id);
+          if (targetUserPlan != SubscriptionType.pro) {
+            print('⏭️ Skip: ${doc.id} (Free/Premium) - 検索者がNon-Pro');
+            continue; // Free/Premiumユーザーを除外
+          }
+        }
         
         // メモリ内フィルタリング
         bool matches = true;
@@ -205,14 +227,67 @@ class PartnerSearchService {
 
   double sin(double x) => x - (x * x * x) / 6 + (x * x * x * x * x) / 120;
   double pi = 3.14159265359;
+  
+  /// 対象ユーザーのプラン種類を取得（キャッシュ付き）
+  /// 
+  /// Firestore users コレクションから isPremium + premiumType を読み取り
+  Future<SubscriptionType> _getTargetUserPlan(String targetUserId) async {
+    try {
+      final userDoc = await _firestore
+          .collection('users')
+          .doc(targetUserId)
+          .get(const GetOptions(source: Source.cache)); // キャッシュ優先で高速化
+      
+      if (!userDoc.exists) return SubscriptionType.free;
+      
+      final data = userDoc.data();
+      final isPremium = data?['isPremium'] as bool? ?? false;
+      final premiumType = data?['premiumType'] as String? ?? 'free';
+      
+      if (isPremium) {
+        if (premiumType == 'pro') return SubscriptionType.pro;
+        if (premiumType == 'premium') return SubscriptionType.premium;
+      }
+      
+      return SubscriptionType.free;
+    } catch (e) {
+      print('⚠️ 対象ユーザープラン取得エラー: $e');
+      return SubscriptionType.free; // エラー時はFreeとして扱う
+    }
+  }
+  
+  /// マッチングリクエスト送信権限チェック（Pro限定機能）
+  /// 
+  /// Returns:
+  /// - canSend: true = 送信可能（Proユーザー）, false = 送信不可（Free/Premium）
+  /// - reason: 不可の場合の理由メッセージ
+  Future<Map<String, dynamic>> canSendMatchRequest() async {
+    final currentUserPlan = await _subscriptionService.getCurrentPlan();
+    
+    if (currentUserPlan == SubscriptionType.pro) {
+      return {'canSend': true, 'reason': ''};
+    } else {
+      return {
+        'canSend': false, 
+        'reason': 'マッチングリクエスト送信はProプラン限定機能です。\nProプランにアップグレードしてパートナーとつながりましょう！',
+        'currentPlan': currentUserPlan.toString().split('.').last,
+      };
+    }
+  }
 
-  /// マッチングリクエストを送信
+  /// マッチングリクエストを送信（✅ Pro限定機能）
   Future<void> sendMatchRequest({
     required String targetUserId,
     String? message,
   }) async {
     final userId = _auth.currentUser?.uid;
     if (userId == null) throw Exception('ログインが必要です');
+
+    // ✅ Pro Plan権限チェック（非対称可視性の一環）
+    final permissionCheck = await canSendMatchRequest();
+    if (permissionCheck['canSend'] != true) {
+      throw Exception(permissionCheck['reason']);
+    }
 
     try {
       final matchRef = _firestore.collection('partner_matches').doc();
@@ -227,6 +302,7 @@ class PartnerSearchService {
       );
 
       await matchRef.set(match.toFirestore());
+      print('✅ マッチングリクエスト送信成功: $userId -> $targetUserId');
     } catch (e) {
       throw Exception('マッチングリクエスト送信エラー: $e');
     }

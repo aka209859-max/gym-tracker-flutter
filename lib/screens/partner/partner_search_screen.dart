@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import '../../models/partner_profile.dart';
 import '../../services/partner_search_service.dart';
 import '../../services/location_service.dart';
+import '../../services/subscription_service.dart';
 import 'partner_profile_detail_screen.dart';
 import 'partner_profile_edit_screen.dart';
+import '../subscription_screen.dart';
 
 /// パートナー検索画面（MVP）
 /// 
@@ -22,11 +24,13 @@ class PartnerSearchScreen extends StatefulWidget {
 class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
   final PartnerSearchService _searchService = PartnerSearchService();
   final LocationService _locationService = LocationService();
+  final SubscriptionService _subscriptionService = SubscriptionService();
 
   List<PartnerProfile> _searchResults = [];
   bool _isLoading = false;
   bool _hasSearched = false;
   String? _errorMessage;
+  SubscriptionType _currentUserPlan = SubscriptionType.free;
 
   // 検索フィルター
   double? _currentLatitude;
@@ -61,6 +65,16 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
   void initState() {
     super.initState();
     _getCurrentLocation();
+    _loadCurrentPlan();
+  }
+  
+  Future<void> _loadCurrentPlan() async {
+    final plan = await _subscriptionService.getCurrentPlan();
+    if (mounted) {
+      setState(() {
+        _currentUserPlan = plan;
+      });
+    }
   }
 
   Future<void> _getCurrentLocation() async {
@@ -263,6 +277,10 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
     if (_isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
+    
+    // ✅ Pro非対称可視性: Free/Premiumユーザーには説明バナーを表示
+    final isNonProUser = _currentUserPlan != SubscriptionType.pro;
+    final showProOnlyBanner = isNonProUser && _searchResults.isNotEmpty;
 
     if (_errorMessage != null) {
       return Center(
@@ -343,11 +361,74 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
 
     return ListView.builder(
       padding: const EdgeInsets.all(16),
-      itemCount: _searchResults.length,
+      itemCount: showProOnlyBanner ? _searchResults.length + 1 : _searchResults.length,
       itemBuilder: (context, index) {
-        final profile = _searchResults[index];
+        // ✅ 最初に説明バナーを表示
+        if (showProOnlyBanner && index == 0) {
+          return _buildProOnlyBanner();
+        }
+        
+        final profileIndex = showProOnlyBanner ? index - 1 : index;
+        final profile = _searchResults[profileIndex];
         return _buildPartnerCard(profile);
       },
+    );
+  }
+
+  /// ✅ Pro非対称可視性: Free/Premiumユーザー向け説明バナー
+  Widget _buildProOnlyBanner() {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 16),
+      color: Colors.amber[50],
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const SubscriptionScreen()),
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(Icons.workspace_premium, color: Colors.white, size: 32),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Proユーザーのみ表示中',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Proプランにアップグレードで全ユーザーを検索可能',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey[700],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(Icons.chevron_right, color: Colors.amber),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -361,14 +442,35 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
           child: Row(
             children: [
               // プロフィール画像
-              CircleAvatar(
-                radius: 30,
-                backgroundImage: profile.photoUrl != null
-                    ? NetworkImage(profile.photoUrl!)
-                    : null,
-                child: profile.photoUrl == null
-                    ? const Icon(Icons.person, size: 30)
-                    : null,
+              Stack(
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundImage: profile.photoUrl != null
+                        ? NetworkImage(profile.photoUrl!)
+                        : null,
+                    child: profile.photoUrl == null
+                        ? const Icon(Icons.person, size: 30)
+                        : null,
+                  ),
+                  // ✅ Proバッジ（Free/Premium検索者にのみ表示）
+                  if (_currentUserPlan != SubscriptionType.pro)
+                    Positioned(
+                      right: 0,
+                      bottom: 0,
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
+                          ),
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.white, width: 2),
+                        ),
+                        child: const Icon(Icons.workspace_premium, color: Colors.white, size: 14),
+                      ),
+                    ),
+                ],
               ),
               const SizedBox(width: 16),
               
