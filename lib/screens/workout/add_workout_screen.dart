@@ -1278,9 +1278,10 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               ],
             ),
             
-            // 💡前回記録バナー
-            if (lastData != null) ...[
-              const SizedBox(height: 8),
+            // 💡初回記録 or 前回記録バナー
+            const SizedBox(height: 8),
+            if (lastData == null) ...[
+              // 初回記録の場合
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
@@ -1297,6 +1298,40 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                         '初回記録\n今日の記録が次回の目標になります。全力で挑戦しましょう！',
                         style: TextStyle(fontSize: 12, color: Colors.purple.shade700),
                       ),
+                    ),
+                  ],
+                ),
+              ),
+            ] else ...[
+              // 前回データがある場合
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade50,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.blue.shade200),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Text('📊', style: TextStyle(fontSize: 16)),
+                        const SizedBox(width: 8),
+                        Text(
+                          '前回の記録',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue.shade700,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      _formatLastWorkoutData(lastData),
+                      style: TextStyle(fontSize: 12, color: Colors.blue.shade700),
                     ),
                   ],
                 ),
@@ -1635,5 +1670,32 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         ],
       ),
     );
+  }
+
+  // 前回ワークアウトデータをフォーマット
+  String _formatLastWorkoutData(Map<String, dynamic>? lastData) {
+    if (lastData == null) return '';
+    
+    final sets = lastData['sets'] as List<dynamic>?;
+    if (sets == null || sets.isEmpty) return '前回データなし';
+    
+    // 最も重い重量を取得
+    double maxWeight = 0;
+    int maxReps = 0;
+    for (var set in sets) {
+      final weight = (set['weight'] ?? 0).toDouble();
+      final reps = (set['reps'] ?? 0).toInt();
+      if (weight > maxWeight) {
+        maxWeight = weight;
+        maxReps = reps;
+      }
+    }
+    
+    final date = lastData['date'] as Timestamp?;
+    final dateStr = date != null 
+        ? '${date.toDate().month}/${date.toDate().day}'
+        : '不明';
+    
+    return '$dateStr: ${maxWeight}kg × ${maxReps}回 × ${sets.length}セット';
   }
 }
