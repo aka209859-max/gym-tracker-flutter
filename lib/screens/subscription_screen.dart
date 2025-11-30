@@ -1229,7 +1229,12 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             children: [
               Icon(Icons.pause_circle, color: Colors.orange),
               const SizedBox(width: 8),
-              const Text('サブスクリプション一時停止'),
+              const Expanded(
+                child: Text(
+                  'サブスク一時停止',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
             ],
           ),
           content: SingleChildScrollView(
