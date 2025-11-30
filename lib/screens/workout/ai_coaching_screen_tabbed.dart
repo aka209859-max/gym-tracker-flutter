@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart'; // 🎯 Phase 1追加
 import '../../services/ai_prediction_service.dart';
 import '../../services/training_analysis_service.dart';
 import '../../services/subscription_service.dart';
@@ -43,6 +44,9 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
       initialIndex: widget.initialTabIndex,
     );
     _autoLoginIfNeeded();
+    
+    // 🎯 Phase 1: AI初回利用時のガイド表示
+    _showFirstTimeAIGuide();
   }
 
   @override
@@ -62,6 +66,173 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
         debugPrint('❌ 匿名認証エラー: $e');
       }
     }
+  }
+  
+  /// 🎯 Phase 1: AI初回利用時のガイド
+  Future<void> _showFirstTimeAIGuide() async {
+    // UIが安定してから表示
+    await Future.delayed(const Duration(milliseconds: 500));
+    
+    if (!mounted) return;
+    
+    final prefs = await SharedPreferences.getInstance();
+    final hasSeenGuide = prefs.getBool('has_seen_ai_first_guide') ?? false;
+    
+    // 初回のみ表示
+    if (hasSeenGuide) return;
+    
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // アニメーションアイコン
+            TweenAnimationBuilder<double>(
+              tween: Tween(begin: 0.0, end: 1.0),
+              duration: const Duration(milliseconds: 800),
+              builder: (context, value, child) {
+                return Transform.scale(
+                  scale: 0.5 + (value * 0.5),
+                  child: Opacity(
+                    opacity: value,
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.purple.shade50,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.psychology,
+                        size: 64,
+                        color: Colors.purple.shade600,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 24),
+            
+            // タイトル
+            const Text(
+              'AI疲労度分析へようこそ！',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            
+            // 説明
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildGuideItem(
+                  icon: Icons.analytics,
+                  title: '科学的な分析',
+                  description: 'あなたのトレーニングデータを基に、疲労度を科学的に分析します。',
+                ),
+                const SizedBox(height: 12),
+                _buildGuideItem(
+                  icon: Icons.auto_awesome,
+                  title: '最適な提案',
+                  description: '回復時間とトレーニングメニューを自動で提案します。',
+                ),
+                const SizedBox(height: 12),
+                _buildGuideItem(
+                  icon: Icons.trending_up,
+                  title: '成長を加速',
+                  description: 'パフォーマンスを最大化し、怪我のリスクを最小化します。',
+                ),
+              ],
+            ),
+          ],
+        ),
+        actions: [
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () async {
+                await prefs.setBool('has_seen_ai_first_guide', true);
+                if (mounted) {
+                  Navigator.pop(context);
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.purple.shade600,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: const Text(
+                'はじめる',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  
+  /// ガイド項目Widget
+  Widget _buildGuideItem({
+    required IconData icon,
+    required String title,
+    required String description,
+  }) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.purple.shade50,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Icon(
+            icon,
+            size: 20,
+            color: Colors.purple.shade600,
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                description,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey.shade700,
+                  height: 1.4,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 
   /// 設定メニューを表示

@@ -947,6 +947,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             
             const SizedBox(height: 16),
             
+            // 🤖 AIカード（Phase 1: AI導線最適化）
+            _buildAICard(theme),
+            
+            const SizedBox(height: 16),
+            
             // 🔔 リマインダーカード
             if (_show48HourReminder)
               _build48HourReminderCard(theme),
@@ -1732,6 +1737,188 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     );
   }
   
+  // 🤖 AIカード（Phase 1: AI導線最適化）
+  Widget _buildAICard(ThemeData theme) {
+    return FutureBuilder<Map<String, dynamic>>(
+      future: _getAICardData(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const SizedBox.shrink();
+        }
+        
+        final data = snapshot.data!;
+        final int remainingCredits = data['remaining'] ?? 0;
+        final String planName = data['planName'] ?? 'Free';
+        final bool canUseAI = remainingCredits > 0;
+        
+        return Container(
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.purple.shade400,
+                Colors.deepPurple.shade600,
+              ],
+            ),
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.purple.withOpacity(0.3),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // ヘッダー
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(
+                      Icons.psychology,
+                      color: Colors.white,
+                      size: 28,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'AI疲労度分析',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          '残り$remainingCredits回 ($planName)',
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.9),
+                            fontSize: 13,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              
+              // 説明文
+              Text(
+                'トレーニング後にAIがあなたの疲労度を科学的に分析。最適な回復時間とトレーニング提案をお届けします。',
+                style: TextStyle(
+                  color: Colors.white.withOpacity(0.9),
+                  fontSize: 14,
+                  height: 1.5,
+                ),
+              ),
+              const SizedBox(height: 16),
+              
+              // ボタン
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton.icon(
+                      onPressed: canUseAI
+                          ? () async {
+                              // AI画面へ遷移
+                              final result = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const AiCoachingScreenTabbed(),
+                                ),
+                              );
+                              
+                              if (result == true && mounted) {
+                                setState(() {
+                                  // データ再読み込み
+                                });
+                              }
+                            }
+                          : null,
+                      icon: const Icon(Icons.trending_up, size: 20),
+                      label: const Text(
+                        'AI分析を開始',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.purple.shade600,
+                        disabledBackgroundColor: Colors.white.withOpacity(0.3),
+                        disabledForegroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                  ),
+                  if (!canUseAI) ...[
+                    const SizedBox(width: 8),
+                    OutlinedButton(
+                      onPressed: () async {
+                        // AI使い切り時のペイウォール表示
+                        await PaywallDialog.show(context, PaywallType.aiLimitReached);
+                        if (mounted) {
+                          setState(() {
+                            // データ再読み込み
+                          });
+                        }
+                      },
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Colors.white, width: 2),
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Text(
+                        '追加',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+  
+  // AI残回数データを取得
+  Future<Map<String, dynamic>> _getAICardData() async {
+    final aiCreditService = AICreditService();
+    final subscriptionService = SubscriptionService();
+    
+    final remaining = await aiCreditService.getRemainingCredits();
+    final planName = await subscriptionService.getCurrentPlanName();
+    
+    return {
+      'remaining': remaining,
+      'planName': planName,
+    };
+  }
+
   // ミニ統計カード（チャートなし・数値のみ）
   Widget _buildMiniStatCard({
     required String title,

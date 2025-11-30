@@ -1075,6 +1075,9 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('トレーニングを保存しました')),
         );
+        
+        // 🎯 Phase 1: トレーニング記録後のAI導線ポップアップ
+        await _showPostWorkoutAIPrompt();
       }
     } catch (e, stackTrace) {
       DebugLogger.instance.log('❌ ワークアウト保存エラー');
@@ -1850,5 +1853,92 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     
     // シンプルに前回の1セットのみ表示（前々回は表示しない）
     return '前回 $dateStr: ${weight}kg × ${reps}回';
+  }
+  
+  // 🎯 Phase 1: トレーニング記録後のAI導線ポップアップ
+  Future<void> _showPostWorkoutAIPrompt() async {
+    if (!mounted) return;
+    
+    final prefs = await SharedPreferences.getInstance();
+    final hasSeenPrompt = prefs.getBool('has_seen_post_workout_ai_prompt') ?? false;
+    
+    // 初回のみ表示（2回目以降は表示しない）
+    if (hasSeenPrompt) return;
+    
+    await showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // アイコン
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.purple.shade50,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.psychology,
+                size: 48,
+                color: Colors.purple.shade600,
+              ),
+            ),
+            const SizedBox(height: 16),
+            
+            // タイトル
+            const Text(
+              'AI疲労度分析を試してみませんか？',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 12),
+            
+            // 説明
+            Text(
+              'トレーニング後にAIがあなたの疲労度を科学的に分析し、最適な回復時間とトレーニング提案をお届けします。',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey.shade700,
+                height: 1.5,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              await prefs.setBool('has_seen_post_workout_ai_prompt', true);
+              if (mounted) {
+                Navigator.pop(context);
+              }
+            },
+            child: const Text('後で'),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              await prefs.setBool('has_seen_post_workout_ai_prompt', true);
+              if (mounted) {
+                Navigator.pop(context); // ダイアログを閉じる
+                Navigator.pushNamed(context, '/ai_coaching'); // AI画面へ遷移
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.purple.shade600,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('試してみる'),
+          ),
+        ],
+      ),
+    );
   }
 }

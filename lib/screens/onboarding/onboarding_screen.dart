@@ -30,7 +30,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   // 次のページへ
   void _nextPage() {
-    if (_currentPage < 2) {
+    if (_currentPage < 3) { // 🎯 4ページに変更
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -82,6 +82,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   _buildPage1TrainingLevel(),
                   _buildPage2TrainingGoal(),
                   _buildPage3TrainingFrequency(),
+                  _buildPage4Tutorial(), // 🎯 チュートリアル画面追加
                 ],
               ),
             ),
@@ -99,10 +100,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Row(
-        children: List.generate(3, (index) {
+        children: List.generate(4, (index) { // 🎯 4ページに変更
           return Expanded(
             child: Container(
-              margin: EdgeInsets.only(right: index < 2 ? 8 : 0),
+              margin: EdgeInsets.only(right: index < 3 ? 8 : 0),
               height: 4,
               decoration: BoxDecoration(
                 color: index <= _currentPage
@@ -386,6 +387,155 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
+  // Page 4: アニメーション付きチュートリアル
+  Widget _buildPage4Tutorial() {
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        children: [
+          const SizedBox(height: 40),
+          // アニメーションアイコン
+          TweenAnimationBuilder<double>(
+            tween: Tween(begin: 0.0, end: 1.0),
+            duration: const Duration(seconds: 2),
+            builder: (context, value, child) {
+              return Transform.scale(
+                scale: 0.8 + (value * 0.2),
+                child: Opacity(
+                  opacity: value,
+                  child: Container(
+                    width: 120,
+                    height: 120,
+                    decoration: BoxDecoration(
+                      color: Colors.purple.withOpacity(0.2),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.rocket_launch,
+                      size: 60,
+                      color: Colors.purple,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 40),
+          const Text(
+            '準備完了！',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'GYM MATCHで最高のトレーニング体験を',
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.7),
+              fontSize: 16,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 60),
+          // 機能紹介カード
+          _buildFeatureCard(
+            icon: Icons.fitness_center,
+            title: 'トレーニング記録',
+            description: '簡単にワークアウトを記録・管理',
+            delay: 0,
+          ),
+          const SizedBox(height: 16),
+          _buildFeatureCard(
+            icon: Icons.psychology,
+            title: 'AI疲労度分析',
+            description: '科学的なデータで回復状態を把握',
+            delay: 200,
+          ),
+          const SizedBox(height: 16),
+          _buildFeatureCard(
+            icon: Icons.emoji_events,
+            title: '目標達成',
+            description: 'バッジやアチーブメントで継続をサポート',
+            delay: 400,
+          ),
+        ],
+      ),
+    );
+  }
+
+  // 機能紹介カード
+  Widget _buildFeatureCard({
+    required IconData icon,
+    required String title,
+    required String description,
+    required int delay,
+  }) {
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0.0, end: 1.0),
+      duration: Duration(milliseconds: 600 + delay),
+      builder: (context, value, child) {
+        return Transform.translate(
+          offset: Offset(0, 20 * (1 - value)),
+          child: Opacity(
+            opacity: value,
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.05),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: Colors.white.withOpacity(0.1),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.purple.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Icon(
+                      icon,
+                      color: Colors.purple,
+                      size: 24,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          description,
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.7),
+                            fontSize: 13,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   // 次へボタン
   Widget _buildNextButton() {
     bool canProceed = false;
@@ -396,6 +546,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       canProceed = _selectedTrainingGoal.isNotEmpty;
     } else if (_currentPage == 2) {
       canProceed = _selectedTrainingFrequency.isNotEmpty;
+    } else if (_currentPage == 3) {
+      canProceed = true; // チュートリアル画面は常に進める
     }
 
     return Padding(
@@ -413,7 +565,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
           ),
           child: Text(
-            _currentPage < 2 ? '次へ' : 'はじめる',
+            _currentPage < 3 ? '次へ' : 'はじめる', // 🎯 4ページに変更
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
