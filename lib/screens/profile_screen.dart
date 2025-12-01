@@ -24,8 +24,10 @@ import '../services/subscription_service.dart';
 import '../services/chat_service.dart';
 import '../services/workout_import_service.dart';
 import '../services/training_partner_service.dart';
+import '../services/referral_service.dart';
 import '../models/training_partner.dart';
 import 'dart:convert';
+import 'package:flutter/services.dart';
 
 /// プロフィール画面
 class ProfileScreen extends StatefulWidget {
@@ -40,6 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final SubscriptionService _subscriptionService = SubscriptionService();
   final ChatService _chatService = ChatService();
   final TrainingPartnerService _trainingPartnerService = TrainingPartnerService();
+  final ReferralService _referralService = ReferralService();
   
   int _favoriteCount = 0;
   int _unreadMessages = 0;
@@ -330,6 +333,189 @@ class _ProfileScreenState extends State<ProfileScreen> {
         );
       }
     }
+  }
+
+  /// 紹介コードダイアログを表示
+  Future<void> _showReferralDialog() async {
+    try {
+      final referralCode = await _referralService.getReferralCode();
+      
+      if (!mounted) return;
+      
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          title: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.orange.shade100,
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.card_giftcard,
+                  color: Colors.orange,
+                  size: 28,
+                ),
+              ),
+              const SizedBox(width: 12),
+              const Expanded(
+                child: Text(
+                  '友達を招待',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'あなたの紹介コード',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.orange.shade50,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.orange.shade200, width: 2),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        referralCode,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 2,
+                          fontFamily: 'monospace',
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.copy, color: Colors.orange),
+                      onPressed: () {
+                        Clipboard.setData(ClipboardData(text: referralCode));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('✅ コードをコピーしました！'),
+                            backgroundColor: Colors.green,
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      },
+                      tooltip: 'コピー',
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                '🎁 紹介特典',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 8),
+              _buildRewardItem('あなた', 'AI分析 x15回（¥300相当）'),
+              _buildRewardItem('友達', 'AI分析 x5回 + Premium 7日間無料'),
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade50,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Text(
+                  '💡 友達がこのコードを入力すると、両方に特典が届きます！',
+                  style: TextStyle(fontSize: 12),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('閉じる'),
+            ),
+            ElevatedButton.icon(
+              onPressed: () async {
+                Clipboard.setData(ClipboardData(
+                  text: 'GYM MATCHで一緒にトレーニングしませんか？\n\n'
+                      '紹介コード: $referralCode\n'
+                      'AI分析5回 + Premium 7日間無料でお試しできます！\n\n'
+                      'https://gym-match-e560d.web.app',
+                ));
+                Navigator.of(context).pop();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('✅ シェア用メッセージをコピーしました！'),
+                    backgroundColor: Colors.green,
+                  ),
+                );
+              },
+              icon: const Icon(Icons.share),
+              label: const Text('シェア'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orange,
+                foregroundColor: Colors.white,
+              ),
+            ),
+          ],
+        ),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('❌ エラー: ${e.toString()}'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  Widget _buildRewardItem(String title, String reward) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              color: Colors.orange.shade100,
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(
+              Icons.check_circle,
+              color: Colors.orange,
+              size: 16,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              '$title: $reward',
+              style: const TextStyle(fontSize: 14),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -681,6 +867,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
               context,
               MaterialPageRoute(builder: (context) => const MessagesScreen()),
             );
+          },
+        ),
+        const SizedBox(height: 12),
+        _buildMenuCard(
+          context,
+          icon: Icons.card_giftcard,
+          title: '友達を招待',
+          subtitle: 'AI x15回 + 紹介された人もAI x5回 + Premium 7日間',
+          badge: 'NEW',
+          badgeColor: Colors.orange,
+          onTap: () {
+            _showReferralDialog();
           },
         ),
         const SizedBox(height: 12),

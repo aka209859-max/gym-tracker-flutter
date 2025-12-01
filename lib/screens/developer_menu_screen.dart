@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../services/subscription_service.dart';
+import '../services/onboarding_service.dart';
 
 /// 開発者専用メニュー画面（リリースビルドでは非表示）
 class DeveloperMenuScreen extends StatefulWidget {
@@ -15,6 +16,7 @@ class DeveloperMenuScreen extends StatefulWidget {
 
 class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
   final _subscriptionService = SubscriptionService();
+  final _onboardingService = OnboardingService();
   SubscriptionType? _currentPlan;
   String? _aiUsageStatus;
   bool _isLoading = true;
@@ -74,6 +76,71 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
         ),
       );
       await _loadCurrentStatus();
+    } catch (e) {
+      if (!mounted) return;
+      
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('❌ リセット失敗: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  /// オンボーディングをリセット（デバッグ用）
+  Future<void> _resetOnboarding() async {
+    try {
+      await _onboardingService.resetOnboarding();
+      
+      if (!mounted) return;
+      
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('✅ オンボーディングをリセットしました\nアプリを再起動してください'),
+          backgroundColor: Colors.green,
+          duration: Duration(seconds: 5),
+        ),
+      );
+    } catch (e) {
+      if (!mounted) return;
+      
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('❌ リセット失敗: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  /// Phase 1機能の状態をすべてリセット
+  Future<void> _resetAllPhase1Features() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      
+      // オンボーディング
+      await _onboardingService.resetOnboarding();
+      
+      // レビュー依頼
+      await prefs.remove('has_reviewed');
+      await prefs.remove('reviewed_at');
+      await prefs.remove('review_request_shown');
+      await prefs.remove('review_request_shown_at');
+      await prefs.remove('review_declined_at');
+      
+      // 紹介バナー
+      await prefs.remove('last_referral_banner_date');
+      
+      if (!mounted) return;
+      
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('✅ Phase 1機能をすべてリセットしました\nアプリを再起動してください'),
+          backgroundColor: Colors.green,
+          duration: Duration(seconds: 5),
+        ),
+      );
     } catch (e) {
       if (!mounted) return;
       
@@ -327,6 +394,52 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.orange,
                     minimumSize: const Size.fromHeight(48),
+                  ),
+                ),
+                
+                const SizedBox(height: 16),
+                
+                // オンボーディングリセットボタン
+                ElevatedButton.icon(
+                  onPressed: _resetOnboarding,
+                  icon: const Icon(Icons.school),
+                  label: const Text('オンボーディングをリセット'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purple,
+                    foregroundColor: Colors.white,
+                    minimumSize: const Size.fromHeight(48),
+                  ),
+                ),
+                
+                const SizedBox(height: 16),
+                
+                // Phase 1機能全リセットボタン
+                ElevatedButton.icon(
+                  onPressed: _resetAllPhase1Features,
+                  icon: const Icon(Icons.delete_forever),
+                  label: const Text('Phase 1機能をすべてリセット'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
+                    minimumSize: const Size.fromHeight(48),
+                  ),
+                ),
+                
+                const SizedBox(height: 8),
+                
+                // リセット後の説明
+                Card(
+                  color: Colors.red.shade50,
+                  child: const Padding(
+                    padding: EdgeInsets.all(12),
+                    child: Text(
+                      '⚠️ Phase 1リセット後は必ずアプリを再起動してください\n'
+                      'リセット内容:\n'
+                      '• オンボーディングツアー\n'
+                      '• レビュー依頼ダイアログ\n'
+                      '• 紹介バナー表示',
+                      style: TextStyle(fontSize: 12, color: Colors.red),
+                    ),
                   ),
                 ),
                 
