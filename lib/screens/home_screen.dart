@@ -5565,7 +5565,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         await prefs.setString('last_referral_banner_date', now.toIso8601String());
         
         // 紹介コードが取得できている場合のみ表示
-        if (_referralCode.isNotEmpty && mounted) {
+        if (_referralCode != null && _referralCode!.isNotEmpty && mounted) {
           // 画面表示後に少し遅延してダイアログ表示
           Future.delayed(const Duration(seconds: 1), () {
             if (mounted) {
@@ -5671,7 +5671,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           ),
           ElevatedButton.icon(
             onPressed: () {
-              Clipboard.setData(ClipboardData(text: _referralCode));
+              Clipboard.setData(ClipboardData(text: _referralCode ?? ''));
               Share.share(
                 'GYM MATCHで一緒にトレーニングしよう！招待コード: $_referralCode\n\n'
                 'https://gym-match-e560d.web.app',
