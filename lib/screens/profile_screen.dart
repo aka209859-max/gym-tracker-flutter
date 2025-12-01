@@ -432,7 +432,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(height: 8),
               _buildRewardItem('あなた', 'AI使用回数 +15回'),
-              _buildRewardItem('友達', 'AI使用回数 +5回 + Premium 7日間無料トライアル'),
+              _buildRewardItem('友達', 'AI使用回数 +5回'),
               const SizedBox(height: 16),
               Container(
                 padding: const EdgeInsets.all(12),
@@ -457,7 +457,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Clipboard.setData(ClipboardData(
                   text: 'GYM MATCHで一緒にトレーニングしませんか？\n\n'
                       '紹介コード: $referralCode\n'
-                      'AI使用回数5回 + Premium 7日間無料トライアルがもらえます！\n\n'
+                      'AI使用回数5回がもらえます！\n\n'
                       'https://gym-match-e560d.web.app',
                 ));
                 Navigator.of(context).pop();

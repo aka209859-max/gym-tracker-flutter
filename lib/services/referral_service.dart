@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,11 +14,9 @@ class ReferralService {
   static const int _codeLength = 8;
   static const String _codePrefix = 'GYM';
 
-  // 紹介特典（v1.02強化版: 3倍に増量！）
-  static const int _refereeAiBonus = 5; // 紹介された側のAI無料利用×5回（旧3回→5回）
-  static const int _refereePremiumDays = 3; // 紹介された側のPremium無料体験×3日間（新規）
-  static const int _referrerAiBonus = 15; // 紹介した側のAI追加パック×3個（15回分、¥900相当、旧5回→15回）
-  static const int _referrerPremiumDays = 7; // 紹介した側のPremium無料体験×7日間（新規）
+  // 紹介特典（v1.02強化版: AI回数のみに変更）
+  static const int _refereeAiBonus = 5; // 紹介された側のAI無料利用×5回
+  static const int _referrerAiBonus = 15; // 紹介した側のAI追加パック×3個（15回分）
 
   /// ユーザーの紹介コードを取得（なければ生成）
   Future<String> getReferralCode() async {
@@ -118,30 +117,24 @@ class ReferralService {
 
     // トランザクションで処理
     await _firestore.runTransaction((transaction) async {
-      // 1. 紹介された側（referee）に豪華特典付与
-      //    - AI無料利用×5回（旧3回→5回に増量）
-      //    - Premium無料体験×3日間（新規追加）
+      // 1. 紹介された側（referee）に特典付与
+      //    - AI無料利用×5回
       final userRef = _firestore.collection('users').doc(user.uid);
-      final premiumUntil = DateTime.now().add(Duration(days: _refereePremiumDays));
       transaction.update(userRef, {
         'usedReferralCode': code,
         'referredBy': referrerId,
         'referralBonusAiCredits': _refereeAiBonus, // 5回分
-        'referralBonusPremiumUntil': Timestamp.fromDate(premiumUntil), // 3日間Premium
         'referredAt': FieldValue.serverTimestamp(),
       });
 
-      // 2. 紹介した側（referrer）に超豪華特典付与
-      //    - AI追加パック×3個（15回分、¥900相当、旧5回→15回に増量）
-      //    - Premium無料体験×7日間（新規追加）
+      // 2. 紹介した側（referrer）に特典付与
+      //    - AI追加パック×3個（15回分）
       final referrerRef = _firestore.collection('users').doc(referrerId);
-      final referrerPremiumUntil = DateTime.now().add(Duration(days: _referrerPremiumDays));
       transaction.update(referrerRef, {
         'referralStats.totalReferrals': FieldValue.increment(1),
         'referralStats.successfulReferrals': FieldValue.increment(1),
-        'referralStats.aiPackCredits': FieldValue.increment(3), // AI追加パック×3個（旧1個→3個）
-        'ai_credits': FieldValue.increment(_referrerAiBonus), // AI 15回分を直接付与（旧5回→15回）
-        'referralBonusPremiumUntil': Timestamp.fromDate(referrerPremiumUntil), // 7日間Premium
+        'referralStats.aiPackCredits': FieldValue.increment(3), // AI追加パック×3個
+        'ai_credits': FieldValue.increment(_referrerAiBonus), // AI 15回分を直接付与
       });
 
       // 3. 紹介履歴を記録（v1.02強化版）
@@ -154,16 +147,16 @@ class ReferralService {
         'status': 'completed',
         'bonuses': {
           'refereeAiCredits': _refereeAiBonus, // 5回分
-          'refereePremiumDays': _refereePremiumDays, // 3日間
-          'referrerAiPackCredits': 3, // AI追加パック×3個（15回分、¥900相当）
-          'referrerPremiumDays': _referrerPremiumDays, // 7日間
+          'referrerAiPackCredits': 3, // AI追加パック×3個（15回分）
         },
       });
     });
 
-    print('🎉 紹介コード適用成功！');
-    print('   紹介された側: AI×${_refereeAiBonus}回 + Premium×${_refereePremiumDays}日間');
-    print('   紹介した側: AI×${_referrerAiBonus}回 + Premium×${_referrerPremiumDays}日間');
+    if (kDebugMode) {
+      print('🎉 紹介コード適用成功！');
+      print('   紹介された側: AI×${_refereeAiBonus}回');
+      print('   紹介した側: AI×${_referrerAiBonus}回');
+    }
 
     return true;
   }
