@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:share_plus/share_plus.dart';
@@ -29,37 +30,23 @@ class EnhancedShareService {
     String? backgroundBottomColor,
   }) async {
     try {
-      // Instagram Stories用のURL scheme
-      const instagramStoriesUrl = 'instagram-stories://share';
-      
-      final uri = Uri.parse(instagramStoriesUrl);
-      
-      if (await canLaunchUrl(uri)) {
-        // Instagram Storiesにシェア
-        await Share.shareXFiles(
-          [XFile.fromData(
-            imageBytes,
-            mimeType: 'image/png',
-            name: 'gym_match_story.png',
-          )],
-          text: 'GYM MATCHでトレーニング記録をシェア！\n#GYMMATCH #筋トレ記録 #ジム\n\nhttps://gym-match-e560d.web.app',
-        );
-      } else {
-        // Instagramがインストールされていない場合、通常のシェア
-        await _shareImage(
-          context: context,
-          imageBytes: imageBytes,
-          text: 'GYM MATCHでトレーニング記録をシェア！ #GYMMATCH #筋トレ記録',
-        );
-      }
-    } catch (e) {
-      print('❌ Instagram Stories シェアエラー: $e');
-      // フォールバック: 通常のシェア
-      await _shareImage(
-        context: context,
-        imageBytes: imageBytes,
-        text: 'GYM MATCHでトレーニング記録をシェア！ #GYMMATCH #筋トレ記録',
+      // Instagram Stories用に最適化されたシェア
+      // Note: iOS/Androidでは通常のShare APIを使用し、
+      // ユーザーがInstagramを選択できるようにする
+      await Share.shareXFiles(
+        [XFile.fromData(
+          imageBytes,
+          mimeType: 'image/png',
+          name: 'gym_match_story.png',
+        )],
+        text: 'GYM MATCHでトレーニング記録をシェア！\n#GYMMATCH #筋トレ記録 #ジム\n\nhttps://gym-match-e560d.web.app',
       );
+    } catch (e) {
+      if (kDebugMode) print('❌ Instagram Stories シェアエラー: $e');
+      // エラーをユーザーに表示
+      if (context.mounted) {
+        _showError(context, 'シェアに失敗しました');
+      }
     }
   }
 
@@ -220,7 +207,7 @@ class EnhancedShareService {
       // シェア記録を保存（バイラル効果測定）
       await _recordShareEvent('weekly_stats');
     } catch (e) {
-      print('❌ 週間統計シェアエラー: $e');
+      if (kDebugMode) print('❌ 週間統計シェアエラー: $e');
       if (context.mounted) {
         Navigator.of(context).pop();
         _showError(context, 'シェアに失敗しました');
@@ -259,7 +246,7 @@ class EnhancedShareService {
       // シェア記録を保存
       await _recordShareEvent('workout');
     } catch (e) {
-      print('❌ トレーニングシェアエラー: $e');
+      if (kDebugMode) print('❌ トレーニングシェアエラー: $e');
       if (context.mounted) {
         Navigator.of(context).pop();
         _showError(context, 'シェアに失敗しました');
@@ -293,7 +280,7 @@ class EnhancedShareService {
 
       return newWeight > bestWeight;
     } catch (e) {
-      print('❌ PR確認エラー: $e');
+      if (kDebugMode) print('❌ PR確認エラー: $e');
       return false;
     }
   }
@@ -498,9 +485,9 @@ class EnhancedShareService {
         'timestamp': FieldValue.serverTimestamp(),
       });
 
-      print('✅ シェアイベント記録: $shareType');
+      if (kDebugMode) print('✅ シェアイベント記録: $shareType');
     } catch (e) {
-      print('❌ シェアイベント記録エラー: $e');
+      if (kDebugMode) print('❌ シェアイベント記録エラー: $e');
     }
   }
 
