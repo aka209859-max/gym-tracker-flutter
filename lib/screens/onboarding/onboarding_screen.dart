@@ -420,10 +420,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   // Page 4: アニメーション付きチュートリアル
   Widget _buildPage4Tutorial() {
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: Column(
-        children: [
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          children: [
           const SizedBox(height: 40),
           // アニメーションアイコン
           TweenAnimationBuilder<double>(
@@ -494,8 +495,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           const SizedBox(height: 32),
           // 🎁 紹介コード入力（Task 10: バイラルループ）
           _buildReferralCodeSection(),
+          const SizedBox(height: 100), // 下部に余白追加
         ],
       ),
+    ),
     );
   }
 
