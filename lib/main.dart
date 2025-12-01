@@ -171,67 +171,6 @@ void main() async {
   runApp(const GymMatchApp());
 }
 
-/// マスターユーザー権限設定（CEO専用）
-/// 起動時に自動的にProプランを設定し、全機能をフルアクセス可能にする
-Future<void> _setMasterUserPrivileges() async {
-  print('👑 マスターユーザー権限設定開始...');
-  
-  try {
-    final subscriptionService = SubscriptionService();
-    
-    // Proプランに設定（全機能アクセス可能）
-    await subscriptionService.setPlan(SubscriptionType.pro);
-    
-    // マスターユーザーフラグ設定
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('is_master_user', true);
-    
-    print('✅ マスターユーザー権限設定完了');
-    print('   プラン: Proプラン（全機能フルアクセス）');
-    print('   🎯 AI成長予測: ✅');
-    print('   🎯 AI効果分析: ✅');
-    print('   🎯 AI週次レポート: ✅');
-    print('   🎯 トレーニングパートナー: ✅');
-    print('   🎯 メッセージング: ✅');
-    print('   🎯 優先サポート: ✅');
-    
-  } catch (e) {
-    print('❌ マスターユーザー権限設定失敗: $e');
-  }
-}
-
-/// デバッグ: 無料プランでテスト（SharedPreferencesを完全リセット）
-Future<void> _resetToFreePlanForTesting() async {
-  print('🧪 [デバッグ] 無料プランリセット開始...');
-  
-  try {
-    final prefs = await SharedPreferences.getInstance();
-    final subscriptionService = SubscriptionService();
-    
-    // 🔥 サブスクリプション関連のデータをすべてクリア
-    await prefs.remove('subscription_type');
-    await prefs.remove('is_master_user');
-    await prefs.remove('ai_usage_count');
-    await prefs.remove('ai_usage_month');
-    await prefs.remove('ai_addon_count');
-    await prefs.remove('ai_credit_count');
-    await prefs.remove('ai_credit_last_reset_date');
-    await prefs.remove('ai_credit_count_earned_count');
-    
-    // 🔥 強制的にFreeプランに設定
-    await subscriptionService.setPlan(SubscriptionType.free);
-    
-    print('✅ [デバッグ] 無料プランリセット完了');
-    print('   プラン: Freeプラン（リワード広告テスト用）');
-    print('   AIクレジット: 0回');
-    print('   月間広告視聴回数: 0/3回');
-    print('   🎬 リワード広告ダイアログが表示されるはずです');
-    
-  } catch (e) {
-    print('❌ [デバッグ] リセット失敗: $e');
-  }
-}
-
 class GymMatchApp extends StatelessWidget {
   const GymMatchApp({super.key});
 
@@ -259,7 +198,9 @@ class GymMatchApp extends StatelessWidget {
               '/main': (context) => const PasswordGateScreen(
                 child: MainScreen(),
               ),
-              '/developer_menu': (context) => const DeveloperMenuScreen(),
+              // 開発者メニュー: リリースビルドでは無効化
+              if (!kReleaseMode)
+                '/developer_menu': (context) => const DeveloperMenuScreen(),
               '/workout-memo': (context) => const WorkoutMemoListScreen(),
               '/personal-factors': (context) => const PersonalFactorsScreen(),
             },
