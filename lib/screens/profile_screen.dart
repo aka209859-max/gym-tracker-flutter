@@ -25,6 +25,7 @@ import '../services/chat_service.dart';
 import '../services/workout_import_service.dart';
 import '../services/training_partner_service.dart';
 import '../services/referral_service.dart';
+import '../services/enhanced_share_service.dart';
 import '../models/training_partner.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
@@ -518,6 +519,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  /// 週間統計をシェア
+  Future<void> _shareWeeklyStats() async {
+    try {
+      final shareService = EnhancedShareService();
+      await shareService.shareWeeklyStats(context: context);
+    } catch (e) {
+      if (!mounted) return;
+      
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('❌ シェアエラー: ${e.toString()}'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -538,8 +556,145 @@ class _ProfileScreenState extends State<ProfileScreen> {
             // プロフィールヘッダー
             _buildProfileHeader(context),
             const SizedBox(height: 24),
+            // 週間統計カード（NEW）
+            _buildWeeklyStatsCard(context),
+            const SizedBox(height: 24),
             // メニューリスト
             _buildMenuList(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildWeeklyStatsCard(BuildContext context) {
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.purple.shade400,
+              Colors.deepPurple.shade600,
+            ],
+          ),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(
+                  Icons.bar_chart,
+                  color: Colors.white,
+                  size: 28,
+                ),
+                const SizedBox(width: 12),
+                const Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '週間トレーニング統計',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        '過去7日間の記録',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.white70,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Text(
+                    'NEW',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    children: [
+                      Icon(Icons.fitness_center, color: Colors.white, size: 24),
+                      SizedBox(height: 8),
+                      Text(
+                        'トレーニング',
+                        style: TextStyle(fontSize: 10, color: Colors.white70),
+                      ),
+                      Text(
+                        '回数・ボリューム',
+                        style: TextStyle(fontSize: 10, color: Colors.white70),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Icon(Icons.show_chart, color: Colors.white, size: 24),
+                      SizedBox(height: 8),
+                      Text(
+                        '部位数',
+                        style: TextStyle(fontSize: 10, color: Colors.white70),
+                      ),
+                      Text(
+                        '平均ボリューム',
+                        style: TextStyle(fontSize: 10, color: Colors.white70),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: _shareWeeklyStats,
+                icon: const Icon(Icons.share, size: 18),
+                label: const Text('Instagram Storiesでシェア'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.purple.shade700,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
