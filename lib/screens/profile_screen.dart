@@ -590,7 +590,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Weekly Training Stats',
+                          '週間トレーニング統計',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -599,7 +599,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         SizedBox(height: 4),
                         Text(
-                          'Last 7 days record',
+                          '過去7日間の記録',
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.white70,
@@ -640,11 +640,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Icon(Icons.fitness_center, color: Colors.white, size: 24),
                         SizedBox(height: 8),
                         Text(
-                          'Training',
+                          'トレーニング',
                           style: TextStyle(fontSize: 10, color: Colors.white70),
                         ),
                         Text(
-                          'Count & Volume',
+                          '回数・ボリューム',
                           style: TextStyle(fontSize: 10, color: Colors.white70),
                         ),
                       ],
@@ -654,11 +654,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Icon(Icons.show_chart, color: Colors.white, size: 24),
                         SizedBox(height: 8),
                         Text(
-                          'Body Parts',
+                          '部位数',
                           style: TextStyle(fontSize: 10, color: Colors.white70),
                         ),
                         Text(
-                          'Avg Volume',
+                          '平均ボリューム',
                           style: TextStyle(fontSize: 10, color: Colors.white70),
                         ),
                       ],
@@ -671,7 +671,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Tap to view weekly stats',
+                    'タップして週間統計を見る',
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.white60,

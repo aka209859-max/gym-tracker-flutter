@@ -117,13 +117,13 @@ class _WeeklyStatsScreenState extends State<WeeklyStatsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Weekly Training Stats'),
+        title: const Text('週間トレーニング統計'),
         centerTitle: true,
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _weeklyStats == null
-              ? const Center(child: Text('No data available'))
+              ? const Center(child: Text('データがありません'))
               : RefreshIndicator(
                   onRefresh: _loadWeeklyStats,
                   child: ListView(
@@ -166,7 +166,7 @@ class _WeeklyStatsScreenState extends State<WeeklyStatsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Last 7 Days Summary',
+              '過去7日間のサマリー',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -179,12 +179,12 @@ class _WeeklyStatsScreenState extends State<WeeklyStatsScreen> {
               children: [
                 _buildStatItem(
                   icon: Icons.fitness_center,
-                  label: 'Workouts',
+                  label: 'トレーニング',
                   value: '$totalWorkouts',
                 ),
                 _buildStatItem(
                   icon: Icons.straighten,
-                  label: 'Total Volume',
+                  label: '総ボリューム',
                   value: '${totalVolume.toStringAsFixed(0)}kg',
                 ),
               ],
@@ -195,12 +195,12 @@ class _WeeklyStatsScreenState extends State<WeeklyStatsScreen> {
               children: [
                 _buildStatItem(
                   icon: Icons.category,
-                  label: 'Muscle Groups',
+                  label: '鍛えた部位',
                   value: '$muscleGroupsCount',
                 ),
                 _buildStatItem(
                   icon: Icons.trending_up,
-                  label: 'Avg Volume',
+                  label: '平均ボリューム',
                   value: '${averageVolume.toStringAsFixed(0)}kg',
                 ),
               ],
@@ -247,7 +247,7 @@ class _WeeklyStatsScreenState extends State<WeeklyStatsScreen> {
           padding: EdgeInsets.all(20),
           child: Center(
             child: Text(
-              'No training records for the past 7 days',
+              '過去7日間のトレーニング記録がありません',
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
           ),
@@ -259,7 +259,7 @@ class _WeeklyStatsScreenState extends State<WeeklyStatsScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          'Daily Stats',
+          '日別統計',
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
@@ -297,7 +297,7 @@ class _WeeklyStatsScreenState extends State<WeeklyStatsScreen> {
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          '$workouts workouts • ${volume.toStringAsFixed(0)}kg • $muscleGroupsCount muscle groups',
+          '$workouts回 • ${volume.toStringAsFixed(0)}kg • $muscleGroupsCount部位',
           style: const TextStyle(fontSize: 12),
         ),
       ),
