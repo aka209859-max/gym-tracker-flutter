@@ -495,7 +495,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> _showEnterReferralCodeDialog() async {
     final TextEditingController codeController = TextEditingController();
     
-    // 既に使用済みかチェック
+    // Check if referral code has already been used
     final hasUsed = await _referralService.hasUsedReferralCode();
     if (hasUsed && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -612,7 +612,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               
               Navigator.of(context).pop();
               
-              // 招待コードを適用
+              // Apply referral code
               try {
                 await _referralService.applyReferralCode(code);
                 if (mounted) {
@@ -623,7 +623,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       duration: Duration(seconds: 3),
                     ),
                   );
-                  _loadUserData(); // データ再読み込み
+                  _loadUserData(); // Reload user data
                 }
               } catch (e) {
                 if (mounted) {
@@ -715,7 +715,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       child: InkWell(
         onTap: () {
-          // 週間統計画面に遷移（実装済み）
+          // Navigate to Weekly Stats Screen
           Navigator.pushNamed(context, '/weekly-stats');
         },
         borderRadius: BorderRadius.circular(16),
@@ -847,7 +847,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildProfileHeader(BuildContext context) {
-    // ✅ 本番実装：Proプランのみ編集権限
+    // Production: Only Pro users can edit
     final bool isProUser = _currentPlan == SubscriptionType.pro;
     
     return Card(
@@ -855,7 +855,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            // プロフィール画像 + 編集ボタン
+            // Profile image + Edit button
             GestureDetector(
               onTap: isProUser ? _navigateToProfileEdit : null,
               child: Stack(
