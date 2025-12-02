@@ -113,26 +113,29 @@ void main() async {
   // ✅ 本番環境：無料プランリセットを無効化
   // await _resetToFreePlanForTesting();
 
+  // ATTリクエストは起動後にバックグラウンドで実行（スプラッシュ表示中）
   if (!kIsWeb) {
-    try {
-      // ダイアログ表示まで少し待機（起動直後のクラッシュ防止）
-      await Future.delayed(const Duration(milliseconds: 1000));
-      final status = await AppTrackingTransparency.requestTrackingAuthorization();
-      print('📱 ATTステータス: $status');
-    } catch (e) {
-      print('❌ ATTリクエストエラー: $e');
-    }
+    Future.delayed(const Duration(milliseconds: 500)).then((_) async {
+      try {
+        final status = await AppTrackingTransparency.requestTrackingAuthorization();
+        print('📱 ATTステータス: $status');
+      } catch (e) {
+        print('❌ ATTリクエストエラー: $e');
+      }
+    });
   }
   
-  // 📱 AdMob初期化（広告表示）
-  try {
-    await AdService().initialize();
-    // インタースティシャル広告を先読み
-    InterstitialAdManager().loadAd();
-    print('✅ AdMob初期化成功');
-  } catch (e) {
-    print('❌ AdMob初期化エラー: $e');
-  }
+  // 📱 AdMob初期化（バックグラウンドで実行、アプリ起動をブロックしない）
+  Future.delayed(Duration.zero).then((_) async {
+    try {
+      await AdService().initialize();
+      // インタースティシャル広告を先読み
+      InterstitialAdManager().loadAd();
+      print('✅ AdMob初期化成功');
+    } catch (e) {
+      print('❌ AdMob初期化エラー: $e');
+    }
+  });
   
   // 💾 オフラインサービス初期化（Hive）
   try {
@@ -142,48 +145,61 @@ void main() async {
     print('❌ オフラインサービス初期化エラー: $e');
   }
   
-  // 💰 RevenueCat初期化（iOS課金統合）
+  // 💰 RevenueCat・広告・トライアル初期化（バックグラウンドで並列実行）
   if (firebaseInitialized) {
-    try {
-      print('💰 RevenueCat初期化開始...');
-      final revenueCatService = RevenueCatService();
-      await revenueCatService.initialize();
-      print('✅ RevenueCat初期化成功');
-    } catch (revenueCatError) {
-      print('❌ RevenueCat初期化エラー（ローカルモードで動作）: $revenueCatError');
-    }
-    
-    // 🎁 トライアル期限チェック
-    try {
-      print('🎁 トライアル期限チェック...');
-      final trialService = TrialService();
-      await trialService.checkTrialExpiration();
-      print('✅ トライアル状態確認完了');
-    } catch (trialError) {
-      print('❌ トライアルチェックエラー: $trialError');
-    }
-    
-    // 📱 AdMob初期化（無料プラン広告用）
-    try {
-      print('📱 AdMob初期化...');
-      final adMobService = AdMobService();
-      await adMobService.initialize();
-      print('✅ AdMob初期化完了');
-    } catch (adMobError) {
-      print('❌ AdMob初期化エラー（広告なしで動作）: $adMobError');
-    }
-    
-    // 🎬 リワード広告初期化（CEO戦略: 動画視聴でAIクレジット付与）
-    try {
-      print('🎬 リワード広告初期化...');
-      globalRewardAdService = RewardAdService();
-      await globalRewardAdService.initialize();
-      // 初回の広告をプリロード
-      await globalRewardAdService.loadRewardedAd();
-      print('✅ リワード広告初期化完了');
-    } catch (rewardAdError) {
-      print('❌ リワード広告初期化エラー（広告なしで動作）: $rewardAdError');
-    }
+    // 重い初期化処理をバックグラウンドで非同期実行（起動時間を短縮）
+    Future.wait([
+      // RevenueCat初期化
+      Future(() async {
+        try {
+          print('💰 RevenueCat初期化開始...');
+          final revenueCatService = RevenueCatService();
+          await revenueCatService.initialize();
+          print('✅ RevenueCat初期化成功');
+        } catch (e) {
+          print('❌ RevenueCat初期化エラー: $e');
+        }
+      }),
+      
+      // トライアル期限チェック
+      Future(() async {
+        try {
+          print('🎁 トライアル期限チェック...');
+          final trialService = TrialService();
+          await trialService.checkTrialExpiration();
+          print('✅ トライアル状態確認完了');
+        } catch (e) {
+          print('❌ トライアルチェックエラー: $e');
+        }
+      }),
+      
+      // AdMob初期化
+      Future(() async {
+        try {
+          print('📱 AdMob初期化...');
+          final adMobService = AdMobService();
+          await adMobService.initialize();
+          print('✅ AdMob初期化完了');
+        } catch (e) {
+          print('❌ AdMob初期化エラー: $e');
+        }
+      }),
+      
+      // リワード広告初期化
+      Future(() async {
+        try {
+          print('🎬 リワード広告初期化...');
+          globalRewardAdService = RewardAdService();
+          await globalRewardAdService.initialize();
+          await globalRewardAdService.loadRewardedAd();
+          print('✅ リワード広告初期化完了');
+        } catch (e) {
+          print('❌ リワード広告初期化エラー: $e');
+        }
+      }),
+    ]).then((_) {
+      print('✅ バックグラウンド初期化完了');
+    });
   }
   
   print('🚀 アプリ起動開始 (Firebase: ${firebaseInitialized ? "有効" : "無効"})');
