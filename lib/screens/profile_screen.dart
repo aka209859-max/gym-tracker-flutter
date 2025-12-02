@@ -714,8 +714,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       child: InkWell(
         onTap: () {
-          // 週間統計メニューを表示
-          _showWeeklyStatsMenu(context);
+          // トレーニングメモ画面に直接遷移
+          Navigator.pushNamed(context, '/workout-memo');
         },
         borderRadius: BorderRadius.circular(16),
         child: Container(
@@ -828,93 +828,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'タップして詳細を表示',
+                    'タップしてメモを見る',
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.white60,
                     ),
                   ),
                   SizedBox(width: 4),
-                  Icon(Icons.chevron_right, color: Colors.white60, size: 16),
+                  Icon(Icons.note, color: Colors.white60, size: 16),
                 ],
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-  
-  /// 週間統計メニューを表示
-  void _showWeeklyStatsMenu(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) => Container(
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.calendar_today, color: Colors.purple),
-              title: const Text('週次レポート'),
-              subtitle: const Text('毎週月曜日に自動生成'),
-              onTap: () {
-                Navigator.pop(context);
-                // 週次レポート画面へ遷移（未実装の場合は準備中メッセージ）
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('📊 週次レポート機能は準備中です'),
-                    backgroundColor: Colors.orange,
-                  ),
-                );
-              },
-            ),
-            const Divider(),
-            ListTile(
-              leading: const Icon(Icons.emoji_events, color: Colors.amber),
-              title: const Text('パーソナルレコード'),
-              subtitle: const Text('月別・期間別の記録'),
-              onTap: () {
-                Navigator.pop(context);
-                // パーソナルレコード画面へ遷移（未実装の場合は準備中メッセージ）
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('🏆 パーソナルレコード機能は準備中です'),
-                    backgroundColor: Colors.orange,
-                  ),
-                );
-              },
-            ),
-            const Divider(),
-            ListTile(
-              leading: const Icon(Icons.analytics, color: Colors.blue),
-              title: const Text('部位別トラッキング'),
-              subtitle: const Text('筋肉グループ別の統計'),
-              onTap: () {
-                Navigator.pop(context);
-                // 部位別トラッキング画面へ遷移（未実装の場合は準備中メッセージ）
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('📈 部位別トラッキング機能は準備中です'),
-                    backgroundColor: Colors.orange,
-                  ),
-                );
-              },
-            ),
-            const Divider(),
-            ListTile(
-              leading: const Icon(Icons.note, color: Colors.green),
-              title: const Text('トレーニングメモ'),
-              subtitle: const Text('詳細画面からメモを追加'),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/workout-memo');
-              },
-            ),
-          ],
         ),
       ),
     );
