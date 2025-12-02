@@ -14,9 +14,9 @@ class ReferralService {
   static const int _codeLength = 8;
   static const String _codePrefix = 'GYM';
 
-  // 紹介特典（v1.02強化版: AI回数のみに変更）
-  static const int _refereeAiBonus = 5; // 紹介された側のAI無料利用×5回
-  static const int _referrerAiBonus = 15; // 紹介した側のAI追加パック×3個（15回分）
+  // 紹介特典（v1.02最適化: 収益性重視）
+  static const int _refereeAiBonus = 3; // 紹介された側のAI無料利用×3回
+  static const int _referrerAiBonus = 5; // 紹介した側のAI追加×5回
 
   /// ユーザーの紹介コードを取得（なければ生成）
   Future<String> getReferralCode() async {
@@ -118,7 +118,7 @@ class ReferralService {
     // トランザクションで処理
     await _firestore.runTransaction((transaction) async {
       // 1. 紹介された側（referee）に特典付与
-      //    - AI無料利用×5回
+      //    - AI無料利用×3回
       final userRef = _firestore.collection('users').doc(user.uid);
       final userSnapshot = await transaction.get(userRef);
       
@@ -126,7 +126,7 @@ class ReferralService {
         transaction.update(userRef, {
           'usedReferralCode': code,
           'referredBy': referrerId,
-          'referralBonusAiCredits': _refereeAiBonus, // 5回分
+          'referralBonusAiCredits': _refereeAiBonus, // 3回分
           'referredAt': FieldValue.serverTimestamp(),
         });
       } else {
@@ -134,14 +134,14 @@ class ReferralService {
         transaction.set(userRef, {
           'usedReferralCode': code,
           'referredBy': referrerId,
-          'referralBonusAiCredits': _refereeAiBonus, // 5回分
+          'referralBonusAiCredits': _refereeAiBonus, // 3回分
           'referredAt': FieldValue.serverTimestamp(),
           'createdAt': FieldValue.serverTimestamp(),
         });
       }
 
       // 2. 紹介した側（referrer）に特典付与
-      //    - AI追加パック×3個（15回分）
+      //    - AI追加×5回
       final referrerRef = _firestore.collection('users').doc(referrerId);
       final referrerSnapshot = await transaction.get(referrerRef);
       
@@ -151,8 +151,8 @@ class ReferralService {
       transaction.update(referrerRef, {
         'referralStats.totalReferrals': (currentStats['totalReferrals'] as int? ?? 0) + 1,
         'referralStats.successfulReferrals': (currentStats['successfulReferrals'] as int? ?? 0) + 1,
-        'referralStats.aiPackCredits': (currentStats['aiPackCredits'] as int? ?? 0) + 3, // AI追加パック×3個
-        'ai_credits': currentAiCredits + _referrerAiBonus, // AI 15回分を直接付与
+        'referralStats.aiPackCredits': (currentStats['aiPackCredits'] as int? ?? 0) + 1, // AI追加パック×1個
+        'ai_credits': currentAiCredits + _referrerAiBonus, // AI 5回分を直接付与
       });
 
       // 3. 紹介履歴を記録（v1.02強化版）
@@ -164,8 +164,8 @@ class ReferralService {
         'createdAt': FieldValue.serverTimestamp(),
         'status': 'completed',
         'bonuses': {
-          'refereeAiCredits': _refereeAiBonus, // 5回分
-          'referrerAiPackCredits': 3, // AI追加パック×3個（15回分）
+          'refereeAiCredits': _refereeAiBonus, // 3回分
+          'referrerAiPackCredits': 1, // AI追加パック×1個（5回分）
         },
       });
     });

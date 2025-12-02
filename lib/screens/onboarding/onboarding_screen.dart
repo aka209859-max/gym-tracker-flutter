@@ -63,7 +63,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('🎉 紹介コードを適用しました！AI無料利用×5回を獲得！'),
+              content: Text('🎉 紹介コードを適用しました！AI無料利用×3回を獲得！'),
               backgroundColor: Colors.green,
               duration: Duration(seconds: 3),
             ),
