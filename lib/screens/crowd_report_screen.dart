@@ -278,12 +278,14 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('エラーが発生しました'),
+          SnackBar(
+            content: Text('エラーが発生しました: ${e.toString()}'),
             backgroundColor: Colors.red,
+            duration: const Duration(seconds: 5),
           ),
         );
       }
+      print('❌ Crowd report error: $e');
     } finally {
       if (mounted) {
         setState(() {

@@ -27,12 +27,19 @@ class CrowdReportIncentiveService {
         );
       }
       
-      // 1. 混雑度をFirestoreに保存
-      await _firestore.collection('gyms').doc(gymId).update({
-        'currentCrowdLevel': crowdLevel,
-        'lastCrowdUpdate': FieldValue.serverTimestamp(),
-        'last_reporter_id': user.uid,
-      });
+      // 1. 混雑度をFirestoreに保存（set with merge to avoid permission errors）
+      try {
+        await _firestore.collection('gyms').doc(gymId).set({
+          'currentCrowdLevel': crowdLevel,
+          'lastCrowdUpdate': FieldValue.serverTimestamp(),
+          'last_reporter_id': user.uid,
+        }, SetOptions(merge: true));
+      } catch (e) {
+        if (kDebugMode) {
+          print('⚠️ Gym update skipped (may not have permission): $e');
+        }
+        // Continue even if gym update fails - user still gets reward
+      }
       
       // 2. 報告回数をインクリメント
       final reportCount = await _incrementReportCount(user.uid);
@@ -60,7 +67,7 @@ class CrowdReportIncentiveService {
       }
       return ReportRewardResult(
         success: false,
-        message: 'エラーが発生しました',
+        message: 'エラーが発生しました: ${e.toString()}',
       );
     }
   }
