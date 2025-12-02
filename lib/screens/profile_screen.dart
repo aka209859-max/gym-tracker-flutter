@@ -556,119 +556,140 @@ class _ProfileScreenState extends State<ProfileScreen> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Colors.purple.shade400,
-              Colors.deepPurple.shade600,
-            ],
-          ),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Icon(
-                  Icons.bar_chart,
-                  color: Colors.white,
-                  size: 28,
-                ),
-                const SizedBox(width: 12),
-                const Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '週間トレーニング統計',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        '過去7日間の記録',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.white70,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const Text(
-                    'NEW',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
+      child: InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, '/weekly-stats');
+        },
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.purple.shade400,
+                Colors.deepPurple.shade600,
               ],
             ),
-            const SizedBox(height: 16),
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
                 children: [
-                  Column(
-                    children: [
-                      Icon(Icons.fitness_center, color: Colors.white, size: 24),
-                      SizedBox(height: 8),
-                      Text(
-                        'トレーニング',
-                        style: TextStyle(fontSize: 10, color: Colors.white70),
-                      ),
-                      Text(
-                        '回数・ボリューム',
-                        style: TextStyle(fontSize: 10, color: Colors.white70),
-                      ),
-                    ],
+                  const Icon(
+                    Icons.bar_chart,
+                    color: Colors.white,
+                    size: 28,
                   ),
-                  Column(
-                    children: [
-                      Icon(Icons.show_chart, color: Colors.white, size: 24),
-                      SizedBox(height: 8),
-                      Text(
-                        '部位数',
-                        style: TextStyle(fontSize: 10, color: Colors.white70),
+                  const SizedBox(width: 12),
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Weekly Training Stats',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          'Last 7 days record',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white70,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Text(
+                      'NEW',
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
-                      Text(
-                        '平均ボリューム',
-                        style: TextStyle(fontSize: 10, color: Colors.white70),
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),
-            ),
-          ],
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      children: [
+                        Icon(Icons.fitness_center, color: Colors.white, size: 24),
+                        SizedBox(height: 8),
+                        Text(
+                          'Training',
+                          style: TextStyle(fontSize: 10, color: Colors.white70),
+                        ),
+                        Text(
+                          'Count & Volume',
+                          style: TextStyle(fontSize: 10, color: Colors.white70),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Icon(Icons.show_chart, color: Colors.white, size: 24),
+                        SizedBox(height: 8),
+                        Text(
+                          'Body Parts',
+                          style: TextStyle(fontSize: 10, color: Colors.white70),
+                        ),
+                        Text(
+                          'Avg Volume',
+                          style: TextStyle(fontSize: 10, color: Colors.white70),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Tap to view weekly stats',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.white60,
+                    ),
+                  ),
+                  SizedBox(width: 4),
+                  Icon(Icons.bar_chart, color: Colors.white60, size: 16),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildProfileHeader(BuildContext context) {
-    // ✅ 本番実装：Proプランのみ編集権限
+    // Production: Only Pro users can edit profile
     final bool isProUser = _currentPlan == SubscriptionType.pro;
     
     return Card(
