@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 /// プラン種類
 enum SubscriptionType {
@@ -18,12 +19,56 @@ class SubscriptionService {
   static const String _cacheTimestampKey = 'cached_plan_timestamp';
   static const int _cacheValidityMinutes = 60; // キャッシュ有効期限: 60分
   
+  // 永年プラン（非消耗型IAP）の製品ID
+  static const String lifetimeProProductId = 'com.gymmatch.app.lifetime_pro';
+  
   SubscriptionType? _memoryCache; // メモリキャッシュ
+  
+  /// 永年プラン（非消耗型IAP）を保持しているかチェック
+  Future<bool> hasLifetimePlan() async {
+    try {
+      final customerInfo = await Purchases.getCustomerInfo();
+      
+      // 非消耗型購入履歴から永年プランをチェック
+      final hasLifetime = customerInfo.nonSubscriptionTransactions.any(
+        (transaction) => transaction.productIdentifier == lifetimeProProductId
+      );
+      
+      if (hasLifetime) {
+        print('✅ 永年Proプラン保持者');
+        return true;
+      }
+      
+      // Entitlement 'pro' が永年プランで有効化されているかもチェック
+      final proEntitlement = customerInfo.entitlements.all['pro'];
+      if (proEntitlement?.isActive == true) {
+        // 非サブスクリプション（永年プラン）かチェック
+        final isSubscription = proEntitlement?.periodType != null;
+        if (!isSubscription) {
+          print('✅ 永年Proプラン保持者（Entitlement経由）');
+          return true;
+        }
+      }
+      
+      return false;
+    } catch (e) {
+      print('⚠️ 永年プランチェックエラー: $e');
+      return false;
+    }
+  }
   
   /// 現在のプラン種類を取得（Firestore優先、キャッシュフォールバック）
   Future<SubscriptionType> getCurrentPlan() async {
     try {
-      // 0. メモリキャッシュチェック（最速）
+      // 0. 永年プランチェック（最優先）
+      final hasLifetime = await hasLifetimePlan();
+      if (hasLifetime) {
+        _memoryCache = SubscriptionType.pro;
+        await _savePlanCache(SubscriptionType.pro);
+        return SubscriptionType.pro;
+      }
+      
+      // 1. メモリキャッシュチェック（最速）
       if (_memoryCache != null) {
         return _memoryCache!;
       }
