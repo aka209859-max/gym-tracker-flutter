@@ -865,25 +865,20 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
     );
   }
 
-  /// ジムをシェアする（正直な「作りました！」スタイル）
+  /// ジムをシェアする
   Future<void> _shareGym() async {
     try {
       final gym = widget.gym;
       
-      // シンプルで正直なツイート文
-      final tweetText = '''GPS×混雑度でジム探しアプリ作りました💪
+      // トレーニング報告用のシンプルなツイート文
+      final tweetText = '''📍 ${gym.name}
 
-GYM MATCH
-
-📍 ${gym.name}
 ⭐ ${gym.rating.toStringAsFixed(1)}/5.0 (${gym.reviewCount}件のレビュー)
 📍 ${gym.address}
 
-まだβ版ですが、使ってみてください！
+#筋トレ''';
 
-#個人開発 #Flutter #GYM_MATCH #ジム''';
-
-      // テキストのみシェア（画像生成は将来実装）
+      // テキストのみシェア
       await _shareService.shareText(
         tweetText,
         subject: 'GYM MATCH - ${gym.name}',
