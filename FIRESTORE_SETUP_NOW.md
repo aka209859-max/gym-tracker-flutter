@@ -34,8 +34,8 @@ TestFlight v1.0.113 ビルド完了後、**必ずこの設定を行ってくだ�
 
 | フィールド名 | 型 | 値 |
 |-------------|-----|-----|
-| `minimum_version` | `string` | `1.0.112` |
-| `recommended_version` | `string` | `1.0.113` |
+| `minimum_version` | `string` | `1.0.148` |
+| `recommended_version` | `string` | `1.0.149` |
 | `update_message` | `string` | `新しいバージョンのアプリが利用可能です。最新バージョンにアップデートしてください。` |
 | `store_url_ios` | `string` | `https://apps.apple.com/jp/app/gym-match/id6736899896` |
 | `store_url_android` | `string` | `https://play.google.com/store/apps/details?id=com.gymmatch.app` |
@@ -44,8 +44,8 @@ TestFlight v1.0.113 ビルド完了後、**必ずこの設定を行ってくだ�
 
 ```json
 {
-  "minimum_version": "1.0.112",
-  "recommended_version": "1.0.113",
+  "minimum_version": "1.0.148",
+  "recommended_version": "1.0.149",
   "update_message": "新しいバージョンのアプリが利用可能です。最新バージョンにアップデートしてください。",
   "store_url_ios": "https://apps.apple.com/jp/app/gym-match/id6736899896",
   "store_url_android": "https://play.google.com/store/apps/details?id=com.gymmatch.app"
@@ -105,18 +105,18 @@ v1.0.112 以降のユーザー → 通常起動
 
 ## 🧪 テスト手順
 
-### ステップ1: v1.0.112 で動作確認
+### ステップ1: v1.0.149 で動作確認
 
-1. TestFlight で v1.0.112 をインストール
+1. TestFlight で v1.0.149 をインストール
 2. アプリを起動
 3. **ダイアログが表示されないこと**を確認（正常動作）
 
-### ステップ2: v1.0.111 で強制更新確認（オプション）
+### ステップ2: v1.0.148 で強制更新確認（オプション）
 
-1. TestFlight で v1.0.111 をインストール
+1. TestFlight で v1.0.148 をインストール
 2. アプリを起動
-3. **強制更新ダイアログが表示されること**を確認
-4. 「OK」ボタンで App Store に遷移すること確認
+3. **ダイアログが表示されないこと**を確認（v1.0.148は現行版）
+4. Firestoreで`minimum_version`を`1.0.149`に変更してテスト
 
 ---
 
@@ -126,15 +126,15 @@ v1.0.112 以降のユーザー → 通常起動
 
 | ユーザーのバージョン | 動作 |
 |-------------------|------|
-| v1.0.111 以前 | 🚨 強制更新ダイアログ → App Store へ |
-| v1.0.112 | ✅ 通常起動（ダイアログなし） |
-| v1.0.113 | ✅ 通常起動（ダイアログなし、最新版） |
+| v1.0.147 以前 | 🚨 強制更新ダイアログ → App Store へ |
+| v1.0.148 | ✅ 通常起動（ダイアログなし、現行版） |
+| v1.0.149 | ✅ 通常起動（ダイアログなし、最新版） |
 
 ---
 
 ## 🚀 次回以降の運用
 
-### 新バージョンリリース時（例: v1.0.114）
+### 新バージョンリリース時（例: v1.0.150）
 
 1. TestFlight でテスト完了
 2. App Store 審査通過
@@ -142,12 +142,12 @@ v1.0.112 以降のユーザー → 通常起動
 
 ```json
 {
-  "minimum_version": "1.0.113",
-  "recommended_version": "1.0.114"
+  "minimum_version": "1.0.149",
+  "recommended_version": "1.0.150"
 }
 ```
 
-4. v1.0.112 以前のユーザーが強制更新される
+4. v1.0.148 以前のユーザーが強制更新される
 
 ---
 
@@ -170,8 +170,8 @@ A: `store_url_ios` が正しいか確認してください。
 - [ ] `app_config/version_control` ドキュメント作成
 - [ ] 5つのフィールドを設定
 - [ ] セキュリティルール追加
-- [ ] v1.0.112 で動作テスト（ダイアログ非表示）
-- [ ] v1.0.111 で強制更新テスト（オプション）
+- [ ] v1.0.149 で動作テスト（ダイアログ非表示）
+- [ ] v1.0.148 で動作テスト（ダイアログ非表示、現行版）
 
 ---
 
