@@ -848,14 +848,15 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
             const SizedBox(width: 12),
             Expanded(
               child: OutlinedButton.icon(
-                onPressed: () {
-                  // TODO: お気に入り機能
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('お気に入りに追加しました')),
-                  );
-                },
-                icon: const Icon(Icons.favorite_border),
-                label: const Text('お気に入り'),
+                onPressed: _toggleFavorite,
+                icon: Icon(_isFavorite ? Icons.favorite : Icons.favorite_border),
+                label: Text(_isFavorite ? 'お気に入り済み' : 'お気に入り'),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: _isFavorite ? Colors.pink : null,
+                  side: BorderSide(
+                    color: _isFavorite ? Colors.pink : Colors.grey,
+                  ),
+                ),
               ),
             ),
           ],
