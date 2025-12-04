@@ -9,6 +9,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'firebase_options.dart';
 import 'services/offline_service.dart';
+import 'services/search_cache_service.dart';
 import 'screens/home_screen.dart';
 import 'screens/map_screen.dart';
 import 'screens/profile_screen.dart';
@@ -143,6 +144,14 @@ void main() async {
     print('✅ オフラインサービス初期化成功');
   } catch (e) {
     print('❌ オフラインサービス初期化エラー: $e');
+  }
+  
+  // 💰 検索キャッシュサービス初期化（Hive - コスト最適化）
+  try {
+    await SearchCacheService().init();
+    print('✅ 検索キャッシュサービス初期化成功（Google Maps API コスト削減）');
+  } catch (e) {
+    print('❌ 検索キャッシュサービス初期化エラー: $e');
   }
   
   // 💰 RevenueCat・広告・トライアル初期化（バックグラウンドで並列実行）

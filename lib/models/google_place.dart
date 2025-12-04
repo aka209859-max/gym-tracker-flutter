@@ -175,6 +175,31 @@ class GooglePlace {
     }
   }
   
+  /// JSON形式に変換（Hiveキャッシュ用）
+  Map<String, dynamic> toJson() {
+    return {
+      'place_id': placeId,
+      'name': name,
+      'vicinity': address,
+      'geometry': {
+        'location': {
+          'lat': latitude,
+          'lng': longitude,
+        },
+      },
+      'rating': rating,
+      'user_ratings_total': userRatingsTotal,
+      'photos': photoReference != null 
+          ? [{'photo_reference': photoReference}] 
+          : null,
+      'opening_hours': openNow != null 
+          ? {'open_now': openNow} 
+          : null,
+      'price_level': priceLevel,
+      'types': types,
+    };
+  }
+  
   /// 既存のGymモデルに変換（互換性のため）
   Map<String, dynamic> toGymCompatible() {
     return {
