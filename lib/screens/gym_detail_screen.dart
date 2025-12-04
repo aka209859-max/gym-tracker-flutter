@@ -31,7 +31,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
   final VisitHistoryService _visitHistoryService = VisitHistoryService();
   final CrowdLevelService _crowdLevelService = CrowdLevelService();
   bool _isCheckedIn = false;
-  bool _isFavorite = false;
+  bool? _isFavorite; // null = ロード中、true/false = 確定
   int? _currentCrowdLevel; // Google Places API混雑度
 
   @override
@@ -285,11 +285,11 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: _toggleFavorite,
-        backgroundColor: _isFavorite ? Colors.pink : Colors.grey[300],
-        foregroundColor: _isFavorite ? Colors.white : Colors.grey[700],
-        icon: Icon(_isFavorite ? Icons.favorite : Icons.favorite_border),
-        label: Text(_isFavorite ? 'お気に入り登録済み' : 'お気に入りに追加'),
+        onPressed: _isFavorite == null ? null : _toggleFavorite,
+        backgroundColor: _isFavorite == true ? Colors.pink : Colors.grey[300],
+        foregroundColor: _isFavorite == true ? Colors.white : Colors.grey[700],
+        icon: Icon(_isFavorite == true ? Icons.favorite : Icons.favorite_border),
+        label: Text(_isFavorite == true ? 'お気に入り登録済み' : _isFavorite == null ? '読み込み中...' : 'お気に入りに追加'),
       ),
     );
   }
@@ -848,13 +848,13 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
             const SizedBox(width: 12),
             Expanded(
               child: OutlinedButton.icon(
-                onPressed: _toggleFavorite,
-                icon: Icon(_isFavorite ? Icons.favorite : Icons.favorite_border),
-                label: Text(_isFavorite ? 'お気に入り済み' : 'お気に入り'),
+                onPressed: _isFavorite == null ? null : _toggleFavorite,
+                icon: Icon(_isFavorite == true ? Icons.favorite : Icons.favorite_border),
+                label: Text(_isFavorite == true ? 'お気に入り済み' : 'お気に入り'),
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: _isFavorite ? Colors.pink : null,
+                  foregroundColor: _isFavorite == true ? Colors.pink : null,
                   side: BorderSide(
-                    color: _isFavorite ? Colors.pink : Colors.grey,
+                    color: _isFavorite == true ? Colors.pink : Colors.grey,
                   ),
                 ),
               ),
