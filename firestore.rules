@@ -1,0 +1,55 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // 🔄 アプリバージョン管理（全ユーザーが読み取り可能）
+    match /app_config/version_control {
+      allow read: if true;  // 全ユーザーが読み取り可能
+      allow write: if false; // 管理者のみ書き込み可能（Firebaseコンソールから）
+    }
+    
+    // 🔒 ユーザーデータ（認証済みユーザーのみ）
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // 📊 ワークアウトデータ（認証済みユーザーのみ）
+    match /workouts/{workoutId} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // 🏋️ ジム情報（全ユーザーが読み取り可能）
+    match /gyms/{gymId} {
+      allow read: if true;
+      allow write: if request.auth != null; // 認証済みユーザーが書き込み可能
+    }
+    
+    // 👥 混雑度レポート（認証済みユーザーのみ）
+    match /crowd_reports/{reportId} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+    
+    // 💰 サブスクリプション情報（本人のみ）
+    match /subscriptions/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // 🎁 リファラル情報（本人のみ）
+    match /referrals/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // 🎯 AI使用履歴（本人のみ）
+    match /ai_usage/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // デフォルトルール: すべて拒否
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
