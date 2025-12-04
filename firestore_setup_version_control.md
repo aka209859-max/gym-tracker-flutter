@@ -28,9 +28,9 @@ GYM MATCHアプリの強制アップデート機能を有効化するためのFi
 
 | フィールド名 | 型 | 値 | 説明 |
 |-------------|-----|-----|------|
-| `minimum_version` | `string` | `1.0.100` | **必須最低バージョン**（これ以下は強制更新） |
+| `minimum_version` | `string` | `1.0.112` | **必須最低バージョン**（これ以下は強制更新） |
 | `recommended_version` | `string` | `1.0.112` | **推奨バージョン**（任意更新ダイアログ表示） |
-| `update_message` | `string` | `新機能：永年Proプラン対応 + Google Maps APIコスト最適化（年間¥48,564削減/1000ユーザー）。より快適にご利用いただけます🎉` | ダイアログに表示されるメッセージ |
+| `update_message` | `string` | `新しいバージョンのアプリが利用可能です。最新バージョンにアップデートしてください。` | ダイアログに表示されるメッセージ |
 | `store_url_ios` | `string` | `https://apps.apple.com/jp/app/gym-match/id6736899896` | App StoreのURL |
 | `store_url_android` | `string` | `https://play.google.com/store/apps/details?id=com.gymmatch.app` | Google Play StoreのURL（将来用） |
 
@@ -40,9 +40,9 @@ GYM MATCHアプリの強制アップデート機能を有効化するためのFi
 
 ```json
 {
-  "minimum_version": "1.0.100",
+  "minimum_version": "1.0.112",
   "recommended_version": "1.0.112",
-  "update_message": "新機能：永年Proプラン対応 + Google Maps APIコスト最適化（年間¥48,564削減/1000ユーザー）。より快適にご利用いただけます🎉",
+  "update_message": "新しいバージョンのアプリが利用可能です。最新バージョンにアップデートしてください。",
   "store_url_ios": "https://apps.apple.com/jp/app/gym-match/id6736899896",
   "store_url_android": "https://play.google.com/store/apps/details?id=com.gymmatch.app"
 }
@@ -52,41 +52,36 @@ GYM MATCHアプリの強制アップデート機能を有効化するためのFi
 
 ## 🎯 動作の仕組み
 
-### パターン1: 任意更新（Recommended Update）
-- **条件**: 現在のバージョン >= `minimum_version` かつ < `recommended_version`
-- **動作**: ダイアログ表示、「後で」ボタンでスキップ可能
-- **例**: v1.0.110 のユーザーに v1.0.112 への更新を推奨
-
-### パターン2: 強制更新（Force Update）
+### パターン1: 強制更新（Force Update）
 - **条件**: 現在のバージョン < `minimum_version`
-- **動作**: ダイアログ表示、「今すぐ更新」ボタンのみ（スキップ不可）
-- **例**: v1.0.99 のユーザーは v1.0.100 以上に強制更新
+- **動作**: シンプルなダイアログ表示、「OK」ボタンで App Store へ
+- **例**: v1.0.111 のユーザーは v1.0.112 以上に強制更新
 
-### パターン3: 更新不要
-- **条件**: 現在のバージョン >= `recommended_version`
+### パターン2: 更新不要
+- **条件**: 現在のバージョン >= `minimum_version`
 - **動作**: ダイアログ非表示、通常起動
 
 ---
 
 ## 📌 運用例
 
-### 例1: v1.0.113リリース時（任意更新）
-
-```json
-{
-  "minimum_version": "1.0.100",
-  "recommended_version": "1.0.113",
-  "update_message": "バグ修正とパフォーマンス向上。更新をお勧めします。"
-}
-```
-
-### 例2: 緊急バグ修正（強制更新）
+### 例1: v1.0.113リリース時（強制更新）
 
 ```json
 {
   "minimum_version": "1.0.113",
   "recommended_version": "1.0.113",
-  "update_message": "重要なセキュリティ修正が含まれています。今すぐ更新してください。"
+  "update_message": "新しいバージョンのアプリが利用可能です。最新バージョンにアップデートしてください。"
+}
+```
+
+### 例2: 緊急バグ修正時（強制更新）
+
+```json
+{
+  "minimum_version": "1.0.114",
+  "recommended_version": "1.0.114",
+  "update_message": "重要な修正が含まれています。最新バージョンにアップデートしてください。"
 }
 ```
 
@@ -110,31 +105,35 @@ GYM MATCHアプリの強制アップデート機能を有効化するためのFi
 
 ## 🧪 テスト手順
 
-### テスト1: 任意更新のテスト
-
-1. Firestoreで以下を設定：
-   ```json
-   {
-     "minimum_version": "1.0.100",
-     "recommended_version": "1.0.113"
-   }
-   ```
-
-2. アプリ（v1.0.112）を起動
-3. 「後で」ボタンでスキップできることを確認
-
-### テスト2: 強制更新のテスト
+### テスト1: 強制更新のテスト
 
 1. Firestoreで以下を設定：
    ```json
    {
      "minimum_version": "1.0.113",
-     "recommended_version": "1.0.113"
+     "recommended_version": "1.0.113",
+     "update_message": "新しいバージョンのアプリが利用可能です。最新バージョンにアップデートしてください。",
+     "store_url_ios": "https://apps.apple.com/jp/app/gym-match/id6736899896"
    }
    ```
 
 2. アプリ（v1.0.112）を起動
-3. 「今すぐ更新」ボタンのみ表示され、スキップ不可を確認
+3. シンプルなダイアログが表示されることを確認
+4. 「OK」ボタンを押してApp Storeに遷移することを確認
+5. 戻るボタンでダイアログが閉じないことを確認（強制更新）
+
+### テスト2: 更新不要のテスト
+
+1. Firestoreで以下を設定：
+   ```json
+   {
+     "minimum_version": "1.0.112",
+     "recommended_version": "1.0.112"
+   }
+   ```
+
+2. アプリ（v1.0.112）を起動
+3. ダイアログが表示されず、通常起動することを確認
 
 ---
 
