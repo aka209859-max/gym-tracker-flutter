@@ -1,6 +1,6 @@
 /// 📈 AI成長予測サービス
 /// 
-/// Gemini 2.0 Flash APIと科学的根拠データベースを活用し、
+/// Gemini 2.5 Flash APIと科学的根拠データベースを活用し、
 /// ユーザーの筋力成長を予測するサービス
 library;
 
@@ -15,7 +15,7 @@ class AIPredictionService {
   // Gemini API設定（AIコーチ専用キー）
   static const String _apiKey = 'AIzaSyA9XmQSHA1llGg7gihqjmOOIaLA856fkLc';
   static const String _apiUrl =
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent';
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 
   /// ユーザーの成長を予測
   /// 
