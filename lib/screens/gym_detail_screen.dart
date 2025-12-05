@@ -101,7 +101,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
   }
 
   Future<void> _toggleFavorite() async {
-    if (_isFavorite) {
+    if (_isFavorite == true) {
       // お気に入りから削除
       final success = await _favoritesService.removeFavorite(widget.gym.id);
       if (success && mounted) {
