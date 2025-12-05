@@ -453,7 +453,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
         ),
         lineTouchData: LineTouchData(
           touchTooltipData: LineTouchTooltipData(
-            tooltipBgColor: Colors.black87,
+            backgroundColor: Colors.black87,
             tooltipRoundedRadius: 8,
             getTooltipItems: (touchedSpots) {
               return touchedSpots.map((spot) {
