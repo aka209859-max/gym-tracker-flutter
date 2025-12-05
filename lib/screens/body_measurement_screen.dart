@@ -453,8 +453,6 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
         ),
         lineTouchData: LineTouchData(
           touchTooltipData: LineTouchTooltipData(
-            backgroundColor: Colors.black87,
-            tooltipRoundedRadius: 8,
             getTooltipItems: (touchedSpots) {
               return touchedSpots.map((spot) {
                 final index = spot.x.toInt();
@@ -465,7 +463,12 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                 
                 return LineTooltipItem(
                   '${DateFormat('M/d').format(date)}\n${value.toStringAsFixed(1)}$unit',
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+                  TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                    backgroundColor: Colors.black87,
+                  ),
                 );
               }).toList();
             },
