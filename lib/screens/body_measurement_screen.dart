@@ -47,29 +47,47 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
 
     try {
       final user = FirebaseAuth.instance.currentUser;
-      if (user == null) return;
+      if (user == null) {
+        print('⚠️ ユーザー未ログイン');
+        return;
+      }
 
+      print('🔍 体重記録を取得中... user_id: ${user.uid}');
+      
       final querySnapshot = await FirebaseFirestore.instance
           .collection('body_measurements')
           .where('user_id', isEqualTo: user.uid)
-          .orderBy('date', descending: true)
-          .limit(30) // 最新30件
           .get();
 
+      print('📊 取得件数: ${querySnapshot.docs.length}');
+
       if (!mounted) return;
+      
+      // データを取得してソート
+      final measurements = querySnapshot.docs.map((doc) {
+        final data = doc.data();
+        return {
+          'id': doc.id,
+          'date': (data['date'] as Timestamp).toDate(),
+          'weight': data['weight'] as double?,
+          'body_fat_percentage': data['body_fat_percentage'] as double?,
+        };
+      }).toList();
+      
+      // 日付でソート（降順）
+      measurements.sort((a, b) => (b['date'] as DateTime).compareTo(a['date'] as DateTime));
+      
+      // 最新30件に絞る
+      final limited = measurements.take(30).toList();
+      
       setState(() {
-        _measurements = querySnapshot.docs.map((doc) {
-          final data = doc.data();
-          return {
-            'id': doc.id,
-            'date': (data['date'] as Timestamp).toDate(),
-            'weight': data['weight'] as double?,
-            'body_fat_percentage': data['body_fat_percentage'] as double?,
-          };
-        }).toList();
+        _measurements = limited;
       });
-    } catch (e) {
+      
+      print('✅ 体重記録読み込み完了: ${_measurements.length}件');
+    } catch (e, stackTrace) {
       print('❌ 記録読み込みエラー: $e');
+      print('スタックトレース: $stackTrace');
     } finally {
       if (!mounted) return;
       setState(() => _isLoading = false);

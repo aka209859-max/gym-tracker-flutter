@@ -130,16 +130,26 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         return;
       }
       
-      // Firestore から最新の体重記録を取得
+      debugPrint('🔍 体重記録を取得中... user_id: ${user.uid}');
+      
+      // Firestore から体重記録を取得（orderBy なしでインデックス不要）
       final snapshot = await FirebaseFirestore.instance
           .collection('body_measurements')
           .where('user_id', isEqualTo: user.uid)
-          .orderBy('date', descending: true)
-          .limit(1)
           .get();
       
+      debugPrint('📊 取得件数: ${snapshot.docs.length}');
+      
       if (snapshot.docs.isNotEmpty) {
-        final data = snapshot.docs.first.data();
+        // 日付でソートして最新を取得
+        final sorted = snapshot.docs.toList()
+          ..sort((a, b) {
+            final aDate = (a.data()['date'] as Timestamp).toDate();
+            final bDate = (b.data()['date'] as Timestamp).toDate();
+            return bDate.compareTo(aDate);  // 降順
+          });
+        
+        final data = sorted.first.data();
         final weight = data['weight'] as double?;
         
         if (weight != null) {
@@ -151,7 +161,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           debugPrint('⚠️ 体重データがnull');
         }
       } else {
-        debugPrint('⚠️ 体重記録が見つかりません');
+        debugPrint('⚠️ 体重記録が見つかりません（データ件数: 0）');
       }
     } catch (e, stackTrace) {
       debugPrint('❌ 体重取得エラー: $e');
