@@ -73,6 +73,9 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   // メモ機能
   final TextEditingController _memoController = TextEditingController();
   
+  // ✅ v1.0.158: ユーザーの最新体重（懸垂の自重計算用）
+  double? _userBodyweight;
+  
   final Map<String, List<String>> _muscleGroupExercises = {
     '胸': ['ベンチプレス', 'ダンベルプレス', 'インクラインプレス', 'ケーブルフライ', 'ディップス'],
     '脚': ['スクワット', 'レッグプレス', 'レッグエクステンション', 'レッグカール', 'カーフレイズ'],
@@ -101,6 +104,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     _autoLoginIfNeeded();
     _loadCustomExercises();
     _loadLastWorkoutData();
+    _loadUserBodyweight(); // ✅ v1.0.158: 体重を取得
     _applyTemplateDataIfProvided();
   }
   
@@ -114,6 +118,44 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       } catch (e) {
         debugPrint('❌ トレーニング記録: 匿名認証エラー: $e');
       }
+    }
+  }
+  
+  /// ✅ v1.0.158: body_measurementsから最新の体重を取得
+  Future<void> _loadUserBodyweight() async {
+    try {
+      final user = firebase_auth.FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        debugPrint('⚠️ 体重取得: ユーザー未ログイン');
+        return;
+      }
+      
+      // Firestore から最新の体重記録を取得
+      final snapshot = await FirebaseFirestore.instance
+          .collection('body_measurements')
+          .where('user_id', isEqualTo: user.uid)
+          .orderBy('date', descending: true)
+          .limit(1)
+          .get();
+      
+      if (snapshot.docs.isNotEmpty) {
+        final data = snapshot.docs.first.data();
+        final weight = data['weight'] as double?;
+        
+        if (weight != null) {
+          setState(() {
+            _userBodyweight = weight;
+          });
+          debugPrint('✅ ユーザー体重を取得: ${weight}kg');
+        } else {
+          debugPrint('⚠️ 体重データがnull');
+        }
+      } else {
+        debugPrint('⚠️ 体重記録が見つかりません');
+      }
+    } catch (e, stackTrace) {
+      debugPrint('❌ 体重取得エラー: $e');
+      debugPrint('   スタックトレース: $stackTrace');
     }
   }
   
@@ -986,14 +1028,25 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           final existingSets = List<Map<String, dynamic>>.from(existingData['sets'] ?? []);
           
           // 新しいセットを既存セットの下に追加
-          final newSets = _sets.map((set) => {
-            'exercise_name': set.exerciseName,
-            'weight': set.weight,
-            'reps': set.reps,
-            'is_completed': set.isCompleted,
-            'has_assist': set.hasAssist,
-            'set_type': set.setType.toString().split('.').last,
-            'is_bodyweight_mode': set.isBodyweightMode,
+          final newSets = _sets.map((set) {
+            // ✅ v1.0.158: 自重モード（懸垂など）の場合、体重を自動反映
+            double effectiveWeight = set.weight;
+            if (set.isBodyweightMode && _userBodyweight != null) {
+              effectiveWeight = _userBodyweight! + set.weight;
+              debugPrint('✅ 既存記録追加 - 自重モード反映: ${set.exerciseName} = ${_userBodyweight}kg + ${set.weight}kg = ${effectiveWeight}kg');
+            }
+            
+            return {
+              'exercise_name': set.exerciseName,
+              'weight': effectiveWeight,  // ✅ 自重 + 追加重量
+              'reps': set.reps,
+              'is_completed': set.isCompleted,
+              'has_assist': set.hasAssist,
+              'set_type': set.setType.toString().split('.').last,
+              'is_bodyweight_mode': set.isBodyweightMode,
+              'user_bodyweight': set.isBodyweightMode ? _userBodyweight : null,
+              'additional_weight': set.isBodyweightMode ? set.weight : null,
+            };
           }).toList();
           
           existingSets.addAll(newSets);
@@ -1044,14 +1097,26 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           'date': Timestamp.fromDate(_selectedDate),
           'start_time': Timestamp.fromDate(startTime),
           'end_time': Timestamp.fromDate(endTime),
-          'sets': _sets.map((set) => {
-            'exercise_name': set.exerciseName,
-            'weight': set.weight,
-            'reps': set.reps,
-            'is_completed': set.isCompleted,
-            'has_assist': set.hasAssist,
-            'set_type': set.setType.toString().split('.').last,
-            'is_bodyweight_mode': set.isBodyweightMode,
+          'sets': _sets.map((set) {
+            // ✅ v1.0.158: 自重モード（懸垂など）の場合、体重を自動反映
+            double effectiveWeight = set.weight;
+            if (set.isBodyweightMode && _userBodyweight != null) {
+              // 自重モード: ユーザー体重 + 追加重量（例: 体重70kg + プレート10kg = 80kg）
+              effectiveWeight = _userBodyweight! + set.weight;
+              debugPrint('✅ 自重モード反映: ${set.exerciseName} = ${_userBodyweight}kg (体重) + ${set.weight}kg (追加) = ${effectiveWeight}kg');
+            }
+            
+            return {
+              'exercise_name': set.exerciseName,
+              'weight': effectiveWeight,  // ✅ 自重 + 追加重量
+              'reps': set.reps,
+              'is_completed': set.isCompleted,
+              'has_assist': set.hasAssist,
+              'set_type': set.setType.toString().split('.').last,
+              'is_bodyweight_mode': set.isBodyweightMode,
+              'user_bodyweight': set.isBodyweightMode ? _userBodyweight : null,  // ✅ 体重を記録
+              'additional_weight': set.isBodyweightMode ? set.weight : null,  // ✅ 追加重量を記録
+            };
           }).toList(),
           'created_at': FieldValue.serverTimestamp(),
         });

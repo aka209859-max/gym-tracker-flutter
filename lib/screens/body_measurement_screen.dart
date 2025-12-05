@@ -12,12 +12,20 @@ class BodyMeasurementScreen extends StatefulWidget {
   State<BodyMeasurementScreen> createState() => _BodyMeasurementScreenState();
 }
 
+// ✅ v1.0.158: グラフ表示オプション追加
+enum ChartType { weight, bodyFat }
+enum ChartPeriod { recent, all }
+
 class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
   final TextEditingController _weightController = TextEditingController();
   final TextEditingController _bodyFatController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
   bool _isLoading = false;
   List<Map<String, dynamic>> _measurements = [];
+  
+  // ✅ v1.0.158: グラフ設定
+  ChartType _selectedChartType = ChartType.weight;
+  ChartPeriod _selectedPeriod = ChartPeriod.recent;
 
   @override
   void initState() {
@@ -87,9 +95,20 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) throw Exception('ユーザーが未ログイン');
 
+      // ✅ v1.0.158: 日付 + 現在時刻を保存
+      final now = DateTime.now();
+      final dateTimeWithTime = DateTime(
+        _selectedDate.year,
+        _selectedDate.month,
+        _selectedDate.day,
+        now.hour,
+        now.minute,
+        now.second,
+      );
+      
       await FirebaseFirestore.instance.collection('body_measurements').add({
         'user_id': user.uid,
-        'date': Timestamp.fromDate(_selectedDate),
+        'date': Timestamp.fromDate(dateTimeWithTime),  // ✅ 時刻を含める
         'weight': weight,
         'body_fat_percentage': bodyFat,
         'created_at': FieldValue.serverTimestamp(),
@@ -241,63 +260,234 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
     );
   }
 
-  /// 体重グラフ
+  /// ✅ v1.0.158: 画像①風の体重グラフ
   Widget _buildWeightChart(ThemeData theme) {
-    final weightData = _measurements
-        .where((m) => m['weight'] != null)
-        .map((m) => FlSpot(
-              m['date'].millisecondsSinceEpoch.toDouble(),
-              m['weight'] as double,
-            ))
-        .toList()
-        .reversed
-        .toList();
-
-    if (weightData.isEmpty) return const SizedBox.shrink();
+    if (_measurements.isEmpty) return const SizedBox.shrink();
 
     return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '体重の推移',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            // ヘッダー（タイトルのみ）
+            Text(
+              _selectedChartType == ChartType.weight ? '体重' : '体脂肪率',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            
+            const SizedBox(height: 24),
+            
+            // グラフ本体
             SizedBox(
-              height: 200,
-              child: LineChart(
-                LineChartData(
-                  gridData: FlGridData(show: true),
-                  titlesData: FlTitlesData(
-                    leftTitles: AxisTitles(
-                      sideTitles: SideTitles(
-                        showTitles: true,
-                        reservedSize: 40,
-                      ),
-                    ),
-                    bottomTitles: AxisTitles(
-                      sideTitles: SideTitles(showTitles: false),
-                    ),
-                    topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                  ),
-                  borderData: FlBorderData(show: true),
-                  lineBarsData: [
-                    LineChartBarData(
-                      spots: weightData,
-                      isCurved: true,
-                      color: theme.colorScheme.primary,
-                      barWidth: 3,
-                      dotData: FlDotData(show: true),
-                    ),
-                  ],
+              height: 250,  // ✅ 数値ラベル表示のため高さを確保
+              child: _buildLineChart(theme),
+            ),
+            
+            const SizedBox(height: 16),
+            
+            // 期間切り替えスイッチ
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text('最近', style: TextStyle(fontSize: 14, color: Colors.grey.shade700)),
+                Switch(
+                  value: _selectedPeriod == ChartPeriod.all,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedPeriod = value ? ChartPeriod.all : ChartPeriod.recent;
+                    });
+                  },
+                  activeColor: Colors.grey.shade400,
                 ),
-              ),
+                Text('全て', style: TextStyle(fontSize: 14, color: Colors.grey.shade700)),
+              ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  /// ✅ 折れ線グラフ（画像①完全再現）
+  Widget _buildLineChart(ThemeData theme) {
+    // データを古い順にソート
+    final sorted = List<Map<String, dynamic>>.from(_measurements)
+      ..sort((a, b) => (a['date'] as DateTime).compareTo(b['date'] as DateTime));
+    
+    // 期間フィルタリング
+    final filtered = _selectedPeriod == ChartPeriod.recent
+        ? sorted.take(10).toList()  // 最新10件
+        : sorted;
+    
+    // スポットデータを生成
+    final spots = <FlSpot>[];
+    final values = <double>[];
+    
+    for (int i = 0; i < filtered.length; i++) {
+      final value = _selectedChartType == ChartType.weight
+          ? filtered[i]['weight'] as double?
+          : filtered[i]['body_fat_percentage'] as double?;
+      
+      if (value != null) {
+        spots.add(FlSpot(i.toDouble(), value));
+        values.add(value);
+      }
+    }
+    
+    if (values.isEmpty) {
+      return Center(child: Text('データがありません'));
+    }
+    
+    // Y軸の範囲と間隔を計算（0.1刻み対応）
+    final minValue = values.reduce((a, b) => a < b ? a : b);
+    final maxValue = values.reduce((a, b) => a > b ? a : b);
+    final range = maxValue - minValue;
+    
+    double interval;
+    if (range <= 1.0) {
+      interval = 0.1;
+    } else if (range <= 2.0) {
+      interval = 0.2;
+    } else if (range <= 5.0) {
+      interval = 0.5;
+    } else if (range <= 10.0) {
+      interval = 1.0;
+    } else if (range <= 20.0) {
+      interval = 2.0;
+    } else {
+      interval = 5.0;
+    }
+    
+    final minY = ((minValue / interval).floor() * interval) - interval;
+    final maxY = ((maxValue / interval).ceil() * interval) + interval;
+    
+    return LineChart(
+      LineChartData(
+        minY: minY,
+        maxY: maxY,
+        lineBarsData: [
+          LineChartBarData(
+            spots: spots,
+            isCurved: true,
+            color: Colors.grey.shade500,
+            barWidth: 2,
+            dotData: FlDotData(
+              show: true,
+              getDotPainter: (spot, percent, barData, index) {
+                final isLatest = index == spots.length - 1;
+                return FlDotCirclePainter(
+                  radius: isLatest ? 7 : 5,
+                  color: isLatest ? Colors.red : Colors.grey.shade700,
+                  strokeWidth: 0,
+                );
+              },
+            ),
+            // ✅ データポイント上に数値を表示
+            showingIndicators: List.generate(spots.length, (index) => index),
+            belowBarData: BarAreaData(show: false),
+          ),
+        ],
+        titlesData: FlTitlesData(
+          rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          bottomTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              reservedSize: 45,
+              getTitlesWidget: (value, meta) {
+                final index = value.toInt();
+                if (index < 0 || index >= filtered.length) return Text('');
+                
+                final date = filtered[index]['date'] as DateTime;
+                final dateStr = DateFormat('MM.dd').format(date);
+                final timeStr = DateFormat('HH:mm').format(date);
+                
+                return Padding(
+                  padding: EdgeInsets.only(top: 8),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(dateStr, style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+                      Text(timeStr, style: TextStyle(fontSize: 9, color: Colors.grey.shade600)),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+          leftTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: false,  // ✅ 画像①では左側の目盛りが非表示
+            ),
+          ),
+        ),
+        gridData: FlGridData(show: false),  // ✅ グリッド線を非表示
+        borderData: FlBorderData(show: false),  // ✅ 枠線を非表示
+        // ✅ 各ポイント上に数値を常時表示
+        extraLinesData: ExtraLinesData(
+          horizontalLines: spots.asMap().entries.map((entry) {
+            final index = entry.key;
+            final spot = entry.value;
+            final isLatest = index == spots.length - 1;
+            
+            return HorizontalLine(
+              y: spot.y,
+              color: Colors.transparent,
+              strokeWidth: 0,
+              label: HorizontalLineLabel(
+                show: true,
+                alignment: Alignment.topCenter,
+                padding: EdgeInsets.only(bottom: 25),
+                style: TextStyle(
+                  color: isLatest ? Colors.red : Colors.grey.shade800,
+                  fontSize: isLatest ? 14 : 11,
+                  fontWeight: isLatest ? FontWeight.bold : FontWeight.normal,
+                ),
+                labelResolver: (line) => spot.y.toStringAsFixed(1),
+              ),
+            );
+          }).toList(),
+        ),
+        lineTouchData: LineTouchData(
+          touchTooltipData: LineTouchTooltipData(
+            tooltipBgColor: Colors.black87,
+            tooltipRoundedRadius: 8,
+            getTooltipItems: (touchedSpots) {
+              return touchedSpots.map((spot) {
+                final index = spot.x.toInt();
+                final date = filtered[index]['date'] as DateTime;
+                final value = spot.y;
+                
+                final unit = _selectedChartType == ChartType.weight ? 'kg' : '%';
+                
+                return LineTooltipItem(
+                  '${DateFormat('M/d').format(date)}\n${value.toStringAsFixed(1)}$unit',
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+                );
+              }).toList();
+            },
+          ),
+          handleBuiltInTouches: true,
+          getTouchedSpotIndicator: (barData, spotIndexes) {
+            return spotIndexes.map((index) {
+              return TouchedSpotIndicatorData(
+                FlLine(color: Colors.grey, strokeWidth: 1, dashArray: [3, 3]),
+                FlDotData(
+                  getDotPainter: (spot, percent, barData, index) {
+                    return FlDotCirclePainter(
+                      radius: 6,
+                      color: Colors.red,
+                      strokeWidth: 2,
+                      strokeColor: Colors.white,
+                    );
+                  },
+                ),
+              );
+            }).toList();
+          },
         ),
       ),
     );
