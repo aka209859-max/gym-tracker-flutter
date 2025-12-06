@@ -67,6 +67,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   bool _isResting = false;
   int _selectedRestDuration = 90;
   final List<int> _restDurations = [30, 60, 90, 120];
+  bool _isRestDialogShowing = false; // ✅ v1.0.162: ダイアログ表示状態フラグ
   
   // 前回記録データ
   Map<String, Map<String, dynamic>> _lastWorkoutData = {};
@@ -515,18 +516,28 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   }
 
   void _startRestTimer() {
+    // ✅ v1.0.162: 既存のタイマーを確実に停止
+    _restTimer?.cancel();
+    
     setState(() {
       _isResting = true;
       _restSeconds = _selectedRestDuration;
     });
     
     _restTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      // ✅ v1.0.162: mountedチェック追加
+      if (!mounted) {
+        timer.cancel();
+        return;
+      }
+      
       setState(() {
         if (_restSeconds > 0) {
           _restSeconds--;
         } else {
           _stopRestTimer();
-          _notifyRestComplete(); // タイマー終了通知
+          // ✅ v1.0.162: 非同期処理を分離してsetStateとの競合を防止
+          Future.microtask(() => _notifyRestComplete());
         }
       });
     });
@@ -534,15 +545,29 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
 
   void _stopRestTimer() {
     _restTimer?.cancel();
-    setState(() {
-      _isResting = false;
-      _restSeconds = 0;
-    });
+    _restTimer = null; // ✅ v1.0.162: nullにして完全に破棄
+    
+    // ✅ v1.0.162: mountedチェック追加
+    if (mounted) {
+      setState(() {
+        _isResting = false;
+        _restSeconds = 0;
+      });
+    }
   }
   
   // タイマー終了時の通知（音声 + バイブレーション + ダイアログ）
   Future<void> _notifyRestComplete() async {
     print('🔔 タイマー終了通知開始');
+    
+    // ✅ v1.0.162: 既にダイアログが表示されている場合はスキップ
+    if (_isRestDialogShowing) {
+      print('⚠️ ダイアログ既に表示中 - スキップ');
+      return;
+    }
+    
+    // ✅ v1.0.162: 非同期処理前にmountedチェック
+    if (!mounted) return;
     
     // 1. システムサウンドを再生（イヤホン対応）
     try {
@@ -550,13 +575,23 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       await SystemSound.play(SystemSoundType.alert);
       print('✅ システムサウンド再生成功');
       
+      // ✅ v1.0.162: 待機中にmountedチェック
+      if (!mounted) return;
+      
       // 追加で0.5秒後にもう一度鳴らす（より目立つように）
       await Future.delayed(const Duration(milliseconds: 500));
+      
+      // ✅ v1.0.162: 再度mountedチェック
+      if (!mounted) return;
+      
       await SystemSound.play(SystemSoundType.alert);
       print('✅ システムサウンド再生成功（2回目）');
     } catch (e) {
       print('❌ サウンド再生エラー: $e');
     }
+    
+    // ✅ v1.0.162: バイブレーション前にmountedチェック
+    if (!mounted) return;
     
     // 2. バイブレーション（デバイスがサポートしている場合）
     try {
@@ -572,62 +607,78 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       print('❌ バイブレーションエラー: $e');
     }
     
+    // ✅ v1.0.162: ダイアログ表示前に最終mountedチェック
+    if (!mounted) return;
+    
     // 3. ダイアログ表示
-    if (mounted) {
-      showDialog(
-        context: context,
-        barrierDismissible: true,
-        builder: (context) => AlertDialog(
-          backgroundColor: Colors.green.shade50,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-            side: BorderSide(color: Colors.green.shade400, width: 2),
-          ),
-          title: const Row(
-            children: [
-              Icon(Icons.alarm, color: Colors.green, size: 32),
-              SizedBox(width: 12),
-              Text(
-                '休憩終了！',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green,
-                ),
-              ),
-            ],
-          ),
-          content: const Text(
-            '次のセットに進みましょう！💪',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-          ),
-          actions: [
-            ElevatedButton(
-              onPressed: () => Navigator.pop(context),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: const Text(
-                'OK',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    _isRestDialogShowing = true; // ✅ v1.0.162: フラグを立てる
+    
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (dialogContext) => AlertDialog(
+        backgroundColor: Colors.green.shade50,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: BorderSide(color: Colors.green.shade400, width: 2),
+        ),
+        title: const Row(
+          children: [
+            Icon(Icons.alarm, color: Colors.green, size: 32),
+            SizedBox(width: 12),
+            Text(
+              '休憩終了！',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
               ),
             ),
           ],
         ),
-      );
-      
-      // 5秒後に自動的にダイアログを閉じる
-      Future.delayed(const Duration(seconds: 5), () {
-        if (mounted && Navigator.canPop(context)) {
-          Navigator.pop(context);
-        }
-      });
-    }
+        content: const Text(
+          '次のセットに進みましょう！💪',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              // ✅ v1.0.162: フラグをクリアしてからダイアログを閉じる
+              _isRestDialogShowing = false;
+              Navigator.pop(dialogContext); // ✅ v1.0.162: dialogContextを使用
+              print('✅ ユーザーがOKボタンを押下 - ダイアログ閉じる');
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            child: const Text(
+              'OK',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+    ).then((_) {
+      // ✅ v1.0.162: ダイアログが閉じられた時に必ずフラグをクリア
+      _isRestDialogShowing = false;
+      print('✅ ダイアログ閉じる - フラグクリア');
+    });
+    
+    // ✅ v1.0.162: 5秒後に自動的にダイアログを閉じる（ダブルpop防止）
+    Future.delayed(const Duration(seconds: 5), () {
+      if (mounted && _isRestDialogShowing && Navigator.canPop(context)) {
+        _isRestDialogShowing = false;
+        Navigator.pop(context);
+        print('✅ 自動閉じ実行（5秒経過）');
+      } else {
+        print('⚠️ 自動閉じスキップ（既に閉じられています）');
+      }
+    });
   }
 
   void _showRestTimerSettings() {
