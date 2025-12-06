@@ -8,6 +8,7 @@ import '../models/workout_log.dart';
 class OfflineService {
   static const String _gymsCacheBox = 'gyms_cache';
   static const String _workoutsCacheBox = 'workouts_cache';
+  static const String _bodyMeasurementsBox = 'body_measurements_cache'; // ✅ v1.0.161
   static const String _pendingSyncBox = 'pending_sync';
 
   /// Hive初期化
@@ -17,6 +18,7 @@ class OfflineService {
     // キャッシュ用ボックスを開く
     await Hive.openBox(_gymsCacheBox);
     await Hive.openBox(_workoutsCacheBox);
+    await Hive.openBox(_bodyMeasurementsBox); // ✅ v1.0.161
     await Hive.openBox(_pendingSyncBox);
   }
 
@@ -91,28 +93,28 @@ class OfflineService {
   // ============================================
 
   /// トレーニング記録をローカルに保存（オフライン時）
-  static Future<String> saveWorkoutOffline(WorkoutLog workout) async {
+  static Future<String> saveWorkoutOffline(Map<String, dynamic> workoutData) async {
     final box = Hive.box(_workoutsCacheBox);
     final localId = 'offline_${DateTime.now().millisecondsSinceEpoch}';
     
+    // DateTime を ISO8601 文字列に変換
+    final data = Map<String, dynamic>.from(workoutData);
+    if (data['date'] is DateTime) {
+      data['date'] = (data['date'] as DateTime).toIso8601String();
+    }
+    if (data['start_time'] is DateTime) {
+      data['start_time'] = (data['start_time'] as DateTime).toIso8601String();
+    }
+    if (data['end_time'] is DateTime) {
+      data['end_time'] = (data['end_time'] as DateTime).toIso8601String();
+    }
+    if (data['created_at'] is DateTime) {
+      data['created_at'] = (data['created_at'] as DateTime).toIso8601String();
+    }
+    
     await box.put(localId, {
+      ...data,
       'localId': localId,
-      'userId': workout.userId,
-      'date': workout.date.toIso8601String(),
-      'gymId': workout.gymId,
-      'gymName': workout.gymName,
-      'exercises': workout.exercises.map((e) => {
-        'name': e.name,
-        'sets': e.sets.map((s) => {
-          'weight': s.weight,
-          'targetReps': s.targetReps,
-          'actualReps': s.actualReps,
-          'hasAssist': s.hasAssist,
-        }).toList(),
-        'bodyPart': e.bodyPart,
-      }).toList(),
-      'duration': workout.duration,
-      'notes': workout.notes,
       'needsSync': true,
     });
 
@@ -145,6 +147,36 @@ class OfflineService {
   }
 
   // ============================================
+  // ✅ v1.0.161: 体重記録のオフライン保存
+  // ============================================
+
+  /// 体重記録をローカルに保存（オフライン時）
+  static Future<String> saveBodyMeasurementOffline(Map<String, dynamic> measurementData) async {
+    final box = Hive.box(_bodyMeasurementsBox);
+    final localId = 'offline_${DateTime.now().millisecondsSinceEpoch}';
+    
+    // DateTime を ISO8601 文字列に変換
+    final data = Map<String, dynamic>.from(measurementData);
+    if (data['date'] is DateTime) {
+      data['date'] = (data['date'] as DateTime).toIso8601String();
+    }
+    if (data['created_at'] is DateTime) {
+      data['created_at'] = (data['created_at'] as DateTime).toIso8601String();
+    }
+    
+    await box.put(localId, {
+      ...data,
+      'localId': localId,
+      'needsSync': true,
+    });
+
+    // 同期待ちリストに追加
+    await _addToPendingSync(localId, 'body_measurement');
+
+    return localId;
+  }
+
+  // ============================================
   // オンライン復帰時の同期処理
   // ============================================
 
@@ -152,6 +184,7 @@ class OfflineService {
   static Future<void> syncPendingData() async {
     final pendingBox = Hive.box(_pendingSyncBox);
     final workoutsBox = Hive.box(_workoutsCacheBox);
+    final bodyMeasurementsBox = Hive.box(_bodyMeasurementsBox); // ✅ v1.0.161
 
     for (var key in pendingBox.keys.toList()) {
       final syncData = pendingBox.get(key);
@@ -169,11 +202,13 @@ class OfflineService {
             final docRef = await FirebaseFirestore.instance
                 .collection('workout_logs')
                 .add({
-              'userId': workoutData['userId'],
+              'user_id': workoutData['user_id'],
+              'muscle_group': workoutData['muscle_group'],
               'date': Timestamp.fromDate(DateTime.parse(workoutData['date'])),
-              'exercises': workoutData['exercises'],
-              'totalDuration': workoutData['totalDuration'],
-              'createdAt': FieldValue.serverTimestamp(),
+              'start_time': Timestamp.fromDate(DateTime.parse(workoutData['start_time'])),
+              'end_time': Timestamp.fromDate(DateTime.parse(workoutData['end_time'])),
+              'sets': workoutData['sets'],
+              'created_at': FieldValue.serverTimestamp(),
             });
 
             // 同期成功したらローカルデータを削除
@@ -181,6 +216,27 @@ class OfflineService {
             await pendingBox.delete(key);
 
             print('✅ Synced workout: $localId → ${docRef.id}');
+          }
+        } else if (type == 'body_measurement') {
+          // ✅ v1.0.161: 体重記録を同期
+          final measurementData = bodyMeasurementsBox.get(localId);
+          if (measurementData != null) {
+            // Firestoreに保存
+            final docRef = await FirebaseFirestore.instance
+                .collection('body_measurements')
+                .add({
+              'user_id': measurementData['user_id'],
+              'date': Timestamp.fromDate(DateTime.parse(measurementData['date'])),
+              'weight': measurementData['weight'],
+              'body_fat_percentage': measurementData['body_fat_percentage'],
+              'created_at': FieldValue.serverTimestamp(),
+            });
+
+            // 同期成功したらローカルデータを削除
+            await bodyMeasurementsBox.delete(localId);
+            await pendingBox.delete(key);
+
+            print('✅ Synced body measurement: $localId → ${docRef.id}');
           }
         }
       } catch (e) {

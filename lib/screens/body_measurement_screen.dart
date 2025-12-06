@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
+import '../services/offline_service.dart'; // ✅ v1.0.161: オフライン対応
 
 /// 体重・体脂肪率記録画面
 class BodyMeasurementScreen extends StatefulWidget {
@@ -123,19 +124,55 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
         now.minute,
         now.second,
       );
+
+      // ✅ v1.0.161: ネットワーク状態を確認
+      final isOnline = await OfflineService.isOnline();
       
-      await FirebaseFirestore.instance.collection('body_measurements').add({
-        'user_id': user.uid,
-        'date': Timestamp.fromDate(dateTimeWithTime),  // ✅ 時刻を含める
-        'weight': weight,
-        'body_fat_percentage': bodyFat,
-        'created_at': FieldValue.serverTimestamp(),
-      });
+      if (isOnline) {
+        // 🌐 オンラインモード: Firestore に保存
+        await FirebaseFirestore.instance.collection('body_measurements').add({
+          'user_id': user.uid,
+          'date': Timestamp.fromDate(dateTimeWithTime),  // ✅ 時刻を含める
+          'weight': weight,
+          'body_fat_percentage': bodyFat,
+          'created_at': FieldValue.serverTimestamp(),
+        });
+
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('記録を保存しました'), backgroundColor: Colors.green),
+          );
+        }
+      } else {
+        // 📴 オフラインモード: ローカルに保存
+        await OfflineService.saveBodyMeasurementOffline({
+          'user_id': user.uid,
+          'date': dateTimeWithTime,
+          'weight': weight,
+          'body_fat_percentage': bodyFat,
+          'created_at': now,
+        });
+
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Row(
+                children: [
+                  Icon(Icons.cloud_off, color: Colors.white),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Text('📴 オフライン保存しました\nオンライン復帰時に自動同期されます'),
+                  ),
+                ],
+              ),
+              backgroundColor: Colors.orange,
+              duration: Duration(seconds: 4),
+            ),
+          );
+        }
+      }
 
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('記録を保存しました'), backgroundColor: Colors.green),
-        );
         _weightController.clear();
         _bodyFatController.clear();
         _loadMeasurements();

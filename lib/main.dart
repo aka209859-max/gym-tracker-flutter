@@ -142,6 +142,22 @@ void main() async {
   try {
     await OfflineService.initialize();
     print('✅ オフラインサービス初期化成功');
+    
+    // ✅ v1.0.161: 起動時に同期待ちデータを自動同期
+    if (firebaseInitialized) {
+      final pendingCount = await OfflineService.getPendingSyncCount();
+      if (pendingCount > 0) {
+        print('📤 同期待ちデータ: $pendingCount件');
+        try {
+          await OfflineService.syncPendingData();
+          print('✅ オフラインデータ同期完了');
+        } catch (e) {
+          print('⚠️ 同期エラー（次回リトライ）: $e');
+        }
+      } else {
+        print('📭 同期待ちデータなし');
+      }
+    }
   } catch (e) {
     print('❌ オフラインサービス初期化エラー: $e');
   }

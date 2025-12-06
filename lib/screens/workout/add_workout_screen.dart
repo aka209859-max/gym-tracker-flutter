@@ -11,6 +11,7 @@ import 'package:vibration/vibration.dart'; // バイブレーション用
 import '../debug_log_screen.dart';
 import '../../services/review_request_service.dart';
 import '../../services/enhanced_share_service.dart';
+import '../../services/offline_service.dart'; // ✅ v1.0.161: オフライン対応
 
 // SetType enum
 enum SetType {
@@ -166,6 +167,106 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     } catch (e, stackTrace) {
       debugPrint('❌ 体重取得エラー: $e');
       debugPrint('   スタックトレース: $stackTrace');
+    }
+  }
+
+  /// ✅ v1.0.161: ネットワーク状態チェック
+  Future<bool> _checkNetworkStatus() async {
+    try {
+      return await OfflineService.isOnline();
+    } catch (e) {
+      debugPrint('⚠️ ネットワークチェックエラー: $e');
+      return false; // エラー時はオフラインとみなす
+    }
+  }
+
+  /// ✅ v1.0.161: オフラインでのトレーニング保存
+  Future<void> _saveWorkoutOffline(String userId) async {
+    debugPrint('📴 オフラインモード: ローカルに保存');
+    
+    try {
+      // トレーニング開始時刻と終了時刻を設定
+      final now = DateTime.now();
+      final startTime = DateTime(
+        _selectedDate.year,
+        _selectedDate.month,
+        _selectedDate.day,
+        now.hour >= 2 ? now.hour - 2 : 0,
+        now.minute,
+      );
+      
+      final endTime = DateTime(
+        _selectedDate.year,
+        _selectedDate.month,
+        _selectedDate.day,
+        now.hour,
+        now.minute,
+      );
+
+      // セットデータを準備
+      final sets = _sets.map((set) {
+        double effectiveWeight = set.weight;
+        if (set.isBodyweightMode && _userBodyweight != null) {
+          effectiveWeight = _userBodyweight! + set.weight;
+        }
+        
+        return {
+          'exercise_name': set.exerciseName,
+          'weight': effectiveWeight,
+          'reps': set.reps,
+          'is_completed': set.isCompleted,
+          'has_assist': set.hasAssist,
+          'set_type': set.setType.toString().split('.').last,
+          'is_bodyweight_mode': set.isBodyweightMode,
+          'user_bodyweight': set.isBodyweightMode ? _userBodyweight : null,
+          'additional_weight': set.isBodyweightMode ? set.weight : null,
+        };
+      }).toList();
+
+      // Hive にローカル保存
+      final localId = await OfflineService.saveWorkoutOffline({
+        'user_id': userId,
+        'muscle_group': _selectedMuscleGroup,
+        'date': _selectedDate,
+        'start_time': startTime,
+        'end_time': endTime,
+        'sets': sets,
+        'created_at': now,
+      });
+
+      debugPrint('✅ オフライン保存成功: $localId');
+
+      if (mounted) {
+        Navigator.pop(context, true);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Row(
+              children: [
+                Icon(Icons.cloud_off, color: Colors.white),
+                SizedBox(width: 8),
+                Expanded(
+                  child: Text('📴 オフライン保存しました\nオンライン復帰時に自動同期されます'),
+                ),
+              ],
+            ),
+            backgroundColor: Colors.orange,
+            duration: Duration(seconds: 4),
+          ),
+        );
+      }
+    } catch (e, stackTrace) {
+      debugPrint('❌ オフライン保存エラー: $e');
+      debugPrint('   スタックトレース: $stackTrace');
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('オフライン保存エラー: $e'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+      }
     }
   }
   
@@ -1023,6 +1124,16 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       final user = firebase_auth.FirebaseAuth.instance.currentUser;
       if (user == null) return;
 
+      // ✅ v1.0.161: ネットワーク状態を確認
+      final isOnline = await _checkNetworkStatus();
+
+      if (!isOnline) {
+        // 📴 オフラインモード: ローカルに保存
+        await _saveWorkoutOffline(user.uid);
+        return;
+      }
+
+      // 🌐 オンラインモード: Firestore に保存
       // 既存記録に追記モード
       if (_existingWorkoutId != null) {
         print('🔄 既存記録に追加セットを追記: $_existingWorkoutId');
