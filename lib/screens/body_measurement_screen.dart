@@ -361,9 +361,16 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
     );
   }
 
-  /// ✅ v1.0.158: 画像①風の体重グラフ
+  /// ✅ v1.0.159: 体重グラフ（タブ切り替え + 最新値表示改善）
   Widget _buildWeightChart(ThemeData theme) {
     if (_measurements.isEmpty) return const SizedBox.shrink();
+
+    // 最新値を取得
+    final sorted = List<Map<String, dynamic>>.from(_measurements)
+      ..sort((a, b) => (b['date'] as DateTime).compareTo(a['date'] as DateTime));
+    final latest = sorted.first;
+    final latestWeight = latest['weight'] as double?;
+    final latestBodyFat = latest['body_fat_percentage'] as double?;
 
     return Card(
       elevation: 2,
@@ -373,13 +380,57 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ヘッダー（タイトルのみ）
-            Text(
-              _selectedChartType == ChartType.weight ? '体重' : '体脂肪率',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            // ✅ タブ切り替え（体重 / 体脂肪率）
+            Row(
+              children: [
+                _buildTabButton(
+                  label: '体重',
+                  isSelected: _selectedChartType == ChartType.weight,
+                  onTap: () => setState(() => _selectedChartType = ChartType.weight),
+                ),
+                const SizedBox(width: 8),
+                _buildTabButton(
+                  label: '体脂肪率',
+                  isSelected: _selectedChartType == ChartType.bodyFat,
+                  onTap: () => setState(() => _selectedChartType = ChartType.bodyFat),
+                ),
+              ],
             ),
             
-            const SizedBox(height: 24),
+            const SizedBox(height: 16),
+            
+            // ✅ 最新値を横に表示（文字の重なりを解消）
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: [
+                Text(
+                  _selectedChartType == ChartType.weight ? '体重' : '体脂肪率',
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(width: 16),
+                if (_selectedChartType == ChartType.weight && latestWeight != null)
+                  Text(
+                    latestWeight.toStringAsFixed(1),
+                    style: const TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red,
+                    ),
+                  ),
+                if (_selectedChartType == ChartType.bodyFat && latestBodyFat != null)
+                  Text(
+                    latestBodyFat.toStringAsFixed(1),
+                    style: const TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red,
+                    ),
+                  ),
+              ],
+            ),
+            
+            const SizedBox(height: 16),
             
             // グラフ本体
             SizedBox(
@@ -539,13 +590,13 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
               color: Colors.transparent,
               strokeWidth: 0,
               label: HorizontalLineLabel(
-                show: true,
+                show: !isLatest,  // ✅ 最新値はタイトル横に表示するため、グラフ上では非表示
                 alignment: Alignment.topCenter,
                 padding: EdgeInsets.only(bottom: 25),
                 style: TextStyle(
-                  color: isLatest ? Colors.red : Colors.grey.shade800,
-                  fontSize: isLatest ? 14 : 11,
-                  fontWeight: isLatest ? FontWeight.bold : FontWeight.normal,
+                  color: Colors.grey.shade800,
+                  fontSize: 11,
+                  fontWeight: FontWeight.normal,
                 ),
                 labelResolver: (line) => spot.y.toStringAsFixed(1),
               ),
@@ -665,6 +716,32 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
             },
           ),
         ],
+      ),
+    );
+  }
+
+  /// ✅ v1.0.159: タブボタンウィジェット
+  Widget _buildTabButton({
+    required String label,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.blue : Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: isSelected ? Colors.white : Colors.grey.shade700,
+          ),
+        ),
       ),
     );
   }
