@@ -174,7 +174,10 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   /// ✅ v1.0.161: ネットワーク状態チェック
   Future<bool> _checkNetworkStatus() async {
     try {
-      return await OfflineService.isOnline();
+      debugPrint('🔍 ネットワーク状態確認中...');
+      final isOnline = await OfflineService.isOnline();
+      debugPrint(isOnline ? '🌐 オンライン' : '📴 オフライン');
+      return isOnline;
     } catch (e) {
       debugPrint('⚠️ ネットワークチェックエラー: $e');
       return false; // エラー時はオフラインとみなす
@@ -183,7 +186,10 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
 
   /// ✅ v1.0.161: オフラインでのトレーニング保存
   Future<void> _saveWorkoutOffline(String userId) async {
-    debugPrint('📴 オフラインモード: ローカルに保存');
+    debugPrint('📴 オフラインモード: ローカルに保存開始');
+    debugPrint('   User ID: $userId');
+    debugPrint('   筋肉グループ: $_selectedMuscleGroup');
+    debugPrint('   セット数: ${_sets.length}');
     
     try {
       // トレーニング開始時刻と終了時刻を設定

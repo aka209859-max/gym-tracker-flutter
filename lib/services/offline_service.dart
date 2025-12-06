@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/gym.dart';
@@ -269,14 +271,21 @@ class OfflineService {
   /// オンライン状態かチェック
   static Future<bool> isOnline() async {
     try {
-      // Firestoreへの軽量なクエリでネットワーク確認
-      await FirebaseFirestore.instance
-          .collection('_health_check')
+      // ✅ v1.0.163: タイムアウトを2秒に短縮し、より軽量な確認方法に変更
+      // Firestoreのメタデータのみを取得（データを読まない）
+      final result = await FirebaseFirestore.instance
+          .collection('workout_logs')
           .limit(1)
-          .get()
-          .timeout(const Duration(seconds: 5));
-      return true;
+          .get(const GetOptions(source: Source.server))
+          .timeout(
+            const Duration(seconds: 2),
+            onTimeout: () => throw TimeoutException('Network timeout'),
+          );
+      
+      // メタデータが取得できればオンライン
+      return result.metadata.isFromCache == false;
     } catch (e) {
+      debugPrint('📴 オフライン検出: $e');
       return false;
     }
   }
