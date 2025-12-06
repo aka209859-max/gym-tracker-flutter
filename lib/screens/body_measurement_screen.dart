@@ -152,6 +152,89 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
     }
   }
 
+  /// 削除確認ダイアログ
+  Future<void> _confirmDelete(Map<String, dynamic> measurement) async {
+    final date = measurement['date'] as DateTime;
+    final weight = measurement['weight'] as double?;
+    final bodyFat = measurement['body_fat_percentage'] as double?;
+    
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('記録を削除'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('以下の記録を削除しますか？'),
+            const SizedBox(height: 16),
+            Text(
+              DateFormat('yyyy年MM月dd日 HH:mm').format(date),
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            if (weight != null) Text('体重: ${weight.toStringAsFixed(1)}kg'),
+            if (bodyFat != null) Text('体脂肪率: ${bodyFat.toStringAsFixed(1)}%'),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('キャンセル'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: const Text('削除'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true) {
+      await _deleteMeasurement(measurement['id']);
+    }
+  }
+
+  /// 記録を削除
+  Future<void> _deleteMeasurement(String documentId) async {
+    setState(() => _isLoading = true);
+
+    try {
+      print('🗑️ 記録を削除中... ID: $documentId');
+      
+      await FirebaseFirestore.instance
+          .collection('body_measurements')
+          .doc(documentId)
+          .delete();
+
+      print('✅ 記録を削除しました');
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('記録を削除しました'),
+            backgroundColor: Colors.orange,
+          ),
+        );
+        _loadMeasurements();  // グラフと履歴を更新
+      }
+    } catch (e) {
+      print('❌ 削除エラー: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('削除に失敗しました: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } finally {
+      if (!mounted) return;
+      setState(() => _isLoading = false);
+    }
+  }
+
   /// 日付選択
   Future<void> _selectDate() async {
     final picked = await showDatePicker(
@@ -572,6 +655,11 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                     if (weight != null && bodyFat != null) const Text('  •  '),
                     if (bodyFat != null) Text('体脂肪率: ${bodyFat.toStringAsFixed(1)}%'),
                   ],
+                ),
+                trailing: IconButton(
+                  icon: const Icon(Icons.delete_outline, color: Colors.red),
+                  onPressed: () => _confirmDelete(measurement),
+                  tooltip: '削除',
                 ),
               );
             },
