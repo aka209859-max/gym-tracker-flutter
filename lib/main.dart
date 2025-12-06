@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_analytics/firebase_analytics.dart';  // ✅ v1.0.164: Analytics追加
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
@@ -99,6 +100,25 @@ void main() async {
       }
     } catch (authError) {
       print('❌ 匿名認証エラー: $authError');
+    }
+    
+    // ✅ v1.0.164: Firebase Analytics初期化
+    try {
+      final analytics = FirebaseAnalytics.instance;
+      print('📊 Firebase Analytics初期化成功');
+      print('   Analytics ID: ${analytics.app.options.projectId}');
+      
+      // 初回起動イベントを送信
+      await analytics.logEvent(
+        name: 'app_open',
+        parameters: {
+          'platform': defaultTargetPlatform.toString(),
+          'timestamp': DateTime.now().toIso8601String(),
+        },
+      );
+      print('✅ Analytics初回イベント送信完了');
+    } catch (analyticsError) {
+      print('❌ Analytics初期化エラー: $analyticsError');
     }
     
   } catch (e, stackTrace) {
