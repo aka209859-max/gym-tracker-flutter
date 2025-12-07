@@ -384,7 +384,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                             SizedBox(
                               width: 60,
                               child: Text(
-                                _isAbsExercise(exercise.name)
+                                (set.isTimeMode ?? false)
                                     ? '${set.actualReps ?? set.targetReps}秒'
                                     : '${set.actualReps ?? set.targetReps}回',
                                 style: const TextStyle(fontSize: 13),

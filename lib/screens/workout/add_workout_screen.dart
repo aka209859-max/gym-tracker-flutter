@@ -31,6 +31,7 @@ class WorkoutSet {
   bool hasAssist;
   SetType setType;
   bool isBodyweightMode; // 自重モード (true: 自重, false: 荷重)
+  bool isTimeMode; // 時間モード (true: 秒数, false: 回数) - v1.0.169: 腹筋用
   
   WorkoutSet({
     required this.exerciseName,
@@ -40,6 +41,7 @@ class WorkoutSet {
     this.hasAssist = false,
     this.setType = SetType.normal,
     this.isBodyweightMode = true, // デフォルトは自重モード
+    this.isTimeMode = false, // デフォルトは回数モード
   });
 }
 
@@ -105,6 +107,15 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   bool _isAbsExercise(String exerciseName) {
     final absExercises = _muscleGroupExercises['腹筋'] ?? [];
     return absExercises.contains(exerciseName);
+  }
+
+  /// v1.0.169: 腹筋種目のデフォルト時間モード判定（プランク系は秒数、その他は回数）
+  bool _getDefaultTimeMode(String exerciseName) {
+    if (!_isAbsExercise(exerciseName)) return false;
+    
+    // プランク系種目は秒数がデフォルト
+    final timeModeExercises = ['プランク', 'サイドプランク'];
+    return timeModeExercises.any((e) => exerciseName.contains(e));
   }
 
   @override
@@ -232,6 +243,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           'has_assist': set.hasAssist,
           'set_type': set.setType.toString().split('.').last,
           'is_bodyweight_mode': set.isBodyweightMode,
+          'is_time_mode': set.isTimeMode,  // v1.0.169: 秒数/回数モード
           'user_bodyweight': set.isBodyweightMode ? _userBodyweight : null,
           'additional_weight': set.isBodyweightMode ? set.weight : null,
         };
@@ -386,6 +398,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 reps: targetReps,
                 isCompleted: false,
                 isBodyweightMode: _isPullUpExercise(name) || _isAbsExercise(name),
+                isTimeMode: _getDefaultTimeMode(name),
               ));
             }
           }
@@ -400,6 +413,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             reps: lastReps ?? 10,
             isCompleted: false,
             isBodyweightMode: _isPullUpExercise(exerciseName) || _isAbsExercise(exerciseName),
+            isTimeMode: _getDefaultTimeMode(exerciseName),
           ));
           print('✅ $exerciseName に1セット追加（前回: ${lastWeight}kg × ${lastReps}reps）');
         }
@@ -524,6 +538,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         reps: lastSet?.reps ?? _lastWorkoutData[exerciseName]?['reps'] ?? 10,
         setType: SetType.normal,
         isBodyweightMode: lastSet?.isBodyweightMode ?? (isPullUpOrAbs ? true : false),
+        isTimeMode: lastSet?.isTimeMode ?? _getDefaultTimeMode(exerciseName),
       ));
     });
   }
@@ -913,6 +928,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         weight: 0.0, 
         reps: 10,
         isBodyweightMode: _isPullUpExercise(exerciseName) || _isAbsExercise(exerciseName),
+        isTimeMode: _getDefaultTimeMode(exerciseName),
       ),
     );
     
@@ -985,6 +1001,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           weight: 0.0, 
           reps: 10,
           isBodyweightMode: _isPullUpExercise(exerciseName) || _isAbsExercise(exerciseName),
+          isTimeMode: _getDefaultTimeMode(exerciseName),
         ),
       );
       final isPullUpBodyweight = _isPullUpExercise(exerciseName) && firstSet.isBodyweightMode;
@@ -1167,6 +1184,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           weight: set.weight,
           reps: set.reps,
           isBodyweightMode: set.isBodyweightMode,
+          isTimeMode: set.isTimeMode,
         ));
       }
     });
@@ -1229,6 +1247,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               'has_assist': set.hasAssist,
               'set_type': set.setType.toString().split('.').last,
               'is_bodyweight_mode': set.isBodyweightMode,
+              'is_time_mode': set.isTimeMode,  // v1.0.169: 秒数/回数モード
               'user_bodyweight': set.isBodyweightMode ? _userBodyweight : null,
               'additional_weight': set.isBodyweightMode ? set.weight : null,
             };
@@ -1299,6 +1318,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               'has_assist': set.hasAssist,
               'set_type': set.setType.toString().split('.').last,
               'is_bodyweight_mode': set.isBodyweightMode,
+              'is_time_mode': set.isTimeMode,  // v1.0.169: 秒数/回数モード
               'user_bodyweight': set.isBodyweightMode ? _userBodyweight : null,  // ✅ 体重を記録
               'additional_weight': set.isBodyweightMode ? set.weight : null,  // ✅ 追加重量を記録
             };
@@ -1917,6 +1937,61 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                             ),
                           ),
                         ),
+                      // v1.0.169: 腹筋種目の場合、回数/秒数切り替えボタンを追加
+                      if (_isAbsExercise(set.exerciseName)) ...[
+                        const SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    set.isTimeMode = false;
+                                  });
+                                },
+                                style: OutlinedButton.styleFrom(
+                                  backgroundColor: !set.isTimeMode 
+                                      ? const Color(0xFF4CAF50) 
+                                      : Colors.white,
+                                  foregroundColor: !set.isTimeMode 
+                                      ? Colors.white 
+                                      : const Color(0xFF4CAF50),
+                                  padding: const EdgeInsets.symmetric(vertical: 8),
+                                  side: BorderSide(
+                                    color: const Color(0xFF4CAF50),
+                                    width: !set.isTimeMode ? 2 : 1,
+                                  ),
+                                ),
+                                child: const Text('回数', style: TextStyle(fontSize: 12)),
+                              ),
+                            ),
+                            const SizedBox(width: 4),
+                            Expanded(
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    set.isTimeMode = true;
+                                  });
+                                },
+                                style: OutlinedButton.styleFrom(
+                                  backgroundColor: set.isTimeMode 
+                                      ? const Color(0xFF4CAF50) 
+                                      : Colors.white,
+                                  foregroundColor: set.isTimeMode 
+                                      ? Colors.white 
+                                      : const Color(0xFF4CAF50),
+                                  padding: const EdgeInsets.symmetric(vertical: 8),
+                                  side: BorderSide(
+                                    color: const Color(0xFF4CAF50),
+                                    width: set.isTimeMode ? 2 : 1,
+                                  ),
+                                ),
+                                child: const Text('秒数', style: TextStyle(fontSize: 12)),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ],
                   ),
                 )
@@ -1944,7 +2019,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 ),
               const SizedBox(width: 8),
               
-              // 有酸素運動の場合は「距離（km）」、腹筋の場合は「秒数」、それ以外は「回数」
+              // 有酸素運動の場合は「距離（km）」、腹筋の場合は「秒数/回数」、それ以外は「回数」
               Expanded(
                 child: TextFormField(
                   key: ValueKey('reps_${globalIndex}_${set.reps}'),
@@ -1952,7 +2027,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     labelText: _isCardioExercise(set.exerciseName) 
                         ? '距離 (km)' 
                         : _isAbsExercise(set.exerciseName)
-                            ? '秒数'
+                            ? (set.isTimeMode ? '秒数' : '回数')
                             : '回数',
                     border: const OutlineInputBorder(),
                     contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),

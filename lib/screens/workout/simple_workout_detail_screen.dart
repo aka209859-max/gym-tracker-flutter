@@ -284,15 +284,16 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
               final set = entry.value;
               final weight = (set['weight'] as num?)?.toDouble() ?? 0.0;
               final reps = set['reps'] as int? ?? 0;
+              final isTimeMode = set['is_time_mode'] as bool? ?? false;  // v1.0.169
               
-              // 有酸素運動の場合は「時間・距離」表示、腹筋の場合は「重さ・秒数」表示
+              // 有酸素運動の場合は「時間・距離」表示、それ以外は重さ×回数/秒数
               final String displayText;
               if (_isCardio) {
                 displayText = '${weight}分 × ${reps}km';
-              } else if (_isAbsExercise(exerciseName)) {
-                displayText = '${weight}kg × ${reps}秒';
               } else {
-                displayText = '${weight}kg × ${reps}回';
+                // v1.0.169: isTimeModeに基づいて秒数/回数を表示
+                final unit = isTimeMode ? '秒' : '回';
+                displayText = '${weight}kg × $reps$unit';
               }
               
               return Padding(
