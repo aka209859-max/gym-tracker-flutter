@@ -2198,6 +2198,21 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     // 高回数でも正確に計算できる
     return weight * (1 + reps / 30.0);
   }
+
+  /// v1.0.170: 懸垂種目の判定
+  bool _isPullUpExercise(String exerciseName) {
+    final pullUpKeywords = ['懸垂', 'チンニング', 'プルアップ'];
+    return pullUpKeywords.any((keyword) => exerciseName.contains(keyword));
+  }
+
+  /// v1.0.170: 腹筋種目の判定
+  bool _isAbsExercise(String exerciseName) {
+    final absExercises = [
+      'クランチ', 'レッグレイズ', 'プランク', 'アブローラー',
+      'ハンギングレッグレイズ', 'サイドプランク', 'バイシクルクランチ', 'ケーブルクランチ'
+    ];
+    return absExercises.any((abs) => exerciseName.contains(abs));
+  }
   
   // ワークアウトセット削除（ワンタップ削除）
   Future<void> _deleteWorkoutSet(String workoutId, int setIndex) async {
@@ -2925,7 +2940,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                   Text(
                                     isCardio 
                                       ? '${set['weight']} 分' 
-                                      : (set['is_bodyweight_mode'] == true && set['weight'] == 0.0)
+                                      : (set['is_bodyweight_mode'] == true && (_isAbsExercise(exerciseName) || set['weight'] == 0.0))
                                         ? '自重'
                                         : '${set['weight']} Kg',
                                     style: const TextStyle(
@@ -2942,7 +2957,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    isCardio ? '${set['reps']} km' : '${set['reps']} 回',
+                                    isCardio 
+                                      ? '${set['reps']} km' 
+                                      : (set['is_time_mode'] == true)
+                                        ? '${set['reps']}秒'
+                                        : '${set['reps']} 回',
                                     style: const TextStyle(
                                       fontSize: 11,
                                       fontWeight: FontWeight.bold,
