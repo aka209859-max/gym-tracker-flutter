@@ -441,6 +441,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
     '脚': false,
     '肩': false,
     '腕': false,
+    '腹筋': false,
     '体幹': false,
     '有酸素': false,
     '初心者': false,
@@ -1011,7 +1012,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
 - よくある間違いと注意事項
 
 【条件】
-- 全身をバランスよく鍛える（胸・背中・脚・肩・腕）
+- 全身をバランスよく鍛える（胸・背中・脚・肩・腕・腹筋）
 - 基本種目中心（マシンとフリーウェイト組み合わせ）
 - 30-45分で完了
 - 怪我のリスクが少ない種目
