@@ -100,6 +100,12 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     final pullUpVariations = ['懸垂', 'チンニング', 'プルアップ', 'チンアップ', 'ワイドグリッププルアップ'];
     return pullUpVariations.any((variation) => exerciseName.contains(variation));
   }
+  
+  // ✅ v1.0.167: 腹筋系種目かどうかを判定（懸垂と同じUI: 自重/重さ/秒数）
+  bool _isAbsExercise(String exerciseName) {
+    final absExercises = _muscleGroupExercises['腹筋'] ?? [];
+    return absExercises.contains(exerciseName);
+  }
 
   @override
   void initState() {
@@ -379,7 +385,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 weight: targetWeight,
                 reps: targetReps,
                 isCompleted: false,
-                isBodyweightMode: _isPullUpExercise(name),
+                isBodyweightMode: _isPullUpExercise(name) || _isAbsExercise(name),
               ));
             }
           }
@@ -393,7 +399,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             weight: lastWeight ?? 0.0,
             reps: lastReps ?? 10,
             isCompleted: false,
-            isBodyweightMode: _isPullUpExercise(exerciseName),
+            isBodyweightMode: _isPullUpExercise(exerciseName) || _isAbsExercise(exerciseName),
           ));
           print('✅ $exerciseName に1セット追加（前回: ${lastWeight}kg × ${lastReps}reps）');
         }
@@ -509,15 +515,15 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         }
       }
       
-      // 懸垂の場合は自重モードをデフォルトに
-      final isPullUp = _isPullUpExercise(exerciseName);
+      // 懸垂または腹筋の場合は自重モードをデフォルトに
+      final isPullUpOrAbs = _isPullUpExercise(exerciseName) || _isAbsExercise(exerciseName);
       
       _sets.add(WorkoutSet(
         exerciseName: exerciseName,
         weight: lastSet?.weight ?? _lastWorkoutData[exerciseName]?['weight']?.toDouble() ?? 0.0,
         reps: lastSet?.reps ?? _lastWorkoutData[exerciseName]?['reps'] ?? 10,
         setType: SetType.normal,
-        isBodyweightMode: lastSet?.isBodyweightMode ?? (isPullUp ? true : false),
+        isBodyweightMode: lastSet?.isBodyweightMode ?? (isPullUpOrAbs ? true : false),
       ));
     });
   }
@@ -906,7 +912,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         exerciseName: exerciseName, 
         weight: 0.0, 
         reps: 10,
-        isBodyweightMode: _isPullUpExercise(exerciseName),
+        isBodyweightMode: _isPullUpExercise(exerciseName) || _isAbsExercise(exerciseName),
       ),
     );
     
@@ -978,7 +984,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           exerciseName: exerciseName, 
           weight: 0.0, 
           reps: 10,
-          isBodyweightMode: _isPullUpExercise(exerciseName),
+          isBodyweightMode: _isPullUpExercise(exerciseName) || _isAbsExercise(exerciseName),
         ),
       );
       final isPullUpBodyweight = _isPullUpExercise(exerciseName) && firstSet.isBodyweightMode;
@@ -1811,8 +1817,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               ),
               const SizedBox(width: 12),
               
-              // 懸垂の場合は自重/荷重モード切り替えを含む特別なUI
-              if (_isPullUpExercise(set.exerciseName))
+              // 懸垂または腹筋の場合は自重/荷重モード切り替えを含む特別なUI
+              if (_isPullUpExercise(set.exerciseName) || _isAbsExercise(set.exerciseName))
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -1865,7 +1871,10 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                                   width: !set.isBodyweightMode ? 2 : 1,
                                 ),
                               ),
-                              child: const Text('荷重', style: TextStyle(fontSize: 12)),
+                              child: Text(
+                                _isAbsExercise(set.exerciseName) ? '重さ' : '荷重', 
+                                style: const TextStyle(fontSize: 12)
+                              ),
                             ),
                           ),
                         ],
@@ -1875,10 +1884,10 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                       if (!set.isBodyweightMode)
                         TextFormField(
                           key: ValueKey('weight_${globalIndex}_${set.weight}'),
-                          decoration: const InputDecoration(
-                            labelText: '荷重 (kg)',
-                            border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          decoration: InputDecoration(
+                            labelText: _isAbsExercise(set.exerciseName) ? '重さ (kg)' : '荷重 (kg)',
+                            border: const OutlineInputBorder(),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                           ),
                           keyboardType: const TextInputType.numberWithOptions(decimal: true),
                           initialValue: set.weight == 0.0 ? '' : set.weight.toString(),
@@ -1935,12 +1944,16 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 ),
               const SizedBox(width: 8),
               
-              // 有酸素運動の場合は「距離（km）」、それ以外は「回数」
+              // 有酸素運動の場合は「距離（km）」、腹筋の場合は「秒数」、それ以外は「回数」
               Expanded(
                 child: TextFormField(
                   key: ValueKey('reps_${globalIndex}_${set.reps}'),
                   decoration: InputDecoration(
-                    labelText: _isCardioExercise(set.exerciseName) ? '距離 (km)' : '回数',
+                    labelText: _isCardioExercise(set.exerciseName) 
+                        ? '距離 (km)' 
+                        : _isAbsExercise(set.exerciseName)
+                            ? '秒数'
+                            : '回数',
                     border: const OutlineInputBorder(),
                     contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   ),
