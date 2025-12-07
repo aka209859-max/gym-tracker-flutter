@@ -31,6 +31,21 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
     return muscleGroup == '有酸素';
   }
 
+  /// ✅ v1.0.168: 腹筋系種目かどうかを判定
+  bool _isAbsExercise(String exerciseName) {
+    const absExercises = [
+      'クランチ',
+      'レッグレイズ',
+      'プランク',
+      'アブローラー',
+      'ハンギングレッグレイズ',
+      'サイドプランク',
+      'バイシクルクランチ',
+      'ケーブルクランチ',
+    ];
+    return absExercises.contains(exerciseName);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -270,10 +285,12 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
               final weight = (set['weight'] as num?)?.toDouble() ?? 0.0;
               final reps = set['reps'] as int? ?? 0;
               
-              // 有酸素運動の場合は「時間・距離」表示
+              // 有酸素運動の場合は「時間・距離」表示、腹筋の場合は「重さ・秒数」表示
               final String displayText;
               if (_isCardio) {
                 displayText = '${weight}分 × ${reps}km';
+              } else if (_isAbsExercise(exerciseName)) {
+                displayText = '${weight}kg × ${reps}秒';
               } else {
                 displayText = '${weight}kg × ${reps}回';
               }
