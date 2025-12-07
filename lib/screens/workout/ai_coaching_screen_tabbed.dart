@@ -442,7 +442,6 @@ class _AIMenuTabState extends State<_AIMenuTab>
     '肩': false,
     '腕': false,
     '腹筋': false,
-    '体幹': false,
     '有酸素': false,
     '初心者': false,
   };
