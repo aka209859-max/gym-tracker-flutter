@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';  // ✅ v1.0.177: Network detection
 import '../models/gym.dart';
 import '../models/workout_log.dart';
 
@@ -271,21 +272,38 @@ class OfflineService {
   /// オンライン状態かチェック
   static Future<bool> isOnline() async {
     try {
-      // ✅ v1.0.163: タイムアウトを2秒に短縮し、より軽量な確認方法に変更
-      // Firestoreのメタデータのみを取得（データを読まない）
-      final result = await FirebaseFirestore.instance
-          .collection('workout_logs')
-          .limit(1)
-          .get(const GetOptions(source: Source.server))
-          .timeout(
-            const Duration(seconds: 2),
-            onTimeout: () => throw TimeoutException('Network timeout'),
-          );
+      // ✅ v1.0.177: connectivity_plus で直接ネットワーク接続を確認
+      final ConnectivityResult connectivityResult = await Connectivity().checkConnectivity();
       
-      // メタデータが取得できればオンライン
-      return result.metadata.isFromCache == false;
+      // 接続なしの場合は即座にオフライン判定
+      if (connectivityResult == ConnectivityResult.none) {
+        debugPrint('📴 オフライン検出: ネットワーク接続なし');
+        return false;
+      }
+      
+      debugPrint('🌐 ネットワーク接続あり: $connectivityResult');
+      
+      // ネットワーク接続があっても、Firestoreへの接続を確認（タイムアウト短縮）
+      try {
+        final result = await FirebaseFirestore.instance
+            .collection('workout_logs')
+            .limit(1)
+            .get(const GetOptions(source: Source.server))
+            .timeout(
+              const Duration(seconds: 1),  // ✅ v1.0.177: 2秒→1秒に短縮
+              onTimeout: () => throw TimeoutException('Network timeout'),
+            );
+        
+        // メタデータが取得できればオンライン
+        final isOnline = result.metadata.isFromCache == false;
+        debugPrint(isOnline ? '🌐 Firestore接続成功' : '📴 Firestoreキャッシュ使用');
+        return isOnline;
+      } catch (e) {
+        debugPrint('📴 Firestore接続失敗: $e');
+        return false;
+      }
     } catch (e) {
-      debugPrint('📴 オフライン検出: $e');
+      debugPrint('📴 オフライン検出エラー: $e');
       return false;
     }
   }
