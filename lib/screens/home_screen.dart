@@ -2900,11 +2900,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       color: Colors.grey[100],
                       child: Builder(
                         builder: (context) {
-                          // ✅ v1.0.182: 種目の最初のセットからis_time_modeを取得
+                          // ✅ v1.0.186: 種目の最初のセットからis_time_modeを取得
                           bool isTimeMode = sets.isNotEmpty && (sets.first['is_time_mode'] == true);
                           
-                          // is_time_modeフィールドがない場合、種目名から判定
-                          if (sets.isNotEmpty && sets.first['is_time_mode'] == null) {
+                          // is_time_modeフィールドが null または false の場合、種目名から判定
+                          if (sets.isNotEmpty && sets.first['is_time_mode'] != true) {
                             final exerciseNameForMode = sets.first['exercise_name'] ?? exerciseName;
                             isTimeMode = _getDefaultTimeMode(exerciseNameForMode);
                           }
@@ -3083,9 +3083,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                       final setExerciseName = set['exercise_name'] ?? exerciseName;
                                       
                                       // ✅ v1.0.182: is_time_modeフィールドがない場合、種目名から判定
+                                      // ✅ v1.0.186: is_time_modeフィールドの優先順位
+                                      // 1. is_time_mode == true の場合は秒数モード
+                                      // 2. is_time_mode が null または false の場合、種目名から判定
                                       bool isTimeMode = set['is_time_mode'] == true;
-                                      if (set['is_time_mode'] == null) {
-                                        // フィールドが存在しない場合、種目名から判定
+                                      if (set['is_time_mode'] != true) {
+                                        // フィールドが null または false の場合、種目名から判定
+                                        // 腹筋種目は秒数モードをデフォルトとする
                                         isTimeMode = _getDefaultTimeMode(setExerciseName);
                                       }
                                       
@@ -3406,7 +3410,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               final exerciseName = set['exercise_name'] as String?;
                               final weight = set['weight'] as num?;
                               final reps = set['reps'] as num?;
-                              final isTimeMode = set['is_time_mode'] == true;  // ✅ v1.0.181: 秒数モード対応
+                              
+                              // ✅ v1.0.186: is_time_mode が null/false でも種目名から判定
+                              bool isTimeMode = set['is_time_mode'] == true;
+                              if (set['is_time_mode'] != true && exerciseName != null) {
+                                isTimeMode = _getDefaultTimeMode(exerciseName);
+                              }
                               
                               // 有酸素運動の場合は「時間(分) × 距離(km)」表示
                               final isCardio = muscleGroup == '有酸素';
