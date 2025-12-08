@@ -2956,16 +2956,25 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    isCardio 
-                                      ? '${set['reps']} km' 
-                                      : (set['is_time_mode'] == true)
-                                        ? '${set['reps']}秒'
-                                        : '${set['reps']} 回',
-                                    style: const TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  Builder(
+                                    builder: (context) {
+                                      final isTimeMode = set['is_time_mode'] == true;
+                                      final reps = set['reps'];
+                                      final exerciseName = set['exercise_name'] ?? '';
+                                      debugPrint('📊 表示: $exerciseName - isTimeMode: $isTimeMode, reps: $reps');
+                                      
+                                      return Text(
+                                        isCardio 
+                                          ? '$reps km' 
+                                          : isTimeMode
+                                            ? '${reps}秒'
+                                            : '$reps 回',
+                                        style: const TextStyle(
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      );
+                                    }
                                   ),
                                 ],
                               ),

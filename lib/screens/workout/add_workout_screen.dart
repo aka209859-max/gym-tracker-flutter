@@ -1239,6 +1239,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               debugPrint('✅ 既存記録追加 - 自重モード反映: ${set.exerciseName} = ${_userBodyweight}kg + ${set.weight}kg = ${effectiveWeight}kg');
             }
             
+            debugPrint('💾 保存データ: ${set.exerciseName} - isTimeMode: ${set.isTimeMode}, reps: ${set.reps}');
             return {
               'exercise_name': set.exerciseName,
               'weight': effectiveWeight,  // ✅ 自重 + 追加重量
