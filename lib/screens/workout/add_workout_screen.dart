@@ -2276,6 +2276,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     
     final weight = (lastData['weight'] ?? 0).toDouble();
     final reps = (lastData['reps'] ?? 0).toInt();
+    final isTimeMode = lastData['is_time_mode'] == true;  // ✅ v1.0.181: 秒数モード対応
     
     final date = lastData['date'] as DateTime?;
     final dateStr = date != null 
@@ -2283,7 +2284,10 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         : '不明';
     
     // シンプルに前回の1セットのみ表示（前々回は表示しない）
-    return '前回 $dateStr: ${weight}kg × ${reps}回';
+    // ✅ v1.0.181: 秒数モードの場合は「秒」と表示
+    return isTimeMode
+        ? '前回 $dateStr: ${weight}kg × ${reps}秒'
+        : '前回 $dateStr: ${weight}kg × ${reps}回';
   }
   
   // 🎯 Phase 1: トレーニング記録後のAI導線ポップアップ

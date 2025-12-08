@@ -3373,12 +3373,15 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               final exerciseName = set['exercise_name'] as String?;
                               final weight = set['weight'] as num?;
                               final reps = set['reps'] as num?;
+                              final isTimeMode = set['is_time_mode'] == true;  // ✅ v1.0.181: 秒数モード対応
                               
                               // 有酸素運動の場合は「時間(分) × 距離(km)」表示
                               final isCardio = muscleGroup == '有酸素';
                               final displayText = isCardio
                                   ? '• $exerciseName: ${weight?.toInt() ?? 0}分 × ${reps?.toInt() ?? 0}km'
-                                  : '• $exerciseName: ${weight?.toInt() ?? 0}kg × ${reps?.toInt() ?? 0}回';
+                                  : isTimeMode
+                                    ? '• $exerciseName: ${weight?.toInt() ?? 0}kg × ${reps?.toInt() ?? 0}秒'  // ✅ 秒数表示
+                                    : '• $exerciseName: ${weight?.toInt() ?? 0}kg × ${reps?.toInt() ?? 0}回';
                               
                               return Padding(
                                 padding: const EdgeInsets.only(left: 8, bottom: 4),
