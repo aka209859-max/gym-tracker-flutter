@@ -3043,7 +3043,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         final workoutId = sets.isNotEmpty ? sets.first['workout_id'] as String? : null;
                         
                         // 最後のセットの重量・回数を取得（前回の記録として使用）
-                        final lastWeight = sets.isNotEmpty ? (sets.last['weight'] as num?)?.toDouble() ?? 0.0 : 0.0;
+                        // ✅ v1.0.175: 自重モード（懸垂）の場合は additional_weight を使用（体重の2重加算防止）
+                        final isBodyweightMode = sets.isNotEmpty && sets.last['is_bodyweight_mode'] == true;
+                        final isPullUpExercise = _isPullUpExercise(exerciseName);
+                        final lastWeight = sets.isNotEmpty 
+                            ? (isBodyweightMode && isPullUpExercise
+                                ? (sets.last['additional_weight'] as num?)?.toDouble() ?? 0.0  // 懸垂: 追加重量のみ
+                                : (sets.last['weight'] as num?)?.toDouble() ?? 0.0)            // その他: 通常の重量
+                            : 0.0;
                         final lastReps = sets.isNotEmpty ? sets.last['reps'] as int? ?? 10 : 10;
                         
                         final templateData = {
