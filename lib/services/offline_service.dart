@@ -270,41 +270,65 @@ class OfflineService {
   // ============================================
 
   /// オンライン状態かチェック
+  /// v1.0.187: オンライン状態を確認（タイムアウト改善）
   static Future<bool> isOnline() async {
     try {
-      // ✅ v1.0.177: connectivity_plus で直接ネットワーク接続を確認
-      // ✅ v1.0.180: List<ConnectivityResult> を処理（connectivity_plus ^6.1.2）
+      // Step 1: connectivity_plus でネットワーク接続を確認
       final List<ConnectivityResult> connectivityResults = await Connectivity().checkConnectivity();
       
       // 接続なしの場合は即座にオフライン判定
       if (connectivityResults.contains(ConnectivityResult.none) || connectivityResults.isEmpty) {
-        debugPrint('📴 オフライン検出: ネットワーク接続なし');
+        debugPrint('📴 [Offline] ネットワーク接続なし');
         return false;
       }
       
-      debugPrint('🌐 ネットワーク接続あり: $connectivityResults');
+      debugPrint('🔍 [Network] 接続検出: $connectivityResults');
       
-      // ネットワーク接続があっても、Firestoreへの接続を確認（タイムアウト短縮）
+      // Step 2: Firestore への実際の接続を確認（タイムアウト 500ms）
       try {
+        debugPrint('🔍 [Firestore] サーバー接続テスト開始...');
+        final startTime = DateTime.now();
+        
         final result = await FirebaseFirestore.instance
-            .collection('workout_logs')
+            .collection('_connection_test')  // テスト用コレクション
             .limit(1)
-            .get(const GetOptions(source: Source.server))
+            .get(const GetOptions(source: Source.server))  // 強制的にサーバーから取得
             .timeout(
-              const Duration(seconds: 1),  // ✅ v1.0.177: 2秒→1秒に短縮
-              onTimeout: () => throw TimeoutException('Network timeout'),
+              const Duration(milliseconds: 500),  // ✅ v1.0.187: 1秒→500msに短縮
+              onTimeout: () {
+                debugPrint('📴 [Firestore] タイムアウト (500ms)');
+                throw TimeoutException('Firestore connection timeout');
+              },
             );
         
-        // メタデータが取得できればオンライン
-        final isOnline = result.metadata.isFromCache == false;
-        debugPrint(isOnline ? '🌐 Firestore接続成功' : '📴 Firestoreキャッシュ使用');
-        return isOnline;
+        final duration = DateTime.now().difference(startTime).inMilliseconds;
+        
+        // メタデータからキャッシュの使用状況を確認
+        final isFromCache = result.metadata.isFromCache;
+        final hasPendingWrites = result.metadata.hasPendingWrites;
+        
+        if (isFromCache) {
+          debugPrint('📴 [Firestore] キャッシュから取得（オフライン） - ${duration}ms');
+          return false;
+        }
+        
+        if (hasPendingWrites) {
+          debugPrint('📴 [Firestore] 保留中の書き込みあり（オフライン） - ${duration}ms');
+          return false;
+        }
+        
+        debugPrint('🌐 [Firestore] サーバー接続成功 ✅ - ${duration}ms');
+        return true;
+        
+      } on TimeoutException catch (e) {
+        debugPrint('📴 [Firestore] タイムアウトエラー: $e');
+        return false;
       } catch (e) {
-        debugPrint('📴 Firestore接続失敗: $e');
+        debugPrint('📴 [Firestore] 接続失敗: $e');
         return false;
       }
     } catch (e) {
-      debugPrint('📴 オフライン検出エラー: $e');
+      debugPrint('📴 [Network] チェックエラー: $e');
       return false;
     }
   }
