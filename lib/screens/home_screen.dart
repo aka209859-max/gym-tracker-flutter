@@ -2300,13 +2300,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     return absExercises.any((abs) => exerciseName.contains(abs));
   }
   
-  /// v1.0.183: 腹筋種目のデフォルト時間モード判定（プランク系は秒数、その他は回数）
+  /// v1.0.185: 腹筋種目のデフォルト時間モード判定
+  /// ユーザーが秒数入力した場合は「秒」表記にするため、デフォルトで全ての腹筋を秒数モードとして扱う
+  /// （過去のis_time_mode=nullデータとの互換性のため）
   bool _getDefaultTimeMode(String exerciseName) {
-    if (!_isAbsExercise(exerciseName)) return false;
-    
-    // プランク系種目は秒数がデフォルト
-    final timeModeExercises = ['プランク', 'サイドプランク'];
-    return timeModeExercises.any((e) => exerciseName.contains(e));
+    // 腹筋種目は全て秒数モードをデフォルトとする
+    return _isAbsExercise(exerciseName);
   }
   
   // ワークアウトセット削除（ワンタップ削除）
