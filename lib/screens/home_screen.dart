@@ -2831,58 +2831,58 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       onLongPress: () {
                         _showEditDeleteMenu(workoutId, exerciseName);
                       },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color(0xFF2E3192), // 深い青紫
-                            Color(0xFFE85D75), // オレンジがかった赤
-                          ],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            isExpanded ? Icons.expand_less : Icons.expand_more,
-                            color: Colors.white,
-                            size: 20,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Color(0xFF2E3192), // 深い青紫
+                              Color(0xFFE85D75), // オレンジがかった赤
+                            ],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
                           ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              exerciseName,
-                              style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              isExpanded ? Icons.expand_less : Icons.expand_more,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                exerciseName,
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
-                          ),
-                          // 編集ボタン（トレーニング記録画面に遷移）
-                          IconButton(
-                            icon: const Icon(Icons.edit, color: Colors.white, size: 18),
-                            padding: const EdgeInsets.all(4),
-                            constraints: const BoxConstraints(),
-                            onPressed: () async {
-                              if (mounted) {
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const WorkoutLogScreen(),
-                                  ),
-                                );
-                                _loadWorkoutsForSelectedDay();
-                              }
-                            },
-                            tooltip: 'トレーニング記録を編集',
-                          ),
-                        ],
+                            // 編集ボタン（トレーニング記録画面に遷移）
+                            IconButton(
+                              icon: const Icon(Icons.edit, color: Colors.white, size: 18),
+                              padding: const EdgeInsets.all(4),
+                              constraints: const BoxConstraints(),
+                              onPressed: () async {
+                                if (mounted) {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const WorkoutLogScreen(),
+                                    ),
+                                  );
+                                  _loadWorkoutsForSelectedDay();
+                                }
+                              },
+                              tooltip: 'トレーニング記録を編集',
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
+                    ),  // InkWell closing
                   
                   // セットリスト（展開時のみ表示）
                   if (isExpanded) ...[
@@ -3042,11 +3042,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                         return Text('$weight Kg', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       }
                                     }
-                                  ),
-                                    style: const TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.bold,
-                                    ),
                                   ),
                                 ],
                               ),
