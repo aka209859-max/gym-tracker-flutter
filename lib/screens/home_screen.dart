@@ -2890,71 +2890,88 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
                       color: Colors.grey[100],
-                      child: Row(
-                        children: [
-                          const SizedBox(
-                            width: 24,
-                            child: Text(
-                              'セット',
-                              style: TextStyle(
-                                fontSize: 9,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black54,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Text(
-                              isCardio ? '時間' : '重さ',
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontSize: 9,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black54,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Text(
-                              isCardio ? '距離' : '回数',
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontSize: 9,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black54,
-                              ),
-                            ),
-                          ),
-                          if (!isCardio)
-                            Expanded(
-                              flex: 2,
-                              child: Text(
-                                'RM',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 9,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey[700],
+                      child: Builder(
+                        builder: (context) {
+                          // ✅ v1.0.182: 種目の最初のセットからis_time_modeを取得
+                          bool isTimeMode = sets.isNotEmpty && (sets.first['is_time_mode'] == true);
+                          
+                          // is_time_modeフィールドがない場合、種目名から判定
+                          if (sets.isNotEmpty && sets.first['is_time_mode'] == null) {
+                            final exerciseNameForMode = sets.first['exercise_name'] ?? exerciseName;
+                            isTimeMode = _getDefaultTimeMode(exerciseNameForMode);
+                          }
+                          
+                          return Row(
+                            children: [
+                              const SizedBox(
+                                width: 24,
+                                child: Text(
+                                  'セット',
+                                  style: TextStyle(
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black54,
+                                  ),
                                 ),
                               ),
-                            ),
-                          if (isCardio) const Spacer(flex: 2),
-                          const SizedBox(
-                            width: 24,
-                            child: Text(
-                              '補助',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 9,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black54,
+                              Expanded(
+                                flex: 2,
+                                child: Text(
+                                  isCardio ? '時間' : '重さ',
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black54,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                          const SizedBox(width: 28),
-                        ],
+                              Expanded(
+                                flex: 2,
+                                child: Text(
+                                  isCardio 
+                                      ? '距離' 
+                                      : isTimeMode 
+                                          ? '秒数'  // ✅ 秒数モードの場合
+                                          : '回数',  // 通常は回数
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                              ),
+                              if (!isCardio)
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                    'RM',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 9,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
+                                ),
+                              if (isCardio) const Spacer(flex: 2),
+                              const SizedBox(
+                                width: 24,
+                                child: Text(
+                                  '補助',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 28),
+                            ],
+                          );
+                        },
                       ),
                     ),
                     
@@ -3053,9 +3070,16 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                 children: [
                                   Builder(
                                     builder: (context) {
-                                      final isTimeMode = set['is_time_mode'] == true;
                                       final reps = set['reps'];
                                       final exerciseName = set['exercise_name'] ?? '';
+                                      
+                                      // ✅ v1.0.182: is_time_modeフィールドがない場合、種目名から判定
+                                      bool isTimeMode = set['is_time_mode'] == true;
+                                      if (set['is_time_mode'] == null) {
+                                        // フィールドが存在しない場合、種目名から判定
+                                        isTimeMode = _getDefaultTimeMode(exerciseName);
+                                      }
+                                      
                                       debugPrint('📊 表示: $exerciseName - isTimeMode: $isTimeMode, reps: $reps');
                                       
                                       return Text(
