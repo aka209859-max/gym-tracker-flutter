@@ -3080,16 +3080,17 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                   Builder(
                                     builder: (context) {
                                       final reps = set['reps'];
-                                      final exerciseName = set['exercise_name'] ?? '';
+                                      // ✅ v1.0.184: exercise_nameを親スコープから取得（より確実）
+                                      final setExerciseName = set['exercise_name'] ?? exerciseName;
                                       
                                       // ✅ v1.0.182: is_time_modeフィールドがない場合、種目名から判定
                                       bool isTimeMode = set['is_time_mode'] == true;
                                       if (set['is_time_mode'] == null) {
                                         // フィールドが存在しない場合、種目名から判定
-                                        isTimeMode = _getDefaultTimeMode(exerciseName);
+                                        isTimeMode = _getDefaultTimeMode(setExerciseName);
                                       }
                                       
-                                      debugPrint('📊 表示: $exerciseName - isTimeMode: $isTimeMode, reps: $reps');
+                                      debugPrint('📊 表示: $setExerciseName - isTimeMode: $isTimeMode, reps: $reps, is_time_mode field: ${set['is_time_mode']}');
                                       
                                       return Text(
                                         isCardio 
