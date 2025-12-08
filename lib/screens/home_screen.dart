@@ -2937,12 +2937,26 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    isCardio 
-                                      ? '${set['weight']} 分' 
-                                      : (set['is_bodyweight_mode'] == true && (_isAbsExercise(exerciseName) || set['weight'] == 0.0))
-                                        ? '自重'
-                                        : '${set['weight']} Kg',
+                                  Builder(
+                                    builder: (context) {
+                                      final weight = set['weight'];
+                                      final isBodyweightMode = set['is_bodyweight_mode'] == true;
+                                      final isAbs = _isAbsExercise(exerciseName);
+                                      
+                                      // デバッグ出力
+                                      debugPrint('🏋️ 重量表示: $exerciseName - weight: $weight, isBodyweightMode: $isBodyweightMode, isAbs: $isAbs');
+                                      
+                                      if (isCardio) {
+                                        return Text('$weight 分', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
+                                      } else if (isAbs && (isBodyweightMode || weight == 0.0)) {
+                                        return const Text('自重', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
+                                      } else if (isBodyweightMode && weight == 0.0) {
+                                        return const Text('自重', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
+                                      } else {
+                                        return Text('$weight Kg', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
+                                      }
+                                    }
+                                  ),
                                     style: const TextStyle(
                                       fontSize: 11,
                                       fontWeight: FontWeight.bold,
