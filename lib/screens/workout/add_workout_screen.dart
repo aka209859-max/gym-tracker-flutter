@@ -1144,6 +1144,83 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     }
   }
 
+  /// ✅ v1.0.178: オフ日として保存
+  Future<void> _saveRestDay(BuildContext context) async {
+    final user = firebase_auth.FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('ログインが必要です')),
+      );
+      return;
+    }
+    
+    try {
+      debugPrint('📴 オフ日を保存: $_selectedDate');
+      
+      // 日付を正規化
+      final normalizedDate = DateTime(_selectedDate.year, _selectedDate.month, _selectedDate.day);
+      
+      // 既存のオフ日レコードを確認
+      final existingQuery = await FirebaseFirestore.instance
+          .collection('rest_days')
+          .where('user_id', isEqualTo: user.uid)
+          .where('date', isEqualTo: Timestamp.fromDate(normalizedDate))
+          .get();
+      
+      if (existingQuery.docs.isNotEmpty) {
+        // 既にオフ日として登録済み
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('この日は既にオフ日として登録されています'),
+              backgroundColor: Colors.orange,
+            ),
+          );
+        }
+        return;
+      }
+      
+      // Firestoreにオフ日を保存
+      await FirebaseFirestore.instance.collection('rest_days').add({
+        'user_id': user.uid,
+        'date': Timestamp.fromDate(normalizedDate),
+        'created_at': FieldValue.serverTimestamp(),
+      });
+      
+      debugPrint('✅ オフ日保存成功');
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Row(
+              children: [
+                Icon(Icons.bed, color: Colors.white),
+                SizedBox(width: 8),
+                Text('オフ日として登録しました'),
+              ],
+            ),
+            backgroundColor: Colors.green,
+          ),
+        );
+        
+        // ホーム画面に戻る
+        Navigator.pop(context, true);
+      }
+    } catch (e, stackTrace) {
+      debugPrint('❌ オフ日保存エラー: $e');
+      debugPrint('   スタックトレース: $stackTrace');
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('オフ日の保存に失敗しました: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
   /// 日付選択ダイアログを表示
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -1470,6 +1547,18 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                       ],
                     ),
                   ),
+                  // ✅ v1.0.178: オフボタン
+                  OutlinedButton.icon(
+                    onPressed: () => _saveRestDay(context),
+                    icon: const Icon(Icons.bed, size: 18),
+                    label: const Text('オフ'),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.green,
+                      side: const BorderSide(color: Colors.green),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
                   OutlinedButton.icon(
                     onPressed: () => _selectDate(context),
                     icon: const Icon(Icons.edit_calendar, size: 18),

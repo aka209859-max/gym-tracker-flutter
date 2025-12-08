@@ -59,6 +59,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   // トレーニング記録がある日付のセット
   Set<DateTime> _workoutDates = {};
   
+  // ✅ v1.0.178: オフ日のセット
+  Set<DateTime> _restDays = {};
+  
   // 種目ごとの展開状態を管理
   Map<String, bool> _expandedExercises = {};
   
@@ -137,6 +140,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     // 空セットをクリーンアップしてからデータ読み込み
     _cleanupEmptySets().then((_) {
       _loadWorkoutDates(); // トレーニング記録がある日付を読み込む
+      _loadRestDays(); // ✅ v1.0.178: オフ日を読み込む
       _loadWorkoutsForSelectedDay();
       _loadBadgeStats();
       _loadActiveGoals();
@@ -580,6 +584,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       // アプリが foreground に戻った時に自動リフレッシュ
       print('🔄 アプリがアクティブになりました - データを再読み込み');
       _loadWorkoutDates(); // トレーニング記録日付も再読み込み
+      _loadRestDays(); // ✅ v1.0.178: オフ日も再読み込み
       _loadWorkoutsForSelectedDay();
       _loadStatistics(); // 統計データも再読み込み
     }
@@ -740,6 +745,43 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       
     } catch (e) {
       print('❌ トレーニング記録日付の取得エラー: $e');
+    }
+  }
+
+  /// ✅ v1.0.178: オフ日を読み込む
+  Future<void> _loadRestDays() async {
+    final user = firebase_auth.FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+    
+    try {
+      print('📅 オフ日を取得中...');
+      
+      // 全オフ日を取得
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('rest_days')
+          .where('user_id', isEqualTo: user.uid)
+          .get();
+      
+      final restDays = <DateTime>{};
+      for (final doc in querySnapshot.docs) {
+        final data = doc.data();
+        final date = (data['date'] as Timestamp?)?.toDate();
+        
+        if (date != null) {
+          // 時刻を正規化（日付のみを使用）
+          final normalizedDate = DateTime(date.year, date.month, date.day);
+          restDays.add(normalizedDate);
+        }
+      }
+      
+      print('✅ オフ日: ${restDays.length}日');
+      
+      setState(() {
+        _restDays = restDays;
+      });
+      
+    } catch (e) {
+      print('❌ オフ日の取得エラー: $e');
     }
   }
 
@@ -2009,6 +2051,51 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         onPageChanged: (focusedDay) {
           _focusedDay = focusedDay;
         },
+        // ✅ v1.0.178: カスタムビルダーでオフ日を表示
+        calendarBuilders: CalendarBuilders(
+          markerBuilder: (context, day, events) {
+            final normalizedDay = DateTime(day.year, day.month, day.day);
+            
+            // オフ日の場合はグリーンで「オフ」と表示
+            if (_restDays.contains(normalizedDay)) {
+              return Positioned(
+                bottom: 2,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: const Text(
+                    'オフ',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 8,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              );
+            }
+            
+            // トレーニング日の場合はオレンジのドット
+            if (events.isNotEmpty) {
+              return Positioned(
+                bottom: 4,
+                child: Container(
+                  width: 6,
+                  height: 6,
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.secondary,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              );
+            }
+            
+            return null;
+          },
+        ),
         calendarStyle: CalendarStyle(
           todayDecoration: BoxDecoration(
             color: theme.colorScheme.primary.withValues(alpha: 0.7),
@@ -2018,9 +2105,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             color: theme.colorScheme.primary,
             shape: BoxShape.circle,
           ),
-          markerDecoration: BoxDecoration(
-            color: theme.colorScheme.secondary,
-            shape: BoxShape.circle,
+          markerDecoration: const BoxDecoration(
+            color: Colors.transparent,  // ✅ v1.0.178: カスタムマーカーを使用するため透明に
           ),
           markersMaxCount: 1,
           todayTextStyle: const TextStyle(
