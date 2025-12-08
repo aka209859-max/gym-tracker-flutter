@@ -231,7 +231,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       // セットデータを準備
       final sets = _sets.map((set) {
         double effectiveWeight = set.weight;
-        if (set.isBodyweightMode && _userBodyweight != null) {
+        if (set.isBodyweightMode && _userBodyweight != null && _isPullUpExercise(set.exerciseName)) {
           effectiveWeight = _userBodyweight! + set.weight;
         }
         
@@ -1232,9 +1232,9 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           
           // 新しいセットを既存セットの下に追加
           final newSets = _sets.map((set) {
-            // ✅ v1.0.158: 自重モード（懸垂など）の場合、体重を自動反映
+            // ✅ v1.0.158+v1.0.170: 自重モード（懸垂のみ）の場合、体重を自動反映
             double effectiveWeight = set.weight;
-            if (set.isBodyweightMode && _userBodyweight != null) {
+            if (set.isBodyweightMode && _userBodyweight != null && _isPullUpExercise(set.exerciseName)) {
               effectiveWeight = _userBodyweight! + set.weight;
               debugPrint('✅ 既存記録追加 - 自重モード反映: ${set.exerciseName} = ${_userBodyweight}kg + ${set.weight}kg = ${effectiveWeight}kg');
             }
@@ -1302,9 +1302,9 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           'start_time': Timestamp.fromDate(startTime),
           'end_time': Timestamp.fromDate(endTime),
           'sets': _sets.map((set) {
-            // ✅ v1.0.158: 自重モード（懸垂など）の場合、体重を自動反映
+            // ✅ v1.0.158+v1.0.170: 自重モード（懸垂のみ）の場合、体重を自動反映
             double effectiveWeight = set.weight;
-            if (set.isBodyweightMode && _userBodyweight != null) {
+            if (set.isBodyweightMode && _userBodyweight != null && _isPullUpExercise(set.exerciseName)) {
               // 自重モード: ユーザー体重 + 追加重量（例: 体重70kg + プレート10kg = 80kg）
               effectiveWeight = _userBodyweight! + set.weight;
               debugPrint('✅ 自重モード反映: ${set.exerciseName} = ${_userBodyweight}kg (体重) + ${set.weight}kg (追加) = ${effectiveWeight}kg');
