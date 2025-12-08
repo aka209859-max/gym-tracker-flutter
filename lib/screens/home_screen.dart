@@ -3052,12 +3052,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                 : (sets.last['weight'] as num?)?.toDouble() ?? 0.0)            // その他: 通常の重量
                             : 0.0;
                         final lastReps = sets.isNotEmpty ? sets.last['reps'] as int? ?? 10 : 10;
+                        final lastIsTimeMode = sets.isNotEmpty && sets.last['is_time_mode'] == true;  // ✅ v1.0.176: is_time_mode を引き継ぐ
                         
                         final templateData = {
                           'muscle_group': muscleGroup,
                           'exercise_name': exerciseName,
                           'last_weight': lastWeight,
                           'last_reps': lastReps,
+                          'is_time_mode': lastIsTimeMode,  // ✅ v1.0.176: 秒数モードを引き継ぐ
                           'existing_workout_id': workoutId,  // 既存記録ID
                         };
                         

@@ -370,6 +370,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       final exerciseName = widget.templateData!['exercise_name'] as String?;
       final lastWeight = widget.templateData!['last_weight'] as double?;
       final lastReps = widget.templateData!['last_reps'] as int?;
+      final lastIsTimeMode = widget.templateData!['is_time_mode'] as bool?;  // ✅ v1.0.176: is_time_mode を取得
       _existingWorkoutId = widget.templateData!['existing_workout_id'] as String?;
       
       setState(() {
@@ -413,9 +414,9 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             reps: lastReps ?? 10,
             isCompleted: false,
             isBodyweightMode: _isPullUpExercise(exerciseName) || _isAbsExercise(exerciseName),
-            isTimeMode: _getDefaultTimeMode(exerciseName),
+            isTimeMode: lastIsTimeMode ?? _getDefaultTimeMode(exerciseName),  // ✅ v1.0.176: templateData から is_time_mode を優先
           ));
-          print('✅ $exerciseName に1セット追加（前回: ${lastWeight}kg × ${lastReps}reps）');
+          print('✅ $exerciseName に1セット追加（前回: ${lastWeight}kg × ${lastReps}reps, isTimeMode: ${lastIsTimeMode ?? _getDefaultTimeMode(exerciseName)}）');
         }
       });
       
