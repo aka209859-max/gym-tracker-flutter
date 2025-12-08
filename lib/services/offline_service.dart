@@ -273,15 +273,16 @@ class OfflineService {
   static Future<bool> isOnline() async {
     try {
       // ✅ v1.0.177: connectivity_plus で直接ネットワーク接続を確認
-      final ConnectivityResult connectivityResult = await Connectivity().checkConnectivity();
+      // ✅ v1.0.180: List<ConnectivityResult> を処理（connectivity_plus ^6.1.2）
+      final List<ConnectivityResult> connectivityResults = await Connectivity().checkConnectivity();
       
       // 接続なしの場合は即座にオフライン判定
-      if (connectivityResult == ConnectivityResult.none) {
+      if (connectivityResults.contains(ConnectivityResult.none) || connectivityResults.isEmpty) {
         debugPrint('📴 オフライン検出: ネットワーク接続なし');
         return false;
       }
       
-      debugPrint('🌐 ネットワーク接続あり: $connectivityResult');
+      debugPrint('🌐 ネットワーク接続あり: $connectivityResults');
       
       // ネットワーク接続があっても、Firestoreへの接続を確認（タイムアウト短縮）
       try {
