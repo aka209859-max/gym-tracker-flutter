@@ -48,6 +48,11 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
   // サブスクリプションサービス
   final SubscriptionService _subscriptionService = SubscriptionService();
   final AICreditService _creditService = AICreditService();
+  
+  // v1.0.192: レート制限対策
+  static DateTime? _lastRequestTime;
+  static int _requestCountInLastMinute = 0;
+  static const int _maxRequestsPerMinute = 15;
 
   @override
   void initState() {
@@ -579,6 +584,30 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
       }
     }
     
+    // v1.0.192: レート制限チェック（事前防止）
+    final now = DateTime.now();
+    if (_lastRequestTime != null) {
+      final timeSinceLastRequest = now.difference(_lastRequestTime!);
+      if (timeSinceLastRequest.inSeconds < 60) {
+        // 1分以内のリクエスト
+        _requestCountInLastMinute++;
+        if (_requestCountInLastMinute >= _maxRequestsPerMinute) {
+          // レート制限に達した
+          final waitSeconds = 60 - timeSinceLastRequest.inSeconds;
+          setState(() {
+            _errorMessage = '⏱️ リクエスト制限に達しました\n\n'
+                'あと${waitSeconds}秒お待ちください。\n'
+                'AIメニュー生成は1分間に最大15回までです。';
+          });
+          return;
+        }
+      } else {
+        // 1分以上経過したのでカウンターリセット
+        _requestCountInLastMinute = 0;
+      }
+    }
+    _lastRequestTime = now;
+    
     setState(() {
       _isGenerating = true;
       _errorMessage = null;
@@ -635,13 +664,43 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
         final duration = DateTime.now().difference(startTime);
         AppLogger.performance('AI Menu Generation', duration);
         AppLogger.info('メニュー生成成功', tag: 'AI_COACHING');
+      } else if (response.statusCode == 429) {
+        // v1.0.192: レート制限エラー（Too Many Requests）
+        AppLogger.warning('Gemini API レート制限: 429 Too Many Requests', tag: 'AI_COACHING');
+        throw Exception('RATE_LIMIT');
+      } else if (response.statusCode == 503) {
+        // サービス一時停止
+        AppLogger.warning('Gemini API サービス停止: 503 Service Unavailable', tag: 'AI_COACHING');
+        throw Exception('SERVICE_UNAVAILABLE');
       } else {
-        throw Exception('API Error: ${response.statusCode}');
+        throw Exception('API_ERROR_${response.statusCode}');
       }
     } catch (e) {
       AppLogger.error('メニュー生成エラー', tag: 'AI_COACHING', error: e);
+      
+      // v1.0.192: ユーザーフレンドリーなエラーメッセージ
+      String userMessage;
+      if (e.toString().contains('RATE_LIMIT')) {
+        userMessage = '⏱️ リクエストが混み合っています\n\n'
+            'AIメニュー生成は1分間に15回までの制限があります。\n'
+            '少し時間をおいてから再度お試しください。\n\n'
+            '💡 ヒント: 広告視聴は月3回まで、Premium/Proプランなら無制限です。';
+      } else if (e.toString().contains('SERVICE_UNAVAILABLE')) {
+        userMessage = '🔧 AIサービスが一時的に利用できません\n\n'
+            'Gemini APIがメンテナンス中または高負荷状態です。\n'
+            'しばらく時間をおいてから再度お試しください。';
+      } else if (e.toString().contains('API_ERROR')) {
+        userMessage = '❌ AIサービスでエラーが発生しました\n\n'
+            'ネットワーク接続を確認してください。\n'
+            '問題が続く場合はお問い合わせください。';
+      } else {
+        userMessage = '❌ メニュー生成に失敗しました\n\n'
+            'ネットワーク接続を確認してください。\n'
+            '問題が続く場合はお問い合わせください。';
+      }
+      
       setState(() {
-        _errorMessage = 'メニュー生成に失敗しました: $e';
+        _errorMessage = userMessage;
         _isGenerating = false;
       });
     }
