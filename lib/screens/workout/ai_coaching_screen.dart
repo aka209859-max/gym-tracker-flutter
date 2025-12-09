@@ -345,10 +345,26 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                IconButton(
-                  icon: const Icon(Icons.save),
-                  onPressed: _saveMenu,
-                  tooltip: '保存',
+                Row(
+                  children: [
+                    // v1.0.189: 今日のメニューに追加ボタン
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.add_circle_outline, size: 18),
+                      label: const Text('今日に追加'),
+                      onPressed: _addToTodayMenu,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    IconButton(
+                      icon: const Icon(Icons.save),
+                      onPressed: _saveMenu,
+                      tooltip: '履歴に保存',
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -644,7 +660,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
       if (targetParts.isEmpty) {
         // 初心者のみ選択 → 全身トレーニング
         return '''
-あなたはプロのパーソナルトレーナーです。筋トレ初心者向けの全身トレーニングメニューを提案してください。
+あなたは GYM MATCH、AI搭載のパーソナルトレーニングアプリです。筋トレ初心者向けの全身トレーニングメニューを提案してください。
 
 【対象者】
 - 筋トレ初心者（ジム通い始めて1〜3ヶ月程度）
@@ -673,7 +689,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
       } else {
         // 初心者 + 部位指定 → その部位に特化した初心者メニュー
         return '''
-あなたはプロのパーソナルトレーナーです。筋トレ初心者向けの「${targetParts.join('、')}」トレーニングメニューを提案してください。
+あなたは GYM MATCH、AI搭載のパーソナルトレーニングアプリです。筋トレ初心者向けの「${targetParts.join('、')}」トレーニングメニューを提案してください。
 
 【対象者】
 - 筋トレ初心者（ジム通い始めて1〜3ヶ月程度）
@@ -703,7 +719,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
     } else {
       // 通常モード（初心者選択なし）
       return '''
-あなたはプロのパーソナルトレーナーです。以下の部位をトレーニングするための最適なメニューを提案してください。
+あなたは GYM MATCH、AI搭載のパーソナルトレーニングアプリです。以下の部位をトレーニングするための最適なメニューを提案してください。
 
 【トレーニング部位】
 ${bodyParts.join('、')}
@@ -726,6 +742,147 @@ ${bodyParts.join('、')}
 メニューを提案してください。
 ''';
     }
+  }
+
+  /// v1.0.190: 今日のメニューに追加（AIメニューを実際の種目セットとして解析）
+  Future<void> _addToTodayMenu() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null || _generatedMenu == null) return;
+
+      // AIメニューをテキスト形式で保存（コピー可能）
+      final today = DateTime.now();
+      final todayDate = DateTime(today.year, today.month, today.day);
+      
+      // 選択された部位を取得
+      final selectedParts = _selectedBodyParts.entries
+          .where((e) => e.value)
+          .map((e) => e.key)
+          .toList();
+      
+      final muscleGroup = selectedParts.isNotEmpty ? selectedParts.first : '全身';
+      
+      // v1.0.190: AIメニューから種目を抽出してセット配列を作成
+      final parsedSets = _parseAIMenuToSets(_generatedMenu!);
+      
+      // AIメニューをFirestoreに保存（解析済みセットとして）
+      await FirebaseFirestore.instance
+          .collection('workout_logs')
+          .add({
+        'user_id': user.uid,
+        'muscle_group': muscleGroup,
+        'date': Timestamp.fromDate(todayDate),
+        'start_time': Timestamp.fromDate(today),
+        'end_time': Timestamp.fromDate(today),
+        'sets': parsedSets, // v1.0.190: 解析済みセットリスト（ユーザーが重さを変更可能）
+        'ai_menu': _generatedMenu, // AIが生成したメニュー全文を保存
+        'ai_body_parts': selectedParts,
+        'created_at': FieldValue.serverTimestamp(),
+        'is_ai_generated': true, // AIメニューであることを示すフラグ
+      });
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Row(
+              children: [
+                Icon(Icons.check_circle, color: Colors.white),
+                SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    '✅ 今日のメニューに追加しました！\nホーム画面で詳細を確認し、重さや回数を調整してください。',
+                  ),
+                ),
+              ],
+            ),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 4),
+          ),
+        );
+        
+        // ホーム画面に戻る（オプション）
+        // Navigator.pop(context, true);
+      }
+
+      debugPrint('✅ 今日のメニューに追加成功');
+    } catch (e) {
+      debugPrint('❌ 今日のメニュー追加エラー: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('追加に失敗しました: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
+  /// v1.0.190: AIメニューテキストから種目セットを解析
+  /// 
+  /// 解析ルール:
+  /// - 「ベンチプレス 3セット × 10-12回」→ 3セット分のデータ作成
+  /// - 「スクワット 4セット × 8-10回」→ 4セット分のデータ作成
+  /// - 回数は中央値を採用（10-12回 → 11回）
+  /// - 重さは0kg（ユーザーが後で設定）
+  List<Map<String, dynamic>> _parseAIMenuToSets(String menuText) {
+    final List<Map<String, dynamic>> sets = [];
+    final lines = menuText.split('\n');
+    
+    // 種目名パターン: 「ベンチプレス」「スクワット」など
+    final exercisePattern = RegExp(
+      r'^[・*-]?\s*([^0-9：:（(]+?)\s*[：:]?\s*(\d+)\s*セット',
+      caseSensitive: false,
+    );
+    
+    // 回数パターン: 「10回」「10-12回」「8~10回」
+    final repsPattern = RegExp(r'(\d+)(?:[-~～]\d+)?\s*回');
+    
+    // 秒数パターン: 「30秒」「60秒」
+    final secondsPattern = RegExp(r'(\d+)\s*秒');
+    
+    for (final line in lines) {
+      final exerciseMatch = exercisePattern.firstMatch(line);
+      if (exerciseMatch == null) continue;
+      
+      final exerciseName = exerciseMatch.group(1)!.trim();
+      final setCount = int.tryParse(exerciseMatch.group(2)!) ?? 3;
+      
+      // 回数または秒数を抽出
+      int reps = 10; // デフォルト10回
+      bool isTimeMode = false;
+      
+      final secondsMatch = secondsPattern.firstMatch(line);
+      if (secondsMatch != null) {
+        reps = int.tryParse(secondsMatch.group(1)!) ?? 30;
+        isTimeMode = true;
+      } else {
+        final repsMatch = repsPattern.firstMatch(line);
+        if (repsMatch != null) {
+          reps = int.tryParse(repsMatch.group(1)!) ?? 10;
+        }
+      }
+      
+      // 指定されたセット数分のデータを作成
+      for (int i = 0; i < setCount; i++) {
+        sets.add({
+          'exercise_name': exerciseName,
+          'reps': reps,
+          'weight': 0.0, // ユーザーが後で設定
+          'is_completed': false,
+          'is_time_mode': isTimeMode, // v1.0.186: 秒数/回数モード
+        });
+      }
+    }
+    
+    // 解析できた種目がない場合は空のリストを返す
+    if (sets.isEmpty) {
+      debugPrint('⚠️ AIメニューから種目を解析できませんでした');
+    } else {
+      debugPrint('✅ ${sets.length}セットを解析しました');
+    }
+    
+    return sets;
   }
 
   /// メニュー保存
