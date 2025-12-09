@@ -15,7 +15,7 @@ class AIPredictionService {
   // Gemini API設定（AIコーチ専用キー）
   static const String _apiKey = 'AIzaSyBoexxWDV_0QIH-ePaMUy_euWuYQGcqvEo';
   static const String _apiUrl =
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 
   /// ユーザーの成長を予測
   /// 
@@ -175,7 +175,10 @@ ${ScientificDatabase.getSystemPrompt()}
     try {
       final response = await http.post(
         Uri.parse('$_apiUrl?key=$_apiKey'),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Ios-Bundle-Identifier': 'com.nexa.gymmatch',
+        },
         body: jsonEncode({
           'contents': [
             {

@@ -71,7 +71,10 @@ class WorkoutImportService {
         // Gemini APIリクエスト
         final response = await http.post(
           Uri.parse('$_apiUrl?key=$_apiKey'),
-          headers: {'Content-Type': 'application/json'},
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Ios-Bundle-Identifier': 'com.nexa.gymmatch',
+          },
           body: jsonEncode({
             'contents': [
               {
