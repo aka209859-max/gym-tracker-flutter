@@ -12,7 +12,7 @@ import 'ai_response_optimizer.dart';
 /// トレーニング効果分析サービスクラス
 class TrainingAnalysisService {
   // Gemini API設定（AIコーチ専用キー）
-  static const String _apiKey = 'AIzaSyA9XmQSHA1llGg7gihqjmOOIaLA856fkLc';
+  static const String _apiKey = 'AIzaSyBoexxWDV_0QIH-ePaMUy_euWuYQGcqvEo';
   static const String _apiUrl =
       'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 

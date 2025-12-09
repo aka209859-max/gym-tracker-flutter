@@ -216,7 +216,7 @@ class GooglePlace {
       'phoneNumber': null, // Google Places API Details呼び出しが必要
       'openingHours': openNow == true ? '営業中' : openNow == false ? '営業時間外' : '営業時間不明',
       'imageUrl': photoReference != null 
-          ? 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=$photoReference&key=AIzaSyA9XmQSHA1llGg7gihqjmOOIaLA856fkLc'
+          ? 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=$photoReference&key=AIzaSyBRJG8v0euVbxbMNbwXownQJA3_Ra8EzMM'
           : 'https://via.placeholder.com/400x300?text=No+Image',
     };
   }

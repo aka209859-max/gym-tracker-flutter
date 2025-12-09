@@ -618,7 +618,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
 
       // Gemini 2.0 Flash API呼び出し
       final response = await http.post(
-        Uri.parse('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=AIzaSyA9XmQSHA1llGg7gihqjmOOIaLA856fkLc'),
+        Uri.parse('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=AIzaSyBoexxWDV_0QIH-ePaMUy_euWuYQGcqvEo'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'contents': [

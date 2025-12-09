@@ -362,7 +362,7 @@ class PartnerMergeService {
       rating: place.rating ?? 0.0,
       reviewCount: place.userRatingsTotal ?? 0,
       imageUrl: place.photoReference != null 
-          ? 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${place.photoReference}&key=AIzaSyA9XmQSHA1llGg7gihqjmOOIaLA856fkLc'
+          ? 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${place.photoReference}&key=AIzaSyBRJG8v0euVbxbMNbwXownQJA3_Ra8EzMM'
           : partnerData?['imageUrl'] as String? ?? 'https://via.placeholder.com/400x300?text=No+Image',
       createdAt: partnerData?['createdAt'] != null 
           ? (partnerData!['createdAt'] as Timestamp).toDate()

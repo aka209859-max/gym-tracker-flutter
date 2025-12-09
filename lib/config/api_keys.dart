@@ -5,7 +5,7 @@
 /// - APIキーはHTTP Refererで制限されています
 class ApiKeys {
   // Google Places API Key
-  static const String googlePlacesApiKey = 'AIzaSyA9XmQSHA1llGg7gihqjmOOIaLA856fkLc';
+  static const String googlePlacesApiKey = 'AIzaSyBRJG8v0euVbxbMNbwXownQJA3_Ra8EzMM';
   
   // Google Places API Base URL
   static const String placesApiBaseUrl = 'https://maps.googleapis.com/maps/api/place';
