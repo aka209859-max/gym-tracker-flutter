@@ -14,7 +14,7 @@ class TrainingAnalysisService {
   // Gemini API設定（AIコーチ専用キー）
   static const String _apiKey = 'AIzaSyBoexxWDV_0QIH-ePaMUy_euWuYQGcqvEo';
   static const String _apiUrl =
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent';
 
   /// トレーニング履歴から効果を分析
   /// 
