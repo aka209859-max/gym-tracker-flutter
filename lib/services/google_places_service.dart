@@ -58,7 +58,12 @@ class GooglePlacesService {
         print('   Proxy URL: $url');
       }
 
-      final response = await http.get(url);
+      final response = await http.get(
+        url,
+        headers: {
+          'X-Ios-Bundle-Identifier': 'com.nexa.gymmatch',
+        },
+      );
 
       if (kDebugMode) {
         print('   Status Code: ${response.statusCode}');
@@ -193,7 +198,12 @@ class GooglePlacesService {
         print('   Proxy URL: $url');
       }
 
-      final response = await http.get(url);
+      final response = await http.get(
+        url,
+        headers: {
+          'X-Ios-Bundle-Identifier': 'com.nexa.gymmatch',
+        },
+      );
 
       if (kDebugMode) {
         print('   Status Code: ${response.statusCode}');
@@ -292,7 +302,12 @@ class GooglePlacesService {
         print('   Expected Cost: ${includePhotos ? "\$0.003" : "\$0.000017"} per request');
       }
 
-      final response = await http.get(url);
+      final response = await http.get(
+        url,
+        headers: {
+          'X-Ios-Bundle-Identifier': 'com.nexa.gymmatch',
+        },
+      );
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
