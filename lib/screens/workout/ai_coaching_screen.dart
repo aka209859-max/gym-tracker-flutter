@@ -573,9 +573,9 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
       final startTime = DateTime.now();
       ConsoleLogger.info('Gemini APIでメニュー生成開始: ${bodyParts.join(', ')}', tag: 'AI_COACHING');
 
-      // Gemini 2.0 Flash API呼び出し
+      // Gemini 2.5 Flash API呼び出し
       final response = await http.post(
-        Uri.parse('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=AIzaSyBoexxWDV_0QIH-ePaMUy_euWuYQGcqvEo'),
+        Uri.parse('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=AIzaSyBoexxWDV_0QIH-ePaMUy_euWuYQGcqvEo'),
         headers: {
           'Content-Type': 'application/json',
           'X-Ios-Bundle-Identifier': 'com.nexa.gymmatch',
