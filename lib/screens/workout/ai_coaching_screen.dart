@@ -48,11 +48,6 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
   // サブスクリプションサービス
   final SubscriptionService _subscriptionService = SubscriptionService();
   final AICreditService _creditService = AICreditService();
-  
-  // v1.0.192: レート制限対策
-  static DateTime? _lastRequestTime;
-  static int _requestCountInLastMinute = 0;
-  static const int _maxRequestsPerMinute = 15;
 
   @override
   void initState() {
@@ -350,26 +345,10 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Row(
-                  children: [
-                    // v1.0.189: 今日のメニューに追加ボタン
-                    ElevatedButton.icon(
-                      icon: const Icon(Icons.add_circle_outline, size: 18),
-                      label: const Text('今日に追加'),
-                      onPressed: _addToTodayMenu,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    IconButton(
-                      icon: const Icon(Icons.save),
-                      onPressed: _saveMenu,
-                      tooltip: '履歴に保存',
-                    ),
-                  ],
+                IconButton(
+                  icon: const Icon(Icons.save),
+                  onPressed: _saveMenu,
+                  tooltip: '保存',
                 ),
               ],
             ),
@@ -584,28 +563,6 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
       }
     }
     
-    // v1.0.192: レート制限チェック（事前防止）
-    final now = DateTime.now();
-    if (_lastRequestTime != null) {
-      final timeSinceLastRequest = now.difference(_lastRequestTime!);
-      if (timeSinceLastRequest.inSeconds < 60) {
-        // 1分以内のリクエスト
-        _requestCountInLastMinute++;
-        if (_requestCountInLastMinute >= _maxRequestsPerMinute) {
-          // レート制限に達した
-          final waitSeconds = 60 - timeSinceLastRequest.inSeconds;
-          setState(() {
-            _errorMessage = '🕐 リクエストが混み合っています\nあと${waitSeconds}秒お待ちください';
-          });
-          return;
-        }
-      } else {
-        // 1分以上経過したのでカウンターリセット
-        _requestCountInLastMinute = 0;
-      }
-    }
-    _lastRequestTime = now;
-    
     setState(() {
       _isGenerating = true;
       _errorMessage = null;
@@ -625,7 +582,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
             {
               'parts': [
                 {
-                  'text': await _buildPrompt(bodyParts),
+                  'text': _buildPrompt(bodyParts),
                 }
               ]
             }
@@ -662,91 +619,37 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
         final duration = DateTime.now().difference(startTime);
         AppLogger.performance('AI Menu Generation', duration);
         AppLogger.info('メニュー生成成功', tag: 'AI_COACHING');
-      } else if (response.statusCode == 429) {
-        // v1.0.192: レート制限エラー（Too Many Requests）
-        AppLogger.warning('Gemini API レート制限: 429 Too Many Requests', tag: 'AI_COACHING');
-        throw Exception('RATE_LIMIT');
-      } else if (response.statusCode == 503) {
-        // サービス一時停止
-        AppLogger.warning('Gemini API サービス停止: 503 Service Unavailable', tag: 'AI_COACHING');
-        throw Exception('SERVICE_UNAVAILABLE');
       } else {
-        throw Exception('API_ERROR_${response.statusCode}');
+        throw Exception('API Error: ${response.statusCode}');
       }
     } catch (e) {
       AppLogger.error('メニュー生成エラー', tag: 'AI_COACHING', error: e);
-      
-      // v1.0.193: シンプルで分かりやすいエラーメッセージ
-      String userMessage;
-      if (e.toString().contains('RATE_LIMIT')) {
-        userMessage = '🕐 リクエストが混み合っています\n1分後に再度お試しください';
-      } else if (e.toString().contains('SERVICE_UNAVAILABLE')) {
-        userMessage = '🕐 リクエストが混み合っています\n1分後に再度お試しください';
-      } else if (e.toString().contains('API_ERROR')) {
-        userMessage = '❌ メニュー生成に失敗しました\n\nネットワーク接続を確認してください';
-      } else {
-        userMessage = '❌ メニュー生成に失敗しました\n\nネットワーク接続を確認してください';
-      }
-      
       setState(() {
-        _errorMessage = userMessage;
+        _errorMessage = 'メニュー生成に失敗しました: $e';
         _isGenerating = false;
       });
     }
   }
 
-  /// v1.0.191: プロンプト構築（ユーザーデータ統合版）
-  Future<String> _buildPrompt(List<String> bodyParts) async {
+  /// プロンプト構築
+  String _buildPrompt(List<String> bodyParts) {
     // 初心者モード判定
     final isBeginner = bodyParts.contains('初心者');
     
     // 初心者以外の部位を抽出
     final targetParts = bodyParts.where((part) => part != '初心者').toList();
     
-    // v1.0.191: ユーザーデータを取得して最適化
-    final userContext = await _getUserContextForAI();
-    
     if (isBeginner) {
       // 初心者向け専用プロンプト
       if (targetParts.isEmpty) {
         // 初心者のみ選択 → 全身トレーニング
-        String prompt = '''
-あなたはプロのパーソナルトレーナー「GYM MATCH」です。筋トレ初心者向けの全身トレーニングメニューを提案してください。
-
-**重要**: 冒頭の挨拶では必ず「こんにちは！パーソナルトレーナーのGYM MATCHです。」と自己紹介してください。[あなたの名前]などのプレースホルダーは使わないでください。
+        return '''
+あなたはプロのパーソナルトレーナーです。筋トレ初心者向けの全身トレーニングメニューを提案してください。
 
 【対象者】
 - 筋トレ初心者（ジム通い始めて1〜3ヶ月程度）
 - 基礎体力づくりを目指す方
-- トレーニングフォームを学びたい方''';
-
-        // v1.0.191: ユーザーデータがあれば追加
-        if (userContext.isNotEmpty) {
-          prompt += '\n\n【ユーザー情報】';
-          if (userContext['age'] != null) {
-            prompt += '\n- 年齢: ${userContext['age']}歳';
-          }
-          if (userContext['training_experience_years'] != null) {
-            prompt += '\n- トレーニング経験: ${userContext['training_experience_years']}年';
-          }
-          if (userContext['weight'] != null) {
-            prompt += '\n- 体重: ${userContext['weight']!.toStringAsFixed(1)}kg';
-          }
-          if (userContext['body_fat'] != null) {
-            prompt += '\n- 体脂肪率: ${userContext['body_fat']!.toStringAsFixed(1)}%';
-          }
-          if (userContext['sleep_hours'] != null) {
-            prompt += '\n- 昨夜の睡眠: ${userContext['sleep_hours']!.toStringAsFixed(1)}時間';
-          }
-          if (userContext['recent_weights'] != null && (userContext['recent_weights'] as Map).isNotEmpty) {
-            prompt += '\n\n【最近の実績重量（直近1週間の平均）】';
-            (userContext['recent_weights'] as Map<String, double>).forEach((exercise, weight) {
-              prompt += '\n- $exercise: ${weight.toStringAsFixed(1)}kg';
-            });
-          }
-        }
-        
-        prompt += '''
+- トレーニングフォームを学びたい方
 
 【提案形式】
 各種目について以下の情報を含めてください：
@@ -767,13 +670,10 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
 
 初心者が安全に取り組める全身トレーニングメニューを提案してください。
 ''';
-        return prompt;
       } else {
         // 初心者 + 部位指定 → その部位に特化した初心者メニュー
-        String prompt = '''
-あなたはプロのパーソナルトレーナー「GYM MATCH」です。筋トレ初心者向けの「${targetParts.join('、')}」トレーニングメニューを提案してください。
-
-**重要**: 冒頭の挨拶では必ず「こんにちは！パーソナルトレーナーのGYM MATCHです。」と自己紹介してください。[あなたの名前]などのプレースホルダーは使わないでください。
+        return '''
+あなたはプロのパーソナルトレーナーです。筋トレ初心者向けの「${targetParts.join('、')}」トレーニングメニューを提案してください。
 
 【対象者】
 - 筋トレ初心者（ジム通い始めて1〜3ヶ月程度）
@@ -799,14 +699,11 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
 
 初心者が安全に取り組める${targetParts.join('、')}トレーニングメニューを提案してください。
 ''';
-        return prompt;
       }
     } else {
       // 通常モード（初心者選択なし）
-      String prompt = '''
-あなたはプロのパーソナルトレーナー「GYM MATCH」です。以下の部位をトレーニングするための最適なメニューを提案してください。
-
-**重要**: 冒頭の挨拶では必ず「こんにちは！パーソナルトレーナーのGYM MATCHです。」と自己紹介してください。[あなたの名前]などのプレースホルダーは使わないでください。
+      return '''
+あなたはプロのパーソナルトレーナーです。以下の部位をトレーニングするための最適なメニューを提案してください。
 
 【トレーニング部位】
 ${bodyParts.join('、')}
@@ -828,235 +725,7 @@ ${bodyParts.join('、')}
 
 メニューを提案してください。
 ''';
-      return prompt;
     }
-  }
-
-  /// v1.0.191: ユーザーコンテキストを取得（AI最適化用）
-  Future<Map<String, dynamic>> _getUserContextForAI() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null) return {};
-    
-    try {
-      // 1. ユーザープロファイル取得
-      Map<String, dynamic> profile = {};
-      try {
-        final profileDoc = await FirebaseFirestore.instance
-            .collection('users')
-            .doc(user.uid)
-            .get();
-        if (profileDoc.exists) {
-          profile = profileDoc.data() ?? {};
-        }
-      } catch (e) {
-        debugPrint('⚠️ プロファイル取得エラー: $e');
-      }
-      
-      // 2. 最新の体重・体脂肪率取得
-      Map<String, dynamic> bodyData = {};
-      try {
-        final bodySnapshot = await FirebaseFirestore.instance
-            .collection('body_measurements')
-            .where('user_id', isEqualTo: user.uid)
-            .orderBy('date', descending: true)
-            .limit(1)
-            .get();
-        if (bodySnapshot.docs.isNotEmpty) {
-          bodyData = bodySnapshot.docs.first.data();
-        }
-      } catch (e) {
-        debugPrint('⚠️ 体組成データ取得エラー: $e');
-      }
-      
-      // 3. 最近のトレーニング実績（直近1週間）
-      Map<String, double> recentWeights = {};
-      try {
-        final weekAgo = DateTime.now().subtract(const Duration(days: 7));
-        final workoutSnapshot = await FirebaseFirestore.instance
-            .collection('workout_logs')
-            .where('user_id', isEqualTo: user.uid)
-            .where('date', isGreaterThan: Timestamp.fromDate(weekAgo))
-            .get();
-        
-        // 種目ごとの平均重量を計算
-        Map<String, List<double>> exerciseWeights = {};
-        for (final doc in workoutSnapshot.docs) {
-          final sets = doc.data()['sets'] as List<dynamic>?;
-          if (sets == null) continue;
-          
-          for (final set in sets) {
-            final exerciseName = set['exercise_name'] as String?;
-            final weight = (set['weight'] as num?)?.toDouble();
-            if (exerciseName != null && weight != null && weight > 0) {
-              exerciseWeights.putIfAbsent(exerciseName, () => []).add(weight);
-            }
-          }
-        }
-        
-        // 平均重量を計算
-        exerciseWeights.forEach((exercise, weights) {
-          if (weights.isNotEmpty) {
-            recentWeights[exercise] = weights.reduce((a, b) => a + b) / weights.length;
-          }
-        });
-      } catch (e) {
-        debugPrint('⚠️ トレーニング履歴取得エラー: $e');
-      }
-      
-      return {
-        'age': profile['age'] as int? ?? 30,
-        'training_experience_years': profile['training_experience_years'] as int? ?? 1,
-        'sleep_hours': (profile['sleep_hours_last_night'] as num?)?.toDouble() ?? 7.0,
-        'protein_intake': (profile['daily_protein_intake_grams'] as num?)?.toDouble() ?? 100.0,
-        'weight': (bodyData['weight'] as num?)?.toDouble(),
-        'body_fat': (bodyData['body_fat_percentage'] as num?)?.toDouble(),
-        'recent_weights': recentWeights,
-      };
-    } catch (e) {
-      debugPrint('❌ ユーザーコンテキスト取得エラー: $e');
-      return {};
-    }
-  }
-
-  /// v1.0.190: 今日のメニューに追加（AIメニューを実際の種目セットとして解析）
-  Future<void> _addToTodayMenu() async {
-    try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user == null || _generatedMenu == null) return;
-
-      // AIメニューをテキスト形式で保存（コピー可能）
-      final today = DateTime.now();
-      final todayDate = DateTime(today.year, today.month, today.day);
-      
-      // 選択された部位を取得
-      final selectedParts = _selectedBodyParts.entries
-          .where((e) => e.value)
-          .map((e) => e.key)
-          .toList();
-      
-      final muscleGroup = selectedParts.isNotEmpty ? selectedParts.first : '全身';
-      
-      // v1.0.190: AIメニューから種目を抽出してセット配列を作成
-      final parsedSets = _parseAIMenuToSets(_generatedMenu!);
-      
-      // AIメニューをFirestoreに保存（解析済みセットとして）
-      await FirebaseFirestore.instance
-          .collection('workout_logs')
-          .add({
-        'user_id': user.uid,
-        'muscle_group': muscleGroup,
-        'date': Timestamp.fromDate(todayDate),
-        'start_time': Timestamp.fromDate(today),
-        'end_time': Timestamp.fromDate(today),
-        'sets': parsedSets, // v1.0.190: 解析済みセットリスト（ユーザーが重さを変更可能）
-        'ai_menu': _generatedMenu, // AIが生成したメニュー全文を保存
-        'ai_body_parts': selectedParts,
-        'created_at': FieldValue.serverTimestamp(),
-        'is_ai_generated': true, // AIメニューであることを示すフラグ
-      });
-
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Row(
-              children: [
-                Icon(Icons.check_circle, color: Colors.white),
-                SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    '✅ 今日のメニューに追加しました！\nホーム画面で詳細を確認し、重さや回数を調整してください。',
-                  ),
-                ),
-              ],
-            ),
-            backgroundColor: Colors.green,
-            duration: Duration(seconds: 4),
-          ),
-        );
-        
-        // ホーム画面に戻る（オプション）
-        // Navigator.pop(context, true);
-      }
-
-      debugPrint('✅ 今日のメニューに追加成功');
-    } catch (e) {
-      debugPrint('❌ 今日のメニュー追加エラー: $e');
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('追加に失敗しました: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    }
-  }
-
-  /// v1.0.190: AIメニューテキストから種目セットを解析
-  /// 
-  /// 解析ルール:
-  /// - 「ベンチプレス 3セット × 10-12回」→ 3セット分のデータ作成
-  /// - 「スクワット 4セット × 8-10回」→ 4セット分のデータ作成
-  /// - 回数は中央値を採用（10-12回 → 11回）
-  /// - 重さは0kg（ユーザーが後で設定）
-  List<Map<String, dynamic>> _parseAIMenuToSets(String menuText) {
-    final List<Map<String, dynamic>> sets = [];
-    final lines = menuText.split('\n');
-    
-    // 種目名パターン: 「ベンチプレス」「スクワット」など
-    final exercisePattern = RegExp(
-      r'^[・*-]?\s*([^0-9：:（(]+?)\s*[：:]?\s*(\d+)\s*セット',
-      caseSensitive: false,
-    );
-    
-    // 回数パターン: 「10回」「10-12回」「8~10回」
-    final repsPattern = RegExp(r'(\d+)(?:[-~～]\d+)?\s*回');
-    
-    // 秒数パターン: 「30秒」「60秒」
-    final secondsPattern = RegExp(r'(\d+)\s*秒');
-    
-    for (final line in lines) {
-      final exerciseMatch = exercisePattern.firstMatch(line);
-      if (exerciseMatch == null) continue;
-      
-      final exerciseName = exerciseMatch.group(1)!.trim();
-      final setCount = int.tryParse(exerciseMatch.group(2)!) ?? 3;
-      
-      // 回数または秒数を抽出
-      int reps = 10; // デフォルト10回
-      bool isTimeMode = false;
-      
-      final secondsMatch = secondsPattern.firstMatch(line);
-      if (secondsMatch != null) {
-        reps = int.tryParse(secondsMatch.group(1)!) ?? 30;
-        isTimeMode = true;
-      } else {
-        final repsMatch = repsPattern.firstMatch(line);
-        if (repsMatch != null) {
-          reps = int.tryParse(repsMatch.group(1)!) ?? 10;
-        }
-      }
-      
-      // 指定されたセット数分のデータを作成
-      for (int i = 0; i < setCount; i++) {
-        sets.add({
-          'exercise_name': exerciseName,
-          'reps': reps,
-          'weight': 0.0, // ユーザーが後で設定
-          'is_completed': false,
-          'is_time_mode': isTimeMode, // v1.0.186: 秒数/回数モード
-        });
-      }
-    }
-    
-    // 解析できた種目がない場合は空のリストを返す
-    if (sets.isEmpty) {
-      debugPrint('⚠️ AIメニューから種目を解析できませんでした');
-    } else {
-      debugPrint('✅ ${sets.length}セットを解析しました');
-    }
-    
-    return sets;
   }
 
   /// メニュー保存
