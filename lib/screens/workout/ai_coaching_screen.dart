@@ -598,7 +598,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
             {
               'parts': [
                 {
-                  'text': _buildPrompt(bodyParts),
+                  'text': await _buildPrompt(bodyParts),
                 }
               ]
             }
@@ -647,25 +647,58 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
     }
   }
 
-  /// プロンプト構築
-  String _buildPrompt(List<String> bodyParts) {
+  /// v1.0.191: プロンプト構築（ユーザーデータ統合版）
+  Future<String> _buildPrompt(List<String> bodyParts) async {
     // 初心者モード判定
     final isBeginner = bodyParts.contains('初心者');
     
     // 初心者以外の部位を抽出
     final targetParts = bodyParts.where((part) => part != '初心者').toList();
     
+    // v1.0.191: ユーザーデータを取得して最適化
+    final userContext = await _getUserContextForAI();
+    
     if (isBeginner) {
       // 初心者向け専用プロンプト
       if (targetParts.isEmpty) {
         // 初心者のみ選択 → 全身トレーニング
-        return '''
-あなたは GYM MATCH、AI搭載のパーソナルトレーニングアプリです。筋トレ初心者向けの全身トレーニングメニューを提案してください。
+        String prompt = '''
+あなたはプロのパーソナルトレーナー「GYM MATCH」です。筋トレ初心者向けの全身トレーニングメニューを提案してください。
+
+**重要**: 冒頭の挨拶では必ず「こんにちは！パーソナルトレーナーのGYM MATCHです。」と自己紹介してください。[あなたの名前]などのプレースホルダーは使わないでください。
 
 【対象者】
 - 筋トレ初心者（ジム通い始めて1〜3ヶ月程度）
 - 基礎体力づくりを目指す方
-- トレーニングフォームを学びたい方
+- トレーニングフォームを学びたい方''';
+
+        // v1.0.191: ユーザーデータがあれば追加
+        if (userContext.isNotEmpty) {
+          prompt += '\n\n【ユーザー情報】';
+          if (userContext['age'] != null) {
+            prompt += '\n- 年齢: ${userContext['age']}歳';
+          }
+          if (userContext['training_experience_years'] != null) {
+            prompt += '\n- トレーニング経験: ${userContext['training_experience_years']}年';
+          }
+          if (userContext['weight'] != null) {
+            prompt += '\n- 体重: ${userContext['weight']!.toStringAsFixed(1)}kg';
+          }
+          if (userContext['body_fat'] != null) {
+            prompt += '\n- 体脂肪率: ${userContext['body_fat']!.toStringAsFixed(1)}%';
+          }
+          if (userContext['sleep_hours'] != null) {
+            prompt += '\n- 昨夜の睡眠: ${userContext['sleep_hours']!.toStringAsFixed(1)}時間';
+          }
+          if (userContext['recent_weights'] != null && (userContext['recent_weights'] as Map).isNotEmpty) {
+            prompt += '\n\n【最近の実績重量（直近1週間の平均）】';
+            (userContext['recent_weights'] as Map<String, double>).forEach((exercise, weight) {
+              prompt += '\n- $exercise: ${weight.toStringAsFixed(1)}kg';
+            });
+          }
+        }
+        
+        prompt += '''
 
 【提案形式】
 各種目について以下の情報を含めてください：
@@ -686,10 +719,13 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
 
 初心者が安全に取り組める全身トレーニングメニューを提案してください。
 ''';
+        return prompt;
       } else {
         // 初心者 + 部位指定 → その部位に特化した初心者メニュー
-        return '''
-あなたは GYM MATCH、AI搭載のパーソナルトレーニングアプリです。筋トレ初心者向けの「${targetParts.join('、')}」トレーニングメニューを提案してください。
+        String prompt = '''
+あなたはプロのパーソナルトレーナー「GYM MATCH」です。筋トレ初心者向けの「${targetParts.join('、')}」トレーニングメニューを提案してください。
+
+**重要**: 冒頭の挨拶では必ず「こんにちは！パーソナルトレーナーのGYM MATCHです。」と自己紹介してください。[あなたの名前]などのプレースホルダーは使わないでください。
 
 【対象者】
 - 筋トレ初心者（ジム通い始めて1〜3ヶ月程度）
@@ -715,11 +751,14 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
 
 初心者が安全に取り組める${targetParts.join('、')}トレーニングメニューを提案してください。
 ''';
+        return prompt;
       }
     } else {
       // 通常モード（初心者選択なし）
-      return '''
-あなたは GYM MATCH、AI搭載のパーソナルトレーニングアプリです。以下の部位をトレーニングするための最適なメニューを提案してください。
+      String prompt = '''
+あなたはプロのパーソナルトレーナー「GYM MATCH」です。以下の部位をトレーニングするための最適なメニューを提案してください。
+
+**重要**: 冒頭の挨拶では必ず「こんにちは！パーソナルトレーナーのGYM MATCHです。」と自己紹介してください。[あなたの名前]などのプレースホルダーは使わないでください。
 
 【トレーニング部位】
 ${bodyParts.join('、')}
@@ -741,6 +780,93 @@ ${bodyParts.join('、')}
 
 メニューを提案してください。
 ''';
+      return prompt;
+    }
+  }
+
+  /// v1.0.191: ユーザーコンテキストを取得（AI最適化用）
+  Future<Map<String, dynamic>> _getUserContextForAI() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return {};
+    
+    try {
+      // 1. ユーザープロファイル取得
+      Map<String, dynamic> profile = {};
+      try {
+        final profileDoc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .get();
+        if (profileDoc.exists) {
+          profile = profileDoc.data() ?? {};
+        }
+      } catch (e) {
+        debugPrint('⚠️ プロファイル取得エラー: $e');
+      }
+      
+      // 2. 最新の体重・体脂肪率取得
+      Map<String, dynamic> bodyData = {};
+      try {
+        final bodySnapshot = await FirebaseFirestore.instance
+            .collection('body_measurements')
+            .where('user_id', isEqualTo: user.uid)
+            .orderBy('date', descending: true)
+            .limit(1)
+            .get();
+        if (bodySnapshot.docs.isNotEmpty) {
+          bodyData = bodySnapshot.docs.first.data();
+        }
+      } catch (e) {
+        debugPrint('⚠️ 体組成データ取得エラー: $e');
+      }
+      
+      // 3. 最近のトレーニング実績（直近1週間）
+      Map<String, double> recentWeights = {};
+      try {
+        final weekAgo = DateTime.now().subtract(const Duration(days: 7));
+        final workoutSnapshot = await FirebaseFirestore.instance
+            .collection('workout_logs')
+            .where('user_id', isEqualTo: user.uid)
+            .where('date', isGreaterThan: Timestamp.fromDate(weekAgo))
+            .get();
+        
+        // 種目ごとの平均重量を計算
+        Map<String, List<double>> exerciseWeights = {};
+        for (final doc in workoutSnapshot.docs) {
+          final sets = doc.data()['sets'] as List<dynamic>?;
+          if (sets == null) continue;
+          
+          for (final set in sets) {
+            final exerciseName = set['exercise_name'] as String?;
+            final weight = (set['weight'] as num?)?.toDouble();
+            if (exerciseName != null && weight != null && weight > 0) {
+              exerciseWeights.putIfAbsent(exerciseName, () => []).add(weight);
+            }
+          }
+        }
+        
+        // 平均重量を計算
+        exerciseWeights.forEach((exercise, weights) {
+          if (weights.isNotEmpty) {
+            recentWeights[exercise] = weights.reduce((a, b) => a + b) / weights.length;
+          }
+        });
+      } catch (e) {
+        debugPrint('⚠️ トレーニング履歴取得エラー: $e');
+      }
+      
+      return {
+        'age': profile['age'] as int? ?? 30,
+        'training_experience_years': profile['training_experience_years'] as int? ?? 1,
+        'sleep_hours': (profile['sleep_hours_last_night'] as num?)?.toDouble() ?? 7.0,
+        'protein_intake': (profile['daily_protein_intake_grams'] as num?)?.toDouble() ?? 100.0,
+        'weight': (bodyData['weight'] as num?)?.toDouble(),
+        'body_fat': (bodyData['body_fat_percentage'] as num?)?.toDouble(),
+        'recent_weights': recentWeights,
+      };
+    } catch (e) {
+      debugPrint('❌ ユーザーコンテキスト取得エラー: $e');
+      return {};
     }
   }
 
