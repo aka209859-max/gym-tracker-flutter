@@ -579,7 +579,8 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
         Uri.parse('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=AIzaSyBoexxWDV_0QIH-ePaMUy_euWuYQGcqvEo'),
         headers: {
           'Content-Type': 'application/json',
-          'X-Ios-Bundle-Identifier': 'com.nexa.gymmatch',
+          // Note: Gemini API does NOT support X-Ios-Bundle-Identifier header
+          // Use API Key restrictions in Google Cloud Console instead
         },
         body: jsonEncode({
           'contents': [

@@ -177,7 +177,7 @@ ${ScientificDatabase.getSystemPrompt()}
         Uri.parse('$_apiUrl?key=$_apiKey'),
         headers: {
           'Content-Type': 'application/json',
-          'X-Ios-Bundle-Identifier': 'com.nexa.gymmatch',
+          // Note: Gemini API does NOT support X-Ios-Bundle-Identifier header
         },
         body: jsonEncode({
           'contents': [
