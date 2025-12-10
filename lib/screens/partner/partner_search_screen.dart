@@ -617,7 +617,10 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                     Wrap(
                       spacing: 4,
                       runSpacing: 4,
-                      children: profile.trainingGoals.take(3).map((goal) {
+                      children: profile.trainingGoals
+                          .where((goal) => goal != null && goal.isNotEmpty)
+                          .take(3)
+                          .map((goal) {
                         return Chip(
                           label: Text(
                             _trainingGoals[goal] ?? goal,

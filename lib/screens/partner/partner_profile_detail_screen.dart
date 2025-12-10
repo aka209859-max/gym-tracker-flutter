@@ -158,9 +158,12 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                   
                   _buildSection(
                     'トレーニング目標',
-                    widget.profile.trainingGoals
-                        .map((goal) => _trainingGoals[goal] ?? goal)
-                        .join(', '),
+                    widget.profile.trainingGoals.isNotEmpty
+                        ? widget.profile.trainingGoals
+                            .where((goal) => goal != null && goal.isNotEmpty)
+                            .map((goal) => _trainingGoals[goal] ?? goal)
+                            .join(', ')
+                        : '未設定',
                   ),
                   const SizedBox(height: 24),
                   
@@ -172,23 +175,33 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                   
                   _buildSection(
                     '好きな部位',
-                    widget.profile.preferredExercises.join(', '),
+                    widget.profile.preferredExercises.isNotEmpty
+                        ? widget.profile.preferredExercises
+                            .where((ex) => ex != null && ex.isNotEmpty)
+                            .join(', ')
+                        : '未設定',
                   ),
                   const SizedBox(height: 24),
                   
                   _buildSection(
                     '利用可能な曜日',
-                    widget.profile.availableDays
-                        .map((day) => _weekDays[day] ?? day)
-                        .join('、'),
+                    widget.profile.availableDays.isNotEmpty
+                        ? widget.profile.availableDays
+                            .where((day) => day != null && day.isNotEmpty)
+                            .map((day) => _weekDays[day] ?? day)
+                            .join('、')
+                        : '未設定',
                   ),
                   const SizedBox(height: 24),
                   
                   _buildSection(
                     '利用可能な時間帯',
-                    widget.profile.availableTimeSlots
-                        .map((slot) => _timeSlots[slot] ?? slot)
-                        .join('、'),
+                    widget.profile.availableTimeSlots.isNotEmpty
+                        ? widget.profile.availableTimeSlots
+                            .where((slot) => slot != null && slot.isNotEmpty)
+                            .map((slot) => _timeSlots[slot] ?? slot)
+                            .join('、')
+                        : '未設定',
                   ),
                   const SizedBox(height: 24),
                   
