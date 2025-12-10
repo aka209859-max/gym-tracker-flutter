@@ -42,16 +42,21 @@ class WorkoutLog {
   }
 
   factory WorkoutLog.fromFirestore(Map<String, dynamic> data, String id) {
+    // 🔧 v1.0.216: user_id (snake_case) と userId (camelCase) の両方に対応
+    final userId = data['user_id'] as String? ?? data['userId'] as String? ?? '';
+    
+    // 🔧 v1.0.216: sets と exercises の両方に対応
+    final rawSets = data['sets'] as List<dynamic>? ?? data['exercises'] as List<dynamic>? ?? [];
+    
     return WorkoutLog(
       id: id,
-      userId: data['userId'] ?? '',
+      userId: userId,
       date: (data['date'] as Timestamp).toDate(),
       gymId: data['gymId'] ?? '',
       gymName: data['gymName'],
-      exercises: (data['exercises'] as List<dynamic>?)
-              ?.map((e) => Exercise.fromMap(e as Map<String, dynamic>))
-              .toList() ??
-          [],
+      exercises: rawSets
+              .map((e) => Exercise.fromMap(e as Map<String, dynamic>))
+              .toList(),
       notes: data['notes'],
       isAutoCompleted: data['isAutoCompleted'] ?? false,
       consecutiveDays: data['consecutiveDays'] ?? 1,
@@ -81,13 +86,27 @@ class Exercise {
   }
 
   factory Exercise.fromMap(Map<String, dynamic> map) {
+    // 🔧 v1.0.216: exercise_name と name の両方に対応
+    final exerciseName = map['exercise_name'] as String? ?? map['name'] as String? ?? '';
+    
+    // 🔧 v1.0.216: add_workout_screenのデータ形式に対応（setsがない場合は自分自身をセットとして扱う）
+    List<WorkoutSet> workoutSets;
+    if (map.containsKey('sets') && map['sets'] is List) {
+      // 新しいフォーマット: exercises 配列に sets 配列
+      workoutSets = (map['sets'] as List<dynamic>)
+          .map((s) => WorkoutSet.fromMap(s as Map<String, dynamic>))
+          .toList();
+    } else if (map.containsKey('weight') && map.containsKey('reps')) {
+      // add_workout_screenのフォーマット: 各セットが個別のオブジェクト
+      workoutSets = [WorkoutSet.fromMap(map)];
+    } else {
+      workoutSets = [];
+    }
+    
     return Exercise(
-      name: map['name'] ?? '',
-      bodyPart: map['bodyPart'] ?? '',
-      sets: (map['sets'] as List<dynamic>?)
-              ?.map((s) => WorkoutSet.fromMap(s as Map<String, dynamic>))
-              .toList() ??
-          [],
+      name: exerciseName,
+      bodyPart: map['bodyPart'] ?? map['muscle_group'] ?? 'その他',
+      sets: workoutSets,
     );
   }
 }
@@ -141,15 +160,20 @@ class WorkoutSet {
   }
 
   factory WorkoutSet.fromMap(Map<String, dynamic> map) {
+    // 🔧 v1.0.216: add_workout_screen.dartのデータ形式に対応
+    // targetReps → reps, actualReps → reps, has_assist → hasAssist
+    final reps = map['reps'] as int? ?? map['targetReps'] as int? ?? map['actualReps'] as int? ?? 0;
+    final weight = (map['weight'] as num?)?.toDouble();
+    
     return WorkoutSet(
-      targetReps: map['targetReps'] ?? 0,
-      actualReps: map['actualReps'],
-      weight: map['weight']?.toDouble(),
+      targetReps: reps,
+      actualReps: map['is_completed'] == true ? reps : null,
+      weight: weight,
       completedAt: map['completedAt'] != null
           ? (map['completedAt'] as Timestamp).toDate()
           : null,
       setType: SetType.values.firstWhere(
-        (e) => e.name == map['setType'],
+        (e) => e.name == (map['setType'] ?? map['set_type']),
         orElse: () => SetType.normal,
       ),
       supersetPairId: map['supersetPairId'],

@@ -54,6 +54,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
       }
 
       // workout_logs コレクションから全トレーニングを取得
+      // 🔧 v1.0.216: user_id (snake_case) を使用（add_workout_screen.dartと一致）
       final workoutSnapshot = await FirebaseFirestore.instance
           .collection('workout_logs')
           .where('user_id', isEqualTo: user.uid)
@@ -64,11 +65,13 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
 
       for (final doc in workoutSnapshot.docs) {
         final data = doc.data();
-        final sets = data['sets'] as List<dynamic>? ?? [];
+        // 🔧 v1.0.216: sets 配列を使用（add_workout_screen.dartと一致）
+        final exercises = data['sets'] as List<dynamic>? ?? [];
         
-        for (final set in sets) {
-          if (set is Map<String, dynamic>) {
-            final name = set['exercise_name'] as String?;
+        for (final exercise in exercises) {
+          if (exercise is Map<String, dynamic>) {
+            // 🔧 v1.0.216: exercise_name フィールドを使用（add_workout_screen.dartと一致）
+            final name = exercise['exercise_name'] as String?;
             if (name != null && name.isNotEmpty) {
               exerciseSet.add(name);
             }

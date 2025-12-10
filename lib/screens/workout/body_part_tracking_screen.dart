@@ -488,11 +488,11 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
   }
 
   /// ワークアウトストリーム取得（インデックス不要のシンプルクエリ）
+  /// 🔧 v1.0.216: workout_logs コレクションを使用（add_workout_screen.dartと一致）
   Stream<QuerySnapshot> _getWorkoutsStream(String userId) {
     return FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .collection('workouts')
+        .collection('workout_logs')
+        .where('user_id', isEqualTo: userId)
         .snapshots();
   }
 
