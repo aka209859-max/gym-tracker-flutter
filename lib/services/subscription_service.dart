@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,7 +28,14 @@ class SubscriptionService {
   /// 永年プラン（非消耗型IAP）を保持しているかチェック
   Future<bool> hasLifetimePlan() async {
     try {
-      final customerInfo = await Purchases.getCustomerInfo();
+      // 🔧 タイムアウト追加: 5秒以内に取得できない場合はスキップ
+      final customerInfo = await Purchases.getCustomerInfo().timeout(
+        const Duration(seconds: 5),
+        onTimeout: () {
+          print('⏱️ RevenueCat タイムアウト - キャッシュ使用');
+          throw TimeoutException('RevenueCat timeout');
+        },
+      );
       
       // 非消耗型購入履歴から永年プランをチェック
       final hasLifetime = customerInfo.nonSubscriptionTransactions.any(

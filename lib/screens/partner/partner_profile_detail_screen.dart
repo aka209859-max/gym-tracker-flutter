@@ -73,12 +73,23 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
   
   /// ✅ Pro Plan権限チェック
   Future<void> _checkPermissions() async {
-    final result = await _searchService.canSendMatchRequest();
-    if (mounted) {
-      setState(() {
-        _canSendRequest = result['canSend'] == true;
-        _permissionMessage = result['reason'];
-      });
+    try {
+      final result = await _searchService.canSendMatchRequest();
+      if (mounted) {
+        setState(() {
+          _canSendRequest = result['canSend'] == true;
+          _permissionMessage = result['reason'];
+        });
+      }
+    } catch (e) {
+      // エラー時は無料ユーザーとして扱う（安全側に倒す）
+      print('⚠️ 権限チェックエラー: $e');
+      if (mounted) {
+        setState(() {
+          _canSendRequest = false;
+          _permissionMessage = 'マッチングリクエスト送信はProプラン限定機能です。';
+        });
+      }
     }
   }
 
