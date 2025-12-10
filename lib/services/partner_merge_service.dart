@@ -90,11 +90,26 @@ class PartnerMergeService {
 
   /// Google PlaceとFirestoreパートナージムをマッチング
   /// 
-  /// 名前と住所の類似度でマッチング
+  /// 1. まずIDで完全一致チェック（混雑度報告済みジム用）
+  /// 2. 次に名前と住所の類似度でマッチング
   Map<String, dynamic>? _findMatchingPartner(
     GooglePlace place,
     List<Map<String, dynamic>> partnerGyms,
   ) {
+    // 🔧 CRITICAL FIX: まずIDで完全一致チェック
+    // 混雑度報告済みのジムは Google Place ID で Firebase に保存されているため、
+    // ID が一致すれば確実に同じジム
+    for (final partner in partnerGyms) {
+      final partnerId = partner['id'] as String? ?? partner['gymId'] as String?;
+      if (partnerId == place.placeId) {
+        if (kDebugMode) {
+          print('   ✅ Exact ID match found: $partnerId');
+        }
+        return partner;
+      }
+    }
+    
+    // ID一致なし → 名前と住所で類似度マッチング
     for (final partner in partnerGyms) {
       final partnerName = (partner['name'] as String? ?? '').toLowerCase();
       final partnerAddress = (partner['address'] as String? ?? '').toLowerCase();
