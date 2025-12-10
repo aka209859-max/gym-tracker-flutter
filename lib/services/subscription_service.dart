@@ -12,8 +12,18 @@ enum SubscriptionType {
   pro        // プロプラン
 }
 
-/// 有料プラン管理サービス
+/// 有料プラン管理サービス（シングルトン）
+/// 
+/// 🎯 最適化戦略:
+/// - アプリ全体で1つのインスタンスを共有
+/// - メモリキャッシュをアプリ起動中保持
+/// - 初回取得後は即座にレスポンス（0ms）
 class SubscriptionService {
+  // ✅ Singleton パターン
+  static final SubscriptionService _instance = SubscriptionService._internal();
+  factory SubscriptionService() => _instance;
+  SubscriptionService._internal();
+  
   static const String _subscriptionKey = 'subscription_status';
   static const String _subscriptionTypeKey = 'subscription_type';
   static const String _cachedPlanKey = 'cached_subscription_plan';
@@ -23,7 +33,9 @@ class SubscriptionService {
   // 永年プラン（非消耗型IAP）の製品ID
   static const String lifetimeProProductId = 'com.gymmatch.app.lifetime_pro';
   
-  SubscriptionType? _memoryCache; // メモリキャッシュ
+  // ✅ static メモリキャッシュ（アプリ全体で共有）
+  static SubscriptionType? _memoryCache;
+  static DateTime? _memoryCacheTimestamp;
   
   /// 永年プラン（非消耗型IAP）を保持しているかチェック
   Future<bool> hasLifetimePlan() async {
@@ -69,8 +81,19 @@ class SubscriptionService {
   Future<SubscriptionType> getCurrentPlan() async {
     try {
       // 1. メモリキャッシュチェック（最速）- 最優先
-      if (_memoryCache != null) {
-        return _memoryCache!;
+      if (_memoryCache != null && _memoryCacheTimestamp != null) {
+        // キャッシュが有効期限内か確認（60分）
+        final now = DateTime.now();
+        final cacheAge = now.difference(_memoryCacheTimestamp!);
+        
+        if (cacheAge.inMinutes < _cacheValidityMinutes) {
+          print('⚡ メモリキャッシュ使用: $_memoryCache (キャッシュ年齢: ${cacheAge.inMinutes}分)');
+          return _memoryCache!;
+        } else {
+          print('⏰ メモリキャッシュ期限切れ - 再取得');
+          _memoryCache = null;
+          _memoryCacheTimestamp = null;
+        }
       }
       
       // 2. Firestoreから取得を試行（ログインユーザー）
@@ -108,8 +131,9 @@ class SubscriptionService {
               }
             }
             
-            // メモリキャッシュに保存
+            // メモリキャッシュに保存（タイムスタンプ付き）
             _memoryCache = plan;
+            _memoryCacheTimestamp = DateTime.now();
             
             // SharedPreferencesキャッシュに保存
             await _savePlanCache(plan);
@@ -127,6 +151,7 @@ class SubscriptionService {
           if (cachedPlan != null) {
             print('📦 キャッシュからプラン取得: $cachedPlan');
             _memoryCache = cachedPlan;
+            _memoryCacheTimestamp = DateTime.now();
             
             // バックグラウンドでRevenueCatチェック
             _checkLifetimePlanInBackground();
@@ -138,6 +163,7 @@ class SubscriptionService {
       
       // 3. デフォルト: Freeプラン
       _memoryCache = SubscriptionType.free;
+      _memoryCacheTimestamp = DateTime.now();
       
       // バックグラウンドでRevenueCatチェック
       _checkLifetimePlanInBackground();
@@ -150,10 +176,12 @@ class SubscriptionService {
       if (cachedPlan != null) {
         print('📦 エラー時キャッシュ使用: $cachedPlan');
         _memoryCache = cachedPlan;
+        _memoryCacheTimestamp = DateTime.now();
         return cachedPlan;
       }
       
       _memoryCache = SubscriptionType.free;
+      _memoryCacheTimestamp = DateTime.now();
       return SubscriptionType.free;
     }
   }
@@ -167,6 +195,7 @@ class SubscriptionService {
         if (hasLifetime && _memoryCache != SubscriptionType.pro) {
           print('🔄 永年プラン検出 - メモリキャッシュ更新');
           _memoryCache = SubscriptionType.pro;
+          _memoryCacheTimestamp = DateTime.now();
           await _savePlanCache(SubscriptionType.pro);
         }
       } catch (e) {
@@ -174,6 +203,13 @@ class SubscriptionService {
         // エラーは無視（既存のプランを維持）
       }
     });
+  }
+  
+  /// キャッシュをクリア（購入完了時やログアウト時に使用）
+  void clearCache() {
+    print('🗑️ SubscriptionService キャッシュクリア');
+    _memoryCache = null;
+    _memoryCacheTimestamp = null;
   }
   
   /// プランをキャッシュに保存
