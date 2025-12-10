@@ -13,6 +13,10 @@ import 'workout/ai_coaching_screen_tabbed.dart';
 import 'workout/template_screen.dart';
 import 'workout/workout_log_screen.dart';
 import 'workout/statistics_dashboard_screen.dart';
+import 'workout/personal_records_screen.dart';
+import 'workout/body_part_tracking_screen.dart';
+import 'workout/workout_memo_list_screen.dart';
+import 'workout/weekly_reports_screen.dart';
 import 'achievements_screen.dart';
 import 'goals_screen.dart';
 import '../models/workout_log.dart' as workout_models;
@@ -2181,6 +2185,132 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   icon: Icon(Icons.calculate, size: 18, color: theme.colorScheme.primary),
                   label: const Text(
                     'RM計算',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    side: BorderSide(color: theme.colorScheme.primary, width: 2),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          
+          const SizedBox(height: 8),
+          
+          // パーソナルレコード & 部位別トラッキング
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PersonalRecordsScreen(),
+                      ),
+                    );
+                  },
+                  icon: Icon(Icons.emoji_events, size: 18, color: theme.colorScheme.primary),
+                  label: const Text(
+                    'PR記録',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    side: BorderSide(color: theme.colorScheme.primary, width: 2),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BodyPartTrackingScreen(),
+                      ),
+                    );
+                  },
+                  icon: Icon(Icons.accessibility_new, size: 18, color: theme.colorScheme.primary),
+                  label: const Text(
+                    '部位別',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    side: BorderSide(color: theme.colorScheme.primary, width: 2),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          
+          const SizedBox(height: 8),
+          
+          // トレーニングメモ & 週次レポート
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const WorkoutMemoListScreen(),
+                      ),
+                    );
+                  },
+                  icon: Icon(Icons.note_alt, size: 18, color: theme.colorScheme.primary),
+                  label: const Text(
+                    'メモ',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    side: BorderSide(color: theme.colorScheme.primary, width: 2),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const WeeklyReportsScreen(),
+                      ),
+                    );
+                  },
+                  icon: Icon(Icons.analytics, size: 18, color: theme.colorScheme.primary),
+                  label: const Text(
+                    '週次',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
