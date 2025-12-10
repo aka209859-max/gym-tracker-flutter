@@ -205,13 +205,6 @@ class SubscriptionService {
     });
   }
   
-  /// キャッシュをクリア（購入完了時やログアウト時に使用）
-  void clearCache() {
-    print('🗑️ SubscriptionService キャッシュクリア');
-    _memoryCache = null;
-    _memoryCacheTimestamp = null;
-  }
-  
   /// プランをキャッシュに保存
   Future<void> _savePlanCache(SubscriptionType plan) async {
     try {
