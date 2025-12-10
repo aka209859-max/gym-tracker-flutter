@@ -43,8 +43,8 @@ android {
         applicationId = "jp.nexa.fitsync"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
-        versionCode = 204
-        versionName = "1.0.204"
+        versionCode = 205
+        versionName = "1.0.205"
     }
 
     buildTypes {
