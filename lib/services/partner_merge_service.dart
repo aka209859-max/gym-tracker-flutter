@@ -88,29 +88,43 @@ class PartnerMergeService {
     }
   }
 
-  /// Google PlaceとFirestoreパートナージムをマッチング
+  /// Google PlaceとFirestoreジムを完全ID一致でマッチング（混雑度報告用）
   /// 
-  /// 1. まずIDで完全一致チェック（混雑度報告済みジム用）
-  /// 2. 次に名前と住所の類似度でマッチング
-  Map<String, dynamic>? _findMatchingPartner(
+  /// ユーザーが混雑度を報告したジムを見つけるため、Google Place IDで完全一致チェック
+  /// パートナージムの名前・住所マッチングとは**完全に分離**
+  Map<String, dynamic>? _findExactIdMatch(
     GooglePlace place,
     List<Map<String, dynamic>> partnerGyms,
   ) {
-    // 🔧 CRITICAL FIX: まずIDで完全一致チェック
-    // 混雑度報告済みのジムは Google Place ID で Firebase に保存されているため、
-    // ID が一致すれば確実に同じジム
-    for (final partner in partnerGyms) {
-      final partnerId = partner['id'] as String? ?? partner['gymId'] as String?;
-      if (partnerId == place.placeId) {
+    for (final gym in partnerGyms) {
+      final gymId = gym['id'] as String? ?? gym['gymId'] as String?;
+      if (gymId == place.placeId) {
         if (kDebugMode) {
-          print('   ✅ Exact ID match found: $partnerId');
+          print('   🎯 Exact ID match found: $gymId (crowd report or user data)');
         }
-        return partner;
+        return gym;
       }
     }
+    return null;
+  }
+  
+  /// Google Placeとパートナージムを名前・住所でマッチング（パートナー用のみ）
+  /// 
+  /// ⚠️ 重要: この関数は isPartner=true のジムのみをマッチング対象にする
+  /// 混雑度報告ジム（isPartnerなし）は対象外
+  Map<String, dynamic>? _findFuzzyPartnerMatch(
+    GooglePlace place,
+    List<Map<String, dynamic>> partnerGyms,
+  ) {
+    // 🔧 CRITICAL FIX: isPartner=true のジムのみを対象にする
+    final actualPartnerGyms = partnerGyms.where((g) => g['isPartner'] == true).toList();
     
-    // ID一致なし → 名前と住所で類似度マッチング
-    for (final partner in partnerGyms) {
+    if (actualPartnerGyms.isEmpty) {
+      return null;
+    }
+    
+    // 名前と住所で類似度マッチング
+    for (final partner in actualPartnerGyms) {
       final partnerName = (partner['name'] as String? ?? '').toLowerCase();
       final partnerAddress = (partner['address'] as String? ?? '').toLowerCase();
       final placeName = place.name.toLowerCase();
@@ -332,17 +346,28 @@ class PartnerMergeService {
         print('\n🔍 Processing: ${place.name}');
       }
       
-      // マッチするパートナージムを検索
-      final matchingPartner = _findMatchingPartner(place, partnerGyms);
+      // 🔧 CRITICAL FIX: 2段階マッチング
+      // 1. 完全ID一致チェック（混雑度報告済みジム用）
+      Map<String, dynamic>? matchedData = _findExactIdMatch(place, partnerGyms);
       
-      if (matchingPartner != null) {
+      // 2. ID一致なし → パートナージムを名前・住所でマッチング
+      if (matchedData == null) {
+        matchedData = _findFuzzyPartnerMatch(place, partnerGyms);
+      }
+      
+      if (matchedData != null) {
         if (kDebugMode) {
-          print('   🏆 Matched with partner: ${matchingPartner['name']}');
+          final isPartner = matchedData['isPartner'] == true;
+          if (isPartner) {
+            print('   🏆 Matched with partner: ${matchedData['name']}');
+          } else {
+            print('   📊 Matched with crowd-reported gym: ${matchedData['id']}');
+          }
         }
       }
       
-      // Google PlaceをGymに変換（パートナー情報があればマージ）
-      final gym = _convertGooglePlaceToGym(place, matchingPartner);
+      // Google PlaceをGymに変換（マッチしたデータがあればマージ）
+      final gym = _convertGooglePlaceToGym(place, matchedData);
       gyms.add(gym);
     }
     
