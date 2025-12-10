@@ -146,11 +146,18 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
 
   @override
   Widget build(BuildContext context) {
+    // 🔧 CRITICAL: 全体をエラーバウンダリでラップ
     return Scaffold(
       appBar: AppBar(
         title: const Text('プロフィール詳細'),
       ),
-      body: SingleChildScrollView(
+      body: _buildBody(),
+    );
+  }
+  
+  Widget _buildBody() {
+    try {
+      return SingleChildScrollView(
         child: Column(
           children: [
             // ヘッダー部分
@@ -230,8 +237,39 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
             ),
           ],
         ),
-      ),
-    );
+      );
+    } catch (e, stackTrace) {
+      print('❌ プロフィール詳細画面ビルドエラー: $e');
+      print('スタックトレース: $stackTrace');
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.error_outline, size: 64, color: Colors.red),
+              const SizedBox(height: 16),
+              const Text(
+                'プロフィールの表示中にエラーが発生しました',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                e.toString(),
+                style: const TextStyle(fontSize: 14, color: Colors.grey),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('戻る'),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
   }
 
   Widget _buildHeader() {
