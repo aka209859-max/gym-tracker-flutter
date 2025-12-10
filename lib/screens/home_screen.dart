@@ -3958,10 +3958,96 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ),
             ),
             const SizedBox(height: 24),
-            // 編集ボタン
+            // 📊 4機能へのナビゲーション
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Text(
+                '統計・分析',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.emoji_events, color: Colors.amber),
+              title: const Text('PR記録'),
+              subtitle: const Text('パーソナルレコード'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PersonalRecordsScreen(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.pie_chart, color: Colors.green),
+              title: const Text('部位別'),
+              subtitle: const Text('部位別トラッキング'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const BodyPartTrackingScreen(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.note, color: Colors.blue),
+              title: const Text('メモ'),
+              subtitle: const Text('トレーニングメモ'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const WorkoutMemoListScreen(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.analytics, color: Colors.purple),
+              title: const Text('週次'),
+              subtitle: const Text('週次レポート'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const WeeklyReportsScreen(),
+                  ),
+                );
+              },
+            ),
+            const Divider(height: 32),
+            // 編集・削除（将来実装）
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Text(
+                'その他',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
             ListTile(
               leading: const Icon(Icons.edit, color: Colors.blue),
               title: const Text('編集'),
+              subtitle: const Text('次のアップデートで実装予定'),
+              enabled: false,
               onTap: () {
                 Navigator.pop(context);
                 _editWorkout(workoutId);
