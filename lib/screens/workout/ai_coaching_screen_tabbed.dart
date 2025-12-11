@@ -1461,8 +1461,8 @@ class _AIMenuTabState extends State<_AIMenuTab>
       line = line.trim();
       if (line.isEmpty) continue;
       
-      // 部位の検出（■や【】で囲まれた部位名）
-      if (line.startsWith('■') || line.startsWith('【')) {
+      // 部位の検出（■、【】、##で囲まれた部位名）
+      if (line.startsWith('■') || line.startsWith('【') || line.startsWith('##') || line.startsWith('#')) {
         for (final key in bodyPartMap.keys) {
           if (line.contains(key)) {
             currentBodyPart = bodyPartMap[key]!;
@@ -1473,7 +1473,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
         continue;
       }
       
-      // 🔧 v1.0.222: 種目名の検出（数字始まり、または「・」で始まる種目行も検出）
+      // 🔧 v1.0.224: 種目名の検出（複数パターンに対応）
       // パターン1: "1. 種目名" or "1) 種目名"
       final exercisePattern = RegExp(r'^(\d+[\.\)]\s*)(.+?)(?:[:：]|$)');
       final match = exercisePattern.firstMatch(line);
@@ -1482,12 +1482,16 @@ class _AIMenuTabState extends State<_AIMenuTab>
       final altExercisePattern = RegExp(r'^[・\*]\s*(.+?)(?:[:：]\s*\*\*|$)');
       final altMatch = altExercisePattern.firstMatch(line);
       
-      // 詳細情報行の判定（先頭がスペースまたはタブ、または「•」で始まる）
+      // パターン3: "**種目1：種目名**" のようなマークダウン形式
+      final markdownPattern = RegExp(r'^\*\*種目\d+[:：](.+?)\*\*');
+      final markdownMatch = markdownPattern.firstMatch(line);
+      
+      // 詳細情報行の判定（先頭がスペースまたはタブ、または「•」「*」で始まる）
       final isDetailLine = line.startsWith('  ') || line.startsWith('\t') || 
                            line.startsWith('•') || 
-                           (line.startsWith('*') && !line.contains('：'));
+                           (line.startsWith('*') && !markdownMatch != null);
       
-      if ((match != null || altMatch != null) && !isDetailLine) {
+      if ((match != null || altMatch != null || markdownMatch != null) && !isDetailLine) {
         // 前の種目を保存
         if (currentExerciseName.isNotEmpty && currentBodyPart.isNotEmpty) {
           exercises.add(ParsedExercise(
@@ -1500,18 +1504,28 @@ class _AIMenuTabState extends State<_AIMenuTab>
           ));
         }
         
-        // 🔧 v1.0.222: 種目名の抽出（両パターンに対応）
+        // 🔧 v1.0.224: 種目名の抽出（3パターンに対応）
         var name = '';
         if (match != null) {
           name = match.group(2)!.trim();
         } else if (altMatch != null) {
           name = altMatch.group(1)!.trim();
+        } else if (markdownMatch != null) {
+          name = markdownMatch.group(1)!.trim();
         }
         
         // 括弧内の補足情報を除去（例: ベンチプレス（バーベル）→ ベンチプレス）
         name = name.replaceAll(RegExp(r'[（\(][^）\)]*[）\)]'), '').trim();
         // **で囲まれた部分があれば除去
         name = name.replaceAll('**', '').trim();
+        // コロンがあれば以降を削除
+        if (name.contains('：')) {
+          name = name.split('：')[0].trim();
+        }
+        if (name.contains(':')) {
+          name = name.split(':')[0].trim();
+        }
+        
         currentExerciseName = name;
         currentDescription = '';
         currentWeight = null;
@@ -1536,24 +1550,30 @@ class _AIMenuTabState extends State<_AIMenuTab>
         // 種目の説明や詳細情報
         if (line.startsWith('説明:') || line.startsWith('説明：')) {
           currentDescription = line.replaceFirst(RegExp(r'説明[:：]\s*'), '');
-        } else if (!line.startsWith('■') && !line.startsWith('【')) {
-          // 🔧 v1.0.222: *や・、•で始まる行、または通常の行から重量・回数・セット情報を抽出
+        } else if (!line.startsWith('■') && !line.startsWith('【') && !line.startsWith('##') && !line.startsWith('#')) {
+          // 🔧 v1.0.224: *や・、•で始まる行、または通常の行から重量・回数・セット情報を抽出
           String cleanLine = line;
-          if (line.startsWith('*') || line.startsWith('・') || line.startsWith('-') || line.startsWith('•')) {
+          // マークダウンの **説明:** のような形式に対応
+          if (line.startsWith('* **') || line.startsWith('• **')) {
+            cleanLine = line.substring(2).trim();
+            // **を除去
+            cleanLine = cleanLine.replaceAll('**', '').trim();
+          } else if (line.startsWith('*') || line.startsWith('・') || line.startsWith('-') || line.startsWith('•')) {
             cleanLine = line.substring(1).trim();
           }
           // インデントされた行の処理
           cleanLine = cleanLine.trim();
           
-          // 重量：XXkg の形式に対応
-          final weightPattern = RegExp(r'重量[:：]?\s*(\d+(?:\.\d+)?)\s*kg');
-          final repsPattern = RegExp(r'回数[:：]?\s*(\d+)\s*(?:回|reps?)');
-          final setsPattern = RegExp(r'セット数[:：]?\s*(\d+)\s*(?:セット|sets?)');
+          // 🔧 v1.0.224: 重量・回数・セット数の抽出（複数パターン対応）
+          // パターン1: "重量: XXkg" または "重量: 男性: XX-XXkg"
+          final weightPattern = RegExp(r'重量[:：]?\s*(?:男性[:：]?\s*)?(\d+(?:\.\d+)?)(?:-\d+(?:\.\d+)?)?(?:kg)?');
+          final repsPattern = RegExp(r'回数[:：]?\s*(\d+)\s*(?:回|reps?)?');
+          final setsPattern = RegExp(r'セット数[:：]?\s*(\d+)\s*(?:セット|sets?)?');
           
-          // 代替パターン（XXkg, XX回, XXセット）
-          final weightPattern2 = RegExp(r'(\d+(?:\.\d+)?)\s*kg');
-          final repsPattern2 = RegExp(r'(\d+)\s*(?:回|reps?)');
-          final setsPattern2 = RegExp(r'(\d+)\s*(?:セット|sets?)');
+          // パターン2: 単純な "XXkg", "XX回", "XXセット"
+          final weightPattern2 = RegExp(r'(\d+(?:\.\d+)?)\s*(?:-\d+(?:\.\d+)?)?\s*kg');
+          final repsPattern2 = RegExp(r'(\d+)\s*回');
+          final setsPattern2 = RegExp(r'(\d+)\s*セット');
           
           var weightMatch = weightPattern.firstMatch(cleanLine);
           var repsMatch = repsPattern.firstMatch(cleanLine);
