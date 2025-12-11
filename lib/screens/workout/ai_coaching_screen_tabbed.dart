@@ -434,7 +434,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
   @override
   bool get wantKeepAlive => true;
 
-  // 部位選択状態（有酸素・初心者追加）
+  // 部位選択状態（有酸素追加）
   final Map<String, bool> _selectedBodyParts = {
     '胸': false,
     '背中': false,
@@ -443,13 +443,19 @@ class _AIMenuTabState extends State<_AIMenuTab>
     '腕': false,
     '腹筋': false,
     '有酸素': false,
-    '初心者': false,
   };
+  
+  // 🔧 v1.0.217: レベル選択（初心者・中級者・上級者）
+  String _selectedLevel = '初心者'; // デフォルトは初心者
 
   // UI状態
   bool _isGenerating = false;
   String? _generatedMenu;
   String? _errorMessage;
+  
+  // 🔧 v1.0.217: トレーニング履歴データ
+  Map<String, Map<String, dynamic>> _exerciseHistory = {}; // 種目名 → {maxWeight, max1RM, totalSets}
+  bool _isLoadingWorkoutHistory = false;
 
   // 履歴
   List<Map<String, dynamic>> _history = [];
@@ -459,6 +465,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
   void initState() {
     super.initState();
     _loadHistory();
+    _loadWorkoutHistory(); // 🔧 v1.0.217: トレーニング履歴を読み込む
   }
 
   /// 履歴読み込み
@@ -485,6 +492,79 @@ class _AIMenuTabState extends State<_AIMenuTab>
       setState(() => _isLoadingHistory = false);
     }
   }
+  
+  /// 🔧 v1.0.217: 直近1ヶ月のトレーニング履歴を読み込み、1RMを自動計算
+  Future<void> _loadWorkoutHistory() async {
+    setState(() => _isLoadingWorkoutHistory = true);
+    
+    try {
+      // 1ヶ月前の日付
+      final oneMonthAgo = DateTime.now().subtract(const Duration(days: 30));
+      
+      // workout_logsから直近1ヶ月のデータを取得
+      final snapshot = await FirebaseFirestore.instance
+          .collection('workout_logs')
+          .where('user_id', isEqualTo: widget.user.uid)
+          .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(oneMonthAgo))
+          .get();
+      
+      // 種目ごとに集計
+      final Map<String, Map<String, dynamic>> exerciseData = {};
+      
+      for (final doc in snapshot.docs) {
+        final data = doc.data();
+        final sets = data['sets'] as List<dynamic>? ?? [];
+        
+        for (final set in sets) {
+          if (set is! Map<String, dynamic>) continue;
+          
+          final exerciseName = set['exercise_name'] as String?;
+          final weight = (set['weight'] as num?)?.toDouble();
+          final reps = set['reps'] as int?;
+          final isCompleted = set['is_completed'] as bool? ?? false;
+          
+          // 完了していないセットはスキップ
+          if (!isCompleted || exerciseName == null || weight == null || reps == null) {
+            continue;
+          }
+          
+          // 1RM計算（Epley formula: 1RM = weight × (1 + reps / 30)）
+          final calculated1RM = weight * (1 + reps / 30);
+          
+          // 種目データを更新
+          if (!exerciseData.containsKey(exerciseName)) {
+            exerciseData[exerciseName] = {
+              'maxWeight': weight,
+              'max1RM': calculated1RM,
+              'totalSets': 1,
+              'bestReps': reps,
+            };
+          } else {
+            final current = exerciseData[exerciseName]!;
+            exerciseData[exerciseName] = {
+              'maxWeight': weight > (current['maxWeight'] as double) ? weight : current['maxWeight'],
+              'max1RM': calculated1RM > (current['max1RM'] as double) ? calculated1RM : current['max1RM'],
+              'totalSets': (current['totalSets'] as int) + 1,
+              'bestReps': reps > (current['bestReps'] as int) ? reps : current['bestReps'],
+            };
+          }
+        }
+      }
+      
+      setState(() {
+        _exerciseHistory = exerciseData;
+        _isLoadingWorkoutHistory = false;
+      });
+      
+      debugPrint('✅ トレーニング履歴読み込み完了: ${exerciseData.length}種目');
+      for (final entry in exerciseData.entries) {
+        debugPrint('   ${entry.key}: 最大重量=${entry.value['maxWeight']}kg, 1RM=${entry.value['max1RM']?.toStringAsFixed(1)}kg');
+      }
+    } catch (e) {
+      debugPrint('❌ トレーニング履歴読み込みエラー: $e');
+      setState(() => _isLoadingWorkoutHistory = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -496,6 +576,10 @@ class _AIMenuTabState extends State<_AIMenuTab>
         children: [
           // 説明文
           _buildDescription(),
+          const SizedBox(height: 24),
+
+          // 🔧 v1.0.217: レベル選択
+          _buildLevelSelector(),
           const SizedBox(height: 24),
 
           // 部位選択
@@ -552,6 +636,77 @@ class _AIMenuTabState extends State<_AIMenuTab>
               style: TextStyle(fontSize: 14),
             ),
           ],
+        ),
+      ),
+    );
+  }
+  
+  /// 🔧 v1.0.217: レベル選択セクション
+  Widget _buildLevelSelector() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'トレーニングレベル',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            Expanded(
+              child: _buildLevelButton('初心者', Icons.fitness_center, Colors.green),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: _buildLevelButton('中級者', Icons.trending_up, Colors.orange),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: _buildLevelButton('上級者', Icons.emoji_events, Colors.red),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+  
+  /// レベルボタン
+  Widget _buildLevelButton(String level, IconData icon, Color color) {
+    final isSelected = _selectedLevel == level;
+    
+    return Material(
+      color: isSelected ? color : Colors.grey.shade200,
+      borderRadius: BorderRadius.circular(12),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: () {
+          setState(() {
+            _selectedLevel = level;
+          });
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+          child: Column(
+            children: [
+              Icon(
+                icon,
+                color: isSelected ? Colors.white : Colors.grey.shade600,
+                size: 28,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                level,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: isSelected ? Colors.white : Colors.grey.shade700,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -981,99 +1136,133 @@ class _AIMenuTabState extends State<_AIMenuTab>
     }
   }
 
-  /// プロンプト構築
+  /// 🔧 v1.0.217: プロンプト構築（レベル別 + トレーニング履歴考慮）
   String _buildPrompt(List<String> bodyParts) {
-    // 初心者モード判定
-    final isBeginner = bodyParts.contains('初心者');
+    // トレーニング履歴情報を構築
+    String historyInfo = '';
+    if (_exerciseHistory.isNotEmpty) {
+      historyInfo = '\n【直近1ヶ月のトレーニング履歴】\n';
+      for (final entry in _exerciseHistory.entries) {
+        final exerciseName = entry.key;
+        final maxWeight = entry.value['maxWeight'];
+        final max1RM = entry.value['max1RM'];
+        final totalSets = entry.value['totalSets'];
+        historyInfo += '- $exerciseName: 最大重量=${maxWeight}kg, 推定1RM=${max1RM?.toStringAsFixed(1)}kg, 総セット数=$totalSets\n';
+      }
+      historyInfo += '\n上記の履歴を参考に、適切な重量と回数を提案してください。\n';
+    }
+    
+    final targetParts = bodyParts;
 
-    // 初心者以外の部位を抽出
-    final targetParts = bodyParts.where((part) => part != '初心者').toList();
-
-    if (isBeginner) {
-      // 初心者向け専用プロンプト
+    // レベル別プロンプト構築
+    if (_selectedLevel == '初心者') {
+      // 初心者向け
       if (targetParts.isEmpty) {
-        // 初心者のみ選択 → 全身トレーニング
         return '''
 あなたはプロのパーソナルトレーナーです。筋トレ初心者向けの全身トレーニングメニューを提案してください。
-
+$historyInfo
 【対象者】
 - 筋トレ初心者（ジム通い始めて1〜3ヶ月程度）
 - 基礎体力づくりを目指す方
 - トレーニングフォームを学びたい方
 
 【提案形式】
-各種目について以下の情報を含めてください：
+各種目について**必ず**以下の情報を含めてください：
 - 種目名
-- セット数（少なめ: 2-3セット）
-- 回数（軽い重量で: 10-15回）
-- 休憩時間（長め: 90-120秒）
+- **具体的な重量（kg）** ← 履歴があればそれを参考に、なければ初心者向けの推奨重量
+- **回数（10-15回）**
+- セット数（2-3セット）
+- 休憩時間（90-120秒）
 - 初心者向けフォームのポイント
-- よくある間違いと注意事項
 
 【条件】
-- 全身をバランスよく鍛える（胸・背中・脚・肩・腕・腹筋）
-- 基本種目中心（マシンとフリーウェイト組み合わせ）
+- 全身をバランスよく鍛える
+- 基本種目中心
 - 30-45分で完了
-- 怪我のリスクが少ない種目
-- フォーム習得を重視
 - 日本語で丁寧に説明
 
-初心者が安全に取り組める全身トレーニングメニューを提案してください。
+**重要: 各種目に具体的な重量と回数を必ず記載してください。**
 ''';
       } else {
-        // 初心者 + 部位指定 → その部位に特化した初心者メニュー
         return '''
 あなたはプロのパーソナルトレーナーです。筋トレ初心者向けの「${targetParts.join('、')}」トレーニングメニューを提案してください。
-
+$historyInfo
 【対象者】
 - 筋トレ初心者（ジム通い始めて1〜3ヶ月程度）
 - ${targetParts.join('、')}を重点的に鍛えたい方
-- トレーニングフォームを学びたい方
 
 【提案形式】
-各種目について以下の情報を含めてください：
+各種目について**必ず**以下の情報を含めてください：
 - 種目名
-- セット数（少なめ: 2-3セット）
-- 回数（軽い重量で: 10-15回）
-- 休憩時間（長め: 90-120秒）
-- 初心者向けフォームのポイント
-- よくある間違いと注意事項
+- **具体的な重量（kg）** ← 履歴があればそれを参考に、なければ初心者向けの推奨重量
+- **回数（10-15回）**
+- セット数（2-3セット）
+- 休憩時間（90-120秒）
+- フォームのポイント
 
 【条件】
 - ${targetParts.join('、')}を重点的にトレーニング
-- 基本種目中心（マシンとフリーウェイト組み合わせ）
 - 30-45分で完了
-- 怪我のリスクが少ない種目
-- フォーム習得を重視
 - 日本語で丁寧に説明
 
-初心者が安全に取り組める${targetParts.join('、')}トレーニングメニューを提案してください。
+**重要: 各種目に具体的な重量と回数を必ず記載してください。**
 ''';
       }
-    } else {
-      // 通常モード（初心者選択なし）
+    } else if (_selectedLevel == '中級者') {
+      // 中級者向け
       return '''
-あなたはプロのパーソナルトレーナーです。以下の部位をトレーニングするための最適なメニューを提案してください。
-
-【トレーニング部位】
-${bodyParts.join('、')}
+あなたはプロのパーソナルトレーナーです。筋トレ中級者向けの「${targetParts.isEmpty ? "全身" : targetParts.join('、')}」トレーニングメニューを提案してください。
+$historyInfo
+【対象者】
+- 筋トレ経験6ヶ月〜2年程度
+- 筋力・筋肥大を目指す方
+- より高度なテクニックを習得したい方
 
 【提案形式】
-各種目について以下の情報を含めてください：
+各種目について**必ず**以下の情報を含めてください：
 - 種目名
-- セット数
-- 回数
-- 休憩時間
-- ポイント・注意事項
+- **具体的な重量（kg）** ← 履歴の1RMの70-85%を目安に提案
+- **回数（8-12回）**
+- セット数（3-4セット）
+- 休憩時間（60-90秒）
+- テクニックのポイント（ドロップセット、スーパーセット等）
 
 【条件】
-- 初心者〜中級者向け
-- ジムで実施可能
+- ${targetParts.isEmpty ? "全身バランスよく" : targetParts.join('、')+"を重点的に"}
+- フリーウェイト中心
 - 45-60分で完了
-- 効率的に鍛えられる
-- 日本語で簡潔に
+- 筋肥大を重視
+- 日本語で説明
 
-メニューを提案してください。
+**重要: 各種目に具体的な重量と回数を必ず記載してください。**
+''';
+    } else {
+      // 上級者向け
+      return '''
+あなたはプロのパーソナルトレーナーです。筋トレ上級者向けの「${targetParts.isEmpty ? "全身" : targetParts.join('、')}」トレーニングメニューを提案してください。
+$historyInfo
+【対象者】
+- 筋トレ経験2年以上
+- 最大限の筋力・筋肥大を目指す方
+- 高強度トレーニングに慣れている方
+
+【提案形式】
+各種目について**必ず**以下の情報を含めてください：
+- 種目名
+- **具体的な重量（kg）** ← 履歴の1RMの85-95%を目安に提案
+- **回数（5-8回）**
+- セット数（4-5セット）
+- 休憩時間（120-180秒）
+- 高度なテクニック（ピラミッド法、5x5法等）
+
+【条件】
+- ${targetParts.isEmpty ? "全身最大限に" : targetParts.join('、')+"を極限まで"}
+- 高重量フリーウェイト中心
+- 60-90分で完了
+- 最大筋力向上を重視
+- 日本語で説明
+
+**重要: 各種目に具体的な重量と回数を必ず記載してください。**
 ''';
     }
   }
