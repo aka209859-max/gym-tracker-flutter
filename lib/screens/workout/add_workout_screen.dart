@@ -80,6 +80,10 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   // ✅ v1.0.158: ユーザーの最新体重（懸垂の自重計算用）
   double? _userBodyweight;
   
+  // 🔧 v1.0.222: AIコーチからのデータ
+  Map<String, dynamic>? _aiCoachData;
+  bool _isFromAICoach = false;
+  
   // 🔧 v1.0.221: 二頭筋・三頭筋の種目を詳細化（Deep Search結果反映）
   final Map<String, List<String>> _muscleGroupExercises = {
     '胸': ['ベンチプレス', 'ダンベルプレス', 'インクラインプレス', 'デクラインプレス', 'ダンベルフライ', 'インクラインフライ', 'ケーブルクロスオーバー', 'ケーブルフライ', 'ディップス', 'チェストプレスマシン', 'ペックフライマシン'],
@@ -127,6 +131,240 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     _loadLastWorkoutData();
     _loadUserBodyweight(); // ✅ v1.0.158: 体重を取得
     _applyTemplateDataIfProvided();
+    
+    // 🔧 v1.0.222: AI Coach データの初期化は didChangeDependencies で行う
+  }
+  
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    
+    // 🔧 v1.0.222: AI Coach からのデータを取得
+    if (!_isFromAICoach) {
+      final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+      if (args != null && args['fromAICoach'] == true) {
+        _aiCoachData = args;
+        _isFromAICoach = true;
+        _initializeFromAICoach(args);
+      }
+    }
+  }
+  
+  /// 🔧 v1.0.222: AIコーチからのデータで初期化
+  /// ParsedExerciseリストを受け取り、1RM計算と推奨重量/回数でセットを自動生成
+  Future<void> _initializeFromAICoach(Map<String, dynamic> args) async {
+    try {
+      debugPrint('🤖 AIコーチデータから初期化開始');
+      
+      final selectedExercises = args['selectedExercises'] as List?;
+      final userLevel = args['userLevel'] as String?;
+      final exerciseHistory = args['exerciseHistory'] as List<Map<String, dynamic>>?;
+      
+      if (selectedExercises == null || selectedExercises.isEmpty) {
+        debugPrint('⚠️ 選択された種目がありません');
+        return;
+      }
+      
+      debugPrint('📋 選択種目: ${selectedExercises.length}件');
+      debugPrint('🎯 ユーザーレベル: $userLevel');
+      debugPrint('📊 履歴データ: ${exerciseHistory?.length ?? 0}件');
+      
+      // 各種目ごとに1RMを計算してセットを生成
+      for (var exercise in selectedExercises) {
+        // ParsedExerciseオブジェクトからデータを取得
+        final exerciseName = _getPropertyValue(exercise, 'name') as String;
+        final bodyPart = _getPropertyValue(exercise, 'bodyPart') as String;
+        final aiWeight = _getPropertyValue(exercise, 'weight') as double?;
+        final aiReps = _getPropertyValue(exercise, 'reps') as int?;
+        final aiSets = _getPropertyValue(exercise, 'sets') as int?;
+        
+        debugPrint('  🏋️ 種目: $exerciseName (部位: $bodyPart)');
+        
+        // 1. 履歴から1RMを計算
+        final oneRM = _calculate1RMFromHistory(exerciseName, exerciseHistory);
+        debugPrint('    💪 推定1RM: ${oneRM?.toStringAsFixed(1) ?? "なし"}kg');
+        
+        // 2. レベルと1RMに基づいて推奨重量・回数を決定
+        final recommendation = _getRecommendedWeightAndReps(
+          userLevel ?? '初心者',
+          oneRM,
+          aiWeight,
+          aiReps,
+        );
+        
+        final weight = recommendation['weight'] as double;
+        final reps = recommendation['reps'] as int;
+        final sets = aiSets ?? 3; // デフォルト3セット
+        
+        debugPrint('    ✅ 推奨: ${weight}kg × ${reps}回 × ${sets}セット');
+        
+        // 3. セットを自動生成
+        setState(() {
+          // 最初のセットの部位を選択
+          if (_selectedMuscleGroup == null) {
+            _selectedMuscleGroup = bodyPart;
+          }
+          
+          for (int i = 0; i < sets; i++) {
+            _sets.add(WorkoutSet(
+              exerciseName: exerciseName,
+              weight: weight,
+              reps: reps,
+              isBodyweightMode: false,
+              isTimeMode: false,
+            ));
+          }
+        });
+      }
+      
+      debugPrint('✅ AIコーチデータ初期化完了: ${_sets.length}セット生成');
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('AIコーチの推奨メニューを読み込みました (${selectedExercises.length}種目)'),
+            backgroundColor: Colors.green,
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
+    } catch (e, stackTrace) {
+      debugPrint('❌ AIコーチデータ初期化エラー: $e');
+      debugPrint('スタックトレース: $stackTrace');
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('AIコーチデータの読み込みに失敗しました: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+  
+  /// オブジェクトから動的にプロパティを取得（ParsedExerciseクラス対応）
+  dynamic _getPropertyValue(dynamic obj, String propertyName) {
+    if (obj is Map) {
+      return obj[propertyName];
+    }
+    // ParsedExerciseオブジェクトの場合
+    switch (propertyName) {
+      case 'name':
+        return (obj as dynamic).name;
+      case 'bodyPart':
+        return (obj as dynamic).bodyPart;
+      case 'weight':
+        return (obj as dynamic).weight;
+      case 'reps':
+        return (obj as dynamic).reps;
+      case 'sets':
+        return (obj as dynamic).sets;
+      default:
+        return null;
+    }
+  }
+  
+  /// 🔧 v1.0.222: 過去30日の履歴から種目別の1RMを取得
+  /// AIコーチが既に計算した1RMを使用（Epley formula: 1RM = weight × (1 + reps / 30)）
+  double? _calculate1RMFromHistory(String exerciseName, dynamic history) {
+    if (history == null) {
+      debugPrint('    ⚠️ 履歴データなし');
+      return null;
+    }
+    
+    // AIコーチから渡される形式: Map<String, Map<String, dynamic>>
+    if (history is Map<String, dynamic>) {
+      final exerciseData = history[exerciseName] as Map<String, dynamic>?;
+      if (exerciseData != null) {
+        final oneRM = exerciseData['max1RM'] as double?;
+        if (oneRM != null && oneRM > 0) {
+          debugPrint('    ✅ 1RM取得成功: ${oneRM.toStringAsFixed(1)}kg');
+          return oneRM;
+        }
+      }
+    }
+    
+    // 履歴がList形式の場合（後方互換性のため）
+    if (history is List) {
+      double maxOneRM = 0.0;
+      
+      for (var log in history) {
+        final exercises = log['exercises'] as List<dynamic>?;
+        if (exercises == null) continue;
+        
+        for (var exercise in exercises) {
+          final name = exercise['name'] as String?;
+          if (name != exerciseName) continue;
+          
+          final sets = exercise['sets'] as List<dynamic>?;
+          if (sets == null) continue;
+          
+          for (var set in sets) {
+            final weight = (set['weight'] as num?)?.toDouble() ?? 0.0;
+            final reps = (set['reps'] as num?)?.toInt() ?? 0;
+            
+            if (weight > 0 && reps > 0 && reps <= 15) {
+              // Brzycki式で1RMを計算
+              final oneRM = reps == 1 ? weight : weight * (36 / (37 - reps));
+              if (oneRM > maxOneRM) {
+                maxOneRM = oneRM;
+              }
+            }
+          }
+        }
+      }
+      
+      return maxOneRM > 0 ? maxOneRM : null;
+    }
+    
+    debugPrint('    ⚠️ 履歴形式が不正');
+    return null;
+  }
+  
+  /// 🔧 v1.0.222: レベルと1RMに基づいて推奨重量と回数を決定
+  Map<String, dynamic> _getRecommendedWeightAndReps(
+    String userLevel,
+    double? oneRM,
+    double? aiWeight,
+    int? aiReps,
+  ) {
+    // 1RMがない場合はAIの提案値を使う、それもなければデフォルト値
+    if (oneRM == null || oneRM == 0) {
+      return {
+        'weight': aiWeight ?? 10.0,
+        'reps': aiReps ?? 10,
+      };
+    }
+    
+    // レベル別の推奨強度（%1RM）と回数
+    double percentage;
+    int reps;
+    
+    switch (userLevel) {
+      case '初心者':
+        percentage = 0.65; // 65%
+        reps = 12;
+        break;
+      case '中級者':
+        percentage = 0.75; // 75%
+        reps = 10;
+        break;
+      case '上級者':
+        percentage = 0.80; // 80%
+        reps = 8;
+        break;
+      default:
+        percentage = 0.70;
+        reps = 10;
+    }
+    
+    final recommendedWeight = (oneRM * percentage / 2.5).round() * 2.5; // 2.5kg単位で丸める
+    
+    return {
+      'weight': recommendedWeight,
+      'reps': reps,
+    };
   }
   
   /// 未ログイン時に自動的に匿名ログイン
@@ -1818,6 +2056,73 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             
             // 💡初回記録 or 前回記録バナー
             const SizedBox(height: 8),
+            
+            // 🔧 v1.0.222: AIコーチからの場合は1RM情報も表示
+            if (_isFromAICoach) ...[
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.green.shade50,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.green.shade300),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Text('🤖', style: TextStyle(fontSize: 16)),
+                        const SizedBox(width: 8),
+                        Text(
+                          'AIコーチの推奨',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green.shade700,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    Builder(
+                      builder: (context) {
+                        final exerciseHistory = _aiCoachData?['exerciseHistory'] as List<Map<String, dynamic>>?;
+                        final oneRM = _calculate1RMFromHistory(exerciseName, exerciseHistory);
+                        final userLevel = _aiCoachData?['userLevel'] as String? ?? '初心者';
+                        
+                        if (oneRM != null && oneRM > 0) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '推定1RM: ${oneRM.toStringAsFixed(1)}kg',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.green.shade900,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                'あなたのレベル ($userLevel) に合わせた重量・回数を設定しています',
+                                style: TextStyle(fontSize: 11, color: Colors.green.shade700),
+                              ),
+                            ],
+                          );
+                        } else {
+                          return Text(
+                            '履歴データから最適な重量・回数を推奨しています',
+                            style: TextStyle(fontSize: 11, color: Colors.green.shade700),
+                          );
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 8),
+            ],
+            
             if (lastData == null) ...[
               // 初回記録の場合
               Container(

@@ -963,7 +963,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                 );
               }).toList(),
               
-              // トレーニング履歴に反映ボタン
+              // 🔧 v1.0.222: トレーニングを開始ボタン（記録画面に遷移）
               const SizedBox(height: 16),
               SizedBox(
                 width: double.infinity,
@@ -971,9 +971,9 @@ class _AIMenuTabState extends State<_AIMenuTab>
                   onPressed: _selectedExerciseIndices.isEmpty
                       ? null
                       : _saveSelectedExercisesToWorkoutLog,
-                  icon: const Icon(Icons.add_circle),
+                  icon: const Icon(Icons.fitness_center),
                   label: Text(
-                    'トレーニング履歴に反映 (${_selectedExerciseIndices.length}種目)',
+                    'トレーニングを開始 (${_selectedExerciseIndices.length}種目)',
                   ),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 14),
@@ -1884,7 +1884,7 @@ $historyInfo
   }
   
   /// メニュー保存
-  /// 🔧 v1.0.220: 選択された種目をトレーニング履歴に保存
+  /// 🔧 v1.0.222: 選択された種目をトレーニング記録画面に渡して遷移
   Future<void> _saveSelectedExercisesToWorkoutLog() async {
     try {
       if (_selectedExerciseIndices.isEmpty) return;
@@ -1899,79 +1899,31 @@ $historyInfo
           .map((index) => _parsedExercises[index])
           .toList();
       
-      // Exercise モデルに変換
-      final exercises = selectedExercises.map((ex) {
-        // デフォルト値の設定
-        final weight = ex.weight ?? 10.0; // デフォルト10kg
-        final reps = ex.reps ?? 10; // デフォルト10回
-        final sets = ex.sets ?? 3; // デフォルト3セット
-        
-        // セット情報を作成
-        final workoutSets = List.generate(
-          sets,
-          (index) => WorkoutSet(
-            targetReps: reps,
-            actualReps: null, // 実際の回数は後で入力
-            weight: weight,
-            setType: SetType.normal,
-          ),
-        );
-        
-        return Exercise(
-          name: ex.name,
-          bodyPart: ex.bodyPart,
-          sets: workoutSets,
-        );
-      }).toList();
+      debugPrint('✅ AIコーチ: ${selectedExercises.length}種目をトレーニング記録画面に渡します');
       
-      // WorkoutLog を作成
-      final workoutLog = WorkoutLog(
-        id: '', // Firestoreが自動生成
-        userId: user.uid,
-        date: DateTime.now(),
-        gymId: 'ai_coach_generated', // AIコーチ生成メニューとして識別
-        gymName: 'AIコーチ提案メニュー',
-        exercises: exercises,
-        notes: 'AIコーチが提案したメニュー（レベル: $_selectedLevel）',
-        isAutoCompleted: false,
-        consecutiveDays: 1,
-      );
-      
-      // Firestoreに保存
-      await FirebaseFirestore.instance
-          .collection('workout_logs')
-          .add(workoutLog.toFirestore());
-      
+      // トレーニング記録画面に遷移（データを引き継ぐ）
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('${selectedExercises.length}種目をトレーニング履歴に追加しました'),
-            backgroundColor: Colors.green,
-            duration: const Duration(seconds: 3),
-            action: SnackBarAction(
-              label: '確認',
-              textColor: Colors.white,
-              onPressed: () {
-                // トレーニング記録画面へ遷移
-                Navigator.of(context).pushNamed('/add-workout');
-              },
-            ),
-          ),
+        await Navigator.of(context).pushNamed(
+          '/add-workout',
+          arguments: {
+            'fromAICoach': true,
+            'selectedExercises': selectedExercises,
+            'userLevel': _selectedLevel, // 初心者・中級者・上級者
+            'exerciseHistory': _exerciseHistory, // 1RM計算用の履歴
+          },
         );
         
-        // 選択をリセット
+        // 戻ってきたら選択をリセット
         setState(() {
           _selectedExerciseIndices.clear();
         });
       }
-      
-      debugPrint('✅ トレーニング履歴保存成功: ${selectedExercises.length}種目');
     } catch (e) {
-      debugPrint('❌ トレーニング履歴保存エラー: $e');
+      debugPrint('❌ トレーニング記録画面への遷移エラー: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('保存に失敗しました: $e'),
+            content: Text('画面遷移に失敗しました: $e'),
             backgroundColor: Colors.red,
           ),
         );
