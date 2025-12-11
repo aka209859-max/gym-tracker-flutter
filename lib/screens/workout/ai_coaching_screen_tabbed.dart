@@ -1489,7 +1489,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       // 詳細情報行の判定（先頭がスペースまたはタブ、または「•」「*」で始まる）
       final isDetailLine = line.startsWith('  ') || line.startsWith('\t') || 
                            line.startsWith('•') || 
-                           (line.startsWith('*') && !markdownMatch != null);
+                           (line.startsWith('*') && markdownMatch == null);
       
       if ((match != null || altMatch != null || markdownMatch != null) && !isDetailLine) {
         // 前の種目を保存
