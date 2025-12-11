@@ -1455,7 +1455,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
           }
           
           // 説明の続き
-          if (currentDescription.isNotEmpty && !weightMatch && !repsMatch && !setsMatch) {
+          if (currentDescription.isNotEmpty && weightMatch == null && repsMatch == null && setsMatch == null) {
             currentDescription += ' ' + line;
           }
         }
