@@ -984,8 +984,52 @@ class _AIMenuTabState extends State<_AIMenuTab>
                 ),
               ),
             ] else ...[
-              // パースに失敗した場合は従来の表示
-              _buildFormattedText(_generatedMenu!),
+              // 🔧 v1.0.223: パースに失敗した場合もエラーメッセージのみ表示（生テキストは表示しない）
+              Card(
+                color: Colors.orange.shade50,
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      Icon(Icons.warning_amber, color: Colors.orange.shade700, size: 48),
+                      const SizedBox(height: 12),
+                      Text(
+                        'メニューの解析に失敗しました',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.orange.shade900,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'もう一度メニューを生成してください。\n問題が続く場合は、サポートにお問い合わせください。',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.orange.shade700,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          setState(() {
+                            _generatedMenu = null;
+                            _parsedExercises.clear();
+                            _errorMessage = null;
+                          });
+                        },
+                        icon: const Icon(Icons.refresh),
+                        label: const Text('再生成する'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.orange.shade600,
+                          foregroundColor: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ],
         ),
@@ -1309,8 +1353,15 @@ class _AIMenuTabState extends State<_AIMenuTab>
         final consumeSuccess = await creditService.consumeAICredit();
         debugPrint('✅ AIクレジット消費: $consumeSuccess');
         
-        // 🔧 v1.0.220: メニューをパースして種目抽出
+        // 🔧 v1.0.223: メニューをパースして種目抽出
+        debugPrint('📄 生成されたメニュー（最初の500文字）:\n${text.substring(0, text.length > 500 ? 500 : text.length)}');
+        
         final parsedExercises = _parseGeneratedMenu(text, bodyParts);
+        
+        debugPrint('✅ メニュー生成成功: ${parsedExercises.length}種目抽出');
+        if (parsedExercises.isEmpty) {
+          debugPrint('⚠️ 警告: パースされた種目が0件です。メニューの形式を確認してください。');
+        }
         
         setState(() {
           _generatedMenu = text;
@@ -1318,8 +1369,6 @@ class _AIMenuTabState extends State<_AIMenuTab>
           _selectedExerciseIndices.clear(); // 選択をリセット
           _isGenerating = false;
         });
-
-        debugPrint('✅ メニュー生成成功: ${parsedExercises.length}種目抽出');
         
         // 残りクレジット表示
         if (mounted) {
@@ -1344,8 +1393,10 @@ class _AIMenuTabState extends State<_AIMenuTab>
     }
   }
   
-  /// 🔧 v1.0.220: AI生成メニューをパースして種目データを抽出
+  /// 🔧 v1.0.223: AI生成メニューをパースして種目データを抽出（完全内部処理）
   List<ParsedExercise> _parseGeneratedMenu(String menu, List<String> bodyParts) {
+    debugPrint('🔍 パース開始: 全${menu.length}文字, ${menu.split('\n').length}行');
+    
     final exercises = <ParsedExercise>[];
     final lines = menu.split('\n');
     
@@ -1388,6 +1439,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
         for (final key in bodyPartMap.keys) {
           if (line.contains(key)) {
             currentBodyPart = bodyPartMap[key]!;
+            debugPrint('  📍 部位検出: $currentBodyPart (行: $line)');
             break;
           }
         }
@@ -1438,6 +1490,8 @@ class _AIMenuTabState extends State<_AIMenuTab>
         currentWeight = null;
         currentReps = null;
         currentSets = null;
+        
+        debugPrint('  ✅ 種目検出: $currentExerciseName (部位: $currentBodyPart)');
         
         // 同じ行に重量・回数・セット情報があるか確認
         final weightPattern = RegExp(r'(\d+(?:\.\d+)?)\s*kg');
