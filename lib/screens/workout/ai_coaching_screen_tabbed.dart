@@ -1461,8 +1461,11 @@ class _AIMenuTabState extends State<_AIMenuTab>
       line = line.trim();
       if (line.isEmpty) continue;
       
-      // 部位の検出（■、【】、##で囲まれた部位名）
-      if (line.startsWith('■') || line.startsWith('【') || line.startsWith('##') || line.startsWith('#')) {
+      // 🔧 v1.0.226: 部位の検出（■、【】、## または単一#で囲まれた部位名）
+      // ### はサブセクションなので無視
+      if (line.startsWith('■') || line.startsWith('【') || 
+          (line.startsWith('##') && !line.startsWith('###')) ||
+          (line.startsWith('#') && !line.startsWith('##'))) {
         for (final key in bodyPartMap.keys) {
           if (line.contains(key)) {
             currentBodyPart = bodyPartMap[key]!;
@@ -1473,7 +1476,13 @@ class _AIMenuTabState extends State<_AIMenuTab>
         continue;
       }
       
-      // 🔧 v1.0.224: 種目名の検出（複数パターンに対応）
+      // ### はサブセクション（スキップ）
+      if (line.startsWith('###')) {
+        debugPrint('  ⏭️  サブセクションをスキップ: $line');
+        continue;
+      }
+      
+      // 🔧 v1.0.226: 種目名の検出（複数パターンに対応）
       // パターン1: "1. 種目名" or "1) 種目名"
       final exercisePattern = RegExp(r'^(\d+[\.\)]\s*)(.+?)(?:[:：]|$)');
       final match = exercisePattern.firstMatch(line);
@@ -1486,12 +1495,16 @@ class _AIMenuTabState extends State<_AIMenuTab>
       final markdownPattern = RegExp(r'^\*\*種目\d+[:：](.+?)\*\*');
       final markdownMatch = markdownPattern.firstMatch(line);
       
+      // パターン4: "**A1. EZバーカール**" のような英数字番号付き形式
+      final alphaNumPattern = RegExp(r'^\*\*[A-Z]\d+[\.\)]\s*(.+?)\*\*');
+      final alphaNumMatch = alphaNumPattern.firstMatch(line);
+      
       // 詳細情報行の判定（先頭がスペースまたはタブ、または「•」「*」で始まる）
       final isDetailLine = line.startsWith('  ') || line.startsWith('\t') || 
                            line.startsWith('•') || 
                            (line.startsWith('*') && markdownMatch == null);
       
-      if ((match != null || altMatch != null || markdownMatch != null) && !isDetailLine) {
+      if ((match != null || altMatch != null || markdownMatch != null || alphaNumMatch != null) && !isDetailLine) {
         // 前の種目を保存
         if (currentExerciseName.isNotEmpty && currentBodyPart.isNotEmpty) {
           exercises.add(ParsedExercise(
@@ -1504,7 +1517,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
           ));
         }
         
-        // 🔧 v1.0.224: 種目名の抽出（3パターンに対応）
+        // 🔧 v1.0.226: 種目名の抽出（4パターンに対応）
         var name = '';
         if (match != null) {
           name = match.group(2)!.trim();
@@ -1512,6 +1525,8 @@ class _AIMenuTabState extends State<_AIMenuTab>
           name = altMatch.group(1)!.trim();
         } else if (markdownMatch != null) {
           name = markdownMatch.group(1)!.trim();
+        } else if (alphaNumMatch != null) {
+          name = alphaNumMatch.group(1)!.trim();
         }
         
         // 括弧内の補足情報を除去（例: ベンチプレス（バーベル）→ ベンチプレス）
