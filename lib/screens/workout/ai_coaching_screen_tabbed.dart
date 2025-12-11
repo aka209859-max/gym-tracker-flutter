@@ -1394,14 +1394,21 @@ class _AIMenuTabState extends State<_AIMenuTab>
         continue;
       }
       
-      // 🔧 v1.0.220-hotfix2: 種目名の検出（数字始まりのみ。*や-は詳細情報）
+      // 🔧 v1.0.222: 種目名の検出（数字始まり、または「・」で始まる種目行も検出）
+      // パターン1: "1. 種目名" or "1) 種目名"
       final exercisePattern = RegExp(r'^(\d+[\.\)]\s*)(.+?)(?:[:：]|$)');
       final match = exercisePattern.firstMatch(line);
       
-      // *始まりは詳細情報として扱う
-      final isDetailLine = line.startsWith('*') || line.startsWith('・') || line.startsWith('-');
+      // パターン2: "・ 種目名：" のような形式（ウォームアップなど）
+      final altExercisePattern = RegExp(r'^[・\*]\s*(.+?)(?:[:：]\s*\*\*|$)');
+      final altMatch = altExercisePattern.firstMatch(line);
       
-      if (match != null && !isDetailLine) {
+      // 詳細情報行の判定（先頭がスペースまたはタブ、または「•」で始まる）
+      final isDetailLine = line.startsWith('  ') || line.startsWith('\t') || 
+                           line.startsWith('•') || 
+                           (line.startsWith('*') && !line.contains('：'));
+      
+      if ((match != null || altMatch != null) && !isDetailLine) {
         // 前の種目を保存
         if (currentExerciseName.isNotEmpty && currentBodyPart.isNotEmpty) {
           exercises.add(ParsedExercise(
@@ -1414,10 +1421,18 @@ class _AIMenuTabState extends State<_AIMenuTab>
           ));
         }
         
-        // 🔧 v1.0.220-hotfix2: 新しい種目（数字プレフィックスと括弧内の補足を除去）
-        var name = match.group(2)!.trim();
+        // 🔧 v1.0.222: 種目名の抽出（両パターンに対応）
+        var name = '';
+        if (match != null) {
+          name = match.group(2)!.trim();
+        } else if (altMatch != null) {
+          name = altMatch.group(1)!.trim();
+        }
+        
         // 括弧内の補足情報を除去（例: ベンチプレス（バーベル）→ ベンチプレス）
         name = name.replaceAll(RegExp(r'[（\(][^）\)]*[）\)]'), '').trim();
+        // **で囲まれた部分があれば除去
+        name = name.replaceAll('**', '').trim();
         currentExerciseName = name;
         currentDescription = '';
         currentWeight = null;
@@ -1441,11 +1456,13 @@ class _AIMenuTabState extends State<_AIMenuTab>
         if (line.startsWith('説明:') || line.startsWith('説明：')) {
           currentDescription = line.replaceFirst(RegExp(r'説明[:：]\s*'), '');
         } else if (!line.startsWith('■') && !line.startsWith('【')) {
-          // 🔧 v1.0.220-hotfix2: *や・で始まる行、または通常の行から重量・回数・セット情報を抽出
+          // 🔧 v1.0.222: *や・、•で始まる行、または通常の行から重量・回数・セット情報を抽出
           String cleanLine = line;
-          if (line.startsWith('*') || line.startsWith('・') || line.startsWith('-')) {
+          if (line.startsWith('*') || line.startsWith('・') || line.startsWith('-') || line.startsWith('•')) {
             cleanLine = line.substring(1).trim();
           }
+          // インデントされた行の処理
+          cleanLine = cleanLine.trim();
           
           // 重量：XXkg の形式に対応
           final weightPattern = RegExp(r'重量[:：]?\s*(\d+(?:\.\d+)?)\s*kg');
