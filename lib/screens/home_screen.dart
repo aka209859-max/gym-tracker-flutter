@@ -88,6 +88,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   final AdMobService _adMobService = AdMobService();
   BannerAd? _bannerAd;
   bool _isAdLoaded = false;
+  bool _isPremiumUser = false; // 🔧 v1.0.225-fix: 有料プラン判定用
   
   // Task 16: バッジシステム
   final AchievementService _achievementService = AchievementService();
@@ -166,8 +167,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       _checkAndShowReferralBanner();
     });
     
-    // 📱 バナー広告をロード
-    _loadBannerAd();
+    // 🔧 v1.0.225-fix: プラン状態をチェックしてから広告を読み込む
+    _checkPremiumStatus();
     
     // 🔔 混雑度アラート監視開始（Premium/Pro限定）
     _startCrowdAlertMonitoring();
@@ -475,7 +476,43 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     );
   }
   
-  /// バナー広告を読み込む
+  /// 🔧 v1.0.225-fix: プラン状態をチェック
+  Future<void> _checkPremiumStatus() async {
+    try {
+      final subscriptionService = SubscriptionService();
+      
+      // 永年プランチェック
+      final hasLifetime = await subscriptionService.hasLifetimePlan();
+      if (hasLifetime) {
+        setState(() {
+          _isPremiumUser = true;
+        });
+        debugPrint('✅ 永年Proプラン保持者 - 広告非表示');
+        return;
+      }
+      
+      // 通常のプランチェック
+      final currentPlan = await subscriptionService.getCurrentPlan();
+      setState(() {
+        _isPremiumUser = currentPlan != SubscriptionType.free;
+      });
+      
+      debugPrint('📊 現在のプラン: $currentPlan (広告表示: ${!_isPremiumUser})');
+      
+      // 無料プランの場合のみ広告をロード
+      if (!_isPremiumUser) {
+        await _loadBannerAd();
+      }
+    } catch (e) {
+      debugPrint('⚠️ プラン状態チェックエラー: $e');
+      // エラー時は念のため広告を表示しない
+      setState(() {
+        _isPremiumUser = true;
+      });
+    }
+  }
+  
+  /// バナー広告を読み込む（無料プランのみ）
   Future<void> _loadBannerAd() async {
     await _adMobService.loadBannerAd(
       onAdLoaded: (ad) {
@@ -1111,7 +1148,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             _buildMonthlySummary(theme),
             
             // 📱 バナー広告表示（無料プランのみ）
-            if (_isAdLoaded && _bannerAd != null)
+            // 🔧 v1.0.225-fix: 有料プラン（永年含む）は広告非表示
+            if (!_isPremiumUser && _isAdLoaded && _bannerAd != null)
               Container(
                 margin: const EdgeInsets.only(top: 16, bottom: 16),
                 alignment: Alignment.center,
