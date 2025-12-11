@@ -158,7 +158,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       
       final selectedExercises = args['selectedExercises'] as List?;
       final userLevel = args['userLevel'] as String?;
-      final exerciseHistory = args['exerciseHistory'] as List<Map<String, dynamic>>?;
+      // v1.0.225-hotfix: Map形式の履歴データに対応
+      final exerciseHistory = args['exerciseHistory'] as Map<String, dynamic>?;
       
       if (selectedExercises == null || selectedExercises.isEmpty) {
         debugPrint('⚠️ 選択された種目がありません');
@@ -167,7 +168,12 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       
       debugPrint('📋 選択種目: ${selectedExercises.length}件');
       debugPrint('🎯 ユーザーレベル: $userLevel');
-      debugPrint('📊 履歴データ: ${exerciseHistory?.length ?? 0}件');
+      // v1.0.225-hotfix: Map形式の履歴データに対応
+      if (exerciseHistory is Map) {
+        debugPrint('📊 履歴データ: ${exerciseHistory.keys.length}種目');
+      } else {
+        debugPrint('📊 履歴データ: なし');
+      }
       
       // 各種目ごとに1RMを計算してセットを生成
       for (var exercise in selectedExercises) {
@@ -2086,7 +2092,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     const SizedBox(height: 6),
                     Builder(
                       builder: (context) {
-                        final exerciseHistory = _aiCoachData?['exerciseHistory'] as List<Map<String, dynamic>>?;
+                        // v1.0.225-hotfix: Map形式の履歴データに対応
+                        final exerciseHistory = _aiCoachData?['exerciseHistory'];
                         final oneRM = _calculate1RMFromHistory(exerciseName, exerciseHistory);
                         final userLevel = _aiCoachData?['userLevel'] as String? ?? '初心者';
                         
