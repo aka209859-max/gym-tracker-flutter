@@ -984,7 +984,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                 ),
               ),
             ] else ...[
-              // 🔧 v1.0.223: パースに失敗した場合もエラーメッセージのみ表示（生テキストは表示しない）
+              // 🔧 v1.0.223-debug: パースに失敗した場合はエラーメッセージと生テキストを表示（デバッグ用）
               Card(
                 color: Colors.orange.shade50,
                 child: Padding(
@@ -1025,6 +1025,33 @@ class _AIMenuTabState extends State<_AIMenuTab>
                           backgroundColor: Colors.orange.shade600,
                           foregroundColor: Colors.white,
                         ),
+                      ),
+                      const SizedBox(height: 16),
+                      const Divider(),
+                      const SizedBox(height: 8),
+                      // 🐛 デバッグ用: 生成されたテキストを表示
+                      ExpansionTile(
+                        title: Text(
+                          '🐛 デバッグ: 生成されたテキストを見る',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.red.shade700,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            color: Colors.grey.shade100,
+                            child: SelectableText(
+                              _generatedMenu ?? '',
+                              style: const TextStyle(
+                                fontSize: 11,
+                                fontFamily: 'monospace',
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
