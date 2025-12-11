@@ -12,6 +12,26 @@ import '../../services/ai_credit_service.dart';
 import '../../widgets/scientific_citation_card.dart';
 import '../../widgets/paywall_dialog.dart';
 import '../../main.dart'; // globalRewardAdService用
+import '../../models/workout_log.dart'; // 🔧 v1.0.220: トレーニング履歴保存用
+
+/// 🔧 v1.0.220: パース済み種目データ（AIコーチ提案メニュー用）
+class ParsedExercise {
+  final String name;
+  final String bodyPart;
+  final double? weight; // kg
+  final int? reps; // 回数
+  final int? sets; // セット数
+  final String? description; // 初心者向け説明
+
+  ParsedExercise({
+    required this.name,
+    required this.bodyPart,
+    this.weight,
+    this.reps,
+    this.sets,
+    this.description,
+  });
+}
 
 /// Layer 5: AIコーチング画面（統合版）
 /// 
@@ -456,6 +476,10 @@ class _AIMenuTabState extends State<_AIMenuTab>
   // 🔧 v1.0.217: トレーニング履歴データ
   Map<String, Map<String, dynamic>> _exerciseHistory = {}; // 種目名 → {maxWeight, max1RM, totalSets}
   bool _isLoadingWorkoutHistory = false;
+  
+  // 🔧 v1.0.220: パース済み種目データ（チェックボックス対応）
+  List<ParsedExercise> _parsedExercises = [];
+  Set<int> _selectedExerciseIndices = {}; // 選択された種目のインデックス
 
   // 履歴
   List<Map<String, dynamic>> _history = [];
@@ -799,7 +823,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
     );
   }
 
-  /// 生成されたメニュー表示
+  /// 🔧 v1.0.220: 生成されたメニュー表示（チェックボックス付き）
   Widget _buildGeneratedMenu() {
     return Card(
       child: Padding(
@@ -817,19 +841,194 @@ class _AIMenuTabState extends State<_AIMenuTab>
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                IconButton(
-                  icon: const Icon(Icons.save),
-                  onPressed: _saveMenu,
-                  tooltip: '保存',
+                Row(
+                  children: [
+                    // 全選択/全解除ボタン
+                    TextButton.icon(
+                      onPressed: () {
+                        setState(() {
+                          if (_selectedExerciseIndices.length == _parsedExercises.length) {
+                            _selectedExerciseIndices.clear();
+                          } else {
+                            _selectedExerciseIndices = Set.from(
+                              List.generate(_parsedExercises.length, (i) => i)
+                            );
+                          }
+                        });
+                      },
+                      icon: Icon(
+                        _selectedExerciseIndices.length == _parsedExercises.length
+                            ? Icons.check_box
+                            : Icons.check_box_outline_blank,
+                        size: 20,
+                      ),
+                      label: Text(
+                        _selectedExerciseIndices.length == _parsedExercises.length
+                            ? '全解除'
+                            : '全選択',
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.save),
+                      onPressed: _saveMenu,
+                      tooltip: '保存',
+                    ),
+                  ],
                 ),
               ],
             ),
             const Divider(),
             const SizedBox(height: 8),
-            _buildFormattedText(_generatedMenu!),
+            
+            // 🔧 v1.0.220: パース済み種目リスト（チェックボックス付き）
+            if (_parsedExercises.isNotEmpty) ...[
+              ..._parsedExercises.asMap().entries.map((entry) {
+                final index = entry.key;
+                final exercise = entry.value;
+                final isSelected = _selectedExerciseIndices.contains(index);
+                
+                return Card(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  color: isSelected ? Colors.blue.shade50 : null,
+                  child: CheckboxListTile(
+                    value: isSelected,
+                    onChanged: (value) {
+                      setState(() {
+                        if (value == true) {
+                          _selectedExerciseIndices.add(index);
+                        } else {
+                          _selectedExerciseIndices.remove(index);
+                        }
+                      });
+                    },
+                    title: Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: _getBodyPartColor(exercise.bodyPart),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            exercise.bodyPart,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            exercise.name,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 4),
+                        if (exercise.weight != null || exercise.reps != null || exercise.sets != null)
+                          Wrap(
+                            spacing: 12,
+                            children: [
+                              if (exercise.weight != null)
+                                _buildInfoChip(Icons.fitness_center, '${exercise.weight}kg'),
+                              if (exercise.reps != null)
+                                _buildInfoChip(Icons.repeat, '${exercise.reps}回'),
+                              if (exercise.sets != null)
+                                _buildInfoChip(Icons.layers, '${exercise.sets}セット'),
+                            ],
+                          ),
+                        if (exercise.description != null) ...[
+                          const SizedBox(height: 6),
+                          Text(
+                            exercise.description!,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey.shade700,
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
+              
+              // トレーニング履歴に反映ボタン
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: _selectedExerciseIndices.isEmpty
+                      ? null
+                      : _saveSelectedExercisesToWorkoutLog,
+                  icon: const Icon(Icons.add_circle),
+                  label: Text(
+                    'トレーニング履歴に反映 (${_selectedExerciseIndices.length}種目)',
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    backgroundColor: Colors.green.shade600,
+                    foregroundColor: Colors.white,
+                    disabledBackgroundColor: Colors.grey.shade300,
+                  ),
+                ),
+              ),
+            ] else ...[
+              // パースに失敗した場合は従来の表示
+              _buildFormattedText(_generatedMenu!),
+            ],
           ],
         ),
       ),
+    );
+  }
+  
+  /// 🔧 v1.0.220: 部位別カラー取得
+  Color _getBodyPartColor(String bodyPart) {
+    switch (bodyPart) {
+      case '胸':
+        return Colors.red.shade400;
+      case '背中':
+        return Colors.blue.shade400;
+      case '脚':
+        return Colors.green.shade400;
+      case '肩':
+        return Colors.orange.shade400;
+      case '腕':
+        return Colors.purple.shade400;
+      case '腹筋':
+        return Colors.teal.shade400;
+      default:
+        return Colors.grey.shade400;
+    }
+  }
+  
+  /// 🔧 v1.0.220: 情報チップウィジェット
+  Widget _buildInfoChip(IconData icon, String text) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 14, color: Colors.grey.shade600),
+        const SizedBox(width: 4),
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: 12,
+            color: Colors.grey.shade700,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
     );
   }
 
@@ -1106,12 +1305,17 @@ class _AIMenuTabState extends State<_AIMenuTab>
         final consumeSuccess = await creditService.consumeAICredit();
         debugPrint('✅ AIクレジット消費: $consumeSuccess');
         
+        // 🔧 v1.0.220: メニューをパースして種目抽出
+        final parsedExercises = _parseGeneratedMenu(text, bodyParts);
+        
         setState(() {
           _generatedMenu = text;
+          _parsedExercises = parsedExercises;
+          _selectedExerciseIndices.clear(); // 選択をリセット
           _isGenerating = false;
         });
 
-        debugPrint('✅ メニュー生成成功');
+        debugPrint('✅ メニュー生成成功: ${parsedExercises.length}種目抽出');
         
         // 残りクレジット表示
         if (mounted) {
@@ -1134,6 +1338,140 @@ class _AIMenuTabState extends State<_AIMenuTab>
         _isGenerating = false;
       });
     }
+  }
+  
+  /// 🔧 v1.0.220: AI生成メニューをパースして種目データを抽出
+  List<ParsedExercise> _parseGeneratedMenu(String menu, List<String> bodyParts) {
+    final exercises = <ParsedExercise>[];
+    final lines = menu.split('\n');
+    
+    String currentBodyPart = '';
+    String currentExerciseName = '';
+    String currentDescription = '';
+    double? currentWeight;
+    int? currentReps;
+    int? currentSets;
+    
+    // 部位マッピング（日本語表記の揺れに対応）
+    final bodyPartMap = {
+      '胸': '胸',
+      '大胸筋': '胸',
+      '背中': '背中',
+      '広背筋': '背中',
+      '僧帽筋': '背中',
+      '脚': '脚',
+      '大腿': '脚',
+      '下半身': '脚',
+      '肩': '肩',
+      '三角筋': '肩',
+      '腕': '腕',
+      '上腕': '腕',
+      '腹筋': '腹筋',
+      '腹': '腹筋',
+      'コア': '腹筋',
+    };
+    
+    for (var line in lines) {
+      line = line.trim();
+      if (line.isEmpty) continue;
+      
+      // 部位の検出（■や【】で囲まれた部位名）
+      if (line.startsWith('■') || line.startsWith('【')) {
+        for (final key in bodyPartMap.keys) {
+          if (line.contains(key)) {
+            currentBodyPart = bodyPartMap[key]!;
+            break;
+          }
+        }
+        continue;
+      }
+      
+      // 種目名の検出（数字始まり、または「-」始まり）
+      final exercisePattern = RegExp(r'^(?:\d+[\.\)]\s*|[-・]\s*)(.+?)(?:[:：]|$)');
+      final match = exercisePattern.firstMatch(line);
+      
+      if (match != null) {
+        // 前の種目を保存
+        if (currentExerciseName.isNotEmpty && currentBodyPart.isNotEmpty) {
+          exercises.add(ParsedExercise(
+            name: currentExerciseName,
+            bodyPart: currentBodyPart,
+            weight: currentWeight,
+            reps: currentReps,
+            sets: currentSets,
+            description: currentDescription.isNotEmpty ? currentDescription : null,
+          ));
+        }
+        
+        // 新しい種目
+        currentExerciseName = match.group(1)!.trim();
+        currentDescription = '';
+        currentWeight = null;
+        currentReps = null;
+        currentSets = null;
+        
+        // 同じ行に重量・回数・セット情報があるか確認
+        final weightPattern = RegExp(r'(\d+(?:\.\d+)?)\s*kg');
+        final repsPattern = RegExp(r'(\d+)\s*(?:回|reps?)');
+        final setsPattern = RegExp(r'(\d+)\s*(?:セット|sets?)');
+        
+        final weightMatch = weightPattern.firstMatch(line);
+        final repsMatch = repsPattern.firstMatch(line);
+        final setsMatch = setsPattern.firstMatch(line);
+        
+        if (weightMatch != null) currentWeight = double.tryParse(weightMatch.group(1)!);
+        if (repsMatch != null) currentReps = int.tryParse(repsMatch.group(1)!);
+        if (setsMatch != null) currentSets = int.tryParse(setsMatch.group(1)!);
+      } else if (currentExerciseName.isNotEmpty) {
+        // 種目の説明や詳細情報
+        if (line.startsWith('説明:') || line.startsWith('説明：')) {
+          currentDescription = line.replaceFirst(RegExp(r'説明[:：]\s*'), '');
+        } else if (!line.startsWith('■') && !line.startsWith('【')) {
+          // 重量・回数・セット情報を抽出
+          final weightPattern = RegExp(r'(\d+(?:\.\d+)?)\s*kg');
+          final repsPattern = RegExp(r'(\d+)\s*(?:回|reps?)');
+          final setsPattern = RegExp(r'(\d+)\s*(?:セット|sets?)');
+          
+          final weightMatch = weightPattern.firstMatch(line);
+          final repsMatch = repsPattern.firstMatch(line);
+          final setsMatch = setsPattern.firstMatch(line);
+          
+          if (weightMatch != null && currentWeight == null) {
+            currentWeight = double.tryParse(weightMatch.group(1)!);
+          }
+          if (repsMatch != null && currentReps == null) {
+            currentReps = int.tryParse(repsMatch.group(1)!);
+          }
+          if (setsMatch != null && currentSets == null) {
+            currentSets = int.tryParse(setsMatch.group(1)!);
+          }
+          
+          // 説明の続き
+          if (currentDescription.isNotEmpty && !weightMatch && !repsMatch && !setsMatch) {
+            currentDescription += ' ' + line;
+          }
+        }
+      }
+    }
+    
+    // 最後の種目を保存
+    if (currentExerciseName.isNotEmpty && currentBodyPart.isNotEmpty) {
+      exercises.add(ParsedExercise(
+        name: currentExerciseName,
+        bodyPart: currentBodyPart,
+        weight: currentWeight,
+        reps: currentReps,
+        sets: currentSets,
+        description: currentDescription.isNotEmpty ? currentDescription : null,
+      ));
+    }
+    
+    debugPrint('📝 パース結果: ${exercises.length}種目抽出');
+    for (final ex in exercises) {
+      debugPrint('  - ${ex.name} (${ex.bodyPart}): ${ex.weight}kg, ${ex.reps}回, ${ex.sets}セット');
+    }
+    
+    return exercises;
   }
 
   /// 🔧 v1.0.219: 初心者向けトレーニング種目データベース（説明付き）
@@ -1500,6 +1838,101 @@ $historyInfo
   }
   
   /// メニュー保存
+  /// 🔧 v1.0.220: 選択された種目をトレーニング履歴に保存
+  Future<void> _saveSelectedExercisesToWorkoutLog() async {
+    try {
+      if (_selectedExerciseIndices.isEmpty) return;
+      
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        throw Exception('ユーザーが認証されていません');
+      }
+      
+      // 選択された種目を抽出
+      final selectedExercises = _selectedExerciseIndices
+          .map((index) => _parsedExercises[index])
+          .toList();
+      
+      // Exercise モデルに変換
+      final exercises = selectedExercises.map((ex) {
+        // デフォルト値の設定
+        final weight = ex.weight ?? 10.0; // デフォルト10kg
+        final reps = ex.reps ?? 10; // デフォルト10回
+        final sets = ex.sets ?? 3; // デフォルト3セット
+        
+        // セット情報を作成
+        final workoutSets = List.generate(
+          sets,
+          (index) => WorkoutSet(
+            targetReps: reps,
+            actualReps: null, // 実際の回数は後で入力
+            weight: weight,
+            setType: SetType.normal,
+          ),
+        );
+        
+        return Exercise(
+          name: ex.name,
+          bodyPart: ex.bodyPart,
+          sets: workoutSets,
+        );
+      }).toList();
+      
+      // WorkoutLog を作成
+      final workoutLog = WorkoutLog(
+        id: '', // Firestoreが自動生成
+        userId: user.uid,
+        date: DateTime.now(),
+        gymId: 'ai_coach_generated', // AIコーチ生成メニューとして識別
+        gymName: 'AIコーチ提案メニュー',
+        exercises: exercises,
+        notes: 'AIコーチが提案したメニュー（レベル: $_selectedLevel）',
+        isAutoCompleted: false,
+        consecutiveDays: 1,
+      );
+      
+      // Firestoreに保存
+      await FirebaseFirestore.instance
+          .collection('workout_logs')
+          .add(workoutLog.toFirestore());
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('${selectedExercises.length}種目をトレーニング履歴に追加しました'),
+            backgroundColor: Colors.green,
+            duration: const Duration(seconds: 3),
+            action: SnackBarAction(
+              label: '確認',
+              textColor: Colors.white,
+              onPressed: () {
+                // トレーニング記録画面へ遷移
+                Navigator.of(context).pushNamed('/add-workout');
+              },
+            ),
+          ),
+        );
+        
+        // 選択をリセット
+        setState(() {
+          _selectedExerciseIndices.clear();
+        });
+      }
+      
+      debugPrint('✅ トレーニング履歴保存成功: ${selectedExercises.length}種目');
+    } catch (e) {
+      debugPrint('❌ トレーニング履歴保存エラー: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('保存に失敗しました: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+  
   Future<void> _saveMenu() async {
     try {
       if (_generatedMenu == null) return;
