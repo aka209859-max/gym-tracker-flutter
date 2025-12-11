@@ -168,8 +168,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       
       debugPrint('📋 選択種目: ${selectedExercises.length}件');
       debugPrint('🎯 ユーザーレベル: $userLevel');
-      // v1.0.225-hotfix: Map形式の履歴データに対応
-      if (exerciseHistory is Map) {
+      // v1.0.225-hotfix2: Map形式の履歴データに対応（Null安全性）
+      if (exerciseHistory != null && exerciseHistory is Map) {
         debugPrint('📊 履歴データ: ${exerciseHistory.keys.length}種目');
       } else {
         debugPrint('📊 履歴データ: なし');
