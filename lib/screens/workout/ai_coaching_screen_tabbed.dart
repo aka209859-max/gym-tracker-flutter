@@ -1394,11 +1394,14 @@ class _AIMenuTabState extends State<_AIMenuTab>
         continue;
       }
       
-      // 種目名の検出（数字始まり、または「-」始まり）
-      final exercisePattern = RegExp(r'^(?:\d+[\.\)]\s*|[-・]\s*)(.+?)(?:[:：]|$)');
+      // 🔧 v1.0.220-hotfix2: 種目名の検出（数字始まりのみ。*や-は詳細情報）
+      final exercisePattern = RegExp(r'^(\d+[\.\)]\s*)(.+?)(?:[:：]|$)');
       final match = exercisePattern.firstMatch(line);
       
-      if (match != null) {
+      // *始まりは詳細情報として扱う
+      final isDetailLine = line.startsWith('*') || line.startsWith('・') || line.startsWith('-');
+      
+      if (match != null && !isDetailLine) {
         // 前の種目を保存
         if (currentExerciseName.isNotEmpty && currentBodyPart.isNotEmpty) {
           exercises.add(ParsedExercise(
@@ -1411,8 +1414,11 @@ class _AIMenuTabState extends State<_AIMenuTab>
           ));
         }
         
-        // 新しい種目
-        currentExerciseName = match.group(1)!.trim();
+        // 🔧 v1.0.220-hotfix2: 新しい種目（数字プレフィックスと括弧内の補足を除去）
+        var name = match.group(2)!.trim();
+        // 括弧内の補足情報を除去（例: ベンチプレス（バーベル）→ ベンチプレス）
+        name = name.replaceAll(RegExp(r'[（\(][^）\)]*[）\)]'), '').trim();
+        currentExerciseName = name;
         currentDescription = '';
         currentWeight = null;
         currentReps = null;
@@ -1435,14 +1441,30 @@ class _AIMenuTabState extends State<_AIMenuTab>
         if (line.startsWith('説明:') || line.startsWith('説明：')) {
           currentDescription = line.replaceFirst(RegExp(r'説明[:：]\s*'), '');
         } else if (!line.startsWith('■') && !line.startsWith('【')) {
-          // 重量・回数・セット情報を抽出
-          final weightPattern = RegExp(r'(\d+(?:\.\d+)?)\s*kg');
-          final repsPattern = RegExp(r'(\d+)\s*(?:回|reps?)');
-          final setsPattern = RegExp(r'(\d+)\s*(?:セット|sets?)');
+          // 🔧 v1.0.220-hotfix2: *や・で始まる行、または通常の行から重量・回数・セット情報を抽出
+          String cleanLine = line;
+          if (line.startsWith('*') || line.startsWith('・') || line.startsWith('-')) {
+            cleanLine = line.substring(1).trim();
+          }
           
-          final weightMatch = weightPattern.firstMatch(line);
-          final repsMatch = repsPattern.firstMatch(line);
-          final setsMatch = setsPattern.firstMatch(line);
+          // 重量：XXkg の形式に対応
+          final weightPattern = RegExp(r'重量[:：]?\s*(\d+(?:\.\d+)?)\s*kg');
+          final repsPattern = RegExp(r'回数[:：]?\s*(\d+)\s*(?:回|reps?)');
+          final setsPattern = RegExp(r'セット数[:：]?\s*(\d+)\s*(?:セット|sets?)');
+          
+          // 代替パターン（XXkg, XX回, XXセット）
+          final weightPattern2 = RegExp(r'(\d+(?:\.\d+)?)\s*kg');
+          final repsPattern2 = RegExp(r'(\d+)\s*(?:回|reps?)');
+          final setsPattern2 = RegExp(r'(\d+)\s*(?:セット|sets?)');
+          
+          var weightMatch = weightPattern.firstMatch(cleanLine);
+          var repsMatch = repsPattern.firstMatch(cleanLine);
+          var setsMatch = setsPattern.firstMatch(cleanLine);
+          
+          // 代替パターンでも試す
+          if (weightMatch == null) weightMatch = weightPattern2.firstMatch(cleanLine);
+          if (repsMatch == null) repsMatch = repsPattern2.firstMatch(cleanLine);
+          if (setsMatch == null) setsMatch = setsPattern2.firstMatch(cleanLine);
           
           if (weightMatch != null && currentWeight == null) {
             currentWeight = double.tryParse(weightMatch.group(1)!);
@@ -1454,9 +1476,9 @@ class _AIMenuTabState extends State<_AIMenuTab>
             currentSets = int.tryParse(setsMatch.group(1)!);
           }
           
-          // 説明の続き
+          // 説明の続き（重量・回数・セット情報がない場合）
           if (currentDescription.isNotEmpty && weightMatch == null && repsMatch == null && setsMatch == null) {
-            currentDescription += ' ' + line;
+            currentDescription += ' ' + cleanLine;
           }
         }
       }
