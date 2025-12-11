@@ -1529,17 +1529,22 @@ class _AIMenuTabState extends State<_AIMenuTab>
           name = alphaNumMatch.group(1)!.trim();
         }
         
-        // 括弧内の補足情報を除去（例: ベンチプレス（バーベル）→ ベンチプレス）
-        name = name.replaceAll(RegExp(r'[（\(][^）\)]*[）\)]'), '').trim();
         // **で囲まれた部分があれば除去
         name = name.replaceAll('**', '').trim();
-        // コロンがあれば以降を削除
+        
+        // 🔧 v1.0.226-fix: コロンがあれば後ろの部分（実際の種目名）を取得
         if (name.contains('：')) {
-          name = name.split('：')[0].trim();
+          // 「種目1：ショルダープレス」→「ショルダープレス」
+          final parts = name.split('：');
+          name = parts.length > 1 ? parts[1].trim() : parts[0].trim();
         }
         if (name.contains(':')) {
-          name = name.split(':')[0].trim();
+          final parts = name.split(':');
+          name = parts.length > 1 ? parts[1].trim() : parts[0].trim();
         }
+        
+        // 括弧内の補足情報を除去（例: ベンチプレス（バーベル）→ ベンチプレス）
+        name = name.replaceAll(RegExp(r'[（\(][^）\)]*[）\)]'), '').trim();
         
         currentExerciseName = name;
         currentDescription = '';
