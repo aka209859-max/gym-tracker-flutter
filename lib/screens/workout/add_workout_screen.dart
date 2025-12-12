@@ -795,7 +795,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         setType: SetType.normal,
         isBodyweightMode: lastSet?.isBodyweightMode ?? (isPullUpOrAbs ? true : false),
         isTimeMode: lastSet?.isTimeMode ?? _getDefaultTimeMode(exerciseName),
-        isCardio: _isCardioExercise(exerciseName), // 🔧 v1.0.226+242: Fix cardio detection
+        isCardio: lastSet?.isCardio ?? _isCardioExercise(exerciseName), // 🔧 v1.0.226+243: Copy from lastSet or auto-detect
       ));
     });
   }
