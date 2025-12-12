@@ -1558,13 +1558,17 @@ class _AIMenuTabState extends State<_AIMenuTab>
         final weightPattern = RegExp(r'(\d+(?:\.\d+)?)\s*kg');
         final repsPattern = RegExp(r'(\d+)\s*(?:回|reps?)');
         final setsPattern = RegExp(r'(\d+)\s*(?:セット|sets?)');
+        final timePattern = RegExp(r'(\d+)\s*分');
         
         final weightMatch = weightPattern.firstMatch(line);
         final repsMatch = repsPattern.firstMatch(line);
         final setsMatch = setsPattern.firstMatch(line);
+        final timeMatch = timePattern.firstMatch(line);
         
         if (weightMatch != null) currentWeight = double.tryParse(weightMatch.group(1)!);
         if (repsMatch != null) currentReps = int.tryParse(repsMatch.group(1)!);
+        // 🔧 v1.0.226: 有酸素運動の時間をrepsとして扱う
+        if (timeMatch != null && currentReps == null) currentReps = int.tryParse(timeMatch.group(1)!);
         if (setsMatch != null) currentSets = int.tryParse(setsMatch.group(1)!);
       } else if (currentExerciseName.isNotEmpty) {
         // 種目の説明や詳細情報
@@ -1595,20 +1599,31 @@ class _AIMenuTabState extends State<_AIMenuTab>
           final repsPattern2 = RegExp(r'(\d+)\s*回');
           final setsPattern2 = RegExp(r'(\d+)\s*セット');
           
+          // 🔧 v1.0.226: 有酸素運動用のパターン（時間）
+          final timePattern = RegExp(r'(?:時間|HIIT形式)[:：]?\s*(\d+)\s*分');
+          final timePattern2 = RegExp(r'(\d+)\s*分');
+          
           var weightMatch = weightPattern.firstMatch(cleanLine);
           var repsMatch = repsPattern.firstMatch(cleanLine);
           var setsMatch = setsPattern.firstMatch(cleanLine);
+          var timeMatch = timePattern.firstMatch(cleanLine);
           
           // 代替パターンでも試す
           if (weightMatch == null) weightMatch = weightPattern2.firstMatch(cleanLine);
           if (repsMatch == null) repsMatch = repsPattern2.firstMatch(cleanLine);
           if (setsMatch == null) setsMatch = setsPattern2.firstMatch(cleanLine);
+          if (timeMatch == null) timeMatch = timePattern2.firstMatch(cleanLine);
           
           if (weightMatch != null && currentWeight == null) {
             currentWeight = double.tryParse(weightMatch.group(1)!);
           }
           if (repsMatch != null && currentReps == null) {
             currentReps = int.tryParse(repsMatch.group(1)!);
+          }
+          // 🔧 v1.0.226: 有酸素運動の場合、時間をrepsとして扱う
+          if (timeMatch != null && currentReps == null) {
+            currentReps = int.tryParse(timeMatch.group(1)!);
+            debugPrint('  ⏱️ 有酸素時間検出: ${timeMatch.group(1)}分 → reps=$currentReps');
           }
           if (setsMatch != null && currentSets == null) {
             currentSets = int.tryParse(setsMatch.group(1)!);
