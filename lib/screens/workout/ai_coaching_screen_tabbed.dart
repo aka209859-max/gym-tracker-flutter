@@ -1507,18 +1507,19 @@ class _AIMenuTabState extends State<_AIMenuTab>
       if ((match != null || altMatch != null || markdownMatch != null || alphaNumMatch != null) && !isDetailLine) {
         // 前の種目を保存
         if (currentExerciseName.isNotEmpty && currentBodyPart.isNotEmpty) {
-          // 🔧 v1.0.226: 有酸素運動の場合、デフォルト値を設定
-          if (currentWeight == 0.0 && currentSets == null) {
-            currentSets = 1; // 有酸素運動はデフォルト1セット
-            debugPrint('  🔧 有酸素運動として自動設定: sets=1');
-          }
+          // 🔧 v1.0.226: デフォルト値を設定
+          final finalWeight = currentWeight ?? 0.0;
+          final finalReps = currentReps ?? 10;
+          final finalSets = currentSets ?? (finalWeight == 0.0 ? 1 : 3); // 有酸素は1セット、筋トレは3セット
+          
+          debugPrint('  💾 種目保存: $currentExerciseName - weight=$finalWeight, reps=$finalReps, sets=$finalSets');
           
           exercises.add(ParsedExercise(
             name: currentExerciseName,
             bodyPart: currentBodyPart,
-            weight: currentWeight ?? 0.0,
-            reps: currentReps ?? 10,
-            sets: currentSets ?? 3,
+            weight: finalWeight,
+            reps: finalReps,
+            sets: finalSets,
             description: currentDescription.isNotEmpty ? currentDescription : null,
           ));
         }
@@ -1641,8 +1642,16 @@ class _AIMenuTabState extends State<_AIMenuTab>
             debugPrint('  📝 現在の状態 ($currentExerciseName): weight=$currentWeight, reps=$currentReps, sets=$currentSets');
           }
           
-          // 説明の続き（重量・回数・セット情報がない場合）
-          if (currentDescription.isNotEmpty && weightMatch == null && repsMatch == null && setsMatch == null) {
+          // 🔧 v1.0.226: 休憩時間、ポイントなどの無関係な行をスキップ
+          final isIgnoredLine = cleanLine.contains('休憩時間') || 
+                               cleanLine.contains('ポイント') ||
+                               cleanLine.contains('フォームのポイント') ||
+                               cleanLine.contains('説明') ||
+                               cleanLine.contains('高度なテクニック') ||
+                               cleanLine.contains('テクニックのポイント');
+          
+          // 説明の続き（重量・回数・セット情報がない場合、かつ無視すべき行ではない場合）
+          if (!isIgnoredLine && currentDescription.isNotEmpty && weightMatch == null && repsMatch == null && timeMatch == null && setsMatch == null) {
             currentDescription += ' ' + cleanLine;
           }
         }
@@ -1651,18 +1660,19 @@ class _AIMenuTabState extends State<_AIMenuTab>
     
     // 最後の種目を保存
     if (currentExerciseName.isNotEmpty && currentBodyPart.isNotEmpty) {
-      // 🔧 v1.0.226: 有酸素運動の場合、デフォルト値を設定
-      if (currentWeight == 0.0 && currentSets == null) {
-        currentSets = 1; // 有酸素運動はデフォルト1セット
-        debugPrint('  🔧 有酸素運動として自動設定: sets=1');
-      }
+      // 🔧 v1.0.226: デフォルト値を設定
+      final finalWeight = currentWeight ?? 0.0;
+      final finalReps = currentReps ?? 10;
+      final finalSets = currentSets ?? (finalWeight == 0.0 ? 1 : 3); // 有酸素は1セット、筋トレは3セット
+      
+      debugPrint('  💾 種目保存: $currentExerciseName - weight=$finalWeight, reps=$finalReps, sets=$finalSets');
       
       exercises.add(ParsedExercise(
         name: currentExerciseName,
         bodyPart: currentBodyPart,
-        weight: currentWeight ?? 0.0,
-        reps: currentReps ?? 10,
-        sets: currentSets ?? 3,
+        weight: finalWeight,
+        reps: finalReps,
+        sets: finalSets,
         description: currentDescription.isNotEmpty ? currentDescription : null,
       ));
     }
