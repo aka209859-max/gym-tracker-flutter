@@ -1582,8 +1582,10 @@ class _AIMenuTabState extends State<_AIMenuTab>
         
         if (weightMatch != null) currentWeight = double.tryParse(weightMatch.group(1)!);
         if (repsMatch != null) currentReps = int.tryParse(repsMatch.group(1)!);
-        // 🔧 v1.0.226: 有酸素運動の時間をrepsとして扱う
-        if (timeMatch != null && currentReps == null) currentReps = int.tryParse(timeMatch.group(1)!);
+        // 🔧 v1.0.226: 有酸素運動の場合のみ、時間をrepsとして扱う
+        if (timeMatch != null && currentReps == null && currentBodyPart == '有酸素') {
+          currentReps = int.tryParse(timeMatch.group(1)!);
+        }
         if (setsMatch != null) currentSets = int.tryParse(setsMatch.group(1)!);
       } else if (currentExerciseName.isNotEmpty) {
         // 種目の説明や詳細情報
@@ -1635,8 +1637,8 @@ class _AIMenuTabState extends State<_AIMenuTab>
           if (repsMatch != null && currentReps == null) {
             currentReps = int.tryParse(repsMatch.group(1)!);
           }
-          // 🔧 v1.0.226: 有酸素運動の場合、時間をrepsとして扱う
-          if (timeMatch != null && currentReps == null) {
+          // 🔧 v1.0.226: 有酸素運動の場合のみ、時間をrepsとして扱う
+          if (timeMatch != null && currentReps == null && currentBodyPart == '有酸素') {
             currentReps = int.tryParse(timeMatch.group(1)!);
             debugPrint('  ⏱️ 有酸素時間検出: ${timeMatch.group(1)}分 → reps=$currentReps (line: $cleanLine)');
           }
