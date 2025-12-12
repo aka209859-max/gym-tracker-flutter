@@ -1507,12 +1507,18 @@ class _AIMenuTabState extends State<_AIMenuTab>
       if ((match != null || altMatch != null || markdownMatch != null || alphaNumMatch != null) && !isDetailLine) {
         // 前の種目を保存
         if (currentExerciseName.isNotEmpty && currentBodyPart.isNotEmpty) {
+          // 🔧 v1.0.226: 有酸素運動の場合、デフォルト値を設定
+          if (currentWeight == 0.0 && currentSets == null) {
+            currentSets = 1; // 有酸素運動はデフォルト1セット
+            debugPrint('  🔧 有酸素運動として自動設定: sets=1');
+          }
+          
           exercises.add(ParsedExercise(
             name: currentExerciseName,
             bodyPart: currentBodyPart,
-            weight: currentWeight,
-            reps: currentReps,
-            sets: currentSets,
+            weight: currentWeight ?? 0.0,
+            reps: currentReps ?? 10,
+            sets: currentSets ?? 3,
             description: currentDescription.isNotEmpty ? currentDescription : null,
           ));
         }
@@ -1558,7 +1564,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
         final weightPattern = RegExp(r'(\d+(?:\.\d+)?)\s*kg');
         final repsPattern = RegExp(r'(\d+)\s*(?:回|reps?)');
         final setsPattern = RegExp(r'(\d+)\s*(?:セット|sets?)');
-        final timePattern = RegExp(r'(\d+)\s*分');
+        final timePattern = RegExp(r'(\d+)\s*分(?:\s*（|\s*\()?');
         
         final weightMatch = weightPattern.firstMatch(line);
         final repsMatch = repsPattern.firstMatch(line);
@@ -1599,9 +1605,9 @@ class _AIMenuTabState extends State<_AIMenuTab>
           final repsPattern2 = RegExp(r'(\d+)\s*回');
           final setsPattern2 = RegExp(r'(\d+)\s*セット');
           
-          // 🔧 v1.0.226: 有酸素運動用のパターン（時間）
+          // 🔧 v1.0.226: 有酸素運動用のパターン（時間）- 括弧付き説明にも対応
           final timePattern = RegExp(r'(?:時間|HIIT形式)[:：]?\s*(\d+)\s*分');
-          final timePattern2 = RegExp(r'(\d+)\s*分');
+          final timePattern2 = RegExp(r'(\d+)\s*分(?:\s*（|\s*\()?');
           
           var weightMatch = weightPattern.firstMatch(cleanLine);
           var repsMatch = repsPattern.firstMatch(cleanLine);
@@ -1623,10 +1629,16 @@ class _AIMenuTabState extends State<_AIMenuTab>
           // 🔧 v1.0.226: 有酸素運動の場合、時間をrepsとして扱う
           if (timeMatch != null && currentReps == null) {
             currentReps = int.tryParse(timeMatch.group(1)!);
-            debugPrint('  ⏱️ 有酸素時間検出: ${timeMatch.group(1)}分 → reps=$currentReps');
+            debugPrint('  ⏱️ 有酸素時間検出: ${timeMatch.group(1)}分 → reps=$currentReps (line: $cleanLine)');
           }
           if (setsMatch != null && currentSets == null) {
             currentSets = int.tryParse(setsMatch.group(1)!);
+            debugPrint('  📊 セット数検出: ${setsMatch.group(1)}セット');
+          }
+          
+          // デバッグ: パース状態を確認
+          if (currentExerciseName.isNotEmpty && (weightMatch != null || repsMatch != null || timeMatch != null || setsMatch != null)) {
+            debugPrint('  📝 現在の状態 ($currentExerciseName): weight=$currentWeight, reps=$currentReps, sets=$currentSets');
           }
           
           // 説明の続き（重量・回数・セット情報がない場合）
@@ -1639,12 +1651,18 @@ class _AIMenuTabState extends State<_AIMenuTab>
     
     // 最後の種目を保存
     if (currentExerciseName.isNotEmpty && currentBodyPart.isNotEmpty) {
+      // 🔧 v1.0.226: 有酸素運動の場合、デフォルト値を設定
+      if (currentWeight == 0.0 && currentSets == null) {
+        currentSets = 1; // 有酸素運動はデフォルト1セット
+        debugPrint('  🔧 有酸素運動として自動設定: sets=1');
+      }
+      
       exercises.add(ParsedExercise(
         name: currentExerciseName,
         bodyPart: currentBodyPart,
-        weight: currentWeight,
-        reps: currentReps,
-        sets: currentSets,
+        weight: currentWeight ?? 0.0,
+        reps: currentReps ?? 10,
+        sets: currentSets ?? 3,
         description: currentDescription.isNotEmpty ? currentDescription : null,
       ));
     }
