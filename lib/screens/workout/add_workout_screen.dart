@@ -32,6 +32,7 @@ class WorkoutSet {
   SetType setType;
   bool isBodyweightMode; // 自重モード (true: 自重, false: 荷重)
   bool isTimeMode; // 時間モード (true: 秒数, false: 回数) - v1.0.169: 腹筋用
+  bool isCardio; // 🔧 v1.0.226+242: 有酸素運動フラグ（セット作成時に固定）
   
   WorkoutSet({
     required this.exerciseName,
@@ -42,6 +43,7 @@ class WorkoutSet {
     this.setType = SetType.normal,
     this.isBodyweightMode = true, // デフォルトは自重モード
     this.isTimeMode = false, // デフォルトは回数モード
+    this.isCardio = false, // 🔧 v1.0.226+242: デフォルトは筋トレ
   });
 }
 
@@ -93,7 +95,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     '二頭': ['バーベルカール', 'EZバーカール', 'ダンベルカール', 'ダンベルカール（オルタネイト）', 'ハンマーカール', 'プリチャーカール', 'インクラインダンベルカール', 'コンセントレーションカール', 'ケーブルカール', 'チンアップ（逆手懸垂）', '21カール', 'ドラッグカール', 'ゾットマンカール', 'マシンアームカール'],
     '三頭': ['トライセプスプレスダウン', 'ケーブルプレスダウン', 'ライイングトライセプスエクステンション', 'スカルクラッシャー', 'オーバーヘッドトライセプスエクステンション', 'ディップス', 'トライセプスキックバック', 'キックバック', 'クローズグリップベンチプレス', 'ケーブルオーバーヘッドエクステンション', 'リバースグリッププレスダウン', 'ダンベルトライセプスエクステンション', 'JMプレス', 'ダイヤモンドプッシュアップ', 'ベンチディップス', 'マシンディップス'],
     '腹筋': ['クランチ', 'レッグレイズ', 'ハンギングレッグレイズ', 'プランク', 'サイドプランク', 'アブローラー', 'ケーブルクランチ', 'バイシクルクランチ', 'ロシアンツイスト', 'マウンテンクライマー', 'ドラゴンフラッグ', 'アブドミナルクランチマシン'],
-    '有酸素': ['ランニング', 'サイクリング', 'エアロバイク', 'ステッパー', '水泳', 'ローイングマシン'],
+    '有酸素': ['ランニング', 'ランニング（トレッドミル）', 'ジョギング', 'ジョギング（屋外）', 'サイクリング', 'エアロバイク', 'ステッパー', '水泳', 'ローイングマシン', 'ウォーキング', 'ウォーキング（トレッドミル）', 'インターバルラン', 'クロストレーナー', 'バトルロープ', 'バーピージャンプ', 'マウンテンクライマー', 'マウンテンクライマー（高強度）'],
   };
   
   // 有酸素運動かどうかを判定
@@ -218,6 +220,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               reps: reps,
               isBodyweightMode: false,
               isTimeMode: false,
+              isCardio: _isCardioExercise(exerciseName), // 🔧 v1.0.226+242: Fix cardio detection
             ));
           }
         });
@@ -645,6 +648,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 isCompleted: false,
                 isBodyweightMode: _isPullUpExercise(name) || _isAbsExercise(name),
                 isTimeMode: _getDefaultTimeMode(name),
+                isCardio: _isCardioExercise(name), // 🔧 v1.0.226+242: Fix cardio detection
               ));
             }
           }
@@ -660,6 +664,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             isCompleted: false,
             isBodyweightMode: _isPullUpExercise(exerciseName) || _isAbsExercise(exerciseName),
             isTimeMode: lastIsTimeMode ?? _getDefaultTimeMode(exerciseName),  // ✅ v1.0.176: templateData から is_time_mode を優先
+            isCardio: _isCardioExercise(exerciseName), // 🔧 v1.0.226+242: Fix cardio detection
           ));
           print('✅ $exerciseName に1セット追加（前回: ${lastWeight}kg × ${lastReps}reps, isTimeMode: ${lastIsTimeMode ?? _getDefaultTimeMode(exerciseName)}）');
         }
@@ -785,6 +790,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         setType: SetType.normal,
         isBodyweightMode: lastSet?.isBodyweightMode ?? (isPullUpOrAbs ? true : false),
         isTimeMode: lastSet?.isTimeMode ?? _getDefaultTimeMode(exerciseName),
+        isCardio: _isCardioExercise(exerciseName), // 🔧 v1.0.226+242: Fix cardio detection
       ));
     });
   }
@@ -1175,6 +1181,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         reps: 10,
         isBodyweightMode: _isPullUpExercise(exerciseName) || _isAbsExercise(exerciseName),
         isTimeMode: _getDefaultTimeMode(exerciseName),
+        isCardio: _isCardioExercise(exerciseName), // 🔧 v1.0.226+242: Fix cardio detection
       ),
     );
     
@@ -1248,6 +1255,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           reps: 10,
           isBodyweightMode: _isPullUpExercise(exerciseName) || _isAbsExercise(exerciseName),
           isTimeMode: _getDefaultTimeMode(exerciseName),
+          isCardio: _isCardioExercise(exerciseName), // 🔧 v1.0.226+242: Fix cardio detection
         ),
       );
       final isPullUpBodyweight = _isPullUpExercise(exerciseName) && firstSet.isBodyweightMode;
@@ -1508,6 +1516,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           reps: set.reps,
           isBodyweightMode: set.isBodyweightMode,
           isTimeMode: set.isTimeMode,
+          isCardio: set.isCardio, // 🔧 v1.0.226+242: Preserve cardio flag
         ));
       }
     });
@@ -2405,7 +2414,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   child: TextFormField(
                     key: ValueKey('weight_${globalIndex}_${set.weight}'),
                     decoration: InputDecoration(
-                      labelText: _isCardioExercise(set.exerciseName) ? '時間 (分)' : '重量 (kg)',
+                      labelText: set.isCardio ? '時間 (分)' : '重量 (kg)', // 🔧 v1.0.226+242: Use stored flag
                       border: const OutlineInputBorder(),
                       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
@@ -2428,7 +2437,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 child: TextFormField(
                   key: ValueKey('reps_${globalIndex}_${set.reps}'),
                   decoration: InputDecoration(
-                    labelText: _isCardioExercise(set.exerciseName) 
+                    labelText: set.isCardio // 🔧 v1.0.226+242: Use stored flag
                         ? '距離 (km)' 
                         : _isAbsExercise(set.exerciseName)
                             ? (set.isTimeMode ? '秒数' : '回数')
