@@ -1435,6 +1435,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
     int? currentSets;
     
     // 🔧 v1.0.221: 部位マッピング（二頭・三頭を分離）
+    // 🔧 v1.0.226: 有酸素を追加
     final bodyPartMap = {
       '胸': '胸',
       '大胸筋': '胸',
@@ -1455,11 +1456,18 @@ class _AIMenuTabState extends State<_AIMenuTab>
       '腹筋': '腹筋',
       '腹': '腹筋',
       'コア': '腹筋',
+      '有酸素': '有酸素', // 🔧 v1.0.226: 有酸素運動対応
+      'カーディオ': '有酸素',
+      '心肺': '有酸素',
     };
+    
+    debugPrint('🔍 パーサー開始: 全${lines.length}行を処理');
     
     for (var line in lines) {
       line = line.trim();
       if (line.isEmpty) continue;
+      
+      debugPrint('  📄 処理中: $line');
       
       // 🔧 v1.0.226: 部位の検出（■、【】、## または単一#で囲まれた部位名）
       // ### はサブセクションなので無視
@@ -1678,8 +1686,18 @@ class _AIMenuTabState extends State<_AIMenuTab>
     }
     
     debugPrint('📝 パース結果: ${exercises.length}種目抽出');
-    for (final ex in exercises) {
-      debugPrint('  - ${ex.name} (${ex.bodyPart}): ${ex.weight}kg, ${ex.reps}回, ${ex.sets}セット');
+    if (exercises.isEmpty) {
+      debugPrint('❌ エラー: 1つも種目が抽出できませんでした！');
+      debugPrint('📋 最後の状態:');
+      debugPrint('  - currentExerciseName: $currentExerciseName');
+      debugPrint('  - currentBodyPart: $currentBodyPart');
+      debugPrint('  - currentWeight: $currentWeight');
+      debugPrint('  - currentReps: $currentReps');
+      debugPrint('  - currentSets: $currentSets');
+    } else {
+      for (final ex in exercises) {
+        debugPrint('  ✅ ${ex.name} (${ex.bodyPart}): ${ex.weight}kg, ${ex.reps}回, ${ex.sets}セット');
+      }
     }
     
     return exercises;
