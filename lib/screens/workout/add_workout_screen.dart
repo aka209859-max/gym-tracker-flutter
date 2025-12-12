@@ -492,6 +492,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           'set_type': set.setType.toString().split('.').last,
           'is_bodyweight_mode': set.isBodyweightMode,
           'is_time_mode': set.isTimeMode,  // v1.0.169: 秒数/回数モード
+          'is_cardio': set.isCardio,  // 🔧 v1.0.226+242: 有酸素フラグ保存
           'user_bodyweight': set.isBodyweightMode ? _userBodyweight : null,
           'additional_weight': set.isBodyweightMode ? set.weight : null,
         };
@@ -636,8 +637,10 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             final targetSets = exercise['target_sets'] as int? ?? 3;
             final targetReps = exercise['target_reps'] as int? ?? 10;
             final targetWeight = exercise['target_weight'] as double? ?? 0.0;
+            // 🔧 v1.0.226+242: 既存データとの互換性のため、is_cardioがnullの場合は種目名から自動判定
+            final isCardio = exercise['is_cardio'] as bool? ?? _isCardioExercise(name);
             
-            print('  ✅ $name: ${targetSets}セット × ${targetReps}回 @ ${targetWeight}kg');
+            print('  ✅ $name: ${targetSets}セット × ${targetReps}回 @ ${targetWeight}kg (有酸素: $isCardio)');
             
             // 各種目のtargetSets数だけセットを追加
             for (int i = 0; i < targetSets; i++) {
@@ -648,7 +651,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 isCompleted: false,
                 isBodyweightMode: _isPullUpExercise(name) || _isAbsExercise(name),
                 isTimeMode: _getDefaultTimeMode(name),
-                isCardio: _isCardioExercise(name), // 🔧 v1.0.226+242: Fix cardio detection
+                isCardio: isCardio, // 🔧 v1.0.226+242: テンプレートから読み込み or 自動判定
               ));
             }
           }
@@ -657,6 +660,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         }
         // ケース2: 単一種目を追加（履歴から「もう一度」の場合）
         else if (exerciseName != null) {
+          // 🔧 v1.0.226+242: 既存データとの互換性のため、is_cardioがnullの場合は種目名から自動判定
+          final lastIsCardio = templateData['is_cardio'] as bool?;
           _sets.add(WorkoutSet(
             exerciseName: exerciseName,
             weight: lastWeight ?? 0.0,
@@ -664,9 +669,9 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             isCompleted: false,
             isBodyweightMode: _isPullUpExercise(exerciseName) || _isAbsExercise(exerciseName),
             isTimeMode: lastIsTimeMode ?? _getDefaultTimeMode(exerciseName),  // ✅ v1.0.176: templateData から is_time_mode を優先
-            isCardio: _isCardioExercise(exerciseName), // 🔧 v1.0.226+242: Fix cardio detection
+            isCardio: lastIsCardio ?? _isCardioExercise(exerciseName), // 🔧 v1.0.226+242: templateDataから読み込み or 自動判定
           ));
-          print('✅ $exerciseName に1セット追加（前回: ${lastWeight}kg × ${lastReps}reps, isTimeMode: ${lastIsTimeMode ?? _getDefaultTimeMode(exerciseName)}）');
+          print('✅ $exerciseName に1セット追加（前回: ${lastWeight}kg × ${lastReps}reps, isTimeMode: ${lastIsTimeMode ?? _getDefaultTimeMode(exerciseName)}, isCardio: ${lastIsCardio ?? _isCardioExercise(exerciseName)}）');
         }
       });
       
@@ -1571,7 +1576,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               debugPrint('✅ 既存記録追加 - 自重モード反映: ${set.exerciseName} = ${_userBodyweight}kg + ${set.weight}kg = ${effectiveWeight}kg');
             }
             
-            debugPrint('💾 保存データ: ${set.exerciseName} - isTimeMode: ${set.isTimeMode}, reps: ${set.reps}');
+            debugPrint('💾 保存データ: ${set.exerciseName} - isTimeMode: ${set.isTimeMode}, isCardio: ${set.isCardio}, reps: ${set.reps}');
             return {
               'exercise_name': set.exerciseName,
               'weight': effectiveWeight,  // ✅ 自重 + 追加重量
@@ -1581,6 +1586,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               'set_type': set.setType.toString().split('.').last,
               'is_bodyweight_mode': set.isBodyweightMode,
               'is_time_mode': set.isTimeMode,  // v1.0.169: 秒数/回数モード
+              'is_cardio': set.isCardio,  // 🔧 v1.0.226+242: 有酸素フラグ保存
               'user_bodyweight': set.isBodyweightMode ? _userBodyweight : null,
               'additional_weight': set.isBodyweightMode ? set.weight : null,
             };
@@ -1652,6 +1658,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               'set_type': set.setType.toString().split('.').last,
               'is_bodyweight_mode': set.isBodyweightMode,
               'is_time_mode': set.isTimeMode,  // v1.0.169: 秒数/回数モード
+              'is_cardio': set.isCardio,  // 🔧 v1.0.226+242: 有酸素フラグ保存
               'user_bodyweight': set.isBodyweightMode ? _userBodyweight : null,  // ✅ 体重を記録
               'additional_weight': set.isBodyweightMode ? set.weight : null,  // ✅ 追加重量を記録
             };
