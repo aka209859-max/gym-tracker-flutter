@@ -2378,21 +2378,24 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       final snapshot = await FirebaseFirestore.instance
           .collection('body_measurements')
           .where('user_id', isEqualTo: userId)
-          .orderBy('timestamp', descending: true)
+          .orderBy('date', descending: true) // 🔧 Fix: 'timestamp' → 'date'
           .limit(1)
           .get();
 
       if (snapshot.docs.isNotEmpty) {
         final data = snapshot.docs.first.data();
         final weight = data['weight'] as num?;
-        final timestamp = data['timestamp'] as Timestamp?;
+        final timestamp = data['date'] as Timestamp?; // 🔧 Fix: 'timestamp' → 'date'
 
         if (mounted && weight != null) {
           setState(() {
             _latestBodyWeight = weight.toDouble();
             _weightRecordedAt = timestamp?.toDate();
           });
+          debugPrint('✅ [Phase 7] 体重取得成功: ${weight}kg'); // デバッグログ追加
         }
+      } else {
+        debugPrint('⚠️ [Phase 7] 体重記録が見つかりません');
       }
     } catch (e) {
       debugPrint('⚠️ [Phase 7] 体重取得エラー: $e');
