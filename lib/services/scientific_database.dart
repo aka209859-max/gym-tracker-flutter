@@ -404,6 +404,80 @@ class ScientificDatabase {
     return additionalSets * 0.0037; // +0.37% per set
   }
 
+  /// Weight Ratioによる客観的レベル判定
+  /// 
+  /// 🔧 v1.0.227: レポート Section 2 準拠（Latella 2020, van den Hoek 2024）
+  /// 
+  /// ユーザーの自己申告を排除し、客観的な体重比でレベルを判定
+  static String detectLevelFromWeightRatio({
+    required double oneRM,
+    required double bodyWeight,
+    required String exerciseName,
+    required String gender,
+  }) {
+    final weightRatio = oneRM / bodyWeight;
+    
+    // 種目を判定
+    final isBenchPress = exerciseName.contains('胸') || 
+                         exerciseName.contains('大胸筋') ||
+                         exerciseName.contains('上腕');
+    final isSquat = exerciseName.contains('脚') || 
+                    exerciseName.contains('大腿') ||
+                    exerciseName.contains('スクワット');
+    final isDeadlift = exerciseName.contains('背中') || 
+                       exerciseName.contains('広背筋') ||
+                       exerciseName.contains('デッドリフト');
+    
+    // レポート Table 1-3 の閾値に基づく判定
+    if (isBenchPress || (!isSquat && !isDeadlift)) {
+      // ベンチプレス基準（デフォルト）
+      if (gender == '男性') {
+        if (weightRatio >= 1.95) return 'エリート';
+        if (weightRatio >= 1.60) return '上級者';
+        if (weightRatio >= 1.20) return '中級者';
+        if (weightRatio >= 0.80) return '初心者';
+        return '未経験・初期';
+      } else {
+        if (weightRatio >= 1.35) return 'エリート';
+        if (weightRatio >= 1.00) return '上級者';
+        if (weightRatio >= 0.80) return '中級者';
+        if (weightRatio >= 0.50) return '初心者';
+        return '未経験・初期';
+      }
+    } else if (isSquat) {
+      // スクワット基準
+      if (gender == '男性') {
+        if (weightRatio >= 2.83) return 'エリート';
+        if (weightRatio >= 2.10) return '上級者';
+        if (weightRatio >= 1.50) return '中級者';
+        if (weightRatio >= 1.00) return '初心者';
+        return '未経験・初期';
+      } else {
+        if (weightRatio >= 2.26) return 'エリート';
+        if (weightRatio >= 1.50) return '上級者';
+        if (weightRatio >= 1.10) return '中級者';
+        if (weightRatio >= 0.70) return '初心者';
+        return '未経験・初期';
+      }
+    } else if (isDeadlift) {
+      // デッドリフト基準
+      if (gender == '男性') {
+        if (weightRatio >= 3.25) return 'エリート';
+        if (weightRatio >= 2.40) return '上級者';
+        if (weightRatio >= 1.80) return '中級者';
+        return '初心者';
+      } else {
+        if (weightRatio >= 2.66) return 'エリート';
+        if (weightRatio >= 1.80) return '上級者';
+        if (weightRatio >= 1.30) return '中級者';
+        return '初心者';
+      }
+    }
+    
+    // フォールバック
+    return '初心者';
+  }
+
   /// 年齢補正係数
   static double getAgeAdjustmentFactor(int age) {
     if (age < 50) {

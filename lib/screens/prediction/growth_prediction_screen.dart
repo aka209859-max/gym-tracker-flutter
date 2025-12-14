@@ -5,10 +5,16 @@
 library;
 
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../services/ai_prediction_service.dart';
 import '../../services/subscription_service.dart';
+import '../../services/advanced_fatigue_service.dart';
+import '../../services/scientific_database.dart';
 import '../../widgets/scientific_citation_card.dart';
 import '../../screens/subscription_screen.dart';
+import '../../screens/personal_factors_screen.dart';
+import '../../screens/body_measurement_screen.dart';
 
 /// AI成長予測画面
 class GrowthPredictionScreen extends StatefulWidget {
@@ -31,6 +37,11 @@ class _GrowthPredictionScreenState extends State<GrowthPredictionScreen> {
   // 予測結果
   Map<String, dynamic>? _predictionResult;
   bool _isLoading = false;  // ✅ 修正: 初期状態はローディングなし
+  
+  // 🆕 v1.0.227: 自動取得データ
+  final AdvancedFatigueService _fatigueService = AdvancedFatigueService();
+  bool _isDataLoaded = false;
+  double? _latestBodyWeight; // 最新の体重
 
   // レベル選択肢
   final List<String> _levels = ['初心者', '中級者', '上級者'];
@@ -50,6 +61,59 @@ class _GrowthPredictionScreenState extends State<GrowthPredictionScreen> {
     super.initState();
     // ✅ 修正: 自動実行を削除（ユーザーが実行ボタンを押したときのみAI機能を使用）
     // 問題：画面起動時に入力前のデータで1回消費していた
+    // 🆕 v1.0.227: ユーザーデータを自動ロード
+    _loadUserData();
+  }
+  
+  /// 🆕 v1.0.227: ユーザーデータを自動ロード
+  Future<void> _loadUserData() async {
+    try {
+      // 1. 個人要因設定から年齢を取得
+      final profile = await _fatigueService.getUserProfile();
+      
+      // 2. 最新の体重を取得
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final weightSnapshot = await FirebaseFirestore.instance
+            .collection('body_measurements')
+            .where('user_id', isEqualTo: user.uid)
+            .orderBy('date', descending: true)
+            .limit(1)
+            .get();
+        
+        if (weightSnapshot.docs.isNotEmpty) {
+          _latestBodyWeight = weightSnapshot.docs.first.data()['weight'] as double?;
+        }
+      }
+      
+      if (mounted) {
+        setState(() {
+          _selectedAge = profile.age;
+          _isDataLoaded = true;
+        });
+        
+        // 体重が取得できた場合は通知
+        if (_latestBodyWeight != null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                '体重 ${_latestBodyWeight!.toStringAsFixed(1)}kg、年齢 ${profile.age}歳 を自動入力しました',
+                style: const TextStyle(fontSize: 13),
+              ),
+              backgroundColor: Colors.green,
+              duration: const Duration(seconds: 3),
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      print('❌ ユーザーデータ読み込みエラー: $e');
+      if (mounted) {
+        setState(() {
+          _isDataLoaded = true; // エラーでも続行
+        });
+      }
+    }
   }
 
   @override
@@ -61,6 +125,29 @@ class _GrowthPredictionScreenState extends State<GrowthPredictionScreen> {
   /// 成長予測を実行
   Future<void> _executePrediction() async {
     if (!_formKey.currentState!.validate()) return;
+    
+    // 🆕 v1.0.227: 体重が取得できていない場合はエラー
+    if (_latestBodyWeight == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('体重データが見つかりません。先に体重を記録してください。'),
+          backgroundColor: Colors.red,
+          action: SnackBarAction(
+            label: '記録する',
+            textColor: Colors.white,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const BodyMeasurementScreen(),
+                ),
+              );
+            },
+          ),
+        ),
+      );
+      return;
+    }
 
     // 🔒 課金チェック: AI機能はプレミアム以上
     final subscriptionService = SubscriptionService();
@@ -99,12 +186,45 @@ class _GrowthPredictionScreenState extends State<GrowthPredictionScreen> {
 
     try {
       print('🚀 成長予測開始...');
+      
+      // 🆕 v1.0.227: Weight Ratioによる客観的レベル判定
+      final declaredLevel = _selectedLevel; // ユーザーが選択したレベル
+      final oneRM = double.parse(_weightController.text);
+      final bodyWeight = _latestBodyWeight!;
+      
+      final objectiveLevel = ScientificDatabase.detectLevelFromWeightRatio(
+        oneRM: oneRM,
+        bodyWeight: bodyWeight,
+        exerciseName: _selectedBodyPart,
+        gender: _selectedGender,
+      );
+      
+      // 🆕 客観レベルを優先
+      final finalLevel = objectiveLevel;
+      
+      // 🆕 申告レベルと客観レベルに乖離がある場合、ユーザーに通知
+      if (declaredLevel != objectiveLevel) {
+        final weightRatio = (oneRM / bodyWeight).toStringAsFixed(2);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Weight Ratio ${weightRatio}倍から判定: 実際のレベルは「$objectiveLevel」です。\nより正確な予測のため、このレベルで計算します。',
+              style: const TextStyle(fontSize: 13),
+            ),
+            backgroundColor: Colors.orange,
+            duration: const Duration(seconds: 6),
+          ),
+        );
+        // 判定結果を反映するために少し待つ
+        await Future.delayed(const Duration(milliseconds: 500));
+      }
+      
       final result = await AIPredictionService.predictGrowth(
-        currentWeight: double.parse(_weightController.text),
-        level: _selectedLevel,
+        currentWeight: oneRM,
+        level: finalLevel, // 🆕 客観レベルを使用
         frequency: _selectedFrequency,
         gender: _selectedGender,
-        age: _selectedAge,
+        age: _selectedAge, // 個人要因設定から自動取得
         bodyPart: _selectedBodyPart,
         monthsAhead: 4,
       );
@@ -353,22 +473,146 @@ class _GrowthPredictionScreenState extends State<GrowthPredictionScreen> {
             ),
             const SizedBox(height: 16),
 
-            // 年齢
-            _buildSliderField(
-              label: '年齢',
-              value: _selectedAge.toDouble(),
-              min: 18,
-              max: 70,
-              divisions: 52,
-              onChanged: (value) {
-                setState(() {
-                  _selectedAge = value.toInt();
-                });
-              },
-              displayValue: '${_selectedAge}歳',
-            ),
+            // 🆕 v1.0.227: 年齢表示（編集不可、個人要因設定へのリンク）
+            _buildAgeDisplayWithLink(),
+            const SizedBox(height: 16),
+            
+            // 🆕 v1.0.227: 体重表示（自動取得、Weight Ratio計算用）
+            if (_latestBodyWeight != null)
+              _buildBodyWeightDisplay(),
           ],
         ),
+      ),
+    );
+  }
+
+  /// 🆕 v1.0.227: 年齢表示 + 個人要因設定へのリンク
+  Widget _buildAgeDisplayWithLink() {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade100,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.grey.shade300),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.cake, color: Colors.grey.shade600),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  '年齢',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
+                  ),
+                ),
+                Text(
+                  '${_selectedAge}歳',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          TextButton.icon(
+            onPressed: () {
+              // 個人要因設定画面へ遷移
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const PersonalFactorsScreen(),
+                ),
+              ).then((_) {
+                // 戻ってきたらデータをリロード
+                _loadUserData();
+              });
+            },
+            icon: const Icon(Icons.edit, size: 16),
+            label: const Text(
+              '変更',
+              style: TextStyle(fontSize: 12),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 🆕 v1.0.227: 体重表示（自動取得）
+  Widget _buildBodyWeightDisplay() {
+    final weightRatio = _weightController.text.isNotEmpty 
+        ? (double.tryParse(_weightController.text) ?? 0) / _latestBodyWeight!
+        : 0.0;
+    
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.blue.shade50,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.blue.shade200),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.monitor_weight, color: Colors.blue.shade700),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  '体重（最新記録から自動取得）',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey,
+                  ),
+                ),
+                Text(
+                  '${_latestBodyWeight!.toStringAsFixed(1)} kg',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                if (weightRatio > 0) ...[
+                  const SizedBox(height: 4),
+                  Text(
+                    'Weight Ratio: ${weightRatio.toStringAsFixed(2)}倍',
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Colors.blue.shade700,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+          TextButton.icon(
+            onPressed: () {
+              // 体重記録画面へ遷移
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const BodyMeasurementScreen(),
+                ),
+              ).then((_) {
+                // 戻ってきたらデータをリロード
+                _loadUserData();
+              });
+            },
+            icon: const Icon(Icons.edit, size: 16),
+            label: const Text(
+              '更新',
+              style: TextStyle(fontSize: 12),
+            ),
+          ),
+        ],
       ),
     );
   }
