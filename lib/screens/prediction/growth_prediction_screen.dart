@@ -33,6 +33,7 @@ class _GrowthPredictionScreenState extends State<GrowthPredictionScreen> {
   String _selectedGender = '女性';
   int _selectedAge = 25;
   String _selectedBodyPart = '大胸筋';
+  int _selectedRPE = 8; // 🆕 v1.0.228: RPE（自覚的強度、デフォルト8）
 
   // 予測結果
   Map<String, dynamic>? _predictionResult;
@@ -227,6 +228,7 @@ class _GrowthPredictionScreenState extends State<GrowthPredictionScreen> {
         age: _selectedAge, // 個人要因設定から自動取得
         bodyPart: _selectedBodyPart,
         monthsAhead: 4,
+        rpe: _selectedRPE, // 🆕 v1.0.228: RPE（自覚的強度）
       );
       print('✅ 成長予測完了: ${result['success']}');
 
@@ -431,6 +433,39 @@ class _GrowthPredictionScreenState extends State<GrowthPredictionScreen> {
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
                     '※ 選択した部位（$_selectedBodyPart）を週に何回トレーニングするか',
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Colors.grey.shade600,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+
+            // 🆕 v1.0.228: RPE（自覚的強度）スライダー
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildSliderField(
+                  label: '前回のトレーニングの強度（RPE）',
+                  value: _selectedRPE.toDouble(),
+                  min: 6,
+                  max: 10,
+                  divisions: 4,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedRPE = value.toInt();
+                    });
+                  },
+                  displayValue: _getRPELabel(_selectedRPE),
+                ),
+                const SizedBox(height: 4),
+                Padding(
+                  padding: const EdgeInsets.only(left: 4),
+                  child: Text(
+                    _getRPEDescription(_selectedRPE),
                     style: TextStyle(
                       fontSize: 11,
                       color: Colors.grey.shade600,
@@ -1083,5 +1118,32 @@ class _GrowthPredictionScreenState extends State<GrowthPredictionScreen> {
         ],
       ),
     );
+  }
+
+  /// 🆕 v1.0.228: RPEラベルを取得
+  String _getRPELabel(int rpe) {
+    switch (rpe) {
+      case 6:
+      case 7:
+        return 'RPE $rpe（余裕あり）';
+      case 8:
+      case 9:
+        return 'RPE $rpe（適正）';
+      case 10:
+        return 'RPE $rpe（限界）';
+      default:
+        return 'RPE $rpe';
+    }
+  }
+
+  /// 🆕 v1.0.228: RPE説明文を取得
+  String _getRPEDescription(int rpe) {
+    if (rpe <= 7) {
+      return '※ まだ余裕があった場合、予測成長率を10%アップします';
+    } else if (rpe >= 10) {
+      return '※ 限界まで追い込んだ場合、過労を考慮して予測成長率を20%ダウンします';
+    } else {
+      return '※ 適正な強度でトレーニングできた場合、標準の成長率で予測します';
+    }
   }
 }
