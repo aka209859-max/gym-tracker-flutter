@@ -2811,22 +2811,6 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 ),
               ],
             ),
-            const SizedBox(height: 16),
-
-            // 年齢
-            _buildSliderField(
-              label: '年齢',
-              value: _selectedAge.toDouble(),
-              min: 18,
-              max: 70,
-              divisions: 52,
-              onChanged: (value) {
-                setState(() {
-                  _selectedAge = value.toInt();
-                });
-              },
-              displayValue: '${_selectedAge}歳',
-            ),
           ],
         ),
       ),
