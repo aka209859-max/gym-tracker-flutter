@@ -2373,32 +2373,61 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
   Future<void> _loadLatestBodyWeight() async {
     try {
       final userId = FirebaseAuth.instance.currentUser?.uid;
-      if (userId == null) return;
+      if (userId == null) {
+        debugPrint('⚠️ [Phase 7] ユーザーIDが取得できません');
+        return;
+      }
 
+      debugPrint('🔍 [Phase 7] 体重取得開始: userId=$userId');
+
+      // 🔧 Fix: orderByを使わず、すべてのドキュメントを取得してクライアント側でソート
       final snapshot = await FirebaseFirestore.instance
           .collection('body_measurements')
           .where('user_id', isEqualTo: userId)
-          .orderBy('date', descending: true) // 🔧 Fix: 'timestamp' → 'date'
-          .limit(1)
           .get();
 
-      if (snapshot.docs.isNotEmpty) {
-        final data = snapshot.docs.first.data();
-        final weight = data['weight'] as num?;
-        final timestamp = data['date'] as Timestamp?; // 🔧 Fix: 'timestamp' → 'date'
+      debugPrint('📊 [Phase 7] 体重記録件数: ${snapshot.docs.length}件');
 
-        if (mounted && weight != null) {
-          setState(() {
-            _latestBodyWeight = weight.toDouble();
-            _weightRecordedAt = timestamp?.toDate();
-          });
-          debugPrint('✅ [Phase 7] 体重取得成功: ${weight}kg'); // デバッグログ追加
-        }
-      } else {
+      if (snapshot.docs.isEmpty) {
         debugPrint('⚠️ [Phase 7] 体重記録が見つかりません');
+        return;
+      }
+
+      // クライアント側でソート（'date' または 'created_at' フィールドを使用）
+      final sortedDocs = snapshot.docs.toList();
+      sortedDocs.sort((a, b) {
+        final aData = a.data();
+        final bData = b.data();
+        
+        // 'date' フィールドを優先、なければ 'created_at' を使用
+        final aTimestamp = (aData['date'] ?? aData['created_at']) as Timestamp?;
+        final bTimestamp = (bData['date'] ?? bData['created_at']) as Timestamp?;
+        
+        if (aTimestamp == null && bTimestamp == null) return 0;
+        if (aTimestamp == null) return 1;
+        if (bTimestamp == null) return -1;
+        
+        return bTimestamp.compareTo(aTimestamp); // 降順（新しい順）
+      });
+
+      final latestDoc = sortedDocs.first;
+      final data = latestDoc.data();
+      final weight = data['weight'] as num?;
+      final timestamp = (data['date'] ?? data['created_at']) as Timestamp?;
+
+      debugPrint('📝 [Phase 7] 最新体重データ: weight=$weight, timestamp=${timestamp?.toDate()}');
+
+      if (mounted && weight != null) {
+        setState(() {
+          _latestBodyWeight = weight.toDouble();
+          _weightRecordedAt = timestamp?.toDate();
+        });
+        debugPrint('✅ [Phase 7] 体重取得成功: ${weight}kg (${timestamp?.toDate()})');
+      } else {
+        debugPrint('⚠️ [Phase 7] 体重データが無効: weight=$weight');
       }
     } catch (e) {
-      debugPrint('⚠️ [Phase 7] 体重取得エラー: $e');
+      debugPrint('❌ [Phase 7] 体重取得エラー: $e');
       // エラー時は null のまま（未設定状態）
     }
   }
