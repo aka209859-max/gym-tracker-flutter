@@ -320,21 +320,13 @@ ${ScientificDatabase.getSystemPrompt()}
     final monthlyRate = ScientificDatabase.getMonthlyGrowthRate(level);
     final ageAdjustment = ScientificDatabase.getAgeAdjustmentFactor(age);
 
-    // 女性の上半身は特別補正
-    double genderBonus = 1.0;
-    final isUpperBody = bodyPart.contains('胸') || 
-                        bodyPart.contains('腕') || 
-                        bodyPart.contains('肩') || 
-                        bodyPart.contains('三角筋');
-    
-    if (gender == '女性' && isUpperBody) {
-      genderBonus = 1.2; // +20%ボーナス（Roberts 2020）
-    }
+    // 🔧 v1.0.226+244: Gender bonus is now handled in getWeeklyGrowthRate()
+    // No need to apply separate genderBonus here
 
     // 月ごとの予測値を計算
     for (int month = 0; month <= monthsAhead; month++) {
       final weight = currentWeight *
-          math.pow(1 + monthlyRate * ageAdjustment * genderBonus, month);
+          math.pow(1 + monthlyRate * ageAdjustment, month);
       final ci = ScientificDatabase.calculateConfidenceInterval(weight, level);
 
       curve.add({
