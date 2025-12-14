@@ -9,6 +9,8 @@ import '../../services/training_analysis_service.dart';
 import '../../services/subscription_service.dart';
 import '../../services/reward_ad_service.dart';
 import '../../services/ai_credit_service.dart';
+import '../../services/advanced_fatigue_service.dart'; // 🆕 Phase 7: 年齢取得用
+import '../../services/scientific_database.dart'; // 🆕 Phase 7: レベル判定用
 import '../../widgets/scientific_citation_card.dart';
 import '../../widgets/paywall_dialog.dart';
 import '../../main.dart'; // globalRewardAdService用
@@ -2294,13 +2296,19 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
 
   // フォーム入力値
   final _formKey = GlobalKey<FormState>();
-  final _weightController = TextEditingController(text: '60');
   String _selectedLevel = '初心者';
   int _selectedFrequency = 3;
   String _selectedGender = '女性';
-  int _selectedAge = 25;
   String _selectedBodyPart = '大胸筋';
   int _selectedRPE = 8; // 🆕 v1.0.230: RPE（自覚的強度、デフォルト8）
+
+  // 🆕 Phase 7: 自動取得データ
+  int? _userAge; // 個人要因設定から取得
+  double? _latestBodyWeight; // 体重記録から取得
+  DateTime? _weightRecordedAt; // 体重記録日時
+  double? _currentOneRM; // 予測の基準となる1RM
+  String? _objectiveLevel; // Weight Ratioから判定された客観的レベル
+  double? _weightRatio; // 1RM ÷ 体重
 
   // 予測結果
   Map<String, dynamic>? _predictionResult;
@@ -2309,7 +2317,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
   @override
   void initState() {
     super.initState();
-    // ✅ 修正: 自動実行を削除（ユーザーが実行ボタンを押したときのみAI機能を使用）
+    _loadUserData(); // 🆕 Phase 7: 年齢・体重を自動取得
   }
 
   // レベル選択肢
@@ -2327,8 +2335,90 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
 
   @override
   void dispose() {
-    _weightController.dispose();
     super.dispose();
+  }
+
+  // ========================================
+  // 🆕 Phase 7: データ自動取得ロジック
+  // ========================================
+
+  /// ユーザーデータ（年齢・体重）を自動取得
+  Future<void> _loadUserData() async {
+    await _loadUserAge();
+    await _loadLatestBodyWeight();
+  }
+
+  /// 個人要因設定から年齢を取得
+  Future<void> _loadUserAge() async {
+    try {
+      final advancedFatigueService = AdvancedFatigueService();
+      final userProfile = await advancedFatigueService.getUserProfile();
+      
+      if (mounted) {
+        setState(() {
+          _userAge = userProfile.age;
+        });
+      }
+    } catch (e) {
+      debugPrint('⚠️ [Phase 7] 年齢取得エラー: $e');
+      // エラー時は null のまま（未設定状態）
+    }
+  }
+
+  /// 体重記録から最新の体重を取得
+  Future<void> _loadLatestBodyWeight() async {
+    try {
+      final userId = FirebaseAuth.instance.currentUser?.uid;
+      if (userId == null) return;
+
+      final snapshot = await FirebaseFirestore.instance
+          .collection('body_measurements')
+          .where('user_id', isEqualTo: userId)
+          .orderBy('timestamp', descending: true)
+          .limit(1)
+          .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        final data = snapshot.docs.first.data();
+        final weight = data['weight'] as num?;
+        final timestamp = data['timestamp'] as Timestamp?;
+
+        if (mounted && weight != null) {
+          setState(() {
+            _latestBodyWeight = weight.toDouble();
+            _weightRecordedAt = timestamp?.toDate();
+          });
+        }
+      }
+    } catch (e) {
+      debugPrint('⚠️ [Phase 7] 体重取得エラー: $e');
+      // エラー時は null のまま（未設定状態）
+    }
+  }
+
+  /// Weight Ratioを計算し、客観的レベルを判定
+  void _calculateWeightRatioAndLevel(double oneRM) {
+    if (_latestBodyWeight == null || _latestBodyWeight! <= 0) {
+      setState(() {
+        _weightRatio = null;
+        _objectiveLevel = null;
+      });
+      return;
+    }
+
+    final ratio = oneRM / _latestBodyWeight!;
+    final detectedLevel = ScientificDatabase.detectLevelFromWeightRatio(
+      oneRM: oneRM,
+      bodyWeight: _latestBodyWeight!,
+      exerciseName: _selectedBodyPart,
+      gender: _selectedGender,
+    );
+
+    setState(() {
+      _currentOneRM = oneRM;
+      _weightRatio = ratio;
+      _objectiveLevel = detectedLevel;
+    });
   }
 
   /// 成長予測を実行(サブスクリプションチェック統合)
@@ -2409,14 +2499,43 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       _predictionResult = null;
     });
 
+    // 🆕 Phase 7: 必須データのバリデーション
+    if (_currentOneRM == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('1RMを入力してください'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+    if (_userAge == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('年齢が未設定です。個人要因設定で年齢を登録してください。'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
+    if (_latestBodyWeight == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('体重が記録されていません。体重を記録してください。'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
+
     try {
       print('🚀 成長予測開始...');
       final result = await AIPredictionService.predictGrowth(
-        currentWeight: double.parse(_weightController.text),
-        level: _selectedLevel,
+        currentWeight: _currentOneRM!, // 🆕 Phase 7: 自動取得した1RM
+        level: _objectiveLevel ?? _selectedLevel, // 🆕 Phase 7: 客観的レベル優先
         frequency: _selectedFrequency,
         gender: _selectedGender,
-        age: _selectedAge,
+        age: _userAge!, // 🆕 Phase 7: 自動取得した年齢
         bodyPart: _selectedBodyPart,
         monthsAhead: 4,
         rpe: _selectedRPE, // 🆕 v1.0.230: RPE（自覚的強度）
@@ -2552,6 +2671,10 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             ),
             const SizedBox(height: 16),
 
+            // 🆕 Phase 7: 年齢表示（自動取得）
+            _buildAutoLoadedDataDisplay(),
+            const SizedBox(height: 16),
+
             // 対象部位
             _buildDropdownField(
               label: '対象部位',
@@ -2566,34 +2689,20 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             const SizedBox(height: 16),
 
             // 現在の1RM
-            TextFormField(
-              controller: _weightController,
-              decoration: const InputDecoration(
-                labelText: '現在の1RM (kg)',
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.fitness_center),
-              ),
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
-              textInputAction: TextInputAction.done,
-              onEditingComplete: () => FocusScope.of(context).unfocus(),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '1RMを入力してください';
-                }
-                final weight = double.tryParse(value);
-                if (weight == null) {
-                  return '数値を入力してください';
-                }
-                if (weight <= 0) {
-                  return '1kg以上を入力してください';
-                }
-                if (weight > 500) {
-                  return '500kg以下を入力してください';
-                }
-                return null;
-              },
-            ),
+            _build1RMInputField(),
             const SizedBox(height: 16),
+
+            // 🆕 Phase 7: Weight Ratio & 客観的レベル表示
+            if (_weightRatio != null) ...[
+              _buildWeightRatioDisplay(),
+              const SizedBox(height: 16),
+            ],
+
+            // 🆕 Phase 7: 客観的レベル判定結果
+            if (_objectiveLevel != null && _objectiveLevel != _selectedLevel) ...[
+              _buildLevelWarning(),
+              const SizedBox(height: 16),
+            ],
 
             // トレーニングレベル
             _buildDropdownField(
@@ -3372,6 +3481,268 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     } else {
       return '※ 適正な強度でトレーニングできた場合、標準の成長率で予測します';
     }
+  }
+
+  // ========================================
+  // 🆕 Phase 7: 自動取得データ表示UI
+  // ========================================
+
+  /// 年齢・体重の自動取得データ表示
+  Widget _buildAutoLoadedDataDisplay() {
+    return Column(
+      children: [
+        // 年齢表示
+        if (_userAge != null)
+          _buildDataRow(
+            icon: Icons.calendar_today,
+            label: '年齢',
+            value: '$_userAge歳',
+            actionLabel: '変更',
+            onTap: () => Navigator.pushNamed(context, '/personal_factors')
+                .then((_) => _loadUserAge()),
+          )
+        else
+          _buildWarningCard(
+            message: '年齢が未設定です。予測精度を高めるため、個人要因設定で年齢を登録してください。',
+            actionLabel: '設定する',
+            onTap: () => Navigator.pushNamed(context, '/personal_factors')
+                .then((_) => _loadUserAge()),
+          ),
+        const SizedBox(height: 12),
+
+        // 体重表示
+        if (_latestBodyWeight != null)
+          _buildDataRow(
+            icon: Icons.monitor_weight,
+            label: '体重',
+            value: '${_latestBodyWeight!.toStringAsFixed(1)}kg'
+                '${_weightRecordedAt != null ? " (${_formatDate(_weightRecordedAt!)})" : ""}',
+            actionLabel: '更新',
+            onTap: () => Navigator.pushNamed(context, '/body_measurement')
+                .then((_) => _loadLatestBodyWeight()),
+          )
+        else
+          _buildWarningCard(
+            message: '体重が記録されていません。予測精度を高めるため、体重を記録してください。',
+            actionLabel: '記録する',
+            onTap: () => Navigator.pushNamed(context, '/body_measurement')
+                .then((_) => _loadLatestBodyWeight()),
+          ),
+      ],
+    );
+  }
+
+  /// データ表示行（年齢・体重）
+  Widget _buildDataRow({
+    required IconData icon,
+    required String label,
+    required String value,
+    required String actionLabel,
+    required VoidCallback onTap,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.blue.shade50,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.blue.shade200),
+      ),
+      child: Row(
+        children: [
+          Icon(icon, color: Colors.blue.shade700),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey.shade600,
+                  ),
+                ),
+                Text(
+                  value,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          TextButton(
+            onPressed: onTap,
+            child: Text(actionLabel),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 警告カード（未設定時）
+  Widget _buildWarningCard({
+    required String message,
+    required String actionLabel,
+    required VoidCallback onTap,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.orange.shade50,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.orange.shade300),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.warning_amber, color: Colors.orange.shade700),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              message,
+              style: const TextStyle(fontSize: 13),
+            ),
+          ),
+          TextButton(
+            onPressed: onTap,
+            child: Text(actionLabel),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 1RM入力フィールド（Weight Ratio計算付き）
+  Widget _build1RMInputField() {
+    return TextFormField(
+      initialValue: _currentOneRM?.toString() ?? '',
+      decoration: const InputDecoration(
+        labelText: '現在の1RM (kg)',
+        border: OutlineInputBorder(),
+        prefixIcon: Icon(Icons.fitness_center),
+      ),
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      textInputAction: TextInputAction.done,
+      onEditingComplete: () => FocusScope.of(context).unfocus(),
+      onChanged: (value) {
+        final oneRM = double.tryParse(value);
+        if (oneRM != null && oneRM > 0) {
+          _calculateWeightRatioAndLevel(oneRM);
+        }
+      },
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return '1RMを入力してください';
+        }
+        final weight = double.tryParse(value);
+        if (weight == null) {
+          return '数値を入力してください';
+        }
+        if (weight <= 0) {
+          return '1kg以上を入力してください';
+        }
+        if (weight > 500) {
+          return '500kg以下を入力してください';
+        }
+        return null;
+      },
+    );
+  }
+
+  /// Weight Ratio表示
+  Widget _buildWeightRatioDisplay() {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.indigo.shade50,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.analytics, color: Colors.indigo.shade700),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Weight Ratio（体重比）',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '${_weightRatio!.toStringAsFixed(2)} (1RM ${_currentOneRM!.toStringAsFixed(1)}kg ÷ 体重 ${_latestBodyWeight!.toStringAsFixed(1)}kg)',
+                  style: const TextStyle(fontSize: 14),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 客観的レベル判定の警告表示
+  Widget _buildLevelWarning() {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.amber.shade50,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.amber.shade300),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.info_outline, color: Colors.amber.shade700),
+              const SizedBox(width: 8),
+              const Text(
+                'レベル判定の通知',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'あなたのWeight Ratio (${_weightRatio!.toStringAsFixed(2)}) から、'
+            '客観的なレベルは「$_objectiveLevel」と判定されました。',
+            style: const TextStyle(fontSize: 13),
+          ),
+          Text(
+            '選択中のレベル：「$_selectedLevel」',
+            style: TextStyle(
+              fontSize: 13,
+              color: Colors.grey.shade700,
+            ),
+          ),
+          const SizedBox(height: 8),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                _selectedLevel = _objectiveLevel!;
+              });
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.amber.shade700,
+            ),
+            child: const Text('客観的レベルを使用する'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 日付フォーマット
+  String _formatDate(DateTime date) {
+    return '${date.month}/${date.day}';
   }
 }
 
