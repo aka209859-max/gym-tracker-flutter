@@ -3783,8 +3783,10 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
   int _currentFrequency = 2;
   String _selectedLevel = '中級者';
   String _selectedGender = '女性';
-  int _selectedAge = 25;
   bool _enablePlateauDetection = true;  // プラトー検出ON/OFF
+
+  // 🆕 Phase 7.5: 自動取得データ
+  int? _userAge; // 個人要因設定から取得
 
   // 分析結果
   Map<String, dynamic>? _analysisResult;
@@ -3793,7 +3795,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
   @override
   void initState() {
     super.initState();
-    // ✅ 修正: 自動実行を削除（ユーザーが実行ボタンを押したときのみAI機能を使用）
+    _loadUserAge(); // 🆕 Phase 7.5: 年齢を自動取得
   }
 
   // 部位選択肢
@@ -3821,6 +3823,27 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
 
   // 現在選択中の部位の種目リスト
   List<String> get _availableExercises => _exercisesByBodyPart[_selectedBodyPart] ?? [];
+
+  // ========================================
+  // 🆕 Phase 7.5: データ自動取得ロジック
+  // ========================================
+
+  /// 個人要因設定から年齢を取得
+  Future<void> _loadUserAge() async {
+    try {
+      final advancedFatigueService = AdvancedFatigueService();
+      final userProfile = await advancedFatigueService.getUserProfile();
+      
+      if (mounted) {
+        setState(() {
+          _userAge = userProfile.age;
+        });
+      }
+    } catch (e) {
+      debugPrint('⚠️ [Phase 7.5] 年齢取得エラー: $e');
+      // エラー時は null のまま（未設定状態）
+    }
+  }
 
   /// 効果分析を実行(サブスクリプションチェック統合)
   Future<void> _executeAnalysis() async {
@@ -3904,6 +3927,17 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
       print('🚀 効果分析開始...');
       
       // プラトー検出が有効な場合、Firestoreから履歴を取得
+      // 🆕 Phase 7.5: 必須データのバリデーション
+      if (_userAge == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('年齢が未設定です。個人要因設定で年齢を登録してください。'),
+            backgroundColor: Colors.orange,
+          ),
+        );
+        return;
+      }
+
       List<Map<String, dynamic>> recentHistory = [];
       if (_enablePlateauDetection) {
         final user = FirebaseAuth.instance.currentUser;
@@ -3919,7 +3953,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         currentFrequency: _currentFrequency,
         level: _selectedLevel,
         gender: _selectedGender,
-        age: _selectedAge,
+        age: _userAge!, // 🆕 Phase 7.5: 自動取得した年齢
         recentHistory: recentHistory,
       );
       print('✅ 効果分析完了: ${result['success']}');
@@ -4132,6 +4166,10 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
             ),
             const SizedBox(height: 16),
 
+            // 🆕 Phase 7.5: 年齢表示（自動取得）
+            _buildAgeDisplay(),
+            const SizedBox(height: 16),
+
             // 対象部位
             _buildDropdownField(
               label: '対象部位',
@@ -4304,26 +4342,90 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            const SizedBox(height: 16),
-
-            // 年齢
-            _buildSliderField(
-              label: '年齢',
-              value: _selectedAge.toDouble(),
-              min: 18,
-              max: 70,
-              divisions: 52,
-              onChanged: (value) {
-                setState(() {
-                  _selectedAge = value.toInt();
-                });
-              },
-              displayValue: '${_selectedAge}歳',
-            ),
           ],
         ),
       ),
     );
+  }
+
+  // ========================================
+  // 🆕 Phase 7.5: 年齢表示UI
+  // ========================================
+
+  /// 年齢の自動取得データ表示
+  Widget _buildAgeDisplay() {
+    if (_userAge != null) {
+      return Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.blue.shade50,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.blue.shade200),
+        ),
+        child: Row(
+          children: [
+            Icon(Icons.calendar_today, color: Colors.blue.shade700),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '年齢',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey.shade600,
+                    ),
+                  ),
+                  Text(
+                    '$_userAge歳',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            TextButton(
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
+              ).then((_) => _loadUserAge()),
+              child: const Text('変更'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      return Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.orange.shade50,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.orange.shade300),
+        ),
+        child: Row(
+          children: [
+            Icon(Icons.warning_amber, color: Colors.orange.shade700),
+            const SizedBox(width: 12),
+            Expanded(
+              child: const Text(
+                '年齢が未設定です。予測精度を高めるため、個人要因設定で年齢を登録してください。',
+                style: TextStyle(fontSize: 13),
+              ),
+            ),
+            TextButton(
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
+              ).then((_) => _loadUserAge()),
+              child: const Text('設定する'),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   /// ドロップダウンフィールド
