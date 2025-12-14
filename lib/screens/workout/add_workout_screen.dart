@@ -661,7 +661,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         // ケース2: 単一種目を追加（履歴から「もう一度」の場合）
         else if (exerciseName != null) {
           // 🔧 v1.0.226+242: 既存データとの互換性のため、is_cardioがnullの場合は種目名から自動判定
-          final lastIsCardio = templateData['is_cardio'] as bool?;
+          final lastIsCardio = widget.templateData!['is_cardio'] as bool?;
           _sets.add(WorkoutSet(
             exerciseName: exerciseName,
             weight: lastWeight ?? 0.0,
