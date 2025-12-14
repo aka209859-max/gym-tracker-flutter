@@ -15,6 +15,8 @@ import '../../widgets/scientific_citation_card.dart';
 import '../../widgets/paywall_dialog.dart';
 import '../../main.dart'; // globalRewardAdService用
 import '../../models/workout_log.dart'; // 🔧 v1.0.220: トレーニング履歴保存用
+import '../personal_factors_screen.dart'; // 🔧 Phase 7 Fix: 個人要因設定画面
+import '../body_measurement_screen.dart'; // 🔧 Phase 7 Fix: 体重記録画面
 
 /// 🔧 v1.0.220: パース済み種目データ（AIコーチ提案メニュー用）
 class ParsedExercise {
@@ -2296,6 +2298,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
 
   // フォーム入力値
   final _formKey = GlobalKey<FormState>();
+  final _oneRMController = TextEditingController(); // 🔧 Phase 7 Fix: 1RM入力用コントローラー
   String _selectedLevel = '初心者';
   int _selectedFrequency = 3;
   String _selectedGender = '女性';
@@ -2335,6 +2338,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
 
   @override
   void dispose() {
+    _oneRMController.dispose(); // 🔧 Phase 7 Fix: コントローラーを破棄
     super.dispose();
   }
 
@@ -2500,10 +2504,22 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     });
 
     // 🆕 Phase 7: 必須データのバリデーション
-    if (_currentOneRM == null) {
+    // 🔧 Phase 7 Fix: _oneRMControllerから1RMを取得
+    final oneRMText = _oneRMController.text.trim();
+    if (oneRMText.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('1RMを入力してください'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+    final oneRM = double.tryParse(oneRMText);
+    if (oneRM == null || oneRM <= 0) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('有効な1RMを入力してください'),
           backgroundColor: Colors.red,
         ),
       );
@@ -2531,7 +2547,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     try {
       print('🚀 成長予測開始...');
       final result = await AIPredictionService.predictGrowth(
-        currentWeight: _currentOneRM!, // 🆕 Phase 7: 自動取得した1RM
+        currentWeight: oneRM, // 🔧 Phase 7 Fix: controllerから取得した1RM
         level: _objectiveLevel ?? _selectedLevel, // 🆕 Phase 7: 客観的レベル優先
         frequency: _selectedFrequency,
         gender: _selectedGender,
@@ -3482,15 +3498,19 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             label: '年齢',
             value: '$_userAge歳',
             actionLabel: '変更',
-            onTap: () => Navigator.pushNamed(context, '/personal_factors')
-                .then((_) => _loadUserAge()),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
+            ).then((_) => _loadUserAge()),
           )
         else
           _buildWarningCard(
             message: '年齢が未設定です。予測精度を高めるため、個人要因設定で年齢を登録してください。',
             actionLabel: '設定する',
-            onTap: () => Navigator.pushNamed(context, '/personal_factors')
-                .then((_) => _loadUserAge()),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
+            ).then((_) => _loadUserAge()),
           ),
         const SizedBox(height: 12),
 
@@ -3502,15 +3522,19 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             value: '${_latestBodyWeight!.toStringAsFixed(1)}kg'
                 '${_weightRecordedAt != null ? " (${_formatDate(_weightRecordedAt!)})" : ""}',
             actionLabel: '更新',
-            onTap: () => Navigator.pushNamed(context, '/body_measurement')
-                .then((_) => _loadLatestBodyWeight()),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const BodyMeasurementScreen()),
+            ).then((_) => _loadLatestBodyWeight()),
           )
         else
           _buildWarningCard(
             message: '体重が記録されていません。予測精度を高めるため、体重を記録してください。',
             actionLabel: '記録する',
-            onTap: () => Navigator.pushNamed(context, '/body_measurement')
-                .then((_) => _loadLatestBodyWeight()),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const BodyMeasurementScreen()),
+            ).then((_) => _loadLatestBodyWeight()),
           ),
       ],
     );
@@ -3600,7 +3624,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
   /// 1RM入力フィールド（Weight Ratio計算付き）
   Widget _build1RMInputField() {
     return TextFormField(
-      initialValue: _currentOneRM?.toString() ?? '',
+      controller: _oneRMController, // 🔧 Phase 7 Fix: controllerを使用
       decoration: const InputDecoration(
         labelText: '現在の1RM (kg)',
         border: OutlineInputBorder(),
@@ -3613,6 +3637,13 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         final oneRM = double.tryParse(value);
         if (oneRM != null && oneRM > 0) {
           _calculateWeightRatioAndLevel(oneRM);
+        } else {
+          // 🔧 Phase 7 Fix: 無効な入力時はWeight Ratioをクリア
+          setState(() {
+            _currentOneRM = null;
+            _weightRatio = null;
+            _objectiveLevel = null;
+          });
         }
       },
       validator: (value) {
