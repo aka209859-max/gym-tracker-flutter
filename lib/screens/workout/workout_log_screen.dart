@@ -216,7 +216,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
 
       final snapshot = await FirebaseFirestore.instance
           .collection('workout_logs')
-          .where('userId', isEqualTo: user.uid)
+          .where('user_id', isEqualTo: user.uid)
           .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(todayStart))
           .get();
       

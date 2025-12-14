@@ -3527,7 +3527,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
       
       final snapshot = await FirebaseFirestore.instance
           .collection('workouts')
-          .where('userId', isEqualTo: userId)
+          .where('user_id', isEqualTo: userId)
           .where('date', isGreaterThan: Timestamp.fromDate(thirtyDaysAgo))
           .orderBy('date', descending: true)
           .limit(20)  // 最大20件のワークアウトログを取得
