@@ -22,10 +22,15 @@ import '../body_measurement_screen.dart'; // 🔧 Phase 7 Fix: 体重記録画�
 class ParsedExercise {
   final String name;
   final String bodyPart;
-  final double? weight; // kg
-  final int? reps; // 回数
+  final double? weight; // kg（筋トレ用）
+  final int? reps; // 回数（筋トレ用）
   final int? sets; // セット数
   final String? description; // 初心者向け説明
+  
+  // 🔧 v1.0.237: 有酸素運動対応
+  final bool isCardio; // 有酸素運動かどうか
+  final double? distance; // 距離（km）（有酸素用）
+  final int? duration; // 時間（分）（有酸素用）
 
   ParsedExercise({
     required this.name,
@@ -34,6 +39,9 @@ class ParsedExercise {
     this.reps,
     this.sets,
     this.description,
+    this.isCardio = false, // デフォルトは筋トレ
+    this.distance,
+    this.duration,
   });
 }
 
@@ -939,7 +947,22 @@ class _AIMenuTabState extends State<_AIMenuTab>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 4),
-                        if (exercise.weight != null || exercise.reps != null || exercise.sets != null)
+                        // 🔧 v1.0.237: 有酸素運動と筋トレで表示を分ける
+                        if (exercise.isCardio) 
+                          // 有酸素運動の表示: 距離/時間
+                          Wrap(
+                            spacing: 12,
+                            children: [
+                              if (exercise.distance != null && exercise.distance! > 0)
+                                _buildInfoChip(Icons.straighten, '${exercise.distance}km'),
+                              if (exercise.duration != null)
+                                _buildInfoChip(Icons.timer, '${exercise.duration}分'),
+                              if (exercise.sets != null)
+                                _buildInfoChip(Icons.layers, '${exercise.sets}セット'),
+                            ],
+                          )
+                        else
+                          // 筋トレの表示: 重さ/回数
                           Wrap(
                             spacing: 12,
                             children: [
@@ -1519,21 +1542,44 @@ class _AIMenuTabState extends State<_AIMenuTab>
       if ((match != null || altMatch != null || markdownMatch != null || alphaNumMatch != null) && !isDetailLine) {
         // 前の種目を保存
         if (currentExerciseName.isNotEmpty && currentBodyPart.isNotEmpty) {
-          // 🔧 v1.0.226: デフォルト値を設定
-          final finalWeight = currentWeight ?? 0.0;
-          final finalReps = currentReps ?? 10;
-          final finalSets = currentSets ?? (finalWeight == 0.0 ? 1 : 3); // 有酸素は1セット、筋トレは3セット
+          // 🔧 v1.0.237: 有酸素運動かどうかを判定
+          final isCardio = currentBodyPart == '有酸素';
           
-          debugPrint('  💾 種目保存: $currentExerciseName - weight=$finalWeight, reps=$finalReps, sets=$finalSets');
-          
-          exercises.add(ParsedExercise(
-            name: currentExerciseName,
-            bodyPart: currentBodyPart,
-            weight: finalWeight,
-            reps: finalReps,
-            sets: finalSets,
-            description: currentDescription.isNotEmpty ? currentDescription : null,
-          ));
+          if (isCardio) {
+            // 有酸素運動の場合: duration（時間）とdistance（距離）を使用
+            final finalDuration = currentReps; // repsに時間が入っている
+            final finalDistance = currentWeight; // weightに距離が入っている可能性
+            final finalSets = currentSets ?? 1; // 有酸素は通常1セット
+            
+            debugPrint('  💾 有酸素種目保存: $currentExerciseName - duration=$finalDuration分, distance=$finalDistance, sets=$finalSets');
+            
+            exercises.add(ParsedExercise(
+              name: currentExerciseName,
+              bodyPart: currentBodyPart,
+              isCardio: true,
+              duration: finalDuration,
+              distance: finalDistance,
+              sets: finalSets,
+              description: currentDescription.isNotEmpty ? currentDescription : null,
+            ));
+          } else {
+            // 筋トレの場合: weight, reps, setsを使用
+            final finalWeight = currentWeight ?? 0.0;
+            final finalReps = currentReps ?? 10;
+            final finalSets = currentSets ?? 3;
+            
+            debugPrint('  💾 筋トレ種目保存: $currentExerciseName - weight=$finalWeight, reps=$finalReps, sets=$finalSets');
+            
+            exercises.add(ParsedExercise(
+              name: currentExerciseName,
+              bodyPart: currentBodyPart,
+              isCardio: false,
+              weight: finalWeight,
+              reps: finalReps,
+              sets: finalSets,
+              description: currentDescription.isNotEmpty ? currentDescription : null,
+            ));
+          }
         }
         
         // 🔧 v1.0.226: 種目名の抽出（4パターンに対応）
@@ -1674,21 +1720,44 @@ class _AIMenuTabState extends State<_AIMenuTab>
     
     // 最後の種目を保存
     if (currentExerciseName.isNotEmpty && currentBodyPart.isNotEmpty) {
-      // 🔧 v1.0.226: デフォルト値を設定
-      final finalWeight = currentWeight ?? 0.0;
-      final finalReps = currentReps ?? 10;
-      final finalSets = currentSets ?? (finalWeight == 0.0 ? 1 : 3); // 有酸素は1セット、筋トレは3セット
+      // 🔧 v1.0.237: 有酸素運動かどうかを判定
+      final isCardio = currentBodyPart == '有酸素';
       
-      debugPrint('  💾 種目保存: $currentExerciseName - weight=$finalWeight, reps=$finalReps, sets=$finalSets');
-      
-      exercises.add(ParsedExercise(
-        name: currentExerciseName,
-        bodyPart: currentBodyPart,
-        weight: finalWeight,
-        reps: finalReps,
-        sets: finalSets,
-        description: currentDescription.isNotEmpty ? currentDescription : null,
-      ));
+      if (isCardio) {
+        // 有酸素運動の場合: duration（時間）とdistance（距離）を使用
+        final finalDuration = currentReps; // repsに時間が入っている
+        final finalDistance = currentWeight; // weightに距離が入っている可能性
+        final finalSets = currentSets ?? 1; // 有酸素は通常1セット
+        
+        debugPrint('  💾 有酸素種目保存: $currentExerciseName - duration=$finalDuration分, distance=$finalDistance, sets=$finalSets');
+        
+        exercises.add(ParsedExercise(
+          name: currentExerciseName,
+          bodyPart: currentBodyPart,
+          isCardio: true,
+          duration: finalDuration,
+          distance: finalDistance,
+          sets: finalSets,
+          description: currentDescription.isNotEmpty ? currentDescription : null,
+        ));
+      } else {
+        // 筋トレの場合: weight, reps, setsを使用
+        final finalWeight = currentWeight ?? 0.0;
+        final finalReps = currentReps ?? 10;
+        final finalSets = currentSets ?? 3;
+        
+        debugPrint('  💾 筋トレ種目保存: $currentExerciseName - weight=$finalWeight, reps=$finalReps, sets=$finalSets');
+        
+        exercises.add(ParsedExercise(
+          name: currentExerciseName,
+          bodyPart: currentBodyPart,
+          isCardio: false,
+          weight: finalWeight,
+          reps: finalReps,
+          sets: finalSets,
+          description: currentDescription.isNotEmpty ? currentDescription : null,
+        ));
+      }
     }
     
     debugPrint('📝 パース結果: ${exercises.length}種目抽出');
@@ -1702,7 +1771,11 @@ class _AIMenuTabState extends State<_AIMenuTab>
       debugPrint('  - currentSets: $currentSets');
     } else {
       for (final ex in exercises) {
-        debugPrint('  ✅ ${ex.name} (${ex.bodyPart}): ${ex.weight}kg, ${ex.reps}回, ${ex.sets}セット');
+        if (ex.isCardio) {
+          debugPrint('  ✅ ${ex.name} (${ex.bodyPart}): ${ex.duration}分, ${ex.distance ?? 0}km, ${ex.sets}セット [有酸素]');
+        } else {
+          debugPrint('  ✅ ${ex.name} (${ex.bodyPart}): ${ex.weight}kg, ${ex.reps}回, ${ex.sets}セット [筋トレ]');
+        }
       }
     }
     
