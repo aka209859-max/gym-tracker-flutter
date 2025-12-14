@@ -2369,13 +2369,15 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     }
   }
 
-  /// 体重記録から最新の体重を取得
-  /// 🔧 v1.0.235: Firestoreから最新体重を確実に取得する（リアルタイム更新対応）
+  /// 📝 体重記録から最新の体重を取得（インデックス不要・全データ対応版）
+  /// 🔧 v1.0.236: Gemini提案を反映 - orderBy削除+クライアント側ソート+フィールド名ゆらぎ対応
   Future<void> _loadLatestBodyWeight() async {
+    if (!mounted) return;
+
     try {
       final userId = FirebaseAuth.instance.currentUser?.uid;
       if (userId == null) {
-        debugPrint('⚠️ [Phase 7] ユーザーIDが取得できません');
+        debugPrint('⚠️ [Phase 7] ユーザーIDが取得できません（未ログイン）');
         if (mounted) {
           setState(() {
             _latestBodyWeight = null;
@@ -2385,22 +2387,18 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         return;
       }
 
-      debugPrint('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-      debugPrint('🔍 [Phase 7] 体重取得開始');
-      debugPrint('  - userId: $userId');
-      debugPrint('  - collection: body_measurements');
-      debugPrint('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      debugPrint('🔍 [Phase 7] 体重取得クエリ開始: userId=$userId');
 
-      // 🔧 v1.0.235 Fix: Firestoreから最新データを取得（キャッシュ無視）
+      // 🎯 Gemini提案: orderByを削除し、単純なwhereのみで取得（インデックス不要で高速・確実）
       final snapshot = await FirebaseFirestore.instance
           .collection('body_measurements')
           .where('user_id', isEqualTo: userId)
-          .get(const GetOptions(source: Source.server)); // ✅ サーバーから強制取得
+          .get(); // ⚡ orderBy削除でFirestoreインデックス不要
 
-      debugPrint('📊 [Phase 7] 体重記録件数: ${snapshot.docs.length}件');
+      debugPrint('📊 [Phase 7] 取得ドキュメント数: ${snapshot.docs.length}件');
 
       if (snapshot.docs.isEmpty) {
-        debugPrint('⚠️ [Phase 7] 体重記録が見つかりません（まだ一度も記録していない）');
+        debugPrint('⚠️ [Phase 7] データが0件です。体重記録画面で保存してください。');
         if (mounted) {
           setState(() {
             _latestBodyWeight = null;
@@ -2410,71 +2408,53 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         return;
       }
 
-      // 🔍 全ドキュメントのデータ構造をログ出力（デバッグ用）
+      // 🔍 デバッグ用: 最初の3件のデータ構造を出力
       for (int i = 0; i < snapshot.docs.length && i < 3; i++) {
         final doc = snapshot.docs[i];
         final data = doc.data();
         debugPrint('  [${i+1}] id: ${doc.id}');
-        debugPrint('      weight: ${data['weight']}');
+        debugPrint('      weight: ${data['weight']} (${data['weight'].runtimeType})');
         debugPrint('      date: ${data['date']}');
+        debugPrint('      timestamp: ${data['timestamp']}');
         debugPrint('      created_at: ${data['created_at']}');
-        debugPrint('      user_id: ${data['user_id']}');
       }
 
-      // クライアント側でソート（'date' フィールドを使用、nullの場合は 'created_at'）
-      final sortedDocs = snapshot.docs.toList();
-      sortedDocs.sort((a, b) {
-        final aData = a.data();
-        final bData = b.data();
+      // 🎯 Gemini提案: クライアント側でソート（日付フィールドのゆらぎを吸収）
+      final docs = snapshot.docs.toList();
+      docs.sort((a, b) {
+        final dataA = a.data();
+        final dataB = b.data();
         
-        // 'date' フィールドを優先、なければ 'created_at' を使用
-        dynamic aTimestamp = aData['date'] ?? aData['created_at'];
-        dynamic bTimestamp = bData['date'] ?? bData['created_at'];
+        // 📌 date, timestamp, created_at の順で優先して日付を探す
+        final timeA = (dataA['date'] ?? dataA['timestamp'] ?? dataA['created_at']) as Timestamp?;
+        final timeB = (dataB['date'] ?? dataB['timestamp'] ?? dataB['created_at']) as Timestamp?;
         
-        // Timestamp型に変換（型安全性を確保）
-        Timestamp? aTs = aTimestamp is Timestamp ? aTimestamp : null;
-        Timestamp? bTs = bTimestamp is Timestamp ? bTimestamp : null;
+        if (timeA == null && timeB == null) return 0;
+        if (timeA == null) return 1; // 日付なしは後ろへ
+        if (timeB == null) return -1;
         
-        if (aTs == null && bTs == null) return 0;
-        if (aTs == null) return 1; // aが無効 → 後ろに配置
-        if (bTs == null) return -1; // bが無効 → aを前に配置
-        
-        return bTs.compareTo(aTs); // 降順（新しい順）
+        return timeB.compareTo(timeA); // 降順（新しい順）
       });
 
-      final latestDoc = sortedDocs.first;
-      final data = latestDoc.data();
+      // ✅ 最新のデータを取得
+      final latestDoc = docs.first;
+      final latestData = latestDoc.data();
+      final weight = latestData['weight'] as num?; // int/double両対応
       
-      // 体重データを取得（型安全に）
-      dynamic weightData = data['weight'];
-      double? weight;
-      if (weightData is double) {
-        weight = weightData;
-      } else if (weightData is int) {
-        weight = weightData.toDouble();
-      } else if (weightData is num) {
-        weight = weightData.toDouble();
-      }
-      
-      // タイムスタンプを取得
-      dynamic timestampData = data['date'] ?? data['created_at'];
-      Timestamp? timestamp = timestampData is Timestamp ? timestampData : null;
+      // 日付の確認（デバッグ用）
+      final recordDate = (latestData['date'] ?? latestData['timestamp'] ?? latestData['created_at']) as Timestamp?;
 
-      debugPrint('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-      debugPrint('📝 [Phase 7] 最新体重データ詳細:');
-      debugPrint('  - doc.id: ${latestDoc.id}');
-      debugPrint('  - weight: $weight kg (type: ${weightData.runtimeType})');
-      debugPrint('  - date: ${timestamp?.toDate()} (type: ${timestampData.runtimeType})');
-      debugPrint('  - user_id: ${data['user_id']}');
-      debugPrint('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      debugPrint('✅ [Phase 7] 最新データ特定: ID=${latestDoc.id}, 体重=${weight}kg, 日付=${recordDate?.toDate()}');
 
       if (weight != null && weight > 0) {
         if (mounted) {
           setState(() {
-            _latestBodyWeight = weight;
-            _weightRecordedAt = timestamp?.toDate();
+            _latestBodyWeight = weight.toDouble();
+            _weightRecordedAt = recordDate?.toDate();
           });
-          debugPrint('✅ [Phase 7] 体重取得成功: ${weight}kg (${timestamp?.toDate()?.toString().substring(0, 16)})');
+          
+          // 🎯 Weight Ratio計算準備完了の通知
+          debugPrint('🎯 [Phase 7] Weight Ratio計算準備完了: 体重=${weight}kg');
         }
       } else {
         debugPrint('⚠️ [Phase 7] 体重データが無効またはゼロ: weight=$weight');
@@ -2485,10 +2465,9 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           });
         }
       }
-    } catch (e, stackTrace) {
-      debugPrint('❌ [Phase 7] 体重取得エラー: $e');
-      debugPrint('   スタックトレース: $stackTrace');
-      // エラー時は null のまま（未設定状態）
+    } catch (e, stack) {
+      debugPrint('❌ [Phase 7] 体重取得で例外発生: $e');
+      debugPrint('   StackTrace: $stack');
       if (mounted) {
         setState(() {
           _latestBodyWeight = null;
