@@ -1665,14 +1665,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               debugPrint('✅ 自重モード反映: ${set.exerciseName} = ${_userBodyweight}kg (体重) + ${set.weight}kg (追加) = ${effectiveWeight}kg');
             }
             
-            // 🔧 v1.0.243: 種目名から部位を逆引き
-            String bodyPart = 'その他';
-            for (final entry in _muscleGroupExercises.entries) {
-              if (entry.value.contains(set.exerciseName)) {
-                bodyPart = entry.key;
-                break;
-              }
-            }
+            // 🔧 v1.0.245: ExerciseMasterData を使用して部位を取得 (Problem 1 fix)
+            final bodyPart = ExerciseMasterData.getBodyPartByName(set.exerciseName);
             
             return {
               'exercise_name': set.exerciseName,
@@ -1694,14 +1688,24 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         
         DebugLogger.instance.log('✅ ワークアウト保存成功: Document ID = ${workoutDoc.id}');
 
-        if (_memoController.text.isNotEmpty) {
-          await FirebaseFirestore.instance.collection('workout_notes').add({
-            'user_id': user.uid,
-            'workout_session_id': workoutDoc.id,
-            'content': _memoController.text,
-            'created_at': Timestamp.now(),
-            'updated_at': Timestamp.now(),
-          });
+        // FIX: Problem 4 - メモ保存の強化
+        if (_memoController.text.trim().isNotEmpty) {
+          try {
+            final noteId = DateTime.now().millisecondsSinceEpoch.toString();
+            await FirebaseFirestore.instance
+                .collection('workout_notes')
+                .doc(noteId)
+                .set({
+              'user_id': user.uid,
+              'workout_session_id': workoutDoc.id, // 正しいIDを使用
+              'content': _memoController.text.trim(),
+              'created_at': FieldValue.serverTimestamp(),
+              'updated_at': FieldValue.serverTimestamp(),
+            });
+            debugPrint('✅ メモ保存完了: $noteId -> workout_session: ${workoutDoc.id}');
+          } catch (e) {
+            debugPrint('❌ メモ保存エラー: $e');
+          }
         }
       }
 

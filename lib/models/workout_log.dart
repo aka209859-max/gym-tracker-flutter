@@ -104,10 +104,16 @@ class Exercise {
       workoutSets = [];
     }
     
-    // 🔧 v1.0.243: bodyPartが無い場合は種目名から逆引き
-    final bodyPart = map['bodyPart'] ?? 
-                     map['muscle_group'] ?? 
-                     ExerciseMasterData.getBodyPartByName(exerciseName);
+    // 🔧 v1.0.245: bodyPartのランタイム補完強化 (Problem 1 fix)
+    String? bodyPart = map['bodyPart'] ?? map['muscle_group'];
+    
+    // bodyPartがnull、または'その他'の場合、ExerciseMasterDataで再評価
+    if (bodyPart == null || bodyPart == 'その他') {
+      bodyPart = ExerciseMasterData.getBodyPartByName(exerciseName);
+    }
+    
+    // それでもnullなら'その他'（ExerciseMasterDataはデフォルトで'その他'を返すので通常不要）
+    bodyPart ??= 'その他';
     
     return Exercise(
       name: exerciseName,

@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 import '../../models/personal_record.dart';
+import '../../services/exercise_master_data.dart'; // 🔧 v1.0.245: Problem 3 fix
 
 /// パーソナルレコード画面
 class PersonalRecordsScreen extends StatefulWidget {
@@ -148,6 +149,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
     );
   }
 
+  // 🔧 v1.0.245: Problem 3 fix - ドロップダウン廃止、ListView一覧表示へ変更
   Widget _buildMainContent(User user) {
     // 種目リスト読み込み中
     if (_isLoadingExercises) {
@@ -192,9 +194,99 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
       );
     }
 
+    // 🔧 v1.0.245: 種目一覧をListViewで表示（ドロップダウン廃止）
+    return Scaffold(
+      appBar: AppBar(title: const Text('パーソナルレコード')),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: _exercises.length,
+        itemBuilder: (context, index) {
+          final exerciseName = _exercises[index];
+          return _buildPRCard(user.uid, exerciseName);
+        },
+      ),
+    );
+  }
+
+  // 🔧 v1.0.245: PRカードウィジェット（Problem 3 fix）
+  Widget _buildPRCard(String userId, String exerciseName) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12),
+      child: ListTile(
+        leading: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.purple.withOpacity(0.1),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            ExerciseMasterData.isCardioExercise(exerciseName)
+                ? Icons.directions_run
+                : Icons.fitness_center,
+            color: Colors.purple,
+          ),
+        ),
+        title: Text(
+          exerciseName,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        subtitle: const Text('タップして推移を確認'),
+        trailing: const Icon(Icons.chevron_right),
+        onTap: () {
+          // 詳細画面（グラフ）へ遷移
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PRDetailScreen(
+                userId: userId,
+                exerciseName: exerciseName,
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+// 🔧 v1.0.245: Problem 3 fix - PR詳細画面（グラフ表示）
+class PRDetailScreen extends StatefulWidget {
+  final String userId;
+  final String exerciseName;
+
+  const PRDetailScreen({
+    super.key,
+    required this.userId,
+    required this.exerciseName,
+  });
+
+  @override
+  State<PRDetailScreen> createState() => _PRDetailScreenState();
+}
+
+class _PRDetailScreenState extends State<PRDetailScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  final List<String> _periods = ['月別', '3ヶ月', '6ヶ月', '9ヶ月', '1年'];
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: _periods.length, vsync: this);
+    _tabController.index = 1; // デフォルト3ヶ月
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('パーソナルレコード'),
+        title: Text(widget.exerciseName),
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
@@ -204,41 +296,15 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
           tabs: _periods.map((p) => Tab(text: p)).toList(),
         ),
       ),
-      body: Column(
-        children: [
-          // 種目選択
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: DropdownButtonFormField<String>(
-              value: _selectedExercise,
-              decoration: const InputDecoration(
-                labelText: '種目を選択',
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.fitness_center),
-              ),
-              items: _exercises
-                  .map((ex) => DropdownMenuItem(value: ex, child: Text(ex)))
-                  .toList(),
-              onChanged: (value) {
-                setState(() => _selectedExercise = value!);
-              },
-            ),
-          ),
-
-          // タブビュー
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: _periods.map((period) {
-                return _PeriodView(
-                  userId: user.uid,
-                  exercise: _selectedExercise ?? '',
-                  period: period,
-                );
-              }).toList(),
-            ),
-          ),
-        ],
+      body: TabBarView(
+        controller: _tabController,
+        children: _periods.map((period) {
+          return _PeriodView(
+            userId: widget.userId,
+            exercise: widget.exerciseName,
+            period: period,
+          );
+        }).toList(),
       ),
     );
   }
