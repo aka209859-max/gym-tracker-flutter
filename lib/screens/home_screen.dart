@@ -2947,15 +2947,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             final sets = entry.value;
             final isExpanded = _expandedExercises[exerciseName] ?? true;
             
-            // muscle_groupを取得（有酸素判定用）
-            // ワークアウト全体のmuscle_groupを取得（セットではなくワークアウトレベル）
-            final muscleGroup = _selectedDayWorkouts.isNotEmpty 
-                ? (_selectedDayWorkouts.first['muscle_group'] as String? ?? '') 
-                : '';
-            final isCardio = muscleGroup == '有酸素';
+            // 🔧 v1.0.243: 各セットのis_cardioフラグを確認（muscle_groupではなく）
+            final isCardio = sets.isNotEmpty && (sets.first['is_cardio'] as bool? ?? false);
             
             if (kDebugMode) {
-              print('種目: $exerciseName, muscle_group: $muscleGroup, isCardio: $isCardio');
+              print('種目: $exerciseName, isCardio: $isCardio (セットから判定)');
             }
             
             // 合計セット数、合計レップ数を計算
@@ -3585,8 +3581,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                 isTimeMode = _getDefaultTimeMode(exerciseName);
                               }
                               
-                              // 有酸素運動の場合は「時間(分) × 距離(km)」表示
-                              final isCardio = muscleGroup == '有酸素';
+                              // 🔧 v1.0.243: セットのis_cardioフラグで判定（muscle_groupではなく）
+                              final isCardio = set['is_cardio'] as bool? ?? false;
                               final displayText = isCardio
                                   ? '• $exerciseName: ${weight?.toInt() ?? 0}分 × ${reps?.toInt() ?? 0}km'
                                   : isTimeMode
