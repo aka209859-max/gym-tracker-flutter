@@ -57,10 +57,9 @@ class AddWorkoutScreen extends StatefulWidget {
   State<AddWorkoutScreen> createState() => _AddWorkoutScreenState();
 }
 
-// 🔧 v1.0.247: ワークアウトタイプフィルター
+// 🔧 v1.0.248: ワークアウトタイプフィルター（筋トレ/有酸素の2部屋制）
 enum WorkoutTypeFilter {
-  all,      // すべて
-  strength, // 筋トレ
+  strength, // 筋トレ（デフォルト）
   cardio,   // 有酸素
 }
 
@@ -73,8 +72,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   int _endMinute = 0;
   final List<WorkoutSet> _sets = [];
   
-  // 🔧 v1.0.247: ワークアウトタイプフィルター
-  WorkoutTypeFilter _workoutTypeFilter = WorkoutTypeFilter.all;
+  // 🔧 v1.0.248: ワークアウトタイプフィルター（デフォルト: 筋トレ）
+  WorkoutTypeFilter _workoutTypeFilter = WorkoutTypeFilter.strength;
   
   // タイマー関連
   Timer? _restTimer;
@@ -1991,22 +1990,18 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     const Spacer(),
-                    // 🔧 v1.0.247: ワークアウトタイプフィルタータブ
+                    // 🔧 v1.0.248: ワークアウトタイプフィルタータブ（筋トレ/有酸素の2部屋制）
                     SegmentedButton<WorkoutTypeFilter>(
                       segments: const [
                         ButtonSegment(
-                          value: WorkoutTypeFilter.all,
-                          label: Text('すべて', style: TextStyle(fontSize: 12)),
-                        ),
-                        ButtonSegment(
                           value: WorkoutTypeFilter.strength,
-                          label: Text('筋トレ', style: TextStyle(fontSize: 12)),
-                          icon: Icon(Icons.fitness_center, size: 16),
+                          label: Text('筋トレ', style: TextStyle(fontSize: 13)),
+                          icon: Icon(Icons.fitness_center, size: 18),
                         ),
                         ButtonSegment(
                           value: WorkoutTypeFilter.cardio,
-                          label: Text('有酸素', style: TextStyle(fontSize: 12)),
-                          icon: Icon(Icons.directions_run, size: 16),
+                          label: Text('有酸素', style: TextStyle(fontSize: 13)),
+                          icon: Icon(Icons.directions_run, size: 18),
                         ),
                       ],
                       selected: {_workoutTypeFilter},
@@ -2025,11 +2020,9 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               
               // 種目ごとにグループ化 + フィルタリング
               ...() {
-                // 🔧 v1.0.247: フィルターに基づいてセットを絞り込み
+                // 🔧 v1.0.248: フィルターに基づいてセットを絞り込み（筋トレ/有酸素の2部屋制）
                 final filteredSets = _sets.where((set) {
                   switch (_workoutTypeFilter) {
-                    case WorkoutTypeFilter.all:
-                      return true;
                     case WorkoutTypeFilter.strength:
                       return !set.isCardio;
                     case WorkoutTypeFilter.cardio:

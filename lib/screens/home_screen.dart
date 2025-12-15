@@ -69,8 +69,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   // 種目ごとの展開状態を管理
   Map<String, bool> _expandedExercises = {};
   
-  // 🔧 v1.0.247: ワークアウトタイプフィルター（ホーム画面）
-  String _homeWorkoutFilter = 'all'; // 'all', 'strength', 'cardio'
+  // 🔧 v1.0.248: ワークアウトタイプフィルター（ホーム画面：筋トレ/有酸素の2部屋制）
+  String _homeWorkoutFilter = 'strength'; // 'strength', 'cardio' (デフォルト: 筋トレ)
   
   // 統計データ
   double _last7DaysVolume = 0.0;
@@ -2849,22 +2849,18 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
                 const SizedBox(height: 12),
                 
-                // 🔧 v1.0.247: ワークアウトタイプフィルター
+                // 🔧 v1.0.248: ワークアウトタイプフィルター（筋トレ/有酸素の2部屋制）
                 SegmentedButton<String>(
                   segments: const [
                     ButtonSegment(
-                      value: 'all',
-                      label: Text('すべて', style: TextStyle(fontSize: 12)),
-                    ),
-                    ButtonSegment(
                       value: 'strength',
-                      label: Text('筋トレ', style: TextStyle(fontSize: 12)),
-                      icon: Icon(Icons.fitness_center, size: 16),
+                      label: Text('筋トレ', style: TextStyle(fontSize: 13)),
+                      icon: Icon(Icons.fitness_center, size: 18),
                     ),
                     ButtonSegment(
                       value: 'cardio',
-                      label: Text('有酸素', style: TextStyle(fontSize: 12)),
-                      icon: Icon(Icons.directions_run, size: 16),
+                      label: Text('有酸素', style: TextStyle(fontSize: 13)),
+                      icon: Icon(Icons.directions_run, size: 18),
                     ),
                   ],
                   selected: {_homeWorkoutFilter},
@@ -2976,19 +2972,17 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           
           // 種目ごとのセクション
           ...exerciseGroups.entries.where((entry) {
-            // 🔧 v1.0.247: ワークアウトタイプフィルター適用
+            // 🔧 v1.0.248: ワークアウトタイプフィルター適用（筋トレ/有酸素の2部屋制）
             final sets = entry.value;
             final isCardio = sets.isNotEmpty && (sets.first['is_cardio'] as bool? ?? false);
             
             switch (_homeWorkoutFilter) {
-              case 'all':
-                return true;
               case 'strength':
                 return !isCardio;
               case 'cardio':
                 return isCardio;
               default:
-                return true;
+                return !isCardio; // デフォルトは筋トレ表示
             }
           }).map((entry) {
             final exerciseName = entry.key;
