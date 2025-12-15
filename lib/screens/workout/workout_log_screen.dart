@@ -369,7 +369,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
         setState(() {
           _cachedWorkouts = cacheSnapshot.docs;
         });
-        debugPrint('✅ キャッシュから${cacheSnapshot.docs.length}件読み込み');
+        print('✅ キャッシュから${cacheSnapshot.docs.length}件読み込み');
       }
       
       // Step 2: バックグラウンドでサーバーから最新取得
@@ -385,10 +385,10 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
           _cachedWorkouts = serverSnapshot.docs;
           _isLoadingFromServer = false;
         });
-        debugPrint('✅ サーバーから${serverSnapshot.docs.length}件読み込み');
+        print('✅ サーバーから${serverSnapshot.docs.length}件読み込み');
       }
     } catch (e) {
-      debugPrint('❌ データ読み込みエラー: $e');
+      print('❌ データ読み込みエラー: $e');
       if (mounted) {
         setState(() => _isLoadingFromServer = false);
       }
