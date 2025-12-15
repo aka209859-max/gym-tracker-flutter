@@ -484,8 +484,8 @@ class _PeriodView extends StatelessWidget {
           if (set is Map<String, dynamic>) {
             final exerciseName = set['exercise_name'] as String?;
             
-            // 指定種目のみ抽出
-            if (exerciseName == exercise) {
+            // 指定種目のみ抽出（nullチェック追加）
+            if (exerciseName == exercise && exerciseName != null) {
               final weight = (set['weight'] as num?)?.toDouble() ?? 0.0;
               final reps = (set['reps'] as int?) ?? 0;
               final isCardio = set['is_cardio'] as bool? ?? false;
@@ -501,7 +501,7 @@ class _PeriodView extends StatelessWidget {
                 records.add(PersonalRecord(
                   id: '${doc.id}_${set['exercise_name']}_${date.millisecondsSinceEpoch}',
                   userId: userId,
-                  exerciseName: exerciseName,
+                  exerciseName: exerciseName, // nullチェック済みなので安全
                   weight: weight,
                   reps: reps,
                   calculated1RM: calculated1RM,
