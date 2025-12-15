@@ -15,6 +15,8 @@ import 'screens/home_screen.dart';
 import 'screens/map_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/splash_screen.dart';
+import 'screens/workout/workout_log_screen.dart';
+import 'screens/workout/ai_coaching_screen_tabbed.dart';
 
 import 'screens/password_gate_screen.dart';
 import 'screens/developer_menu_screen.dart';
@@ -310,9 +312,11 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = [
-    const HomeScreen(),  // トレーニング記録画面（筋トレMEMO風）
-    const MapScreen(),  // ジムマップ（カスタム混雑度表示）
-    const ProfileScreen(),  // プロフィール
+    const HomeScreen(),  // ダッシュボード
+    const WorkoutLogScreen(),  // トレーニング記録・ログ
+    const AICoachingScreenTabbed(),  // AIコーチ（メニュー生成・成長予測・効果分析）
+    const MapScreen(),  // ジム検索（リアルタイム混雑度）
+    const ProfileScreen(),  // プロフィール・設定
   ];
 
   @override
@@ -344,14 +348,32 @@ class _MainScreenState extends State<MainScreen> {
                 },
         destinations: const [
           NavigationDestination(
-            icon: Icon(Icons.event_note_outlined),
-            selectedIcon: Icon(Icons.event_note),
-            label: '記録',
+            icon: Icon(Icons.home_outlined),
+            selectedIcon: Icon(Icons.home),
+            label: 'ホーム',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.fitness_center_outlined),
+            selectedIcon: Icon(Icons.fitness_center),
+            label: 'ワークアウト',
+          ),
+          NavigationDestination(
+            icon: Badge(
+              label: Text('AI', style: TextStyle(fontSize: 8)),
+              backgroundColor: Colors.deepPurple,
+              child: Icon(Icons.psychology_outlined),
+            ),
+            selectedIcon: Badge(
+              label: Text('AI', style: TextStyle(fontSize: 8)),
+              backgroundColor: Colors.deepPurple,
+              child: Icon(Icons.psychology),
+            ),
+            label: 'AI機能',
           ),
           NavigationDestination(
             icon: Icon(Icons.map_outlined),
             selectedIcon: Icon(Icons.map),
-            label: 'ジムマップ',
+            label: 'ジム検索',
           ),
           NavigationDestination(
             icon: Icon(Icons.person_outline),
