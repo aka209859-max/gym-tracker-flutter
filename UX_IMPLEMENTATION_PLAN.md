@@ -104,70 +104,72 @@ class GoalSelectionScreen extends StatelessWidget {
 
 ---
 
-#### 2. ナビゲーション構造の抜本的改革
+#### 2. ナビゲーション構造の抜本的改革 ✅ 実装完了（v1.0.240）
 
 **現状の問題**:
 - ハンバーガーメニューに主要機能が隠れている
 - ユーザーが機能の存在に気づかない
+- ジム検索という独自の強みが活かされていない
 
 **改善策**:
 ```dart
-// 🎯 ボトムタブナビゲーション実装
-class MainNavigationScreen extends StatefulWidget {
-  @override
-  State<MainNavigationScreen> createState() => _MainNavigationScreenState();
-}
+// 🎯 5タブボトムナビゲーション実装（GYM MATCH専用設計）
+final List<Widget> _screens = [
+  const HomeScreen(),  // ダッシュボード
+  const WorkoutLogScreen(),  // トレーニング記録・ログ
+  const AICoachingScreenTabbed(),  // AI機能（メニュー生成・成長予測・効果分析）
+  const MapScreen(),  // ジム検索（リアルタイム混雑度）
+  const ProfileScreen(),  // プロフィール・設定
+];
 
-class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _currentIndex = 0;
-  
-  final _screens = [
-    HomeScreen(),        // ダッシュボード
-    WorkoutScreen(),     // トレーニング開始
-    HistoryScreen(),     // 履歴・分析
-    ProfileScreen(),     // プロフィール
-  ];
-  
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _screens[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) => setState(() => _currentIndex = index),
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Theme.of(context).primaryColor,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'ホーム',
-          ),
-          BottomNavigationBarItem(
-            icon: Badge(
-              label: Text('AI'),
-              backgroundColor: Colors.purple,
-              child: Icon(Icons.fitness_center),
-            ),
-            label: 'トレーニング',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart),
-            label: '履歴',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'プロフィール',
-          ),
-        ],
-      ),
-    );
-  }
-}
+// ナビゲーションバー（5タブ）
+destinations: const [
+  NavigationDestination(
+    icon: Icon(Icons.home_outlined),
+    selectedIcon: Icon(Icons.home),
+    label: 'ホーム',
+  ),
+  NavigationDestination(
+    icon: Icon(Icons.fitness_center_outlined),
+    selectedIcon: Icon(Icons.fitness_center),
+    label: 'ワークアウト',
+  ),
+  NavigationDestination(
+    icon: Badge(
+      label: Text('AI', style: TextStyle(fontSize: 8)),
+      backgroundColor: Colors.deepPurple,
+      child: Icon(Icons.psychology_outlined),
+    ),
+    selectedIcon: Badge(
+      label: Text('AI', style: TextStyle(fontSize: 8)),
+      backgroundColor: Colors.deepPurple,
+      child: Icon(Icons.psychology),
+    ),
+    label: 'AI機能',  // ← 最大の差別化要素！
+  ),
+  NavigationDestination(
+    icon: Icon(Icons.map_outlined),
+    selectedIcon: Icon(Icons.map),
+    label: 'ジム検索',  // ← GYM MATCH独自の強み！
+  ),
+  NavigationDestination(
+    icon: Icon(Icons.person_outline),
+    selectedIcon: Icon(Icons.person),
+    label: 'プロフィール',
+  ),
+],
 ```
+
+**実装のポイント**:
+1. **AI機能に「AIバッジ」追加** → 視覚的に目立たせる
+2. **ジム検索を独立タブ化** → 競合にない独自機能を強調
+3. **ワークアウトログにキャッシュファースト戦略** → v1.0.239で実装済み
 
 **期待効果**:
 - 主要機能へのアクセス: 3タップ → **1タップ**
 - 機能発見率: 30% → **90%**
+- AI機能利用率: 10% → **70%**
+- ジム検索利用率: **+200%**
 
 ---
 
