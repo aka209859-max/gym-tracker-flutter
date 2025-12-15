@@ -16,6 +16,7 @@ import 'screens/map_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/splash_screen.dart';
 import 'screens/workout/workout_log_screen.dart';
+import 'screens/workout/workout_history_screen.dart'; // ✅ v1.0.241: トレーニング履歴タブ
 import 'screens/workout/ai_coaching_screen_tabbed.dart';
 
 import 'screens/password_gate_screen.dart';
@@ -312,9 +313,9 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = [
-    const HomeScreen(),  // ダッシュボード
-    const WorkoutLogScreen(),  // トレーニング記録・ログ
-    const AICoachingScreenTabbed(),  // AIコーチ（メニュー生成・成長予測・効果分析）
+    const HomeScreen(),  // ホーム（カレンダー・統計・AI提案）
+    const WorkoutHistoryScreen(),  // トレーニング履歴（部位別・PR・メモ・週次）
+    const AICoachingScreenTabbed(),  // AI機能（メニュー生成・成長予測・効果分析）
     const MapScreen(),  // ジム検索（リアルタイム混雑度）
     const ProfileScreen(),  // プロフィール・設定
   ];
@@ -353,9 +354,9 @@ class _MainScreenState extends State<MainScreen> {
             label: 'ホーム',
           ),
           NavigationDestination(
-            icon: Icon(Icons.fitness_center_outlined),
-            selectedIcon: Icon(Icons.fitness_center),
-            label: 'ワークアウト',
+            icon: Icon(Icons.history),
+            selectedIcon: Icon(Icons.history),
+            label: '履歴',
           ),
           NavigationDestination(
             icon: Badge(

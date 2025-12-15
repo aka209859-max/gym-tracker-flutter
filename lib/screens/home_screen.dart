@@ -1072,7 +1072,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          'トレーニング記録',
+          'ホーム',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
