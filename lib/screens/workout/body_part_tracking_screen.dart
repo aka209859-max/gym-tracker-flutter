@@ -89,7 +89,6 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
   }
 
   Widget _buildMainContent(User user) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('部位別トラッキング'),
@@ -101,146 +100,131 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          _buildControlPanel(),
-          Expanded(
-            child: StreamBuilder<QuerySnapshot>(
-              stream: _getWorkoutsStream(user.uid),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                }
+      body: StreamBuilder<QuerySnapshot>(
+        stream: _getWorkoutsStream(user.uid),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text('エラーが発生しました: ${snapshot.error}'),
-                  );
-                }
+          if (snapshot.hasError) {
+            return Center(
+              child: Text('エラーが発生しました: ${snapshot.error}'),
+            );
+          }
 
-                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return _buildEmptyState();
-                }
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return _buildEmptyState();
+          }
 
-                // 部位別統計を計算
-                final stats = _calculateBodyPartStats(snapshot.data!.docs);
+          // 部位別統計を計算
+          final stats = _calculateBodyPartStats(snapshot.data!.docs);
 
-                return _buildStatsView(stats);
-              },
-            ),
-          ),
-        ],
+          return Column(
+            children: [
+              Expanded(child: _buildStatsView(stats)),
+              _buildCompactControlPanel(),
+            ],
+          );
+        },
       ),
     );
   }
 
-  /// コントロールパネル（トレーニングスタイル + 期間選択）
-  Widget _buildControlPanel() {
-    return Card(
-      margin: const EdgeInsets.all(16),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'トレーニングスタイル',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey,
+  /// コンパクトなコントロールパネル（下部配置）
+  Widget _buildCompactControlPanel() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, -2),
+          ),
+        ],
+      ),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          child: Row(
+            children: [
+              // 集計期間
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      '集計期間',
+                      style: TextStyle(fontSize: 11, color: Colors.grey),
+                    ),
+                    const SizedBox(height: 4),
+                    SegmentedButton<int>(
+                      segments: const [
+                        ButtonSegment(value: 7, label: Text('7日')),
+                        ButtonSegment(value: 30, label: Text('30日')),
+                        ButtonSegment(value: 90, label: Text('90日')),
+                      ],
+                      selected: {_periodDays},
+                      onSelectionChanged: (Set<int> selected) {
+                        setState(() => _periodDays = selected.first);
+                      },
+                      style: ButtonStyle(
+                        textStyle: WidgetStateProperty.all(
+                          const TextStyle(fontSize: 12),
+                        ),
+                        padding: WidgetStateProperty.all(
+                          const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 8),
-            SegmentedButton<String>(
-              segments: const [
-                ButtonSegment(
-                  value: 'fullbody',
-                  label: Text('全身法'),
-                  icon: Icon(Icons.accessibility_new),
+              const SizedBox(width: 12),
+              // トレーニングスタイル
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'スタイル',
+                      style: TextStyle(fontSize: 11, color: Colors.grey),
+                    ),
+                    const SizedBox(height: 4),
+                    SegmentedButton<String>(
+                      segments: const [
+                        ButtonSegment(value: 'fullbody', label: Text('全身')),
+                        ButtonSegment(value: 'split', label: Text('分割')),
+                      ],
+                      selected: {_trainingStyle},
+                      onSelectionChanged: (Set<String> selected) {
+                        setState(() => _trainingStyle = selected.first);
+                      },
+                      style: ButtonStyle(
+                        textStyle: WidgetStateProperty.all(
+                          const TextStyle(fontSize: 12),
+                        ),
+                        padding: WidgetStateProperty.all(
+                          const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                ButtonSegment(
-                  value: 'split',
-                  label: Text('分割法'),
-                  icon: Icon(Icons.splitscreen),
-                ),
-              ],
-              selected: {_trainingStyle},
-              onSelectionChanged: (Set<String> selected) {
-                setState(() {
-                  _trainingStyle = selected.first;
-                });
-              },
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              '集計期間',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey,
               ),
-            ),
-            const SizedBox(height: 8),
-            SegmentedButton<int>(
-              segments: const [
-                ButtonSegment(
-                  value: 7,
-                  label: Text('7日'),
-                ),
-                ButtonSegment(
-                  value: 30,
-                  label: Text('30日'),
-                ),
-                ButtonSegment(
-                  value: 90,
-                  label: Text('90日'),
-                ),
-              ],
-              selected: {_periodDays},
-              onSelectionChanged: (Set<int> selected) {
-                setState(() {
-                  _periodDays = selected.first;
-                });
-              },
-            ),
-            const SizedBox(height: 8),
-            _buildStyleExplanation(),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-  /// トレーニングスタイルの説明
-  Widget _buildStyleExplanation() {
-    final explanation = _trainingStyle == 'fullbody'
-        ? '毎回全身をバランスよくトレーニング（週3回想定）'
-        : '部位ごとにローテーション（週5-6回想定）';
 
-    return Container(
-      margin: const EdgeInsets.only(top: 8),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.blue.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        children: [
-          const Icon(Icons.info, size: 16, color: Colors.blue),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              explanation,
-              style: const TextStyle(fontSize: 12, color: Colors.blue),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
-  /// 統計表示ビュー
+  /// 統計表示ビュー（ビジュアル重視型）
   Widget _buildStatsView(Map<String, int> stats) {
     if (stats.isEmpty) {
       return _buildEmptyState();
@@ -250,211 +234,197 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
     final sortedEntries = stats.entries.toList()
       ..sort((a, b) => b.value.compareTo(a.value));
 
-    // アラート判定
-    final alerts = _generateAlerts(stats);
+    // 不足部位を検出
+    final insufficientParts = _getInsufficientParts(stats, maxCount);
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // アラートカード
-          if (alerts.isNotEmpty) ...[
-            _buildAlertsCard(alerts),
-            const SizedBox(height: 16),
-          ],
-
-          // サマリーカード
-          _buildSummaryCard(stats, maxCount),
-          const SizedBox(height: 16),
-
-          // 部位別詳細リスト
-          const Text(
-            '部位別詳細',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+          // ヘッダー（期間表示）
+          Row(
+            children: [
+              const Icon(Icons.analytics_outlined, size: 20, color: Colors.blue),
+              const SizedBox(width: 8),
+              Text(
+                '過去${_periodDays}日間のバランス',
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 12),
-          ...sortedEntries.map((entry) => _buildBodyPartCard(
+          const SizedBox(height: 20),
+
+          // 部位別プログレスバー（メイン表示）
+          ...sortedEntries.map((entry) => _buildVisualBodyPartRow(
                 entry.key,
                 entry.value,
                 maxCount,
               )),
+
+          const SizedBox(height: 20),
+
+          // 不足部位アラート（目立つ配置）
+          if (insufficientParts.isNotEmpty) _buildInsufficientAlert(insufficientParts),
         ],
       ),
     );
   }
 
-  /// アラートカード
-  Widget _buildAlertsCard(List<String> alerts) {
-    return Card(
-      color: Colors.orange.shade50,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Icon(Icons.warning_amber, color: Colors.orange.shade700),
-                const SizedBox(width: 8),
-                Text(
-                  '不足部位のお知らせ',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.orange.shade700,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            ...alerts.map((alert) => Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Row(
-                    children: [
-                      Icon(Icons.circle, size: 8, color: Colors.orange.shade700),
-                      const SizedBox(width: 8),
-                      Expanded(child: Text(alert)),
-                    ],
-                  ),
-                )),
-          ],
-        ),
-      ),
-    );
-  }
 
-  /// サマリーカード
-  Widget _buildSummaryCard(Map<String, int> stats, int maxCount) {
-    final totalCount = stats.values.reduce((a, b) => a + b);
-    final avgCount = (totalCount / stats.length).toStringAsFixed(1);
-    final mostTrained = stats.entries.reduce((a, b) => a.value > b.value ? a : b);
 
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'サマリー',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildSummaryItem(
-                  '合計',
-                  totalCount.toString(),
-                  Icons.fitness_center,
-                  Colors.blue,
-                ),
-                _buildSummaryItem(
-                  '平均',
-                  avgCount,
-                  Icons.trending_up,
-                  Colors.green,
-                ),
-                _buildSummaryItem(
-                  '最多',
-                  bodyPartNames[mostTrained.key] ?? mostTrained.key,
-                  Icons.star,
-                  Colors.orange,
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSummaryItem(String label, String value, IconData icon, Color color) {
-    return Column(
-      children: [
-        Icon(icon, color: color, size: 32),
-        const SizedBox(height: 4),
-        Text(
-          value,
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: color,
-          ),
-        ),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 12,
-            color: Colors.grey,
-          ),
-        ),
-      ],
-    );
-  }
-
-  /// 部位別カード
-  Widget _buildBodyPartCard(String bodyPart, int count, int maxCount) {
+  /// ビジュアルな部位別行（提案A: ビジュアル重視型）
+  Widget _buildVisualBodyPartRow(String bodyPart, int count, int maxCount) {
     final displayName = bodyPartNames[bodyPart] ?? bodyPart;
     final percentage = maxCount > 0 ? (count / maxCount) : 0.0;
     final color = _getColorForCount(count, maxCount);
+    final isInsufficient = percentage < 0.5; // 最多部位の50%未満を不足とみなす
 
-    return Card(
-      margin: const EdgeInsets.only(bottom: 12),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  displayName,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 部位名と回数
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    displayName,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  '$count回',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: color,
+                  if (isInsufficient) ...[
+                    const SizedBox(width: 8),
+                    Icon(Icons.warning_amber_rounded, 
+                         size: 18, 
+                         color: Colors.orange.shade700),
+                  ],
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    '$count回',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: color,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: LinearProgressIndicator(
-                value: percentage,
-                minHeight: 20,
-                backgroundColor: Colors.grey.shade200,
-                valueColor: AlwaysStoppedAnimation<Color>(color),
+                  const SizedBox(width: 8),
+                  Text(
+                    '${(percentage * 100).toStringAsFixed(0)}%',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey.shade600,
+                    ),
+                  ),
+                ],
               ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          // 大きなプログレスバー
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: LinearProgressIndicator(
+              value: percentage,
+              minHeight: 28,
+              backgroundColor: Colors.grey.shade200,
+              valueColor: AlwaysStoppedAnimation<Color>(color),
             ),
-            const SizedBox(height: 8),
-            Text(
-              '${(percentage * 100).toStringAsFixed(0)}% (最多部位比)',
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.grey.shade600,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
+  }
+
+  /// 不足部位アラート（目立つデザイン）
+  Widget _buildInsufficientAlert(List<String> insufficientParts) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.orange.shade50,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.orange.shade300, width: 2),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.warning_amber_rounded, 
+                   color: Colors.orange.shade700, 
+                   size: 24),
+              const SizedBox(width: 12),
+              Text(
+                '不足部位',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.orange.shade900,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: insufficientParts.map((part) {
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: Colors.orange.shade100,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: Colors.orange.shade400),
+                ),
+                child: Text(
+                  part,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.orange.shade900,
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            'これらの部位を次回のトレーニングで強化しましょう',
+            style: TextStyle(
+              fontSize: 13,
+              color: Colors.grey.shade700,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 不足部位を取得
+  List<String> _getInsufficientParts(Map<String, int> stats, int maxCount) {
+    final insufficient = <String>[];
+    
+    for (final entry in stats.entries) {
+      final percentage = maxCount > 0 ? (entry.value / maxCount) : 0.0;
+      if (percentage < 0.5) { // 最多部位の50%未満
+        final displayName = bodyPartNames[entry.key] ?? entry.key;
+        insufficient.add(displayName);
+      }
+    }
+    
+    return insufficient;
   }
 
   /// 空の状態
@@ -526,36 +496,6 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
     return stats;
   }
 
-  /// アラート生成
-  List<String> _generateAlerts(Map<String, int> stats) {
-    final alerts = <String>[];
-    
-    if (stats.isEmpty) return alerts;
-
-    final avgCount = stats.values.reduce((a, b) => a + b) / stats.length;
-
-    if (_trainingStyle == 'fullbody') {
-      // 全身トレーニング: 全部位が平均的であるべき
-      for (final entry in stats.entries) {
-        if (entry.value < avgCount * 0.5) {
-          final displayName = bodyPartNames[entry.key] ?? entry.key;
-          alerts.add('$displayNameのトレーニングが不足しています（平均の50%以下）');
-        }
-      }
-    } else {
-      // 分割法: 週に1回は各部位をトレーニング
-      final minExpected = _periodDays ~/ 7; // 週1回の期待値
-
-      for (final entry in stats.entries) {
-        if (entry.value < minExpected) {
-          final displayName = bodyPartNames[entry.key] ?? entry.key;
-          alerts.add('$displayNameのトレーニング頻度が低いです（週1回未満）');
-        }
-      }
-    }
-
-    return alerts;
-  }
 
   /// カウントに応じた色を取得
   Color _getColorForCount(int count, int maxCount) {
