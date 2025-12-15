@@ -13,28 +13,38 @@ class ExerciseMasterData {
     '有酸素': ['ランニング', 'ランニング（トレッドミル）', 'ジョギング', 'ジョギング（屋外）', 'サイクリング', 'エアロバイク', 'ステッパー', '水泳', 'ローイングマシン', 'ウォーキング', 'ウォーキング（トレッドミル）', 'インターバルラン', 'クロストレーナー', 'バトルロープ', 'バーピージャンプ', 'マウンテンクライマー', 'マウンテンクライマー（高強度）'],
   };
 
-  /// 種目名から部位を推定
+  /// 種目名から部位を推定 (FIX: Problem 1 - Trim and normalize)
   /// 
   /// [exerciseName] 種目名（例: "ベンチプレス", "ランニング"）
   /// 
   /// Returns: 部位名（例: "胸", "有酸素"）、見つからない場合は "その他"
   static String getBodyPartByName(String exerciseName) {
+    // スペースを除去して正規化
+    final normalizedName = exerciseName.trim().replaceAll(' ', '');
+    
     for (final entry in muscleGroupExercises.entries) {
-      if (entry.value.contains(exerciseName)) {
+      // マップ内の種目も正規化して比較
+      if (entry.value.any((e) => e.replaceAll(' ', '') == normalizedName || exerciseName.contains(e))) {
         return entry.key;
       }
     }
     return 'その他';
   }
 
-  /// 有酸素運動かどうかを判定
+  /// 有酸素運動かどうかを判定 (FIX: Problem 2 - Trim and normalize)
   static bool isCardioExercise(String exerciseName) {
-    return muscleGroupExercises['有酸素']?.contains(exerciseName) ?? false;
+    final normalizedName = exerciseName.trim().replaceAll(' ', '');
+    final cardioList = muscleGroupExercises['有酸素'] ?? [];
+    
+    return cardioList.any((e) => e.replaceAll(' ', '') == normalizedName || exerciseName.contains(e));
   }
 
   /// 腹筋種目かどうかを判定
   static bool isAbsExercise(String exerciseName) {
-    return muscleGroupExercises['腹筋']?.contains(exerciseName) ?? false;
+    final normalizedName = exerciseName.trim().replaceAll(' ', '');
+    final absList = muscleGroupExercises['腹筋'] ?? [];
+    
+    return absList.any((e) => e.replaceAll(' ', '') == normalizedName || exerciseName.contains(e));
   }
 
   /// 懸垂系種目かどうかを判定

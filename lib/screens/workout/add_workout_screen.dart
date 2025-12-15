@@ -12,6 +12,7 @@ import '../debug_log_screen.dart';
 import '../../services/review_request_service.dart';
 import '../../services/enhanced_share_service.dart';
 import '../../services/offline_service.dart'; // ✅ v1.0.161: オフライン対応
+import '../../services/exercise_master_data.dart'; // FIX: Problem 2 - Add ExerciseMasterData import
 
 // SetType enum
 enum SetType {
@@ -796,17 +797,21 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         }
       }
       
-      // 懸垂または腹筋の場合は自重モードをデフォルトに
-      final isPullUpOrAbs = _isPullUpExercise(exerciseName) || _isAbsExercise(exerciseName);
+      // FIX: Problem 2 - Use centralized ExerciseMasterData logic
+      final isPullUp = ExerciseMasterData.isPullUpExercise(exerciseName);
+      final isAbs = ExerciseMasterData.isAbsExercise(exerciseName);
+      final isCardio = ExerciseMasterData.isCardioExercise(exerciseName);
+      
+      debugPrint('➕ セット追加: $exerciseName (有酸素: $isCardio, 腹筋: $isAbs)');
       
       _sets.add(WorkoutSet(
         exerciseName: exerciseName,
         weight: lastSet?.weight ?? _lastWorkoutData[exerciseName]?['weight']?.toDouble() ?? 0.0,
         reps: lastSet?.reps ?? _lastWorkoutData[exerciseName]?['reps'] ?? 10,
         setType: SetType.normal,
-        isBodyweightMode: lastSet?.isBodyweightMode ?? (isPullUpOrAbs ? true : false),
-        isTimeMode: lastSet?.isTimeMode ?? _getDefaultTimeMode(exerciseName),
-        isCardio: lastSet?.isCardio ?? _isCardioExercise(exerciseName), // 🔧 v1.0.226+243: Copy from lastSet or auto-detect
+        isBodyweightMode: lastSet?.isBodyweightMode ?? (isPullUp || isAbs ? true : false),
+        isTimeMode: lastSet?.isTimeMode ?? (isAbs ? true : false), // 腹筋はデフォルト秒数
+        isCardio: lastSet?.isCardio ?? isCardio, // 自動判定または前回の値を継承
       ));
     });
   }
