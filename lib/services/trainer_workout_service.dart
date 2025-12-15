@@ -211,8 +211,3 @@ class TrainerBodyMetrics {
     );
   }
 }
-
-void debugPrint(String message) {
-  // For development purposes
-  print(message);
-}
