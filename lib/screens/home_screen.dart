@@ -28,6 +28,7 @@ import '../services/workout_share_service.dart';
 import '../services/enhanced_share_service.dart';
 import '../services/fatigue_management_service.dart';
 import '../services/advanced_fatigue_service.dart';
+import '../services/exercise_master_data.dart';
 import '../models/user_profile.dart';
 import '../widgets/workout_share_card.dart';
 import '../widgets/workout_share_image.dart';
@@ -2973,8 +2974,23 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           // 種目ごとのセクション
           ...exerciseGroups.entries.where((entry) {
             // 🔧 v1.0.248: ワークアウトタイプフィルター適用（筋トレ/有酸素の2部屋制）
+            final exerciseName = entry.key;
             final sets = entry.value;
-            final isCardio = sets.isNotEmpty && (sets.first['is_cardio'] as bool? ?? false);
+            
+            // 🔧 v1.0.248: is_cardioフラグがない古いデータにも対応
+            // 1. まずis_cardioフラグをチェック
+            // 2. フラグがなければExerciseMasterDataで判定
+            bool isCardio = false;
+            if (sets.isNotEmpty) {
+              final firstSet = sets.first;
+              if (firstSet['is_cardio'] != null) {
+                // フラグが存在する場合はそれを使用
+                isCardio = firstSet['is_cardio'] as bool;
+              } else {
+                // フラグがない古いデータの場合、ExerciseMasterDataで判定
+                isCardio = ExerciseMasterData.isCardioExercise(exerciseName);
+              }
+            }
             
             switch (_homeWorkoutFilter) {
               case 'strength':
