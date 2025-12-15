@@ -185,8 +185,9 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         final aiWeight = _getPropertyValue(exercise, 'weight') as double?;
         final aiReps = _getPropertyValue(exercise, 'reps') as int?;
         final aiSets = _getPropertyValue(exercise, 'sets') as int?;
+        final isCardio = _getPropertyValue(exercise, 'isCardio') as bool? ?? false; // 🔧 v1.0.242+266: AI Coachから直接取得
         
-        debugPrint('  🏋️ 種目: $exerciseName (部位: $bodyPart)');
+        debugPrint('  🏋️ 種目: $exerciseName (部位: $bodyPart, 有酸素: $isCardio)');
         
         // 1. 履歴から1RMを計算
         final oneRM = _calculate1RMFromHistory(exerciseName, exerciseHistory);
@@ -220,7 +221,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               reps: reps,
               isBodyweightMode: false,
               isTimeMode: false,
-              isCardio: _isCardioExercise(exerciseName), // 🔧 v1.0.226+242: Fix cardio detection
+              isCardio: isCardio, // 🔧 v1.0.242+266: ParsedExercise.isCardioを直接使用
             ));
           }
         });
