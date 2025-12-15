@@ -484,8 +484,18 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           effectiveWeight = _userBodyweight! + set.weight;
         }
         
+        // 🔧 v1.0.243: 種目名から部位を逆引き
+        String bodyPart = 'その他';
+        for (final entry in _muscleGroupExercises.entries) {
+          if (entry.value.contains(set.exerciseName)) {
+            bodyPart = entry.key;
+            break;
+          }
+        }
+        
         return {
           'exercise_name': set.exerciseName,
+          'bodyPart': bodyPart,  // 🔧 v1.0.243: 部位情報を追加
           'weight': effectiveWeight,
           'reps': set.reps,
           'is_completed': set.isCompleted,
@@ -1650,8 +1660,18 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               debugPrint('✅ 自重モード反映: ${set.exerciseName} = ${_userBodyweight}kg (体重) + ${set.weight}kg (追加) = ${effectiveWeight}kg');
             }
             
+            // 🔧 v1.0.243: 種目名から部位を逆引き
+            String bodyPart = 'その他';
+            for (final entry in _muscleGroupExercises.entries) {
+              if (entry.value.contains(set.exerciseName)) {
+                bodyPart = entry.key;
+                break;
+              }
+            }
+            
             return {
               'exercise_name': set.exerciseName,
+              'bodyPart': bodyPart,  // 🔧 v1.0.243: 部位情報を追加
               'weight': effectiveWeight,  // ✅ 自重 + 追加重量
               'reps': set.reps,
               'is_completed': set.isCompleted,

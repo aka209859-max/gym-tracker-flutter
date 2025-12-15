@@ -18,7 +18,6 @@ class BodyPartTrackingScreen extends StatefulWidget {
 }
 
 class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
-  String _trainingStyle = 'fullbody'; // 'fullbody' or 'split'
   int _periodDays = 30; // 集計期間（日数）
 
   // 部位の日本語名マッピング
@@ -92,13 +91,6 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('部位別トラッキング'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.info_outline),
-            onPressed: () => _showInfoDialog(),
-            tooltip: '使い方',
-          ),
-        ],
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _getWorkoutsStream(user.uid),
@@ -147,72 +139,35 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: Row(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 集計期間
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text(
-                      '集計期間',
-                      style: TextStyle(fontSize: 11, color: Colors.grey),
-                    ),
-                    const SizedBox(height: 4),
-                    SegmentedButton<int>(
-                      segments: const [
-                        ButtonSegment(value: 7, label: Text('7日')),
-                        ButtonSegment(value: 30, label: Text('30日')),
-                        ButtonSegment(value: 90, label: Text('90日')),
-                      ],
-                      selected: {_periodDays},
-                      onSelectionChanged: (Set<int> selected) {
-                        setState(() => _periodDays = selected.first);
-                      },
-                      style: ButtonStyle(
-                        textStyle: WidgetStateProperty.all(
-                          const TextStyle(fontSize: 12),
-                        ),
-                        padding: WidgetStateProperty.all(
-                          const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              const Text(
+                '集計期間',
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey),
               ),
-              const SizedBox(width: 12),
-              // トレーニングスタイル
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text(
-                      'スタイル',
-                      style: TextStyle(fontSize: 11, color: Colors.grey),
-                    ),
-                    const SizedBox(height: 4),
-                    SegmentedButton<String>(
-                      segments: const [
-                        ButtonSegment(value: 'fullbody', label: Text('全身')),
-                        ButtonSegment(value: 'split', label: Text('分割')),
-                      ],
-                      selected: {_trainingStyle},
-                      onSelectionChanged: (Set<String> selected) {
-                        setState(() => _trainingStyle = selected.first);
-                      },
-                      style: ButtonStyle(
-                        textStyle: WidgetStateProperty.all(
-                          const TextStyle(fontSize: 12),
-                        ),
-                        padding: WidgetStateProperty.all(
-                          const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                        ),
-                      ),
-                    ),
+              const SizedBox(height: 8),
+              SizedBox(
+                width: double.infinity,
+                child: SegmentedButton<int>(
+                  segments: const [
+                    ButtonSegment(value: 7, label: Text('7日')),
+                    ButtonSegment(value: 30, label: Text('30日')),
+                    ButtonSegment(value: 90, label: Text('90日')),
                   ],
+                  selected: {_periodDays},
+                  onSelectionChanged: (Set<int> selected) {
+                    setState(() => _periodDays = selected.first);
+                  },
+                  style: ButtonStyle(
+                    textStyle: WidgetStateProperty.all(
+                      const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
+                    padding: WidgetStateProperty.all(
+                      const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -507,62 +462,5 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
     return Colors.red;
   }
 
-  /// 使い方ダイアログ
-  void _showInfoDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('部位別トラッキングについて'),
-        content: const SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'この機能では、過去のトレーニング記録から部位別の統計を表示します。',
-                style: TextStyle(fontSize: 14),
-              ),
-              SizedBox(height: 16),
-              Text(
-                '📊 トレーニングスタイル',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 8),
-              Text(
-                '• 全身トレーニング: 毎回すべての部位をバランスよく鍛える方法（週3回想定）\n'
-                '• 分割法: 部位ごとにローテーションで鍛える方法（週5-6回想定）',
-                style: TextStyle(fontSize: 13),
-              ),
-              SizedBox(height: 16),
-              Text(
-                '⚠️ アラート機能',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 8),
-              Text(
-                'トレーニングスタイルに基づいて、不足している部位を自動的に検知します。',
-                style: TextStyle(fontSize: 13),
-              ),
-              SizedBox(height: 16),
-              Text(
-                '💡 ヒント',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 8),
-              Text(
-                'バランスの取れたトレーニングで、怪我のリスクを減らし、効果的に筋力を向上させましょう！',
-                style: TextStyle(fontSize: 13),
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('閉じる'),
-          ),
-        ],
-      ),
-    );
-  }
+
 }

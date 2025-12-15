@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../services/exercise_master_data.dart'; // 🔧 v1.0.243
 
 /// トレーニングログのモデル
 class WorkoutLog {
@@ -103,9 +104,14 @@ class Exercise {
       workoutSets = [];
     }
     
+    // 🔧 v1.0.243: bodyPartが無い場合は種目名から逆引き
+    final bodyPart = map['bodyPart'] ?? 
+                     map['muscle_group'] ?? 
+                     ExerciseMasterData.getBodyPartByName(exerciseName);
+    
     return Exercise(
       name: exerciseName,
-      bodyPart: map['bodyPart'] ?? map['muscle_group'] ?? 'その他',
+      bodyPart: bodyPart,
       sets: workoutSets,
     );
   }
@@ -131,6 +137,8 @@ class WorkoutSet {
   final int? dropsetLevel;      // ドロップセットのレベル (1, 2, 3...)
   final int? rpe;               // RPE (Rate of Perceived Exertion) 1-10
   final bool? hasAssist;        // 補助有無
+  final bool isCardio;          // 🔧 v1.0.243: 有酸素運動フラグ
+  final bool isTimeMode;        // 🔧 v1.0.243: 時間モード（秒数 vs 回数）
 
   WorkoutSet({
     required this.targetReps,
@@ -142,6 +150,8 @@ class WorkoutSet {
     this.dropsetLevel,
     this.rpe,
     this.hasAssist,
+    this.isCardio = false,    // デフォルトは筋トレ
+    this.isTimeMode = false,  // デフォルトは回数モード
   });
 
   Map<String, dynamic> toMap() {
@@ -156,6 +166,8 @@ class WorkoutSet {
       'dropsetLevel': dropsetLevel,
       'rpe': rpe,
       'hasAssist': hasAssist,
+      'isCardio': isCardio,      // 🔧 v1.0.243
+      'isTimeMode': isTimeMode,  // 🔧 v1.0.243
     };
   }
 
@@ -180,6 +192,8 @@ class WorkoutSet {
       dropsetLevel: map['dropsetLevel'],
       rpe: map['rpe'],
       hasAssist: map['hasAssist'] ?? map['has_assist'],
+      isCardio: map['isCardio'] ?? map['is_cardio'] ?? false,       // 🔧 v1.0.243: 両形式対応
+      isTimeMode: map['isTimeMode'] ?? map['is_time_mode'] ?? false, // 🔧 v1.0.243: 両形式対応
     );
   }
 
