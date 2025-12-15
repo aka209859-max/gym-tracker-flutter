@@ -120,11 +120,20 @@ if (user != null && !user.isAnonymous) {
 
 Before committing code, verify:
 
-1. ✅ No Android platform references in `.dart` files
-2. ✅ No Android-specific dependencies in `pubspec.yaml`
-3. ✅ Anonymous user support in authentication flows
-4. ✅ iOS platform checks only (or iOS + Web)
-5. ✅ RevenueCat integration works for anonymous users
+1. ✅ **Confirm repository**: This is the iOS-only repository (check `git remote -v`)
+2. ✅ No Android platform references in `.dart` files
+3. ✅ No Android-specific dependencies in `pubspec.yaml`
+4. ✅ No Android documentation files added
+5. ✅ Anonymous user support in authentication flows
+6. ✅ iOS platform checks only (or iOS + Web)
+7. ✅ RevenueCat integration works for anonymous users
+
+**If you need to work on Android**:
+❌ **STOP** - Switch to the Android repository:
+```bash
+cd /home/user/webapp-android
+git remote -v  # Verify: gym-tracker-flutter-android
+```
 
 ## 🚀 Version History
 
