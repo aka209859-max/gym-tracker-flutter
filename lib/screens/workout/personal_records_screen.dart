@@ -368,8 +368,11 @@ class _PeriodView extends StatelessWidget {
                           showTitles: true,
                           reservedSize: 40,
                           getTitlesWidget: (value, meta) {
+                            // 🔧 v1.0.246: 有酸素運動の場合は「分」、筋トレは「kg」
+                            final isCardio = data.isNotEmpty && data.first.isCardio;
+                            final unit = isCardio ? '分' : 'kg';
                             return Text(
-                              '${value.toInt()}kg',
+                              '${value.toInt()}$unit',
                               style: const TextStyle(fontSize: 10),
                             );
                           },
@@ -434,6 +437,7 @@ class _PeriodView extends StatelessWidget {
     );
   }
 
+  // 🔧 v1.0.246: workout_logsから実際のトレーニングデータを取得
   Future<List<PersonalRecord>> _fetchPRData() async {
     final now = DateTime.now();
     DateTime startDate;
@@ -458,32 +462,87 @@ class _PeriodView extends StatelessWidget {
         startDate = DateTime(now.year, now.month - 3, now.day);
     }
 
-    // インデックス不要のシンプルなクエリ（where 1つのみ）
-    final snapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .collection('personalRecords')
-        .where('exerciseName', isEqualTo: exercise)
-        .get();
+    try {
+      // workout_logsコレクションから取得
+      final snapshot = await FirebaseFirestore.instance
+          .collection('workout_logs')
+          .where('user_id', isEqualTo: userId)
+          .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(startDate))
+          .get();
 
-    // メモリ内でフィルタリングとソート
-    final records = snapshot.docs
-        .map((doc) => PersonalRecord.fromFirestore(
-            doc.data() as Map<String, dynamic>, doc.id))
-        .where((record) => record.achievedAt.isAfter(startDate))
-        .toList();
-    
-    // 日付順にソート
-    records.sort((a, b) => a.achievedAt.compareTo(b.achievedAt));
-    
-    return records;
+      debugPrint('📊 PR記録取得: ${snapshot.docs.length}件のworkout_logs');
+
+      // 各ワークアウトログから指定種目のPRを抽出
+      final List<PersonalRecord> records = [];
+      
+      for (final doc in snapshot.docs) {
+        final data = doc.data();
+        final sets = data['sets'] as List<dynamic>? ?? [];
+        final date = (data['date'] as Timestamp?)?.toDate() ?? DateTime.now();
+        
+        for (final set in sets) {
+          if (set is Map<String, dynamic>) {
+            final exerciseName = set['exercise_name'] as String?;
+            
+            // 指定種目のみ抽出
+            if (exerciseName == exercise) {
+              final weight = (set['weight'] as num?)?.toDouble() ?? 0.0;
+              final reps = (set['reps'] as int?) ?? 0;
+              final isCardio = set['is_cardio'] as bool? ?? false;
+              final isCompleted = set['is_completed'] as bool? ?? false;
+              
+              // 完了したセットのみ
+              if (isCompleted && weight > 0 && reps > 0) {
+                // 有酸素運動の場合は1RM計算しない（時間×距離で表示）
+                final calculated1RM = isCardio 
+                    ? weight // 有酸素は時間をそのまま使用
+                    : _calculate1RM(weight, reps);
+                
+                records.add(PersonalRecord(
+                  id: '${doc.id}_${set['exercise_name']}_${date.millisecondsSinceEpoch}',
+                  userId: userId,
+                  exerciseName: exerciseName,
+                  weight: weight,
+                  reps: reps,
+                  calculated1RM: calculated1RM,
+                  achievedAt: date,
+                  isCardio: isCardio,
+                ));
+              }
+            }
+          }
+        }
+      }
+      
+      // 日付順にソート
+      records.sort((a, b) => a.achievedAt.compareTo(b.achievedAt));
+      
+      debugPrint('✅ ${exercise}のPR記録: ${records.length}件');
+      return records;
+      
+    } catch (e) {
+      debugPrint('❌ PR記録取得エラー: $e');
+      return [];
+    }
+  }
+  
+  // 1RM計算（Epley式）
+  double _calculate1RM(double weight, int reps) {
+    if (reps == 1) return weight;
+    return weight * (1 + reps / 30.0);
   }
 
   Widget _buildGrowthStats(List<PersonalRecord> data) {
     final start = data.first;
     final current = data.last;
-    final growthKg = current.calculated1RM - start.calculated1RM;
-    final growthPercent = (growthKg / start.calculated1RM) * 100;
+    final isCardio = start.isCardio;  // 🔧 v1.0.246: 有酸素運動判定
+    
+    final growthValue = current.calculated1RM - start.calculated1RM;
+    final growthPercent = (growthValue / start.calculated1RM) * 100;
+    
+    // 🔧 v1.0.246: 有酸素は「時間」、筋トレは「1RM」
+    final label = isCardio ? '時間' : '1RM';
+    final unit = isCardio ? '分' : 'kg';
 
     return Card(
       margin: const EdgeInsets.all(16),
@@ -502,13 +561,13 @@ class _PeriodView extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    const Text(
-                      '開始時 (1RM)',
-                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                    Text(
+                      '開始時 ($label)',
+                      style: const TextStyle(fontSize: 12, color: Colors.grey),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '${start.calculated1RM.toStringAsFixed(1)}kg',
+                      '${start.calculated1RM.toStringAsFixed(1)}$unit',
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -517,13 +576,13 @@ class _PeriodView extends StatelessWidget {
                 const Icon(Icons.arrow_forward, size: 32, color: Colors.grey),
                 Column(
                   children: [
-                    const Text(
-                      '現在 (1RM)',
-                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                    Text(
+                      '現在 ($label)',
+                      style: const TextStyle(fontSize: 12, color: Colors.grey),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '${current.calculated1RM.toStringAsFixed(1)}kg',
+                      '${current.calculated1RM.toStringAsFixed(1)}$unit',
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -543,7 +602,7 @@ class _PeriodView extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '+${growthKg.toStringAsFixed(1)}kg (+${growthPercent.toStringAsFixed(1)}%)',
+                    '+${growthValue.toStringAsFixed(1)}$unit (+${growthPercent.toStringAsFixed(1)}%)',
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -580,17 +639,29 @@ class _PeriodView extends StatelessWidget {
             itemBuilder: (context, index) {
               final record = data[data.length - 1 - index]; // 新しい順
 
+              // 🔧 v1.0.246: 有酸素運動は「時間 × 距離」、筋トレは「重量 × 回数」
+              final isCardio = record.isCardio;
+              final title = isCardio
+                  ? '${record.weight.toStringAsFixed(1)}分 × ${record.reps}km'
+                  : '${record.weight}kg × ${record.reps}回';
+              final subtitle = isCardio
+                  ? '合計時間: ${record.calculated1RM.toStringAsFixed(1)}分'
+                  : '1RM推定: ${record.calculated1RM.toStringAsFixed(1)}kg';
+              
               return ListTile(
                 leading: CircleAvatar(
-                  child: Text('${index + 1}'),
+                  backgroundColor: isCardio ? Colors.orange : Colors.blue,
+                  child: Icon(
+                    isCardio ? Icons.directions_run : Icons.fitness_center,
+                    color: Colors.white,
+                    size: 20,
+                  ),
                 ),
                 title: Text(
-                  '${record.weight}kg × ${record.reps}回',
+                  title,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                subtitle: Text(
-                  '1RM推定: ${record.calculated1RM.toStringAsFixed(1)}kg',
-                ),
+                subtitle: Text(subtitle),
                 trailing: Text(
                   DateFormat('MM/dd').format(record.achievedAt),
                   style: const TextStyle(color: Colors.grey),
