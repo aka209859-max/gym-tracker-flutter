@@ -57,6 +57,13 @@ class AddWorkoutScreen extends StatefulWidget {
   State<AddWorkoutScreen> createState() => _AddWorkoutScreenState();
 }
 
+// 🔧 v1.0.247: ワークアウトタイプフィルター
+enum WorkoutTypeFilter {
+  all,      // すべて
+  strength, // 筋トレ
+  cardio,   // 有酸素
+}
+
 class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   DateTime _selectedDate = DateTime.now();
   String? _selectedMuscleGroup;
@@ -65,6 +72,9 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   int _endHour = 11;
   int _endMinute = 0;
   final List<WorkoutSet> _sets = [];
+  
+  // 🔧 v1.0.247: ワークアウトタイプフィルター
+  WorkoutTypeFilter _workoutTypeFilter = WorkoutTypeFilter.all;
   
   // タイマー関連
   Timer? _restTimer;
@@ -1974,16 +1984,61 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               const Divider(height: 32, thickness: 2),
               Padding(
                 padding: const EdgeInsets.all(16),
-                child: Text(
-                  'セット',
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                child: Row(
+                  children: [
+                    const Text(
+                      'セット',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    const Spacer(),
+                    // 🔧 v1.0.247: ワークアウトタイプフィルタータブ
+                    SegmentedButton<WorkoutTypeFilter>(
+                      segments: const [
+                        ButtonSegment(
+                          value: WorkoutTypeFilter.all,
+                          label: Text('すべて', style: TextStyle(fontSize: 12)),
+                        ),
+                        ButtonSegment(
+                          value: WorkoutTypeFilter.strength,
+                          label: Text('筋トレ', style: TextStyle(fontSize: 12)),
+                          icon: Icon(Icons.fitness_center, size: 16),
+                        ),
+                        ButtonSegment(
+                          value: WorkoutTypeFilter.cardio,
+                          label: Text('有酸素', style: TextStyle(fontSize: 12)),
+                          icon: Icon(Icons.directions_run, size: 16),
+                        ),
+                      ],
+                      selected: {_workoutTypeFilter},
+                      onSelectionChanged: (Set<WorkoutTypeFilter> newSelection) {
+                        setState(() {
+                          _workoutTypeFilter = newSelection.first;
+                        });
+                      },
+                      style: ButtonStyle(
+                        visualDensity: VisualDensity.compact,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               
-              // 種目ごとにグループ化
+              // 種目ごとにグループ化 + フィルタリング
               ...() {
+                // 🔧 v1.0.247: フィルターに基づいてセットを絞り込み
+                final filteredSets = _sets.where((set) {
+                  switch (_workoutTypeFilter) {
+                    case WorkoutTypeFilter.all:
+                      return true;
+                    case WorkoutTypeFilter.strength:
+                      return !set.isCardio;
+                    case WorkoutTypeFilter.cardio:
+                      return set.isCardio;
+                  }
+                }).toList();
+                
                 final exerciseGroups = <String, List<WorkoutSet>>{};
-                for (var set in _sets) {
+                for (var set in filteredSets) {
                   exerciseGroups.putIfAbsent(set.exerciseName, () => []).add(set);
                 }
                 

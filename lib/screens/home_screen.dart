@@ -69,6 +69,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   // 種目ごとの展開状態を管理
   Map<String, bool> _expandedExercises = {};
   
+  // 🔧 v1.0.247: ワークアウトタイプフィルター（ホーム画面）
+  String _homeWorkoutFilter = 'all'; // 'all', 'strength', 'cardio'
+  
   // 統計データ
   double _last7DaysVolume = 0.0;
   double _currentMonthVolume = 0.0;
@@ -2845,6 +2848,36 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ],
                 ),
                 const SizedBox(height: 12),
+                
+                // 🔧 v1.0.247: ワークアウトタイプフィルター
+                SegmentedButton<String>(
+                  segments: const [
+                    ButtonSegment(
+                      value: 'all',
+                      label: Text('すべて', style: TextStyle(fontSize: 12)),
+                    ),
+                    ButtonSegment(
+                      value: 'strength',
+                      label: Text('筋トレ', style: TextStyle(fontSize: 12)),
+                      icon: Icon(Icons.fitness_center, size: 16),
+                    ),
+                    ButtonSegment(
+                      value: 'cardio',
+                      label: Text('有酸素', style: TextStyle(fontSize: 12)),
+                      icon: Icon(Icons.directions_run, size: 16),
+                    ),
+                  ],
+                  selected: {_homeWorkoutFilter},
+                  onSelectionChanged: (Set<String> newSelection) {
+                    setState(() {
+                      _homeWorkoutFilter = newSelection.first;
+                    });
+                  },
+                  style: ButtonStyle(
+                    visualDensity: VisualDensity.compact,
+                  ),
+                ),
+                const SizedBox(height: 8),
               ],
             ),
           ),
@@ -2942,7 +2975,22 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
           
           // 種目ごとのセクション
-          ...exerciseGroups.entries.map((entry) {
+          ...exerciseGroups.entries.where((entry) {
+            // 🔧 v1.0.247: ワークアウトタイプフィルター適用
+            final sets = entry.value;
+            final isCardio = sets.isNotEmpty && (sets.first['is_cardio'] as bool? ?? false);
+            
+            switch (_homeWorkoutFilter) {
+              case 'all':
+                return true;
+              case 'strength':
+                return !isCardio;
+              case 'cardio':
+                return isCardio;
+              default:
+                return true;
+            }
+          }).map((entry) {
             final exerciseName = entry.key;
             final sets = entry.value;
             final isExpanded = _expandedExercises[exerciseName] ?? true;
