@@ -3005,11 +3005,21 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             final sets = entry.value;
             final isExpanded = _expandedExercises[exerciseName] ?? true;
             
-            // 🔧 v1.0.243: 各セットのis_cardioフラグを確認（muscle_groupではなく）
-            final isCardio = sets.isNotEmpty && (sets.first['is_cardio'] as bool? ?? false);
+            // 🔧 v1.0.249: 後方互換性のあるis_cardio判定（表示用）
+            bool isCardio = false;
+            if (sets.isNotEmpty) {
+              final firstSet = sets.first;
+              if (firstSet['is_cardio'] != null) {
+                // フラグが存在する場合はそれを使用
+                isCardio = firstSet['is_cardio'] as bool;
+              } else {
+                // フラグがない古いデータの場合、ExerciseMasterDataで判定
+                isCardio = ExerciseMasterData.isCardioExercise(exerciseName);
+              }
+            }
             
             if (kDebugMode) {
-              print('種目: $exerciseName, isCardio: $isCardio (セットから判定)');
+              print('種目: $exerciseName, isCardio: $isCardio (後方互換性判定)');
             }
             
             // 合計セット数、合計レップ数を計算
@@ -3131,6 +3141,19 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                             isTimeMode = _getDefaultTimeMode(exerciseNameForMode);
                           }
                           
+                          // 🔧 v1.0.249: 有酸素運動の2列目ヘッダーを「距離」または「回数」に分ける
+                          String secondColumnHeader;
+                          if (isCardio) {
+                            // 有酸素運動の場合、距離を使うか回数を使うかを判定
+                            secondColumnHeader = ExerciseMasterData.cardioUsesDistance(exerciseName) 
+                                ? '距離' 
+                                : '回数';
+                          } else if (isTimeMode) {
+                            secondColumnHeader = '秒数';  // 秒数モード（腹筋等）
+                          } else {
+                            secondColumnHeader = '回数';  // 通常の回数
+                          }
+                          
                           return Row(
                             children: [
                               const SizedBox(
@@ -3159,11 +3182,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               Expanded(
                                 flex: 2,
                                 child: Text(
-                                  isCardio 
-                                      ? '距離' 
-                                      : isTimeMode 
-                                          ? '秒数'  // ✅ 秒数モードの場合
-                                          : '回数',  // 通常は回数
+                                  secondColumnHeader,
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     fontSize: 9,
@@ -3317,12 +3336,23 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                       
                                       debugPrint('📊 表示: $setExerciseName - isTimeMode: $isTimeMode, reps: $reps, is_time_mode field: ${set['is_time_mode']}');
                                       
+                                      // 🔧 v1.0.249: 有酸素運動の表示を「距離」または「回数」に分ける
+                                      String displayText;
+                                      if (isCardio) {
+                                        // 有酸素運動の場合
+                                        if (ExerciseMasterData.cardioUsesDistance(setExerciseName)) {
+                                          displayText = '$reps km';  // 距離を使う有酸素（ランニング等）
+                                        } else {
+                                          displayText = '$reps 回';  // 回数を使う有酸素（バーピー等）
+                                        }
+                                      } else if (isTimeMode) {
+                                        displayText = '${reps}秒';   // 秒数モード（腹筋等）
+                                      } else {
+                                        displayText = '$reps 回';    // 通常の回数
+                                      }
+                                      
                                       return Text(
-                                        isCardio 
-                                          ? '$reps km' 
-                                          : isTimeMode
-                                            ? '${reps}秒'
-                                            : '$reps 回',
+                                        displayText,
                                         style: const TextStyle(
                                           fontSize: 11,
                                           fontWeight: FontWeight.bold,
