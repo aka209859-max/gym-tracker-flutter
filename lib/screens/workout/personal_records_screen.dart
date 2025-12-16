@@ -526,10 +526,12 @@ class _PeriodView extends StatelessWidget {
           .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(startDate))
           .get();
 
-      debugPrint('📊 PR記録取得: ${snapshot.docs.length}件のworkout_logs');
+      debugPrint('📊 PR記録取得: ${snapshot.docs.length}件のworkout_logs (種目: $exercise)');
 
       // 各ワークアウトログから指定種目のPRを抽出
       final List<PersonalRecord> records = [];
+      int totalSetsChecked = 0;
+      int matchedSets = 0;
       
       for (final doc in snapshot.docs) {
         final data = doc.data();
@@ -537,18 +539,29 @@ class _PeriodView extends StatelessWidget {
         final date = (data['date'] as Timestamp?)?.toDate() ?? DateTime.now();
         
         for (final set in sets) {
+          totalSetsChecked++;
           if (set is Map<String, dynamic>) {
             final exerciseName = set['exercise_name'] as String?;
             
             // 指定種目のみ抽出（nullチェック追加）
             if (exerciseName == exercise && exerciseName != null) {
+              matchedSets++;
+              debugPrint('  ✅ マッチした種目: $exerciseName (weight: ${set['weight']}, reps: ${set['reps']}, completed: ${set['is_completed']})');
+            }
               final weight = (set['weight'] as num?)?.toDouble() ?? 0.0;
               final reps = (set['reps'] as int?) ?? 0;
-              final isCardio = set['is_cardio'] as bool? ?? false;
-              final isCompleted = set['is_completed'] as bool? ?? false;
+              final isCardio = set['is_cardio'] as bool? ?? ExerciseMasterData.isCardioExercise(exerciseName!); // 🔧 v1.0.251: 後方互換性
+              final isCompleted = set['is_completed'] as bool? ?? true; // 🔧 v1.0.251: デフォルトtrueで後方互換性
               
-              // 完了したセットのみ
-              if (isCompleted && weight > 0 && reps > 0) {
+              // 🔧 v1.0.251: より寛容な条件に変更
+              // - 完了フラグがtrueまたは未設定
+              // - 有酸素: 時間(weight)が0より大きい、または回数(reps)が0より大きい
+              // - 筋トレ: 回数(reps)が0より大きい（自重の場合weight=0も許可）
+              final hasValidData = isCardio 
+                  ? (weight > 0 || reps > 0) // 有酸素: 時間または距離/回数
+                  : (reps > 0); // 筋トレ: 回数があればOK（自重でもweight=0を許可）
+              
+              if (isCompleted && hasValidData) {
                 // 有酸素運動の場合は1RM計算しない（時間×距離で表示）
                 final calculated1RM = isCardio 
                     ? weight // 有酸素は時間をそのまま使用
@@ -573,7 +586,7 @@ class _PeriodView extends StatelessWidget {
       // 日付順にソート
       records.sort((a, b) => a.achievedAt.compareTo(b.achievedAt));
       
-      debugPrint('✅ ${exercise}のPR記録: ${records.length}件');
+      debugPrint('✅ ${exercise}のPR記録: ${records.length}件 (確認したセット数: $totalSetsChecked, マッチした種目: $matchedSets)');
       return records;
       
     } catch (e) {
