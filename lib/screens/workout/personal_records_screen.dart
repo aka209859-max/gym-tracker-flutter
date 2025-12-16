@@ -214,7 +214,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
     );
   }
 
-  // 🔧 v1.0.251: 部位別カテゴリーカードウィジェット
+  // 🔧 v1.0.253: すべての部位を常に表示（記録なしでも表示）
   Widget _buildBodyPartCategory(String userId, String bodyPart, IconData icon, Color color) {
     // この部位に属する種目をフィルタリング
     final bodyPartExercises = _exercises.where((exerciseName) {
@@ -222,11 +222,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
       return detectedBodyPart == bodyPart;
     }).toList();
 
-    // この部位の種目がない場合は表示しない
-    if (bodyPartExercises.isEmpty) {
-      return const SizedBox.shrink();
-    }
-
+    // 🔧 v1.0.253: 記録がなくても常に表示（0種目として表示）
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
       child: ListTile(
@@ -248,7 +244,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
         subtitle: Text('${bodyPartExercises.length}種目'),
         trailing: const Icon(Icons.chevron_right),
         onTap: () {
-          // 種目一覧画面へ遷移
+          // 🔧 v1.0.253: 記録がない場合も遷移可能（空の一覧画面）
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -546,22 +542,22 @@ class _PeriodView extends StatelessWidget {
             // 指定種目のみ抽出（nullチェック追加）
             if (exerciseName == exercise && exerciseName != null) {
               matchedSets++;
-              debugPrint('  ✅ マッチした種目: $exerciseName (weight: ${set['weight']}, reps: ${set['reps']}, completed: ${set['is_completed']})');
+              debugPrint('  ✅ マッチした種目: $exerciseName (weight: ${set['weight']}, reps: ${set['reps']})');
             }
               final weight = (set['weight'] as num?)?.toDouble() ?? 0.0;
               final reps = (set['reps'] as int?) ?? 0;
               final isCardio = set['is_cardio'] as bool? ?? ExerciseMasterData.isCardioExercise(exerciseName!); // 🔧 v1.0.251: 後方互換性
-              final isCompleted = set['is_completed'] as bool? ?? true; // 🔧 v1.0.251: デフォルトtrueで後方互換性
+              // 🔧 v1.0.253: 完了/未完了に関わらずホーム画面に表示される = PRに反映
+              // final isCompleted = set['is_completed'] as bool? ?? true; // 不要になった
               
-              // 🔧 v1.0.251: より寛容な条件に変更
-              // - 完了フラグがtrueまたは未設定
+              // 🔧 v1.0.253: 完了フラグをチェックしない（ホーム画面に表示されていればPRに反映）
               // - 有酸素: 時間(weight)が0より大きい、または回数(reps)が0より大きい
               // - 筋トレ: 回数(reps)が0より大きい（自重の場合weight=0も許可）
               final hasValidData = isCardio 
                   ? (weight > 0 || reps > 0) // 有酸素: 時間または距離/回数
                   : (reps > 0); // 筋トレ: 回数があればOK（自重でもweight=0を許可）
               
-              if (isCompleted && hasValidData) {
+              if (hasValidData) {
                 // 有酸素運動の場合は1RM計算しない（時間×距離で表示）
                 final calculated1RM = isCardio 
                     ? weight // 有酸素は時間をそのまま使用
@@ -763,49 +759,69 @@ class ExerciseListScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('$bodyPart - PR記録'),
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: exercises.length,
-        itemBuilder: (context, index) {
-          final exerciseName = exercises[index];
-          final isCardio = ExerciseMasterData.isCardioExercise(exerciseName);
-          
-          return Card(
-            margin: const EdgeInsets.only(bottom: 12),
-            child: ListTile(
-              leading: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: (isCardio ? Colors.teal : Colors.purple).withOpacity(0.1),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  isCardio ? Icons.directions_run : Icons.fitness_center,
-                  color: isCardio ? Colors.teal : Colors.purple,
-                ),
+      body: exercises.isEmpty
+          ? Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.fitness_center, size: 64, color: Colors.grey[400]),
+                  const SizedBox(height: 16),
+                  Text(
+                    'まだ$bodyPartの記録がありません',
+                    style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'トレーニングを記録すると、ここに表示されます',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 14, color: Colors.grey[500]),
+                  ),
+                ],
               ),
-              title: Text(
-                exerciseName,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-              subtitle: const Text('タップして推移を確認'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {
-                // 詳細画面（グラフ）へ遷移
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PRDetailScreen(
-                      userId: userId,
-                      exerciseName: exerciseName,
+            )
+          : ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: exercises.length,
+              itemBuilder: (context, index) {
+                final exerciseName = exercises[index];
+                final isCardio = ExerciseMasterData.isCardioExercise(exerciseName);
+                
+                return Card(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  child: ListTile(
+                    leading: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: (isCardio ? Colors.teal : Colors.purple).withOpacity(0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        isCardio ? Icons.directions_run : Icons.fitness_center,
+                        color: isCardio ? Colors.teal : Colors.purple,
+                      ),
                     ),
+                    title: Text(
+                      exerciseName,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: const Text('タップして推移を確認'),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () {
+                      // 詳細画面（グラフ）へ遷移
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PRDetailScreen(
+                            userId: userId,
+                            exerciseName: exerciseName,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 );
               },
             ),
-          );
-        },
-      ),
     );
   }
 }
