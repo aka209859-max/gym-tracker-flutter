@@ -543,10 +543,10 @@ class _PeriodView extends StatelessWidget {
             if (exerciseName == exercise && exerciseName != null) {
               matchedSets++;
               debugPrint('  ✅ マッチした種目: $exerciseName (weight: ${set['weight']}, reps: ${set['reps']})');
-            }
+              
               final weight = (set['weight'] as num?)?.toDouble() ?? 0.0;
               final reps = (set['reps'] as int?) ?? 0;
-              final isCardio = set['is_cardio'] as bool? ?? ExerciseMasterData.isCardioExercise(exerciseName!); // 🔧 v1.0.251: 後方互換性
+              final isCardio = set['is_cardio'] as bool? ?? ExerciseMasterData.isCardioExercise(exerciseName); // 🔧 v1.0.251: 後方互換性
               // 🔧 v1.0.253: 完了/未完了に関わらずホーム画面に表示される = PRに反映
               // final isCompleted = set['is_completed'] as bool? ?? true; // 不要になった
               
@@ -566,7 +566,7 @@ class _PeriodView extends StatelessWidget {
                 records.add(PersonalRecord(
                   id: '${doc.id}_${set['exercise_name']}_${date.millisecondsSinceEpoch}',
                   userId: userId,
-                  exerciseName: exerciseName, // nullチェック済みなので安全
+                  exerciseName: exerciseName,
                   weight: weight,
                   reps: reps,
                   calculated1RM: calculated1RM,
@@ -617,7 +617,7 @@ class _PeriodView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '$periodの成長',
+              '${period}の成長',
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
