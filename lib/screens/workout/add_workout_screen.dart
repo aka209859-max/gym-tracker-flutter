@@ -2517,13 +2517,13 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 ),
               const SizedBox(width: 8),
               
-              // 有酸素運動の場合は「距離（km）」、腹筋の場合は「秒数/回数」、それ以外は「回数」
+              // 有酸素運動の場合は距離ベースかレップスベースかで分ける、腹筋の場合は「秒数/回数」、それ以外は「回数」
               Expanded(
                 child: TextFormField(
                   key: ValueKey('reps_${globalIndex}_${set.reps}'),
                   decoration: InputDecoration(
                     labelText: set.isCardio // 🔧 v1.0.226+242: Use stored flag
-                        ? '距離 (km)' 
+                        ? (ExerciseMasterData.cardioUsesDistance(set.exerciseName) ? '距離 (km)' : '回数') // 🔧 v1.0.251: Distance vs Reps for cardio
                         : _isAbsExercise(set.exerciseName)
                             ? (set.isTimeMode ? '秒数' : '回数')
                             : '回数',

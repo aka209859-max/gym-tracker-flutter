@@ -44,6 +44,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
   }
 
   /// Firestoreからトレーニング履歴を読み取り、種目リストを作成
+  /// 🔧 v1.0.251: 部位別にグルーピングして取得
   Future<void> _loadExercisesFromHistory() async {
     try {
       final user = FirebaseAuth.instance.currentUser;
@@ -149,7 +150,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
     );
   }
 
-  // 🔧 v1.0.245: Problem 3 fix - ドロップダウン廃止、ListView一覧表示へ変更
+  // 🔧 v1.0.251: 部位別カテゴリー表示へ変更
   Widget _buildMainContent(User user) {
     // 種目リスト読み込み中
     if (_isLoadingExercises) {
@@ -194,15 +195,70 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
       );
     }
 
-    // 🔧 v1.0.245: 種目一覧をListViewで表示（ドロップダウン廃止）
+    // 🔧 v1.0.251: 部位別カテゴリー表示（胸・背中・肩・二頭・三頭・腹筋・脚）
     return Scaffold(
       appBar: AppBar(title: const Text('パーソナルレコード')),
-      body: ListView.builder(
+      body: ListView(
         padding: const EdgeInsets.all(16),
-        itemCount: _exercises.length,
-        itemBuilder: (context, index) {
-          final exerciseName = _exercises[index];
-          return _buildPRCard(user.uid, exerciseName);
+        children: [
+          _buildBodyPartCategory(user.uid, '胸', Icons.fitness_center, Colors.red),
+          _buildBodyPartCategory(user.uid, '背中', Icons.fitness_center, Colors.blue),
+          _buildBodyPartCategory(user.uid, '肩', Icons.fitness_center, Colors.orange),
+          _buildBodyPartCategory(user.uid, '二頭', Icons.fitness_center, Colors.purple),
+          _buildBodyPartCategory(user.uid, '三頭', Icons.fitness_center, Colors.pink),
+          _buildBodyPartCategory(user.uid, '腹筋', Icons.fitness_center, Colors.green),
+          _buildBodyPartCategory(user.uid, '脚', Icons.fitness_center, Colors.brown),
+          _buildBodyPartCategory(user.uid, '有酸素', Icons.directions_run, Colors.teal),
+        ],
+      ),
+    );
+  }
+
+  // 🔧 v1.0.251: 部位別カテゴリーカードウィジェット
+  Widget _buildBodyPartCategory(String userId, String bodyPart, IconData icon, Color color) {
+    // この部位に属する種目をフィルタリング
+    final bodyPartExercises = _exercises.where((exerciseName) {
+      final detectedBodyPart = ExerciseMasterData.getBodyPartByName(exerciseName);
+      return detectedBodyPart == bodyPart;
+    }).toList();
+
+    // この部位の種目がない場合は表示しない
+    if (bodyPartExercises.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12),
+      child: ListTile(
+        leading: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.1),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            icon,
+            color: color,
+          ),
+        ),
+        title: Text(
+          bodyPart,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        ),
+        subtitle: Text('${bodyPartExercises.length}種目'),
+        trailing: const Icon(Icons.chevron_right),
+        onTap: () {
+          // 種目一覧画面へ遷移
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ExerciseListScreen(
+                userId: userId,
+                bodyPart: bodyPart,
+                exercises: bodyPartExercises,
+              ),
+            ),
+          );
         },
       ),
     );
@@ -670,6 +726,72 @@ class _PeriodView extends StatelessWidget {
             },
           ),
         ],
+      ),
+    );
+  }
+}
+
+// 🔧 v1.0.251: 部位別の種目一覧画面
+class ExerciseListScreen extends StatelessWidget {
+  final String userId;
+  final String bodyPart;
+  final List<String> exercises;
+
+  const ExerciseListScreen({
+    super.key,
+    required this.userId,
+    required this.bodyPart,
+    required this.exercises,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('$bodyPart - PR記録'),
+      ),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: exercises.length,
+        itemBuilder: (context, index) {
+          final exerciseName = exercises[index];
+          final isCardio = ExerciseMasterData.isCardioExercise(exerciseName);
+          
+          return Card(
+            margin: const EdgeInsets.only(bottom: 12),
+            child: ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: (isCardio ? Colors.teal : Colors.purple).withOpacity(0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  isCardio ? Icons.directions_run : Icons.fitness_center,
+                  color: isCardio ? Colors.teal : Colors.purple,
+                ),
+              ),
+              title: Text(
+                exerciseName,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: const Text('タップして推移を確認'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {
+                // 詳細画面（グラフ）へ遷移
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PRDetailScreen(
+                      userId: userId,
+                      exerciseName: exerciseName,
+                    ),
+                  ),
+                );
+              },
+            ),
+          );
+        },
       ),
     );
   }
