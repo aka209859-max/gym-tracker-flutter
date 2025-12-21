@@ -24,11 +24,22 @@ jobs:
         run: |
           flutter clean
           flutter pub get
+          
+      - name: Generate localization files
+        run: |
+          echo "🌍 Generating l10n files for 7 languages..."
+          flutter gen-l10n
+          echo "✅ Localization files generated"
+          ls -la lib/generated/ || echo "⚠️ lib/generated/ not found"
+          
+      - name: Install iOS dependencies
+        run: |
           cd ios
           pod repo remove trunk 2>/dev/null || true
           rm -rf ~/.cocoapods/repos/trunk
           export CP_REPOS_DIR="$HOME/.cocoapods/repos"
           pod install --repo-update --verbose
+
       
       - name: Install Apple Certificate and Provisioning Profile
         env:
