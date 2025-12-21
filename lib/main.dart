@@ -344,6 +344,8 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    
     return Consumer<NavigationProvider>(
       builder: (context, navigationProvider, child) {
         return Scaffold(
@@ -361,39 +363,39 @@ class _MainScreenState extends State<MainScreen> {
                 onDestinationSelected: (index) {
                   navigationProvider.selectTab(index);
                 },
-        destinations: const [
+        destinations: [
           NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home),
-            label: 'ホーム',
+            icon: const Icon(Icons.home_outlined),
+            selectedIcon: const Icon(Icons.home),
+            label: l10n?.navHome ?? 'ホーム',
           ),
           NavigationDestination(
-            icon: Icon(Icons.history),
-            selectedIcon: Icon(Icons.history),
-            label: '履歴',
+            icon: const Icon(Icons.history),
+            selectedIcon: const Icon(Icons.history),
+            label: l10n?.navWorkout ?? '履歴',
           ),
           NavigationDestination(
-            icon: Badge(
+            icon: const Badge(
               label: Text('AI', style: TextStyle(fontSize: 8)),
               backgroundColor: Colors.deepPurple,
               child: Icon(Icons.psychology_outlined),
             ),
-            selectedIcon: Badge(
+            selectedIcon: const Badge(
               label: Text('AI', style: TextStyle(fontSize: 8)),
               backgroundColor: Colors.deepPurple,
               child: Icon(Icons.psychology),
             ),
-            label: 'AI機能',
+            label: l10n?.navAI ?? 'AI機能',
           ),
           NavigationDestination(
-            icon: Icon(Icons.map_outlined),
-            selectedIcon: Icon(Icons.map),
-            label: 'ジム検索',
+            icon: const Icon(Icons.map_outlined),
+            selectedIcon: const Icon(Icons.map),
+            label: l10n?.navGym ?? 'ジム検索',
           ),
           NavigationDestination(
-            icon: Icon(Icons.person_outline),
-            selectedIcon: Icon(Icons.person),
-            label: 'プロフィール',
+            icon: const Icon(Icons.person_outline),
+            selectedIcon: const Icon(Icons.person),
+            label: l10n?.navProfile ?? 'プロフィール',
           ),
         ],
               ),
