@@ -903,5 +903,74 @@
       "rating": {"type": "double"},
       "count": {"type": "int"}
     }
-  }
+  },
+  
+  "subscription": "サブスクリプション",
+  "freePlan": "無料プラン",
+  "premiumPlan": "Premiumプラン",
+  "proPlan": "Proプラン",
+  "currentPlan": "現在のプラン",
+  "upgradePlan": "プランをアップグレード",
+  "changePlan": "プラン変更",
+  "cancelSubscription": "サブスクリプションをキャンセル",
+  "freeTrial": "無料トライアル",
+  "freeTrialDays": "{days}日間無料トライアル",
+  "@freeTrialDays": {
+    "placeholders": {
+      "days": {"type": "int"}
+    }
+  },
+  "trialEndsAutoRenew": "トライアル終了後、自動的に有料プランに移行します",
+  "trialPeriod": "無料トライアル期間: Premium 30日間 / Pro 14日間",
+  "cancelAnytime": "いつでもキャンセル可能（期間満了まで利用可）",
+  "planChangesAfterCurrent": "現在のプラン期間が終了後に新プランが適用されます",
+  "unlimitedAI": "AI機能無制限",
+  "noAds": "広告なし",
+  "unlimitedFavorites": "お気に入り無制限",
+  "postGymReviews": "ジムレビュー投稿",
+  "gpsLocationSearch": "GPS位置検索",
+  "aiLimitedTo": "AI機能が{from}→{to}に制限",
+  "@aiLimitedTo": {
+    "placeholders": {
+      "from": {"type": "String"},
+      "to": {"type": "String"}
+    }
+  },
+  "switchToPlan": "{planName}に変更",
+  "@switchToPlan": {
+    "placeholders": {
+      "planName": {"type": "String"}
+    }
+  },
+  "switchToPlanConfirm": "{planName}に変更すると、以下の機能が制限されます：",
+  "@switchToPlanConfirm": {
+    "placeholders": {
+      "planName": {"type": "String"}
+    }
+  },
+  "purchaseCompleted": "{planName}の購入が完了しました！",
+  "@purchaseCompleted": {
+    "placeholders": {
+      "planName": {"type": "String"}
+    }
+  },
+  "planSwitched": "{planName}に変更しました！",
+  "@planSwitched": {
+    "placeholders": {
+      "planName": {"type": "String"}
+    }
+  },
+  "changeInAppStore": "App Store設定から{planName}へ変更してください",
+  "@changeInAppStore": {
+    "placeholders": {
+      "planName": {"type": "String"}
+    }
+  },
+  "appStoreInstructions": "1. iPhoneの「設定」アプリを開く\n2. 一番上の[Apple ID]をタップ\n3. 「サブスクリプション」をタップ\n4. 「GYM MATCH」を選択\n5. 希望のプランを選択",
+  "aiAddonPack": "AI追加パック",
+  "purchaseAiAddon": "AI使用回数を追加購入",
+  "loadPlanError": "プラン読み込みエラー",
+  "premiumFeatures": "Premiumプランの全機能",
+  "freeFeatures": "無料プランの全機能",
+  "allFeaturesForever": "すべての機能を永久利用"
 }

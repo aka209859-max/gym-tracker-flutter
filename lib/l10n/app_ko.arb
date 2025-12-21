@@ -519,5 +519,16 @@
   "visitorWelcome": "방문객 환영",
   "sortByRating": "평점순",
   "sortByCrowd": "혼잡도순",
-  "sortByPrice": "가격순"
+  "sortByPrice": "가격순",
+  
+  "subscription": "구독",
+  "freePlan": "무료 플랜",
+  "premiumPlan": "프리미엄 플랜",
+  "proPlan": "프로 플랜",
+  "currentPlan": "현재 플랜",
+  "upgradePlan": "플랜 업그레이드",
+  "freeTrial": "무료 체험",
+  "unlimitedAI": "무제한 AI",
+  "noAds": "광고 없음",
+  "unlimitedFavorites": "무제한 즐겨찾기"
 }
