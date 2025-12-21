@@ -1,0 +1,21 @@
+diff --git a/.github/workflows/ios-release.yml b/.github/workflows/ios-release.yml
+index 1887e62..be641e3 100644
+--- a/.github/workflows/ios-release.yml
++++ b/.github/workflows/ios-release.yml
+@@ -24,6 +24,16 @@ jobs:
+         run: |
+           flutter clean
+           flutter pub get
++          
++      - name: Generate localization files
++        run: |
++          echo "🌍 Generating l10n files for 7 languages..."
++          flutter gen-l10n
++          echo "✅ Localization files generated"
++          ls -la lib/generated/ || echo "⚠️ lib/generated/ not found"
++          
++      - name: Install iOS dependencies
++        run: |
+           cd ios
+           pod repo remove trunk 2>/dev/null || true
+           rm -rf ~/.cocoapods/repos/trunk
