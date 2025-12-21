@@ -5792,13 +5792,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
   /// 設定メニューを表示
   void _showSettingsMenu(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (context) => Container(
+      builder: (builderContext) {
+        final l10n = AppLocalizations.of(builderContext)!;
+        return Container(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -5854,8 +5855,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               subtitle: Text(l10n.pastTrainingRecords),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).pushNamed('/workout-memo');
+                Navigator.of(builderContext).pop();
+                Navigator.of(builderContext).pushNamed('/workout-memo');
               },
             ),
             // メニュー項目2: 個人要因設定
@@ -5881,8 +5882,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               subtitle: Text(l10n.editPersonalFactors),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).pushNamed('/personal-factors');
+                Navigator.of(builderContext).pop();
+                Navigator.of(builderContext).pushNamed('/personal-factors');
               },
             ),
             // メニュー項目3: 言語設定
@@ -5908,9 +5909,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               subtitle: const Text('6言語対応 - グローバル展開中'),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
-                Navigator.of(context).pop();
+                Navigator.of(builderContext).pop();
                 Navigator.push(
-                  context,
+                  builderContext,
                   MaterialPageRoute(
                     builder: (context) => const LanguageSettingsScreen(),
                   ),
@@ -5920,7 +5921,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             const SizedBox(height: 10),
           ],
         ),
-      ),
+      );
+      },
     );
   }
   
