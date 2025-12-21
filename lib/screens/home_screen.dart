@@ -1130,7 +1130,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               _buildHabitFormationCard(theme),
             
             // トグルボタン（疲労管理・目標・アクションの表示/非表示切替）
-            _buildAdvancedSectionsToggle(theme),
+            _buildAdvancedSectionsToggle(context, theme),
             
             // 展開可能な詳細セクション
             if (_isAdvancedSectionsExpanded) ...[
@@ -1153,7 +1153,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             const SizedBox(height: 16),
             
             // 月間サマリー統計
-            _buildMonthlySummary(theme),
+            _buildMonthlySummary(context, theme),
             
             // 📱 バナー広告表示（無料プランのみ）
             // 🔧 v1.0.225-fix: 有料プラン（永年含む）は広告非表示
@@ -1205,7 +1205,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   }
 
   // 詳細セクションのトグルボタン
-  Widget _buildAdvancedSectionsToggle(ThemeData theme) {
+  Widget _buildAdvancedSectionsToggle(BuildContext context, ThemeData theme) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: InkWell(
@@ -2552,7 +2553,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     }
   }
 
-  Widget _buildMonthlySummary(ThemeData theme) {
+  Widget _buildMonthlySummary(BuildContext context, ThemeData theme) {
+    final l10n = AppLocalizations.of(context)!;
     // エンプティステート判定（データなし時）
     if (_totalDaysFromStart == 0 && _monthlyActiveDays == 0) {
       return Column(
@@ -2602,7 +2604,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
           ),
           const SizedBox(height: 16),
-          _buildWorkoutHistory(theme),
+          _buildWorkoutHistory(context, theme),
         ],
       );
     }
@@ -2710,12 +2712,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         const SizedBox(height: 16),
         
         // トレーニング履歴
-        _buildWorkoutHistory(theme),
+        _buildWorkoutHistory(context, theme),
       ],
     );
   }
 
-  Widget _buildWorkoutHistory(ThemeData theme) {
+  Widget _buildWorkoutHistory(BuildContext context, ThemeData theme) {
+    final l10n = AppLocalizations.of(context)!;
     // Firestoreから読み込んだ実際のデータを使用
     if (_isLoading) {
       return Container(
