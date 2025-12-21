@@ -26,6 +26,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   # Core Firebase packages (LOCKED versions for Flutter 3.35.4)
   firebase_core: 3.6.0
@@ -101,6 +103,9 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+
+  # ✅ v1.0.256: 多言語対応（i18n/l10n）
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
