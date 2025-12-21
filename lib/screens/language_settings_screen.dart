@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../generated/app_localizations.dart';
 import '../providers/locale_provider.dart';
 
 /// 言語設定画面

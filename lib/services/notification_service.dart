@@ -78,6 +78,7 @@ class NotificationService {
       ),
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle, // iOS専用だが必須パラメータのため指定
     );
   }
 
@@ -122,6 +123,7 @@ class NotificationService {
       ),
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle, // iOS専用だが必須パラメータのため指定
     );
   }
 

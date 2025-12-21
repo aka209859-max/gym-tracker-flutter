@@ -7,6 +7,9 @@ arb-dir: lib/l10n
 # テンプレートARBファイル（日本語がベース）
 template-arb-file: app_ja.arb
 
+# 出力先ディレクトリ（lib/generated/に生成）
+output-dir: lib/generated
+
 # 出力先ディレクトリ
 output-localization-file: app_localizations.dart
 
@@ -18,9 +21,6 @@ nullable-getter: false
 
 # 合成メッセージを使用（パラメータ付きメッセージ）
 use-escaping: false
-
-# プレースホルダーのヘルパークラスを生成
-synthetic-package: false
 
 # 対応言語（ISO 639-1コード）
 preferred-supported-locales:
