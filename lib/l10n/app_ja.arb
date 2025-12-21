@@ -834,5 +834,74 @@
   "restorePurchases": "購入を復元",
   "restoreSuccess": "復元しました",
   "restoreError": "復元に失敗しました",
-  "noPurchasesToRestore": "復元する購入がありません"
+  "noPurchasesToRestore": "復元する購入がありません",
+  
+  "favorite": "お気に入り",
+  "addedToFavorites": "お気に入りに追加しました",
+  "removedFromFavorites": "お気に入りから削除しました",
+  "alreadyFavorite": "お気に入り登録済み",
+  "checkIn": "チェックイン",
+  "checkOut": "チェックアウト",
+  "checkedIn": "チェックインしました！",
+  "checkedOut": "チェックアウトしました",
+  "checkInFailed": "チェックインに失敗しました",
+  "checkInAt": "{gymName}にチェックインしました",
+  "@checkInAt": {
+    "placeholders": {
+      "gymName": {"type": "String"}
+    }
+  },
+  "shareGym": "このジムをシェア",
+  "shared": "シェアしました！",
+  "shareFailed": "シェアに失敗しました: {error}",
+  "routeGuidance": "ルート案内",
+  "couldNotOpenMap": "Googleマップを開けませんでした",
+  "reviews": "レビュー",
+  "postReview": "レビューを投稿",
+  "noReviews": "まだレビューがありません\n最初のレビューを投稿してください！",
+  "loadReviewsFailed": "レビューの読み込みに失敗しました",
+  "viewAll": "すべて見る",
+  "noCrowdData": "まだ混雑度情報がありません",
+  "crowdLevel": "混雑度",
+  "googleStats": "Google統計",
+  "userReport": "ユーザー報告",
+  "ownerProvided": "オーナー提供",
+  "announcement": "お知らせ",
+  "partnerGym": "パートナージム",
+  "visitorWelcome": "ビジター可",
+  "visitorBooking": "ビジター予約申込",
+  "couponCode": "クーポンコード: {code}",
+  "@couponCode": {
+    "placeholders": {
+      "code": {"type": "String"}
+    }
+  },
+  "validUntil": "{date}まで",
+  "@validUntil": {
+    "placeholders": {
+      "date": {"type": "String"}
+    }
+  },
+  "moderatelyCrowded": "やや混雑",
+  "moderatelyEmpty": "やや空き",
+  "updatedMinutesAgo": "{minutes}分前更新",
+  "@updatedMinutesAgo": {
+    "placeholders": {
+      "minutes": {"type": "int"}
+    }
+  },
+  "equipmentCount": "{name} × {count}台",
+  "@equipmentCount": {
+    "placeholders": {
+      "name": {"type": "String"},
+      "count": {"type": "int"}
+    }
+  },
+  "ratingWithCount": "{rating} ({count}件)",
+  "@ratingWithCount": {
+    "placeholders": {
+      "rating": {"type": "double"},
+      "count": {"type": "int"}
+    }
+  }
 }

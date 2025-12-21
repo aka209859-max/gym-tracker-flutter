@@ -498,5 +498,26 @@
   "legal": "법적 정보",
   "privacyPolicy": "개인정보 처리방침",
   "termsOfService": "이용약관",
-  "licenses": "라이선스"
+  "licenses": "라이선스",
+  
+  "favorite": "즐겨찾기",
+  "addedToFavorites": "즐겨찾기에 추가됨",
+  "removedFromFavorites": "즐겨찾기에서 제거됨",
+  "checkIn": "체크인",
+  "checkOut": "체크아웃",
+  "checkedIn": "체크인 완료!",
+  "shareGym": "이 체육관 공유",
+  "shared": "공유 완료!",
+  "routeGuidance": "길 안내",
+  "reviews": "리뷰",
+  "postReview": "리뷰 작성",
+  "noReviews": "리뷰가 아직 없습니다\n첫 리뷰를 작성해주세요!",
+  "viewAll": "모두 보기",
+  "noCrowdData": "혼잡도 정보가 없습니다",
+  "crowdLevel": "혼잡도",
+  "announcement": "공지사항",
+  "visitorWelcome": "방문객 환영",
+  "sortByRating": "평점순",
+  "sortByCrowd": "혼잡도순",
+  "sortByPrice": "가격순"
 }
