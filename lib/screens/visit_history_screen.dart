@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../services/visit_history_service.dart';
@@ -52,15 +53,15 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('訪問履歴を削除'),
-        content: const Text('この訪問履歴を削除しますか？'),
+        content: const Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('削除', style: TextStyle(color: Colors.red)),
+            child: const Text(AppLocalizations.of(context)!.delete, style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -71,14 +72,14 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
       if (success) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('訪問履歴を削除しました')),
+            const SnackBar(content: Text(AppLocalizations.of(context)!.delete)),
           );
           _loadVisitHistory();
         }
       } else {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('削除に失敗しました')),
+            const SnackBar(content: Text(AppLocalizations.of(context)!.deleteError)),
           );
         }
       }
@@ -89,13 +90,13 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('訪問履歴'),
+        title: const Text(AppLocalizations.of(context)!.visitHistory),
         elevation: 2,
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: _loadVisitHistory,
-            tooltip: '更新',
+            tooltip: AppLocalizations.of(context)!.refresh,
           ),
         ],
       ),
@@ -149,7 +150,7 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
             ),
             const SizedBox(height: 24),
             Text(
-              '訪問履歴がありません',
+              AppLocalizations.of(context)!.noVisitHistory,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -292,7 +293,7 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
               IconButton(
                 icon: Icon(Icons.delete_outline, color: Colors.grey[400]),
                 onPressed: () => _deleteHistory(history.id),
-                tooltip: '削除',
+                tooltip: AppLocalizations.of(context)!.delete,
               ),
             ],
           ),

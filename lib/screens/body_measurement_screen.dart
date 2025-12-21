@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -112,7 +113,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
 
     try {
       final user = FirebaseAuth.instance.currentUser;
-      if (user == null) throw Exception('ユーザーが未ログイン');
+      if (user == null) throw Exception(AppLocalizations.of(context)!.login);
 
       // ✅ v1.0.158: 日付 + 現在時刻を保存
       final now = DateTime.now();
@@ -140,7 +141,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
 
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('記録を保存しました'), backgroundColor: Colors.green),
+            const SnackBar(content: Text(AppLocalizations.of(context)!.save), backgroundColor: Colors.green),
           );
         }
       } else {
@@ -180,7 +181,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('エラー: $e'), backgroundColor: Colors.red),
+          SnackBar(content: Text(AppLocalizations.of(context)!.error), backgroundColor: Colors.red),
         );
       }
     } finally {
@@ -198,12 +199,12 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('記録を削除'),
+        title: const Text(AppLocalizations.of(context)!.delete),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('以下の記録を削除しますか？'),
+            Text(AppLocalizations.of(context)!.delete),
             const SizedBox(height: 16),
             Text(
               DateFormat('yyyy年MM月dd日 HH:mm').format(date),
@@ -250,7 +251,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('記録を削除しました'),
+            content: Text(AppLocalizations.of(context)!.delete),
             backgroundColor: Colors.orange,
           ),
         );
@@ -374,7 +375,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 16),
                             ),
-                            child: const Text('記録を保存', style: TextStyle(fontSize: 16)),
+                            child: const Text(AppLocalizations.of(context)!.save, style: TextStyle(fontSize: 16)),
                           ),
                         ],
                       ),
@@ -481,7 +482,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text('最近', style: TextStyle(fontSize: 14, color: Colors.grey.shade700)),
+                Text(AppLocalizations.of(context)!.recentExercises, style: TextStyle(fontSize: 14, color: Colors.grey.shade700)),
                 Switch(
                   value: _selectedPeriod == ChartPeriod.all,
                   onChanged: (value) {

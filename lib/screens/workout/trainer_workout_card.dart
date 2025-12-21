@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../services/trainer_workout_service.dart';
@@ -220,7 +221,7 @@ class TrainerWorkoutCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            'パーソナルトレーニング',
+                            AppLocalizations.of(context)!.personalTraining,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -248,7 +249,7 @@ class TrainerWorkoutCard extends StatelessWidget {
                   children: [
                     // トレーナー情報
                     _buildInfoRow('トレーナー', record.trainerName),
-                    _buildInfoRow('時間', '${record.duration}分'),
+                    _buildInfoRow(AppLocalizations.of(context)!.duration, '${record.duration}分'),
                     _buildInfoRow('強度', _getIntensityLabel(record.intensity)),
                     
                     const SizedBox(height: 24),
@@ -308,11 +309,11 @@ class TrainerWorkoutCard extends StatelessWidget {
                           child: Column(
                             children: [
                               if (record.bodyMetrics!.weight != null)
-                                _buildMetricRow('体重', '${record.bodyMetrics!.weight}kg'),
+                                _buildMetricRow(AppLocalizations.of(context)!.weight, '${record.bodyMetrics!.weight}kg'),
                               if (record.bodyMetrics!.bodyFat != null)
-                                _buildMetricRow('体脂肪率', '${record.bodyMetrics!.bodyFat}%'),
+                                _buildMetricRow(AppLocalizations.of(context)!.bodyFat, '${record.bodyMetrics!.bodyFat}%'),
                               if (record.bodyMetrics!.muscleMass != null)
-                                _buildMetricRow('筋肉量', '${record.bodyMetrics!.muscleMass}kg'),
+                                _buildMetricRow(AppLocalizations.of(context)!.muscleMass, '${record.bodyMetrics!.muscleMass}kg'),
                             ],
                           ),
                         ),
@@ -410,7 +411,7 @@ class TrainerWorkoutCard extends StatelessWidget {
         return 'ハード';
       case 'medium':
       default:
-        return '普通';
+        return AppLocalizations.of(context)!.crowdLevelNormal;
     }
   }
 }

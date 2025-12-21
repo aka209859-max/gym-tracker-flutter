@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 /// 特定商取引法に基づく表記画面
@@ -56,7 +57,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
   Widget _buildInfoTable(BuildContext context) {
     return Column(
       children: [
-        _buildTableRow('販売事業者', '井上元'),
+        _buildTableRow(AppLocalizations.of(context)!.sellerInfo, '井上元'),
         _buildTableRow('運営統括責任者', '井上元'),
         _buildTableRow('所在地', '〒839-0817\n福岡県久留米市瀬下町243'),
         _buildTableRow(
@@ -87,7 +88,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
         ),
         _buildTableRow(
           'サービス提供時期',
-          '決済完了後、即時利用可能となります。',
+          AppLocalizations.of(context)!.purchaseCompleted,
         ),
         _buildTableRow(
           '返品・返金について',
@@ -102,7 +103,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
         _buildTableRow(
           '解約方法',
           'iOS:\n'
-          '設定アプリ → Apple ID → サブスクリプション → GYM MATCH → サブスクリプションをキャンセル\n\n'
+          AppLocalizations.of(context)!.cancel
           '注意事項:\n'
           '• 解約は次回更新日の24時間前までに行ってください\n'
           '• 解約後も、現在の請求期間終了まではサービスをご利用いただけます\n'
@@ -220,7 +221,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'プライバシーポリシー・利用規約',
+            AppLocalizations.of(context)!.privacyPolicy,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -229,7 +230,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           const Text(
-            '本サービスのプライバシーポリシーおよび利用規約は、アプリ内の設定メニューからご確認いただけます。',
+            AppLocalizations.of(context)!.confirm,
             style: TextStyle(fontSize: 13),
           ),
           const SizedBox(height: 8),
@@ -238,7 +239,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
               Icon(Icons.privacy_tip_outlined, size: 16, color: Colors.blue.shade700),
               const SizedBox(width: 4),
               const Text(
-                '設定 → プライバシーポリシー',
+                AppLocalizations.of(context)!.settings,
                 style: TextStyle(fontSize: 12, color: Colors.blue),
               ),
             ],
@@ -249,7 +250,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
               Icon(Icons.description_outlined, size: 16, color: Colors.blue.shade700),
               const SizedBox(width: 4),
               const Text(
-                '設定 → 利用規約',
+                AppLocalizations.of(context)!.settings,
                 style: TextStyle(fontSize: 12, color: Colors.blue),
               ),
             ],
@@ -298,7 +299,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           const Text(
-            'メールアドレス: i.hajime1219@outlook.jp',
+            AppLocalizations.of(context)!.email,
             style: TextStyle(fontSize: 13),
           ),
           const Text(

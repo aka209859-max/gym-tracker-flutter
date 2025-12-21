@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
@@ -101,7 +102,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
     final result = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('メモを編集'),
+        title: const Text(AppLocalizations.of(context)!.edit),
         content: TextField(
           controller: controller,
           maxLines: 5,
@@ -138,7 +139,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
       } catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('エラー: $e')),
+            SnackBar(content: Text(AppLocalizations.of(context)!.error)),
           );
         }
       }
@@ -151,7 +152,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('メモを削除'),
-        content: const Text('このメモを削除してもよろしいですか？'),
+        content: const Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -174,14 +175,14 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
         await _noteService.deleteNote(noteId);
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('メモを削除しました')),
+            const SnackBar(content: Text(AppLocalizations.of(context)!.delete)),
           );
           _loadMemosWithWorkouts(); // リロード
         }
       } catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('削除エラー: $e')),
+            SnackBar(content: Text(AppLocalizations.of(context)!.delete)),
           );
         }
       }
@@ -218,7 +219,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'トレーニング記録の詳細画面から\nメモを追加できます',
+                        AppLocalizations.of(context)!.addWorkout,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 14,

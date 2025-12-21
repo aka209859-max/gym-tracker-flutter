@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../models/pt_member.dart';
@@ -27,7 +28,7 @@ class _POMembersScreenState extends State<POMembersScreen> {
             child: SegmentedButton<String>(
               segments: const [
                 ButtonSegment(value: 'all', label: Text('全会員')),
-                ButtonSegment(value: 'active', label: Text('アクティブ')),
+                ButtonSegment(value: 'active', label: Text(AppLocalizations.of(context)!.active)),
                 ButtonSegment(value: 'dormant', label: Text('休眠中')),
               ],
               selected: {_filterStatus},
@@ -52,7 +53,7 @@ class _POMembersScreenState extends State<POMembersScreen> {
                 }
 
                 if (snapshot.hasError) {
-                  return Center(child: Text('エラー: ${snapshot.error}'));
+                  return Center(child: Text(AppLocalizations.of(context)!.snapshotError));
                 }
 
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
@@ -109,7 +110,7 @@ class _POMembersScreenState extends State<POMembersScreen> {
                           const SizedBox(width: 12),
                           Expanded(
                             child: _SummaryCard(
-                              label: 'アクティブ',
+                              label: AppLocalizations.of(context)!.active,
                               value: '$activeCount名',
                               color: Colors.green,
                             ),
@@ -161,7 +162,7 @@ class _POMembersScreenState extends State<POMembersScreen> {
         onPressed: () {
           // 会員追加機能（今後実装）
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('会員追加機能は近日公開予定です')),
+            const SnackBar(content: Text(AppLocalizations.of(context)!.addWorkout)),
           );
         },
         child: const Icon(Icons.add),
@@ -267,7 +268,7 @@ class _MemberCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      member.isActive ? 'アクティブ' : '休眠中',
+                      member.isActive ? AppLocalizations.of(context)!.active : '休眠中',
                       style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.bold,

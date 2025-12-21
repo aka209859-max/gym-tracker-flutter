@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -93,7 +94,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
           unselectedLabelColor: Colors.white.withValues(alpha: 0.7),
           tabs: const [
             Tab(text: 'マイテンプレート', icon: Icon(Icons.folder, size: 20)),
-            Tab(text: 'おすすめ', icon: Icon(Icons.auto_awesome, size: 20)),
+            Tab(text: AppLocalizations.of(context)!.recommendation, icon: Icon(Icons.auto_awesome, size: 20)),
           ],
         ),
       ),
@@ -171,7 +172,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'よく使う種目セットを保存してみましょう',
+                  AppLocalizations.of(context)!.save,
                   style: TextStyle(fontSize: 14, color: Colors.grey[500]),
                 ),
               ],
@@ -264,7 +265,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
                                   border: Border.all(color: Colors.orange),
                                 ),
                                 child: const Text(
-                                  'おすすめ',
+                                  AppLocalizations.of(context)!.recommendation,
                                   style: TextStyle(
                                     fontSize: 10,
                                     fontWeight: FontWeight.bold,
@@ -399,14 +400,14 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
         
         if (result == true && mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('トレーニングを保存しました')),
+            const SnackBar(content: Text(AppLocalizations.of(context)!.save)),
           );
         }
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('エラー: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.error)),
         );
       }
     } finally {
@@ -446,13 +447,13 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
 
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('テンプレートを削除しました')),
+            const SnackBar(content: Text(AppLocalizations.of(context)!.delete)),
           );
         }
       } catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('削除エラー: $e')),
+            SnackBar(content: Text(AppLocalizations.of(context)!.delete)),
           );
         }
       }

@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import '../services/subscription_service.dart';
 import '../services/revenue_cat_service.dart';
@@ -52,12 +53,12 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
         content: const Text(
           'AI追加パック（5回分）\n'
           '料金: ¥300\n\n'
-          '今月のAI機能使用回数を5回追加します。',
+          AppLocalizations.of(context)!.addWorkout,
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
@@ -94,7 +95,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
               children: [
                 Icon(Icons.check_circle, color: Colors.green, size: 32),
                 SizedBox(width: 12),
-                Text('購入完了'),
+                Text(AppLocalizations.of(context)!.purchaseCompleted),
               ],
             ),
             content: const Text(
@@ -107,7 +108,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                   Navigator.pop(context); // ダイアログを閉じる
                   Navigator.pop(context, true); // 購入画面を閉じて成功を返す
                 },
-                child: const Text('閉じる'),
+                child: const Text(AppLocalizations.of(context)!.close),
               ),
             ],
           ),
@@ -121,14 +122,14 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
               children: [
                 Icon(Icons.error, color: Colors.red, size: 32),
                 SizedBox(width: 12),
-                Text('購入エラー'),
+                Text(AppLocalizations.of(context)!.error),
               ],
             ),
             content: const Text('購入処理に失敗しました。\nもう一度お試しください。'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('閉じる'),
+                child: const Text(AppLocalizations.of(context)!.close),
               ),
             ],
           ),
@@ -146,7 +147,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                         '後ほど再度お試しください。';
         } else if (e.toString().contains('cancelled') || 
                    e.toString().contains('キャンセル')) {
-          errorMessage = '購入がキャンセルされました。';
+          errorMessage = AppLocalizations.of(context)!.purchaseCancelled;
         }
         
         showDialog(
@@ -156,14 +157,14 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
               children: [
                 Icon(Icons.warning, color: Colors.orange, size: 32),
                 SizedBox(width: 12),
-                Text('購入エラー'),
+                Text(AppLocalizations.of(context)!.error),
               ],
             ),
             content: Text(errorMessage),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('閉じる'),
+                child: const Text(AppLocalizations.of(context)!.close),
               ),
             ],
           ),
@@ -255,7 +256,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                     Text(
                       isProPlan 
                           ? 'プラン基本: 無制限 / 追加購入: $_addonLimit回'
-                          : 'プラン基本: $_baseLimit回 / 追加購入: $_addonLimit回',
+                          : AppLocalizations.of(context)!.addWorkout,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey[600],

@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 /// POセッション管理画面
@@ -36,7 +37,7 @@ class POSessionsScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('セッション追加は近日公開予定です')),
+            const SnackBar(content: Text(AppLocalizations.of(context)!.addWorkout)),
           );
         },
         child: const Icon(Icons.add),

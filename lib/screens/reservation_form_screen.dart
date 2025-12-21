@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/gym.dart';
@@ -138,7 +139,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ビジター予約申込'),
+        title: const Text(AppLocalizations.of(context)!.visitorBooking),
         backgroundColor: Colors.orange[700],
       ),
       body: SingleChildScrollView(
@@ -230,7 +231,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
               TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(
-                  labelText: 'メールアドレス *',
+                  labelText: AppLocalizations.of(context)!.email,
                   hintText: 'example@email.com',
                   prefixIcon: Icon(Icons.email),
                   border: OutlineInputBorder(),
@@ -238,10 +239,10 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return 'メールアドレスを入力してください';
+                    return AppLocalizations.of(context)!.emailRequired;
                   }
                   if (!value.contains('@')) {
-                    return '正しいメールアドレスを入力してください';
+                    return AppLocalizations.of(context)!.enterValidEmailAddress;
                   }
                   return null;
                 },

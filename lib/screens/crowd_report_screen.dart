@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -61,7 +62,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('混雑度を報告'),
+        title: const Text(AppLocalizations.of(context)!.reportCrowd),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -127,7 +128,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
             const SizedBox(height: 24),
             // 混雑度選択
             const Text(
-              '現在の混雑度を選択してください',
+              AppLocalizations.of(context)!.selectExercise,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
@@ -277,7 +278,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('エラーが発生しました: ${e.toString()}'),
+            content: Text(AppLocalizations.of(context)!.errorGeneric),
             backgroundColor: Colors.red,
             duration: const Duration(seconds: 5),
           ),
@@ -376,13 +377,13 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
       case 2:
         return 'やや空き';
       case 3:
-        return '普通';
+        return AppLocalizations.of(context)!.crowdLevelNormal;
       case 4:
         return 'やや混雑';
       case 5:
         return '超混雑';
       default:
-        return '不明';
+        return AppLocalizations.of(context)!.unknown;
     }
   }
 

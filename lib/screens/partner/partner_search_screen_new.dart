@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import '../../models/training_partner.dart';
 import '../../services/training_partner_service.dart';
@@ -18,7 +19,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
 
   String _selectedLocation = 'すべて';
   String _selectedExperienceLevel = 'すべて';
-  String _selectedGoal = 'すべて';
+  String _selectedGoal = AppLocalizations.of(context)!.filterAll;
   
   bool _canAccess = false;
   bool _hasSearched = false; // 検索実行フラグ
@@ -27,22 +28,22 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
   static const List<String> _prefectures = [
     'すべて',
     '北海道',
-    '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県',
+    '青森県', '岩手県', '宮城県', '秋田県', '山形県', AppLocalizations.of(context)!.prefectureFukushima,
     '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県',
-    '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県',
+    '新潟県', '富山県', AppLocalizations.of(context)!.prefectureIshikawa, '福井県', '山梨県', '長野県',
     '岐阜県', '静岡県', '愛知県', '三重県',
-    '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県',
+    '滋賀県', '京都府', AppLocalizations.of(context)!.prefectureOsaka, '兵庫県', '奈良県', '和歌山県',
     '鳥取県', '島根県', '岡山県', '広島県', '山口県',
-    '徳島県', '香川県', '愛媛県', '高知県',
+    '徳島県', AppLocalizations.of(context)!.prefectureKagawa, '愛媛県', '高知県',
     '福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県',
-    '沖縄県',
+    AppLocalizations.of(context)!.prefectureOkinawa,
   ];
 
   static const List<String> _experienceLevels = [
     'すべて',
     '初心者',
     '中級者',
-    '上級者',
+    AppLocalizations.of(context)!.advanced,
   ];
 
   static const List<String> _goals = [
@@ -50,7 +51,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
     '筋肥大',
     '減量',
     'パワー向上',
-    '健康維持',
+    AppLocalizations.of(context)!.healthMaintenance,
     '体力向上',
   ];
 
@@ -76,7 +77,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('パートナー検索'),
+        title: const Text(AppLocalizations.of(context)!.partnerSearch),
       ),
       body: Column(
         children: [
@@ -94,7 +95,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
 
   Widget _buildPaywall() {
     return Scaffold(
-      appBar: AppBar(title: const Text('パートナー検索')),
+      appBar: AppBar(title: const Text(AppLocalizations.of(context)!.partnerSearch)),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -102,7 +103,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
             const Icon(Icons.diamond, size: 80, color: Colors.amber),
             const SizedBox(height: 24),
             const Text(
-              'パートナー検索機能',
+              AppLocalizations.of(context)!.searchGym,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
@@ -136,7 +137,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
           DropdownButtonFormField<String>(
             value: _selectedLocation,
             decoration: const InputDecoration(
-              labelText: '居住地',
+              labelText: AppLocalizations.of(context)!.residence,
               border: OutlineInputBorder(),
               filled: true,
               fillColor: Colors.white,
@@ -150,7 +151,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
                 .toList(),
             onChanged: (value) {
               setState(() {
-                _selectedLocation = value ?? 'すべて';
+                _selectedLocation = value ?? AppLocalizations.of(context)!.filterAll;
               });
             },
           ),
@@ -160,7 +161,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
           DropdownButtonFormField<String>(
             value: _selectedExperienceLevel,
             decoration: const InputDecoration(
-              labelText: '経験レベル',
+              labelText: AppLocalizations.of(context)!.experienceLevel,
               border: OutlineInputBorder(),
               filled: true,
               fillColor: Colors.white,
@@ -174,7 +175,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
                 .toList(),
             onChanged: (value) {
               setState(() {
-                _selectedExperienceLevel = value ?? 'すべて';
+                _selectedExperienceLevel = value ?? AppLocalizations.of(context)!.filterAll;
               });
             },
           ),
@@ -184,7 +185,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
           DropdownButtonFormField<String>(
             value: _selectedGoal,
             decoration: const InputDecoration(
-              labelText: '目標',
+              labelText: AppLocalizations.of(context)!.goal,
               border: OutlineInputBorder(),
               filled: true,
               fillColor: Colors.white,
@@ -198,7 +199,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
                 .toList(),
             onChanged: (value) {
               setState(() {
-                _selectedGoal = value ?? 'すべて';
+                _selectedGoal = value ?? AppLocalizations.of(context)!.filterAll;
               });
             },
           ),
@@ -223,7 +224,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
                   Icon(Icons.search, color: Colors.white),
                   SizedBox(width: 8),
                   Text(
-                    '検索開始',
+                    AppLocalizations.of(context)!.searchGym,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                 ],
@@ -243,7 +244,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
           Icon(Icons.search, size: 80, color: Colors.grey[400]),
           const SizedBox(height: 16),
           Text(
-            '条件を選択して検索開始ボタンを押してください',
+            AppLocalizations.of(context)!.selectExercise,
             style: TextStyle(fontSize: 16, color: Colors.grey[600]),
             textAlign: TextAlign.center,
           ),
@@ -260,9 +261,9 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
   Widget _buildSearchResults() {
     return StreamBuilder<List<TrainingPartner>>(
       stream: _partnerService.searchPartners(
-        location: (_selectedLocation == 'すべて' || _selectedLocation.isEmpty) ? null : _selectedLocation,
-        experienceLevel: (_selectedExperienceLevel == 'すべて' || _selectedExperienceLevel.isEmpty) ? null : _selectedExperienceLevel,
-        goal: (_selectedGoal == 'すべて' || _selectedGoal.isEmpty) ? null : _selectedGoal,
+        location: (_selectedLocation == AppLocalizations.of(context)!.filterAll || _selectedLocation.isEmpty) ? null : _selectedLocation,
+        experienceLevel: (_selectedExperienceLevel == AppLocalizations.of(context)!.filterAll || _selectedExperienceLevel.isEmpty) ? null : _selectedExperienceLevel,
+        goal: (_selectedGoal == AppLocalizations.of(context)!.filterAll || _selectedGoal.isEmpty) ? null : _selectedGoal,
       ),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
@@ -272,7 +273,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               children: [
                 const Icon(Icons.error, size: 64, color: Colors.red),
                 const SizedBox(height: 16),
-                Text('エラーが発生しました'),
+                Text(AppLocalizations.of(context)!.errorGeneric),
                 const SizedBox(height: 8),
                 Text(
                   '${snapshot.error}',
@@ -286,7 +287,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
                       _hasSearched = false;
                     });
                   },
-                  child: const Text('戻る'),
+                  child: const Text(AppLocalizations.of(context)!.back),
                 ),
               ],
             ),
@@ -312,7 +313,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '検索条件を変更してみてください',
+                  AppLocalizations.of(context)!.searchConditions,
                   style: TextStyle(fontSize: 14, color: Colors.grey[500]),
                 ),
               ],

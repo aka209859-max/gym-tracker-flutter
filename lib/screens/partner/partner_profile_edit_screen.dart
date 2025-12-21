@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import '../../services/partner_service.dart';
 
@@ -21,12 +22,12 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
 
   final List<String> _availableExercises = [
     'ベンチプレス', 'スクワット', 'デッドリフト', '懸垂',
-    'ショルダープレス', 'バーベルロー', 'レッグプレス', '有酸素運動',
+    'ショルダープレス', 'バーベルロー', 'レッグプレス', AppLocalizations.of(context)!.cardio,
   ];
 
   final List<String> _availableGoals = [
     '筋力アップ', '筋肥大', 'ダイエット', '体力向上',
-    'ボディメイク', 'コンテスト出場', '健康維持',
+    'ボディメイク', 'コンテスト出場', AppLocalizations.of(context)!.healthMaintenance,
   ];
 
   @override
@@ -52,7 +53,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('プロフィールを更新しました'),
+            content: Text(AppLocalizations.of(context)!.updateProfileSuccess),
             backgroundColor: Colors.green,
           ),
         );
@@ -62,7 +63,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('エラー: $e'),
+            content: Text(AppLocalizations.of(context)!.error),
             backgroundColor: Colors.red,
           ),
         );
@@ -79,7 +80,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'プロフィール編集',
+          AppLocalizations.of(context)!.editProfile,
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -94,7 +95,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
             TextFormField(
               controller: _bioController,
               decoration: const InputDecoration(
-                labelText: '自己紹介',
+                labelText: AppLocalizations.of(context)!.bio,
                 hintText: 'トレーニングについて自由に書いてください',
                 border: OutlineInputBorder(),
               ),
@@ -109,15 +110,15 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
             const SizedBox(height: 24),
 
             // 経験レベル
-            const Text('経験レベル', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text(AppLocalizations.of(context)!.experienceLevel, style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             DropdownButtonFormField<String>(
               value: _experienceLevel,
               decoration: const InputDecoration(border: OutlineInputBorder()),
               items: const [
-                DropdownMenuItem(value: 'beginner', child: Text('初心者')),
+                DropdownMenuItem(value: 'beginner', child: Text(AppLocalizations.of(context)!.beginner)),
                 DropdownMenuItem(value: 'intermediate', child: Text('中級者')),
-                DropdownMenuItem(value: 'advanced', child: Text('上級者')),
+                DropdownMenuItem(value: 'advanced', child: Text(AppLocalizations.of(context)!.advanced)),
               ],
               onChanged: (value) {
                 setState(() => _experienceLevel = value!);
@@ -151,7 +152,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
             const SizedBox(height: 24),
 
             // 目標
-            const Text('目標', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text(AppLocalizations.of(context)!.goal, style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
@@ -184,7 +185,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
               ),
               child: _isLoading
                   ? const CircularProgressIndicator(color: Colors.white)
-                  : const Text('保存', style: TextStyle(fontSize: 16)),
+                  : const Text(AppLocalizations.of(context)!.save, style: TextStyle(fontSize: 16)),
             ),
           ],
         ),

@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 /// 利用規約画面
@@ -8,7 +9,7 @@ class TermsOfServiceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('利用規約'),
+        title: const Text(AppLocalizations.of(context)!.termsOfService),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
@@ -228,7 +229,7 @@ class TermsOfServiceScreen extends StatelessWidget {
               Icon(Icons.contact_mail, color: Colors.blue.shade700),
               const SizedBox(width: 8),
               const Text(
-                'お問い合わせ',
+                AppLocalizations.of(context)!.contactUs,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -252,7 +253,7 @@ class TermsOfServiceScreen extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           const Text(
-            'メールアドレス: i.hajime1219@outlook.jp',
+            AppLocalizations.of(context)!.email,
             style: TextStyle(fontSize: 13),
           ),
           const Text(

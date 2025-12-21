@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -139,16 +140,16 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('画像を削除'),
-        content: const Text('この画像を削除してもよろしいですか？'),
+        content: const Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('削除'),
+            child: const Text(AppLocalizations.of(context)!.delete),
           ),
         ],
       ),
@@ -173,7 +174,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('画像を削除しました'),
+            content: Text(AppLocalizations.of(context)!.delete),
           ),
         );
       }
@@ -185,7 +186,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('削除失敗: $e'),
+            content: Text(AppLocalizations.of(context)!.delete),
             backgroundColor: Colors.red,
           ),
         );
@@ -216,7 +217,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
             IconButton(
               icon: const Icon(Icons.add_photo_alternate),
               onPressed: _pickAndUploadPhotos,
-              tooltip: '画像を追加',
+              tooltip: AppLocalizations.of(context)!.addWorkout,
             ),
         ],
       ),
@@ -262,7 +263,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
             ElevatedButton.icon(
               onPressed: _pickAndUploadPhotos,
               icon: const Icon(Icons.add_photo_alternate),
-              label: const Text('画像を追加'),
+              label: const Text(AppLocalizations.of(context)!.addWorkout),
               style: ElevatedButton.styleFrom(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -285,7 +286,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '登録画像: ${_photoUrls.length}枚',
+                AppLocalizations.of(context)!.emailNotRegistered,
                 style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -294,7 +295,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
               TextButton.icon(
                 onPressed: _isUploading ? null : _pickAndUploadPhotos,
                 icon: const Icon(Icons.add),
-                label: const Text('追加'),
+                label: const Text(AppLocalizations.of(context)!.add),
               ),
             ],
           ),

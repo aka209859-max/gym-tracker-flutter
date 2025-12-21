@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -107,7 +108,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
 
     } catch (e) {
       print('❌ 統計読み込みエラー: $e');
-      debugPrint('統計読み込みエラー: $e');
+      debugPrint(AppLocalizations.of(context)!.error);
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
@@ -389,7 +390,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
                 Expanded(
                   child: _buildStatItem(
                     icon: Icons.fitness_center,
-                    label: 'トレーニング日数',
+                    label: AppLocalizations.of(context)!.trainingDays,
                     value: '$_weeklyWorkoutDays日',
                     color: Colors.blue,
                   ),
@@ -490,7 +491,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
                 Expanded(
                   child: _buildStatItem(
                     icon: Icons.event_available,
-                    label: 'トレーニング日数',
+                    label: AppLocalizations.of(context)!.trainingDays,
                     value: '$_monthlyWorkoutDays日',
                     color: Colors.purple,
                   ),

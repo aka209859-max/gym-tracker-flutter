@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import '../../config/crowd_data_config.dart';
 
@@ -151,7 +152,7 @@ class PhaseMigrationScreen extends StatelessWidget {
                       Icon(Icons.api, size: 20, color: Colors.blue),
                       const SizedBox(width: 4),
                       Text(
-                        'Google API: ${CrowdDataConfig.enableGooglePlacesAPI ? "有効" : "無効"}',
+                        'Google API: ${CrowdDataConfig.enableGooglePlacesAPI ? "有効" : AppLocalizations.of(context)!.invalid}',
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.grey[700],

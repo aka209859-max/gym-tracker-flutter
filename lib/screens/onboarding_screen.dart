@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -89,7 +90,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: TextButton(
                   onPressed: _skipOnboarding,
                   child: const Text(
-                    'スキップ',
+                    AppLocalizations.of(context)!.skip,
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
@@ -139,7 +140,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                   ),
                   child: Text(
-                    _currentPage < _pages.length - 1 ? '次へ' : 'はじめる！',
+                    _currentPage < _pages.length - 1 ? AppLocalizations.of(context)!.next : 'はじめる！',
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

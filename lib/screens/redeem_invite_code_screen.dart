@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../services/referral_service.dart';
@@ -37,7 +38,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {
       setState(() {
-        _errorMessage = 'ログインが必要です';
+        _errorMessage = AppLocalizations.of(context)!.signInRequired;
       });
       return;
     }
@@ -91,7 +92,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
                   Navigator.of(context).pop(); // Close dialog
                   Navigator.of(context).pop(true); // Close screen (notify success)
                 },
-                child: const Text('閉じる'),
+                child: const Text(AppLocalizations.of(context)!.close),
               ),
             ],
           ),
@@ -163,7 +164,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
               ),
               textAlign: TextAlign.center,
               decoration: InputDecoration(
-                labelText: '招待コード',
+                labelText: AppLocalizations.of(context)!.inviteCode,
                 hintText: 'GYMXXXXX',
                 hintStyle: TextStyle(
                   color: Colors.grey.shade400,

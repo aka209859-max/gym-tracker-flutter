@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import '../../models/partner_profile.dart';
 import '../../services/partner_search_service.dart';
@@ -31,38 +32,38 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
     'muscle_gain': '筋力増強',
     'weight_loss': '減量',
     'endurance': '持久力向上',
-    'flexibility': '柔軟性向上',
+    'flexibility': AppLocalizations.of(context)!.goalFlexibility,
   };
 
   final Map<String, String> _experienceLevels = {
     'beginner': '初心者',
     'intermediate': '中級者',
     'advanced': '上級者',
-    'expert': 'エキスパート',
+    'expert': AppLocalizations.of(context)!.levelExpert,
   };
 
   final Map<String, String> _genders = {
     'male': '男性',
     'female': '女性',
-    'other': 'その他',
+    'other': AppLocalizations.of(context)!.other,
     'not_specified': '未指定',
   };
 
   final Map<String, String> _weekDays = {
     'monday': '月',
     'tuesday': '火',
-    'wednesday': '水',
+    'wednesday': AppLocalizations.of(context)!.wed,
     'thursday': '木',
     'friday': '金',
     'saturday': '土',
-    'sunday': '日',
+    'sunday': AppLocalizations.of(context)!.sun,
   };
 
   final Map<String, String> _timeSlots = {
     'morning': '朝',
     'afternoon': '昼',
     'evening': '夕',
-    'night': '夜',
+    'night': AppLocalizations.of(context)!.night,
   };
 
   @override
@@ -132,7 +133,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('送信エラー: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.error)),
         );
       }
     } finally {
@@ -149,7 +150,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
     // 🔧 CRITICAL: 全体をエラーバウンダリでラップ
     return Scaffold(
       appBar: AppBar(
-        title: const Text('プロフィール詳細'),
+        title: const Text(AppLocalizations.of(context)!.navProfile),
       ),
       body: _buildBody(),
     );
@@ -171,7 +172,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildSection('自己紹介', widget.profile.bio ?? '自己紹介はありません'),
+                  _buildSection(AppLocalizations.of(context)!.bio, widget.profile.bio ?? '自己紹介はありません'),
                   const SizedBox(height: 24),
                   
                   _buildSection(
@@ -181,12 +182,12 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                             .where((goal) => goal != null && goal.isNotEmpty)
                             .map((goal) => _trainingGoals[goal] ?? goal)
                             .join(', ')
-                        : '未設定',
+                        : AppLocalizations.of(context)!.notSet,
                   ),
                   const SizedBox(height: 24),
                   
                   _buildSection(
-                    '経験レベル',
+                    AppLocalizations.of(context)!.experienceLevel,
                     _experienceLevels[widget.profile.experienceLevel] ?? widget.profile.experienceLevel,
                   ),
                   const SizedBox(height: 24),
@@ -197,7 +198,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                         ? widget.profile.preferredExercises
                             .where((ex) => ex != null && ex.isNotEmpty)
                             .join(', ')
-                        : '未設定',
+                        : AppLocalizations.of(context)!.notSet,
                   ),
                   const SizedBox(height: 24),
                   
@@ -208,7 +209,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                             .where((day) => day != null && day.isNotEmpty)
                             .map((day) => _weekDays[day] ?? day)
                             .join('、')
-                        : '未設定',
+                        : AppLocalizations.of(context)!.notSet,
                   ),
                   const SizedBox(height: 24),
                   
@@ -219,7 +220,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                             .where((slot) => slot != null && slot.isNotEmpty)
                             .map((slot) => _timeSlots[slot] ?? slot)
                             .join('、')
-                        : '未設定',
+                        : AppLocalizations.of(context)!.notSet,
                   ),
                   const SizedBox(height: 24),
                   
@@ -250,7 +251,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               const Icon(Icons.error_outline, size: 64, color: Colors.red),
               const SizedBox(height: 16),
               const Text(
-                'プロフィールの表示中にエラーが発生しました',
+                AppLocalizations.of(context)!.error,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
@@ -263,7 +264,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               const SizedBox(height: 24),
               ElevatedButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('戻る'),
+                child: const Text(AppLocalizations.of(context)!.back),
               ),
             ],
           ),
@@ -383,7 +384,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
             const SizedBox(height: 16),
             const Text('✨ Proプランの特典'),
             const SizedBox(height: 8),
-            _buildBenefitRow('パートナー検索 無制限'),
+            _buildBenefitRow(AppLocalizations.of(context)!.searchGym),
             _buildBenefitRow('マッチングリクエスト送信'),
             _buildBenefitRow('メッセージ機能'),
             _buildBenefitRow('AI機能 無制限使用'),
@@ -398,7 +399,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () {
@@ -550,7 +551,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                     : Icon(!_canSendRequest ? Icons.upgrade : Icons.send),
                 label: Text(
                   _isSending
-                      ? '送信中...'
+                      ? AppLocalizations.of(context)!.submitting
                       : !_canSendRequest
                           ? 'Proプランにアップグレード'
                           : 'リクエストを送る'

@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -62,7 +63,7 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
 
     if (password.isEmpty) {
       setState(() {
-        _errorMessage = 'パスワードを入力してください';
+        _errorMessage = AppLocalizations.of(context)!.passwordRequired;
       });
       return;
     }
@@ -79,12 +80,12 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
         });
       } catch (e) {
         setState(() {
-          _errorMessage = '認証情報の保存に失敗しました';
+          _errorMessage = AppLocalizations.of(context)!.save;
         });
       }
     } else {
       setState(() {
-        _errorMessage = 'パスワードが正しくありません';
+        _errorMessage = AppLocalizations.of(context)!.incorrectPassword;
       });
     }
   }
@@ -172,7 +173,7 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
                   controller: _passwordController,
                   decoration: InputDecoration(
                     labelText: 'パスワード',
-                    hintText: 'テスト用パスワードを入力',
+                    hintText: AppLocalizations.of(context)!.password,
                     prefixIcon: const Icon(Icons.vpn_key),
                     border: const OutlineInputBorder(),
                     errorText: _errorMessage,
@@ -193,7 +194,7 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
                       foregroundColor: Colors.white,
                     ),
                     child: const Text(
-                      'アクセス',
+                      AppLocalizations.of(context)!.gymAccess,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -230,7 +231,7 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        '現在β版のテスト運用中です。パスワードはNexaJP関係者のみに配布されています。',
+                        AppLocalizations.of(context)!.password,
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.blue[900],

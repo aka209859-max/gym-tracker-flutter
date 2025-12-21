@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import '../../models/training_partner.dart';
 import '../../services/training_partner_service.dart';
@@ -61,7 +62,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('エラー: $e'),
+            content: Text(AppLocalizations.of(context)!.error),
             backgroundColor: Colors.red,
           ),
         );
@@ -119,7 +120,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('エラー: $e'),
+            content: Text(AppLocalizations.of(context)!.error),
             backgroundColor: Colors.red,
           ),
         );
@@ -155,16 +156,16 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                   // 基本情報
                   _buildInfoSection('基本情報', [
                     if (widget.partner.location != null)
-                      _buildInfoRow(Icons.location_on, '居住地', widget.partner.location!),
+                      _buildInfoRow(Icons.location_on, AppLocalizations.of(context)!.residence, widget.partner.location!),
                     if (widget.partner.experienceLevel != null)
-                      _buildInfoRow(Icons.fitness_center, '経験レベル', widget.partner.experienceLevel!),
+                      _buildInfoRow(Icons.fitness_center, AppLocalizations.of(context)!.experienceLevel, widget.partner.experienceLevel!),
                   ]),
 
                   const SizedBox(height: 24),
 
                   // 目標
                   if (widget.partner.goals.isNotEmpty)
-                    _buildInfoSection('目標', [
+                    _buildInfoSection(AppLocalizations.of(context)!.goal, [
                       Wrap(
                         spacing: 8,
                         runSpacing: 8,
@@ -200,7 +201,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
 
                   // 自己紹介
                   if (widget.partner.bio != null && widget.partner.bio!.isNotEmpty)
-                    _buildInfoSection('自己紹介', [
+                    _buildInfoSection(AppLocalizations.of(context)!.bio, [
                       Text(
                         widget.partner.bio!,
                         style: const TextStyle(fontSize: 15, height: 1.6),

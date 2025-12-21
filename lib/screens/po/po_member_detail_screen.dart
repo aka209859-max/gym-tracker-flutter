@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../models/pt_member.dart';
@@ -18,7 +19,7 @@ class POMemberDetailScreen extends StatelessWidget {
             icon: const Icon(Icons.edit),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('編集機能は近日公開予定です')),
+                const SnackBar(content: Text(AppLocalizations.of(context)!.edit)),
               );
             },
           ),
@@ -40,9 +41,9 @@ class POMemberDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   _InfoRow(label: '名前', value: member.name),
-                  _InfoRow(label: 'メール', value: member.email),
+                  _InfoRow(label: AppLocalizations.of(context)!.email, value: member.email),
                   if (member.phoneNumber != null)
-                    _InfoRow(label: '電話番号', value: member.phoneNumber!),
+                    _InfoRow(label: AppLocalizations.of(context)!.gymPhone, value: member.phoneNumber!),
                   _InfoRow(
                     label: '入会日',
                     value: DateFormat('yyyy/MM/dd').format(member.joinedAt),
@@ -67,7 +68,7 @@ class POMemberDetailScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
-                  _InfoRow(label: 'プラン', value: member.planName),
+                  _InfoRow(label: AppLocalizations.of(context)!.upgradePlan, value: member.planName),
                   _InfoRow(
                     label: '総セッション数',
                     value: '${member.totalSessions}回',

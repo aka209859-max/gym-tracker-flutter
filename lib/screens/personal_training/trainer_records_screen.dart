@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../services/trainer_workout_service.dart';
@@ -33,7 +34,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null || user.email == null) {
-        throw Exception('ログインしていません');
+        throw Exception(AppLocalizations.of(context)!.login);
       }
 
       final records = await _service.getSharedWorkoutRecordsByEmail(
@@ -72,7 +73,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: const Text(
-          'パーソナルトレーニング',
+          AppLocalizations.of(context)!.personalTraining,
           style: TextStyle(
             color: Colors.white,
             fontSize: 18,
@@ -112,7 +113,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                   ),
                   const SizedBox(height: 12),
                   const Text(
-                    'パーソナルトレーニング',
+                    AppLocalizations.of(context)!.personalTraining,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -140,7 +141,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'メニュー',
+                    AppLocalizations.of(context)!.generateMenu,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

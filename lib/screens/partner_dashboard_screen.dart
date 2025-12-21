@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import '../models/partner_access.dart';
 import 'partner_campaign_editor_screen.dart';
@@ -100,7 +101,7 @@ class PartnerDashboardScreen extends StatelessWidget {
               items: [
                 _MenuItem(
                   icon: Icons.edit_note,
-                  title: 'キャンペーン編集',
+                  title: AppLocalizations.of(context)!.edit,
                   subtitle: '期間限定キャンペーンを即座に更新',
                   enabled: partnerAccess.hasPermission('editCampaign'),
                   onTap: () {
@@ -144,7 +145,7 @@ class PartnerDashboardScreen extends StatelessWidget {
               items: [
                 _MenuItem(
                   icon: Icons.fitness_center,
-                  title: '設備情報編集',
+                  title: AppLocalizations.of(context)!.edit,
                   subtitle: 'マシン・設備の詳細を更新',
                   enabled: partnerAccess.hasPermission('editFacilities'),
                   onTap: () {
@@ -161,7 +162,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                 _MenuItem(
                   icon: Icons.email,
                   title: 'ビジター予約設定',
-                  subtitle: '予約受付と通知メールアドレス設定',
+                  subtitle: AppLocalizations.of(context)!.settings,
                   enabled: partnerAccess.hasPermission('editFacilities'),
                   onTap: () {
                     Navigator.push(
@@ -176,7 +177,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                 ),
                 _MenuItem(
                   icon: Icons.access_time,
-                  title: '営業時間編集',
+                  title: AppLocalizations.of(context)!.edit,
                   subtitle: '営業時間・臨時休業のお知らせ',
                   enabled: partnerAccess.hasPermission('editHours'),
                   onTap: () {
@@ -198,7 +199,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                 _MenuItem(
                   icon: Icons.bar_chart,
                   title: '閲覧統計',
-                  subtitle: '店舗ページの閲覧数を確認',
+                  subtitle: AppLocalizations.of(context)!.confirm,
                   enabled: partnerAccess.hasPermission('viewAnalytics'),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -216,7 +217,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                 Navigator.pop(context);
               },
               icon: const Icon(Icons.logout),
-              label: const Text('ログアウト'),
+              label: const Text(AppLocalizations.of(context)!.logout),
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),

@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -69,7 +70,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
       }
 
       // ユーザー名を取得
-      String userName = 'ユーザー';
+      String userName = AppLocalizations.of(context)!.userReport;
       if (user.displayName != null && user.displayName!.isNotEmpty) {
         userName = user.displayName!;
       } else if (user.email != null) {
@@ -162,7 +163,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('閉じる'),
+            child: const Text(AppLocalizations.of(context)!.close),
           ),
           ElevatedButton(
             onPressed: () {
@@ -184,7 +185,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('レビューを投稿'),
+        title: const Text(AppLocalizations.of(context)!.submitReview),
         centerTitle: true,
       ),
       body: _isSubmitting
@@ -310,7 +311,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
 
                     // コメント入力
                     const Text(
-                      'コメント',
+                      AppLocalizations.of(context)!.comment,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -348,7 +349,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                           foregroundColor: Colors.white,
                         ),
                         child: const Text(
-                          'レビューを投稿',
+                          AppLocalizations.of(context)!.submitReview,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

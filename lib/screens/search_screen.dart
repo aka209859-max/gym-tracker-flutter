@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/foundation.dart';
@@ -211,7 +212,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       }
                     });
                   },
-                  tooltip: '現在地検索をクリア',
+                  tooltip: AppLocalizations.of(context)!.searchGym,
                 ),
               ],
             ],
@@ -219,7 +220,7 @@ class _SearchScreenState extends State<SearchScreen> {
           if (_currentPosition != null) ...[
             const SizedBox(height: 12),
             const Text(
-              '検索半径',
+              AppLocalizations.of(context)!.searchGym,
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
             Row(
@@ -263,7 +264,7 @@ class _SearchScreenState extends State<SearchScreen> {
           children: [
             CircularProgressIndicator(),
             SizedBox(height: 16),
-            Text('全国のジムを検索中...'),
+            Text(AppLocalizations.of(context)!.searchGym),
           ],
         ),
       );
@@ -292,7 +293,7 @@ class _SearchScreenState extends State<SearchScreen> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _applyFilters,
-              child: const Text('再検索'),
+              child: const Text(AppLocalizations.of(context)!.searchGym),
             ),
           ],
         ),
@@ -531,7 +532,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 ),
                                 SizedBox(width: 2),
                                 Text(
-                                  '広告',
+                                  AppLocalizations.of(context)!.noAds,
                                   style: TextStyle(
                                     fontSize: 10,
                                     fontWeight: FontWeight.bold,
@@ -772,7 +773,7 @@ class _SearchScreenState extends State<SearchScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('位置情報を取得できませんでした。東京駅周辺で検索します。'),
+              content: Text(AppLocalizations.of(context)!.searchGym),
               backgroundColor: Colors.orange,
               duration: Duration(seconds: 3),
             ),
@@ -929,7 +930,7 @@ class _SearchScreenState extends State<SearchScreen> {
     } catch (e) {
       if (kDebugMode) {
         print('❌ 検索エラー: $e');
-        print('   検索タイプ: ${_searchQuery.isNotEmpty ? "テキスト検索" : "GPS検索"}');
+        print('   検索タイプ: ${_searchQuery.isNotEmpty ? AppLocalizations.of(context)!.textSearch : "GPS検索"}');
         if (_currentPosition != null) {
           print('   GPS座標: ${_currentPosition!.latitude}, ${_currentPosition!.longitude}');
         }
@@ -941,11 +942,11 @@ class _SearchScreenState extends State<SearchScreen> {
       // ユーザーフレンドリーなエラーメッセージ
       String userMessage = AppLocalizations.of(context)!.searchFailed;
       if (e.toString().contains('ClientException')) {
-        userMessage = 'ネットワークエラー: API接続に失敗しました\n\nHTTPリファラー制限を確認してください';
+        userMessage = AppLocalizations.of(context)!.networkError;
       } else if (e.toString().contains('REQUEST_DENIED')) {
         userMessage = AppLocalizations.of(context)!.apiKeyError;
       } else if (e.toString().contains('ZERO_RESULTS')) {
-        userMessage = '検索結果が見つかりませんでした';
+        userMessage = AppLocalizations.of(context)!.searchGym;
       }
       
       setState(() {
@@ -956,7 +957,7 @@ class _SearchScreenState extends State<SearchScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('検索に失敗しました: $e'),
+            content: Text(AppLocalizations.of(context)!.searchGym),
             backgroundColor: Colors.red,
           ),
         );

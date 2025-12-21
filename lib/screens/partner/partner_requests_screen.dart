@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 /// パートナーリクエスト画面（未実装）
@@ -22,7 +23,7 @@ class PartnerRequestsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              '今後のアップデートで追加予定',
+              AppLocalizations.of(context)!.addWorkout,
               style: TextStyle(fontSize: 14, color: Colors.grey[600]),
             ),
           ],

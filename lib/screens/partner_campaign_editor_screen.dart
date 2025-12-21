@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -219,7 +220,7 @@ class _PartnerCampaignEditorScreenState
                   )
                 : const Icon(Icons.save),
             onPressed: _isSaving ? null : _saveCampaign,
-            tooltip: '保存',
+            tooltip: AppLocalizations.of(context)!.save,
           ),
         ],
       ),
@@ -247,7 +248,7 @@ class _PartnerCampaignEditorScreenState
                     decoration: const InputDecoration(
                       labelText: 'パートナー特典',
                       hintText: '入会金50%OFF・初月無料',
-                      helperText: '検索結果に常に表示される基本特典',
+                      helperText: AppLocalizations.of(context)!.searchGym,
                       border: OutlineInputBorder(),
                       prefixIcon: Icon(Icons.local_offer),
                     ),
@@ -387,7 +388,7 @@ class _PartnerCampaignEditorScreenState
                     OutlinedButton.icon(
                       onPressed: _pickBannerImage,
                       icon: const Icon(Icons.add_photo_alternate),
-                      label: const Text('バナー画像を追加'),
+                      label: const Text(AppLocalizations.of(context)!.addWorkout),
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 16),
                       ),

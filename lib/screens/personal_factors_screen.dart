@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import '../models/user_profile.dart';
 import '../services/advanced_fatigue_service.dart';
@@ -64,7 +65,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
       });
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('プロフィール読み込みエラー: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.error)),
         );
       }
     }
@@ -284,7 +285,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
               decoration: const InputDecoration(
                 labelText: 'トレーニング経験年数',
-                suffixText: '年',
+                suffixText: AppLocalizations.of(context)!.annualPrice,
                 helperText: '<1年: 1.10x, 3-5年: 0.95x, 5+年: 0.90x',
                 helperMaxLines: 2,
                 prefixIcon: Icon(Icons.fitness_center),
@@ -437,7 +438,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
           children: [
             Icon(Icons.help, color: Colors.blue),
             SizedBox(width: 8),
-            Text('個人要因設定ヘルプ'),
+            Text(AppLocalizations.of(context)!.settings),
           ],
         ),
         content: SingleChildScrollView(

@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -27,7 +28,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
   Future<void> _authenticate() async {
     if (_passwordController.text.trim().isEmpty) {
       setState(() {
-        _errorMessage = 'パスワードを入力してください';
+        _errorMessage = AppLocalizations.of(context)!.passwordRequired;
       });
       return;
     }
@@ -40,7 +41,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) {
-        throw Exception('ログインしていません');
+        throw Exception(AppLocalizations.of(context)!.login);
       }
 
       // ユーザー情報を取得
@@ -79,11 +80,11 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
 
       // パスワード検証
       if (correctPassword == null || correctPassword.isEmpty) {
-        throw Exception('パスワードが設定されていません。ジム店舗にお問い合わせください。');
+        throw Exception(AppLocalizations.of(context)!.settings);
       }
 
       if (_passwordController.text.trim() != correctPassword) {
-        throw Exception('パスワードが正しくありません');
+        throw Exception(AppLocalizations.of(context)!.incorrectPassword);
       }
 
       // 認証成功 - トレーナー記録画面へ遷移
@@ -111,7 +112,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
-          'パーソナルトレーニング',
+          AppLocalizations.of(context)!.personalTraining,
           style: TextStyle(
             color: Colors.white,
             fontSize: 18,
@@ -149,7 +150,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
 
               // タイトル
               const Text(
-                'パスワード認証',
+                AppLocalizations.of(context)!.password,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -162,7 +163,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
 
               // 説明文
               const Text(
-                'パーソナルトレーニング記録にアクセスするには\nパスワードが必要です',
+                AppLocalizations.of(context)!.personalTraining,
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.black54,
@@ -185,7 +186,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'メールアドレス',
+                      AppLocalizations.of(context)!.email,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.black54,
@@ -212,7 +213,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'パスワード',
+                    AppLocalizations.of(context)!.password,
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.black87,
@@ -225,7 +226,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
                     obscureText: _obscurePassword,
                     enabled: !_isLoading,
                     decoration: InputDecoration(
-                      hintText: 'ジム店舗から配布されたパスワード',
+                      hintText: AppLocalizations.of(context)!.password,
                       hintStyle: TextStyle(color: Colors.grey[400]),
                       filled: true,
                       fillColor: Colors.white,
@@ -339,7 +340,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
-                        'パスワードが分からない場合は、ジム店舗のスタッフにお問い合わせください。',
+                        AppLocalizations.of(context)!.password,
                         style: TextStyle(
                           color: Colors.blue[900],
                           fontSize: 13,

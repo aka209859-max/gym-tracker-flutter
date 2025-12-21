@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,7 +20,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('メッセージ'),
+        title: const Text(AppLocalizations.of(context)!.messaging),
         elevation: 2,
       ),
       body: StreamBuilder<List<Conversation>>(
@@ -91,7 +92,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
             ),
             const SizedBox(height: 24),
             Text(
-              'メッセージがありません',
+              AppLocalizations.of(context)!.noMessages,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -100,7 +101,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
             ),
             const SizedBox(height: 12),
             Text(
-              'トレーニングパートナーとメッセージを\n開始してみましょう',
+              AppLocalizations.of(context)!.trainingPartner,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14,
@@ -253,7 +254,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
     if (difference.inDays == 0) {
       return DateFormat('HH:mm').format(timestamp);
     } else if (difference.inDays == 1) {
-      return '昨日';
+      return AppLocalizations.of(context)!.yesterday;
     } else if (difference.inDays < 7) {
       return DateFormat('E', 'ja_JP').format(timestamp);
     } else {

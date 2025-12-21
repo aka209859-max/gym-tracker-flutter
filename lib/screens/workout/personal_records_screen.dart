@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -162,7 +163,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
             children: [
               CircularProgressIndicator(),
               SizedBox(height: 16),
-              Text('種目を読み込み中...'),
+              Text(AppLocalizations.of(context)!.loading),
             ],
           ),
         ),
@@ -282,7 +283,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
           exerciseName,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        subtitle: const Text('タップして推移を確認'),
+        subtitle: const Text(AppLocalizations.of(context)!.confirm),
         trailing: const Icon(Icons.chevron_right),
         onTap: () {
           // 詳細画面（グラフ）へ遷移
@@ -665,7 +666,7 @@ class _PeriodView extends StatelessWidget {
               child: Column(
                 children: [
                   const Text(
-                    '成長',
+                    AppLocalizations.of(context)!.executeGrowthPrediction,
                     style: TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                   const SizedBox(height: 4),
@@ -807,7 +808,7 @@ class ExerciseListScreen extends StatelessWidget {
                       exerciseName,
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: const Text('タップして推移を確認'),
+                    subtitle: const Text(AppLocalizations.of(context)!.confirm),
                     trailing: const Icon(Icons.chevron_right),
                     onTap: () {
                       // 詳細画面（グラフ）へ遷移

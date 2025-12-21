@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../services/chat_service.dart';
@@ -326,7 +327,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
     if (messageDate == today) {
       return '今日';
     } else if (messageDate == yesterday) {
-      return '昨日';
+      return AppLocalizations.of(context)!.yesterday;
     } else {
       return '${date.year}年${date.month}月${date.day}日';
     }

@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -66,7 +67,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
             userCredential = await FirebaseAuth.instance.signInAnonymously().timeout(
               const Duration(seconds: 15),
               onTimeout: () {
-                throw Exception('ログインタイムアウト（15秒）');
+                throw Exception(AppLocalizations.of(context)!.login);
               },
             );
             
@@ -173,7 +174,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
-                        'エラー詳細:\n${snapshot.error}',
+                        AppLocalizations.of(context)!.error,
                         style: const TextStyle(fontSize: 12, color: Colors.red),
                       ),
                     ),
@@ -297,7 +298,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('シェアに失敗しました: $e'),
+            content: Text(AppLocalizations.of(context)!.shareFailed),
             backgroundColor: Colors.red,
           ),
         );

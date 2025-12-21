@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -157,7 +158,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('開発者メニュー'),
+        title: const Text(AppLocalizations.of(context)!.developerMenu),
         backgroundColor: Colors.deepPurple,
       ),
       body: _isLoading
@@ -231,7 +232,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                                 IconButton(
                                   icon: const Icon(Icons.copy, color: Colors.green),
                                   onPressed: _copyUidToClipboard,
-                                  tooltip: 'コピー',
+                                  tooltip: AppLocalizations.of(context)!.copy,
                                 ),
                               ],
                             ),
@@ -247,7 +248,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                           ),
                         ] else
                           const Text(
-                            'ログインが必要です',
+                            AppLocalizations.of(context)!.signInRequired,
                             style: TextStyle(fontSize: 14, color: Colors.red),
                           ),
                       ],
@@ -266,7 +267,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          '現在のプラン',
+                          AppLocalizations.of(context)!.currentPlan,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -279,7 +280,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                             Text(
                               _currentPlan != null
                                   ? _subscriptionService.getPlanName(_currentPlan!)
-                                  : '読み込み中...',
+                                  : AppLocalizations.of(context)!.loadingWorkouts,
                               style: const TextStyle(fontSize: 18),
                             ),
                             if (_currentPlan != null)

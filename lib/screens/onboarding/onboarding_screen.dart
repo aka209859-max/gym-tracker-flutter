@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import '../../services/onboarding_service.dart';
 import '../../services/referral_service.dart';
@@ -73,7 +74,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('紹介コードエラー: ${e.toString()}'),
+              content: Text(AppLocalizations.of(context)!.error),
               backgroundColor: Colors.red,
               duration: const Duration(seconds: 3),
             ),
@@ -160,7 +161,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           const SizedBox(height: 40),
           const Text(
-            'あなたのトレーニング経験は？',
+            AppLocalizations.of(context)!.trainingExperience,
             style: TextStyle(
               color: Colors.white,
               fontSize: 28,
@@ -169,7 +170,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           const SizedBox(height: 12),
           Text(
-            'あなたに最適なメニューを作成します',
+            AppLocalizations.of(context)!.createOptimalMenu,
             style: TextStyle(
               color: Colors.white.withOpacity(0.7),
               fontSize: 16,
@@ -178,36 +179,36 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           const SizedBox(height: 40),
           _buildOptionCard(
             title: '初心者',
-            subtitle: 'トレーニングを始めたばかり',
+            subtitle: AppLocalizations.of(context)!.beginnerDesc,
             icon: Icons.self_improvement,
-            isSelected: _selectedTrainingLevel == '初心者',
+            isSelected: _selectedTrainingLevel == AppLocalizations.of(context)!.beginner,
             onTap: () {
               setState(() {
-                _selectedTrainingLevel = '初心者';
+                _selectedTrainingLevel = AppLocalizations.of(context)!.beginner;
               });
             },
           ),
           const SizedBox(height: 16),
           _buildOptionCard(
             title: '中級者',
-            subtitle: '半年〜2年程度の経験あり',
+            subtitle: AppLocalizations.of(context)!.intermediateDesc,
             icon: Icons.fitness_center,
-            isSelected: _selectedTrainingLevel == '中級者',
+            isSelected: _selectedTrainingLevel == AppLocalizations.of(context)!.intermediate,
             onTap: () {
               setState(() {
-                _selectedTrainingLevel = '中級者';
+                _selectedTrainingLevel = AppLocalizations.of(context)!.intermediate;
               });
             },
           ),
           const SizedBox(height: 16),
           _buildOptionCard(
-            title: '上級者',
+            title: AppLocalizations.of(context)!.advanced,
             subtitle: '2年以上の継続的な経験あり',
             icon: Icons.emoji_events,
-            isSelected: _selectedTrainingLevel == '上級者',
+            isSelected: _selectedTrainingLevel == AppLocalizations.of(context)!.advanced,
             onTap: () {
               setState(() {
-                _selectedTrainingLevel = '上級者';
+                _selectedTrainingLevel = AppLocalizations.of(context)!.advanced;
               });
             },
           ),
@@ -225,7 +226,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           const SizedBox(height: 40),
           const Text(
-            '主なトレーニング目的は？',
+            AppLocalizations.of(context)!.trainingGoal,
             style: TextStyle(
               color: Colors.white,
               fontSize: 28,
@@ -234,7 +235,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           const SizedBox(height: 12),
           Text(
-            '目的に合わせた最適なプログラムを提案します',
+            AppLocalizations.of(context)!.optimalProgram,
             style: TextStyle(
               color: Colors.white.withOpacity(0.7),
               fontSize: 16,
@@ -243,36 +244,36 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           const SizedBox(height: 40),
           _buildOptionCard(
             title: '筋肥大',
-            subtitle: '筋肉を大きくしたい',
+            subtitle: AppLocalizations.of(context)!.muscleGrowthDesc,
             icon: Icons.volunteer_activism,
-            isSelected: _selectedTrainingGoal == '筋肥大',
+            isSelected: _selectedTrainingGoal == AppLocalizations.of(context)!.muscleGrowth,
             onTap: () {
               setState(() {
-                _selectedTrainingGoal = '筋肥大';
+                _selectedTrainingGoal = AppLocalizations.of(context)!.muscleGrowth;
               });
             },
           ),
           const SizedBox(height: 16),
           _buildOptionCard(
             title: 'ダイエット',
-            subtitle: '体脂肪を減らしたい',
+            subtitle: AppLocalizations.of(context)!.dietGoalDesc,
             icon: Icons.trending_down,
-            isSelected: _selectedTrainingGoal == 'ダイエット',
+            isSelected: _selectedTrainingGoal == AppLocalizations.of(context)!.dietGoal,
             onTap: () {
               setState(() {
-                _selectedTrainingGoal = 'ダイエット';
+                _selectedTrainingGoal = AppLocalizations.of(context)!.dietGoal;
               });
             },
           ),
           const SizedBox(height: 16),
           _buildOptionCard(
             title: '健康維持',
-            subtitle: '健康的な身体を維持したい',
+            subtitle: AppLocalizations.of(context)!.healthMaintenanceDesc,
             icon: Icons.favorite,
-            isSelected: _selectedTrainingGoal == '健康維持',
+            isSelected: _selectedTrainingGoal == AppLocalizations.of(context)!.healthMaintenance,
             onTap: () {
               setState(() {
-                _selectedTrainingGoal = '健康維持';
+                _selectedTrainingGoal = AppLocalizations.of(context)!.healthMaintenance;
               });
             },
           ),
@@ -290,7 +291,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           const SizedBox(height: 40),
           const Text(
-            'トレーニング頻度は？',
+            AppLocalizations.of(context)!.trainingFrequency,
             style: TextStyle(
               color: Colors.white,
               fontSize: 28,
@@ -308,36 +309,36 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           const SizedBox(height: 40),
           _buildOptionCard(
             title: '週1-2回',
-            subtitle: 'まずは習慣化から',
+            subtitle: AppLocalizations.of(context)!.startHabitBuilding,
             icon: Icons.calendar_today,
-            isSelected: _selectedTrainingFrequency == '週1-2回',
+            isSelected: _selectedTrainingFrequency == AppLocalizations.of(context)!.frequency1to2,
             onTap: () {
               setState(() {
-                _selectedTrainingFrequency = '週1-2回';
+                _selectedTrainingFrequency = AppLocalizations.of(context)!.frequency1to2;
               });
             },
           ),
           const SizedBox(height: 16),
           _buildOptionCard(
             title: '週3-4回',
-            subtitle: '本格的にトレーニング',
+            subtitle: AppLocalizations.of(context)!.regularTraining,
             icon: Icons.calendar_month,
-            isSelected: _selectedTrainingFrequency == '週3-4回',
+            isSelected: _selectedTrainingFrequency == AppLocalizations.of(context)!.frequency3to4,
             onTap: () {
               setState(() {
-                _selectedTrainingFrequency = '週3-4回';
+                _selectedTrainingFrequency = AppLocalizations.of(context)!.frequency3to4;
               });
             },
           ),
           const SizedBox(height: 16),
           _buildOptionCard(
             title: '週5回以上',
-            subtitle: '毎日トレーニング',
+            subtitle: AppLocalizations.of(context)!.dailyTraining,
             icon: Icons.event_repeat,
-            isSelected: _selectedTrainingFrequency == '週5回以上',
+            isSelected: _selectedTrainingFrequency == AppLocalizations.of(context)!.frequency5plus,
             onTap: () {
               setState(() {
-                _selectedTrainingFrequency = '週5回以上';
+                _selectedTrainingFrequency = AppLocalizations.of(context)!.frequency5plus;
               });
             },
           ),
@@ -456,7 +457,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           const SizedBox(height: 40),
           const Text(
-            '準備完了！',
+            AppLocalizations.of(context)!.ready,
             style: TextStyle(
               color: Colors.white,
               fontSize: 32,
@@ -476,7 +477,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           // 機能紹介カード
           _buildFeatureCard(
             icon: Icons.fitness_center,
-            title: 'トレーニング記録',
+            title: AppLocalizations.of(context)!.workoutRecords,
             description: '簡単にワークアウトを記録・管理',
             delay: 0,
           ),
@@ -484,14 +485,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           _buildFeatureCard(
             icon: Icons.psychology,
             title: 'AI疲労度分析',
-            description: '科学的なデータで回復状態を把握',
+            description: AppLocalizations.of(context)!.aiAnalysisDesc,
             delay: 200,
           ),
           const SizedBox(height: 16),
           _buildFeatureCard(
             icon: Icons.emoji_events,
             title: '目標達成',
-            description: 'バッジやアチーブメントで継続をサポート',
+            description: AppLocalizations.of(context)!.achievementSupport,
             delay: 400,
           ),
           const SizedBox(height: 32),
@@ -700,7 +701,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
           ),
           child: Text(
-            _currentPage < 3 ? '次へ' : 'はじめる', // 🎯 4ページに変更
+            _currentPage < 3 ? '次へ' : AppLocalizations.of(context)!.getStarted, // 🎯 4ページに変更
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,

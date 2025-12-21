@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,7 +18,7 @@ class PODashboardScreen extends StatefulWidget {
 }
 
 class _PODashboardScreenState extends State<PODashboardScreen> {
-  String _gymName = '読み込み中...';
+  String _gymName = AppLocalizations.of(context)!.loadingWorkouts;
   int _totalMembers = 0;
   int _activeMembers = 0;
   int _dormantMembers = 0;
@@ -34,7 +35,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) {
-        throw Exception('ユーザーが認証されていません');
+        throw Exception(AppLocalizations.of(context)!.userNotAuthenticated);
       }
 
       if (kDebugMode) {
@@ -71,7 +72,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
       final dormantMembers = totalMembers - activeMembers;
 
       setState(() {
-        _gymName = poData['gymName'] ?? '不明';
+        _gymName = poData['gymName'] ?? AppLocalizations.of(context)!.unknown;
         _totalMembers = totalMembers;
         _activeMembers = activeMembers;
         _dormantMembers = dormantMembers;
@@ -95,7 +96,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('データ読み込みエラー: $e'),
+            content: Text(AppLocalizations.of(context)!.dataLoadError),
             backgroundColor: Colors.red,
           ),
         );
@@ -123,7 +124,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('ログアウトエラー: $e'),
+            content: Text(AppLocalizations.of(context)!.error),
             backgroundColor: Colors.red,
           ),
         );
@@ -142,7 +143,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: _logout,
-            tooltip: 'ログアウト',
+            tooltip: AppLocalizations.of(context)!.logout,
           ),
         ],
       ),
@@ -219,7 +220,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
                     ),
                     const SizedBox(height: 12),
                     _buildFeatureButton(
-                      title: '分析',
+                      title: AppLocalizations.of(context)!.analysis,
                       subtitle: 'KPIグラフと統計データ',
                       icon: Icons.analytics_outlined,
                       onTap: () {

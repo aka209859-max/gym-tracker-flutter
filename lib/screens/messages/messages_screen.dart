@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,7 +20,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: const Text(
-          'メッセージ',
+          AppLocalizations.of(context)!.messaging,
           style: TextStyle(
             color: Colors.white,
             fontSize: 18,
@@ -72,7 +73,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
           Icon(Icons.login, size: 80, color: Colors.grey[400]),
           const SizedBox(height: 16),
           Text(
-            'ログインが必要です',
+            AppLocalizations.of(context)!.signInRequired,
             style: TextStyle(fontSize: 18, color: Colors.grey[600]),
           ),
         ],
@@ -93,7 +94,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            'パートナー検索から相手を探してみましょう',
+            AppLocalizations.of(context)!.searchGym,
             style: TextStyle(fontSize: 14, color: Colors.grey[500]),
           ),
         ],
@@ -119,7 +120,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
           child: const Icon(Icons.person, color: Colors.white),
         ),
         title: Text(
-          'パートナー',
+          AppLocalizations.of(context)!.findPartner,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         subtitle: Text(

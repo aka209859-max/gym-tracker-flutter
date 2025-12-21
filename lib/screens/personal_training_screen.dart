@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 /// パーソナルトレーニング画面
@@ -14,7 +15,7 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('パーソナルトレーニング'),
+        title: const Text(AppLocalizations.of(context)!.personalTraining),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -48,7 +49,7 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
             ),
             const SizedBox(height: 16),
             const Text(
-              'パーソナルトレーニング',
+              AppLocalizations.of(context)!.personalTraining,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -74,7 +75,7 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          'メニュー',
+          AppLocalizations.of(context)!.generateMenu,
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
@@ -88,7 +89,7 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
           icon: Icons.calendar_today,
           iconColor: Colors.blue,
           title: '予約状況',
-          subtitle: '現在の予約を確認',
+          subtitle: AppLocalizations.of(context)!.confirm,
           onTap: () {
             // TODO: 予約状況画面へ遷移
             ScaffoldMessenger.of(context).showSnackBar(

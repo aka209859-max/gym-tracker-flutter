@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,7 +30,7 @@ class RMCalculatorScreen extends StatelessWidget {
             ),
             tabs: const [
               Tab(icon: Icon(Icons.calculate, size: 24), text: '1RM計算'),
-              Tab(icon: Icon(Icons.fitness_center, size: 24), text: 'プレート計算'),
+              Tab(icon: Icon(Icons.fitness_center, size: 24), text: AppLocalizations.of(context)!.plateCalculator),
             ],
           ),
         ),
@@ -255,7 +256,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                                         borderRadius: BorderRadius.circular(4),
                                       ),
                                       child: const Text(
-                                        '最大',
+                                        AppLocalizations.of(context)!.intensityMaximal,
                                         style: TextStyle(
                                           fontSize: 10,
                                           color: Colors.white,
@@ -455,7 +456,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
     if (_selectedPlates.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('利用可能なプレートを1つ以上選択してください'),
+          content: Text(AppLocalizations.of(context)!.selectExercise),
           backgroundColor: Colors.red,
         ),
       );
@@ -566,7 +567,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                   
                   // クイック設定プリセット
                   const Text(
-                    'クイック設定',
+                    AppLocalizations.of(context)!.settings,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -596,7 +597,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                   
                   // プレート個別選択
                   const Text(
-                    'プレート選択（タップでON/OFF）',
+                    AppLocalizations.of(context)!.selectExercise,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,

@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -166,7 +167,7 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('週次レポート設定'),
+        title: const Text(AppLocalizations.of(context)!.settings),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -218,7 +219,7 @@ class _ReportCard extends StatelessWidget {
               children: [
                 // 実績サマリー
                 _buildSection(
-                  '実績',
+                  AppLocalizations.of(context)!.achievementsAndGoals,
                   [
                     _InfoRow(
                       icon: Icons.fitness_center,

@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import '../services/favorites_service.dart';
@@ -90,12 +91,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('お気に入りから削除'),
+        title: const Text(AppLocalizations.of(context)!.removeFromFavorites),
         content: Text('「${gym.name}」をお気に入りから削除しますか？'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
@@ -103,7 +104,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               backgroundColor: Colors.red,
               foregroundColor: Colors.white,
             ),
-            child: const Text('削除'),
+            child: const Text(AppLocalizations.of(context)!.delete),
           ),
         ],
       ),
@@ -130,12 +131,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('お気に入り'),
+        title: const Text(AppLocalizations.of(context)!.favorite),
         actions: [
           if (_favoriteGyms.isNotEmpty)
             IconButton(
               icon: const Icon(Icons.delete_sweep),
-              tooltip: 'すべて削除',
+              tooltip: AppLocalizations.of(context)!.deleteAll,
               onPressed: _clearAllFavorites,
             ),
         ],
@@ -170,7 +171,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           ),
           const SizedBox(height: 12),
           Text(
-            'ジム詳細画面で♡ボタンをタップして\nお気に入りに追加できます',
+            AppLocalizations.of(context)!.addWorkout,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14,
@@ -316,7 +317,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                               Icon(Icons.open_in_new, size: 12, color: Colors.blue),
                               SizedBox(width: 4),
                               Text(
-                                '料金・設備を確認',
+                                AppLocalizations.of(context)!.confirm,
                                 style: TextStyle(
                                   fontSize: 11,
                                   fontWeight: FontWeight.bold,
@@ -335,7 +336,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               // 削除ボタン
               IconButton(
                 icon: const Icon(Icons.delete_outline, color: Colors.red),
-                tooltip: '削除',
+                tooltip: AppLocalizations.of(context)!.delete,
                 onPressed: () => _removeFavorite(gym),
               ),
             ],
@@ -353,11 +354,11 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('すべて削除'),
-        content: const Text('お気に入りをすべて削除しますか？\nこの操作は取り消せません。'),
+        content: const Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
@@ -365,7 +366,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               backgroundColor: Colors.red,
               foregroundColor: Colors.white,
             ),
-            child: const Text('すべて削除'),
+            child: const Text(AppLocalizations.of(context)!.deleteAll),
           ),
         ],
       ),
@@ -377,7 +378,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('お気に入りをすべて削除しました'),
+            content: Text(AppLocalizations.of(context)!.delete),
             backgroundColor: Colors.green,
           ),
         );

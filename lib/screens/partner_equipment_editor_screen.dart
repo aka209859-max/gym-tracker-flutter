@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/gym.dart';
@@ -136,7 +137,7 @@ class _PartnerEquipmentEditorScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('設備・マシン情報編集'),
+        title: const Text(AppLocalizations.of(context)!.edit),
         backgroundColor: Colors.amber[700],
         actions: [
           if (!_isLoading)
@@ -219,7 +220,7 @@ class _PartnerEquipmentEditorScreenState
                         const SizedBox(width: 8),
                         const Expanded(
                           child: Text(
-                            '設置しているマシンの種類と台数を設定してください。\nユーザーが設備情報を確認できます。',
+                            AppLocalizations.of(context)!.confirm,
                             style: TextStyle(fontSize: 13),
                           ),
                         ),
@@ -317,7 +318,7 @@ class _PartnerEquipmentEditorScreenState
                             )
                           : const Icon(Icons.save),
                       label: const Text(
-                        '設備情報を保存',
+                        AppLocalizations.of(context)!.save,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

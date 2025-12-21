@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import '../utils/strength_calculators.dart';
 
@@ -17,7 +18,7 @@ class CalculatorsScreen extends StatelessWidget {
           bottom: const TabBar(
             tabs: [
               Tab(icon: Icon(Icons.calculate), text: '1RM計算'),
-              Tab(icon: Icon(Icons.fitness_center), text: 'プレート計算'),
+              Tab(icon: Icon(Icons.fitness_center), text: AppLocalizations.of(context)!.plateCalculator),
             ],
           ),
         ),
@@ -149,7 +150,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                   controller: _repsController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                    labelText: '回数',
+                    labelText: AppLocalizations.of(context)!.repsCount,
                     border: OutlineInputBorder(),
                     prefixIcon: Icon(Icons.repeat),
                   ),
@@ -168,7 +169,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: const Text('計算', style: TextStyle(fontSize: 16)),
+                  child: const Text(AppLocalizations.of(context)!.calculate, style: TextStyle(fontSize: 16)),
                 ),
               ),
               const SizedBox(width: 12),
@@ -177,7 +178,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                 ),
-                child: const Text('クリア'),
+                child: const Text(AppLocalizations.of(context)!.clear),
               ),
             ],
           ),
@@ -194,7 +195,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                 child: Column(
                   children: [
                     const Text(
-                      '推定1RM',
+                      AppLocalizations.of(context)!.estimatedMax,
                       style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
                     const SizedBox(height: 8),
@@ -399,7 +400,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: const Text('計算', style: TextStyle(fontSize: 16)),
+                  child: const Text(AppLocalizations.of(context)!.calculate, style: TextStyle(fontSize: 16)),
                 ),
               ),
               const SizedBox(width: 12),
@@ -408,7 +409,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                 ),
-                child: const Text('クリア'),
+                child: const Text(AppLocalizations.of(context)!.clear),
               ),
             ],
           ),

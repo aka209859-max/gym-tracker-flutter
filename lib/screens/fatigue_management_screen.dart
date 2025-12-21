@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
@@ -58,7 +59,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
     if (!_isEnabled) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('疲労管理システムをONにしてください'),
+          content: Text(AppLocalizations.of(context)!.enableFatigueManagement),
           backgroundColor: Colors.orange,
         ),
       );
@@ -355,7 +356,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
     if (_isLoading) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('疲労管理システム'),
+          title: const Text(AppLocalizations.of(context)!.fatigueManagementSystem),
         ),
         body: const Center(child: CircularProgressIndicator()),
       );
@@ -363,7 +364,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('疲労管理システム'),
+        title: const Text(AppLocalizations.of(context)!.fatigueManagementSystem),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -418,11 +419,11 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                   color: _isEnabled ? Colors.green : Colors.grey,
                 ),
                 title: const Text(
-                  '疲労管理システム',
+                  AppLocalizations.of(context)!.fatigueManagementSystem,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Text(
-                  _isEnabled ? '有効' : '無効',
+                  _isEnabled ? '有効' : AppLocalizations.of(context)!.invalid,
                   style: TextStyle(
                     color: _isEnabled ? Colors.green : Colors.grey,
                     fontWeight: FontWeight.bold,
@@ -492,7 +493,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
-                        '疲労管理システムをONにしてください',
+                        AppLocalizations.of(context)!.enableFatigueManagement,
                         style: TextStyle(
                           fontSize: 13,
                           color: Colors.grey[800],
@@ -516,7 +517,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                 ),
                 title: const Text('本日のトレーニング'),
                 subtitle: Text(
-                  _hasWorkoutToday ? '記録済み（分析完了）' : 'まだ記録がありません',
+                  _hasWorkoutToday ? AppLocalizations.of(context)!.purchaseCompleted : 'まだ記録がありません',
                   style: TextStyle(
                     color: _hasWorkoutToday ? Colors.green : Colors.grey,
                   ),

@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../services/trial_service.dart';
@@ -200,10 +201,10 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
   /// 条件リスト
   Widget _buildConditionsList() {
     final conditionLabels = {
-      'account_created': 'アカウント登録完了',
+      'account_created': AppLocalizations.of(context)!.purchaseCompleted,
       'profile_completed': 'プロフィール設定完了',
       'first_workout_logged': 'トレーニング記録1回以上',
-      'gym_searched': 'ジム検索1回以上',
+      'gym_searched': AppLocalizations.of(context)!.searchGym,
     };
 
     return Card(
@@ -310,7 +311,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      'すべての条件を達成すると自動的にトライアル開始',
+                      AppLocalizations.of(context)!.allExercises,
                       style: TextStyle(
                         fontSize: 13,
                         color: Colors.amber[900],

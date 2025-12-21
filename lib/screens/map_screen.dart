@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
@@ -73,7 +74,7 @@ class _MapScreenState extends State<MapScreen> {
           ],
         ),
         content: const Text(
-          'あなたの近くのジムを検索するために位置情報を使用します。\n\n'
+          AppLocalizations.of(context)!.searchGym
           '※位置情報は検索のみに使用され、保存されません。',
           style: TextStyle(fontSize: 14),
         ),
@@ -152,7 +153,7 @@ class _MapScreenState extends State<MapScreen> {
                   Text(
                     kIsWeb 
                       ? 'ブラウザで位置情報を許可してください'
-                      : '端末の位置情報設定を確認してください',
+                      : AppLocalizations.of(context)!.confirm,
                     style: const TextStyle(fontSize: 12),
                   ),
                   const SizedBox(height: 4),
@@ -312,7 +313,7 @@ class _MapScreenState extends State<MapScreen> {
         if (searchSucceeded && gyms.isNotEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('周辺の${gyms.length}件のジムを検索しました'),
+              content: Text(AppLocalizations.of(context)!.searchGym),
               backgroundColor: Colors.green,
               duration: const Duration(seconds: 2),
             ),
@@ -328,7 +329,7 @@ class _MapScreenState extends State<MapScreen> {
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: const Text('ジム検索に失敗しました。もう一度お試しください'),
+              content: const Text(AppLocalizations.of(context)!.searchGym),
               backgroundColor: Colors.red,
               duration: const Duration(seconds: 3),
               action: SnackBarAction(
@@ -391,7 +392,7 @@ class _MapScreenState extends State<MapScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('検索に失敗しました: $e'),
+            content: Text(AppLocalizations.of(context)!.searchGym),
             backgroundColor: Colors.red,
           ),
         );
@@ -440,7 +441,7 @@ class _MapScreenState extends State<MapScreen> {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      '現在地周辺のジムを検索するには、下の「現在地」ボタンをタップ',
+                      AppLocalizations.of(context)!.searchGym,
                       style: TextStyle(
                         fontSize: 13,
                         color: Colors.blue[700],
@@ -467,7 +468,7 @@ class _MapScreenState extends State<MapScreen> {
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      '現在地を取得中... 近くのジムを検索しています',
+                      AppLocalizations.of(context)!.searchGym,
                       style: TextStyle(
                         fontSize: 13,
                         color: Colors.green[700],
@@ -541,7 +542,7 @@ class _MapScreenState extends State<MapScreen> {
             ElevatedButton.icon(
               onPressed: _acquireLocationAndSearch,
               icon: const Icon(Icons.refresh),
-              label: const Text('再検索'),
+              label: const Text(AppLocalizations.of(context)!.searchGym),
             ),
           ],
         ),
@@ -618,7 +619,7 @@ class _MapScreenState extends State<MapScreen> {
         children: [
           const Icon(Icons.people, size: 20),
           const SizedBox(width: 8),
-          const Text('混雑度フィルター:', style: TextStyle(fontWeight: FontWeight.bold)),
+          const Text(AppLocalizations.of(context)!.workoutTypeFilter, style: TextStyle(fontWeight: FontWeight.bold)),
           const SizedBox(width: 16),
           Expanded(
             child: Slider(
@@ -705,7 +706,7 @@ class _MapScreenState extends State<MapScreen> {
                                 ),
                                 SizedBox(width: 2),
                                 Text(
-                                  '広告',
+                                  AppLocalizations.of(context)!.noAds,
                                   style: TextStyle(
                                     fontSize: 10,
                                     fontWeight: FontWeight.bold,
@@ -800,11 +801,11 @@ class _MapScreenState extends State<MapScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('フィルター設定'),
+        title: const Text(AppLocalizations.of(context)!.workoutTypeFilter),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('混雑度の上限を選択'),
+            const Text(AppLocalizations.of(context)!.selectExercise),
             const SizedBox(height: 16),
             StatefulBuilder(
               builder: (context, setState) {

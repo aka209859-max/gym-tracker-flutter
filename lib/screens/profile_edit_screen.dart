@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:image_picker/image_picker.dart';
@@ -33,15 +34,15 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   // 都道府県リスト
   static const List<String> _prefectures = [
     '北海道',
-    '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県',
+    '青森県', '岩手県', '宮城県', '秋田県', '山形県', AppLocalizations.of(context)!.prefectureFukushima,
     '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県',
-    '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県',
+    '新潟県', '富山県', AppLocalizations.of(context)!.prefectureIshikawa, '福井県', '山梨県', '長野県',
     '岐阜県', '静岡県', '愛知県', '三重県',
-    '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県',
+    '滋賀県', '京都府', AppLocalizations.of(context)!.prefectureOsaka, '兵庫県', '奈良県', '和歌山県',
     '鳥取県', '島根県', '岡山県', '広島県', '山口県',
-    '徳島県', '香川県', '愛媛県', '高知県',
+    '徳島県', AppLocalizations.of(context)!.prefectureKagawa, '愛媛県', '高知県',
     '福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県',
-    '沖縄県',
+    AppLocalizations.of(context)!.prefectureOkinawa,
   ];
 
   @override
@@ -128,7 +129,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         // 成功フィードバック
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('画像を選択しました'),
+            content: Text(AppLocalizations.of(context)!.selectExercise),
             backgroundColor: Colors.green,
             duration: Duration(seconds: 2),
           ),
@@ -211,14 +212,14 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       if (mounted) {
         Navigator.pop(context, true);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('プロフィールを保存しました')),
+          const SnackBar(content: Text(AppLocalizations.of(context)!.save)),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('エラーが発生しました: $e'),
+            content: Text(AppLocalizations.of(context)!.errorGeneric),
             backgroundColor: Colors.red,
           ),
         );
@@ -245,7 +246,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           ],
         ),
         content: const Text(
-          'プロフィール編集機能はProプラン限定です。\n'
+          AppLocalizations.of(context)!.edit
           'Proプランにアップグレードしてご利用ください。',
         ),
         actions: [
@@ -368,7 +369,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     DropdownButtonFormField<String>(
                       value: _selectedLocation,
                       decoration: const InputDecoration(
-                        labelText: '居住地',
+                        labelText: AppLocalizations.of(context)!.residence,
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.location_on),
                       ),
@@ -415,7 +416,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           SizedBox(width: 8),
                           Expanded(
                             child: Text(
-                              'プロフィール情報は他のユーザーに公開されます',
+                              AppLocalizations.of(context)!.navProfile,
                               style: TextStyle(fontSize: 12),
                             ),
                           ),

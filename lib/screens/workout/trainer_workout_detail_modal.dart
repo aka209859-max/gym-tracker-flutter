@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -30,7 +31,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) {
-        throw Exception('ログインしていません');
+        throw Exception(AppLocalizations.of(context)!.login);
       }
 
       // workout_logsコレクションに保存
@@ -73,7 +74,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('保存に失敗しました: ${e.toString()}'),
+            content: Text(AppLocalizations.of(context)!.save),
             backgroundColor: Colors.red,
           ),
         );
@@ -215,7 +216,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                     if (widget.record.bodyMetrics != null) ...[
                       const SizedBox(height: 24),
                       const Text(
-                        '体重・体組成',
+                        AppLocalizations.of(context)!.bodyMeasurement,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -233,11 +234,11 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                         child: Column(
                           children: [
                             if (widget.record.bodyMetrics!.weight != null)
-                              _buildMetricRow('体重', '${widget.record.bodyMetrics!.weight}kg'),
+                              _buildMetricRow(AppLocalizations.of(context)!.weight, '${widget.record.bodyMetrics!.weight}kg'),
                             if (widget.record.bodyMetrics!.bodyFat != null)
-                              _buildMetricRow('体脂肪率', '${widget.record.bodyMetrics!.bodyFat}%'),
+                              _buildMetricRow(AppLocalizations.of(context)!.bodyFat, '${widget.record.bodyMetrics!.bodyFat}%'),
                             if (widget.record.bodyMetrics!.muscleMass != null)
-                              _buildMetricRow('筋肉量', '${widget.record.bodyMetrics!.muscleMass}kg'),
+                              _buildMetricRow(AppLocalizations.of(context)!.muscleMass, '${widget.record.bodyMetrics!.muscleMass}kg'),
                           ],
                         ),
                       ),
@@ -288,7 +289,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                               ),
                             )
                           : const Icon(Icons.save),
-                      label: Text(_isSaving ? '保存中...' : 'この記録を保存する'),
+                      label: Text(_isSaving ? '保存中...' : AppLocalizations.of(context)!.save),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange,
                         foregroundColor: Colors.white,
@@ -317,7 +318,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                           const SizedBox(width: 8),
                           const Expanded(
                             child: Text(
-                              '保存すると、この記録があなたのワークアウト記録に追加されます。元のトレーナー記録は残ります。',
+                              AppLocalizations.of(context)!.save,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.black54,

@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -105,7 +106,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('画像アップロードエラー: $e'),
+            content: Text(AppLocalizations.of(context)!.error),
             backgroundColor: Colors.red,
           ),
         );
@@ -153,7 +154,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('お知らせを保存しました'),
+            content: Text(AppLocalizations.of(context)!.save),
             backgroundColor: Colors.green,
           ),
         );
@@ -163,7 +164,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('保存エラー: $e'),
+            content: Text(AppLocalizations.of(context)!.saveFailed),
             backgroundColor: Colors.red,
           ),
         );
@@ -177,7 +178,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.announcement == null ? 'お知らせ投稿' : 'お知らせ編集'),
+        title: Text(widget.announcement == null ? 'お知らせ投稿' : AppLocalizations.of(context)!.edit),
         actions: [
           TextButton.icon(
             onPressed: _isSaving ? null : _saveAnnouncement,
@@ -188,7 +189,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
                 : const Icon(Icons.send),
-            label: const Text('投稿'),
+            label: const Text(AppLocalizations.of(context)!.postSubmitted),
             style: TextButton.styleFrom(
               foregroundColor: Colors.white,
             ),
@@ -330,7 +331,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
                       : const Icon(Icons.add_photo_alternate),
-                  label: Text(_isUploading ? 'アップロード中...' : '画像を選択'),
+                  label: Text(_isUploading ? 'アップロード中...' : AppLocalizations.of(context)!.selectExercise),
                   style: OutlinedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 50),
                   ),
@@ -339,7 +340,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
               
               // 有効期限設定
               const Text(
-                '有効期限',
+                AppLocalizations.of(context)!.expiryDate,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

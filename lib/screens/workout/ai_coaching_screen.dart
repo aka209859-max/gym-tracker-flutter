@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -195,7 +196,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
             ),
             const SizedBox(height: 12),
             const Text(
-              'トレーニングしたい部位を選択すると、AIが最適なメニューを提案します。',
+              AppLocalizations.of(context)!.selectExercise,
               style: TextStyle(fontSize: 14),
             ),
             const SizedBox(height: 12),
@@ -245,7 +246,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          'トレーニング部位を選択',
+          AppLocalizations.of(context)!.selectExercise,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -474,7 +475,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
 
       // 2. 箇条書き処理（* → ・）
       if (line.trim().startsWith('*')) {
-        line = line.replaceFirst(RegExp(r'^\*\s*'), '・');
+        line = line.replaceFirst(RegExp(r'^\*\s*'), AppLocalizations.of(context)!.aiPromptTargetBodyPart);
       }
 
       // 3. 太字処理（**text** → 太字）
@@ -549,10 +550,10 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
         ConsoleLogger.debug('広告視聴結果: $watchedAd', tag: 'AI_COACHING');
         
         if (watchedAd != true) {
-          ConsoleLogger.warn('広告視聴キャンセルまたは失敗', tag: 'AI_COACHING');
+          ConsoleLogger.warn(AppLocalizations.of(context)!.cancel, tag: 'AI_COACHING');
           return; // キャンセルまたは失敗
         }
-        ConsoleLogger.info('広告視聴成功 → AI機能実行へ', tag: 'AI_COACHING');
+        ConsoleLogger.info(AppLocalizations.of(context)!.success, tag: 'AI_COACHING');
         // 広告視聴成功 → クレジット付与済み → 処理続行
       } else {
         // 月3回上限到達 → サブスク誘導
@@ -629,7 +630,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
 
         final duration = DateTime.now().difference(startTime);
         AppLogger.performance('AI Menu Generation', duration);
-        AppLogger.info('メニュー生成成功', tag: 'AI_COACHING');
+        AppLogger.info(AppLocalizations.of(context)!.success, tag: 'AI_COACHING');
       } else {
         AppLogger.warning('Gemini API エラー: ${response.statusCode} - フォールバックを使用', tag: 'AI_COACHING');
         throw Exception('API Error: ${response.statusCode}');
@@ -638,7 +639,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
       AppLogger.warning('タイムアウト - 科学的根拠ベースのメニューを生成', tag: 'AI_COACHING');
       _generateFallbackMenu(bodyParts);
     } catch (e) {
-      AppLogger.error('メニュー生成エラー - フォールバックを使用', tag: 'AI_COACHING', error: e);
+      AppLogger.error(AppLocalizations.of(context)!.error, tag: 'AI_COACHING', error: e);
       _generateFallbackMenu(bodyParts);
     }
   }
@@ -853,7 +854,7 @@ ${bodyParts.join('、')}
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('メニューを保存しました'),
+            content: Text(AppLocalizations.of(context)!.save),
             backgroundColor: Colors.green,
           ),
         );
@@ -868,7 +869,7 @@ ${bodyParts.join('、')}
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('保存に失敗しました: $e'),
+            content: Text(AppLocalizations.of(context)!.save),
             backgroundColor: Colors.red,
           ),
         );
@@ -893,7 +894,7 @@ ${bodyParts.join('、')}
               ),
               SizedBox(height: 8),
               Text(
-                'トレーニングしたい部位を選択すると、Gemini 2.0 Flash AIが最適なメニューを提案します。',
+                AppLocalizations.of(context)!.selectExercise,
                 style: TextStyle(fontSize: 13),
               ),
               SizedBox(height: 16),
@@ -903,7 +904,7 @@ ${bodyParts.join('、')}
               ),
               SizedBox(height: 8),
               Text(
-                '気に入ったメニューは保存して、後から見返すことができます。',
+                AppLocalizations.of(context)!.save,
                 style: TextStyle(fontSize: 13),
               ),
               SizedBox(height: 16),
@@ -913,7 +914,7 @@ ${bodyParts.join('、')}
               ),
               SizedBox(height: 8),
               Text(
-                '過去の提案を確認して、トレーニングのバリエーションを増やしましょう。',
+                AppLocalizations.of(context)!.confirm,
                 style: TextStyle(fontSize: 13),
               ),
             ],
@@ -1056,7 +1057,7 @@ ${bodyParts.join('、')}
               backgroundColor: Colors.blue.shade700,
               foregroundColor: Colors.white,
             ),
-            child: const Text('追加購入する'),
+            child: const Text(AppLocalizations.of(context)!.addWorkout),
           ),
         ],
       ),

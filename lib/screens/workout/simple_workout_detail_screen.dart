@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -240,7 +241,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
               ] else ...[
                 const SizedBox(height: 8),
                 Text(
-                  'タップしてメモを追加',
+                  AppLocalizations.of(context)!.addWorkout,
                   style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                 ),
               ],
@@ -401,13 +402,13 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('メモを保存しました'), backgroundColor: Colors.green),
+          const SnackBar(content: Text(AppLocalizations.of(context)!.save), backgroundColor: Colors.green),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('メモの保存に失敗しました: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.save)),
         );
       }
     }
@@ -425,13 +426,13 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('メモを削除しました'), backgroundColor: Colors.green),
+          const SnackBar(content: Text(AppLocalizations.of(context)!.delete), backgroundColor: Colors.green),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('メモの削除に失敗しました: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.delete)),
         );
       }
     }
@@ -467,7 +468,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
         .toList();
     
     // 削除ターゲットの情報
-    final targetInfo = '削除対象: "$exerciseName" (${exerciseName.runtimeType}, len=${exerciseName.length})';
+    final targetInfo = AppLocalizations.of(context)!.delete$exerciseName" (${exerciseName.runtimeType}, len=${exerciseName.length})';
     
     final afterDeleteSets = sets.where((set) {
       if (set is Map<String, dynamic>) {

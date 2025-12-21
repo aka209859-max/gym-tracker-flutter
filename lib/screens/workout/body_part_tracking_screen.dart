@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -101,7 +102,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
 
           if (snapshot.hasError) {
             return Center(
-              child: Text('エラーが発生しました: ${snapshot.error}'),
+              child: Text(AppLocalizations.of(context)!.errorGeneric),
             );
           }
 

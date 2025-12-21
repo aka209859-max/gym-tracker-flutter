@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../services/campaign_service.dart';
@@ -33,7 +34,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
     'Nike Training Club',
     'MyFitnessPal',
     'Strava',
-    'その他',
+    AppLocalizations.of(context)!.other,
   ];
 
   String? _selectedApp;
@@ -49,7 +50,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
       return;
     }
 
-    final appName = _selectedApp == 'その他'
+    final appName = _selectedApp == AppLocalizations.of(context)!.other
         ? _appNameController.text
         : _selectedApp!;
 
@@ -82,7 +83,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('エラーが発生しました: $e'),
+            content: Text(AppLocalizations.of(context)!.errorGeneric),
             backgroundColor: Colors.red,
           ),
         );
@@ -204,7 +205,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          '乗り換え前のアプリを選択',
+          AppLocalizations.of(context)!.selectExercise,
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
@@ -234,7 +235,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                         });
                       },
                     )),
-                if (_selectedApp == 'その他') ...[
+                if (_selectedApp == AppLocalizations.of(context)!.other) ...[
                   const SizedBox(height: 16),
                   TextFormField(
                     controller: _appNameController,
@@ -244,7 +245,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) {
-                      if (_selectedApp == 'その他' &&
+                      if (_selectedApp == AppLocalizations.of(context)!.other &&
                           (value == null || value.isEmpty)) {
                         return 'アプリ名を入力してください';
                       }
@@ -282,9 +283,9 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
               ],
             ),
             const SizedBox(height: 12),
-            _buildConditionItem('1️⃣', '乗り換え前アプリ名を登録'),
+            _buildConditionItem('1️⃣', AppLocalizations.of(context)!.emailNotRegistered),
             _buildConditionItem('2️⃣', 'SNSで体験をシェア（テンプレート提供）'),
-            _buildConditionItem('3️⃣', '自動確認後、即座に特典適用'),
+            _buildConditionItem('3️⃣', AppLocalizations.of(context)!.confirm),
             const SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.all(12),

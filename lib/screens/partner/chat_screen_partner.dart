@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -86,7 +87,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('メッセージ送信エラー: $e'), backgroundColor: Colors.red),
+          SnackBar(content: Text(AppLocalizations.of(context)!.error), backgroundColor: Colors.red),
         );
       }
     } finally {
@@ -101,7 +102,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('ブロックの確認'),
+        title: const Text(AppLocalizations.of(context)!.confirm),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,7 +121,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
@@ -150,7 +151,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('エラー: $e'), backgroundColor: Colors.red),
+          SnackBar(content: Text(AppLocalizations.of(context)!.error), backgroundColor: Colors.red),
         );
       }
     }
@@ -158,27 +159,27 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
 
   /// 通報ダイアログ
   Future<void> _showReportDialog() async {
-    String selectedReason = '不適切な内容';
+    String selectedReason = AppLocalizations.of(context)!.inappropriateContent;
     final TextEditingController detailsController = TextEditingController();
 
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => StatefulBuilder(
         builder: (context, setState) => AlertDialog(
-          title: const Text('通報する'),
+          title: const Text(AppLocalizations.of(context)!.report),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('通報理由を選択してください:'),
+                const Text(AppLocalizations.of(context)!.selectExercise),
                 const SizedBox(height: 12),
                 ...[
-                  '不適切な内容',
+                  AppLocalizations.of(context)!.inappropriateContent,
                   'スパム・宣伝',
                   'ハラスメント',
                   'なりすまし',
-                  'その他',
+                  AppLocalizations.of(context)!.other,
                 ].map((reason) {
                   return RadioListTile<String>(
                     title: Text(reason),
@@ -208,11 +209,11 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context, false),
-              child: const Text('キャンセル'),
+              child: const Text(AppLocalizations.of(context)!.cancel),
             ),
             ElevatedButton(
               onPressed: () => Navigator.pop(context, true),
-              child: const Text('送信'),
+              child: const Text(AppLocalizations.of(context)!.sendMessage),
             ),
           ],
         ),
@@ -241,7 +242,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('エラー: $e'), backgroundColor: Colors.red),
+          SnackBar(content: Text(AppLocalizations.of(context)!.error), backgroundColor: Colors.red),
         );
       }
     }
@@ -278,7 +279,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
                   children: [
                     Icon(Icons.flag, size: 20),
                     SizedBox(width: 8),
-                    Text('通報する'),
+                    Text(AppLocalizations.of(context)!.report),
                   ],
                 ),
               ),
@@ -300,7 +301,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
-                  return Center(child: Text('エラー: ${snapshot.error}'));
+                  return Center(child: Text(AppLocalizations.of(context)!.snapshotError));
                 }
 
                 if (!snapshot.hasData) {
