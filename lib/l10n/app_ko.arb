@@ -567,5 +567,27 @@
   "trainingFrequency": "트레이닝 빈도는?",
   "startHabitBuilding": "습관 만들기부터",
   "regularTraining": "본격적인 트레이닝",
-  "dailyTraining": "매일 트레이닝"
+  "dailyTraining": "매일 트레이닝",
+  
+  "aiCoaching": "AI 코칭",
+  "aiScientificCoaching": "AI 과학적 코칭",
+  "aiThinking": "AI가 생각 중...",
+  "aiAnalyzing": "AI 분석 중...",
+  "aiGenerating": "AI가 최적의 프로그램을 분석 중...",
+  "aiPredictionComplete": "AI 예측 완료!",
+  "aiAnalysisComplete": "AI 분석 완료!",
+  "aiGenerationComplete": "AI 생성 완료!",
+  "aiFatigueAnalysisWelcome": "AI 피로도 분석에 오신 것을 환영합니다!",
+  "aiGrowthPrediction": "AI 성장 예측",
+  "aiFatigueAnalysis": "AI 피로도 분석",
+  "scientificPrediction": "40개 이상의 논문 기반 과학적 예측",
+  "generateMenu": "메뉴 생성",
+  "executeGrowthPrediction": "성장 예측 실행",
+  "enterOneRM": "1RM을 입력하세요",
+  "sets": "세트",
+  "setCount": "{count}세트",
+  "minutes": "분",
+  "minuteCount": "{count}분",
+  "reps": "회",
+  "repCount": "{count}회"
 }

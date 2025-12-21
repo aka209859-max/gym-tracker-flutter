@@ -1020,5 +1020,155 @@
   "optimalProgram": "目的に合わせた最適なプログラムを提案します",
   "createOptimalMenu": "あなたに最適なメニューを作成します",
   "achievementSupport": "バッジやアチーブメントで継続をサポート",
-  "earnedAiCredits": "✨ AI無料利用×3回を獲得！"
+  "earnedAiCredits": "✨ AI無料利用×3回を獲得！",
+  
+  "aiCoaching": "AIコーチング",
+  "aiScientificCoaching": "AI科学的コーチング",
+  "aiThinking": "AIが考え中...",
+  "aiAnalyzing": "AI分析中...",
+  "aiGenerating": "AIが最適なプログラムを分析中...",
+  "aiAnalyzingScientific": "AIが科学的根拠に基づいて分析中...",
+  "aiPredictionComplete": "AI予測完了!",
+  "aiAnalysisComplete": "AI分析完了!",
+  "aiGenerationComplete": "AI生成完了!",
+  "aiFatigueAnalysisWelcome": "AI疲労度分析へようこそ！",
+  "aiGrowthPrediction": "AI成長予測",
+  "aiDetailedAnalysis": "AI詳細分析",
+  "aiFatigueAnalysis": "AI疲労度分析",
+  "aiPoweredTraining": "AI powered トレーニング提案",
+  "scientificPrediction": "40本以上の論文に基づく科学的予測",
+  "fourMonthPrediction": "4ヶ月後の予測",
+  "generateMenu": "メニューを生成",
+  "executeGrowthPrediction": "成長予測を実行",
+  "weightRatio": "Weight Ratio（体重比）",
+  "enterOneRM": "1RMを入力してください",
+  "enterAtLeast1kg": "1kg以上を入力してください",
+  "max500kg": "500kg以下を入力してください",
+  "rpeModerate": "RPE {rpe}（余裕あり）",
+  "@rpeModerate": {
+    "placeholders": {
+      "rpe": {"type": "int"}
+    }
+  },
+  "rpeOptimal": "RPE {rpe}（適正）",
+  "@rpeOptimal": {
+    "placeholders": {
+      "rpe": {"type": "int"}
+    }
+  },
+  "rpeMaximal": "RPE {rpe}（限界）",
+  "@rpeMaximal": {
+    "placeholders": {
+      "rpe": {"type": "int"}
+    }
+  },
+  "sets": "セット",
+  "setCount": "{count}セット",
+  "@setCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "minutes": "分",
+  "minuteCount": "{count}分",
+  "@minuteCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "reps": "回",
+  "repCount": "{count}回",
+  "@repCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  
+  "aiPromptUserInfo": "【ユーザー情報】",
+  "aiPromptTargetBodyPart": "・対象部位：{bodyPart}",
+  "@aiPromptTargetBodyPart": {
+    "placeholders": {
+      "bodyPart": {"type": "String"}
+    }
+  },
+  "aiPromptCurrentOneRM": "・現在の1RM：{weight}kg",
+  "@aiPromptCurrentOneRM": {
+    "placeholders": {
+      "weight": {"type": "String"}
+    }
+  },
+  "aiPromptTrainingLevel": "・トレーニングレベル：{level}",
+  "@aiPromptTrainingLevel": {
+    "placeholders": {
+      "level": {"type": "String"}
+    }
+  },
+  "aiPromptFrequency": "・現在の頻度：{bodyPart} を週{frequency}回トレーニング",
+  "@aiPromptFrequency": {
+    "placeholders": {
+      "bodyPart": {"type": "String"},
+      "frequency": {"type": "int"}
+    }
+  },
+  "aiPromptGender": "・性別：{gender}",
+  "@aiPromptGender": {
+    "placeholders": {
+      "gender": {"type": "String"}
+    }
+  },
+  "aiPromptAge": "・年齢：{age}歳",
+  "@aiPromptAge": {
+    "placeholders": {
+      "age": {"type": "int"}
+    }
+  },
+  "aiPromptPredictionResult": "【予測結果】",
+  "aiPromptPredictionPeriod": "・予測期間：{months}ヶ月",
+  "@aiPromptPredictionPeriod": {
+    "placeholders": {
+      "months": {"type": "int"}
+    }
+  },
+  "aiPromptPredictedOneRM": "・予測1RM：{weight}kg",
+  "@aiPromptPredictedOneRM": {
+    "placeholders": {
+      "weight": {"type": "int"}
+    }
+  },
+  "aiPromptGrowthRate": "・成長率：月+{rate}%",
+  "@aiPromptGrowthRate": {
+    "placeholders": {
+      "rate": {"type": "int"}
+    }
+  },
+  "aiPromptWeeklyGrowthRate": "・週次成長率：週+{rate}%",
+  "@aiPromptWeeklyGrowthRate": {
+    "placeholders": {
+      "rate": {"type": "String"}
+    }
+  },
+  "aiPromptRecommendedProgram": "【推奨プログラム】",
+  "aiPromptRecommendedFrequency": "・{bodyPart} のトレーニング：週{frequency}回",
+  "@aiPromptRecommendedFrequency": {
+    "placeholders": {
+      "bodyPart": {"type": "String"},
+      "frequency": {"type": "int"}
+    }
+  },
+  "aiPromptRecommendedVolume": "・{bodyPart} のボリューム：週{volume}セット",
+  "@aiPromptRecommendedVolume": {
+    "placeholders": {
+      "bodyPart": {"type": "String"},
+      "volume": {"type": "int"}
+    }
+  },
+  "aiPromptEffectSize": "・効果量：ES={effectSize}",
+  "@aiPromptEffectSize": {
+    "placeholders": {
+      "effectSize": {"type": "String"}
+    }
+  },
+  "aiResponseScientificBasis": "## 成長予測の科学的根拠",
+  "aiResponseActionPlan": "## 推奨アクションプラン",
+  "aiResponseSuccessKeys": "## 成功のカギ"
 }
