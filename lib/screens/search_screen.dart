@@ -62,7 +62,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ジム検索'),
+        title: const Text(AppLocalizations.of(context)!.gymSearch),
         elevation: 2,
       ),
       body: Column(
@@ -99,7 +99,7 @@ class _SearchScreenState extends State<SearchScreen> {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'ジム名・地域で検索...',
+                hintText: AppLocalizations.of(context)!.searchPlaceholder,
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: _searchQuery.isNotEmpty
                     ? IconButton(
@@ -162,7 +162,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     height: 20,
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
-                : const Text('検索'),
+                : const Text(AppLocalizations.of(context)!.search),
           ),
         ],
       ),
@@ -191,7 +191,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         )
                       : const Icon(Icons.my_location),
                   label: Text(_currentPosition == null
-                      ? 'GPS位置を取得'
+                      ? AppLocalizations.of(context)!.getGpsLocation
                       : 'GPS: ${_currentPosition!.latitude.toStringAsFixed(4)}, ${_currentPosition!.longitude.toStringAsFixed(4)}'),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 12),
@@ -314,7 +314,7 @@ class _SearchScreenState extends State<SearchScreen> {
             Text(
               _currentPosition != null || _searchQuery.isNotEmpty
                   ? '検索結果が見つかりません'
-                  : 'GPS位置検索またはテキスト検索を開始してください',
+                  : AppLocalizations.of(context)!.startGpsOrTextSearch,
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey.shade600,
@@ -429,7 +429,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         }
                       : null,
                   icon: const Icon(Icons.chevron_left),
-                  label: const Text('前へ'),
+                  label: const Text(AppLocalizations.of(context)!.previous),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue[600],
                     foregroundColor: Colors.white,
@@ -456,7 +456,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         }
                       : null,
                   icon: const Icon(Icons.chevron_right),
-                  label: const Text('次へ'),
+                  label: const Text(AppLocalizations.of(context)!.next),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue[600],
                     foregroundColor: Colors.white,
@@ -636,7 +636,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             Icon(Icons.check_circle, size: 12, color: Colors.white),
                             SizedBox(width: 4),
                             Text(
-                              'ビジター可',
+                              AppLocalizations.of(context)!.visitorWelcome,
                               style: TextStyle(
                                 fontSize: 11,
                                 fontWeight: FontWeight.bold,
@@ -939,11 +939,11 @@ class _SearchScreenState extends State<SearchScreen> {
       }
       
       // ユーザーフレンドリーなエラーメッセージ
-      String userMessage = 'ジムの検索に失敗しました';
+      String userMessage = AppLocalizations.of(context)!.searchFailed;
       if (e.toString().contains('ClientException')) {
         userMessage = 'ネットワークエラー: API接続に失敗しました\n\nHTTPリファラー制限を確認してください';
       } else if (e.toString().contains('REQUEST_DENIED')) {
-        userMessage = 'APIキーエラー: アクセスが拒否されました';
+        userMessage = AppLocalizations.of(context)!.apiKeyError;
       } else if (e.toString().contains('ZERO_RESULTS')) {
         userMessage = '検索結果が見つかりませんでした';
       }

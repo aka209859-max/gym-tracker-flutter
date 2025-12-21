@@ -98,9 +98,9 @@ class _AchievementsScreenState extends State<AchievementsScreen>
           unselectedLabelColor: Colors.white70,
           indicatorColor: Colors.white,
           tabs: const [
-            Tab(text: 'すべて'),
+            Tab(text: AppLocalizations.of(context)!.all),
             Tab(text: '継続'),
-            Tab(text: '総重量'),
+            Tab(text: AppLocalizations.of(context)!.totalWeight),
             Tab(text: 'PR'),
           ],
         ),
@@ -424,11 +424,11 @@ class _AchievementsScreenState extends State<AchievementsScreen>
   String _getCategoryUnit(BadgeCategory category) {
     switch (category) {
       case BadgeCategory.streak:
-        return '日';
+        return AppLocalizations.of(context)!.sun;
       case BadgeCategory.totalWeight:
         return 'kg';
       case BadgeCategory.prCount:
-        return '回';
+        return AppLocalizations.of(context)!.reps;
     }
   }
 }

@@ -126,12 +126,12 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   // 無料プラン
                   _buildPlanCard(
                     type: SubscriptionType.free,
-                    name: '無料プラン',
+                    name: AppLocalizations.of(context)!.freePlan,
                     price: '¥0',
                     priceUnit: '永久無料',
                     features: [
                       '全国のジム検索',
-                      'GPS位置検索',
+                      AppLocalizations.of(context)!.gpsSearch,
                       '基本情報閲覧',
                       '混雑度表示',
                       '営業時間確認',
@@ -153,7 +153,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     type: SubscriptionType.premium,
                     name: 'Premium',
                     price: _getPriceForPlan(SubscriptionType.premium),
-                    priceUnit: _isYearlySelected ? '年額' : '月額',
+                    priceUnit: _isYearlySelected ? AppLocalizations.of(context)!.yearly : AppLocalizations.of(context)!.monthly,
                     monthlyEquivalent: _isYearlySelected ? '月換算 ¥400' : null,
                     discount: _isYearlySelected ? '20% OFF' : null,
                     savings: _isYearlySelected ? '¥1,200お得！' : null,
@@ -177,7 +177,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     type: SubscriptionType.pro,
                     name: 'Pro',
                     price: _getPriceForPlan(SubscriptionType.pro),
-                    priceUnit: _isYearlySelected ? '年額' : '月額',
+                    priceUnit: _isYearlySelected ? AppLocalizations.of(context)!.yearly : AppLocalizations.of(context)!.monthly,
                     monthlyEquivalent: _isYearlySelected ? '月換算 ¥667' : null,
                     discount: _isYearlySelected ? '32% OFF' : null,
                     savings: _isYearlySelected ? '¥3,760お得！' : null,
@@ -241,7 +241,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             ),
             const SizedBox(height: 12),
             const Text(
-              '現在のプラン',
+              AppLocalizations.of(context)!.currentPlan,
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
             const SizedBox(height: 4),
@@ -320,7 +320,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   TextButton.icon(
                     onPressed: _showDowngradeDialog,
                     icon: const Icon(Icons.arrow_downward, size: 20),
-                    label: const Text('プラン変更'),
+                    label: const Text(AppLocalizations.of(context)!.changePlan),
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.blue,
                     ),
@@ -347,7 +347,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             _buildToggleButton(
-              label: '月額',
+              label: AppLocalizations.of(context)!.monthly,
               isSelected: !_isYearlySelected,
               onTap: () {
                 setState(() {
@@ -619,7 +619,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                               side: BorderSide(color: color, width: 2),
                             ),
                             child: const Text(
-                              '現在のプラン',
+                              AppLocalizations.of(context)!.currentPlan,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -683,15 +683,15 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            _buildComparisonRow('ジム検索', true, true, true),
-            _buildComparisonRow('GPS位置検索', true, true, true),
+            _buildComparisonRow(AppLocalizations.of(context)!.gymSearch, true, true, true),
+            _buildComparisonRow(AppLocalizations.of(context)!.gpsSearch, true, true, true),
             _buildComparisonRow('混雑度表示', true, true, true),
-            _buildComparisonRow('トレーニング記録', true, true, true),
+            _buildComparisonRow(AppLocalizations.of(context)!.trainingLog, true, true, true),
             _buildComparisonRow('広告表示なし', false, true, true),
             _buildComparisonRow('お気に入り保存', false, true, true),
             _buildComparisonRow('レビュー投稿', false, true, true),
             _buildComparisonRow('成長予測・効果分析', false, true, true),
-            _buildComparisonRow('パートナー検索', false, false, true),
+            _buildComparisonRow(AppLocalizations.of(context)!.partnerSearch, false, false, true),
             _buildComparisonRow('メッセージング', false, false, true),
           ],
         ),
@@ -944,7 +944,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   Future<void> _changePlan(SubscriptionType newPlan) async {
     // 年額/月額に応じた価格を取得
     final price = _getPriceForPlan(newPlan);
-    final billingPeriod = _isYearlySelected ? '年額' : '月額';
+    final billingPeriod = _isYearlySelected ? AppLocalizations.of(context)!.yearly : AppLocalizations.of(context)!.monthly;
     
     final confirmed = await showDialog<bool>(
       context: context,
@@ -957,7 +957,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
@@ -1045,7 +1045,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('購入がキャンセルされました'),
+              content: Text(AppLocalizations.of(context)!.purchaseCancelled),
               backgroundColor: Colors.grey,
             ),
           );
@@ -1212,7 +1212,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'AI追加パック',
+                      AppLocalizations.of(context)!.aiAddonPack,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -1220,7 +1220,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'AI使用回数を追加購入',
+                      AppLocalizations.of(context)!.purchaseAiAddon,
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey[600],
@@ -1266,7 +1266,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     
     // 現在のプランに応じてダウングレード先を決定
     final String targetPlan = _currentPlan == SubscriptionType.pro ? 'premium' : 'free';
-    final String targetPlanName = targetPlan == 'premium' ? 'Premium' : '無料プラン';
+    final String targetPlanName = targetPlan == 'premium' ? 'Premium' : AppLocalizations.of(context)!.freePlan;
 
     showDialog(
       context: context,
@@ -1363,7 +1363,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('キャンセル'),
+              child: const Text(AppLocalizations.of(context)!.cancel),
             ),
             ElevatedButton(
               onPressed: () async {
@@ -1382,7 +1382,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       backgroundColor: Colors.blue,
                       duration: const Duration(seconds: 5),
                       action: SnackBarAction(
-                        label: 'ヘルプ',
+                        label: AppLocalizations.of(context)!.help,
                         textColor: Colors.white,
                         onPressed: () {
                           // App Store設定へのリンクを表示
@@ -1418,7 +1418,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         'AI機能が月20回→月3回に制限',
         'お気に入り無制限→制限あり',
         '詳細な混雑度統計',
-        'ジムレビュー投稿',
+        AppLocalizations.of(context)!.postGymReviews,
         '広告が表示されます',
       ];
     }
@@ -1456,7 +1456,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('閉じる'),
+            child: const Text(AppLocalizations.of(context)!.readLess),
           ),
         ],
       ),

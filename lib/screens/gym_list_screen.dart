@@ -37,7 +37,7 @@ class _GymListScreenState extends State<GymListScreen> {
                   children: [
                     Icon(Icons.star, size: 20),
                     SizedBox(width: 8),
-                    Text('評価順'),
+                    Text(AppLocalizations.of(context)!.sortByRating),
                   ],
                 ),
               ),
@@ -47,7 +47,7 @@ class _GymListScreenState extends State<GymListScreen> {
                   children: [
                     Icon(Icons.people, size: 20),
                     SizedBox(width: 8),
-                    Text('混雑度順'),
+                    Text(AppLocalizations.of(context)!.sortByCrowd),
                   ],
                 ),
               ),
@@ -57,7 +57,7 @@ class _GymListScreenState extends State<GymListScreen> {
                   children: [
                     Icon(Icons.attach_money, size: 20),
                     SizedBox(width: 8),
-                    Text('料金順'),
+                    Text(AppLocalizations.of(context)!.sortByPrice),
                   ],
                 ),
               ),

@@ -37,7 +37,7 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
       builder: (context, authSnapshot) {
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            appBar: AppBar(title: const Text('週次レポート')),
+            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.weeklyReport)),
             body: const Center(
               child: CircularProgressIndicator(),
             ),
@@ -47,16 +47,16 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
         final user = authSnapshot.data;
         if (user == null) {
           return Scaffold(
-            appBar: AppBar(title: const Text('週次レポート')),
+            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.weeklyReport)),
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('ログインに失敗しました'),
+                  const Text(AppLocalizations.of(context)!.loginError),
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _autoLoginIfNeeded,
-                    child: const Text('再試行'),
+                    child: const Text(AppLocalizations.of(context)!.tryAgain),
                   ),
                 ],
               ),
@@ -72,7 +72,7 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
   Widget _buildMainContent(User user) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('週次レポート'),
+        title: const Text(AppLocalizations.of(context)!.weeklyReport),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -183,7 +183,7 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('閉じる'),
+            child: const Text(AppLocalizations.of(context)!.readLess),
           ),
         ],
       ),
@@ -222,7 +222,7 @@ class _ReportCard extends StatelessWidget {
                   [
                     _InfoRow(
                       icon: Icons.fitness_center,
-                      label: 'トレーニング回数',
+                      label: AppLocalizations.of(context)!.workoutCount,
                       value: '${report.totalWorkouts}回',
                     ),
                     _InfoRow(

@@ -27,14 +27,14 @@ class AICoachingScreen extends StatefulWidget {
 class _AICoachingScreenState extends State<AICoachingScreen> {
   // 部位選択状態（有酸素・初心者追加）
   final Map<String, bool> _selectedBodyParts = {
-    '胸': false,
-    '背中': false,
-    '脚': false,
-    '肩': false,
-    '腕': false,
+    AppLocalizations.of(context)!.bodyPartChest: false,
+    AppLocalizations.of(context)!.bodyPartBack: false,
+    AppLocalizations.of(context)!.bodyPartLegs: false,
+    AppLocalizations.of(context)!.bodyPartShoulders: false,
+    AppLocalizations.of(context)!.bodyPartArms: false,
     '腹筋': false,
-    '有酸素': false,
-    '初心者': false,
+    AppLocalizations.of(context)!.exerciseCardio: false,
+    AppLocalizations.of(context)!.levelBeginner: false,
   };
 
   // UI状態
@@ -105,7 +105,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
       builder: (context, authSnapshot) {
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            appBar: AppBar(title: const Text('AIコーチング')),
+            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.aiCoaching)),
             body: const Center(child: CircularProgressIndicator()),
           );
         }
@@ -113,8 +113,8 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
         final user = authSnapshot.data;
         if (user == null) {
           return Scaffold(
-            appBar: AppBar(title: const Text('AIコーチング')),
-            body: const Center(child: Text('ログインに失敗しました')),
+            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.aiCoaching)),
+            body: const Center(child: Text(AppLocalizations.of(context)!.loginError)),
           );
         }
 
@@ -126,7 +126,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
   Widget _buildMainContent(User user) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('AIコーチング'),
+        title: const Text(AppLocalizations.of(context)!.aiCoaching),
         actions: [
           IconButton(
             icon: const Icon(Icons.info_outline),
@@ -185,7 +185,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
                 Icon(Icons.auto_awesome, color: Colors.blue.shade700),
                 const SizedBox(width: 8),
                 const Text(
-                  'AI powered トレーニング提案',
+                  AppLocalizations.of(context)!.aiPoweredTraining,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -257,7 +257,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
           runSpacing: 8,
           children: _selectedBodyParts.keys.map((part) {
             final isSelected = _selectedBodyParts[part]!;
-            final isBeginner = part == '初心者';
+            final isBeginner = part == AppLocalizations.of(context)!.levelBeginner;
             
             return FilterChip(
               label: Row(
@@ -318,7 +318,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
                 ),
               )
             : const Icon(Icons.auto_awesome),
-        label: Text(_isGenerating ? 'AIが考え中...' : 'メニューを生成'),
+        label: Text(_isGenerating ? AppLocalizations.of(context)!.aiThinking : AppLocalizations.of(context)!.generateMenu),
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 16),
           backgroundColor: Colors.blue.shade700,
@@ -349,7 +349,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
                 IconButton(
                   icon: const Icon(Icons.save),
                   onPressed: _saveMenu,
-                  tooltip: '保存',
+                  tooltip: AppLocalizations.of(context)!.saveWorkout,
                 ),
               ],
             ),
@@ -645,8 +645,8 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
 
   /// フォールバックメニュー生成（AI失敗時）
   void _generateFallbackMenu(List<String> bodyParts) {
-    final isBeginner = bodyParts.contains('初心者');
-    final targetParts = bodyParts.where((part) => part != '初心者').toList();
+    final isBeginner = bodyParts.contains(AppLocalizations.of(context)!.levelBeginner);
+    final targetParts = bodyParts.where((part) => part != AppLocalizations.of(context)!.levelBeginner).toList();
     
     final buffer = StringBuffer();
     buffer.writeln('# 科学的根拠に基づくトレーニングメニュー\n');
@@ -708,12 +708,12 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
   /// 部位別エクササイズを追加
   void _addBodyPartExercises(StringBuffer buffer, String bodyPart, bool isBeginner) {
     final exercises = {
-      '胸': ['ベンチプレス', 'ダンベルフライ', 'ケーブルクロスオーバー'],
-      '背中': ['デッドリフト', 'ラットプルダウン', 'ベントオーバーロウ'],
-      '脚': ['スクワット', 'レッグプレス', 'レッグカール'],
-      '肩': ['ショルダープレス', 'サイドレイズ', 'リアデルトフライ'],
-      '腕': ['バーベルカール', 'トライセプスエクステンション', 'ハンマーカール'],
-      '腹筋': ['クランチ', 'プランク', 'レッグレイズ'],
+      AppLocalizations.of(context)!.bodyPartChest: [AppLocalizations.of(context)!.exerciseBenchPress, 'ダンベルフライ', 'ケーブルクロスオーバー'],
+      AppLocalizations.of(context)!.bodyPartBack: [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, AppLocalizations.of(context)!.exerciseBentOverRow],
+      AppLocalizations.of(context)!.bodyPartLegs: [AppLocalizations.of(context)!.exerciseSquat, AppLocalizations.of(context)!.exerciseLegPress, AppLocalizations.of(context)!.exerciseLegCurl],
+      AppLocalizations.of(context)!.bodyPartShoulders: [AppLocalizations.of(context)!.exerciseShoulderPress, AppLocalizations.of(context)!.exerciseSideRaise, AppLocalizations.of(context)!.exerciseRearDeltFly],
+      AppLocalizations.of(context)!.bodyPartArms: [AppLocalizations.of(context)!.exerciseBarbellCurl, AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseHammerCurl],
+      '腹筋': [AppLocalizations.of(context)!.exerciseCrunch, AppLocalizations.of(context)!.exercisePlank, AppLocalizations.of(context)!.exerciseLegRaise],
     };
     
     final targetExercises = exercises[bodyPart] ?? ['基本種目'];
@@ -735,10 +735,10 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
   /// プロンプト構築
   String _buildPrompt(List<String> bodyParts) {
     // 初心者モード判定
-    final isBeginner = bodyParts.contains('初心者');
+    final isBeginner = bodyParts.contains(AppLocalizations.of(context)!.levelBeginner);
     
     // 初心者以外の部位を抽出
-    final targetParts = bodyParts.where((part) => part != '初心者').toList();
+    final targetParts = bodyParts.where((part) => part != AppLocalizations.of(context)!.levelBeginner).toList();
     
     if (isBeginner) {
       // 初心者向け専用プロンプト
@@ -922,7 +922,7 @@ ${bodyParts.join('、')}
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('閉じる'),
+            child: const Text(AppLocalizations.of(context)!.readLess),
           ),
         ],
       ),
@@ -985,7 +985,7 @@ ${bodyParts.join('、')}
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('閉じる'),
+            child: const Text(AppLocalizations.of(context)!.readLess),
           ),
           ElevatedButton(
             onPressed: () {
@@ -1041,7 +1041,7 @@ ${bodyParts.join('、')}
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('閉じる'),
+            child: const Text(AppLocalizations.of(context)!.readLess),
           ),
           ElevatedButton(
             onPressed: () {

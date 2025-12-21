@@ -22,11 +22,11 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
 
   // 部位の日本語名マッピング
   static const Map<String, String> bodyPartNames = {
-    'chest': '胸',
-    'back': '背中',
-    'legs': '脚',
-    'shoulders': '肩',
-    'arms': '腕',
+    'chest': AppLocalizations.of(context)!.bodyPartChest,
+    'back': AppLocalizations.of(context)!.bodyPartBack,
+    'legs': AppLocalizations.of(context)!.bodyPartLegs,
+    'shoulders': AppLocalizations.of(context)!.bodyPartShoulders,
+    'arms': AppLocalizations.of(context)!.bodyPartArms,
     'core': '体幹',
   };
 
@@ -55,7 +55,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
       builder: (context, authSnapshot) {
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            appBar: AppBar(title: const Text('部位別トラッキング')),
+            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.bodyPartTracking)),
             body: const Center(
               child: CircularProgressIndicator(),
             ),
@@ -65,16 +65,16 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
         final user = authSnapshot.data;
         if (user == null) {
           return Scaffold(
-            appBar: AppBar(title: const Text('部位別トラッキング')),
+            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.bodyPartTracking)),
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('ログインに失敗しました'),
+                  const Text(AppLocalizations.of(context)!.loginError),
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _autoLoginIfNeeded,
-                    child: const Text('再試行'),
+                    child: const Text(AppLocalizations.of(context)!.tryAgain),
                   ),
                 ],
               ),
@@ -90,7 +90,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
   Widget _buildMainContent(User user) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('部位別トラッキング'),
+        title: const Text(AppLocalizations.of(context)!.bodyPartTracking),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _getWorkoutsStream(user.uid),
@@ -393,7 +393,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
             Icon(Icons.show_chart, size: 80, color: Colors.grey.shade400),
             const SizedBox(height: 16),
             Text(
-              'トレーニング記録がありません',
+              AppLocalizations.of(context)!.noWorkouts,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

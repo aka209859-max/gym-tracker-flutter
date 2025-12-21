@@ -217,12 +217,12 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('削除'),
+            child: const Text(AppLocalizations.of(context)!.remove),
           ),
         ],
       ),
@@ -261,7 +261,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('削除に失敗しました: $e'),
+            content: Text(AppLocalizations.of(context)!.deleteFailed),
             backgroundColor: Colors.red,
           ),
         );
@@ -324,7 +324,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                             onTap: _selectDate,
                             child: InputDecorator(
                               decoration: const InputDecoration(
-                                labelText: '日付',
+                                labelText: AppLocalizations.of(context)!.date,
                                 border: OutlineInputBorder(),
                                 prefixIcon: Icon(Icons.calendar_today),
                               ),
@@ -421,13 +421,13 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
             Row(
               children: [
                 _buildTabButton(
-                  label: '体重',
+                  label: AppLocalizations.of(context)!.bodyWeight,
                   isSelected: _selectedChartType == ChartType.weight,
                   onTap: () => setState(() => _selectedChartType = ChartType.weight),
                 ),
                 const SizedBox(width: 8),
                 _buildTabButton(
-                  label: '体脂肪率',
+                  label: AppLocalizations.of(context)!.bodyFatRate,
                   isSelected: _selectedChartType == ChartType.bodyFat,
                   onTap: () => setState(() => _selectedChartType = ChartType.bodyFat),
                 ),
@@ -442,7 +442,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
               textBaseline: TextBaseline.alphabetic,
               children: [
                 Text(
-                  _selectedChartType == ChartType.weight ? '体重' : '体脂肪率',
+                  _selectedChartType == ChartType.weight ? AppLocalizations.of(context)!.bodyWeight : AppLocalizations.of(context)!.bodyFatRate,
                   style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(width: 16),
@@ -527,7 +527,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
     }
     
     if (values.isEmpty) {
-      return Center(child: Text('データがありません'));
+      return Center(child: Text(AppLocalizations.of(context)!.noData));
     }
     
     // Y軸の範囲と間隔を計算（0.1刻み対応）
@@ -747,7 +747,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                 trailing: IconButton(
                   icon: const Icon(Icons.delete_outline, color: Colors.red),
                   onPressed: () => _confirmDelete(measurement),
-                  tooltip: '削除',
+                  tooltip: AppLocalizations.of(context)!.remove,
                 ),
               );
             },

@@ -17,7 +17,7 @@ class LanguageSettingsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n?.languageSettings ?? '言語設定'),
+        title: Text(l10n?.languageSettings ?? AppLocalizations.of(context)!.languageSettings),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -106,7 +106,7 @@ class LanguageSettingsScreen extends StatelessWidget {
                           Navigator.of(context).pop();
                         },
                         child: const Text(
-                          'OK',
+                          AppLocalizations.of(context)!.ok,
                           style: TextStyle(fontSize: 16),
                         ),
                       ),

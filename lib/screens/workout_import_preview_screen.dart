@@ -26,13 +26,13 @@ class _WorkoutImportPreviewScreenState
 
   // 部位選択肢
   static const List<String> _bodyPartOptions = [
-    '胸',
-    '脚',
-    '背中',
-    '肩',
-    '二頭',
-    '三頭',
-    '有酸素',
+    AppLocalizations.of(context)!.bodyPartChest,
+    AppLocalizations.of(context)!.bodyPartLegs,
+    AppLocalizations.of(context)!.bodyPartBack,
+    AppLocalizations.of(context)!.bodyPartShoulders,
+    AppLocalizations.of(context)!.bodyPartBiceps,
+    AppLocalizations.of(context)!.bodyPartTriceps,
+    AppLocalizations.of(context)!.exerciseCardio,
   ];
 
   @override
@@ -61,49 +61,49 @@ class _WorkoutImportPreviewScreenState
   String _estimateBodyPart(String exerciseName) {
     final mapping = {
       // 胸
-      'ベンチプレス': '胸',
-      'ダンベルプレス': '胸',
-      'インクラインプレス': '胸',
-      'ケーブルフライ': '胸',
-      'ディップス': '胸',
+      AppLocalizations.of(context)!.exerciseBenchPress: AppLocalizations.of(context)!.bodyPartChest,
+      AppLocalizations.of(context)!.exerciseDumbbellPress: AppLocalizations.of(context)!.bodyPartChest,
+      AppLocalizations.of(context)!.exerciseInclinePress: AppLocalizations.of(context)!.bodyPartChest,
+      AppLocalizations.of(context)!.exerciseCableFly: AppLocalizations.of(context)!.bodyPartChest,
+      AppLocalizations.of(context)!.exerciseDips: AppLocalizations.of(context)!.bodyPartChest,
       
       // 背中
-      'ラットプルダウン': '背中',
-      'チンニング': '背中',
-      'チンニング（懸垂）': '背中',
-      '懸垂': '背中',
-      'ベントオーバーローイング': '背中',
-      'デッドリフト': '背中',
-      'シーテッドロウ': '背中',
+      AppLocalizations.of(context)!.exerciseLatPulldown: AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.exerciseChinUp: AppLocalizations.of(context)!.bodyPartBack,
+      'チンニング（懸垂）': AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.exercisePullUp: AppLocalizations.of(context)!.bodyPartBack,
+      'ベントオーバーローイング': AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.exerciseDeadlift: AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.exerciseSeatedRow: AppLocalizations.of(context)!.bodyPartBack,
       
       // 脚
-      'スクワット': '脚',
-      'レッグプレス': '脚',
-      'レッグエクステンション': '脚',
-      'レッグカール': '脚',
-      'ランジ': '脚',
+      AppLocalizations.of(context)!.exerciseSquat: AppLocalizations.of(context)!.bodyPartLegs,
+      AppLocalizations.of(context)!.exerciseLegPress: AppLocalizations.of(context)!.bodyPartLegs,
+      AppLocalizations.of(context)!.exerciseLegExtension: AppLocalizations.of(context)!.bodyPartLegs,
+      AppLocalizations.of(context)!.exerciseLegCurl: AppLocalizations.of(context)!.bodyPartLegs,
+      'ランジ': AppLocalizations.of(context)!.bodyPartLegs,
       
       // 肩
-      'ショルダープレス': '肩',
-      'サイドレイズ': '肩',
-      'フロントレイズ': '肩',
-      'リアレイズ': '肩',
+      AppLocalizations.of(context)!.exerciseShoulderPress: AppLocalizations.of(context)!.bodyPartShoulders,
+      AppLocalizations.of(context)!.exerciseSideRaise: AppLocalizations.of(context)!.bodyPartShoulders,
+      AppLocalizations.of(context)!.exerciseFrontRaise: AppLocalizations.of(context)!.bodyPartShoulders,
+      'リアレイズ': AppLocalizations.of(context)!.bodyPartShoulders,
       
       // 二頭
-      'バーベルカール': '二頭',
-      'ダンベルカール': '二頭',
-      'ハンマーカール': '二頭',
+      AppLocalizations.of(context)!.exerciseBarbellCurl: AppLocalizations.of(context)!.bodyPartBiceps,
+      AppLocalizations.of(context)!.exerciseDumbbellCurl: AppLocalizations.of(context)!.bodyPartBiceps,
+      AppLocalizations.of(context)!.exerciseHammerCurl: AppLocalizations.of(context)!.bodyPartBiceps,
       
       // 三頭
-      'トライセプスダウン': '三頭',
-      'トライセプスエクステンション': '三頭',
-      'フレンチプレス': '三頭',
+      'トライセプスダウン': AppLocalizations.of(context)!.bodyPartTriceps,
+      AppLocalizations.of(context)!.exerciseTricepsExtension: AppLocalizations.of(context)!.bodyPartTriceps,
+      'フレンチプレス': AppLocalizations.of(context)!.bodyPartTriceps,
       
       // 有酸素
-      'ランニング': '有酸素',
-      'ウォーキング': '有酸素',
-      'バイク': '有酸素',
-      'エアロバイク': '有酸素',
+      AppLocalizations.of(context)!.exerciseRunning: AppLocalizations.of(context)!.exerciseCardio,
+      'ウォーキング': AppLocalizations.of(context)!.exerciseCardio,
+      'バイク': AppLocalizations.of(context)!.exerciseCardio,
+      AppLocalizations.of(context)!.exerciseAerobicBike: AppLocalizations.of(context)!.exerciseCardio,
     };
     
     return mapping[exerciseName] ?? '胸'; // デフォルト: 胸
@@ -126,7 +126,7 @@ class _WorkoutImportPreviewScreenState
       
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) {
-        throw Exception('ユーザーが認証されていません');
+        throw Exception(AppLocalizations.of(context)!.userNotAuthenticated);
       }
       debugPrint('✅ [IMPORT] ユーザー確認: ${user.uid}');
 
@@ -164,7 +164,7 @@ class _WorkoutImportPreviewScreenState
         
         convertedExercises.add({
           'name': exercise['name'],
-          'bodyPart': _selectedBodyParts[i] ?? '胸',
+          'bodyPart': _selectedBodyParts[i] ?? AppLocalizations.of(context)!.bodyPartChest,
           'sets': sets.map((set) {
             final setData = set as Map<String, dynamic>;
             return {
@@ -242,7 +242,7 @@ class _WorkoutImportPreviewScreenState
             backgroundColor: Colors.red.shade700,
             duration: const Duration(seconds: 5),
             action: SnackBarAction(
-              label: '再試行',
+              label: AppLocalizations.of(context)!.tryAgain,
               textColor: Colors.white,
               onPressed: _importData,
             ),
@@ -427,7 +427,7 @@ class _WorkoutImportPreviewScreenState
                       side: const BorderSide(color: Colors.grey),
                     ),
                     child: const Text(
-                      'キャンセル',
+                      AppLocalizations.of(context)!.cancel,
                       style: TextStyle(fontSize: 16),
                     ),
                   ),

@@ -71,7 +71,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
       // 本日のトレーニング記録を取得
       final user = firebase_auth.FirebaseAuth.instance.currentUser;
       if (user == null) {
-        throw Exception('ユーザーが認証されていません');
+        throw Exception(AppLocalizations.of(context)!.userNotAuthenticated);
       }
 
       final today = DateTime.now();
@@ -118,7 +118,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
             totalVolumeLoad += weight * reps;
           }
           
-          final bodyPart = exercise['body_part'] as String? ?? '不明';
+          final bodyPart = exercise['body_part'] as String? ?? AppLocalizations.of(context)!.unknown;
           bodyParts.add(bodyPart);
         }
       }
@@ -168,9 +168,9 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
     fatigueScore += totalSets * 2.0;
     
     // 部位数による疲労度（大筋群は追加）
-    if (bodyParts.contains('脚')) fatigueScore += 15.0;
-    if (bodyParts.contains('背中')) fatigueScore += 10.0;
-    if (bodyParts.contains('胸')) fatigueScore += 8.0;
+    if (bodyParts.contains(AppLocalizations.of(context)!.bodyPartLegs)) fatigueScore += 15.0;
+    if (bodyParts.contains(AppLocalizations.of(context)!.bodyPartBack)) fatigueScore += 10.0;
+    if (bodyParts.contains(AppLocalizations.of(context)!.bodyPartChest)) fatigueScore += 8.0;
     
     // 疲労度レベルを判定
     String fatigueLevel;
@@ -184,7 +184,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
       levelColor = Colors.green;
       levelIcon = Icons.sentiment_satisfied;
       advice = '良好なトレーニングでした！\n軽いストレッチと十分な水分補給をしましょう。';
-      recoveryTime = '24時間';
+      recoveryTime = AppLocalizations.of(context)!.allDay;
     } else if (fatigueScore < 50) {
       fatigueLevel = '中程度';
       levelColor = Colors.blue;
@@ -260,7 +260,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
               const SizedBox(height: 20),
               
               // トレーニング内容サマリー
-              _buildInfoRow('総セット数', '$totalSets セット'),
+              _buildInfoRow(AppLocalizations.of(context)!.totalSets, '$totalSets セット'),
               const SizedBox(height: 8),
               _buildInfoRow('総負荷量', '${totalVolumeLoad.toStringAsFixed(0)} kg'),
               const SizedBox(height: 8),
@@ -321,7 +321,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('閉じる'),
+            child: const Text(AppLocalizations.of(context)!.readLess),
           ),
         ],
       ),

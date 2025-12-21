@@ -48,7 +48,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
       builder: (context, authSnapshot) {
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            appBar: AppBar(title: const Text('テンプレート')),
+            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.templates)),
             body: const Center(child: CircularProgressIndicator()),
           );
         }
@@ -56,16 +56,16 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
         final user = authSnapshot.data;
         if (user == null) {
           return Scaffold(
-            appBar: AppBar(title: const Text('テンプレート')),
+            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.templates)),
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('ログインに失敗しました'),
+                  const Text(AppLocalizations.of(context)!.loginError),
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _autoLoginIfNeeded,
-                    child: const Text('再試行'),
+                    child: const Text(AppLocalizations.of(context)!.tryAgain),
                   ),
                 ],
               ),
@@ -117,7 +117,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
           }
         },
         icon: const Icon(Icons.add),
-        label: const Text('テンプレート作成'),
+        label: const Text(AppLocalizations.of(context)!.createTemplate),
         backgroundColor: theme.colorScheme.primary,
         foregroundColor: Colors.white,
       ),
@@ -138,7 +138,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
         }
 
         if (snapshot.hasError) {
-          return Center(child: Text('エラー: ${snapshot.error}'));
+          return Center(child: Text(AppLocalizations.of(context)!.snapshotError));
         }
 
         final docs = snapshot.data?.docs ?? [];
@@ -304,7 +304,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
                             children: [
                               Icon(Icons.delete, color: Colors.red, size: 20),
                               SizedBox(width: 8),
-                              Text('削除'),
+                              Text(AppLocalizations.of(context)!.remove),
                             ],
                           ),
                         ),
@@ -421,17 +421,17 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('テンプレート削除'),
+        title: const Text(AppLocalizations.of(context)!.deleteTemplate),
         content: Text('「${template.name}」を削除しますか？'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('削除'),
+            child: const Text(AppLocalizations.of(context)!.remove),
           ),
         ],
       ),
@@ -462,16 +462,16 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
   /// 部位別アイコン
   IconData _getMuscleGroupIcon(String muscleGroup) {
     switch (muscleGroup) {
-      case '胸':
+      case AppLocalizations.of(context)!.bodyPartChest:
         return Icons.favorite;
-      case '背中':
+      case AppLocalizations.of(context)!.bodyPartBack:
         return Icons.backpack;
-      case '脚':
+      case AppLocalizations.of(context)!.bodyPartLegs:
         return Icons.directions_run;
-      case '肩':
+      case AppLocalizations.of(context)!.bodyPartShoulders:
         return Icons.fitness_center;
-      case '二頭':
-      case '三頭':
+      case AppLocalizations.of(context)!.bodyPartBiceps:
+      case AppLocalizations.of(context)!.bodyPartTriceps:
         return Icons.front_hand;
       default:
         return Icons.fitness_center;

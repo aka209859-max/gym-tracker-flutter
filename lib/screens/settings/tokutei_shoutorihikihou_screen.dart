@@ -60,7 +60,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
         _buildTableRow('運営統括責任者', '井上元'),
         _buildTableRow('所在地', '〒839-0817\n福岡県久留米市瀬下町243'),
         _buildTableRow(
-          'お問い合わせ',
+          AppLocalizations.of(context)!.contactUs,
           'メールアドレス: i.hajime1219@outlook.jp\n（対応時間: 平日 10:00-18:00）',
         ),
         _buildTableRow(

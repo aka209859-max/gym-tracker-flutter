@@ -113,11 +113,11 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, controller.text),
-            child: const Text('保存'),
+            child: const Text(AppLocalizations.of(context)!.saveWorkout),
           ),
         ],
       ),
@@ -155,7 +155,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
@@ -163,7 +163,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
               backgroundColor: Colors.red,
               foregroundColor: Colors.white,
             ),
-            child: const Text('削除'),
+            child: const Text(AppLocalizations.of(context)!.remove),
           ),
         ],
       ),
@@ -192,7 +192,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('トレーニングメモ'),
+        title: const Text(AppLocalizations.of(context)!.trainingMemo),
         backgroundColor: Colors.purple,
         foregroundColor: Colors.white,
       ),
@@ -240,7 +240,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
                       
                       // ワークアウトの日付と部位を取得
                       final date = (workoutData['date'] as Timestamp?)?.toDate();
-                      final muscleGroup = workoutData['muscle_group'] as String? ?? '不明';
+                      final muscleGroup = workoutData['muscle_group'] as String? ?? AppLocalizations.of(context)!.unknown;
                       
                       return Card(
                         margin: const EdgeInsets.only(bottom: 12),

@@ -151,7 +151,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
         ],
       ),
@@ -453,7 +453,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('閉じる'),
+              child: const Text(AppLocalizations.of(context)!.readLess),
             ),
             ElevatedButton.icon(
               onPressed: () async {
@@ -891,7 +891,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _buildMenuCard(
           context,
           icon: Icons.notifications,
-          title: '通知設定',
+          title: AppLocalizations.of(context)!.notificationSettings,
           subtitle: 'プッシュ通知・アラート',
           onTap: () {
             Navigator.push(
@@ -1005,7 +1005,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('キャンセル'),
+              child: const Text(AppLocalizations.of(context)!.cancel),
             ),
             ElevatedButton(
               onPressed: () {
@@ -1099,7 +1099,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Icon(Icons.settings, color: Colors.deepPurple.shade700),
                   const SizedBox(width: 12),
                   const Text(
-                    '設定メニュー',
+                    AppLocalizations.of(context)!.settingsMenu,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -1123,13 +1123,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               title: const Text(
-                'トレーニングメモ',
+                AppLocalizations.of(context)!.trainingMemo,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text('過去のトレーニング記録を確認'),
+              subtitle: const Text(AppLocalizations.of(context)!.pastTrainingRecords),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
@@ -1150,13 +1150,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               title: const Text(
-                '個人要因設定',
+                AppLocalizations.of(context)!.personalFactorsSettings,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text('年齢・経験・睡眠・栄養などを編集'),
+              subtitle: const Text(AppLocalizations.of(context)!.editPersonalFactors),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
@@ -1177,7 +1177,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               title: const Text(
-                '言語設定',
+                AppLocalizations.of(context)!.languageSettings,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -1200,7 +1200,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Text(
-                '法的情報',
+                AppLocalizations.of(context)!.legal,
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -1222,7 +1222,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               title: const Text(
-                '利用規約',
+                AppLocalizations.of(context)!.termsOfService,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -1260,7 +1260,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text('販売事業者・返金ポリシー'),
+              subtitle: const Text(AppLocalizations.of(context)!.sellerInfo),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
@@ -1286,7 +1286,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               title: const Text(
-                'プライバシーポリシー',
+                AppLocalizations.of(context)!.privacyPolicy,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,

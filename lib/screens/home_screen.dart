@@ -860,7 +860,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         if (sets != null) {
           for (final set in sets) {
             final setData = set as Map<String, dynamic>;
-            final name = setData['exercise_name'] as String? ?? '不明な種目';
+            final name = setData['exercise_name'] as String? ?? AppLocalizations.of(context)!.unknownExercise;
             
             if (!exerciseMap.containsKey(name)) {
               exerciseMap[name] = [];
@@ -886,7 +886,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('シェアできる種目がありません'),
+              content: Text(AppLocalizations.of(context)!.noExercisesToShare),
               backgroundColor: Colors.orange,
             ),
           );
@@ -1080,7 +1080,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          'ホーム',
+          AppLocalizations.of(context)!.navHome,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
@@ -1101,7 +1101,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () => _showSettingsMenu(context),
-            tooltip: '設定',
+            tooltip: AppLocalizations.of(context)!.settings,
           ),
         ],
       ),
@@ -1190,7 +1190,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         },
         icon: const Icon(Icons.add, size: 24),
         label: const Text(
-          'トレーニング記録',
+          AppLocalizations.of(context)!.trainingLog,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -2092,7 +2092,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           _loadWorkoutsForSelectedDay();
         },
         availableCalendarFormats: const {
-          CalendarFormat.month: '月',
+          CalendarFormat.month: AppLocalizations.of(context)!.mon,
         },
         eventLoader: (day) {
           // この日にトレーニング記録があるかチェック
@@ -2202,7 +2202,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   },
                   icon: Icon(Icons.library_books, size: 18, color: theme.colorScheme.primary),
                   label: const Text(
-                    'テンプレート',
+                    AppLocalizations.of(context)!.templates,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -2266,7 +2266,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   },
                   icon: Icon(Icons.emoji_events, size: 18, color: theme.colorScheme.primary),
                   label: const Text(
-                    'PR記録',
+                    AppLocalizations.of(context)!.prRecords,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -2294,7 +2294,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   },
                   icon: Icon(Icons.accessibility_new, size: 18, color: theme.colorScheme.primary),
                   label: const Text(
-                    '部位別',
+                    AppLocalizations.of(context)!.byBodyPart,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -2329,7 +2329,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   },
                   icon: Icon(Icons.note_alt, size: 18, color: theme.colorScheme.primary),
                   label: const Text(
-                    'メモ',
+                    AppLocalizations.of(context)!.notes,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -2464,15 +2464,15 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
   /// v1.0.170: 懸垂種目の判定
   bool _isPullUpExercise(String exerciseName) {
-    final pullUpKeywords = ['懸垂', 'チンニング', 'プルアップ'];
+    final pullUpKeywords = [AppLocalizations.of(context)!.exercisePullUp, AppLocalizations.of(context)!.exerciseChinUp, 'プルアップ'];
     return pullUpKeywords.any((keyword) => exerciseName.contains(keyword));
   }
 
   /// v1.0.170: 腹筋種目の判定
   bool _isAbsExercise(String exerciseName) {
     final absExercises = [
-      'クランチ', 'レッグレイズ', 'プランク', 'アブローラー',
-      'ハンギングレッグレイズ', 'サイドプランク', 'バイシクルクランチ', 'ケーブルクランチ'
+      AppLocalizations.of(context)!.exerciseCrunch, AppLocalizations.of(context)!.exerciseLegRaise, AppLocalizations.of(context)!.exercisePlank, AppLocalizations.of(context)!.exerciseAbRoller,
+      AppLocalizations.of(context)!.exerciseHangingLegRaise, AppLocalizations.of(context)!.exerciseSidePlank, AppLocalizations.of(context)!.exerciseBicycleCrunch, AppLocalizations.of(context)!.exerciseCableCrunch
     ];
     return absExercises.any((abs) => exerciseName.contains(abs));
   }
@@ -2779,7 +2779,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       final sets = workout['sets'] as List<dynamic>? ?? [];
       for (var i = 0; i < sets.length; i++) {
         final set = sets[i];
-        final exerciseName = set['exercise_name'] as String? ?? '不明な種目';
+        final exerciseName = set['exercise_name'] as String? ?? AppLocalizations.of(context)!.unknownExercise;
         
         if (!exerciseGroups.containsKey(exerciseName)) {
           exerciseGroups[exerciseName] = [];
@@ -2849,7 +2849,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       IconButton(
                         icon: const Icon(Icons.share, size: 20),
                         onPressed: () => _handleShare(),
-                        tooltip: 'トレーニングをシェア',
+                        tooltip: AppLocalizations.of(context)!.shareWorkout,
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
                       ),
@@ -2907,7 +2907,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         ),
                         const SizedBox(width: 6),
                         Text(
-                          'セットタイプの見方',
+                          AppLocalizations.of(context)!.setTypeInfo,
                           style: TextStyle(
                             fontSize: 13,
                             color: theme.colorScheme.primary,
@@ -2952,7 +2952,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           Icons.compare_arrows,
                           Colors.purple,
                           'SS',
-                          'スーパーセット',
+                          AppLocalizations.of(context)!.superSet,
                           '連続で行う2種目',
                         ),
                         const SizedBox(height: 8),
@@ -2967,7 +2967,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         _buildSetTypeExplanationRow(
                           Icons.local_fire_department,
                           Colors.red,
-                          '限界',
+                          AppLocalizations.of(context)!.limit,
                           '限界セット',
                           '完全に力尽きるまで',
                         ),
@@ -3049,7 +3049,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   children: [
                     Icon(Icons.delete, color: Colors.white, size: 32),
                     SizedBox(height: 4),
-                    Text('削除', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                    Text(AppLocalizations.of(context)!.remove, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                   ],
                 ),
               ),
@@ -3153,12 +3153,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           if (isCardio) {
                             // 有酸素運動の場合、距離を使うか回数を使うかを判定
                             secondColumnHeader = ExerciseMasterData.cardioUsesDistance(exerciseName) 
-                                ? '距離' 
-                                : '回数';
+                                ? AppLocalizations.of(context)!.distance 
+                                : AppLocalizations.of(context)!.repsCount;
                           } else if (isTimeMode) {
-                            secondColumnHeader = '秒数';  // 秒数モード（腹筋等）
+                            secondColumnHeader = AppLocalizations.of(context)!.seconds;  // 秒数モード（腹筋等）
                           } else {
-                            secondColumnHeader = '回数';  // 通常の回数
+                            secondColumnHeader = AppLocalizations.of(context)!.repsCount;  // 通常の回数
                           }
                           
                           return Row(
@@ -3166,7 +3166,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               const SizedBox(
                                 width: 24,
                                 child: Text(
-                                  'セット',
+                                  AppLocalizations.of(context)!.sets,
                                   style: TextStyle(
                                     fontSize: 9,
                                     fontWeight: FontWeight.bold,
@@ -3177,7 +3177,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               Expanded(
                                 flex: 2,
                                 child: Text(
-                                  isCardio ? '時間' : '重さ',
+                                  isCardio ? AppLocalizations.of(context)!.time : '重さ',
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     fontSize: 9,
@@ -3416,7 +3416,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     GestureDetector(
                       onTap: () {
                         // 該当種目のデータをテンプレート形式に変換
-                        final muscleGroup = sets.isNotEmpty ? sets.first['muscle_group'] as String? ?? '不明' : '不明';
+                        final muscleGroup = sets.isNotEmpty ? sets.first['muscle_group'] as String? ?? AppLocalizations.of(context)!.unknown : AppLocalizations.of(context)!.unknown;
                         final workoutId = sets.isNotEmpty ? sets.first['workout_id'] as String? : null;
                         
                         // 最後のセットの重量・回数を取得（前回の記録として使用）
@@ -3645,7 +3645,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                   borderRadius: BorderRadius.circular(4),
                                 ),
                                 child: Text(
-                                  muscleGroup ?? '不明',
+                                  muscleGroup ?? AppLocalizations.of(context)!.unknown,
                                   style: TextStyle(
                                     fontSize: 12,
                                     color: theme.colorScheme.primary,
@@ -3803,20 +3803,20 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) {
           return AlertDialog(
-            title: const Text('フィルター'),
+            title: const Text(AppLocalizations.of(context)!.filter),
             content: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // 部位選択
-                  const Text('部位', style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text(AppLocalizations.of(context)!.bodyPart, style: TextStyle(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
-                    children: ['胸', '脚', '背中', '肩', '二頭', '三頭', '有酸素', 'すべて'].map((group) {
-                      final isSelected = group == 'すべて' 
+                    children: [AppLocalizations.of(context)!.bodyPartChest, AppLocalizations.of(context)!.bodyPartLegs, AppLocalizations.of(context)!.bodyPartBack, AppLocalizations.of(context)!.bodyPartShoulders, AppLocalizations.of(context)!.bodyPartBiceps, AppLocalizations.of(context)!.bodyPartTriceps, AppLocalizations.of(context)!.exerciseCardio, AppLocalizations.of(context)!.all].map((group) {
+                      final isSelected = group == AppLocalizations.of(context)!.all 
                           ? _selectedMuscleGroupFilter == null
                           : _selectedMuscleGroupFilter == group;
                       return FilterChip(
@@ -3831,7 +3831,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         onSelected: (selected) {
                           setDialogState(() {
                             setState(() {
-                              _selectedMuscleGroupFilter = group == 'すべて' ? null : group;
+                              _selectedMuscleGroupFilter = group == AppLocalizations.of(context)!.all ? null : group;
                             });
                           });
                         },
@@ -3877,7 +3877,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         });
                       },
                       icon: const Icon(Icons.clear, size: 16),
-                      label: const Text('クリア', style: TextStyle(fontSize: 12)),
+                      label: const Text(AppLocalizations.of(context)!.clear, style: TextStyle(fontSize: 12)),
                     ),
                 ],
               ),
@@ -3892,14 +3892,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   Navigator.pop(context);
                   _performSearch();
                 },
-                child: const Text('リセット'),
+                child: const Text(AppLocalizations.of(context)!.reset),
               ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                   _performSearch();
                 },
-                child: const Text('適用'),
+                child: const Text(AppLocalizations.of(context)!.apply),
               ),
             ],
           );
@@ -3996,7 +3996,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       case workout_models.SetType.failure:
         icon = Icons.local_fire_department;
         color = Colors.red;
-        label = '限界';
+        label = AppLocalizations.of(context)!.limit;
         break;
       default:
         return const SizedBox.shrink();
@@ -4040,7 +4040,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
@@ -4048,7 +4048,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               backgroundColor: Colors.red,
               foregroundColor: Colors.white,
             ),
-            child: const Text('削除'),
+            child: const Text(AppLocalizations.of(context)!.remove),
           ),
         ],
       ),
@@ -4101,8 +4101,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
             ListTile(
               leading: const Icon(Icons.emoji_events, color: Colors.amber),
-              title: const Text('PR記録'),
-              subtitle: const Text('パーソナルレコード'),
+              title: const Text(AppLocalizations.of(context)!.prRecords),
+              subtitle: const Text(AppLocalizations.of(context)!.personalRecord),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.pop(context);
@@ -4116,8 +4116,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
             ListTile(
               leading: const Icon(Icons.pie_chart, color: Colors.green),
-              title: const Text('部位別'),
-              subtitle: const Text('部位別トラッキング'),
+              title: const Text(AppLocalizations.of(context)!.byBodyPart),
+              subtitle: const Text(AppLocalizations.of(context)!.bodyPartTracking),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.pop(context);
@@ -4131,8 +4131,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
             ListTile(
               leading: const Icon(Icons.note, color: Colors.blue),
-              title: const Text('メモ'),
-              subtitle: const Text('トレーニングメモ'),
+              title: const Text(AppLocalizations.of(context)!.notes),
+              subtitle: const Text(AppLocalizations.of(context)!.trainingMemo),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.pop(context);
@@ -4147,7 +4147,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ListTile(
               leading: const Icon(Icons.analytics, color: Colors.purple),
               title: const Text('週次'),
-              subtitle: const Text('週次レポート'),
+              subtitle: const Text(AppLocalizations.of(context)!.weeklyReport),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.pop(context);
@@ -4164,7 +4164,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Text(
-                'その他',
+                AppLocalizations.of(context)!.bodyPartOther,
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -4174,7 +4174,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
             ListTile(
               leading: const Icon(Icons.edit, color: Colors.blue),
-              title: const Text('編集'),
+              title: const Text(AppLocalizations.of(context)!.edit),
               subtitle: const Text('次のアップデートで実装予定'),
               enabled: false,
               onTap: () {
@@ -4186,7 +4186,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             // 削除ボタン
             ListTile(
               leading: const Icon(Icons.delete, color: Colors.red),
-              title: const Text('削除', style: TextStyle(color: Colors.red)),
+              title: const Text(AppLocalizations.of(context)!.remove, style: TextStyle(color: Colors.red)),
               onTap: () async {
                 print('👆 メニューから削除選択: $exerciseName (ID: $workoutId)');
                 Navigator.pop(context);
@@ -4256,7 +4256,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('最後の種目が削除されたため、トレーニング記録全体を削除しました'),
+                content: Text(AppLocalizations.of(context)!.lastExerciseDeleted),
                 backgroundColor: Colors.orange,
               ),
             );
@@ -4344,7 +4344,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('最後の種目が削除されたため、トレーニング記録全体を削除しました'),
+                content: Text(AppLocalizations.of(context)!.lastExerciseDeleted),
                 backgroundColor: Colors.orange,
               ),
             );
@@ -4409,7 +4409,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       print('Stack Trace: $stackTrace');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('削除に失敗しました: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.deleteFailed)),
         );
       }
     }
@@ -4478,7 +4478,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       print('Stack Trace: $stackTrace');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('削除に失敗しました: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.deleteFailed)),
         );
       }
     }
@@ -4708,7 +4708,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       // 本日のトレーニング記録を取得
       final user = firebase_auth.FirebaseAuth.instance.currentUser;
       if (user == null) {
-        throw Exception('ユーザーが認証されていません');
+        throw Exception(AppLocalizations.of(context)!.userNotAuthenticated);
       }
 
       final today = DateTime.now();
@@ -4755,7 +4755,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         
         // 部位情報を収集
         final muscleGroup = data['muscle_group'] as String?;
-        if (muscleGroup != null && muscleGroup != '有酸素') {
+        if (muscleGroup != null && muscleGroup != AppLocalizations.of(context)!.exerciseCardio) {
           bodyParts.add(muscleGroup);
         }
         
@@ -4957,7 +4957,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context, null),
-                child: const Text('キャンセル'),
+                child: const Text(AppLocalizations.of(context)!.cancel),
               ),
               ElevatedButton(
                 onPressed: () => Navigator.pop(context, selectedRPE),
@@ -5152,7 +5152,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('閉じる'),
+            child: const Text(AppLocalizations.of(context)!.readLess),
           ),
         ],
       ),
@@ -5431,7 +5431,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('閉じる'),
+            child: const Text(AppLocalizations.of(context)!.readLess),
           ),
         ],
       ),
@@ -6194,7 +6194,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('後で'),
+            child: const Text(AppLocalizations.of(context)!.later),
           ),
           ElevatedButton.icon(
             onPressed: () {

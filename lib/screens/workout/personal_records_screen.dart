@@ -118,7 +118,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
       builder: (context, authSnapshot) {
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            appBar: AppBar(title: const Text('パーソナルレコード')),
+            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.personalRecord)),
             body: const Center(
               child: CircularProgressIndicator(),
             ),
@@ -128,16 +128,16 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
         final user = authSnapshot.data;
         if (user == null) {
           return Scaffold(
-            appBar: AppBar(title: const Text('パーソナルレコード')),
+            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.personalRecord)),
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('ログインに失敗しました'),
+                  const Text(AppLocalizations.of(context)!.loginError),
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _autoLoginIfNeeded,
-                    child: const Text('再試行'),
+                    child: const Text(AppLocalizations.of(context)!.tryAgain),
                   ),
                 ],
               ),
@@ -155,7 +155,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
     // 種目リスト読み込み中
     if (_isLoadingExercises) {
       return Scaffold(
-        appBar: AppBar(title: const Text('パーソナルレコード')),
+        appBar: AppBar(title: const Text(AppLocalizations.of(context)!.personalRecord)),
         body: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -172,7 +172,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
     // 種目がない場合
     if (_exercises.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: const Text('パーソナルレコード')),
+        appBar: AppBar(title: const Text(AppLocalizations.of(context)!.personalRecord)),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -180,7 +180,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
               Icon(Icons.fitness_center, size: 64, color: Colors.grey[400]),
               const SizedBox(height: 16),
               Text(
-                'まだトレーニング記録がありません',
+                AppLocalizations.of(context)!.noWorkoutRecords,
                 style: TextStyle(fontSize: 16, color: Colors.grey[600]),
               ),
               const SizedBox(height: 8),
@@ -197,18 +197,18 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
 
     // 🔧 v1.0.251: 部位別カテゴリー表示（胸・背中・肩・二頭・三頭・腹筋・脚）
     return Scaffold(
-      appBar: AppBar(title: const Text('パーソナルレコード')),
+      appBar: AppBar(title: const Text(AppLocalizations.of(context)!.personalRecord)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          _buildBodyPartCategory(user.uid, '胸', Icons.fitness_center, Colors.red),
-          _buildBodyPartCategory(user.uid, '背中', Icons.fitness_center, Colors.blue),
-          _buildBodyPartCategory(user.uid, '肩', Icons.fitness_center, Colors.orange),
-          _buildBodyPartCategory(user.uid, '二頭', Icons.fitness_center, Colors.purple),
-          _buildBodyPartCategory(user.uid, '三頭', Icons.fitness_center, Colors.pink),
+          _buildBodyPartCategory(user.uid, AppLocalizations.of(context)!.bodyPartChest, Icons.fitness_center, Colors.red),
+          _buildBodyPartCategory(user.uid, AppLocalizations.of(context)!.bodyPartBack, Icons.fitness_center, Colors.blue),
+          _buildBodyPartCategory(user.uid, AppLocalizations.of(context)!.bodyPartShoulders, Icons.fitness_center, Colors.orange),
+          _buildBodyPartCategory(user.uid, AppLocalizations.of(context)!.bodyPartBiceps, Icons.fitness_center, Colors.purple),
+          _buildBodyPartCategory(user.uid, AppLocalizations.of(context)!.bodyPartTriceps, Icons.fitness_center, Colors.pink),
           _buildBodyPartCategory(user.uid, '腹筋', Icons.fitness_center, Colors.green),
-          _buildBodyPartCategory(user.uid, '脚', Icons.fitness_center, Colors.brown),
-          _buildBodyPartCategory(user.uid, '有酸素', Icons.directions_run, Colors.teal),
+          _buildBodyPartCategory(user.uid, AppLocalizations.of(context)!.bodyPartLegs, Icons.fitness_center, Colors.brown),
+          _buildBodyPartCategory(user.uid, AppLocalizations.of(context)!.exerciseCardio, Icons.directions_run, Colors.teal),
         ],
       ),
     );
@@ -383,7 +383,7 @@ class _PeriodView extends StatelessWidget {
         }
 
         if (snapshot.hasError) {
-          return Center(child: Text('エラー: ${snapshot.error}'));
+          return Center(child: Text(AppLocalizations.of(context)!.snapshotError));
         }
 
         final data = snapshot.data ?? [];
@@ -422,7 +422,7 @@ class _PeriodView extends StatelessWidget {
                           getTitlesWidget: (value, meta) {
                             // 🔧 v1.0.246: 有酸素運動の場合は「分」、筋トレは「kg」
                             final isCardio = data.isNotEmpty && data.first.isCardio;
-                            final unit = isCardio ? '分' : 'kg';
+                            final unit = isCardio ? AppLocalizations.of(context)!.minutes : 'kg';
                             return Text(
                               '${value.toInt()}$unit',
                               style: const TextStyle(fontSize: 10),
@@ -609,8 +609,8 @@ class _PeriodView extends StatelessWidget {
     final growthPercent = (growthValue / start.calculated1RM) * 100;
     
     // 🔧 v1.0.246: 有酸素は「時間」、筋トレは「1RM」
-    final label = isCardio ? '時間' : '1RM';
-    final unit = isCardio ? '分' : 'kg';
+    final label = isCardio ? AppLocalizations.of(context)!.time : AppLocalizations.of(context)!.oneRepMax;
+    final unit = isCardio ? AppLocalizations.of(context)!.minutes : 'kg';
 
     return Card(
       margin: const EdgeInsets.all(16),

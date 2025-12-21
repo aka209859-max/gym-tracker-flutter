@@ -28,20 +28,20 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
   /// 有酸素運動かどうかを判定
   bool get _isCardio {
     final muscleGroup = widget.workoutData['muscle_group'] as String? ?? '';
-    return muscleGroup == '有酸素';
+    return muscleGroup == AppLocalizations.of(context)!.exerciseCardio;
   }
 
   /// ✅ v1.0.168: 腹筋系種目かどうかを判定
   bool _isAbsExercise(String exerciseName) {
     const absExercises = [
-      'クランチ',
-      'レッグレイズ',
-      'プランク',
-      'アブローラー',
-      'ハンギングレッグレイズ',
-      'サイドプランク',
-      'バイシクルクランチ',
-      'ケーブルクランチ',
+      AppLocalizations.of(context)!.exerciseCrunch,
+      AppLocalizations.of(context)!.exerciseLegRaise,
+      AppLocalizations.of(context)!.exercisePlank,
+      AppLocalizations.of(context)!.exerciseAbRoller,
+      AppLocalizations.of(context)!.exerciseHangingLegRaise,
+      AppLocalizations.of(context)!.exerciseSidePlank,
+      AppLocalizations.of(context)!.exerciseBicycleCrunch,
+      AppLocalizations.of(context)!.exerciseCableCrunch,
     ];
     return absExercises.contains(exerciseName);
   }
@@ -78,14 +78,14 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
     final data = widget.workoutData;
     
     // データ解析
-    final muscleGroup = data['muscle_group'] as String? ?? '不明';
+    final muscleGroup = data['muscle_group'] as String? ?? AppLocalizations.of(context)!.unknown;
     final date = (data['date'] as Timestamp?)?.toDate() ?? DateTime.now();
     final startTime = (data['start_time'] as Timestamp?)?.toDate();
     final endTime = (data['end_time'] as Timestamp?)?.toDate();
     final sets = data['sets'] as List<dynamic>? ?? [];
     
     // トレーニング時間計算
-    String durationText = '不明';
+    String durationText = AppLocalizations.of(context)!.unknown;
     if (startTime != null && endTime != null) {
       final duration = endTime.difference(startTime);
       durationText = '${duration.inMinutes}分';
@@ -95,14 +95,14 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
     final exerciseMap = <String, List<Map<String, dynamic>>>{};
     for (final set in sets) {
       if (set is Map<String, dynamic>) {
-        final exerciseName = set['exercise_name'] as String? ?? '不明';
+        final exerciseName = set['exercise_name'] as String? ?? AppLocalizations.of(context)!.unknown;
         exerciseMap.putIfAbsent(exerciseName, () => []).add(set);
       }
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('トレーニング詳細'),
+        title: const Text(AppLocalizations.of(context)!.workoutDetails),
         actions: [
           IconButton(
             icon: const Icon(Icons.delete),
@@ -210,7 +210,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                   Icon(Icons.edit_note, size: 24, color: theme.colorScheme.primary),
                   const SizedBox(width: 8),
                   const Text(
-                    'トレーニングメモ',
+                    AppLocalizations.of(context)!.trainingMemo,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const Spacer(),
@@ -274,7 +274,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                 IconButton(
                   icon: const Icon(Icons.delete_outline, color: Colors.red),
                   onPressed: () => _confirmDeleteExercise(exerciseName),
-                  tooltip: '種目を削除',
+                  tooltip: AppLocalizations.of(context)!.deleteExercise,
                 ),
               ],
             ),
@@ -292,7 +292,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                 displayText = '${weight}分 × ${reps}km';
               } else {
                 // v1.0.169: isTimeModeに基づいて秒数/回数を表示
-                final unit = isTimeMode ? '秒' : '回';
+                final unit = isTimeMode ? '秒' : AppLocalizations.of(context)!.reps;
                 displayText = '${weight}kg × $reps$unit';
               }
               
@@ -339,7 +339,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('トレーニングメモ'),
+        title: const Text(AppLocalizations.of(context)!.trainingMemo),
         content: TextField(
           controller: controller,
           maxLines: 5,
@@ -355,18 +355,18 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                 await _deleteNote();
                 if (mounted) Navigator.pop(context);
               },
-              child: const Text('削除', style: TextStyle(color: Colors.red)),
+              child: const Text(AppLocalizations.of(context)!.remove, style: TextStyle(color: Colors.red)),
             ),
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () async {
               await _saveNote(controller.text);
               if (mounted) Navigator.pop(context);
             },
-            child: const Text('保存'),
+            child: const Text(AppLocalizations.of(context)!.saveWorkout),
           ),
         ],
       ),
@@ -524,7 +524,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           if (afterDeleteSets.isNotEmpty)
             ElevatedButton(
@@ -533,7 +533,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                 await _deleteExercise(exerciseName);
               },
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-              child: const Text('削除'),
+              child: const Text(AppLocalizations.of(context)!.remove),
             ),
           if (afterDeleteSets.isEmpty)
             ElevatedButton(
@@ -590,7 +590,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('削除に失敗しました: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.deleteFailed)),
         );
       }
       print('❌ 種目削除エラー: $e');
@@ -630,7 +630,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('最後の種目が削除されたため、トレーニング記録全体を削除しました'),
+            content: Text(AppLocalizations.of(context)!.lastExerciseDeleted),
             backgroundColor: Colors.orange,
           ),
         );
@@ -695,7 +695,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('最後の種目が削除されたため、トレーニング記録全体を削除しました'),
+            content: Text(AppLocalizations.of(context)!.lastExerciseDeleted),
             backgroundColor: Colors.orange,
           ),
         );
@@ -741,11 +741,11 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('削除確認'),
-        content: const Text('このトレーニング記録を削除しますか？'),
+        content: const Text(AppLocalizations.of(context)!.deleteWorkoutConfirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -753,7 +753,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
               await _deleteWorkout();
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            child: const Text('削除'),
+            child: const Text(AppLocalizations.of(context)!.remove),
           ),
         ],
       ),
@@ -770,14 +770,14 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('トレーニング記録を削除しました'), backgroundColor: Colors.green),
+          const SnackBar(content: Text(AppLocalizations.of(context)!.deleteWorkoutSuccess), backgroundColor: Colors.green),
         );
         Navigator.pop(context);
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('削除に失敗しました: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.deleteFailed)),
         );
       }
     }

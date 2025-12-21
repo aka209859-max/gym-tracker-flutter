@@ -21,24 +21,24 @@ class _PartnerEquipmentEditorScreenState
   final List<String> _availableEquipment = [
     'フリーウエイト',
     'スミスマシン',
-    'レッグプレス',
-    'ベンチプレス',
+    AppLocalizations.of(context)!.exerciseLegPress,
+    AppLocalizations.of(context)!.exerciseBenchPress,
     'ケーブルマシン',
     'ランニングマシン',
-    'エアロバイク',
+    AppLocalizations.of(context)!.exerciseAerobicBike,
     'ダンベル',
     'バーベル',
-    'ラットプルダウン',
-    'レッグエクステンション',
-    'レッグカール',
+    AppLocalizations.of(context)!.exerciseLatPulldown,
+    AppLocalizations.of(context)!.exerciseLegExtension,
+    AppLocalizations.of(context)!.exerciseLegCurl,
     'アブドミナル',
-    'ショルダープレス',
+    AppLocalizations.of(context)!.exerciseShoulderPress,
     'チェストプレス',
     'ハックスクワット',
     'ケーブルクロスオーバー',
     'ローイングマシン',
     'ステップマシン',
-    'その他',
+    AppLocalizations.of(context)!.bodyPartOther,
   ];
 
   Map<String, int> _equipmentData = {};
@@ -74,7 +74,7 @@ class _PartnerEquipmentEditorScreenState
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('データ読み込みエラー: $e'),
+            content: Text(AppLocalizations.of(context)!.dataLoadError),
             backgroundColor: Colors.red,
           ),
         );
@@ -152,7 +152,7 @@ class _PartnerEquipmentEditorScreenState
                     )
                   : const Icon(Icons.save),
               onPressed: _isSaving ? null : _saveEquipmentData,
-              tooltip: '保存',
+              tooltip: AppLocalizations.of(context)!.saveWorkout,
             ),
         ],
       ),

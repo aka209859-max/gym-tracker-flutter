@@ -152,7 +152,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             backgroundColor: Colors.red,
             duration: const Duration(seconds: 5),
             action: SnackBarAction(
-              label: '再試行',
+              label: AppLocalizations.of(context)!.tryAgain,
               textColor: Colors.white,
               onPressed: _pickImage,
             ),
@@ -251,7 +251,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () {
@@ -269,12 +269,12 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('プロフィール編集'),
+        title: const Text(AppLocalizations.of(context)!.profileEdit),
         actions: [
           if (!_isLoading)
             TextButton(
               onPressed: _saveProfile,
-              child: const Text('完了', style: TextStyle(color: Colors.white)),
+              child: const Text(AppLocalizations.of(context)!.complete, style: TextStyle(color: Colors.white)),
             ),
         ],
       ),

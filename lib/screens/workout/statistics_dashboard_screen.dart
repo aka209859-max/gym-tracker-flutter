@@ -155,11 +155,11 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
       print('   セット数: ${sets.length}');
       totalSets += sets.length;
       
-      final muscleGroup = data['muscle_group'] as String? ?? '不明';
+      final muscleGroup = data['muscle_group'] as String? ?? AppLocalizations.of(context)!.unknown;
       print('   筋肉グループ: $muscleGroup');
       
       // 有酸素運動の時間のみを集計（筋トレは除外）
-      if (muscleGroup == '有酸素') {
+      if (muscleGroup == AppLocalizations.of(context)!.exerciseCardio) {
         // 有酸素運動の場合、weightフィールドが「時間（分）」を表す
         print('   🏃 有酸素運動データ');
         
@@ -227,7 +227,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
       final sets = data['sets'] as List<dynamic>? ?? [];
       totalSets += sets.length;
       
-      final muscleGroup = data['muscle_group'] as String? ?? '不明';
+      final muscleGroup = data['muscle_group'] as String? ?? AppLocalizations.of(context)!.unknown;
       
       // 総負荷量計算: 重量 × レップ数 × セット数
       for (final set in sets) {
@@ -236,7 +236,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
           final reps = (set['reps'] as num?)?.toInt() ?? 0;
           
           // 有酸素運動は除外（重量の意味が異なるため）
-          if (muscleGroup != '有酸素' && weight > 0 && reps > 0) {
+          if (muscleGroup != AppLocalizations.of(context)!.exerciseCardio && weight > 0 && reps > 0) {
             final volume = weight * reps; // 1セットの負荷量
             muscleGroupVolume[muscleGroup] = (muscleGroupVolume[muscleGroup] ?? 0.0) + volume;
             
@@ -331,7 +331,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: _loadStatistics,
-            tooltip: '更新',
+            tooltip: AppLocalizations.of(context)!.update,
           ),
         ],
       ),
@@ -397,7 +397,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
                 Expanded(
                   child: _buildStatItem(
                     icon: Icons.list_alt,
-                    label: '総セット数',
+                    label: AppLocalizations.of(context)!.totalSets,
                     value: '$_weeklyTotalSetsセット',
                     color: Colors.green,
                   ),
@@ -498,7 +498,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
                 Expanded(
                   child: _buildStatItem(
                     icon: Icons.bar_chart,
-                    label: '総セット数',
+                    label: AppLocalizations.of(context)!.totalSets,
                     value: '$_monthlyTotalSetsセット',
                     color: Colors.teal,
                   ),
@@ -628,15 +628,15 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
 
   Color _getColorForMuscleGroup(String muscleGroup) {
     final colors = {
-      '胸': Colors.red,
-      '背中': Colors.blue,
-      '脚': Colors.green,
-      '肩': Colors.orange,
-      '腕': Colors.purple,
-      '二頭': Colors.indigo,
-      '三頭': Colors.pink,
+      AppLocalizations.of(context)!.bodyPartChest: Colors.red,
+      AppLocalizations.of(context)!.bodyPartBack: Colors.blue,
+      AppLocalizations.of(context)!.bodyPartLegs: Colors.green,
+      AppLocalizations.of(context)!.bodyPartShoulders: Colors.orange,
+      AppLocalizations.of(context)!.bodyPartArms: Colors.purple,
+      AppLocalizations.of(context)!.bodyPartBiceps: Colors.indigo,
+      AppLocalizations.of(context)!.bodyPartTriceps: Colors.pink,
       '体幹': Colors.teal,
-      '有酸素': Colors.amber,
+      AppLocalizations.of(context)!.exerciseCardio: Colors.amber,
     };
     return colors[muscleGroup] ?? Colors.grey;
   }

@@ -153,7 +153,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
             
             // タイトル
             const Text(
-              'AI疲労度分析へようこそ！',
+              AppLocalizations.of(context)!.aiFatigueAnalysisWelcome,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -206,7 +206,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                 ),
               ),
               child: const Text(
-                'はじめる',
+                AppLocalizations.of(context)!.getStarted,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -298,7 +298,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                   Icon(Icons.settings, color: Colors.deepPurple.shade700),
                   const SizedBox(width: 12),
                   const Text(
-                    '設定メニュー',
+                    AppLocalizations.of(context)!.settingsMenu,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -322,13 +322,13 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                 ),
               ),
               title: const Text(
-                'トレーニングメモ',
+                AppLocalizations.of(context)!.trainingMemo,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text('過去のトレーニング記録を確認'),
+              subtitle: const Text(AppLocalizations.of(context)!.pastTrainingRecords),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
@@ -349,13 +349,13 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                 ),
               ),
               title: const Text(
-                '個人要因設定',
+                AppLocalizations.of(context)!.personalFactorsSettings,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text('年齢・経験・睡眠・栄養などを編集'),
+              subtitle: const Text(AppLocalizations.of(context)!.editPersonalFactors),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
@@ -376,7 +376,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
       builder: (context, authSnapshot) {
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            appBar: AppBar(title: const Text('AIコーチング')),
+            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.aiCoaching)),
             body: const Center(child: CircularProgressIndicator()),
           );
         }
@@ -384,8 +384,8 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
         final user = authSnapshot.data;
         if (user == null) {
           return Scaffold(
-            appBar: AppBar(title: const Text('AIコーチング')),
-            body: const Center(child: Text('ログインに失敗しました')),
+            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.aiCoaching)),
+            body: const Center(child: Text(AppLocalizations.of(context)!.loginError)),
           );
         }
 
@@ -401,7 +401,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
           children: [
             Icon(Icons.auto_awesome, size: 24),
             SizedBox(width: 8),
-            Text('AI科学的コーチング'),
+            Text(AppLocalizations.of(context)!.aiScientificCoaching),
           ],
         ),
         backgroundColor: Colors.deepPurple.shade700,
@@ -410,7 +410,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: _showSettingsMenu,
-            tooltip: '設定',
+            tooltip: AppLocalizations.of(context)!.settings,
           ),
         ],
         bottom: TabBar(
@@ -429,7 +429,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
             ),
             Tab(
               icon: Icon(Icons.analytics),
-              text: '効果分析',
+              text: AppLocalizations.of(context)!.aiEffectAnalysis,
             ),
           ],
         ),
@@ -469,13 +469,13 @@ class _AIMenuTabState extends State<_AIMenuTab>
 
   // 部位選択状態（有酸素追加）
   final Map<String, bool> _selectedBodyParts = {
-    '胸': false,
-    '背中': false,
-    '脚': false,
-    '肩': false,
-    '腕': false,
+    AppLocalizations.of(context)!.bodyPartChest: false,
+    AppLocalizations.of(context)!.bodyPartBack: false,
+    AppLocalizations.of(context)!.bodyPartLegs: false,
+    AppLocalizations.of(context)!.bodyPartShoulders: false,
+    AppLocalizations.of(context)!.bodyPartArms: false,
     '腹筋': false,
-    '有酸素': false,
+    AppLocalizations.of(context)!.exerciseCardio: false,
   };
   
   // 🔧 v1.0.217: レベル選択（初心者・中級者・上級者）
@@ -659,7 +659,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                 Icon(Icons.auto_awesome, color: Colors.blue.shade700),
                 const SizedBox(width: 8),
                 const Text(
-                  'AI powered トレーニング提案',
+                  AppLocalizations.of(context)!.aiPoweredTraining,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -694,15 +694,15 @@ class _AIMenuTabState extends State<_AIMenuTab>
         Row(
           children: [
             Expanded(
-              child: _buildLevelButton('初心者', Icons.fitness_center, Colors.green),
+              child: _buildLevelButton(AppLocalizations.of(context)!.levelBeginner, Icons.fitness_center, Colors.green),
             ),
             const SizedBox(width: 8),
             Expanded(
-              child: _buildLevelButton('中級者', Icons.trending_up, Colors.orange),
+              child: _buildLevelButton(AppLocalizations.of(context)!.levelIntermediate, Icons.trending_up, Colors.orange),
             ),
             const SizedBox(width: 8),
             Expanded(
-              child: _buildLevelButton('上級者', Icons.emoji_events, Colors.red),
+              child: _buildLevelButton(AppLocalizations.of(context)!.levelAdvanced, Icons.emoji_events, Colors.red),
             ),
           ],
         ),
@@ -767,7 +767,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
           runSpacing: 8,
           children: _selectedBodyParts.keys.map((part) {
             final isSelected = _selectedBodyParts[part]!;
-            final isBeginner = part == '初心者';
+            final isBeginner = part == AppLocalizations.of(context)!.levelBeginner;
 
             return FilterChip(
               label: Row(
@@ -885,7 +885,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                     IconButton(
                       icon: const Icon(Icons.save),
                       onPressed: _saveMenu,
-                      tooltip: '保存',
+                      tooltip: AppLocalizations.of(context)!.saveWorkout,
                     ),
                   ],
                 ),
@@ -1095,17 +1095,17 @@ class _AIMenuTabState extends State<_AIMenuTab>
   /// 🔧 v1.0.221: 部位別カラー取得（二頭・三頭対応）
   Color _getBodyPartColor(String bodyPart) {
     switch (bodyPart) {
-      case '胸':
+      case AppLocalizations.of(context)!.bodyPartChest:
         return Colors.red.shade400;
-      case '背中':
+      case AppLocalizations.of(context)!.bodyPartBack:
         return Colors.blue.shade400;
-      case '脚':
+      case AppLocalizations.of(context)!.bodyPartLegs:
         return Colors.green.shade400;
-      case '肩':
+      case AppLocalizations.of(context)!.bodyPartShoulders:
         return Colors.orange.shade400;
-      case '二頭':
+      case AppLocalizations.of(context)!.bodyPartBiceps:
         return Colors.purple.shade400;
-      case '三頭':
+      case AppLocalizations.of(context)!.bodyPartTriceps:
         return Colors.deepPurple.shade400;
       case '腕': // 後方互換性
         return Colors.purple.shade300;
@@ -1465,28 +1465,28 @@ class _AIMenuTabState extends State<_AIMenuTab>
     // 🔧 v1.0.221: 部位マッピング（二頭・三頭を分離）
     // 🔧 v1.0.226: 有酸素を追加
     final bodyPartMap = {
-      '胸': '胸',
-      '大胸筋': '胸',
-      '背中': '背中',
-      '広背筋': '背中',
-      '僧帽筋': '背中',
-      '脚': '脚',
-      '大腿': '脚',
-      '下半身': '脚',
-      '肩': '肩',
-      '三角筋': '肩',
-      '二頭': '二頭',
-      '上腕二頭筋': '二頭',
-      '三頭': '三頭',
-      '上腕三頭筋': '三頭',
+      AppLocalizations.of(context)!.bodyPartChest: AppLocalizations.of(context)!.bodyPartChest,
+      AppLocalizations.of(context)!.musclePecs: AppLocalizations.of(context)!.bodyPartChest,
+      AppLocalizations.of(context)!.bodyPartBack: AppLocalizations.of(context)!.bodyPartBack,
+      '広背筋': AppLocalizations.of(context)!.bodyPartBack,
+      '僧帽筋': AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.bodyPartLegs: AppLocalizations.of(context)!.bodyPartLegs,
+      '大腿': AppLocalizations.of(context)!.bodyPartLegs,
+      '下半身': AppLocalizations.of(context)!.bodyPartLegs,
+      AppLocalizations.of(context)!.bodyPartShoulders: AppLocalizations.of(context)!.bodyPartShoulders,
+      '三角筋': AppLocalizations.of(context)!.bodyPartShoulders,
+      AppLocalizations.of(context)!.bodyPartBiceps: AppLocalizations.of(context)!.bodyPartBiceps,
+      '上腕二頭筋': AppLocalizations.of(context)!.bodyPartBiceps,
+      AppLocalizations.of(context)!.bodyPartTriceps: AppLocalizations.of(context)!.bodyPartTriceps,
+      '上腕三頭筋': AppLocalizations.of(context)!.bodyPartTriceps,
       '腕': '腕', // 後方互換性のため残す
-      '上腕': '腕',
+      '上腕': AppLocalizations.of(context)!.bodyPartArms,
       '腹筋': '腹筋',
-      '腹': '腹筋',
+      AppLocalizations.of(context)!.bodyPartAbs: '腹筋',
       'コア': '腹筋',
       '有酸素': '有酸素', // 🔧 v1.0.226: 有酸素運動対応
-      'カーディオ': '有酸素',
-      '心肺': '有酸素',
+      'カーディオ': AppLocalizations.of(context)!.exerciseCardio,
+      '心肺': AppLocalizations.of(context)!.exerciseCardio,
     };
     
     debugPrint('🔍 パーサー開始: 全${lines.length}行を処理');
@@ -1544,7 +1544,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
         // 前の種目を保存
         if (currentExerciseName.isNotEmpty && currentBodyPart.isNotEmpty) {
           // 🔧 v1.0.237: 有酸素運動かどうかを判定
-          final isCardio = currentBodyPart == '有酸素';
+          final isCardio = currentBodyPart == AppLocalizations.of(context)!.exerciseCardio;
           
           if (isCardio) {
             // 有酸素運動の場合: duration（時間）とdistance（距離）を使用
@@ -1634,7 +1634,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
         if (weightMatch != null) currentWeight = double.tryParse(weightMatch.group(1)!);
         if (repsMatch != null) currentReps = int.tryParse(repsMatch.group(1)!);
         // 🔧 v1.0.226: 有酸素運動の場合のみ、時間をrepsとして扱う
-        if (timeMatch != null && currentReps == null && currentBodyPart == '有酸素') {
+        if (timeMatch != null && currentReps == null && currentBodyPart == AppLocalizations.of(context)!.exerciseCardio) {
           currentReps = int.tryParse(timeMatch.group(1)!);
         }
         if (setsMatch != null) currentSets = int.tryParse(setsMatch.group(1)!);
@@ -1689,7 +1689,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
             currentReps = int.tryParse(repsMatch.group(1)!);
           }
           // 🔧 v1.0.226: 有酸素運動の場合のみ、時間をrepsとして扱う
-          if (timeMatch != null && currentReps == null && currentBodyPart == '有酸素') {
+          if (timeMatch != null && currentReps == null && currentBodyPart == AppLocalizations.of(context)!.exerciseCardio) {
             currentReps = int.tryParse(timeMatch.group(1)!);
             debugPrint('  ⏱️ 有酸素時間検出: ${timeMatch.group(1)}分 → reps=$currentReps (line: $cleanLine)');
           }
@@ -1704,7 +1704,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
           }
           
           // 🔧 v1.0.226: 休憩時間、ポイントなどの無関係な行をスキップ
-          final isIgnoredLine = cleanLine.contains('休憩時間') || 
+          final isIgnoredLine = cleanLine.contains(AppLocalizations.of(context)!.restTime) || 
                                cleanLine.contains('ポイント') ||
                                cleanLine.contains('フォームのポイント') ||
                                cleanLine.contains('説明') ||
@@ -1722,7 +1722,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
     // 最後の種目を保存
     if (currentExerciseName.isNotEmpty && currentBodyPart.isNotEmpty) {
       // 🔧 v1.0.237: 有酸素運動かどうかを判定
-      final isCardio = currentBodyPart == '有酸素';
+      final isCardio = currentBodyPart == AppLocalizations.of(context)!.exerciseCardio;
       
       if (isCardio) {
         // 有酸素運動の場合: duration（時間）とdistance（距離）を使用
@@ -1923,7 +1923,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
     final targetParts = bodyParts;
 
     // レベル別プロンプト構築
-    if (_selectedLevel == '初心者') {
+    if (_selectedLevel == AppLocalizations.of(context)!.levelBeginner) {
       // 初心者向け
       if (targetParts.isEmpty) {
         return '''
@@ -2012,15 +2012,15 @@ $historyInfo
 
 【条件】
 - ${targetParts.join('、')}を重点的にトレーニング
-${targetParts.contains('有酸素') ? "- **有酸素運動のみ**を提案（筋トレ種目は含めない）" : "- 基本種目中心"}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- **有酸素運動のみ**を提案（筋トレ種目は含めない）" : "- 基本種目中心"}
 - 30-45分で完了
 - 日本語で丁寧に説明
 
 **重要: 各種目に具体的な重量と回数を必ず記載してください。有酸素運動の場合は重量0kg、時間をXX分形式で記載してください。**
-${targetParts.contains('有酸素') ? "**絶対厳守: 有酸素運動データベースの種目のみ使用すること。ベンチプレス、スクワットなどの筋トレ種目は絶対に含めないこと。**" : ""}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対厳守: 有酸素運動データベースの種目のみ使用すること。ベンチプレス、スクワットなどの筋トレ種目は絶対に含めないこと。**" : ""}
 ''';
       }
-    } else if (_selectedLevel == '中級者') {
+    } else if (_selectedLevel == AppLocalizations.of(context)!.levelIntermediate) {
       // 中級者向け
       return '''
 あなたはプロのパーソナルトレーナーです。筋トレ中級者向けの「${targetParts.isEmpty ? "全身" : targetParts.join('、')}」トレーニングメニューを提案してください。
@@ -2062,12 +2062,12 @@ $historyInfo
 
 【条件】
 - ${targetParts.isEmpty ? "全身バランスよく" : targetParts.join('、')+"を重点的に"}
-${targetParts.contains('有酸素') ? "- **有酸素運動のみ**を提案（筋トレ種目は含めない）\n- HIIT、持久走、インターバルなど多様な有酸素トレーニング" : "- フリーウェイト中心\n- 筋肥大を重視"}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- **有酸素運動のみ**を提案（筋トレ種目は含めない）\n- HIIT、持久走、インターバルなど多様な有酸素トレーニング" : "- フリーウェイト中心\n- 筋肥大を重視"}
 - 45-60分で完了
 - 日本語で説明
 
 **重要: 各種目に具体的な重量と回数を必ず記載してください。有酸素運動の場合は重量0kg、時間をXX分形式で記載してください。**
-${targetParts.contains('有酸素') ? "**絶対厳守: 有酸素運動データベースの種目のみ使用すること。ベンチプレス、スクワット、デッドリフトなどの筋トレ種目は絶対に含めないこと。**" : ""}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対厳守: 有酸素運動データベースの種目のみ使用すること。ベンチプレス、スクワット、デッドリフトなどの筋トレ種目は絶対に含めないこと。**" : ""}
 ''';
     } else {
       // 上級者向け
@@ -2111,12 +2111,12 @@ $historyInfo
 
 【条件】
 - ${targetParts.isEmpty ? "全身最大限に" : targetParts.join('、')+"を極限まで"}
-${targetParts.contains('有酸素') ? "- **有酸素運動のみ**を提案（筋トレ種目は含めない）\n- HIIT、タバタ式、持久走など高強度有酸素トレーニング" : "- 高重量フリーウェイト中心\n- 最大筋力向上を重視"}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- **有酸素運動のみ**を提案（筋トレ種目は含めない）\n- HIIT、タバタ式、持久走など高強度有酸素トレーニング" : "- 高重量フリーウェイト中心\n- 最大筋力向上を重視"}
 - 60-90分で完了
 - 日本語で説明
 
 **重要: 各種目に具体的な重量と回数を必ず記載してください。有酸素運動の場合は重量0kg、時間をXX分形式で記載してください。**
-${targetParts.contains('有酸素') ? "**絶対厳守: 有酸素運動データベースの種目のみ使用すること。ベンチプレス、スクワット、デッドリフト、ショルダープレスなどの筋トレ種目は絶対に含めないこと。**" : ""}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対厳守: 有酸素運動データベースの種目のみ使用すること。ベンチプレス、スクワット、デッドリフト、ショルダープレスなどの筋トレ種目は絶対に含めないこと。**" : ""}
 ''';
     }
   }
@@ -2174,7 +2174,7 @@ ${targetParts.contains('有酸素') ? "**絶対厳守: 有酸素運動データ�
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
@@ -2270,7 +2270,7 @@ ${targetParts.contains('有酸素') ? "**絶対厳守: 有酸素運動データ�
       
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) {
-        throw Exception('ユーザーが認証されていません');
+        throw Exception(AppLocalizations.of(context)!.userNotAuthenticated);
       }
       
       // 選択された種目を抽出
@@ -2373,10 +2373,10 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
   // フォーム入力値
   final _formKey = GlobalKey<FormState>();
   final _oneRMController = TextEditingController(); // 🔧 Phase 7 Fix: 1RM入力用コントローラー
-  String _selectedLevel = '初心者';
+  String _selectedLevel = AppLocalizations.of(context)!.levelBeginner;
   int _selectedFrequency = 3;
-  String _selectedGender = '女性';
-  String _selectedBodyPart = '大胸筋';
+  String _selectedGender = AppLocalizations.of(context)!.genderFemale;
+  String _selectedBodyPart = AppLocalizations.of(context)!.musclePecs;
   int _selectedRPE = 8; // 🆕 v1.0.230: RPE（自覚的強度、デフォルト8）
 
   // 🆕 Phase 7: 自動取得データ
@@ -2398,11 +2398,11 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
   }
 
   // レベル選択肢
-  final List<String> _levels = ['初心者', '中級者', '上級者'];
+  final List<String> _levels = [AppLocalizations.of(context)!.levelBeginner, AppLocalizations.of(context)!.levelIntermediate, AppLocalizations.of(context)!.levelAdvanced];
 
   // 部位選択肢
   final List<String> _bodyParts = [
-    '大胸筋',
+    AppLocalizations.of(context)!.musclePecs,
     '広背筋',
     '大腿四頭筋',
     '上腕二頭筋',
@@ -2660,7 +2660,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     if (oneRMText.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('1RMを入力してください'),
+          content: Text(AppLocalizations.of(context)!.enterOneRM),
           backgroundColor: Colors.red,
         ),
       );
@@ -2798,7 +2798,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'AI成長予測',
+                    AppLocalizations.of(context)!.aiGrowthPrediction,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -2807,7 +2807,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '40本以上の論文に基づく科学的予測',
+                    AppLocalizations.of(context)!.scientificPrediction,
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.grey.shade700,
@@ -2956,9 +2956,9 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildDropdownField(
-                  label: '性別',
+                  label: AppLocalizations.of(context)!.gender,
                   value: _selectedGender,
-                  items: ['男性', '女性'],
+                  items: [AppLocalizations.of(context)!.genderMale, AppLocalizations.of(context)!.genderFemale],
                   onChanged: (value) {
                     setState(() {
                       _selectedGender = value!;
@@ -3080,7 +3080,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         children: [
           CircularProgressIndicator(),
           SizedBox(height: 16),
-          Text('AIが科学的根拠に基づいて分析中...'),
+          Text(AppLocalizations.of(context)!.aiAnalyzingScientific),
         ],
       ),
     );
@@ -3177,7 +3177,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  '4ヶ月後の予測',
+                  AppLocalizations.of(context)!.fourMonthPrediction,
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
@@ -3274,7 +3274,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     Icon(Icons.psychology, color: Colors.purple.shade700),
                     const SizedBox(width: 8),
                     const Text(
-                      'AI詳細分析',
+                      AppLocalizations.of(context)!.aiDetailedAnalysis,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -3381,7 +3381,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
@@ -3518,7 +3518,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('後で'),
+            child: const Text(AppLocalizations.of(context)!.later),
           ),
           ElevatedButton(
             onPressed: () {
@@ -3647,7 +3647,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         if (_userAge != null)
           _buildDataRow(
             icon: Icons.calendar_today,
-            label: '年齢',
+            label: AppLocalizations.of(context)!.age,
             value: '$_userAge歳',
             actionLabel: '変更',
             onTap: () => Navigator.push(
@@ -3670,10 +3670,10 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         if (_latestBodyWeight != null)
           _buildDataRow(
             icon: Icons.monitor_weight,
-            label: '体重',
+            label: AppLocalizations.of(context)!.bodyWeight,
             value: '${_latestBodyWeight!.toStringAsFixed(1)}kg'
                 '${_weightRecordedAt != null ? " (${_formatDate(_weightRecordedAt!)})" : ""}',
-            actionLabel: '更新',
+            actionLabel: AppLocalizations.of(context)!.update,
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const BodyMeasurementScreen()),
@@ -3800,17 +3800,17 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       },
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return '1RMを入力してください';
+          return AppLocalizations.of(context)!.enterOneRM;
         }
         final weight = double.tryParse(value);
         if (weight == null) {
           return '数値を入力してください';
         }
         if (weight <= 0) {
-          return '1kg以上を入力してください';
+          return AppLocalizations.of(context)!.enterAtLeast1kg;
         }
         if (weight > 500) {
-          return '500kg以下を入力してください';
+          return AppLocalizations.of(context)!.max500kg;
         }
         return null;
       },
@@ -3834,7 +3834,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Weight Ratio（体重比）',
+                  AppLocalizations.of(context)!.weightRatio,
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -3929,12 +3929,12 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
 
   // フォーム入力値
   final _formKey = GlobalKey<FormState>();
-  String _selectedBodyPart = '大胸筋';
+  String _selectedBodyPart = AppLocalizations.of(context)!.musclePecs;
   String _selectedExercise = 'ベンチプレス';  // 種目選択
   int _currentSets = 12;
   int _currentFrequency = 2;
-  String _selectedLevel = '中級者';
-  String _selectedGender = '女性';
+  String _selectedLevel = AppLocalizations.of(context)!.levelIntermediate;
+  String _selectedGender = AppLocalizations.of(context)!.genderFemale;
   bool _enablePlateauDetection = true;  // プラトー検出ON/OFF
 
   // 🆕 Phase 7.5: 自動取得データ
@@ -3952,7 +3952,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
 
   // 部位選択肢
   final List<String> _bodyParts = [
-    '大胸筋',
+    AppLocalizations.of(context)!.musclePecs,
     '広背筋',
     '大腿四頭筋',
     '上腕二頭筋',
@@ -3962,16 +3962,16 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
 
   // 種目選択肢（部位ごと）
   final Map<String, List<String>> _exercisesByBodyPart = {
-    '大胸筋': ['ベンチプレス', 'インクラインベンチプレス', 'ダンベルフライ', 'ディップス'],
-    '広背筋': ['デッドリフト', 'ラットプルダウン', 'ベントオーバーロウ', 'チンニング'],
-    '大腿四頭筋': ['スクワット', 'レッグプレス', 'レッグエクステンション', 'ランジ'],
-    '上腕二頭筋': ['バーベルカール', 'ダンベルカール', 'ハンマーカール', 'プリーチャーカール'],
-    '上腕三頭筋': ['トライセプスプレスダウン', 'ライイングトライセプスエクステンション', 'ディップス', 'クローズグリップベンチプレス'],
-    '三角筋': ['ショルダープレス', 'サイドレイズ', 'フロントレイズ', 'リアレイズ'],
+    AppLocalizations.of(context)!.musclePecs: [AppLocalizations.of(context)!.exerciseBenchPress, 'インクラインベンチプレス', 'ダンベルフライ', AppLocalizations.of(context)!.exerciseDips],
+    '広背筋': [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, AppLocalizations.of(context)!.exerciseBentOverRow, AppLocalizations.of(context)!.exerciseChinUp],
+    '大腿四頭筋': [AppLocalizations.of(context)!.exerciseSquat, AppLocalizations.of(context)!.exerciseLegPress, AppLocalizations.of(context)!.exerciseLegExtension, 'ランジ'],
+    '上腕二頭筋': [AppLocalizations.of(context)!.exerciseBarbellCurl, AppLocalizations.of(context)!.exerciseDumbbellCurl, AppLocalizations.of(context)!.exerciseHammerCurl, 'プリーチャーカール'],
+    '上腕三頭筋': ['トライセプスプレスダウン', 'ライイングトライセプスエクステンション', AppLocalizations.of(context)!.exerciseDips, 'クローズグリップベンチプレス'],
+    '三角筋': [AppLocalizations.of(context)!.exerciseShoulderPress, AppLocalizations.of(context)!.exerciseSideRaise, AppLocalizations.of(context)!.exerciseFrontRaise, 'リアレイズ'],
   };
 
   // レベル選択肢
-  final List<String> _levels = ['初心者', '中級者', '上級者'];
+  final List<String> _levels = [AppLocalizations.of(context)!.levelBeginner, AppLocalizations.of(context)!.levelIntermediate, AppLocalizations.of(context)!.levelAdvanced];
 
   // 現在選択中の部位の種目リスト
   List<String> get _availableExercises => _exercisesByBodyPart[_selectedBodyPart] ?? [];
@@ -4333,7 +4333,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                   // 部位変更時に種目を自動選択
                   _selectedExercise = _availableExercises.isNotEmpty 
                       ? _availableExercises.first 
-                      : 'ベンチプレス';
+                      : AppLocalizations.of(context)!.exerciseBenchPress;
                 });
               },
             ),
@@ -4471,9 +4471,9 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildDropdownField(
-                  label: '性別',
+                  label: AppLocalizations.of(context)!.gender,
                   value: _selectedGender,
-                  items: ['男性', '女性'],
+                  items: [AppLocalizations.of(context)!.genderMale, AppLocalizations.of(context)!.genderFemale],
                   onChanged: (value) {
                     setState(() {
                       _selectedGender = value!;
@@ -4523,7 +4523,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '年齢',
+                    AppLocalizations.of(context)!.age,
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.grey.shade600,
@@ -4675,7 +4675,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         children: [
           CircularProgressIndicator(),
           SizedBox(height: 16),
-          Text('AIが最適なプログラムを分析中...'),
+          Text(AppLocalizations.of(context)!.aiGenerating),
         ],
       ),
     );
@@ -4792,7 +4792,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                     Icon(Icons.psychology, color: Colors.purple.shade700),
                     const SizedBox(width: 8),
                     const Text(
-                      'AI詳細分析',
+                      AppLocalizations.of(context)!.aiDetailedAnalysis,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -4911,7 +4911,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         break;
       default:
         statusColor = Colors.grey;
-        statusLabel = '不明';
+        statusLabel = AppLocalizations.of(context)!.unknown;
     }
 
     return Card(
@@ -4990,7 +4990,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         break;
       default:
         statusColor = Colors.grey;
-        statusLabel = '不明';
+        statusLabel = AppLocalizations.of(context)!.unknown;
     }
 
     return Card(
@@ -5221,7 +5221,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
@@ -5358,7 +5358,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('後で'),
+            child: const Text(AppLocalizations.of(context)!.later),
           ),
           ElevatedButton(
             onPressed: () {

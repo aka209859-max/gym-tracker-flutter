@@ -98,25 +98,25 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   
   // 🔧 v1.0.221: 二頭筋・三頭筋の種目を詳細化（Deep Search結果反映）
   final Map<String, List<String>> _muscleGroupExercises = {
-    '胸': ['ベンチプレス', 'ダンベルプレス', 'インクラインプレス', 'デクラインプレス', 'ダンベルフライ', 'インクラインフライ', 'ケーブルクロスオーバー', 'ケーブルフライ', 'ディップス', 'チェストプレスマシン', 'ペックフライマシン'],
-    '脚': ['バーベルスクワット', 'フロントスクワット', 'ブルガリアンスクワット', 'スクワット', 'レッグプレス', 'レッグエクステンション', 'レッグカール', 'ルーマニアンデッドリフト', 'ランジ', 'レッグアブダクション', 'レッグアダクション', 'カーフレイズ', 'ヒップスラスト'],
-    '背中': ['デッドリフト', 'ラットプルダウン', 'ラットプルダウン（ワイド）', 'ラットプルダウン（ナロー）', 'チンニング', '懸垂', 'ベントオーバーロウ', 'ワンハンドダンベルロウ', 'Tバーロウ', 'シーテッドロウ', 'ケーブルロウ', 'バックエクステンション', 'シュラッグ'],
-    '肩': ['ショルダープレス', 'ダンベルショルダープレス', 'マシンショルダープレス', 'サイドレイズ', 'ケーブルサイドレイズ', 'フロントレイズ', 'リアレイズ', 'リアデルトフライ', 'ケーブルリアレイズ', 'アップライトロウ', 'フェイスプル'],
-    '二頭': ['バーベルカール', 'EZバーカール', 'ダンベルカール', 'ダンベルカール（オルタネイト）', 'ハンマーカール', 'プリチャーカール', 'インクラインダンベルカール', 'コンセントレーションカール', 'ケーブルカール', 'チンアップ（逆手懸垂）', '21カール', 'ドラッグカール', 'ゾットマンカール', 'マシンアームカール'],
-    '三頭': ['トライセプスプレスダウン', 'ケーブルプレスダウン', 'ライイングトライセプスエクステンション', 'スカルクラッシャー', 'オーバーヘッドトライセプスエクステンション', 'ディップス', 'トライセプスキックバック', 'キックバック', 'クローズグリップベンチプレス', 'ケーブルオーバーヘッドエクステンション', 'リバースグリッププレスダウン', 'ダンベルトライセプスエクステンション', 'JMプレス', 'ダイヤモンドプッシュアップ', 'ベンチディップス', 'マシンディップス'],
-    '腹筋': ['クランチ', 'レッグレイズ', 'ハンギングレッグレイズ', 'プランク', 'サイドプランク', 'アブローラー', 'ケーブルクランチ', 'バイシクルクランチ', 'ロシアンツイスト', 'マウンテンクライマー', 'ドラゴンフラッグ', 'アブドミナルクランチマシン'],
-    '有酸素': ['ランニング', 'ランニング（トレッドミル）', 'ジョギング', 'ジョギング（屋外）', 'サイクリング', 'エアロバイク', 'ステッパー', '水泳', 'ローイングマシン', 'ウォーキング', 'ウォーキング（トレッドミル）', 'インターバルラン', 'クロストレーナー', 'バトルロープ', 'バーピージャンプ', 'マウンテンクライマー', 'マウンテンクライマー（高強度）'],
+    AppLocalizations.of(context)!.bodyPartChest: [AppLocalizations.of(context)!.exerciseBenchPress, AppLocalizations.of(context)!.exerciseDumbbellPress, AppLocalizations.of(context)!.exerciseInclinePress, 'デクラインプレス', 'ダンベルフライ', 'インクラインフライ', 'ケーブルクロスオーバー', AppLocalizations.of(context)!.exerciseCableFly, AppLocalizations.of(context)!.exerciseDips, 'チェストプレスマシン', 'ペックフライマシン'],
+    AppLocalizations.of(context)!.bodyPartLegs: ['バーベルスクワット', 'フロントスクワット', 'ブルガリアンスクワット', AppLocalizations.of(context)!.exerciseSquat, AppLocalizations.of(context)!.exerciseLegPress, AppLocalizations.of(context)!.exerciseLegExtension, AppLocalizations.of(context)!.exerciseLegCurl, 'ルーマニアンデッドリフト', 'ランジ', 'レッグアブダクション', 'レッグアダクション', AppLocalizations.of(context)!.exerciseCalfRaise, 'ヒップスラスト'],
+    AppLocalizations.of(context)!.bodyPartBack: [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, 'ラットプルダウン（ワイド）', 'ラットプルダウン（ナロー）', AppLocalizations.of(context)!.exerciseChinUp, AppLocalizations.of(context)!.exercisePullUp, AppLocalizations.of(context)!.exerciseBentOverRow, 'ワンハンドダンベルロウ', 'Tバーロウ', AppLocalizations.of(context)!.exerciseSeatedRow, 'ケーブルロウ', 'バックエクステンション', 'シュラッグ'],
+    AppLocalizations.of(context)!.bodyPartShoulders: [AppLocalizations.of(context)!.exerciseShoulderPress, 'ダンベルショルダープレス', 'マシンショルダープレス', AppLocalizations.of(context)!.exerciseSideRaise, 'ケーブルサイドレイズ', AppLocalizations.of(context)!.exerciseFrontRaise, 'リアレイズ', AppLocalizations.of(context)!.exerciseRearDeltFly, 'ケーブルリアレイズ', AppLocalizations.of(context)!.exerciseUprightRow, 'フェイスプル'],
+    AppLocalizations.of(context)!.bodyPartBiceps: [AppLocalizations.of(context)!.exerciseBarbellCurl, 'EZバーカール', AppLocalizations.of(context)!.exerciseDumbbellCurl, 'ダンベルカール（オルタネイト）', AppLocalizations.of(context)!.exerciseHammerCurl, AppLocalizations.of(context)!.exercisePreacherCurl, 'インクラインダンベルカール', 'コンセントレーションカール', AppLocalizations.of(context)!.exerciseCableCurl, 'チンアップ（逆手懸垂）', '21カール', 'ドラッグカール', 'ゾットマンカール', 'マシンアームカール'],
+    AppLocalizations.of(context)!.bodyPartTriceps: ['トライセプスプレスダウン', 'ケーブルプレスダウン', 'ライイングトライセプスエクステンション', AppLocalizations.of(context)!.exerciseSkullCrusher, 'オーバーヘッドトライセプスエクステンション', AppLocalizations.of(context)!.exerciseDips, 'トライセプスキックバック', AppLocalizations.of(context)!.exerciseKickback, 'クローズグリップベンチプレス', 'ケーブルオーバーヘッドエクステンション', 'リバースグリッププレスダウン', 'ダンベルトライセプスエクステンション', 'JMプレス', 'ダイヤモンドプッシュアップ', 'ベンチディップス', 'マシンディップス'],
+    '腹筋': [AppLocalizations.of(context)!.exerciseCrunch, AppLocalizations.of(context)!.exerciseLegRaise, AppLocalizations.of(context)!.exerciseHangingLegRaise, AppLocalizations.of(context)!.exercisePlank, AppLocalizations.of(context)!.exerciseSidePlank, AppLocalizations.of(context)!.exerciseAbRoller, AppLocalizations.of(context)!.exerciseCableCrunch, AppLocalizations.of(context)!.exerciseBicycleCrunch, 'ロシアンツイスト', 'マウンテンクライマー', 'ドラゴンフラッグ', 'アブドミナルクランチマシン'],
+    AppLocalizations.of(context)!.exerciseCardio: [AppLocalizations.of(context)!.exerciseRunning, 'ランニング（トレッドミル）', 'ジョギング', 'ジョギング（屋外）', 'サイクリング', AppLocalizations.of(context)!.exerciseAerobicBike, 'ステッパー', '水泳', 'ローイングマシン', 'ウォーキング', 'ウォーキング（トレッドミル）', 'インターバルラン', 'クロストレーナー', 'バトルロープ', 'バーピージャンプ', 'マウンテンクライマー', 'マウンテンクライマー（高強度）'],
   };
   
   // 有酸素運動かどうかを判定
   bool _isCardioExercise(String exerciseName) {
-    final cardioExercises = _muscleGroupExercises['有酸素'] ?? [];
+    final cardioExercises = _muscleGroupExercises[AppLocalizations.of(context)!.exerciseCardio] ?? [];
     return cardioExercises.contains(exerciseName);
   }
   
   // 懸垂系種目かどうかを判定
   bool _isPullUpExercise(String exerciseName) {
-    final pullUpVariations = ['懸垂', 'チンニング', 'プルアップ', 'チンアップ', 'ワイドグリッププルアップ'];
+    final pullUpVariations = [AppLocalizations.of(context)!.exercisePullUp, AppLocalizations.of(context)!.exerciseChinUp, 'プルアップ', 'チンアップ', 'ワイドグリッププルアップ'];
     return pullUpVariations.any((variation) => exerciseName.contains(variation));
   }
   
@@ -205,7 +205,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         
         // 2. レベルと1RMに基づいて推奨重量・回数を決定
         final recommendation = _getRecommendedWeightAndReps(
-          userLevel ?? '初心者',
+          userLevel ?? AppLocalizations.of(context)!.levelBeginner,
           oneRM,
           aiWeight,
           aiReps,
@@ -362,15 +362,15 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     int reps;
     
     switch (userLevel) {
-      case '初心者':
+      case AppLocalizations.of(context)!.levelBeginner:
         percentage = 0.65; // 65%
         reps = 12;
         break;
-      case '中級者':
+      case AppLocalizations.of(context)!.levelIntermediate:
         percentage = 0.75; // 75%
         reps = 10;
         break;
-      case '上級者':
+      case AppLocalizations.of(context)!.levelAdvanced:
         percentage = 0.80; // 80%
         reps = 8;
         break;
@@ -495,7 +495,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         }
         
         // 🔧 v1.0.243: 種目名から部位を逆引き
-        String bodyPart = 'その他';
+        String bodyPart = AppLocalizations.of(context)!.bodyPartOther;
         for (final entry in _muscleGroupExercises.entries) {
           if (entry.value.contains(set.exerciseName)) {
             bodyPart = entry.key;
@@ -603,13 +603,13 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       final Map<String, List<String>> customOnly = {};
       
       final defaultExercises = {
-        '胸': ['ベンチプレス', 'ダンベルプレス', 'インクラインプレス', 'ケーブルフライ', 'ディップス'],
-        '脚': ['スクワット', 'レッグプレス', 'レッグエクステンション', 'レッグカール', 'カーフレイズ'],
-        '背中': ['デッドリフト', 'ラットプルダウン', 'ベントオーバーロウ', 'シーテッドロウ', '懸垂'],
-        '肩': ['ショルダープレス', 'サイドレイズ', 'フロントレイズ', 'リアデルトフライ', 'アップライトロウ'],
-        '二頭': ['バーベルカール', 'ダンベルカール', 'ハンマーカール', 'プリチャーカール', 'ケーブルカール'],
-        '三頭': ['トライセプスエクステンション', 'スカルクラッシャー', 'ケーブルプッシュダウン', 'ディップス', 'キックバック'],
-        '有酸素': ['ランニング', 'サイクリング', 'エアロバイク', 'ステッパー', '水泳'],
+        AppLocalizations.of(context)!.bodyPartChest: [AppLocalizations.of(context)!.exerciseBenchPress, AppLocalizations.of(context)!.exerciseDumbbellPress, AppLocalizations.of(context)!.exerciseInclinePress, AppLocalizations.of(context)!.exerciseCableFly, AppLocalizations.of(context)!.exerciseDips],
+        AppLocalizations.of(context)!.bodyPartLegs: [AppLocalizations.of(context)!.exerciseSquat, AppLocalizations.of(context)!.exerciseLegPress, AppLocalizations.of(context)!.exerciseLegExtension, AppLocalizations.of(context)!.exerciseLegCurl, AppLocalizations.of(context)!.exerciseCalfRaise],
+        AppLocalizations.of(context)!.bodyPartBack: [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, AppLocalizations.of(context)!.exerciseBentOverRow, AppLocalizations.of(context)!.exerciseSeatedRow, AppLocalizations.of(context)!.exercisePullUp],
+        AppLocalizations.of(context)!.bodyPartShoulders: [AppLocalizations.of(context)!.exerciseShoulderPress, AppLocalizations.of(context)!.exerciseSideRaise, AppLocalizations.of(context)!.exerciseFrontRaise, AppLocalizations.of(context)!.exerciseRearDeltFly, AppLocalizations.of(context)!.exerciseUprightRow],
+        AppLocalizations.of(context)!.bodyPartBiceps: [AppLocalizations.of(context)!.exerciseBarbellCurl, AppLocalizations.of(context)!.exerciseDumbbellCurl, AppLocalizations.of(context)!.exerciseHammerCurl, AppLocalizations.of(context)!.exercisePreacherCurl, AppLocalizations.of(context)!.exerciseCableCurl],
+        AppLocalizations.of(context)!.bodyPartTriceps: [AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseSkullCrusher, 'ケーブルプッシュダウン', AppLocalizations.of(context)!.exerciseDips, AppLocalizations.of(context)!.exerciseKickback],
+        AppLocalizations.of(context)!.exerciseCardio: [AppLocalizations.of(context)!.exerciseRunning, 'サイクリング', AppLocalizations.of(context)!.exerciseAerobicBike, 'ステッパー', '水泳'],
       };
       
       _muscleGroupExercises.forEach((muscleGroup, exercises) {
@@ -790,7 +790,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       print('📍 スタックトレース: $stackTrace');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('データ読み込みエラー: $e'), backgroundColor: Colors.red),
+          SnackBar(content: Text(AppLocalizations.of(context)!.dataLoadError), backgroundColor: Colors.red),
         );
       }
     }
@@ -967,7 +967,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               ),
             ),
             child: const Text(
-              'OK',
+              AppLocalizations.of(context)!.ok,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
@@ -1013,7 +1013,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   children: [
                     TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: const Text('キャンセル', style: TextStyle(color: Colors.red)),
+                      child: const Text(AppLocalizations.of(context)!.cancel, style: TextStyle(color: Colors.red)),
                     ),
                     const Text(
                       '休憩時間を設定',
@@ -1160,7 +1160,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('キャンセル'),
+              child: const Text(AppLocalizations.of(context)!.cancel),
             ),
           ],
         ),
@@ -1257,7 +1257,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () {
@@ -1265,7 +1265,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               final reps = double.tryParse(repsController.text) ?? 10.0;
               Navigator.pop(context, {'weight': weight, 'reps': reps});
             },
-            child: const Text('適用'),
+            child: const Text(AppLocalizations.of(context)!.apply),
           ),
         ],
       ),
@@ -1316,13 +1316,13 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   // カスタム種目かどうかを判定
   bool _isCustomExercise(String exerciseName) {
     final defaultExercises = {
-      '胸': ['ベンチプレス', 'ダンベルプレス', 'インクラインプレス', 'ケーブルフライ', 'ディップス'],
-      '脚': ['スクワット', 'レッグプレス', 'レッグエクステンション', 'レッグカール', 'カーフレイズ'],
-      '背中': ['デッドリフト', 'ラットプルダウン', 'ベントオーバーロウ', 'シーテッドロウ', '懸垂'],
-      '肩': ['ショルダープレス', 'サイドレイズ', 'フロントレイズ', 'リアデルトフライ', 'アップライトロウ'],
-      '二頭': ['バーベルカール', 'ダンベルカール', 'ハンマーカール', 'プリチャーカール', 'ケーブルカール'],
-      '三頭': ['トライセプスエクステンション', 'スカルクラッシャー', 'ケーブルプッシュダウン', 'ディップス', 'キックバック'],
-      '有酸素': ['ランニング', 'サイクリング', 'エアロバイク', 'ステッパー', '水泳'],
+      AppLocalizations.of(context)!.bodyPartChest: [AppLocalizations.of(context)!.exerciseBenchPress, AppLocalizations.of(context)!.exerciseDumbbellPress, AppLocalizations.of(context)!.exerciseInclinePress, AppLocalizations.of(context)!.exerciseCableFly, AppLocalizations.of(context)!.exerciseDips],
+      AppLocalizations.of(context)!.bodyPartLegs: [AppLocalizations.of(context)!.exerciseSquat, AppLocalizations.of(context)!.exerciseLegPress, AppLocalizations.of(context)!.exerciseLegExtension, AppLocalizations.of(context)!.exerciseLegCurl, AppLocalizations.of(context)!.exerciseCalfRaise],
+      AppLocalizations.of(context)!.bodyPartBack: [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, AppLocalizations.of(context)!.exerciseBentOverRow, AppLocalizations.of(context)!.exerciseSeatedRow, AppLocalizations.of(context)!.exercisePullUp],
+      AppLocalizations.of(context)!.bodyPartShoulders: [AppLocalizations.of(context)!.exerciseShoulderPress, AppLocalizations.of(context)!.exerciseSideRaise, AppLocalizations.of(context)!.exerciseFrontRaise, AppLocalizations.of(context)!.exerciseRearDeltFly, AppLocalizations.of(context)!.exerciseUprightRow],
+      AppLocalizations.of(context)!.bodyPartBiceps: [AppLocalizations.of(context)!.exerciseBarbellCurl, AppLocalizations.of(context)!.exerciseDumbbellCurl, AppLocalizations.of(context)!.exerciseHammerCurl, AppLocalizations.of(context)!.exercisePreacherCurl, AppLocalizations.of(context)!.exerciseCableCurl],
+      AppLocalizations.of(context)!.bodyPartTriceps: [AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseSkullCrusher, 'ケーブルプッシュダウン', AppLocalizations.of(context)!.exerciseDips, AppLocalizations.of(context)!.exerciseKickback],
+      AppLocalizations.of(context)!.exerciseCardio: [AppLocalizations.of(context)!.exerciseRunning, 'サイクリング', AppLocalizations.of(context)!.exerciseAerobicBike, 'ステッパー', '水泳'],
     };
     
     final defaults = defaultExercises[_selectedMuscleGroup] ?? [];
@@ -1339,12 +1339,12 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('削除'),
+            child: const Text(AppLocalizations.of(context)!.remove),
           ),
         ],
       ),
@@ -1372,7 +1372,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     final result = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('カスタム種目を追加'),
+        title: const Text(AppLocalizations.of(context)!.addCustomExercise),
         content: TextField(
           controller: controller,
           decoration: const InputDecoration(
@@ -1384,11 +1384,11 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, controller.text),
-            child: const Text('追加'),
+            child: const Text(AppLocalizations.of(context)!.add),
           ),
         ],
       ),
@@ -1421,7 +1421,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       return DateFormat('yyyy年M月d日(E)', 'ja_JP').format(date);
     } catch (e) {
       // Web環境やロケール初期化失敗時のフォールバック
-      const weekdays = ['月', '火', '水', '木', '金', '土', '日'];
+      const weekdays = [AppLocalizations.of(context)!.mon, AppLocalizations.of(context)!.tue, AppLocalizations.of(context)!.wed, AppLocalizations.of(context)!.thu, AppLocalizations.of(context)!.fri, AppLocalizations.of(context)!.sat, AppLocalizations.of(context)!.sun];
       final weekday = weekdays[(date.weekday - 1) % 7];
       return '${date.year}年${date.month}月${date.day}日($weekday)';
     }
@@ -1432,7 +1432,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     final user = firebase_auth.FirebaseAuth.instance.currentUser;
     if (user == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('ログインが必要です')),
+        const SnackBar(content: Text(AppLocalizations.of(context)!.loginRequired)),
       );
       return;
     }
@@ -1744,7 +1744,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('保存エラー: $e'),
+            content: Text(AppLocalizations.of(context)!.saveFailed),
             duration: const Duration(seconds: 5),
             backgroundColor: Colors.red,
           ),
@@ -1761,7 +1761,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('トレーニング記録'),
+          title: const Text(AppLocalizations.of(context)!.trainingLog),
           backgroundColor: theme.colorScheme.primary,
           foregroundColor: Colors.white,
           actions: [
@@ -1948,7 +1948,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                         IconButton(
                           icon: const Icon(Icons.copy),
                           onPressed: () => _copyExerciseSets(exercise),
-                          tooltip: 'セットをコピー',
+                          tooltip: AppLocalizations.of(context)!.copySet,
                         ),
                       if (isCustomExercise)
                         IconButton(
@@ -1986,7 +1986,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 child: Row(
                   children: [
                     const Text(
-                      'セット',
+                      AppLocalizations.of(context)!.sets,
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     const Spacer(),
@@ -1995,12 +1995,12 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                       segments: const [
                         ButtonSegment(
                           value: WorkoutTypeFilter.strength,
-                          label: Text('筋トレ', style: TextStyle(fontSize: 13)),
+                          label: Text(AppLocalizations.of(context)!.strengthTrainingFilter, style: TextStyle(fontSize: 13)),
                           icon: Icon(Icons.fitness_center, size: 18),
                         ),
                         ButtonSegment(
                           value: WorkoutTypeFilter.cardio,
-                          label: Text('有酸素', style: TextStyle(fontSize: 13)),
+                          label: Text(AppLocalizations.of(context)!.exerciseCardio, style: TextStyle(fontSize: 13)),
                           icon: Icon(Icons.directions_run, size: 18),
                         ),
                       ],
@@ -2189,7 +2189,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                         // v1.0.225-hotfix: Map形式の履歴データに対応
                         final exerciseHistory = _aiCoachData?['exerciseHistory'];
                         final oneRM = _calculate1RMFromHistory(exerciseName, exerciseHistory);
-                        final userLevel = _aiCoachData?['userLevel'] as String? ?? '初心者';
+                        final userLevel = _aiCoachData?['userLevel'] as String? ?? AppLocalizations.of(context)!.levelBeginner;
                         
                         if (oneRM != null && oneRM > 0) {
                           return Column(
@@ -2460,7 +2460,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                                     width: !set.isTimeMode ? 2 : 1,
                                   ),
                                 ),
-                                child: const Text('回数', style: TextStyle(fontSize: 12)),
+                                child: const Text(AppLocalizations.of(context)!.repsCount, style: TextStyle(fontSize: 12)),
                               ),
                             ),
                             const SizedBox(width: 4),
@@ -2484,7 +2484,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                                     width: set.isTimeMode ? 2 : 1,
                                   ),
                                 ),
-                                child: const Text('秒数', style: TextStyle(fontSize: 12)),
+                                child: const Text(AppLocalizations.of(context)!.seconds, style: TextStyle(fontSize: 12)),
                               ),
                             ),
                           ],
@@ -2525,8 +2525,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     labelText: set.isCardio // 🔧 v1.0.226+242: Use stored flag
                         ? (ExerciseMasterData.cardioUsesDistance(set.exerciseName) ? '距離 (km)' : '回数') // 🔧 v1.0.251: Distance vs Reps for cardio
                         : _isAbsExercise(set.exerciseName)
-                            ? (set.isTimeMode ? '秒数' : '回数')
-                            : '回数',
+                            ? (set.isTimeMode ? AppLocalizations.of(context)!.seconds : AppLocalizations.of(context)!.repsCount)
+                            : AppLocalizations.of(context)!.repsCount,
                     border: const OutlineInputBorder(),
                     contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   ),
@@ -2608,7 +2608,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 },
               ),
               ChoiceChip(
-                label: const Text('限界', style: TextStyle(fontSize: 12)),
+                label: const Text(AppLocalizations.of(context)!.limit, style: TextStyle(fontSize: 12)),
                 selected: set.setType == SetType.failure,
                 onSelected: (selected) {
                   if (selected) {
@@ -2661,7 +2661,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     set.isCompleted ? Icons.check_circle : Icons.check_circle_outline,
                     size: 18,
                   ),
-                  label: Text(set.isCompleted ? '完了' : '未完了'),
+                  label: Text(set.isCompleted ? AppLocalizations.of(context)!.complete : '未完了'),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: set.isCompleted ? Colors.green : Colors.grey,
                     side: BorderSide(
@@ -2688,7 +2688,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     final date = lastData['date'] as DateTime?;
     final dateStr = date != null 
         ? '${date.month}/${date.day}'
-        : '不明';
+        : AppLocalizations.of(context)!.unknown;
     
     // シンプルに前回の1セットのみ表示（前々回は表示しない）
     // ✅ v1.0.181: 秒数モードの場合は「秒」と表示
@@ -2763,7 +2763,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 Navigator.pop(context);
               }
             },
-            child: const Text('後で'),
+            child: const Text(AppLocalizations.of(context)!.later),
           ),
           ElevatedButton(
             onPressed: () async {

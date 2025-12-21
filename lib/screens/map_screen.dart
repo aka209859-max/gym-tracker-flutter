@@ -86,7 +86,7 @@ class _MapScreenState extends State<MapScreen> {
                 Navigator.pop(context);
               }
             },
-            child: const Text('後で'),
+            child: const Text(AppLocalizations.of(context)!.later),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -165,7 +165,7 @@ class _MapScreenState extends State<MapScreen> {
               backgroundColor: Colors.orange,
               duration: const Duration(seconds: 5),
               action: SnackBarAction(
-                label: '再試行',
+                label: AppLocalizations.of(context)!.tryAgain,
                 textColor: Colors.white,
                 onPressed: _acquireLocationAndSearch,
               ),
@@ -238,7 +238,7 @@ class _MapScreenState extends State<MapScreen> {
             facilities: place.types,
             phoneNumber: '',
             openingHours: place.openNow != null 
-                ? (place.openNow! ? '営業中' : '営業時間外')
+                ? (place.openNow! ? AppLocalizations.of(context)!.open : '営業時間外')
                 : '営業時間不明',
             monthlyFee: 0,
             rating: place.rating ?? 0.0,
@@ -332,7 +332,7 @@ class _MapScreenState extends State<MapScreen> {
               backgroundColor: Colors.red,
               duration: const Duration(seconds: 3),
               action: SnackBarAction(
-                label: '再試行',
+                label: AppLocalizations.of(context)!.tryAgain,
                 textColor: Colors.white,
                 onPressed: _acquireLocationAndSearch,
               ),
@@ -519,7 +519,7 @@ class _MapScreenState extends State<MapScreen> {
                 child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
               )
             : const Icon(Icons.my_location),
-        label: Text(_isLoadingGPS ? '検索中...' : '現在地'),
+        label: Text(_isLoadingGPS ? '検索中...' : AppLocalizations.of(context)!.currentLocation),
       ),
     );
   }
@@ -830,14 +830,14 @@ class _MapScreenState extends State<MapScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('キャンセル'),
+            child: const Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
               setState(() {}); // 外側のStateも更新
             },
-            child: const Text('適用'),
+            child: const Text(AppLocalizations.of(context)!.apply),
           ),
         ],
       ),
@@ -849,15 +849,15 @@ class _MapScreenState extends State<MapScreen> {
       case 1:
         return '空いています';
       case 2:
-        return 'やや空き';
+        return AppLocalizations.of(context)!.moderatelyEmpty;
       case 3:
-        return '普通';
+        return AppLocalizations.of(context)!.normal;
       case 4:
-        return 'やや混雑';
+        return AppLocalizations.of(context)!.moderatelyCrowded;
       case 5:
         return '超混雑';
       default:
-        return '不明';
+        return AppLocalizations.of(context)!.unknown;
     }
   }
 

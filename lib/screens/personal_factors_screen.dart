@@ -218,7 +218,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
             ),
             const Divider(height: 24),
             Text(
-              '最終更新: ${_currentProfile?.lastUpdated != null ? _formatDateTime(_currentProfile!.lastUpdated) : "未設定"}',
+              '最終更新: ${_currentProfile?.lastUpdated != null ? _formatDateTime(_currentProfile!.lastUpdated) : AppLocalizations.of(context)!.notSet}',
               style: TextStyle(fontSize: 12, color: Colors.grey[600]),
             ),
           ],
@@ -257,7 +257,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               textInputAction: TextInputAction.next,
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
               decoration: const InputDecoration(
-                labelText: '年齢',
+                labelText: AppLocalizations.of(context)!.age,
                 suffixText: '歳',
                 helperText: '<25歳: 0.95x, 40-50歳: 1.05x, 50+歳: 1.10x',
                 helperMaxLines: 2,
@@ -320,7 +320,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
               decoration: const InputDecoration(
                 labelText: '昨晩の睡眠時間',
-                suffixText: '時間',
+                suffixText: AppLocalizations.of(context)!.time,
                 helperText: '<6時間: 1.15x, 8+時間: 0.95x',
                 helperMaxLines: 2,
                 prefixIcon: Icon(Icons.bedtime),
@@ -407,7 +407,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                 Icon(Icons.science, size: 16, color: Colors.grey[700]),
                 const SizedBox(width: 8),
                 Text(
-                  '科学的根拠',
+                  AppLocalizations.of(context)!.scientificBasis,
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -497,7 +497,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('閉じる'),
+            child: const Text(AppLocalizations.of(context)!.readLess),
           ),
         ],
       ),

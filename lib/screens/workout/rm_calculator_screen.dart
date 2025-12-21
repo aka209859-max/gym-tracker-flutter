@@ -143,7 +143,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
             textInputAction: TextInputAction.done,
             onEditingComplete: () => FocusScope.of(context).unfocus(),
             decoration: InputDecoration(
-              labelText: '回数',
+              labelText: AppLocalizations.of(context)!.repsCount,
               hintText: '例: 5',
               prefixIcon: const Icon(Icons.repeat),
               border: OutlineInputBorder(
