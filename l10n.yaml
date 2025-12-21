@@ -7,14 +7,14 @@ arb-dir: lib/l10n
 # テンプレートARBファイル（日本語がベース）
 template-arb-file: app_ja.arb
 
-# 出力先ディレクトリ（lib/gen/に生成）
-output-dir: lib/gen
+# 出力先ディレクトリ（lib/generated/に生成）
+output-dir: lib/generated
 
 # 出力ファイル名
-output-localization-file: l10n.dart
+output-localization-file: app_localizations.dart
 
 # 生成されるクラス名
-output-class: L10n
+output-class: AppLocalizations
 
 # nullableな型を使用
 nullable-getter: false
