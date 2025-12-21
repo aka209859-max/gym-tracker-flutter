@@ -30,6 +30,7 @@ import '../services/enhanced_share_service.dart';
 import '../models/training_partner.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// プロフィール画面
 class ProfileScreen extends StatefulWidget {
@@ -522,14 +523,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('プロフィール'),
+        title: Text(l10n.navProfile),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () => _showSettingsMenu(context),
-            tooltip: '設定',
+            tooltip: l10n.settings,
           ),
         ],
       ),
