@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:gym_match/generated/app_localizations.dart';
 import '../providers/gym_provider.dart';
 import '../models/gym.dart';
 import 'gym_detail_screen.dart';
@@ -17,9 +18,10 @@ class _GymListScreenState extends State<GymListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ジム一覧'),
+        title: Text(l10n.gymList),
         actions: [
           PopupMenuButton<String>(
             icon: const Icon(Icons.sort),

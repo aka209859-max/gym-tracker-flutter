@@ -629,5 +629,186 @@
   "legal": "法的情報",
   "privacyPolicy": "プライバシーポリシー",
   "termsOfService": "利用規約",
-  "licenses": "ライセンス"
+  "licenses": "ライセンス",
+  
+  "todaysWorkoutLog": "今日のトレーニング記録",
+  "noTodaysWorkout": "今日のトレーニング記録がありません",
+  "addFirstRecord": "最初の記録を追加",
+  "backToHome": "ホームに戻る",
+  "noExercisesToShare": "シェアできる種目がありません",
+  "shareFailed": "シェアに失敗しました",
+  "shareError": "シェアエラー: {error}",
+  "@shareError": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  
+  "sortByRating": "評価順",
+  "sortByCrowd": "混雑度順",
+  "sortByPrice": "料金順",
+  "sortByDistance": "距離順",
+  "sortByName": "名前順",
+  
+  "filterAll": "すべて",
+  "filterOpen": "営業中",
+  "filterNearby": "近く",
+  
+  "searchHint": "検索",
+  "searchGyms": "ジムを検索",
+  "searchResults": "検索結果",
+  "noSearchResults": "検索結果が見つかりません",
+  
+  "map": "マップ",
+  "list": "リスト",
+  "details": "詳細",
+  
+  "open": "営業中",
+  "closed": "閉店",
+  "openingSoon": "まもなく営業開始",
+  "closingSoon": "まもなく閉店",
+  
+  "viewOnMap": "地図で見る",
+  "getDirections": "ルート",
+  "call": "電話",
+  "website": "ウェブサイト",
+  "share": "共有",
+  
+  "reviews": "レビュー",
+  "review": "レビュー",
+  "writeReview": "レビューを書く",
+  "noReviews": "レビューがありません",
+  "readMore": "もっと見る",
+  "readLess": "閉じる",
+  
+  "photos": "写真",
+  "noPhotos": "写真がありません",
+  "addPhoto": "写真を追加",
+  
+  "amenities": "設備",
+  "equipment": "器具",
+  "classes": "クラス",
+  "trainers": "トレーナー",
+  
+  "membership": "会員プラン",
+  "dayPass": "一日券",
+  "monthlyPass": "月額プラン",
+  "yearlyPass": "年間プラン",
+  
+  "hours": "営業時間",
+  "mon": "月",
+  "tue": "火",
+  "wed": "水",
+  "thu": "木",
+  "fri": "金",
+  "sat": "土",
+  "sun": "日",
+  
+  "monday": "月曜日",
+  "tuesday": "火曜日",
+  "wednesday": "水曜日",
+  "thursday": "木曜日",
+  "friday": "金曜日",
+  "saturday": "土曜日",
+  "sunday": "日曜日",
+  
+  "allDay": "24時間",
+  "closed": "休業",
+  
+  "reportIssue": "問題を報告",
+  "reportIncorrectInfo": "情報が間違っています",
+  "reportClosed": "閉業しました",
+  "reportOther": "その他",
+  
+  "thankYou": "ありがとうございます",
+  "submitted": "送信しました",
+  "submitting": "送信中...",
+  
+  "signInRequired": "ログインが必要です",
+  "signInToContinue": "続行するにはログインしてください",
+  "signInWithEmail": "メールアドレスでログイン",
+  "signInWithGoogle": "Googleでログイン",
+  "signInWithApple": "Appleでログイン",
+  
+  "createAccount": "アカウントを作成",
+  "alreadyHaveAccount": "アカウントをお持ちの方",
+  "dontHaveAccount": "アカウントをお持ちでない方",
+  
+  "emailAddress": "メールアドレス",
+  "enterEmail": "メールアドレスを入力",
+  "enterPassword": "パスワードを入力",
+  "enterName": "名前を入力",
+  
+  "invalidEmail": "無効なメールアドレス",
+  "invalidPassword": "無効なパスワード",
+  "passwordTooShort": "パスワードが短すぎます",
+  "passwordsDoNotMatch": "パスワードが一致しません",
+  
+  "signUpSuccess": "登録が完了しました",
+  "signInSuccess": "ログインしました",
+  "signOutSuccess": "ログアウトしました",
+  
+  "verifyEmail": "メールアドレスを確認",
+  "verificationEmailSent": "確認メールを送信しました",
+  "resendVerificationEmail": "確認メールを再送信",
+  
+  "updateProfile": "プロフィールを更新",
+  "updateProfileSuccess": "プロフィールを更新しました",
+  "updateProfileError": "プロフィールの更新に失敗しました",
+  
+  "uploadPhoto": "写真をアップロード",
+  "uploadPhotoSuccess": "写真をアップロードしました",
+  "uploadPhotoError": "写真のアップロードに失敗しました",
+  
+  "deleteConfirm": "削除の確認",
+  "deleteMessage": "本当に削除しますか？",
+  "deleteSuccess": "削除しました",
+  "deleteError": "削除に失敗しました",
+  
+  "saveChanges": "変更を保存",
+  "discardChanges": "変更を破棄",
+  "unsavedChanges": "保存されていない変更があります",
+  
+  "premium": "プレミアム",
+  "premiumFeatures": "プレミアム機能",
+  "upgradeToPremium": "プレミアムにアップグレード",
+  "freeTrial": "無料トライアル",
+  "startFreeTrial": "無料トライアルを開始",
+  
+  "subscribe": "購読",
+  "unsubscribe": "購読解除",
+  "subscribed": "購読中",
+  "subscription": "サブスクリプション",
+  "subscriptionStatus": "購読状況",
+  
+  "monthly": "月額",
+  "yearly": "年額",
+  "lifetime": "永久",
+  
+  "price": "価格",
+  "total": "合計",
+  "subtotal": "小計",
+  "tax": "税",
+  "discount": "割引",
+  
+  "paymentMethod": "支払い方法",
+  "addPaymentMethod": "支払い方法を追加",
+  "creditCard": "クレジットカード",
+  "debitCard": "デビットカード",
+  
+  "cardNumber": "カード番号",
+  "expiryDate": "有効期限",
+  "cvv": "CVV",
+  "billingAddress": "請求先住所",
+  
+  "purchase": "購入",
+  "purchaseSuccess": "購入が完了しました",
+  "purchaseError": "購入に失敗しました",
+  "purchaseCancelled": "購入がキャンセルされました",
+  
+  "restore": "復元",
+  "restorePurchases": "購入を復元",
+  "restoreSuccess": "復元しました",
+  "restoreError": "復元に失敗しました",
+  "noPurchasesToRestore": "復元する購入がありません"
 }

@@ -599,5 +599,13 @@
   "legal": "Legal",
   "privacyPolicy": "Privacy Policy",
   "termsOfService": "Terms of Service",
-  "licenses": "Licenses"
+  "licenses": "Licenses",
+  
+  "todaysWorkoutLog": "Today's Workout",
+  "noTodaysWorkout": "No workout today",
+  "addFirstRecord": "Add first record",
+  "backToHome": "Back to Home",
+  "noExercisesToShare": "No exercises to share",
+  "shareFailed": "Share failed",
+  "shareError": "Share error: {error}"
 }
