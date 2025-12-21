@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../providers/locale_provider.dart';
 
 /// 言語設定画面
@@ -12,10 +13,11 @@ class LanguageSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final localeProvider = Provider.of<LocaleProvider>(context);
     final currentLocale = localeProvider.locale;
+    final l10n = AppLocalizations.of(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('言語設定'),
+        title: Text(l10n?.languageSettings ?? '言語設定'),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -37,6 +39,8 @@ class LanguageSettingsScreen extends StatelessWidget {
                 fontSize: 16,
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
               ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
             subtitle: Text(
               localeInfo.name,
@@ -44,6 +48,8 @@ class LanguageSettingsScreen extends StatelessWidget {
                 fontSize: 14,
                 color: Colors.grey[600],
               ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
             trailing: isSelected
                 ? const Icon(
@@ -59,8 +65,9 @@ class LanguageSettingsScreen extends StatelessWidget {
                 // スナックバーで通知
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('言語を${localeInfo.nativeName}に変更しました'),
+                    content: Text('${localeInfo.nativeName}に変更しました'),
                     duration: const Duration(seconds: 2),
+                    behavior: SnackBarBehavior.floating,
                   ),
                 );
               }

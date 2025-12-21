@@ -27,6 +27,9 @@ class LocaleProvider extends ChangeNotifier {
   
   Locale get locale => _locale;
   
+  bool _isInitialized = false;
+  bool get isInitialized => _isInitialized;
+  
   LocaleProvider() {
     _loadLocale();
   }
@@ -42,12 +45,16 @@ class LocaleProvider extends ChangeNotifier {
         final isSupported = supportedLocales.any((info) => info.locale.languageCode == languageCode);
         if (isSupported) {
           _locale = Locale(languageCode);
-          notifyListeners();
           print('✅ 保存された言語設定を読み込み: $languageCode');
+        } else {
+          print('⚠️ サポートされていない言語コード: $languageCode (デフォルト: ja)');
         }
       }
     } catch (e) {
-      print('⚠️ 言語設定の読み込みに失敗: $e');
+      print('⚠️ 言語設定の読み込みに失敗: $e (デフォルト: ja)');
+    } finally {
+      _isInitialized = true;
+      notifyListeners();
     }
   }
   
