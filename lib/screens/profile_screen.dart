@@ -15,6 +15,7 @@ import 'settings/tokutei_shoutorihikihou_screen.dart';
 import 'workout_import_preview_screen.dart';
 import 'achievements_screen.dart';
 import 'personal_factors_screen.dart';
+import 'language_settings_screen.dart';
 import 'campaign/campaign_registration_screen.dart';
 import 'ai_addon_purchase_screen.dart';
 import 'profile_edit_screen.dart';
@@ -1156,6 +1157,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushNamed('/personal-factors');
+              },
+            ),
+            // メニュー項目3: 言語設定
+            ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.green.shade50,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(
+                  Icons.language,
+                  color: Colors.green.shade700,
+                ),
+              ),
+              title: const Text(
+                '言語設定',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              subtitle: const Text('6言語対応 - グローバル展開中'),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LanguageSettingsScreen(),
+                  ),
+                );
               },
             ),
             const Divider(height: 20),
