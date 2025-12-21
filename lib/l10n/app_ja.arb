@@ -2,7 +2,6 @@
   "@@locale": "ja",
   "@@context": "GYM MATCH v1.04 - 日本語ベース多言語対応ファイル",
   
-  "_comment_app_info": "===== アプリ基本情報 =====",
   "appName": "GYM MATCH",
   "@appName": {
     "description": "アプリケーション名"
@@ -12,14 +11,12 @@
     "description": "アプリのキャッチコピー"
   },
   
-  "_comment_navigation": "===== ナビゲーション =====",
   "navHome": "ホーム",
   "navGym": "ジム",
   "navWorkout": "記録",
   "navAI": "AI",
   "navProfile": "プロフィール",
   
-  "_comment_common": "===== 共通ボタン・アクション =====",
   "save": "保存",
   "cancel": "キャンセル",
   "delete": "削除",
@@ -35,7 +32,6 @@
   "retry": "再試行",
   "confirm": "確認",
   
-  "_comment_auth": "===== 認証・ログイン =====",
   "login": "ログイン",
   "logout": "ログアウト",
   "signUp": "新規登録",
@@ -43,7 +39,6 @@
   "password": "パスワード",
   "forgotPassword": "パスワードをお忘れですか？",
   
-  "_comment_gym_search": "===== ジム検索 =====",
   "searchGym": "ジムを検索",
   "nearbyGyms": "近くのジム",
   "gymDetails": "ジム詳細",
@@ -56,7 +51,6 @@
   "crowdLevelCrowded": "混雑",
   "crowdLevelVeryCrowded": "非常に混雑",
   
-  "_comment_workout": "===== トレーニング記録 =====",
   "workout": "トレーニング",
   "addWorkout": "記録を追加",
   "workoutHistory": "トレーニング履歴",
@@ -85,12 +79,10 @@
   "bodyPartAbs": "腹",
   "bodyPartCardio": "有酸素",
   
-  "_comment_workout_types": "===== トレーニングタイプ =====",
   "strengthTraining": "筋トレ",
   "cardio": "有酸素運動",
   "workoutTypeFilter": "タイプ絞り込み",
   
-  "_comment_pr": "===== 自己ベスト(PR) =====",
   "personalRecords": "自己ベスト",
   "prTitle": "PR記録",
   "prAchieved": "達成",
@@ -113,7 +105,6 @@
     }
   },
   
-  "_comment_ai": "===== AI機能 =====",
   "aiCoach": "AIコーチ",
   "aiMenu": "AIメニュー提案",
   "aiGrowthPrediction": "成長予測",
@@ -131,7 +122,6 @@
   "scientificBasis": "科学的根拠",
   "basedOnPapers": "40本以上の論文に基づく",
   
-  "_comment_subscription": "===== サブスクリプション =====",
   "subscription": "プラン管理",
   "freePlan": "無料プラン",
   "premiumPlan": "Premium",
@@ -171,7 +161,6 @@
   "noAds": "広告なし",
   "adSupported": "広告表示あり",
   
-  "_comment_profile": "===== プロフィール =====",
   "profile": "プロフィール",
   "editProfile": "プロフィール編集",
   "settings": "設定",
@@ -181,7 +170,6 @@
   "weight": "体重",
   "goal": "目標",
   
-  "_comment_stats": "===== 統計・レポート =====",
   "statistics": "統計",
   "weeklyReport": "週次レポート",
   "totalVolume": "総重量",
@@ -189,7 +177,6 @@
   "totalSets": "総セット数",
   "workoutCount": "トレーニング回数",
   
-  "_comment_errors": "===== エラーメッセージ =====",
   "error": "エラー",
   "errorGeneric": "エラーが発生しました",
   "errorNetwork": "ネットワークエラー",
@@ -197,20 +184,17 @@
   "errorDataNotFound": "データが見つかりません",
   "errorPermissionDenied": "権限がありません",
   
-  "_comment_success": "===== 成功メッセージ =====",
   "success": "成功",
   "saved": "保存しました",
   "deleted": "削除しました",
   "updated": "更新しました",
   
-  "_comment_partner": "===== トレーニングパートナー =====",
   "trainingPartner": "トレーニングパートナー",
   "findPartner": "パートナーを探す",
   "myPartners": "マイパートナー",
   "partnerRequests": "リクエスト",
   "messaging": "メッセージ",
   
-  "_comment_settings": "===== 設定 =====",
   "language": "言語",
   "notifications": "通知",
   "privacy": "プライバシー",
@@ -220,7 +204,6 @@
   "version": "バージョン",
   "logout": "ログアウト",
   
-  "_comment_language_names": "===== 言語名 =====",
   "languageJapanese": "日本語",
   "languageEnglish": "English",
   "languageKorean": "한국어",
