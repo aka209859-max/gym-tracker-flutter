@@ -275,5 +275,16 @@
   "languageChinese": "中文（简体）",
   "languageChineseTW": "中文（繁體）",
   "languageGerman": "Deutsch (德语)",
-  "languageSpanish": "Español (西班牙语)"
+  "languageSpanish": "Español (西班牙语)",
+  "workoutHistory": "训练历史",
+  "gymSearch": "搜索健身房",
+  "error": "错误",
+  "loading": "加载中",
+  "save": "保存",
+  "cancel": "取消",
+  "delete": "删除",
+  "confirm": "确认",
+  "yes": "是",
+  "no": "否",
+  "ok": "确定"
 }

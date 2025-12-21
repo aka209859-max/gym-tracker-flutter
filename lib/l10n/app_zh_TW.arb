@@ -275,5 +275,10 @@
   "languageChinese": "中文（简体）",
   "languageChineseTW": "中文（繁體）",
   "languageGerman": "Deutsch (德語)",
-  "languageSpanish": "Español (西班牙語)"
+  "languageSpanish": "Español (西班牙語)",
+  "workoutHistory": "訓練歷史",
+  "loading": "載入中",
+  "save": "保存",
+  "cancel": "取消",
+  "delete": "刪除"
 }
