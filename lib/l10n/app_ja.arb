@@ -230,15 +230,132 @@
   "goals": "目標",
   "fatigueManagement": "疲労管理",
   
+  "importFromPhoto": "写真・CSVから取り込み",
+  "importFromPhotoSubtitle": "他アプリの記録画像・CSVファイルを自動データ化",
+  "personalTraining": "パーソナルトレーニング",
+  "personalTrainingSubtitle": "予約状況・トレーニング記録・予約申込",
+  "aiAddonPurchase": "AI追加購入",
+  "aiAddonSubtitle": "AIコーチング回数を追加購入",
+  "favorites": "お気に入りジム",
+  "favoritesCount": "{count}件",
+  "@favoritesCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "bodyMeasurement": "体重・体組成記録",
+  "visitHistory": "ジム訪問履歴",
+  "messages": "メッセージ",
+  "unreadMessages": "{count}件の未読",
+  "@unreadMessages": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "trainingPartners": "トレーニングパートナー",
+  "partnersCount": "{count}人",
+  "@partnersCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "inviteCode": "招待コード入力",
+  "campaignRegistration": "キャンペーン登録",
+  "legalInfo": "法的情報",
+  "sellerInfo": "販売事業者・返金ポリシー",
+  
+  "workoutLog": "トレーニング記録",
+  "addSet": "セット追加",
+  "setNumber": "セット{number}",
+  "@setNumber": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "warmupSet": "ウォームアップ",
+  "workingSet": "ワーキング",
+  "dropSet": "ドロップ",
+  "failureSet": "限界",
+  "restPauseSet": "レストポーズ",
+  "superSet": "スーパーセット",
+  "tempo": "テンポ",
+  "notes": "メモ",
+  "addExercise": "種目を追加",
+  "selectExercise": "種目を選択",
+  "customExercise": "カスタム種目",
+  "searchExercise": "種目を検索",
+  "recentExercises": "最近使用した種目",
+  "popularExercises": "人気の種目",
+  "allExercises": "すべての種目",
+  
+  "workoutDate": "日付",
+  "workoutTime": "時刻",
+  "workoutDuration": "時間",
+  "totalSets": "総セット数",
+  "totalReps": "総レップ数",
+  "totalWeight": "総重量",
+  "maxWeight": "最大重量",
+  "avgWeight": "平均重量",
+  "oneRepMax": "1RM",
+  "estimatedMax": "推定1RM",
+  
+  "filterByDate": "日付で絞込",
+  "filterByExercise": "種目で絞込",
+  "filterByMuscle": "部位で絞込",
+  "sortBy": "並び替え",
+  "sortByDate": "日付順",
+  "sortByVolume": "重量順",
+  "sortByDuration": "時間順",
+  
+  "thisWeek": "今週",
+  "thisMonth": "今月",
+  "last7Days": "過去7日",
+  "last30Days": "過去30日",
+  "last90Days": "過去90日",
+  "allTime": "全期間",
+  "customRange": "カスタム期間",
+  
+  "chart": "グラフ",
+  "list": "リスト",
+  "calendar": "カレンダー",
+  "summary": "サマリー",
+  "details": "詳細",
+  "progress": "進捗",
+  "analysis": "分析",
+  
+  "bodyWeight": "体重",
+  "bodyFat": "体脂肪率",
+  "muscleMass": "筋肉量",
+  "bmi": "BMI",
+  "measurementDate": "測定日",
+  "addMeasurement": "測定記録を追加",
+  
+  "template": "テンプレート",
+  "templates": "テンプレート",
+  "createTemplate": "テンプレート作成",
+  "saveAsTemplate": "テンプレートとして保存",
+  "useTemplate": "テンプレートを使用",
+  "templateName": "テンプレート名",
+  "deleteTemplate": "テンプレート削除",
+  
+  "share": "シェア",
+  "shareWorkout": "トレーニングをシェア",
+  "shareProgress": "進捗をシェア",
+  "shareAchievement": "実績をシェア",
+  "copyLink": "リンクをコピー",
+  "shareToSocial": "SNSでシェア",
+  
   "language": "言語",
   "languageSettings": "言語設定",
   "notifications": "通知",
+  "notificationSettings": "通知設定",
   "privacy": "プライバシー",
   "termsOfService": "利用規約",
   "privacyPolicy": "プライバシーポリシー",
   "about": "GYM MATCHについて",
   "version": "バージョン",
   "logout": "ログアウト",
+  "deleteAccount": "アカウント削除",
   
   "languageJapanese": "日本語",
   "languageEnglish": "English",

@@ -230,15 +230,132 @@
   "goals": "Goals",
   "fatigueManagement": "Fatigue Management",
   
+  "importFromPhoto": "Import from Photo/CSV",
+  "importFromPhotoSubtitle": "Auto-convert workout images & CSV files",
+  "personalTraining": "Personal Training",
+  "personalTrainingSubtitle": "Bookings, records & reservations",
+  "aiAddonPurchase": "Buy AI Credits",
+  "aiAddonSubtitle": "Purchase additional AI coaching credits",
+  "favorites": "Favorite Gyms",
+  "favoritesCount": "{count} items",
+  "@favoritesCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "bodyMeasurement": "Body Measurements",
+  "visitHistory": "Gym Visit History",
+  "messages": "Messages",
+  "unreadMessages": "{count} unread",
+  "@unreadMessages": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "trainingPartners": "Training Partners",
+  "partnersCount": "{count} partners",
+  "@partnersCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "inviteCode": "Enter Invite Code",
+  "campaignRegistration": "Campaign Registration",
+  "legalInfo": "Legal Information",
+  "sellerInfo": "Seller Info & Refund Policy",
+  
+  "workoutLog": "Workout Log",
+  "addSet": "Add Set",
+  "setNumber": "Set {number}",
+  "@setNumber": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "warmupSet": "Warmup",
+  "workingSet": "Working",
+  "dropSet": "Drop",
+  "failureSet": "Failure",
+  "restPauseSet": "Rest-Pause",
+  "superSet": "Superset",
+  "tempo": "Tempo",
+  "notes": "Notes",
+  "addExercise": "Add Exercise",
+  "selectExercise": "Select Exercise",
+  "customExercise": "Custom Exercise",
+  "searchExercise": "Search Exercise",
+  "recentExercises": "Recent Exercises",
+  "popularExercises": "Popular Exercises",
+  "allExercises": "All Exercises",
+  
+  "workoutDate": "Date",
+  "workoutTime": "Time",
+  "workoutDuration": "Duration",
+  "totalSets": "Total Sets",
+  "totalReps": "Total Reps",
+  "totalWeight": "Total Weight",
+  "maxWeight": "Max Weight",
+  "avgWeight": "Avg Weight",
+  "oneRepMax": "1RM",
+  "estimatedMax": "Est. 1RM",
+  
+  "filterByDate": "Filter by Date",
+  "filterByExercise": "Filter by Exercise",
+  "filterByMuscle": "Filter by Muscle",
+  "sortBy": "Sort By",
+  "sortByDate": "By Date",
+  "sortByVolume": "By Volume",
+  "sortByDuration": "By Duration",
+  
+  "thisWeek": "This Week",
+  "thisMonth": "This Month",
+  "last7Days": "Last 7 Days",
+  "last30Days": "Last 30 Days",
+  "last90Days": "Last 90 Days",
+  "allTime": "All Time",
+  "customRange": "Custom Range",
+  
+  "chart": "Chart",
+  "list": "List",
+  "calendar": "Calendar",
+  "summary": "Summary",
+  "details": "Details",
+  "progress": "Progress",
+  "analysis": "Analysis",
+  
+  "bodyWeight": "Body Weight",
+  "bodyFat": "Body Fat %",
+  "muscleMass": "Muscle Mass",
+  "bmi": "BMI",
+  "measurementDate": "Date",
+  "addMeasurement": "Add Measurement",
+  
+  "template": "Template",
+  "templates": "Templates",
+  "createTemplate": "Create Template",
+  "saveAsTemplate": "Save as Template",
+  "useTemplate": "Use Template",
+  "templateName": "Template Name",
+  "deleteTemplate": "Delete Template",
+  
+  "share": "Share",
+  "shareWorkout": "Share Workout",
+  "shareProgress": "Share Progress",
+  "shareAchievement": "Share Achievement",
+  "copyLink": "Copy Link",
+  "shareToSocial": "Share to Social",
+  
   "language": "Language",
   "languageSettings": "Language Settings",
   "notifications": "Notifications",
+  "notificationSettings": "Notification Settings",
   "privacy": "Privacy",
   "termsOfService": "Terms of Service",
   "privacyPolicy": "Privacy Policy",
   "about": "About GYM MATCH",
   "version": "Version",
   "logout": "Logout",
+  "deleteAccount": "Delete Account",
   
   "languageJapanese": "日本語",
   "languageEnglish": "English",

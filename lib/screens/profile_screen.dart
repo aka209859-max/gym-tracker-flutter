@@ -669,6 +669,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildMenuList(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         // 📸 写真から取り込み（NEW!）
@@ -684,13 +685,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               child: const Icon(Icons.photo_camera, color: Colors.white),
             ),
-            title: const Text(
-              '📸 写真・CSVから取り込み',
-              style: TextStyle(fontWeight: FontWeight.bold),
+            title: Text(
+              '📸 ${l10n.importFromPhoto}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            subtitle: const Text(
-              '他アプリの記録画像・CSVファイルを自動データ化',
-              style: TextStyle(fontSize: 12),
+            subtitle: Text(
+              l10n.importFromPhotoSubtitle,
+              style: const TextStyle(fontSize: 12),
             ),
             trailing: const Icon(Icons.arrow_forward_ios, size: 16),
             onTap: _importWorkoutData,
@@ -710,13 +711,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               child: const Icon(Icons.psychology, color: Colors.white),
             ),
-            title: const Text(
-              '🔬 個人要因設定',
-              style: TextStyle(fontWeight: FontWeight.bold),
+            title: Text(
+              '🔬 ${l10n.personalFactorsSettings}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            subtitle: const Text(
-              '年齢・経験・睡眠・栄養・アルコール（PFM補正）',
-              style: TextStyle(fontSize: 12),
+            subtitle: Text(
+              l10n.editPersonalFactors,
+              style: const TextStyle(fontSize: 12),
             ),
             trailing: const Icon(Icons.arrow_forward_ios, size: 16),
             onTap: () {
@@ -741,13 +742,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               child: const Icon(Icons.fitness_center, color: Colors.white),
             ),
-            title: const Text(
-              '💪 パーソナルトレーニング',
-              style: TextStyle(fontWeight: FontWeight.bold),
+            title: Text(
+              '💪 ${l10n.personalTraining}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            subtitle: const Text(
-              '予約状況・トレーニング記録・予約申込',
-              style: TextStyle(fontSize: 12),
+            subtitle: Text(
+              l10n.personalTrainingSubtitle,
+              style: const TextStyle(fontSize: 12),
             ),
             trailing: const Icon(Icons.arrow_forward_ios, size: 16),
             onTap: () {
@@ -773,13 +774,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 child: const Icon(Icons.auto_awesome, color: Colors.white),
               ),
-              title: const Text(
-                '💰 AI追加購入',
-                style: TextStyle(fontWeight: FontWeight.bold),
+              title: Text(
+                '💰 ${l10n.aiAddonPurchase}',
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              subtitle: const Text(
-                'AI機能をさらに5回追加（¥300）',
-                style: TextStyle(fontSize: 12),
+              subtitle: Text(
+                l10n.aiAddonSubtitle,
+                style: const TextStyle(fontSize: 12),
               ),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
@@ -796,8 +797,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _buildMenuCard(
           context,
           icon: Icons.favorite,
-          title: 'お気に入りジム',
-          subtitle: '$_favoriteCount件',
+          title: l10n.favorites,
+          subtitle: l10n.favoritesCount(_favoriteCount),
           onTap: () {
             Navigator.push(
               context,
@@ -810,8 +811,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _buildMenuCard(
           context,
           icon: Icons.emoji_events,
-          title: '達成バッジ',
-          subtitle: 'あなたの実績を確認',
+          title: l10n.achievements,
+          subtitle: l10n.pastTrainingRecords,  // Reusing this key for now
           onTap: () {
             Navigator.push(
               context,
@@ -836,8 +837,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _buildMenuCard(
           context,
           icon: Icons.history,
-          title: '訪問履歴',
-          subtitle: '過去の訪問ジム',
+          title: l10n.visitHistory,
+          subtitle: l10n.gymDetails,  // Reusing key
           onTap: () {
             Navigator.push(
               context,
@@ -849,8 +850,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _buildMenuCard(
           context,
           icon: Icons.people,
-          title: 'トレーニングパートナー',
-          subtitle: 'マッチング機能',
+          title: l10n.trainingPartners,
+          subtitle: l10n.partnersCount(_trainingPartnerCount),
           onTap: () {
             Navigator.push(
               context,
@@ -862,8 +863,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _buildMenuCard(
           context,
           icon: Icons.message,
-          title: 'メッセージ',
-          subtitle: _unreadMessages > 0 ? '新着 $_unreadMessages 件' : '新着メッセージなし',
+          title: l10n.messages,
+          subtitle: _unreadMessages > 0 ? l10n.unreadMessages(_unreadMessages) : l10n.messages,
           badge: _unreadMessages > 0 ? '$_unreadMessages' : null,
           badgeColor: Colors.red,
           onTap: () {
@@ -902,9 +903,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _buildMenuCard(
           context,
           icon: Icons.card_giftcard,
-          title: '招待コードを入力',
-          subtitle: '招待コードで特典をGET',
-          badge: '特典',
+          title: l10n.inviteCode,
+          subtitle: l10n.campaignRegistration,
+          badge: l10n.proPlan,  // Reusing for badge
           badgeColor: Colors.amber,
           onTap: () async {
             final result = await Navigator.push(
