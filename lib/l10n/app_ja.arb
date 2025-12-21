@@ -647,6 +647,30 @@
   "sortByRating": "評価順",
   "sortByCrowd": "混雑度順",
   "sortByPrice": "料金順",
+  
+  "workoutDetails": "トレーニング詳細",
+  "noWorkoutRecords": "まだトレーニング記録がありません",
+  "shareWorkout": "トレーニングをシェア",
+  "authenticationError": "認証エラー",
+  "loginFailed": "Firebaseの初期化またはログインに失敗しました",
+  "updating": "更新中",
+  "retry": "再試行",
+  "unknownExercise": "不明な種目",
+  "memo": "メモ",
+  "prRecords": "PR記録",
+  "exercisesAndSets": "{count}種目 • {sets} セット",
+  "@exercisesAndSets": {
+    "placeholders": {
+      "count": {"type": "int"},
+      "sets": {"type": "int"}
+    }
+  },
+  "durationMinutes": "{duration}分",
+  "@durationMinutes": {
+    "placeholders": {
+      "duration": {"type": "int"}
+    }
+  },
   "sortByDistance": "距離順",
   "sortByName": "名前順",
   

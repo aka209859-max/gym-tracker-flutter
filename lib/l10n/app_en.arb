@@ -607,5 +607,22 @@
   "backToHome": "Back to Home",
   "noExercisesToShare": "No exercises to share",
   "shareFailed": "Share failed",
-  "shareError": "Share error: {error}"
+  "shareError": "Share error: {error}",
+  
+  "sortByRating": "Sort by Rating",
+  "sortByCrowd": "Sort by Crowd",
+  "sortByPrice": "Sort by Price",
+  
+  "workoutDetails": "Workout Details",
+  "noWorkoutRecords": "No workout records yet",
+  "shareWorkout": "Share Workout",
+  "authenticationError": "Authentication Error",
+  "loginFailed": "Firebase initialization or login failed",
+  "updating": "Updating",
+  "retry": "Retry",
+  "unknownExercise": "Unknown Exercise",
+  "memo": "Memo",
+  "prRecords": "PR Records",
+  "exercisesAndSets": "{count} exercises • {sets} sets",
+  "durationMinutes": "{duration} min"
 }
