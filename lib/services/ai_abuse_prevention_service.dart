@@ -233,12 +233,10 @@ class AIAbusePreventionService {
     try {
       final deviceInfo = DeviceInfoPlugin();
       
+      // iOS専用アプリ
       if (Platform.isIOS) {
         final iosInfo = await deviceInfo.iosInfo;
         return iosInfo.identifierForVendor ?? 'unknown_ios';
-      } else if (Platform.isAndroid) {
-        final androidInfo = await deviceInfo.androidInfo;
-        return androidInfo.id;
       }
       
       return 'unknown_platform';

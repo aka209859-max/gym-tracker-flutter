@@ -277,11 +277,11 @@ Text(
 
 ### 2. フォント対応
 
-各言語に適したフォントを自動選択（Flutterデフォルト）:
-- **日本語**: Hiragino Sans (iOS) / Noto Sans JP (Android)
-- **English**: SF Pro (iOS) / Roboto (Android)
-- **한국어**: Apple SD Gothic Neo (iOS) / Noto Sans KR (Android)
-- **中文**: PingFang SC (iOS) / Noto Sans SC (Android)
+各言語に適したフォントを自動選択（Flutterデフォルト、iOS専用）:
+- **日本語**: Hiragino Sans (iOS標準)
+- **English**: SF Pro (iOS標準)
+- **한국어**: Apple SD Gothic Neo (iOS標準)
+- **中文**: PingFang SC (iOS標準)
 - **Deutsch/Español**: 英語と同じ
 
 ---

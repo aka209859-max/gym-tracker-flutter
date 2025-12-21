@@ -25,3 +25,8 @@ Thumbs.db
 # Keep lib/ directory for source code!
 
 .firebase/
+
+# iOS専用リポジトリ - Android関連ファイルは除外
+android/
+*.apk
+*.aab

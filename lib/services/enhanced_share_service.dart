@@ -31,7 +31,7 @@ class EnhancedShareService {
   }) async {
     try {
       // Instagram Stories用に最適化されたシェア
-      // Note: iOS/Androidでは通常のShare APIを使用し、
+      // Note: iOSでは通常のShare APIを使用し、
       // ユーザーがInstagramを選択できるようにする
       await Share.shareXFiles(
         [XFile.fromData(
