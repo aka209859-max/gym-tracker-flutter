@@ -47,6 +47,7 @@ import '../services/magic_number_service.dart';
 import '../services/crowd_alert_service.dart';
 import '../services/referral_service.dart';
 import 'debug_log_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -840,8 +841,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       if (_selectedDay == null || _selectedDayWorkouts.isEmpty) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('シェアできるトレーニング記録がありません'),
+            SnackBar(
+              content: Text(l10n.noShareableRecords),
               backgroundColor: Colors.orange,
             ),
           );
@@ -1071,6 +1072,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     
     return Scaffold(
       backgroundColor: Colors.grey[100],
@@ -1242,8 +1244,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               const SizedBox(width: 8),
               Text(
                 _isAdvancedSectionsExpanded
-                    ? '詳細セクションを閉じる'
-                    : '詳細セクションを表示（疲労管理・目標）',
+                    ? l10n.hideDetailsSection
+                    : l10n.showDetailsSection,
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -2639,9 +2641,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  const Text(
-                    'MONTHLY ARCHIVE',
-                    style: TextStyle(
+                  Text(
+                    l10n.monthlyArchive,
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.2,
@@ -2754,7 +2756,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
             const SizedBox(height: 16),
             Text(
-              '${_selectedDay!.month}月${_selectedDay!.day}日のトレーニング記録はありません',
+              l10n.noWorkoutRecordsForDate(_selectedDay!.month, _selectedDay!.day),
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey[600],
@@ -2830,8 +2832,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     Expanded(
                       child: Text(
                         _selectedDay != null && _isSameDay(_selectedDay!, DateTime.now())
-                            ? '今日のトレーニング'
-                            : '${_selectedDay!.month}月${_selectedDay!.day}日のトレーニング',
+                            ? l10n.todaysWorkout
+                            : '${_selectedDay!.month}/${_selectedDay!.day}',  // Simplified date format
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -2853,16 +2855,16 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 
                 // 🔧 v1.0.248: ワークアウトタイプフィルター（筋トレ/有酸素の2部屋制）
                 SegmentedButton<String>(
-                  segments: const [
+                  segments: [
                     ButtonSegment(
                       value: 'strength',
-                      label: Text('筋トレ', style: TextStyle(fontSize: 13)),
-                      icon: Icon(Icons.fitness_center, size: 18),
+                      label: Text(l10n.strengthTrainingFilter, style: const TextStyle(fontSize: 13)),
+                      icon: const Icon(Icons.fitness_center, size: 18),
                     ),
                     ButtonSegment(
                       value: 'cardio',
-                      label: Text('有酸素', style: TextStyle(fontSize: 13)),
-                      icon: Icon(Icons.directions_run, size: 18),
+                      label: Text(l10n.cardioFilter, style: const TextStyle(fontSize: 13)),
+                      icon: const Icon(Icons.directions_run, size: 18),
                     ),
                   ],
                   selected: {_homeWorkoutFilter},
@@ -5816,9 +5818,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 children: [
                   Icon(Icons.settings, color: Colors.deepPurple.shade700),
                   const SizedBox(width: 12),
-                  const Text(
-                    '設定メニュー',
-                    style: TextStyle(
+                  Text(
+                    l10n.settingsMenu,
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -5840,14 +5842,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   color: Colors.blue.shade700,
                 ),
               ),
-              title: const Text(
-                'トレーニングメモ',
-                style: TextStyle(
+              title: Text(
+                l10n.trainingMemo,
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text('過去のトレーニング記録を確認'),
+              subtitle: Text(l10n.pastTrainingRecords),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
@@ -5867,14 +5869,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   color: Colors.purple.shade700,
                 ),
               ),
-              title: const Text(
-                '個人要因設定',
-                style: TextStyle(
+              title: Text(
+                l10n.personalFactorsSettings,
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text('年齢・経験・睡眠・栄養などを編集'),
+              subtitle: Text(l10n.editPersonalFactors),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
@@ -5894,8 +5896,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   color: Colors.green.shade700,
                 ),
               ),
-              title: const Text(
-                '言語設定',
+              title: Text(
+                l10n.languageSettings,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,

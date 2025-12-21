@@ -1,9 +1,15 @@
 {
   "@@locale": "en",
-  "@@context": "GYM MATCH v1.04 - English (US) Translation",
+  "@@context": "GYM MATCH v1.04 - English localization file",
   
   "appName": "GYM MATCH",
-  "appTagline": "Gym Search · Crowding · Workout Tracker",
+  "@appName": {
+    "description": "Application name"
+  },
+  "appTagline": "Gym Search, Crowd Levels & Workout Logs",
+  "@appTagline": {
+    "description": "App catchphrase"
+  },
   
   "navHome": "Home",
   "navGym": "Gyms",
@@ -26,17 +32,17 @@
   "retry": "Retry",
   "confirm": "Confirm",
   
-  "login": "Log In",
-  "logout": "Log Out",
+  "login": "Login",
+  "logout": "Logout",
   "signUp": "Sign Up",
   "email": "Email",
   "password": "Password",
-  "forgotPassword": "Forgot Password?",
+  "forgotPassword": "Forgot password?",
   
   "searchGym": "Search Gym",
   "nearbyGyms": "Nearby Gyms",
   "gymDetails": "Gym Details",
-  "crowdLevel": "Crowding Level",
+  "crowdLevel": "Crowd Level",
   "openingHours": "Opening Hours",
   "facilities": "Facilities",
   "reviews": "Reviews",
@@ -53,6 +59,14 @@
   "reps": "Reps",
   "weight": "Weight",
   "weightKg": "{weight}kg",
+  "@weightKg": {
+    "description": "Weight display (kilograms)",
+    "placeholders": {
+      "weight": {
+        "type": "double"
+      }
+    }
+  },
   "restTime": "Rest Time",
   "duration": "Duration",
   "distance": "Distance",
@@ -65,26 +79,50 @@
   "bodyPartAbs": "Abs",
   "bodyPartCardio": "Cardio",
   
-  "strengthTraining": "Strength",
+  "strengthTraining": "Strength Training",
   "cardio": "Cardio",
-  "workoutTypeFilter": "Filter by Type",
+  "workoutTypeFilter": "Workout Type Filter",
   
   "personalRecords": "Personal Records",
   "prTitle": "PR Records",
   "prAchieved": "Achieved",
   "prDaysAgo": "{days} days ago",
+  "@prDaysAgo": {
+    "description": "Days since PR achieved",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
   "prMonthsAgo": "{months} months ago",
+  "@prMonthsAgo": {
+    "description": "Months since PR achieved",
+    "placeholders": {
+      "months": {
+        "type": "int"
+      }
+    }
+  },
   
   "aiCoach": "AI Coach",
   "aiMenu": "AI Menu Suggestion",
   "aiGrowthPrediction": "Growth Prediction",
   "aiEffectAnalysis": "Effect Analysis",
-  "aiUsageRemaining": "{count} AI uses left",
-  "aiUnlimited": "Unlimited AI",
+  "aiUsageRemaining": "AI {count} left",
+  "@aiUsageRemaining": {
+    "description": "Remaining AI usage count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "aiUnlimited": "AI Unlimited",
   "scientificBasis": "Scientific Basis",
-  "basedOnPapers": "Based on 40+ research papers",
+  "basedOnPapers": "Based on 40+ papers",
   
-  "subscription": "Subscription",
+  "subscription": "Plan Management",
   "freePlan": "Free Plan",
   "premiumPlan": "Premium",
   "proPlan": "Pro",
@@ -93,11 +131,35 @@
   "monthlyPrice": "Monthly",
   "annualPrice": "Annual",
   "pricePerMonth": "{price}/month",
+  "@pricePerMonth": {
+    "description": "Monthly price display",
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
   "pricePerYear": "{price}/year",
+  "@pricePerYear": {
+    "description": "Annual price display",
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
   "freeTrial": "Free Trial",
-  "freeTrialDays": "{days}-day free trial",
+  "freeTrialDays": "{days} days free",
+  "@freeTrialDays": {
+    "description": "Free trial period",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
   "noAds": "No Ads",
-  "adSupported": "Ad-supported",
+  "adSupported": "Ad Supported",
   
   "profile": "Profile",
   "editProfile": "Edit Profile",
@@ -131,7 +193,42 @@
   "findPartner": "Find Partner",
   "myPartners": "My Partners",
   "partnerRequests": "Requests",
-  "messaging": "Messages",
+  "messaging": "Messaging",
+  
+  "todaysWorkout": "Today's Workout",
+  "workoutRecords": "Workout Records",
+  "monthlyArchive": "MONTHLY ARCHIVE",
+  "noWorkoutRecordsForDate": "No workout records for {month}/{day}",
+  "@noWorkoutRecordsForDate": {
+    "description": "Message when no workout records exist for selected date",
+    "placeholders": {
+      "month": {
+        "type": "int"
+      },
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "detailsSection": "Details Section",
+  "showDetailsSection": "Show details (fatigue & goals)",
+  "hideDetailsSection": "Hide details",
+  "settingsMenu": "Settings Menu",
+  "personalFactorsSettings": "Personal Factors",
+  "trainingMemo": "Training Memo",
+  "pastTrainingRecords": "View past training records",
+  "editPersonalFactors": "Edit age, experience, sleep, nutrition, etc.",
+  "noShareableRecords": "No shareable workout records",
+  "strengthTrainingFilter": "Strength",
+  "cardioFilter": "Cardio",
+  "setTypeInfo": "Set Type Guide",
+  "byBodyPart": "By Body Part",
+  "weeklyReport": "Weekly",
+  "memo": "Memo",
+  "achievementsAndGoals": "Achievements & Goals",
+  "achievements": "Achievements",
+  "goals": "Goals",
+  "fatigueManagement": "Fatigue Management",
   
   "language": "Language",
   "languageSettings": "Language Settings",
@@ -141,11 +238,12 @@
   "privacyPolicy": "Privacy Policy",
   "about": "About GYM MATCH",
   "version": "Version",
+  "logout": "Logout",
   
-  "languageJapanese": "日本語 (Japanese)",
+  "languageJapanese": "日本語",
   "languageEnglish": "English",
-  "languageKorean": "한국어 (Korean)",
-  "languageChinese": "中文 (Chinese Simplified)",
-  "languageGerman": "Deutsch (German)",
-  "languageSpanish": "Español (Spanish)"
+  "languageKorean": "한국어",
+  "languageChinese": "中文（简体）",
+  "languageGerman": "Deutsch",
+  "languageSpanish": "Español"
 }

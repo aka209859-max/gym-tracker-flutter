@@ -195,6 +195,41 @@
   "partnerRequests": "リクエスト",
   "messaging": "メッセージ",
   
+  "todaysWorkout": "今日のトレーニング",
+  "workoutRecords": "トレーニング記録",
+  "monthlyArchive": "MONTHLY ARCHIVE",
+  "noWorkoutRecordsForDate": "{month}月{day}日のトレーニング記録はありません",
+  "@noWorkoutRecordsForDate": {
+    "description": "選択した日にトレーニング記録がない時のメッセージ",
+    "placeholders": {
+      "month": {
+        "type": "int"
+      },
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "detailsSection": "詳細セクション",
+  "showDetailsSection": "詳細セクションを表示（疲労管理・目標）",
+  "hideDetailsSection": "詳細セクションを閉じる",
+  "settingsMenu": "設定メニュー",
+  "personalFactorsSettings": "個人要因設定",
+  "trainingMemo": "トレーニングメモ",
+  "pastTrainingRecords": "過去のトレーニング記録を確認",
+  "editPersonalFactors": "年齢・経験・睡眠・栄養などを編集",
+  "noShareableRecords": "シェアできるトレーニング記録がありません",
+  "strengthTrainingFilter": "筋トレ",
+  "cardioFilter": "有酸素",
+  "setTypeInfo": "セットタイプの見方",
+  "byBodyPart": "部位別",
+  "weeklyReport": "週次",
+  "memo": "メモ",
+  "achievementsAndGoals": "実績と目標",
+  "achievements": "実績",
+  "goals": "目標",
+  "fatigueManagement": "疲労管理",
+  
   "language": "言語",
   "languageSettings": "言語設定",
   "notifications": "通知",
