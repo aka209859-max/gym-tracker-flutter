@@ -30,7 +30,7 @@ jobs:
           echo "🌍 Generating l10n files for 7 languages..."
           flutter gen-l10n
           echo "✅ Localization files generated"
-          ls -la lib/generated/ || echo "⚠️ lib/generated/ not found"
+          ls -la lib/gen/ || echo "⚠️ lib/gen/ not found"
           
       - name: Install iOS dependencies
         run: |
