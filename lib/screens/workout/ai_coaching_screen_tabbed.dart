@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart'; // 🎯 Phase 1追加
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // 🆕 v1.0.274: Multilingual support
 import '../../services/ai_prediction_service.dart';
 import '../../services/training_analysis_service.dart';
 import '../../services/subscription_service.dart';
@@ -825,7 +826,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                 ),
               )
             : const Icon(Icons.auto_awesome),
-        label: Text(_isGenerating ? 'AIが考え中...' : 'メニューを生成'),
+        label: Text(_isGenerating ? AppLocalizations.of(context)!.aiThinking : AppLocalizations.of(context)!.generateMenu),
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 16),
           backgroundColor: Colors.blue.shade700,
@@ -2705,6 +2706,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         bodyPart: _selectedBodyPart,
         monthsAhead: 4,
         rpe: _selectedRPE, // 🆕 v1.0.230: RPE（自覚的強度）
+        locale: AppLocalizations.of(context)!.localeName, // 🆕 v1.0.274: Pass user's locale
       );
       print('✅ 成長予測完了: ${result['success']}');
 
@@ -3062,7 +3064,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               ),
             )
           : const Icon(Icons.auto_graph),
-      label: Text(_isLoading ? 'AI分析中...' : '成長予測を実行'),
+      label: Text(_isLoading ? AppLocalizations.of(context)!.aiAnalyzing : AppLocalizations.of(context)!.executeGrowthPrediction),
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 16),
         backgroundColor: Colors.purple.shade700,
@@ -4657,7 +4659,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               ),
             )
           : const Icon(Icons.auto_graph),
-      label: Text(_isLoading ? 'AI分析中...' : '効果を分析'),
+      label: Text(_isLoading ? AppLocalizations.of(context)!.aiAnalyzing : '効果を分析'),
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 16),
         backgroundColor: Colors.orange.shade700,
