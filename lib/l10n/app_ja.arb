@@ -1,7 +1,6 @@
 {
   "@@locale": "ja",
   "@@context": "GYM MATCH v1.04 - 日本語ベース多言語対応ファイル",
-  
   "appName": "GYM MATCH",
   "@appName": {
     "description": "アプリケーション名"
@@ -10,13 +9,11 @@
   "@appTagline": {
     "description": "アプリのキャッチコピー"
   },
-  
   "navHome": "ホーム",
   "navGym": "ジム",
   "navWorkout": "記録",
   "navAI": "AI",
   "navProfile": "プロフィール",
-  
   "save": "保存",
   "cancel": "キャンセル",
   "delete": "削除",
@@ -28,17 +25,15 @@
   "back": "戻る",
   "next": "次へ",
   "done": "完了",
-  "loading": "読み込み中...",
+  "loading": "読み込み中",
   "retry": "再試行",
   "confirm": "確認",
-  
   "login": "ログイン",
   "logout": "ログアウト",
   "signUp": "新規登録",
   "email": "メールアドレス",
   "password": "パスワード",
-  "forgotPassword": "パスワードをお忘れですか？",
-  
+  "forgotPassword": "パスワードを忘れた方",
   "searchGym": "ジムを検索",
   "nearbyGyms": "近くのジム",
   "gymDetails": "ジム詳細",
@@ -50,20 +45,19 @@
   "crowdLevelNormal": "普通",
   "crowdLevelCrowded": "混雑",
   "crowdLevelVeryCrowded": "非常に混雑",
-  
   "workout": "トレーニング",
   "addWorkout": "記録を追加",
   "workoutHistory": "トレーニング履歴",
   "exercise": "種目",
   "sets": "セット",
-  "reps": "レップ",
-  "weight": "重量",
+  "reps": "回",
+  "weight": "体重",
   "weightKg": "{weight}kg",
   "@weightKg": {
-    "description": "重量の表示（キログラム）",
     "placeholders": {
       "weight": {
-        "type": "double"
+        "type": "double",
+        "format": "decimalPattern"
       }
     }
   },
@@ -78,11 +72,9 @@
   "bodyPartArms": "腕",
   "bodyPartAbs": "腹",
   "bodyPartCardio": "有酸素",
-  
   "strengthTraining": "筋トレ",
   "cardio": "有酸素運動",
   "workoutTypeFilter": "タイプ絞り込み",
-  
   "personalRecords": "自己ベスト",
   "prTitle": "PR記録",
   "prAchieved": "達成",
@@ -104,10 +96,9 @@
       }
     }
   },
-  
   "aiCoach": "AIコーチ",
   "aiMenu": "AIメニュー提案",
-  "aiGrowthPrediction": "成長予測",
+  "aiGrowthPrediction": "AI成長予測",
   "aiEffectAnalysis": "効果分析",
   "aiUsageRemaining": "AI残り{count}回",
   "@aiUsageRemaining": {
@@ -121,11 +112,10 @@
   "aiUnlimited": "AI無制限",
   "scientificBasis": "科学的根拠",
   "basedOnPapers": "40本以上の論文に基づく",
-  
-  "subscription": "プラン管理",
+  "subscription": "サブスクリプション",
   "freePlan": "無料プラン",
-  "premiumPlan": "Premium",
-  "proPlan": "Pro",
+  "premiumPlan": "Premiumプラン",
+  "proPlan": "Proプラン",
   "currentPlan": "現在のプラン",
   "upgradePlan": "プランをアップグレード",
   "monthlyPrice": "月額",
@@ -149,9 +139,8 @@
     }
   },
   "freeTrial": "無料トライアル",
-  "freeTrialDays": "{days}日間無料",
+  "freeTrialDays": "{days}日間無料トライアル",
   "@freeTrialDays": {
-    "description": "無料トライアル期間",
     "placeholders": {
       "days": {
         "type": "int"
@@ -160,41 +149,34 @@
   },
   "noAds": "広告なし",
   "adSupported": "広告表示あり",
-  
   "profile": "プロフィール",
   "editProfile": "プロフィール編集",
   "settings": "設定",
   "name": "名前",
   "age": "年齢",
   "height": "身長",
-  "weight": "体重",
   "goal": "目標",
-  
   "statistics": "統計",
   "weeklyReport": "週次レポート",
-  "totalVolume": "総重量",
+  "totalVolume": "総ボリューム",
   "totalReps": "総レップ数",
   "totalSets": "総セット数",
   "workoutCount": "トレーニング回数",
-  
   "error": "エラー",
   "errorGeneric": "エラーが発生しました",
   "errorNetwork": "ネットワークエラー",
   "errorAuth": "認証エラー",
   "errorDataNotFound": "データが見つかりません",
   "errorPermissionDenied": "権限がありません",
-  
   "success": "成功",
   "saved": "保存しました",
   "deleted": "削除しました",
   "updated": "更新しました",
-  
   "trainingPartner": "トレーニングパートナー",
   "findPartner": "パートナーを探す",
   "myPartners": "マイパートナー",
   "partnerRequests": "リクエスト",
   "messaging": "メッセージ",
-  
   "todaysWorkout": "今日のトレーニング",
   "workoutRecords": "トレーニング記録",
   "monthlyArchive": "MONTHLY ARCHIVE",
@@ -223,13 +205,11 @@
   "cardioFilter": "有酸素",
   "setTypeInfo": "セットタイプの見方",
   "byBodyPart": "部位別",
-  "weeklyReport": "週次",
   "memo": "メモ",
   "achievementsAndGoals": "実績と目標",
-  "achievements": "実績",
+  "achievements": "実績通知",
   "goals": "目標",
   "fatigueManagement": "疲労管理",
-  
   "importFromPhoto": "写真・CSVから取り込み",
   "importFromPhotoSubtitle": "他アプリの記録画像・CSVファイルを自動データ化",
   "personalTraining": "パーソナルトレーニング",
@@ -240,36 +220,43 @@
   "favoritesCount": "{count}件",
   "@favoritesCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "bodyMeasurement": "体重・体組成記録",
-  "visitHistory": "ジム訪問履歴",
+  "visitHistory": "訪問履歴",
   "messages": "メッセージ",
   "unreadMessages": "{count}件の未読",
   "@unreadMessages": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "trainingPartners": "トレーニングパートナー",
   "partnersCount": "{count}人",
   "@partnersCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "inviteCode": "招待コード入力",
   "campaignRegistration": "キャンペーン登録",
   "legalInfo": "法的情報",
   "sellerInfo": "販売事業者・返金ポリシー",
-  
   "workoutLog": "トレーニング記録",
   "addSet": "セット追加",
   "setNumber": "セット{number}",
   "@setNumber": {
     "placeholders": {
-      "number": {"type": "int"}
+      "number": {
+        "type": "int"
+      }
     }
   },
   "warmupSet": "ウォームアップ",
@@ -287,18 +274,14 @@
   "recentExercises": "最近使用した種目",
   "popularExercises": "人気の種目",
   "allExercises": "すべての種目",
-  
   "workoutDate": "日付",
   "workoutTime": "時刻",
   "workoutDuration": "時間",
-  "totalSets": "総セット数",
-  "totalReps": "総レップ数",
   "totalWeight": "総重量",
   "maxWeight": "最大重量",
   "avgWeight": "平均重量",
   "oneRepMax": "1RM",
   "estimatedMax": "推定1RM",
-  
   "filterByDate": "日付で絞込",
   "filterByExercise": "種目で絞込",
   "filterByMuscle": "部位で絞込",
@@ -306,7 +289,6 @@
   "sortByDate": "日付順",
   "sortByVolume": "重量順",
   "sortByDuration": "時間順",
-  
   "thisWeek": "今週",
   "thisMonth": "今月",
   "last7Days": "過去7日",
@@ -314,7 +296,6 @@
   "last90Days": "過去90日",
   "allTime": "全期間",
   "customRange": "カスタム期間",
-  
   "chart": "グラフ",
   "list": "リスト",
   "calendar": "カレンダー",
@@ -322,14 +303,12 @@
   "details": "詳細",
   "progress": "進捗",
   "analysis": "分析",
-  
   "bodyWeight": "体重",
   "bodyFat": "体脂肪率",
   "muscleMass": "筋肉量",
   "bmi": "BMI",
   "measurementDate": "測定日",
   "addMeasurement": "測定記録を追加",
-  
   "template": "テンプレート",
   "templates": "テンプレート",
   "createTemplate": "テンプレート作成",
@@ -337,14 +316,12 @@
   "useTemplate": "テンプレートを使用",
   "templateName": "テンプレート名",
   "deleteTemplate": "テンプレート削除",
-  
-  "share": "シェア",
+  "share": "共有",
   "shareWorkout": "トレーニングをシェア",
   "shareProgress": "進捗をシェア",
   "shareAchievement": "実績をシェア",
   "copyLink": "リンクをコピー",
   "shareToSocial": "SNSでシェア",
-  
   "language": "言語",
   "languageSettings": "言語設定",
   "notifications": "通知",
@@ -354,9 +331,7 @@
   "privacyPolicy": "プライバシーポリシー",
   "about": "GYM MATCHについて",
   "version": "バージョン",
-  "logout": "ログアウト",
   "deleteAccount": "アカウント削除",
-  
   "languageJapanese": "日本語",
   "languageEnglish": "English",
   "languageKorean": "한국어",
@@ -364,20 +339,11 @@
   "languageChineseTW": "中文（繁體）",
   "languageGerman": "Deutsch",
   "languageSpanish": "Español",
-  
-  "workoutHistory": "トレーニング履歴",
-  "workoutDetails": "詳細",
+  "workoutDetails": "トレーニング詳細",
   "exerciseHistory": "種目履歴",
-  "totalSets": "総セット数",
-  "totalReps": "総レップ数",
-  "totalVolume": "総ボリューム",
-  "maxWeight": "最大重量",
   "averageWeight": "平均重量",
   "selectDate": "日付を選択",
   "selectBodyPart": "部位を選択",
-  "selectExercise": "種目を選択",
-  "searchExercise": "種目を検索",
-  "customExercise": "カスタム種目",
   "addCustomExercise": "カスタム種目を追加",
   "exerciseName": "種目名",
   "exerciseNameHint": "例: ベンチプレス",
@@ -395,10 +361,8 @@
   "noWorkouts": "トレーニング記録がありません",
   "noExercises": "種目がありません",
   "addFirstExercise": "最初の種目を追加しましょう",
-  
   "gymSearch": "ジム検索",
   "gymList": "ジム一覧",
-  "gymDetails": "ジム詳細",
   "gymName": "ジム名",
   "gymAddress": "住所",
   "gymPhone": "電話番号",
@@ -415,8 +379,6 @@
   "submitReview": "レビューを投稿",
   "searchNearby": "近くのジムを検索",
   "currentLocation": "現在地",
-  "distance": "距離",
-  "crowdLevel": "混雑度",
   "reportCrowd": "混雑度を報告",
   "empty": "空いている",
   "moderate": "普通",
@@ -427,22 +389,16 @@
   "favoriteAdded": "お気に入りに追加しました",
   "favoriteRemoved": "お気に入りから削除しました",
   "noFavorites": "お気に入りのジムがありません",
-  
   "auth": "認証",
-  "login": "ログイン",
-  "signUp": "新規登録",
-  "email": "メールアドレス",
-  "password": "パスワード",
   "confirmPassword": "パスワード（確認）",
-  "forgotPassword": "パスワードを忘れた方",
   "resetPassword": "パスワードをリセット",
   "sendResetEmail": "リセットメールを送信",
   "emailSent": "メールを送信しました",
   "emailRequired": "メールアドレスを入力してください",
   "passwordRequired": "パスワードを入力してください",
-  "passwordTooShort": "パスワードは6文字以上で入力してください",
+  "passwordTooShort": "パスワードが短すぎます",
   "passwordMismatch": "パスワードが一致しません",
-  "invalidEmail": "有効なメールアドレスを入力してください",
+  "invalidEmail": "無効なメールアドレス",
   "loginError": "ログインに失敗しました",
   "signUpError": "登録に失敗しました",
   "alreadyHaveAccount": "アカウントをお持ちの方",
@@ -450,8 +406,6 @@
   "or": "または",
   "continueWithGoogle": "Googleで続ける",
   "continueWithApple": "Appleで続ける",
-  
-  "messages": "メッセージ",
   "newMessage": "新しいメッセージ",
   "sendMessage": "送信",
   "messageHint": "メッセージを入力",
@@ -463,10 +417,11 @@
   "lastSeenAt": "{time}にログイン",
   "@lastSeenAt": {
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
-  
   "aiCoaching": "AIコーチング",
   "aiAnalyzing": "AI分析中...",
   "aiRecommendation": "AI推奨メニュー",
@@ -474,33 +429,30 @@
   "aiCreditsRemaining": "残り{count}回",
   "@aiCreditsRemaining": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
-  "aiUnlimited": "AI無制限",
   "purchaseAICredits": "AI追加購入",
   "aiPurchaseSuccess": "AI利用回数を追加しました",
   "aiPurchaseError": "購入に失敗しました",
-  
-  "visitHistory": "訪問履歴",
   "lastVisit": "最終訪問",
   "visitCount": "訪問回数",
   "visitCountTimes": "{count}回",
   "@visitCountTimes": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "noVisitHistory": "訪問履歴がありません",
-  
-  "error": "エラー",
   "errorOccurred": "エラーが発生しました",
-  "networkError": "ネットワークエラー",
+  "networkError": "ネットワークエラー: API接続に失敗しました",
   "serverError": "サーバーエラー",
   "unknownError": "不明なエラー",
   "tryAgain": "再試行",
-  "retry": "リトライ",
-  "loading": "読み込み中",
   "loadMore": "さらに読み込む",
   "refresh": "更新",
   "pullToRefresh": "引っ張って更新",
@@ -510,27 +462,16 @@
   "resultsCount": "{count}件",
   "@resultsCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
-  
-  "confirm": "確認",
   "confirmAction": "この操作を実行しますか？",
   "areYouSure": "よろしいですか？",
   "cannotUndo": "この操作は取り消せません",
-  "yes": "はい",
-  "no": "いいえ",
-  "ok": "OK",
-  "cancel": "キャンセル",
-  "close": "閉じる",
-  "back": "戻る",
-  "next": "次へ",
   "previous": "前へ",
   "skip": "スキップ",
-  "done": "完了",
-  "save": "保存",
-  "edit": "編集",
-  "delete": "削除",
   "add": "追加",
   "remove": "削除",
   "select": "選択",
@@ -541,18 +482,14 @@
   "apply": "適用",
   "filter": "フィルター",
   "sort": "並び替え",
-  "sortBy": "並び替え",
   "ascending": "昇順",
   "descending": "降順",
-  
   "date": "日付",
   "time": "時間",
   "today": "今日",
   "yesterday": "昨日",
   "tomorrow": "明日",
-  "thisWeek": "今週",
   "lastWeek": "先週",
-  "thisMonth": "今月",
   "lastMonth": "先月",
   "thisYear": "今年",
   "lastYear": "昨年",
@@ -561,20 +498,14 @@
   "endDate": "終了日",
   "from": "から",
   "to": "まで",
-  
   "notification": "通知",
   "notificationTitle": "通知",
   "enableNotifications": "通知を有効にする",
   "disableNotifications": "通知を無効にする",
   "notificationPermission": "通知の許可が必要です",
-  "notificationSettings": "通知設定",
   "pushNotifications": "プッシュ通知",
   "emailNotifications": "メール通知",
   "workoutReminders": "トレーニングリマインダー",
-  "weeklyReport": "週次レポート",
-  "achievements": "実績通知",
-  
-  "profile": "プロフィール",
   "profileEdit": "プロフィール編集",
   "displayName": "表示名",
   "displayNameHint": "ニックネーム",
@@ -586,18 +517,12 @@
   "female": "女性",
   "other": "その他",
   "preferNotToSay": "回答しない",
-  "height": "身長",
   "heightCm": "{height}cm",
   "@heightCm": {
     "placeholders": {
-      "height": {"type": "int"}
-    }
-  },
-  "bodyWeight": "体重",
-  "weightKg": "{weight}kg",
-  "@weightKg": {
-    "placeholders": {
-      "weight": {"type": "double", "format": "decimalPattern"}
+      "height": {
+        "type": "int"
+      }
     }
   },
   "profilePhoto": "プロフィール写真",
@@ -605,8 +530,6 @@
   "removePhoto": "写真を削除",
   "takePhoto": "写真を撮る",
   "chooseFromLibrary": "ライブラリから選択",
-  
-  "settings": "設定",
   "general": "一般",
   "account": "アカウント",
   "security": "セキュリティ",
@@ -617,7 +540,6 @@
   "confirmNewPassword": "新しいパスワード（確認）",
   "passwordChanged": "パスワードを変更しました",
   "emailChanged": "メールアドレスを変更しました",
-  
   "help": "ヘルプ",
   "helpCenter": "ヘルプセンター",
   "faq": "よくある質問",
@@ -625,100 +547,82 @@
   "reportProblem": "問題を報告",
   "feedback": "フィードバック",
   "sendFeedback": "フィードバックを送信",
-  
   "legal": "法的情報",
-  "privacyPolicy": "プライバシーポリシー",
-  "termsOfService": "利用規約",
   "licenses": "ライセンス",
-  
   "todaysWorkoutLog": "今日のトレーニング記録",
   "noTodaysWorkout": "今日のトレーニング記録がありません",
   "addFirstRecord": "最初の記録を追加",
   "backToHome": "ホームに戻る",
   "noExercisesToShare": "シェアできる種目がありません",
-  "shareFailed": "シェアに失敗しました",
+  "shareFailed": "シェアに失敗しました: {error}",
   "shareError": "シェアエラー: {error}",
   "@shareError": {
     "placeholders": {
-      "error": {"type": "String"}
+      "error": {
+        "type": "String"
+      }
     }
   },
-  
   "sortByRating": "評価順",
   "sortByCrowd": "混雑度順",
   "sortByPrice": "料金順",
-  
-  "workoutDetails": "トレーニング詳細",
   "noWorkoutRecords": "まだトレーニング記録がありません",
-  "shareWorkout": "トレーニングをシェア",
   "authenticationError": "認証エラー",
   "loginFailed": "Firebaseの初期化またはログインに失敗しました",
   "updating": "更新中",
-  "retry": "再試行",
   "unknownExercise": "不明な種目",
-  "memo": "メモ",
   "prRecords": "PR記録",
   "exercisesAndSets": "{count}種目 • {sets} セット",
   "@exercisesAndSets": {
     "placeholders": {
-      "count": {"type": "int"},
-      "sets": {"type": "int"}
+      "count": {
+        "type": "int"
+      },
+      "sets": {
+        "type": "int"
+      }
     }
   },
   "durationMinutes": "{duration}分",
   "@durationMinutes": {
     "placeholders": {
-      "duration": {"type": "int"}
+      "duration": {
+        "type": "int"
+      }
     }
   },
   "sortByDistance": "距離順",
   "sortByName": "名前順",
-  
   "filterAll": "すべて",
   "filterOpen": "営業中",
   "filterNearby": "近く",
-  
   "searchHint": "検索",
   "searchGyms": "ジムを検索",
-  "searchResults": "検索結果",
-  "noSearchResults": "検索結果が見つかりません",
-  
+  "noSearchResults": "検索結果がありません",
   "map": "マップ",
-  "list": "リスト",
-  "details": "詳細",
-  
   "open": "営業中",
-  "closed": "閉店",
+  "closed": "休業",
   "openingSoon": "まもなく営業開始",
   "closingSoon": "まもなく閉店",
-  
   "viewOnMap": "地図で見る",
   "getDirections": "ルート",
   "call": "電話",
   "website": "ウェブサイト",
-  "share": "共有",
-  
-  "reviews": "レビュー",
   "review": "レビュー",
-  "writeReview": "レビューを書く",
-  "noReviews": "レビューがありません",
+  "noReviews": "まだレビューがありません\n最初のレビューを投稿してください！",
   "readMore": "もっと見る",
   "readLess": "閉じる",
-  
   "photos": "写真",
   "noPhotos": "写真がありません",
   "addPhoto": "写真を追加",
-  
   "amenities": "設備",
   "equipment": "器具",
   "classes": "クラス",
   "trainers": "トレーナー",
-  
   "membership": "会員プラン",
   "dayPass": "一日券",
   "monthlyPass": "月額プラン",
   "yearlyPass": "年間プラン",
-  
   "hours": "営業時間",
   "mon": "月",
   "tue": "火",
@@ -727,7 +631,6 @@
   "fri": "金",
   "sat": "土",
   "sun": "日",
-  
   "monday": "月曜日",
   "tuesday": "火曜日",
   "wednesday": "水曜日",
@@ -735,107 +638,78 @@
   "friday": "金曜日",
   "saturday": "土曜日",
   "sunday": "日曜日",
-  
   "allDay": "24時間",
-  "closed": "休業",
-  
   "reportIssue": "問題を報告",
   "reportIncorrectInfo": "情報が間違っています",
   "reportClosed": "閉業しました",
   "reportOther": "その他",
-  
   "thankYou": "ありがとうございます",
   "submitted": "送信しました",
   "submitting": "送信中...",
-  
   "signInRequired": "ログインが必要です",
   "signInToContinue": "続行するにはログインしてください",
   "signInWithEmail": "メールアドレスでログイン",
   "signInWithGoogle": "Googleでログイン",
   "signInWithApple": "Appleでログイン",
-  
   "createAccount": "アカウントを作成",
-  "alreadyHaveAccount": "アカウントをお持ちの方",
-  "dontHaveAccount": "アカウントをお持ちでない方",
-  
   "emailAddress": "メールアドレス",
   "enterEmail": "メールアドレスを入力",
   "enterPassword": "パスワードを入力",
   "enterName": "名前を入力",
-  
-  "invalidEmail": "無効なメールアドレス",
   "invalidPassword": "無効なパスワード",
-  "passwordTooShort": "パスワードが短すぎます",
   "passwordsDoNotMatch": "パスワードが一致しません",
-  
   "signUpSuccess": "登録が完了しました",
   "signInSuccess": "ログインしました",
   "signOutSuccess": "ログアウトしました",
-  
   "verifyEmail": "メールアドレスを確認",
   "verificationEmailSent": "確認メールを送信しました",
   "resendVerificationEmail": "確認メールを再送信",
-  
   "updateProfile": "プロフィールを更新",
   "updateProfileSuccess": "プロフィールを更新しました",
   "updateProfileError": "プロフィールの更新に失敗しました",
-  
   "uploadPhoto": "写真をアップロード",
   "uploadPhotoSuccess": "写真をアップロードしました",
   "uploadPhotoError": "写真のアップロードに失敗しました",
-  
   "deleteConfirm": "削除の確認",
   "deleteMessage": "本当に削除しますか？",
   "deleteSuccess": "削除しました",
   "deleteError": "削除に失敗しました",
-  
   "saveChanges": "変更を保存",
   "discardChanges": "変更を破棄",
   "unsavedChanges": "保存されていない変更があります",
-  
   "premium": "プレミアム",
-  "premiumFeatures": "プレミアム機能",
+  "premiumFeatures": "Premiumプランの全機能",
   "upgradeToPremium": "プレミアムにアップグレード",
-  "freeTrial": "無料トライアル",
   "startFreeTrial": "無料トライアルを開始",
-  
   "subscribe": "購読",
   "unsubscribe": "購読解除",
   "subscribed": "購読中",
-  "subscription": "サブスクリプション",
   "subscriptionStatus": "購読状況",
-  
   "monthly": "月額",
   "yearly": "年額",
   "lifetime": "永久",
-  
   "price": "価格",
   "total": "合計",
   "subtotal": "小計",
   "tax": "税",
   "discount": "割引",
-  
   "paymentMethod": "支払い方法",
   "addPaymentMethod": "支払い方法を追加",
   "creditCard": "クレジットカード",
   "debitCard": "デビットカード",
-  
   "cardNumber": "カード番号",
   "expiryDate": "有効期限",
   "cvv": "CVV",
   "billingAddress": "請求先住所",
-  
   "purchase": "購入",
   "purchaseSuccess": "購入が完了しました",
   "purchaseError": "購入に失敗しました",
   "purchaseCancelled": "購入がキャンセルされました",
-  
   "restore": "復元",
   "restorePurchases": "購入を復元",
   "restoreSuccess": "復元しました",
   "restoreError": "復元に失敗しました",
   "noPurchasesToRestore": "復元する購入がありません",
-  
   "favorite": "お気に入り",
   "addedToFavorites": "お気に入りに追加しました",
   "removedFromFavorites": "お気に入りから削除しました",
@@ -848,21 +722,19 @@
   "checkInAt": "{gymName}にチェックインしました",
   "@checkInAt": {
     "placeholders": {
-      "gymName": {"type": "String"}
+      "gymName": {
+        "type": "String"
+      }
     }
   },
   "shareGym": "このジムをシェア",
   "shared": "シェアしました！",
-  "shareFailed": "シェアに失敗しました: {error}",
   "routeGuidance": "ルート案内",
   "couldNotOpenMap": "Googleマップを開けませんでした",
-  "reviews": "レビュー",
   "postReview": "レビューを投稿",
-  "noReviews": "まだレビューがありません\n最初のレビューを投稿してください！",
   "loadReviewsFailed": "レビューの読み込みに失敗しました",
   "viewAll": "すべて見る",
   "noCrowdData": "まだ混雑度情報がありません",
-  "crowdLevel": "混雑度",
   "googleStats": "Google統計",
   "userReport": "ユーザー報告",
   "ownerProvided": "オーナー提供",
@@ -873,13 +745,17 @@
   "couponCode": "クーポンコード: {code}",
   "@couponCode": {
     "placeholders": {
-      "code": {"type": "String"}
+      "code": {
+        "type": "String"
+      }
     }
   },
   "validUntil": "{date}まで",
   "@validUntil": {
     "placeholders": {
-      "date": {"type": "String"}
+      "date": {
+        "type": "String"
+      }
     }
   },
   "moderatelyCrowded": "やや混雑",
@@ -887,115 +763,113 @@
   "updatedMinutesAgo": "{minutes}分前更新",
   "@updatedMinutesAgo": {
     "placeholders": {
-      "minutes": {"type": "int"}
+      "minutes": {
+        "type": "int"
+      }
     }
   },
   "equipmentCount": "{name} × {count}台",
   "@equipmentCount": {
     "placeholders": {
-      "name": {"type": "String"},
-      "count": {"type": "int"}
+      "name": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
     }
   },
   "ratingWithCount": "{rating} ({count}件)",
   "@ratingWithCount": {
     "placeholders": {
-      "rating": {"type": "double"},
-      "count": {"type": "int"}
+      "rating": {
+        "type": "double"
+      },
+      "count": {
+        "type": "int"
+      }
     }
   },
-  
-  "subscription": "サブスクリプション",
-  "freePlan": "無料プラン",
-  "premiumPlan": "Premiumプラン",
-  "proPlan": "Proプラン",
-  "currentPlan": "現在のプラン",
-  "upgradePlan": "プランをアップグレード",
   "changePlan": "プラン変更",
   "cancelSubscription": "サブスクリプションをキャンセル",
-  "freeTrial": "無料トライアル",
-  "freeTrialDays": "{days}日間無料トライアル",
-  "@freeTrialDays": {
-    "placeholders": {
-      "days": {"type": "int"}
-    }
-  },
   "trialEndsAutoRenew": "トライアル終了後、自動的に有料プランに移行します",
   "trialPeriod": "無料トライアル期間: Premium 30日間 / Pro 14日間",
   "cancelAnytime": "いつでもキャンセル可能（期間満了まで利用可）",
   "planChangesAfterCurrent": "現在のプラン期間が終了後に新プランが適用されます",
   "unlimitedAI": "AI機能無制限",
-  "noAds": "広告なし",
   "unlimitedFavorites": "お気に入り無制限",
   "postGymReviews": "ジムレビュー投稿",
   "gpsLocationSearch": "GPS位置検索",
   "aiLimitedTo": "AI機能が{from}→{to}に制限",
   "@aiLimitedTo": {
     "placeholders": {
-      "from": {"type": "String"},
-      "to": {"type": "String"}
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
     }
   },
   "switchToPlan": "{planName}に変更",
   "@switchToPlan": {
     "placeholders": {
-      "planName": {"type": "String"}
+      "planName": {
+        "type": "String"
+      }
     }
   },
   "switchToPlanConfirm": "{planName}に変更すると、以下の機能が制限されます：",
   "@switchToPlanConfirm": {
     "placeholders": {
-      "planName": {"type": "String"}
+      "planName": {
+        "type": "String"
+      }
     }
   },
   "purchaseCompleted": "{planName}の購入が完了しました！",
   "@purchaseCompleted": {
     "placeholders": {
-      "planName": {"type": "String"}
+      "planName": {
+        "type": "String"
+      }
     }
   },
   "planSwitched": "{planName}に変更しました！",
   "@planSwitched": {
     "placeholders": {
-      "planName": {"type": "String"}
+      "planName": {
+        "type": "String"
+      }
     }
   },
   "changeInAppStore": "App Store設定から{planName}へ変更してください",
   "@changeInAppStore": {
     "placeholders": {
-      "planName": {"type": "String"}
+      "planName": {
+        "type": "String"
+      }
     }
   },
   "appStoreInstructions": "1. iPhoneの「設定」アプリを開く\n2. 一番上の[Apple ID]をタップ\n3. 「サブスクリプション」をタップ\n4. 「GYM MATCH」を選択\n5. 希望のプランを選択",
   "aiAddonPack": "AI追加パック",
   "purchaseAiAddon": "AI使用回数を追加購入",
   "loadPlanError": "プラン読み込みエラー",
-  "premiumFeatures": "Premiumプランの全機能",
   "freeFeatures": "無料プランの全機能",
   "allFeaturesForever": "すべての機能を永久利用",
-  
   "search": "検索",
-  "gymSearch": "ジム検索",
   "searchPlaceholder": "ジム名・地域で検索...",
   "searchFailed": "ジムの検索に失敗しました",
   "searchError": "検索エラー",
   "gpsSearch": "GPS位置検索",
   "getGpsLocation": "GPS位置を取得",
   "startGpsOrTextSearch": "GPS位置検索またはテキスト検索を開始してください",
-  "searchResults": "検索結果",
-  "noSearchResults": "検索結果がありません",
-  "networkError": "ネットワークエラー: API接続に失敗しました",
   "apiKeyError": "APIキーエラー: アクセスが拒否されました",
   "locationPermissionRequired": "位置情報の許可が必要です",
   "textSearch": "テキスト検索",
-  "nearbyGyms": "近くのジム",
-  
   "onboarding": "オンボーディング",
   "welcomeToGymMatch": "GYM MATCHで最高のトレーニング体験を",
   "getStarted": "はじめる",
-  "next": "次へ",
-  "skip": "スキップ",
-  "done": "完了",
   "ready": "準備完了！",
   "trainingExperience": "あなたのトレーニング経験は？",
   "beginner": "初心者",
@@ -1021,18 +895,14 @@
   "createOptimalMenu": "あなたに最適なメニューを作成します",
   "achievementSupport": "バッジやアチーブメントで継続をサポート",
   "earnedAiCredits": "✨ AI無料利用×3回を獲得！",
-  
-  "aiCoaching": "AIコーチング",
   "aiScientificCoaching": "AI科学的コーチング",
   "aiThinking": "AIが考え中...",
-  "aiAnalyzing": "AI分析中...",
   "aiGenerating": "AIが最適なプログラムを分析中...",
   "aiAnalyzingScientific": "AIが科学的根拠に基づいて分析中...",
   "aiPredictionComplete": "AI予測完了!",
   "aiAnalysisComplete": "AI分析完了!",
   "aiGenerationComplete": "AI生成完了!",
   "aiFatigueAnalysisWelcome": "AI疲労度分析へようこそ！",
-  "aiGrowthPrediction": "AI成長予測",
   "aiDetailedAnalysis": "AI詳細分析",
   "aiFatigueAnalysis": "AI疲労度分析",
   "aiPoweredTraining": "AI powered トレーニング提案",
@@ -1047,128 +917,250 @@
   "rpeModerate": "RPE {rpe}（余裕あり）",
   "@rpeModerate": {
     "placeholders": {
-      "rpe": {"type": "int"}
+      "rpe": {
+        "type": "int"
+      }
     }
   },
   "rpeOptimal": "RPE {rpe}（適正）",
   "@rpeOptimal": {
     "placeholders": {
-      "rpe": {"type": "int"}
+      "rpe": {
+        "type": "int"
+      }
     }
   },
   "rpeMaximal": "RPE {rpe}（限界）",
   "@rpeMaximal": {
     "placeholders": {
-      "rpe": {"type": "int"}
+      "rpe": {
+        "type": "int"
+      }
     }
   },
-  "sets": "セット",
   "setCount": "{count}セット",
   "@setCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "minutes": "分",
   "minuteCount": "{count}分",
   "@minuteCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
-  "reps": "回",
   "repCount": "{count}回",
   "@repCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
-  
   "aiPromptUserInfo": "【ユーザー情報】",
   "aiPromptTargetBodyPart": "・対象部位：{bodyPart}",
   "@aiPromptTargetBodyPart": {
     "placeholders": {
-      "bodyPart": {"type": "String"}
+      "bodyPart": {
+        "type": "String"
+      }
     }
   },
   "aiPromptCurrentOneRM": "・現在の1RM：{weight}kg",
   "@aiPromptCurrentOneRM": {
     "placeholders": {
-      "weight": {"type": "String"}
+      "weight": {
+        "type": "String"
+      }
     }
   },
   "aiPromptTrainingLevel": "・トレーニングレベル：{level}",
   "@aiPromptTrainingLevel": {
     "placeholders": {
-      "level": {"type": "String"}
+      "level": {
+        "type": "String"
+      }
     }
   },
   "aiPromptFrequency": "・現在の頻度：{bodyPart} を週{frequency}回トレーニング",
   "@aiPromptFrequency": {
     "placeholders": {
-      "bodyPart": {"type": "String"},
-      "frequency": {"type": "int"}
+      "bodyPart": {
+        "type": "String"
+      },
+      "frequency": {
+        "type": "int"
+      }
     }
   },
   "aiPromptGender": "・性別：{gender}",
   "@aiPromptGender": {
     "placeholders": {
-      "gender": {"type": "String"}
+      "gender": {
+        "type": "String"
+      }
     }
   },
   "aiPromptAge": "・年齢：{age}歳",
   "@aiPromptAge": {
     "placeholders": {
-      "age": {"type": "int"}
+      "age": {
+        "type": "int"
+      }
     }
   },
   "aiPromptPredictionResult": "【予測結果】",
   "aiPromptPredictionPeriod": "・予測期間：{months}ヶ月",
   "@aiPromptPredictionPeriod": {
     "placeholders": {
-      "months": {"type": "int"}
+      "months": {
+        "type": "int"
+      }
     }
   },
   "aiPromptPredictedOneRM": "・予測1RM：{weight}kg",
   "@aiPromptPredictedOneRM": {
     "placeholders": {
-      "weight": {"type": "int"}
+      "weight": {
+        "type": "int"
+      }
     }
   },
   "aiPromptGrowthRate": "・成長率：月+{rate}%",
   "@aiPromptGrowthRate": {
     "placeholders": {
-      "rate": {"type": "int"}
+      "rate": {
+        "type": "int"
+      }
     }
   },
   "aiPromptWeeklyGrowthRate": "・週次成長率：週+{rate}%",
   "@aiPromptWeeklyGrowthRate": {
     "placeholders": {
-      "rate": {"type": "String"}
+      "rate": {
+        "type": "String"
+      }
     }
   },
   "aiPromptRecommendedProgram": "【推奨プログラム】",
   "aiPromptRecommendedFrequency": "・{bodyPart} のトレーニング：週{frequency}回",
   "@aiPromptRecommendedFrequency": {
     "placeholders": {
-      "bodyPart": {"type": "String"},
-      "frequency": {"type": "int"}
+      "bodyPart": {
+        "type": "String"
+      },
+      "frequency": {
+        "type": "int"
+      }
     }
   },
   "aiPromptRecommendedVolume": "・{bodyPart} のボリューム：週{volume}セット",
   "@aiPromptRecommendedVolume": {
     "placeholders": {
-      "bodyPart": {"type": "String"},
-      "volume": {"type": "int"}
+      "bodyPart": {
+        "type": "String"
+      },
+      "volume": {
+        "type": "int"
+      }
     }
   },
   "aiPromptEffectSize": "・効果量：ES={effectSize}",
   "@aiPromptEffectSize": {
     "placeholders": {
-      "effectSize": {"type": "String"}
+      "effectSize": {
+        "type": "String"
+      }
     }
   },
   "aiResponseScientificBasis": "## 成長予測の科学的根拠",
   "aiResponseActionPlan": "## 推奨アクションプラン",
-  "aiResponseSuccessKeys": "## 成功のカギ"
+  "aiResponseSuccessKeys": "## 成功のカギ",
+  "update": "更新",
+  "complete": "完了",
+  "selected": "選択済み",
+  "bodyPartBiceps": "二頭",
+  "bodyPartTriceps": "三頭",
+  "levelBeginner": "初心者",
+  "levelIntermediate": "中級者",
+  "levelAdvanced": "上級者",
+  "genderMale": "男性",
+  "genderFemale": "女性",
+  "exerciseCardio": "有酸素",
+  "repsCount": "回数",
+  "setsCount": "セット数",
+  "detail": "詳細",
+  "later": "後で",
+  "all": "すべて",
+  "bodyPartOther": "その他",
+  "exerciseBenchPress": "ベンチプレス",
+  "exerciseSquat": "スクワット",
+  "exerciseDeadlift": "デッドリフト",
+  "exercisePullUp": "懸垂",
+  "exerciseLatPulldown": "ラットプルダウン",
+  "exerciseLegPress": "レッグプレス",
+  "exerciseShoulderPress": "ショルダープレス",
+  "exerciseDips": "ディップス",
+  "exerciseLegExtension": "レッグエクステンション",
+  "exerciseLegCurl": "レッグカール",
+  "exerciseSideRaise": "サイドレイズ",
+  "exerciseBarbellCurl": "バーベルカール",
+  "exerciseHammerCurl": "ハンマーカール",
+  "exerciseFrontRaise": "フロントレイズ",
+  "exerciseDumbbellCurl": "ダンベルカール",
+  "exerciseBentOverRow": "ベントオーバーロウ",
+  "exerciseDumbbellPress": "ダンベルプレス",
+  "exerciseInclinePress": "インクラインプレス",
+  "exerciseCableFly": "ケーブルフライ",
+  "exerciseSeatedRow": "シーテッドロウ",
+  "exerciseTricepsExtension": "トライセプスエクステンション",
+  "exerciseRearDeltFly": "リアデルトフライ",
+  "exerciseChinUp": "チンニング",
+  "exerciseLegRaise": "レッグレイズ",
+  "exercisePlank": "プランク",
+  "exerciseRunning": "ランニング",
+  "exerciseCrunch": "クランチ",
+  "exerciseAbRoller": "アブローラー",
+  "exerciseHangingLegRaise": "ハンギングレッグレイズ",
+  "exerciseSidePlank": "サイドプランク",
+  "exerciseBicycleCrunch": "バイシクルクランチ",
+  "exerciseCableCrunch": "ケーブルクランチ",
+  "exerciseCalfRaise": "カーフレイズ",
+  "exerciseUprightRow": "アップライトロウ",
+  "exercisePreacherCurl": "プリチャーカール",
+  "exerciseCableCurl": "ケーブルカール",
+  "exerciseSkullCrusher": "スカルクラッシャー",
+  "exerciseKickback": "キックバック",
+  "exerciseAerobicBike": "エアロバイク",
+  "unknown": "不明",
+  "seconds": "秒数",
+  "limit": "限界",
+  "normal": "普通",
+  "active": "アクティブ",
+  "notSet": "未設定",
+  "personalRecord": "パーソナルレコード",
+  "trainingLog": "トレーニング記録",
+  "bodyPartTracking": "部位別トラッキング",
+  "partnerSearch": "パートナー検索",
+  "goalMuscleGain": "筋肥大",
+  "goalHealthMaintenance": "健康維持",
+  "goalDiet": "ダイエット",
+  "bodyFatRate": "体脂肪率",
+  "experienceLevel": "経験レベル",
+  "musclePecs": "大胸筋",
+  "enterEmailAddress": "メールアドレスを入力してください",
+  "enterValidEmailAddress": "正しいメールアドレスを入力してください",
+  "loginRequired": "ログインが必要です",
+  "userNotAuthenticated": "ユーザーが認証されていません",
+  "deleteFailed": "削除に失敗しました: $e",
+  "dataLoadError": "データ読み込みエラー: $e",
+  "saveFailed": "保存エラー: $e",
+  "snapshotError": "エラー: ${snapshot.error}",
+  "lastExerciseDeleted": "最後の種目が削除されたため、トレーニング記録全体を削除しました"
 }

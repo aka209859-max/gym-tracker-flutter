@@ -1,16 +1,13 @@
 {
   "@@locale": "de",
   "@@context": "GYM MATCH v1.04 - German Translation",
-  
   "appName": "GYM MATCH",
   "appTagline": "Fitnessstudio-Suche · Auslastung · Training",
-  
   "navHome": "Startseite",
   "navGym": "Studios",
   "navWorkout": "Training",
   "navAI": "KI",
   "navProfile": "Profil",
-  
   "save": "Speichern",
   "cancel": "Abbrechen",
   "delete": "Löschen",
@@ -22,19 +19,17 @@
   "back": "Zurück",
   "next": "Weiter",
   "done": "Fertig",
-  "loading": "Laden...",
+  "loading": "Laden",
   "retry": "Wiederholen",
   "confirm": "Bestätigen",
-  
   "login": "Anmelden",
   "logout": "Abmelden",
   "signUp": "Registrieren",
   "email": "E-Mail",
   "password": "Passwort",
   "forgotPassword": "Passwort vergessen?",
-  
   "searchGym": "Studio suchen",
-  "nearbyGyms": "Studios in der Nähe",
+  "nearbyGyms": "Fitnessstudios in der Nähe",
   "gymDetails": "Studio-Details",
   "crowdLevel": "Auslastung",
   "openingHours": "Öffnungszeiten",
@@ -44,7 +39,6 @@
   "crowdLevelNormal": "Normal",
   "crowdLevelCrowded": "Voll",
   "crowdLevelVeryCrowded": "Sehr voll",
-  
   "workout": "Training",
   "addWorkout": "Training hinzufügen",
   "workoutHistory": "Trainingshistorie",
@@ -64,30 +58,26 @@
   "bodyPartArms": "Arme",
   "bodyPartAbs": "Bauch",
   "bodyPartCardio": "Ausdauer",
-  
   "strengthTraining": "Krafttraining",
   "cardio": "Ausdauertraining",
   "workoutTypeFilter": "Nach Typ filtern",
-  
   "personalRecords": "Persönliche Rekorde",
   "prTitle": "PR-Aufzeichnungen",
   "prAchieved": "Erreicht",
   "prDaysAgo": "vor {days} Tagen",
   "prMonthsAgo": "vor {months} Monaten",
-  
   "aiCoach": "KI-Coach",
   "aiMenu": "KI-Menüvorschlag",
-  "aiGrowthPrediction": "Wachstumsprognose",
+  "aiGrowthPrediction": "AI Wachstumsprognose",
   "aiEffectAnalysis": "Effektanalyse",
   "aiUsageRemaining": "{count} KI-Nutzungen übrig",
   "aiUnlimited": "Unbegrenzte KI",
   "scientificBasis": "Wissenschaftliche Grundlage",
   "basedOnPapers": "Basiert auf über 40 Forschungsarbeiten",
-  
   "subscription": "Abonnement",
   "freePlan": "Kostenloser Plan",
-  "premiumPlan": "Premium",
-  "proPlan": "Pro",
+  "premiumPlan": "Premium-Plan",
+  "proPlan": "Pro-Plan",
   "currentPlan": "Aktueller Plan",
   "upgradePlan": "Plan upgraden",
   "monthlyPrice": "Monatlich",
@@ -98,41 +88,34 @@
   "freeTrialDays": "{days} Tage kostenlos",
   "noAds": "Keine Werbung",
   "adSupported": "Mit Werbung",
-  
   "profile": "Profil",
   "editProfile": "Profil bearbeiten",
   "settings": "Einstellungen",
   "name": "Name",
   "age": "Alter",
   "height": "Größe",
-  "weight": "Gewicht",
   "goal": "Ziel",
-  
   "statistics": "Statistiken",
   "weeklyReport": "Wochenbericht",
   "totalVolume": "Gesamtvolumen",
   "totalReps": "Gesamtwiederholungen",
   "totalSets": "Gesamtsätze",
   "workoutCount": "Trainingsanzahl",
-  
   "error": "Fehler",
   "errorGeneric": "Ein Fehler ist aufgetreten",
   "errorNetwork": "Netzwerkfehler",
   "errorAuth": "Authentifizierungsfehler",
   "errorDataNotFound": "Daten nicht gefunden",
   "errorPermissionDenied": "Zugriff verweigert",
-  
   "success": "Erfolg",
   "saved": "Gespeichert",
   "deleted": "Gelöscht",
   "updated": "Aktualisiert",
-  
   "trainingPartner": "Trainingspartner",
   "findPartner": "Partner finden",
   "myPartners": "Meine Partner",
   "partnerRequests": "Anfragen",
   "messaging": "Nachrichten",
-  
   "language": "Sprache",
   "languageSettings": "Spracheinstellungen",
   "notifications": "Benachrichtigungen",
@@ -141,7 +124,6 @@
   "privacyPolicy": "Datenschutzrichtlinie",
   "about": "Über GYM MATCH",
   "version": "Version",
-  
   "importFromPhoto": "Aus Foto/CSV importieren",
   "importFromPhotoSubtitle": "Bilder & CSV-Dateien automatisch konvertieren",
   "personalTraining": "Personaltraining",
@@ -152,7 +134,9 @@
   "favoritesCount": "{count} Einträge",
   "@favoritesCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "bodyMeasurement": "Körpermessungen",
@@ -161,27 +145,32 @@
   "unreadMessages": "{count} ungelesen",
   "@unreadMessages": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "trainingPartners": "Trainingspartner",
   "partnersCount": "{count} Partner",
   "@partnersCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "inviteCode": "Einladungscode eingeben",
   "campaignRegistration": "Kampagnen-Registrierung",
   "legalInfo": "Rechtliche Informationen",
   "sellerInfo": "Verkäuferinfo & Rückerstattung",
-  
   "workoutLog": "Trainingsprotokoll",
   "addSet": "Satz hinzufügen",
   "setNumber": "Satz {number}",
   "@setNumber": {
     "placeholders": {
-      "number": {"type": "int"}
+      "number": {
+        "type": "int"
+      }
     }
   },
   "warmupSet": "Aufwärmen",
@@ -199,18 +188,14 @@
   "recentExercises": "Letzte Übungen",
   "popularExercises": "Beliebte Übungen",
   "allExercises": "Alle Übungen",
-  
   "workoutDate": "Datum",
   "workoutTime": "Zeit",
   "workoutDuration": "Dauer",
-  "totalSets": "Gesamtsätze",
-  "totalReps": "Gesamtwiederholungen",
   "totalWeight": "Gesamtgewicht",
   "maxWeight": "Maximalgewicht",
   "avgWeight": "Durchschnittsgewicht",
   "oneRepMax": "1RM",
   "estimatedMax": "Geschätztes 1RM",
-  
   "filterByDate": "Nach Datum filtern",
   "filterByExercise": "Nach Übung filtern",
   "filterByMuscle": "Nach Muskel filtern",
@@ -218,7 +203,6 @@
   "sortByDate": "Nach Datum",
   "sortByVolume": "Nach Volumen",
   "sortByDuration": "Nach Dauer",
-  
   "thisWeek": "Diese Woche",
   "thisMonth": "Dieser Monat",
   "last7Days": "Letzte 7 Tage",
@@ -226,7 +210,6 @@
   "last90Days": "Letzte 90 Tage",
   "allTime": "Gesamte Zeit",
   "customRange": "Benutzerdefinierter Zeitraum",
-  
   "chart": "Diagramm",
   "list": "Liste",
   "calendar": "Kalender",
@@ -234,14 +217,12 @@
   "details": "Details",
   "progress": "Fortschritt",
   "analysis": "Analyse",
-  
   "bodyWeight": "Körpergewicht",
   "bodyFat": "Körperfett %",
   "muscleMass": "Muskelmasse",
   "bmi": "BMI",
   "measurementDate": "Datum",
   "addMeasurement": "Messung hinzufügen",
-  
   "template": "Vorlage",
   "templates": "Vorlagen",
   "createTemplate": "Vorlage erstellen",
@@ -249,26 +230,14 @@
   "useTemplate": "Vorlage verwenden",
   "templateName": "Vorlagenname",
   "deleteTemplate": "Vorlage löschen",
-  
   "share": "Teilen",
   "shareWorkout": "Training teilen",
   "shareProgress": "Fortschritt teilen",
   "shareAchievement": "Erfolg teilen",
   "copyLink": "Link kopieren",
   "shareToSocial": "In sozialen Medien teilen",
-  
-  "language": "Sprache",
-  "languageSettings": "Spracheinstellungen",
-  "notifications": "Benachrichtigungen",
   "notificationSettings": "Benachrichtigungseinstellungen",
-  "privacy": "Datenschutz",
-  "termsOfService": "Nutzungsbedingungen",
-  "privacyPolicy": "Datenschutzrichtlinie",
-  "about": "Über GYM MATCH",
-  "version": "Version",
-  "logout": "Abmelden",
   "deleteAccount": "Konto löschen",
-  
   "languageJapanese": "日本語 (Japanisch)",
   "languageEnglish": "English (Englisch)",
   "languageKorean": "한국어 (Koreanisch)",
@@ -276,19 +245,12 @@
   "languageChineseTW": "中文 (Chinesisch traditionell)",
   "languageGerman": "Deutsch",
   "languageSpanish": "Español (Spanisch)",
-  "workoutHistory": "Trainingshistorie",
-  "loading": "Laden",
-  "save": "Speichern",
-  "cancel": "Abbrechen",
-  "delete": "Löschen",
-  
   "muscleGrowth": "Muskelaufbau",
   "muscleGrowthDesc": "Muskelmasse aufbauen",
   "dietGoal": "Fettabbau",
   "dietGoalDesc": "Körperfett reduzieren",
   "healthMaintenance": "Gesundheitserhaltung",
   "healthMaintenanceDesc": "Gesunden Körper erhalten",
-  
   "aiCoaching": "AI-Coaching",
   "aiScientificCoaching": "AI Wissenschaftliches Training",
   "aiThinking": "AI denkt nach...",
@@ -297,37 +259,107 @@
   "aiPredictionComplete": "AI-Vorhersage abgeschlossen!",
   "aiAnalysisComplete": "AI-Analyse abgeschlossen!",
   "aiGenerationComplete": "AI-Generierung abgeschlossen!",
-  "aiGrowthPrediction": "AI Wachstumsprognose",
   "aiFatigueAnalysis": "AI Ermüdungsanalyse",
   "scientificPrediction": "Wissenschaftliche Vorhersage basierend auf 40+ Studien",
   "generateMenu": "Trainingsplan generieren",
   "executeGrowthPrediction": "Wachstumsprognose ausführen",
-  
-  "subscription": "Abonnement",
-  "freePlan": "Kostenloser Plan",
-  "premiumPlan": "Premium-Plan",
-  "proPlan": "Pro-Plan",
-  "upgradePlan": "Plan upgraden",
-  "freeTrial": "Kostenlose Testversion",
   "unlimitedAI": "Unbegrenzte AI",
-  "noAds": "Keine Werbung",
-  
   "favorite": "Favorit",
   "addedToFavorites": "Zu Favoriten hinzugefügt",
   "removedFromFavorites": "Aus Favoriten entfernt",
   "checkIn": "Check-in",
   "checkOut": "Check-out",
   "checkedIn": "Eingecheckt!",
-  "reviews": "Bewertungen",
   "postReview": "Bewertung abgeben",
   "noReviews": "Noch keine Bewertungen\nSei der Erste!",
   "viewAll": "Alle anzeigen",
-  
   "search": "Suchen",
   "searchPlaceholder": "Nach Fitnessstudio oder Ort suchen...",
   "searchFailed": "Suche fehlgeschlagen",
   "gpsSearch": "GPS-Standortsuche",
   "searchResults": "Suchergebnisse",
   "noSearchResults": "Keine Suchergebnisse",
-  "nearbyGyms": "Fitnessstudios in der Nähe"
+  "update": "Aktualisieren",
+  "add": "Hinzufügen",
+  "later": "Später",
+  "all": "Alle",
+  "bodyPartBiceps": "Bizeps",
+  "bodyPartTriceps": "Trizeps",
+  "bodyPartOther": "Andere",
+  "levelBeginner": "Anfänger",
+  "levelIntermediate": "Fortgeschrittene",
+  "levelAdvanced": "Fortgeschritten",
+  "genderMale": "Männlich",
+  "genderFemale": "Weiblich",
+  "exerciseCardio": "Kardio",
+  "exerciseBenchPress": "Bankdrücken",
+  "exerciseSquat": "Kniebeugen",
+  "exerciseDeadlift": "Kreuzheben",
+  "exercisePullUp": "Klimmzüge",
+  "exerciseLatPulldown": "Latzug",
+  "exerciseLegPress": "Beinpresse",
+  "exerciseShoulderPress": "Schulterdrücken",
+  "exerciseDips": "Dips",
+  "exerciseLegExtension": "Beinstrecker",
+  "exerciseLegCurl": "Beinbeuger",
+  "exerciseSideRaise": "Seitheben",
+  "exerciseBarbellCurl": "Langhantelcurl",
+  "exerciseHammerCurl": "Hammercurl",
+  "exerciseFrontRaise": "Frontheben",
+  "exerciseDumbbellCurl": "Kurzhantelcurl",
+  "exerciseBentOverRow": "Vorgebeugtes Rudern",
+  "exerciseDumbbellPress": "Kurzhanteldrücken",
+  "exerciseInclinePress": "Schrägbankdrücken",
+  "exerciseCableFly": "Kabel-Flys",
+  "exerciseSeatedRow": "Rudern sitzend",
+  "exerciseTricepsExtension": "Trizepsstrecker",
+  "exerciseRearDeltFly": "Reverse Flys",
+  "exerciseChinUp": "Klimmzug",
+  "exerciseLegRaise": "Beinheben",
+  "exercisePlank": "Unterarmstütz",
+  "exerciseRunning": "Laufen",
+  "exerciseCrunch": "Crunches",
+  "exerciseAbRoller": "Ab-Roller",
+  "exerciseHangingLegRaise": "Hängendes Beinheben",
+  "exerciseSidePlank": "Seitlicher Unterarmstütz",
+  "exerciseBicycleCrunch": "Fahrrad-Crunches",
+  "exerciseCableCrunch": "Kabel-Crunches",
+  "exerciseCalfRaise": "Wadenheben",
+  "exerciseUprightRow": "Aufrechtes Rudern",
+  "exercisePreacherCurl": "Scott-Curl",
+  "exerciseCableCurl": "Kabel-Curl",
+  "exerciseSkullCrusher": "Stirndrücken",
+  "exerciseKickback": "Kickbacks",
+  "exerciseAerobicBike": "Heimtrainer",
+  "unknown": "Unbekannt",
+  "seconds": "Sekunden",
+  "time": "Zeit",
+  "limit": "Limit",
+  "normal": "Normal",
+  "active": "Aktiv",
+  "notSet": "Nicht festgelegt",
+  "personalRecord": "Persönlicher Rekord",
+  "trainingLog": "Trainingsprotokoll",
+  "trainingMemo": "Trainingsnotiz",
+  "bodyPartTracking": "Körperteil-Tracking",
+  "partnerSearch": "Partnersuche",
+  "goalMuscleGain": "Muskelaufbau",
+  "goalHealthMaintenance": "Gesundheitserhaltung",
+  "goalDiet": "Diät",
+  "bodyFatRate": "Körperfettanteil",
+  "experienceLevel": "Erfahrungsstufe",
+  "musclePecs": "Brustmuskel",
+  "monthly": "Monatlich",
+  "emailAddress": "E-Mail-Adresse",
+  "enterEmailAddress": "Bitte E-Mail-Adresse eingeben",
+  "enterValidEmailAddress": "Bitte gültige E-Mail-Adresse eingeben",
+  "loginRequired": "Anmeldung erforderlich",
+  "userNotAuthenticated": "Benutzer nicht authentifiziert",
+  "loginFailed": "Anmeldung fehlgeschlagen",
+  "errorOccurred": "Fehler: $e",
+  "deleteFailed": "Löschen fehlgeschlagen: $e",
+  "dataLoadError": "Datenladefehler: $e",
+  "saveFailed": "Speicherfehler: $e",
+  "snapshotError": "Fehler: ${snapshot.error}",
+  "lastExerciseDeleted": "Gesamtes Trainingsprotokoll gelöscht, da letzte Übung entfernt wurde"
 }
