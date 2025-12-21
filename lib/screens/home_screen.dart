@@ -19,6 +19,7 @@ import 'workout/workout_memo_list_screen.dart';
 import 'workout/weekly_reports_screen.dart';
 import 'achievements_screen.dart';
 import 'goals_screen.dart';
+import 'language_settings_screen.dart';
 import '../models/workout_log.dart' as workout_models;
 import '../models/goal.dart';
 import '../services/achievement_service.dart';
@@ -5880,33 +5881,34 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 Navigator.of(context).pushNamed('/personal-factors');
               },
             ),
-            // メニュー項目3: デバッグログ（🔧開発者向け）
+            // メニュー項目3: 言語設定
             ListTile(
               leading: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.orange.shade50,
+                  color: Colors.green.shade50,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Icon(
-                  Icons.bug_report,
-                  color: Colors.orange.shade700,
+                  Icons.language,
+                  color: Colors.green.shade700,
                 ),
               ),
               title: const Text(
-                'デバッグログ',
+                '言語設定',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text('アプリの動作ログを確認（問題調査用）'),
+              subtitle: const Text('6言語対応 - グローバル展開中'),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
-                Navigator.of(context).push(
+                Navigator.push(
+                  context,
                   MaterialPageRoute(
-                    builder: (context) => const DebugLogScreen(),
+                    builder: (context) => const LanguageSettingsScreen(),
                   ),
                 );
               },

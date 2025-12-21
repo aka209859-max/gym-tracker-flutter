@@ -62,12 +62,55 @@ class LanguageSettingsScreen extends StatelessWidget {
               await localeProvider.setLocale(localeInfo.locale);
               
               if (context.mounted) {
-                // スナックバーで通知
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('${localeInfo.nativeName}に変更しました'),
-                    duration: const Duration(seconds: 2),
-                    behavior: SnackBarBehavior.floating,
+                // ダイアログで再起動を促す
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (dialogContext) => AlertDialog(
+                    title: Row(
+                      children: [
+                        Text(localeInfo.flag, style: const TextStyle(fontSize: 32)),
+                        const SizedBox(width: 12),
+                        const Expanded(
+                          child: Text(
+                            '言語を変更しました',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ),
+                      ],
+                    ),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${localeInfo.nativeName}に変更されました。',
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(height: 12),
+                        const Text(
+                          'アプリを再起動して変更を反映します。',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          // ダイアログを閉じる
+                          Navigator.of(dialogContext).pop();
+                          // 言語設定画面を閉じる
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text(
+                          'OK',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ],
                   ),
                 );
               }
