@@ -28,5 +28,6 @@ preferred-supported-locales:
   - en  # English (US)
   - ko  # 한국어
   - zh  # 中文（简体）
+  - zh_TW  # 中文（繁體）
   - de  # Deutsch
   - es  # Español

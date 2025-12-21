@@ -30,7 +30,7 @@ import '../services/enhanced_share_service.dart';
 import '../models/training_partner.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gym_match/generated/app_localizations.dart';
 
 /// プロフィール画面
 class ProfileScreen extends StatefulWidget {
@@ -49,6 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   
   int _favoriteCount = 0;
   int _unreadMessages = 0;
+  int _trainingPartnerCount = 0;
   SubscriptionType _currentPlan = SubscriptionType.free;
   TrainingPartner? _userProfile;
 

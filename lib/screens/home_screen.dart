@@ -47,7 +47,7 @@ import '../services/magic_number_service.dart';
 import '../services/crowd_alert_service.dart';
 import '../services/referral_service.dart';
 import 'debug_log_screen.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gym_match/generated/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
