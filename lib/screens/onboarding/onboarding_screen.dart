@@ -160,9 +160,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 40),
-          const Text(
+          Text(
             AppLocalizations.of(context)!.trainingExperience,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 28,
               fontWeight: FontWeight.bold,
@@ -225,9 +225,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 40),
-          const Text(
+          Text(
             AppLocalizations.of(context)!.trainingGoal,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 28,
               fontWeight: FontWeight.bold,
@@ -290,9 +290,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 40),
-          const Text(
+          Text(
             AppLocalizations.of(context)!.trainingFrequency,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 28,
               fontWeight: FontWeight.bold,
@@ -456,9 +456,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             },
           ),
           const SizedBox(height: 40),
-          const Text(
+          Text(
             AppLocalizations.of(context)!.ready,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 32,
               fontWeight: FontWeight.bold,
