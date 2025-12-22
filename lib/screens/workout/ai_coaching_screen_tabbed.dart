@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart'; // 🎯 Phase 1追加
-import 'package:gym_match/generated/app_localizations.dart'; // 🆕 v1.0.274: Multilingual support
+import 'package:gym_match/gen/app_localizations.dart'; // 🆕 v1.0.274: Multilingual support
 import '../../services/ai_prediction_service.dart';
 import '../../services/training_analysis_service.dart';
 import '../../services/subscription_service.dart';

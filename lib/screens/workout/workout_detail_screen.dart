@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:gym_match/generated/app_localizations.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import '../../models/workout_log.dart';
 import '../../models/workout_note.dart';
 import '../../services/workout_note_service.dart';

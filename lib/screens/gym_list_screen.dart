@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:gym_match/generated/app_localizations.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import '../providers/gym_provider.dart';
 import '../models/gym.dart';
 import 'gym_detail_screen.dart';

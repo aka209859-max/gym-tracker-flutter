@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_match/generated/app_localizations.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'body_part_tracking_screen.dart';
 import 'personal_records_screen.dart';
 import 'workout_memo_list_screen.dart';

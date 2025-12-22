@@ -30,7 +30,7 @@ import '../services/enhanced_share_service.dart';
 import '../models/training_partner.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:gym_match/generated/app_localizations.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 
 /// プロフィール画面
 class ProfileScreen extends StatefulWidget {
