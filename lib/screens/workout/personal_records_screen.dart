@@ -119,7 +119,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
       builder: (context, authSnapshot) {
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.personalRecord)),
+            appBar: AppBar(title: Text(AppLocalizations.of(context)!.personalRecord)),
             body: const Center(
               child: CircularProgressIndicator(),
             ),
@@ -129,16 +129,16 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
         final user = authSnapshot.data;
         if (user == null) {
           return Scaffold(
-            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.personalRecord)),
+            appBar: AppBar(title: Text(AppLocalizations.of(context)!.personalRecord)),
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(AppLocalizations.of(context)!.loginError),
+                  Text(AppLocalizations.of(context)!.loginError),
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _autoLoginIfNeeded,
-                    child: const Text(AppLocalizations.of(context)!.tryAgain),
+                    child: Text(AppLocalizations.of(context)!.tryAgain),
                   ),
                 ],
               ),
@@ -156,7 +156,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
     // 種目リスト読み込み中
     if (_isLoadingExercises) {
       return Scaffold(
-        appBar: AppBar(title: const Text(AppLocalizations.of(context)!.personalRecord)),
+        appBar: AppBar(title: Text(AppLocalizations.of(context)!.personalRecord)),
         body: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -173,7 +173,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
     // 種目がない場合
     if (_exercises.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: const Text(AppLocalizations.of(context)!.personalRecord)),
+        appBar: AppBar(title: Text(AppLocalizations.of(context)!.personalRecord)),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -198,7 +198,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
 
     // 🔧 v1.0.251: 部位別カテゴリー表示（胸・背中・肩・二頭・三頭・腹筋・脚）
     return Scaffold(
-      appBar: AppBar(title: const Text(AppLocalizations.of(context)!.personalRecord)),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.personalRecord)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -283,7 +283,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
           exerciseName,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        subtitle: const Text(AppLocalizations.of(context)!.confirm),
+        subtitle: Text(AppLocalizations.of(context)!.confirm),
         trailing: const Icon(Icons.chevron_right),
         onTap: () {
           // 詳細画面（グラフ）へ遷移
@@ -808,7 +808,7 @@ class ExerciseListScreen extends StatelessWidget {
                       exerciseName,
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: const Text(AppLocalizations.of(context)!.confirm),
+                    subtitle: Text(AppLocalizations.of(context)!.confirm),
                     trailing: const Icon(Icons.chevron_right),
                     onTap: () {
                       // 詳細画面（グラフ）へ遷移

@@ -117,7 +117,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
     if (_isInitializing) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text(AppLocalizations.of(context)!.trainingLog),
+          title: Text(AppLocalizations.of(context)!.trainingLog),
         ),
         body: const Center(
           child: CircularProgressIndicator(),
@@ -145,7 +145,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
         
         return Scaffold(
           appBar: AppBar(
-            title: const Text(AppLocalizations.of(context)!.trainingLog),
+            title: Text(AppLocalizations.of(context)!.trainingLog),
           ),
           body: Center(
             child: Padding(
@@ -188,7 +188,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
                       _initializeAuth();
                     },
                     icon: const Icon(Icons.refresh),
-                    label: const Text(AppLocalizations.of(context)!.tryAgain),
+                    label: Text(AppLocalizations.of(context)!.tryAgain),
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                     ),
@@ -199,7 +199,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
                       // ホーム画面に戻る
                       Navigator.of(context).popUntil((route) => route.isFirst);
                     },
-                    child: const Text(AppLocalizations.of(context)!.backToHome),
+                    child: Text(AppLocalizations.of(context)!.backToHome),
                   ),
                 ],
               ),
@@ -311,7 +311,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.trainingLog),
+        title: Text(AppLocalizations.of(context)!.trainingLog),
         actions: [
           IconButton(
             icon: const Icon(Icons.share),
@@ -479,7 +479,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
                         );
                       },
                       icon: const Icon(Icons.add),
-                      label: const Text(AppLocalizations.of(context)!.addFirstRecord),
+                      label: Text(AppLocalizations.of(context)!.addFirstRecord),
                     ),
                   ],
                 ),

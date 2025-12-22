@@ -158,7 +158,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.developerMenu),
+        title: Text(AppLocalizations.of(context)!.developerMenu),
         backgroundColor: Colors.deepPurple,
       ),
       body: _isLoading

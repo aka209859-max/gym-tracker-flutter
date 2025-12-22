@@ -56,7 +56,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
       builder: (context, authSnapshot) {
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.bodyPartTracking)),
+            appBar: AppBar(title: Text(AppLocalizations.of(context)!.bodyPartTracking)),
             body: const Center(
               child: CircularProgressIndicator(),
             ),
@@ -66,16 +66,16 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
         final user = authSnapshot.data;
         if (user == null) {
           return Scaffold(
-            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.bodyPartTracking)),
+            appBar: AppBar(title: Text(AppLocalizations.of(context)!.bodyPartTracking)),
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(AppLocalizations.of(context)!.loginError),
+                  Text(AppLocalizations.of(context)!.loginError),
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _autoLoginIfNeeded,
-                    child: const Text(AppLocalizations.of(context)!.tryAgain),
+                    child: Text(AppLocalizations.of(context)!.tryAgain),
                   ),
                 ],
               ),
@@ -91,7 +91,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
   Widget _buildMainContent(User user) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.bodyPartTracking),
+        title: Text(AppLocalizations.of(context)!.bodyPartTracking),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _getWorkoutsStream(user.uid),

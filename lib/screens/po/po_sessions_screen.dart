@@ -37,7 +37,7 @@ class POSessionsScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text(AppLocalizations.of(context)!.addWorkout)),
+            SnackBar(content: Text(AppLocalizations.of(context)!.addWorkout)),
           );
         },
         child: const Icon(Icons.add),

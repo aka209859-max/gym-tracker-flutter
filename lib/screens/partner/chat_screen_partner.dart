@@ -102,7 +102,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(AppLocalizations.of(context)!.confirm),
+        title: Text(AppLocalizations.of(context)!.confirm),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,7 +121,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
@@ -166,13 +166,13 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
       context: context,
       builder: (context) => StatefulBuilder(
         builder: (context, setState) => AlertDialog(
-          title: const Text(AppLocalizations.of(context)!.report),
+          title: Text(AppLocalizations.of(context)!.report),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(AppLocalizations.of(context)!.selectExercise),
+                Text(AppLocalizations.of(context)!.selectExercise),
                 const SizedBox(height: 12),
                 ...[
                   AppLocalizations.of(context)!.inappropriateContent,
@@ -209,11 +209,11 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context, false),
-              child: const Text(AppLocalizations.of(context)!.cancel),
+              child: Text(AppLocalizations.of(context)!.cancel),
             ),
             ElevatedButton(
               onPressed: () => Navigator.pop(context, true),
-              child: const Text(AppLocalizations.of(context)!.sendMessage),
+              child: Text(AppLocalizations.of(context)!.sendMessage),
             ),
           ],
         ),

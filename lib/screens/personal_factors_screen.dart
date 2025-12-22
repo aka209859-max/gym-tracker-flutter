@@ -498,7 +498,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.readLess),
+            child: Text(AppLocalizations.of(context)!.readLess),
           ),
         ],
       ),

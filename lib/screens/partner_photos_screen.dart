@@ -140,16 +140,16 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('画像を削除'),
-        content: const Text(AppLocalizations.of(context)!.delete),
+        content: Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text(AppLocalizations.of(context)!.delete),
+            child: Text(AppLocalizations.of(context)!.delete),
           ),
         ],
       ),
@@ -263,7 +263,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
             ElevatedButton.icon(
               onPressed: _pickAndUploadPhotos,
               icon: const Icon(Icons.add_photo_alternate),
-              label: const Text(AppLocalizations.of(context)!.addWorkout),
+              label: Text(AppLocalizations.of(context)!.addWorkout),
               style: ElevatedButton.styleFrom(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -295,7 +295,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
               TextButton.icon(
                 onPressed: _isUploading ? null : _pickAndUploadPhotos,
                 icon: const Icon(Icons.add),
-                label: const Text(AppLocalizations.of(context)!.add),
+                label: Text(AppLocalizations.of(context)!.add),
               ),
             ],
           ),

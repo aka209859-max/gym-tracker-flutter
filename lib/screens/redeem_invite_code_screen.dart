@@ -92,7 +92,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
                   Navigator.of(context).pop(); // Close dialog
                   Navigator.of(context).pop(true); // Close screen (notify success)
                 },
-                child: const Text(AppLocalizations.of(context)!.close),
+                child: Text(AppLocalizations.of(context)!.close),
               ),
             ],
           ),

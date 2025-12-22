@@ -20,7 +20,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.messaging),
+        title: Text(AppLocalizations.of(context)!.messaging),
         elevation: 2,
       ),
       body: StreamBuilder<List<Conversation>>(

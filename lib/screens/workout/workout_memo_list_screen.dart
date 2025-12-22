@@ -102,7 +102,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
     final result = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(AppLocalizations.of(context)!.edit),
+        title: Text(AppLocalizations.of(context)!.edit),
         content: TextField(
           controller: controller,
           maxLines: 5,
@@ -114,11 +114,11 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, controller.text),
-            child: const Text(AppLocalizations.of(context)!.saveWorkout),
+            child: Text(AppLocalizations.of(context)!.saveWorkout),
           ),
         ],
       ),
@@ -152,11 +152,11 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('メモを削除'),
-        content: const Text(AppLocalizations.of(context)!.delete),
+        content: Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
@@ -164,7 +164,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
               backgroundColor: Colors.red,
               foregroundColor: Colors.white,
             ),
-            child: const Text(AppLocalizations.of(context)!.remove),
+            child: Text(AppLocalizations.of(context)!.remove),
           ),
         ],
       ),
@@ -175,7 +175,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
         await _noteService.deleteNote(noteId);
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text(AppLocalizations.of(context)!.delete)),
+            SnackBar(content: Text(AppLocalizations.of(context)!.delete)),
           );
           _loadMemosWithWorkouts(); // リロード
         }
@@ -193,7 +193,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.trainingMemo),
+        title: Text(AppLocalizations.of(context)!.trainingMemo),
         backgroundColor: Colors.purple,
         foregroundColor: Colors.white,
       ),

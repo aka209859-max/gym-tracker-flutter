@@ -344,7 +344,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     final result = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(AppLocalizations.of(context)!.addCustomExercise),
+        title: Text(AppLocalizations.of(context)!.addCustomExercise),
         content: TextField(
           controller: controller,
           decoration: const InputDecoration(
@@ -356,11 +356,11 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, controller.text),
-            child: const Text(AppLocalizations.of(context)!.add),
+            child: Text(AppLocalizations.of(context)!.add),
           ),
         ],
       ),
@@ -478,7 +478,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.trainingLog),
+        title: Text(AppLocalizations.of(context)!.trainingLog),
         backgroundColor: theme.colorScheme.primary,
         foregroundColor: Colors.white,
         actions: [
@@ -931,7 +931,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     set.isCompleted ? Icons.check_circle : Icons.check_circle_outline,
                     size: 18,
                   ),
-                  label: const Text(AppLocalizations.of(context)!.complete),
+                  label: Text(AppLocalizations.of(context)!.complete),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: set.isCompleted ? Colors.green : Colors.grey.shade300,
                     foregroundColor: set.isCompleted ? Colors.white : Colors.black,

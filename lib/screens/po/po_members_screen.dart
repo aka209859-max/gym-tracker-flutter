@@ -162,7 +162,7 @@ class _POMembersScreenState extends State<POMembersScreen> {
         onPressed: () {
           // 会員追加機能（今後実装）
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text(AppLocalizations.of(context)!.addWorkout)),
+            SnackBar(content: Text(AppLocalizations.of(context)!.addWorkout)),
           );
         },
         child: const Icon(Icons.add),

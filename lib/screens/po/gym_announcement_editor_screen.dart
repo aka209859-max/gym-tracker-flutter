@@ -189,7 +189,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
                 : const Icon(Icons.send),
-            label: const Text(AppLocalizations.of(context)!.postSubmitted),
+            label: Text(AppLocalizations.of(context)!.postSubmitted),
             style: TextButton.styleFrom(
               foregroundColor: Colors.white,
             ),

@@ -388,7 +388,7 @@ class _PartnerCampaignEditorScreenState
                     OutlinedButton.icon(
                       onPressed: _pickBannerImage,
                       icon: const Icon(Icons.add_photo_alternate),
-                      label: const Text(AppLocalizations.of(context)!.addWorkout),
+                      label: Text(AppLocalizations.of(context)!.addWorkout),
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 16),
                       ),

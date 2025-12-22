@@ -169,7 +169,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: const Text(AppLocalizations.of(context)!.calculate, style: TextStyle(fontSize: 16)),
+                  child: Text(AppLocalizations.of(context)!.calculate, style: TextStyle(fontSize: 16)),
                 ),
               ),
               const SizedBox(width: 12),
@@ -178,7 +178,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                 ),
-                child: const Text(AppLocalizations.of(context)!.clear),
+                child: Text(AppLocalizations.of(context)!.clear),
               ),
             ],
           ),
@@ -400,7 +400,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: const Text(AppLocalizations.of(context)!.calculate, style: TextStyle(fontSize: 16)),
+                  child: Text(AppLocalizations.of(context)!.calculate, style: TextStyle(fontSize: 16)),
                 ),
               ),
               const SizedBox(width: 12),
@@ -409,7 +409,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                 ),
-                child: const Text(AppLocalizations.of(context)!.clear),
+                child: Text(AppLocalizations.of(context)!.clear),
               ),
             ],
           ),

@@ -3803,14 +3803,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) {
           return AlertDialog(
-            title: const Text(AppLocalizations.of(context)!.filter),
+            title: Text(AppLocalizations.of(context)!.filter),
             content: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // 部位選択
-                  const Text(AppLocalizations.of(context)!.bodyPart, style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text(AppLocalizations.of(context)!.bodyPart, style: TextStyle(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
                   Wrap(
                     spacing: 8,
@@ -3877,7 +3877,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         });
                       },
                       icon: const Icon(Icons.clear, size: 16),
-                      label: const Text(AppLocalizations.of(context)!.clear, style: TextStyle(fontSize: 12)),
+                      label: Text(AppLocalizations.of(context)!.clear, style: TextStyle(fontSize: 12)),
                     ),
                 ],
               ),
@@ -3892,14 +3892,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   Navigator.pop(context);
                   _performSearch();
                 },
-                child: const Text(AppLocalizations.of(context)!.reset),
+                child: Text(AppLocalizations.of(context)!.reset),
               ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                   _performSearch();
                 },
-                child: const Text(AppLocalizations.of(context)!.apply),
+                child: Text(AppLocalizations.of(context)!.apply),
               ),
             ],
           );
@@ -4040,7 +4040,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
@@ -4048,7 +4048,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               backgroundColor: Colors.red,
               foregroundColor: Colors.white,
             ),
-            child: const Text(AppLocalizations.of(context)!.remove),
+            child: Text(AppLocalizations.of(context)!.remove),
           ),
         ],
       ),
@@ -4101,8 +4101,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
             ListTile(
               leading: const Icon(Icons.emoji_events, color: Colors.amber),
-              title: const Text(AppLocalizations.of(context)!.prRecords),
-              subtitle: const Text(AppLocalizations.of(context)!.personalRecord),
+              title: Text(AppLocalizations.of(context)!.prRecords),
+              subtitle: Text(AppLocalizations.of(context)!.personalRecord),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.pop(context);
@@ -4116,8 +4116,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
             ListTile(
               leading: const Icon(Icons.pie_chart, color: Colors.green),
-              title: const Text(AppLocalizations.of(context)!.byBodyPart),
-              subtitle: const Text(AppLocalizations.of(context)!.bodyPartTracking),
+              title: Text(AppLocalizations.of(context)!.byBodyPart),
+              subtitle: Text(AppLocalizations.of(context)!.bodyPartTracking),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.pop(context);
@@ -4131,8 +4131,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
             ListTile(
               leading: const Icon(Icons.note, color: Colors.blue),
-              title: const Text(AppLocalizations.of(context)!.notes),
-              subtitle: const Text(AppLocalizations.of(context)!.trainingMemo),
+              title: Text(AppLocalizations.of(context)!.notes),
+              subtitle: Text(AppLocalizations.of(context)!.trainingMemo),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.pop(context);
@@ -4147,7 +4147,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ListTile(
               leading: const Icon(Icons.analytics, color: Colors.purple),
               title: const Text('週次'),
-              subtitle: const Text(AppLocalizations.of(context)!.weeklyReport),
+              subtitle: Text(AppLocalizations.of(context)!.weeklyReport),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.pop(context);
@@ -4174,7 +4174,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
             ListTile(
               leading: const Icon(Icons.edit, color: Colors.blue),
-              title: const Text(AppLocalizations.of(context)!.edit),
+              title: Text(AppLocalizations.of(context)!.edit),
               subtitle: const Text('次のアップデートで実装予定'),
               enabled: false,
               onTap: () {
@@ -4186,7 +4186,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             // 削除ボタン
             ListTile(
               leading: const Icon(Icons.delete, color: Colors.red),
-              title: const Text(AppLocalizations.of(context)!.remove, style: TextStyle(color: Colors.red)),
+              title: Text(AppLocalizations.of(context)!.remove, style: TextStyle(color: Colors.red)),
               onTap: () async {
                 print('👆 メニューから削除選択: $exerciseName (ID: $workoutId)');
                 Navigator.pop(context);
@@ -4957,7 +4957,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context, null),
-                child: const Text(AppLocalizations.of(context)!.cancel),
+                child: Text(AppLocalizations.of(context)!.cancel),
               ),
               ElevatedButton(
                 onPressed: () => Navigator.pop(context, selectedRPE),
@@ -5152,7 +5152,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.readLess),
+            child: Text(AppLocalizations.of(context)!.readLess),
           ),
         ],
       ),
@@ -5431,7 +5431,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.readLess),
+            child: Text(AppLocalizations.of(context)!.readLess),
           ),
         ],
       ),
@@ -6194,7 +6194,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.later),
+            child: Text(AppLocalizations.of(context)!.later),
           ),
           ElevatedButton.icon(
             onPressed: () {

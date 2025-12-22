@@ -750,7 +750,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                       _isCheckedIn = false;
                     });
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text(AppLocalizations.of(context)!.checkedOut)),
+                      SnackBar(content: Text(AppLocalizations.of(context)!.checkedOut)),
                     );
                   }
                 } else {
@@ -761,7 +761,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                       _isCheckedIn = true;
                     });
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text(AppLocalizations.of(context)!.checkedIn)),
+                      SnackBar(content: Text(AppLocalizations.of(context)!.checkedIn)),
                     );
                   }
                 }
@@ -803,7 +803,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
           child: OutlinedButton.icon(
             onPressed: _shareGym,
             icon: const Icon(Icons.share),
-            label: const Text(AppLocalizations.of(context)!.shareGym),
+            label: Text(AppLocalizations.of(context)!.shareGym),
             style: OutlinedButton.styleFrom(
               side: BorderSide(color: Colors.blue[600]!),
               foregroundColor: Colors.blue[600],
@@ -828,7 +828,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
               }
             },
             icon: const Icon(Icons.rate_review),
-            label: const Text(AppLocalizations.of(context)!.postReview),
+            label: Text(AppLocalizations.of(context)!.postReview),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.amber[700],
               foregroundColor: Colors.white,
@@ -842,7 +842,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
               child: ElevatedButton.icon(
                 onPressed: _openGoogleMapsRoute,
                 icon: const Icon(Icons.directions),
-                label: const Text(AppLocalizations.of(context)!.routeGuidance),
+                label: Text(AppLocalizations.of(context)!.routeGuidance),
               ),
             ),
             const SizedBox(width: 12),
@@ -923,7 +923,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                   onPressed: () {
                     // TODO: レビュー一覧画面への遷移
                   },
-                  child: const Text(AppLocalizations.of(context)!.viewAll),
+                  child: Text(AppLocalizations.of(context)!.viewAll),
                 ),
               ],
             ),
@@ -946,7 +946,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                   }
                 },
                 icon: const Icon(Icons.rate_review),
-                label: const Text(AppLocalizations.of(context)!.postReview),
+                label: Text(AppLocalizations.of(context)!.postReview),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.amber[700],
                   foregroundColor: Colors.white,

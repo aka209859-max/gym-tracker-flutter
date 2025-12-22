@@ -87,7 +87,7 @@ class _MapScreenState extends State<MapScreen> {
                 Navigator.pop(context);
               }
             },
-            child: const Text(AppLocalizations.of(context)!.later),
+            child: Text(AppLocalizations.of(context)!.later),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -329,7 +329,7 @@ class _MapScreenState extends State<MapScreen> {
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: const Text(AppLocalizations.of(context)!.searchGym),
+              content: Text(AppLocalizations.of(context)!.searchGym),
               backgroundColor: Colors.red,
               duration: const Duration(seconds: 3),
               action: SnackBarAction(
@@ -542,7 +542,7 @@ class _MapScreenState extends State<MapScreen> {
             ElevatedButton.icon(
               onPressed: _acquireLocationAndSearch,
               icon: const Icon(Icons.refresh),
-              label: const Text(AppLocalizations.of(context)!.searchGym),
+              label: Text(AppLocalizations.of(context)!.searchGym),
             ),
           ],
         ),
@@ -619,7 +619,7 @@ class _MapScreenState extends State<MapScreen> {
         children: [
           const Icon(Icons.people, size: 20),
           const SizedBox(width: 8),
-          const Text(AppLocalizations.of(context)!.workoutTypeFilter, style: TextStyle(fontWeight: FontWeight.bold)),
+          Text(AppLocalizations.of(context)!.workoutTypeFilter, style: TextStyle(fontWeight: FontWeight.bold)),
           const SizedBox(width: 16),
           Expanded(
             child: Slider(
@@ -801,11 +801,11 @@ class _MapScreenState extends State<MapScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(AppLocalizations.of(context)!.workoutTypeFilter),
+        title: Text(AppLocalizations.of(context)!.workoutTypeFilter),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(AppLocalizations.of(context)!.selectExercise),
+            Text(AppLocalizations.of(context)!.selectExercise),
             const SizedBox(height: 16),
             StatefulBuilder(
               builder: (context, setState) {
@@ -831,14 +831,14 @@ class _MapScreenState extends State<MapScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
               setState(() {}); // 外側のStateも更新
             },
-            child: const Text(AppLocalizations.of(context)!.apply),
+            child: Text(AppLocalizations.of(context)!.apply),
           ),
         ],
       ),

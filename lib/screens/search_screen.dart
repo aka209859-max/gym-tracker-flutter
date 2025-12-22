@@ -63,7 +63,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.gymSearch),
+        title: Text(AppLocalizations.of(context)!.gymSearch),
         elevation: 2,
       ),
       body: Column(
@@ -163,7 +163,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     height: 20,
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
-                : const Text(AppLocalizations.of(context)!.search),
+                : Text(AppLocalizations.of(context)!.search),
           ),
         ],
       ),
@@ -293,7 +293,7 @@ class _SearchScreenState extends State<SearchScreen> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _applyFilters,
-              child: const Text(AppLocalizations.of(context)!.searchGym),
+              child: Text(AppLocalizations.of(context)!.searchGym),
             ),
           ],
         ),
@@ -430,7 +430,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         }
                       : null,
                   icon: const Icon(Icons.chevron_left),
-                  label: const Text(AppLocalizations.of(context)!.previous),
+                  label: Text(AppLocalizations.of(context)!.previous),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue[600],
                     foregroundColor: Colors.white,
@@ -457,7 +457,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         }
                       : null,
                   icon: const Icon(Icons.chevron_right),
-                  label: const Text(AppLocalizations.of(context)!.next),
+                  label: Text(AppLocalizations.of(context)!.next),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue[600],
                     foregroundColor: Colors.white,

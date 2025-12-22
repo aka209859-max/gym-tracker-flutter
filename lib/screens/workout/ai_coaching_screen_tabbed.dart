@@ -328,7 +328,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text(AppLocalizations.of(context)!.pastTrainingRecords),
+              subtitle: Text(AppLocalizations.of(context)!.pastTrainingRecords),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
@@ -355,7 +355,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text(AppLocalizations.of(context)!.editPersonalFactors),
+              subtitle: Text(AppLocalizations.of(context)!.editPersonalFactors),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
@@ -376,7 +376,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
       builder: (context, authSnapshot) {
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.aiCoaching)),
+            appBar: AppBar(title: Text(AppLocalizations.of(context)!.aiCoaching)),
             body: const Center(child: CircularProgressIndicator()),
           );
         }
@@ -384,8 +384,8 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
         final user = authSnapshot.data;
         if (user == null) {
           return Scaffold(
-            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.aiCoaching)),
-            body: const Center(child: Text(AppLocalizations.of(context)!.loginError)),
+            appBar: AppBar(title: Text(AppLocalizations.of(context)!.aiCoaching)),
+            body: Center(child: Text(AppLocalizations.of(context)!.loginError)),
           );
         }
 
@@ -2174,7 +2174,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
@@ -3381,7 +3381,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
@@ -3518,7 +3518,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text(AppLocalizations.of(context)!.later),
+            child: Text(AppLocalizations.of(context)!.later),
           ),
           ElevatedButton(
             onPressed: () {
@@ -5221,7 +5221,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
@@ -5358,7 +5358,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text(AppLocalizations.of(context)!.later),
+            child: Text(AppLocalizations.of(context)!.later),
           ),
           ElevatedButton(
             onPressed: () {

@@ -49,7 +49,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
       builder: (context, authSnapshot) {
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.templates)),
+            appBar: AppBar(title: Text(AppLocalizations.of(context)!.templates)),
             body: const Center(child: CircularProgressIndicator()),
           );
         }
@@ -57,16 +57,16 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
         final user = authSnapshot.data;
         if (user == null) {
           return Scaffold(
-            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.templates)),
+            appBar: AppBar(title: Text(AppLocalizations.of(context)!.templates)),
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(AppLocalizations.of(context)!.loginError),
+                  Text(AppLocalizations.of(context)!.loginError),
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _autoLoginIfNeeded,
-                    child: const Text(AppLocalizations.of(context)!.tryAgain),
+                    child: Text(AppLocalizations.of(context)!.tryAgain),
                   ),
                 ],
               ),
@@ -118,7 +118,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
           }
         },
         icon: const Icon(Icons.add),
-        label: const Text(AppLocalizations.of(context)!.createTemplate),
+        label: Text(AppLocalizations.of(context)!.createTemplate),
         backgroundColor: theme.colorScheme.primary,
         foregroundColor: Colors.white,
       ),
@@ -400,7 +400,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
         
         if (result == true && mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text(AppLocalizations.of(context)!.save)),
+            SnackBar(content: Text(AppLocalizations.of(context)!.save)),
           );
         }
       }
@@ -422,17 +422,17 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(AppLocalizations.of(context)!.deleteTemplate),
+        title: Text(AppLocalizations.of(context)!.deleteTemplate),
         content: Text('「${template.name}」を削除しますか？'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text(AppLocalizations.of(context)!.remove),
+            child: Text(AppLocalizations.of(context)!.remove),
           ),
         ],
       ),
@@ -447,7 +447,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
 
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text(AppLocalizations.of(context)!.delete)),
+            SnackBar(content: Text(AppLocalizations.of(context)!.delete)),
           );
         }
       } catch (e) {

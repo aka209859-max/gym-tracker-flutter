@@ -116,7 +116,7 @@ class _PartnerReservationSettingsScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.settings),
+        title: Text(AppLocalizations.of(context)!.settings),
         backgroundColor: Colors.orange[700],
         actions: [
           if (!_isLoading)

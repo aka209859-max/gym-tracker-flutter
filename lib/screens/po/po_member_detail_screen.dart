@@ -19,7 +19,7 @@ class POMemberDetailScreen extends StatelessWidget {
             icon: const Icon(Icons.edit),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text(AppLocalizations.of(context)!.edit)),
+                SnackBar(content: Text(AppLocalizations.of(context)!.edit)),
               );
             },
           ),

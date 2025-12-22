@@ -141,7 +141,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
 
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text(AppLocalizations.of(context)!.save), backgroundColor: Colors.green),
+            SnackBar(content: Text(AppLocalizations.of(context)!.save), backgroundColor: Colors.green),
           );
         }
       } else {
@@ -199,7 +199,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(AppLocalizations.of(context)!.delete),
+        title: Text(AppLocalizations.of(context)!.delete),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -218,12 +218,12 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text(AppLocalizations.of(context)!.remove),
+            child: Text(AppLocalizations.of(context)!.remove),
           ),
         ],
       ),
@@ -375,7 +375,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 16),
                             ),
-                            child: const Text(AppLocalizations.of(context)!.save, style: TextStyle(fontSize: 16)),
+                            child: Text(AppLocalizations.of(context)!.save, style: TextStyle(fontSize: 16)),
                           ),
                         ],
                       ),

@@ -9,7 +9,7 @@ class TermsOfServiceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.termsOfService),
+        title: Text(AppLocalizations.of(context)!.termsOfService),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),

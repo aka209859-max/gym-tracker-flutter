@@ -15,7 +15,7 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.personalTraining),
+        title: Text(AppLocalizations.of(context)!.personalTraining),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),

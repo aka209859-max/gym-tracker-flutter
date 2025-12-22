@@ -62,7 +62,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.reportCrowd),
+        title: Text(AppLocalizations.of(context)!.reportCrowd),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),

@@ -322,7 +322,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.readLess),
+            child: Text(AppLocalizations.of(context)!.readLess),
           ),
         ],
       ),
@@ -356,7 +356,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
     if (_isLoading) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text(AppLocalizations.of(context)!.fatigueManagementSystem),
+          title: Text(AppLocalizations.of(context)!.fatigueManagementSystem),
         ),
         body: const Center(child: CircularProgressIndicator()),
       );
@@ -364,7 +364,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.fatigueManagementSystem),
+        title: Text(AppLocalizations.of(context)!.fatigueManagementSystem),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),

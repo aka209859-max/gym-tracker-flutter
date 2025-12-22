@@ -136,7 +136,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
               Navigator.of(context).pop(); // ダイアログ閉じる
               Navigator.of(context).pop(); // この画面も閉じる
             },
-            child: const Text(AppLocalizations.of(context)!.close),
+            child: Text(AppLocalizations.of(context)!.close),
           ),
         ],
       ),

@@ -103,7 +103,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.workoutDetails),
+        title: Text(AppLocalizations.of(context)!.workoutDetails),
         actions: [
           IconButton(
             icon: const Icon(Icons.delete),
@@ -340,7 +340,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(AppLocalizations.of(context)!.trainingMemo),
+        title: Text(AppLocalizations.of(context)!.trainingMemo),
         content: TextField(
           controller: controller,
           maxLines: 5,
@@ -356,18 +356,18 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                 await _deleteNote();
                 if (mounted) Navigator.pop(context);
               },
-              child: const Text(AppLocalizations.of(context)!.remove, style: TextStyle(color: Colors.red)),
+              child: Text(AppLocalizations.of(context)!.remove, style: TextStyle(color: Colors.red)),
             ),
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () async {
               await _saveNote(controller.text);
               if (mounted) Navigator.pop(context);
             },
-            child: const Text(AppLocalizations.of(context)!.saveWorkout),
+            child: Text(AppLocalizations.of(context)!.saveWorkout),
           ),
         ],
       ),
@@ -402,7 +402,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppLocalizations.of(context)!.save), backgroundColor: Colors.green),
+          SnackBar(content: Text(AppLocalizations.of(context)!.save), backgroundColor: Colors.green),
         );
       }
     } catch (e) {
@@ -426,7 +426,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppLocalizations.of(context)!.delete), backgroundColor: Colors.green),
+          SnackBar(content: Text(AppLocalizations.of(context)!.delete), backgroundColor: Colors.green),
         );
       }
     } catch (e) {
@@ -525,7 +525,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           if (afterDeleteSets.isNotEmpty)
             ElevatedButton(
@@ -534,7 +534,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                 await _deleteExercise(exerciseName);
               },
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-              child: const Text(AppLocalizations.of(context)!.remove),
+              child: Text(AppLocalizations.of(context)!.remove),
             ),
           if (afterDeleteSets.isEmpty)
             ElevatedButton(
@@ -742,11 +742,11 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('削除確認'),
-        content: const Text(AppLocalizations.of(context)!.deleteWorkoutConfirm),
+        content: Text(AppLocalizations.of(context)!.deleteWorkoutConfirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -754,7 +754,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
               await _deleteWorkout();
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            child: const Text(AppLocalizations.of(context)!.remove),
+            child: Text(AppLocalizations.of(context)!.remove),
           ),
         ],
       ),
@@ -771,7 +771,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppLocalizations.of(context)!.deleteWorkoutSuccess), backgroundColor: Colors.green),
+          SnackBar(content: Text(AppLocalizations.of(context)!.deleteWorkoutSuccess), backgroundColor: Colors.green),
         );
         Navigator.pop(context);
       }

@@ -58,7 +58,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
@@ -108,7 +108,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                   Navigator.pop(context); // ダイアログを閉じる
                   Navigator.pop(context, true); // 購入画面を閉じて成功を返す
                 },
-                child: const Text(AppLocalizations.of(context)!.close),
+                child: Text(AppLocalizations.of(context)!.close),
               ),
             ],
           ),
@@ -129,7 +129,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text(AppLocalizations.of(context)!.close),
+                child: Text(AppLocalizations.of(context)!.close),
               ),
             ],
           ),
@@ -164,7 +164,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text(AppLocalizations.of(context)!.close),
+                child: Text(AppLocalizations.of(context)!.close),
               ),
             ],
           ),

@@ -163,7 +163,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text(AppLocalizations.of(context)!.close),
+            child: Text(AppLocalizations.of(context)!.close),
           ),
           ElevatedButton(
             onPressed: () {
@@ -185,7 +185,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.submitReview),
+        title: Text(AppLocalizations.of(context)!.submitReview),
         centerTitle: true,
       ),
       body: _isSubmitting

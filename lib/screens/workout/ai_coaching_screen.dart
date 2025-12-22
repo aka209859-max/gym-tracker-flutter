@@ -106,7 +106,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
       builder: (context, authSnapshot) {
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.aiCoaching)),
+            appBar: AppBar(title: Text(AppLocalizations.of(context)!.aiCoaching)),
             body: const Center(child: CircularProgressIndicator()),
           );
         }
@@ -114,8 +114,8 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
         final user = authSnapshot.data;
         if (user == null) {
           return Scaffold(
-            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.aiCoaching)),
-            body: const Center(child: Text(AppLocalizations.of(context)!.loginError)),
+            appBar: AppBar(title: Text(AppLocalizations.of(context)!.aiCoaching)),
+            body: Center(child: Text(AppLocalizations.of(context)!.loginError)),
           );
         }
 
@@ -127,7 +127,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
   Widget _buildMainContent(User user) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.aiCoaching),
+        title: Text(AppLocalizations.of(context)!.aiCoaching),
         actions: [
           IconButton(
             icon: const Icon(Icons.info_outline),
@@ -923,7 +923,7 @@ ${bodyParts.join('、')}
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.readLess),
+            child: Text(AppLocalizations.of(context)!.readLess),
           ),
         ],
       ),
@@ -986,7 +986,7 @@ ${bodyParts.join('、')}
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text(AppLocalizations.of(context)!.readLess),
+            child: Text(AppLocalizations.of(context)!.readLess),
           ),
           ElevatedButton(
             onPressed: () {
@@ -1042,7 +1042,7 @@ ${bodyParts.join('、')}
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text(AppLocalizations.of(context)!.readLess),
+            child: Text(AppLocalizations.of(context)!.readLess),
           ),
           ElevatedButton(
             onPressed: () {
@@ -1057,7 +1057,7 @@ ${bodyParts.join('、')}
               backgroundColor: Colors.blue.shade700,
               foregroundColor: Colors.white,
             ),
-            child: const Text(AppLocalizations.of(context)!.addWorkout),
+            child: Text(AppLocalizations.of(context)!.addWorkout),
           ),
         ],
       ),

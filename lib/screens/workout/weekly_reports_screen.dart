@@ -38,7 +38,7 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
       builder: (context, authSnapshot) {
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.weeklyReport)),
+            appBar: AppBar(title: Text(AppLocalizations.of(context)!.weeklyReport)),
             body: const Center(
               child: CircularProgressIndicator(),
             ),
@@ -48,16 +48,16 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
         final user = authSnapshot.data;
         if (user == null) {
           return Scaffold(
-            appBar: AppBar(title: const Text(AppLocalizations.of(context)!.weeklyReport)),
+            appBar: AppBar(title: Text(AppLocalizations.of(context)!.weeklyReport)),
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(AppLocalizations.of(context)!.loginError),
+                  Text(AppLocalizations.of(context)!.loginError),
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _autoLoginIfNeeded,
-                    child: const Text(AppLocalizations.of(context)!.tryAgain),
+                    child: Text(AppLocalizations.of(context)!.tryAgain),
                   ),
                 ],
               ),
@@ -73,7 +73,7 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
   Widget _buildMainContent(User user) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.weeklyReport),
+        title: Text(AppLocalizations.of(context)!.weeklyReport),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -167,7 +167,7 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(AppLocalizations.of(context)!.settings),
+        title: Text(AppLocalizations.of(context)!.settings),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -184,7 +184,7 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.readLess),
+            child: Text(AppLocalizations.of(context)!.readLess),
           ),
         ],
       ),

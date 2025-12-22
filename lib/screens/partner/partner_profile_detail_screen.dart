@@ -150,7 +150,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
     // 🔧 CRITICAL: 全体をエラーバウンダリでラップ
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.navProfile),
+        title: Text(AppLocalizations.of(context)!.navProfile),
       ),
       body: _buildBody(),
     );
@@ -264,7 +264,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               const SizedBox(height: 24),
               ElevatedButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text(AppLocalizations.of(context)!.back),
+                child: Text(AppLocalizations.of(context)!.back),
               ),
             ],
           ),
@@ -399,7 +399,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () {

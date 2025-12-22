@@ -91,12 +91,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(AppLocalizations.of(context)!.removeFromFavorites),
+        title: Text(AppLocalizations.of(context)!.removeFromFavorites),
         content: Text('「${gym.name}」をお気に入りから削除しますか？'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
@@ -104,7 +104,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               backgroundColor: Colors.red,
               foregroundColor: Colors.white,
             ),
-            child: const Text(AppLocalizations.of(context)!.delete),
+            child: Text(AppLocalizations.of(context)!.delete),
           ),
         ],
       ),
@@ -131,7 +131,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.favorite),
+        title: Text(AppLocalizations.of(context)!.favorite),
         actions: [
           if (_favoriteGyms.isNotEmpty)
             IconButton(
@@ -354,11 +354,11 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('すべて削除'),
-        content: const Text(AppLocalizations.of(context)!.delete),
+        content: Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
@@ -366,7 +366,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               backgroundColor: Colors.red,
               foregroundColor: Colors.white,
             ),
-            child: const Text(AppLocalizations.of(context)!.deleteAll),
+            child: Text(AppLocalizations.of(context)!.deleteAll),
           ),
         ],
       ),

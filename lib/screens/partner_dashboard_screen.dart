@@ -217,7 +217,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                 Navigator.pop(context);
               },
               icon: const Icon(Icons.logout),
-              label: const Text(AppLocalizations.of(context)!.logout),
+              label: Text(AppLocalizations.of(context)!.logout),
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),

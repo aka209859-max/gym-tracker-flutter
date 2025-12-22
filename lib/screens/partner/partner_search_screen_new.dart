@@ -77,7 +77,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.partnerSearch),
+        title: Text(AppLocalizations.of(context)!.partnerSearch),
       ),
       body: Column(
         children: [
@@ -95,7 +95,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
 
   Widget _buildPaywall() {
     return Scaffold(
-      appBar: AppBar(title: const Text(AppLocalizations.of(context)!.partnerSearch)),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.partnerSearch)),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -287,7 +287,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
                       _hasSearched = false;
                     });
                   },
-                  child: const Text(AppLocalizations.of(context)!.back),
+                  child: Text(AppLocalizations.of(context)!.back),
                 ),
               ],
             ),

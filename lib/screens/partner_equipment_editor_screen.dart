@@ -137,7 +137,7 @@ class _PartnerEquipmentEditorScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.edit),
+        title: Text(AppLocalizations.of(context)!.edit),
         backgroundColor: Colors.amber[700],
         actions: [
           if (!_isLoading)

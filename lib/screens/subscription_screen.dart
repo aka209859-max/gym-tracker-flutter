@@ -320,7 +320,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   TextButton.icon(
                     onPressed: _showDowngradeDialog,
                     icon: const Icon(Icons.arrow_downward, size: 20),
-                    label: const Text(AppLocalizations.of(context)!.changePlan),
+                    label: Text(AppLocalizations.of(context)!.changePlan),
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.blue,
                     ),
@@ -957,7 +957,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
@@ -1363,7 +1363,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text(AppLocalizations.of(context)!.cancel),
+              child: Text(AppLocalizations.of(context)!.cancel),
             ),
             ElevatedButton(
               onPressed: () async {
@@ -1456,7 +1456,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.readLess),
+            child: Text(AppLocalizations.of(context)!.readLess),
           ),
         ],
       ),

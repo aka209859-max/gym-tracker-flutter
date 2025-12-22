@@ -1013,7 +1013,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   children: [
                     TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: const Text(AppLocalizations.of(context)!.cancel, style: TextStyle(color: Colors.red)),
+                      child: Text(AppLocalizations.of(context)!.cancel, style: TextStyle(color: Colors.red)),
                     ),
                     const Text(
                       '休憩時間を設定',
@@ -1160,7 +1160,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text(AppLocalizations.of(context)!.cancel),
+              child: Text(AppLocalizations.of(context)!.cancel),
             ),
           ],
         ),
@@ -1257,7 +1257,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () {
@@ -1265,7 +1265,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               final reps = double.tryParse(repsController.text) ?? 10.0;
               Navigator.pop(context, {'weight': weight, 'reps': reps});
             },
-            child: const Text(AppLocalizations.of(context)!.apply),
+            child: Text(AppLocalizations.of(context)!.apply),
           ),
         ],
       ),
@@ -1339,12 +1339,12 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text(AppLocalizations.of(context)!.remove),
+            child: Text(AppLocalizations.of(context)!.remove),
           ),
         ],
       ),
@@ -1372,7 +1372,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     final result = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(AppLocalizations.of(context)!.addCustomExercise),
+        title: Text(AppLocalizations.of(context)!.addCustomExercise),
         content: TextField(
           controller: controller,
           decoration: const InputDecoration(
@@ -1384,11 +1384,11 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, controller.text),
-            child: const Text(AppLocalizations.of(context)!.add),
+            child: Text(AppLocalizations.of(context)!.add),
           ),
         ],
       ),
@@ -1421,7 +1421,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       return DateFormat('yyyy年M月d日(E)', 'ja_JP').format(date);
     } catch (e) {
       // Web環境やロケール初期化失敗時のフォールバック
-      const weekdays = [AppLocalizations.of(context)!.mon, AppLocalizations.of(context)!.tue, AppLocalizations.of(context)!.wed, AppLocalizations.of(context)!.thu, AppLocalizations.of(context)!.fri, AppLocalizations.of(context)!.sat, AppLocalizations.of(context)!.sun];
+      final weekdays = [AppLocalizations.of(context)!.mon, AppLocalizations.of(context)!.tue, AppLocalizations.of(context)!.wed, AppLocalizations.of(context)!.thu, AppLocalizations.of(context)!.fri, AppLocalizations.of(context)!.sat, AppLocalizations.of(context)!.sun];
       final weekday = weekdays[(date.weekday - 1) % 7];
       return '${date.year}年${date.month}月${date.day}日($weekday)';
     }
@@ -1432,7 +1432,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     final user = firebase_auth.FirebaseAuth.instance.currentUser;
     if (user == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text(AppLocalizations.of(context)!.loginRequired)),
+        SnackBar(content: Text(AppLocalizations.of(context)!.loginRequired)),
       );
       return;
     }
@@ -1761,7 +1761,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(AppLocalizations.of(context)!.trainingLog),
+          title: Text(AppLocalizations.of(context)!.trainingLog),
           backgroundColor: theme.colorScheme.primary,
           foregroundColor: Colors.white,
           actions: [
@@ -2460,7 +2460,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                                     width: !set.isTimeMode ? 2 : 1,
                                   ),
                                 ),
-                                child: const Text(AppLocalizations.of(context)!.repsCount, style: TextStyle(fontSize: 12)),
+                                child: Text(AppLocalizations.of(context)!.repsCount, style: TextStyle(fontSize: 12)),
                               ),
                             ),
                             const SizedBox(width: 4),
@@ -2484,7 +2484,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                                     width: set.isTimeMode ? 2 : 1,
                                   ),
                                 ),
-                                child: const Text(AppLocalizations.of(context)!.seconds, style: TextStyle(fontSize: 12)),
+                                child: Text(AppLocalizations.of(context)!.seconds, style: TextStyle(fontSize: 12)),
                               ),
                             ),
                           ],
@@ -2608,7 +2608,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 },
               ),
               ChoiceChip(
-                label: const Text(AppLocalizations.of(context)!.limit, style: TextStyle(fontSize: 12)),
+                label: Text(AppLocalizations.of(context)!.limit, style: TextStyle(fontSize: 12)),
                 selected: set.setType == SetType.failure,
                 onSelected: (selected) {
                   if (selected) {
@@ -2763,7 +2763,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 Navigator.pop(context);
               }
             },
-            child: const Text(AppLocalizations.of(context)!.later),
+            child: Text(AppLocalizations.of(context)!.later),
           ),
           ElevatedButton(
             onPressed: () async {

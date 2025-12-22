@@ -53,15 +53,15 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('訪問履歴を削除'),
-        content: const Text(AppLocalizations.of(context)!.delete),
+        content: Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text(AppLocalizations.of(context)!.delete, style: TextStyle(color: Colors.red)),
+            child: Text(AppLocalizations.of(context)!.delete, style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -72,14 +72,14 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
       if (success) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text(AppLocalizations.of(context)!.delete)),
+            SnackBar(content: Text(AppLocalizations.of(context)!.delete)),
           );
           _loadVisitHistory();
         }
       } else {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text(AppLocalizations.of(context)!.deleteError)),
+            SnackBar(content: Text(AppLocalizations.of(context)!.deleteError)),
           );
         }
       }
@@ -90,7 +90,7 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.visitHistory),
+        title: Text(AppLocalizations.of(context)!.visitHistory),
         elevation: 2,
         actions: [
           IconButton(

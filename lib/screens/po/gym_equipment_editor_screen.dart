@@ -131,7 +131,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(AppLocalizations.of(context)!.addWorkout),
+        title: Text(AppLocalizations.of(context)!.addWorkout),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -155,7 +155,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () {
@@ -169,7 +169,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
                 Navigator.pop(context);
               }
             },
-            child: const Text(AppLocalizations.of(context)!.add),
+            child: Text(AppLocalizations.of(context)!.add),
           ),
         ],
       ),
@@ -184,7 +184,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.edit),
+        title: Text(AppLocalizations.of(context)!.edit),
         actions: [
           if (!_isLoading)
             TextButton.icon(
@@ -196,7 +196,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
                       child: CircularProgressIndicator(strokeWidth: 2),
                     )
                   : const Icon(Icons.save),
-              label: const Text(AppLocalizations.of(context)!.save),
+              label: Text(AppLocalizations.of(context)!.save),
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white,
               ),
@@ -242,7 +242,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
                 ElevatedButton.icon(
                   onPressed: _addEquipment,
                   icon: const Icon(Icons.add),
-                  label: const Text(AppLocalizations.of(context)!.add),
+                  label: Text(AppLocalizations.of(context)!.add),
                 ),
               ],
             ),

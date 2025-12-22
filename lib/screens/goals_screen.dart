@@ -72,7 +72,7 @@ class _GoalsScreenState extends State<GoalsScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.settings),
+        title: Text(AppLocalizations.of(context)!.settings),
         bottom: TabBar(
           controller: _tabController,
           labelColor: Colors.white,
@@ -118,7 +118,7 @@ class _GoalsScreenState extends State<GoalsScreen>
             ElevatedButton.icon(
               onPressed: _showCreateGoalDialog,
               icon: const Icon(Icons.add),
-              label: const Text(AppLocalizations.of(context)!.settings),
+              label: Text(AppLocalizations.of(context)!.settings),
             ),
           ],
         ),
@@ -387,7 +387,7 @@ class _GoalsScreenState extends State<GoalsScreen>
             // 削除
             ListTile(
               leading: const Icon(Icons.delete, color: Colors.red),
-              title: const Text(AppLocalizations.of(context)!.remove, style: TextStyle(color: Colors.red)),
+              title: Text(AppLocalizations.of(context)!.remove, style: TextStyle(color: Colors.red)),
               onTap: () async {
                 Navigator.pop(context);
                 final confirmed = await _showDeleteConfirmDialog(goal.name);
@@ -395,7 +395,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                   await _goalService.deleteGoal(goal.id);
                   if (mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text(AppLocalizations.of(context)!.delete)),
+                      SnackBar(content: Text(AppLocalizations.of(context)!.delete)),
                     );
                   }
                   _loadGoals();
@@ -413,12 +413,12 @@ class _GoalsScreenState extends State<GoalsScreen>
     return await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(AppLocalizations.of(context)!.delete),
+        title: Text(AppLocalizations.of(context)!.delete),
         content: Text('「$goalName」を削除しますか？\nこの操作は取り消せません。'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
@@ -426,7 +426,7 @@ class _GoalsScreenState extends State<GoalsScreen>
               backgroundColor: Colors.red,
               foregroundColor: Colors.white,
             ),
-            child: const Text(AppLocalizations.of(context)!.remove),
+            child: Text(AppLocalizations.of(context)!.remove),
           ),
         ],
       ),
@@ -444,7 +444,7 @@ class _GoalsScreenState extends State<GoalsScreen>
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) {
           return AlertDialog(
-            title: const Text(AppLocalizations.of(context)!.settings),
+            title: Text(AppLocalizations.of(context)!.settings),
             content: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -485,7 +485,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                   const SizedBox(height: 16),
                   
                   // 目標値入力
-                  const Text(AppLocalizations.of(context)!.targetValue, style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text(AppLocalizations.of(context)!.targetValue, style: TextStyle(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
                   TextFormField(
                     initialValue: targetValue.toString(),
@@ -532,7 +532,7 @@ class _GoalsScreenState extends State<GoalsScreen>
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text(AppLocalizations.of(context)!.cancel),
+                child: Text(AppLocalizations.of(context)!.cancel),
               ),
               ElevatedButton(
                 onPressed: () async {
@@ -551,7 +551,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                     
                     if (mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text(AppLocalizations.of(context)!.settings)),
+                        SnackBar(content: Text(AppLocalizations.of(context)!.settings)),
                       );
                     }
                     
@@ -564,7 +564,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                     }
                   }
                 },
-                child: const Text(AppLocalizations.of(context)!.settings),
+                child: Text(AppLocalizations.of(context)!.settings),
               ),
             ],
           );
@@ -601,7 +601,7 @@ class _GoalsScreenState extends State<GoalsScreen>
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -625,7 +625,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                 }
               }
             },
-            child: const Text(AppLocalizations.of(context)!.update),
+            child: Text(AppLocalizations.of(context)!.update),
           ),
         ],
       ),

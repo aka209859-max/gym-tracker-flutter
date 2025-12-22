@@ -137,7 +137,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.partnerSearch),
+        title: Text(AppLocalizations.of(context)!.partnerSearch),
         actions: [
           IconButton(
             icon: const Icon(Icons.person_add),
@@ -220,7 +220,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
             const SizedBox(height: 16),
 
             // 経験レベルフィルター
-            const Text(AppLocalizations.of(context)!.experienceLevel, style: TextStyle(fontWeight: FontWeight.bold)),
+            Text(AppLocalizations.of(context)!.experienceLevel, style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
@@ -240,7 +240,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
             const SizedBox(height: 16),
 
             // 性別フィルター
-            const Text(AppLocalizations.of(context)!.gender, style: TextStyle(fontWeight: FontWeight.bold)),
+            Text(AppLocalizations.of(context)!.gender, style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
@@ -341,7 +341,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
               child: ElevatedButton.icon(
                 onPressed: _isLoading ? null : _searchPartners,
                 icon: const Icon(Icons.search),
-                label: const Text(AppLocalizations.of(context)!.searchHint),
+                label: Text(AppLocalizations.of(context)!.searchHint),
               ),
             ),
           ],
@@ -375,7 +375,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _searchPartners,
-              child: const Text(AppLocalizations.of(context)!.retry),
+              child: Text(AppLocalizations.of(context)!.retry),
             ),
           ],
         ),

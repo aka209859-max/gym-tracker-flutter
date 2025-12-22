@@ -139,7 +139,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.visitorBooking),
+        title: Text(AppLocalizations.of(context)!.visitorBooking),
         backgroundColor: Colors.orange[700],
       ),
       body: SingleChildScrollView(
