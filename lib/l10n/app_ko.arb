@@ -561,10 +561,10 @@
   "loginRequired": "로그인이 필요합니다",
   "userNotAuthenticated": "사용자가 인증되지 않음",
   "loginFailed": "로그인 실패",
-  "deleteFailed": "삭제 실패: $e",
-  "dataLoadError": "데이터 로드 오류: $e",
-  "saveFailed": "저장 오류: $e",
-  "snapshotError": "오류: ${snapshot.error}",
+  "deleteFailed": "삭제 실패: {e}",
+  "dataLoadError": "데이터 로드 오류: {e}",
+  "saveFailed": "저장 오류: {e}",
+  "snapshotError": "오류: {error}",
   "lastExerciseDeleted": "마지막 운동이 삭제되어 전체 훈련 기록을 삭제했습니다",
   "billingAddress": "[KO] 請求先住所",
   "call": "[KO] 電話",
@@ -972,5 +972,33 @@
   "debugInfo": "[KO] デバッグ情報",
   "stackTrace": "[KO] スタックトレース",
   "documentId": "[KO] ドキュメントID",
-  "totalDocuments": "[KO] 全ドキュメント数"
+  "totalDocuments": "[KO] 全ドキュメント数",
+  "@snapshotError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@deleteFailed": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "@dataLoadError": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "@saveFailed": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  }
 }

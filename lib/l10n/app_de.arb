@@ -356,11 +356,11 @@
   "loginRequired": "Anmeldung erforderlich",
   "userNotAuthenticated": "Benutzer nicht authentifiziert",
   "loginFailed": "Anmeldung fehlgeschlagen",
-  "errorOccurred": "Fehler: $e",
-  "deleteFailed": "Löschen fehlgeschlagen: $e",
-  "dataLoadError": "Datenladefehler: $e",
-  "saveFailed": "Speicherfehler: $e",
-  "snapshotError": "Fehler: ${snapshot.error}",
+  "errorOccurred": "Fehler: {e}",
+  "deleteFailed": "Löschen fehlgeschlagen: {e}",
+  "dataLoadError": "Datenladefehler: {e}",
+  "saveFailed": "Speicherfehler: {e}",
+  "snapshotError": "Fehler: {error}",
   "lastExerciseDeleted": "Gesamtes Trainingsprotokoll gelöscht, da letzte Übung entfernt wurde",
   "birthday": "生JahrMonatTag",
   "startGpsOrTextSearch": "GPS位置SuchenまたはテキストSuchenをStartBitte",
@@ -972,5 +972,40 @@
   "debugInfo": "[DE] デバッグ情報",
   "stackTrace": "[DE] スタックトレース",
   "documentId": "[DE] ドキュメントID",
-  "totalDocuments": "[DE] 全ドキュメント数"
+  "totalDocuments": "[DE] 全ドキュメント数",
+  "@snapshotError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@errorOccurred": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "@deleteFailed": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "@dataLoadError": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "@saveFailed": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  }
 }

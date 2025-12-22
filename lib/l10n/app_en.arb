@@ -746,10 +746,10 @@
   "enterValidEmailAddress": "Please enter a valid email address",
   "loginRequired": "Login required",
   "userNotAuthenticated": "User not authenticated",
-  "deleteFailed": "Delete failed: $e",
-  "dataLoadError": "Data load error: $e",
-  "saveFailed": "Save error: $e",
-  "snapshotError": "Error: ${snapshot.error}",
+  "deleteFailed": "Delete failed: {e}",
+  "dataLoadError": "Data load error: {e}",
+  "saveFailed": "Save error: {e}",
+  "snapshotError": "Error: {error}",
   "lastExerciseDeleted": "Deleted entire training log because last exercise was removed",
   "billingAddress": "[EN] 請求先住所",
   "call": "[EN] 電話",
@@ -1045,5 +1045,33 @@
   "debugInfo": "Debug Info",
   "stackTrace": "Stack Trace",
   "documentId": "Document ID",
-  "totalDocuments": "Total Documents"
+  "totalDocuments": "Total Documents",
+  "@snapshotError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@deleteFailed": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "@dataLoadError": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "@saveFailed": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -1158,10 +1158,10 @@
   "enterValidEmailAddress": "正しいメールアドレスを入力してください",
   "loginRequired": "ログインが必要です",
   "userNotAuthenticated": "ユーザーが認証されていません",
-  "deleteFailed": "削除に失敗しました: $e",
-  "dataLoadError": "データ読み込みエラー: $e",
-  "saveFailed": "保存エラー: $e",
-  "snapshotError": "エラー: ${snapshot.error}",
+  "deleteFailed": "削除に失敗しました: {e}",
+  "dataLoadError": "データ読み込みエラー: {e}",
+  "saveFailed": "保存エラー: {e}",
+  "snapshotError": "エラー: {error}",
   "lastExerciseDeleted": "最後の種目が削除されたため、トレーニング記録全体を削除しました",
   "calculate": "計算",
   "report": "通報する",
@@ -1338,5 +1338,33 @@
   "debugInfo": "デバッグ情報",
   "stackTrace": "スタックトレース",
   "documentId": "ドキュメントID",
-  "totalDocuments": "全ドキュメント数"
+  "totalDocuments": "全ドキュメント数",
+  "@snapshotError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@deleteFailed": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "@dataLoadError": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "@saveFailed": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -356,11 +356,11 @@
   "loginRequired": "需要登入",
   "userNotAuthenticated": "用戶未認證",
   "loginFailed": "登入失敗",
-  "errorOccurred": "錯誤: $e",
-  "deleteFailed": "刪除失敗: $e",
-  "dataLoadError": "數據載入錯誤: $e",
-  "saveFailed": "儲存錯誤: $e",
-  "snapshotError": "錯誤: ${snapshot.error}",
+  "errorOccurred": "錯誤: {e}",
+  "deleteFailed": "刪除失敗: {e}",
+  "dataLoadError": "數據載入錯誤: {e}",
+  "saveFailed": "儲存錯誤: {e}",
+  "snapshotError": "錯誤: {error}",
   "lastExerciseDeleted": "由於最後一個動作被刪除，已刪除整個訓練記錄",
   "birthday": "[ZH_TW] 生年月日",
   "startGpsOrTextSearch": "GPS位置搜尋またはテキスト搜尋を開始請",
@@ -972,5 +972,40 @@
   "debugInfo": "[ZH_TW] デバッグ情報",
   "stackTrace": "[ZH_TW] スタックトレース",
   "documentId": "[ZH_TW] ドキュメントID",
-  "totalDocuments": "[ZH_TW] 全ドキュメント数"
+  "totalDocuments": "[ZH_TW] 全ドキュメント数",
+  "@snapshotError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@errorOccurred": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "@deleteFailed": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "@dataLoadError": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "@saveFailed": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  }
 }

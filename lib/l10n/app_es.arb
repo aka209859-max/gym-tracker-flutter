@@ -356,11 +356,11 @@
   "loginRequired": "Inicio de sesión requerido",
   "userNotAuthenticated": "Usuario no autenticado",
   "loginFailed": "Error de inicio de sesión",
-  "errorOccurred": "Error: $e",
-  "deleteFailed": "Error al eliminar: $e",
-  "dataLoadError": "Error de carga de datos: $e",
-  "saveFailed": "Error al guardar: $e",
-  "snapshotError": "Error: ${snapshot.error}",
+  "errorOccurred": "Error: {e}",
+  "deleteFailed": "Error al eliminar: {e}",
+  "dataLoadError": "Error de carga de datos: {e}",
+  "saveFailed": "Error al guardar: {e}",
+  "snapshotError": "Error: {error}",
   "lastExerciseDeleted": "Registro completo eliminado porque se quitó el último ejercicio",
   "birthday": "生AñoMesDía",
   "startGpsOrTextSearch": "GPS位置BuscarまたはテキストBuscarをIniciarPor favor",
@@ -972,5 +972,40 @@
   "debugInfo": "[ES] デバッグ情報",
   "stackTrace": "[ES] スタックトレース",
   "documentId": "[ES] ドキュメントID",
-  "totalDocuments": "[ES] 全ドキュメント数"
+  "totalDocuments": "[ES] 全ドキュメント数",
+  "@snapshotError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@errorOccurred": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "@deleteFailed": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "@dataLoadError": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "@saveFailed": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  }
 }
