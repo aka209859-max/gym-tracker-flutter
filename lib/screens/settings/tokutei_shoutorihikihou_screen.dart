@@ -229,7 +229,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          const Text(
+          Text(
             AppLocalizations.of(context)!.confirm,
             style: TextStyle(fontSize: 13),
           ),
@@ -238,7 +238,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
             children: [
               Icon(Icons.privacy_tip_outlined, size: 16, color: Colors.blue.shade700),
               const SizedBox(width: 4),
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.settings,
                 style: TextStyle(fontSize: 12, color: Colors.blue),
               ),
@@ -249,7 +249,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
             children: [
               Icon(Icons.description_outlined, size: 16, color: Colors.blue.shade700),
               const SizedBox(width: 4),
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.settings,
                 style: TextStyle(fontSize: 12, color: Colors.blue),
               ),
@@ -298,9 +298,9 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-          const Text(
+          Text(
             AppLocalizations.of(context)!.email,
-            style: TextStyle(fontSize: 13),
+            style: const TextStyle(fontSize: 13),
           ),
           const Text(
             'X（旧Twitter）: @MatchGym71830',

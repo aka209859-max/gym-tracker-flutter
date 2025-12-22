@@ -228,9 +228,9 @@ class TermsOfServiceScreen extends StatelessWidget {
             children: [
               Icon(Icons.contact_mail, color: Colors.blue.shade700),
               const SizedBox(width: 8),
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.contactUs,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.blue,
@@ -252,9 +252,9 @@ class TermsOfServiceScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-          const Text(
+          Text(
             AppLocalizations.of(context)!.email,
-            style: TextStyle(fontSize: 13),
+            style: const TextStyle(fontSize: 13),
           ),
           const Text(
             '（対応時間: 平日 10:00-18:00）',

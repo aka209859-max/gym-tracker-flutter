@@ -210,9 +210,9 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                 children: [
                   Icon(Icons.edit_note, size: 24, color: theme.colorScheme.primary),
                   const SizedBox(width: 8),
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.trainingMemo,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const Spacer(),
                   if (_isLoadingNote)

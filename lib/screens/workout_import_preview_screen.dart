@@ -25,15 +25,15 @@ class _WorkoutImportPreviewScreenState
   late Map<int, String> _selectedBodyParts; // 種目インデックス → 選択された部位
   bool _isImporting = false;
 
-  // 部位選択肢
+  // 部位選択肢（ハードコード - 表示時に多言語化）
   static const List<String> _bodyPartOptions = [
-    AppLocalizations.of(context)!.bodyPartChest,
-    AppLocalizations.of(context)!.bodyPartLegs,
-    AppLocalizations.of(context)!.bodyPartBack,
-    AppLocalizations.of(context)!.bodyPartShoulders,
-    AppLocalizations.of(context)!.bodyPartBiceps,
-    AppLocalizations.of(context)!.bodyPartTriceps,
-    AppLocalizations.of(context)!.exerciseCardio,
+    '胸',      // Chest
+    '脚',      // Legs
+    '背中',    // Back
+    '肩',      // Shoulders
+    '上腕二頭筋', // Biceps
+    '上腕三頭筋', // Triceps
+    '有酸素',   // Cardio
   ];
 
   @override
@@ -229,9 +229,9 @@ class _WorkoutImportPreviewScreenState
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.error,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -427,9 +427,9 @@ class _WorkoutImportPreviewScreenState
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       side: const BorderSide(color: Colors.grey),
                     ),
-                    child: const Text(
+                    child: Text(
                       AppLocalizations.of(context)!.cancel,
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ),
                 ),
