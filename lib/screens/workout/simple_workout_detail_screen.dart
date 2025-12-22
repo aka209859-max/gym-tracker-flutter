@@ -34,7 +34,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
 
   /// ✅ v1.0.168: 腹筋系種目かどうかを判定
   bool _isAbsExercise(String exerciseName) {
-    const absExercises = [
+    final absExercises = [
       AppLocalizations.of(context)!.exerciseCrunch,
       AppLocalizations.of(context)!.exerciseLegRaise,
       AppLocalizations.of(context)!.exercisePlank,
