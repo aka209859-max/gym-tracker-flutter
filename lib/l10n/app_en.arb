@@ -1073,5 +1073,50 @@
         "type": "String"
       }
     }
-  }
+  },
+  "workoutDetail": "Workout Details",
+  "addNote": "Add Note",
+  "editNote": "Edit Note",
+  "noteHint": "Record your impressions and insights from training...",
+  "noteSaved": "Note saved",
+  "noteUpdated": "Note updated",
+  "noteDeleted": "Note deleted",
+  "noteSaveFailed": "Failed to save note: {error}",
+  "@noteSaveFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noteDeleteFailed": "Failed to delete note: {error}",
+  "@noteDeleteFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "sets": "Sets",
+  "reps": "Reps",
+  "weight": "Weight",
+  "duration": "Duration",
+  "rest": "Rest",
+  "tempo": "Tempo",
+  "rir": "RIR",
+  "seconds": "sec",
+  "minutes": "min",
+  "workoutNotes": "Workout Notes",
+  "exerciseList": "Exercise List",
+  "totalVolume": "Total Volume",
+  "totalSets": "Total Sets",
+  "workoutDuration": "Workout Duration",
+  "crunch": "Crunch",
+  "legRaise": "Leg Raise",
+  "plank": "Plank",
+  "abRoller": "Ab Roller",
+  "hangingLegRaise": "Hanging Leg Raise",
+  "sidePlank": "Side Plank",
+  "bicycleCrunch": "Bicycle Crunch",
+  "cableCrunch": "Cable Crunch"
 }

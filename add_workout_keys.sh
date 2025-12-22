@@ -1,0 +1,192 @@
+#!/bin/bash
+
+# Korean
+cat >> lib/l10n/app_ko.arb << 'EOF'
+,
+  "workoutDetail": "운동 상세",
+  "addNote": "메모 추가",
+  "editNote": "메모 편집",
+  "noteHint": "훈련 소감과 깨달음을 기록...",
+  "noteSaved": "메모가 저장되었습니다",
+  "noteUpdated": "메모가 업데이트되었습니다",
+  "noteDeleted": "메모가 삭제되었습니다",
+  "noteSaveFailed": "메모 저장 실패: {error}",
+  "noteDeleteFailed": "메모 삭제 실패: {error}",
+  "sets": "세트",
+  "reps": "회",
+  "weight": "무게",
+  "duration": "시간",
+  "rest": "휴식",
+  "tempo": "템포",
+  "rir": "RIR",
+  "seconds": "초",
+  "minutes": "분",
+  "workoutNotes": "운동 메모",
+  "exerciseList": "종목 목록",
+  "totalVolume": "총 부하량",
+  "totalSets": "총 세트 수",
+  "workoutDuration": "운동 시간",
+  "crunch": "크런치",
+  "legRaise": "레그 레이즈",
+  "plank": "플랭크",
+  "abRoller": "앱 롤러",
+  "hangingLegRaise": "행잉 레그 레이즈",
+  "sidePlank": "사이드 플랭크",
+  "bicycleCrunch": "바이시클 크런치",
+  "cableCrunch": "케이블 크런치"
+}
+EOF
+
+# Simplified Chinese
+sed -i '$ d' lib/l10n/app_zh.arb
+cat >> lib/l10n/app_zh.arb << 'EOF'
+,
+  "workoutDetail": "训练详情",
+  "addNote": "添加备忘录",
+  "editNote": "编辑备忘录",
+  "noteHint": "记录训练的感想和发现...",
+  "noteSaved": "备忘录已保存",
+  "noteUpdated": "备忘录已更新",
+  "noteDeleted": "备忘录已删除",
+  "noteSaveFailed": "保存备忘录失败: {error}",
+  "noteDeleteFailed": "删除备忘录失败: {error}",
+  "sets": "组",
+  "reps": "次",
+  "weight": "重量",
+  "duration": "时长",
+  "rest": "休息",
+  "tempo": "节奏",
+  "rir": "RIR",
+  "seconds": "秒",
+  "minutes": "分钟",
+  "workoutNotes": "训练备忘录",
+  "exerciseList": "动作列表",
+  "totalVolume": "总负荷量",
+  "totalSets": "总组数",
+  "workoutDuration": "训练时长",
+  "crunch": "卷腹",
+  "legRaise": "举腿",
+  "plank": "平板支撑",
+  "abRoller": "健腹轮",
+  "hangingLegRaise": "悬垂举腿",
+  "sidePlank": "侧平板支撑",
+  "bicycleCrunch": "单车卷腹",
+  "cableCrunch": "绳索卷腹"
+}
+EOF
+
+# Traditional Chinese
+sed -i '$ d' lib/l10n/app_zh_TW.arb
+cat >> lib/l10n/app_zh_TW.arb << 'EOF'
+,
+  "workoutDetail": "訓練詳情",
+  "addNote": "新增備忘錄",
+  "editNote": "編輯備忘錄",
+  "noteHint": "記錄訓練的感想和發現...",
+  "noteSaved": "備忘錄已儲存",
+  "noteUpdated": "備忘錄已更新",
+  "noteDeleted": "備忘錄已刪除",
+  "noteSaveFailed": "儲存備忘錄失敗: {error}",
+  "noteDeleteFailed": "刪除備忘錄失敗: {error}",
+  "sets": "組",
+  "reps": "次",
+  "weight": "重量",
+  "duration": "時長",
+  "rest": "休息",
+  "tempo": "節奏",
+  "rir": "RIR",
+  "seconds": "秒",
+  "minutes": "分鐘",
+  "workoutNotes": "訓練備忘錄",
+  "exerciseList": "動作清單",
+  "totalVolume": "總負荷量",
+  "totalSets": "總組數",
+  "workoutDuration": "訓練時長",
+  "crunch": "捲腹",
+  "legRaise": "舉腿",
+  "plank": "平板支撐",
+  "abRoller": "健腹輪",
+  "hangingLegRaise": "懸垂舉腿",
+  "sidePlank": "側平板支撐",
+  "bicycleCrunch": "單車捲腹",
+  "cableCrunch": "繩索捲腹"
+}
+EOF
+
+# German
+sed -i '$ d' lib/l10n/app_de.arb
+cat >> lib/l10n/app_de.arb << 'EOF'
+,
+  "workoutDetail": "Trainingsdetails",
+  "addNote": "Notiz hinzufügen",
+  "editNote": "Notiz bearbeiten",
+  "noteHint": "Eindrücke und Erkenntnisse vom Training aufzeichnen...",
+  "noteSaved": "Notiz gespeichert",
+  "noteUpdated": "Notiz aktualisiert",
+  "noteDeleted": "Notiz gelöscht",
+  "noteSaveFailed": "Notiz speichern fehlgeschlagen: {error}",
+  "noteDeleteFailed": "Notiz löschen fehlgeschlagen: {error}",
+  "sets": "Sätze",
+  "reps": "Wdh.",
+  "weight": "Gewicht",
+  "duration": "Dauer",
+  "rest": "Pause",
+  "tempo": "Tempo",
+  "rir": "RIR",
+  "seconds": "Sek.",
+  "minutes": "Min.",
+  "workoutNotes": "Trainingsnotizen",
+  "exerciseList": "Übungsliste",
+  "totalVolume": "Gesamtvolumen",
+  "totalSets": "Gesamtsätze",
+  "workoutDuration": "Trainingsdauer",
+  "crunch": "Crunch",
+  "legRaise": "Beinheben",
+  "plank": "Plank",
+  "abRoller": "Ab Roller",
+  "hangingLegRaise": "Hängendes Beinheben",
+  "sidePlank": "Seitliche Plank",
+  "bicycleCrunch": "Fahrrad-Crunch",
+  "cableCrunch": "Kabel-Crunch"
+}
+EOF
+
+# Spanish
+sed -i '$ d' lib/l10n/app_es.arb
+cat >> lib/l10n/app_es.arb << 'EOF'
+,
+  "workoutDetail": "Detalles del entrenamiento",
+  "addNote": "Añadir nota",
+  "editNote": "Editar nota",
+  "noteHint": "Registra tus impresiones y descubrimientos del entrenamiento...",
+  "noteSaved": "Nota guardada",
+  "noteUpdated": "Nota actualizada",
+  "noteDeleted": "Nota eliminada",
+  "noteSaveFailed": "Error al guardar nota: {error}",
+  "noteDeleteFailed": "Error al eliminar nota: {error}",
+  "sets": "Series",
+  "reps": "Reps",
+  "weight": "Peso",
+  "duration": "Duración",
+  "rest": "Descanso",
+  "tempo": "Tempo",
+  "rir": "RIR",
+  "seconds": "seg",
+  "minutes": "min",
+  "workoutNotes": "Notas de entrenamiento",
+  "exerciseList": "Lista de ejercicios",
+  "totalVolume": "Volumen total",
+  "totalSets": "Series totales",
+  "workoutDuration": "Duración del entrenamiento",
+  "crunch": "Crunch",
+  "legRaise": "Elevación de piernas",
+  "plank": "Plancha",
+  "abRoller": "Rueda abdominal",
+  "hangingLegRaise": "Elevación de piernas colgante",
+  "sidePlank": "Plancha lateral",
+  "bicycleCrunch": "Crunch bicicleta",
+  "cableCrunch": "Crunch con cable"
+}
+EOF
+
+echo "✅ Workout keys added to all language ARB files"

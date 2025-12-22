@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:gym_match/generated/app_localizations.dart';
 import '../../models/workout_log.dart';
 import '../../models/workout_note.dart';
 import '../../services/workout_note_service.dart';
@@ -65,34 +66,35 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
 
   // メモ追加・編集ダイアログを表示
   Future<void> _showNoteDialog() async {
+    final l10n = AppLocalizations.of(context)!;
     final controller = TextEditingController(text: _workoutNote?.content ?? '');
     
     final result = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(_workoutNote == null ? 'メモを追加' : 'メモを編集'),
+        title: Text(_workoutNote == null ? l10n.addNote : l10n.editNote),
         content: TextField(
           controller: controller,
           maxLines: 8,
-          decoration: const InputDecoration(
-            hintText: 'トレーニングの感想や気づきを記録...',
-            border: OutlineInputBorder(),
+          decoration: InputDecoration(
+            hintText: l10n.noteHint,
+            border: const OutlineInputBorder(),
           ),
           autofocus: true,
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('キャンセル'),
+            child: Text(l10n.cancel),
           ),
           if (_workoutNote != null)
             TextButton(
               onPressed: () => Navigator.pop(context, '__DELETE__'),
-              child: const Text('削除', style: TextStyle(color: Colors.red)),
+              child: Text(l10n.delete, style: const TextStyle(color: Colors.red)),
             ),
           FilledButton(
             onPressed: () => Navigator.pop(context, controller.text),
-            child: const Text('保存'),
+            child: Text(l10n.save),
           ),
         ],
       ),
@@ -112,6 +114,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
 
   // メモを保存
   Future<void> _saveNote(String content) async {
+    final l10n = AppLocalizations.of(context)!;
     try {
       if (_workoutNote == null) {
         // 新規作成
@@ -125,7 +128,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
         });
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('メモを保存しました'), backgroundColor: Colors.green),
+            SnackBar(content: Text(l10n.noteSaved), backgroundColor: Colors.green),
           );
         }
       } else {
@@ -136,14 +139,14 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
         });
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('メモを更新しました'), backgroundColor: Colors.green),
+            SnackBar(content: Text(l10n.noteUpdated), backgroundColor: Colors.green),
           );
         }
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('メモの保存に失敗しました: $e'), backgroundColor: Colors.red),
+          SnackBar(content: Text(l10n.noteSaveFailed(e.toString())), backgroundColor: Colors.red),
         );
       }
     }
@@ -151,6 +154,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
 
   // メモを削除
   Future<void> _deleteNote() async {
+    final l10n = AppLocalizations.of(context)!;
     try {
       if (_workoutNote != null) {
         await _noteService.deleteNote(_workoutNote!.id);
@@ -159,14 +163,14 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
         });
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('メモを削除しました')),
+            SnackBar(content: Text(l10n.noteDeleted)),
           );
         }
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('メモの削除に失敗しました: $e'), backgroundColor: Colors.red),
+          SnackBar(content: Text(l10n.noteDeleteFailed(e.toString())), backgroundColor: Colors.red),
         );
       }
     }
@@ -174,6 +178,8 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     if (kDebugMode) {
       debugPrint('🏗️ Building WorkoutDetailScreen');
       debugPrint('  Workout ID: ${widget.workout.id}');
@@ -183,7 +189,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('トレーニング詳細'),
+        title: Text(l10n.workoutDetail),
         actions: [
           IconButton(
             icon: const Icon(Icons.edit),

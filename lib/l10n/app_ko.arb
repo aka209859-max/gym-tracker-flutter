@@ -1000,5 +1000,50 @@
         "type": "String"
       }
     }
-  }
+  },
+  "workoutDetail": "운동 상세",
+  "addNote": "메모 추가",
+  "editNote": "메모 편집",
+  "noteHint": "훈련 소감과 깨달음을 기록...",
+  "noteSaved": "메모가 저장되었습니다",
+  "noteUpdated": "메모가 업데이트되었습니다",
+  "noteDeleted": "메모가 삭제되었습니다",
+  "noteSaveFailed": "메모 저장 실패: {error}",
+  "@noteSaveFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noteDeleteFailed": "메모 삭제 실패: {error}",
+  "@noteDeleteFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "sets": "세트",
+  "reps": "회",
+  "weight": "무게",
+  "duration": "시간",
+  "rest": "휴식",
+  "tempo": "템포",
+  "rir": "RIR",
+  "seconds": "초",
+  "minutes": "분",
+  "workoutNotes": "운동 메모",
+  "exerciseList": "종목 목록",
+  "totalVolume": "총 부하량",
+  "totalSets": "총 세트 수",
+  "workoutDuration": "운동 시간",
+  "crunch": "크런치",
+  "legRaise": "레그 레이즈",
+  "plank": "플랭크",
+  "abRoller": "앱 롤러",
+  "hangingLegRaise": "행잉 레그 레이즈",
+  "sidePlank": "사이드 플랭크",
+  "bicycleCrunch": "바이시클 크런치",
+  "cableCrunch": "케이블 크런치"
 }

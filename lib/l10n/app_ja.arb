@@ -1366,5 +1366,50 @@
         "type": "String"
       }
     }
-  }
+  },
+  "workoutDetail": "トレーニング詳細",
+  "addNote": "メモを追加",
+  "editNote": "メモを編集",
+  "noteHint": "トレーニングの感想や気づきを記録...",
+  "noteSaved": "メモを保存しました",
+  "noteUpdated": "メモを更新しました",
+  "noteDeleted": "メモを削除しました",
+  "noteSaveFailed": "メモの保存に失敗しました: {error}",
+  "@noteSaveFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noteDeleteFailed": "メモの削除に失敗しました: {error}",
+  "@noteDeleteFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "sets": "セット",
+  "reps": "回",
+  "weight": "重量",
+  "duration": "時間",
+  "rest": "休憩",
+  "tempo": "テンポ",
+  "rir": "RIR",
+  "seconds": "秒",
+  "minutes": "分",
+  "workoutNotes": "ワークアウトメモ",
+  "exerciseList": "種目一覧",
+  "totalVolume": "総負荷量",
+  "totalSets": "総セット数",
+  "workoutDuration": "トレーニング時間",
+  "crunch": "クランチ",
+  "legRaise": "レッグレイズ",
+  "plank": "プランク",
+  "abRoller": "アブローラー",
+  "hangingLegRaise": "ハンギングレッグレイズ",
+  "sidePlank": "サイドプランク",
+  "bicycleCrunch": "バイシクルクランチ",
+  "cableCrunch": "ケーブルクランチ"
 }

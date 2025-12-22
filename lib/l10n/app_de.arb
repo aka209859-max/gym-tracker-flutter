@@ -1007,5 +1007,50 @@
         "type": "String"
       }
     }
-  }
+  },
+  "workoutDetail": "Trainingsdetails",
+  "addNote": "Notiz hinzufügen",
+  "editNote": "Notiz bearbeiten",
+  "noteHint": "Eindrücke und Erkenntnisse vom Training aufzeichnen...",
+  "noteSaved": "Notiz gespeichert",
+  "noteUpdated": "Notiz aktualisiert",
+  "noteDeleted": "Notiz gelöscht",
+  "noteSaveFailed": "Notiz speichern fehlgeschlagen: {error}",
+  "@noteSaveFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noteDeleteFailed": "Notiz löschen fehlgeschlagen: {error}",
+  "@noteDeleteFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "sets": "Sätze",
+  "reps": "Wdh.",
+  "weight": "Gewicht",
+  "duration": "Dauer",
+  "rest": "Pause",
+  "tempo": "Tempo",
+  "rir": "RIR",
+  "seconds": "Sek.",
+  "minutes": "Min.",
+  "workoutNotes": "Trainingsnotizen",
+  "exerciseList": "Übungsliste",
+  "totalVolume": "Gesamtvolumen",
+  "totalSets": "Gesamtsätze",
+  "workoutDuration": "Trainingsdauer",
+  "crunch": "Crunch",
+  "legRaise": "Beinheben",
+  "plank": "Plank",
+  "abRoller": "Ab Roller",
+  "hangingLegRaise": "Hängendes Beinheben",
+  "sidePlank": "Seitliche Plank",
+  "bicycleCrunch": "Fahrrad-Crunch",
+  "cableCrunch": "Kabel-Crunch"
 }

@@ -1007,5 +1007,50 @@
         "type": "String"
       }
     }
-  }
+  },
+  "workoutDetail": "训练详情",
+  "addNote": "添加备忘录",
+  "editNote": "编辑备忘录",
+  "noteHint": "记录训练的感想和发现...",
+  "noteSaved": "备忘录已保存",
+  "noteUpdated": "备忘录已更新",
+  "noteDeleted": "备忘录已删除",
+  "noteSaveFailed": "保存备忘录失败: {error}",
+  "@noteSaveFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noteDeleteFailed": "删除备忘录失败: {error}",
+  "@noteDeleteFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "sets": "组",
+  "reps": "次",
+  "weight": "重量",
+  "duration": "时长",
+  "rest": "休息",
+  "tempo": "节奏",
+  "rir": "RIR",
+  "seconds": "秒",
+  "minutes": "分钟",
+  "workoutNotes": "训练备忘录",
+  "exerciseList": "动作列表",
+  "totalVolume": "总负荷量",
+  "totalSets": "总组数",
+  "workoutDuration": "训练时长",
+  "crunch": "卷腹",
+  "legRaise": "举腿",
+  "plank": "平板支撑",
+  "abRoller": "健腹轮",
+  "hangingLegRaise": "悬垂举腿",
+  "sidePlank": "侧平板支撑",
+  "bicycleCrunch": "单车卷腹",
+  "cableCrunch": "绳索卷腹"
 }

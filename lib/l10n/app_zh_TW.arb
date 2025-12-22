@@ -1007,5 +1007,50 @@
         "type": "String"
       }
     }
-  }
+  },
+  "workoutDetail": "訓練詳情",
+  "addNote": "新增備忘錄",
+  "editNote": "編輯備忘錄",
+  "noteHint": "記錄訓練的感想和發現...",
+  "noteSaved": "備忘錄已儲存",
+  "noteUpdated": "備忘錄已更新",
+  "noteDeleted": "備忘錄已刪除",
+  "noteSaveFailed": "儲存備忘錄失敗: {error}",
+  "@noteSaveFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noteDeleteFailed": "刪除備忘錄失敗: {error}",
+  "@noteDeleteFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "sets": "組",
+  "reps": "次",
+  "weight": "重量",
+  "duration": "時長",
+  "rest": "休息",
+  "tempo": "節奏",
+  "rir": "RIR",
+  "seconds": "秒",
+  "minutes": "分鐘",
+  "workoutNotes": "訓練備忘錄",
+  "exerciseList": "動作清單",
+  "totalVolume": "總負荷量",
+  "totalSets": "總組數",
+  "workoutDuration": "訓練時長",
+  "crunch": "捲腹",
+  "legRaise": "舉腿",
+  "plank": "平板支撐",
+  "abRoller": "健腹輪",
+  "hangingLegRaise": "懸垂舉腿",
+  "sidePlank": "側平板支撐",
+  "bicycleCrunch": "單車捲腹",
+  "cableCrunch": "繩索捲腹"
 }

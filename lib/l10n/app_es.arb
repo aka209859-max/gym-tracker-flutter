@@ -1007,5 +1007,50 @@
         "type": "String"
       }
     }
-  }
+  },
+  "workoutDetail": "Detalles del entrenamiento",
+  "addNote": "Añadir nota",
+  "editNote": "Editar nota",
+  "noteHint": "Registra tus impresiones y descubrimientos del entrenamiento...",
+  "noteSaved": "Nota guardada",
+  "noteUpdated": "Nota actualizada",
+  "noteDeleted": "Nota eliminada",
+  "noteSaveFailed": "Error al guardar nota: {error}",
+  "@noteSaveFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noteDeleteFailed": "Error al eliminar nota: {error}",
+  "@noteDeleteFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "sets": "Series",
+  "reps": "Reps",
+  "weight": "Peso",
+  "duration": "Duración",
+  "rest": "Descanso",
+  "tempo": "Tempo",
+  "rir": "RIR",
+  "seconds": "seg",
+  "minutes": "min",
+  "workoutNotes": "Notas de entrenamiento",
+  "exerciseList": "Lista de ejercicios",
+  "totalVolume": "Volumen total",
+  "totalSets": "Series totales",
+  "workoutDuration": "Duración del entrenamiento",
+  "crunch": "Crunch",
+  "legRaise": "Elevación de piernas",
+  "plank": "Plancha",
+  "abRoller": "Rueda abdominal",
+  "hangingLegRaise": "Elevación de piernas colgante",
+  "sidePlank": "Plancha lateral",
+  "bicycleCrunch": "Crunch bicicleta",
+  "cableCrunch": "Crunch con cable"
 }
