@@ -71,7 +71,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
       if (!mounted) return;
       
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text('✅ AI使用回数をリセットしました'),
           backgroundColor: Colors.green,
         ),
@@ -97,7 +97,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
       if (!mounted) return;
       
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text('✅ オンボーディングをリセットしました\nアプリを再起動してください'),
           backgroundColor: Colors.green,
           duration: Duration(seconds: 5),
@@ -136,7 +136,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
       if (!mounted) return;
       
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text('✅ Phase 1機能をすべてリセットしました\nアプリを再起動してください'),
           backgroundColor: Colors.green,
           duration: Duration(seconds: 5),
@@ -195,7 +195,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Row(
+                        Row(
                           children: [
                             Icon(Icons.fingerprint, color: Colors.green),
                             SizedBox(width: 8),
@@ -361,7 +361,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Row(
+                        Row(
                           children: [
                             Icon(Icons.psychology, color: Colors.deepPurple),
                             SizedBox(width: 8),
@@ -454,7 +454,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Row(
+                        Row(
                           children: [
                             Icon(Icons.info_outline, color: Colors.blue),
                             SizedBox(width: 8),

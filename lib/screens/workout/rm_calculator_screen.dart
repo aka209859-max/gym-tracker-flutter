@@ -82,7 +82,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text('正しい数値を入力してください'),
           backgroundColor: Colors.red,
         ),
@@ -455,7 +455,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
 
     if (_selectedPlates.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(AppLocalizations.of(context)!.selectExercise),
           backgroundColor: Colors.red,
         ),
@@ -804,7 +804,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                         ),
                       ),
                       const SizedBox(width: 12),
-                      const Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(

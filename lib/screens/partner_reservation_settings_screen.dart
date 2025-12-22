@@ -87,7 +87,7 @@ class _PartnerReservationSettingsScreenState
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text('✅ 予約設定を更新しました！'),
             backgroundColor: Colors.green,
           ),
@@ -255,7 +255,7 @@ class _PartnerReservationSettingsScreenState
                     const SizedBox(height: 8),
                     TextFormField(
                       controller: _emailController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: AppLocalizations.of(context)!.email,
                         hintText: 'reservation@gym.com',
                         prefixIcon: Icon(Icons.email),
@@ -331,7 +331,7 @@ class _PartnerReservationSettingsScreenState
                                       color: Colors.blue[600],
                                       borderRadius: BorderRadius.circular(4),
                                     ),
-                                    child: const Row(
+                                    child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Icon(Icons.check_circle,

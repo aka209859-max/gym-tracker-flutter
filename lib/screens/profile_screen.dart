@@ -104,7 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final importType = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.upload_file, color: Colors.purple),
             SizedBox(width: 8),
@@ -258,7 +258,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       if (file.size > 5 * 1024 * 1024) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text('❌ ファイルサイズが大きすぎます（5MB以下）'),
               backgroundColor: Colors.red,
             ),
@@ -413,7 +413,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onPressed: () {
                         Clipboard.setData(ClipboardData(text: referralCode));
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
+                          SnackBar(
                             content: Text('✅ コードをコピーしました！'),
                             backgroundColor: Colors.green,
                             duration: Duration(seconds: 2),
@@ -465,7 +465,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ));
                 Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
+                  SnackBar(
                     content: Text('✅ シェア用メッセージをコピーしました！'),
                     backgroundColor: Colors.green,
                   ),

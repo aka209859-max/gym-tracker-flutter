@@ -27,7 +27,7 @@ class _DebugLogScreenState extends State<DebugLogScreen> {
               final logText = logs.join('\n');
               Clipboard.setData(ClipboardData(text: logText));
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
+                SnackBar(
                   content: Text('ログをクリップボードにコピーしました'),
                   duration: Duration(seconds: 2),
                 ),
@@ -42,7 +42,7 @@ class _DebugLogScreenState extends State<DebugLogScreen> {
                 DebugLogger.instance.clearLogs();
               });
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
+                SnackBar(
                   content: Text('ログをクリアしました'),
                   duration: Duration(seconds: 1),
                 ),

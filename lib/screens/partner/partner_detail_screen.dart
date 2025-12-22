@@ -92,7 +92,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
       if (!isFriend) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text('友達になってからメッセージを送信できます'),
               backgroundColor: Colors.orange,
             ),

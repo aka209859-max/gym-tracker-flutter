@@ -297,7 +297,7 @@ class _ReportCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
               Icon(Icons.lightbulb, color: Colors.blue, size: 20),
               SizedBox(width: 8),

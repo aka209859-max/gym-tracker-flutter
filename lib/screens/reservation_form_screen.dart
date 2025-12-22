@@ -107,7 +107,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
       if (mounted) {
         // 成功メッセージ
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text('✅ 予約申込を送信しました！店舗から連絡があります。'),
             backgroundColor: Colors.green,
             duration: Duration(seconds: 3),
@@ -191,7 +191,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
               // 氏名入力
               TextFormField(
                 controller: _nameController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'お名前 *',
                   hintText: '山田 太郎',
                   prefixIcon: Icon(Icons.person),
@@ -210,7 +210,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
               // 電話番号入力
               TextFormField(
                 controller: _phoneController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: '電話番号 *',
                   hintText: '090-1234-5678',
                   prefixIcon: Icon(Icons.phone),
@@ -230,7 +230,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
               // メールアドレス入力
               TextFormField(
                 controller: _emailController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)!.email,
                   hintText: 'example@email.com',
                   prefixIcon: Icon(Icons.email),
@@ -295,7 +295,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
               // その他要望
               TextFormField(
                 controller: _messageController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'その他ご要望（任意）',
                   hintText: '例: 初めてのジム利用です',
                   prefixIcon: Icon(Icons.message),

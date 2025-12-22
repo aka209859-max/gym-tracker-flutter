@@ -96,7 +96,7 @@ class POAnalyticsScreen extends StatelessWidget {
                   trailing: ElevatedButton(
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
+                        SnackBar(
                             content: Text('一斉メッセージ機能は近日公開予定です')),
                       );
                     },

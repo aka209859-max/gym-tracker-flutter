@@ -103,7 +103,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(AppLocalizations.of(context)!.saved),
             backgroundColor: Colors.green,
           ),
@@ -137,7 +137,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
           children: [
             TextField(
               controller: nameController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: '器具名',
                 hintText: '例: レッグプレス',
               ),
@@ -145,7 +145,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
             const SizedBox(height: 16),
             TextField(
               controller: countController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: '台数',
               ),
               keyboardType: TextInputType.number,

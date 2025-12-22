@@ -397,7 +397,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
   Widget _buildMainContent(User user) {
     return Scaffold(
         appBar: AppBar(
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.auto_awesome, size: 24),
             SizedBox(width: 8),
@@ -1332,7 +1332,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
               // 広告表示失敗
               if (mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
+                  SnackBar(
                     content: Text('広告の読み込みに失敗しました。しばらくしてからお試しください。'),
                     backgroundColor: Colors.red,
                   ),
@@ -2127,7 +2127,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.play_circle_outline, color: Colors.blue, size: 28),
             SizedBox(width: 12),
@@ -2149,7 +2149,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
                 color: Colors.blue.shade50,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
@@ -2242,7 +2242,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
         // 広告視聴成功メッセージ
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text('🎁 AI機能1回分を獲得しました!'),
               backgroundColor: Colors.green,
               duration: Duration(seconds: 2),
@@ -2331,7 +2331,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text('メニューを保存しました'),
             backgroundColor: Colors.green,
           ),
@@ -2617,7 +2617,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               // 広告表示失敗
               if (mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
+                  SnackBar(
                     content: Text('広告の読み込みに失敗しました。しばらくしてからお試しください。'),
                     backgroundColor: Colors.red,
                   ),
@@ -2659,7 +2659,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     final oneRMText = _oneRMController.text.trim();
     if (oneRMText.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(AppLocalizations.of(context)!.enterOneRM),
           backgroundColor: Colors.red,
         ),
@@ -2669,7 +2669,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     final oneRM = double.tryParse(oneRMText);
     if (oneRM == null || oneRM <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text('有効な1RMを入力してください'),
           backgroundColor: Colors.red,
         ),
@@ -2678,7 +2678,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     }
     if (_userAge == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text('年齢が未設定です。個人要因設定で年齢を登録してください。'),
           backgroundColor: Colors.orange,
         ),
@@ -2687,7 +2687,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     }
     if (_latestBodyWeight == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text('体重が記録されていません。体重を記録してください。'),
           backgroundColor: Colors.orange,
         ),
@@ -3334,7 +3334,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.play_circle_outline, color: Colors.blue, size: 28),
             SizedBox(width: 12),
@@ -3356,7 +3356,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 color: Colors.blue.shade50,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
@@ -3449,7 +3449,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         // 広告視聴成功メッセージ
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text('🎁 AI機能1回分を獲得しました!'),
               backgroundColor: Colors.green,
               duration: Duration(seconds: 2),
@@ -3468,7 +3468,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.workspace_premium, color: Colors.amber, size: 28),
             SizedBox(width: 12),
@@ -3777,7 +3777,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
   Widget _build1RMInputField() {
     return TextFormField(
       controller: _oneRMController, // 🔧 Phase 7 Fix: controllerを使用
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         labelText: '現在の1RM (kg)',
         border: OutlineInputBorder(),
         prefixIcon: Icon(Icons.fitness_center),
@@ -4038,7 +4038,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               // 広告表示失敗
               if (mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
+                  SnackBar(
                     content: Text('広告の読み込みに失敗しました。しばらくしてからお試しください。'),
                     backgroundColor: Colors.red,
                   ),
@@ -4082,7 +4082,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
       // 🆕 Phase 7.5: 必須データのバリデーション
       if (_userAge == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text('年齢が未設定です。個人要因設定で年齢を登録してください。'),
             backgroundColor: Colors.orange,
           ),
@@ -5174,7 +5174,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.play_circle_outline, color: Colors.blue, size: 28),
             SizedBox(width: 12),
@@ -5196,7 +5196,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 color: Colors.blue.shade50,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
@@ -5289,7 +5289,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         // 広告視聴成功メッセージ
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text('🎁 AI機能1回分を獲得しました!'),
               backgroundColor: Colors.green,
               duration: Duration(seconds: 2),
@@ -5308,7 +5308,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.workspace_premium, color: Colors.amber, size: 28),
             SizedBox(width: 12),

@@ -108,7 +108,7 @@ class _PartnerEquipmentEditorScreenState
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text('✅ 設備情報を更新しました！'),
             backgroundColor: Colors.green,
           ),

@@ -101,7 +101,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text('レビューを投稿しました！'),
             backgroundColor: Colors.green,
           ),
@@ -130,14 +130,14 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.workspace_premium, color: Colors.blue),
             SizedBox(width: 12),
             Text('Premium機能'),
           ],
         ),
-        content: const Column(
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -322,7 +322,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                       controller: _commentController,
                       maxLines: 5,
                       maxLength: 500,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: 'このジムの良かった点や改善点を教えてください',
                         border: OutlineInputBorder(),
                       ),

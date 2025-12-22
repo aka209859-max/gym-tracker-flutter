@@ -60,14 +60,14 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
           context: context,
           barrierDismissible: false,
           builder: (context) => AlertDialog(
-            title: const Row(
+            title: Row(
               children: [
                 Icon(Icons.celebration, color: Colors.amber, size: 32),
                 SizedBox(width: 12),
                 Text('🎉 登録完了！'),
               ],
             ),
-            content: const Column(
+            content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -269,7 +269,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Row(
+                    Row(
                       children: [
                         Icon(Icons.stars, color: Colors.amber),
                         SizedBox(width: 8),

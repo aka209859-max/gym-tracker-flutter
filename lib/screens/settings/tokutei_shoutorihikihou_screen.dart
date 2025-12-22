@@ -25,7 +25,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: Colors.amber.shade200),
               ),
-              child: const Row(
+              child: Row(
                 children: [
                   Icon(Icons.info_outline, color: Colors.amber),
                   SizedBox(width: 8),
@@ -335,7 +335,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
         color: Colors.grey.shade100,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(

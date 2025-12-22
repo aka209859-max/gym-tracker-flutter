@@ -824,7 +824,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       } else {
                         if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
+                          SnackBar(
                             content: Text('利用規約を開けませんでした'),
                             duration: Duration(seconds: 2),
                           ),
@@ -862,7 +862,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       } else {
                         if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
+                          SnackBar(
                             content: Text('プライバシーポリシーを開けませんでした'),
                             duration: Duration(seconds: 2),
                           ),
@@ -972,7 +972,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       if (newPlan == SubscriptionType.free) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text('無料プランへの変更は、App Store設定でサブスクリプションをキャンセルしてください'),
               duration: Duration(seconds: 4),
               backgroundColor: Colors.orange,
@@ -1044,7 +1044,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         // ユーザーがキャンセルした場合など
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text(AppLocalizations.of(context)!.purchaseCancelled),
               backgroundColor: Colors.grey,
             ),
@@ -1099,7 +1099,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       if (hasActiveSub) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text('購入履歴を復元しました！'),
               backgroundColor: Colors.green,
             ),
@@ -1111,7 +1111,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       } else {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text('復元可能な購入履歴がありませんでした'),
               backgroundColor: Colors.orange,
             ),
@@ -1158,7 +1158,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       _loadCurrentPlan();
     } else if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text('プラン変更に失敗しました'),
           backgroundColor: Colors.red,
         ),
@@ -1343,7 +1343,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 const Text('変更理由', style: TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8),
                 DropdownButtonFormField<String>(
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: '選択してください',
                   ),

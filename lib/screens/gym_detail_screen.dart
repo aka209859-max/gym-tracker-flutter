@@ -109,7 +109,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
           _isFavorite = false;
         });
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(AppLocalizations.of(context)!.removedFromFavorites),
             backgroundColor: Colors.grey,
           ),
@@ -123,7 +123,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
           _isFavorite = true;
         });
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(AppLocalizations.of(context)!.addedToFavorites),
             backgroundColor: Colors.pink,
           ),
@@ -153,7 +153,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
       );
     } else if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(AppLocalizations.of(context)!.checkInFailed),
           backgroundColor: Colors.red,
         ),
@@ -886,7 +886,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(AppLocalizations.of(context)!.shared),
             backgroundColor: Colors.green,
             duration: Duration(seconds: 2),
@@ -1109,7 +1109,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                     color: Colors.amber[700],
                     borderRadius: BorderRadius.circular(6),
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text('🏆', style: TextStyle(fontSize: 14)),

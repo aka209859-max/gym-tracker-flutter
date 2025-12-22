@@ -173,7 +173,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(AppLocalizations.of(context)!.delete),
           ),
         );

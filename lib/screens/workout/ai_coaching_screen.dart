@@ -853,7 +853,7 @@ ${bodyParts.join('、')}
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(AppLocalizations.of(context)!.save),
             backgroundColor: Colors.green,
           ),
@@ -945,14 +945,14 @@ ${bodyParts.join('、')}
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.info_outline, color: Colors.orange),
             SizedBox(width: 12),
             Text('月間上限に達しました'),
           ],
         ),
-        content: const Column(
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -1010,14 +1010,14 @@ ${bodyParts.join('、')}
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.info_outline, color: Colors.orange),
             SizedBox(width: 12),
             Text('月間上限に達しました'),
           ],
         ),
-        content: const Column(
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -66,7 +66,7 @@ class _MapScreenState extends State<MapScreen> {
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.location_on, color: Colors.blue),
             SizedBox(width: 8),
@@ -320,7 +320,7 @@ class _MapScreenState extends State<MapScreen> {
           );
         } else if (searchSucceeded && gyms.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text('この地域にはジムが見つかりませんでした'),
               backgroundColor: Colors.orange,
               duration: Duration(seconds: 3),
@@ -697,7 +697,7 @@ class _MapScreenState extends State<MapScreen> {
                               color: Colors.amber[700],
                               borderRadius: BorderRadius.circular(4),
                             ),
-                            child: const Row(
+                            child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(

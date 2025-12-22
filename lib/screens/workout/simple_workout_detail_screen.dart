@@ -344,7 +344,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
         content: TextField(
           controller: controller,
           maxLines: 5,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             hintText: 'メモを入力...',
             border: OutlineInputBorder(),
           ),
@@ -630,7 +630,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
       await docRef.delete();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(AppLocalizations.of(context)!.lastExerciseDeleted),
             backgroundColor: Colors.orange,
           ),
@@ -695,7 +695,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
       await docRef.delete();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(AppLocalizations.of(context)!.lastExerciseDeleted),
             backgroundColor: Colors.orange,
           ),

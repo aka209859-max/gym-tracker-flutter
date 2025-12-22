@@ -347,7 +347,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         title: Text(AppLocalizations.of(context)!.addCustomExercise),
         content: TextField(
           controller: controller,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             hintText: '種目名を入力',
             border: OutlineInputBorder(),
           ),
@@ -792,7 +792,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 // 距離入力
                 Expanded(
                   child: TextField(
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: '距離 (km)',
                       border: OutlineInputBorder(),
                       contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -813,7 +813,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 // 時間入力
                 Expanded(
                   child: TextField(
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: '時間 (分)',
                       border: OutlineInputBorder(),
                       contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -834,7 +834,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 // 重量入力
                 Expanded(
                   child: TextField(
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: '重量 (kg)',
                       border: OutlineInputBorder(),
                       contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -855,7 +855,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 // 回数入力
                 Expanded(
                   child: TextField(
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: AppLocalizations.of(context)!.repsCount,
                       border: OutlineInputBorder(),
                       contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),

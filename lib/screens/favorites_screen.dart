@@ -377,7 +377,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(AppLocalizations.of(context)!.delete),
             backgroundColor: Colors.green,
           ),

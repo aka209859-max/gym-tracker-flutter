@@ -239,7 +239,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                   const SizedBox(height: 16),
                   TextFormField(
                     controller: _appNameController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'アプリ名を入力',
                       hintText: '例: トレーニング日記',
                       border: OutlineInputBorder(),

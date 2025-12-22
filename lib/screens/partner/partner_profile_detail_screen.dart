@@ -500,7 +500,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               controller: _messageController,
               maxLines: 4,
               maxLength: 200,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 hintText: '自己紹介やトレーニングの希望を書いてください',
                 border: OutlineInputBorder(),
               ),

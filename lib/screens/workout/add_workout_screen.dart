@@ -535,7 +535,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       if (mounted) {
         Navigator.pop(context, true);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Row(
               children: [
                 Icon(Icons.cloud_off, color: Colors.white),
@@ -932,7 +932,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           borderRadius: BorderRadius.circular(20),
           side: BorderSide(color: Colors.green.shade400, width: 2),
         ),
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.alarm, color: Colors.green, size: 32),
             SizedBox(width: 12),
@@ -1235,7 +1235,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 textInputAction: TextInputAction.next,
                 onEditingComplete: () => FocusScope.of(context).nextFocus(),
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: '重量 (kg)',
                   border: OutlineInputBorder(),
                 ),
@@ -1247,7 +1247,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               keyboardType: TextInputType.number,
               textInputAction: TextInputAction.done,
               onEditingComplete: () => FocusScope.of(context).unfocus(),
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: '回数 (reps)',
                 border: OutlineInputBorder(),
               ),
@@ -1375,7 +1375,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         title: Text(AppLocalizations.of(context)!.addCustomExercise),
         content: TextField(
           controller: controller,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             hintText: '種目名を入力',
             border: OutlineInputBorder(),
           ),
@@ -1454,7 +1454,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         // 既にオフ日として登録済み
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text('この日は既にオフ日として登録されています'),
               backgroundColor: Colors.orange,
             ),
@@ -1474,7 +1474,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Row(
               children: [
                 Icon(Icons.bed, color: Colors.white),

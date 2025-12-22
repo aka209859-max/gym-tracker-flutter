@@ -171,7 +171,7 @@ class _PartnerCampaignEditorScreenState
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text('✅ キャンペーンを保存しました！ユーザーアプリに即反映されます'),
             backgroundColor: Colors.green,
             duration: Duration(seconds: 3),
@@ -245,7 +245,7 @@ class _PartnerCampaignEditorScreenState
                   const SizedBox(height: 8),
                   TextFormField(
                     controller: _benefitController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'パートナー特典',
                       hintText: '入会金50%OFF・初月無料',
                       helperText: AppLocalizations.of(context)!.searchGym,
@@ -265,7 +265,7 @@ class _PartnerCampaignEditorScreenState
                   const SizedBox(height: 8),
                   TextFormField(
                     controller: _campaignTitleController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'キャンペーンタイトル',
                       hintText: '🎉 春の入会キャンペーン開催中!',
                       border: OutlineInputBorder(),
@@ -278,7 +278,7 @@ class _PartnerCampaignEditorScreenState
 
                   TextFormField(
                     controller: _campaignDescController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'キャンペーン詳細',
                       hintText:
                           '3月31日までの入会で入会金無料 + プロテイン1kg プレゼント!',
@@ -330,7 +330,7 @@ class _PartnerCampaignEditorScreenState
 
                   TextFormField(
                     controller: _couponCodeController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'クーポンコード (任意)',
                       hintText: 'SPRING2024',
                       border: OutlineInputBorder(),

@@ -58,7 +58,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
   Future<void> _endTodayWorkout() async {
     if (!_isEnabled) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(AppLocalizations.of(context)!.enableFatigueManagement),
           backgroundColor: Colors.orange,
         ),
@@ -89,7 +89,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
       if (querySnapshot.docs.isEmpty) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text('本日のトレーニング記録が見つかりません'),
               backgroundColor: Colors.orange,
             ),

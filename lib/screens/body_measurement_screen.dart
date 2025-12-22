@@ -156,7 +156,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
 
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Row(
                 children: [
                   Icon(Icons.cloud_off, color: Colors.white),
@@ -250,7 +250,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(AppLocalizations.of(context)!.delete),
             backgroundColor: Colors.orange,
           ),
@@ -324,7 +324,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                           InkWell(
                             onTap: _selectDate,
                             child: InputDecorator(
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 labelText: AppLocalizations.of(context)!.date,
                                 border: OutlineInputBorder(),
                                 prefixIcon: Icon(Icons.calendar_today),
@@ -339,7 +339,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                           // 体重入力
                           TextField(
                             controller: _weightController,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               labelText: '体重 (kg)',
                               border: OutlineInputBorder(),
                               prefixIcon: Icon(Icons.monitor_weight),
@@ -353,7 +353,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                           // 体脂肪率入力
                           TextField(
                             controller: _bodyFatController,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               labelText: '体脂肪率 (%)',
                               border: OutlineInputBorder(),
                               prefixIcon: Icon(Icons.analytics),

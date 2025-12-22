@@ -106,7 +106,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
         content: TextField(
           controller: controller,
           maxLines: 5,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             hintText: 'メモを入力してください',
             border: OutlineInputBorder(),
           ),

@@ -197,7 +197,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
                 const SizedBox(height: 16),
                 TextField(
                   controller: detailsController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: '詳細（任意）',
                     border: OutlineInputBorder(),
                   ),

@@ -195,7 +195,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           padding: const EdgeInsets.only(bottom: 16),
                           child: TextFormField(
                             controller: _nameController,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               labelText: AppLocalizations.of(context)!.name,
                               prefixIcon: Icon(Icons.person),
                               border: OutlineInputBorder(),
@@ -212,7 +212,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       // メールアドレス入力
                       TextFormField(
                         controller: _emailController,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           labelText: AppLocalizations.of(context)!.email,
                           prefixIcon: Icon(Icons.email),
                           border: OutlineInputBorder(),
@@ -233,7 +233,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       // パスワード入力
                       TextFormField(
                         controller: _passwordController,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           labelText: AppLocalizations.of(context)!.password,
                           prefixIcon: Icon(Icons.lock),
                           border: OutlineInputBorder(),

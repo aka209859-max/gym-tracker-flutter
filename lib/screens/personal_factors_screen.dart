@@ -257,7 +257,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               keyboardType: TextInputType.number,
               textInputAction: TextInputAction.next,
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.age,
                 suffixText: '歳',
                 helperText: '<25歳: 0.95x, 40-50歳: 1.05x, 50+歳: 1.10x',
@@ -283,7 +283,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               keyboardType: TextInputType.number,
               textInputAction: TextInputAction.next,
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'トレーニング経験年数',
                 suffixText: AppLocalizations.of(context)!.annualPrice,
                 helperText: '<1年: 1.10x, 3-5年: 0.95x, 5+年: 0.90x',
@@ -319,7 +319,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
               textInputAction: TextInputAction.next,
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: '昨晩の睡眠時間',
                 suffixText: AppLocalizations.of(context)!.time,
                 helperText: '<6時間: 1.15x, 8+時間: 0.95x',
@@ -345,7 +345,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
               textInputAction: TextInputAction.next,
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: '1日のタンパク質摂取量',
                 suffixText: 'グラム',
                 helperText: '<84g(1.2g/kg): 1.10x, 112+g(1.6g/kg): 0.95x (体重70kg想定)',
@@ -371,7 +371,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               keyboardType: TextInputType.number,
               textInputAction: TextInputAction.done,
               onEditingComplete: () => FocusScope.of(context).unfocus(),
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: '前日のアルコール摂取量',
                 suffixText: 'ユニット',
                 helperText: '1ユニット毎に+5% (ビール350ml≒1.4ユニット)',
@@ -434,7 +434,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.help, color: Colors.blue),
             SizedBox(width: 8),

@@ -91,7 +91,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Row(
+            title: Row(
               children: [
                 Icon(Icons.check_circle, color: Colors.green, size: 32),
                 SizedBox(width: 12),
@@ -118,7 +118,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Row(
+            title: Row(
               children: [
                 Icon(Icons.error, color: Colors.red, size: 32),
                 SizedBox(width: 12),
@@ -153,7 +153,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Row(
+            title: Row(
               children: [
                 Icon(Icons.warning, color: Colors.orange, size: 32),
                 SizedBox(width: 12),
@@ -205,7 +205,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Row(
+                    Row(
                       children: [
                         Icon(Icons.auto_awesome, color: Colors.blue, size: 28),
                         SizedBox(width: 12),

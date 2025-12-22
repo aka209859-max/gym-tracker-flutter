@@ -38,7 +38,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
     await Clipboard.setData(ClipboardData(text: _template));
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text('✅ テンプレートをコピーしました！'),
           backgroundColor: Colors.green,
           duration: Duration(seconds: 2),
@@ -105,7 +105,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.check_circle, color: Colors.green, size: 32),
             SizedBox(width: 12),
@@ -382,7 +382,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
+            Row(
               children: [
                 Icon(Icons.article, color: Colors.blue),
                 SizedBox(width: 8),
@@ -429,7 +429,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
+            Row(
               children: [
                 Icon(Icons.checklist, color: Colors.blue),
                 SizedBox(width: 8),

@@ -523,7 +523,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               color: Colors.amber[700],
                               borderRadius: BorderRadius.circular(4),
                             ),
-                            child: const Row(
+                            child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
@@ -631,7 +631,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           color: Colors.blue[600],
                           borderRadius: BorderRadius.circular(4),
                         ),
-                        child: const Row(
+                        child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(Icons.check_circle, size: 12, color: Colors.white),
@@ -772,7 +772,7 @@ class _SearchScreenState extends State<SearchScreen> {
         
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text(AppLocalizations.of(context)!.searchGym),
               backgroundColor: Colors.orange,
               duration: Duration(seconds: 3),

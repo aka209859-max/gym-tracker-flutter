@@ -455,7 +455,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                   const SizedBox(height: 8),
                   DropdownButtonFormField<GoalType>(
                     value: selectedType,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),

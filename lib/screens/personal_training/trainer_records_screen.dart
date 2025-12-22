@@ -57,7 +57,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
   void _onRecordSaved() {
     // 保存成功メッセージ
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
+      SnackBar(
         content: Text('✅ トレーニング記録を保存しました'),
         backgroundColor: Colors.green,
         duration: Duration(seconds: 2),

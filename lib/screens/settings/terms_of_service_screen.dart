@@ -272,7 +272,7 @@ class TermsOfServiceScreen extends StatelessWidget {
         color: Colors.grey.shade100,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(

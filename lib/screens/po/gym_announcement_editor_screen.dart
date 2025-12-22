@@ -95,7 +95,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text('画像をアップロードしました'),
             backgroundColor: Colors.green,
           ),
@@ -153,7 +153,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(AppLocalizations.of(context)!.save),
             backgroundColor: Colors.green,
           ),
@@ -233,7 +233,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
               // タイトル入力
               TextFormField(
                 controller: _titleController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'タイトル',
                   hintText: '例: 春の入会キャンペーン開催中',
                   border: OutlineInputBorder(),
@@ -250,7 +250,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
               // 本文入力
               TextFormField(
                 controller: _contentController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: '本文',
                   hintText: 'お知らせの詳細を入力してください',
                   border: OutlineInputBorder(),
@@ -272,7 +272,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                   children: [
                     TextFormField(
                       controller: _couponCodeController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'クーポンコード（任意）',
                         hintText: '例: SPRING2024',
                         border: OutlineInputBorder(),

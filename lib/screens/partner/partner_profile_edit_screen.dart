@@ -52,7 +52,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(AppLocalizations.of(context)!.updateProfileSuccess),
             backgroundColor: Colors.green,
           ),
@@ -94,7 +94,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
             // 自己紹介
             TextFormField(
               controller: _bioController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.bio,
                 hintText: 'トレーニングについて自由に書いてください',
                 border: OutlineInputBorder(),
@@ -114,7 +114,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
             const SizedBox(height: 8),
             DropdownButtonFormField<String>(
               value: _experienceLevel,
-              decoration: const InputDecoration(border: OutlineInputBorder()),
+              decoration: InputDecoration(border: OutlineInputBorder()),
               items: const [
                 DropdownMenuItem(value: 'beginner', child: Text(AppLocalizations.of(context)!.beginner)),
                 DropdownMenuItem(value: 'intermediate', child: Text('中級者')),

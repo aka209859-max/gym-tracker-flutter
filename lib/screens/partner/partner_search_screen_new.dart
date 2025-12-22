@@ -136,7 +136,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
           // 居住地フィルター
           DropdownButtonFormField<String>(
             value: _selectedLocation,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: AppLocalizations.of(context)!.residence,
               border: OutlineInputBorder(),
               filled: true,
@@ -160,7 +160,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
           // 経験レベルフィルター
           DropdownButtonFormField<String>(
             value: _selectedExperienceLevel,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: AppLocalizations.of(context)!.experienceLevel,
               border: OutlineInputBorder(),
               filled: true,
@@ -184,7 +184,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
           // 目標フィルター
           DropdownButtonFormField<String>(
             value: _selectedGoal,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: AppLocalizations.of(context)!.goal,
               border: OutlineInputBorder(),
               filled: true,
@@ -218,7 +218,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 backgroundColor: Theme.of(context).primaryColor,
               ),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.search, color: Colors.white),

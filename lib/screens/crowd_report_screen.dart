@@ -143,7 +143,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
             TextField(
               controller: _commentController,
               maxLines: 3,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 hintText: '例: 平日の夕方は結構混んでます',
                 border: OutlineInputBorder(),
               ),

@@ -233,7 +233,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
       if (todayDocs.isEmpty) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text(AppLocalizations.of(context)!.noTodaysWorkout),
               backgroundColor: Colors.orange,
             ),
@@ -278,7 +278,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
       if (exerciseGroups.isEmpty) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text(AppLocalizations.of(context)!.noExercisesToShare),
               backgroundColor: Colors.orange,
             ),

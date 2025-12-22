@@ -885,7 +885,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       if (exerciseGroups.isEmpty) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text(AppLocalizations.of(context)!.noExercisesToShare),
               backgroundColor: Colors.orange,
             ),
@@ -3044,7 +3044,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 alignment: Alignment.centerRight,
                 padding: const EdgeInsets.only(right: 20),
                 color: Colors.red,
-                child: const Column(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.delete, color: Colors.white, size: 32),
@@ -4255,7 +4255,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           await docRef.delete();
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
+              SnackBar(
                 content: Text(AppLocalizations.of(context)!.lastExerciseDeleted),
                 backgroundColor: Colors.orange,
               ),
@@ -4343,7 +4343,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           await docRef.delete();
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
+              SnackBar(
                 content: Text(AppLocalizations.of(context)!.lastExerciseDeleted),
                 backgroundColor: Colors.orange,
               ),
@@ -4435,7 +4435,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         print('❌ ドキュメントが見つかりません: $workoutId');
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text('削除対象の記録が見つかりませんでした'),
               backgroundColor: Colors.orange,
             ),
@@ -4461,7 +4461,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text('記録を削除しました'),
             backgroundColor: Colors.green,
           ),
@@ -4488,7 +4488,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   void _editWorkout(String workoutId) {
     // 編集画面に遷移（AddWorkoutScreenを編集モードで開く）
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
+      SnackBar(
         content: Text('編集機能は次のアップデートで実装予定です'),
         duration: Duration(seconds: 2),
       ),
@@ -4653,7 +4653,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: const Row(
+                    child: Row(
                       children: [
                         Icon(Icons.info, color: Colors.white, size: 16),
                         SizedBox(width: 8),
@@ -4733,7 +4733,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       if (todayDocs.isEmpty) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text('本日のトレーニング記録が見つかりません'),
               backgroundColor: Colors.orange,
             ),
@@ -4839,7 +4839,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) {
           return AlertDialog(
-            title: const Row(
+            title: Row(
               children: [
                 Icon(Icons.psychology, color: Colors.blue, size: 28),
                 SizedBox(width: 12),
@@ -6113,7 +6113,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.card_giftcard, color: Colors.orange, size: 28),
             SizedBox(width: 12),
@@ -6147,7 +6147,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Row(
+                  Row(
                     children: [
                       Icon(Icons.star, color: Colors.orange, size: 20),
                       SizedBox(width: 8),
@@ -6205,7 +6205,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               );
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
+                SnackBar(
                   content: Text('招待コードをコピーしました！'),
                   duration: Duration(seconds: 2),
                 ),

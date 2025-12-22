@@ -137,7 +137,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                 child: TextField(
                   controller: _weightController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: '重量 (kg)',
                     border: OutlineInputBorder(),
                     prefixIcon: Icon(Icons.fitness_center),
@@ -149,7 +149,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                 child: TextField(
                   controller: _repsController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: AppLocalizations.of(context)!.repsCount,
                     border: OutlineInputBorder(),
                     prefixIcon: Icon(Icons.repeat),
@@ -223,7 +223,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                       color: Colors.grey[100],
                       borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
                     ),
-                    child: const Row(
+                    child: Row(
                       children: [
                         Icon(Icons.table_chart),
                         SizedBox(width: 8),
@@ -459,7 +459,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                       color: Colors.grey[100],
                       borderRadius: const BorderRadius.vertical(top: Radius.circular(4)),
                     ),
-                    child: const Row(
+                    child: Row(
                       children: [
                         Icon(Icons.fitness_center),
                         SizedBox(width: 8),

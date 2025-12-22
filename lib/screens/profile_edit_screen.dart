@@ -31,18 +31,18 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   bool _isLoading = false;
   bool _isPickingImage = false; // 画像選択中フラグ
 
-  // 都道府県リスト
+  // 都道府県リスト（ハードコード - ローカライズは表示時に対応）
   static const List<String> _prefectures = [
     '北海道',
-    '青森県', '岩手県', '宮城県', '秋田県', '山形県', AppLocalizations.of(context)!.prefectureFukushima,
+    '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県',
     '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県',
-    '新潟県', '富山県', AppLocalizations.of(context)!.prefectureIshikawa, '福井県', '山梨県', '長野県',
+    '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県',
     '岐阜県', '静岡県', '愛知県', '三重県',
-    '滋賀県', '京都府', AppLocalizations.of(context)!.prefectureOsaka, '兵庫県', '奈良県', '和歌山県',
+    '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県',
     '鳥取県', '島根県', '岡山県', '広島県', '山口県',
-    '徳島県', AppLocalizations.of(context)!.prefectureKagawa, '愛媛県', '高知県',
+    '徳島県', '香川県', '愛媛県', '高知県',
     '福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県',
-    AppLocalizations.of(context)!.prefectureOkinawa,
+    '沖縄県',
   ];
 
   @override
@@ -128,10 +128,10 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         
         // 成功フィードバック
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(AppLocalizations.of(context)!.selectExercise),
             backgroundColor: Colors.green,
-            duration: Duration(seconds: 2),
+            duration: const Duration(seconds: 2),
           ),
         );
       } else {
@@ -238,7 +238,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.diamond, color: Colors.amber),
             SizedBox(width: 8),
@@ -351,7 +351,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     // アカウント名
                     TextFormField(
                       controller: _displayNameController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'アカウント名 *',
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.person),
@@ -368,7 +368,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     // 居住地
                     DropdownButtonFormField<String>(
                       value: _selectedLocation,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: AppLocalizations.of(context)!.residence,
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.location_on),
@@ -410,7 +410,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(color: Colors.blue.shade200),
                       ),
-                      child: const Row(
+                      child: Row(
                         children: [
                           Icon(Icons.info, color: Colors.blue, size: 20),
                           SizedBox(width: 8),
