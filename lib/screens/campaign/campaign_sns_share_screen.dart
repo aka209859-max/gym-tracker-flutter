@@ -117,8 +117,8 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
           children: [
             const CircularProgressIndicator(),
             const SizedBox(height: 16),
-            const Text(
-              AppLocalizations.of(context)!.confirm,
+            Text(
+                          AppLocalizations.of(context)!.confirm,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14),
             ),
@@ -248,8 +248,8 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
                       size: 48,
                     ),
                     const SizedBox(height: 12),
-                    const Text(
-                      AppLocalizations.of(context)!.postSubmitted,
+                    Text(
+                          AppLocalizations.of(context)!.postSubmitted,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

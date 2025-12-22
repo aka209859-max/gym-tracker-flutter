@@ -313,12 +313,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                             border: Border.all(color: Colors.blue, width: 1),
                           ),
                           child: Row(
-                            children: const [
-                              Icon(Icons.open_in_new, size: 12, color: Colors.blue),
-                              SizedBox(width: 4),
+                            children: [
+                              const Icon(Icons.open_in_new, size: 12, color: Colors.blue),
+                              const SizedBox(width: 4),
                               Text(
                                 AppLocalizations.of(context)!.confirm,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 11,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.blue,

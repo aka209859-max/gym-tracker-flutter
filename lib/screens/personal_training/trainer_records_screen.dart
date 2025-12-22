@@ -72,8 +72,8 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: const Text(
-          AppLocalizations.of(context)!.personalTraining,
+        title: Text(
+                          AppLocalizations.of(context)!.personalTraining,
           style: TextStyle(
             color: Colors.white,
             fontSize: 18,
@@ -112,8 +112,8 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  const Text(
-                    AppLocalizations.of(context)!.personalTraining,
+                  Text(
+                          AppLocalizations.of(context)!.personalTraining,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -140,8 +140,8 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    AppLocalizations.of(context)!.generateMenu,
+                  Text(
+                          AppLocalizations.of(context)!.generateMenu,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

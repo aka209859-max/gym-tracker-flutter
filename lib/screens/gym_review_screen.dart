@@ -310,8 +310,8 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                     const SizedBox(height: 24),
 
                     // コメント入力
-                    const Text(
-                      AppLocalizations.of(context)!.comment,
+                    Text(
+                          AppLocalizations.of(context)!.comment,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -348,7 +348,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                           backgroundColor: Colors.blue,
                           foregroundColor: Colors.white,
                         ),
-                        child: const Text(
+                        child: Text(
                           AppLocalizations.of(context)!.submitReview,
                           style: TextStyle(
                             fontSize: 16,

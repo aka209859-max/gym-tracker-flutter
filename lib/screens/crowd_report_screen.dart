@@ -127,8 +127,8 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
             ),
             const SizedBox(height: 24),
             // 混雑度選択
-            const Text(
-              AppLocalizations.of(context)!.selectExercise,
+            Text(
+                          AppLocalizations.of(context)!.selectExercise,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),

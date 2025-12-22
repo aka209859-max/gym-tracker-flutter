@@ -215,8 +215,8 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                     // ボディメトリクス
                     if (widget.record.bodyMetrics != null) ...[
                       const SizedBox(height: 24),
-                      const Text(
-                        AppLocalizations.of(context)!.bodyMeasurement,
+                      Text(
+                          AppLocalizations.of(context)!.bodyMeasurement,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

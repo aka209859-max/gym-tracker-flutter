@@ -680,8 +680,8 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                       color: Colors.blue[600],
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    child: const Text(
-                      AppLocalizations.of(context)!.ownerProvided,
+                    child: Text(
+                          AppLocalizations.of(context)!.ownerProvided,
                       style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
@@ -915,8 +915,8 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  AppLocalizations.of(context)!.review,
+                Text(
+                          AppLocalizations.of(context)!.review,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 TextButton(
@@ -1311,7 +1311,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                   children: [
                     Row(
                       children: [
-                        const Text(
+                        Text(
                           AppLocalizations.of(context)!.visitorBooking,
                           style: TextStyle(
                             fontSize: 18,
@@ -1325,8 +1325,8 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                             color: Colors.green[600],
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child: const Text(
-                            AppLocalizations.of(context)!.visitorWelcome,
+                          child: Text(
+                          AppLocalizations.of(context)!.visitorWelcome,
                             style: TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
@@ -1421,8 +1421,8 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                   children: [
                     Icon(Icons.campaign, color: Colors.orange[700]),
                     const SizedBox(width: 8),
-                    const Text(
-                      AppLocalizations.of(context)!.announcement,
+                    Text(
+                          AppLocalizations.of(context)!.announcement,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

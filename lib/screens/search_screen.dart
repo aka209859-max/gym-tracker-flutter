@@ -219,8 +219,8 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
           if (_currentPosition != null) ...[
             const SizedBox(height: 12),
-            const Text(
-              AppLocalizations.of(context)!.searchGym,
+            Text(
+                          AppLocalizations.of(context)!.searchGym,
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
             Row(

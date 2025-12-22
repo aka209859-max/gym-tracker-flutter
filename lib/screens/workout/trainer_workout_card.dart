@@ -220,8 +220,8 @@ class TrainerWorkoutCard extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            AppLocalizations.of(context)!.personalTraining,
+                          Text(
+                          AppLocalizations.of(context)!.personalTraining,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,

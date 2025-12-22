@@ -102,8 +102,8 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
           children: [
             const Icon(Icons.diamond, size: 80, color: Colors.amber),
             const SizedBox(height: 24),
-            const Text(
-              AppLocalizations.of(context)!.searchGym,
+            Text(
+                          AppLocalizations.of(context)!.searchGym,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),

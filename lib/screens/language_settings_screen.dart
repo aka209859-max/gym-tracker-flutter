@@ -105,9 +105,9 @@ class LanguageSettingsScreen extends StatelessWidget {
                           // 言語設定画面を閉じる
                           Navigator.of(context).pop();
                         },
-                        child: const Text(
+                        child: Text(
                           AppLocalizations.of(context)!.ok,
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         ),
                       ),
                     ],

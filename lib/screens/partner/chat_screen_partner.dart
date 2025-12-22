@@ -273,12 +273,12 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
                   ],
                 ),
               ),
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'report',
                 child: Row(
                   children: [
-                    Icon(Icons.flag, size: 20),
-                    SizedBox(width: 8),
+                    const Icon(Icons.flag, size: 20),
+                    const SizedBox(width: 8),
                     Text(AppLocalizations.of(context)!.report),
                   ],
                 ),

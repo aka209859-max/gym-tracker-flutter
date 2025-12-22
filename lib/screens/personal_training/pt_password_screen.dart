@@ -111,8 +111,8 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text(
-          AppLocalizations.of(context)!.personalTraining,
+        title: Text(
+                          AppLocalizations.of(context)!.personalTraining,
           style: TextStyle(
             color: Colors.white,
             fontSize: 18,
@@ -149,8 +149,8 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
               const SizedBox(height: 24),
 
               // タイトル
-              const Text(
-                AppLocalizations.of(context)!.password,
+              Text(
+                          AppLocalizations.of(context)!.password,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -162,8 +162,8 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
               const SizedBox(height: 8),
 
               // 説明文
-              const Text(
-                AppLocalizations.of(context)!.personalTraining,
+              Text(
+                          AppLocalizations.of(context)!.personalTraining,
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.black54,
