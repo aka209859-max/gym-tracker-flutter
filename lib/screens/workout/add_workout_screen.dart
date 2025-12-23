@@ -361,22 +361,20 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     double percentage;
     int reps;
     
-    switch (userLevel) {
-      case AppLocalizations.of(context)!.levelBeginner:
-        percentage = 0.65; // 65%
-        reps = 12;
-        break;
-      case AppLocalizations.of(context)!.levelIntermediate:
-        percentage = 0.75; // 75%
-        reps = 10;
-        break;
-      case AppLocalizations.of(context)!.levelAdvanced:
-        percentage = 0.80; // 80%
-        reps = 8;
-        break;
-      default:
-        percentage = 0.70;
-        reps = 10;
+    final l10n = AppLocalizations.of(context)!;
+    if (userLevel == l10n.levelBeginner) {
+      percentage = 0.65; // 65%
+      reps = 12;
+    } else if (userLevel == l10n.levelIntermediate) {
+      percentage = 0.75; // 75%
+      reps = 10;
+    } else if (userLevel == l10n.levelAdvanced) {
+      percentage = 0.80; // 80%
+      reps = 8;
+    } else {
+      percentage = 0.70;
+      reps = 10;
+    }
     }
     
     final recommendedWeight = (oneRM * percentage / 2.5).round() * 2.5; // 2.5kg単位で丸める

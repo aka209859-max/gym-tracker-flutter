@@ -461,20 +461,20 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
 
   /// 部位別アイコン
   IconData _getMuscleGroupIcon(String muscleGroup) {
-    switch (muscleGroup) {
-      case AppLocalizations.of(context)!.bodyPartChest:
-        return Icons.favorite;
-      case AppLocalizations.of(context)!.bodyPartBack:
-        return Icons.backpack;
-      case AppLocalizations.of(context)!.bodyPartLegs:
-        return Icons.directions_run;
-      case AppLocalizations.of(context)!.bodyPartShoulders:
-        return Icons.fitness_center;
-      case AppLocalizations.of(context)!.bodyPartBiceps:
-      case AppLocalizations.of(context)!.bodyPartTriceps:
-        return Icons.front_hand;
-      default:
-        return Icons.fitness_center;
+    final l10n = AppLocalizations.of(context)!;
+    
+    if (muscleGroup == l10n.bodyPartChest) {
+      return Icons.favorite;
+    } else if (muscleGroup == l10n.bodyPartBack) {
+      return Icons.backpack;
+    } else if (muscleGroup == l10n.bodyPartLegs) {
+      return Icons.directions_run;
+    } else if (muscleGroup == l10n.bodyPartShoulders) {
+      return Icons.fitness_center;
+    } else if (muscleGroup == l10n.bodyPartBiceps || muscleGroup == l10n.bodyPartTriceps) {
+      return Icons.front_hand;
+    } else {
+      return Icons.fitness_center;
     }
   }
 }

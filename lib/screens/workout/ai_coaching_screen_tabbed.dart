@@ -2398,7 +2398,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     _selectedBodyPart = l10n.musclePecs;
     _levels = [l10n.levelBeginner, l10n.levelIntermediate, l10n.levelAdvanced];
     _genders = [l10n.genderMale, l10n.genderFemale];
-    _bodyParts = [l10n.musclePecs, l10n.muscleBiceps, l10n.muscleLegs, l10n.muscleShoulders, l10n.muscleBack];
+    _bodyParts = [l10n.musclePecs, '上腕二頭筋', '大腿四頭筋', '三角筋', '広背筋'];
     
     _loadUserData(); // 🆕 Phase 7: 年齢・体重を自動取得
   }
@@ -3928,12 +3928,12 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
 
   // フォーム入力値
   final _formKey = GlobalKey<FormState>();
-  String _selectedBodyPart = AppLocalizations.of(context)!.musclePecs;
+  late String _selectedBodyPart;
   String _selectedExercise = 'ベンチプレス';  // 種目選択
   int _currentSets = 12;
   int _currentFrequency = 2;
-  String _selectedLevel = AppLocalizations.of(context)!.levelIntermediate;
-  String _selectedGender = AppLocalizations.of(context)!.genderFemale;
+  late String _selectedLevel;
+  late String _selectedGender;
   bool _enablePlateauDetection = true;  // プラトー検出ON/OFF
 
   // 🆕 Phase 7.5: 自動取得データ
@@ -3943,31 +3943,41 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
   Map<String, dynamic>? _analysisResult;
   bool _isLoading = false;  // ✅ 修正: 初期状態はローディングなし
 
+  late List<String> _bodyParts;
+  late Map<String, List<String>> _exercisesByBodyPart;
+
   @override
   void initState() {
     super.initState();
+    
+    // 初期化: context依存の値をinitStateで設定
+    final l10n = AppLocalizations.of(context)!;
+    _selectedBodyPart = l10n.musclePecs;
+    _selectedLevel = l10n.levelIntermediate;
+    _selectedGender = l10n.genderFemale;
+    
+    // 部位選択肢
+    _bodyParts = [
+      l10n.musclePecs,
+      '広背筋',
+      '大腿四頭筋',
+      '上腕二頭筋',
+      '上腕三頭筋',
+      '三角筋',
+    ];
+
+    // 種目選択肢（部位ごと）
+    _exercisesByBodyPart = {
+      l10n.musclePecs: [l10n.exerciseBenchPress, 'インクラインベンチプレス', 'ダンベルフライ', l10n.exerciseDips],
+      '広背筋': [l10n.exerciseDeadlift, l10n.exerciseLatPulldown, l10n.exerciseBentOverRow, l10n.exerciseChinUp],
+      '大腿四頭筋': [l10n.exerciseSquat, l10n.exerciseLegPress, l10n.exerciseLegExtension, 'ランジ'],
+      '上腕二頭筋': [l10n.exerciseBarbellCurl, l10n.exerciseDumbbellCurl, l10n.exerciseHammerCurl, 'プリーチャーカール'],
+      '上腕三頭筋': ['トライセプスプレスダウン', 'ライイングトライセプスエクステンション', l10n.exerciseDips, 'クローズグリップベンチプレス'],
+      '三角筋': [l10n.exerciseShoulderPress, l10n.exerciseSideRaise, l10n.exerciseFrontRaise, 'リアレイズ'],
+    };
+    
     _loadUserAge(); // 🆕 Phase 7.5: 年齢を自動取得
   }
-
-  // 部位選択肢
-  final List<String> _bodyParts = [
-    AppLocalizations.of(context)!.musclePecs,
-    '広背筋',
-    '大腿四頭筋',
-    '上腕二頭筋',
-    '上腕三頭筋',
-    '三角筋',
-  ];
-
-  // 種目選択肢（部位ごと）
-  final Map<String, List<String>> _exercisesByBodyPart = {
-    AppLocalizations.of(context)!.musclePecs: [AppLocalizations.of(context)!.exerciseBenchPress, 'インクラインベンチプレス', 'ダンベルフライ', AppLocalizations.of(context)!.exerciseDips],
-    '広背筋': [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, AppLocalizations.of(context)!.exerciseBentOverRow, AppLocalizations.of(context)!.exerciseChinUp],
-    '大腿四頭筋': [AppLocalizations.of(context)!.exerciseSquat, AppLocalizations.of(context)!.exerciseLegPress, AppLocalizations.of(context)!.exerciseLegExtension, 'ランジ'],
-    '上腕二頭筋': [AppLocalizations.of(context)!.exerciseBarbellCurl, AppLocalizations.of(context)!.exerciseDumbbellCurl, AppLocalizations.of(context)!.exerciseHammerCurl, 'プリーチャーカール'],
-    '上腕三頭筋': ['トライセプスプレスダウン', 'ライイングトライセプスエクステンション', AppLocalizations.of(context)!.exerciseDips, 'クローズグリップベンチプレス'],
-    '三角筋': [AppLocalizations.of(context)!.exerciseShoulderPress, AppLocalizations.of(context)!.exerciseSideRaise, AppLocalizations.of(context)!.exerciseFrontRaise, 'リアレイズ'],
-  };
 
   // レベル選択肢
   final List<String> _levels = [AppLocalizations.of(context)!.levelBeginner, AppLocalizations.of(context)!.levelIntermediate, AppLocalizations.of(context)!.levelAdvanced];

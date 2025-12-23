@@ -31,7 +31,7 @@ import 'providers/auth_provider.dart';
 import 'providers/navigation_provider.dart';
 import 'providers/locale_provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'generated/app_localizations.dart';
+import 'gen/app_localizations.dart';
 import 'widgets/trial_welcome_dialog.dart';
 import 'widgets/admob_banner.dart';
 import 'services/subscription_service.dart';
