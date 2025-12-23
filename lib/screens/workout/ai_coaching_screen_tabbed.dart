@@ -152,8 +152,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
             const SizedBox(height: 24),
             
             // タイトル
-            const Text(
-              AppLocalizations.of(context)!.aiFatigueAnalysisWelcome,
+            Text(AppLocalizations.of(context)!.aiFatigueAnalysisWelcome,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -205,8 +204,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              child: const Text(
-                AppLocalizations.of(context)!.getStarted,
+              child: Text(AppLocalizations.of(context)!.getStarted,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -297,8 +295,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                 children: [
                   Icon(Icons.settings, color: Colors.deepPurple.shade700),
                   const SizedBox(width: 12),
-                  const Text(
-                    AppLocalizations.of(context)!.settingsMenu,
+                  Text(AppLocalizations.of(context)!.settingsMenu,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -321,8 +318,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                   color: Colors.blue.shade700,
                 ),
               ),
-              title: const Text(
-                AppLocalizations.of(context)!.trainingMemo,
+              title: Text(AppLocalizations.of(context)!.trainingMemo,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -348,8 +344,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                   color: Colors.purple.shade700,
                 ),
               ),
-              title: const Text(
-                AppLocalizations.of(context)!.personalFactorsSettings,
+              title: Text(AppLocalizations.of(context)!.personalFactorsSettings,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -418,7 +413,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
           indicatorColor: Colors.white,
           labelColor: Colors.white,
           unselectedLabelColor: Colors.white70,
-          tabs: const [
+          tabs: [
             Tab(
               icon: Icon(Icons.fitness_center),
               text: 'メニュー提案',
@@ -658,8 +653,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
               children: [
                 Icon(Icons.auto_awesome, color: Colors.blue.shade700),
                 const SizedBox(width: 8),
-                const Text(
-                  AppLocalizations.of(context)!.aiPoweredTraining,
+                Text(AppLocalizations.of(context)!.aiPoweredTraining,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -3176,8 +3170,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                   color: Colors.green.shade700,
                 ),
                 const SizedBox(height: 16),
-                const Text(
-                  AppLocalizations.of(context)!.fourMonthPrediction,
+                Text(AppLocalizations.of(context)!.fourMonthPrediction,
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
@@ -3273,8 +3266,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                   children: [
                     Icon(Icons.psychology, color: Colors.purple.shade700),
                     const SizedBox(width: 8),
-                    const Text(
-                      AppLocalizations.of(context)!.aiDetailedAnalysis,
+                    Text(AppLocalizations.of(context)!.aiDetailedAnalysis,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -3833,8 +3825,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  AppLocalizations.of(context)!.weightRatio,
+                Text(AppLocalizations.of(context)!.weightRatio,
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -4791,8 +4782,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                   children: [
                     Icon(Icons.psychology, color: Colors.purple.shade700),
                     const SizedBox(width: 8),
-                    const Text(
-                      AppLocalizations.of(context)!.aiDetailedAnalysis,
+                    Text(AppLocalizations.of(context)!.aiDetailedAnalysis,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

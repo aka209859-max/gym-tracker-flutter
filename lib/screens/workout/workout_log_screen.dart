@@ -155,8 +155,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
                 children: [
                   const Icon(Icons.warning_amber_rounded, size: 80, color: Colors.orange),
                   const SizedBox(height: 24),
-                  const Text(
-                    AppLocalizations.of(context)!.authenticationError,
+                  Text(AppLocalizations.of(context)!.authenticationError,
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),

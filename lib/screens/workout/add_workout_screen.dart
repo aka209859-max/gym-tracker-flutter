@@ -966,8 +966,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const Text(
-              AppLocalizations.of(context)!.ok,
+            child: Text(AppLocalizations.of(context)!.ok,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
@@ -1985,8 +1984,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 padding: const EdgeInsets.all(16),
                 child: Row(
                   children: [
-                    const Text(
-                      AppLocalizations.of(context)!.sets,
+                    Text(AppLocalizations.of(context)!.sets,
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     const Spacer(),

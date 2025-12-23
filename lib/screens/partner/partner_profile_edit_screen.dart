@@ -79,8 +79,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          AppLocalizations.of(context)!.editProfile,
+        title: Text(AppLocalizations.of(context)!.editProfile,
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,

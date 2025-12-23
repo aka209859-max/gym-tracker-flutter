@@ -418,8 +418,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                   size: 40,
                   color: _isEnabled ? Colors.green : Colors.grey,
                 ),
-                title: const Text(
-                  AppLocalizations.of(context)!.fatigueManagementSystem,
+                title: Text(AppLocalizations.of(context)!.fatigueManagementSystem,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Text(

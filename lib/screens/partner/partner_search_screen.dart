@@ -168,8 +168,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              AppLocalizations.of(context)!.searchConditions,
+            Text(AppLocalizations.of(context)!.searchConditions,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

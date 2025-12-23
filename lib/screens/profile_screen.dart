@@ -1098,8 +1098,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   Icon(Icons.settings, color: Colors.deepPurple.shade700),
                   const SizedBox(width: 12),
-                  const Text(
-                    AppLocalizations.of(context)!.settingsMenu,
+                  Text(AppLocalizations.of(context)!.settingsMenu,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -1122,8 +1121,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.blue.shade700,
                 ),
               ),
-              title: const Text(
-                AppLocalizations.of(context)!.trainingMemo,
+              title: Text(AppLocalizations.of(context)!.trainingMemo,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -1149,8 +1147,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.purple.shade700,
                 ),
               ),
-              title: const Text(
-                AppLocalizations.of(context)!.personalFactorsSettings,
+              title: Text(AppLocalizations.of(context)!.personalFactorsSettings,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -1176,8 +1173,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.green.shade700,
                 ),
               ),
-              title: const Text(
-                AppLocalizations.of(context)!.languageSettings,
+              title: Text(AppLocalizations.of(context)!.languageSettings,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -1221,8 +1217,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.blue.shade700,
                 ),
               ),
-              title: const Text(
-                AppLocalizations.of(context)!.termsOfService,
+              title: Text(AppLocalizations.of(context)!.termsOfService,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -1285,8 +1280,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.green.shade700,
                 ),
               ),
-              title: const Text(
-                AppLocalizations.of(context)!.privacyPolicy,
+              title: Text(AppLocalizations.of(context)!.privacyPolicy,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,

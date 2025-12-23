@@ -89,8 +89,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 alignment: Alignment.topRight,
                 child: TextButton(
                   onPressed: _skipOnboarding,
-                  child: const Text(
-                    AppLocalizations.of(context)!.skip,
+                  child: Text(AppLocalizations.of(context)!.skip,
                     style: TextStyle(fontSize: 16),
                   ),
                 ),

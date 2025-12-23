@@ -50,10 +50,10 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('AI追加パックを購入しますか？'),
-        content: const Text(
+        content: Text(
           'AI追加パック（5回分）\n'
           '料金: ¥300\n\n'
-          AppLocalizations.of(context)!.addWorkout,
+          '${AppLocalizations.of(context)!.addWorkout}',
         ),
         actions: [
           TextButton(

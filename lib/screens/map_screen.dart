@@ -73,8 +73,7 @@ class _MapScreenState extends State<MapScreen> {
             Text('位置情報を使用しますか？'),
           ],
         ),
-        content: const Text(
-          AppLocalizations.of(context)!.searchGym
+        content: Text(AppLocalizations.of(context)!.searchGym
           '※位置情報は検索のみに使用され、保存されません。',
           style: TextStyle(fontSize: 14),
         ),

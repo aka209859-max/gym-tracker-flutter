@@ -48,8 +48,7 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
               color: Colors.orange[700],
             ),
             const SizedBox(height: 16),
-            const Text(
-              AppLocalizations.of(context)!.personalTraining,
+            Text(AppLocalizations.of(context)!.personalTraining,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -74,8 +73,7 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          AppLocalizations.of(context)!.generateMenu,
+        Text(AppLocalizations.of(context)!.generateMenu,
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,

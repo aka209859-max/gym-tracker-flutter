@@ -193,8 +193,7 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
                       backgroundColor: Theme.of(context).colorScheme.primary,
                       foregroundColor: Colors.white,
                     ),
-                    child: const Text(
-                      AppLocalizations.of(context)!.gymAccess,
+                    child: Text(AppLocalizations.of(context)!.gymAccess,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

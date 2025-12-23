@@ -460,8 +460,7 @@ import 'po_dashboard_screen.dart';
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                   ),
                 )
-              : const Text(
-                  AppLocalizations.of(context)!.login,
+              : Text(AppLocalizations.of(context)!.login,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -549,8 +548,7 @@ import 'po_dashboard_screen.dart';
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                   ),
                 )
-              : const Text(
-                  AppLocalizations.of(context)!.login,
+              : Text(AppLocalizations.of(context)!.login,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

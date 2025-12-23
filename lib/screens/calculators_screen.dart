@@ -194,8 +194,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                 padding: const EdgeInsets.all(24),
                 child: Column(
                   children: [
-                    const Text(
-                      AppLocalizations.of(context)!.estimatedMax,
+                    Text(AppLocalizations.of(context)!.estimatedMax,
                       style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
                     const SizedBox(height: 8),

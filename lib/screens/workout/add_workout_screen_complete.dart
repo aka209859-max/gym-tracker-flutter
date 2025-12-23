@@ -700,8 +700,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                       color: Colors.orange.shade100,
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    child: const Text(
-                      AppLocalizations.of(context)!.exerciseCardio,
+                    child: Text(AppLocalizations.of(context)!.exerciseCardio,
                       style: TextStyle(fontSize: 10, color: Colors.orange, fontWeight: FontWeight.bold),
                     ),
                   ),

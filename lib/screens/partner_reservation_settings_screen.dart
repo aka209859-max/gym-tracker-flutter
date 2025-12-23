@@ -245,8 +245,7 @@ class _PartnerReservationSettingsScreenState
                     const SizedBox(height: 24),
 
                     // メールアドレス設定
-                    const Text(
-                      AppLocalizations.of(context)!.email,
+                    Text(AppLocalizations.of(context)!.email,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -402,8 +401,7 @@ class _PartnerReservationSettingsScreenState
                                 ),
                               )
                             : const Icon(Icons.save),
-                        label: const Text(
-                          AppLocalizations.of(context)!.save,
+                        label: Text(AppLocalizations.of(context)!.save,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

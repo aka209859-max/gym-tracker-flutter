@@ -1079,8 +1079,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
-          AppLocalizations.of(context)!.navHome,
+        title: Text(AppLocalizations.of(context)!.navHome,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
@@ -1189,8 +1188,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           }
         },
         icon: const Icon(Icons.add, size: 24),
-        label: const Text(
-          AppLocalizations.of(context)!.trainingLog,
+        label: Text(AppLocalizations.of(context)!.trainingLog,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -2201,8 +2199,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     );
                   },
                   icon: Icon(Icons.library_books, size: 18, color: theme.colorScheme.primary),
-                  label: const Text(
-                    AppLocalizations.of(context)!.templates,
+                  label: Text(AppLocalizations.of(context)!.templates,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -2265,8 +2262,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     );
                   },
                   icon: Icon(Icons.emoji_events, size: 18, color: theme.colorScheme.primary),
-                  label: const Text(
-                    AppLocalizations.of(context)!.prRecords,
+                  label: Text(AppLocalizations.of(context)!.prRecords,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -2293,8 +2289,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     );
                   },
                   icon: Icon(Icons.accessibility_new, size: 18, color: theme.colorScheme.primary),
-                  label: const Text(
-                    AppLocalizations.of(context)!.byBodyPart,
+                  label: Text(AppLocalizations.of(context)!.byBodyPart,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -2328,8 +2323,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     );
                   },
                   icon: Icon(Icons.note_alt, size: 18, color: theme.colorScheme.primary),
-                  label: const Text(
-                    AppLocalizations.of(context)!.notes,
+                  label: Text(AppLocalizations.of(context)!.notes,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,

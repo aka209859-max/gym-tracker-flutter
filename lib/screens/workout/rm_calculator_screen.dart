@@ -255,8 +255,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                                         color: Theme.of(context).colorScheme.primary,
                                         borderRadius: BorderRadius.circular(4),
                                       ),
-                                      child: const Text(
-                                        AppLocalizations.of(context)!.intensityMaximal,
+                                      child: Text(AppLocalizations.of(context)!.intensityMaximal,
                                         style: TextStyle(
                                           fontSize: 10,
                                           color: Colors.white,
@@ -566,8 +565,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                   const SizedBox(height: 16),
                   
                   // クイック設定プリセット
-                  const Text(
-                    AppLocalizations.of(context)!.settings,
+                  Text(AppLocalizations.of(context)!.settings,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -596,8 +594,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                   const SizedBox(height: 16),
                   
                   // プレート個別選択
-                  const Text(
-                    AppLocalizations.of(context)!.selectExercise,
+                  Text(AppLocalizations.of(context)!.selectExercise,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,

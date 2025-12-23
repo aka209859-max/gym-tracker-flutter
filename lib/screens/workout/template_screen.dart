@@ -264,8 +264,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
                                   borderRadius: BorderRadius.circular(4),
                                   border: Border.all(color: Colors.orange),
                                 ),
-                                child: const Text(
-                                  AppLocalizations.of(context)!.recommendation,
+                                child: Text(AppLocalizations.of(context)!.recommendation,
                                   style: TextStyle(
                                     fontSize: 10,
                                     fontWeight: FontWeight.bold,

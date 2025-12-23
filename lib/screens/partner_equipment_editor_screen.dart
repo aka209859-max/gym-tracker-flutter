@@ -317,8 +317,7 @@ class _PartnerEquipmentEditorScreenState
                               ),
                             )
                           : const Icon(Icons.save),
-                      label: const Text(
-                        AppLocalizations.of(context)!.save,
+                      label: Text(AppLocalizations.of(context)!.save,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

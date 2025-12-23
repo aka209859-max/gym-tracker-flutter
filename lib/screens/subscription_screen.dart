@@ -240,8 +240,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               color: planColor,
             ),
             const SizedBox(height: 12),
-            const Text(
-              AppLocalizations.of(context)!.currentPlan,
+            Text(AppLocalizations.of(context)!.currentPlan,
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
             const SizedBox(height: 4),
@@ -618,8 +617,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                               padding: const EdgeInsets.symmetric(vertical: 14),
                               side: BorderSide(color: color, width: 2),
                             ),
-                            child: const Text(
-                              AppLocalizations.of(context)!.currentPlan,
+                            child: Text(AppLocalizations.of(context)!.currentPlan,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -1211,8 +1209,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      AppLocalizations.of(context)!.aiAddonPack,
+                    Text(AppLocalizations.of(context)!.aiAddonPack,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

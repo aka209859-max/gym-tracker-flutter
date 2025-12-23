@@ -250,8 +250,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
             children: [
               const Icon(Icons.error_outline, size: 64, color: Colors.red),
               const SizedBox(height: 16),
-              const Text(
-                AppLocalizations.of(context)!.error,
+              Text(AppLocalizations.of(context)!.error,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),

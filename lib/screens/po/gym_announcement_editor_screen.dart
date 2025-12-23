@@ -339,8 +339,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
               const SizedBox(height: 24),
               
               // 有効期限設定
-              const Text(
-                AppLocalizations.of(context)!.expiryDate,
+              Text(AppLocalizations.of(context)!.expiryDate,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

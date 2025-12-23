@@ -185,8 +185,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
               children: [
                 Icon(Icons.auto_awesome, color: Colors.blue.shade700),
                 const SizedBox(width: 8),
-                const Text(
-                  AppLocalizations.of(context)!.aiPoweredTraining,
+                Text(AppLocalizations.of(context)!.aiPoweredTraining,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -195,8 +194,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
               ],
             ),
             const SizedBox(height: 12),
-            const Text(
-              AppLocalizations.of(context)!.selectExercise,
+            Text(AppLocalizations.of(context)!.selectExercise,
               style: TextStyle(fontSize: 14),
             ),
             const SizedBox(height: 12),
@@ -245,8 +243,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          AppLocalizations.of(context)!.selectExercise,
+        Text(AppLocalizations.of(context)!.selectExercise,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,

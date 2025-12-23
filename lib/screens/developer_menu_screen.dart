@@ -247,8 +247,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                             ),
                           ),
                         ] else
-                          const Text(
-                            AppLocalizations.of(context)!.signInRequired,
+                          Text(AppLocalizations.of(context)!.signInRequired,
                             style: TextStyle(fontSize: 14, color: Colors.red),
                           ),
                       ],
@@ -266,8 +265,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          AppLocalizations.of(context)!.currentPlan,
+                        Text(AppLocalizations.of(context)!.currentPlan,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

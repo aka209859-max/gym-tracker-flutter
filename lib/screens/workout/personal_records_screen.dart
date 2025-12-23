@@ -665,8 +665,7 @@ class _PeriodView extends StatelessWidget {
             Center(
               child: Column(
                 children: [
-                  const Text(
-                    AppLocalizations.of(context)!.executeGrowthPrediction,
+                  Text(AppLocalizations.of(context)!.executeGrowthPrediction,
                     style: TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                   const SizedBox(height: 4),
