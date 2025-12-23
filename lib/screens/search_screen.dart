@@ -148,7 +148,7 @@ class _SearchScreenState extends State<SearchScreen> {
               },
             ),
           ),
-          const SizedBox(width: 8),
+          SizedBox(width: 8),
           ElevatedButton(
             onPressed: _searchQuery.isEmpty || _isSearching ? null : _applyFilters,
             style: ElevatedButton.styleFrom(
@@ -190,7 +190,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           height: 16,
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
-                      : const Icon(Icons.my_location),
+                      : Icon(Icons.my_location),
                   label: Text(_currentPosition == null
                       ? AppLocalizations.of(context)!.getGpsLocation
                       : 'GPS: ${_currentPosition!.latitude.toStringAsFixed(4)}, ${_currentPosition!.longitude.toStringAsFixed(4)}'),
@@ -200,7 +200,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
               if (_currentPosition != null) ...[
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
                 IconButton(
                   icon: const Icon(Icons.clear),
                   onPressed: () {
@@ -218,7 +218,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ],
           ),
           if (_currentPosition != null) ...[
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
                           AppLocalizations.of(context)!.searchGym,
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
@@ -258,7 +258,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget _buildSearchResults() {
     // ローディング中
     if (_isSearching) {
-      return const Center(
+      return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -290,7 +290,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             ElevatedButton(
               onPressed: _applyFilters,
               child: Text(AppLocalizations.of(context)!.searchGym),
@@ -311,7 +311,7 @@ class _SearchScreenState extends State<SearchScreen> {
               size: 64,
               color: Colors.grey.shade400,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               _currentPosition != null || _searchQuery.isNotEmpty
                   ? '検索結果が見つかりません'
@@ -429,7 +429,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           });
                         }
                       : null,
-                  icon: const Icon(Icons.chevron_left),
+                  icon: Icon(Icons.chevron_left),
                   label: Text(AppLocalizations.of(context)!.previous),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue[600],
@@ -456,7 +456,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           });
                         }
                       : null,
-                  icon: const Icon(Icons.chevron_right),
+                  icon: Icon(Icons.chevron_right),
                   label: Text(AppLocalizations.of(context)!.next),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue[600],
@@ -624,7 +624,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     ],
                     // ビジター可バッジ
                     if (gym.acceptsVisitors) ...[
-                      const SizedBox(height: 4),
+                      SizedBox(height: 4),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                         decoration: BoxDecoration(

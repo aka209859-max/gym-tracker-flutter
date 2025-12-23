@@ -887,7 +887,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _showReferralDialog();
           },
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         _buildMenuCard(
           context,
           icon: Icons.notifications,
@@ -1097,7 +1097,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Row(
                 children: [
                   Icon(Icons.settings, color: Colors.deepPurple.shade700),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Text(AppLocalizations.of(context)!.settingsMenu,
                     style: TextStyle(
                       fontSize: 18,

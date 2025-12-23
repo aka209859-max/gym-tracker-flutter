@@ -585,7 +585,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             
             // セット入力セクション
             if (_sets.isNotEmpty) ...[
-              const Divider(height: 32, thickness: 2),
+              Divider(height: 32, thickness: 2),
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
@@ -693,7 +693,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 if (isCardio) ...[
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                     decoration: BoxDecoration(

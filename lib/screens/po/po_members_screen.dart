@@ -107,7 +107,7 @@ class _POMembersScreenState extends State<POMembersScreen> {
                               color: Colors.blue,
                             ),
                           ),
-                          const SizedBox(width: 12),
+                          SizedBox(width: 12),
                           Expanded(
                             child: _SummaryCard(
                               label: AppLocalizations.of(context)!.active,

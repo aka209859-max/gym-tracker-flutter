@@ -384,7 +384,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             Row(
               children: [
                 Expanded(
@@ -485,7 +485,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             Row(
               children: [
                 Expanded(

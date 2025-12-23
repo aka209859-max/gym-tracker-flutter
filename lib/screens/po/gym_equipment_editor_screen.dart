@@ -195,7 +195,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
                       height: 16,
                       child: CircularProgressIndicator(strokeWidth: 2),
                     )
-                  : const Icon(Icons.save),
+                  : Icon(Icons.save),
               label: Text(AppLocalizations.of(context)!.save),
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -241,14 +241,14 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
                 ),
                 ElevatedButton.icon(
                   onPressed: _addEquipment,
-                  icon: const Icon(Icons.add),
+                  icon: Icon(Icons.add),
                   label: Text(AppLocalizations.of(context)!.add),
                 ),
               ],
             ),
             const SizedBox(height: 16),
             if (_equipment.isEmpty)
-              const Center(
+              Center(
                 child: Padding(
                   padding: EdgeInsets.all(16),
                   child: Text(AppLocalizations.of(context)!.emailNotRegistered),

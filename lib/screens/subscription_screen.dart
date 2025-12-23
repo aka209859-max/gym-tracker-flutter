@@ -97,7 +97,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         ],
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -239,7 +239,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               size: 48,
               color: planColor,
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(AppLocalizations.of(context)!.currentPlan,
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
@@ -311,14 +311,14 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             if (_currentPlan != SubscriptionType.free && !_hasLifetimePlan) ...[
               const SizedBox(height: 16),
               const Divider(),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // ダウングレードボタン
                   TextButton.icon(
                     onPressed: _showDowngradeDialog,
-                    icon: const Icon(Icons.arrow_downward, size: 20),
+                    icon: Icon(Icons.arrow_downward, size: 20),
                     label: Text(AppLocalizations.of(context)!.changePlan),
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.blue,
@@ -680,7 +680,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             _buildComparisonRow(AppLocalizations.of(context)!.gymSearch, true, true, true),
             _buildComparisonRow(AppLocalizations.of(context)!.gpsSearch, true, true, true),
             _buildComparisonRow('混雑度表示', true, true, true),
@@ -1204,7 +1204,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   size: 32,
                 ),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1215,7 +1215,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Text(
                       AppLocalizations.of(context)!.purchaseAiAddon,
                       style: TextStyle(
@@ -1377,7 +1377,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     SnackBar(
                       content: Text('App Store設定から$targetPlanNameへ変更してください'),
                       backgroundColor: Colors.blue,
-                      duration: const Duration(seconds: 5),
+                      duration: Duration(seconds: 5),
                       action: SnackBarAction(
                         label: AppLocalizations.of(context)!.help,
                         textColor: Colors.white,

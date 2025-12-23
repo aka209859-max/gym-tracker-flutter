@@ -31,7 +31,7 @@ class _GymListScreenState extends State<GymListScreen> {
               });
             },
             itemBuilder: (context) => [
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'rating',
                 child: Row(
                   children: [
@@ -41,7 +41,7 @@ class _GymListScreenState extends State<GymListScreen> {
                   ],
                 ),
               ),
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'crowd',
                 child: Row(
                   children: [
@@ -51,7 +51,7 @@ class _GymListScreenState extends State<GymListScreen> {
                   ],
                 ),
               ),
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'price',
                 child: Row(
                   children: [

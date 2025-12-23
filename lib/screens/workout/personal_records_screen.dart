@@ -135,7 +135,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(AppLocalizations.of(context)!.loginError),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _autoLoginIfNeeded,
                     child: Text(AppLocalizations.of(context)!.tryAgain),
@@ -157,7 +157,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
     if (_isLoadingExercises) {
       return Scaffold(
         appBar: AppBar(title: Text(AppLocalizations.of(context)!.personalRecord)),
-        body: const Center(
+        body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -179,7 +179,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(Icons.fitness_center, size: 64, color: Colors.grey[400]),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Text(
                 AppLocalizations.of(context)!.noWorkoutRecords,
                 style: TextStyle(fontSize: 16, color: Colors.grey[600]),
@@ -414,7 +414,7 @@ class _PeriodView extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 child: LineChart(
                   LineChartData(
-                    gridData: const FlGridData(show: true),
+                    gridData: FlGridData(show: true),
                     titlesData: FlTitlesData(
                       leftTitles: AxisTitles(
                         sideTitles: SideTitles(
@@ -661,7 +661,7 @@ class _PeriodView extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             const Divider(),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Center(
               child: Column(
                 children: [

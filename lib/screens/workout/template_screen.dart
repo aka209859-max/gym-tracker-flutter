@@ -63,7 +63,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(AppLocalizations.of(context)!.loginError),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _autoLoginIfNeeded,
                     child: Text(AppLocalizations.of(context)!.tryAgain),
@@ -117,7 +117,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
             setState(() {}); // リフレッシュ
           }
         },
-        icon: const Icon(Icons.add),
+        icon: Icon(Icons.add),
         label: Text(AppLocalizations.of(context)!.createTemplate),
         backgroundColor: theme.colorScheme.primary,
         foregroundColor: Colors.white,
@@ -170,7 +170,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
                   'テンプレートがありません',
                   style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   AppLocalizations.of(context)!.save,
                   style: TextStyle(fontSize: 14, color: Colors.grey[500]),
@@ -298,7 +298,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
                         }
                       },
                       itemBuilder: (context) => [
-                        const PopupMenuItem(
+                        PopupMenuItem(
                           value: 'delete',
                           child: Row(
                             children: [

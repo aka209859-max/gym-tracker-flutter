@@ -110,7 +110,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
 
             // 経験レベル
             Text(AppLocalizations.of(context)!.experienceLevel, style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             DropdownButtonFormField<String>(
               value: _experienceLevel,
               decoration: InputDecoration(border: OutlineInputBorder()),
@@ -183,7 +183,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
               child: _isLoading
-                  ? const CircularProgressIndicator(color: Colors.white)
+                  ? CircularProgressIndicator(color: Colors.white)
                   : Text(AppLocalizations.of(context)!.save, style: TextStyle(fontSize: 16)),
             ),
           ],

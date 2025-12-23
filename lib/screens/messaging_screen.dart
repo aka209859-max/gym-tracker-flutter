@@ -90,7 +90,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
               size: 80,
               color: Colors.grey[300],
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             Text(
               AppLocalizations.of(context)!.noMessages,
               style: TextStyle(
@@ -99,7 +99,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
                 color: Colors.grey[600],
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
               AppLocalizations.of(context)!.trainingPartner,
               textAlign: TextAlign.center,

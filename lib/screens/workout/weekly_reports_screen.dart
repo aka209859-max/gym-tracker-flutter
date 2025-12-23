@@ -54,7 +54,7 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(AppLocalizations.of(context)!.loginError),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _autoLoginIfNeeded,
                     child: Text(AppLocalizations.of(context)!.tryAgain),

@@ -52,7 +52,7 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('訪問履歴を削除'),
+        title: Text('訪問履歴を削除'),
         content: Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(
@@ -148,7 +148,7 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
               size: 80,
               color: Colors.grey[300],
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             Text(
               AppLocalizations.of(context)!.noVisitHistory,
               style: TextStyle(

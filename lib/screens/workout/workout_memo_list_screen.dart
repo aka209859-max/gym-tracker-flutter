@@ -151,7 +151,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('メモを削除'),
+        title: Text('メモを削除'),
         content: Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(
@@ -217,7 +217,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
                           color: Colors.grey.shade600,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       Text(
                         AppLocalizations.of(context)!.addWorkout,
                         textAlign: TextAlign.center,

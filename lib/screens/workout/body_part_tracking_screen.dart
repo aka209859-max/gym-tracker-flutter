@@ -72,7 +72,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(AppLocalizations.of(context)!.loginError),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _autoLoginIfNeeded,
                     child: Text(AppLocalizations.of(context)!.tryAgain),
@@ -392,7 +392,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.show_chart, size: 80, color: Colors.grey.shade400),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.noWorkouts,
               style: TextStyle(

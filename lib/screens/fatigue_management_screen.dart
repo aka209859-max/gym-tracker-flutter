@@ -489,7 +489,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                 child: Row(
                   children: [
                     Icon(Icons.info, color: Colors.grey[700], size: 20),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12),
                     Expanded(
                       child: Text(
                         AppLocalizations.of(context)!.enableFatigueManagement,
@@ -514,7 +514,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                   color: _hasWorkoutToday ? Colors.green : Colors.grey,
                   size: 32,
                 ),
-                title: const Text('本日のトレーニング'),
+                title: Text('本日のトレーニング'),
                 subtitle: Text(
                   _hasWorkoutToday ? AppLocalizations.of(context)!.purchaseCompleted : 'まだ記録がありません',
                   style: TextStyle(

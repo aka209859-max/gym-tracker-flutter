@@ -154,18 +154,18 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Icon(Icons.warning_amber_rounded, size: 80, color: Colors.orange),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   Text(AppLocalizations.of(context)!.authenticationError,
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   Text(
                     AppLocalizations.of(context)!.loginFailed,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                   ),
                   if (kDebugMode && snapshot.hasError) ...[
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
@@ -178,7 +178,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
                       ),
                     ),
                   ],
-                  const SizedBox(height: 32),
+                  SizedBox(height: 32),
                   ElevatedButton.icon(
                     onPressed: () {
                       setState(() {
@@ -186,13 +186,13 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
                       });
                       _initializeAuth();
                     },
-                    icon: const Icon(Icons.refresh),
+                    icon: Icon(Icons.refresh),
                     label: Text(AppLocalizations.of(context)!.tryAgain),
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   TextButton(
                     onPressed: () {
                       // ホーム画面に戻る
@@ -462,12 +462,12 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
                   children: [
                     Icon(Icons.fitness_center,
                         size: 64, color: Colors.grey[400]),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Text(
                       AppLocalizations.of(context)!.noWorkoutRecords,
                       style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
                     ElevatedButton.icon(
                       onPressed: () {
                         Navigator.push(
@@ -477,7 +477,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
                           ),
                         );
                       },
-                      icon: const Icon(Icons.add),
+                      icon: Icon(Icons.add),
                       label: Text(AppLocalizations.of(context)!.addFirstRecord),
                     ),
                   ],
@@ -519,7 +519,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
                               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                             ),
                           ),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8),
                           Text(
                             AppLocalizations.of(context)!.updating,
                             style: TextStyle(color: Colors.white, fontSize: 12),
@@ -672,7 +672,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
               );
             },
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12),
           _QuickAccessCard(
             title: AppLocalizations.of(context)!.prRecords,
             icon: Icons.trending_up,
@@ -686,7 +686,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
               );
             },
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12),
           _QuickAccessCard(
             title: AppLocalizations.of(context)!.byBodyPart,
             icon: Icons.accessibility_new,
@@ -700,7 +700,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
               );
             },
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12),
           _QuickAccessCard(
             title: AppLocalizations.of(context)!.notes,
             icon: Icons.note_add,

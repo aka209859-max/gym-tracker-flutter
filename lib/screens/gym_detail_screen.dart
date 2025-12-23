@@ -359,7 +359,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -370,7 +370,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                 child: Column(
                   children: [
                     Icon(Icons.help_outline, size: 48, color: Colors.grey[400]),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Text(
                       AppLocalizations.of(context)!.noCrowdData,
                       style: TextStyle(
@@ -529,7 +529,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                 ),
               ],
             ),
-            const Divider(thickness: 2),
+            Divider(thickness: 2),
             _buildInfoRow(Icons.star, AppLocalizations.of(context)!.rating, '${gym.rating} (${gym.reviewCount}件)'),
             _buildInfoRow(Icons.location_on, AppLocalizations.of(context)!.gymAddress, gym.address),
             if (gym.phoneNumber.isNotEmpty)
@@ -673,7 +673,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                     '設備・マシン情報',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                     decoration: BoxDecoration(
@@ -802,7 +802,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
           width: double.infinity,
           child: OutlinedButton.icon(
             onPressed: _shareGym,
-            icon: const Icon(Icons.share),
+            icon: Icon(Icons.share),
             label: Text(AppLocalizations.of(context)!.shareGym),
             style: OutlinedButton.styleFrom(
               side: BorderSide(color: Colors.blue[600]!),
@@ -827,7 +827,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                 setState(() {});
               }
             },
-            icon: const Icon(Icons.rate_review),
+            icon: Icon(Icons.rate_review),
             label: Text(AppLocalizations.of(context)!.postReview),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.amber[700],
@@ -835,17 +835,17 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
             ),
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         Row(
           children: [
             Expanded(
               child: ElevatedButton.icon(
                 onPressed: _openGoogleMapsRoute,
-                icon: const Icon(Icons.directions),
+                icon: Icon(Icons.directions),
                 label: Text(AppLocalizations.of(context)!.routeGuidance),
               ),
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             Expanded(
               child: OutlinedButton.icon(
                 onPressed: _isFavorite == null ? null : _toggleFavorite,
@@ -945,7 +945,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                     setState(() {}); // レビュー投稿後に画面を更新
                   }
                 },
-                icon: const Icon(Icons.rate_review),
+                icon: Icon(Icons.rate_review),
                 label: Text(AppLocalizations.of(context)!.postReview),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.amber[700],
@@ -1125,8 +1125,8 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(width: 8),
-                const Expanded(
+                SizedBox(width: 8),
+                Expanded(
                   child: Text(
                     AppLocalizations.of(context)!.partnerGym,
                     style: TextStyle(
@@ -1304,7 +1304,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                   size: 28,
                 ),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1318,7 +1318,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
@@ -1420,7 +1420,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                 Row(
                   children: [
                     Icon(Icons.campaign, color: Colors.orange[700]),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Text(
                           AppLocalizations.of(context)!.announcement,
                       style: TextStyle(

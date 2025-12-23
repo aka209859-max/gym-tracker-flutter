@@ -228,27 +228,27 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
               color: Colors.blue.shade700,
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Text(
             AppLocalizations.of(context)!.confirm,
             style: TextStyle(fontSize: 13),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Row(
             children: [
               Icon(Icons.privacy_tip_outlined, size: 16, color: Colors.blue.shade700),
-              const SizedBox(width: 4),
+              SizedBox(width: 4),
               Text(
                 AppLocalizations.of(context)!.settings,
                 style: TextStyle(fontSize: 12, color: Colors.blue),
               ),
             ],
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4),
           Row(
             children: [
               Icon(Icons.description_outlined, size: 16, color: Colors.blue.shade700),
-              const SizedBox(width: 4),
+              SizedBox(width: 4),
               Text(
                 AppLocalizations.of(context)!.settings,
                 style: TextStyle(fontSize: 12, color: Colors.blue),
@@ -297,7 +297,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4),
           Text(
             AppLocalizations.of(context)!.email,
             style: const TextStyle(fontSize: 13),

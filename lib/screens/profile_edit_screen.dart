@@ -151,7 +151,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           SnackBar(
             content: Text('画像の読み込みに失敗しました\n$e'),
             backgroundColor: Colors.red,
-            duration: const Duration(seconds: 5),
+            duration: Duration(seconds: 5),
             action: SnackBarAction(
               label: AppLocalizations.of(context)!.tryAgain,
               textColor: Colors.white,

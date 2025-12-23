@@ -217,8 +217,8 @@ class _PartnerEquipmentEditorScreenState
                       children: [
                         Icon(Icons.info_outline,
                             color: Colors.blue[700], size: 20),
-                        const SizedBox(width: 8),
-                        const Expanded(
+                        SizedBox(width: 8),
+                        Expanded(
                           child: Text(
                             AppLocalizations.of(context)!.confirm,
                             style: TextStyle(fontSize: 13),
@@ -316,7 +316,7 @@ class _PartnerEquipmentEditorScreenState
                                     AlwaysStoppedAnimation<Color>(Colors.white),
                               ),
                             )
-                          : const Icon(Icons.save),
+                          : Icon(Icons.save),
                       label: Text(AppLocalizations.of(context)!.save,
                         style: TextStyle(
                           fontSize: 16,

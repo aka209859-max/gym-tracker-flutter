@@ -67,7 +67,7 @@ class POMemberDetailScreen extends StatelessWidget {
                     '契約情報',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   _InfoRow(label: AppLocalizations.of(context)!.upgradePlan, value: member.planName),
                   _InfoRow(
                     label: '総セッション数',

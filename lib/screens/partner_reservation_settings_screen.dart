@@ -198,8 +198,8 @@ class _PartnerReservationSettingsScreenState
                         children: [
                           Icon(Icons.info_outline,
                               color: Colors.blue[700], size: 20),
-                          const SizedBox(width: 8),
-                          const Expanded(
+                          SizedBox(width: 8),
+                          Expanded(
                             child: Text(
                               AppLocalizations.of(context)!.settings,
                               style: TextStyle(fontSize: 13),
@@ -251,7 +251,7 @@ class _PartnerReservationSettingsScreenState
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     TextFormField(
                       controller: _emailController,
                       decoration: InputDecoration(
@@ -313,7 +313,7 @@ class _PartnerReservationSettingsScreenState
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12),
                       Card(
                         elevation: 4,
                         child: Padding(
@@ -349,7 +349,7 @@ class _PartnerReservationSettingsScreenState
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 12),
+                              SizedBox(height: 12),
                               Container(
                                 padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
@@ -362,8 +362,8 @@ class _PartnerReservationSettingsScreenState
                                   children: [
                                     Icon(Icons.calendar_today,
                                         color: Colors.orange[700]),
-                                    const SizedBox(width: 12),
-                                    const Expanded(
+                                    SizedBox(width: 12),
+                                    Expanded(
                                       child: Text(
                                         AppLocalizations.of(context)!.visitorBooking,
                                         style: TextStyle(
@@ -400,7 +400,7 @@ class _PartnerReservationSettingsScreenState
                                       Colors.white),
                                 ),
                               )
-                            : const Icon(Icons.save),
+                            : Icon(Icons.save),
                         label: Text(AppLocalizations.of(context)!.save,
                           style: TextStyle(
                             fontSize: 16,

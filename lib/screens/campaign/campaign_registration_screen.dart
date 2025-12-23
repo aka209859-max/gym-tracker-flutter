@@ -219,7 +219,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
             color: Colors.grey[600],
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         Card(
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -236,7 +236,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                       },
                     )),
                 if (_selectedApp == AppLocalizations.of(context)!.other) ...[
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   TextFormField(
                     controller: _appNameController,
                     decoration: InputDecoration(
@@ -282,7 +282,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             _buildConditionItem('1️⃣', AppLocalizations.of(context)!.emailNotRegistered),
             _buildConditionItem('2️⃣', 'SNSで体験をシェア（テンプレート提供）'),
             _buildConditionItem('3️⃣', AppLocalizations.of(context)!.confirm),

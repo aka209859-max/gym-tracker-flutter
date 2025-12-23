@@ -225,7 +225,7 @@ class _PartnerCampaignEditorScreenState
         ],
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : Form(
               key: _formKey,
               child: ListView(
@@ -242,7 +242,7 @@ class _PartnerCampaignEditorScreenState
                     '基本特典',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   TextFormField(
                     controller: _benefitController,
                     decoration: InputDecoration(
@@ -387,7 +387,7 @@ class _PartnerCampaignEditorScreenState
                   else
                     OutlinedButton.icon(
                       onPressed: _pickBannerImage,
-                      icon: const Icon(Icons.add_photo_alternate),
+                      icon: Icon(Icons.add_photo_alternate),
                       label: Text(AppLocalizations.of(context)!.addWorkout),
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 16),

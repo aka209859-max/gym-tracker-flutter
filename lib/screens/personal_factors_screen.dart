@@ -217,7 +217,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               '基礎Training Loadに掛け算されます',
               style: TextStyle(fontSize: 12, color: Colors.grey[700]),
             ),
-            const Divider(height: 24),
+            Divider(height: 24),
             Text(
               '最終更新: ${_currentProfile?.lastUpdated != null ? _formatDateTime(_currentProfile!.lastUpdated) : AppLocalizations.of(context)!.notSet}',
               style: TextStyle(fontSize: 12, color: Colors.grey[600]),
@@ -406,7 +406,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
             Row(
               children: [
                 Icon(Icons.science, size: 16, color: Colors.grey[700]),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Text(
                   AppLocalizations.of(context)!.scientificBasis,
                   style: TextStyle(

@@ -21,7 +21,7 @@ class PartnerRequestsScreen extends StatelessWidget {
               'パートナーリクエスト機能',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.grey[700]),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               AppLocalizations.of(context)!.addWorkout,
               style: TextStyle(fontSize: 14, color: Colors.grey[600]),

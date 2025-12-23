@@ -91,7 +91,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('達成バッジ'),
+        title: Text('達成バッジ'),
         bottom: TabBar(
           controller: _tabController,
           labelColor: Colors.white,

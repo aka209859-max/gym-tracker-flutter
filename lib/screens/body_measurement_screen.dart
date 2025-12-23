@@ -301,7 +301,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
           foregroundColor: Colors.white,
         ),
         body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -426,7 +426,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                   isSelected: _selectedChartType == ChartType.weight,
                   onTap: () => setState(() => _selectedChartType = ChartType.weight),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 _buildTabButton(
                   label: AppLocalizations.of(context)!.bodyFatRate,
                   isSelected: _selectedChartType == ChartType.bodyFat,

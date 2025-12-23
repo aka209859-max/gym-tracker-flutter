@@ -249,7 +249,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Icon(Icons.error_outline, size: 64, color: Colors.red),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Text(AppLocalizations.of(context)!.error,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
@@ -260,7 +260,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                 style: const TextStyle(fontSize: 14, color: Colors.grey),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
               ElevatedButton(
                 onPressed: () => Navigator.pop(context),
                 child: Text(AppLocalizations.of(context)!.back),
@@ -382,7 +382,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
             ),
             const SizedBox(height: 16),
             const Text('✨ Proプランの特典'),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             _buildBenefitRow(AppLocalizations.of(context)!.searchGym),
             _buildBenefitRow('マッチングリクエスト送信'),
             _buildBenefitRow('メッセージ機能'),

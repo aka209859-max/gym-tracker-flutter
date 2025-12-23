@@ -135,7 +135,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         actions: [
           if (_favoriteGyms.isNotEmpty)
             IconButton(
-              icon: const Icon(Icons.delete_sweep),
+              icon: Icon(Icons.delete_sweep),
               tooltip: AppLocalizations.of(context)!.deleteAll,
               onPressed: _clearAllFavorites,
             ),
@@ -169,7 +169,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               color: Colors.grey[600],
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Text(
             AppLocalizations.of(context)!.addWorkout,
             textAlign: TextAlign.center,
@@ -315,7 +315,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                           child: Row(
                             children: [
                               const Icon(Icons.open_in_new, size: 12, color: Colors.blue),
-                              const SizedBox(width: 4),
+                              SizedBox(width: 4),
                               Text(
                                 AppLocalizations.of(context)!.confirm,
                                 style: const TextStyle(
@@ -335,7 +335,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               
               // 削除ボタン
               IconButton(
-                icon: const Icon(Icons.delete_outline, color: Colors.red),
+                icon: Icon(Icons.delete_outline, color: Colors.red),
                 tooltip: AppLocalizations.of(context)!.delete,
                 onPressed: () => _removeFavorite(gym),
               ),
@@ -353,7 +353,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('すべて削除'),
+        title: Text('すべて削除'),
         content: Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(

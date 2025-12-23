@@ -116,7 +116,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             const CircularProgressIndicator(),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
                           AppLocalizations.of(context)!.confirm,
               textAlign: TextAlign.center,
@@ -197,7 +197,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
               ),
               const SizedBox(height: 24),
               const Divider(),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Text(
                 AppLocalizations.of(context)!.purchaseCompleted,
                 textAlign: TextAlign.center,
@@ -247,7 +247,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
                       color: Colors.green[700],
                       size: 48,
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     Text(
                           AppLocalizations.of(context)!.postSubmitted,
                       style: TextStyle(
@@ -255,7 +255,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Text(
                       AppLocalizations.of(context)!.confirm,
                       style: TextStyle(
@@ -447,7 +447,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
             _buildInstructionStep('2', 'X（旧Twitter）またはInstagramアプリを開く'),
             _buildInstructionStep('3', 'コピーしたテンプレートを貼り付けて投稿'),
             _buildInstructionStep('4', 'このアプリに戻って「投稿しました」をタップ'),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -457,7 +457,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
               child: Row(
                 children: [
                   Icon(Icons.auto_awesome, color: Colors.green[700], size: 20),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       AppLocalizations.of(context)!.confirm,

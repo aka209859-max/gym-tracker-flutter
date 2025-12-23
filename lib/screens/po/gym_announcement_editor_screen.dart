@@ -188,7 +188,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                     height: 16,
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
-                : const Icon(Icons.send),
+                : Icon(Icons.send),
             label: Text(AppLocalizations.of(context)!.postSubmitted),
             style: TextButton.styleFrom(
               foregroundColor: Colors.white,
@@ -330,7 +330,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                           height: 16,
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
-                      : const Icon(Icons.add_photo_alternate),
+                      : Icon(Icons.add_photo_alternate),
                   label: Text(_isUploading ? 'アップロード中...' : AppLocalizations.of(context)!.selectExercise),
                   style: OutlinedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 50),

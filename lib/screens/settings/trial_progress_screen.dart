@@ -297,7 +297,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
                 height: 1.6,
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -308,7 +308,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
               child: Row(
                 children: [
                   Icon(Icons.info_outline, color: Colors.amber[800], size: 20),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       AppLocalizations.of(context)!.allExercises,

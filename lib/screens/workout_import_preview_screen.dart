@@ -241,7 +241,7 @@ class _WorkoutImportPreviewScreenState
               ],
             ),
             backgroundColor: Colors.red.shade700,
-            duration: const Duration(seconds: 5),
+            duration: Duration(seconds: 5),
             action: SnackBarAction(
               label: AppLocalizations.of(context)!.tryAgain,
               textColor: Colors.white,

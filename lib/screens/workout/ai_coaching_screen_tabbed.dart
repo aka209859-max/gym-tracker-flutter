@@ -294,7 +294,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
               child: Row(
                 children: [
                   Icon(Icons.settings, color: Colors.deepPurple.shade700),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Text(AppLocalizations.of(context)!.settingsMenu,
                     style: TextStyle(
                       fontSize: 18,
@@ -652,7 +652,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
             Row(
               children: [
                 Icon(Icons.auto_awesome, color: Colors.blue.shade700),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Text(AppLocalizations.of(context)!.aiPoweredTraining,
                   style: TextStyle(
                     fontSize: 18,
@@ -684,17 +684,17 @@ class _AIMenuTabState extends State<_AIMenuTab>
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         Row(
           children: [
             Expanded(
               child: _buildLevelButton(AppLocalizations.of(context)!.levelBeginner, Icons.fitness_center, Colors.green),
             ),
-            const SizedBox(width: 8),
+            SizedBox(width: 8),
             Expanded(
               child: _buildLevelButton(AppLocalizations.of(context)!.levelIntermediate, Icons.trending_up, Colors.orange),
             ),
-            const SizedBox(width: 8),
+            SizedBox(width: 8),
             Expanded(
               child: _buildLevelButton(AppLocalizations.of(context)!.levelAdvanced, Icons.emoji_events, Colors.red),
             ),
@@ -755,7 +755,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         Wrap(
           spacing: 8,
           runSpacing: 8,
@@ -819,7 +819,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                   valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                 ),
               )
-            : const Icon(Icons.auto_awesome),
+            : Icon(Icons.auto_awesome),
         label: Text(_isGenerating ? AppLocalizations.of(context)!.aiThinking : AppLocalizations.of(context)!.generateMenu),
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 16),
@@ -2786,7 +2786,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         child: Row(
           children: [
             Icon(Icons.timeline, size: 40, color: Colors.purple.shade700),
-            const SizedBox(width: 16),
+            SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -2799,7 +2799,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                       color: Colors.purple.shade900,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
                     AppLocalizations.of(context)!.scientificPrediction,
                     style: TextStyle(
@@ -3057,7 +3057,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
               ),
             )
-          : const Icon(Icons.auto_graph),
+          : Icon(Icons.auto_graph),
       label: Text(_isLoading ? AppLocalizations.of(context)!.aiAnalyzing : AppLocalizations.of(context)!.executeGrowthPrediction),
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 16),
@@ -3069,7 +3069,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
 
   /// ローディングインジケーター
   Widget _buildLoadingIndicator() {
-    return const Center(
+    return Center(
       child: Column(
         children: [
           CircularProgressIndicator(),
@@ -3169,7 +3169,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                   size: 48,
                   color: Colors.green.shade700,
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Text(AppLocalizations.of(context)!.fourMonthPrediction,
                   style: TextStyle(
                     fontSize: 16,
@@ -3265,7 +3265,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 Row(
                   children: [
                     Icon(Icons.psychology, color: Colors.purple.shade700),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Text(AppLocalizations.of(context)!.aiDetailedAnalysis,
                       style: TextStyle(
                         fontSize: 16,
@@ -3820,7 +3820,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       child: Row(
         children: [
           Icon(Icons.analytics, color: Colors.indigo.shade700),
-          const SizedBox(width: 12),
+          SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -4508,7 +4508,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Row(
           children: [
             Icon(Icons.calendar_today, color: Colors.blue.shade700),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -4649,7 +4649,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
               ),
             )
-          : const Icon(Icons.auto_graph),
+          : Icon(Icons.auto_graph),
       label: Text(_isLoading ? AppLocalizations.of(context)!.aiAnalyzing : '効果を分析'),
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 16),
@@ -4661,7 +4661,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
 
   /// ローディングインジケーター
   Widget _buildLoadingIndicator() {
-    return const Center(
+    return Center(
       child: Column(
         children: [
           CircularProgressIndicator(),
@@ -4781,7 +4781,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 Row(
                   children: [
                     Icon(Icons.psychology, color: Colors.purple.shade700),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Text(AppLocalizations.of(context)!.aiDetailedAnalysis,
                       style: TextStyle(
                         fontSize: 16,

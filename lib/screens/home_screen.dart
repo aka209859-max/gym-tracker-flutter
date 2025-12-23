@@ -1187,7 +1187,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             await _loadHabitData(); // 🔥 習慣形成データも更新
           }
         },
-        icon: const Icon(Icons.add, size: 24),
+        icon: Icon(Icons.add, size: 24),
         label: Text(AppLocalizations.of(context)!.trainingLog,
           style: TextStyle(
             fontSize: 16,
@@ -2277,7 +2277,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ),
                 ),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Expanded(
                 child: OutlinedButton.icon(
                   onPressed: () {
@@ -2899,7 +2899,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           size: 16,
                           color: theme.colorScheme.primary,
                         ),
-                        const SizedBox(width: 6),
+                        SizedBox(width: 6),
                         Text(
                           AppLocalizations.of(context)!.setTypeInfo,
                           style: TextStyle(
@@ -2941,7 +2941,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           'ウォームアップセット',
                           '本番前の準備セット',
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8),
                         _buildSetTypeExplanationRow(
                           Icons.compare_arrows,
                           Colors.purple,
@@ -2957,7 +2957,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           'ドロップセット',
                           '重量を落として限界まで',
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8),
                         _buildSetTypeExplanationRow(
                           Icons.local_fire_department,
                           Colors.red,
@@ -3157,7 +3157,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           
                           return Row(
                             children: [
-                              const SizedBox(
+                              SizedBox(
                                 width: 24,
                                 child: Text(
                                   AppLocalizations.of(context)!.sets,
@@ -3615,7 +3615,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   ListView.separated(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -3805,7 +3805,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 children: [
                   // 部位選択
                   Text(AppLocalizations.of(context)!.bodyPart, style: TextStyle(fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
@@ -3870,7 +3870,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           });
                         });
                       },
-                      icon: const Icon(Icons.clear, size: 16),
+                      icon: Icon(Icons.clear, size: 16),
                       label: Text(AppLocalizations.of(context)!.clear, style: TextStyle(fontSize: 12)),
                     ),
                 ],
@@ -4094,7 +4094,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.emoji_events, color: Colors.amber),
+              leading: Icon(Icons.emoji_events, color: Colors.amber),
               title: Text(AppLocalizations.of(context)!.prRecords),
               subtitle: Text(AppLocalizations.of(context)!.personalRecord),
               trailing: const Icon(Icons.chevron_right),
@@ -4109,7 +4109,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.pie_chart, color: Colors.green),
+              leading: Icon(Icons.pie_chart, color: Colors.green),
               title: Text(AppLocalizations.of(context)!.byBodyPart),
               subtitle: Text(AppLocalizations.of(context)!.bodyPartTracking),
               trailing: const Icon(Icons.chevron_right),
@@ -4124,7 +4124,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.note, color: Colors.blue),
+              leading: Icon(Icons.note, color: Colors.blue),
               title: Text(AppLocalizations.of(context)!.notes),
               subtitle: Text(AppLocalizations.of(context)!.trainingMemo),
               trailing: const Icon(Icons.chevron_right),
@@ -4140,7 +4140,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
             ListTile(
               leading: const Icon(Icons.analytics, color: Colors.purple),
-              title: const Text('週次'),
+              title: Text('週次'),
               subtitle: Text(AppLocalizations.of(context)!.weeklyReport),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
@@ -4155,7 +4155,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
             const Divider(height: 32),
             // 編集・削除（将来実装）
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Text(
                 AppLocalizations.of(context)!.bodyPartOther,
@@ -4167,7 +4167,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.edit, color: Colors.blue),
+              leading: Icon(Icons.edit, color: Colors.blue),
               title: Text(AppLocalizations.of(context)!.edit),
               subtitle: const Text('次のアップデートで実装予定'),
               enabled: false,
@@ -4179,7 +4179,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             const Divider(),
             // 削除ボタン
             ListTile(
-              leading: const Icon(Icons.delete, color: Colors.red),
+              leading: Icon(Icons.delete, color: Colors.red),
               title: Text(AppLocalizations.of(context)!.remove, style: TextStyle(color: Colors.red)),
               onTap: () async {
                 print('👆 メニューから削除選択: $exerciseName (ID: $workoutId)');

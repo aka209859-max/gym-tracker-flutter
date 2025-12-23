@@ -209,7 +209,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
               Row(
                 children: [
                   Icon(Icons.edit_note, size: 24, color: theme.colorScheme.primary),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Text(
                     AppLocalizations.of(context)!.trainingMemo,
                     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -239,7 +239,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                   overflow: TextOverflow.ellipsis,
                 ),
               ] else ...[
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   AppLocalizations.of(context)!.addWorkout,
                   style: TextStyle(fontSize: 14, color: Colors.grey[600]),
@@ -279,7 +279,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             ...sets.asMap().entries.map((entry) {
               final index = entry.key;
               final set = entry.value;
@@ -741,7 +741,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('削除確認'),
+        title: Text('削除確認'),
         content: Text(AppLocalizations.of(context)!.deleteWorkoutConfirm),
         actions: [
           TextButton(

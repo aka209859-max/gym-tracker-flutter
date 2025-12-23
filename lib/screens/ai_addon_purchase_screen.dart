@@ -49,7 +49,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('AI追加パックを購入しますか？'),
+        title: Text('AI追加パックを購入しますか？'),
         content: Text(
           'AI追加パック（5回分）\n'
           '料金: ¥300\n\n'
@@ -252,7 +252,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Text(
                       isProPlan 
                           ? 'プラン基本: 無制限 / 追加購入: $_addonLimit回'

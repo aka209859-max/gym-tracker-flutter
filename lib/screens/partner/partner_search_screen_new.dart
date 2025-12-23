@@ -101,7 +101,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Icon(Icons.diamond, size: 80, color: Colors.amber),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             Text(
                           AppLocalizations.of(context)!.searchGym,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -242,7 +242,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(Icons.search, size: 80, color: Colors.grey[400]),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             AppLocalizations.of(context)!.selectExercise,
             style: TextStyle(fontSize: 16, color: Colors.grey[600]),
@@ -272,7 +272,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Icon(Icons.error, size: 64, color: Colors.red),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Text(AppLocalizations.of(context)!.errorGeneric),
                 const SizedBox(height: 8),
                 Text(
@@ -280,7 +280,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
                   style: const TextStyle(fontSize: 12, color: Colors.grey),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
@@ -311,7 +311,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
                   '該当するパートナーが見つかりませんでした',
                   style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   AppLocalizations.of(context)!.searchConditions,
                   style: TextStyle(fontSize: 14, color: Colors.grey[500]),

@@ -228,7 +228,7 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       Text(
                         AppLocalizations.of(context)!.password,
                         style: TextStyle(

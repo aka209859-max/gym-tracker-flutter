@@ -339,7 +339,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: _isLoading ? null : _searchPartners,
-                icon: const Icon(Icons.search),
+                icon: Icon(Icons.search),
                 label: Text(AppLocalizations.of(context)!.searchHint),
               ),
             ),
@@ -364,14 +364,14 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Icon(Icons.error_outline, size: 64, color: Colors.red),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.errorGeneric,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 8),
             Text(_errorMessage!),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             ElevatedButton(
               onPressed: _searchPartners,
               child: Text(AppLocalizations.of(context)!.retry),
@@ -391,7 +391,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
               size: 64,
               color: Colors.grey[400],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.searchGym,
               style: TextStyle(
@@ -422,7 +422,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                 color: Colors.grey[600],
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               AppLocalizations.of(context)!.searchConditions,
               style: TextStyle(

@@ -184,7 +184,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
             Row(
               children: [
                 Icon(Icons.auto_awesome, color: Colors.blue.shade700),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Text(AppLocalizations.of(context)!.aiPoweredTraining,
                   style: TextStyle(
                     fontSize: 18,
@@ -193,7 +193,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(AppLocalizations.of(context)!.selectExercise,
               style: TextStyle(fontSize: 14),
             ),
@@ -249,7 +249,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         Wrap(
           spacing: 8,
           runSpacing: 8,
@@ -315,7 +315,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
                   valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                 ),
               )
-            : const Icon(Icons.auto_awesome),
+            : Icon(Icons.auto_awesome),
         label: Text(_isGenerating ? AppLocalizations.of(context)!.aiThinking : AppLocalizations.of(context)!.generateMenu),
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 16),
@@ -879,8 +879,8 @@ ${bodyParts.join('、')}
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('AIコーチングについて'),
-        content: const SingleChildScrollView(
+        title: Text('AIコーチングについて'),
+        content: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,

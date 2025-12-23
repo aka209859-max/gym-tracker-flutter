@@ -215,7 +215,7 @@ class TrainerWorkoutCard extends StatelessWidget {
                       ),
                       child: Icon(Icons.fitness_center, color: Colors.orange[700]),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 16),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -302,7 +302,7 @@ class TrainerWorkoutCard extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12),
                       Card(
                         child: Padding(
                           padding: const EdgeInsets.all(16),

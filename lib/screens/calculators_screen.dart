@@ -14,7 +14,7 @@ class CalculatorsScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('計算ツール'),
+          title: Text('計算ツール'),
           bottom: TabBar(
             tabs: [
               Tab(icon: Icon(Icons.calculate), text: '1RM計算'),
@@ -144,7 +144,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                   ),
                 ),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               Expanded(
                 child: TextField(
                   controller: _repsController,
@@ -172,7 +172,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                   child: Text(AppLocalizations.of(context)!.calculate, style: TextStyle(fontSize: 16)),
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12),
               OutlinedButton(
                 onPressed: _clear,
                 style: OutlinedButton.styleFrom(
@@ -402,7 +402,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                   child: Text(AppLocalizations.of(context)!.calculate, style: TextStyle(fontSize: 16)),
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12),
               OutlinedButton(
                 onPressed: _clear,
                 style: OutlinedButton.styleFrom(

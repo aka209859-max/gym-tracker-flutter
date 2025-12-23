@@ -47,7 +47,7 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
               size: 64,
               color: Colors.orange[700],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(AppLocalizations.of(context)!.personalTraining,
               style: TextStyle(
                 fontSize: 24,

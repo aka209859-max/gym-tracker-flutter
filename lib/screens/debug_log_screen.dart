@@ -60,7 +60,7 @@ class _DebugLogScreenState extends State<DebugLogScreen> {
         ],
       ),
       body: logs.isEmpty
-          ? const Center(
+          ? Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

@@ -1979,7 +1979,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             
             // セット入力セクション
             if (_sets.isNotEmpty) ...[
-              const Divider(height: 32, thickness: 2),
+              Divider(height: 32, thickness: 2),
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Row(
@@ -2181,7 +2181,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 6),
+                    SizedBox(height: 6),
                     Builder(
                       builder: (context) {
                         // v1.0.225-hotfix: Map形式の履歴データに対応
@@ -2435,7 +2435,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                         ),
                       // v1.0.169: 腹筋種目の場合、回数/秒数切り替えボタンを追加
                       if (_isAbsExercise(set.exerciseName)) ...[
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8),
                         Row(
                           children: [
                             Expanded(
@@ -2461,7 +2461,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                                 child: Text(AppLocalizations.of(context)!.repsCount, style: TextStyle(fontSize: 12)),
                               ),
                             ),
-                            const SizedBox(width: 4),
+                            SizedBox(width: 4),
                             Expanded(
                               child: OutlinedButton(
                                 onPressed: () {

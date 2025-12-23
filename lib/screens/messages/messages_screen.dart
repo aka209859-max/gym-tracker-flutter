@@ -71,7 +71,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(Icons.login, size: 80, color: Colors.grey[400]),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             AppLocalizations.of(context)!.signInRequired,
             style: TextStyle(fontSize: 18, color: Colors.grey[600]),
@@ -92,7 +92,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
             'まだメッセージがありません',
             style: TextStyle(fontSize: 18, color: Colors.grey[600]),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             AppLocalizations.of(context)!.searchGym,
             style: TextStyle(fontSize: 14, color: Colors.grey[500]),

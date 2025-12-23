@@ -214,7 +214,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
 
                     // ボディメトリクス
                     if (widget.record.bodyMetrics != null) ...[
-                      const SizedBox(height: 24),
+                      SizedBox(height: 24),
                       Text(
                           AppLocalizations.of(context)!.bodyMeasurement,
                         style: TextStyle(
@@ -223,7 +223,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                           color: Colors.black87,
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12),
                       Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
@@ -288,7 +288,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                                 valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                               ),
                             )
-                          : const Icon(Icons.save),
+                          : Icon(Icons.save),
                       label: Text(_isSaving ? '保存中...' : AppLocalizations.of(context)!.save),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange,
@@ -315,8 +315,8 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Icon(Icons.info_outline, color: Colors.blue[700], size: 18),
-                          const SizedBox(width: 8),
-                          const Expanded(
+                          SizedBox(width: 8),
+                          Expanded(
                             child: Text(
                               AppLocalizations.of(context)!.save,
                               style: TextStyle(

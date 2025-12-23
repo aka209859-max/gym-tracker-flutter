@@ -111,7 +111,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                       size: 30,
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   Text(
                           AppLocalizations.of(context)!.personalTraining,
                     style: TextStyle(

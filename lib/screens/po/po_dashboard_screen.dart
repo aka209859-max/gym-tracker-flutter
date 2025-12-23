@@ -218,7 +218,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
                         );
                       },
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     _buildFeatureButton(
                       title: AppLocalizations.of(context)!.analysis,
                       subtitle: 'KPIグラフと統計データ',

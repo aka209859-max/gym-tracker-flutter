@@ -227,7 +227,7 @@ class TermsOfServiceScreen extends StatelessWidget {
           Row(
             children: [
               Icon(Icons.contact_mail, color: Colors.blue.shade700),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Text(
                 AppLocalizations.of(context)!.contactUs,
                 style: const TextStyle(
@@ -251,7 +251,7 @@ class TermsOfServiceScreen extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4),
           Text(
             AppLocalizations.of(context)!.email,
             style: const TextStyle(fontSize: 13),

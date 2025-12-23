@@ -220,7 +220,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   TextField(
                     controller: _passwordController,
                     obscureText: _obscurePassword,
@@ -337,7 +337,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Icon(Icons.info_outline, color: Colors.blue[700], size: 20),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12),
                     Expanded(
                       child: Text(
                         AppLocalizations.of(context)!.password,

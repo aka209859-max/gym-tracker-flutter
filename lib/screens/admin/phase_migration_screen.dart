@@ -146,11 +146,11 @@ class PhaseMigrationScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Row(
                     children: [
                       Icon(Icons.api, size: 20, color: Colors.blue),
-                      const SizedBox(width: 4),
+                      SizedBox(width: 4),
                       Text(
                         'Google API: ${CrowdDataConfig.enableGooglePlacesAPI ? "有効" : AppLocalizations.of(context)!.invalid}',
                         style: TextStyle(

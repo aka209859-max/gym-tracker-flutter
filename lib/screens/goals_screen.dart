@@ -114,10 +114,10 @@ class _GoalsScreenState extends State<GoalsScreen>
               'アクティブな目標がありません',
               style: TextStyle(fontSize: 16, color: Colors.grey[600]),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             ElevatedButton.icon(
               onPressed: _showCreateGoalDialog,
-              icon: const Icon(Icons.add),
+              icon: Icon(Icons.add),
               label: Text(AppLocalizations.of(context)!.settings),
             ),
           ],
@@ -222,7 +222,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                       size: 28,
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: 16),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -234,7 +234,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4),
                         Text(
                           '${goal.period == GoalPeriod.weekly ? AppLocalizations.of(context)!.thisWeek : AppLocalizations.of(context)!.thisMonth}の目標',
                           style: TextStyle(
@@ -386,7 +386,7 @@ class _GoalsScreenState extends State<GoalsScreen>
             const Divider(),
             // 削除
             ListTile(
-              leading: const Icon(Icons.delete, color: Colors.red),
+              leading: Icon(Icons.delete, color: Colors.red),
               title: Text(AppLocalizations.of(context)!.remove, style: TextStyle(color: Colors.red)),
               onTap: () async {
                 Navigator.pop(context);
@@ -486,12 +486,12 @@ class _GoalsScreenState extends State<GoalsScreen>
                   
                   // 目標値入力
                   Text(AppLocalizations.of(context)!.targetValue, style: TextStyle(fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   TextFormField(
                     initialValue: targetValue.toString(),
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
+                      border: OutlineInputBorder(),
                       suffixText: selectedType == GoalType.weeklyWorkoutCount ? AppLocalizations.of(context)!.reps : 'kg',
                       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
@@ -514,7 +514,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                     child: Row(
                       children: [
                         Icon(Icons.lightbulb_outline, color: Colors.blue[700], size: 20),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             selectedType == GoalType.weeklyWorkoutCount

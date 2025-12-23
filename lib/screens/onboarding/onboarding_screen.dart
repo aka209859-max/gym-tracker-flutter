@@ -159,7 +159,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 40),
+          SizedBox(height: 40),
           Text(
             AppLocalizations.of(context)!.trainingExperience,
             style: const TextStyle(
@@ -168,7 +168,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Text(
             AppLocalizations.of(context)!.createOptimalMenu,
             style: TextStyle(
@@ -176,7 +176,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               fontSize: 16,
             ),
           ),
-          const SizedBox(height: 40),
+          SizedBox(height: 40),
           _buildOptionCard(
             title: '初心者',
             subtitle: AppLocalizations.of(context)!.beginnerDesc,
@@ -188,7 +188,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               });
             },
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           _buildOptionCard(
             title: '中級者',
             subtitle: AppLocalizations.of(context)!.intermediateDesc,
@@ -200,7 +200,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               });
             },
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           _buildOptionCard(
             title: AppLocalizations.of(context)!.advanced,
             subtitle: '2年以上の継続的な経験あり',
@@ -224,7 +224,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 40),
+          SizedBox(height: 40),
           Text(
             AppLocalizations.of(context)!.trainingGoal,
             style: const TextStyle(
@@ -233,7 +233,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Text(
             AppLocalizations.of(context)!.optimalProgram,
             style: TextStyle(
@@ -241,7 +241,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               fontSize: 16,
             ),
           ),
-          const SizedBox(height: 40),
+          SizedBox(height: 40),
           _buildOptionCard(
             title: '筋肥大',
             subtitle: AppLocalizations.of(context)!.muscleGrowthDesc,
@@ -253,7 +253,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               });
             },
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           _buildOptionCard(
             title: 'ダイエット',
             subtitle: AppLocalizations.of(context)!.dietGoalDesc,
@@ -265,7 +265,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               });
             },
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           _buildOptionCard(
             title: '健康維持',
             subtitle: AppLocalizations.of(context)!.healthMaintenanceDesc,
@@ -289,7 +289,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 40),
+          SizedBox(height: 40),
           Text(
             AppLocalizations.of(context)!.trainingFrequency,
             style: const TextStyle(
@@ -306,7 +306,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               fontSize: 16,
             ),
           ),
-          const SizedBox(height: 40),
+          SizedBox(height: 40),
           _buildOptionCard(
             title: '週1-2回',
             subtitle: AppLocalizations.of(context)!.startHabitBuilding,
@@ -318,7 +318,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               });
             },
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           _buildOptionCard(
             title: '週3-4回',
             subtitle: AppLocalizations.of(context)!.regularTraining,
@@ -330,7 +330,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               });
             },
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           _buildOptionCard(
             title: '週5回以上',
             subtitle: AppLocalizations.of(context)!.dailyTraining,
@@ -455,7 +455,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               );
             },
           ),
-          const SizedBox(height: 40),
+          SizedBox(height: 40),
           Text(
             AppLocalizations.of(context)!.ready,
             style: const TextStyle(
@@ -481,14 +481,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             description: '簡単にワークアウトを記録・管理',
             delay: 0,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           _buildFeatureCard(
             icon: Icons.psychology,
             title: 'AI疲労度分析',
             description: AppLocalizations.of(context)!.aiAnalysisDesc,
             delay: 200,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           _buildFeatureCard(
             icon: Icons.emoji_events,
             title: '目標達成',

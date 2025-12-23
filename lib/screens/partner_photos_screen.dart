@@ -139,7 +139,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('画像を削除'),
+        title: Text('画像を削除'),
         content: Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(
@@ -259,10 +259,10 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
                 color: Colors.grey[500],
               ),
             ),
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
             ElevatedButton.icon(
               onPressed: _pickAndUploadPhotos,
-              icon: const Icon(Icons.add_photo_alternate),
+              icon: Icon(Icons.add_photo_alternate),
               label: Text(AppLocalizations.of(context)!.addWorkout),
               style: ElevatedButton.styleFrom(
                 padding:
@@ -294,7 +294,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
               ),
               TextButton.icon(
                 onPressed: _isUploading ? null : _pickAndUploadPhotos,
-                icon: const Icon(Icons.add),
+                icon: Icon(Icons.add),
                 label: Text(AppLocalizations.of(context)!.add),
               ),
             ],

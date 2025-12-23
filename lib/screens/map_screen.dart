@@ -148,7 +148,7 @@ class _MapScreenState extends State<MapScreen> {
                     '位置情報を取得できませんでした',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
                     kIsWeb 
                       ? 'ブラウザで位置情報を許可してください'
@@ -163,7 +163,7 @@ class _MapScreenState extends State<MapScreen> {
                 ],
               ),
               backgroundColor: Colors.orange,
-              duration: const Duration(seconds: 5),
+              duration: Duration(seconds: 5),
               action: SnackBarAction(
                 label: AppLocalizations.of(context)!.tryAgain,
                 textColor: Colors.white,
@@ -330,7 +330,7 @@ class _MapScreenState extends State<MapScreen> {
             SnackBar(
               content: Text(AppLocalizations.of(context)!.searchGym),
               backgroundColor: Colors.red,
-              duration: const Duration(seconds: 3),
+              duration: Duration(seconds: 3),
               action: SnackBarAction(
                 label: AppLocalizations.of(context)!.tryAgain,
                 textColor: Colors.white,
@@ -437,7 +437,7 @@ class _MapScreenState extends State<MapScreen> {
               child: Row(
                 children: [
                   const Icon(Icons.info_outline, color: Colors.blue, size: 20),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       AppLocalizations.of(context)!.searchGym,
@@ -464,7 +464,7 @@ class _MapScreenState extends State<MapScreen> {
                     height: 20,
                     child: CircularProgressIndicator(strokeWidth: 2),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Expanded(
                     child: Text(
                       AppLocalizations.of(context)!.searchGym,
@@ -518,7 +518,7 @@ class _MapScreenState extends State<MapScreen> {
                 height: 20,
                 child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
               )
-            : const Icon(Icons.my_location),
+            : Icon(Icons.my_location),
         label: Text(_isLoadingGPS ? '検索中...' : AppLocalizations.of(context)!.currentLocation),
       ),
     );
@@ -537,10 +537,10 @@ class _MapScreenState extends State<MapScreen> {
               '近くにジムが見つかりませんでした',
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             ElevatedButton.icon(
               onPressed: _acquireLocationAndSearch,
-              icon: const Icon(Icons.refresh),
+              icon: Icon(Icons.refresh),
               label: Text(AppLocalizations.of(context)!.searchGym),
             ),
           ],
@@ -617,7 +617,7 @@ class _MapScreenState extends State<MapScreen> {
       child: Row(
         children: [
           const Icon(Icons.people, size: 20),
-          const SizedBox(width: 8),
+          SizedBox(width: 8),
           Text(AppLocalizations.of(context)!.workoutTypeFilter, style: TextStyle(fontWeight: FontWeight.bold)),
           const SizedBox(width: 16),
           Expanded(
