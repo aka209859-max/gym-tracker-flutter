@@ -28,9 +28,9 @@ class RMCalculatorScreen extends StatelessWidget {
               fontSize: 16,
               fontWeight: FontWeight.normal,
             ),
-            tabs: const [
-              Tab(icon: Icon(Icons.calculate, size: 24), text: '1RM計算'),
-              Tab(icon: Icon(Icons.fitness_center, size: 24), text: AppLocalizations.of(context)!.plateCalculator),
+            tabs: [
+              const Tab(icon: Icon(Icons.calculate, size: 24), text: '1RM計算'),
+              Tab(icon: const Icon(Icons.fitness_center, size: 24), text: AppLocalizations.of(context)!.plateCalculator),
             ],
           ),
         ),
