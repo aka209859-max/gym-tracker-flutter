@@ -204,7 +204,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
               const Icon(Icons.analytics_outlined, size: 20, color: Colors.blue),
               const SizedBox(width: 8),
               Text(
-                '過去${_periodDays}日間のバランス',
+                AppLocalizations.of(context)!.bodyPartBalanceDays.replaceAll('{days}', _periodDays.toString()),
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

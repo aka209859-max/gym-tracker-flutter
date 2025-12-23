@@ -658,7 +658,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                   padding: const EdgeInsets.symmetric(vertical: 14),
                                 ),
                                 child: const Text(
-                                  '無料トライアルを始める',
+                                  AppLocalizations.of(context)!.subscriptionStartFreeTrial,
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -695,7 +695,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             _buildComparisonRow(AppLocalizations.of(context)!.gpsSearch, true, true, true),
             _buildComparisonRow('混雑度表示', true, true, true),
             _buildComparisonRow(AppLocalizations.of(context)!.trainingLog, true, true, true),
-            _buildComparisonRow('広告表示なし', false, true, true),
+            _buildComparisonRow(AppLocalizations.of(context)!.subscriptionNoAds, false, true, true),
             _buildComparisonRow('お気に入り保存', false, true, true),
             _buildComparisonRow('レビュー投稿', false, true, true),
             _buildComparisonRow('成長予測・効果分析', false, true, true),
@@ -1424,7 +1424,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       return [
         'AI機能が月20回→月3回に制限',
         'お気に入り無制限→制限あり',
-        '詳細な混雑度統計',
+        AppLocalizations.of(context)!.subscriptionDetailedStats,
         AppLocalizations.of(context)!.postGymReviews,
         '広告が表示されます',
       ];

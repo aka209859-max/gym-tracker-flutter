@@ -369,7 +369,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(width: 12),
               const Expanded(
                 child: Text(
-                  '友達を招待',
+                  AppLocalizations.of(context)!.profileInviteFriends,
                   style: TextStyle(fontSize: 20),
                 ),
               ),
@@ -825,8 +825,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _buildMenuCard(
           context,
           icon: Icons.monitor_weight,
-          title: '体重・体脂肪率',
-          subtitle: '身体の記録と管理',
+          title: AppLocalizations.of(context)!.profileBodyWeight,
+          subtitle: AppLocalizations.of(context)!.profileBodyMeasurement,
           onTap: () {
             Navigator.push(
               context,
@@ -879,7 +879,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _buildMenuCard(
           context,
           icon: Icons.card_giftcard,
-          title: '友達を招待',
+          title: AppLocalizations.of(context)!.profileInviteFriends,
           subtitle: 'AI x5回 + 紹介された人もAI x3回',
           badge: 'NEW',
           badgeColor: Colors.orange,
@@ -892,7 +892,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           context,
           icon: Icons.notifications,
           title: AppLocalizations.of(context)!.notificationSettings,
-          subtitle: 'プッシュ通知・アラート',
+          subtitle: AppLocalizations.of(context)!.profileNotifications,
           onTap: () {
             Navigator.push(
               context,

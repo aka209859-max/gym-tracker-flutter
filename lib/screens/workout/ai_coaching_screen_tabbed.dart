@@ -1018,7 +1018,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                       Icon(Icons.warning_amber, color: Colors.orange.shade700, size: 48),
                       const SizedBox(height: 12),
                       Text(
-                        'メニューの解析に失敗しました',
+                        AppLocalizations.of(context)!.aiMenuParseFailed,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -1044,7 +1044,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                           });
                         },
                         icon: const Icon(Icons.refresh),
-                        label: const Text('再生成する'),
+                        label: const Text(AppLocalizations.of(context)!.aiMenuRetryButton),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange.shade600,
                           foregroundColor: Colors.white,
