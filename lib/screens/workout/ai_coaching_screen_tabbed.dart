@@ -3945,42 +3945,53 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
 
   late List<String> _bodyParts;
   late Map<String, List<String>> _exercisesByBodyPart;
+  late List<String> _levels; // 🔧 v1.0.297: late変更（didChangeDependenciesで初期化）
+  bool _isInitialized = false; // 🔧 初期化フラグ
 
   @override
   void initState() {
     super.initState();
-    
-    // 初期化: context依存の値をinitStateで設定
-    final l10n = AppLocalizations.of(context)!;
-    _selectedBodyPart = l10n.musclePecs;
-    _selectedLevel = l10n.levelIntermediate;
-    _selectedGender = l10n.genderFemale;
-    
-    // 部位選択肢
-    _bodyParts = [
-      l10n.musclePecs,
-      '広背筋',
-      '大腿四頭筋',
-      '上腕二頭筋',
-      '上腕三頭筋',
-      '三角筋',
-    ];
-
-    // 種目選択肢（部位ごと）
-    _exercisesByBodyPart = {
-      l10n.musclePecs: [l10n.exerciseBenchPress, 'インクラインベンチプレス', 'ダンベルフライ', l10n.exerciseDips],
-      '広背筋': [l10n.exerciseDeadlift, l10n.exerciseLatPulldown, l10n.exerciseBentOverRow, l10n.exerciseChinUp],
-      '大腿四頭筋': [l10n.exerciseSquat, l10n.exerciseLegPress, l10n.exerciseLegExtension, 'ランジ'],
-      '上腕二頭筋': [l10n.exerciseBarbellCurl, l10n.exerciseDumbbellCurl, l10n.exerciseHammerCurl, 'プリーチャーカール'],
-      '上腕三頭筋': ['トライセプスプレスダウン', 'ライイングトライセプスエクステンション', l10n.exerciseDips, 'クローズグリップベンチプレス'],
-      '三角筋': [l10n.exerciseShoulderPress, l10n.exerciseSideRaise, l10n.exerciseFrontRaise, 'リアレイズ'],
-    };
-    
     _loadUserAge(); // 🆕 Phase 7.5: 年齢を自動取得
   }
 
-  // レベル選択肢
-  final List<String> _levels = [AppLocalizations.of(context)!.levelBeginner, AppLocalizations.of(context)!.levelIntermediate, AppLocalizations.of(context)!.levelAdvanced];
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    
+    // 🔧 v1.0.297: 1回だけ初期化（context利用可能）
+    if (!_isInitialized) {
+      final l10n = AppLocalizations.of(context)!;
+      
+      _selectedBodyPart = l10n.musclePecs;
+      _selectedLevel = l10n.levelIntermediate;
+      _selectedGender = l10n.genderFemale;
+      
+      // レベル選択肢
+      _levels = [l10n.levelBeginner, l10n.levelIntermediate, l10n.levelAdvanced];
+      
+      // 部位選択肢
+      _bodyParts = [
+        l10n.musclePecs,
+        '広背筋',
+        '大腿四頭筋',
+        '上腕二頭筋',
+        '上腕三頭筋',
+        '三角筋',
+      ];
+
+      // 種目選択肢（部位ごと）
+      _exercisesByBodyPart = {
+        l10n.musclePecs: [l10n.exerciseBenchPress, 'インクラインベンチプレス', 'ダンベルフライ', l10n.exerciseDips],
+        '広背筋': [l10n.exerciseDeadlift, l10n.exerciseLatPulldown, l10n.exerciseBentOverRow, l10n.exerciseChinUp],
+        '大腿四頭筋': [l10n.exerciseSquat, l10n.exerciseLegPress, l10n.exerciseLegExtension, 'ランジ'],
+        '上腕二頭筋': [l10n.exerciseBarbellCurl, l10n.exerciseDumbbellCurl, l10n.exerciseHammerCurl, 'プリーチャーカール'],
+        '上腕三頭筋': ['トライセプスプレスダウン', 'ライイングトライセプスエクステンション', l10n.exerciseDips, 'クローズグリップベンチプレス'],
+        '三角筋': [l10n.exerciseShoulderPress, l10n.exerciseSideRaise, l10n.exerciseFrontRaise, 'リアレイズ'],
+      };
+      
+      _isInitialized = true;
+    }
+  }
 
   // 現在選択中の部位の種目リスト
   List<String> get _availableExercises => _exercisesByBodyPart[_selectedBodyPart] ?? [];
