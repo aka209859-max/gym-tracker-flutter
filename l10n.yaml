@@ -16,6 +16,9 @@ output-localization-file: app_localizations.dart
 # 生成されるクラス名
 output-class: AppLocalizations
 
+# 🔧 v1.0.299: Gemini推奨 - 物理ファイルとして生成（CI/IDE安定化）
+synthetic-package: false
+
 # nullableな型を使用
 nullable-getter: false
 
