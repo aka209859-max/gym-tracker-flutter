@@ -245,7 +245,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             Text('Proプラン限定機能'),
           ],
         ),
-        content: Text(AppLocalizations.of(context)!.edit
+        content: const Text(
           'Proプランにアップグレードしてご利用ください。',
         ),
         actions: [

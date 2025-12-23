@@ -301,7 +301,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
-                  return Center(child: Text(AppLocalizations.of(context)!.snapshotError));
+                  return Center(child: Text(AppLocalizations.of(context)!.snapshotError(snapshot.error.toString())));
                 }
 
                 if (!snapshot.hasData) {

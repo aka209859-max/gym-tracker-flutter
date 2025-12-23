@@ -796,7 +796,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       print('📍 スタックトレース: $stackTrace');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context)!.dataLoadError), backgroundColor: Colors.red),
+          SnackBar(content: Text(AppLocalizations.of(context)!.dataLoadError(e.toString())), backgroundColor: Colors.red),
         );
       }
     }
@@ -1749,7 +1749,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(AppLocalizations.of(context)!.saveFailed),
+            content: Text(AppLocalizations.of(context)!.saveFailed(e.toString())),
             duration: const Duration(seconds: 5),
             backgroundColor: Colors.red,
           ),

@@ -250,7 +250,7 @@ class TrainerWorkoutCard extends StatelessWidget {
                     // トレーナー情報
                     _buildInfoRow('トレーナー', record.trainerName),
                     _buildInfoRow(AppLocalizations.of(context)!.duration, '${record.duration}分'),
-                    _buildInfoRow('強度', _getIntensityLabel(record.intensity)),
+                    _buildInfoRow('強度', _getIntensityLabel(context, record.intensity)),
                     
                     const SizedBox(height: 24),
                     const Text(
@@ -403,7 +403,7 @@ class TrainerWorkoutCard extends StatelessWidget {
     );
   }
 
-  String _getIntensityLabel(String intensity) {
+  String _getIntensityLabel(BuildContext context, String intensity) {
     switch (intensity) {
       case 'low':
         return '軽め';

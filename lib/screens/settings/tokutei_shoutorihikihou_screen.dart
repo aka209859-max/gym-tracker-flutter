@@ -43,7 +43,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
             const SizedBox(height: 20),
             _buildImportantNotice(),
             const SizedBox(height: 20),
-            _buildRelatedLinks(),
+            _buildRelatedLinks(context),
             const SizedBox(height: 20),
             _buildContactSection(context),
             const SizedBox(height: 20),
@@ -88,7 +88,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
         ),
         _buildTableRow(
           'サービス提供時期',
-          AppLocalizations.of(context)!.purchaseCompleted,
+          AppLocalizations.of(context)!.purchaseCompleted('サービス'),
         ),
         _buildTableRow(
           '返品・返金について',
@@ -103,7 +103,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
         _buildTableRow(
           '解約方法',
           'iOS:\n'
-          AppLocalizations.of(context)!.cancel
+          '${AppLocalizations.of(context)!.cancel}\n'
           '注意事項:\n'
           '• 解約は次回更新日の24時間前までに行ってください\n'
           '• 解約後も、現在の請求期間終了まではサービスをご利用いただけます\n'
@@ -210,7 +210,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildRelatedLinks() {
+  Widget _buildRelatedLinks(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(

@@ -95,7 +95,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
               children: [
                 Icon(Icons.check_circle, color: Colors.green, size: 32),
                 SizedBox(width: 12),
-                Text(AppLocalizations.of(context)!.purchaseCompleted),
+                Text(AppLocalizations.of(context)!.purchaseCompleted('AI追加パック')),
               ],
             ),
             content: const Text(

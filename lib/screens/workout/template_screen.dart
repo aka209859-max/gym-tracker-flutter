@@ -139,7 +139,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
         }
 
         if (snapshot.hasError) {
-          return Center(child: Text(AppLocalizations.of(context)!.snapshotError));
+          return Center(child: Text(AppLocalizations.of(context)!.snapshotError(snapshot.error.toString())));
         }
 
         final docs = snapshot.data?.docs ?? [];

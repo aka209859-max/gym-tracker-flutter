@@ -384,7 +384,7 @@ class _PeriodView extends StatelessWidget {
         }
 
         if (snapshot.hasError) {
-          return Center(child: Text(AppLocalizations.of(context)!.snapshotError));
+          return Center(child: Text(AppLocalizations.of(context)!.snapshotError(snapshot.error.toString())));
         }
 
         final data = snapshot.data ?? [];
@@ -479,7 +479,7 @@ class _PeriodView extends StatelessWidget {
               ),
 
               // 成長統計
-              if (data.length >= 2) _buildGrowthStats(data),
+              if (data.length >= 2) _buildGrowthStats(context, data),
 
               // 記録リスト
               _buildRecordsList(data),
@@ -601,7 +601,7 @@ class _PeriodView extends StatelessWidget {
     return weight * (1 + reps / 30.0);
   }
 
-  Widget _buildGrowthStats(List<PersonalRecord> data) {
+  Widget _buildGrowthStats(BuildContext context, List<PersonalRecord> data) {
     final start = data.first;
     final current = data.last;
     final isCardio = start.isCardio;  // 🔧 v1.0.246: 有酸素運動判定

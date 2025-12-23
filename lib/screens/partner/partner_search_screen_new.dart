@@ -19,7 +19,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
 
   String _selectedLocation = 'すべて';
   String _selectedExperienceLevel = 'すべて';
-  String _selectedGoal = AppLocalizations.of(context)!.filterAll;
+  late String _selectedGoal;
   
   bool _canAccess = false;
   bool _hasSearched = false; // 検索実行フラグ
@@ -59,6 +59,12 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
   void initState() {
     super.initState();
     _checkAccess();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _selectedGoal = AppLocalizations.of(context)!.filterAll;
   }
 
   Future<void> _checkAccess() async {

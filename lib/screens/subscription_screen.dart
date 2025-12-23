@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'package:flutter/foundation.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import '../services/subscription_service.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import '../services/revenue_cat_service.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import '../services/subscription_management_service.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'ai_addon_purchase_screen.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'campaign/campaign_registration_screen.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 
 /// サブスクリプション管理画面
 class SubscriptionScreen extends StatefulWidget {

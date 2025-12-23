@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import '../models/achievement.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import '../services/achievement_service.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 
 /// 達成バッジ画面
 class AchievementsScreen extends StatefulWidget {

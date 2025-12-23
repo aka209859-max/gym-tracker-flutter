@@ -235,7 +235,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
-                        entry.value,
+                        entry.value.toString(),
                         style: TextStyle(
                           fontSize: 16,
                           color: isAchieved ? Colors.black : Colors.grey[600],

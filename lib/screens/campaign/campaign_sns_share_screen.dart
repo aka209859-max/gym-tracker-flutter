@@ -199,7 +199,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
               const Divider(),
               SizedBox(height: 16),
               Text(
-                AppLocalizations.of(context)!.purchaseCompleted,
+                AppLocalizations.of(context)!.purchaseCompleted('キャンペーン特典'),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14,

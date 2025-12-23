@@ -28,14 +28,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
   bool _isLoading = false;
 
   // 人気アプリのリスト
-  final List<String> _popularApps = [
-    '筋トレMEMO',
-    'FiNC',
-    'Nike Training Club',
-    'MyFitnessPal',
-    'Strava',
-    AppLocalizations.of(context)!.other,
-  ];
+  late final List<String> _popularApps;
 
   String? _selectedApp;
 
@@ -95,6 +88,19 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
         });
       }
     }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _popularApps = [
+      '筋トレMEMO',
+      'FiNC',
+      'Nike Training Club',
+      'MyFitnessPal',
+      'Strava',
+      AppLocalizations.of(context)!.other,
+    ];
   }
 
   @override

@@ -1,18 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'package:flutter/foundation.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import '../models/gym.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import '../models/gym_announcement.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import '../models/review.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import '../services/realtime_user_service.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import '../services/favorites_service.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import '../services/share_service.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import '../services/visit_history_service.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import '../services/crowd_level_service.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'crowd_report_screen.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'reservation_form_screen.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'gym_review_screen.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 
 /// ジム詳細画面
 class GymDetailScreen extends StatefulWidget {
