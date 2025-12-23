@@ -1992,7 +1992,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     const Spacer(),
                     // 🔧 v1.0.248: ワークアウトタイプフィルタータブ（筋トレ/有酸素の2部屋制）
                     SegmentedButton<WorkoutTypeFilter>(
-                      segments: const [
+                      segments: [
                         ButtonSegment(
                           value: WorkoutTypeFilter.strength,
                           label: Text(AppLocalizations.of(context)!.strengthTrainingFilter, style: TextStyle(fontSize: 13)),

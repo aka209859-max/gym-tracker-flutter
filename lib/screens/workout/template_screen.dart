@@ -92,7 +92,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
           indicatorColor: Colors.white,
           labelColor: Colors.white,
           unselectedLabelColor: Colors.white.withValues(alpha: 0.7),
-          tabs: const [
+          tabs: [
             Tab(text: 'マイテンプレート', icon: Icon(Icons.folder, size: 20)),
             Tab(text: AppLocalizations.of(context)!.recommendation, icon: Icon(Icons.auto_awesome, size: 20)),
           ],

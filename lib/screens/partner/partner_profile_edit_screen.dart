@@ -115,7 +115,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
             DropdownButtonFormField<String>(
               value: _experienceLevel,
               decoration: InputDecoration(border: OutlineInputBorder()),
-              items: const [
+              items: [
                 DropdownMenuItem(value: 'beginner', child: Text(AppLocalizations.of(context)!.beginner)),
                 DropdownMenuItem(value: 'intermediate', child: Text('中級者')),
                 DropdownMenuItem(value: 'advanced', child: Text(AppLocalizations.of(context)!.advanced)),

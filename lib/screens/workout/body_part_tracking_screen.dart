@@ -21,8 +21,8 @@ class BodyPartTrackingScreen extends StatefulWidget {
 class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
   int _periodDays = 30; // 集計期間（日数）
 
-  // 部位の日本語名マッピング
-  static const Map<String, String> bodyPartNames = {
+  // 部位の日本語名マッピング（contextが必要なのでgetterとして実装）
+  Map<String, String> get bodyPartNames => {
     'chest': AppLocalizations.of(context)!.bodyPartChest,
     'back': AppLocalizations.of(context)!.bodyPartBack,
     'legs': AppLocalizations.of(context)!.bodyPartLegs,

@@ -2091,7 +2091,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           // 選択した日のトレーニング記録を読み込む
           _loadWorkoutsForSelectedDay();
         },
-        availableCalendarFormats: const {
+        availableCalendarFormats: {
           CalendarFormat.month: AppLocalizations.of(context)!.mon,
         },
         eventLoader: (day) {

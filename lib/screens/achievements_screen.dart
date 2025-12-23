@@ -97,7 +97,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
           labelColor: Colors.white,
           unselectedLabelColor: Colors.white70,
           indicatorColor: Colors.white,
-          tabs: const [
+          tabs: [
             Tab(text: AppLocalizations.of(context)!.all),
             Tab(text: '継続'),
             Tab(text: AppLocalizations.of(context)!.totalWeight),

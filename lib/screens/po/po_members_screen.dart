@@ -26,7 +26,7 @@ class _POMembersScreenState extends State<POMembersScreen> {
           Padding(
             padding: const EdgeInsets.all(16),
             child: SegmentedButton<String>(
-              segments: const [
+              segments: [
                 ButtonSegment(value: 'all', label: Text('全会員')),
                 ButtonSegment(value: 'active', label: Text(AppLocalizations.of(context)!.active)),
                 ButtonSegment(value: 'dormant', label: Text('休眠中')),

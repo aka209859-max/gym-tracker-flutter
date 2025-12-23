@@ -78,7 +78,7 @@ class _GoalsScreenState extends State<GoalsScreen>
           labelColor: Colors.white,
           unselectedLabelColor: Colors.white70,
           indicatorColor: Colors.white,
-          tabs: const [
+          tabs: [
             Tab(text: AppLocalizations.of(context)!.active),
             Tab(text: '達成済み'),
           ],

@@ -15,7 +15,7 @@ class CalculatorsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('計算ツール'),
-          bottom: const TabBar(
+          bottom: TabBar(
             tabs: [
               Tab(icon: Icon(Icons.calculate), text: '1RM計算'),
               Tab(icon: Icon(Icons.fitness_center), text: AppLocalizations.of(context)!.plateCalculator),
