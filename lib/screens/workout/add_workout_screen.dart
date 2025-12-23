@@ -13,6 +13,7 @@ import '../../services/review_request_service.dart';
 import '../../services/enhanced_share_service.dart';
 import '../../services/offline_service.dart'; // ✅ v1.0.161: オフライン対応
 import '../../services/exercise_master_data.dart'; // FIX: Problem 2 - Add ExerciseMasterData import
+import '../../gen/app_localizations.dart'; // 🔧 v1.0.298: AppLocalizations import CRITICAL FIX
 
 // SetType enum
 enum SetType {
