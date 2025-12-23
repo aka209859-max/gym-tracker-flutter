@@ -1901,8 +1901,32 @@ class _AIMenuTabState extends State<_AIMenuTab>
 **重要**: 種目名・重量・回数のみ簡潔に記載。説明は不要。
 ''';
 
+  /// 🆕 v1.0.301: 多言語対応のための言語指示取得
+  String _getLanguageInstruction() {
+    final locale = AppLocalizations.of(context)!.localeName;
+    switch (locale) {
+      case 'en':
+        return 'Please provide detailed explanations in English';
+      case 'es':
+        return 'Proporcione explicaciones detalladas en español';
+      case 'ko':
+        return '한국어로 자세한 설명을 제공하세요';
+      case 'zh':
+        return '请用简体中文提供详细说明';
+      case 'zh_TW':
+        return '請用繁體中文提供詳細說明';
+      case 'de':
+        return 'Bitte geben Sie detaillierte Erklärungen auf Deutsch';
+      case 'ja':
+      default:
+        return '日本語で丁寧に説明';
+    }
+  }
+
   /// 🔧 v1.0.217: プロンプト構築（レベル別 + トレーニング履歴考慮 + v1.0.219: レベル別種目DB）
+  /// 🆕 v1.0.301: 多言語対応追加
   String _buildPrompt(List<String> bodyParts) {
+    final languageInstruction = _getLanguageInstruction();
     // トレーニング履歴情報を構築
     String historyInfo = '';
     if (_exerciseHistory.isNotEmpty) {
@@ -1965,7 +1989,7 @@ $historyInfo
 - 全身をバランスよく鍛える
 - 基本種目中心
 - 30-45分で完了
-- 日本語で丁寧に説明
+- $languageInstruction
 
 **重要: 各種目に具体的な重量と回数を必ず記載してください。有酸素運動の場合は重量0kg、時間をXX分形式で記載してください。**
 ''';
@@ -2011,7 +2035,7 @@ $historyInfo
 - ${targetParts.join('、')}を重点的にトレーニング
 ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- **有酸素運動のみ**を提案（筋トレ種目は含めない）" : "- 基本種目中心"}
 - 30-45分で完了
-- 日本語で丁寧に説明
+- $languageInstruction
 
 **重要: 各種目に具体的な重量と回数を必ず記載してください。有酸素運動の場合は重量0kg、時間をXX分形式で記載してください。**
 ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対厳守: 有酸素運動データベースの種目のみ使用すること。ベンチプレス、スクワットなどの筋トレ種目は絶対に含めないこと。**" : ""}
@@ -2061,7 +2085,7 @@ $historyInfo
 - ${targetParts.isEmpty ? "全身バランスよく" : targetParts.join('、')+"を重点的に"}
 ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- **有酸素運動のみ**を提案（筋トレ種目は含めない）\n- HIIT、持久走、インターバルなど多様な有酸素トレーニング" : "- フリーウェイト中心\n- 筋肥大を重視"}
 - 45-60分で完了
-- 日本語で説明
+- $languageInstruction
 
 **重要: 各種目に具体的な重量と回数を必ず記載してください。有酸素運動の場合は重量0kg、時間をXX分形式で記載してください。**
 ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対厳守: 有酸素運動データベースの種目のみ使用すること。ベンチプレス、スクワット、デッドリフトなどの筋トレ種目は絶対に含めないこと。**" : ""}
@@ -2110,7 +2134,7 @@ $historyInfo
 - ${targetParts.isEmpty ? "全身最大限に" : targetParts.join('、')+"を極限まで"}
 ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- **有酸素運動のみ**を提案（筋トレ種目は含めない）\n- HIIT、タバタ式、持久走など高強度有酸素トレーニング" : "- 高重量フリーウェイト中心\n- 最大筋力向上を重視"}
 - 60-90分で完了
-- 日本語で説明
+- $languageInstruction
 
 **重要: 各種目に具体的な重量と回数を必ず記載してください。有酸素運動の場合は重量0kg、時間をXX分形式で記載してください。**
 ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対厳守: 有酸素運動データベースの種目のみ使用すること。ベンチプレス、スクワット、デッドリフト、ショルダープレスなどの筋トレ種目は絶対に含めないこと。**" : ""}
