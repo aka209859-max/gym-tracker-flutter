@@ -297,7 +297,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(AppLocalizations.of(context)!.shareFailed),
+            content: Text(AppLocalizations.of(context)!.shareFailed(e.toString())),
             backgroundColor: Colors.red,
           ),
         );

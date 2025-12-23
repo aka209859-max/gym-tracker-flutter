@@ -468,7 +468,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
         .toList();
     
     // 削除ターゲットの情報
-    final targetInfo = AppLocalizations.of(context)!.delete$exerciseName" (${exerciseName.runtimeType}, len=${exerciseName.length})';
+    final targetInfo = '${AppLocalizations.of(context)!.delete} $exerciseName (${exerciseName.runtimeType}, len=${exerciseName.length})';
     
     final afterDeleteSets = sets.where((set) {
       if (set is Map<String, dynamic>) {
@@ -591,7 +591,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context)!.deleteFailed)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.deleteFailed(e.toString()))),
         );
       }
       print('❌ 種目削除エラー: $e');
@@ -778,7 +778,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context)!.deleteFailed)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.deleteFailed(e.toString()))),
         );
       }
     }

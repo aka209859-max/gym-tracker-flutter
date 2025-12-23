@@ -463,15 +463,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
   bool get wantKeepAlive => true;
 
   // 部位選択状態（有酸素追加）
-  final Map<String, bool> _selectedBodyParts = {
-    AppLocalizations.of(context)!.bodyPartChest: false,
-    AppLocalizations.of(context)!.bodyPartBack: false,
-    AppLocalizations.of(context)!.bodyPartLegs: false,
-    AppLocalizations.of(context)!.bodyPartShoulders: false,
-    AppLocalizations.of(context)!.bodyPartArms: false,
-    '腹筋': false,
-    AppLocalizations.of(context)!.exerciseCardio: false,
-  };
+  late final Map<String, bool> _selectedBodyParts;
   
   // 🔧 v1.0.217: レベル選択（初心者・中級者・上級者）
   String _selectedLevel = '初心者'; // デフォルトは初心者
@@ -496,6 +488,16 @@ class _AIMenuTabState extends State<_AIMenuTab>
   @override
   void initState() {
     super.initState();
+    // 部位選択状態を初期化
+    _selectedBodyParts = {
+      'bodyPartChest': false,
+      'bodyPartBack': false,
+      'bodyPartLegs': false,
+      'bodyPartShoulders': false,
+      'bodyPartArms': false,
+      '腹筋': false,
+      'exerciseCardio': false,
+    };
     _loadHistory();
     _loadWorkoutHistory(); // 🔧 v1.0.217: トレーニング履歴を読み込む
   }
@@ -1088,25 +1090,26 @@ class _AIMenuTabState extends State<_AIMenuTab>
   
   /// 🔧 v1.0.221: 部位別カラー取得（二頭・三頭対応）
   Color _getBodyPartColor(String bodyPart) {
-    switch (bodyPart) {
-      case AppLocalizations.of(context)!.bodyPartChest:
-        return Colors.red.shade400;
-      case AppLocalizations.of(context)!.bodyPartBack:
-        return Colors.blue.shade400;
-      case AppLocalizations.of(context)!.bodyPartLegs:
-        return Colors.green.shade400;
-      case AppLocalizations.of(context)!.bodyPartShoulders:
-        return Colors.orange.shade400;
-      case AppLocalizations.of(context)!.bodyPartBiceps:
-        return Colors.purple.shade400;
-      case AppLocalizations.of(context)!.bodyPartTriceps:
-        return Colors.deepPurple.shade400;
-      case '腕': // 後方互換性
-        return Colors.purple.shade300;
-      case '腹筋':
-        return Colors.teal.shade400;
-      default:
-        return Colors.grey.shade400;
+    final l10n = AppLocalizations.of(context)!;
+    
+    if (bodyPart == l10n.bodyPartChest) {
+      return Colors.red.shade400;
+    } else if (bodyPart == l10n.bodyPartBack) {
+      return Colors.blue.shade400;
+    } else if (bodyPart == l10n.bodyPartLegs) {
+      return Colors.green.shade400;
+    } else if (bodyPart == l10n.bodyPartShoulders) {
+      return Colors.orange.shade400;
+    } else if (bodyPart == l10n.bodyPartBiceps) {
+      return Colors.purple.shade400;
+    } else if (bodyPart == l10n.bodyPartTriceps) {
+      return Colors.deepPurple.shade400;
+    } else if (bodyPart == '腕') { // 後方互換性
+      return Colors.purple.shade300;
+    } else if (bodyPart == '腹筋') {
+      return Colors.teal.shade400;
+    } else {
+      return Colors.grey.shade400;
     }
   }
   
@@ -2367,10 +2370,10 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
   // フォーム入力値
   final _formKey = GlobalKey<FormState>();
   final _oneRMController = TextEditingController(); // 🔧 Phase 7 Fix: 1RM入力用コントローラー
-  String _selectedLevel = AppLocalizations.of(context)!.levelBeginner;
+  late String _selectedLevel;
   int _selectedFrequency = 3;
-  String _selectedGender = AppLocalizations.of(context)!.genderFemale;
-  String _selectedBodyPart = AppLocalizations.of(context)!.musclePecs;
+  late String _selectedGender;
+  late String _selectedBodyPart;
   int _selectedRPE = 8; // 🆕 v1.0.230: RPE（自覚的強度、デフォルト8）
 
   // 🆕 Phase 7: 自動取得データ
@@ -2388,21 +2391,26 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
   @override
   void initState() {
     super.initState();
+    // 初期化
+    final l10n = AppLocalizations.of(context)!;
+    _selectedLevel = l10n.levelBeginner;
+    _selectedGender = l10n.genderFemale;
+    _selectedBodyPart = l10n.musclePecs;
+    _levels = [l10n.levelBeginner, l10n.levelIntermediate, l10n.levelAdvanced];
+    _genders = [l10n.genderMale, l10n.genderFemale];
+    _bodyParts = [l10n.musclePecs, l10n.muscleBiceps, l10n.muscleLegs, l10n.muscleShoulders, l10n.muscleBack];
+    
     _loadUserData(); // 🆕 Phase 7: 年齢・体重を自動取得
   }
 
   // レベル選択肢
-  final List<String> _levels = [AppLocalizations.of(context)!.levelBeginner, AppLocalizations.of(context)!.levelIntermediate, AppLocalizations.of(context)!.levelAdvanced];
+  late List<String> _levels;
 
   // 部位選択肢
-  final List<String> _bodyParts = [
-    AppLocalizations.of(context)!.musclePecs,
-    '広背筋',
-    '大腿四頭筋',
-    '上腕二頭筋',
-    '上腕三頭筋',
-    '三角筋',
-  ];
+  late List<String> _bodyParts;
+  
+  // 性別選択肢
+  late List<String> _genders;
 
   @override
   void dispose() {

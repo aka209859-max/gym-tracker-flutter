@@ -4403,7 +4403,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       print('Stack Trace: $stackTrace');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context)!.deleteFailed)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.deleteFailed(e.toString()))),
         );
       }
     }
@@ -4472,7 +4472,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       print('Stack Trace: $stackTrace');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context)!.deleteFailed)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.deleteFailed(e.toString()))),
         );
       }
     }

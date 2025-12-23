@@ -262,7 +262,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(AppLocalizations.of(context)!.deleteFailed),
+            content: Text(AppLocalizations.of(context)!.deleteFailed(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
