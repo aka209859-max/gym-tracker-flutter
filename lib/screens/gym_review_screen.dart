@@ -147,17 +147,17 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
             ),
             SizedBox(height: 16),
             Text(
-              '💎 Premiumプランにアップグレードすると:',
+              AppLocalizations.of(context)!.workout_d00ce2c5,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 8),
-            Text('• ジムレビューの投稿', style: TextStyle(fontSize: 14)),
-            Text('• AI機能を月10回使用', style: TextStyle(fontSize: 14)),
-            Text('• お気に入り無制限', style: TextStyle(fontSize: 14)),
-            Text('• 詳細な混雑度統計', style: TextStyle(fontSize: 14)),
+            Text(AppLocalizations.of(context)!.gym_1f17945f, style: TextStyle(fontSize: 14)),
+            Text(AppLocalizations.of(context)!.gym_0d16858a, style: TextStyle(fontSize: 14)),
+            Text(AppLocalizations.of(context)!.gym_75b373bb, style: TextStyle(fontSize: 14)),
+            Text(AppLocalizations.of(context)!.gym_56a27f66, style: TextStyle(fontSize: 14)),
           ],
         ),
         actions: [

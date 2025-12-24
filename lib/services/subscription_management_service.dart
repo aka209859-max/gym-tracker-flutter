@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// サブスクリプション管理サービス
 /// 
 /// 一時停止・ダウングレード・解約理由収集など、
@@ -232,7 +233,7 @@ class SubscriptionManagementService {
         } else {
           return {
             'type': 'pause',
-            'message': '1-3ヶ月の一時停止で料金を抑えられます',
+            'message': AppLocalizations.of(context)!.generatedKey_761fdde4,
           };
         }
       
@@ -258,7 +259,7 @@ class SubscriptionManagementService {
         if (currentPlan == 'pro' || currentPlan == 'premium') {
           return {
             'type': 'ai_pack',
-            'message': '無料プラン + AI追加パック（¥300/5回）なら必要な機能だけ使えます',
+            'message': AppLocalizations.of(context)!.generatedKey_114e7f61,
           };
         }
         return {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../services/version_check_service.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// アップデート促進ダイアログ
 /// 
 /// 🎯 機能:
@@ -65,7 +66,7 @@ class UpdateDialog extends StatelessWidget {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('App Storeを開けませんでした'),
+                          content: Text(AppLocalizations.of(context)!.general_d062e87e),
                         ),
                       );
                     }

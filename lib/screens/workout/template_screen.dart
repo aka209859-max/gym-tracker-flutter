@@ -388,7 +388,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
           }).toList(),
         };
         
-        print('📋 テンプレートデータを渡す: $templateData');
+        print(AppLocalizations.of(context)!.generatedKey_b714e319);
         
         final result = await Navigator.push(
           context,
@@ -422,7 +422,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
       context: context,
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.deleteTemplate),
-        content: Text('「${template.name}」を削除しますか？'),
+        content: Text(AppLocalizations.of(context)!.generatedKey_51ce78c9),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),

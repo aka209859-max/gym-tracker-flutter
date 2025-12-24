@@ -108,16 +108,16 @@ class ScientificBasis {
   /// トレーニングレベル別の月次筋力向上率（%）
   static const Map<String, Map<String, dynamic>> STRENGTH_PROGRESSION_RATES = {
     'beginner': {
-      'period': '0-6ヶ月',
+      'period': AppLocalizations.of(context)!.mon,
       'monthly_rate_min': 15.0,
       'monthly_rate_max': 25.0,
       'weekly_rate_min': 3.5,
       'weekly_rate_max': 5.8,
       'description': AppLocalizations.of(context)!.general_fb75142a,
-      'reference': 'Effect of high intensity study - 6週間で+31.2%',
+      'reference': AppLocalizations.of(context)!.generatedKey_e899fff0,
     },
     'intermediate': {
-      'period': '6-24ヶ月',
+      'period': AppLocalizations.of(context)!.mon,
       'monthly_rate_min': 5.0,
       'monthly_rate_max': 10.0,
       'weekly_rate_min': 1.2,
@@ -138,7 +138,7 @@ class ScientificBasis {
 
   /// ACSM推奨の負荷増加ルール
   static const Map<String, dynamic> LOAD_PROGRESSION_RULE = {
-    'condition': '目標レップ数を1-2回超過達成',
+    'condition': AppLocalizations.of(context)!.generatedKey_0caa3e2f,
     'increase_min': 2.0, // %
     'increase_max': 10.0, // %
     'reference': 'ACSM 2009 - 2-10% Rule',
@@ -183,7 +183,7 @@ class ScientificBasis {
   static const Map<String, dynamic> PLATEAU_DEFINITION = {
     'stagnation_weeks': 4, // 3-4週間
     'progress_threshold': 2.0, // %未満の進捗
-    'description': '主要種目の1RM推定値が3-4週間、2%未満の変化',
+    'description': AppLocalizations.of(context)!.generatedKey_10359595,
   };
 
   /// プラトー打破戦略A: 新刺激
@@ -202,7 +202,7 @@ class ScientificBasis {
     },
     {
       'name': AppLocalizations.of(context)!.general_f9cf88c0,
-      'description': 'セット内に短い休憩（15-30秒）を挟む',
+      'description': AppLocalizations.of(context)!.generatedKey_1eea5646,
       'effect': AppLocalizations.of(context)!.general_8ce8f22a,
       'reference': 'Krzysztofik et al. 2019',
     },
@@ -283,12 +283,12 @@ class ScientificBasis {
     'large_muscles': {
       'beginner': {'hours': 72, 'days': 3},
       'intermediate_advanced': {'hours': 48, 'days': 2},
-      'reference': {'description': '脚・背中・胸 - Davies 2024, Damas 2016'},
+      'reference': {'description': AppLocalizations.of(context)!.general_ba5babc8},
     },
     'small_muscles': {
       'beginner': {'hours': 48, 'days': 2},
       'intermediate_advanced': {'hours': 36, 'days': 1.5},
-      'reference': {'description': '肩・腕 - Davies 2024, Damas 2016'},
+      'reference': {'description': AppLocalizations.of(context)!.general_023226de},
     },
   };
 

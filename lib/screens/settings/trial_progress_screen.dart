@@ -108,7 +108,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
 
     if (_isTrialActive) {
       title = AppLocalizations.of(context)!.subscription_a3287c96;
-      subtitle = '残り$_remainingDays日間、プレミアム機能をお楽しみください';
+      subtitle = AppLocalizations.of(context)!.generatedKey_87967650;
       color = Colors.green;
       icon = Icons.celebration;
     } else if (_isTrialUsed) {
@@ -278,7 +278,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
             ),
             const SizedBox(height: 12),
             const Text(
-              '✨ プレミアムプラン 7日間無料',
+              AppLocalizations.of(context)!.subscription_19705f59,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -286,11 +286,11 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              '• AI機能 月10回\n'
-              '• お気に入り登録無制限\n'
-              '• ジムレビュー投稿\n'
-              '• 混雑度アラート通知\n'
-              '• 高度なフィルター検索',
+              AppLocalizations.of(context)!.generatedKey_5117983a
+              AppLocalizations.of(context)!.generatedKey_d42111dd
+              AppLocalizations.of(context)!.generatedKey_496b48ae
+              AppLocalizations.of(context)!.generatedKey_7a7b91ca
+              AppLocalizations.of(context)!.subscription_71bca8ba,
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey[700],

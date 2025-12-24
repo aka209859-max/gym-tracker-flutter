@@ -5,6 +5,7 @@ import 'subscription_service.dart';
 import 'notification_service.dart';
 import 'dart:async';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// 混雑度アラート通知サービス（Premium/Pro限定機能）
 /// 
 /// お気に入りジムの混雑度が設定値以下になったときに通知
@@ -36,7 +37,7 @@ class CrowdAlertService {
       
       if (favorites.isEmpty) {
         if (kDebugMode) {
-          print('ℹ️ お気に入りジムなし');
+          print(AppLocalizations.of(context)!.general_0253ebc6);
         }
         return;
       }

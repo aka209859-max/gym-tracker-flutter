@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/gym.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// ジム情報シェア用カードウィジェット
 /// 「こんなの作りました！」スタイルのTwitter投稿用
 class GymShareCard extends StatelessWidget {
@@ -240,7 +241,7 @@ class GymShareCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Text(
-                        '📱 GYM MATCHアプリで詳細を見る',
+                        AppLocalizations.of(context)!.gym_fac3d027,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,

@@ -5,6 +5,7 @@ import 'subscription_service.dart';
 import 'ai_abuse_prevention_service.dart';
 import 'referral_service.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// AI機能クレジット管理サービス（CEO戦略: 動画視聴で1回追加）
 class AICreditService {
   static const String _aiCreditKey = 'ai_credit_count';
@@ -33,7 +34,7 @@ class AICreditService {
       if (isBlocked) {
         return CanUseAIResult(
           allowed: false,
-          reason: 'アカウントがブロックされています。\nサポートにお問い合わせください。',
+          reason: AppLocalizations.of(context)!.generatedKey_ba165086,
         );
       }
       
@@ -247,13 +248,13 @@ class AICreditService {
       
       List<String> parts = [];
       if (referralBonus > 0) {
-        parts.add('🎁紹介ボーナス: $referralBonus回');
+        parts.add(AppLocalizations.of(context)!.generatedKey_873ee19b);
       }
       if (addonUsage > 0) {
-        parts.add('AI追加パック: $addonUsage回');
+        parts.add(AppLocalizations.of(context)!.generatedKey_c6156f0e);
       }
       if (credits > 0 || parts.isEmpty) {
-        parts.add('AIクレジット: $credits回');
+        parts.add(AppLocalizations.of(context)!.generatedKey_d90cbf45);
       }
       
       return parts.join(' | ');

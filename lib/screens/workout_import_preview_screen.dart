@@ -250,7 +250,7 @@ class _WorkoutImportPreviewScreenState
           ),
         );
         
-        debugPrint('🔙 [IMPORT] エラー後もプレビュー画面に留まります（ユーザーが閉じるまで）');
+        debugPrint(AppLocalizations.of(context)!.generatedKey_fbe877fb);
         // エラー時は画面を閉じない（ユーザーが再試行またはキャンセルを選択）
       }
     } finally {
@@ -270,7 +270,7 @@ class _WorkoutImportPreviewScreenState
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('📸 トレーニング記録の取り込み'),
+        title: const Text(AppLocalizations.of(context)!.workout_602fcf4c),
         backgroundColor: const Color(0xFF1A237E),
       ),
       body: Column(
@@ -342,7 +342,7 @@ class _WorkoutImportPreviewScreenState
                           child: Row(
                             children: [
                               const Text(
-                                '部位: ',
+                                AppLocalizations.of(context)!.workout_b98aa1b1,
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,

@@ -5,6 +5,7 @@
 library;
 
 import 'dart:convert';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'dart:math' as math;
 import 'package:http/http.dart' as http;
 import 'scientific_database.dart';
@@ -111,7 +112,7 @@ class AIPredictionService {
       };
     } catch (e, stackTrace) {
       print('❌❌❌ predictGrowth全体エラー: $e');
-      print('スタックトレース: $stackTrace');
+      print(AppLocalizations.of(context)!.generatedKey_f9edcc24);
       return {
         'success': false,
         'error': 'AI予測の生成に失敗しました: $e',
@@ -167,7 +168,7 @@ class AIPredictionService {
       return cachedResponse;
     }
     
-    print('⏳ AI分析: API呼び出し中...');
+    print(AppLocalizations.of(context)!.general_67ea6ba1);
     
     // 🆕 v1.0.274: Build multilingual prompt based on locale
     final prompt = _buildPrompt(
@@ -245,19 +246,19 @@ class AIPredictionService {
   ) {
     final buffer = StringBuffer();
     
-    buffer.writeln('## 成長予測の科学的根拠');
-    buffer.writeln('あなたの$level レベルでは、月+${(monthlyRate * 100).round()}%の成長が期待できます。');
-    buffer.writeln('現在${currentWeight.round()}kg → 4ヶ月後${predictedWeight.round()}kg（+${(predictedWeight - currentWeight).round()}kg）の成長が科学的に見込まれます。');
+    buffer.writeln(AppLocalizations.of(context)!.aiResponseScientificBasis);
+    buffer.writeln(AppLocalizations.of(context)!.generatedKey_d293bb2d);
+    buffer.writeln(AppLocalizations.of(context)!.generatedKey_df68039d);
     
-    buffer.writeln('\n## 推奨アクションプラン');
-    buffer.writeln('* $bodyPart のトレーニング: 週${recommendedFreq['frequency']}回');
-    buffer.writeln('* $bodyPart のボリューム: 週${recommendedVolume['optimal']}セット（${recommendedVolume['min']}-${recommendedVolume['max']}セット）');
-    buffer.writeln('* 負荷増加: 週+${(weeklyRate * 100 * 10).round() / 10}%のペースで重量を上げる');
+    buffer.writeln(AppLocalizations.of(context)!.generatedKey_dde51564);
+    buffer.writeln(AppLocalizations.of(context)!.generatedKey_8dc60129frequency']}回');
+    buffer.writeln(AppLocalizations.of(context)!.generatedKey_edc3881boptimal']}セット（${recommendedVolume['min']}-${recommendedVolume['max']}セット）');
+    buffer.writeln(AppLocalizations.of(context)!.generatedKey_88d87130);
     
     buffer.writeln('\n## 成功のカギ');
-    buffer.writeln('* プログレッシブオーバーロード（漸進的過負荷）の実践');
-    buffer.writeln('* 十分な休息（$bodyPartは最低48時間空ける）');
-    buffer.writeln('* 適切な栄養摂取（タンパク質1.6-2.2g/kg/日）');
+    buffer.writeln(AppLocalizations.of(context)!.general_8909f54a);
+    buffer.writeln(AppLocalizations.of(context)!.generatedKey_a18ea9fb);
+    buffer.writeln(AppLocalizations.of(context)!.generatedKey_cb2b318c);
     
     return buffer.toString();
   }
@@ -314,7 +315,7 @@ class AIPredictionService {
     // ボリュームの根拠
     basis.add({
       'citation': 'Schoenfeld et al. 2017',
-      'finding': 'セット追加ごとに+0.37%の成長',
+      'finding': AppLocalizations.of(context)!.generatedKey_e9e092c8,
       'effectSize': 'N/A',
     });
 
@@ -492,7 +493,7 @@ $systemPrompt
 ・効果量：ES=${recommendedFreq['effectSize']}
 
 【重要】
-「週${recommendedFreq['frequency']}回」= 同一部位（$bodyPart）を週に${recommendedFreq['frequency']}回トレーニングすること
+「週${recommendedFreq['frequencyAppLocalizations.of(context)!.generatedKey_7ffb5fe4frequency']}回トレーニングすること
 これはGrgic et al. 2018のメタ分析に基づく推奨値
 
 以下の形式で簡潔に回答してください（300文字以内）：

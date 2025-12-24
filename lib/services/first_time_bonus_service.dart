@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// 初回ボーナスサービス（v1.02新機能）
 /// 
 /// 新規ユーザーに初回AI無料体験を提供
@@ -20,7 +21,7 @@ class FirstTimeBonusService {
     try {
       // 既に付与済みかチェック
       if (await hasReceivedFirstTimeBonus()) {
-        print('ℹ️ 初回ボーナス: 既に付与済み');
+        print(AppLocalizations.of(context)!.general_c8efbf80);
         return;
       }
 

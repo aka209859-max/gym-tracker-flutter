@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'subscription_service.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// AdMob広告管理サービス
 /// 
 /// 無料プランのみ広告表示
@@ -31,7 +32,7 @@ class AdMobService {
 
     // Web環境ではAdMobをスキップ（MissingPluginException防止）
     if (kIsWeb) {
-      debugPrint('🌐 Web環境のためAdMob初期化をスキップ');
+      debugPrint(AppLocalizations.of(context)!.general_36030a98);
       _isInitialized = true;
       return;
     }
@@ -66,7 +67,7 @@ class AdMobService {
     // 無料プラン以外は広告を表示しない
     if (plan != SubscriptionType.free) {
       if (kDebugMode) {
-        debugPrint('ℹ️ 有料プランのため広告なし');
+        debugPrint(AppLocalizations.of(context)!.general_17c155a4);
       }
       return;
     }
@@ -74,7 +75,7 @@ class AdMobService {
     // Web環境では広告なし
     if (kIsWeb) {
       if (kDebugMode) {
-        debugPrint('ℹ️ Web環境のため広告なし');
+        debugPrint(AppLocalizations.of(context)!.general_851c1742);
       }
       return;
     }
@@ -91,13 +92,13 @@ class AdMobService {
         listener: BannerAdListener(
           onAdLoaded: (Ad ad) {
             debugPrint('✅ バナー広告読み込み成功');
-            debugPrint('   広告ID: $bannerAdUnitId');
+            debugPrint(AppLocalizations.of(context)!.generatedKey_ead97a43);
             _isAdLoaded = true;
             onAdLoaded(ad as BannerAd);
           },
           onAdFailedToLoad: (Ad ad, LoadAdError error) {
             debugPrint('❌ [AdMob] バナー広告読み込み失敗');
-            debugPrint('   広告ID: $bannerAdUnitId');
+            debugPrint(AppLocalizations.of(context)!.generatedKey_ead97a43);
             debugPrint('   エラーコード: ${error.code}');
             debugPrint('   エラー内容: ${error.message}');
             debugPrint('   ドメイン: ${error.domain}');
@@ -110,12 +111,12 @@ class AdMobService {
           },
           onAdOpened: (Ad ad) {
             if (kDebugMode) {
-              debugPrint('📱 バナー広告が開かれました');
+              debugPrint(AppLocalizations.of(context)!.general_6b5081fd);
             }
           },
           onAdClosed: (Ad ad) {
             if (kDebugMode) {
-              debugPrint('📱 バナー広告が閉じられました');
+              debugPrint(AppLocalizations.of(context)!.general_4b39d28f);
             }
           },
         ),

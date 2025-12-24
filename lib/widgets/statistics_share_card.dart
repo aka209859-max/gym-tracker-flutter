@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// Task 27: 統計データシェア用カード
 class StatisticsShareCard extends StatelessWidget {
   final int weeklyWorkoutDays;
@@ -110,7 +111,7 @@ class StatisticsShareCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  '$currentStreak日連続',
+                  AppLocalizations.of(context)!.generatedKey_d84c0c56,
                   style: const TextStyle(
                     fontSize: 48,
                     fontWeight: FontWeight.bold,
@@ -333,7 +334,7 @@ class StatisticsShareCard extends StatelessWidget {
           // フッター
           Center(
             child: Text(
-              '#GYMMATCH #トレーニング統計 #筋トレ継続',
+              AppLocalizations.of(context)!.general_142a2f0e,
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.white.withValues(alpha: 0.8),

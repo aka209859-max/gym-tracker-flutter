@@ -188,7 +188,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       }
       
       debugPrint('📋 選択種目: ${selectedExercises.length}件');
-      debugPrint('🎯 ユーザーレベル: $userLevel');
+      debugPrint(AppLocalizations.of(context)!.generatedKey_4cfb6b51);
       // v1.0.225-hotfix2: Map形式の履歴データに対応（Null安全性）
       if (exerciseHistory != null && exerciseHistory is Map) {
         debugPrint('📊 履歴データ: ${exerciseHistory.keys.length}種目');
@@ -251,7 +251,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('AIコーチの推奨メニューを読み込みました (${selectedExercises.length}種目)'),
+            content: Text(AppLocalizations.of(context)!.generatedKey_d4d0a508),
             backgroundColor: Colors.green,
             duration: const Duration(seconds: 2),
           ),
@@ -259,7 +259,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       }
     } catch (e, stackTrace) {
       debugPrint('❌ AIコーチデータ初期化エラー: $e');
-      debugPrint('スタックトレース: $stackTrace');
+      debugPrint(AppLocalizations.of(context)!.generatedKey_f9edcc24);
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -450,7 +450,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       }
     } catch (e, stackTrace) {
       debugPrint('❌ 体重取得エラー: $e');
-      debugPrint('   スタックトレース: $stackTrace');
+      debugPrint(AppLocalizations.of(context)!.generatedKey_d79a4e44);
     }
   }
 
@@ -459,7 +459,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     try {
       debugPrint('🔍 ネットワーク状態確認中...');
       final isOnline = await OfflineService.isOnline();
-      debugPrint(isOnline ? '🌐 オンライン' : '📴 オフライン');
+      debugPrint(isOnline ? AppLocalizations.of(context)!.workout_a15db522 : AppLocalizations.of(context)!.workout_b513ee00);
       return isOnline;
     } catch (e) {
       debugPrint('⚠️ ネットワークチェックエラー: $e');
@@ -547,7 +547,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 Icon(Icons.cloud_off, color: Colors.white),
                 SizedBox(width: 8),
                 Expanded(
-                  child: Text('📴 オフライン保存しました\nオンライン復帰時に自動同期されます'),
+                  child: Text(AppLocalizations.of(context)!.generatedKey_11b93b24),
                 ),
               ],
             ),
@@ -558,7 +558,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       }
     } catch (e, stackTrace) {
       debugPrint('❌ オフライン保存エラー: $e');
-      debugPrint('   スタックトレース: $stackTrace');
+      debugPrint(AppLocalizations.of(context)!.generatedKey_d79a4e44);
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -639,7 +639,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   
   void _applyTemplateDataIfProvided() {
     if (widget.templateData != null) {
-      print('📋 テンプレートデータを適用: ${widget.templateData}');
+      print(AppLocalizations.of(context)!.generatedKey_c5928230);
       
       final muscleGroup = widget.templateData!['muscle_group'] as String?;
       final exercises = widget.templateData!['exercises'] as List<dynamic>?;
@@ -657,7 +657,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         
         // ケース1: テンプレートから複数種目を追加
         if (exercises != null && exercises.isNotEmpty) {
-          print('📋 テンプレートから${exercises.length}種目を読み込み');
+          print(AppLocalizations.of(context)!.generatedKey_44c64823);
           
           for (var exercise in exercises) {
             final name = exercise['exercise_name'] as String;
@@ -793,7 +793,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       print('🔑 種目キー: ${_lastWorkoutData.keys.toList()}');
     } catch (e, stackTrace) {
       print('❌ 前回データ読み込みエラー: $e');
-      print('📍 スタックトレース: $stackTrace');
+      print(AppLocalizations.of(context)!.generatedKey_abcdd0f0);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(AppLocalizations.of(context)!.dataLoadError(e.toString())), backgroundColor: Colors.red),
@@ -1050,7 +1050,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     final remainingSeconds = seconds % 60;
                     final displayText = minutes > 0
                         ? '$minutes分${remainingSeconds > 0 ? ' $remainingSeconds秒' : ''}'
-                        : '$seconds秒';
+                        : AppLocalizations.of(context)!.seconds;
                     return Center(
                       child: Text(
                         displayText,
@@ -1123,7 +1123,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
 
       if (exerciseHistory.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('$exerciseNameの履歴がありません')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.generatedKey_02257848)),
         );
         return;
       }
@@ -1134,7 +1134,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       final selected = await showDialog<Map<String, dynamic>>(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('$exerciseNameの過去記録'),
+          title: Text(AppLocalizations.of(context)!.generatedKey_0d5c4fc8),
           content: SizedBox(
             width: double.maxFinite,
             child: ListView.builder(
@@ -1187,7 +1187,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('記録を反映しました: $weight kg × $reps reps'),
+            content: Text(AppLocalizations.of(context)!.generatedKey_6184b271),
             duration: const Duration(seconds: 2),
             backgroundColor: Colors.green,
           ),
@@ -1229,7 +1229,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     final result = await showDialog<Map<String, double>>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('$exerciseNameの一括入力'),
+        title: Text(AppLocalizations.of(context)!.generatedKey_74da9166),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -1340,7 +1340,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.workout_54d4f6f6),
-        content: Text('「$exerciseName」を削除しますか？\nこの操作は取り消せません。'),
+        content: Text(AppLocalizations.of(context)!.generatedKey_c80b15f5),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -1364,7 +1364,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('「$exerciseName」を削除しました')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.generatedKey_0a84ceba)),
         );
       }
     }
@@ -1413,7 +1413,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('「$result」をカスタム種目として保存しました')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.generatedKey_d9074687)),
         );
       }
     }
@@ -1443,7 +1443,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     }
     
     try {
-      debugPrint('📴 オフ日を保存: $_selectedDate');
+      debugPrint(AppLocalizations.of(context)!.generatedKey_0c183ad8);
       
       // 日付を正規化
       final normalizedDate = DateTime(_selectedDate.year, _selectedDate.month, _selectedDate.day);
@@ -1496,7 +1496,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       }
     } catch (e, stackTrace) {
       debugPrint('❌ オフ日保存エラー: $e');
-      debugPrint('   スタックトレース: $stackTrace');
+      debugPrint(AppLocalizations.of(context)!.generatedKey_d79a4e44);
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -1557,7 +1557,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     });
     
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('${exerciseSets.length}セットをコピーしました')),
+      SnackBar(content: Text(AppLocalizations.of(context)!.generatedKey_7c8d26de)),
     );
   }
 
@@ -1637,7 +1637,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         }
       } else {
         // 新規記録モード
-        print('➕ 新規記録を作成');
+        print(AppLocalizations.of(context)!.workout_f894e7b4);
         
         // トレーニング開始時刻と終了時刻を設定
         // デフォルト: 現在時刻から2時間のトレーニング
@@ -1744,7 +1744,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     } catch (e, stackTrace) {
       DebugLogger.instance.log('❌ ワークアウト保存エラー');
       DebugLogger.instance.log('   エラー: $e');
-      DebugLogger.instance.log('   スタックトレース: $stackTrace');
+      DebugLogger.instance.log(AppLocalizations.of(context)!.generatedKey_d79a4e44);
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -1922,7 +1922,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
-                  '$_selectedMuscleGroupの種目',
+                  AppLocalizations.of(context)!.generatedKey_f36e4e45,
                   style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -2051,7 +2051,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      '📝 トレーニングメモ',
+                      AppLocalizations.of(context)!.workout_bc108eb8,
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 12),
@@ -2130,7 +2130,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 Expanded(
                   child: OutlinedButton.icon(
                     onPressed: () {
-                      print('🔘 前回ボタンタップ: $exerciseName');
+                      print(AppLocalizations.of(context)!.generatedKey_7ce1d4dd);
                       print('🔍 lastData: $lastData');
                       print('🔍 _lastWorkoutData: $_lastWorkoutData');
                       _showWorkoutHistoryDialog(exerciseName);
@@ -2209,7 +2209,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                'あなたのレベル ($userLevel) に合わせた重量・回数を設定しています',
+                                AppLocalizations.of(context)!.generatedKey_7b01524a,
                                 style: TextStyle(fontSize: 11, color: Colors.green.shade700),
                               ),
                             ],
@@ -2243,7 +2243,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        '初回記録\n今日の記録が次回の目標になります。全力で挑戦しましょう！',
+                        AppLocalizations.of(context)!.generatedKey_2873d010,
                         style: TextStyle(fontSize: 12, color: Colors.purple.shade700),
                       ),
                     ),

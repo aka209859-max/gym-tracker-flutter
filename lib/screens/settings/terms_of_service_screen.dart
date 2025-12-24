@@ -20,36 +20,36 @@ class TermsOfServiceScreen extends StatelessWidget {
           children: [
             _buildSection(
               AppLocalizations.of(context)!.profile_6a8629ce,
-              'この利用規約（以下「本規約」）は、井上元（以下「開発者」）が提供するGYM MATCHアプリ（以下「本アプリ」）の利用条件を定めるものです。ユーザーは、本アプリを利用することにより、本規約に同意したものとみなされます。',
+              AppLocalizations.of(context)!.generatedKey_68142d17,
             ),
             _buildSection(
               AppLocalizations.of(context)!.profile_7a557256,
-              '本アプリは、以下の機能を提供します：\n\n'
-              '• トレーニング記録の管理\n'
-              '• ジム検索・位置情報表示\n'
-              '• AIによるトレーニングメニュー提案\n'
-              '• トレーニングデータの分析・可視化\n'
-              '• 有料サブスクリプションプラン（Premium、Pro）',
+              AppLocalizations.of(context)!.generatedKey_49167046
+              AppLocalizations.of(context)!.generatedKey_5db26dd7
+              AppLocalizations.of(context)!.generatedKey_54eb522c
+              AppLocalizations.of(context)!.generatedKey_3482f20a
+              AppLocalizations.of(context)!.generatedKey_6e6ed0f3
+              AppLocalizations.of(context)!.generatedKey_cfee6527,
             ),
             _buildSection(
               AppLocalizations.of(context)!.profile_94636bb4,
-              'ユーザーは、本アプリの利用にあたり、以下の行為をしてはなりません：\n\n'
-              '• 法令または公序良俗に違反する行為\n'
-              '• 本アプリのサーバーまたはネットワークの機能を破壊したり、妨害したりする行為\n'
-              '• 他のユーザーに関する個人情報等を収集または蓄積する行為\n'
-              '• 不正アクセスをし、またはこれを試みる行為\n'
-              '• 本アプリの不具合を意図的に利用する行為',
+              AppLocalizations.of(context)!.generatedKey_78cd69ae
+              AppLocalizations.of(context)!.generatedKey_0b46001b
+              AppLocalizations.of(context)!.generatedKey_bfe041dc
+              AppLocalizations.of(context)!.generatedKey_bd7bdb16
+              AppLocalizations.of(context)!.generatedKey_cfb0b943
+              AppLocalizations.of(context)!.profile_74198dd6,
             ),
             _buildSubscriptionSection(),
             _buildSection(
               AppLocalizations.of(context)!.profile_2324b2ad,
-              '• 開発者は、本アプリに起因してユーザーに生じたあらゆる損害について、一切の責任を負いません。\n'
-              '• 本アプリのトレーニング提案は参考情報であり、医学的アドバイスではありません。運動を始める前に医師に相談してください。',
+              AppLocalizations.of(context)!.generatedKey_37dfeeec
+              AppLocalizations.of(context)!.profile_fa0a808b,
             ),
             _buildSection(
               AppLocalizations.of(context)!.profile_177dff1d,
-              '• 本規約の解釈にあたっては、日本法を準拠法とします。\n'
-              '• 本アプリに関して紛争が生じた場合には、開発者の所在地を管轄する裁判所を専属的合意管轄とします。',
+              AppLocalizations.of(context)!.generatedKey_c4938e35
+              AppLocalizations.of(context)!.profile_bf244acc,
             ),
             const SizedBox(height: 20),
             _buildContactSection(context),
@@ -137,7 +137,7 @@ class TermsOfServiceScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 const Text(
-                  'App内課金（Apple App Store）を通じて支払いが行われます。',
+                  AppLocalizations.of(context)!.generatedKey_e73b7aa2,
                   style: TextStyle(fontSize: 13),
                 ),
                 const SizedBox(height: 12),
@@ -163,7 +163,7 @@ class TermsOfServiceScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 const Text(
-                  'iOS: 設定 → Apple ID → サブスクリプション → GYM MATCH → サブスクリプションをキャンセル',
+                  AppLocalizations.of(context)!.profile_198f91b5,
                   style: TextStyle(fontSize: 13),
                 ),
                 const SizedBox(height: 12),
@@ -176,7 +176,7 @@ class TermsOfServiceScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 const Text(
-                  'Appleの返金ポリシーに準拠します。返金については、App Storeサポートにお問い合わせください。',
+                  AppLocalizations.of(context)!.profile_3305914b,
                   style: TextStyle(fontSize: 13),
                 ),
               ],
@@ -245,7 +245,7 @@ class TermsOfServiceScreen extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           const Text(
-            '開発者: 井上元',
+            AppLocalizations.of(context)!.profile_01fd668e,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
@@ -257,7 +257,7 @@ class TermsOfServiceScreen extends StatelessWidget {
             style: const TextStyle(fontSize: 13),
           ),
           const Text(
-            '（対応時間: 平日 10:00-18:00）',
+            AppLocalizations.of(context)!.generatedKey_8033527d,
             style: TextStyle(fontSize: 12, color: Colors.grey),
           ),
         ],
@@ -276,15 +276,15 @@ class TermsOfServiceScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '制定日: 2025年11月20日',
+            AppLocalizations.of(context)!.profile_df278013,
             style: TextStyle(fontSize: 12, color: Colors.grey),
           ),
           Text(
-            '最終更新日: 2025年11月20日',
+            AppLocalizations.of(context)!.profile_4281fda9,
             style: TextStyle(fontSize: 12, color: Colors.grey),
           ),
           Text(
-            '施行日: 2025年11月20日',
+            AppLocalizations.of(context)!.profile_cf265521,
             style: TextStyle(fontSize: 12, color: Colors.grey),
           ),
         ],

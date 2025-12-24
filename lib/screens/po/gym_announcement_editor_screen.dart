@@ -235,7 +235,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                 controller: _titleController,
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)!.gym_37f10bb4,
-                  hintText: '例: 春の入会キャンペーン開催中',
+                  hintText: AppLocalizations.of(context)!.gym_b8997834,
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
@@ -274,7 +274,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                       controller: _couponCodeController,
                       decoration: InputDecoration(
                         labelText: AppLocalizations.of(context)!.gym_7ce11d8a,
-                        hintText: '例: SPRING2024',
+                        hintText: AppLocalizations.of(context)!.gym_46d008a8,
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.local_offer),
                       ),
@@ -331,7 +331,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
                       : Icon(Icons.add_photo_alternate),
-                  label: Text(_isUploading ? 'アップロード中...' : AppLocalizations.of(context)!.selectExercise),
+                  label: Text(_isUploading ? AppLocalizations.of(context)!.gym_725430f7 : AppLocalizations.of(context)!.selectExercise),
                   style: OutlinedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 50),
                   ),

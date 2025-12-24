@@ -109,7 +109,7 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      '毎週月曜日に自動生成されます\n（デモモードではCloud Function未実装のため手動データが必要です）',
+                      AppLocalizations.of(context)!.generatedKey_8a87562e,
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                     ),
@@ -419,7 +419,7 @@ class _BodyPartRow extends StatelessWidget {
               SizedBox(
                 width: 30,
                 child: Text(
-                  '$count回',
+                  AppLocalizations.of(context)!.reps,
                   style: const TextStyle(
                       fontSize: 12, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.right,

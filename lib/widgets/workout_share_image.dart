@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../utils/one_rm_calculator.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// トレーニングシェア用画像Widget
 /// 
 /// SNSシェア用の美しい画像を生成
@@ -216,7 +217,7 @@ class WorkoutShareImage extends StatelessWidget {
           Expanded(
             child: Text(
               (isBodyweightMode || weight == 0.0)
-                ? '自重 × $reps reps'
+                ? AppLocalizations.of(context)!.generatedKey_9d72b3b7
                 : '$weight kg × $reps reps',
               style: const TextStyle(
                 fontSize: 13,

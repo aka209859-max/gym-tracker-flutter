@@ -158,7 +158,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
               const Icon(Icons.check_circle, color: Colors.white),
               const SizedBox(width: 12),
               Expanded(
-                child: Text('${widget.gym.name}にチェックインしました'),
+                child: Text(AppLocalizations.of(context)!.generatedKey_1605acad),
               ),
             ],
           ),
@@ -451,7 +451,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                   children: [
                     if (minutesAgo != null)
                       Text(
-                        '$minutesAgo分前更新',
+                        AppLocalizations.of(context)!.generatedKey_51d4147a,
                         style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                       ),
                     if (dataSource != null)
@@ -788,7 +788,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                     builder: (context) => AlertDialog(
                       title: Text(AppLocalizations.of(context)!.gym_b439391c),
                       content: const Text(
-                        'チェックイン機能を使用するには、Firebase Consoleで設定ファイルを取得し、firebase_options.dartを更新してください。',
+                        AppLocalizations.of(context)!.gym_585da793,
                       ),
                       actions: [
                         TextButton(
@@ -1006,7 +1006,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(24),
                       child: Text(
-                        'まだレビューがありません\n最初のレビューを投稿してください！',
+                        AppLocalizations.of(context)!.generatedKey_161e491d,
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.grey[600]),
                       ),

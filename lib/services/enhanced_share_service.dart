@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class EnhancedShareService {
           mimeType: 'image/png',
           name: 'gym_match_story.png',
         )],
-        text: 'GYM MATCHでトレーニング記録をシェア！\n#GYMMATCH #筋トレ記録 #ジム\n\nhttps://gym-match-e560d.web.app',
+        text: AppLocalizations.of(context)!.generatedKey_99ca4bf5,
       );
     } catch (e) {
       if (kDebugMode) print('❌ Instagram Stories シェアエラー: $e');
@@ -101,7 +102,7 @@ class EnhancedShareService {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '$exerciseName で新記録を達成しました！',
+              AppLocalizations.of(context)!.generatedKey_efdeb364,
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
@@ -123,7 +124,7 @@ class EnhancedShareService {
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    '🎉 素晴らしい！',
+                    AppLocalizations.of(context)!.general_75d64c1f,
                     style: TextStyle(fontSize: 14),
                   ),
                 ],
@@ -180,7 +181,7 @@ class EnhancedShareService {
 
       // ローディング表示
       if (context.mounted) {
-        _showLoadingDialog(context, '統計画像を生成中...');
+        _showLoadingDialog(context, AppLocalizations.of(context)!.general_8f6d635c);
       }
 
       // 週間統計を取得
@@ -236,7 +237,7 @@ class EnhancedShareService {
     required List<WorkoutExerciseGroup> exercises,
   }) async {
     try {
-      _showLoadingDialog(context, '画像を生成中...');
+      _showLoadingDialog(context, AppLocalizations.of(context)!.workout_56143742);
 
       final shareWidget = WorkoutShareImage(
         date: date,

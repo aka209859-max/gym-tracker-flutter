@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../services/messaging_service.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// チャット画面
 class ChatScreen extends StatefulWidget {
   final String conversationId;
@@ -239,7 +240,7 @@ class _ChatScreenState extends State<ChatScreen> {
               child: TextField(
                 controller: _messageController,
                 decoration: InputDecoration(
-                  hintText: 'メッセージを入力...',
+                  hintText: AppLocalizations.of(context)!.general_94ebce72,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24),
                     borderSide: BorderSide.none,

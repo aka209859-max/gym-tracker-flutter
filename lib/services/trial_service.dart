@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'subscription_service.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// 無料トライアル管理サービス
 /// 
 /// パターンA: アクティブユーザー限定7日間プレミアムトライアル
@@ -266,7 +267,7 @@ class TrialService {
         if (trialStarted) {
           // トライアル期限切れ - 無料プランに戻す
           await _subscriptionService.setPlan(SubscriptionType.free);
-          print('⏰ トライアル期限切れ - 無料プランに戻しました');
+          print(AppLocalizations.of(context)!.subscription_a2e6b644);
         }
       }
       
@@ -299,9 +300,9 @@ class TrialService {
     final progress = await getTrialProgress(userId);
     
     if (progress == 100) {
-      return '🎉 トライアル条件達成！プレミアム7日間無料';
+      return AppLocalizations.of(context)!.subscription_26ba93a2;
     }
     
-    return 'トライアル達成進捗: $progress%';
+    return AppLocalizations.of(context)!.generatedKey_9da152f4;
   }
 }

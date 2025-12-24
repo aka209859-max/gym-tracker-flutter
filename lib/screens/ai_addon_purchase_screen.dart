@@ -51,8 +51,8 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.general_a03febb3),
         content: Text(
-          'AI追加パック（5回分）\n'
-          '料金: ¥300\n\n'
+          AppLocalizations.of(context)!.generatedKey_96475ff8
+          AppLocalizations.of(context)!.generatedKey_b71ac08e
           '${AppLocalizations.of(context)!.addWorkout}',
         ),
         actions: [
@@ -99,7 +99,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
               ],
             ),
             content: const Text(
-              'AI追加パック（5回分）を購入しました！\n'
+              AppLocalizations.of(context)!.generatedKey_1ea406c3
               AppLocalizations.of(context)!.general_6dc47887,
             ),
             actions: [
@@ -143,7 +143,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
         
         if (e.toString().contains('product not found') || 
             e.toString().contains(AppLocalizations.of(context)!.general_e322250e)) {
-          errorMessage = 'この商品は現在利用できません。\n'
+          errorMessage = AppLocalizations.of(context)!.generatedKey_7a59299a
                         AppLocalizations.of(context)!.general_b316392b;
         } else if (e.toString().contains('cancelled') || 
                    e.toString().contains(AppLocalizations.of(context)!.buttonCancel)) {
@@ -243,7 +243,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                           ),
                         ),
                         Text(
-                          isProPlan ? '残り: ∞' : '残り: $remaining回',
+                          isProPlan ? AppLocalizations.of(context)!.general_c262c425 : AppLocalizations.of(context)!.generatedKey_031e7ade,
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -316,10 +316,10 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      '• 追加購入分は今月末まで有効です\n'
-                      '• 月が変わると追加購入分もリセットされます\n'
-                      '• 追加購入はいつでも可能です\n'
-                      '• プラン変更後も追加購入分は引き継がれます',
+                      AppLocalizations.of(context)!.generatedKey_9db89838
+                      AppLocalizations.of(context)!.generatedKey_c77de40c
+                      AppLocalizations.of(context)!.generatedKey_1775a032
+                      AppLocalizations.of(context)!.general_5d492514,
                       style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey[700],
@@ -371,7 +371,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Text(
-                    '💰 お得',
+                    AppLocalizations.of(context)!.general_2adb470f,
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
@@ -418,7 +418,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 4),
                     child: Text(
-                      '/ $aiCount回',
+                      AppLocalizations.of(context)!.generatedKey_c825e1b3,
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey[600],

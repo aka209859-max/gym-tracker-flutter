@@ -271,7 +271,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                       const Icon(Icons.fitness_center, size: 20, color: Colors.grey),
                       const SizedBox(width: 8),
                       const Text(
-                        '実力が近い人のみ（±15% 1RM）',
+                        AppLocalizations.of(context)!.generatedKey_055759b3,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],

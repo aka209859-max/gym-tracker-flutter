@@ -89,7 +89,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
       print('✅ 体重記録読み込み完了: ${_measurements.length}件');
     } catch (e, stackTrace) {
       print('❌ 記録読み込みエラー: $e');
-      print('スタックトレース: $stackTrace');
+      print(AppLocalizations.of(context)!.generatedKey_f9edcc24);
     } finally {
       if (!mounted) return;
       setState(() => _isLoading = false);
@@ -162,7 +162,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                   Icon(Icons.cloud_off, color: Colors.white),
                   SizedBox(width: 8),
                   Expanded(
-                    child: Text('📴 オフライン保存しました\nオンライン復帰時に自動同期されます'),
+                    child: Text(AppLocalizations.of(context)!.generatedKey_11b93b24),
                   ),
                 ],
               ),
@@ -207,7 +207,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
             Text(AppLocalizations.of(context)!.delete),
             const SizedBox(height: 16),
             Text(
-              DateFormat('yyyy年MM月dd日 HH:mm').format(date),
+              DateFormat(AppLocalizations.of(context)!.general_d908e55a).format(date),
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
@@ -239,7 +239,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
     setState(() => _isLoading = true);
 
     try {
-      print('🗑️ 記録を削除中... ID: $documentId');
+      print(AppLocalizations.of(context)!.generatedKey_837372a4);
       
       await FirebaseFirestore.instance
           .collection('body_measurements')

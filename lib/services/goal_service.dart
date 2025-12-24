@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import '../models/goal.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// 目標管理サービス
 class GoalService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -204,7 +205,7 @@ class GoalService {
     await _firestore.collection('user_goals').doc(goalId).delete();
 
     if (kDebugMode) {
-      debugPrint('🗑️ 目標を削除しました: $goalId');
+      debugPrint(AppLocalizations.of(context)!.generatedKey_901fff2b);
     }
   }
 
@@ -221,7 +222,7 @@ class GoalService {
       await _firestore.collection('user_goals').doc(goalId).update(updates);
 
       if (kDebugMode) {
-        debugPrint('✏️ 目標を更新しました: $goalId');
+        debugPrint(AppLocalizations.of(context)!.generatedKey_10698ef0);
       }
     }
   }

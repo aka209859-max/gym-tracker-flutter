@@ -241,7 +241,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
       );
     } catch (e, stackTrace) {
       print('❌ プロフィール詳細画面ビルドエラー: $e');
-      print('スタックトレース: $stackTrace');
+      print(AppLocalizations.of(context)!.generatedKey_f9edcc24);
       return Center(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -377,20 +377,20 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'マッチングリクエスト送信は\nProプラン限定機能です',
+              AppLocalizations.of(context)!.generatedKey_8ab9dcf9,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            const Text('✨ Proプランの特典'),
+            const Text(AppLocalizations.of(context)!.profile_f35ed075),
             SizedBox(height: 8),
             _buildBenefitRow(AppLocalizations.of(context)!.searchGym),
             _buildBenefitRow(AppLocalizations.of(context)!.profile_b2818710),
             _buildBenefitRow(AppLocalizations.of(context)!.profile_a980ca9f),
-            _buildBenefitRow('AI機能 無制限使用'),
+            _buildBenefitRow(AppLocalizations.of(context)!.profile_3ba4fae0),
             _buildBenefitRow(AppLocalizations.of(context)!.profile_8fdc9d03),
             const SizedBox(height: 8),
             const Text(
-              '月額¥980（年間プラン32% OFF）',
+              AppLocalizations.of(context)!.generatedKey_152ba977,
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
           ],

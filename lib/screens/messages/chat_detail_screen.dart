@@ -145,7 +145,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                         Icon(Icons.chat_bubble_outline, size: 80, color: Colors.grey[300]),
                         const SizedBox(height: 16),
                         Text(
-                          'メッセージを送信して\n会話を始めましょう',
+                          AppLocalizations.of(context)!.generatedKey_0a9c8389,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 16,
@@ -272,7 +272,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                     child: TextField(
                       controller: _messageController,
                       decoration: InputDecoration(
-                        hintText: 'メッセージを入力...',
+                        hintText: AppLocalizations.of(context)!.general_94ebce72,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(24),
                           borderSide: BorderSide.none,

@@ -126,7 +126,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
             onEditingComplete: () => FocusScope.of(context).nextFocus(),
             decoration: InputDecoration(
               labelText: '重量 (kg)',
-              hintText: '例: 80',
+              hintText: AppLocalizations.of(context)!.workout_7c7387b8,
               prefixIcon: const Icon(Icons.fitness_center),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -145,7 +145,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
             onEditingComplete: () => FocusScope.of(context).unfocus(),
             decoration: InputDecoration(
               labelText: AppLocalizations.of(context)!.repsCount,
-              hintText: '例: 5',
+              hintText: AppLocalizations.of(context)!.workout_0f574d10,
               prefixIcon: const Icon(Icons.repeat),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -337,10 +337,10 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  '• RM (Repetition Maximum)：特定の回数で挙上可能な最大重量\n'
-                  '• 1RM：1回だけ挙上できる最大重量\n'
-                  '• この計算はEpley式を使用しています\n'
-                  '• 実際の1RMとは誤差がある可能性があります',
+                  AppLocalizations.of(context)!.generatedKey_6731dc9d
+                  AppLocalizations.of(context)!.generatedKey_780e4b39
+                  AppLocalizations.of(context)!.generatedKey_bafa2012
+                  AppLocalizations.of(context)!.workout_03fba8c7,
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey[700],
@@ -445,7 +445,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
     if (targetWeight == null || targetWeight <= _barWeight) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('バーの重量（${_barWeight}kg）より大きい値を入力してください'),
+          content: Text(AppLocalizations.of(context)!.generatedKey_fdc9c9f2),
           backgroundColor: Colors.red,
         ),
       );
@@ -707,7 +707,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
             decoration: InputDecoration(
               labelText: '目標重量 (kg)',
               labelStyle: const TextStyle(fontSize: 16),
-              hintText: '例: 100',
+              hintText: AppLocalizations.of(context)!.workout_b173a620,
               hintStyle: TextStyle(fontSize: 18, color: Colors.grey[400]),
               prefixIcon: Icon(Icons.fitness_center, size: 28, color: theme.colorScheme.primary),
               border: OutlineInputBorder(
@@ -910,7 +910,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Text(
-                                '$plateCount枚',
+                                AppLocalizations.of(context)!.generatedKey_a2dd7366,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 28,
@@ -983,10 +983,10 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  '• ジムにあるプレートだけを選択してください\n'
-                  '• プリセットから選択すると素早く設定できます\n'
-                  '• 設定は自動保存されます\n'
-                  '• 表示されるのは片側の枚数です（両側に装着）',
+                  AppLocalizations.of(context)!.generatedKey_508a83f8
+                  AppLocalizations.of(context)!.generatedKey_cf1cfa23
+                  AppLocalizations.of(context)!.generatedKey_f897a66f
+                  AppLocalizations.of(context)!.generatedKey_6f7f8448,
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey[700],

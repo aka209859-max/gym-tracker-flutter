@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:csv/csv.dart';
@@ -37,11 +38,11 @@ class WorkoutImportService {
         if (imageBytes.length > maxSizeBytes) {
           if (kDebugMode) {
             print('⚠️ 画像サイズが大きすぎます: ${(imageBytes.length / 1024 / 1024).toStringAsFixed(2)}MB');
-            print('💡 ヒント: より小さい画像を使用するか、スクリーンショットの品質を下げてください');
+            print(AppLocalizations.of(context)!.workout_26d79d97);
           }
           // 大きすぎる場合はエラーとする
           throw Exception(
-            '画像サイズが大きすぎます (${(imageBytes.length / 1024 / 1024).toStringAsFixed(1)}MB)。\n'
+            AppLocalizations.of(context)!.generatedKey_588e8dd8
             AppLocalizations.of(context)!.workout_dd8555d2
           );
         }
@@ -102,7 +103,7 @@ class WorkoutImportService {
 
       if (kDebugMode) {
         print('📡 APIレスポンス: ${response.statusCode}');
-        print('📄 レスポンスボディ（最初の200文字）: ${response.body.substring(0, response.body.length > 200 ? 200 : response.body.length)}');
+        print(AppLocalizations.of(context)!.generatedKey_b2a0fa05);
       }
 
       if (response.statusCode == 200) {
@@ -287,7 +288,7 @@ JSON形式例:
       int dataStartIndex = hasHeader ? 1 : 0;
       
       if (kDebugMode) {
-        print('📋 ヘッダー検出: ${hasHeader ? "あり" : "なし"}');
+        print('📋 ヘッダー検出: ${hasHeader ? "あり" : AppLocalizations.of(context)!.noAds}');
       }
 
       // データ行を解析

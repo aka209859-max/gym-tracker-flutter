@@ -140,7 +140,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              '友達の紹介コードを入力して\n特典をゲットしよう！',
+              AppLocalizations.of(context)!.generatedKey_8e38c4b2,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14,
@@ -294,7 +294,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
 
             // Notes
             Text(
-              '※ 招待コードは1回のみ使用可能です\n※ 既に他のユーザーが使用したコードは無効です',
+              AppLocalizations.of(context)!.generatedKey_1cd8d542,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 12,

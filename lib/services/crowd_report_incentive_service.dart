@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'ai_credit_service.dart';
 import 'achievement_service.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// 混雑度報告インセンティブサービス
 /// 
 /// ユーザーに混雑度報告を促すための報酬システム
@@ -73,7 +74,7 @@ class CrowdReportIncentiveService {
       }
       return ReportRewardResult(
         success: false,
-        message: 'エラーが発生しました: ${e.toString()}',
+        message: AppLocalizations.of(context)!.generatedKey_aee3d6b6,
       );
     }
   }
@@ -103,7 +104,7 @@ class CrowdReportIncentiveService {
         // 10回報告: バッジ「混雑レポーター」
         reward = MilestoneReward(
           type: RewardType.badge,
-          title: '🎖️ バッジ獲得！',
+          title: AppLocalizations.of(context)!.general_c28da24d,
           description: AppLocalizations.of(context)!.general_d8b75b82,
           badgeId: 'crowd_reporter_10',
         );
@@ -114,11 +115,11 @@ class CrowdReportIncentiveService {
         // 50回報告: Premium 1ヶ月無料クーポン
         reward = MilestoneReward(
           type: RewardType.premiumCoupon,
-          title: '🎁 Premium 1ヶ月無料！',
+          title: AppLocalizations.of(context)!.general_e802f511,
           description: AppLocalizations.of(context)!.general_1a08e6bb,
           couponCode: 'PREMIUM_1MONTH_FREE',
         );
-        await _issueCoupon(userId, 'PREMIUM_1MONTH_FREE', 'Premium 1ヶ月無料', 30);
+        await _issueCoupon(userId, 'PREMIUM_1MONTH_FREE', AppLocalizations.of(context)!.general_ce58e1e8, 30);
         break;
         
       case 100:
@@ -136,8 +137,8 @@ class CrowdReportIncentiveService {
         // 200回報告: 特別バッジ + AI 50回分
         reward = MilestoneReward(
           type: RewardType.legendary,
-          title: '👑 伝説の混雑レポーター！',
-          description: '200回達成！AI 50回分プレゼント',
+          title: AppLocalizations.of(context)!.general_5f560fbc,
+          description: AppLocalizations.of(context)!.general_26a3f317,
           badgeId: 'crowd_reporter_legendary',
         );
         await _unlockBadge(userId, 'crowd_reporter_legendary');
@@ -231,13 +232,13 @@ class CrowdReportIncentiveService {
   String _getMilestoneRewardDescription(int milestone) {
     switch (milestone) {
       case 10:
-        return '🎖️ バッジ「混雑レポーター」';
+        return AppLocalizations.of(context)!.general_38e0a1b9;
       case 50:
-        return '🎁 Premium 1ヶ月無料';
+        return AppLocalizations.of(context)!.general_8cc67771;
       case 100:
         return '🔥 Pro Plan 50% OFF';
       case 200:
-        return '👑 伝説バッジ + AI 50回分';
+        return AppLocalizations.of(context)!.general_95241780;
       default:
         return AppLocalizations.of(context)!.general_945ccc14;
     }

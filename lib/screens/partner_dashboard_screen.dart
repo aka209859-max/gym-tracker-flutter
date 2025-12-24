@@ -64,7 +64,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                '🏆 β版パートナー',
+                                AppLocalizations.of(context)!.general_01dd1fe6,
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.amber[700],
@@ -182,7 +182,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                   enabled: partnerAccess.hasPermission('editHours'),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('🚧 実装予定の機能です')),
+                      const SnackBar(content: Text(AppLocalizations.of(context)!.general_c396daa8)),
                     );
                   },
                 ),
@@ -203,7 +203,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                   enabled: partnerAccess.hasPermission('viewAnalytics'),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('🚧 実装予定の機能です')),
+                      const SnackBar(content: Text(AppLocalizations.of(context)!.general_c396daa8)),
                     );
                   },
                 ),

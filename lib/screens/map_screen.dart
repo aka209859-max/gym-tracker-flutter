@@ -74,7 +74,7 @@ class _MapScreenState extends State<MapScreen> {
           ],
         ),
         content: Text(
-          '${AppLocalizations.of(context)!.searchGym}\n※位置情報は検索のみに使用され、保存されません。',
+          AppLocalizations.of(context)!.generatedKey_f4f68181,
           style: TextStyle(fontSize: 14),
         ),
         actions: [
@@ -112,7 +112,7 @@ class _MapScreenState extends State<MapScreen> {
 
     try {
       if (kDebugMode) {
-        debugPrint('🌍 GPS位置情報を取得中...');
+        debugPrint(AppLocalizations.of(context)!.general_1d85fea7);
       }
 
       Position? position = await _locationService.getCurrentLocation();
@@ -184,7 +184,7 @@ class _MapScreenState extends State<MapScreen> {
       
       try {
         if (kDebugMode) {
-          debugPrint('🌐 Google Places APIで周辺のジムを検索中...');
+          debugPrint(AppLocalizations.of(context)!.general_af01f3fc);
         }
         
         final places = await _placesService.searchNearbyGyms(
@@ -195,7 +195,7 @@ class _MapScreenState extends State<MapScreen> {
           const Duration(seconds: 15),
           onTimeout: () {
             if (kDebugMode) {
-              debugPrint('⏱️ Google Places API timeout - フォールバックします');
+              debugPrint(AppLocalizations.of(context)!.general_e6d6fa86);
             }
             throw TimeoutException('Google Places API timeout');
           },
@@ -224,7 +224,7 @@ class _MapScreenState extends State<MapScreen> {
           // パートナー統合失敗時もGoogle Placesデータをそのまま使用
           if (kDebugMode) {
             debugPrint('⚠️ パートナー統合失敗: $mergeError');
-            debugPrint('   Google Placesデータをそのまま使用します');
+            debugPrint(AppLocalizations.of(context)!.general_07c37d11);
           }
           
           // Google PlaceをGymに変換（パートナー情報なし）
@@ -263,13 +263,13 @@ class _MapScreenState extends State<MapScreen> {
         
       } on TimeoutException catch (e) {
         if (kDebugMode) {
-          debugPrint('⏱️ Google Places APIタイムアウト: $e');
-          debugPrint('   フォールバック: サンプルデータを使用します');
+          debugPrint(AppLocalizations.of(context)!.generatedKey_4087785c);
+          debugPrint(AppLocalizations.of(context)!.general_bbad8051);
         }
       } catch (e) {
         if (kDebugMode) {
           debugPrint('⚠️ Google Places API検索エラー: $e');
-          debugPrint('   フォールバック: サンプルデータを使用します');
+          debugPrint(AppLocalizations.of(context)!.general_bbad8051);
         }
       }
       
@@ -302,7 +302,7 @@ class _MapScreenState extends State<MapScreen> {
         }
       } else if (gyms.isEmpty) {
         if (kDebugMode) {
-          debugPrint('ℹ️ 検索結果が0件です（この地域にジムが存在しない可能性）');
+          debugPrint(AppLocalizations.of(context)!.generatedKey_d014a7b1);
         }
       }
         
@@ -378,7 +378,7 @@ class _MapScreenState extends State<MapScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${gyms.length}件のジムが見つかりました'),
+            content: Text(AppLocalizations.of(context)!.generatedKey_e197bc84),
             backgroundColor: Colors.green,
           ),
         );
@@ -490,7 +490,7 @@ class _MapScreenState extends State<MapScreen> {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      'あなたの近くのジム ${_nearbyGyms.length}件を表示中',
+                      AppLocalizations.of(context)!.generatedKey_934c5ba2,
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
@@ -519,7 +519,7 @@ class _MapScreenState extends State<MapScreen> {
                 child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
               )
             : Icon(Icons.my_location),
-        label: Text(_isLoadingGPS ? '検索中...' : AppLocalizations.of(context)!.currentLocation),
+        label: Text(_isLoadingGPS ? AppLocalizations.of(context)!.general_8b582e14 : AppLocalizations.of(context)!.currentLocation),
       ),
     );
   }

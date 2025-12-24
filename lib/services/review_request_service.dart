@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// レビュー依頼サービス（ASO最適化）
 /// 
 /// 5回目のトレーニング記録後に自動的にレビューを依頼
@@ -65,7 +66,7 @@ class ReviewRequestService {
             Icon(Icons.star, color: Colors.orange, size: 32),
             SizedBox(width: 12),
             Text(
-              'GYM MATCH を気に入っていますか？',
+              AppLocalizations.of(context)!.general_c1182ccf,
               style: TextStyle(fontSize: 18),
             ),
           ],
@@ -80,7 +81,7 @@ class ReviewRequestService {
             ),
             SizedBox(height: 16),
             Text(
-              'よろしければ、App Store でレビューをお願いします。\nあなたのフィードバックがアプリの改善に役立ちます！',
+              AppLocalizations.of(context)!.generatedKey_722dc403,
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
           ],
@@ -169,7 +170,7 @@ class ReviewRequestService {
   Future<void> _markAsDeclined() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('review_declined_at', DateTime.now().toIso8601String());
-    print('ℹ️ レビュー拒否: ${_cooldownDays}日間はリクエストしません');
+    print(AppLocalizations.of(context)!.generatedKey_c6000590);
   }
 
   /// レビュー済みかチェック

@@ -109,7 +109,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('🎉 乗り換え割キャンペーン'),
+        title: const Text(AppLocalizations.of(context)!.general_842f4cca),
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -247,7 +247,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                     controller: _appNameController,
                     decoration: InputDecoration(
                       labelText: AppLocalizations.of(context)!.general_67c0f232,
-                      hintText: '例: トレーニング日記',
+                      hintText: AppLocalizations.of(context)!.general_fff14fa3,
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) {
@@ -280,7 +280,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                 Icon(Icons.info, color: Colors.blue[700]),
                 const SizedBox(width: 8),
                 Text(
-                  '$benefit獲得条件',
+                  AppLocalizations.of(context)!.generatedKey_674539cb,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

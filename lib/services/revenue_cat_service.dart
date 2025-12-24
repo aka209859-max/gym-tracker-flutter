@@ -5,6 +5,7 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'subscription_service.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// RevenueCat統合サービス - iOS App Store課金管理
 /// 
 /// 機能:
@@ -102,7 +103,7 @@ class RevenueCatService {
   void _setupPurchaseListener() {
     Purchases.addCustomerInfoUpdateListener((customerInfo) {
       if (kDebugMode) {
-        debugPrint('📱 購入状態が更新されました');
+        debugPrint(AppLocalizations.of(context)!.general_76a1611b);
       }
       syncSubscriptionStatus();
     });
@@ -275,7 +276,7 @@ class RevenueCatService {
       // ユーザーキャンセルは正常系として扱う
       if (e.code == '1' || e.code == 'purchase_cancelled') {
         if (kDebugMode) {
-          debugPrint('ℹ️ ユーザーが購入をキャンセルしました');
+          debugPrint(AppLocalizations.of(context)!.general_84b65c77);
         }
         return false;
       }
@@ -313,7 +314,7 @@ class RevenueCatService {
         if (hasActiveSub) {
           debugPrint('✅ 購入履歴を復元しました');
         } else {
-          debugPrint('ℹ️ 復元可能な購入履歴がありません');
+          debugPrint(AppLocalizations.of(context)!.general_39972114);
         }
       }
       
@@ -372,7 +373,7 @@ class RevenueCatService {
       
       // デバッグ: 利用可能な商品をログ出力
       if (kDebugMode) {
-        debugPrint('📦 利用可能な商品一覧:');
+        debugPrint(AppLocalizations.of(context)!.general_67385e18);
         for (var pkg in offerings.current!.availablePackages) {
           debugPrint('  - ${pkg.storeProduct.identifier}: ${pkg.storeProduct.title} (${pkg.storeProduct.priceString})');
         }
@@ -390,12 +391,12 @@ class RevenueCatService {
             .map((pkg) => pkg.storeProduct.identifier)
             .join(', ');
         throw Exception(
-          'AI追加パック商品が見つかりません。\n'
-          '探している商品ID: $aiAdditionalPackProductId\n'
-          '利用可能な商品ID: $availableIds\n\n'
-          '対処方法:\n'
-          '1. App Store Connectで商品を作成してください\n'
-          '2. RevenueCat ConsoleのOfferingsに商品を追加してください'
+          AppLocalizations.of(context)!.generatedKey_081f30b2
+          AppLocalizations.of(context)!.generatedKey_bd2d5ba0
+          AppLocalizations.of(context)!.generatedKey_371e13e6
+          AppLocalizations.of(context)!.generatedKey_02e74dc3
+          AppLocalizations.of(context)!.generatedKey_9021f412
+          AppLocalizations.of(context)!.general_545cee9a
         );
       }
       
@@ -419,7 +420,7 @@ class RevenueCatService {
       // ユーザーキャンセルは正常系として扱う
       if (e.code == '1' || e.code == 'purchase_cancelled') {
         if (kDebugMode) {
-          debugPrint('ℹ️ ユーザーが購入をキャンセルしました');
+          debugPrint(AppLocalizations.of(context)!.general_84b65c77);
         }
         return false;
       }

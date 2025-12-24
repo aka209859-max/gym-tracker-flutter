@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';  // ✅ v1.0.177: Network detection
 import '../models/gym.dart';
 import '../models/workout_log.dart';
@@ -313,7 +314,7 @@ class OfflineService {
         }
         
         if (hasPendingWrites) {
-          debugPrint('📴 [Firestore] 保留中の書き込みあり（オフライン） - ${duration}ms');
+          debugPrint(AppLocalizations.of(context)!.generatedKey_8f0b1ef3);
           return false;
         }
         

@@ -955,10 +955,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       
       if (querySnapshot.docs.isEmpty) {
         DebugLogger.instance.log('⚠️ このユーザーの記録が見つかりません');
-        DebugLogger.instance.log('   考えられる原因:');
-        DebugLogger.instance.log('   1. まだトレーニングを記録していない');
-        DebugLogger.instance.log('   2. Firestoreセキュリティルールで読み込みが拒否されている');
-        DebugLogger.instance.log('   3. 異なるユーザーアカウントでログインしている');
+        DebugLogger.instance.log(AppLocalizations.of(context)!.general_70b17b5b);
+        DebugLogger.instance.log(AppLocalizations.of(context)!.general_ce175fc5);
+        DebugLogger.instance.log(AppLocalizations.of(context)!.general_325dfd2b);
+        DebugLogger.instance.log(AppLocalizations.of(context)!.general_40dd331a);
       }
 
       // 選択した日（年・月・日のみ）
@@ -977,7 +977,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           
           // データ構造をログ出力（最初の1件のみ）
           if (i == 0) {
-            DebugLogger.instance.log('📋 データ構造サンプル:');
+            DebugLogger.instance.log(AppLocalizations.of(context)!.general_802433f4);
             DebugLogger.instance.log('   muscle_group: ${data['muscle_group']?.runtimeType}');
             DebugLogger.instance.log('   date: ${data['date']?.runtimeType}');
             DebugLogger.instance.log('   sets: ${data['sets']?.runtimeType}');
@@ -1420,8 +1420,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         final remainingCredits = data?['credits'] ?? 0;
         final currentPlan = data?['plan'] ?? SubscriptionType.free;
         final displayText = currentPlan == SubscriptionType.pro
-            ? 'AI残回数: ∞'
-            : 'AI残回数: $remainingCredits回';
+            ? AppLocalizations.of(context)!.general_52d24f09
+            : AppLocalizations.of(context)!.generatedKey_88e64c29;
         
         return Container(
           padding: const EdgeInsets.all(16),
@@ -1460,7 +1460,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   const SizedBox(width: 12),
                   const Expanded(
                     child: Text(
-                      '💡 今日のAI提案',
+                      AppLocalizations.of(context)!.general_36a162c5,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -1490,7 +1490,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ),
               const SizedBox(height: 12),
               const Text(
-                'あなた専用のトレーニングメニューを\nAIが科学的に分析します',
+                AppLocalizations.of(context)!.generatedKey_9cabffba,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 13,
@@ -1600,7 +1600,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
                 const SizedBox(height: 4),
                 const Text(
-                  '前回のトレーニングから2日経過しました。\n今日もトレーニングしませんか？',
+                  AppLocalizations.of(context)!.generatedKey_5ff6013e,
                   style: TextStyle(
                     fontSize: 13,
                     color: Colors.black87,
@@ -1664,7 +1664,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'お久しぶりです 🏋️',
+                  AppLocalizations.of(context)!.general_b17d877f,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -1673,7 +1673,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
                 const SizedBox(height: 4),
                 const Text(
-                  'しばらくトレーニングを記録していませんね。\nまた始めませんか？',
+                  AppLocalizations.of(context)!.generatedKey_e199031a,
                   style: TextStyle(
                     fontSize: 13,
                     color: Colors.black87,
@@ -1737,7 +1737,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               const SizedBox(width: 12),
               const Expanded(
                 child: Text(
-                  '🔥 あなたの習慣',
+                  AppLocalizations.of(context)!.general_1024fe10,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -1871,7 +1871,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             const Divider(height: 1, color: Colors.green),
             const SizedBox(height: 12),
             const Text(
-              '💡 あなたのトレーニングパターン',
+              AppLocalizations.of(context)!.general_ff0d16ff,
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
@@ -2586,7 +2586,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'トレーニングを記録して、\n進捗を可視化しましょう',
+                  AppLocalizations.of(context)!.generatedKey_16ea699e,
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey,
@@ -3296,10 +3296,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                       final isAbs = _isAbsExercise(exerciseName);
                                       
                                       // デバッグ出力
-                                      debugPrint('🏋️ 重量表示: $exerciseName - weight: $weight, isBodyweightMode: $isBodyweightMode, isAbs: $isAbs');
+                                      debugPrint(AppLocalizations.of(context)!.generatedKey_62bb229b);
                                       
                                       if (isCardio) {
-                                        return Text('$weight 分', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
+                                        return Text(AppLocalizations.of(context)!.minutes, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       } else if (isAbs && (isBodyweightMode || weight == 0.0)) {
                                         return Text(AppLocalizations.of(context)!.bodyweight, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       } else if (isBodyweightMode && weight == 0.0) {
@@ -3343,12 +3343,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                         if (ExerciseMasterData.cardioUsesDistance(setExerciseName)) {
                                           displayText = '$reps km';  // 距離を使う有酸素（ランニング等）
                                         } else {
-                                          displayText = '$reps 回';  // 回数を使う有酸素（バーピー等）
+                                          displayText = AppLocalizations.of(context)!.reps;  // 回数を使う有酸素（バーピー等）
                                         }
                                       } else if (isTimeMode) {
                                         displayText = '${reps}秒';   // 秒数モード（腹筋等）
                                       } else {
-                                        displayText = '$reps 回';    // 通常の回数
+                                        displayText = AppLocalizations.of(context)!.reps;    // 通常の回数
                                       }
                                       
                                       return Text(
@@ -3433,7 +3433,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           'existing_workout_id': workoutId,  // 既存記録ID
                         };
                         
-                        print('📋 追加セット準備（＋ボタンから）: $exerciseName');
+                        print(AppLocalizations.of(context)!.generatedKey_cd7a5e77);
                         if (isCardio) {
                           print('   前回: ${lastWeight}分 × ${lastReps}km');
                         } else {
@@ -3500,7 +3500,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 child: TextField(
                   controller: _searchController,
                   decoration: InputDecoration(
-                    hintText: '種目名で検索...',
+                    hintText: AppLocalizations.of(context)!.general_2e54ced5,
                     prefixIcon: const Icon(Icons.search),
                     suffixIcon: _searchController.text.isNotEmpty
                         ? IconButton(
@@ -4029,7 +4029,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.general_bd574e96),
-        content: Text('「$exerciseName」の記録を削除しますか？\nこの操作は取り消せません。'),
+        content: Text(AppLocalizations.of(context)!.generatedKey_c676bfd2),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -4305,7 +4305,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             if (mounted) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('「$exerciseName」を削除しました（残り${totalRemainingExercises}種目）'),
+                  content: Text(AppLocalizations.of(context)!.generatedKey_3ff76bd8),
                   backgroundColor: Colors.green,
                 ),
               );
@@ -4370,7 +4370,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('「$exerciseName」を削除しました（残り${totalRemainingExercises}種目）'),
+                content: Text(AppLocalizations.of(context)!.generatedKey_3ff76bd8),
                 backgroundColor: Colors.green,
               ),
             );
@@ -4439,7 +4439,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       
       // ドキュメント情報をログ出力
       final data = docSnapshot.data();
-      print('📄 削除対象ドキュメント:');
+      print(AppLocalizations.of(context)!.general_1d0812c6);
       print('   - muscle_group: ${data?['muscle_group']}');
       print('   - sets: ${(data?['sets'] as List?)?.length ?? 0}セット');
       print('   - date: ${data?['date']}');
@@ -4543,7 +4543,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '🔬 疲労管理システム',
+                            AppLocalizations.of(context)!.general_ccc38a4d,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -4836,7 +4836,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               children: [
                 Icon(Icons.psychology, color: Colors.blue, size: 28),
                 SizedBox(width: 12),
-                Text('🔬 セッションRPE入力'),
+                Text(AppLocalizations.of(context)!.general_9bef87b7),
               ],
             ),
             content: SingleChildScrollView(
@@ -4938,7 +4938,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         ),
                         const SizedBox(height: 8),
                         const Text(
-                          '0-1: 休息\n2-3: 軽い運動\n4-6: 中程度の運動\n7-8: きつい運動\n9-10: 最大努力',
+                          AppLocalizations.of(context)!.generatedKey_a215dfab,
                           style: TextStyle(fontSize: 11, height: 1.4),
                         ),
                       ],
@@ -5035,7 +5035,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     
     final recoveryTime = recoveryHours >= 72 
         ? '${recoveryHours}時間以上' 
-        : '$recoveryHours時間';
+        : AppLocalizations.of(context)!.generatedKey_e5d37f36;
 
     showDialog(
       context: context,
@@ -5044,7 +5044,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           children: [
             Icon(levelIcon, color: levelColor, size: 32),
             const SizedBox(width: 12),
-            const Text('🔬 疲労度分析結果'),
+            const Text(AppLocalizations.of(context)!.general_2b363a80),
           ],
         ),
         content: SingleChildScrollView(
@@ -5234,7 +5234,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           children: [
             Icon(Icons.psychology, color: Colors.blue[700], size: 32),
             const SizedBox(width: 12),
-            const Text('🔬 総合疲労度分析'),
+            const Text(AppLocalizations.of(context)!.general_9879fe60),
           ],
         ),
         content: SingleChildScrollView(
@@ -5334,7 +5334,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           Icon(Icons.trending_up, color: Colors.blue[700], size: 18),
                           const SizedBox(width: 8),
                           const Text(
-                            'Phase 2c: ACWR分析',
+                            AppLocalizations.of(context)!.general_e07253c3,
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.bold,
@@ -5379,14 +5379,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               
               // Phase 2a アドバイス
               Text(
-                '【基礎分析】\n$baseAdvice',
+                AppLocalizations.of(context)!.generatedKey_9beb17d9,
                 style: const TextStyle(fontSize: 13, height: 1.5),
               ),
               
               if (acwr != null) ...[
                 const SizedBox(height: 12),
                 Text(
-                  '【ACWR分析】\n$acwrAdvice',
+                  AppLocalizations.of(context)!.generatedKey_71f910d6,
                   style: const TextStyle(fontSize: 13, height: 1.5),
                 ),
               ],
@@ -5589,7 +5589,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             // 予測メッセージ
             if (!goal.isCompleted)
               Text(
-                '残り${goal.daysRemaining}日 | 現在のペースを維持しよう',
+                AppLocalizations.of(context)!.generatedKey_838efe8a,
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.white.withValues(alpha: 0.9),
@@ -5694,7 +5694,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               Row(
                 children: [
                   const Text(
-                    '🎯 目標進捗',
+                    AppLocalizations.of(context)!.general_d2afc264,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -5902,7 +5902,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text('6言語対応 - グローバル展開中'),
+              subtitle: const Text(AppLocalizations.of(context)!.profile_d15e7de3),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(builderContext).pop();
@@ -5965,7 +5965,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               
               // タイトル
               const Text(
-                '🎉 習慣化達成！',
+                AppLocalizations.of(context)!.general_1a42fb6b,
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
@@ -6002,7 +6002,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         Icon(Icons.star, color: Colors.amber, size: 24),
                         const SizedBox(width: 8),
                         const Text(
-                          '継続率 80%',
+                          AppLocalizations.of(context)!.general_1fe3a7b5,
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -6112,7 +6112,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             SizedBox(width: 12),
             Expanded(
               child: Text(
-                '🎁 友達を招待してAI5回分ゲット！',
+                AppLocalizations.of(context)!.general_ef4f68a1,
                 style: TextStyle(fontSize: 18),
               ),
             ),
@@ -6123,7 +6123,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'あなたの招待コード: $_referralCode',
+              AppLocalizations.of(context)!.generatedKey_9bae24d2,
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -6160,7 +6160,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          '招待された側: AI無料利用×3回',
+                          AppLocalizations.of(context)!.general_99ec23f0,
                           style: TextStyle(color: Colors.grey.shade700),
                         ),
                       ),
@@ -6173,7 +6173,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          '招待した側: AI追加パック×1個（5回分、¥300相当）',
+                          AppLocalizations.of(context)!.generatedKey_d0688916,
                           style: TextStyle(color: Colors.grey.shade700),
                         ),
                       ),
@@ -6193,7 +6193,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             onPressed: () {
               Clipboard.setData(ClipboardData(text: _referralCode ?? ''));
               Share.share(
-                'GYM MATCHで一緒にトレーニングしよう！招待コード: $_referralCode\n\n'
+                AppLocalizations.of(context)!.generatedKey_b8db302a
                 'https://gym-match-e560d.web.app',
               );
               Navigator.pop(context);

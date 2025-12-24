@@ -319,7 +319,7 @@ import 'po_dashboard_screen.dart';
 
                 // ヘルプテキスト
                 Text(
-                  'PO管理者専用のログイン画面です\nアクセスコードをお持ちの方は「アクセスコード」タブから\nログインしてください',
+                  AppLocalizations.of(context)!.generatedKey_fe73ede6,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 12,
@@ -481,7 +481,7 @@ import 'po_dashboard_screen.dart';
           controller: _accessCodeController,
           decoration: InputDecoration(
             labelText: AppLocalizations.of(context)!.accessCode,
-            hintText: '例: RF-AKA-2024',
+            hintText: AppLocalizations.of(context)!.generatedKey_39cc3687,
             prefixIcon: const Icon(Icons.key_outlined),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),

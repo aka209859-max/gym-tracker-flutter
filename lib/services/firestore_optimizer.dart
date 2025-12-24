@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:convert';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// Firestoreコスト最適化サービス
 /// 
 /// Firestoreの読み取り/書き込み操作を最小化してコストを削減
@@ -72,7 +73,7 @@ class FirestoreOptimizer {
     }
 
     // Firestoreから取得
-    print('⏳ Firestoreクエリ実行: $cacheKey');
+    print(AppLocalizations.of(context)!.generatedKey_76426959);
     final snapshot = await query.get();
     
     final results = snapshot.docs

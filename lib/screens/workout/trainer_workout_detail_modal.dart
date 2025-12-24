@@ -289,7 +289,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                               ),
                             )
                           : Icon(Icons.save),
-                      label: Text(_isSaving ? '保存中...' : AppLocalizations.of(context)!.save),
+                      label: Text(_isSaving ? AppLocalizations.of(context)!.workout_20388583 : AppLocalizations.of(context)!.save),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange,
                         foregroundColor: Colors.white,

@@ -64,7 +64,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('🎉 紹介コードを適用しました！AI無料利用×3回を獲得！'),
+              content: Text(AppLocalizations.of(context)!.general_a0c756b2),
               backgroundColor: Colors.green,
               duration: Duration(seconds: 3),
             ),
@@ -308,7 +308,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           SizedBox(height: 40),
           _buildOptionCard(
-            title: '週1-2回',
+            title: AppLocalizations.of(context)!.reps,
             subtitle: AppLocalizations.of(context)!.startHabitBuilding,
             icon: Icons.calendar_today,
             isSelected: _selectedTrainingFrequency == AppLocalizations.of(context)!.frequency1to2,
@@ -320,7 +320,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           SizedBox(height: 16),
           _buildOptionCard(
-            title: '週3-4回',
+            title: AppLocalizations.of(context)!.reps,
             subtitle: AppLocalizations.of(context)!.regularTraining,
             icon: Icons.calendar_month,
             isSelected: _selectedTrainingFrequency == AppLocalizations.of(context)!.frequency3to4,
@@ -466,7 +466,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           const SizedBox(height: 16),
           Text(
-            'GYM MATCHで最高のトレーニング体験を',
+            AppLocalizations.of(context)!.welcomeToGymMatch,
             style: TextStyle(
               color: Colors.white.withOpacity(0.7),
               fontSize: 16,
@@ -585,7 +585,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '✨ AI無料利用×3回を獲得！',
+                    AppLocalizations.of(context)!.earnedAiCredits,
                     style: TextStyle(
                       color: Colors.amber.withOpacity(0.9),
                       fontSize: 12,

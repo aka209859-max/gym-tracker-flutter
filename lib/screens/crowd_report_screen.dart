@@ -144,7 +144,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
               controller: _commentController,
               maxLines: 3,
               decoration: InputDecoration(
-                hintText: '例: 平日の夕方は結構混んでます',
+                hintText: AppLocalizations.of(context)!.general_61cf8cef,
                 border: OutlineInputBorder(),
               ),
             ),
@@ -311,7 +311,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                     '✅ ${result.message}',
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Text('🎁 AI 1回分をプレゼント！（報告${result.reportCount}回目）'),
+                  Text(AppLocalizations.of(context)!.generatedKey_9ff70568),
                 ],
               ),
             ),
@@ -439,7 +439,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                 const Icon(Icons.emoji_events, color: Colors.orange),
                 const SizedBox(width: 8),
                 Text(
-                  '次の報酬まであと${_nextMilestone!.remaining}回！',
+                  AppLocalizations.of(context)!.generatedKey_f0f0c7f4,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

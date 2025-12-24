@@ -122,7 +122,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                   ),
                   const SizedBox(height: 4),
                   const Text(
-                    'プロトレーナーによる\nマンツーマン指導',
+                    AppLocalizations.of(context)!.generatedKey_b55f1ed0,
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.black54,
@@ -270,7 +270,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                                   ),
                                   const SizedBox(height: 8),
                                   const Text(
-                                    'トレーナーが記録を共有すると\nここに表示されます',
+                                    AppLocalizations.of(context)!.generatedKey_5df71c9c,
                                     style: TextStyle(
                                       fontSize: 13,
                                       color: Colors.black38,

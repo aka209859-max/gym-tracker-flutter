@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../screens/settings/trial_progress_screen.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// 無料トライアル案内ダイアログ
 /// 
 /// アプリ初回起動時に表示
@@ -66,7 +67,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'GYM MATCHへ',
+                      AppLocalizations.of(context)!.subscription_55b8a61a,
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.white.withValues(alpha: 0.9),
@@ -130,8 +131,8 @@ class TrialWelcomeDialog extends StatelessWidget {
                           ),
                           const SizedBox(height: 12),
                           _buildConditionItem('1. プロフィール設定を完了'),
-                          _buildConditionItem('2. トレーニング記録を1回入力'),
-                          _buildConditionItem('3. ジム検索を1回実行'),
+                          _buildConditionItem(AppLocalizations.of(context)!.subscription_f50d3215),
+                          _buildConditionItem(AppLocalizations.of(context)!.subscription_2ae35955),
                         ],
                       ),
                     ),
@@ -139,18 +140,18 @@ class TrialWelcomeDialog extends StatelessWidget {
                     
                     // プレミアム特典リスト
                     const Text(
-                      '✨ プレミアム特典',
+                      AppLocalizations.of(context)!.subscription_a2e75082,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 8),
-                    _buildBenefitItem('🤖 AI機能 月10回'),
-                    _buildBenefitItem('❤️ お気に入り無制限'),
-                    _buildBenefitItem('📝 ジムレビュー投稿'),
-                    _buildBenefitItem('🔔 混雑度アラート通知'),
-                    _buildBenefitItem('🎯 高度なフィルター検索'),
+                    _buildBenefitItem(AppLocalizations.of(context)!.subscription_a1d7b68f),
+                    _buildBenefitItem(AppLocalizations.of(context)!.subscription_87af865e),
+                    _buildBenefitItem(AppLocalizations.of(context)!.subscription_3a23222d),
+                    _buildBenefitItem(AppLocalizations.of(context)!.subscription_823a5d48),
+                    _buildBenefitItem(AppLocalizations.of(context)!.subscription_715332a5),
                     const SizedBox(height: 16),
                     
                     // 注意事項

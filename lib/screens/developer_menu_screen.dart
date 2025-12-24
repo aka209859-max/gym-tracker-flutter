@@ -179,7 +179,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                       ),
                     ),
                     subtitle: Text(
-                      'リリースビルド（App Store版）では表示されません\nTestFlightビルドのみで利用可能',
+                      AppLocalizations.of(context)!.generatedKey_24950e16,
                       style: TextStyle(fontSize: 12),
                     ),
                   ),
@@ -200,7 +200,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                             Icon(Icons.fingerprint, color: Colors.green),
                             SizedBox(width: 8),
                             Text(
-                              '🆔 あなたのFirebase UID',
+                              AppLocalizations.of(context)!.general_7a182a17,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -239,7 +239,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                           ),
                           const SizedBox(height: 8),
                           const Text(
-                            '💡 このUIDを使ってFirestoreで開発者権限を設定できます',
+                            AppLocalizations.of(context)!.general_7a793789,
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.black87,
@@ -335,8 +335,8 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                         ),
                         SizedBox(height: 12),
                         Text(
-                          'Apple審査対応のため、開発者メニューからのプラン変更機能は削除されました。\n\n'
-                          'プラン変更はRevenueCat経由の正規課金のみ有効です。\n\n'
+                          AppLocalizations.of(context)!.generatedKey_de9021b8
+                          AppLocalizations.of(context)!.generatedKey_25deda5a
                           AppLocalizations.of(context)!.general_2474b23c,
                           style: TextStyle(
                             fontSize: 14,
@@ -416,7 +416,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                 ElevatedButton.icon(
                   onPressed: _resetAllPhase1Features,
                   icon: const Icon(Icons.delete_forever),
-                  label: const Text('Phase 1機能をすべてリセット'),
+                  label: const Text(AppLocalizations.of(context)!.general_d5890bfa),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
                     foregroundColor: Colors.white,
@@ -433,10 +433,10 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                     padding: EdgeInsets.all(12),
                     child: Text(
                       '⚠️ Phase 1リセット後は必ずアプリを再起動してください\n'
-                      'リセット内容:\n'
-                      '• オンボーディングツアー\n'
-                      '• レビュー依頼ダイアログ\n'
-                      '• 紹介バナー表示',
+                      AppLocalizations.of(context)!.sets
+                      AppLocalizations.of(context)!.generatedKey_5657d91f
+                      AppLocalizations.of(context)!.generatedKey_9c5698dd
+                      AppLocalizations.of(context)!.general_48d1e7eb,
                       style: TextStyle(fontSize: 12, color: Colors.red),
                     ),
                   ),
@@ -467,10 +467,10 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                         ),
                         const SizedBox(height: 12),
                         Text(
-                          '1. 上記のボタンで任意のプランに変更できます\n'
-                          '2. プロプランに変更すると全機能が使用可能になります\n'
-                          '3. AI使用回数は月次で自動リセットされます\n'
-                          '4. 手動リセットボタンで即座に回数をリセット可能',
+                          AppLocalizations.of(context)!.generatedKey_91c9449a
+                          AppLocalizations.of(context)!.generatedKey_734a59b9
+                          AppLocalizations.of(context)!.generatedKey_a0b3c8d7
+                          AppLocalizations.of(context)!.general_d423a462,
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey.shade700,

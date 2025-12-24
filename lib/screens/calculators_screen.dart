@@ -120,7 +120,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    '1RM (1 Rep Max) は、1回だけ持ち上げられる最大重量です。\n'
+                    AppLocalizations.of(context)!.generatedKey_7cf32853
                     AppLocalizations.of(context)!.general_f5fcce57,
                     style: TextStyle(fontSize: 14),
                   ),
@@ -278,7 +278,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
 
     if (targetWeight == null || targetWeight <= _barWeight) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('バー重量 (${_barWeight}kg) より大きい重量を入力してください')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.generatedKey_ef30a8d3)),
       );
       return;
     }
@@ -334,7 +334,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    '目標重量を入力すると、バーベルの片側に必要なプレートの\n'
+                    AppLocalizations.of(context)!.generatedKey_20458277
                     AppLocalizations.of(context)!.general_9d700689,
                     style: TextStyle(fontSize: 14),
                   ),
@@ -385,7 +385,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
               labelText: '目標重量 (kg)',
               border: const OutlineInputBorder(),
               prefixIcon: const Icon(Icons.scale),
-              helperText: 'バー重量 ($_barWeight kg) を含む総重量を入力',
+              helperText: AppLocalizations.of(context)!.generatedKey_56b65fc2,
             ),
           ),
           const SizedBox(height: 16),
@@ -474,7 +474,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                     const Padding(
                       padding: EdgeInsets.all(24),
                       child: Text(
-                        'プレート不要 (バーのみ)',
+                        AppLocalizations.of(context)!.generatedKey_201ea826,
                         style: TextStyle(fontSize: 16, color: Colors.grey),
                       ),
                     )
@@ -524,7 +524,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                     const SizedBox(width: 12),
                     const Expanded(
                       child: Text(
-                        '表示は片側のプレート数です。\n両側に同じ構成をセットしてください。',
+                        AppLocalizations.of(context)!.generatedKey_e9fe8032,
                         style: TextStyle(fontSize: 14),
                       ),
                     ),

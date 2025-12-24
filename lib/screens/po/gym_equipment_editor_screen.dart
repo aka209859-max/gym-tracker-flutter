@@ -139,7 +139,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
               controller: nameController,
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.gym_17c1e0c7,
-                hintText: '例: レッグプレス',
+                hintText: AppLocalizations.of(context)!.gym_ad4f70f3,
               ),
             ),
             const SizedBox(height: 16),

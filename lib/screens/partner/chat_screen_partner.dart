@@ -107,13 +107,13 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('${widget.partner.displayName}さんをブロックしますか？'),
+            Text(AppLocalizations.of(context)!.generatedKey_b6a2b2e7),
             const SizedBox(height: 16),
             Text(
-              'ブロックすると:\n'
-              '• メッセージの送受信ができなくなります\n'
-              '• 検索結果に表示されなくなります\n'
-              '• 相手からあなたのプロフィールが見られなくなります',
+              AppLocalizations.of(context)!.general_0cdd8f95
+              AppLocalizations.of(context)!.generatedKey_f073e2b1
+              AppLocalizations.of(context)!.generatedKey_3f52e845
+              AppLocalizations.of(context)!.general_dd7cc19f,
               style: TextStyle(fontSize: 13, color: Colors.grey[700]),
             ),
           ],
@@ -413,7 +413,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
               child: TextField(
                 controller: _messageController,
                 decoration: InputDecoration(
-                  hintText: 'メッセージを入力...',
+                  hintText: AppLocalizations.of(context)!.general_94ebce72,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24),
                     borderSide: BorderSide.none,

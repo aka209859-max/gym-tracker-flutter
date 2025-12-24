@@ -149,7 +149,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
       print('   データ: ${data.keys.toList()}');
       
       final date = (data['date'] as Timestamp).toDate();
-      print('   日付: $date');
+      print(AppLocalizations.of(context)!.generatedKey_08b72f35);
       workoutDates.add(DateFormat('yyyy-MM-dd').format(date));
       
       final sets = data['sets'] as List<dynamic>? ?? [];
@@ -157,12 +157,12 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
       totalSets += sets.length;
       
       final muscleGroup = data['muscle_group'] as String? ?? AppLocalizations.of(context)!.unknown;
-      print('   筋肉グループ: $muscleGroup');
+      print(AppLocalizations.of(context)!.generatedKey_62a594cf);
       
       // 有酸素運動の時間のみを集計（筋トレは除外）
       if (muscleGroup == AppLocalizations.of(context)!.exerciseCardio) {
         // 有酸素運動の場合、weightフィールドが「時間（分）」を表す
-        print('   🏃 有酸素運動データ');
+        print(AppLocalizations.of(context)!.workout_9e9bc482);
         
         // 各セットのweightフィールドから時間を取得
         for (final set in sets) {
@@ -182,8 +182,8 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
 
     print('\n📊 === 週間統計最終結果 ===');
     print('   トレーニング日数: ${workoutDates.length}日');
-    print('   総セット数: $totalSets');
-    print('   有酸素時間: $totalMinutes分');
+    print(AppLocalizations.of(context)!.generatedKey_fd2964d7);
+    print(AppLocalizations.of(context)!.generatedKey_74f074ea);
     print('=========================\n');
     
     if (mounted) {

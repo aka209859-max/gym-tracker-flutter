@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../gen/app_localizations.dart';
 import '../providers/locale_provider.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// 言語設定画面
 /// 
 /// サポート言語（6言語）から選択して、アプリの表示言語を変更できます
@@ -84,7 +85,7 @@ class LanguageSettingsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${localeInfo.nativeName}に変更されました。',
+                          AppLocalizations.of(context)!.generatedKey_3aa92e14,
                           style: const TextStyle(fontSize: 16),
                         ),
                         const SizedBox(height: 12),
@@ -132,7 +133,7 @@ class LanguageSettingsScreen extends StatelessWidget {
             const Icon(Icons.language, size: 48, color: Colors.blue),
             const SizedBox(height: 8),
             Text(
-              'GYM MATCH - 6言語対応',
+              AppLocalizations.of(context)!.generatedKey_81de7e28,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,

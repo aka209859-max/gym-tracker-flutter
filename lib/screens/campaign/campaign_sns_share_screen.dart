@@ -51,7 +51,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
     try {
       await Share.share(
         _template,
-        subject: 'GYM MATCH 乗り換え体験',
+        subject: AppLocalizations.of(context)!.general_fe603f63,
       );
     } catch (e) {
       if (mounted) {
@@ -149,7 +149,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('📱 SNSでシェア'),
+        title: const Text(AppLocalizations.of(context)!.general_1f4b1996),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
@@ -409,7 +409,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
             ),
             const SizedBox(height: 12),
             Text(
-              '💡 自由に編集してOKですが、認証コードとハッシュタグは必須です',
+              AppLocalizations.of(context)!.general_277a7cf0,
               style: TextStyle(
                 fontSize: 12,
                 color: Colors.grey[600],

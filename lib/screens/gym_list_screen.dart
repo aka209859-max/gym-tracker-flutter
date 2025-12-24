@@ -224,7 +224,7 @@ class _GymListScreenState extends State<GymListScreen> {
           ),
           const SizedBox(width: 6),
           Text(
-            '現在の混雑度: ${gym.crowdLevelText}',
+            AppLocalizations.of(context)!.generatedKey_c930c91e,
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.bold,

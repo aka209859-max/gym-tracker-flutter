@@ -236,7 +236,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                         ),
                         SizedBox(height: 4),
                         Text(
-                          '${goal.period == GoalPeriod.weekly ? AppLocalizations.of(context)!.thisWeek : AppLocalizations.of(context)!.thisMonth}の目標',
+                          AppLocalizations.of(context)!.generatedKey_8413b8f0,
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey[600],
@@ -414,7 +414,7 @@ class _GoalsScreenState extends State<GoalsScreen>
       context: context,
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.delete),
-        content: Text('「$goalName」を削除しますか？\nこの操作は取り消せません。'),
+        content: Text(AppLocalizations.of(context)!.generatedKey_799ab9f4),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -580,7 +580,7 @@ class _GoalsScreenState extends State<GoalsScreen>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('${goal.name}を編集'),
+        title: Text(AppLocalizations.of(context)!.generatedKey_2a5ffab4),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

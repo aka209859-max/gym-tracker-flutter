@@ -252,7 +252,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              '店舗の雰囲気やマシン・設備の写真を\nアップロードしましょう',
+              AppLocalizations.of(context)!.generatedKey_66304a49,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14,

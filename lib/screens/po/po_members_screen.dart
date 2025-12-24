@@ -111,7 +111,7 @@ class _POMembersScreenState extends State<POMembersScreen> {
                           Expanded(
                             child: _SummaryCard(
                               label: AppLocalizations.of(context)!.active,
-                              value: '$activeCount名',
+                              value: AppLocalizations.of(context)!.generatedKey_f02ab35b,
                               color: Colors.green,
                             ),
                           ),
@@ -119,7 +119,7 @@ class _POMembersScreenState extends State<POMembersScreen> {
                           Expanded(
                             child: _SummaryCard(
                               label: AppLocalizations.of(context)!.general_a9de8b69,
-                              value: '$dormantCount名',
+                              value: AppLocalizations.of(context)!.generatedKey_133c129a,
                               color: Colors.orange,
                             ),
                           ),
@@ -291,7 +291,7 @@ class _MemberCard extends StatelessWidget {
                   ),
                   if (daysSince != null)
                     Text(
-                      '最終: $daysSince日前',
+                      AppLocalizations.of(context)!.generatedKey_0bbe6198,
                       style: TextStyle(
                         fontSize: 12,
                         color: daysSince > 14 ? Colors.red : Colors.grey[700],

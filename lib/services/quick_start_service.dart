@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../models/workout_log.dart';
 import '../models/exercise.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// クイックスタートサービス（v1.02新機能）
 /// 
 /// 初心者向けのサンプルトレーニングを提供
@@ -146,7 +147,7 @@ class QuickStartService {
         exercises: exercises,
         duration: Duration(minutes: 45), // サンプル時間
         totalVolume: _calculateTotalVolume(exercises),
-        notes: '🚀 クイックスタート: $templateName',
+        notes: AppLocalizations.of(context)!.generatedKey_44750f0a,
         gymId: null,
         gymName: null,
       );

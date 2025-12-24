@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'ai_credit_service.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// リワード動画広告サービス（CEO戦略: 動画1回視聴 → AI機能1回追加）
 class RewardAdService {
   static final RewardAdService _instance = RewardAdService._internal();
@@ -27,7 +28,7 @@ class RewardAdService {
   Future<void> initialize() async {
     // Web環境ではAdMobをスキップ
     if (kIsWeb) {
-      debugPrint('🌐 Web環境のためAdMob初期化をスキップ');
+      debugPrint(AppLocalizations.of(context)!.general_36030a98);
       return;
     }
     

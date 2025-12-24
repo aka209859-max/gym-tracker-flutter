@@ -224,9 +224,9 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    '• 動画広告を視聴すると、AI機能を1回使用できます\n'
-                    '• 月3回まで広告視聴可能\n'
-                    '• Premium/Proプランは無制限に使用可能',
+                    AppLocalizations.of(context)!.generatedKey_79ab5374
+                    AppLocalizations.of(context)!.generatedKey_46daa8ca
+                    AppLocalizations.of(context)!.workout_d35c3540,
                     style: TextStyle(fontSize: 13),
                   ),
                 ],
@@ -529,12 +529,12 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
     
     // ステップ1: AI使用可能チェック（サブスク or クレジット）
     final canUse = await _creditService.canUseAI();
-    ConsoleLogger.debug('canUseAI結果: $canUse', tag: 'AI_COACHING');
+    ConsoleLogger.debug(AppLocalizations.of(context)!.generatedKey_b657787b, tag: 'AI_COACHING');
     
     if (!canUse) {
       // ステップ2: 広告視聴可能かチェック（無料ユーザー & 月3回未満）
       final canEarnFromAd = await _creditService.canEarnCreditFromAd();
-      ConsoleLogger.debug('canEarnCreditFromAd結果: $canEarnFromAd', tag: 'AI_COACHING');
+      ConsoleLogger.debug(AppLocalizations.of(context)!.generatedKey_c85769fb, tag: 'AI_COACHING');
       
       if (canEarnFromAd && mounted) {
         ConsoleLogger.info(AppLocalizations.of(context)!.workout_3cdc9d1b, tag: 'AI_COACHING');
@@ -544,7 +544,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
           builder: (context) => const RewardAdDialog(),
         );
         
-        ConsoleLogger.debug('広告視聴結果: $watchedAd', tag: 'AI_COACHING');
+        ConsoleLogger.debug(AppLocalizations.of(context)!.generatedKey_5a65e7d3, tag: 'AI_COACHING');
         
         if (watchedAd != true) {
           ConsoleLogger.warn(AppLocalizations.of(context)!.cancel, tag: 'AI_COACHING');
@@ -554,7 +554,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
         // 広告視聴成功 → クレジット付与済み → 処理続行
       } else {
         // 月3回上限到達 → サブスク誘導
-        ConsoleLogger.warn('月間上限到達 → アップグレードダイアログ表示', tag: 'AI_COACHING');
+        ConsoleLogger.warn(AppLocalizations.of(context)!.workout_d689f5ec, tag: 'AI_COACHING');
         if (mounted) {
           _showUpgradeDialog();
         }
@@ -600,7 +600,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
       ).timeout(
         const Duration(seconds: 10),
         onTimeout: () {
-          AppLogger.warning('Gemini API タイムアウト - フォールバックを使用', tag: 'AI_COACHING');
+          AppLogger.warning(AppLocalizations.of(context)!.workout_18ebf2f6, tag: 'AI_COACHING');
           throw TimeoutException('API request timed out');
         },
       );
@@ -633,7 +633,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
         throw Exception('API Error: ${response.statusCode}');
       }
     } on TimeoutException catch (e) {
-      AppLogger.warning('タイムアウト - 科学的根拠ベースのメニューを生成', tag: 'AI_COACHING');
+      AppLogger.warning(AppLocalizations.of(context)!.workout_17d45dd6, tag: 'AI_COACHING');
       _generateFallbackMenu(bodyParts);
     } catch (e) {
       AppLogger.error(AppLocalizations.of(context)!.error, tag: 'AI_COACHING', error: e);
@@ -647,55 +647,55 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
     final targetParts = bodyParts.where((part) => part != AppLocalizations.of(context)!.levelBeginner).toList();
     
     final buffer = StringBuffer();
-    buffer.writeln('# 科学的根拠に基づくトレーニングメニュー\n');
-    buffer.writeln('💡 AIが一時的に利用できないため、科学的研究に基づいた推奨メニューを提案します。\n');
+    buffer.writeln(AppLocalizations.of(context)!.generatedKey_a2170a7d);
+    buffer.writeln(AppLocalizations.of(context)!.generatedKey_8627ad90);
     
     if (targetParts.isEmpty) {
       // 全身トレーニング
-      buffer.writeln('## 全身バランストレーニング\n');
+      buffer.writeln(AppLocalizations.of(context)!.generatedKey_3921a074);
       if (isBeginner) {
-        buffer.writeln('### 1. スクワット');
-        buffer.writeln('- セット数: 3セット');
-        buffer.writeln('- 回数: 10-12回');
-        buffer.writeln('- 休憩: 90秒');
-        buffer.writeln('- ポイント: フォーム重視、軽い重量から\n');
+        buffer.writeln(AppLocalizations.of(context)!.exercise_6d49cfbd);
+        buffer.writeln(AppLocalizations.of(context)!.workout_87cf37ce);
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_63dfa8fd);
+        buffer.writeln(AppLocalizations.of(context)!.workout_ff02a3f0);
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_f48e246a);
         
-        buffer.writeln('### 2. ベンチプレス');
-        buffer.writeln('- セット数: 3セット');
-        buffer.writeln('- 回数: 10-12回');
-        buffer.writeln('- 休憩: 90秒\n');
+        buffer.writeln(AppLocalizations.of(context)!.exercise_7f131aaa);
+        buffer.writeln(AppLocalizations.of(context)!.workout_87cf37ce);
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_63dfa8fd);
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_9dbcd380);
         
-        buffer.writeln('### 3. ラットプルダウン');
-        buffer.writeln('- セット数: 3セット');
-        buffer.writeln('- 回数: 10-12回');
-        buffer.writeln('- 休憩: 60秒\n');
+        buffer.writeln(AppLocalizations.of(context)!.workout_fe875196);
+        buffer.writeln(AppLocalizations.of(context)!.workout_87cf37ce);
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_63dfa8fd);
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_e3c1b530);
       } else {
-        buffer.writeln('### 1. スクワット');
-        buffer.writeln('- セット数: 4-5セット');
-        buffer.writeln('- 回数: 6-10回');
-        buffer.writeln('- 休憩: 2-3分\n');
+        buffer.writeln(AppLocalizations.of(context)!.exercise_6d49cfbd);
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_95eff134);
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_7b69d2d1);
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_7d332e7f);
         
-        buffer.writeln('### 2. ベンチプレス');
-        buffer.writeln('- セット数: 4-5セット');
-        buffer.writeln('- 回数: 6-10回');
-        buffer.writeln('- 休憩: 2-3分\n');
+        buffer.writeln(AppLocalizations.of(context)!.exercise_7f131aaa);
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_95eff134);
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_7b69d2d1);
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_7d332e7f);
         
-        buffer.writeln('### 3. デッドリフト');
-        buffer.writeln('- セット数: 3-4セット');
-        buffer.writeln('- 回数: 5-8回');
-        buffer.writeln('- 休憩: 3-4分\n');
+        buffer.writeln(AppLocalizations.of(context)!.exercise_bddaa38a);
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_9c54dcf8);
+        buffer.writeln(AppLocalizations.of(context)!.reps);
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_64963de8);
       }
     } else {
       // 部位別トレーニング
       for (final part in targetParts) {
-        buffer.writeln('## $part トレーニング\n');
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_7fb65399);
         _addBodyPartExercises(buffer, part, isBeginner);
       }
     }
     
     buffer.writeln('\n---');
-    buffer.writeln('📚 科学的根拠: Schoenfeld et al. 2017, ACSM Guidelines 2009');
-    buffer.writeln('💡 より詳細な提案が必要な場合は、後ほど再度お試しください。');
+    buffer.writeln(AppLocalizations.of(context)!.workout_4c839041);
+    buffer.writeln(AppLocalizations.of(context)!.workout_5055caaf);
     
     setState(() {
       _generatedMenu = buffer.toString();
@@ -719,13 +719,13 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
     for (int i = 0; i < targetExercises.length && i < 3; i++) {
       buffer.writeln('### ${i + 1}. ${targetExercises[i]}');
       if (isBeginner) {
-        buffer.writeln('- セット数: 2-3セット');
-        buffer.writeln('- 回数: 10-15回');
-        buffer.writeln('- 休憩: 90秒\n');
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_7f25816c);
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_7ae0e831);
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_9dbcd380);
       } else {
-        buffer.writeln('- セット数: 3-4セット');
-        buffer.writeln('- 回数: 8-12回');
-        buffer.writeln('- 休憩: 60-90秒\n');
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_9c54dcf8);
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_22068d85);
+        buffer.writeln(AppLocalizations.of(context)!.generatedKey_e420dac1);
       }
     }
   }
@@ -886,7 +886,7 @@ ${bodyParts.join('、')}
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                '🤖 AIがトレーニングメニューを提案',
+                AppLocalizations.of(context)!.workout_6298b94b,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
@@ -896,7 +896,7 @@ ${bodyParts.join('、')}
               ),
               SizedBox(height: 16),
               Text(
-                '💾 メニューを保存',
+                AppLocalizations.of(context)!.workout_cb9ef699,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
@@ -906,7 +906,7 @@ ${bodyParts.join('、')}
               ),
               SizedBox(height: 16),
               Text(
-                '📜 履歴表示',
+                AppLocalizations.of(context)!.workout_e63fe8de,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8),
@@ -959,19 +959,19 @@ ${bodyParts.join('、')}
             ),
             SizedBox(height: 16),
             Text(
-              '💎 Premiumプランにアップグレードすると:',
+              AppLocalizations.of(context)!.workout_d00ce2c5,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 8),
-            Text('• AI機能を月10回まで使用可能', style: TextStyle(fontSize: 13)),
-            Text('• 広告なしで快適に利用', style: TextStyle(fontSize: 13)),
-            Text('• 30日間無料トライアル', style: TextStyle(fontSize: 13)),
+            Text(AppLocalizations.of(context)!.workout_302d148c, style: TextStyle(fontSize: 13)),
+            Text(AppLocalizations.of(context)!.workout_18419fdb, style: TextStyle(fontSize: 13)),
+            Text(AppLocalizations.of(context)!.workout_995040b8, style: TextStyle(fontSize: 13)),
             SizedBox(height: 8),
             Text(
-              '🏆 Proプランなら月30回！',
+              AppLocalizations.of(context)!.workout_98fdb72e,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
@@ -1024,16 +1024,16 @@ ${bodyParts.join('、')}
             ),
             SizedBox(height: 16),
             Text(
-              '💰 AI追加パック（¥300）:',
+              AppLocalizations.of(context)!.generatedKey_530c8f16,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 8),
-            Text('• AI機能を5回追加', style: TextStyle(fontSize: 13)),
-            Text('• 今月末まで有効', style: TextStyle(fontSize: 13)),
-            Text('• いつでも追加購入可能', style: TextStyle(fontSize: 13)),
+            Text(AppLocalizations.of(context)!.workout_940a74d8, style: TextStyle(fontSize: 13)),
+            Text(AppLocalizations.of(context)!.workout_d9fd4ff4, style: TextStyle(fontSize: 13)),
+            Text(AppLocalizations.of(context)!.workout_fdf1a277, style: TextStyle(fontSize: 13)),
           ],
         ),
         actions: [

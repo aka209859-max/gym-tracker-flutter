@@ -192,8 +192,8 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
               TextFormField(
                 controller: _nameController,
                 decoration: InputDecoration(
-                  labelText: 'お名前 *',
-                  hintText: '山田 太郎',
+                  labelText: AppLocalizations.of(context)!.general_a3751722,
+                  hintText: AppLocalizations.of(context)!.general_22f70c10,
                   prefixIcon: Icon(Icons.person),
                   border: OutlineInputBorder(),
                 ),
@@ -211,7 +211,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
               TextFormField(
                 controller: _phoneController,
                 decoration: InputDecoration(
-                  labelText: '電話番号 *',
+                  labelText: AppLocalizations.of(context)!.general_1b4a8f3e,
                   hintText: '090-1234-5678',
                   prefixIcon: Icon(Icons.phone),
                   border: OutlineInputBorder(),
@@ -252,7 +252,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
 
               // 希望日選択
               const Text(
-                '希望日時 *',
+                AppLocalizations.of(context)!.general_3cbc39ba,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -297,7 +297,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
                 controller: _messageController,
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)!.general_ec0e7b9d,
-                  hintText: '例: 初めてのジム利用です',
+                  hintText: AppLocalizations.of(context)!.general_3919dbe4,
                   prefixIcon: Icon(Icons.message),
                   border: OutlineInputBorder(),
                 ),
@@ -321,7 +321,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        '※ 予約申込後、店舗から確認のご連絡があります。\n※ この申込は仮予約です。店舗の確認をもって予約確定となります。',
+                        AppLocalizations.of(context)!.generatedKey_8bc67a22,
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.blue[900],

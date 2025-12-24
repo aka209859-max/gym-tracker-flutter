@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// 言語設定を管理するProvider
 /// 
 /// サポート言語:
@@ -17,10 +18,10 @@ class LocaleProvider extends ChangeNotifier {
   
   /// サポートされている言語リスト
   static const List<LocaleInfo> supportedLocales = [
-    LocaleInfo(locale: Locale('ja'), name: 'Japanese', nativeName: '日本語', flag: '🇯🇵'),
+    LocaleInfo(locale: Locale('ja'), name: 'Japanese', nativeName: AppLocalizations.of(context)!.languageJapanese, flag: '🇯🇵'),
     LocaleInfo(locale: Locale('en'), name: 'English', nativeName: 'English', flag: '🇺🇸'),
     LocaleInfo(locale: Locale('ko'), name: 'Korean', nativeName: '한국어', flag: '🇰🇷'),
-    LocaleInfo(locale: Locale('zh'), name: 'Chinese', nativeName: '中文', flag: '🇨🇳'),
+    LocaleInfo(locale: Locale('zh'), name: 'Chinese', nativeName: AppLocalizations.of(context)!.workout_df5c2fc5, flag: '🇨🇳'),
     LocaleInfo(locale: Locale('de'), name: 'German', nativeName: 'Deutsch', flag: '🇩🇪'),
     LocaleInfo(locale: Locale('es'), name: 'Spanish', nativeName: 'Español', flag: '🇪🇸'),
   ];

@@ -28,9 +28,9 @@ class PhaseMigrationScreen extends StatelessWidget {
             // フェーズ1の詳細
             _buildPhaseCard(
               phase: CrowdDataPhase.phase1,
-              title: 'フェーズ1: 統計ベース',
-              revenue: '0 - 100万円/月',
-              cost: '\$0/月',
+              title: AppLocalizations.of(context)!.general_6a559d3d,
+              revenue: AppLocalizations.of(context)!.generatedKey_2e811d78,
+              cost: AppLocalizations.of(context)!.mon,
               accuracy: '70-90%',
               description: AppLocalizations.of(context)!.general_b6c03396,
               features: [
@@ -46,9 +46,9 @@ class PhaseMigrationScreen extends StatelessWidget {
             // フェーズ2の詳細
             _buildPhaseCard(
               phase: CrowdDataPhase.phase2,
-              title: 'フェーズ2: ハイブリッド',
-              revenue: '100 - 300万円/月',
-              cost: '\$170/月',
+              title: AppLocalizations.of(context)!.general_29316586,
+              revenue: AppLocalizations.of(context)!.generatedKey_776a9503,
+              cost: AppLocalizations.of(context)!.mon,
               accuracy: '85-95%',
               description: AppLocalizations.of(context)!.general_4dd675e7,
               features: [
@@ -64,9 +64,9 @@ class PhaseMigrationScreen extends StatelessWidget {
             // フェーズ3の詳細
             _buildPhaseCard(
               phase: CrowdDataPhase.phase3,
-              title: 'フェーズ3: フルAPI',
+              title: AppLocalizations.of(context)!.general_9ada5639,
               revenue: AppLocalizations.of(context)!.general_90d5357d,
-              cost: '\$850/月',
+              cost: AppLocalizations.of(context)!.mon,
               accuracy: '90-95%',
               description: AppLocalizations.of(context)!.general_a12528f0,
               features: [
@@ -308,11 +308,11 @@ class PhaseMigrationScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             _buildGuideItem(
-              '1. フェーズ1 → フェーズ2',
+              AppLocalizations.of(context)!.general_10819990,
               AppLocalizations.of(context)!.general_2e4b390b,
             ),
             _buildGuideItem(
-              '2. フェーズ2 → フェーズ3',
+              AppLocalizations.of(context)!.general_6947183d,
               AppLocalizations.of(context)!.general_f5e6812d,
             ),
             const SizedBox(height: 12),
@@ -326,7 +326,7 @@ class PhaseMigrationScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    '📋 移行チェックリスト:',
+                    AppLocalizations.of(context)!.general_b12e4926,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

@@ -294,7 +294,7 @@ class _PartnerReservationSettingsScreenState
                           const SizedBox(width: 8),
                           const Expanded(
                             child: Text(
-                              '※ 複数店舗を運営されている場合は、各店舗ごとに異なるメールアドレスを設定してください。\n※ 予約通知は現在Firebase Functions経由で送信されます（別途設定が必要です）。',
+                              AppLocalizations.of(context)!.generatedKey_78d3c5fd,
                               style: TextStyle(fontSize: 12),
                             ),
                           ),

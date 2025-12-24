@@ -125,7 +125,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 backgroundColor: Colors.blue,
                 child: Icon(Icons.photo_camera, color: Colors.white),
               ),
-              title: const Text('📸 写真から取り込み'),
+              title: const Text(AppLocalizations.of(context)!.profile_4bac693a),
               subtitle: const Text(
                 AppLocalizations.of(context)!.profile_d752bd08,
                 style: TextStyle(fontSize: 12),
@@ -139,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 backgroundColor: Colors.green,
                 child: Icon(Icons.description, color: Colors.white),
               ),
-              title: const Text('📄 CSVから取り込み'),
+              title: const Text(AppLocalizations.of(context)!.profile_3cbb854e),
               subtitle: const Text(
                 AppLocalizations.of(context)!.profile_d97e2902,
                 style: TextStyle(fontSize: 12),
@@ -193,7 +193,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     CircularProgressIndicator(),
                     SizedBox(height: 16),
-                    Text('画像を解析しています...'),
+                    Text(AppLocalizations.of(context)!.profile_53b1904a),
                   ],
                 ),
               ),
@@ -281,7 +281,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     CircularProgressIndicator(),
                     SizedBox(height: 16),
-                    Text('CSVファイルを解析しています...'),
+                    Text(AppLocalizations.of(context)!.profile_8de080a6),
                   ],
                 ),
               ),
@@ -427,15 +427,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(height: 20),
               const Text(
-                '🎁 紹介特典',
+                AppLocalizations.of(context)!.profile_11b58ebc,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 8),
-              _buildRewardItem(AppLocalizations.of(context)!.profile_7128a2b9, 'AI使用回数 +5回'),
-              _buildRewardItem(AppLocalizations.of(context)!.profile_e6a7ff8b, 'AI使用回数 +3回'),
+              _buildRewardItem(AppLocalizations.of(context)!.profile_7128a2b9, AppLocalizations.of(context)!.navAI),
+              _buildRewardItem(AppLocalizations.of(context)!.profile_e6a7ff8b, AppLocalizations.of(context)!.navAI),
               const SizedBox(height: 16),
               Container(
                 padding: const EdgeInsets.all(12),
@@ -444,7 +444,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: const Text(
-                  '💡 友達がこのコードを入力すると、両方に特典が届きます！',
+                  AppLocalizations.of(context)!.profile_09c89631,
                   style: TextStyle(fontSize: 12),
                 ),
               ),
@@ -458,9 +458,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ElevatedButton.icon(
               onPressed: () async {
                 Clipboard.setData(ClipboardData(
-                  text: 'GYM MATCHで一緒にトレーニングしませんか？\n\n'
-                      '紹介コード: $referralCode\n'
-                      'AI使用回数3回がもらえます！\n\n'
+                  text: AppLocalizations.of(context)!.generatedKey_b82404b5
+                      AppLocalizations.of(context)!.generatedKey_6738f579
+                      AppLocalizations.of(context)!.generatedKey_db4ebdd3
                       'https://gym-match-e560d.web.app',
                 ));
                 Navigator.of(context).pop();
@@ -614,7 +614,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             const SizedBox(height: 4),
             Text(
-              _userProfile?.bio ?? 'GYM MATCHへようこそ',
+              _userProfile?.bio ?? AppLocalizations.of(context)!.profile_750e8971,
               style: TextStyle(fontSize: 12, color: Colors.grey[600]),
               textAlign: TextAlign.center,
               maxLines: 2,
@@ -880,7 +880,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           context,
           icon: Icons.card_giftcard,
           title: AppLocalizations.of(context)!.profileInviteFriends,
-          subtitle: 'AI x5回 + 紹介された人もAI x3回',
+          subtitle: AppLocalizations.of(context)!.profile_f7b8953f,
           badge: 'NEW',
           badgeColor: Colors.orange,
           onTap: () {
@@ -989,7 +989,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '$featureNameは有料プラン会員限定の機能です。',
+                AppLocalizations.of(context)!.generatedKey_dee40980,
                 style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 16),
@@ -998,8 +998,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 style: TextStyle(fontSize: 14, color: Colors.grey[700]),
               ),
               const SizedBox(height: 8),
-              _buildFeatureItem('🤝 トレーニングパートナーマッチング'),
-              _buildFeatureItem('💬 メッセージング機能'),
+              _buildFeatureItem(AppLocalizations.of(context)!.profile_9789e99b),
+              _buildFeatureItem(AppLocalizations.of(context)!.subscription_4ee5c60b),
             ],
           ),
           actions: [
@@ -1050,7 +1050,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.profile_b217155b),
         content: Text(
-          '$featureNameは現在開発中です。\n次回のアップデートでご利用いただけます。',
+          AppLocalizations.of(context)!.generatedKey_1d067291,
         ),
         actions: [
           TextButton(
@@ -1179,7 +1179,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text('6言語対応 - グローバル展開中'),
+              subtitle: const Text(AppLocalizations.of(context)!.profile_d15e7de3),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();

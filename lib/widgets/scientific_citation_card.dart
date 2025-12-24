@@ -5,6 +5,7 @@ library;
 
 import 'package:flutter/material.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// 科学的引用カード
 class ScientificCitationCard extends StatelessWidget {
   final String citation;
@@ -140,7 +141,7 @@ class _ScientificBasisSectionState extends State<ScientificBasisSection> {
               ),
             ),
             subtitle: Text(
-              '${widget.basis.length}本の査読付き論文',
+              AppLocalizations.of(context)!.generatedKey_d6ef4230,
               style: TextStyle(
                 fontSize: 12,
                 color: Colors.grey.shade600,

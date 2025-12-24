@@ -100,11 +100,11 @@ class CrowdDataConfig {
   static String get phaseDescription {
     switch (currentPhase) {
       case CrowdDataPhase.phase1:
-        return 'フェーズ1: 統計ベース + ユーザー報告（コスト\$0/月）';
+        return AppLocalizations.of(context)!.generatedKey_d1f54967;
       case CrowdDataPhase.phase2:
-        return 'フェーズ2: ハイブリッド戦略（コスト\$170/月）';
+        return AppLocalizations.of(context)!.generatedKey_cbcfc076;
       case CrowdDataPhase.phase3:
-        return 'フェーズ3: フルAPI導入（コスト\$850/月）';
+        return AppLocalizations.of(context)!.generatedKey_7d8a2d8a;
     }
   }
   

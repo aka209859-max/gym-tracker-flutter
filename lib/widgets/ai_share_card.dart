@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// AI分析結果をSNSシェア用に美しく表示するカード
 class AIShareCard extends StatelessWidget {
   final String title;
@@ -124,7 +125,7 @@ class AIShareCard extends StatelessWidget {
                   ),
                 ),
                 const Text(
-                  '📱 App Store で入手',
+                  AppLocalizations.of(context)!.general_1297387e,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 11,

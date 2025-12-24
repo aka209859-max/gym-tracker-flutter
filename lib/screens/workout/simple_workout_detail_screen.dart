@@ -345,7 +345,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
           controller: controller,
           maxLines: 5,
           decoration: InputDecoration(
-            hintText: 'メモを入力...',
+            hintText: AppLocalizations.of(context)!.workout_3514c3dc,
             border: OutlineInputBorder(),
           ),
         ),
@@ -494,7 +494,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('「$exerciseName」を削除しますか？'),
+              Text(AppLocalizations.of(context)!.generatedKey_6ece374b),
               const SizedBox(height: 16),
               const Divider(),
               const SizedBox(height: 8),
@@ -650,7 +650,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('「$exerciseName」を削除しました（残り${remainingExerciseNames}種目）'),
+            content: Text(AppLocalizations.of(context)!.generatedKey_758d777e),
             backgroundColor: Colors.green,
           ),
         );
@@ -709,7 +709,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('「$exerciseName」を削除しました（残り${exercises.length}種目）'),
+            content: Text(AppLocalizations.of(context)!.generatedKey_08aedbf7),
             backgroundColor: Colors.green,
           ),
         );

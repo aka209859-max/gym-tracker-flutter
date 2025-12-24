@@ -131,7 +131,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
       behavior: HitTestBehavior.translucent,
       child: Scaffold(
         appBar: AppBar(
-        title: const Text('🔬 個人要因設定'),
+        title: const Text(AppLocalizations.of(context)!.personalFactor_7a61c15b),
         actions: [
           IconButton(
             icon: const Icon(Icons.help_outline),
@@ -153,13 +153,13 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                     const SizedBox(height: 24),
                     
                     // 静的要因セクション
-                    _buildSectionHeader(AppLocalizations.of(context)!.personalFactor_a8e6bc91, '変更頻度: 低'),
+                    _buildSectionHeader(AppLocalizations.of(context)!.personalFactor_a8e6bc91, AppLocalizations.of(context)!.personalFactor_fe2e1a9a),
                     const SizedBox(height: 12),
                     _buildStaticFactorsCard(),
                     const SizedBox(height: 24),
                     
                     // 動的要因セクション
-                    _buildSectionHeader(AppLocalizations.of(context)!.personalFactor_380ea875, '変更頻度: 高（日々更新推奨）'),
+                    _buildSectionHeader(AppLocalizations.of(context)!.personalFactor_380ea875, AppLocalizations.of(context)!.generatedKey_5f66300d),
                     const SizedBox(height: 12),
                     _buildDynamicFactorsCard(),
                     const SizedBox(height: 32),
@@ -176,7 +176,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                         foregroundColor: Colors.white,
                       ),
                       child: const Text(
-                        '💾 保存して PFM を更新',
+                        AppLocalizations.of(context)!.personalFactor_17960add,
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -200,7 +200,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
         child: Column(
           children: [
             const Text(
-              '現在の Personal Factor Multiplier',
+              AppLocalizations.of(context)!.personalFactor_1a9ab501,
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
@@ -214,7 +214,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              '基礎Training Loadに掛け算されます',
+              AppLocalizations.of(context)!.personalFactor_6e00fd9c,
               style: TextStyle(fontSize: 12, color: Colors.grey[700]),
             ),
             Divider(height: 24),
@@ -260,7 +260,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.age,
                 suffixText: AppLocalizations.of(context)!.personalFactor_cfa20784,
-                helperText: '<25歳: 0.95x, 40-50歳: 1.05x, 50+歳: 1.10x',
+                helperText: AppLocalizations.of(context)!.generatedKey_47b8a545,
                 helperMaxLines: 2,
                 prefixIcon: Icon(Icons.cake),
               ),
@@ -286,7 +286,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.personalFactor_5a712682,
                 suffixText: AppLocalizations.of(context)!.annualPrice,
-                helperText: '<1年: 1.10x, 3-5年: 0.95x, 5+年: 0.90x',
+                helperText: AppLocalizations.of(context)!.generatedKey_f9998737,
                 helperMaxLines: 2,
                 prefixIcon: Icon(Icons.fitness_center),
               ),
@@ -322,7 +322,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.personalFactor_db37d13b,
                 suffixText: AppLocalizations.of(context)!.time,
-                helperText: '<6時間: 1.15x, 8+時間: 0.95x',
+                helperText: AppLocalizations.of(context)!.personalFactor_926f964b,
                 helperMaxLines: 2,
                 prefixIcon: Icon(Icons.bedtime),
               ),
@@ -374,7 +374,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.personalFactor_e8aa7dea,
                 suffixText: AppLocalizations.of(context)!.personalFactor_ec2007be,
-                helperText: '1ユニット毎に+5% (ビール350ml≒1.4ユニット)',
+                helperText: AppLocalizations.of(context)!.generatedKey_99e6fba7,
                 helperMaxLines: 2,
                 prefixIcon: Icon(Icons.local_bar),
               ),
@@ -419,7 +419,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              'Personal Factor Multiplier (PFM) は、年齢・経験・睡眠・栄養・アルコールの5要素を統合して個人の疲労感受性を補正します。\n\n'
+              AppLocalizations.of(context)!.generatedKey_2b6b9ab2
               '範囲: 0.7x - 1.3x (最小30%減〜最大30%増)\n'
               AppLocalizations.of(context)!.personalFactor_a5772517,
               style: TextStyle(fontSize: 11, color: Colors.grey[700]),
@@ -453,23 +453,23 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               const SizedBox(height: 16),
               _buildHelpSection(
                 '📊 静的要因',
-                '変更頻度が低い要素です:\n'
-                '• 年齢: 加齢による回復力の変化\n'
-                '• トレーニング経験: 適応能力の違い',
+                AppLocalizations.of(context)!.generatedKey_38fecd64
+                AppLocalizations.of(context)!.generatedKey_ecb9080a
+                AppLocalizations.of(context)!.personalFactor_bc1b3d5b,
               ),
               const SizedBox(height: 12),
               _buildHelpSection(
-                '⚡ 動的要因',
-                '日々変動する要素です:\n'
-                '• 睡眠時間: 回復の質\n'
-                '• タンパク質摂取: 筋肉回復の材料\n'
-                '• アルコール: 回復阻害要因',
+                AppLocalizations.of(context)!.personalFactor_6a75ad83,
+                AppLocalizations.of(context)!.generatedKey_b9c37a72
+                AppLocalizations.of(context)!.generatedKey_fb6e8bd2
+                AppLocalizations.of(context)!.generatedKey_b905afe2
+                AppLocalizations.of(context)!.personalFactor_63b473a6,
               ),
               const SizedBox(height: 12),
               _buildHelpSection(
-                '🎯 推奨更新頻度',
-                '• 静的要因: 数ヶ月に1回\n'
-                '• 動的要因: トレーニング前日・当日に更新',
+                AppLocalizations.of(context)!.personalFactor_669f4356,
+                AppLocalizations.of(context)!.generatedKey_43279a59
+                AppLocalizations.of(context)!.personalFactor_6fbc6841,
               ),
               const SizedBox(height: 12),
               Container(

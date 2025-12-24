@@ -56,7 +56,7 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              'プロのトレーナーによる\nマンツーマン指導',
+              AppLocalizations.of(context)!.generatedKey_9772ef29,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14,

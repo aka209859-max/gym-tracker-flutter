@@ -62,7 +62,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
         while (userCredential == null && retryCount < maxRetries) {
           try {
             retryCount++;
-            print('   試行 $retryCount/$maxRetries...');
+            print(AppLocalizations.of(context)!.generatedKey_15000674);
             
             userCredential = await FirebaseAuth.instance.signInAnonymously().timeout(
               const Duration(seconds: 15),
@@ -76,7 +76,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
           } catch (e) {
             print('   試行 $retryCount 失敗: $e');
             if (retryCount < maxRetries) {
-              print('   2秒後に再試行...');
+              print(AppLocalizations.of(context)!.workout_8a86d09a);
               await Future.delayed(const Duration(seconds: 2));
             } else {
               print('❌ 最大試行回数に達しました');
@@ -859,7 +859,7 @@ class _SimpleWorkoutCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
-                        '$duration分',
+                        AppLocalizations.of(context)!.minutes,
                         style: TextStyle(
                           fontSize: 12,
                           color: Theme.of(context)

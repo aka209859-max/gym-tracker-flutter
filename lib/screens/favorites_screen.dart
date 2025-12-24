@@ -92,7 +92,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.removeFromFavorites),
-        content: Text('「${gym.name}」をお気に入りから削除しますか？'),
+        content: Text(AppLocalizations.of(context)!.generatedKey_e177a676),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -116,7 +116,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       if (success && mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${gym.name} をお気に入りから削除しました'),
+            content: Text(AppLocalizations.of(context)!.generatedKey_298342bb),
             backgroundColor: Colors.green,
           ),
         );
@@ -196,7 +196,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               const Icon(Icons.favorite, color: Colors.red, size: 20),
               const SizedBox(width: 8),
               Text(
-                'お気に入りのジム (${_favoriteGyms.length}件)',
+                AppLocalizations.of(context)!.generatedKey_248390f0,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

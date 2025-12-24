@@ -4,6 +4,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:io';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// AI悪用防止サービス（5層防御）
 /// 
 /// Phase 1実装:
@@ -27,7 +28,7 @@ class AIAbusePreventionService {
       if (lastHourCalls >= MAX_AI_CALLS_PER_HOUR) {
         return RateLimitResult(
           allowed: false,
-          reason: '1時間の利用上限（${MAX_AI_CALLS_PER_HOUR}回）に達しました。\nしばらくお待ちください。',
+          reason: AppLocalizations.of(context)!.generatedKey_fc1a79ee,
           retryAfter: const Duration(hours: 1),
         );
       }
@@ -37,7 +38,7 @@ class AIAbusePreventionService {
       if (todayCalls >= MAX_AI_CALLS_PER_DAY) {
         return RateLimitResult(
           allowed: false,
-          reason: '本日の利用上限（${MAX_AI_CALLS_PER_DAY}回）に達しました。\n明日またご利用ください。',
+          reason: AppLocalizations.of(context)!.generatedKey_8ed6a095,
           retryAfter: Duration(hours: 24 - now.hour),
         );
       }
@@ -47,8 +48,8 @@ class AIAbusePreventionService {
       if (monthCalls >= MAX_AI_CALLS_PER_MONTH) {
         return RateLimitResult(
           allowed: false,
-          reason: '今月の利用上限（${MAX_AI_CALLS_PER_MONTH}回）に達しました。\n'
-                 '異常な利用パターンが検出されました。\n'
+          reason: AppLocalizations.of(context)!.generatedKey_4cf248d0
+                 AppLocalizations.of(context)!.generatedKey_0efa33de
                  AppLocalizations.of(context)!.general_357589c3,
           retryAfter: null,
         );
@@ -220,7 +221,7 @@ class AIAbusePreventionService {
       });
       
       if (kDebugMode) {
-        print('🚩 ユーザーフラグ: $userId - $flagType - $reason');
+        print(AppLocalizations.of(context)!.generatedKey_4d7afd8b);
       }
     } catch (e) {
       if (kDebugMode) {

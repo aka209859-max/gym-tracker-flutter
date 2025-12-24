@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_analytics/firebase_analytics.dart';  // ✅ v1.0.164: Analytics追加
 import 'package:shared_preferences/shared_preferences.dart';
@@ -99,7 +100,7 @@ void main() async {
       
       // 既存ユーザーがいるか確認
       if (auth.currentUser == null) {
-        print('   新規ユーザーとして匿名ログイン中...');
+        print(AppLocalizations.of(context)!.general_73647770);
         final userCredential = await auth.signInAnonymously();
         print('✅ 匿名認証成功: ${userCredential.user?.uid}');
       } else {
@@ -146,7 +147,7 @@ void main() async {
     Future.delayed(const Duration(milliseconds: 500)).then((_) async {
       try {
         final status = await AppTrackingTransparency.requestTrackingAuthorization();
-        print('📱 ATTステータス: $status');
+        print(AppLocalizations.of(context)!.generatedKey_f7cf4b71);
       } catch (e) {
         print('❌ ATTリクエストエラー: $e');
       }
@@ -174,7 +175,7 @@ void main() async {
     if (firebaseInitialized) {
       final pendingCount = await OfflineService.getPendingSyncCount();
       if (pendingCount > 0) {
-        print('📤 同期待ちデータ: $pendingCount件');
+        print(AppLocalizations.of(context)!.generatedKey_872bf7a3);
         try {
           await OfflineService.syncPendingData();
           print('✅ オフラインデータ同期完了');
@@ -182,7 +183,7 @@ void main() async {
           print('⚠️ 同期エラー（次回リトライ）: $e');
         }
       } else {
-        print('📭 同期待ちデータなし');
+        print(AppLocalizations.of(context)!.general_15a2ecb2);
       }
     }
   } catch (e) {
@@ -216,7 +217,7 @@ void main() async {
       // トライアル期限チェック
       Future(() async {
         try {
-          print('🎁 トライアル期限チェック...');
+          print(AppLocalizations.of(context)!.general_ccfa7e92);
           final trialService = TrialService();
           await trialService.checkTrialExpiration();
           print('✅ トライアル状態確認完了');
@@ -228,7 +229,7 @@ void main() async {
       // AdMob初期化
       Future(() async {
         try {
-          print('📱 AdMob初期化...');
+          print(AppLocalizations.of(context)!.general_ba8b3276);
           final adMobService = AdMobService();
           await adMobService.initialize();
           print('✅ AdMob初期化完了');
@@ -240,7 +241,7 @@ void main() async {
       // リワード広告初期化
       Future(() async {
         try {
-          print('🎬 リワード広告初期化...');
+          print(AppLocalizations.of(context)!.general_12c91638);
           globalRewardAdService = RewardAdService();
           await globalRewardAdService.initialize();
           await globalRewardAdService.loadRewardedAd();
@@ -275,7 +276,7 @@ class GymMatchApp extends StatelessWidget {
       child: Consumer2<ThemeProvider, LocaleProvider>(
         builder: (context, themeProvider, localeProvider, child) {
           return MaterialApp(
-            title: 'GYM MATCH - ジム検索アプリ',
+            title: AppLocalizations.of(context)!.general_b1a27a94,
             debugShowCheckedModeBanner: false,
             theme: themeProvider.currentTheme,
             
@@ -420,7 +421,7 @@ class _LoadingScreen extends StatelessWidget {
           children: [
             CircularProgressIndicator(),
             SizedBox(height: 24),
-            Text('FitSync 起動中...'),
+            Text(AppLocalizations.of(context)!.general_358b3eef),
           ],
         ),
       ),

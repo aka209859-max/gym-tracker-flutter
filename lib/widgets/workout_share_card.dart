@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// Task 27: トレーニング記録シェア用カード
 class WorkoutShareCard extends StatelessWidget {
   final DateTime date;
@@ -251,7 +252,7 @@ class WorkoutShareCard extends StatelessWidget {
           // フッター
           Center(
             child: Text(
-              '#GYMMATCH #筋トレ記録',
+              AppLocalizations.of(context)!.workout_b3b53405,
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.white.withValues(alpha: 0.8),

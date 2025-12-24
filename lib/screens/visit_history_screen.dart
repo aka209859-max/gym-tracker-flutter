@@ -159,7 +159,7 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
             ),
             const SizedBox(height: 12),
             Text(
-              'ジム詳細画面で「チェックイン」すると\nここに履歴が表示されます',
+              AppLocalizations.of(context)!.generatedKey_6d64f0af,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14,

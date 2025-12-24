@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'dart:async';
 
@@ -164,7 +165,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       }
       
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('AIコーチから${exercises.length}種目を読み込みました')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.generatedKey_61221654)),
       );
     });
   }
@@ -184,7 +185,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   
   void _applyTemplateDataIfProvided() {
     if (widget.templateData != null) {
-      print('📋 テンプレートデータを適用: ${widget.templateData}');
+      print(AppLocalizations.of(context)!.generatedKey_c5928230);
       
       final muscleGroup = widget.templateData!['muscle_group'] as String?;
       if (muscleGroup != null) {
@@ -394,7 +395,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     });
     
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('${exerciseSets.length}セットをコピーしました')),
+      SnackBar(content: Text(AppLocalizations.of(context)!.generatedKey_7c8d26de)),
     );
   }
 
@@ -540,7 +541,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
-                  '$_selectedMuscleGroupの種目',
+                  AppLocalizations.of(context)!.generatedKey_f36e4e45,
                   style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -618,7 +619,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      '📝 トレーニングメモ',
+                      AppLocalizations.of(context)!.workout_bc108eb8,
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 12),
@@ -724,7 +725,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        '前回記録: ${lastData['weight']}kg x ${lastData['reps']}回\n今日の記録が次回の目標になります。',
+                        '前回記録: ${lastData['weight']}kg x ${lastData['repsAppLocalizations.of(context)!.generatedKey_aef11465,
                         style: TextStyle(fontSize: 12, color: Colors.purple.shade700),
                       ),
                     ),

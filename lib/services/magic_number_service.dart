@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// マジックナンバーサービス
 /// 
 /// 「5記録/30日」のマジックナンバーを達成すると、
@@ -94,7 +95,7 @@ class MagicNumberService {
       await prefs.setBool(_keyShownDialog, true);
       await prefs.setString(_keyAchievedDate, DateTime.now().toIso8601String());
 
-      print('🎉 マジックナンバー達成！');
+      print(AppLocalizations.of(context)!.general_dac8f38e);
       return true;
     } catch (e) {
       print('❌ マジックナンバー達成チェックエラー: $e');
@@ -158,12 +159,12 @@ class MagicNumberService {
     if (count == 0) {
       return AppLocalizations.of(context)!.general_c719e5c8;
     } else if (count == 1) {
-      return 'いいスタートです！あと${magicNumberRecords - count}記録で習慣化達成！';
+      return AppLocalizations.of(context)!.generatedKey_5dd7baf1;
     } else if (count < magicNumberRecords) {
       final remaining = magicNumberRecords - count;
       return 'あと$remaining記録！この調子で続けましょう💪';
     } else {
-      return '🎉 習慣化達成！あなたは継続できる人です！';
+      return AppLocalizations.of(context)!.general_35b53a6b;
     }
   }
 
@@ -191,9 +192,9 @@ class MagicNumberService {
   /// リマインダーメッセージを生成
   String getReminderMessage(int count, int daysRemaining) {
     if (count == 0) {
-      return '30日以内に5記録で習慣化！\n今日からスタートしませんか？';
+      return AppLocalizations.of(context)!.generatedKey_69df4973;
     } else if (count == 1) {
-      return 'あと4記録で習慣化達成！\n残り${daysRemaining}日です。';
+      return AppLocalizations.of(context)!.generatedKey_1a0782d5;
     } else {
       return 'あと${magicNumberRecords - count}記録！\n残り${daysRemaining}日で達成できます💪';
     }

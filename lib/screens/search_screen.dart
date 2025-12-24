@@ -208,7 +208,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       _currentPosition = null;
                       // GPS位置をクリアするだけで、再検索はしない
                       if (kDebugMode) {
-                        print('🗑️ GPS位置をクリア');
+                        print(AppLocalizations.of(context)!.general_a337a1ca);
                       }
                     });
                   },
@@ -371,7 +371,7 @@ class _SearchScreenState extends State<SearchScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '全${sortedGyms.length}件中 ${startIndex + 1}-${endIndex > sortedGyms.length ? sortedGyms.length : endIndex}件を表示',
+                  AppLocalizations.of(context)!.generatedKey_5c140a75,
                   style: const TextStyle(fontSize: 12, color: Colors.black87),
                 ),
                 Text(
@@ -795,7 +795,7 @@ class _SearchScreenState extends State<SearchScreen> {
         _applyFilters();
       } else {
         if (kDebugMode) {
-          print('ℹ️ テキスト検索が優先されるため、GPS検索はスキップ');
+          print(AppLocalizations.of(context)!.general_5a7c338c);
         }
       }
     } finally {

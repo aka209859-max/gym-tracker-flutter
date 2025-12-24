@@ -5,6 +5,7 @@ import '../services/ai_credit_service.dart';
 import '../screens/subscription_screen.dart';
 import '../screens/ai_addon_purchase_screen.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// ペイウォールダイアログ種別
 enum PaywallType {
   aiLimitReached,  // AI利用回数上限到達
@@ -221,7 +222,7 @@ class PaywallDialog extends StatelessWidget {
             
             // 説明
             const Text(
-              '素晴らしい継続力です！\nさらに快適なトレーニング体験をお楽しみください',
+              AppLocalizations.of(context)!.generatedKey_124470ff,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
@@ -261,7 +262,7 @@ class PaywallDialog extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  _buildFeatureRow(Icons.psychology, 'AI分析 10回/月'),
+                  _buildFeatureRow(Icons.psychology, AppLocalizations.of(context)!.general_6fe5838b),
                   _buildFeatureRow(Icons.block, AppLocalizations.of(context)!.noAds),
                   _buildFeatureRow(Icons.show_chart, AppLocalizations.of(context)!.general_c75214b2),
                   const SizedBox(height: 16),
@@ -374,7 +375,7 @@ class PaywallDialog extends StatelessWidget {
             
             // タイトル
             const Text(
-              'トレーニングパートナーを\n見つけよう',
+              AppLocalizations.of(context)!.generatedKey_7210fc11,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
@@ -386,7 +387,7 @@ class PaywallDialog extends StatelessWidget {
             
             // 説明
             const Text(
-              '孤独なトレーニングから卒業\n同じジム・同じ目標の仲間と一緒に成長',
+              AppLocalizations.of(context)!.generatedKey_067c77b6,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
@@ -437,9 +438,9 @@ class PaywallDialog extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  _buildFeatureRow(Icons.people, 'パートナー検索 🆕'),
-                  _buildFeatureRow(Icons.chat, 'メッセージング機能 🆕'),
-                  _buildFeatureRow(Icons.psychology, 'AI分析 30回/月'),
+                  _buildFeatureRow(Icons.people, AppLocalizations.of(context)!.general_0f30314e),
+                  _buildFeatureRow(Icons.chat, AppLocalizations.of(context)!.general_61a9d8cc),
+                  _buildFeatureRow(Icons.psychology, AppLocalizations.of(context)!.general_ff8f35a7),
                   _buildFeatureRow(Icons.block, AppLocalizations.of(context)!.noAds),
                   const SizedBox(height: 16),
                   Container(
@@ -486,7 +487,7 @@ class PaywallDialog extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  'Pro Planを試す',
+                  AppLocalizations.of(context)!.general_c312150e,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -553,7 +554,7 @@ class PaywallDialog extends StatelessWidget {
         if (!rewardAdService.isAdReady()) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('広告を準備中です...しばらくお待ちください'),
+              content: Text(AppLocalizations.of(context)!.general_540c1855),
               duration: Duration(seconds: 2),
             ),
           );
@@ -576,7 +577,7 @@ class PaywallDialog extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                '🎁 AI機能1回分を獲得しました！(残り${remaining}回)',
+                AppLocalizations.of(context)!.generatedKey_57df266a,
               ),
               duration: const Duration(seconds: 3),
               backgroundColor: Colors.green,

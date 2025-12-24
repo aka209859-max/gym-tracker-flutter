@@ -621,7 +621,7 @@ class _PeriodView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${period}の成長',
+              AppLocalizations.of(context)!.generatedKey_6d344dc3,
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
@@ -760,7 +760,7 @@ class ExerciseListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('$bodyPart - PR記録'),
+        title: Text(AppLocalizations.of(context)!.generatedKey_fef4f34a),
       ),
       body: exercises.isEmpty
           ? Center(
@@ -770,7 +770,7 @@ class ExerciseListScreen extends StatelessWidget {
                   Icon(Icons.fitness_center, size: 64, color: Colors.grey[400]),
                   const SizedBox(height: 16),
                   Text(
-                    'まだ$bodyPartの記録がありません',
+                    AppLocalizations.of(context)!.generatedKey_b9c14a1a,
                     style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                   ),
                   const SizedBox(height: 8),

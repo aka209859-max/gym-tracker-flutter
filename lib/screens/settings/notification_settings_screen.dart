@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// 通知設定画面
 class NotificationSettingsScreen extends StatefulWidget {
   const NotificationSettingsScreen({super.key});
@@ -85,7 +86,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('リマインダー時刻を${_formatTime(_reminderTime)}に設定しました'),
+            content: Text(AppLocalizations.of(context)!.generatedKey_360787f9),
             backgroundColor: Colors.green,
           ),
         );
@@ -237,7 +238,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    '通知は端末の設定でも管理できます。\n設定アプリ > 通知 からご確認ください。',
+                    AppLocalizations.of(context)!.generatedKey_e67c4c69,
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.blue[900],

@@ -302,25 +302,25 @@ class ScientificDatabase {
         return {
           'frequency': 2,
           'effectSize': 0.88,
-          'reason': '回復時間確保（Grgic 2018）'
+          'reason': AppLocalizations.of(context)!.generatedKey_041feef7
         };
       case AppLocalizations.of(context)!.levelIntermediate:
         return {
           'frequency': 3,
           'effectSize': 1.03,
-          'reason': 'ボリューム増加（Grgic 2018）'
+          'reason': AppLocalizations.of(context)!.generatedKey_3609eb69
         };
       case AppLocalizations.of(context)!.levelAdvanced:
         return {
           'frequency': 5,
           'effectSize': 1.08,
-          'reason': '高ボリューム達成（Grgic 2018）'
+          'reason': AppLocalizations.of(context)!.generatedKey_12676fb1
         };
       default:
         return {
           'frequency': 2,
           'effectSize': 0.88,
-          'reason': '回復時間確保（Grgic 2018）'
+          'reason': AppLocalizations.of(context)!.generatedKey_041feef7
         };
     }
   }
@@ -358,17 +358,17 @@ class ScientificDatabase {
   static List<String> getPlateauSolutions(String level) {
     if (level == AppLocalizations.of(context)!.levelBeginner || level == AppLocalizations.of(context)!.levelIntermediate) {
       return [
-        'ディロード週を実施（ボリューム30-50%削減、強度維持）',
+        AppLocalizations.of(context)!.generatedKey_b3c5133b,
         AppLocalizations.of(context)!.general_ffd1690a,
-        'トレーニング頻度を週+1回増やす',
+        AppLocalizations.of(context)!.generatedKey_950cc5f0,
       ];
     } else {
       // 上級者向け
       return [
-        'ドロップセットを導入（Krzysztofik 2019, ES=0.69）',
+        AppLocalizations.of(context)!.generatedKey_1b5db8bc,
         AppLocalizations.of(context)!.general_e49688cb,
-        'DUP（Daily Undulating Periodization）に変更（Williams 2017, ES=0.68）',
-        'ディロード週を実施（ボリューム30-50%削減）',
+        AppLocalizations.of(context)!.generatedKey_ecc237d7,
+        AppLocalizations.of(context)!.generatedKey_7d7e6ec7,
       ];
     }
   }
