@@ -963,5 +963,72 @@
   "hangingLegRaise": "懸垂抬腿",
   "sidePlank": "側板",
   "bicycleCrunch": "自行車脆皮",
-  "cableCrunch": "電纜壓縮"
+  "cableCrunch": "電纜壓縮",
+  "aiDebugShowText": "調試：查看生成的文本",
+  "aiMenuParseFailed": "菜單解析失敗",
+  "aiMenuRetryButton": "再生",
+  "aiMenuRetryPrompt": "重新產生選單。",
+  "bodyPartBalance30Days": "過去 30 天的餘額",
+  "bodyPartBalanceDays": "過去 {days} 天的餘額",
+  "@bodyPartBalanceDays": {
+    "placeholders": {
+      "days": {
+        "type": "Object"
+      }
+    }
+  },
+  "buttonAdd": "添加",
+  "buttonCancel": "取消",
+  "buttonClose": "關閉",
+  "buttonConfirm": "確認",
+  "buttonDelete": "刪除",
+  "buttonEdit": "編輯",
+  "buttonSave": "保持",
+  "errorLoadFailed": "載入失敗",
+  "errorSaveFailed": "保存失敗",
+  "profileBodyMeasurement": "實體記錄和管理",
+  "profileBodyWeight": "體重/體脂肪百分比",
+  "profileGymDetails": "遊戲詳情",
+  "profileInviteFriends": "邀請朋友",
+  "profileMessages": "資訊",
+  "profileNotifications": "推播通知和提醒",
+  "profileTrainingPartners": "培訓夥伴",
+  "profileVisitHistory": "訪問歷史",
+  "subscriptionDetailedStats": "詳細的擁塞統計數據",
+  "subscriptionFreeFeatures": "免費套餐包含所有功能",
+  "subscriptionFreeTrialDays": "{天} 天免費試用",
+  "@subscriptionFreeTrialDays": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionGrowthPrediction": "成長預測與影響分析",
+  "subscriptionGymReviews": "健身房評價提交",
+  "subscriptionMonthlyEquivalent": "月費¥{price}",
+  "@subscriptionMonthlyEquivalent": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionNoAds": "無廣告",
+  "subscriptionPopularBadge": "人氣排名第一",
+  "subscriptionSavings": "¥{amount}超值優惠！",
+  "@subscriptionSavings": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionStartFreeTrial": "開始免費試用",
+  "subscriptionUnlimitedFavorites": "無限收藏",
+  "workoutRepsLabel": "時代",
+  "workoutSetsLabel": "放",
+  "workoutTotalSets": "集合總數",
+  "workoutTotalVolume": "總負荷",
+  "workoutWeightLabel": "重量"
 }

@@ -963,5 +963,72 @@
   "hangingLegRaise": "행잉 레그 레이즈",
   "sidePlank": "사이드 플랑크",
   "bicycleCrunch": "바이시클 크런치",
-  "cableCrunch": "케이블 크런치"
+  "cableCrunch": "케이블 크런치",
+  "aiDebugShowText": "디버그: 생성된 텍스트 보기",
+  "aiMenuParseFailed": "메뉴 파싱에 실패했습니다.",
+  "aiMenuRetryButton": "재생성하다",
+  "aiMenuRetryPrompt": "다시 메뉴를 생성합니다.",
+  "bodyPartBalance30Days": "지난 30일간의 균형",
+  "bodyPartBalanceDays": "지난 {days}일간의 균형",
+  "@bodyPartBalanceDays": {
+    "placeholders": {
+      "days": {
+        "type": "Object"
+      }
+    }
+  },
+  "buttonAdd": "추가",
+  "buttonCancel": "취소",
+  "buttonClose": "닫다",
+  "buttonConfirm": "확인",
+  "buttonDelete": "삭제",
+  "buttonEdit": "편집",
+  "buttonSave": "저장",
+  "errorLoadFailed": "로드에 실패했습니다.",
+  "errorSaveFailed": "저장에 실패했습니다.",
+  "profileBodyMeasurement": "신체 기록 및 관리",
+  "profileBodyWeight": "체중·체지방율",
+  "profileGymDetails": "Detalles del gimnasio",
+  "profileInviteFriends": "친구 초대",
+  "profileMessages": "글",
+  "profileNotifications": "푸시 알림 및 경고",
+  "profileTrainingPartners": "Socios de formación",
+  "profileVisitHistory": "Historial de visitas",
+  "subscriptionDetailedStats": "상세한 혼잡도 통계",
+  "subscriptionFreeFeatures": "무료 플랜의 모든 기능",
+  "subscriptionFreeTrialDays": "{days}일간 무료 체험",
+  "@subscriptionFreeTrialDays": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionGrowthPrediction": "성장 예측 및 효과 분석",
+  "subscriptionGymReviews": "체육관 리뷰 게시물",
+  "subscriptionMonthlyEquivalent": "월 변환 ¥{price}",
+  "@subscriptionMonthlyEquivalent": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionNoAds": "광고 표시 없음",
+  "subscriptionPopularBadge": "인기 No.1",
+  "subscriptionSavings": "¥{amount}유익!",
+  "@subscriptionSavings": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionStartFreeTrial": "무료 평가판 시작",
+  "subscriptionUnlimitedFavorites": "즐겨찾기 무제한",
+  "workoutRepsLabel": "시간",
+  "workoutSetsLabel": "세트",
+  "workoutTotalSets": "총 세트 수",
+  "workoutTotalVolume": "총 부하량",
+  "workoutWeightLabel": "무게"
 }

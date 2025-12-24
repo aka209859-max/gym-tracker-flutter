@@ -963,5 +963,72 @@
   "hangingLegRaise": "悬垂抬腿",
   "sidePlank": "侧板",
   "bicycleCrunch": "自行车脆皮",
-  "cableCrunch": "电缆压缩"
+  "cableCrunch": "电缆压缩",
+  "aiDebugShowText": "调试：查看生成的文本",
+  "aiMenuParseFailed": "菜单解析失败",
+  "aiMenuRetryButton": "再生",
+  "aiMenuRetryPrompt": "重新生成菜单。",
+  "bodyPartBalance30Days": "过去 30 天的余额",
+  "bodyPartBalanceDays": "过去 {days} 天的余额",
+  "@bodyPartBalanceDays": {
+    "placeholders": {
+      "days": {
+        "type": "Object"
+      }
+    }
+  },
+  "buttonAdd": "添加",
+  "buttonCancel": "取消",
+  "buttonClose": "关闭",
+  "buttonConfirm": "确认",
+  "buttonDelete": "删除",
+  "buttonEdit": "编辑",
+  "buttonSave": "保持",
+  "errorLoadFailed": "加载失败",
+  "errorSaveFailed": "保存失败",
+  "profileBodyMeasurement": "物理记录和管理",
+  "profileBodyWeight": "体重/体脂百分比",
+  "profileGymDetails": "游戏详情",
+  "profileInviteFriends": "邀请朋友",
+  "profileMessages": "信息",
+  "profileNotifications": "推送通知和提醒",
+  "profileTrainingPartners": "培训伙伴",
+  "profileVisitHistory": "访问历史",
+  "subscriptionDetailedStats": "详细的拥堵统计数据",
+  "subscriptionFreeFeatures": "免费套餐包含所有功能",
+  "subscriptionFreeTrialDays": "{天} 天免费试用",
+  "@subscriptionFreeTrialDays": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionGrowthPrediction": "增长预测和影响分析",
+  "subscriptionGymReviews": "健身房评价提交",
+  "subscriptionMonthlyEquivalent": "月费¥{price}",
+  "@subscriptionMonthlyEquivalent": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionNoAds": "无广告",
+  "subscriptionPopularBadge": "人气排名第一",
+  "subscriptionSavings": "¥{amount}超值优惠！",
+  "@subscriptionSavings": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionStartFreeTrial": "开始免费试用",
+  "subscriptionUnlimitedFavorites": "无限收藏",
+  "workoutRepsLabel": "时代",
+  "workoutSetsLabel": "放",
+  "workoutTotalSets": "集合总数",
+  "workoutTotalVolume": "总负荷",
+  "workoutWeightLabel": "重量"
 }

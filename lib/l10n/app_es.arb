@@ -963,5 +963,72 @@
   "hangingLegRaise": "Elevaciones de piernas colgado",
   "sidePlank": "Plancha lateral",
   "bicycleCrunch": "Crujido de bicicleta",
-  "cableCrunch": "Crujido de cable"
+  "cableCrunch": "Crujido de cable",
+  "aiDebugShowText": "Depuración: visualización del texto generado",
+  "aiMenuParseFailed": "Error al analizar el menú",
+  "aiMenuRetryButton": "Regenerado",
+  "aiMenuRetryPrompt": "Generar el menú nuevamente.",
+  "bodyPartBalance30Days": "Saldo de los últimos 30 días",
+  "bodyPartBalanceDays": "Saldo de los últimos {días} días",
+  "@bodyPartBalanceDays": {
+    "placeholders": {
+      "days": {
+        "type": "Object"
+      }
+    }
+  },
+  "buttonAdd": "suma",
+  "buttonCancel": "Cancelar",
+  "buttonClose": "cerca",
+  "buttonConfirm": "confirmación",
+  "buttonDelete": "borrar",
+  "buttonEdit": "editar",
+  "buttonSave": "mantener",
+  "errorLoadFailed": "Error en la carga",
+  "errorSaveFailed": "Error al guardar",
+  "profileBodyMeasurement": "Registro y gestión física",
+  "profileBodyWeight": "Peso/porcentaje de grasa corporal",
+  "profileGymDetails": "Detalles del juego",
+  "profileInviteFriends": "Invitar amigos",
+  "profileMessages": "Mensaje",
+  "profileNotifications": "Notificaciones push y alertas",
+  "profileTrainingPartners": "Socios de formación",
+  "profileVisitHistory": "Historial de visitas",
+  "subscriptionDetailedStats": "Estadísticas detalladas de congestión",
+  "subscriptionFreeFeatures": "Todas las funciones del plan gratuito",
+  "subscriptionFreeTrialDays": "{días} día de prueba gratuita",
+  "@subscriptionFreeTrialDays": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionGrowthPrediction": "Previsión de crecimiento y análisis de impacto",
+  "subscriptionGymReviews": "Envío de reseñas de gimnasios",
+  "subscriptionMonthlyEquivalent": "Precio mensual ¥{precio}",
+  "@subscriptionMonthlyEquivalent": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionNoAds": "Sin anuncios",
+  "subscriptionPopularBadge": "Número 1 en popularidad",
+  "subscriptionSavings": "¥{amount}¡Gran oferta!",
+  "@subscriptionSavings": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionStartFreeTrial": "Comience su prueba gratuita",
+  "subscriptionUnlimitedFavorites": "Favoritos ilimitados",
+  "workoutRepsLabel": "veces",
+  "workoutSetsLabel": "colocar",
+  "workoutTotalSets": "Número total de conjuntos",
+  "workoutTotalVolume": "Carga total",
+  "workoutWeightLabel": "peso"
 }
