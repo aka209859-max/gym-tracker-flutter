@@ -326,7 +326,7 @@
   "visitCount": "訪問Wiederholungen",
   "visitCountTimes": "{count}回",
   "noVisitHistory": "訪問履歴がありません",
-  "errorOccurred": "Fehler: {e}",
+  "errorOccurred": "Ein Fehler ist aufgetreten",
   "networkError": "ネットワークFehler: API接続にFehlgeschlagen",
   "serverError": "サーバーFehler",
   "unknownError": "不明なFehler",
@@ -969,7 +969,7 @@
   "aiMenuRetryButton": "Regenerieren",
   "aiMenuRetryPrompt": "Generieren Sie das Menü erneut.",
   "bodyPartBalance30Days": "Kontostand der letzten 30 Tage",
-  "bodyPartBalanceDays": "Kontostand der letzten {Tage} Tage",
+  "bodyPartBalanceDays": "Kontostand der letzten {days} Tage",
   "@bodyPartBalanceDays": {
     "placeholders": {
       "days": {
@@ -996,7 +996,7 @@
   "profileVisitHistory": "Besuchsgeschichte",
   "subscriptionDetailedStats": "Detaillierte Staustatistiken",
   "subscriptionFreeFeatures": "Alle Funktionen im kostenlosen Tarif",
-  "subscriptionFreeTrialDays": "{Tage} tagelange kostenlose Testversion",
+  "subscriptionFreeTrialDays": "{days} tagelange kostenlose Testversion",
   "@subscriptionFreeTrialDays": {
     "placeholders": {
       "days": {

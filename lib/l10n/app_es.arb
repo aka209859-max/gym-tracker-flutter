@@ -969,7 +969,7 @@
   "aiMenuRetryButton": "Regenerado",
   "aiMenuRetryPrompt": "Generar el menú nuevamente.",
   "bodyPartBalance30Days": "Saldo de los últimos 30 días",
-  "bodyPartBalanceDays": "Saldo de los últimos {días} días",
+  "bodyPartBalanceDays": "Saldo de los últimos {days} días",
   "@bodyPartBalanceDays": {
     "placeholders": {
       "days": {
@@ -996,7 +996,7 @@
   "profileVisitHistory": "Historial de visitas",
   "subscriptionDetailedStats": "Estadísticas detalladas de congestión",
   "subscriptionFreeFeatures": "Todas las funciones del plan gratuito",
-  "subscriptionFreeTrialDays": "{días} día de prueba gratuita",
+  "subscriptionFreeTrialDays": "{days} día de prueba gratuita",
   "@subscriptionFreeTrialDays": {
     "placeholders": {
       "days": {
@@ -1006,7 +1006,7 @@
   },
   "subscriptionGrowthPrediction": "Previsión de crecimiento y análisis de impacto",
   "subscriptionGymReviews": "Envío de reseñas de gimnasios",
-  "subscriptionMonthlyEquivalent": "Precio mensual ¥{precio}",
+  "subscriptionMonthlyEquivalent": "Precio mensual ¥{price}",
   "@subscriptionMonthlyEquivalent": {
     "placeholders": {
       "price": {
