@@ -39,3 +39,5 @@ android/
 *.aab
 google_credentials.json
 gym-match-e560d-*.json
+dart_backup/
+arb_backup_*/
