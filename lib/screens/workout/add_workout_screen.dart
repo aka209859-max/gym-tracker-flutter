@@ -751,7 +751,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         print('⚠️ ワークアウト履歴が1件もありません');
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text(AppLocalizations.of(context)!.workout_まだ記録がありません最初のワークアウトを記録しましょう)),
+            SnackBar(content: Text(AppLocalizations.of(context)!.workout_まだ記録がありません最初のワークアウトを記録しましょう)),
           );
         }
         return;
@@ -1030,7 +1030,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                         Navigator.pop(context);
                         _startRestTimer(); // 設定後すぐにタイマー開始
                       },
-                      child: const Text(AppLocalizations.of(context)!.workout_開始, style: TextStyle(fontWeight: FontWeight.bold)),
+                      child: Text(AppLocalizations.of(context)!.workout_開始, style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
                   ],
                 ),
@@ -1339,7 +1339,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(AppLocalizations.of(context)!.workout_カスタム種目を削除),
+        title: Text(AppLocalizations.of(context)!.workout_カスタム種目を削除),
         content: Text('「$exerciseName」を削除しますか？\nこの操作は取り消せません。'),
         actions: [
           TextButton(
@@ -1564,7 +1564,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   Future<void> _saveWorkout() async {
     if (_selectedMuscleGroup == null || _sets.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text(AppLocalizations.of(context)!.workout_部位と種目を選択してください)),
+        SnackBar(content: Text(AppLocalizations.of(context)!.workout_部位と種目を選択してください)),
       );
       return;
     }
@@ -1729,7 +1729,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       if (mounted) {
         Navigator.pop(context, true);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppLocalizations.of(context)!.workout_トレーニングを保存しました)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.workout_トレーニングを保存しました)),
         );
         
         // 🎯 Phase 1: トレーニング記録後のAI導線ポップアップ
@@ -1856,7 +1856,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   OutlinedButton.icon(
                     onPressed: () => _saveRestDay(context),
                     icon: const Icon(Icons.bed, size: 18),
-                    label: const Text(AppLocalizations.of(context)!.workout_オフ),
+                    label: Text(AppLocalizations.of(context)!.workout_オフ),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.green,
                       side: const BorderSide(color: Colors.green),
@@ -1867,7 +1867,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   OutlinedButton.icon(
                     onPressed: () => _selectDate(context),
                     icon: const Icon(Icons.edit_calendar, size: 18),
-                    label: const Text(AppLocalizations.of(context)!.workout_変更),
+                    label: Text(AppLocalizations.of(context)!.workout_変更),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: theme.colorScheme.primary,
                       side: BorderSide(color: theme.colorScheme.primary),
@@ -2136,7 +2136,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                       _showWorkoutHistoryDialog(exerciseName);
                     },
                     icon: const Icon(Icons.history, size: 18),
-                    label: const Text(AppLocalizations.of(context)!.workout_前回),
+                    label: Text(AppLocalizations.of(context)!.workout_前回),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.purple,
                       side: const BorderSide(color: Colors.purple),
@@ -2148,7 +2148,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   child: OutlinedButton.icon(
                     onPressed: () => _showBulkInputDialog(exerciseName),
                     icon: const Icon(Icons.edit, size: 18),
-                    label: const Text(AppLocalizations.of(context)!.workout_一括入力),
+                    label: Text(AppLocalizations.of(context)!.workout_一括入力),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.blue,
                       side: const BorderSide(color: Colors.blue),
@@ -2300,7 +2300,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             OutlinedButton.icon(
               onPressed: () => _addSet(exerciseName),
               icon: const Icon(Icons.add),
-              label: const Text(AppLocalizations.of(context)!.workout_セットを追加),
+              label: Text(AppLocalizations.of(context)!.workout_セットを追加),
               style: OutlinedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 40),
               ),
@@ -2369,7 +2369,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                                   width: set.isBodyweightMode ? 2 : 1,
                                 ),
                               ),
-                              child: const Text(AppLocalizations.of(context)!.bodyweight, style: TextStyle(fontSize: 12)),
+                              child: Text(AppLocalizations.of(context)!.bodyweight, style: TextStyle(fontSize: 12)),
                             ),
                           ),
                           const SizedBox(width: 4),
@@ -2568,7 +2568,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             runSpacing: 4,
             children: [
               ChoiceChip(
-                label: const Text(AppLocalizations.of(context)!.workout_通常, style: TextStyle(fontSize: 12)),
+                label: Text(AppLocalizations.of(context)!.workout_通常, style: TextStyle(fontSize: 12)),
                 selected: set.setType == SetType.normal,
                 onSelected: (selected) {
                   if (selected) {
@@ -2781,7 +2781,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               backgroundColor: Colors.purple.shade600,
               foregroundColor: Colors.white,
             ),
-            child: const Text(AppLocalizations.of(context)!.workout_試してみる),
+            child: Text(AppLocalizations.of(context)!.workout_試してみる),
           ),
         ],
       ),

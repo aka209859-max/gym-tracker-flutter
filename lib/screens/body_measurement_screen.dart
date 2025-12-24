@@ -103,7 +103,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
 
     if (weight == null && bodyFat == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text(AppLocalizations.of(context)!.general_体重または体脂肪率を入力してください)),
+        SnackBar(content: Text(AppLocalizations.of(context)!.general_体重または体脂肪率を入力してください)),
       );
       return;
     }
@@ -296,7 +296,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
       behavior: HitTestBehavior.translucent,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(AppLocalizations.of(context)!.profileBodyWeight),
+          title: Text(AppLocalizations.of(context)!.profileBodyWeight),
           backgroundColor: theme.colorScheme.primary,
           foregroundColor: Colors.white,
         ),

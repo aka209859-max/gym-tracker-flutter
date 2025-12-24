@@ -97,7 +97,7 @@ class _MapScreenState extends State<MapScreen> {
                 _acquireLocationAndSearch();
               }
             },
-            child: const Text(AppLocalizations.of(context)!.general_はい使用します),
+            child: Text(AppLocalizations.of(context)!.general_はい使用します),
           ),
         ],
       ),
@@ -407,7 +407,7 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.general_ジムマップ),
+        title: Text(AppLocalizations.of(context)!.general_ジムマップ),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),

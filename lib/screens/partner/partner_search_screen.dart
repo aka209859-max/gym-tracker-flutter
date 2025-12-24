@@ -93,7 +93,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
       // 位置情報取得失敗時は続行（フィルターから距離を除外）
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppLocalizations.of(context)!.general_位置情報を取得できませんでした)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.general_位置情報を取得できませんでした)),
         );
       }
     }
@@ -195,7 +195,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
             ],
 
             // トレーニング目標フィルター
-            const Text(AppLocalizations.of(context)!.profile_トレーニング目標, style: TextStyle(fontWeight: FontWeight.bold)),
+            Text(AppLocalizations.of(context)!.profile_トレーニング目標, style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,

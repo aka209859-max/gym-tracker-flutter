@@ -258,7 +258,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               Navigator.pop(context);
               // サブスクリプション画面へ遷移（実装済みと仮定）
             },
-            child: const Text(AppLocalizations.of(context)!.viewProPlan),
+            child: Text(AppLocalizations.of(context)!.viewProPlan),
           ),
         ],
       ),

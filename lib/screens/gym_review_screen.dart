@@ -174,7 +174,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
               backgroundColor: Colors.blue,
               foregroundColor: Colors.white,
             ),
-            child: const Text(AppLocalizations.of(context)!.workout_プランを見る),
+            child: Text(AppLocalizations.of(context)!.workout_プランを見る),
           ),
         ],
       ),

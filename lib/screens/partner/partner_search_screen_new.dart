@@ -125,7 +125,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
               ),
-              child: const Text(AppLocalizations.of(context)!.viewProPlan),
+              child: Text(AppLocalizations.of(context)!.viewProPlan),
             ),
           ],
         ),

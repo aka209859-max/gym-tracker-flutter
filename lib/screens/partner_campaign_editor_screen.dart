@@ -295,7 +295,7 @@ class _PartnerCampaignEditorScreenState
                   ListTile(
                     contentPadding: EdgeInsets.zero,
                     leading: const Icon(Icons.calendar_today),
-                    title: const Text(AppLocalizations.of(context)!.general_キャンペーン期限),
+                    title: Text(AppLocalizations.of(context)!.general_キャンペーン期限),
                     subtitle: Text(
                       _validUntil != null
                           ? '${_validUntil!.year}年${_validUntil!.month}月${_validUntil!.day}日まで'

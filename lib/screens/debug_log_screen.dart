@@ -17,7 +17,7 @@ class _DebugLogScreenState extends State<DebugLogScreen> {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.general_デバッグログ),
+        title: Text(AppLocalizations.of(context)!.general_デバッグログ),
         backgroundColor: Colors.deepPurple,
         foregroundColor: Colors.white,
         actions: [

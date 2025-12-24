@@ -389,7 +389,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                 ElevatedButton.icon(
                   onPressed: _resetAIUsage,
                   icon: const Icon(Icons.refresh),
-                  label: const Text(AppLocalizations.of(context)!.general_AI使用回数をリセット),
+                  label: Text(AppLocalizations.of(context)!.general_AI使用回数をリセット),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.orange,
                     minimumSize: const Size.fromHeight(48),
@@ -402,7 +402,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                 ElevatedButton.icon(
                   onPressed: _resetOnboarding,
                   icon: const Icon(Icons.school),
-                  label: const Text(AppLocalizations.of(context)!.general_オンボーディングをリセット),
+                  label: Text(AppLocalizations.of(context)!.general_オンボーディングをリセット),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.purple,
                     foregroundColor: Colors.white,

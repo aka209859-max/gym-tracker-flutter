@@ -9,7 +9,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.profile_特定商取引法に基づく表記),
+        title: Text(AppLocalizations.of(context)!.profile_特定商取引法に基づく表記),
         backgroundColor: Colors.deepPurple,
         foregroundColor: Colors.white,
       ),

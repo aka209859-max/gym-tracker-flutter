@@ -109,7 +109,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
     
     if (_messageController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text(AppLocalizations.of(context)!.profile_メッセージを入力してください)),
+        SnackBar(content: Text(AppLocalizations.of(context)!.profile_メッセージを入力してください)),
       );
       return;
     }
@@ -126,7 +126,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppLocalizations.of(context)!.profile_マッチングリクエストを送信しました)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.profile_マッチングリクエストを送信しました)),
         );
         Navigator.pop(context);
       }
@@ -369,7 +369,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               child: const Icon(Icons.workspace_premium, color: Colors.white),
             ),
             const SizedBox(width: 12),
-            const Text(AppLocalizations.of(context)!.profile_Pro限定機能),
+            Text(AppLocalizations.of(context)!.profile_Pro限定機能),
           ],
         ),
         content: Column(
@@ -412,7 +412,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               backgroundColor: Colors.amber,
               foregroundColor: Colors.white,
             ),
-            child: const Text(AppLocalizations.of(context)!.viewProPlan),
+            child: Text(AppLocalizations.of(context)!.viewProPlan),
           ),
         ],
       ),

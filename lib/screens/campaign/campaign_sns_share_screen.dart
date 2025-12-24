@@ -177,7 +177,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
               ElevatedButton.icon(
                 onPressed: _copyToClipboard,
                 icon: const Icon(Icons.copy),
-                label: const Text(AppLocalizations.of(context)!.general_テンプレートをコピー),
+                label: Text(AppLocalizations.of(context)!.general_テンプレートをコピー),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(16),
                   backgroundColor: Colors.blue[700],
@@ -188,7 +188,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
               ElevatedButton.icon(
                 onPressed: _shareToSns,
                 icon: const Icon(Icons.share),
-                label: const Text(AppLocalizations.of(context)!.general_SNSアプリで投稿),
+                label: Text(AppLocalizations.of(context)!.general_SNSアプリで投稿),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(16),
                   backgroundColor: Colors.green[700],

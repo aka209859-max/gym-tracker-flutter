@@ -213,7 +213,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
           children: [
             Icon(levelIcon, color: levelColor, size: 32),
             const SizedBox(width: 12),
-            const Text(AppLocalizations.of(context)!.general_疲労度分析結果),
+            Text(AppLocalizations.of(context)!.general_疲労度分析結果),
           ],
         ),
         content: SingleChildScrollView(

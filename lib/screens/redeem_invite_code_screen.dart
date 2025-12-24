@@ -115,7 +115,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.general_招待コードを使用),
+        title: Text(AppLocalizations.of(context)!.general_招待コードを使用),
         backgroundColor: Colors.deepPurple,
       ),
       body: SingleChildScrollView(

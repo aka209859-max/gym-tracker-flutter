@@ -216,7 +216,7 @@ class ReferralSuccessDialog {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text(AppLocalizations.of(context)!.general_あとで),
+              child: Text(AppLocalizations.of(context)!.general_あとで),
             ),
             ElevatedButton(
               onPressed: () {

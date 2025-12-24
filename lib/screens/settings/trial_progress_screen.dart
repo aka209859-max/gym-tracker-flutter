@@ -67,7 +67,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.subscription_トライアル進捗),
+        title: Text(AppLocalizations.of(context)!.subscription_トライアル進捗),
         centerTitle: true,
       ),
       body: _isLoading

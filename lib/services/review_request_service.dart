@@ -88,12 +88,12 @@ class ReviewRequestService {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text(AppLocalizations.of(context)!.later),
+            child: Text(AppLocalizations.of(context)!.later),
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
             icon: const Icon(Icons.star),
-            label: const Text(AppLocalizations.of(context)!.general_レビューする),
+            label: Text(AppLocalizations.of(context)!.general_レビューする),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.orange,
               foregroundColor: Colors.white,

@@ -13,7 +13,7 @@ class RMCalculatorScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(AppLocalizations.of(context)!.workout_計算ツール),
+          title: Text(AppLocalizations.of(context)!.workout_計算ツール),
           backgroundColor: theme.colorScheme.primary,
           bottom: TabBar(
             indicatorColor: Colors.white,

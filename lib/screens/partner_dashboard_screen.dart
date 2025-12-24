@@ -22,7 +22,7 @@ class PartnerDashboardScreen extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(AppLocalizations.of(context)!.general_パートナー管理画面),
+            Text(AppLocalizations.of(context)!.general_パートナー管理画面),
             Text(
               partnerAccess.gymName,
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal),

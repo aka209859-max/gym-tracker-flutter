@@ -362,7 +362,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                 backgroundColor: Colors.orange,
                 padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
               ),
-              child: const Text(AppLocalizations.of(context)!.general_ありがとう),
+              child: Text(AppLocalizations.of(context)!.general_ありがとう),
             ),
           ],
         ),

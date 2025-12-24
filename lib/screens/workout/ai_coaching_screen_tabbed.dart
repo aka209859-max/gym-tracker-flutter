@@ -2200,7 +2200,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
             icon: const Icon(Icons.play_arrow),
-            label: const Text(AppLocalizations.of(context)!.workout_動画を視聴),
+            label: Text(AppLocalizations.of(context)!.workout_動画を視聴),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade700,
               foregroundColor: Colors.white,
@@ -3410,7 +3410,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
             icon: const Icon(Icons.play_arrow),
-            label: const Text(AppLocalizations.of(context)!.workout_動画を視聴),
+            label: Text(AppLocalizations.of(context)!.workout_動画を視聴),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade700,
               foregroundColor: Colors.white,
@@ -4588,7 +4588,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 context,
                 MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
               ).then((_) => _loadUserAge()),
-              child: const Text(AppLocalizations.of(context)!.workout_変更),
+              child: Text(AppLocalizations.of(context)!.workout_変更),
             ),
           ],
         ),
@@ -5269,7 +5269,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
             icon: const Icon(Icons.play_arrow),
-            label: const Text(AppLocalizations.of(context)!.workout_動画を視聴),
+            label: Text(AppLocalizations.of(context)!.workout_動画を視聴),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade700,
               foregroundColor: Colors.white,

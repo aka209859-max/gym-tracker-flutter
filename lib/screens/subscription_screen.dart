@@ -88,7 +88,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.subscription_プラン管理),
+        title: Text(AppLocalizations.of(context)!.subscription_プラン管理),
         centerTitle: true,
         actions: [
           // 購入復元ボタン（iOS専用 - Apple審査対応）
@@ -969,7 +969,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text(AppLocalizations.of(context)!.subscription_確定),
+            child: Text(AppLocalizations.of(context)!.subscription_確定),
           ),
         ],
       ),
@@ -1347,7 +1347,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 const SizedBox(height: 16),
                 
                 // 理由選択
-                const Text(AppLocalizations.of(context)!.subscription_変更理由, style: TextStyle(fontWeight: FontWeight.bold)),
+                Text(AppLocalizations.of(context)!.subscription_変更理由, style: TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8),
                 DropdownButtonFormField<String>(
                   decoration: InputDecoration(
@@ -1404,7 +1404,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 backgroundColor: Colors.blue,
                 foregroundColor: Colors.white,
               ),
-              child: const Text(AppLocalizations.of(context)!.subscription_変更する),
+              child: Text(AppLocalizations.of(context)!.subscription_変更する),
             ),
           ],
         ),
@@ -1437,7 +1437,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(AppLocalizations.of(context)!.subscription_プラン変更手順),
+        title: Text(AppLocalizations.of(context)!.subscription_プラン変更手順),
         content: const SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

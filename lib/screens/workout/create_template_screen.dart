@@ -63,7 +63,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.createTemplate),
+        title: Text(AppLocalizations.of(context)!.createTemplate),
         backgroundColor: theme.colorScheme.primary,
         foregroundColor: Colors.white,
         actions: [
@@ -169,7 +169,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                 TextButton.icon(
                   onPressed: _addExercise,
                   icon: const Icon(Icons.add),
-                  label: const Text(AppLocalizations.of(context)!.workout_種目追加),
+                  label: Text(AppLocalizations.of(context)!.workout_種目追加),
                 ),
               ],
             ),
@@ -250,8 +250,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                             border: const OutlineInputBorder(),
                             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                             suffixIcon: IconButton(
-                              icon: const Icon(Icons.list, size: 20),
-                              tooltip: AppLocalizations.of(context)!.workout_プリセットに戻る,
+                              icon: Icon(Icons.list, size: 20), tooltip: AppLocalizations.of(context)!.workout_プリセットに戻る,
                               onPressed: () {
                                 setState(() {
                                   exercise.isCustomExercise = false;
@@ -396,7 +395,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
 
     if (_exercises.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text(AppLocalizations.of(context)!.workout_種目を1つ以上追加してください)),
+        SnackBar(content: Text(AppLocalizations.of(context)!.workout_種目を1つ以上追加してください)),
       );
       return;
     }
@@ -435,7 +434,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppLocalizations.of(context)!.workout_テンプレートを保存しました)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.workout_テンプレートを保存しました)),
         );
         Navigator.pop(context, true);
       }

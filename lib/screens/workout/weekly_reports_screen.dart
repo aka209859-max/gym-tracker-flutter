@@ -172,8 +172,8 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             SwitchListTile(
-              title: const Text(AppLocalizations.of(context)!.workout_週次レコメンデーション),
-              subtitle: const Text(AppLocalizations.of(context)!.workout_推奨曜日とメニュー提案を表示),
+              title: Text(AppLocalizations.of(context)!.workout_週次レコメンデーション),
+              subtitle: Text(AppLocalizations.of(context)!.workout_推奨曜日とメニュー提案を表示),
               value: true,
               onChanged: (value) {
                 // TODO: Save setting to Firestore

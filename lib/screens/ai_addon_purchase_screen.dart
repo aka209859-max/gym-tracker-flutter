@@ -66,7 +66,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
               backgroundColor: Colors.blue,
               foregroundColor: Colors.white,
             ),
-            child: const Text(AppLocalizations.of(context)!.general_購入する),
+            child: Text(AppLocalizations.of(context)!.general_購入する),
           ),
         ],
       ),
@@ -187,7 +187,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.purchaseAICredits),
+        title: Text(AppLocalizations.of(context)!.purchaseAICredits),
         centerTitle: true,
         backgroundColor: theme.colorScheme.primary,
         foregroundColor: Colors.white,

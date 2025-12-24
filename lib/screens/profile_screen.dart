@@ -472,7 +472,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 );
               },
               icon: const Icon(Icons.share),
-              label: const Text(AppLocalizations.of(context)!.profile_シェア),
+              label: Text(AppLocalizations.of(context)!.profile_シェア),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
                 foregroundColor: Colors.white,
@@ -981,7 +981,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               Icon(Icons.lock, color: Colors.amber[700]),
               const SizedBox(width: 8),
-              const Text(AppLocalizations.of(context)!.profile_有料プラン限定機能),
+              Text(AppLocalizations.of(context)!.profile_有料プラン限定機能),
             ],
           ),
           content: Column(
@@ -1012,7 +1012,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Navigator.pop(context);
                 // TODO: Implement SubscriptionScreen
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text(AppLocalizations.of(context)!.profile_プラン詳細画面は近日公開予定です)),
+                  SnackBar(content: Text(AppLocalizations.of(context)!.profile_プラン詳細画面は近日公開予定です)),
                 );
                 /*
                 Navigator.push(
@@ -1021,7 +1021,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ).then((_) => _loadUserData());
                 */
               },
-              child: const Text(AppLocalizations.of(context)!.profile_プラン詳細を見る),
+              child: Text(AppLocalizations.of(context)!.profile_プラン詳細を見る),
             ),
           ],
         ),
@@ -1048,14 +1048,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(AppLocalizations.of(context)!.profile_近日公開),
+        title: Text(AppLocalizations.of(context)!.profile_近日公開),
         content: Text(
           '$featureNameは現在開発中です。\n次回のアップデートでご利用いただけます。',
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppLocalizations.of(context)!.gym_了解),
+            child: Text(AppLocalizations.of(context)!.gym_了解),
           ),
         ],
       ),
@@ -1223,7 +1223,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text(AppLocalizations.of(context)!.profile_サービス利用条件サブスクリプション),
+              subtitle: Text(AppLocalizations.of(context)!.profile_サービス利用条件サブスクリプション),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
@@ -1286,7 +1286,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text(AppLocalizations.of(context)!.profile_個人情報の取扱い),
+              subtitle: Text(AppLocalizations.of(context)!.profile_個人情報の取扱い),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () async {
                 Navigator.of(context).pop();
@@ -1296,7 +1296,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 } else {
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text(AppLocalizations.of(context)!.subscription_プライバシーポリシーを開けませんでした)),
+                      SnackBar(content: Text(AppLocalizations.of(context)!.subscription_プライバシーポリシーを開けませんでした)),
                     );
                   }
                 }

@@ -128,7 +128,7 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
             ElevatedButton.icon(
               onPressed: _loadVisitHistory,
               icon: const Icon(Icons.refresh),
-              label: const Text(AppLocalizations.of(context)!.general_再読み込み),
+              label: Text(AppLocalizations.of(context)!.general_再読み込み),
             ),
           ],
         ),

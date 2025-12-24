@@ -132,7 +132,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
         await _noteService.updateNote(note.id, result);
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text(AppLocalizations.of(context)!.noteUpdated)),
+            SnackBar(content: Text(AppLocalizations.of(context)!.noteUpdated)),
           );
           _loadMemosWithWorkouts(); // リロード
         }

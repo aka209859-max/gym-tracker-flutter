@@ -1091,8 +1091,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           // 開発者メニュー（デバッグモードのみ表示）
           if (kDebugMode)
             IconButton(
-              icon: const Icon(Icons.developer_mode),
-              tooltip: AppLocalizations.of(context)!.developerMenu,
+              icon: Icon(Icons.developer_mode), tooltip: AppLocalizations.of(context)!.developerMenu,
               onPressed: () {
                 Navigator.pushNamed(context, '/developer_menu');
               },
@@ -2500,7 +2499,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         print('❌ ドキュメントデータが存在しません');
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text(AppLocalizations.of(context)!.gym_データの取得に失敗しました)),
+            SnackBar(content: Text(AppLocalizations.of(context)!.gym_データの取得に失敗しました)),
           );
         }
         return;
@@ -2534,7 +2533,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppLocalizations.of(context)!.general_セットを削除しました)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.general_セットを削除しました)),
         );
       }
     } catch (e) {
@@ -3302,9 +3301,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                       if (isCardio) {
                                         return Text('$weight 分', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       } else if (isAbs && (isBodyweightMode || weight == 0.0)) {
-                                        return const Text(AppLocalizations.of(context)!.bodyweight, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
+                                        return Text(AppLocalizations.of(context)!.bodyweight, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       } else if (isBodyweightMode && weight == 0.0) {
-                                        return const Text(AppLocalizations.of(context)!.bodyweight, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
+                                        return Text(AppLocalizations.of(context)!.bodyweight, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       } else {
                                         return Text('$weight Kg', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       }
@@ -3836,7 +3835,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   const SizedBox(height: 16),
                   
                   // 日付範囲
-                  const Text(AppLocalizations.of(context)!.general_日付範囲, style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text(AppLocalizations.of(context)!.general_日付範囲, style: TextStyle(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
                   OutlinedButton.icon(
                     onPressed: () async {
@@ -4029,7 +4028,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     return await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(AppLocalizations.of(context)!.general_記録を削除),
+        title: Text(AppLocalizations.of(context)!.general_記録を削除),
         content: Text('「$exerciseName」の記録を削除しますか？\nこの操作は取り消せません。'),
         actions: [
           TextButton(
@@ -4169,7 +4168,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ListTile(
               leading: Icon(Icons.edit, color: Colors.blue),
               title: Text(AppLocalizations.of(context)!.edit),
-              subtitle: const Text(AppLocalizations.of(context)!.general_次のアップデートで実装予定),
+              subtitle: Text(AppLocalizations.of(context)!.general_次のアップデートで実装予定),
               enabled: false,
               onTap: () {
                 Navigator.pop(context);
@@ -4958,7 +4957,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: _getRPEColor(selectedRPE),
                 ),
-                child: const Text(AppLocalizations.of(context)!.subscription_確定),
+                child: Text(AppLocalizations.of(context)!.subscription_確定),
               ),
             ],
           );
@@ -5729,7 +5728,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   );
                   _loadActiveGoals();
                 },
-                child: const Text(AppLocalizations.of(context)!.general_すべて表示),
+                child: Text(AppLocalizations.of(context)!.general_すべて表示),
               ),
             ],
           ),
@@ -6206,7 +6205,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               );
             },
             icon: const Icon(Icons.share, size: 18),
-            label: const Text(AppLocalizations.of(context)!.general_今すぐシェア),
+            label: Text(AppLocalizations.of(context)!.general_今すぐシェア),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.orange,
               foregroundColor: Colors.white,
@@ -6381,7 +6380,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     onPressed: () {
                       // コピー機能は後で実装
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text(AppLocalizations.of(context)!.general_コードをコピーしました)),
+                        SnackBar(content: Text(AppLocalizations.of(context)!.general_コードをコピーしました)),
                       );
                     },
                   ),

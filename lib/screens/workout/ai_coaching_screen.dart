@@ -995,7 +995,7 @@ ${bodyParts.join('、')}
               backgroundColor: Colors.blue.shade700,
               foregroundColor: Colors.white,
             ),
-            child: const Text(AppLocalizations.of(context)!.workout_プランを見る),
+            child: Text(AppLocalizations.of(context)!.workout_プランを見る),
           ),
         ],
       ),

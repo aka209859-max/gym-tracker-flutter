@@ -126,11 +126,11 @@ class POMemberDetailScreen extends StatelessWidget {
           ElevatedButton.icon(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text(AppLocalizations.of(context)!.general_メッセージ機能は近日公開予定です)),
+                SnackBar(content: Text(AppLocalizations.of(context)!.general_メッセージ機能は近日公開予定です)),
               );
             },
             icon: const Icon(Icons.message),
-            label: const Text(AppLocalizations.of(context)!.general_メッセージを送信),
+            label: Text(AppLocalizations.of(context)!.general_メッセージを送信),
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(double.infinity, 48),
             ),
@@ -139,11 +139,11 @@ class POMemberDetailScreen extends StatelessWidget {
           OutlinedButton.icon(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text(AppLocalizations.of(context)!.general_セッション履歴は近日公開予定です)),
+                SnackBar(content: Text(AppLocalizations.of(context)!.general_セッション履歴は近日公開予定です)),
               );
             },
             icon: const Icon(Icons.history),
-            label: const Text(AppLocalizations.of(context)!.general_セッション履歴を見る),
+            label: Text(AppLocalizations.of(context)!.general_セッション履歴を見る),
             style: OutlinedButton.styleFrom(
               minimumSize: const Size(double.infinity, 48),
             ),

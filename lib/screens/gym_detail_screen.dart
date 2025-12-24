@@ -415,7 +415,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                     );
                   },
                   icon: const Icon(Icons.edit),
-                  label: const Text(AppLocalizations.of(context)!.gym_混雑度を報告する),
+                  label: Text(AppLocalizations.of(context)!.gym_混雑度を報告する),
                 ),
               ),
             ],
@@ -515,7 +515,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                   );
                 },
                 icon: const Icon(Icons.edit),
-                label: const Text(AppLocalizations.of(context)!.gym_混雑度を報告する),
+                label: Text(AppLocalizations.of(context)!.gym_混雑度を報告する),
               ),
             ),
           ],
@@ -564,7 +564,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
               child: ElevatedButton.icon(
                 onPressed: _checkInToGym,
                 icon: const Icon(Icons.check_circle_outline),
-                label: const Text(AppLocalizations.of(context)!.gym_このジムにチェックイン),
+                label: Text(AppLocalizations.of(context)!.gym_このジムにチェックイン),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   backgroundColor: Theme.of(context).colorScheme.primary,
@@ -786,14 +786,14 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: const Text(AppLocalizations.of(context)!.gym_Firebase設定が必要です),
+                      title: Text(AppLocalizations.of(context)!.gym_Firebase設定が必要です),
                       content: const Text(
                         'チェックイン機能を使用するには、Firebase Consoleで設定ファイルを取得し、firebase_options.dartを更新してください。',
                       ),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),
-                          child: const Text(AppLocalizations.of(context)!.gym_了解),
+                          child: Text(AppLocalizations.of(context)!.gym_了解),
                         ),
                       ],
                     ),

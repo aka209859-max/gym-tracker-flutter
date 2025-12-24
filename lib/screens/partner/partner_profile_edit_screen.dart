@@ -126,7 +126,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
             const SizedBox(height: 24),
 
             // 好きな種目
-            const Text(AppLocalizations.of(context)!.profile_好きな種目, style: TextStyle(fontWeight: FontWeight.bold)),
+            Text(AppLocalizations.of(context)!.profile_好きな種目, style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,

@@ -318,7 +318,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text(AppLocalizations.of(context)!.workout_休憩時間を設定),
+        title: Text(AppLocalizations.of(context)!.workout_休憩時間を設定),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: _restDurations.map((duration) {
@@ -401,7 +401,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   Future<void> _saveWorkout() async {
     if (_sets.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text(AppLocalizations.of(context)!.workout_種目を追加してください)),
+        SnackBar(content: Text(AppLocalizations.of(context)!.workout_種目を追加してください)),
       );
       return;
     }
@@ -460,7 +460,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       if (mounted) {
         Navigator.pop(context, true);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppLocalizations.of(context)!.workout_トレーニングを保存しました)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.workout_トレーニングを保存しました)),
         );
       }
     } catch (e) {
@@ -575,7 +575,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 child: OutlinedButton.icon(
                   onPressed: _showAddCustomExerciseDialog,
                   icon: const Icon(Icons.add),
-                  label: const Text(AppLocalizations.of(context)!.workout_種目を追加カスタム),
+                  label: Text(AppLocalizations.of(context)!.workout_種目を追加カスタム),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                   ),
@@ -747,7 +747,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             OutlinedButton.icon(
               onPressed: () => _addSet(exerciseName),
               icon: const Icon(Icons.add),
-              label: const Text(AppLocalizations.of(context)!.workout_セットを追加),
+              label: Text(AppLocalizations.of(context)!.workout_セットを追加),
               style: OutlinedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 40),
               ),

@@ -167,7 +167,7 @@ class _InstallPromptState extends State<InstallPrompt> {
                     child: OutlinedButton.icon(
                       onPressed: _dismissPrompt,
                       icon: const Icon(Icons.cancel_outlined),
-                      label: const Text(AppLocalizations.of(context)!.later),
+                      label: Text(AppLocalizations.of(context)!.later),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: Colors.white,
                         side: const BorderSide(color: Colors.white70),
@@ -183,7 +183,7 @@ class _InstallPromptState extends State<InstallPrompt> {
                         _showInstallInstructions(context);
                       },
                       icon: const Icon(Icons.add_to_home_screen),
-                      label: const Text(AppLocalizations.of(context)!.general_インストール),
+                      label: Text(AppLocalizations.of(context)!.general_インストール),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: const Color(0xFF1E88E5),

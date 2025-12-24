@@ -198,7 +198,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.general_店舗画像管理),
+        title: Text(AppLocalizations.of(context)!.general_店舗画像管理),
         elevation: 2,
         actions: [
           if (_isUploading)

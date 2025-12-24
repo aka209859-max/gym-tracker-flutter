@@ -53,7 +53,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
 
     if (weight == null || reps == null || weight <= 0 || reps <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text(AppLocalizations.of(context)!.general_有効な重量と回数を入力してください)),
+        SnackBar(content: Text(AppLocalizations.of(context)!.general_有効な重量と回数を入力してください)),
       );
       return;
     }

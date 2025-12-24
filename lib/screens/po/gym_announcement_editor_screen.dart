@@ -378,7 +378,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                     });
                   },
                   icon: const Icon(Icons.clear),
-                  label: const Text(AppLocalizations.of(context)!.gym_期限をクリア),
+                  label: Text(AppLocalizations.of(context)!.gym_期限をクリア),
                 ),
             ],
           ),

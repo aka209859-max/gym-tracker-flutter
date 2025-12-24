@@ -139,12 +139,12 @@ class EnhancedShareService {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text(AppLocalizations.of(context)!.later),
+            child: Text(AppLocalizations.of(context)!.later),
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
             icon: const Icon(Icons.share),
-            label: const Text(AppLocalizations.of(context)!.general_シェアする),
+            label: Text(AppLocalizations.of(context)!.general_シェアする),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.orange,
               foregroundColor: Colors.white,

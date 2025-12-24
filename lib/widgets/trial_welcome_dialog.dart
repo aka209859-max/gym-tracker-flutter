@@ -218,7 +218,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                     const SizedBox(height: 8),
                     TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: const Text(AppLocalizations.of(context)!.subscription_後で確認する),
+                      child: Text(AppLocalizations.of(context)!.subscription_後で確認する),
                     ),
                   ],
                 ),

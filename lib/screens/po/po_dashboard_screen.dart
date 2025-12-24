@@ -136,7 +136,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.general_PO管理ダッシュボード),
+        title: Text(AppLocalizations.of(context)!.general_PO管理ダッシュボード),
         backgroundColor: Colors.blue.shade700,
         foregroundColor: Colors.white,
         actions: [
@@ -203,7 +203,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
                       icon: Icons.people_outline,
                       onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text(AppLocalizations.of(context)!.general_会員管理画面は次のフェーズで実装予定)),
+                          SnackBar(content: Text(AppLocalizations.of(context)!.general_会員管理画面は次のフェーズで実装予定)),
                         );
                       },
                     ),
@@ -214,7 +214,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
                       icon: Icons.calendar_today_outlined,
                       onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text(AppLocalizations.of(context)!.general_セッション管理画面は次のフェーズで実装予定)),
+                          SnackBar(content: Text(AppLocalizations.of(context)!.general_セッション管理画面は次のフェーズで実装予定)),
                         );
                       },
                     ),
@@ -225,7 +225,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
                       icon: Icons.analytics_outlined,
                       onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text(AppLocalizations.of(context)!.general_分析画面は次のフェーズで実装予定)),
+                          SnackBar(content: Text(AppLocalizations.of(context)!.general_分析画面は次のフェーズで実装予定)),
                         );
                       },
                     ),

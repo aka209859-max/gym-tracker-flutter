@@ -126,7 +126,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            child: const Text(AppLocalizations.of(context)!.general_ブロック),
+            child: Text(AppLocalizations.of(context)!.general_ブロック),
           ),
         ],
       ),
@@ -144,7 +144,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppLocalizations.of(context)!.general_ブロックしました)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.general_ブロックしました)),
         );
         Navigator.pop(context);
       }
@@ -236,7 +236,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppLocalizations.of(context)!.general_通報を受け付けましたご協力ありがとうございます)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.general_通報を受け付けましたご協力ありがとうございます)),
         );
       }
     } catch (e) {

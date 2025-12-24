@@ -92,7 +92,7 @@ class POAnalyticsScreen extends StatelessWidget {
                 child: ListTile(
                   leading: const Icon(Icons.error, color: Colors.orange),
                   title: Text('休眠会員: $dormantMembers名'),
-                  subtitle: const Text(AppLocalizations.of(context)!.general_最終セッションから2週間以上経過),
+                  subtitle: Text(AppLocalizations.of(context)!.general_最終セッションから2週間以上経過),
                   trailing: ElevatedButton(
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -100,7 +100,7 @@ class POAnalyticsScreen extends StatelessWidget {
                             content: Text(AppLocalizations.of(context)!.general_一斉メッセージ機能は近日公開予定です)),
                       );
                     },
-                    child: const Text(AppLocalizations.of(context)!.general_対応する),
+                    child: Text(AppLocalizations.of(context)!.general_対応する),
                   ),
                 ),
               ),
