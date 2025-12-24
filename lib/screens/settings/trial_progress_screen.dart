@@ -67,7 +67,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.subscription_トライアル進捗),
+        title: Text(AppLocalizations.of(context)!.subscription_39b68eb5),
         centerTitle: true,
       ),
       body: _isLoading
@@ -107,23 +107,23 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
     IconData icon;
 
     if (_isTrialActive) {
-      title = AppLocalizations.of(context)!.subscription_プレミアムトライアル中;
+      title = AppLocalizations.of(context)!.subscription_a3287c96;
       subtitle = '残り$_remainingDays日間、プレミアム機能をお楽しみください';
       color = Colors.green;
       icon = Icons.celebration;
     } else if (_isTrialUsed) {
-      title = AppLocalizations.of(context)!.subscription_トライアル期間終了;
-      subtitle = AppLocalizations.of(context)!.subscription_プレミアムプランにアップグレードして機能を継続利用;
+      title = AppLocalizations.of(context)!.subscription_c0cf3d85;
+      subtitle = AppLocalizations.of(context)!.subscription_f4836731;
       color = Colors.orange;
       icon = Icons.timer_off;
     } else if (_progress == 100) {
-      title = AppLocalizations.of(context)!.subscription_トライアル条件達成;
-      subtitle = AppLocalizations.of(context)!.subscription_自動的にプレミアム7日間トライアルが開始されました;
+      title = AppLocalizations.of(context)!.subscription_65f10245;
+      subtitle = AppLocalizations.of(context)!.subscription_7bd9224a;
       color = Colors.blue;
       icon = Icons.star;
     } else {
-      title = AppLocalizations.of(context)!.subscription_トライアル達成まであと少し;
-      subtitle = AppLocalizations.of(context)!.subscription_条件を達成してプレミアム7日間無料体験;
+      title = AppLocalizations.of(context)!.subscription_52882bb7;
+      subtitle = AppLocalizations.of(context)!.subscription_d1e40f4a;
       color = Colors.grey;
       icon = Icons.flag;
     }
@@ -169,7 +169,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              AppLocalizations.of(context)!.subscription_達成進捗,
+              AppLocalizations.of(context)!.subscription_740f887c,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -202,8 +202,8 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
   Widget _buildConditionsList() {
     final conditionLabels = {
       'account_created': AppLocalizations.of(context)!.purchaseCompleted,
-      'profile_completed': AppLocalizations.of(context)!.subscription_プロフィール設定完了,
-      'first_workout_logged': AppLocalizations.of(context)!.subscription_トレーニング記録1回以上,
+      'profile_completed': AppLocalizations.of(context)!.subscription_0297fa2a,
+      'first_workout_logged': AppLocalizations.of(context)!.subscription_f49e6075,
       'gym_searched': AppLocalizations.of(context)!.searchGym,
     };
 
@@ -214,7 +214,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              AppLocalizations.of(context)!.subscription_トライアル条件,
+              AppLocalizations.of(context)!.subscription_0fca92cf,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -267,7 +267,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
                 Icon(Icons.card_giftcard, color: Colors.blue[700]),
                 const SizedBox(width: 8),
                 Text(
-                  AppLocalizations.of(context)!.subscription_トライアル特典,
+                  AppLocalizations.of(context)!.subscription_f578bedc,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

@@ -102,7 +102,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(AppLocalizations.of(context)!.gym_レビューを投稿しました),
+            content: Text(AppLocalizations.of(context)!.gym_07855ac3),
             backgroundColor: Colors.green,
           ),
         );
@@ -134,7 +134,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
           children: [
             Icon(Icons.workspace_premium, color: Colors.blue),
             SizedBox(width: 12),
-            Text(AppLocalizations.of(context)!.gym_Premium機能),
+            Text(AppLocalizations.of(context)!.gym_c28a37a1),
           ],
         ),
         content: Column(
@@ -142,7 +142,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              AppLocalizations.of(context)!.gym_レビュー投稿はPremiumProプラン限定機能です,
+              AppLocalizations.of(context)!.gym_309f83b8,
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 16),
@@ -174,7 +174,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
               backgroundColor: Colors.blue,
               foregroundColor: Colors.white,
             ),
-            child: Text(AppLocalizations.of(context)!.workout_プランを見る),
+            child: Text(AppLocalizations.of(context)!.workout_aa5018ba),
           ),
         ],
       ),
@@ -235,7 +235,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
 
                     // 総合評価
                     _buildRatingSection(
-                      title: AppLocalizations.of(context)!.gym_総合評価,
+                      title: AppLocalizations.of(context)!.gym_9bbdadad,
                       rating: _overallRating,
                       icon: Icons.star,
                       color: Colors.amber,
@@ -249,7 +249,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
 
                     // 詳細評価
                     const Text(
-                      AppLocalizations.of(context)!.gym_詳細評価,
+                      AppLocalizations.of(context)!.gym_9ff748a0,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -258,7 +258,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                     const SizedBox(height: 16),
 
                     _buildRatingSection(
-                      title: AppLocalizations.of(context)!.gym_混雑度の正確さ,
+                      title: AppLocalizations.of(context)!.gym_59aa0844,
                       rating: _crowdAccuracy,
                       icon: Icons.people,
                       color: Colors.blue,
@@ -271,7 +271,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                     const SizedBox(height: 12),
 
                     _buildRatingSection(
-                      title: AppLocalizations.of(context)!.gym_清潔さ,
+                      title: AppLocalizations.of(context)!.gym_972e9a95,
                       rating: _cleanliness,
                       icon: Icons.cleaning_services,
                       color: Colors.green,
@@ -284,7 +284,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                     const SizedBox(height: 12),
 
                     _buildRatingSection(
-                      title: AppLocalizations.of(context)!.gym_スタッフの対応,
+                      title: AppLocalizations.of(context)!.gym_a649b7f0,
                       rating: _staffFriendliness,
                       icon: Icons.person,
                       color: Colors.orange,
@@ -297,7 +297,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                     const SizedBox(height: 12),
 
                     _buildRatingSection(
-                      title: AppLocalizations.of(context)!.gym_初心者への優しさ,
+                      title: AppLocalizations.of(context)!.gym_e1e3e550,
                       rating: _beginnerFriendly,
                       icon: Icons.school,
                       color: Colors.purple,
@@ -323,15 +323,15 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                       maxLines: 5,
                       maxLength: 500,
                       decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context)!.gym_このジムの良かった点や改善点を教えてください,
+                        hintText: AppLocalizations.of(context)!.gym_0c16050e,
                         border: OutlineInputBorder(),
                       ),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return AppLocalizations.of(context)!.gym_コメントを入力してください;
+                          return AppLocalizations.of(context)!.gym_f68a6177;
                         }
                         if (value.trim().length < 10) {
-                          return AppLocalizations.of(context)!.gym_10文字以上入力してください;
+                          return AppLocalizations.of(context)!.gym_56366b67;
                         }
                         return null;
                       },

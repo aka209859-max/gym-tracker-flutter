@@ -314,7 +314,7 @@ class _SearchScreenState extends State<SearchScreen> {
             SizedBox(height: 16),
             Text(
               _currentPosition != null || _searchQuery.isNotEmpty
-                  ? AppLocalizations.of(context)!.general_検索結果が見つかりません
+                  ? AppLocalizations.of(context)!.general_89ea4973
                   : AppLocalizations.of(context)!.startGpsOrTextSearch,
               style: TextStyle(
                 fontSize: 16,

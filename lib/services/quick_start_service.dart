@@ -12,96 +12,96 @@ class QuickStartService {
 
   /// クイックスタートテンプレート（初心者向け）
   static final Map<String, List<Map<String, dynamic>>> templates = {
-    AppLocalizations.of(context)!.general_胸トレ初心者: [
+    AppLocalizations.of(context)!.general_3fb0f43a: [
       {
         'name': AppLocalizations.of(context)!.exerciseBenchPress,
         'sets': 3,
         'reps': 10,
         'weight': 40.0,
-        'notes': AppLocalizations.of(context)!.general_バーベルを胸につけるイメージで,
+        'notes': AppLocalizations.of(context)!.general_efd91eb0,
       },
       {
-        'name': AppLocalizations.of(context)!.workout_ダンベルフライ,
+        'name': AppLocalizations.of(context)!.workout_e85fb0a4,
         'sets': 3,
         'reps': 12,
         'weight': 10.0,
-        'notes': AppLocalizations.of(context)!.general_胸を大きく開くイメージで,
+        'notes': AppLocalizations.of(context)!.general_d85846a8,
       },
       {
-        'name': AppLocalizations.of(context)!.general_プッシュアップ,
+        'name': AppLocalizations.of(context)!.general_36594338,
         'sets': 3,
         'reps': 15,
         'weight': 0.0,
-        'notes': AppLocalizations.of(context)!.general_体幹をまっすぐに保つ,
+        'notes': AppLocalizations.of(context)!.general_fb7fa23b,
       },
     ],
-    AppLocalizations.of(context)!.general_背中トレ初心者: [
+    AppLocalizations.of(context)!.general_b85cad35: [
       {
         'name': AppLocalizations.of(context)!.exerciseDeadlift,
         'sets': 3,
         'reps': 8,
         'weight': 50.0,
-        'notes': AppLocalizations.of(context)!.general_背中をまっすぐに保つ,
+        'notes': AppLocalizations.of(context)!.general_49fb9e50,
       },
       {
         'name': AppLocalizations.of(context)!.exerciseLatPulldown,
         'sets': 3,
         'reps': 12,
         'weight': 30.0,
-        'notes': AppLocalizations.of(context)!.general_肩甲骨を寄せるイメージで,
+        'notes': AppLocalizations.of(context)!.general_2d57da37,
       },
       {
-        'name': AppLocalizations.of(context)!.general_ダンベルロウ,
+        'name': AppLocalizations.of(context)!.general_9ba1c450,
         'sets': 3,
         'reps': 10,
         'weight': 12.0,
-        'notes': AppLocalizations.of(context)!.general_肘を後ろに引くイメージで,
+        'notes': AppLocalizations.of(context)!.general_fc06fc9d,
       },
     ],
-    AppLocalizations.of(context)!.general_脚トレ初心者: [
+    AppLocalizations.of(context)!.general_5c8057de: [
       {
         'name': AppLocalizations.of(context)!.exerciseSquat,
         'sets': 3,
         'reps': 10,
         'weight': 40.0,
-        'notes': AppLocalizations.of(context)!.general_膝がつま先より前に出ないように,
+        'notes': AppLocalizations.of(context)!.general_5d04b53b,
       },
       {
         'name': AppLocalizations.of(context)!.exerciseLegPress,
         'sets': 3,
         'reps': 12,
         'weight': 60.0,
-        'notes': AppLocalizations.of(context)!.general_足全体で押すイメージで,
+        'notes': AppLocalizations.of(context)!.general_73bcde28,
       },
       {
         'name': AppLocalizations.of(context)!.exerciseLegCurl,
         'sets': 3,
         'reps': 15,
         'weight': 20.0,
-        'notes': AppLocalizations.of(context)!.general_ハムストリングスを意識,
+        'notes': AppLocalizations.of(context)!.general_515717e8,
       },
     ],
-    AppLocalizations.of(context)!.general_全身トレ初心者: [
+    AppLocalizations.of(context)!.general_e999c1ce: [
       {
         'name': AppLocalizations.of(context)!.exerciseSquat,
         'sets': 3,
         'reps': 10,
         'weight': 40.0,
-        'notes': AppLocalizations.of(context)!.general_下半身の王道種目,
+        'notes': AppLocalizations.of(context)!.general_b86d4dc6,
       },
       {
         'name': AppLocalizations.of(context)!.exerciseBenchPress,
         'sets': 3,
         'reps': 10,
         'weight': 40.0,
-        'notes': AppLocalizations.of(context)!.general_上半身の押す動作,
+        'notes': AppLocalizations.of(context)!.general_906766df,
       },
       {
         'name': AppLocalizations.of(context)!.exerciseDeadlift,
         'sets': 3,
         'reps': 8,
         'weight': 50.0,
-        'notes': AppLocalizations.of(context)!.general_背中とハムストリングス,
+        'notes': AppLocalizations.of(context)!.general_ddf9f028,
       },
     ],
   };

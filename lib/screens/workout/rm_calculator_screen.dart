@@ -13,7 +13,7 @@ class RMCalculatorScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.workout_計算ツール),
+          title: Text(AppLocalizations.of(context)!.workout_0052814d),
           backgroundColor: theme.colorScheme.primary,
           bottom: TabBar(
             indicatorColor: Colors.white,
@@ -83,7 +83,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(AppLocalizations.of(context)!.workout_正しい数値を入力してください),
+          content: Text(AppLocalizations.of(context)!.workout_bc3633b9),
           backgroundColor: Colors.red,
         ),
       );
@@ -110,7 +110,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
           ),
           const SizedBox(height: 8),
           const Text(
-            AppLocalizations.of(context)!.workout_挙上した重量と回数から1RMを計算します,
+            AppLocalizations.of(context)!.workout_9c0a4993,
             style: TextStyle(
               fontSize: 14,
               color: Colors.grey,
@@ -172,7 +172,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
               elevation: 2,
             ),
             child: const Text(
-              AppLocalizations.of(context)!.workout_1RMを計算,
+              AppLocalizations.of(context)!.workout_c0a0d68f,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -205,7 +205,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                       ),
                       const SizedBox(width: 8),
                       const Text(
-                        AppLocalizations.of(context)!.workout_RM計算結果120RM,
+                        AppLocalizations.of(context)!.workout_eca81c63,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -327,7 +327,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                     Icon(Icons.info_outline, color: Colors.grey[600]),
                     const SizedBox(width: 8),
                     const Text(
-                      AppLocalizations.of(context)!.workout_RMについて,
+                      AppLocalizations.of(context)!.workout_22a0ae55,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -495,7 +495,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
         children: [
           // タイトル
           const Text(
-            AppLocalizations.of(context)!.workout_プレート計算機,
+            AppLocalizations.of(context)!.workout_ae263865,
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
@@ -504,7 +504,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
           ),
           const SizedBox(height: 8),
           const Text(
-            AppLocalizations.of(context)!.workout_バーベルに必要なプレート組み合わせを計算,
+            AppLocalizations.of(context)!.workout_5dd09e2c,
             style: TextStyle(
               fontSize: 16,
               color: Colors.grey,
@@ -539,7 +539,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                         Icon(Icons.settings, color: theme.colorScheme.primary, size: 24),
                         const SizedBox(width: 8),
                         const Text(
-                          AppLocalizations.of(context)!.workout_利用可能なプレート,
+                          AppLocalizations.of(context)!.workout_2b9ba6e9,
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -576,15 +576,15 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                   Row(
                     children: [
                       Expanded(
-                        child: _presetButton(AppLocalizations.of(context)!.workout_標準セット, 'standard', theme),
+                        child: _presetButton(AppLocalizations.of(context)!.workout_4926a20c, 'standard', theme),
                       ),
                       const SizedBox(width: 8),
                       Expanded(
-                        child: _presetButton(AppLocalizations.of(context)!.workout_20kgベース, '20kg_base', theme),
+                        child: _presetButton(AppLocalizations.of(context)!.workout_2335c870, '20kg_base', theme),
                       ),
                       const SizedBox(width: 8),
                       Expanded(
-                        child: _presetButton(AppLocalizations.of(context)!.workout_基本セット, 'basic', theme),
+                        child: _presetButton(AppLocalizations.of(context)!.workout_903c82de, 'basic', theme),
                       ),
                     ],
                   ),
@@ -667,7 +667,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                     Icon(Icons.straighten, color: Colors.grey[700], size: 22),
                     const SizedBox(width: 8),
                     const Text(
-                      AppLocalizations.of(context)!.workout_バーの重量,
+                      AppLocalizations.of(context)!.workout_1c6dabe4,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -746,7 +746,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
               elevation: 4,
             ),
             child: const Text(
-              AppLocalizations.of(context)!.workout_プレートを計算,
+              AppLocalizations.of(context)!.workout_c0a474a8,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -805,14 +805,14 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            AppLocalizations.of(context)!.workout_片側のプレート,
+                            AppLocalizations.of(context)!.workout_489b353c,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
-                            AppLocalizations.of(context)!.workout_両側に同じ組み合わせを装着,
+                            AppLocalizations.of(context)!.workout_726d4bbf,
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.grey,
@@ -973,7 +973,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                     Icon(Icons.info_outline, color: Colors.grey[600]),
                     const SizedBox(width: 8),
                     const Text(
-                      AppLocalizations.of(context)!.workout_使い方のヒント,
+                      AppLocalizations.of(context)!.workout_e903a9d4,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

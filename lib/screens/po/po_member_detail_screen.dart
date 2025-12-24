@@ -36,7 +36,7 @@ class POMemberDetailScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    AppLocalizations.of(context)!.gym_基本情報,
+                    AppLocalizations.of(context)!.gym_0179630e,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
@@ -45,10 +45,10 @@ class POMemberDetailScreen extends StatelessWidget {
                   if (member.phoneNumber != null)
                     _InfoRow(label: AppLocalizations.of(context)!.gymPhone, value: member.phoneNumber!),
                   _InfoRow(
-                    label: AppLocalizations.of(context)!.general_入会日,
+                    label: AppLocalizations.of(context)!.general_d583e5d0,
                     value: DateFormat('yyyy/MM/dd').format(member.joinedAt),
                   ),
-                  _InfoRow(label: AppLocalizations.of(context)!.general_担当トレーナー, value: member.trainerName),
+                  _InfoRow(label: AppLocalizations.of(context)!.general_a82f5771, value: member.trainerName),
                 ],
               ),
             ),
@@ -64,22 +64,22 @@ class POMemberDetailScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    AppLocalizations.of(context)!.general_契約情報,
+                    AppLocalizations.of(context)!.general_f499f3a7,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 16),
                   _InfoRow(label: AppLocalizations.of(context)!.upgradePlan, value: member.planName),
                   _InfoRow(
-                    label: AppLocalizations.of(context)!.general_総セッション数,
+                    label: AppLocalizations.of(context)!.general_71becd2b,
                     value: '${member.totalSessions}回',
                   ),
                   _InfoRow(
-                    label: AppLocalizations.of(context)!.general_残りセッション,
+                    label: AppLocalizations.of(context)!.general_520812b8,
                     value: '${member.remainingSessions}回',
                   ),
                   if (member.lastSessionAt != null)
                     _InfoRow(
-                      label: AppLocalizations.of(context)!.general_最終セッション,
+                      label: AppLocalizations.of(context)!.general_49c6c5b4,
                       value: DateFormat('yyyy/MM/dd')
                           .format(member.lastSessionAt!),
                     ),
@@ -105,8 +105,8 @@ class POMemberDetailScreen extends StatelessWidget {
                   Expanded(
                     child: Text(
                       member.isActive
-                          ? AppLocalizations.of(context)!.general_アクティブ会員です
-                          : AppLocalizations.of(context)!.general_休眠中です2週間以上セッションなし,
+                          ? AppLocalizations.of(context)!.general_54e32695
+                          : AppLocalizations.of(context)!.general_6fff9de3,
                       style: TextStyle(
                         fontSize: 14,
                         color: member.isActive
@@ -126,11 +126,11 @@ class POMemberDetailScreen extends StatelessWidget {
           ElevatedButton.icon(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(AppLocalizations.of(context)!.general_メッセージ機能は近日公開予定です)),
+                SnackBar(content: Text(AppLocalizations.of(context)!.general_0dfb3c3b)),
               );
             },
             icon: const Icon(Icons.message),
-            label: Text(AppLocalizations.of(context)!.general_メッセージを送信),
+            label: Text(AppLocalizations.of(context)!.general_ed353b30),
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(double.infinity, 48),
             ),
@@ -139,11 +139,11 @@ class POMemberDetailScreen extends StatelessWidget {
           OutlinedButton.icon(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(AppLocalizations.of(context)!.general_セッション履歴は近日公開予定です)),
+                SnackBar(content: Text(AppLocalizations.of(context)!.general_75a6ecb5)),
               );
             },
             icon: const Icon(Icons.history),
-            label: Text(AppLocalizations.of(context)!.general_セッション履歴を見る),
+            label: Text(AppLocalizations.of(context)!.general_5573bee6),
             style: OutlinedButton.styleFrom(
               minimumSize: const Size(double.infinity, 48),
             ),

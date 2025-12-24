@@ -34,7 +34,7 @@ class ReferralSuccessDialog {
               ),
               const SizedBox(width: 12),
               const Text(
-                AppLocalizations.of(context)!.general_紹介特典ゲット,
+                AppLocalizations.of(context)!.general_85d1b5d2,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 24,
@@ -47,7 +47,7 @@ class ReferralSuccessDialog {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                AppLocalizations.of(context)!.general_友達の紹介コードを使っていただきありがとうございます,
+                AppLocalizations.of(context)!.general_31ec114c,
                 style: TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 20),
@@ -74,14 +74,14 @@ class ReferralSuccessDialog {
                       icon: Icons.smart_toy,
                       title: AppLocalizations.of(context)!.aiCoaching,
                       value: '×$aiBonus回',
-                      description: AppLocalizations.of(context)!.general_すぐに使えます,
+                      description: AppLocalizations.of(context)!.general_ffe34333,
                     ),
                     const SizedBox(height: 8),
                     _buildBonusItem(
                       icon: Icons.workspace_premium,
-                      title: AppLocalizations.of(context)!.general_Premium無料体験,
+                      title: AppLocalizations.of(context)!.general_7db414f2,
                       value: '$premiumDays日間',
-                      description: AppLocalizations.of(context)!.general_全機能が使い放題,
+                      description: AppLocalizations.of(context)!.general_9b63b1e6,
                     ),
                   ],
                 ),
@@ -108,7 +108,7 @@ class ReferralSuccessDialog {
                 ),
               ),
               child: const Text(
-                AppLocalizations.of(context)!.general_はじめる,
+                AppLocalizations.of(context)!.general_81e13f3b,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -151,7 +151,7 @@ class ReferralSuccessDialog {
               ),
               const SizedBox(width: 12),
               const Text(
-                AppLocalizations.of(context)!.general_紹介成功,
+                AppLocalizations.of(context)!.general_99c96084,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 24,
@@ -191,14 +191,14 @@ class ReferralSuccessDialog {
                       icon: Icons.smart_toy,
                       title: AppLocalizations.of(context)!.aiCoaching,
                       value: '×$aiBonus回',
-                      description: AppLocalizations.of(context)!.general_900相当,
+                      description: AppLocalizations.of(context)!.general_89a02b48,
                     ),
                     const SizedBox(height: 8),
                     _buildBonusItem(
                       icon: Icons.workspace_premium,
-                      title: AppLocalizations.of(context)!.general_Premium無料体験,
+                      title: AppLocalizations.of(context)!.general_7db414f2,
                       value: '$premiumDays日間',
-                      description: AppLocalizations.of(context)!.general_全機能が使い放題,
+                      description: AppLocalizations.of(context)!.general_9b63b1e6,
                     ),
                   ],
                 ),
@@ -216,7 +216,7 @@ class ReferralSuccessDialog {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text(AppLocalizations.of(context)!.general_あとで),
+              child: Text(AppLocalizations.of(context)!.general_26e67e1a),
             ),
             ElevatedButton(
               onPressed: () {
@@ -232,7 +232,7 @@ class ReferralSuccessDialog {
                 ),
               ),
               child: const Text(
-                AppLocalizations.of(context)!.general_もっと招待する,
+                AppLocalizations.of(context)!.general_d3c89caa,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

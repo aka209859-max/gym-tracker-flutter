@@ -41,7 +41,7 @@ class Gym {
   final String? reservationEmail;    // 予約通知先メールアドレス（複数店舗対応）
 
   // マシン・設備情報（オーナーが編集）
-  final Map<String, int>? equipment; // マシン種類と台数 (例: {AppLocalizations.of(context)!.exerciseLegPress: 2, AppLocalizations.of(context)!.gym_スミスマシン: 1})
+  final Map<String, int>? equipment; // マシン種類と台数 (例: {AppLocalizations.of(context)!.exerciseLegPress: 2, AppLocalizations.of(context)!.gym_8b54efdd: 1})
 
   Gym({
     required this.id,
@@ -160,7 +160,7 @@ class Gym {
   String get crowdLevelText {
     switch (currentCrowdLevel) {
       case 1:
-        return AppLocalizations.of(context)!.gym_空いています;
+        return AppLocalizations.of(context)!.gym_e662330d;
       case 2:
         return AppLocalizations.of(context)!.moderatelyEmpty;
       case 3:
@@ -168,7 +168,7 @@ class Gym {
       case 4:
         return AppLocalizations.of(context)!.moderatelyCrowded;
       case 5:
-        return AppLocalizations.of(context)!.gym_超混雑;
+        return AppLocalizations.of(context)!.gym_181af51b;
       default:
         return AppLocalizations.of(context)!.unknown;
     }

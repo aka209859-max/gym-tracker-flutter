@@ -7,11 +7,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 /// 習慣形成マイルストーン
 enum HabitMilestone {
-  streak10(10, AppLocalizations.of(context)!.general_10日連続達成),
-  streak30(30, AppLocalizations.of(context)!.general_30日連続達成),
-  streak50(50, AppLocalizations.of(context)!.general_50日連続達成),
-  streak100(100, AppLocalizations.of(context)!.general_100日連続達成),
-  streak365(365, AppLocalizations.of(context)!.general_1年連続達成);
+  streak10(10, AppLocalizations.of(context)!.general_bcb900c4),
+  streak30(30, AppLocalizations.of(context)!.general_b32b7934),
+  streak50(50, AppLocalizations.of(context)!.general_119ecef6),
+  streak100(100, AppLocalizations.of(context)!.general_0501c995),
+  streak365(365, AppLocalizations.of(context)!.general_31b3e4e4);
 
   const HabitMilestone(this.days, this.message);
   final int days;

@@ -22,7 +22,7 @@ import 'po_dashboard_screen.dart';
 
       final userId = userCredential.user?.uid;
       if (userId == null) {
-        throw Exception(AppLocalizations.of(context)!.error_認証に失敗しました);
+        throw Exception(AppLocalizations.of(context)!.error_31d6c265);
       }
 
       if (kDebugMode) {
@@ -44,12 +44,12 @@ import 'po_dashboard_screen.dart';
       final data = poDoc.data();
       if (data == null) {
         await FirebaseAuth.instance.signOut();
-        throw Exception(AppLocalizations.of(context)!.error_管理者データの取得に失敗しました);
+        throw Exception(AppLocalizations.of(context)!.error_5f7080fe);
       }
       
       if (data['role'] != 'po') {
         await FirebaseAuth.instance.signOut();
-        throw Exception(AppLocalizations.of(context)!.general_PO管理者権限がありません);
+        throw Exception(AppLocalizations.of(context)!.general_82f22f64);
       }
 
       if (kDebugMode) {
@@ -76,13 +76,13 @@ import 'po_dashboard_screen.dart';
           errorMsg = AppLocalizations.of(context)!.emailNotRegistered;
           break;
         case 'wrong-password':
-          errorMsg = AppLocalizations.of(context)!.general_パスワードが間違っています;
+          errorMsg = AppLocalizations.of(context)!.general_cca4bb63;
           break;
         case 'invalid-email':
           errorMsg = AppLocalizations.of(context)!.invalidEmailFormat;
           break;
         case 'user-disabled':
-          errorMsg = AppLocalizations.of(context)!.general_このアカウントは無効化されています;
+          errorMsg = AppLocalizations.of(context)!.general_a62dd99d;
           break;
         default:
           errorMsg = AppLocalizations.of(context)!.error;
@@ -129,7 +129,7 @@ import 'po_dashboard_screen.dart';
           .get();
 
       if (querySnapshot.docs.isEmpty) {
-        throw Exception(AppLocalizations.of(context)!.general_無効なアクセスコードです);
+        throw Exception(AppLocalizations.of(context)!.general_5e23a0da);
       }
 
       final poDoc = querySnapshot.docs.first;
@@ -211,7 +211,7 @@ import 'po_dashboard_screen.dart';
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  AppLocalizations.of(context)!.general_PO管理ページ,
+                  AppLocalizations.of(context)!.general_5de90c88,
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.grey.shade600,
@@ -492,10 +492,10 @@ import 'po_dashboard_screen.dart';
           textCapitalization: TextCapitalization.characters,
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return AppLocalizations.of(context)!.general_アクセスコードを入力してください;
+              return AppLocalizations.of(context)!.general_5fdcaed2;
             }
             if (value.length < 8) {
-              return AppLocalizations.of(context)!.general_アクセスコードは8文字以上です;
+              return AppLocalizations.of(context)!.general_f3d35372;
             }
             return null;
           },
@@ -515,7 +515,7 @@ import 'po_dashboard_screen.dart';
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  AppLocalizations.of(context)!.general_アクセスコードは担当者から発行されたコードです,
+                  AppLocalizations.of(context)!.general_c932d178,
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.blue.shade700,

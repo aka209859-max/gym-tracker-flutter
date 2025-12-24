@@ -175,7 +175,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.workout_実施種目,
+                    AppLocalizations.of(context)!.workout_52114ce9,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -557,12 +557,12 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
       
       final doc = await docRef.get();
       if (!doc.exists) {
-        throw Exception(AppLocalizations.of(context)!.workout_ワークアウトが見つかりません);
+        throw Exception(AppLocalizations.of(context)!.workout_eefd8bda);
       }
       
       final data = doc.data();
       if (data == null) {
-        throw Exception(AppLocalizations.of(context)!.workout_ワークアウトデータが空です);
+        throw Exception(AppLocalizations.of(context)!.workout_5ccef23e);
       }
       
       // 🔍 デバッグ: データ構造を確認
@@ -741,7 +741,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.workout_削除確認),
+        title: Text(AppLocalizations.of(context)!.workout_f1f6bea2),
         content: Text(AppLocalizations.of(context)!.deleteWorkoutConfirm),
         actions: [
           TextButton(

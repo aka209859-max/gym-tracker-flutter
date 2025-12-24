@@ -139,7 +139,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.general_画像を削除),
+        title: Text(AppLocalizations.of(context)!.general_d069db16),
         content: Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(
@@ -198,7 +198,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.general_店舗画像管理),
+        title: Text(AppLocalizations.of(context)!.general_64cab206),
         elevation: 2,
         actions: [
           if (_isUploading)
@@ -243,7 +243,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              AppLocalizations.of(context)!.general_店舗画像がまだありません,
+              AppLocalizations.of(context)!.general_150daaa6,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

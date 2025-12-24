@@ -105,13 +105,13 @@ extension AnnouncementTypeExtension on AnnouncementType {
       case AnnouncementType.general:
         return AppLocalizations.of(context)!.announcement;
       case AnnouncementType.campaign:
-        return AppLocalizations.of(context)!.gym_キャンペーン;
+        return AppLocalizations.of(context)!.gym_275cef99;
       case AnnouncementType.event:
-        return AppLocalizations.of(context)!.gym_イベント;
+        return AppLocalizations.of(context)!.gym_a611a72b;
       case AnnouncementType.maintenance:
-        return AppLocalizations.of(context)!.gym_メンテナンス;
+        return AppLocalizations.of(context)!.gym_2a5f33dd;
       case AnnouncementType.newEquipment:
-        return AppLocalizations.of(context)!.gym_新規設備;
+        return AppLocalizations.of(context)!.gym_9246e93a;
       case AnnouncementType.hours:
         return AppLocalizations.of(context)!.hours;
     }

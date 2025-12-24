@@ -21,7 +21,7 @@ class FriendRequestService {
     if (currentUserId == null) throw Exception(AppLocalizations.of(context)!.userNotAuthenticated);
     
     if (currentUserId == targetId) {
-      throw Exception(AppLocalizations.of(context)!.general_自分に友達申請はできません);
+      throw Exception(AppLocalizations.of(context)!.general_82c35ddb);
     }
 
     // 既存の申請をチェック
@@ -33,7 +33,7 @@ class FriendRequestService {
         .get();
 
     if (existingRequest.docs.isNotEmpty) {
-      throw Exception(AppLocalizations.of(context)!.general_既に友達申請を送信しています);
+      throw Exception(AppLocalizations.of(context)!.general_036253ca);
     }
 
     // 逆方向の申請をチェック（相手が既に申請している場合）
@@ -72,19 +72,19 @@ class FriendRequestService {
         .get();
 
     if (!requestDoc.exists) {
-      throw Exception(AppLocalizations.of(context)!.general_友達申請が見つかりません);
+      throw Exception(AppLocalizations.of(context)!.general_6cbc10f0);
     }
 
     final requestData = requestDoc.data();
     if (requestData == null) {
-      throw Exception(AppLocalizations.of(context)!.gym_データの取得に失敗しました);
+      throw Exception(AppLocalizations.of(context)!.gym_c7e47d32);
     }
     final requesterId = requestData['requester_id'] as String;
     final targetId = requestData['target_id'] as String;
 
     // 自分宛の申請かチェック
     if (targetId != currentUserId) {
-      throw Exception(AppLocalizations.of(context)!.general_この申請を承認する権限がありません);
+      throw Exception(AppLocalizations.of(context)!.general_0f541745);
     }
 
     // 申請を承認済みに更新
@@ -109,18 +109,18 @@ class FriendRequestService {
         .get();
 
     if (!requestDoc.exists) {
-      throw Exception(AppLocalizations.of(context)!.general_友達申請が見つかりません);
+      throw Exception(AppLocalizations.of(context)!.general_6cbc10f0);
     }
 
     final requestData = requestDoc.data();
     if (requestData == null) {
-      throw Exception(AppLocalizations.of(context)!.gym_データの取得に失敗しました);
+      throw Exception(AppLocalizations.of(context)!.gym_c7e47d32);
     }
     final targetId = requestData['target_id'] as String;
 
     // 自分宛の申請かチェック
     if (targetId != currentUserId) {
-      throw Exception(AppLocalizations.of(context)!.general_この申請を拒否する権限がありません);
+      throw Exception(AppLocalizations.of(context)!.general_58b51061);
     }
 
     // 申請を拒否済みに更新

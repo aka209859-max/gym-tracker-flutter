@@ -14,12 +14,12 @@ class SubscriptionManagementService {
 
   /// 解約・ダウングレード理由
   static const List<String> churnReasons = [
-    AppLocalizations.of(context)!.subscription_料金が高い,
-    AppLocalizations.of(context)!.subscription_使用頻度が低い,
-    AppLocalizations.of(context)!.subscription_必要な機能がない,
-    AppLocalizations.of(context)!.subscription_ジムを辞めた,
-    AppLocalizations.of(context)!.subscription_他のアプリに移行,
-    AppLocalizations.of(context)!.subscription_一時的に利用しない,
+    AppLocalizations.of(context)!.subscription_d0ec979f,
+    AppLocalizations.of(context)!.subscription_650df3a4,
+    AppLocalizations.of(context)!.subscription_296022b1,
+    AppLocalizations.of(context)!.subscription_89e60591,
+    AppLocalizations.of(context)!.subscription_21666f45,
+    AppLocalizations.of(context)!.subscription_0cdfb519,
     AppLocalizations.of(context)!.bodyPartOther,
   ];
 
@@ -223,11 +223,11 @@ class SubscriptionManagementService {
   Map<String, String> suggestRetentionOption(String currentPlan, String reason) {
     // 理由に応じて最適な代替案を提案
     switch (reason) {
-      case AppLocalizations.of(context)!.subscription_料金が高い:
+      case AppLocalizations.of(context)!.subscription_d0ec979f:
         if (currentPlan == 'pro') {
           return {
             'type': 'downgrade',
-            'message': AppLocalizations.of(context)!.subscription_Premiumプランにダウングレードすれば月480節約できます,
+            'message': AppLocalizations.of(context)!.subscription_9f2715bb,
           };
         } else {
           return {
@@ -236,25 +236,25 @@ class SubscriptionManagementService {
           };
         }
       
-      case AppLocalizations.of(context)!.subscription_使用頻度が低い:
+      case AppLocalizations.of(context)!.subscription_650df3a4:
         return {
           'type': 'pause',
-          'message': AppLocalizations.of(context)!.subscription_一時停止で無駄な支払いを避けて必要な時に再開できます,
+          'message': AppLocalizations.of(context)!.subscription_6ec3ee80,
         };
       
-      case AppLocalizations.of(context)!.subscription_ジムを辞めた:
+      case AppLocalizations.of(context)!.subscription_89e60591:
         return {
           'type': 'pause',
-          'message': AppLocalizations.of(context)!.subscription_新しいジムが見つかるまで一時停止しませんか,
+          'message': AppLocalizations.of(context)!.subscription_d6d20930,
         };
       
-      case AppLocalizations.of(context)!.subscription_一時的に利用しない:
+      case AppLocalizations.of(context)!.subscription_0cdfb519:
         return {
           'type': 'pause',
-          'message': AppLocalizations.of(context)!.subscription_最大3ヶ月の一時停止で復帰時もスムーズに再開できます,
+          'message': AppLocalizations.of(context)!.subscription_74863211,
         };
       
-      case AppLocalizations.of(context)!.subscription_必要な機能がない:
+      case AppLocalizations.of(context)!.subscription_296022b1:
         if (currentPlan == 'pro' || currentPlan == 'premium') {
           return {
             'type': 'ai_pack',
@@ -263,13 +263,13 @@ class SubscriptionManagementService {
         }
         return {
           'type': 'downgrade',
-          'message': AppLocalizations.of(context)!.subscription_無料プランでも基本機能は使えます,
+          'message': AppLocalizations.of(context)!.subscription_b18ca5da,
         };
       
       default:
         return {
           'type': 'pause',
-          'message': AppLocalizations.of(context)!.subscription_解約前に1ヶ月の一時停止を試してみませんか,
+          'message': AppLocalizations.of(context)!.subscription_0c7f8762,
         };
     }
   }

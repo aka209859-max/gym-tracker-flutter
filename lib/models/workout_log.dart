@@ -213,7 +213,7 @@ class WorkoutSet {
   String get setTypeDisplayName {
     switch (setType) {
       case SetType.normal:
-        return AppLocalizations.of(context)!.workout_通常;
+        return AppLocalizations.of(context)!.workout_9f784efd;
       case SetType.warmup:
         return 'W-UP';
       case SetType.superset:

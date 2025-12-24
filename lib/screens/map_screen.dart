@@ -70,7 +70,7 @@ class _MapScreenState extends State<MapScreen> {
           children: [
             Icon(Icons.location_on, color: Colors.blue),
             SizedBox(width: 8),
-            Text(AppLocalizations.of(context)!.general_位置情報を使用しますか),
+            Text(AppLocalizations.of(context)!.general_3b4e37f6),
           ],
         ),
         content: Text(
@@ -97,7 +97,7 @@ class _MapScreenState extends State<MapScreen> {
                 _acquireLocationAndSearch();
               }
             },
-            child: Text(AppLocalizations.of(context)!.general_はい使用します),
+            child: Text(AppLocalizations.of(context)!.general_c01ec2ac),
           ),
         ],
       ),
@@ -145,19 +145,19 @@ class _MapScreenState extends State<MapScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    AppLocalizations.of(context)!.general_位置情報を取得できませんでした,
+                    AppLocalizations.of(context)!.general_8b92a0e1,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 4),
                   Text(
                     kIsWeb 
-                      ? AppLocalizations.of(context)!.general_ブラウザで位置情報を許可してください
+                      ? AppLocalizations.of(context)!.general_e4a4a1d1
                       : AppLocalizations.of(context)!.confirm,
                     style: const TextStyle(fontSize: 12),
                   ),
                   const SizedBox(height: 4),
                   const Text(
-                    AppLocalizations.of(context)!.general_東京駅周辺のジムを表示しています,
+                    AppLocalizations.of(context)!.general_3d380ed0,
                     style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                   ),
                 ],
@@ -238,8 +238,8 @@ class _MapScreenState extends State<MapScreen> {
             facilities: place.types,
             phoneNumber: '',
             openingHours: place.openNow != null 
-                ? (place.openNow! ? AppLocalizations.of(context)!.open : AppLocalizations.of(context)!.general_営業時間外)
-                : AppLocalizations.of(context)!.general_営業時間不明,
+                ? (place.openNow! ? AppLocalizations.of(context)!.open : AppLocalizations.of(context)!.general_a2082b23)
+                : AppLocalizations.of(context)!.general_88133d74,
             monthlyFee: 0,
             rating: place.rating ?? 0.0,
             reviewCount: place.userRatingsTotal ?? 0,
@@ -320,7 +320,7 @@ class _MapScreenState extends State<MapScreen> {
         } else if (searchSucceeded && gyms.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(AppLocalizations.of(context)!.general_この地域にはジムが見つかりませんでした),
+              content: Text(AppLocalizations.of(context)!.general_fe7a7194),
               backgroundColor: Colors.orange,
               duration: Duration(seconds: 3),
             ),
@@ -407,7 +407,7 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.general_ジムマップ),
+        title: Text(AppLocalizations.of(context)!.general_8a9d68db),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
@@ -534,7 +534,7 @@ class _MapScreenState extends State<MapScreen> {
             const Icon(Icons.search_off, size: 64, color: Colors.grey),
             const SizedBox(height: 16),
             const Text(
-              AppLocalizations.of(context)!.general_近くにジムが見つかりませんでした,
+              AppLocalizations.of(context)!.general_303bea53,
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             SizedBox(height: 24),
@@ -571,7 +571,7 @@ class _MapScreenState extends State<MapScreen> {
                 Icon(Icons.search_off, size: 64, color: Colors.grey),
                 SizedBox(height: 16),
                 Text(
-                  AppLocalizations.of(context)!.general_条件に一致するジムが見つかりません,
+                  AppLocalizations.of(context)!.general_25d11492,
                   style: TextStyle(fontSize: 16, color: Colors.grey),
                 ),
               ],
@@ -847,7 +847,7 @@ class _MapScreenState extends State<MapScreen> {
   String _getCrowdLevelText(int level) {
     switch (level) {
       case 1:
-        return AppLocalizations.of(context)!.gym_空いています;
+        return AppLocalizations.of(context)!.gym_e662330d;
       case 2:
         return AppLocalizations.of(context)!.moderatelyEmpty;
       case 3:
@@ -855,7 +855,7 @@ class _MapScreenState extends State<MapScreen> {
       case 4:
         return AppLocalizations.of(context)!.moderatelyCrowded;
       case 5:
-        return AppLocalizations.of(context)!.gym_超混雑;
+        return AppLocalizations.of(context)!.gym_181af51b;
       default:
         return AppLocalizations.of(context)!.unknown;
     }

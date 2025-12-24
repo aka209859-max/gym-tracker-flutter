@@ -29,20 +29,20 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
 
   // 設備候補
   final List<String> _facilityOptions = [
-    AppLocalizations.of(context)!.gym_シャワー室,
-    AppLocalizations.of(context)!.gym_サウナ,
-    AppLocalizations.of(context)!.gym_プール,
-    AppLocalizations.of(context)!.gym_スパ,
-    AppLocalizations.of(context)!.gym_ロッカールーム,
+    AppLocalizations.of(context)!.gym_bd5c63c1,
+    AppLocalizations.of(context)!.gym_d816d814,
+    AppLocalizations.of(context)!.gym_62b8a10f,
+    AppLocalizations.of(context)!.gym_a88b1eac,
+    AppLocalizations.of(context)!.gym_3f1c4a99,
     AppLocalizations.of(context)!.personalTraining,
-    AppLocalizations.of(context)!.gym_グループレッスン,
+    AppLocalizations.of(context)!.gym_0f5d9dd9,
     'Wi-Fi',
-    AppLocalizations.of(context)!.gym_駐車場,
-    AppLocalizations.of(context)!.gym_24時間営業,
-    AppLocalizations.of(context)!.gym_女性専用エリア,
-    AppLocalizations.of(context)!.gym_ストレッチエリア,
-    AppLocalizations.of(context)!.gym_有酸素エリア,
-    AppLocalizations.of(context)!.gym_フリーウェイトエリア,
+    AppLocalizations.of(context)!.gym_6cec8734,
+    AppLocalizations.of(context)!.gym_fc767436,
+    AppLocalizations.of(context)!.gym_ae762a12,
+    AppLocalizations.of(context)!.gym_7d1e3afa,
+    AppLocalizations.of(context)!.gym_1741ee33,
+    AppLocalizations.of(context)!.gym_bdb55ce3,
   ];
 
   @override
@@ -63,7 +63,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
       if (gymDoc.exists) {
         final data = gymDoc.data();
         if (data == null) {
-          throw Exception(AppLocalizations.of(context)!.gym_データの取得に失敗しました);
+          throw Exception(AppLocalizations.of(context)!.gym_c7e47d32);
         }
         setState(() {
           _equipment = data['equipment'] != null
@@ -138,7 +138,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
             TextField(
               controller: nameController,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.gym_器具名,
+                labelText: AppLocalizations.of(context)!.gym_17c1e0c7,
                 hintText: '例: レッグプレス',
               ),
             ),
@@ -146,7 +146,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
             TextField(
               controller: countController,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.gym_台数,
+                labelText: AppLocalizations.of(context)!.gym_d441d8be,
               ),
               keyboardType: TextInputType.number,
             ),
@@ -233,7 +233,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  AppLocalizations.of(context)!.gym_マシン器具,
+                  AppLocalizations.of(context)!.gym_841a92b0,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -314,7 +314,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              AppLocalizations.of(context)!.gym_施設設備,
+              AppLocalizations.of(context)!.gym_36f6e41f,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

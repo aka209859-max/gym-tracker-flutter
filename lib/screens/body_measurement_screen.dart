@@ -103,7 +103,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
 
     if (weight == null && bodyFat == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context)!.general_体重または体脂肪率を入力してください)),
+        SnackBar(content: Text(AppLocalizations.of(context)!.general_6d12fd22)),
       );
       return;
     }
@@ -315,7 +315,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            AppLocalizations.of(context)!.general_今日の記録,
+                            AppLocalizations.of(context)!.general_d279f4b3,
                             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 16),
@@ -492,7 +492,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                   },
                   activeColor: Colors.grey.shade400,
                 ),
-                Text(AppLocalizations.of(context)!.general_全て, style: TextStyle(fontSize: 14, color: Colors.grey.shade700)),
+                Text(AppLocalizations.of(context)!.general_3582fe36, style: TextStyle(fontSize: 14, color: Colors.grey.shade700)),
               ],
             ),
           ],
@@ -697,7 +697,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
               Icon(Icons.analytics_outlined, size: 48, color: Colors.grey[400]),
               const SizedBox(height: 16),
               Text(
-                AppLocalizations.of(context)!.general_記録がありません,
+                AppLocalizations.of(context)!.general_175145c8,
                 style: TextStyle(fontSize: 16, color: Colors.grey[600]),
               ),
             ],
@@ -713,7 +713,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
           const Padding(
             padding: EdgeInsets.all(16),
             child: Text(
-              AppLocalizations.of(context)!.workout_記録履歴,
+              AppLocalizations.of(context)!.workout_16013f46,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ),

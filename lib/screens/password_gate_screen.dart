@@ -158,7 +158,7 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
-                    AppLocalizations.of(context)!.general_β版テスト運用中,
+                    AppLocalizations.of(context)!.general_f62ab22a,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -220,7 +220,7 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
                               size: 20, color: Colors.blue[700]),
                           const SizedBox(width: 8),
                           Text(
-                            AppLocalizations.of(context)!.general_β版テスト運用について,
+                            AppLocalizations.of(context)!.general_4f700ca2,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.blue[900],

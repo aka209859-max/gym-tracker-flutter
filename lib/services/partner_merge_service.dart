@@ -187,7 +187,7 @@ class PartnerMergeService {
     int matchCount = 0;
     for (final kw1 in keywords1) {
       for (final kw2 in keywords2) {
-        // キーワードの部分一致を許容（例: "royal" と AppLocalizations.of(context)!.general_ロイヤル）
+        // キーワードの部分一致を許容（例: "royal" と AppLocalizations.of(context)!.general_d696cff8）
         if (kw1.contains(kw2) || kw2.contains(kw1)) {
           matchCount++;
           break;
@@ -223,10 +223,10 @@ class PartnerMergeService {
   bool _isKanaEnglishMatch(String kw1, String kw2) {
     // よくある対応パターン
     final Map<String, String> kanaEnglishMap = {
-      'royal': AppLocalizations.of(context)!.general_ロイヤル,
-      'fitness': AppLocalizations.of(context)!.general_フィットネス,
-      'cafe': AppLocalizations.of(context)!.gym_カフェ,
-      'wash': AppLocalizations.of(context)!.general_ウォッシュ,
+      'royal': AppLocalizations.of(context)!.general_d696cff8,
+      'fitness': AppLocalizations.of(context)!.general_c758fe69,
+      'cafe': AppLocalizations.of(context)!.gym_71edef7e,
+      'wash': AppLocalizations.of(context)!.general_40a6b7e6,
     };
     
     for (final entry in kanaEnglishMap.entries) {
@@ -254,13 +254,13 @@ class PartnerMergeService {
     }
     
     // 都道府県・市区町村の一致チェック
-    final prefectures = [AppLocalizations.of(context)!.profile_北海道, AppLocalizations.of(context)!.general_青森, AppLocalizations.of(context)!.general_岩手, AppLocalizations.of(context)!.general_宮城, AppLocalizations.of(context)!.general_秋田, AppLocalizations.of(context)!.general_山形, AppLocalizations.of(context)!.general_福島,
-                         AppLocalizations.of(context)!.general_茨城, AppLocalizations.of(context)!.general_栃木, AppLocalizations.of(context)!.general_群馬, AppLocalizations.of(context)!.general_埼玉, AppLocalizations.of(context)!.general_千葉, AppLocalizations.of(context)!.general_東京, AppLocalizations.of(context)!.general_神奈川,
-                         AppLocalizations.of(context)!.general_新潟, AppLocalizations.of(context)!.general_富山, AppLocalizations.of(context)!.general_石川, AppLocalizations.of(context)!.general_福井, AppLocalizations.of(context)!.general_山梨, AppLocalizations.of(context)!.general_長野, AppLocalizations.of(context)!.general_岐阜,
-                         AppLocalizations.of(context)!.general_静岡, AppLocalizations.of(context)!.general_愛知, AppLocalizations.of(context)!.general_三重, AppLocalizations.of(context)!.general_滋賀, AppLocalizations.of(context)!.general_京都, AppLocalizations.of(context)!.general_大阪, AppLocalizations.of(context)!.general_兵庫,
-                         AppLocalizations.of(context)!.general_奈良, AppLocalizations.of(context)!.general_和歌山, AppLocalizations.of(context)!.general_鳥取, AppLocalizations.of(context)!.general_島根, AppLocalizations.of(context)!.general_岡山, AppLocalizations.of(context)!.general_広島, AppLocalizations.of(context)!.general_山口,
-                         AppLocalizations.of(context)!.general_徳島, AppLocalizations.of(context)!.general_香川, AppLocalizations.of(context)!.general_愛媛, AppLocalizations.of(context)!.general_高知, AppLocalizations.of(context)!.general_福岡, AppLocalizations.of(context)!.general_佐賀, AppLocalizations.of(context)!.general_長崎,
-                         AppLocalizations.of(context)!.general_熊本, AppLocalizations.of(context)!.general_大分, AppLocalizations.of(context)!.general_宮崎, AppLocalizations.of(context)!.general_鹿児島, AppLocalizations.of(context)!.general_沖縄];
+    final prefectures = [AppLocalizations.of(context)!.profile_afa342b7, AppLocalizations.of(context)!.general_d837067a, AppLocalizations.of(context)!.general_d2e3ea81, AppLocalizations.of(context)!.general_2b180dc8, AppLocalizations.of(context)!.general_4f199796, AppLocalizations.of(context)!.general_1947f6db, AppLocalizations.of(context)!.general_30216a10,
+                         AppLocalizations.of(context)!.general_078bb920, AppLocalizations.of(context)!.general_2d9eaae3, AppLocalizations.of(context)!.general_2af324df, AppLocalizations.of(context)!.general_07cf822c, AppLocalizations.of(context)!.general_c335de5c, AppLocalizations.of(context)!.general_6fa43203, AppLocalizations.of(context)!.general_eef6da2f,
+                         AppLocalizations.of(context)!.general_215695a6, AppLocalizations.of(context)!.general_3913724a, AppLocalizations.of(context)!.general_e1637371, AppLocalizations.of(context)!.general_47547464, AppLocalizations.of(context)!.general_4ecfe176, AppLocalizations.of(context)!.general_b468fb56, AppLocalizations.of(context)!.general_5f93c0f9,
+                         AppLocalizations.of(context)!.general_3ef233eb, AppLocalizations.of(context)!.general_ae4a6f15, AppLocalizations.of(context)!.general_6bd46be4, AppLocalizations.of(context)!.general_a27d2589, AppLocalizations.of(context)!.general_923b46f2, AppLocalizations.of(context)!.general_013f31f7, AppLocalizations.of(context)!.general_35247177,
+                         AppLocalizations.of(context)!.general_a248c80f, AppLocalizations.of(context)!.general_b85dfa67, AppLocalizations.of(context)!.general_9138605b, AppLocalizations.of(context)!.general_03801a58, AppLocalizations.of(context)!.general_76683668, AppLocalizations.of(context)!.general_fc9c3580, AppLocalizations.of(context)!.general_84ec0ce8,
+                         AppLocalizations.of(context)!.general_fe4dc268, AppLocalizations.of(context)!.general_fcfd4cb4, AppLocalizations.of(context)!.general_e01c5655, AppLocalizations.of(context)!.general_6ef4203d, AppLocalizations.of(context)!.general_87dc5e14, AppLocalizations.of(context)!.general_5a0ca2e2, AppLocalizations.of(context)!.general_2dbcf5d1,
+                         AppLocalizations.of(context)!.general_21caf754, AppLocalizations.of(context)!.general_0f944350, AppLocalizations.of(context)!.general_3edec490, AppLocalizations.of(context)!.general_8e53814f, AppLocalizations.of(context)!.general_7c2594ee];
     
     String? prefecture1;
     String? prefecture2;
@@ -279,7 +279,7 @@ class PartnerMergeService {
     double score = (prefecture1 != null && prefecture2 != null && prefecture1 == prefecture2) ? 0.3 : 0.0;
     
     // 主要都市名の一致チェック（佐賀市、久留米市、鳥栖市など）
-    final cities = [AppLocalizations.of(context)!.general_佐賀市, AppLocalizations.of(context)!.general_久留米市, AppLocalizations.of(context)!.general_鳥栖市, AppLocalizations.of(context)!.general_福岡市, AppLocalizations.of(context)!.general_大和町, AppLocalizations.of(context)!.general_津福, AppLocalizations.of(context)!.general_西新町, AppLocalizations.of(context)!.general_鍋島, AppLocalizations.of(context)!.general_緑小路];
+    final cities = [AppLocalizations.of(context)!.general_3046b259, AppLocalizations.of(context)!.general_dc2264c5, AppLocalizations.of(context)!.general_47cc8127, AppLocalizations.of(context)!.general_6aa81375, AppLocalizations.of(context)!.general_f75d35c8, AppLocalizations.of(context)!.general_4bf41b7e, AppLocalizations.of(context)!.general_d7334355, AppLocalizations.of(context)!.general_cfd154a5, AppLocalizations.of(context)!.general_f6090f96];
     for (final city in cities) {
       final cityNorm = _normalizeString(city);
       if (normalized1.contains(cityNorm) && normalized2.contains(cityNorm)) {
@@ -311,7 +311,7 @@ class PartnerMergeService {
     return str
         .toLowerCase()
         .replaceAll(RegExp(r'[\s\-_&・]'), '')
-        .replaceAll(AppLocalizations.of(context)!.general_ー, '')
+        .replaceAll(AppLocalizations.of(context)!.general_2bc17100, '')
         .replaceAll('－', '');
   }
 
@@ -397,7 +397,7 @@ class PartnerMergeService {
       facilities: partnerData?['facilities'] != null 
           ? List<String>.from(partnerData!['facilities'] as List)
           : [],
-      openingHours: place.openNow == true ? AppLocalizations.of(context)!.open : place.openNow == false ? AppLocalizations.of(context)!.general_営業時間外 : AppLocalizations.of(context)!.general_営業時間不明,
+      openingHours: place.openNow == true ? AppLocalizations.of(context)!.open : place.openNow == false ? AppLocalizations.of(context)!.general_a2082b23 : AppLocalizations.of(context)!.general_88133d74,
       monthlyFee: (partnerData?['monthlyFee'] as num?)?.toDouble() ?? 0.0,
       rating: place.rating ?? 0.0,
       reviewCount: place.userRatingsTotal ?? 0,

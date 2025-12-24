@@ -162,7 +162,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           ),
           const SizedBox(height: 24),
           Text(
-            AppLocalizations.of(context)!.general_お気に入りがありません,
+            AppLocalizations.of(context)!.general_a15b95ca,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,

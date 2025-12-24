@@ -146,7 +146,7 @@ class WorkoutShareCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  AppLocalizations.of(context)!.workout_セット詳細,
+                  AppLocalizations.of(context)!.workout_bd3212f5,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,

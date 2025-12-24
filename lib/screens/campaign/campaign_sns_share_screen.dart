@@ -124,7 +124,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              AppLocalizations.of(context)!.general_数分以内に結果をお知らせします,
+              AppLocalizations.of(context)!.general_4dbf836e,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 12, color: Colors.grey[600]),
             ),
@@ -145,7 +145,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final benefit = widget.application.planType == 'premium' ? AppLocalizations.of(context)!.general_2ヶ月無料 : AppLocalizations.of(context)!.general_初月無料;
+    final benefit = widget.application.planType == 'premium' ? AppLocalizations.of(context)!.general_9aff674f : AppLocalizations.of(context)!.general_6fd93ccd;
 
     return Scaffold(
       appBar: AppBar(
@@ -177,7 +177,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
               ElevatedButton.icon(
                 onPressed: _copyToClipboard,
                 icon: const Icon(Icons.copy),
-                label: Text(AppLocalizations.of(context)!.general_テンプレートをコピー),
+                label: Text(AppLocalizations.of(context)!.general_a1817327),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(16),
                   backgroundColor: Colors.blue[700],
@@ -188,7 +188,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
               ElevatedButton.icon(
                 onPressed: _shareToSns,
                 icon: const Icon(Icons.share),
-                label: Text(AppLocalizations.of(context)!.general_SNSアプリで投稿),
+                label: Text(AppLocalizations.of(context)!.general_b5b7e374),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(16),
                   backgroundColor: Colors.green[700],
@@ -199,7 +199,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
               const Divider(),
               SizedBox(height: 16),
               Text(
-                AppLocalizations.of(context)!.purchaseCompleted(AppLocalizations.of(context)!.general_キャンペーン特典),
+                AppLocalizations.of(context)!.purchaseCompleted(AppLocalizations.of(context)!.general_140fbc0e),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14,
@@ -332,7 +332,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
                 Icon(Icons.vpn_key, color: Colors.amber[700], size: 28),
                 const SizedBox(width: 8),
                 const Text(
-                  AppLocalizations.of(context)!.general_あなたの認証コード,
+                  AppLocalizations.of(context)!.general_c8bef2a9,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -387,7 +387,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
                 Icon(Icons.article, color: Colors.blue),
                 SizedBox(width: 8),
                 Text(
-                  AppLocalizations.of(context)!.general_投稿テンプレート,
+                  AppLocalizations.of(context)!.general_5aab3d07,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -434,7 +434,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
                 Icon(Icons.checklist, color: Colors.blue),
                 SizedBox(width: 8),
                 Text(
-                  AppLocalizations.of(context)!.general_投稿手順,
+                  AppLocalizations.of(context)!.general_4b8a8d52,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -443,10 +443,10 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
               ],
             ),
             const SizedBox(height: 12),
-            _buildInstructionStep('1', AppLocalizations.of(context)!.general_テンプレートをコピーをタップ),
-            _buildInstructionStep('2', AppLocalizations.of(context)!.general_X旧TwitterまたはInstagramアプリを開く),
-            _buildInstructionStep('3', AppLocalizations.of(context)!.general_コピーしたテンプレートを貼り付けて投稿),
-            _buildInstructionStep('4', AppLocalizations.of(context)!.general_このアプリに戻って投稿しましたをタップ),
+            _buildInstructionStep('1', AppLocalizations.of(context)!.general_3ad25210),
+            _buildInstructionStep('2', AppLocalizations.of(context)!.general_e8477f45),
+            _buildInstructionStep('3', AppLocalizations.of(context)!.general_d9c86932),
+            _buildInstructionStep('4', AppLocalizations.of(context)!.general_4da5e52b),
             SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.all(12),

@@ -104,7 +104,7 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
                     const Icon(Icons.info_outline, size: 64, color: Colors.blue),
                     const SizedBox(height: 16),
                     const Text(
-                      AppLocalizations.of(context)!.workout_週次レポートはまだありません,
+                      AppLocalizations.of(context)!.workout_73791c8e,
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 8),
@@ -127,12 +127,12 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
                   Icon(Icons.assessment, size: 64, color: Colors.grey[400]),
                   const SizedBox(height: 16),
                   Text(
-                    AppLocalizations.of(context)!.workout_まだ週次レポートがありません,
+                    AppLocalizations.of(context)!.workout_6fa5ecc7,
                     style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    AppLocalizations.of(context)!.workout_毎週月曜日に自動生成されます,
+                    AppLocalizations.of(context)!.workout_c604389d,
                     style: TextStyle(fontSize: 12, color: Colors.grey[500]),
                   ),
                 ],
@@ -172,8 +172,8 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             SwitchListTile(
-              title: Text(AppLocalizations.of(context)!.workout_週次レコメンデーション),
-              subtitle: Text(AppLocalizations.of(context)!.workout_推奨曜日とメニュー提案を表示),
+              title: Text(AppLocalizations.of(context)!.workout_82b9ada7),
+              subtitle: Text(AppLocalizations.of(context)!.workout_54f8ade3),
               value: true,
               onChanged: (value) {
                 // TODO: Save setting to Firestore
@@ -228,12 +228,12 @@ class _ReportCard extends StatelessWidget {
                     ),
                     _InfoRow(
                       icon: Icons.timer,
-                      label: AppLocalizations.of(context)!.workout_合計時間,
+                      label: AppLocalizations.of(context)!.workout_5197dae1,
                       value: '${report.totalMinutes}分',
                     ),
                     _InfoRow(
                       icon: Icons.local_fire_department,
-                      label: AppLocalizations.of(context)!.workout_ストリーク,
+                      label: AppLocalizations.of(context)!.workout_a9ff3dea,
                       value: '${report.streak}日',
                     ),
                   ],
@@ -245,7 +245,7 @@ class _ReportCard extends StatelessWidget {
 
                 // 部位別実施状況
                 _buildSection(
-                  AppLocalizations.of(context)!.workout_部位別実施状況,
+                  AppLocalizations.of(context)!.workout_2d649ff9,
                   [
                     ...report.bodyParts.entries.map((entry) {
                       return _BodyPartRow(
@@ -302,7 +302,7 @@ class _ReportCard extends StatelessWidget {
               Icon(Icons.lightbulb, color: Colors.blue, size: 20),
               SizedBox(width: 8),
               Text(
-                AppLocalizations.of(context)!.workout_今週のレコメンデーション,
+                AppLocalizations.of(context)!.workout_1ed68d67,
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
             ],

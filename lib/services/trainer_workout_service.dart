@@ -14,7 +14,7 @@ class TrainerWorkoutService {
     try {
       // メールアドレスが空の場合は空リストを返す
       if (memberEmail.isEmpty) {
-        debugPrint(AppLocalizations.of(context)!.workout_メールアドレスが設定されていません);
+        debugPrint(AppLocalizations.of(context)!.workout_8982c109);
         return [];
       }
 

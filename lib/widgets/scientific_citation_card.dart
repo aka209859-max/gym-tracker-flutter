@@ -196,15 +196,15 @@ class ConfidenceIndicator extends StatelessWidget {
     IconData icon;
 
     if (paperCount >= 5) {
-      level = AppLocalizations.of(context)!.general_高信頼性;
+      level = AppLocalizations.of(context)!.general_23ce592c;
       color = Colors.green;
       icon = Icons.verified;
     } else if (paperCount >= 3) {
-      level = AppLocalizations.of(context)!.general_中信頼性;
+      level = AppLocalizations.of(context)!.general_9afb9ad5;
       color = Colors.orange;
       icon = Icons.check_circle;
     } else {
-      level = AppLocalizations.of(context)!.general_参考値;
+      level = AppLocalizations.of(context)!.general_310ee291;
       color = Colors.grey;
       icon = Icons.info;
     }

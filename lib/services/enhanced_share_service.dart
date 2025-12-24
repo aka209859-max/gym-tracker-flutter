@@ -45,7 +45,7 @@ class EnhancedShareService {
       if (kDebugMode) print('❌ Instagram Stories シェアエラー: $e');
       // エラーをユーザーに表示
       if (context.mounted) {
-        _showError(context, AppLocalizations.of(context)!.error_シェアに失敗しました);
+        _showError(context, AppLocalizations.of(context)!.error_3f9cd0bc);
       }
     }
   }
@@ -90,7 +90,7 @@ class EnhancedShareService {
             const SizedBox(width: 12),
             const Expanded(
               child: Text(
-                AppLocalizations.of(context)!.general_新記録達成,
+                AppLocalizations.of(context)!.general_a32e6bd5,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
@@ -131,7 +131,7 @@ class EnhancedShareService {
             ),
             const SizedBox(height: 16),
             const Text(
-              AppLocalizations.of(context)!.general_この記録をSNSでシェアしますか,
+              AppLocalizations.of(context)!.general_6720b74a,
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
           ],
@@ -144,7 +144,7 @@ class EnhancedShareService {
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
             icon: const Icon(Icons.share),
-            label: Text(AppLocalizations.of(context)!.general_シェアする),
+            label: Text(AppLocalizations.of(context)!.general_c544a2d9),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.orange,
               foregroundColor: Colors.white,
@@ -263,7 +263,7 @@ class EnhancedShareService {
       if (kDebugMode) print('❌ トレーニングシェアエラー: $e');
       if (context.mounted) {
         Navigator.of(context).pop();
-        _showError(context, AppLocalizations.of(context)!.error_シェアに失敗しました);
+        _showError(context, AppLocalizations.of(context)!.error_3f9cd0bc);
       }
     }
   }
@@ -331,7 +331,7 @@ class EnhancedShareService {
             ),
             const SizedBox(height: 32),
             const Text(
-              AppLocalizations.of(context)!.general_新記録達成,
+              AppLocalizations.of(context)!.general_a32e6bd5,
               style: TextStyle(
                 fontSize: 48,
                 fontWeight: FontWeight.bold,

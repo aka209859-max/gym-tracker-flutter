@@ -250,11 +250,11 @@ class TrainerWorkoutCard extends StatelessWidget {
                     // トレーナー情報
                     _buildInfoRow(AppLocalizations.of(context)!.trainers, record.trainerName),
                     _buildInfoRow(AppLocalizations.of(context)!.duration, '${record.duration}分'),
-                    _buildInfoRow(AppLocalizations.of(context)!.workout_強度, _getIntensityLabel(context, record.intensity)),
+                    _buildInfoRow(AppLocalizations.of(context)!.workout_c34d51a0, _getIntensityLabel(context, record.intensity)),
                     
                     const SizedBox(height: 24),
                     const Text(
-                      AppLocalizations.of(context)!.workout_実施メニュー,
+                      AppLocalizations.of(context)!.workout_6635091c,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -296,7 +296,7 @@ class TrainerWorkoutCard extends StatelessWidget {
                     if (record.bodyMetrics != null) ...[
                       const SizedBox(height: 24),
                       const Text(
-                        AppLocalizations.of(context)!.workout_体組成,
+                        AppLocalizations.of(context)!.workout_85a5a0ad,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -324,7 +324,7 @@ class TrainerWorkoutCard extends StatelessWidget {
                     if (record.trainerNotes.isNotEmpty) ...[
                       const SizedBox(height: 24),
                       const Text(
-                        AppLocalizations.of(context)!.workout_トレーナーからのメッセージ,
+                        AppLocalizations.of(context)!.workout_ffc76989,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -406,9 +406,9 @@ class TrainerWorkoutCard extends StatelessWidget {
   String _getIntensityLabel(BuildContext context, String intensity) {
     switch (intensity) {
       case 'low':
-        return AppLocalizations.of(context)!.workout_軽め;
+        return AppLocalizations.of(context)!.workout_c55c9549;
       case 'high':
-        return AppLocalizations.of(context)!.workout_ハード;
+        return AppLocalizations.of(context)!.workout_eaaa4898;
       case 'medium':
       default:
         return AppLocalizations.of(context)!.crowdLevelNormal;

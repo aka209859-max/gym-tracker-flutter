@@ -20,25 +20,25 @@ class _PartnerEquipmentEditorScreenState
 
   // マシン種類のマスタリスト
   final List<String> _availableEquipment = [
-    AppLocalizations.of(context)!.general_フリーウエイト,
-    AppLocalizations.of(context)!.gym_スミスマシン,
+    AppLocalizations.of(context)!.general_c43e173a,
+    AppLocalizations.of(context)!.gym_8b54efdd,
     AppLocalizations.of(context)!.exerciseLegPress,
     AppLocalizations.of(context)!.exerciseBenchPress,
-    AppLocalizations.of(context)!.general_ケーブルマシン,
-    AppLocalizations.of(context)!.gym_ランニングマシン,
+    AppLocalizations.of(context)!.general_34cda07f,
+    AppLocalizations.of(context)!.gym_40e07129,
     AppLocalizations.of(context)!.exerciseAerobicBike,
     AppLocalizations.of(context)!.dumbbell,
     AppLocalizations.of(context)!.barbell,
     AppLocalizations.of(context)!.exerciseLatPulldown,
     AppLocalizations.of(context)!.exerciseLegExtension,
     AppLocalizations.of(context)!.exerciseLegCurl,
-    AppLocalizations.of(context)!.general_アブドミナル,
+    AppLocalizations.of(context)!.general_921ddbac,
     AppLocalizations.of(context)!.exerciseShoulderPress,
-    AppLocalizations.of(context)!.exercise_チェストプレス,
-    AppLocalizations.of(context)!.general_ハックスクワット,
-    AppLocalizations.of(context)!.workout_ケーブルクロスオーバー,
-    AppLocalizations.of(context)!.workout_ローイングマシン,
-    AppLocalizations.of(context)!.general_ステップマシン,
+    AppLocalizations.of(context)!.exercise_cfc4f367,
+    AppLocalizations.of(context)!.general_c2994ab4,
+    AppLocalizations.of(context)!.workout_c196525e,
+    AppLocalizations.of(context)!.workout_4c6d7db7,
+    AppLocalizations.of(context)!.general_58db9535,
     AppLocalizations.of(context)!.bodyPartOther,
   ];
 
@@ -232,7 +232,7 @@ class _PartnerEquipmentEditorScreenState
 
                   // マシンリスト
                   const Text(
-                    AppLocalizations.of(context)!.gym_設備マシン情報,
+                    AppLocalizations.of(context)!.gym_2689426f,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

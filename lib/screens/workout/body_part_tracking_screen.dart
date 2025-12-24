@@ -145,7 +145,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                AppLocalizations.of(context)!.workout_集計期間,
+                AppLocalizations.of(context)!.workout_36413c90,
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey),
               ),
               const SizedBox(height: 8),
@@ -153,9 +153,9 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
                 width: double.infinity,
                 child: SegmentedButton<int>(
                   segments: const [
-                    ButtonSegment(value: 7, label: Text(AppLocalizations.of(context)!.workout_7日)),
-                    ButtonSegment(value: 30, label: Text(AppLocalizations.of(context)!.workout_30日)),
-                    ButtonSegment(value: 90, label: Text(AppLocalizations.of(context)!.workout_90日)),
+                    ButtonSegment(value: 7, label: Text(AppLocalizations.of(context)!.workout_7097f864)),
+                    ButtonSegment(value: 30, label: Text(AppLocalizations.of(context)!.workout_593f53b5)),
+                    ButtonSegment(value: 90, label: Text(AppLocalizations.of(context)!.workout_e80812be)),
                   ],
                   selected: {_periodDays},
                   onSelectionChanged: (Set<int> selected) {
@@ -323,7 +323,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
                    size: 24),
               const SizedBox(width: 12),
               Text(
-                AppLocalizations.of(context)!.workout_不足部位,
+                AppLocalizations.of(context)!.workout_e03f69fa,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -357,7 +357,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
           ),
           const SizedBox(height: 12),
           Text(
-            AppLocalizations.of(context)!.workout_これらの部位を次回のトレーニングで強化しましょう,
+            AppLocalizations.of(context)!.workout_2f9761ff,
             style: TextStyle(
               fontSize: 13,
               color: Colors.grey.shade700,
@@ -403,7 +403,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              AppLocalizations.of(context)!.workout_ワークアウトを記録すると部位別の統計が表示されます,
+              AppLocalizations.of(context)!.workout_b3e9f505,
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.grey.shade600),
             ),

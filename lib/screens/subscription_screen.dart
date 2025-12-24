@@ -88,7 +88,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.subscription_プラン管理),
+        title: Text(AppLocalizations.of(context)!.subscription_1cbcacf3),
         centerTitle: true,
         actions: [
           // 購入復元ボタン（iOS専用 - Apple審査対応）
@@ -125,7 +125,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   
                   // プラン選択セクション
                   const Text(
-                    AppLocalizations.of(context)!.subscription_プランを選択,
+                    AppLocalizations.of(context)!.subscription_f129a868,
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -138,13 +138,13 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     type: SubscriptionType.free,
                     name: AppLocalizations.of(context)!.freePlan,
                     price: '¥0',
-                    priceUnit: AppLocalizations.of(context)!.subscription_永久無料,
+                    priceUnit: AppLocalizations.of(context)!.subscription_95db4a6f,
                     features: [
-                      AppLocalizations.of(context)!.subscription_全国のジム検索,
+                      AppLocalizations.of(context)!.subscription_d59bc6e4,
                       AppLocalizations.of(context)!.gpsSearch,
-                      AppLocalizations.of(context)!.subscription_基本情報閲覧,
-                      AppLocalizations.of(context)!.subscription_混雑度表示,
-                      AppLocalizations.of(context)!.subscription_営業時間確認,
+                      AppLocalizations.of(context)!.subscription_0a2805b1,
+                      AppLocalizations.of(context)!.subscription_cd8c3359,
+                      AppLocalizations.of(context)!.subscription_1c65be25,
                       '📝 トレーニング記録',
                       '🤖 AI機能月3回',
                       '📢 広告表示あり',
@@ -166,7 +166,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     priceUnit: _isYearlySelected ? AppLocalizations.of(context)!.yearly : AppLocalizations.of(context)!.monthly,
                     monthlyEquivalent: _isYearlySelected ? '月換算 ¥400' : null,
                     discount: _isYearlySelected ? '20% OFF' : null,
-                    savings: _isYearlySelected ? AppLocalizations.of(context)!.subscription_1200お得 : null,
+                    savings: _isYearlySelected ? AppLocalizations.of(context)!.subscription_eb54b59e : null,
                     features: [
                       '✨ 無料プランの全機能',
                       '🤖 AI機能月20回（AIコーチ・成長予測・効果分析合計）',
@@ -190,7 +190,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     priceUnit: _isYearlySelected ? AppLocalizations.of(context)!.yearly : AppLocalizations.of(context)!.monthly,
                     monthlyEquivalent: _isYearlySelected ? '月換算 ¥667' : null,
                     discount: _isYearlySelected ? '32% OFF' : null,
-                    savings: _isYearlySelected ? AppLocalizations.of(context)!.subscription_3760お得 : null,
+                    savings: _isYearlySelected ? AppLocalizations.of(context)!.subscription_0ed6afa5 : null,
                     features: [
                       '✨ Premiumプランの全機能',
                       '🤖 AI機能無制限（AIコーチ・成長予測・効果分析）',
@@ -288,7 +288,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     Icon(Icons.stars, color: Colors.white, size: 20),
                     SizedBox(width: 8),
                     Text(
-                      AppLocalizations.of(context)!.subscription_永年Proプラン,
+                      AppLocalizations.of(context)!.subscription_2aa69e25,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -603,8 +603,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                           const SizedBox(width: 8),
                           Text(
                             type == SubscriptionType.premium
-                                ? AppLocalizations.of(context)!.subscription_30日間無料トライアル
-                                : AppLocalizations.of(context)!.subscription_14日間無料トライアル,
+                                ? AppLocalizations.of(context)!.subscription_f7ec6c91
+                                : AppLocalizations.of(context)!.subscription_2fe3bc16,
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
@@ -643,7 +643,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                   padding: const EdgeInsets.symmetric(vertical: 14),
                                 ),
                                 child: const Text(
-                                  AppLocalizations.of(context)!.subscription_このプランに変更,
+                                  AppLocalizations.of(context)!.subscription_bf804c6f,
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -684,7 +684,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              AppLocalizations.of(context)!.subscription_機能比較,
+              AppLocalizations.of(context)!.subscription_aaee0ad5,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -693,14 +693,14 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             SizedBox(height: 16),
             _buildComparisonRow(AppLocalizations.of(context)!.gymSearch, true, true, true),
             _buildComparisonRow(AppLocalizations.of(context)!.gpsSearch, true, true, true),
-            _buildComparisonRow(AppLocalizations.of(context)!.subscription_混雑度表示, true, true, true),
+            _buildComparisonRow(AppLocalizations.of(context)!.subscription_cd8c3359, true, true, true),
             _buildComparisonRow(AppLocalizations.of(context)!.trainingLog, true, true, true),
             _buildComparisonRow(AppLocalizations.of(context)!.subscriptionNoAds, false, true, true),
-            _buildComparisonRow(AppLocalizations.of(context)!.subscription_お気に入り保存, false, true, true),
-            _buildComparisonRow(AppLocalizations.of(context)!.subscription_レビュー投稿, false, true, true),
-            _buildComparisonRow(AppLocalizations.of(context)!.subscription_成長予測効果分析, false, true, true),
+            _buildComparisonRow(AppLocalizations.of(context)!.subscription_9217a80b, false, true, true),
+            _buildComparisonRow(AppLocalizations.of(context)!.subscription_397839f3, false, true, true),
+            _buildComparisonRow(AppLocalizations.of(context)!.subscription_52f5cfb1, false, true, true),
             _buildComparisonRow(AppLocalizations.of(context)!.partnerSearch, false, false, true),
-            _buildComparisonRow(AppLocalizations.of(context)!.subscription_メッセージング, false, false, true),
+            _buildComparisonRow(AppLocalizations.of(context)!.subscription_f19cb091, false, false, true),
           ],
         ),
       ),
@@ -767,7 +767,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 Icon(Icons.info_outline, color: Colors.blue[700], size: 20),
                 const SizedBox(width: 8),
                 Text(
-                  AppLocalizations.of(context)!.subscription_ご利用について,
+                  AppLocalizations.of(context)!.subscription_76b79b54,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -833,7 +833,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text(AppLocalizations.of(context)!.subscription_利用規約を開けませんでした),
+                            content: Text(AppLocalizations.of(context)!.subscription_0a763184),
                             duration: Duration(seconds: 2),
                           ),
                         );
@@ -871,7 +871,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text(AppLocalizations.of(context)!.subscription_プライバシーポリシーを開けませんでした),
+                            content: Text(AppLocalizations.of(context)!.subscription_f8882591),
                             duration: Duration(seconds: 2),
                           ),
                         );
@@ -957,7 +957,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('プランを${newPlan == SubscriptionType.free ? AppLocalizations.of(context)!.workout_変更 : 'アップグレード'}しますか？'),
+        title: Text('プランを${newPlan == SubscriptionType.free ? AppLocalizations.of(context)!.workout_5c7bbafb : 'アップグレード'}しますか？'),
         content: Text(
           '${_subscriptionService.getPlanName(newPlan)}に変更します。\n\n'
           '料金: $price ($billingPeriod)',
@@ -969,7 +969,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
-            child: Text(AppLocalizations.of(context)!.subscription_確定),
+            child: Text(AppLocalizations.of(context)!.subscription_84b9d24c),
           ),
         ],
       ),
@@ -1108,7 +1108,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(AppLocalizations.of(context)!.subscription_購入履歴を復元しました),
+              content: Text(AppLocalizations.of(context)!.subscription_471c73c1),
               backgroundColor: Colors.green,
             ),
           );
@@ -1120,7 +1120,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(AppLocalizations.of(context)!.subscription_復元可能な購入履歴がありませんでした),
+              content: Text(AppLocalizations.of(context)!.subscription_8449b990),
               backgroundColor: Colors.orange,
             ),
           );
@@ -1167,7 +1167,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     } else if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(AppLocalizations.of(context)!.subscription_プラン変更に失敗しました),
+          content: Text(AppLocalizations.of(context)!.subscription_1bc3e774),
           backgroundColor: Colors.red,
         ),
       );
@@ -1347,12 +1347,12 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 const SizedBox(height: 16),
                 
                 // 理由選択
-                Text(AppLocalizations.of(context)!.subscription_変更理由, style: TextStyle(fontWeight: FontWeight.bold)),
+                Text(AppLocalizations.of(context)!.subscription_1ffe5eae, style: TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8),
                 DropdownButtonFormField<String>(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: AppLocalizations.of(context)!.subscription_選択してください,
+                    hintText: AppLocalizations.of(context)!.subscription_90a2e4d0,
                   ),
                   value: selectedReason,
                   items: SubscriptionManagementService.churnReasons.map((reason) {
@@ -1404,7 +1404,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 backgroundColor: Colors.blue,
                 foregroundColor: Colors.white,
               ),
-              child: Text(AppLocalizations.of(context)!.subscription_変更する),
+              child: Text(AppLocalizations.of(context)!.subscription_cddeade5),
             ),
           ],
         ),
@@ -1416,17 +1416,17 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   List<String> _getLostFeatures() {
     if (_currentPlan == SubscriptionType.pro) {
       return [
-        AppLocalizations.of(context)!.subscription_AI機能が無制限月20回に制限,
-        AppLocalizations.of(context)!.subscription_トレーニングパートナー検索,
-        AppLocalizations.of(context)!.subscription_メッセージング機能_1,
+        AppLocalizations.of(context)!.subscription_2939d15b,
+        AppLocalizations.of(context)!.subscription_8232b2c6,
+        AppLocalizations.of(context)!.subscription_4fb5def4,
       ];
     } else if (_currentPlan == SubscriptionType.premium) {
       return [
-        AppLocalizations.of(context)!.subscription_AI機能が月20回月3回に制限,
-        AppLocalizations.of(context)!.subscription_お気に入り無制限制限あり,
+        AppLocalizations.of(context)!.subscription_95d4c56c,
+        AppLocalizations.of(context)!.subscription_8c2b9430,
         AppLocalizations.of(context)!.subscriptionDetailedStats,
         AppLocalizations.of(context)!.postGymReviews,
-        AppLocalizations.of(context)!.subscription_広告が表示されます,
+        AppLocalizations.of(context)!.subscription_f9025e06,
       ];
     }
     return [];
@@ -1437,7 +1437,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.subscription_プラン変更手順),
+        title: Text(AppLocalizations.of(context)!.subscription_f56f5454),
         content: const SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

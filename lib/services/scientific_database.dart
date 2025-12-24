@@ -269,7 +269,7 @@ class ScientificDatabase {
     final isUpperBody = bodyPart.contains(AppLocalizations.of(context)!.bodyPartChest) || 
                         bodyPart.contains(AppLocalizations.of(context)!.bodyPartArms) || 
                         bodyPart.contains(AppLocalizations.of(context)!.bodyPartShoulders) || 
-                        bodyPart.contains(AppLocalizations.of(context)!.workout_三角筋);
+                        bodyPart.contains(AppLocalizations.of(context)!.workout_da6d5d22);
     
     if (gender == AppLocalizations.of(context)!.genderFemale && isUpperBody && level == AppLocalizations.of(context)!.levelBeginner) {
       // 🔧 v1.0.226+244: 女性の上半身初心者のみ1.2倍ボーナス（Roberts 2020）
@@ -331,7 +331,7 @@ class ScientificDatabase {
     final isLargeMuscle = bodyPart.contains(AppLocalizations.of(context)!.bodyPartChest) ||
         bodyPart.contains(AppLocalizations.of(context)!.bodyPartBack) ||
         bodyPart.contains(AppLocalizations.of(context)!.bodyPartLegs) ||
-        bodyPart.contains(AppLocalizations.of(context)!.workout_下半身);
+        bodyPart.contains(AppLocalizations.of(context)!.workout_10073d2e);
 
     if (isLargeMuscle) {
       // 大筋群：48-72時間
@@ -359,14 +359,14 @@ class ScientificDatabase {
     if (level == AppLocalizations.of(context)!.levelBeginner || level == AppLocalizations.of(context)!.levelIntermediate) {
       return [
         'ディロード週を実施（ボリューム30-50%削減、強度維持）',
-        AppLocalizations.of(context)!.general_種目を変更角度器具を変える,
+        AppLocalizations.of(context)!.general_ffd1690a,
         'トレーニング頻度を週+1回増やす',
       ];
     } else {
       // 上級者向け
       return [
         'ドロップセットを導入（Krzysztofik 2019, ES=0.69）',
-        AppLocalizations.of(context)!.general_クラスターセットで力発揮維持,
+        AppLocalizations.of(context)!.general_e49688cb,
         'DUP（Daily Undulating Periodization）に変更（Williams 2017, ES=0.68）',
         'ディロード週を実施（ボリューム30-50%削減）',
       ];
@@ -420,54 +420,54 @@ class ScientificDatabase {
     // 種目を判定
     final isBenchPress = exerciseName.contains(AppLocalizations.of(context)!.bodyPartChest) || 
                          exerciseName.contains(AppLocalizations.of(context)!.musclePecs) ||
-                         exerciseName.contains(AppLocalizations.of(context)!.bodyPart_上腕);
+                         exerciseName.contains(AppLocalizations.of(context)!.bodyPart_cc7dbde9);
     final isSquat = exerciseName.contains(AppLocalizations.of(context)!.bodyPartLegs) || 
-                    exerciseName.contains(AppLocalizations.of(context)!.workout_大腿) ||
+                    exerciseName.contains(AppLocalizations.of(context)!.workout_0c28e8be) ||
                     exerciseName.contains(AppLocalizations.of(context)!.exerciseSquat);
     final isDeadlift = exerciseName.contains(AppLocalizations.of(context)!.bodyPartBack) || 
-                       exerciseName.contains(AppLocalizations.of(context)!.workout_広背筋) ||
+                       exerciseName.contains(AppLocalizations.of(context)!.workout_0f45a131) ||
                        exerciseName.contains(AppLocalizations.of(context)!.exerciseDeadlift);
     
     // レポート Table 1-3 の閾値に基づく判定
     if (isBenchPress || (!isSquat && !isDeadlift)) {
       // ベンチプレス基準（デフォルト）
       if (gender == AppLocalizations.of(context)!.genderMale) {
-        if (weightRatio >= 1.95) return AppLocalizations.of(context)!.general_エリート;
+        if (weightRatio >= 1.95) return AppLocalizations.of(context)!.general_7db7cd79;
         if (weightRatio >= 1.60) return AppLocalizations.of(context)!.levelAdvanced;
         if (weightRatio >= 1.20) return AppLocalizations.of(context)!.levelIntermediate;
         if (weightRatio >= 0.80) return AppLocalizations.of(context)!.levelBeginner;
-        return AppLocalizations.of(context)!.general_未経験初期;
+        return AppLocalizations.of(context)!.general_156f0a0c;
       } else {
-        if (weightRatio >= 1.35) return AppLocalizations.of(context)!.general_エリート;
+        if (weightRatio >= 1.35) return AppLocalizations.of(context)!.general_7db7cd79;
         if (weightRatio >= 1.00) return AppLocalizations.of(context)!.levelAdvanced;
         if (weightRatio >= 0.80) return AppLocalizations.of(context)!.levelIntermediate;
         if (weightRatio >= 0.50) return AppLocalizations.of(context)!.levelBeginner;
-        return AppLocalizations.of(context)!.general_未経験初期;
+        return AppLocalizations.of(context)!.general_156f0a0c;
       }
     } else if (isSquat) {
       // スクワット基準
       if (gender == AppLocalizations.of(context)!.genderMale) {
-        if (weightRatio >= 2.83) return AppLocalizations.of(context)!.general_エリート;
+        if (weightRatio >= 2.83) return AppLocalizations.of(context)!.general_7db7cd79;
         if (weightRatio >= 2.10) return AppLocalizations.of(context)!.levelAdvanced;
         if (weightRatio >= 1.50) return AppLocalizations.of(context)!.levelIntermediate;
         if (weightRatio >= 1.00) return AppLocalizations.of(context)!.levelBeginner;
-        return AppLocalizations.of(context)!.general_未経験初期;
+        return AppLocalizations.of(context)!.general_156f0a0c;
       } else {
-        if (weightRatio >= 2.26) return AppLocalizations.of(context)!.general_エリート;
+        if (weightRatio >= 2.26) return AppLocalizations.of(context)!.general_7db7cd79;
         if (weightRatio >= 1.50) return AppLocalizations.of(context)!.levelAdvanced;
         if (weightRatio >= 1.10) return AppLocalizations.of(context)!.levelIntermediate;
         if (weightRatio >= 0.70) return AppLocalizations.of(context)!.levelBeginner;
-        return AppLocalizations.of(context)!.general_未経験初期;
+        return AppLocalizations.of(context)!.general_156f0a0c;
       }
     } else if (isDeadlift) {
       // デッドリフト基準
       if (gender == AppLocalizations.of(context)!.genderMale) {
-        if (weightRatio >= 3.25) return AppLocalizations.of(context)!.general_エリート;
+        if (weightRatio >= 3.25) return AppLocalizations.of(context)!.general_7db7cd79;
         if (weightRatio >= 2.40) return AppLocalizations.of(context)!.levelAdvanced;
         if (weightRatio >= 1.80) return AppLocalizations.of(context)!.levelIntermediate;
         return AppLocalizations.of(context)!.levelBeginner;
       } else {
-        if (weightRatio >= 2.66) return AppLocalizations.of(context)!.general_エリート;
+        if (weightRatio >= 2.66) return AppLocalizations.of(context)!.general_7db7cd79;
         if (weightRatio >= 1.80) return AppLocalizations.of(context)!.levelAdvanced;
         if (weightRatio >= 1.30) return AppLocalizations.of(context)!.levelIntermediate;
         return AppLocalizations.of(context)!.levelBeginner;

@@ -14,7 +14,7 @@ class CalculatorsScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.workout_計算ツール),
+          title: Text(AppLocalizations.of(context)!.workout_0052814d),
           bottom: TabBar(
             tabs: [
               Tab(icon: Icon(Icons.calculate), text: AppLocalizations.of(context)!.rmCalculator),
@@ -53,7 +53,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
 
     if (weight == null || reps == null || weight <= 0 || reps <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context)!.general_有効な重量と回数を入力してください)),
+        SnackBar(content: Text(AppLocalizations.of(context)!.general_483508ec)),
       );
       return;
     }
@@ -109,7 +109,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                       Icon(Icons.info_outline, color: Colors.blue[700]),
                       const SizedBox(width: 8),
                       Text(
-                        AppLocalizations.of(context)!.general_1RM計算機,
+                        AppLocalizations.of(context)!.general_a35f8c38,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -121,7 +121,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                   const SizedBox(height: 8),
                   const Text(
                     '1RM (1 Rep Max) は、1回だけ持ち上げられる最大重量です。\n'
-                    AppLocalizations.of(context)!.general_Epley式を使用して推定1RMを計算します,
+                    AppLocalizations.of(context)!.general_f5fcce57,
                     style: TextStyle(fontSize: 14),
                   ),
                 ],
@@ -227,7 +227,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                         Icon(Icons.table_chart),
                         SizedBox(width: 8),
                         Text(
-                          AppLocalizations.of(context)!.general_ターゲット回数別の推奨重量,
+                          AppLocalizations.of(context)!.general_1840ca14,
                           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -323,7 +323,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                       Icon(Icons.info_outline, color: Colors.orange[700]),
                       const SizedBox(width: 8),
                       Text(
-                        AppLocalizations.of(context)!.workout_プレート計算機,
+                        AppLocalizations.of(context)!.workout_ae263865,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -335,7 +335,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                   const SizedBox(height: 8),
                   const Text(
                     '目標重量を入力すると、バーベルの片側に必要なプレートの\n'
-                    AppLocalizations.of(context)!.general_組み合わせを計算します,
+                    AppLocalizations.of(context)!.general_9d700689,
                     style: TextStyle(fontSize: 14),
                   ),
                 ],
@@ -352,7 +352,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    AppLocalizations.of(context)!.general_バー重量,
+                    AppLocalizations.of(context)!.general_d1efcee6,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
@@ -425,7 +425,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                 child: Column(
                   children: [
                     const Text(
-                      AppLocalizations.of(context)!.general_実際の総重量,
+                      AppLocalizations.of(context)!.general_c9083826,
                       style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
                     const SizedBox(height: 8),

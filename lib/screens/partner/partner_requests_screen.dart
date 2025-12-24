@@ -9,7 +9,7 @@ class PartnerRequestsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.profile_パートナーリクエスト),
+        title: Text(AppLocalizations.of(context)!.profile_01b6f7d1),
       ),
       body: Center(
         child: Column(
@@ -18,7 +18,7 @@ class PartnerRequestsScreen extends StatelessWidget {
             Icon(Icons.person_add, size: 80, color: Colors.grey[400]),
             const SizedBox(height: 16),
             Text(
-              AppLocalizations.of(context)!.general_パートナーリクエスト機能,
+              AppLocalizations.of(context)!.general_e2ae645c,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.grey[700]),
             ),
             SizedBox(height: 8),

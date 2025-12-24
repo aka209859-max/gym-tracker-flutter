@@ -127,7 +127,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                         Icon(Icons.error_outline, size: 48, color: Colors.red[300]),
                         const SizedBox(height: 16),
                         Text(
-                          AppLocalizations.of(context)!.error_メッセージの読み込みに失敗しました,
+                          AppLocalizations.of(context)!.error_4c43efe6,
                           style: TextStyle(color: Colors.grey[600]),
                         ),
                       ],

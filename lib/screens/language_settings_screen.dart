@@ -73,7 +73,7 @@ class LanguageSettingsScreen extends StatelessWidget {
                         const SizedBox(width: 12),
                         const Expanded(
                           child: Text(
-                            AppLocalizations.of(context)!.profile_言語を変更しました,
+                            AppLocalizations.of(context)!.profile_5501a97a,
                             style: TextStyle(fontSize: 18),
                           ),
                         ),
@@ -89,7 +89,7 @@ class LanguageSettingsScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 12),
                         const Text(
-                          AppLocalizations.of(context)!.profile_アプリを再起動して変更を反映します,
+                          AppLocalizations.of(context)!.profile_510d373d,
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey,
@@ -141,7 +141,7 @@ class LanguageSettingsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              AppLocalizations.of(context)!.profile_グローバル展開中,
+              AppLocalizations.of(context)!.profile_21abb17c,
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey[600],

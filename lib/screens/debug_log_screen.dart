@@ -17,7 +17,7 @@ class _DebugLogScreenState extends State<DebugLogScreen> {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.general_デバッグログ),
+        title: Text(AppLocalizations.of(context)!.general_97909b88),
         backgroundColor: Colors.deepPurple,
         foregroundColor: Colors.white,
         actions: [
@@ -28,12 +28,12 @@ class _DebugLogScreenState extends State<DebugLogScreen> {
               Clipboard.setData(ClipboardData(text: logText));
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(AppLocalizations.of(context)!.general_ログをクリップボードにコピーしました),
+                  content: Text(AppLocalizations.of(context)!.general_34b10a74),
                   duration: Duration(seconds: 2),
                 ),
               );
             },
-            tooltip: AppLocalizations.of(context)!.general_ログをコピー,
+            tooltip: AppLocalizations.of(context)!.general_d889d870,
           ),
           IconButton(
             icon: const Icon(Icons.delete),
@@ -43,12 +43,12 @@ class _DebugLogScreenState extends State<DebugLogScreen> {
               });
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(AppLocalizations.of(context)!.general_ログをクリアしました),
+                  content: Text(AppLocalizations.of(context)!.general_9248af32),
                   duration: Duration(seconds: 1),
                 ),
               );
             },
-            tooltip: AppLocalizations.of(context)!.general_ログをクリア,
+            tooltip: AppLocalizations.of(context)!.general_a0854d25,
           ),
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -71,7 +71,7 @@ class _DebugLogScreenState extends State<DebugLogScreen> {
                   ),
                   SizedBox(height: 16),
                   Text(
-                    AppLocalizations.of(context)!.general_まだログがありません,
+                    AppLocalizations.of(context)!.general_d35250cd,
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.grey,

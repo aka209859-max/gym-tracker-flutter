@@ -319,7 +319,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
     if (_isLoading) {
       return Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.workout_統計ダッシュボード),
+          title: Text(AppLocalizations.of(context)!.workout_d558b4a3),
         ),
         body: const Center(child: CircularProgressIndicator()),
       );
@@ -327,7 +327,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.workout_統計ダッシュボード),
+        title: Text(AppLocalizations.of(context)!.workout_d558b4a3),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -379,7 +379,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
                 Icon(Icons.calendar_today, color: theme.colorScheme.primary, size: 24),
                 const SizedBox(width: 12),
                 const Text(
-                  AppLocalizations.of(context)!.workout_今週の概要,
+                  AppLocalizations.of(context)!.workout_35f61292,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -411,7 +411,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
                 Expanded(
                   child: _buildStatItem(
                     icon: Icons.directions_run,
-                    label: AppLocalizations.of(context)!.workout_有酸素時間,
+                    label: AppLocalizations.of(context)!.workout_668f7523,
                     value: '$_weeklyTotalMinutes分',
                     color: Colors.orange,
                   ),
@@ -455,7 +455,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
             ),
             const SizedBox(height: 8),
             const Text(
-              AppLocalizations.of(context)!.workout_連続トレーニング記録,
+              AppLocalizations.of(context)!.workout_a826db5c,
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.white70,
@@ -480,7 +480,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
                 Icon(Icons.date_range, color: theme.colorScheme.primary, size: 24),
                 const SizedBox(width: 12),
                 const Text(
-                  AppLocalizations.of(context)!.workout_今月の統計,
+                  AppLocalizations.of(context)!.workout_7643b53a,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -523,7 +523,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
               Icon(Icons.bar_chart, size: 64, color: Colors.grey[400]),
               const SizedBox(height: 16),
               Text(
-                AppLocalizations.of(context)!.workout_部位別データがありません,
+                AppLocalizations.of(context)!.workout_ce2a2744,
                 style: TextStyle(fontSize: 16, color: Colors.grey[600]),
               ),
             ],
@@ -547,7 +547,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
                 Icon(Icons.pie_chart, color: theme.colorScheme.primary, size: 24),
                 const SizedBox(width: 12),
                 const Text(
-                  AppLocalizations.of(context)!.workout_部位別トレーニング今月,
+                  AppLocalizations.of(context)!.workout_a826808f,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ],

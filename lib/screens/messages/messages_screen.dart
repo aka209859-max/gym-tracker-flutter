@@ -89,7 +89,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
           Icon(Icons.chat_bubble_outline, size: 80, color: Colors.grey[400]),
           const SizedBox(height: 16),
           Text(
-            AppLocalizations.of(context)!.general_まだメッセージがありません,
+            AppLocalizations.of(context)!.general_00af6a9c,
             style: TextStyle(fontSize: 18, color: Colors.grey[600]),
           ),
           SizedBox(height: 8),
@@ -124,7 +124,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          lastMessage.isEmpty ? AppLocalizations.of(context)!.general_メッセージを送信しましょう : lastMessage,
+          lastMessage.isEmpty ? AppLocalizations.of(context)!.general_c69c0c2d : lastMessage,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(color: Colors.grey[600]),
@@ -157,7 +157,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
     } else if (difference.inMinutes > 0) {
       return '${difference.inMinutes}分前';
     } else {
-      return AppLocalizations.of(context)!.general_たった今;
+      return AppLocalizations.of(context)!.general_e31b5d77;
     }
   }
 }

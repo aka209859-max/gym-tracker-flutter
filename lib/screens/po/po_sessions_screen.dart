@@ -17,17 +17,17 @@ class POSessionsScreen extends StatelessWidget {
             Icon(Icons.calendar_today, size: 64, color: Colors.grey[400]),
             const SizedBox(height: 16),
             Text(
-              AppLocalizations.of(context)!.general_セッション管理,
+              AppLocalizations.of(context)!.general_119d8156,
               style: TextStyle(fontSize: 20, color: Colors.grey[700]),
             ),
             const SizedBox(height: 8),
             Text(
-              AppLocalizations.of(context)!.general_カレンダー表示とセッション予約管理,
+              AppLocalizations.of(context)!.general_daeb1c39,
               style: TextStyle(fontSize: 14, color: Colors.grey[600]),
             ),
             const SizedBox(height: 24),
             const Chip(
-              label: Text(AppLocalizations.of(context)!.general_近日公開予定),
+              label: Text(AppLocalizations.of(context)!.general_ebcbe40e),
               backgroundColor: Colors.blue,
               labelStyle: TextStyle(color: Colors.white),
             ),

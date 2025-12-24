@@ -52,7 +52,7 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.general_訪問履歴を削除),
+        title: Text(AppLocalizations.of(context)!.general_5f7f67c7),
         content: Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(
@@ -128,7 +128,7 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
             ElevatedButton.icon(
               onPressed: _loadVisitHistory,
               icon: const Icon(Icons.refresh),
-              label: Text(AppLocalizations.of(context)!.general_再読み込み),
+              label: Text(AppLocalizations.of(context)!.general_53b262c8),
             ),
           ],
         ),

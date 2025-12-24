@@ -42,7 +42,7 @@ class WorkoutImportService {
           // 大きすぎる場合はエラーとする
           throw Exception(
             '画像サイズが大きすぎます (${(imageBytes.length / 1024 / 1024).toStringAsFixed(1)}MB)。\n'
-            AppLocalizations.of(context)!.workout_10MB以下の画像を使用してください
+            AppLocalizations.of(context)!.workout_dd8555d2
           );
         }
         
@@ -155,13 +155,13 @@ class WorkoutImportService {
         if (kDebugMode) {
           print('❌ API権限エラー (403): ${response.body}');
         }
-        throw Exception(AppLocalizations.of(context)!.workout_画像解析APIの権限エラーですしばらく待ってから再度お試しください);
+        throw Exception(AppLocalizations.of(context)!.workout_7d512f87);
       } else if (response.statusCode == 400) {
         // 400 Bad Request（リクエスト形式エラー）
         if (kDebugMode) {
           print('❌ リクエストエラー (400): ${response.body}');
         }
-        throw Exception(AppLocalizations.of(context)!.workout_画像形式が正しくありません別の画像でお試しください);
+        throw Exception(AppLocalizations.of(context)!.workout_ba59242e);
       } else {
         // その他のエラー
         if (kDebugMode) {
@@ -272,7 +272,7 @@ JSON形式例:
       );
 
       if (csvRows.isEmpty) {
-        throw Exception(AppLocalizations.of(context)!.workout_CSVファイルが空ですデータが含まれているか確認してください);
+        throw Exception(AppLocalizations.of(context)!.workout_53bd5cb4);
       }
 
       if (kDebugMode) {
@@ -350,7 +350,7 @@ JSON形式例:
       }
 
       if (exercisesByDate.isEmpty) {
-        throw Exception(AppLocalizations.of(context)!.workout_有効なトレーニングデータが見つかりませんでしたCSVフォーマットを確認してください);
+        throw Exception(AppLocalizations.of(context)!.workout_8682e261);
       }
 
       // 最初の日付のデータを返す（複数日ある場合は最新日）
@@ -382,7 +382,7 @@ JSON形式例:
     if (row.isEmpty) return false;
     
     // 日本語ヘッダー
-    final japaneseHeaders = [AppLocalizations.of(context)!.date, AppLocalizations.of(context)!.exercise, AppLocalizations.of(context)!.workoutSetsLabel, AppLocalizations.of(context)!.workoutWeightLabel, AppLocalizations.of(context)!.repsCount, AppLocalizations.of(context)!.workout_メニュー, AppLocalizations.of(context)!.bodyPart];
+    final japaneseHeaders = [AppLocalizations.of(context)!.date, AppLocalizations.of(context)!.exercise, AppLocalizations.of(context)!.workoutSetsLabel, AppLocalizations.of(context)!.workoutWeightLabel, AppLocalizations.of(context)!.repsCount, AppLocalizations.of(context)!.workout_2c76b53f, AppLocalizations.of(context)!.bodyPart];
     // 英語ヘッダー
     final englishHeaders = ['date', 'exercise', 'set', 'weight', 'reps', 'menu', 'bodypart'];
     
@@ -511,34 +511,34 @@ JSON形式例:
       // 胸
       AppLocalizations.of(context)!.exerciseBenchPress: AppLocalizations.of(context)!.bodyPartChest,
       AppLocalizations.of(context)!.exerciseDumbbellPress: AppLocalizations.of(context)!.bodyPartChest,
-      AppLocalizations.of(context)!.exercise_ダンベルベンチプレス: AppLocalizations.of(context)!.bodyPartChest,
+      AppLocalizations.of(context)!.exercise_4cb61d65: AppLocalizations.of(context)!.bodyPartChest,
       AppLocalizations.of(context)!.exerciseInclinePress: AppLocalizations.of(context)!.bodyPartChest,
-      AppLocalizations.of(context)!.exercise_インクラインベンチプレス: AppLocalizations.of(context)!.bodyPartChest,
+      AppLocalizations.of(context)!.exercise_fbfc037a: AppLocalizations.of(context)!.bodyPartChest,
       AppLocalizations.of(context)!.exerciseCableFly: AppLocalizations.of(context)!.bodyPartChest,
       AppLocalizations.of(context)!.exerciseDips: AppLocalizations.of(context)!.bodyPartChest,
-      AppLocalizations.of(context)!.exercise_チェストプレス: AppLocalizations.of(context)!.bodyPartChest,
-      AppLocalizations.of(context)!.workout_ペックフライ: AppLocalizations.of(context)!.bodyPartChest,
+      AppLocalizations.of(context)!.exercise_cfc4f367: AppLocalizations.of(context)!.bodyPartChest,
+      AppLocalizations.of(context)!.workout_fb73b843: AppLocalizations.of(context)!.bodyPartChest,
       
       // 背中
       AppLocalizations.of(context)!.exerciseLatPulldown: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.exerciseChinUp: AppLocalizations.of(context)!.bodyPartBack,
-      AppLocalizations.of(context)!.workout_チンニング懸垂: AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.workout_4f6cd3a6: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.exercisePullUp: AppLocalizations.of(context)!.bodyPartBack,
-      AppLocalizations.of(context)!.workout_ベントオーバーローイング: AppLocalizations.of(context)!.bodyPartBack,
-      AppLocalizations.of(context)!.workout_ベントオーバーロー: AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.workout_e6ae79d7: AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.workout_02d51e36: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.exerciseDeadlift: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.exerciseSeatedRow: AppLocalizations.of(context)!.bodyPartBack,
-      AppLocalizations.of(context)!.workout_ワンハンドロウ: AppLocalizations.of(context)!.bodyPartBack,
-      AppLocalizations.of(context)!.workout_Tバーロウ: AppLocalizations.of(context)!.bodyPartBack,
-      AppLocalizations.of(context)!.workout_ケーブルロウ: AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.workout_1db606e0: AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.workout_78f50d3b: AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.workout_f8d1b968: AppLocalizations.of(context)!.bodyPartBack,
       
       // 脚
       AppLocalizations.of(context)!.exerciseSquat: AppLocalizations.of(context)!.bodyPartLegs,
       AppLocalizations.of(context)!.exerciseLegPress: AppLocalizations.of(context)!.bodyPartLegs,
       AppLocalizations.of(context)!.exerciseLegExtension: AppLocalizations.of(context)!.bodyPartLegs,
       AppLocalizations.of(context)!.exerciseLegCurl: AppLocalizations.of(context)!.bodyPartLegs,
-      AppLocalizations.of(context)!.workout_ランジ: AppLocalizations.of(context)!.bodyPartLegs,
-      AppLocalizations.of(context)!.exercise_ブルガリアンスクワット: AppLocalizations.of(context)!.bodyPartLegs,
+      AppLocalizations.of(context)!.workout_a19f4e60: AppLocalizations.of(context)!.bodyPartLegs,
+      AppLocalizations.of(context)!.exercise_1602d233: AppLocalizations.of(context)!.bodyPartLegs,
       AppLocalizations.of(context)!.exerciseCalfRaise: AppLocalizations.of(context)!.bodyPartLegs,
       AppLocalizations.of(context)!.legRaise: AppLocalizations.of(context)!.bodyPartLegs,
       
@@ -546,35 +546,35 @@ JSON形式例:
       AppLocalizations.of(context)!.exerciseShoulderPress: AppLocalizations.of(context)!.bodyPartShoulders,
       AppLocalizations.of(context)!.exerciseSideRaise: AppLocalizations.of(context)!.bodyPartShoulders,
       AppLocalizations.of(context)!.exerciseFrontRaise: AppLocalizations.of(context)!.bodyPartShoulders,
-      AppLocalizations.of(context)!.workout_リアレイズ: AppLocalizations.of(context)!.bodyPartShoulders,
+      AppLocalizations.of(context)!.workout_61db805d: AppLocalizations.of(context)!.bodyPartShoulders,
       AppLocalizations.of(context)!.exerciseUprightRow: AppLocalizations.of(context)!.bodyPartShoulders,
-      AppLocalizations.of(context)!.exercise_ダンベルショルダープレス: AppLocalizations.of(context)!.bodyPartShoulders,
+      AppLocalizations.of(context)!.exercise_b9e82d29: AppLocalizations.of(context)!.bodyPartShoulders,
       
       // 二頭
       AppLocalizations.of(context)!.exerciseBarbellCurl: AppLocalizations.of(context)!.bodyPartBiceps,
       AppLocalizations.of(context)!.exerciseDumbbellCurl: AppLocalizations.of(context)!.bodyPartBiceps,
       AppLocalizations.of(context)!.exerciseHammerCurl: AppLocalizations.of(context)!.bodyPartBiceps,
-      AppLocalizations.of(context)!.workout_プリーチャーカール: AppLocalizations.of(context)!.bodyPartBiceps,
-      AppLocalizations.of(context)!.workout_コンセントレーションカール: AppLocalizations.of(context)!.bodyPartBiceps,
-      AppLocalizations.of(context)!.workout_インクラインカール: AppLocalizations.of(context)!.bodyPartBiceps,
+      AppLocalizations.of(context)!.workout_d7e8733c: AppLocalizations.of(context)!.bodyPartBiceps,
+      AppLocalizations.of(context)!.workout_6a8e2907: AppLocalizations.of(context)!.bodyPartBiceps,
+      AppLocalizations.of(context)!.workout_2de38ba1: AppLocalizations.of(context)!.bodyPartBiceps,
       
       // 三頭
-      AppLocalizations.of(context)!.workout_トライセプスダウン: AppLocalizations.of(context)!.bodyPartTriceps,
-      AppLocalizations.of(context)!.exercise_トライセプスプレスダウン: AppLocalizations.of(context)!.bodyPartTriceps,
+      AppLocalizations.of(context)!.workout_f2a8fd43: AppLocalizations.of(context)!.bodyPartTriceps,
+      AppLocalizations.of(context)!.exercise_636fb74f: AppLocalizations.of(context)!.bodyPartTriceps,
       AppLocalizations.of(context)!.exerciseTricepsExtension: AppLocalizations.of(context)!.bodyPartTriceps,
-      AppLocalizations.of(context)!.workout_ライイングトライセプスエクステンション: AppLocalizations.of(context)!.bodyPartTriceps,
-      AppLocalizations.of(context)!.exercise_フレンチプレス: AppLocalizations.of(context)!.bodyPartTriceps,
+      AppLocalizations.of(context)!.workout_41ae2e59: AppLocalizations.of(context)!.bodyPartTriceps,
+      AppLocalizations.of(context)!.exercise_f6d35c01: AppLocalizations.of(context)!.bodyPartTriceps,
       AppLocalizations.of(context)!.exerciseKickback: AppLocalizations.of(context)!.bodyPartTriceps,
-      AppLocalizations.of(context)!.exercise_クローズグリップベンチプレス: AppLocalizations.of(context)!.bodyPartTriceps,
+      AppLocalizations.of(context)!.exercise_a60f616c: AppLocalizations.of(context)!.bodyPartTriceps,
       
       // 有酸素
       AppLocalizations.of(context)!.exerciseRunning: AppLocalizations.of(context)!.exerciseCardio,
-      AppLocalizations.of(context)!.workout_ウォーキング: AppLocalizations.of(context)!.exerciseCardio,
-      AppLocalizations.of(context)!.workout_バイク: AppLocalizations.of(context)!.exerciseCardio,
+      AppLocalizations.of(context)!.workout_e23f084e: AppLocalizations.of(context)!.exerciseCardio,
+      AppLocalizations.of(context)!.workout_57bd7c71: AppLocalizations.of(context)!.exerciseCardio,
       AppLocalizations.of(context)!.exerciseAerobicBike: AppLocalizations.of(context)!.exerciseCardio,
-      AppLocalizations.of(context)!.workout_トレッドミル: AppLocalizations.of(context)!.exerciseCardio,
-      AppLocalizations.of(context)!.workout_エリプティカル: AppLocalizations.of(context)!.exerciseCardio,
-      AppLocalizations.of(context)!.workout_ローイングマシン: AppLocalizations.of(context)!.exerciseCardio,
+      AppLocalizations.of(context)!.workout_8308db37: AppLocalizations.of(context)!.exerciseCardio,
+      AppLocalizations.of(context)!.workout_a19d7669: AppLocalizations.of(context)!.exerciseCardio,
+      AppLocalizations.of(context)!.workout_4c6d7db7: AppLocalizations.of(context)!.exerciseCardio,
     };
   }
 }

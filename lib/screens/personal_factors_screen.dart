@@ -153,13 +153,13 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                     const SizedBox(height: 24),
                     
                     // 静的要因セクション
-                    _buildSectionHeader(AppLocalizations.of(context)!.personalFactor_静的要因_1, '変更頻度: 低'),
+                    _buildSectionHeader(AppLocalizations.of(context)!.personalFactor_a8e6bc91, '変更頻度: 低'),
                     const SizedBox(height: 12),
                     _buildStaticFactorsCard(),
                     const SizedBox(height: 24),
                     
                     // 動的要因セクション
-                    _buildSectionHeader(AppLocalizations.of(context)!.personalFactor_動的要因_1, '変更頻度: 高（日々更新推奨）'),
+                    _buildSectionHeader(AppLocalizations.of(context)!.personalFactor_380ea875, '変更頻度: 高（日々更新推奨）'),
                     const SizedBox(height: 12),
                     _buildDynamicFactorsCard(),
                     const SizedBox(height: 32),
@@ -259,18 +259,18 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.age,
-                suffixText: AppLocalizations.of(context)!.personalFactor_歳,
+                suffixText: AppLocalizations.of(context)!.personalFactor_cfa20784,
                 helperText: '<25歳: 0.95x, 40-50歳: 1.05x, 50+歳: 1.10x',
                 helperMaxLines: 2,
                 prefixIcon: Icon(Icons.cake),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return AppLocalizations.of(context)!.personalFactor_年齢を入力してください;
+                  return AppLocalizations.of(context)!.personalFactor_03a1c2ca;
                 }
                 final age = int.tryParse(value);
                 if (age == null || age < 10 || age > 100) {
-                  return AppLocalizations.of(context)!.personalFactor_10100の範囲で入力してください;
+                  return AppLocalizations.of(context)!.personalFactor_fb13f7ed;
                 }
                 return null;
               },
@@ -284,7 +284,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               textInputAction: TextInputAction.next,
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.personalFactor_トレーニング経験年数,
+                labelText: AppLocalizations.of(context)!.personalFactor_5a712682,
                 suffixText: AppLocalizations.of(context)!.annualPrice,
                 helperText: '<1年: 1.10x, 3-5年: 0.95x, 5+年: 0.90x',
                 helperMaxLines: 2,
@@ -292,11 +292,11 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return AppLocalizations.of(context)!.personalFactor_経験年数を入力してください;
+                  return AppLocalizations.of(context)!.personalFactor_31098440;
                 }
                 final years = int.tryParse(value);
                 if (years == null || years < 0 || years > 50) {
-                  return AppLocalizations.of(context)!.personalFactor_050の範囲で入力してください;
+                  return AppLocalizations.of(context)!.personalFactor_47d86eef;
                 }
                 return null;
               },
@@ -320,7 +320,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               textInputAction: TextInputAction.next,
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.personalFactor_昨晩の睡眠時間,
+                labelText: AppLocalizations.of(context)!.personalFactor_db37d13b,
                 suffixText: AppLocalizations.of(context)!.time,
                 helperText: '<6時間: 1.15x, 8+時間: 0.95x',
                 helperMaxLines: 2,
@@ -328,11 +328,11 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return AppLocalizations.of(context)!.personalFactor_睡眠時間を入力してください;
+                  return AppLocalizations.of(context)!.personalFactor_f3409cdd;
                 }
                 final hours = double.tryParse(value);
                 if (hours == null || hours < 0 || hours > 24) {
-                  return AppLocalizations.of(context)!.personalFactor_024の範囲で入力してください;
+                  return AppLocalizations.of(context)!.personalFactor_616dc22d;
                 }
                 return null;
               },
@@ -346,19 +346,19 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               textInputAction: TextInputAction.next,
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.personalFactor_1日のタンパク質摂取量,
-                suffixText: AppLocalizations.of(context)!.personalFactor_グラム,
+                labelText: AppLocalizations.of(context)!.personalFactor_9f7b01f0,
+                suffixText: AppLocalizations.of(context)!.personalFactor_4da8beb5,
                 helperText: '<84g(1.2g/kg): 1.10x, 112+g(1.6g/kg): 0.95x (体重70kg想定)',
                 helperMaxLines: 3,
                 prefixIcon: Icon(Icons.restaurant),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return AppLocalizations.of(context)!.personalFactor_タンパク質摂取量を入力してください;
+                  return AppLocalizations.of(context)!.personalFactor_59352db7;
                 }
                 final protein = double.tryParse(value);
                 if (protein == null || protein < 0 || protein > 500) {
-                  return AppLocalizations.of(context)!.personalFactor_0500の範囲で入力してください;
+                  return AppLocalizations.of(context)!.personalFactor_b7206655;
                 }
                 return null;
               },
@@ -372,19 +372,19 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               textInputAction: TextInputAction.done,
               onEditingComplete: () => FocusScope.of(context).unfocus(),
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.personalFactor_前日のアルコール摂取量,
-                suffixText: AppLocalizations.of(context)!.personalFactor_ユニット,
+                labelText: AppLocalizations.of(context)!.personalFactor_e8aa7dea,
+                suffixText: AppLocalizations.of(context)!.personalFactor_ec2007be,
                 helperText: '1ユニット毎に+5% (ビール350ml≒1.4ユニット)',
                 helperMaxLines: 2,
                 prefixIcon: Icon(Icons.local_bar),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return AppLocalizations.of(context)!.personalFactor_アルコール摂取量を入力してください0も入力;
+                  return AppLocalizations.of(context)!.personalFactor_38c38095;
                 }
                 final units = int.tryParse(value);
                 if (units == null || units < 0 || units > 20) {
-                  return AppLocalizations.of(context)!.personalFactor_020の範囲で入力してください;
+                  return AppLocalizations.of(context)!.personalFactor_df82df91;
                 }
                 return null;
               },
@@ -421,7 +421,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
             Text(
               'Personal Factor Multiplier (PFM) は、年齢・経験・睡眠・栄養・アルコールの5要素を統合して個人の疲労感受性を補正します。\n\n'
               '範囲: 0.7x - 1.3x (最小30%減〜最大30%増)\n'
-              AppLocalizations.of(context)!.personalFactor_PFM値が高いほど同じトレーニングでも疲労度が高くなります,
+              AppLocalizations.of(context)!.personalFactor_a5772517,
               style: TextStyle(fontSize: 11, color: Colors.grey[700]),
             ),
           ],
@@ -447,7 +447,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
-                AppLocalizations.of(context)!.personalFactor_この画面ではあなたの個人特性に基づいて疲労度計算を補正します,
+                AppLocalizations.of(context)!.personalFactor_56a6d8a6,
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
@@ -485,7 +485,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        AppLocalizations.of(context)!.personalFactor_トレーニング終了後最新の動的要因で自動計算されます,
+                        AppLocalizations.of(context)!.personalFactor_24d99a0b,
                         style: TextStyle(fontSize: 12, color: Colors.grey[800]),
                       ),
                     ),

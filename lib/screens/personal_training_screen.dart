@@ -86,12 +86,12 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
           context,
           icon: Icons.calendar_today,
           iconColor: Colors.blue,
-          title: AppLocalizations.of(context)!.general_予約状況,
+          title: AppLocalizations.of(context)!.general_2c7a47d4,
           subtitle: AppLocalizations.of(context)!.confirm,
           onTap: () {
             // TODO: 予約状況画面へ遷移
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(AppLocalizations.of(context)!.general_予約状況機能は開発中です)),
+              SnackBar(content: Text(AppLocalizations.of(context)!.general_95f06a54)),
             );
           },
         ),
@@ -102,12 +102,12 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
           context,
           icon: Icons.add_circle,
           iconColor: Colors.green,
-          title: AppLocalizations.of(context)!.general_新規予約,
-          subtitle: AppLocalizations.of(context)!.general_トレーニングを予約する,
+          title: AppLocalizations.of(context)!.general_bd9326cc,
+          subtitle: AppLocalizations.of(context)!.general_e8725971,
           onTap: () {
             // TODO: 新規予約画面へ遷移
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(AppLocalizations.of(context)!.general_新規予約機能は開発中です)),
+              SnackBar(content: Text(AppLocalizations.of(context)!.general_791be39d)),
             );
           },
         ),
@@ -118,12 +118,12 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
           context,
           icon: Icons.assignment,
           iconColor: Colors.orange,
-          title: AppLocalizations.of(context)!.general_トレーナー記録,
-          subtitle: AppLocalizations.of(context)!.general_トレーナーが記録したトレーニング履歴,
+          title: AppLocalizations.of(context)!.general_fae344b2,
+          subtitle: AppLocalizations.of(context)!.general_6c8b9d29,
           onTap: () {
             // TODO: トレーナー記録画面へ遷移
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(AppLocalizations.of(context)!.general_トレーナー記録機能は開発中です)),
+              SnackBar(content: Text(AppLocalizations.of(context)!.general_ea97e57d)),
             );
           },
         ),

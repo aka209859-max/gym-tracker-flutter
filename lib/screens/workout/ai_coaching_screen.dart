@@ -33,7 +33,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
     AppLocalizations.of(context)!.bodyPartLegs: false,
     AppLocalizations.of(context)!.bodyPartShoulders: false,
     AppLocalizations.of(context)!.bodyPartArms: false,
-    AppLocalizations.of(context)!.bodyPart_腹筋: false,
+    AppLocalizations.of(context)!.bodyPart_ceb49fa1: false,
     AppLocalizations.of(context)!.exerciseCardio: false,
     AppLocalizations.of(context)!.levelBeginner: false,
   };
@@ -132,7 +132,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
           IconButton(
             icon: const Icon(Icons.info_outline),
             onPressed: () => _showInfoDialog(),
-            tooltip: AppLocalizations.of(context)!.workout_使い方,
+            tooltip: AppLocalizations.of(context)!.workout_9e8d8121,
           ),
         ],
       ),
@@ -213,7 +213,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
                       Icon(Icons.info_outline, color: Colors.orange.shade700, size: 20),
                       const SizedBox(width: 8),
                       Text(
-                        AppLocalizations.of(context)!.workout_無料プランの制限,
+                        AppLocalizations.of(context)!.workout_f8ad9a0a,
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -338,7 +338,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  AppLocalizations.of(context)!.workout_提案されたメニュー,
+                  AppLocalizations.of(context)!.workout_ba5c8bd5,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -391,7 +391,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          AppLocalizations.of(context)!.workout_過去の提案,
+          AppLocalizations.of(context)!.workout_5fcb26ba,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -405,7 +405,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
             child: Padding(
               padding: EdgeInsets.all(24),
               child: Center(
-                child: Text(AppLocalizations.of(context)!.workout_まだ履歴がありません),
+                child: Text(AppLocalizations.of(context)!.workout_355e6980),
               ),
             ),
           )
@@ -525,7 +525,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
 
   /// AIメニュー生成
   Future<void> _generateMenu(List<String> bodyParts) async {
-    ConsoleLogger.info(AppLocalizations.of(context)!.workout_AIコーチング開始, tag: 'AI_COACHING');
+    ConsoleLogger.info(AppLocalizations.of(context)!.workout_195d675c, tag: 'AI_COACHING');
     
     // ステップ1: AI使用可能チェック（サブスク or クレジット）
     final canUse = await _creditService.canUseAI();
@@ -537,7 +537,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
       ConsoleLogger.debug('canEarnCreditFromAd結果: $canEarnFromAd', tag: 'AI_COACHING');
       
       if (canEarnFromAd && mounted) {
-        ConsoleLogger.info(AppLocalizations.of(context)!.workout_リワード広告ダイアログを表示, tag: 'AI_COACHING');
+        ConsoleLogger.info(AppLocalizations.of(context)!.workout_3cdc9d1b, tag: 'AI_COACHING');
         // ステップ3: リワード広告ダイアログ表示
         final watchedAd = await showDialog<bool>(
           context: context,
@@ -706,15 +706,15 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
   /// 部位別エクササイズを追加
   void _addBodyPartExercises(StringBuffer buffer, String bodyPart, bool isBeginner) {
     final exercises = {
-      AppLocalizations.of(context)!.bodyPartChest: [AppLocalizations.of(context)!.exerciseBenchPress, AppLocalizations.of(context)!.workout_ダンベルフライ, AppLocalizations.of(context)!.workout_ケーブルクロスオーバー],
+      AppLocalizations.of(context)!.bodyPartChest: [AppLocalizations.of(context)!.exerciseBenchPress, AppLocalizations.of(context)!.workout_e85fb0a4, AppLocalizations.of(context)!.workout_c196525e],
       AppLocalizations.of(context)!.bodyPartBack: [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, AppLocalizations.of(context)!.exerciseBentOverRow],
       AppLocalizations.of(context)!.bodyPartLegs: [AppLocalizations.of(context)!.exerciseSquat, AppLocalizations.of(context)!.exerciseLegPress, AppLocalizations.of(context)!.exerciseLegCurl],
       AppLocalizations.of(context)!.bodyPartShoulders: [AppLocalizations.of(context)!.exerciseShoulderPress, AppLocalizations.of(context)!.exerciseSideRaise, AppLocalizations.of(context)!.exerciseRearDeltFly],
       AppLocalizations.of(context)!.bodyPartArms: [AppLocalizations.of(context)!.exerciseBarbellCurl, AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseHammerCurl],
-      AppLocalizations.of(context)!.bodyPart_腹筋: [AppLocalizations.of(context)!.exerciseCrunch, AppLocalizations.of(context)!.exercisePlank, AppLocalizations.of(context)!.exerciseLegRaise],
+      AppLocalizations.of(context)!.bodyPart_ceb49fa1: [AppLocalizations.of(context)!.exerciseCrunch, AppLocalizations.of(context)!.exercisePlank, AppLocalizations.of(context)!.exerciseLegRaise],
     };
     
-    final targetExercises = exercises[bodyPart] ?? [AppLocalizations.of(context)!.workout_基本種目];
+    final targetExercises = exercises[bodyPart] ?? [AppLocalizations.of(context)!.workout_065a723e];
     
     for (int i = 0; i < targetExercises.length && i < 3; i++) {
       buffer.writeln('### ${i + 1}. ${targetExercises[i]}');
@@ -879,7 +879,7 @@ ${bodyParts.join('、')}
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.workout_AIコーチングについて),
+        title: Text(AppLocalizations.of(context)!.workout_47f85b9f),
         content: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -946,7 +946,7 @@ ${bodyParts.join('、')}
           children: [
             Icon(Icons.info_outline, color: Colors.orange),
             SizedBox(width: 12),
-            Text(AppLocalizations.of(context)!.workout_月間上限に達しました),
+            Text(AppLocalizations.of(context)!.workout_42a622a9),
           ],
         ),
         content: Column(
@@ -954,7 +954,7 @@ ${bodyParts.join('、')}
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              AppLocalizations.of(context)!.workout_今月の無料動画視聴は上限3回に達しました,
+              AppLocalizations.of(context)!.workout_f85e416b,
               style: TextStyle(fontSize: 14),
             ),
             SizedBox(height: 16),
@@ -995,7 +995,7 @@ ${bodyParts.join('、')}
               backgroundColor: Colors.blue.shade700,
               foregroundColor: Colors.white,
             ),
-            child: Text(AppLocalizations.of(context)!.workout_プランを見る),
+            child: Text(AppLocalizations.of(context)!.workout_aa5018ba),
           ),
         ],
       ),
@@ -1011,7 +1011,7 @@ ${bodyParts.join('、')}
           children: [
             Icon(Icons.info_outline, color: Colors.orange),
             SizedBox(width: 12),
-            Text(AppLocalizations.of(context)!.workout_月間上限に達しました),
+            Text(AppLocalizations.of(context)!.workout_42a622a9),
           ],
         ),
         content: Column(
@@ -1019,7 +1019,7 @@ ${bodyParts.join('、')}
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              AppLocalizations.of(context)!.workout_今月のAI使用回数が上限に達しました,
+              AppLocalizations.of(context)!.workout_03c8c351,
               style: TextStyle(fontSize: 14),
             ),
             SizedBox(height: 16),

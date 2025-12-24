@@ -50,12 +50,12 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
           .get();
 
       if (!poDoc.exists) {
-        throw Exception(AppLocalizations.of(context)!.general_PO情報が見つかりません);
+        throw Exception(AppLocalizations.of(context)!.general_e22a77d8);
       }
 
       final poData = poDoc.data();
       if (poData == null) {
-        throw Exception(AppLocalizations.of(context)!.error_POデータの取得に失敗しました);
+        throw Exception(AppLocalizations.of(context)!.error_46a35645);
       }
       
       // 会員数集計（仮データ）
@@ -136,7 +136,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.general_PO管理ダッシュボード),
+        title: Text(AppLocalizations.of(context)!.general_4a0065da),
         backgroundColor: Colors.blue.shade700,
         foregroundColor: Colors.white,
         actions: [
@@ -165,7 +165,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      AppLocalizations.of(context)!.general_PO管理者ダッシュボード,
+                      AppLocalizations.of(context)!.general_d99061be,
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey.shade600,
@@ -175,21 +175,21 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
 
                     // KPIカード
                     _buildKPICard(
-                      title: AppLocalizations.of(context)!.general_総会員数,
+                      title: AppLocalizations.of(context)!.general_4146c265,
                       value: _totalMembers.toString(),
                       icon: Icons.people,
                       color: Colors.blue,
                     ),
                     const SizedBox(height: 12),
                     _buildKPICard(
-                      title: AppLocalizations.of(context)!.general_アクティブ会員,
+                      title: AppLocalizations.of(context)!.general_58b46f8e,
                       value: _activeMembers.toString(),
                       icon: Icons.trending_up,
                       color: Colors.green,
                     ),
                     const SizedBox(height: 12),
                     _buildKPICard(
-                      title: AppLocalizations.of(context)!.general_休眠会員,
+                      title: AppLocalizations.of(context)!.general_3a99254a,
                       value: _dormantMembers.toString(),
                       icon: Icons.trending_down,
                       color: Colors.orange,
@@ -198,34 +198,34 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
 
                     // 機能ボタン（仮実装）
                     _buildFeatureButton(
-                      title: AppLocalizations.of(context)!.general_会員管理,
-                      subtitle: AppLocalizations.of(context)!.general_会員リストの表示と管理,
+                      title: AppLocalizations.of(context)!.general_8043e494,
+                      subtitle: AppLocalizations.of(context)!.general_2994cb17,
                       icon: Icons.people_outline,
                       onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(AppLocalizations.of(context)!.general_会員管理画面は次のフェーズで実装予定)),
+                          SnackBar(content: Text(AppLocalizations.of(context)!.general_5846d4c4)),
                         );
                       },
                     ),
                     const SizedBox(height: 12),
                     _buildFeatureButton(
-                      title: AppLocalizations.of(context)!.general_セッション管理,
-                      subtitle: AppLocalizations.of(context)!.general_予約とセッション履歴,
+                      title: AppLocalizations.of(context)!.general_119d8156,
+                      subtitle: AppLocalizations.of(context)!.general_f86194c5,
                       icon: Icons.calendar_today_outlined,
                       onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(AppLocalizations.of(context)!.general_セッション管理画面は次のフェーズで実装予定)),
+                          SnackBar(content: Text(AppLocalizations.of(context)!.general_9fef05a3)),
                         );
                       },
                     ),
                     SizedBox(height: 12),
                     _buildFeatureButton(
                       title: AppLocalizations.of(context)!.analysis,
-                      subtitle: AppLocalizations.of(context)!.general_KPIグラフと統計データ,
+                      subtitle: AppLocalizations.of(context)!.general_a7599bdd,
                       icon: Icons.analytics_outlined,
                       onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(AppLocalizations.of(context)!.general_分析画面は次のフェーズで実装予定)),
+                          SnackBar(content: Text(AppLocalizations.of(context)!.general_1a8525c9)),
                         );
                       },
                     ),

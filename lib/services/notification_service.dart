@@ -71,7 +71,7 @@ class NotificationService {
     await _notifications.zonedSchedule(
       1, // notification ID
       '${muscleGroup}の回復完了！💪',
-      AppLocalizations.of(context)!.general_次のトレーニングに最適なタイミングです,
+      AppLocalizations.of(context)!.general_39e26ea4,
       tz.TZDateTime.now(tz.local).add(delay),
       const NotificationDetails(
         iOS: DarwinNotificationDetails(),
@@ -115,8 +115,8 @@ class NotificationService {
   Future<void> scheduleReengagementNotification() async {
     await _notifications.zonedSchedule(
       4, // notification ID
-      AppLocalizations.of(context)!.general_お久しぶりです_1,
-      AppLocalizations.of(context)!.general_あなたの成長予測が待っています,
+      AppLocalizations.of(context)!.general_c2f773c9,
+      AppLocalizations.of(context)!.general_5957525b,
       tz.TZDateTime.now(tz.local).add(const Duration(days: 7)),
       const NotificationDetails(
         iOS: DarwinNotificationDetails(),
@@ -208,13 +208,13 @@ class NotificationService {
   String _getCrowdLevelText(int level) {
     switch (level) {
       case 1:
-        return AppLocalizations.of(context)!.gym_空いています;
+        return AppLocalizations.of(context)!.gym_e662330d;
       case 2:
         return AppLocalizations.of(context)!.moderatelyEmpty;
       case 3:
         return AppLocalizations.of(context)!.intensityModerate;
       default:
-        return AppLocalizations.of(context)!.gym_空いています;
+        return AppLocalizations.of(context)!.gym_e662330d;
     }
   }
 }

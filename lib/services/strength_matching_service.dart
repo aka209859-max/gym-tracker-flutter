@@ -15,7 +15,7 @@ class StrengthMatchingService {
     // スクワット系
     AppLocalizations.of(context)!.exerciseSquat, 'squat',
     // ベンチプレス系
-    AppLocalizations.of(context)!.exerciseBenchPress, 'bench press', AppLocalizations.of(context)!.general_ベンチ,
+    AppLocalizations.of(context)!.exerciseBenchPress, 'bench press', AppLocalizations.of(context)!.general_c757af1f,
     // デッドリフト系
     AppLocalizations.of(context)!.exerciseDeadlift, 'deadlift',
   };
@@ -47,7 +47,7 @@ class StrengthMatchingService {
 
       // 各種目（スクワット、ベンチ、デッド）の最大1RMを取得
       final squatPR = _getMaxPRByKeyword(big3PRs, [AppLocalizations.of(context)!.exerciseSquat, 'squat']);
-      final benchPR = _getMaxPRByKeyword(big3PRs, [AppLocalizations.of(context)!.exerciseBenchPress, 'bench press', AppLocalizations.of(context)!.general_ベンチ]);
+      final benchPR = _getMaxPRByKeyword(big3PRs, [AppLocalizations.of(context)!.exerciseBenchPress, 'bench press', AppLocalizations.of(context)!.general_c757af1f]);
       final deadliftPR = _getMaxPRByKeyword(big3PRs, [AppLocalizations.of(context)!.exerciseDeadlift, 'deadlift']);
 
       // 記録がある種目のみで平均を計算

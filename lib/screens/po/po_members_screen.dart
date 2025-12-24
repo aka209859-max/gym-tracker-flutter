@@ -27,9 +27,9 @@ class _POMembersScreenState extends State<POMembersScreen> {
             padding: const EdgeInsets.all(16),
             child: SegmentedButton<String>(
               segments: [
-                ButtonSegment(value: 'all', label: Text(AppLocalizations.of(context)!.general_全会員)),
+                ButtonSegment(value: 'all', label: Text(AppLocalizations.of(context)!.general_f3a02437)),
                 ButtonSegment(value: 'active', label: Text(AppLocalizations.of(context)!.active)),
-                ButtonSegment(value: 'dormant', label: Text(AppLocalizations.of(context)!.general_休眠中)),
+                ButtonSegment(value: 'dormant', label: Text(AppLocalizations.of(context)!.general_a9de8b69)),
               ],
               selected: {_filterStatus},
               onSelectionChanged: (Set<String> newSelection) {
@@ -65,7 +65,7 @@ class _POMembersScreenState extends State<POMembersScreen> {
                             size: 64, color: Colors.grey[400]),
                         const SizedBox(height: 16),
                         Text(
-                          AppLocalizations.of(context)!.general_まだパーソナル会員がいません,
+                          AppLocalizations.of(context)!.general_ab9c4e26,
                           style:
                               TextStyle(fontSize: 16, color: Colors.grey[600]),
                         ),
@@ -102,7 +102,7 @@ class _POMembersScreenState extends State<POMembersScreen> {
                         children: [
                           Expanded(
                             child: _SummaryCard(
-                              label: AppLocalizations.of(context)!.general_全会員,
+                              label: AppLocalizations.of(context)!.general_f3a02437,
                               value: '${members.length}名',
                               color: Colors.blue,
                             ),
@@ -118,7 +118,7 @@ class _POMembersScreenState extends State<POMembersScreen> {
                           const SizedBox(width: 12),
                           Expanded(
                             child: _SummaryCard(
-                              label: AppLocalizations.of(context)!.general_休眠中,
+                              label: AppLocalizations.of(context)!.general_a9de8b69,
                               value: '$dormantCount名',
                               color: Colors.orange,
                             ),
@@ -268,7 +268,7 @@ class _MemberCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      member.isActive ? AppLocalizations.of(context)!.active : AppLocalizations.of(context)!.general_休眠中,
+                      member.isActive ? AppLocalizations.of(context)!.active : AppLocalizations.of(context)!.general_a9de8b69,
                       style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.bold,

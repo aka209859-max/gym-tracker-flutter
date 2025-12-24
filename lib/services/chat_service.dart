@@ -50,12 +50,12 @@ class ChatService {
     final conversationDoc = await conversationRef.get();
 
     if (!conversationDoc.exists) {
-      throw Exception(AppLocalizations.of(context)!.general_会話が見つかりません);
+      throw Exception(AppLocalizations.of(context)!.general_705052a5);
     }
 
     final conversationData = conversationDoc.data();
     if (conversationData == null) {
-      throw Exception(AppLocalizations.of(context)!.error_会話データの取得に失敗しました);
+      throw Exception(AppLocalizations.of(context)!.error_8f013312);
     }
     
     final participants = List<String>.from(conversationData['participants'] as List? ?? []);
@@ -103,7 +103,7 @@ class ChatService {
     // 🔒 友達チェック
     final isFriend = await _friendRequestService.areFriends(currentUser.uid, partnerId);
     if (!isFriend) {
-      throw Exception(AppLocalizations.of(context)!.general_友達になってからメッセージを送信できます);
+      throw Exception(AppLocalizations.of(context)!.general_3165d4b1);
     }
 
     // 既存のチャットルームを検索

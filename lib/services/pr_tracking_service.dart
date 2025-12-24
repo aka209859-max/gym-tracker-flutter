@@ -192,17 +192,17 @@ class PRTrackingService {
       // 胸
       AppLocalizations.of(context)!.exerciseBenchPress: AppLocalizations.of(context)!.bodyPartChest,
       AppLocalizations.of(context)!.exerciseInclinePress: AppLocalizations.of(context)!.bodyPartChest,
-      AppLocalizations.of(context)!.workout_ダンベルフライ: AppLocalizations.of(context)!.bodyPartChest,
+      AppLocalizations.of(context)!.workout_e85fb0a4: AppLocalizations.of(context)!.bodyPartChest,
       AppLocalizations.of(context)!.exerciseCableFly: AppLocalizations.of(context)!.bodyPartChest,
       AppLocalizations.of(context)!.exerciseDips: AppLocalizations.of(context)!.bodyPartChest,
-      AppLocalizations.of(context)!.general_プッシュアップ: AppLocalizations.of(context)!.bodyPartChest,
+      AppLocalizations.of(context)!.general_36594338: AppLocalizations.of(context)!.bodyPartChest,
       
       // 背中
       AppLocalizations.of(context)!.exerciseDeadlift: AppLocalizations.of(context)!.bodyPartBack,
-      AppLocalizations.of(context)!.general_バーベルロウ: AppLocalizations.of(context)!.bodyPartBack,
-      AppLocalizations.of(context)!.general_ダンベルロウ: AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.general_f9e3856d: AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.general_9ba1c450: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.exerciseLatPulldown: AppLocalizations.of(context)!.bodyPartBack,
-      AppLocalizations.of(context)!.workout_プルアップ: AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.workout_e3dc6687: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.exerciseSeatedRow: AppLocalizations.of(context)!.bodyPartBack,
       
       // 脚
@@ -217,7 +217,7 @@ class PRTrackingService {
       AppLocalizations.of(context)!.exerciseDumbbellPress: AppLocalizations.of(context)!.bodyPartShoulders,
       AppLocalizations.of(context)!.exerciseSideRaise: AppLocalizations.of(context)!.bodyPartShoulders,
       AppLocalizations.of(context)!.exerciseFrontRaise: AppLocalizations.of(context)!.bodyPartShoulders,
-      AppLocalizations.of(context)!.workout_リアレイズ: AppLocalizations.of(context)!.bodyPartShoulders,
+      AppLocalizations.of(context)!.workout_61db805d: AppLocalizations.of(context)!.bodyPartShoulders,
       
       // 腕
       AppLocalizations.of(context)!.exerciseBarbellCurl: AppLocalizations.of(context)!.bodyPartArms,

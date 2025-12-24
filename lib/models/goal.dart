@@ -101,9 +101,9 @@ class Goal {
   String get name {
     switch (type) {
       case GoalType.weeklyWorkoutCount:
-        return AppLocalizations.of(context)!.general_週間トレーニング回数;
+        return AppLocalizations.of(context)!.general_e9b451c8;
       case GoalType.monthlyTotalWeight:
-        return AppLocalizations.of(context)!.general_月間総重量;
+        return AppLocalizations.of(context)!.general_12bffb53;
     }
   }
 

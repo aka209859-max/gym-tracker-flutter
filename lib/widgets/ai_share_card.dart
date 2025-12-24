@@ -69,7 +69,7 @@ class AIShareCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      AppLocalizations.of(context)!.general_AI科学的トレーニングコーチ,
+                      AppLocalizations.of(context)!.general_05ce10ff,
                       style: TextStyle(
                         color: Colors.white70,
                         fontSize: 10,
@@ -159,7 +159,7 @@ class AIShareCard extends StatelessWidget {
       // 現在のRM
       _buildStatRow(
         icon: Icons.straighten,
-        label: AppLocalizations.of(context)!.general_現在の1RM,
+        label: AppLocalizations.of(context)!.general_6e52e168,
         value: '${currentWeight.round()}kg',
       ),
       const SizedBox(height: 12),
@@ -176,7 +176,7 @@ class AIShareCard extends StatelessWidget {
       // 成長率
       _buildStatRow(
         icon: Icons.show_chart,
-        label: AppLocalizations.of(context)!.general_成長率,
+        label: AppLocalizations.of(context)!.general_f388c562,
         value: '+$growthPercentage%',
         highlighted: true,
       ),
@@ -185,14 +185,14 @@ class AIShareCard extends StatelessWidget {
 
   /// トレーニング分析用ウィジェット
   List<Widget> _buildTrainingAnalysisWidgets() {
-    final volumeStatus = data['volumeAnalysis']?['status'] as String? ?? AppLocalizations.of(context)!.general_適切;
-    final frequencyStatus = data['frequencyAnalysis']?['status'] as String? ?? AppLocalizations.of(context)!.general_適切;
+    final volumeStatus = data['volumeAnalysis']?['status'] as String? ?? AppLocalizations.of(context)!.general_453ad54f;
+    final frequencyStatus = data['frequencyAnalysis']?['status'] as String? ?? AppLocalizations.of(context)!.general_453ad54f;
     
     return [
       // ボリューム評価
       _buildStatRow(
         icon: Icons.fitness_center,
-        label: AppLocalizations.of(context)!.general_トレーニングボリューム,
+        label: AppLocalizations.of(context)!.general_14bc4f05,
         value: volumeStatus,
       ),
       const SizedBox(height: 12),
@@ -200,7 +200,7 @@ class AIShareCard extends StatelessWidget {
       // 頻度評価
       _buildStatRow(
         icon: Icons.calendar_today,
-        label: AppLocalizations.of(context)!.general_トレーニング頻度,
+        label: AppLocalizations.of(context)!.general_f7a36a23,
         value: frequencyStatus,
       ),
     ];

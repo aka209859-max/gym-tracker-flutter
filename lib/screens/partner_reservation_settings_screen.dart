@@ -221,7 +221,7 @@ class _PartnerReservationSettingsScreenState
                           });
                         },
                         title: const Text(
-                          AppLocalizations.of(context)!.profile_ビジター利用を受け付ける,
+                          AppLocalizations.of(context)!.profile_285758a8,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -229,8 +229,8 @@ class _PartnerReservationSettingsScreenState
                         ),
                         subtitle: Text(
                           _acceptsVisitors
-                              ? AppLocalizations.of(context)!.profile_ユーザーアプリにビジター可バッジが表示されます
-                              : AppLocalizations.of(context)!.profile_予約ボタンは非表示になります,
+                              ? AppLocalizations.of(context)!.profile_a54b51da
+                              : AppLocalizations.of(context)!.profile_b3857acd,
                           style: const TextStyle(fontSize: 13),
                         ),
                         secondary: Icon(
@@ -307,7 +307,7 @@ class _PartnerReservationSettingsScreenState
                     // プレビュー
                     if (_acceptsVisitors) ...[
                       const Text(
-                        AppLocalizations.of(context)!.profile_ユーザーアプリでの表示プレビュー,
+                        AppLocalizations.of(context)!.profile_599b1faa,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

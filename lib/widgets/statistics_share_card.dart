@@ -70,7 +70,7 @@ class StatisticsShareCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    AppLocalizations.of(context)!.general_トレーニング統計,
+                    AppLocalizations.of(context)!.general_cbca9048,
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.white70,
@@ -119,7 +119,7 @@ class StatisticsShareCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  AppLocalizations.of(context)!.workout_連続トレーニング記録,
+                  AppLocalizations.of(context)!.workout_a826db5c,
                   style: TextStyle(
                     fontSize: 22,
                     color: Colors.white70,
@@ -149,7 +149,7 @@ class StatisticsShareCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 12),
                     Text(
-                      AppLocalizations.of(context)!.general_今週の実績,
+                      AppLocalizations.of(context)!.general_124aaff7,
                       style: TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
@@ -209,7 +209,7 @@ class StatisticsShareCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 12),
                     Text(
-                      AppLocalizations.of(context)!.general_今月の実績,
+                      AppLocalizations.of(context)!.general_d2429b27,
                       style: TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
@@ -263,7 +263,7 @@ class StatisticsShareCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 12),
                       Text(
-                        AppLocalizations.of(context)!.general_部位別トレーニング,
+                        AppLocalizations.of(context)!.general_5aa4062e,
                         style: TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.bold,

@@ -107,7 +107,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
           controller: controller,
           maxLines: 5,
           decoration: InputDecoration(
-            hintText: AppLocalizations.of(context)!.workout_メモを入力してください,
+            hintText: AppLocalizations.of(context)!.workout_01411783,
             border: OutlineInputBorder(),
           ),
         ),
@@ -151,7 +151,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.workout_メモを削除),
+        title: Text(AppLocalizations.of(context)!.workout_c1cd0279),
         content: Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(
@@ -211,7 +211,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        AppLocalizations.of(context)!.workout_メモはまだありません,
+                        AppLocalizations.of(context)!.workout_b19f3279,
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.grey.shade600,
@@ -272,7 +272,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
                                         Text(
                                           date != null
                                               ? DateFormat('yyyy/MM/dd').format(date)
-                                              : AppLocalizations.of(context)!.workout_日付不明,
+                                              : AppLocalizations.of(context)!.workout_3e8e25ce,
                                           style: TextStyle(
                                             fontSize: 14,
                                             fontWeight: FontWeight.bold,

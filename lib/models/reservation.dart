@@ -62,9 +62,9 @@ class Reservation {
   String get statusText {
     switch (status) {
       case 'pending':
-        return AppLocalizations.of(context)!.general_申込済;
+        return AppLocalizations.of(context)!.general_044f232e;
       case 'confirmed':
-        return AppLocalizations.of(context)!.subscription_確定;
+        return AppLocalizations.of(context)!.subscription_84b9d24c;
       case 'cancelled':
         return AppLocalizations.of(context)!.buttonCancel;
       default:

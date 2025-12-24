@@ -93,7 +93,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
       // 位置情報取得失敗時は続行（フィルターから距離を除外）
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context)!.general_位置情報を取得できませんでした)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.general_8b92a0e1)),
         );
       }
     }
@@ -195,7 +195,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
             ],
 
             // トレーニング目標フィルター
-            Text(AppLocalizations.of(context)!.profile_トレーニング目標, style: TextStyle(fontWeight: FontWeight.bold)),
+            Text(AppLocalizations.of(context)!.profile_c7511bf1, style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
@@ -291,7 +291,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
               const Padding(
                 padding: EdgeInsets.only(top: 4),
                 child: Text(
-                  AppLocalizations.of(context)!.general_あなたのBIG3平均1RMの15範囲内のユーザーのみ表示,
+                  AppLocalizations.of(context)!.general_80d43a2b,
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ),
@@ -307,7 +307,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                       const SizedBox(width: 8),
                       const Expanded(
                         child: Text(
-                          AppLocalizations.of(context)!.general_同じジム時間帯の人のみ2時間,
+                          AppLocalizations.of(context)!.general_726613df,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -328,7 +328,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
               const Padding(
                 padding: EdgeInsets.only(top: 4),
                 child: Text(
-                  AppLocalizations.of(context)!.general_あなたがよく行くジムで同じ時間帯2時間にトレーニングする人のみ表示,
+                  AppLocalizations.of(context)!.general_aaed5769,
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ),
@@ -416,7 +416,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              AppLocalizations.of(context)!.general_条件に一致するパートナーが見つかりませんでした,
+              AppLocalizations.of(context)!.general_07460321,
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey[600],
@@ -483,7 +483,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      AppLocalizations.of(context)!.general_Proユーザーのみ表示中,
+                      AppLocalizations.of(context)!.general_4c0c946d,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -491,7 +491,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      AppLocalizations.of(context)!.general_Proプランにアップグレードで全ユーザーを検索可能,
+                      AppLocalizations.of(context)!.general_b96738b9,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey[700],

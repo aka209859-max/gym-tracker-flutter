@@ -73,16 +73,16 @@ void main() async {
   // 日本語ロケール初期化（日付フォーマット用）
   try {
     await initializeDateFormatting('ja_JP', null);
-    ConsoleLogger.info(AppLocalizations.of(context)!.general_日本語ロケール初期化成功, tag: 'INIT');
+    ConsoleLogger.info(AppLocalizations.of(context)!.general_0e024233, tag: 'INIT');
   } catch (e) {
-    ConsoleLogger.warn(AppLocalizations.of(context)!.error_日本語ロケール初期化失敗継続可能, tag: 'INIT');
+    ConsoleLogger.warn(AppLocalizations.of(context)!.error_2def7135, tag: 'INIT');
     // Web環境では失敗する可能性があるが、アプリ起動は継続
   }
   
   // Firebase初期化（エラー時はスキップしてデモモード）
   bool firebaseInitialized = false;
   try {
-    ConsoleLogger.info(AppLocalizations.of(context)!.general_Firebase初期化開始, tag: 'FIREBASE');
+    ConsoleLogger.info(AppLocalizations.of(context)!.general_890a33f3, tag: 'FIREBASE');
     
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
@@ -372,7 +372,7 @@ class _MainScreenState extends State<MainScreen> {
           NavigationDestination(
             icon: const Icon(Icons.history),
             selectedIcon: const Icon(Icons.history),
-            label: l10n?.navWorkout ?? AppLocalizations.of(context)!.general_履歴,
+            label: l10n?.navWorkout ?? AppLocalizations.of(context)!.general_da63bff4,
           ),
           NavigationDestination(
             icon: const Badge(
@@ -385,7 +385,7 @@ class _MainScreenState extends State<MainScreen> {
               backgroundColor: Colors.deepPurple,
               child: Icon(Icons.psychology),
             ),
-            label: l10n?.navAI ?? AppLocalizations.of(context)!.general_AI機能,
+            label: l10n?.navAI ?? AppLocalizations.of(context)!.general_deb22de6,
           ),
           NavigationDestination(
             icon: const Icon(Icons.map_outlined),

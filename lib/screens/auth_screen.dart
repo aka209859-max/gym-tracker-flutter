@@ -145,7 +145,7 @@ class _AuthScreenState extends State<AuthScreen> {
       case 'weak-password':
         return AppLocalizations.of(context)!.passwordMin6;
       case 'network-request-failed':
-        return AppLocalizations.of(context)!.general_ネットワーク接続を確認してください;
+        return AppLocalizations.of(context)!.general_4b85b706;
       default:
         return AppLocalizations.of(context)!.error;
     }
@@ -177,7 +177,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  AppLocalizations.of(context)!.general_フィットネスソーシャルマップ,
+                  AppLocalizations.of(context)!.general_3fc0f668,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Colors.grey[600],
                       ),
@@ -202,7 +202,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             ),
                             validator: (value) {
                               if (!_isLogin && (value == null || value.trim().isEmpty)) {
-                                return AppLocalizations.of(context)!.general_名前を入力してください;
+                                return AppLocalizations.of(context)!.general_98d98661;
                               }
                               return null;
                             },
@@ -310,7 +310,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         child: Text(
                           _isLogin
                               ? AppLocalizations.of(context)!.dontHaveAccount
-                              : AppLocalizations.of(context)!.general_既にアカウントをお持ちの方はこちら,
+                              : AppLocalizations.of(context)!.general_8fc2afad,
                         ),
                       ),
                     ],
@@ -321,7 +321,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
                 // 利用規約・プライバシーポリシー
                 Text(
-                  AppLocalizations.of(context)!.general_続行することで利用規約とプライバシーポリシーに同意したものとみなされます,
+                  AppLocalizations.of(context)!.general_cef07c55,
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.grey[600],

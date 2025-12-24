@@ -126,7 +126,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            child: Text(AppLocalizations.of(context)!.general_ブロック),
+            child: Text(AppLocalizations.of(context)!.general_9bba20c8),
           ),
         ],
       ),
@@ -144,7 +144,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context)!.general_ブロックしました)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.general_1a0017eb)),
         );
         Navigator.pop(context);
       }
@@ -176,9 +176,9 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
                 const SizedBox(height: 12),
                 ...[
                   AppLocalizations.of(context)!.inappropriateContent,
-                  AppLocalizations.of(context)!.general_スパム宣伝,
-                  AppLocalizations.of(context)!.general_ハラスメント,
-                  AppLocalizations.of(context)!.general_なりすまし,
+                  AppLocalizations.of(context)!.general_43115ef3,
+                  AppLocalizations.of(context)!.general_6687d4b9,
+                  AppLocalizations.of(context)!.general_503e4fae,
                   AppLocalizations.of(context)!.other,
                 ].map((reason) {
                   return RadioListTile<String>(
@@ -198,7 +198,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
                 TextField(
                   controller: detailsController,
                   decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.general_詳細任意,
+                    labelText: AppLocalizations.of(context)!.general_c2c1126e,
                     border: OutlineInputBorder(),
                   ),
                   maxLines: 3,
@@ -236,7 +236,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context)!.general_通報を受け付けましたご協力ありがとうございます)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.general_f53f0049)),
         );
       }
     } catch (e) {
@@ -269,7 +269,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
                   children: [
                     Icon(Icons.block, size: 20),
                     SizedBox(width: 8),
-                    Text(AppLocalizations.of(context)!.general_ブロックする),
+                    Text(AppLocalizations.of(context)!.general_0cdd8f95),
                   ],
                 ),
               ),
@@ -313,7 +313,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
                 if (messages.isEmpty) {
                   return Center(
                     child: Text(
-                      AppLocalizations.of(context)!.general_メッセージを送信して会話を始めましょう,
+                      AppLocalizations.of(context)!.general_948098d7,
                       style: TextStyle(color: Colors.grey[600]),
                     ),
                   );

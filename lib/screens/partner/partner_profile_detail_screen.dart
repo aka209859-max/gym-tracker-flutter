@@ -46,7 +46,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
     'male': AppLocalizations.of(context)!.genderMale,
     'female': AppLocalizations.of(context)!.genderFemale,
     'other': AppLocalizations.of(context)!.other,
-    'not_specified': AppLocalizations.of(context)!.profile_未指定,
+    'not_specified': AppLocalizations.of(context)!.profile_a479de60,
   };
 
   final Map<String, String> _weekDays = {
@@ -61,8 +61,8 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
 
   final Map<String, String> _timeSlots = {
     'morning': AppLocalizations.of(context)!.morning,
-    'afternoon': AppLocalizations.of(context)!.profile_昼,
-    'evening': AppLocalizations.of(context)!.profile_夕,
+    'afternoon': AppLocalizations.of(context)!.profile_290d9996,
+    'evening': AppLocalizations.of(context)!.profile_04b88dd2,
     'night': AppLocalizations.of(context)!.night,
   };
 
@@ -88,7 +88,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
       if (mounted) {
         setState(() {
           _canSendRequest = false;
-          _permissionMessage = AppLocalizations.of(context)!.profile_マッチングリクエスト送信はProプラン限定機能です;
+          _permissionMessage = AppLocalizations.of(context)!.profile_e0342da8;
         });
       }
     }
@@ -109,7 +109,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
     
     if (_messageController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context)!.profile_メッセージを入力してください)),
+        SnackBar(content: Text(AppLocalizations.of(context)!.profile_5cd65c3e)),
       );
       return;
     }
@@ -126,7 +126,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context)!.profile_マッチングリクエストを送信しました)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.profile_5b16043c)),
         );
         Navigator.pop(context);
       }
@@ -172,11 +172,11 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildSection(AppLocalizations.of(context)!.bio, widget.profile.bio ?? AppLocalizations.of(context)!.profile_自己紹介はありません),
+                  _buildSection(AppLocalizations.of(context)!.bio, widget.profile.bio ?? AppLocalizations.of(context)!.profile_c1dcde32),
                   const SizedBox(height: 24),
                   
                   _buildSection(
-                    AppLocalizations.of(context)!.profile_トレーニング目標,
+                    AppLocalizations.of(context)!.profile_c7511bf1,
                     widget.profile.trainingGoals.isNotEmpty
                         ? widget.profile.trainingGoals
                             .where((goal) => goal != null && goal.isNotEmpty)
@@ -193,7 +193,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                   const SizedBox(height: 24),
                   
                   _buildSection(
-                    AppLocalizations.of(context)!.profile_好きな部位,
+                    AppLocalizations.of(context)!.profile_dfe6eee7,
                     widget.profile.preferredExercises.isNotEmpty
                         ? widget.profile.preferredExercises
                             .where((ex) => ex != null && ex.isNotEmpty)
@@ -203,7 +203,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                   const SizedBox(height: 24),
                   
                   _buildSection(
-                    AppLocalizations.of(context)!.profile_利用可能な曜日,
+                    AppLocalizations.of(context)!.profile_7db380c8,
                     widget.profile.availableDays.isNotEmpty
                         ? widget.profile.availableDays
                             .where((day) => day != null && day.isNotEmpty)
@@ -214,7 +214,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                   const SizedBox(height: 24),
                   
                   _buildSection(
-                    AppLocalizations.of(context)!.profile_利用可能な時間帯,
+                    AppLocalizations.of(context)!.profile_1cfba3aa,
                     widget.profile.availableTimeSlots.isNotEmpty
                         ? widget.profile.availableTimeSlots
                             .where((slot) => slot != null && slot.isNotEmpty)
@@ -226,7 +226,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                   
                   if (widget.profile.preferredLocation != null)
                     _buildSection(
-                      AppLocalizations.of(context)!.profile_希望エリア,
+                      AppLocalizations.of(context)!.profile_6745b85b,
                       widget.profile.preferredLocation!,
                     ),
                   const SizedBox(height: 32),
@@ -369,7 +369,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               child: const Icon(Icons.workspace_premium, color: Colors.white),
             ),
             const SizedBox(width: 12),
-            Text(AppLocalizations.of(context)!.profile_Pro限定機能),
+            Text(AppLocalizations.of(context)!.profile_3d9421a7),
           ],
         ),
         content: Column(
@@ -384,10 +384,10 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
             const Text('✨ Proプランの特典'),
             SizedBox(height: 8),
             _buildBenefitRow(AppLocalizations.of(context)!.searchGym),
-            _buildBenefitRow(AppLocalizations.of(context)!.profile_マッチングリクエスト送信),
-            _buildBenefitRow(AppLocalizations.of(context)!.profile_メッセージ機能),
+            _buildBenefitRow(AppLocalizations.of(context)!.profile_b2818710),
+            _buildBenefitRow(AppLocalizations.of(context)!.profile_a980ca9f),
             _buildBenefitRow('AI機能 無制限使用'),
-            _buildBenefitRow(AppLocalizations.of(context)!.profile_全Premium機能),
+            _buildBenefitRow(AppLocalizations.of(context)!.profile_8fdc9d03),
             const SizedBox(height: 8),
             const Text(
               '月額¥980（年間プラン32% OFF）',
@@ -465,7 +465,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
             Row(
               children: [
                 const Text(
-                  AppLocalizations.of(context)!.profile_マッチングリクエスト,
+                  AppLocalizations.of(context)!.profile_0e655357,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -483,7 +483,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Text(
-                      AppLocalizations.of(context)!.profile_PRO限定,
+                      AppLocalizations.of(context)!.profile_3e89f30d,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -500,7 +500,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               maxLines: 4,
               maxLength: 200,
               decoration: InputDecoration(
-                hintText: AppLocalizations.of(context)!.profile_自己紹介やトレーニングの希望を書いてください,
+                hintText: AppLocalizations.of(context)!.profile_b78090c1,
                 border: OutlineInputBorder(),
               ),
             ),
@@ -520,7 +520,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                     const Icon(Icons.lock, color: Colors.amber, size: 32),
                     const SizedBox(height: 8),
                     Text(
-                      _permissionMessage ?? AppLocalizations.of(context)!.profile_Pro限定機能です,
+                      _permissionMessage ?? AppLocalizations.of(context)!.profile_35399a27,
                       style: const TextStyle(fontSize: 14),
                       textAlign: TextAlign.center,
                     ),
@@ -552,8 +552,8 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                   _isSending
                       ? AppLocalizations.of(context)!.submitting
                       : !_canSendRequest
-                          ? AppLocalizations.of(context)!.profile_Proプランにアップグレード
-                          : AppLocalizations.of(context)!.profile_リクエストを送る
+                          ? AppLocalizations.of(context)!.profile_7d5e513b
+                          : AppLocalizations.of(context)!.profile_580ce520
                 ),
               ),
             ),

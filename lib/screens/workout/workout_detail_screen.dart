@@ -308,7 +308,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                         ),
                         const Expanded(
                           child: Text(
-                            AppLocalizations.of(context)!.workout_重さ,
+                            AppLocalizations.of(context)!.workout_2579352f,
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
@@ -319,7 +319,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                         SizedBox(
                           width: 60,
                           child: Text(
-                            _isAbsExercise(exercise.name) ? AppLocalizations.of(context)!.workout_秒数 : AppLocalizations.of(context)!.repsCount,
+                            _isAbsExercise(exercise.name) ? AppLocalizations.of(context)!.workout_34d70475 : AppLocalizations.of(context)!.repsCount,
                             style: const TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
@@ -341,7 +341,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                         const SizedBox(
                           width: 40,
                           child: Text(
-                            AppLocalizations.of(context)!.workout_補助,
+                            AppLocalizations.of(context)!.workout_c6b41e99,
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
@@ -441,7 +441,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                         const Icon(Icons.note, size: 20),
                         const SizedBox(width: 8),
                         const Text(
-                          AppLocalizations.of(context)!.workout_記録時のメモ,
+                          AppLocalizations.of(context)!.workout_e5798fef,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -528,7 +528,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                 ),
               ] else ...[
                 Text(
-                  AppLocalizations.of(context)!.workout_タップしてトレーニングの感想や気づきを記録,
+                  AppLocalizations.of(context)!.workout_e5b3b7b2,
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey[600],

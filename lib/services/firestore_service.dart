@@ -334,11 +334,11 @@ class FirestoreService {
   /// 種目名から部位を推定（簡易版）
   String _inferBodyPart(String exerciseName) {
     final name = exerciseName.toLowerCase();
-    if (name.contains(AppLocalizations.of(context)!.bodyPartChest) || name.contains(AppLocalizations.of(context)!.general_ベンチ) || name.contains('chest')) return AppLocalizations.of(context)!.bodyPartChest;
-    if (name.contains(AppLocalizations.of(context)!.general_背) || name.contains(AppLocalizations.of(context)!.general_ラット) || name.contains(AppLocalizations.of(context)!.general_デッド) || name.contains('back')) return AppLocalizations.of(context)!.bodyPartBack;
+    if (name.contains(AppLocalizations.of(context)!.bodyPartChest) || name.contains(AppLocalizations.of(context)!.general_c757af1f) || name.contains('chest')) return AppLocalizations.of(context)!.bodyPartChest;
+    if (name.contains(AppLocalizations.of(context)!.general_cea4cba5) || name.contains(AppLocalizations.of(context)!.general_0bb30234) || name.contains(AppLocalizations.of(context)!.general_39629cf6) || name.contains('back')) return AppLocalizations.of(context)!.bodyPartBack;
     if (name.contains(AppLocalizations.of(context)!.bodyPartLegs) || name.contains(AppLocalizations.of(context)!.exerciseSquat) || name.contains('leg')) return AppLocalizations.of(context)!.bodyPartLegs;
-    if (name.contains(AppLocalizations.of(context)!.bodyPartShoulders) || name.contains(AppLocalizations.of(context)!.general_ショルダー) || name.contains('shoulder')) return AppLocalizations.of(context)!.bodyPartShoulders;
-    if (name.contains(AppLocalizations.of(context)!.bodyPartArms) || name.contains(AppLocalizations.of(context)!.general_カール) || name.contains('arm')) return AppLocalizations.of(context)!.bodyPartArms;
+    if (name.contains(AppLocalizations.of(context)!.bodyPartShoulders) || name.contains(AppLocalizations.of(context)!.general_dd6fcfba) || name.contains('shoulder')) return AppLocalizations.of(context)!.bodyPartShoulders;
+    if (name.contains(AppLocalizations.of(context)!.bodyPartArms) || name.contains(AppLocalizations.of(context)!.general_368577a9) || name.contains('arm')) return AppLocalizations.of(context)!.bodyPartArms;
     return AppLocalizations.of(context)!.bodyPartOther;
   }
 

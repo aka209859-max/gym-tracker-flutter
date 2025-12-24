@@ -300,7 +300,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           const SizedBox(height: 12),
           Text(
-            AppLocalizations.of(context)!.general_頻度に応じた最適なボリュームを提案します,
+            AppLocalizations.of(context)!.general_146fc72d,
             style: TextStyle(
               color: Colors.white.withOpacity(0.7),
               fontSize: 16,
@@ -478,7 +478,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           _buildFeatureCard(
             icon: Icons.fitness_center,
             title: AppLocalizations.of(context)!.workoutRecords,
-            description: AppLocalizations.of(context)!.general_簡単にワークアウトを記録管理,
+            description: AppLocalizations.of(context)!.general_a708f25a,
             delay: 0,
           ),
           SizedBox(height: 16),
@@ -491,7 +491,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           SizedBox(height: 16),
           _buildFeatureCard(
             icon: Icons.emoji_events,
-            title: AppLocalizations.of(context)!.general_目標達成,
+            title: AppLocalizations.of(context)!.general_ed434def,
             description: AppLocalizations.of(context)!.achievementSupport,
             delay: 400,
           ),
@@ -530,7 +530,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     const Icon(Icons.card_giftcard, color: Colors.orange, size: 20),
                     const SizedBox(width: 8),
                     Text(
-                      AppLocalizations.of(context)!.general_紹介コードをお持ちですか,
+                      AppLocalizations.of(context)!.general_81245a16,
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.9),
                         fontSize: 14,
@@ -548,7 +548,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     });
                   },
                   title: Text(
-                    AppLocalizations.of(context)!.general_紹介コードを入力する,
+                    AppLocalizations.of(context)!.general_bef2e703,
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.8),
                       fontSize: 13,

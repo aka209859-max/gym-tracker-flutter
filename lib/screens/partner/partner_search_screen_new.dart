@@ -27,7 +27,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
   // 都道府県リスト
   static const List<String> _prefectures = [
     AppLocalizations.of(context)!.all,
-    AppLocalizations.of(context)!.profile_北海道,
+    AppLocalizations.of(context)!.profile_afa342b7,
     AppLocalizations.of(context)!.prefectureAomori, AppLocalizations.of(context)!.prefectureIwate, AppLocalizations.of(context)!.prefectureMiyagi, AppLocalizations.of(context)!.prefectureAkita, AppLocalizations.of(context)!.prefectureYamagata, AppLocalizations.of(context)!.prefectureFukushima,
     AppLocalizations.of(context)!.prefectureIbaraki, AppLocalizations.of(context)!.prefectureTochigi, AppLocalizations.of(context)!.prefectureGunma, AppLocalizations.of(context)!.prefectureSaitama, AppLocalizations.of(context)!.prefectureChiba, AppLocalizations.of(context)!.prefectureTokyo, AppLocalizations.of(context)!.prefectureKanagawa,
     AppLocalizations.of(context)!.prefectureNiigata, AppLocalizations.of(context)!.prefectureToyama, AppLocalizations.of(context)!.prefectureIshikawa, AppLocalizations.of(context)!.prefectureFukui, AppLocalizations.of(context)!.prefectureYamanashi, AppLocalizations.of(context)!.prefectureNagano,
@@ -50,9 +50,9 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
     AppLocalizations.of(context)!.all,
     AppLocalizations.of(context)!.goalMuscleGain,
     AppLocalizations.of(context)!.goalWeightLoss,
-    AppLocalizations.of(context)!.general_パワー向上,
+    AppLocalizations.of(context)!.general_8fdcc9c5,
     AppLocalizations.of(context)!.goalMaintenance,
-    AppLocalizations.of(context)!.profile_体力向上,
+    AppLocalizations.of(context)!.profile_64b9cf75,
   ];
 
   @override
@@ -114,7 +114,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
             ),
             const SizedBox(height: 8),
             const Text(
-              AppLocalizations.of(context)!.general_Proプラン限定機能です,
+              AppLocalizations.of(context)!.general_9eba2cc5,
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             const SizedBox(height: 32),
@@ -256,7 +256,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
           ),
           const SizedBox(height: 8),
           Text(
-            AppLocalizations.of(context)!.general_居住地経験レベル目標で絞り込めます,
+            AppLocalizations.of(context)!.general_4f03a19c,
             style: TextStyle(fontSize: 14, color: Colors.grey[500]),
           ),
         ],
@@ -314,7 +314,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
                 Icon(Icons.person_search, size: 80, color: Colors.grey[400]),
                 const SizedBox(height: 16),
                 Text(
-                  AppLocalizations.of(context)!.general_該当するパートナーが見つかりませんでした,
+                  AppLocalizations.of(context)!.general_c814cc13,
                   style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                 ),
                 SizedBox(height: 8),

@@ -47,7 +47,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
     AppLocalizations.of(context)!.bodyPartBack: [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, AppLocalizations.of(context)!.exerciseBentOverRow, AppLocalizations.of(context)!.exerciseSeatedRow, AppLocalizations.of(context)!.exercisePullUp],
     AppLocalizations.of(context)!.bodyPartShoulders: [AppLocalizations.of(context)!.exerciseShoulderPress, AppLocalizations.of(context)!.exerciseSideRaise, AppLocalizations.of(context)!.exerciseFrontRaise, AppLocalizations.of(context)!.exerciseRearDeltFly, AppLocalizations.of(context)!.exerciseUprightRow],
     AppLocalizations.of(context)!.bodyPartBiceps: [AppLocalizations.of(context)!.exerciseBarbellCurl, AppLocalizations.of(context)!.exerciseDumbbellCurl, AppLocalizations.of(context)!.exerciseHammerCurl, AppLocalizations.of(context)!.exercisePreacherCurl, AppLocalizations.of(context)!.exerciseCableCurl],
-    AppLocalizations.of(context)!.bodyPartTriceps: [AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseSkullCrusher, AppLocalizations.of(context)!.workout_ケーブルプッシュダウン, AppLocalizations.of(context)!.exerciseDips, AppLocalizations.of(context)!.exerciseKickback],
+    AppLocalizations.of(context)!.bodyPartTriceps: [AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseSkullCrusher, AppLocalizations.of(context)!.workout_22752b72, AppLocalizations.of(context)!.exerciseDips, AppLocalizations.of(context)!.exerciseKickback],
   };
 
   @override
@@ -104,7 +104,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return AppLocalizations.of(context)!.workout_テンプレート名を入力してください;
+                  return AppLocalizations.of(context)!.workout_e4a17e51;
                 }
                 return null;
               },
@@ -116,7 +116,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
             TextFormField(
               controller: _descriptionController,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.workout_説明オプション,
+                labelText: AppLocalizations.of(context)!.workout_51018497,
                 hintText: '例: 胸を集中的に鍛えるメニュー',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -130,7 +130,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
             
             // 部位選択
             const Text(
-              AppLocalizations.of(context)!.workout_主要部位,
+              AppLocalizations.of(context)!.workout_9b2523e6,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
@@ -163,13 +163,13 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  AppLocalizations.of(context)!.workout_種目リスト,
+                  AppLocalizations.of(context)!.workout_6e8a7475,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 TextButton.icon(
                   onPressed: _addExercise,
                   icon: const Icon(Icons.add),
-                  label: Text(AppLocalizations.of(context)!.workout_種目追加),
+                  label: Text(AppLocalizations.of(context)!.workout_c3a95268),
                 ),
               ],
             ),
@@ -187,7 +187,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                     Icon(Icons.fitness_center, size: 48, color: Colors.grey[400]),
                     const SizedBox(height: 8),
                     Text(
-                      AppLocalizations.of(context)!.workout_種目を追加してください,
+                      AppLocalizations.of(context)!.workout_d90b7b6b,
                       style: TextStyle(color: Colors.grey[600]),
                     ),
                   ],
@@ -246,11 +246,11 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                         TextFormField(
                           initialValue: exercise.exerciseName,
                           decoration: InputDecoration(
-                            labelText: AppLocalizations.of(context)!.workout_カスタム種目名,
+                            labelText: AppLocalizations.of(context)!.workout_923d0cbb,
                             border: const OutlineInputBorder(),
                             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                             suffixIcon: IconButton(
-                              icon: Icon(Icons.list, size: 20), tooltip: AppLocalizations.of(context)!.workout_プリセットに戻る,
+                              icon: Icon(Icons.list, size: 20), tooltip: AppLocalizations.of(context)!.workout_16dc7c2c,
                               onPressed: () {
                                 setState(() {
                                   exercise.isCustomExercise = false;
@@ -395,7 +395,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
 
     if (_exercises.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context)!.workout_種目を1つ以上追加してください)),
+        SnackBar(content: Text(AppLocalizations.of(context)!.workout_bf13cb6c)),
       );
       return;
     }
@@ -406,7 +406,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) {
         // 匿名ログイン実装により、この状態には通常到達しない
-        throw Exception(AppLocalizations.of(context)!.workout_認証エラーが発生しました);
+        throw Exception(AppLocalizations.of(context)!.workout_07d18a44);
       }
 
       final template = WorkoutTemplate(
@@ -434,7 +434,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context)!.workout_テンプレートを保存しました)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.workout_dff9ccc1)),
         );
         Navigator.pop(context, true);
       }

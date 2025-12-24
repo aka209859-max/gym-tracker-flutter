@@ -41,7 +41,7 @@ class WeeklyStatsShareImage extends StatelessWidget {
             
             // タイトル
             const Text(
-              AppLocalizations.of(context)!.general_週間トレーニング統計,
+              AppLocalizations.of(context)!.general_5fb75911,
               style: TextStyle(
                 fontSize: 56,
                 fontWeight: FontWeight.bold,
@@ -76,7 +76,7 @@ class WeeklyStatsShareImage extends StatelessWidget {
             
             _buildStatCard(
               icon: Icons.show_chart,
-              label: AppLocalizations.of(context)!.general_総ボリューム,
+              label: AppLocalizations.of(context)!.general_fd707892,
               value: _formatVolume(totalVolume),
               unit: AppLocalizations.of(context)!.kg,
               color: Colors.orange,
@@ -86,7 +86,7 @@ class WeeklyStatsShareImage extends StatelessWidget {
             
             _buildStatCard(
               icon: Icons.grid_on,
-              label: AppLocalizations.of(context)!.general_トレーニング部位,
+              label: AppLocalizations.of(context)!.general_0f8ad912,
               value: '$muscleGroupsCount',
               unit: AppLocalizations.of(context)!.bodyPart,
               color: Colors.green,
@@ -96,7 +96,7 @@ class WeeklyStatsShareImage extends StatelessWidget {
             
             _buildStatCard(
               icon: Icons.trending_up,
-              label: AppLocalizations.of(context)!.general_平均ボリューム回,
+              label: AppLocalizations.of(context)!.general_1f8930f3,
               value: _formatVolume(avgVolumePerWorkout),
               unit: AppLocalizations.of(context)!.kg,
               color: Colors.pink,

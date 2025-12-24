@@ -136,7 +136,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
             const SizedBox(height: 24),
             // コメント入力
             const Text(
-              AppLocalizations.of(context)!.general_コメント任意,
+              AppLocalizations.of(context)!.general_58fd6db3,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
@@ -156,7 +156,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
               child: ElevatedButton(
                 onPressed: _submitReport,
                 child: const Text(
-                  AppLocalizations.of(context)!.general_報告を送信,
+                  AppLocalizations.of(context)!.general_c989a28a,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -362,7 +362,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                 backgroundColor: Colors.orange,
                 padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
               ),
-              child: Text(AppLocalizations.of(context)!.general_ありがとう),
+              child: Text(AppLocalizations.of(context)!.general_6ff30ca2),
             ),
           ],
         ),
@@ -373,7 +373,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
   String _getCrowdLevelText(int level) {
     switch (level) {
       case 1:
-        return AppLocalizations.of(context)!.gym_空いています;
+        return AppLocalizations.of(context)!.gym_e662330d;
       case 2:
         return AppLocalizations.of(context)!.moderatelyEmpty;
       case 3:
@@ -381,7 +381,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
       case 4:
         return AppLocalizations.of(context)!.moderatelyCrowded;
       case 5:
-        return AppLocalizations.of(context)!.gym_超混雑;
+        return AppLocalizations.of(context)!.gym_181af51b;
       default:
         return AppLocalizations.of(context)!.unknown;
     }
@@ -390,15 +390,15 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
   String _getCrowdLevelDescription(int level) {
     switch (level) {
       case 1:
-        return AppLocalizations.of(context)!.general_ほとんど人がいません;
+        return AppLocalizations.of(context)!.general_32d99a79;
       case 2:
-        return AppLocalizations.of(context)!.general_少し人がいますが余裕があります;
+        return AppLocalizations.of(context)!.general_1c845e05;
       case 3:
-        return AppLocalizations.of(context)!.general_適度に人がいます;
+        return AppLocalizations.of(context)!.general_5c408dba;
       case 4:
-        return AppLocalizations.of(context)!.general_かなり混んでいます;
+        return AppLocalizations.of(context)!.general_f1efa2a1;
       case 5:
-        return AppLocalizations.of(context)!.general_非常に混雑しています;
+        return AppLocalizations.of(context)!.general_b37aab80;
       default:
         return '';
     }

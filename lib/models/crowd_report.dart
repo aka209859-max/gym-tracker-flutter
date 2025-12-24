@@ -50,7 +50,7 @@ class CrowdReport {
   String get crowdLevelText {
     switch (crowdLevel) {
       case 1:
-        return AppLocalizations.of(context)!.gym_空いています;
+        return AppLocalizations.of(context)!.gym_e662330d;
       case 2:
         return AppLocalizations.of(context)!.moderatelyEmpty;
       case 3:
@@ -58,7 +58,7 @@ class CrowdReport {
       case 4:
         return AppLocalizations.of(context)!.moderatelyCrowded;
       case 5:
-        return AppLocalizations.of(context)!.gym_超混雑;
+        return AppLocalizations.of(context)!.gym_181af51b;
       default:
         return AppLocalizations.of(context)!.unknown;
     }

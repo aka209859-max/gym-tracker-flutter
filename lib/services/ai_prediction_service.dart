@@ -274,32 +274,32 @@ class AIPredictionService {
     if (level == AppLocalizations.of(context)!.levelBeginner) {
       basis.add({
         'citation': 'ACSM 2009',
-        'finding': AppLocalizations.of(context)!.general_初心者は4ヶ月で約30の筋力向上,
+        'finding': AppLocalizations.of(context)!.general_28b93543,
         'effectSize': 'N/A',
       });
       
       final isUpperBody = bodyPart.contains(AppLocalizations.of(context)!.bodyPartChest) || 
                           bodyPart.contains(AppLocalizations.of(context)!.bodyPartArms) || 
                           bodyPart.contains(AppLocalizations.of(context)!.bodyPartShoulders) || 
-                          bodyPart.contains(AppLocalizations.of(context)!.workout_三角筋);
+                          bodyPart.contains(AppLocalizations.of(context)!.workout_da6d5d22);
       
       if (gender == AppLocalizations.of(context)!.genderFemale && isUpperBody) {
         basis.add({
           'citation': 'Roberts et al. 2020',
-          'finding': AppLocalizations.of(context)!.general_女性の上半身は男性より20高い成長率,
+          'finding': AppLocalizations.of(context)!.general_22c8a84e,
           'effectSize': 'ES=-0.60',
         });
       }
     } else if (level == AppLocalizations.of(context)!.levelIntermediate) {
       basis.add({
         'citation': 'ACSM 2009',
-        'finding': AppLocalizations.of(context)!.general_中級者は4ヶ月で約15の筋力向上,
+        'finding': AppLocalizations.of(context)!.general_1e52e0d5,
         'effectSize': 'N/A',
       });
     } else {
       basis.add({
         'citation': 'Williams et al. 2017',
-        'finding': AppLocalizations.of(context)!.general_DUPが上級者に効果的4ヶ月で約5成長,
+        'finding': AppLocalizations.of(context)!.general_92cbf27f,
         'effectSize': 'ES=0.68',
       });
     }
@@ -307,7 +307,7 @@ class AIPredictionService {
     // 頻度の根拠
     basis.add({
       'citation': 'Grgic et al. 2018',
-      'finding': AppLocalizations.of(context)!.general_ボリュームが成長の鍵頻度は手段,
+      'finding': AppLocalizations.of(context)!.general_8e3d4ad1,
       'effectSize': 'ES=0.88-1.08',
     });
 

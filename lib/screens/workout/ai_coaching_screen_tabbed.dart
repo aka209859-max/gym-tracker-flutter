@@ -167,20 +167,20 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
               children: [
                 _buildGuideItem(
                   icon: Icons.analytics,
-                  title: AppLocalizations.of(context)!.workout_科学的な分析,
-                  description: AppLocalizations.of(context)!.workout_あなたのトレーニングデータを基に疲労度を科学的に分析します,
+                  title: AppLocalizations.of(context)!.workout_8458abfe,
+                  description: AppLocalizations.of(context)!.workout_762fc148,
                 ),
                 const SizedBox(height: 12),
                 _buildGuideItem(
                   icon: Icons.auto_awesome,
-                  title: AppLocalizations.of(context)!.workout_最適な提案,
-                  description: AppLocalizations.of(context)!.workout_回復時間とトレーニングメニューを自動で提案します,
+                  title: AppLocalizations.of(context)!.workout_3f0bb9b4,
+                  description: AppLocalizations.of(context)!.workout_369dbcbd,
                 ),
                 const SizedBox(height: 12),
                 _buildGuideItem(
                   icon: Icons.trending_up,
-                  title: AppLocalizations.of(context)!.workout_成長を加速,
-                  description: AppLocalizations.of(context)!.workout_パフォーマンスを最大化し怪我のリスクを最小化します,
+                  title: AppLocalizations.of(context)!.workout_e3e5061b,
+                  description: AppLocalizations.of(context)!.workout_d373a48f,
                 ),
               ],
             ),
@@ -416,11 +416,11 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
           tabs: [
             Tab(
               icon: Icon(Icons.fitness_center),
-              text: AppLocalizations.of(context)!.workout_メニュー提案,
+              text: AppLocalizations.of(context)!.workout_0185a259,
             ),
             Tab(
               icon: Icon(Icons.timeline),
-              text: AppLocalizations.of(context)!.workout_成長予測,
+              text: AppLocalizations.of(context)!.workout_fec3bf19,
             ),
             Tab(
               icon: Icon(Icons.analytics),
@@ -495,7 +495,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       'bodyPartLegs': false,
       'bodyPartShoulders': false,
       'bodyPartArms': false,
-      AppLocalizations.of(context)!.bodyPart_腹筋: false,
+      AppLocalizations.of(context)!.bodyPart_ceb49fa1: false,
       'exerciseCardio': false,
     };
     _loadHistory();
@@ -665,7 +665,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
             ),
             const SizedBox(height: 12),
             const Text(
-              AppLocalizations.of(context)!.workout_トレーニングしたい部位を選択するとAIが最適なメニューを提案します,
+              AppLocalizations.of(context)!.workout_17f59b6a,
               style: TextStyle(fontSize: 14),
             ),
           ],
@@ -680,7 +680,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          AppLocalizations.of(context)!.workout_トレーニングレベル,
+          AppLocalizations.of(context)!.workout_2dc1ee52,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -751,7 +751,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          AppLocalizations.of(context)!.workout_トレーニング部位を選択,
+          AppLocalizations.of(context)!.workout_478bc20c,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -844,7 +844,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  AppLocalizations.of(context)!.workout_提案されたメニュー,
+                  AppLocalizations.of(context)!.workout_ba5c8bd5,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -873,8 +873,8 @@ class _AIMenuTabState extends State<_AIMenuTab>
                       ),
                       label: Text(
                         _selectedExerciseIndices.length == _parsedExercises.length
-                            ? AppLocalizations.of(context)!.workout_全解除
-                            : AppLocalizations.of(context)!.workout_全選択,
+                            ? AppLocalizations.of(context)!.workout_69593f57
+                            : AppLocalizations.of(context)!.workout_219e609f,
                         style: const TextStyle(fontSize: 12),
                       ),
                     ),
@@ -1106,7 +1106,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       return Colors.deepPurple.shade400;
     } else if (bodyPart == AppLocalizations.of(context)!.bodyPartArms) { // 後方互換性
       return Colors.purple.shade300;
-    } else if (bodyPart == AppLocalizations.of(context)!.bodyPart_腹筋) {
+    } else if (bodyPart == AppLocalizations.of(context)!.bodyPart_ceb49fa1) {
       return Colors.teal.shade400;
     } else {
       return Colors.grey.shade400;
@@ -1163,7 +1163,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          AppLocalizations.of(context)!.workout_過去の提案,
+          AppLocalizations.of(context)!.workout_5fcb26ba,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -1177,7 +1177,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
             child: Padding(
               padding: EdgeInsets.all(24),
               child: Center(
-                child: Text(AppLocalizations.of(context)!.workout_まだ履歴がありません),
+                child: Text(AppLocalizations.of(context)!.workout_355e6980),
               ),
             ),
           )
@@ -1330,7 +1330,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
               if (mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text(AppLocalizations.of(context)!.workout_広告の読み込みに失敗しましたしばらくしてからお試しください),
+                    content: Text(AppLocalizations.of(context)!.workout_9d662a8d),
                     backgroundColor: Colors.red,
                   ),
                 );
@@ -1345,14 +1345,14 @@ class _AIMenuTabState extends State<_AIMenuTab>
         } else {
           // 今月の広告視聴上限に達している
           if (mounted) {
-            await _showUpgradeDialog(AppLocalizations.of(context)!.workout_今月の無料AI利用回数を使い切りました);
+            await _showUpgradeDialog(AppLocalizations.of(context)!.workout_2ee7735b);
           }
           return;
         }
       } else {
         // 有料プランで月次上限に達している
         if (mounted) {
-          await _showUpgradeDialog(AppLocalizations.of(context)!.workout_今月のAI利用回数を使い切りました);
+          await _showUpgradeDialog(AppLocalizations.of(context)!.workout_1b17a3c8);
         }
         return;
       }
@@ -1465,25 +1465,25 @@ class _AIMenuTabState extends State<_AIMenuTab>
       AppLocalizations.of(context)!.bodyPartChest: AppLocalizations.of(context)!.bodyPartChest,
       AppLocalizations.of(context)!.musclePecs: AppLocalizations.of(context)!.bodyPartChest,
       AppLocalizations.of(context)!.bodyPartBack: AppLocalizations.of(context)!.bodyPartBack,
-      AppLocalizations.of(context)!.workout_広背筋: AppLocalizations.of(context)!.bodyPartBack,
-      AppLocalizations.of(context)!.workout_僧帽筋: AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.workout_0f45a131: AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.workout_b06bf71b: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.bodyPartLegs: AppLocalizations.of(context)!.bodyPartLegs,
-      AppLocalizations.of(context)!.workout_大腿: AppLocalizations.of(context)!.bodyPartLegs,
-      AppLocalizations.of(context)!.workout_下半身: AppLocalizations.of(context)!.bodyPartLegs,
+      AppLocalizations.of(context)!.workout_0c28e8be: AppLocalizations.of(context)!.bodyPartLegs,
+      AppLocalizations.of(context)!.workout_10073d2e: AppLocalizations.of(context)!.bodyPartLegs,
       AppLocalizations.of(context)!.bodyPartShoulders: AppLocalizations.of(context)!.bodyPartShoulders,
-      AppLocalizations.of(context)!.workout_三角筋: AppLocalizations.of(context)!.bodyPartShoulders,
+      AppLocalizations.of(context)!.workout_da6d5d22: AppLocalizations.of(context)!.bodyPartShoulders,
       AppLocalizations.of(context)!.bodyPartBiceps: AppLocalizations.of(context)!.bodyPartBiceps,
-      AppLocalizations.of(context)!.bodyPart_上腕二頭筋: AppLocalizations.of(context)!.bodyPartBiceps,
+      AppLocalizations.of(context)!.bodyPart_8efece65: AppLocalizations.of(context)!.bodyPartBiceps,
       AppLocalizations.of(context)!.bodyPartTriceps: AppLocalizations.of(context)!.bodyPartTriceps,
-      AppLocalizations.of(context)!.bodyPart_上腕三頭筋: AppLocalizations.of(context)!.bodyPartTriceps,
+      AppLocalizations.of(context)!.bodyPart_c158cb15: AppLocalizations.of(context)!.bodyPartTriceps,
       AppLocalizations.of(context)!.bodyPartArms: AppLocalizations.of(context)!.bodyPartArms, // 後方互換性のため残す
-      AppLocalizations.of(context)!.bodyPart_上腕: AppLocalizations.of(context)!.bodyPartArms,
-      AppLocalizations.of(context)!.bodyPart_腹筋: AppLocalizations.of(context)!.bodyPart_腹筋,
-      AppLocalizations.of(context)!.bodyPartAbs: AppLocalizations.of(context)!.bodyPart_腹筋,
-      AppLocalizations.of(context)!.workout_コア: AppLocalizations.of(context)!.bodyPart_腹筋,
+      AppLocalizations.of(context)!.bodyPart_cc7dbde9: AppLocalizations.of(context)!.bodyPartArms,
+      AppLocalizations.of(context)!.bodyPart_ceb49fa1: AppLocalizations.of(context)!.bodyPart_ceb49fa1,
+      AppLocalizations.of(context)!.bodyPartAbs: AppLocalizations.of(context)!.bodyPart_ceb49fa1,
+      AppLocalizations.of(context)!.workout_3347b366: AppLocalizations.of(context)!.bodyPart_ceb49fa1,
       AppLocalizations.of(context)!.exerciseCardio: AppLocalizations.of(context)!.exerciseCardio, // 🔧 v1.0.226: 有酸素運動対応
-      AppLocalizations.of(context)!.workout_カーディオ: AppLocalizations.of(context)!.exerciseCardio,
-      AppLocalizations.of(context)!.workout_心肺: AppLocalizations.of(context)!.exerciseCardio,
+      AppLocalizations.of(context)!.workout_5cd69285: AppLocalizations.of(context)!.exerciseCardio,
+      AppLocalizations.of(context)!.workout_ad5c696a: AppLocalizations.of(context)!.exerciseCardio,
     };
     
     debugPrint('🔍 パーサー開始: 全${lines.length}行を処理');
@@ -1637,7 +1637,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
         if (setsMatch != null) currentSets = int.tryParse(setsMatch.group(1)!);
       } else if (currentExerciseName.isNotEmpty) {
         // 種目の説明や詳細情報
-        if (line.startsWith(AppLocalizations.of(context)!.workout_説明_1) || line.startsWith(AppLocalizations.of(context)!.workout_説明)) {
+        if (line.startsWith(AppLocalizations.of(context)!.workout_f517d9ec) || line.startsWith(AppLocalizations.of(context)!.workout_5071705c)) {
           currentDescription = line.replaceFirst(RegExp(r'説明[:：]\s*'), '');
         } else if (!line.startsWith('■') && !line.startsWith('【') && !line.startsWith('##') && !line.startsWith('#')) {
           // 🔧 v1.0.224: *や・、•で始まる行、または通常の行から重量・回数・セット情報を抽出
@@ -1659,7 +1659,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
           final repsPattern = RegExp(r'回数[:：]?\s*(\d+)\s*(?:回|reps?)?');
           final setsPattern = RegExp(r'セット数[:：]?\s*(\d+)\s*(?:セット|sets?)?');
           
-          // パターン2: 単純な "XXkg", AppLocalizations.of(context)!.workout_XX回, AppLocalizations.of(context)!.workout_XXセット
+          // パターン2: 単純な "XXkg", AppLocalizations.of(context)!.workout_b47211da, AppLocalizations.of(context)!.workout_fa854190
           final weightPattern2 = RegExp(r'(\d+(?:\.\d+)?)\s*(?:-\d+(?:\.\d+)?)?\s*kg');
           final repsPattern2 = RegExp(r'(\d+)\s*回');
           final setsPattern2 = RegExp(r'(\d+)\s*セット');
@@ -1703,10 +1703,10 @@ class _AIMenuTabState extends State<_AIMenuTab>
           // 🔧 v1.0.226: 休憩時間、ポイントなどの無関係な行をスキップ
           final isIgnoredLine = cleanLine.contains(AppLocalizations.of(context)!.restTime) || 
                                cleanLine.contains(AppLocalizations.of(context)!.points) ||
-                               cleanLine.contains(AppLocalizations.of(context)!.workout_フォームのポイント) ||
-                               cleanLine.contains(AppLocalizations.of(context)!.workout_説明_2) ||
-                               cleanLine.contains(AppLocalizations.of(context)!.workout_高度なテクニック) ||
-                               cleanLine.contains(AppLocalizations.of(context)!.workout_テクニックのポイント);
+                               cleanLine.contains(AppLocalizations.of(context)!.workout_f87ab689) ||
+                               cleanLine.contains(AppLocalizations.of(context)!.workout_1acc9df7) ||
+                               cleanLine.contains(AppLocalizations.of(context)!.workout_695ead36) ||
+                               cleanLine.contains(AppLocalizations.of(context)!.workout_ad1f2968);
           
           // 説明の続き（重量・回数・セット情報がない場合、かつ無視すべき行ではない場合）
           if (!isIgnoredLine && currentDescription.isNotEmpty && weightMatch == null && repsMatch == null && timeMatch == null && setsMatch == null) {
@@ -1912,14 +1912,14 @@ class _AIMenuTabState extends State<_AIMenuTab>
       case 'ko':
         return '한국어로 자세한 설명을 제공하세요';
       case 'zh':
-        return AppLocalizations.of(context)!.workout_请用简体中文提供详细说明;
+        return AppLocalizations.of(context)!.workout_df5c2fc5;
       case 'zh_TW':
-        return AppLocalizations.of(context)!.workout_請用繁體中文提供詳細說明;
+        return AppLocalizations.of(context)!.workout_837b9b2e;
       case 'de':
         return 'Bitte geben Sie detaillierte Erklärungen auf Deutsch';
       case 'ja':
       default:
-        return AppLocalizations.of(context)!.workout_日本語で丁寧に説明;
+        return AppLocalizations.of(context)!.workout_7f865f4b;
     }
   }
 
@@ -2152,7 +2152,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
           children: [
             Icon(Icons.play_circle_outline, color: Colors.blue, size: 28),
             SizedBox(width: 12),
-            Text(AppLocalizations.of(context)!.workout_動画でAI機能解放),
+            Text(AppLocalizations.of(context)!.workout_80a340fe),
           ],
         ),
         content: Column(
@@ -2160,7 +2160,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              AppLocalizations.of(context)!.workout_無料プランでは動画広告を視聴することでAI機能を1回利用できます,
+              AppLocalizations.of(context)!.workout_27e98563,
               style: TextStyle(fontSize: 14, height: 1.6),
             ),
             const SizedBox(height: 16),
@@ -2178,7 +2178,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
                       Icon(Icons.check_circle, color: Colors.green, size: 20),
                       SizedBox(width: 8),
                       Text(
-                        AppLocalizations.of(context)!.workout_月3回まで動画視聴でAI利用可能,
+                        AppLocalizations.of(context)!.workout_21745d7a,
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
@@ -2200,7 +2200,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
             icon: const Icon(Icons.play_arrow),
-            label: Text(AppLocalizations.of(context)!.workout_動画を視聴),
+            label: Text(AppLocalizations.of(context)!.workout_d489aa48),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade700,
               foregroundColor: Colors.white,
@@ -2353,7 +2353,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(AppLocalizations.of(context)!.workout_メニューを保存しました),
+            content: Text(AppLocalizations.of(context)!.workout_b7932eef),
             backgroundColor: Colors.green,
           ),
         );
@@ -2422,7 +2422,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     _selectedBodyPart = l10n.musclePecs;
     _levels = [l10n.levelBeginner, l10n.levelIntermediate, l10n.levelAdvanced];
     _genders = [l10n.genderMale, l10n.genderFemale];
-    _bodyParts = [l10n.musclePecs, AppLocalizations.of(context)!.bodyPart_上腕二頭筋, AppLocalizations.of(context)!.workout_大腿四頭筋, AppLocalizations.of(context)!.workout_三角筋, AppLocalizations.of(context)!.workout_広背筋];
+    _bodyParts = [l10n.musclePecs, AppLocalizations.of(context)!.bodyPart_8efece65, AppLocalizations.of(context)!.workout_0c5ee6c6, AppLocalizations.of(context)!.workout_da6d5d22, AppLocalizations.of(context)!.workout_0f45a131];
     
     _loadUserData(); // 🆕 Phase 7: 年齢・体重を自動取得
   }
@@ -2644,7 +2644,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               if (mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text(AppLocalizations.of(context)!.workout_広告の読み込みに失敗しましたしばらくしてからお試しください),
+                    content: Text(AppLocalizations.of(context)!.workout_9d662a8d),
                     backgroundColor: Colors.red,
                   ),
                 );
@@ -2659,14 +2659,14 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         } else {
           // 今月の広告視聴上限に達している
           if (mounted) {
-            await _showUpgradeDialog(AppLocalizations.of(context)!.workout_今月の無料AI利用回数を使い切りました);
+            await _showUpgradeDialog(AppLocalizations.of(context)!.workout_2ee7735b);
           }
           return;
         }
       } else {
         // 有料プランで月次上限に達している
         if (mounted) {
-          await _showUpgradeDialog(AppLocalizations.of(context)!.workout_今月のAI利用回数を使い切りました);
+          await _showUpgradeDialog(AppLocalizations.of(context)!.workout_1b17a3c8);
         }
         return;
       }
@@ -2696,7 +2696,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     if (oneRM == null || oneRM <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(AppLocalizations.of(context)!.workout_有効な1RMを入力してください),
+          content: Text(AppLocalizations.of(context)!.workout_199dd9c4),
           backgroundColor: Colors.red,
         ),
       );
@@ -2705,7 +2705,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     if (_userAge == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(AppLocalizations.of(context)!.workout_年齢が未設定です個人要因設定で年齢を登録してください),
+          content: Text(AppLocalizations.of(context)!.workout_b257cb17),
           backgroundColor: Colors.orange,
         ),
       );
@@ -2714,7 +2714,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     if (_latestBodyWeight == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(AppLocalizations.of(context)!.workout_体重が記録されていません体重を記録してください),
+          content: Text(AppLocalizations.of(context)!.workout_2375b9ab),
           backgroundColor: Colors.orange,
         ),
       );
@@ -2900,7 +2900,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
 
             // トレーニングレベル
             _buildDropdownField(
-              label: AppLocalizations.of(context)!.workout_トレーニングレベル,
+              label: AppLocalizations.of(context)!.workout_2dc1ee52,
               value: _selectedLevel,
               items: _levels,
               onChanged: (value) {
@@ -3265,7 +3265,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     Icon(Icons.show_chart, color: Colors.blue.shade700),
                     const SizedBox(width: 8),
                     const Text(
-                      AppLocalizations.of(context)!.general_成長率,
+                      AppLocalizations.of(context)!.general_f388c562,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -3362,7 +3362,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           children: [
             Icon(Icons.play_circle_outline, color: Colors.blue, size: 28),
             SizedBox(width: 12),
-            Text(AppLocalizations.of(context)!.workout_動画でAI機能解放),
+            Text(AppLocalizations.of(context)!.workout_80a340fe),
           ],
         ),
         content: Column(
@@ -3370,7 +3370,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              AppLocalizations.of(context)!.workout_無料プランでは動画広告を視聴することでAI機能を1回利用できます,
+              AppLocalizations.of(context)!.workout_27e98563,
               style: TextStyle(fontSize: 14, height: 1.6),
             ),
             const SizedBox(height: 16),
@@ -3388,7 +3388,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                       Icon(Icons.check_circle, color: Colors.green, size: 20),
                       SizedBox(width: 8),
                       Text(
-                        AppLocalizations.of(context)!.workout_月3回まで動画視聴でAI利用可能,
+                        AppLocalizations.of(context)!.workout_21745d7a,
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
@@ -3410,7 +3410,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
             icon: const Icon(Icons.play_arrow),
-            label: Text(AppLocalizations.of(context)!.workout_動画を視聴),
+            label: Text(AppLocalizations.of(context)!.workout_d489aa48),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade700,
               foregroundColor: Colors.white,
@@ -3673,7 +3673,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             icon: Icons.calendar_today,
             label: AppLocalizations.of(context)!.age,
             value: '$_userAge歳',
-            actionLabel: AppLocalizations.of(context)!.workout_変更,
+            actionLabel: AppLocalizations.of(context)!.workout_5c7bbafb,
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
@@ -3996,21 +3996,21 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
       // 部位選択肢
       _bodyParts = [
         l10n.musclePecs,
-        AppLocalizations.of(context)!.workout_広背筋,
-        AppLocalizations.of(context)!.workout_大腿四頭筋,
-        AppLocalizations.of(context)!.bodyPart_上腕二頭筋,
-        AppLocalizations.of(context)!.bodyPart_上腕三頭筋,
-        AppLocalizations.of(context)!.workout_三角筋,
+        AppLocalizations.of(context)!.workout_0f45a131,
+        AppLocalizations.of(context)!.workout_0c5ee6c6,
+        AppLocalizations.of(context)!.bodyPart_8efece65,
+        AppLocalizations.of(context)!.bodyPart_c158cb15,
+        AppLocalizations.of(context)!.workout_da6d5d22,
       ];
 
       // 種目選択肢（部位ごと）
       _exercisesByBodyPart = {
-        l10n.musclePecs: [l10n.exerciseBenchPress, AppLocalizations.of(context)!.exercise_インクラインベンチプレス, AppLocalizations.of(context)!.workout_ダンベルフライ, l10n.exerciseDips],
-        AppLocalizations.of(context)!.workout_広背筋: [l10n.exerciseDeadlift, l10n.exerciseLatPulldown, l10n.exerciseBentOverRow, l10n.exerciseChinUp],
-        AppLocalizations.of(context)!.workout_大腿四頭筋: [l10n.exerciseSquat, l10n.exerciseLegPress, l10n.exerciseLegExtension, AppLocalizations.of(context)!.workout_ランジ],
-        AppLocalizations.of(context)!.bodyPart_上腕二頭筋: [l10n.exerciseBarbellCurl, l10n.exerciseDumbbellCurl, l10n.exerciseHammerCurl, AppLocalizations.of(context)!.workout_プリーチャーカール],
-        AppLocalizations.of(context)!.bodyPart_上腕三頭筋: [AppLocalizations.of(context)!.exercise_トライセプスプレスダウン, AppLocalizations.of(context)!.workout_ライイングトライセプスエクステンション, l10n.exerciseDips, AppLocalizations.of(context)!.exercise_クローズグリップベンチプレス],
-        AppLocalizations.of(context)!.workout_三角筋: [l10n.exerciseShoulderPress, l10n.exerciseSideRaise, l10n.exerciseFrontRaise, AppLocalizations.of(context)!.workout_リアレイズ],
+        l10n.musclePecs: [l10n.exerciseBenchPress, AppLocalizations.of(context)!.exercise_fbfc037a, AppLocalizations.of(context)!.workout_e85fb0a4, l10n.exerciseDips],
+        AppLocalizations.of(context)!.workout_0f45a131: [l10n.exerciseDeadlift, l10n.exerciseLatPulldown, l10n.exerciseBentOverRow, l10n.exerciseChinUp],
+        AppLocalizations.of(context)!.workout_0c5ee6c6: [l10n.exerciseSquat, l10n.exerciseLegPress, l10n.exerciseLegExtension, AppLocalizations.of(context)!.workout_a19f4e60],
+        AppLocalizations.of(context)!.bodyPart_8efece65: [l10n.exerciseBarbellCurl, l10n.exerciseDumbbellCurl, l10n.exerciseHammerCurl, AppLocalizations.of(context)!.workout_d7e8733c],
+        AppLocalizations.of(context)!.bodyPart_c158cb15: [AppLocalizations.of(context)!.exercise_636fb74f, AppLocalizations.of(context)!.workout_41ae2e59, l10n.exerciseDips, AppLocalizations.of(context)!.exercise_a60f616c],
+        AppLocalizations.of(context)!.workout_da6d5d22: [l10n.exerciseShoulderPress, l10n.exerciseSideRaise, l10n.exerciseFrontRaise, AppLocalizations.of(context)!.workout_61db805d],
       };
       
       _isInitialized = true;
@@ -4083,7 +4083,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               if (mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text(AppLocalizations.of(context)!.workout_広告の読み込みに失敗しましたしばらくしてからお試しください),
+                    content: Text(AppLocalizations.of(context)!.workout_9d662a8d),
                     backgroundColor: Colors.red,
                   ),
                 );
@@ -4098,14 +4098,14 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         } else {
           // 今月の広告視聴上限に達している
           if (mounted) {
-            await _showUpgradeDialog(AppLocalizations.of(context)!.workout_今月の無料AI利用回数を使い切りました);
+            await _showUpgradeDialog(AppLocalizations.of(context)!.workout_2ee7735b);
           }
           return;
         }
       } else {
         // 有料プランで月次上限に達している
         if (mounted) {
-          await _showUpgradeDialog(AppLocalizations.of(context)!.workout_今月のAI利用回数を使い切りました);
+          await _showUpgradeDialog(AppLocalizations.of(context)!.workout_1b17a3c8);
         }
         return;
       }
@@ -4127,7 +4127,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
       if (_userAge == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(AppLocalizations.of(context)!.workout_年齢が未設定です個人要因設定で年齢を登録してください),
+            content: Text(AppLocalizations.of(context)!.workout_b257cb17),
             backgroundColor: Colors.orange,
           ),
         );
@@ -4499,7 +4499,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
 
             // トレーニングレベル
             _buildDropdownField(
-              label: AppLocalizations.of(context)!.workout_トレーニングレベル,
+              label: AppLocalizations.of(context)!.workout_2dc1ee52,
               value: _selectedLevel,
               items: _levels,
               onChanged: (value) {
@@ -4588,7 +4588,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 context,
                 MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
               ).then((_) => _loadUserAge()),
-              child: Text(AppLocalizations.of(context)!.workout_変更),
+              child: Text(AppLocalizations.of(context)!.workout_5c7bbafb),
             ),
           ],
         ),
@@ -5221,7 +5221,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           children: [
             Icon(Icons.play_circle_outline, color: Colors.blue, size: 28),
             SizedBox(width: 12),
-            Text(AppLocalizations.of(context)!.workout_動画でAI機能解放),
+            Text(AppLocalizations.of(context)!.workout_80a340fe),
           ],
         ),
         content: Column(
@@ -5229,7 +5229,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              AppLocalizations.of(context)!.workout_無料プランでは動画広告を視聴することでAI機能を1回利用できます,
+              AppLocalizations.of(context)!.workout_27e98563,
               style: TextStyle(fontSize: 14, height: 1.6),
             ),
             const SizedBox(height: 16),
@@ -5247,7 +5247,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                       Icon(Icons.check_circle, color: Colors.green, size: 20),
                       SizedBox(width: 8),
                       Text(
-                        AppLocalizations.of(context)!.workout_月3回まで動画視聴でAI利用可能,
+                        AppLocalizations.of(context)!.workout_21745d7a,
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
@@ -5269,7 +5269,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
             icon: const Icon(Icons.play_arrow),
-            label: Text(AppLocalizations.of(context)!.workout_動画を視聴),
+            label: Text(AppLocalizations.of(context)!.workout_d489aa48),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade700,
               foregroundColor: Colors.white,

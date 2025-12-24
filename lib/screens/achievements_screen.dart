@@ -96,7 +96,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.general_達成バッジ),
+        title: Text(AppLocalizations.of(context)!.general_472edfec),
         bottom: TabBar(
           controller: _tabController,
           labelColor: Colors.white,
@@ -104,7 +104,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
           indicatorColor: Colors.white,
           tabs: [
             Tab(text: AppLocalizations.of(context)!.all),
-            Tab(text: AppLocalizations.of(context)!.general_継続),
+            Tab(text: AppLocalizations.of(context)!.general_3fa16d02),
             Tab(text: AppLocalizations.of(context)!.totalWeight),
             Tab(text: 'PR'),
           ],
@@ -157,19 +157,19 @@ class _AchievementsScreenState extends State<AchievementsScreen>
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _buildStatItem(
-                AppLocalizations.of(context)!.general_解除済み,
+                AppLocalizations.of(context)!.general_68f06584,
                 '${_stats['unlocked']}',
                 Icons.emoji_events,
                 Colors.white,
               ),
               _buildStatItem(
-                AppLocalizations.of(context)!.general_未解除,
+                AppLocalizations.of(context)!.general_e05cb021,
                 '${_stats['locked']}',
                 Icons.lock_outline,
                 Colors.white70,
               ),
               _buildStatItem(
-                AppLocalizations.of(context)!.general_達成率,
+                AppLocalizations.of(context)!.general_7810caaf,
                 '$unlockedPercent%',
                 Icons.insights,
                 Colors.white,
@@ -226,7 +226,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
   Widget _buildBadgeList(List<Achievement> badges, ThemeData theme) {
     if (badges.isEmpty) {
       return const Center(
-        child: Text(AppLocalizations.of(context)!.general_バッジがありません),
+        child: Text(AppLocalizations.of(context)!.general_398db801),
       );
     }
 
@@ -417,9 +417,9 @@ class _AchievementsScreenState extends State<AchievementsScreen>
   String _getCategoryLabel(BadgeCategory category) {
     switch (category) {
       case BadgeCategory.streak:
-        return AppLocalizations.of(context)!.general_継続;
+        return AppLocalizations.of(context)!.general_3fa16d02;
       case BadgeCategory.totalWeight:
-        return AppLocalizations.of(context)!.general_累計;
+        return AppLocalizations.of(context)!.general_dc78fd37;
       case BadgeCategory.prCount:
         return 'PR';
     }

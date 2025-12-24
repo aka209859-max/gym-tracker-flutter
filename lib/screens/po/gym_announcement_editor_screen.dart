@@ -96,7 +96,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(AppLocalizations.of(context)!.gym_画像をアップロードしました),
+            content: Text(AppLocalizations.of(context)!.gym_6604883b),
             backgroundColor: Colors.green,
           ),
         );
@@ -178,7 +178,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.announcement == null ? AppLocalizations.of(context)!.gym_お知らせ投稿 : AppLocalizations.of(context)!.edit),
+        title: Text(widget.announcement == null ? AppLocalizations.of(context)!.gym_afa40a0c : AppLocalizations.of(context)!.edit),
         actions: [
           TextButton.icon(
             onPressed: _isSaving ? null : _saveAnnouncement,
@@ -205,7 +205,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
             children: [
               // お知らせタイプ選択
               const Text(
-                AppLocalizations.of(context)!.gym_お知らせタイプ,
+                AppLocalizations.of(context)!.gym_0dfe6c91,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -234,13 +234,13 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
               TextFormField(
                 controller: _titleController,
                 decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)!.gym_タイトル,
+                  labelText: AppLocalizations.of(context)!.gym_37f10bb4,
                   hintText: '例: 春の入会キャンペーン開催中',
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return AppLocalizations.of(context)!.gym_タイトルを入力してください;
+                    return AppLocalizations.of(context)!.gym_0be017ad;
                   }
                   return null;
                 },
@@ -251,14 +251,14 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
               TextFormField(
                 controller: _contentController,
                 decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)!.gym_本文,
-                  hintText: AppLocalizations.of(context)!.gym_お知らせの詳細を入力してください,
+                  labelText: AppLocalizations.of(context)!.gym_0edea1b7,
+                  hintText: AppLocalizations.of(context)!.gym_b23cb9bd,
                   border: OutlineInputBorder(),
                 ),
                 maxLines: 5,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return AppLocalizations.of(context)!.gym_本文を入力してください;
+                    return AppLocalizations.of(context)!.gym_524e1d73;
                   }
                   return null;
                 },
@@ -273,7 +273,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                     TextFormField(
                       controller: _couponCodeController,
                       decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.gym_クーポンコード任意,
+                        labelText: AppLocalizations.of(context)!.gym_7ce11d8a,
                         hintText: '例: SPRING2024',
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.local_offer),
@@ -285,7 +285,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
               
               // 画像アップロード
               const Text(
-                AppLocalizations.of(context)!.gym_お知らせ画像,
+                AppLocalizations.of(context)!.gym_b26e7c38,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -363,7 +363,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                 icon: const Icon(Icons.calendar_today),
                 label: Text(
                   _validUntil == null
-                      ? AppLocalizations.of(context)!.gym_期限なし
+                      ? AppLocalizations.of(context)!.gym_5d1d7a5c
                       : '${_validUntil!.year}/${_validUntil!.month}/${_validUntil!.day}',
                 ),
                 style: OutlinedButton.styleFrom(
@@ -378,7 +378,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                     });
                   },
                   icon: const Icon(Icons.clear),
-                  label: Text(AppLocalizations.of(context)!.gym_期限をクリア),
+                  label: Text(AppLocalizations.of(context)!.gym_4f509a03),
                 ),
             ],
           ),
