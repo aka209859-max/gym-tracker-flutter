@@ -3353,14 +3353,11 @@
   "autoGen_6f7f8448": "• El número que se muestra es para un lado (adjunto a ambos lados)",
   "autoGen_6ece374b": "¿Quieres eliminar &quot;$exerciseName&quot;?",
   "autoGen_758d777e": "&quot;$exerciseName&quot; ha sido eliminado (${remainingExerciseNames} ejercicios restantes)",
-  "autoGen_08aedbf7": "&quot;$exerciseName&quot; ha sido eliminado (quedan ${exercises.length} ejercicios)",
   "autoGen_08b72f35": "   Fecha: $date",
   "autoGen_62a594cf": "   Grupo muscular: $muscleGroup",
   "autoGen_fd2964d7": "   Conjuntos totales: $totalSets",
   "autoGen_74f074ea": "   Minutos aeróbicos: $totalMinutes",
   "autoGen_b714e319": "📋 Pasando datos de plantilla: $templateData",
-  "autoGen_51ce78c9": "¿Quieres eliminar &quot;${template.name}&quot;?",
   "autoGen_8a87562e": "Generado automáticamente todos los lunes (en modo de demostración, se requieren datos manuales ya que la función Cloud no está implementada)",
-  "autoGen_4360465c": "📱 [WorkoutLogScreen] Usuario actual: ${user?.uid ?? ",
   "autoGen_15000674": "   Intentos $retryCount/$maxRetries..."
 }

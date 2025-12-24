@@ -3353,14 +3353,11 @@
   "autoGen_6f7f8448": "• 显示的数字是单面（两侧均有贴合）的数量。",
   "autoGen_6ece374b": "您要删除“$exerciseName”吗？",
   "autoGen_758d777e": "“$exerciseName” 已被删除（还剩下{remainingExerciseNames} 个练习）",
-  "autoGen_08aedbf7": "“$exerciseName” 已被删除（剩余{exercises.length} 个练习）",
   "autoGen_08b72f35": "   日期：$date",
   "autoGen_62a594cf": "   肌肉群：$muscleGroup",
   "autoGen_fd2964d7": "   总集合数：$totalSets",
   "autoGen_74f074ea": "   有氧运动时间：$totalMinutes",
   "autoGen_b714e319": "📋 传递模板数据：$templateData",
-  "autoGen_51ce78c9": "您要删除“${template.name}”吗？",
   "autoGen_8a87562e": "每周一自动生成（演示模式下，由于尚未实现云函数，因此需要手动输入数据）",
-  "autoGen_4360465c": "📱 [WorkoutLogScreen] 当前用户：${user?.uid ?? ",
   "autoGen_15000674": "   尝试次数 $retryCount/$maxRetries..."
 }

@@ -3353,14 +3353,11 @@
   "autoGen_6f7f8448": "• 顯示的數字是單面（兩邊均有貼合）的數量。",
   "autoGen_6ece374b": "您要刪除“$exerciseName”嗎？",
   "autoGen_758d777e": "「$exerciseName」 已被刪除（剩下{remainingExerciseNames} 個練習）",
-  "autoGen_08aedbf7": "「$exerciseName」 已被刪除（剩餘{exercises.length} 個練習）",
   "autoGen_08b72f35": "   日期：$date",
   "autoGen_62a594cf": "   肌肉群：$muscleGroup",
   "autoGen_fd2964d7": "   總集合數：$totalSets",
   "autoGen_74f074ea": "   有氧運動時間：$totalMinutes",
   "autoGen_b714e319": "📋 傳遞模板資料：$templateData",
-  "autoGen_51ce78c9": "您要刪除“${template.name}”嗎？",
   "autoGen_8a87562e": "每週一自動產生（演示模式下，由於尚未實現雲端函數，因此需要手動輸入資料）",
-  "autoGen_4360465c": "📱 [WorkoutLogScreen] 目前使用者：${user?.uid ?? ",
   "autoGen_15000674": "   嘗試次數 $retryCount/$maxRetries..."
 }

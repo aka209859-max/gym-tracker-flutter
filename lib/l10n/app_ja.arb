@@ -3783,14 +3783,11 @@
   "autoGen_6f7f8448": "• 表示されるのは片側の枚数です（両側に装着）",
   "autoGen_6ece374b": "「$exerciseName」を削除しますか？",
   "autoGen_758d777e": "「$exerciseName」を削除しました（残り${remainingExerciseNames}種目）",
-  "autoGen_08aedbf7": "「$exerciseName」を削除しました（残り${exercises.length}種目）",
   "autoGen_08b72f35": "   日付: $date",
   "autoGen_62a594cf": "   筋肉グループ: $muscleGroup",
   "autoGen_fd2964d7": "   総セット数: $totalSets",
   "autoGen_74f074ea": "   有酸素時間: $totalMinutes分",
   "autoGen_b714e319": "📋 テンプレートデータを渡す: $templateData",
-  "autoGen_51ce78c9": "「${template.name}」を削除しますか？",
   "autoGen_8a87562e": "毎週月曜日に自動生成されます\\n（デモモードではCloud Function未実装のため手動データが必要です）",
-  "autoGen_4360465c": "📱 [WorkoutLogScreen] 現在のユーザー: ${user?.uid ?? ",
   "autoGen_15000674": "   試行 $retryCount/$maxRetries..."
 }

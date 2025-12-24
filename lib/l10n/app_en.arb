@@ -3325,14 +3325,11 @@
   "autoGen_6f7f8448": "• The number displayed is for one side (attached to both sides)",
   "autoGen_6ece374b": "Do you want to delete &quot;$exerciseName&quot;?",
   "autoGen_758d777e": "&quot;$exerciseName&quot; has been deleted (${remainingExerciseNames} exercises remaining)",
-  "autoGen_08aedbf7": "&quot;$exerciseName&quot; has been deleted (${exercises.length} exercises remaining)",
   "autoGen_08b72f35": "   Date: $date",
   "autoGen_62a594cf": "   Muscle Group: $muscleGroup",
   "autoGen_fd2964d7": "   Total sets: $totalSets",
   "autoGen_74f074ea": "   Aerobic minutes: $totalMinutes",
   "autoGen_b714e319": "📋 Passing template data: $templateData",
-  "autoGen_51ce78c9": "Do you want to delete &quot;${template.name}&quot;?",
   "autoGen_8a87562e": "Automatically generated every Monday (in demo mode, manual data is required as Cloud Function is not implemented)",
-  "autoGen_4360465c": "📱 [WorkoutLogScreen] Current user: ${user?.uid ?? ",
   "autoGen_15000674": "   Attempts $retryCount/$maxRetries..."
 }

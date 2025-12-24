@@ -3353,14 +3353,11 @@
   "autoGen_6f7f8448": "• 표시되는 것은 한쪽의 매수입니다 (양쪽에 장착)",
   "autoGen_6ece374b": "$exerciseName을 삭제하시겠습니까?",
   "autoGen_758d777e": "&#39;$exerciseName&#39;이(가 남은 ${remainingExerciseNames}종목)이 삭제되었습니다.",
-  "autoGen_08aedbf7": "&#39;$exerciseName&#39;이(가 남은 ${exercises.length}종목)이 삭제되었습니다.",
   "autoGen_08b72f35": "   날짜: $date",
   "autoGen_62a594cf": "   근육 그룹: $muscleGroup",
   "autoGen_fd2964d7": "   총 세트 수: $totalSets",
   "autoGen_74f074ea": "   유산소 시간: $totalMinutes분",
   "autoGen_b714e319": "📋 템플릿 데이터 전달: $templateData",
-  "autoGen_51ce78c9": "&#39;${template.name}&#39;을 삭제하시겠습니까?",
   "autoGen_8a87562e": "매주 월요일에 자동으로 생성됩니다.\\n(데모 모드에서는 Cloud Function을 구현하지 않으므로 수동 데이터 필요)",
-  "autoGen_4360465c": "📱 [WorkoutLogScreen] 현재 사용자: ${user?.uid ?? ",
   "autoGen_15000674": "   시도 $retryCount/$maxRetries..."
 }
