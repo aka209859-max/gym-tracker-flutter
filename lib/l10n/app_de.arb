@@ -3039,7 +3039,6 @@
   "autoGen_5f00a229": "• Kostenloser Testzeitraum: Premium 30 Tage / Pro 14 Tage\\n",
   "autoGen_87c8ba71": "• Nach Ablauf der Testphase werden Sie automatisch auf einen kostenpflichtigen Tarif umgestellt.",
   "autoGen_97af1fdc": "• Jederzeit kündbar (kann bis zum Ende des Zeitraums genutzt werden)",
-  "autoGen_816e8fef": "}Möchten Sie?",
   "autoGen_27f6a7d8": "Ändern Sie es in {subscriptionService_getPlanNamenewPlan}.\\n\\n",
   "autoGen_dfce8f7b": "Geändert zu {subscriptionService_getPlanNamenewPlan}!",
   "autoGen_a3361465": "Ändern Sie zu $targetPlanName",

@@ -3039,7 +3039,6 @@
   "autoGen_5f00a229": "• Periodo de prueba gratuito: Premium 30 días / Pro 14 días",
   "autoGen_87c8ba71": "• Una vez finalizada la prueba, se le transferirá automáticamente a un plan pago.",
   "autoGen_97af1fdc": "• Cancelar en cualquier momento (se puede utilizar hasta el final del período)",
-  "autoGen_816e8fef": "}¿Quieres?",
   "autoGen_27f6a7d8": "Cámbielo a {subscriptionService_getPlanNamenewPlan}.\\n\\n",
   "autoGen_dfce8f7b": "¡Cambiado a {subscriptionService_getPlanNamenewPlan}!",
   "autoGen_a3361465": "Cambiar a $targetPlanName",

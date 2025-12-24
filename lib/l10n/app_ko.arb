@@ -3039,7 +3039,6 @@
   "autoGen_5f00a229": "• 무료 평가판 기간: Premium 30일 / Pro 14일\\n",
   "autoGen_87c8ba71": "• 평가판이 끝나면 자동으로 유료 플랜으로 이동합니다.\\n",
   "autoGen_97af1fdc": "• 언제든지 취소 가능(기간 만료까지 이용 가능)",
-  "autoGen_816e8fef": "} 하시겠습니까?",
   "autoGen_27f6a7d8": "{subscriptionService_getPlanNamenewPlan}로 변경합니다. \\n\\n",
   "autoGen_dfce8f7b": "{subscriptionService_getPlanNamenewPlan}로 변경되었습니다!",
   "autoGen_a3361465": "$targetPlanName으로 변경",

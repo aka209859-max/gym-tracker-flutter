@@ -3011,7 +3011,6 @@
   "autoGen_5f00a229": "• Free trial period: Premium 30 days / Pro 14 days\\n",
   "autoGen_87c8ba71": "• After the trial ends, you will automatically be transferred to a paid plan.",
   "autoGen_97af1fdc": "• Cancel anytime (can be used until the end of the period)",
-  "autoGen_816e8fef": "}Do you want to?",
   "autoGen_27f6a7d8": "Change it to {subscriptionService_getPlanNamenewPlan}.\\n\\n",
   "autoGen_dfce8f7b": "Changed to {subscriptionService_getPlanNamenewPlan}!",
   "autoGen_a3361465": "Change to $targetPlanName",

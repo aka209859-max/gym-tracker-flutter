@@ -3039,7 +3039,6 @@
   "autoGen_5f00a229": "• 免费试用期：高级版 30 天 / 专业版 14 天",
   "autoGen_87c8ba71": "• 试用期结束后，您将自动转为付费计划。",
   "autoGen_97af1fdc": "• 可随时取消（可在有效期结束前使用）",
-  "autoGen_816e8fef": "}你想要_____吗？",
   "autoGen_27f6a7d8": "将其更改为 {subscriptionService_getPlanNamenewPlan}。\\n\\n",
   "autoGen_dfce8f7b": "已更改为 {subscriptionService_getPlanNamenewPlan}！",
   "autoGen_a3361465": "更改为 $targetPlanName",
