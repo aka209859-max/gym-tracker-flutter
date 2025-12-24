@@ -957,9 +957,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.generatedKey_8fbbcc30アップグレードAppLocalizations.of(context)!.generatedKey_816e8fef),
+        title: Text('プランを${newPlan == SubscriptionType.free ? AppLocalizations.of(context)!.workout_5c7bbafb : AppLocalizations.of(context)!.upgradePlan}しますか？'),
         content: Text(
-          AppLocalizations.of(context)!.generatedKey_27f6a7d8
+          '${_subscriptionService.getPlanName(newPlan)}に変更します。\n\n'
           '料金: $price ($billingPeriod)',
         ),
         actions: [
