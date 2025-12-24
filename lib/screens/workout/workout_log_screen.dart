@@ -49,7 +49,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
       
       final user = FirebaseAuth.instance.currentUser;
       
-      print('📱 [WorkoutLogScreen] 現在のユーザー: ${user?.uid ?? "null"}');
+      print('📱 [WorkoutLogScreen] Current user: ${user?.uid ?? "null"}');
       
       if (user == null) {
         print('🔐 [WorkoutLogScreen] 自動ログイン開始...');

@@ -4229,12 +4229,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         print('🔍 Before delete - total sets: ${sets.length}');
         
         // 指定された種目のセットだけをフィルタリング（削除）
-        print('🎯 削除対象: "$exerciseName" (length=${exerciseName.length})');
+        print('🎯 Delete target: "$exerciseName" (length=${exerciseName.length})');
         final remainingSets = sets.where((set) {
           if (set is Map<String, dynamic>) {
             final setExerciseName = set['exercise_name'] as String? ?? '';
             final isMatch = setExerciseName == exerciseName;
-            print('   セット比較: "$setExerciseName" vs "$exerciseName" → Match=$isMatch');
+            print('   Set comparison: "$setExerciseName" vs "$exerciseName" → Match=$isMatch');
             return setExerciseName != exerciseName;
           }
           return true;

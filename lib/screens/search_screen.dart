@@ -851,7 +851,7 @@ class _SearchScreenState extends State<SearchScreen> {
       if (_searchQuery.isNotEmpty) {
         // テキスト検索（全国対応 - エリア名 or ジム名）
         if (kDebugMode) {
-          print('📝 テキスト検索: "$_searchQuery"');
+          print('📝 Text search: "$_searchQuery"');
         }
         // 🏆 パートナー情報統合版API使用
         googleGyms = await _placesService.searchGymsByTextWithPartners(_searchQuery);
@@ -935,7 +935,7 @@ class _SearchScreenState extends State<SearchScreen> {
           print('   GPS座標: ${_currentPosition!.latitude}, ${_currentPosition!.longitude}');
         }
         if (_searchQuery.isNotEmpty) {
-          print('   検索クエリ: "$_searchQuery"');
+          print('   Search query: "$_searchQuery"');
         }
       }
       
