@@ -510,14 +510,6 @@
   "female": "女性",
   "other": "その他",
   "preferNotToSay": "回答しない",
-  "heightCm": "{height}cm",
-  "@heightCm": {
-    "placeholders": {
-      "height": {
-        "type": "int"
-      }
-    }
-  },
   "profilePhoto": "プロフィール写真",
   "changePhoto": "写真を変更",
   "removePhoto": "写真を削除",
@@ -2269,7 +2261,6 @@
   "workout_518d7cc7": "ワークアウトテンプレート",
   "workout_e4a17e51": "テンプレート名を入力してください",
   "general_5010ff33": "メッセージを送る",
-  "general_b3d21234": "あと{magicNumberRecords - count}記録！\n残り{daysRemaining}日で達成できます💪",
   "workout_a247c53d": "⚠️ [Phase 7] データが0件です。体重記録画面で保存してください。",
   "general_a248c80f": "奈良",
   "subscription_a23b1458": "1. プロフィール設定を完了",
@@ -2498,7 +2489,6 @@
   "general_73647770": "   新規ユーザーとして匿名ログイン中...",
   "general_3fb0f43a": "胸トレ初心者",
   "general_6b0cabf8": "新しい目標",
-  "general_0a7adae9": "疲労リスク：週{-suggestedChange}セット削減推奨",
   "profile_ef975f27": "• Premiumプラン: 広告非表示、AI機能月10回利用可能\n",
   "subscription_953409cc": "⚠️ トライアル既に使用済み",
   "profile_e6a7ff8b": "友達",
@@ -3290,7 +3280,6 @@
   "gym_94a329e3": "恵比寿駅直結の便利な総合フィットネスクラブ。",
   "subscription_c6d71b69": "月換算 ¥667",
   "general_a2eb53c9": "30日間で5記録を達成しました！\n\nあなたは継続できる人です💪\nこのペースを維持すれば、\n80%の確率で習慣化できます！",
-  "general_0817271f": "いいスタートです！あと{magicNumberRecords - count}記録で習慣化達成！",
   "general_39972114": "ℹ️ 復元可能な購入履歴がありません",
   "general_8bb90efa": "⚠️ このコードを投稿に必ず含めてください",
   "profile_d227b9e9": "iOS 12.0以降のiPhone/iPad\n※安定した動作にはiOS 14.0以降を推奨",
