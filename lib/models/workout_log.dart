@@ -105,15 +105,16 @@ class Exercise {
     }
     
     // 🔧 v1.0.245: bodyPartのランタイム補完強化 (Problem 1 fix)
+    // 🔧 v1.0.317: AppLocalizations削除のため、'Other'文字列を直接使用
     String? bodyPart = map['bodyPart'] ?? map['muscle_group'];
     
-    // bodyPartがnull、またはAppLocalizations.of(context)!.bodyPartOtherの場合、ExerciseMasterDataで再評価
-    if (bodyPart == null || bodyPart == AppLocalizations.of(context)!.bodyPartOther) {
+    // bodyPartがnull、または'Other'の場合、ExerciseMasterDataで再評価
+    if (bodyPart == null || bodyPart == 'Other') {
       bodyPart = ExerciseMasterData.getBodyPartByName(exerciseName);
     }
     
-    // それでもnullならAppLocalizations.of(context)!.bodyPartOther（ExerciseMasterDataはデフォルトでAppLocalizations.of(context)!.bodyPartOtherを返すので通常不要）
-    bodyPart ??= AppLocalizations.of(context)!.bodyPartOther;
+    // それでもnullなら'Other'（ExerciseMasterDataはデフォルトで'Other'を返すので通常不要）
+    bodyPart ??= 'Other';
     
     return Exercise(
       name: exerciseName,

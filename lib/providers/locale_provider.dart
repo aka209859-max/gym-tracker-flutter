@@ -17,12 +17,12 @@ class LocaleProvider extends ChangeNotifier {
   
   /// サポートされている言語リスト
   static const List<LocaleInfo> supportedLocales = [
-    LocaleInfo(locale: Locale('ja'), name: AppLocalizations.of(context)!.languageJapanese, nativeName: AppLocalizations.of(context)!.languageJapanese, flag: '🇯🇵'),
-    LocaleInfo(locale: Locale('en'), name: AppLocalizations.of(context)!.languageEnglish, nativeName: AppLocalizations.of(context)!.languageEnglish, flag: '🇺🇸'),
-    LocaleInfo(locale: Locale('ko'), name: 'Korean', nativeName: AppLocalizations.of(context)!.languageKorean, flag: '🇰🇷'),
-    LocaleInfo(locale: Locale('zh'), name: 'Chinese', nativeName: AppLocalizations.of(context)!.languageChinese, flag: '🇨🇳'),
-    LocaleInfo(locale: Locale('de'), name: 'German', nativeName: AppLocalizations.of(context)!.languageGerman, flag: '🇩🇪'),
-    LocaleInfo(locale: Locale('es'), name: 'Spanish', nativeName: AppLocalizations.of(context)!.languageSpanish, flag: '🇪🇸'),
+    LocaleInfo(locale: Locale('ja'), name: 'Japanese', nativeName: '日本語', flag: '🇯🇵'),
+    LocaleInfo(locale: Locale('en'), name: 'English', nativeName: 'English', flag: '🇺🇸'),
+    LocaleInfo(locale: Locale('ko'), name: 'Korean', nativeName: '한국어', flag: '🇰🇷'),
+    LocaleInfo(locale: Locale('zh'), name: 'Chinese', nativeName: '中文', flag: '🇨🇳'),
+    LocaleInfo(locale: Locale('de'), name: 'German', nativeName: 'Deutsch', flag: '🇩🇪'),
+    LocaleInfo(locale: Locale('es'), name: 'Spanish', nativeName: 'Español', flag: '🇪🇸'),
   ];
   
   Locale get locale => _locale;

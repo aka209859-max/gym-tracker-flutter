@@ -1,0 +1,64 @@
+v1.0.317 - Arithmetic Placeholder Fix
+
+🎯 Critical Fix: Remove Arithmetic Operations from ICU Placeholders
+
+## Problem Resolved
+After v1.0.316 cleanup, flutter gen-l10n still reported ICU Lexing Errors:
+1. Arithmetic operations in placeholders: {variable - variable}
+2. Negative variable notation: {-variable}
+3. Non-ASCII characters in placeholder identifiers: {Höhe}
+
+## Root Cause
+ICU Message Format specification does NOT support:
+- Arithmetic expressions inside placeholders
+- Mathematical operations (+, -, *, /)
+- Non-ASCII variable names (only in message text)
+
+Valid:   {count} records
+Invalid: {total - count} records
+Invalid: {-remaining} records
+Invalid: {Höhe} cm
+
+## Solution
+Removed 4 problematic keys across all 7 languages:
+1. heightCm: Used {Höhe} (German umlaut in identifier)
+2. general_0a7adae9: Used {-suggestedChange} (negative)
+3. general_b3d21234: Used {magicNumberRecords - count} (subtraction)
+4. general_0817271f: Used {magicNumberRecords - count} (subtraction)
+
+## Statistics
+- Keys removed: 22 (4 unique × 7 languages) + 6 sync = 28 total
+- Keys per file: 2,873 → 2,869
+- All 7 files synchronized: 2,869 keys each
+
+## Cumulative Progress (v1.0.314-317)
+- v1.0.314: Removed 1,274 Dart code keys
+- v1.0.315: Removed 6,510 invalid ICU syntax keys
+- v1.0.316: Removed 680 Dart remnants + broken fragments
+- v1.0.317: Removed 28 arithmetic placeholder keys
+- Total removed: 8,492 keys across all versions
+
+## Expected Outcome
+✅ flutter gen-l10n: ZERO ICU Lexing Errors
+✅ iOS Archive Build: Should succeed
+✅ All placeholders: Simple variable names only
+
+## Implementation Guidelines
+For deleted keys, reimplement in Dart:
+
+Before (WRONG):
+ARB: "remaining": "{total - completed} tasks left"
+
+After (CORRECT):
+ARB: "remaining": "{count} tasks left"
+Dart: AppLocalizations.of(context)!.remaining(
+        count: total - completed
+      )
+
+## Version
+v1.0.317+339
+
+## Monitor Build
+https://github.com/aka209859-max/gym-tracker-flutter/actions
+
+This version fixes the final arithmetic placeholder issues.
