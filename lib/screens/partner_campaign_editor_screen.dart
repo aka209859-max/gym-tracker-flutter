@@ -239,15 +239,15 @@ class _PartnerCampaignEditorScreenState
 
                   // 基本特典
                   Text(
-                    '基本特典',
+                    AppLocalizations.of(context)!.general_基本特典,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   SizedBox(height: 8),
                   TextFormField(
                     controller: _benefitController,
                     decoration: InputDecoration(
-                      labelText: 'パートナー特典',
-                      hintText: '入会金50%OFF・初月無料',
+                      labelText: AppLocalizations.of(context)!.general_パートナー特典,
+                      hintText: AppLocalizations.of(context)!.gym_入会金50OFF初月無料,
                       helperText: AppLocalizations.of(context)!.searchGym,
                       border: OutlineInputBorder(),
                       prefixIcon: Icon(Icons.local_offer),
@@ -259,14 +259,14 @@ class _PartnerCampaignEditorScreenState
 
                   // キャンペーン情報
                   Text(
-                    '期間限定キャンペーン',
+                    AppLocalizations.of(context)!.general_期間限定キャンペーン,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 8),
                   TextFormField(
                     controller: _campaignTitleController,
                     decoration: InputDecoration(
-                      labelText: 'キャンペーンタイトル',
+                      labelText: AppLocalizations.of(context)!.general_キャンペーンタイトル,
                       hintText: '🎉 春の入会キャンペーン開催中!',
                       border: OutlineInputBorder(),
                       prefixIcon: Icon(Icons.campaign),
@@ -279,7 +279,7 @@ class _PartnerCampaignEditorScreenState
                   TextFormField(
                     controller: _campaignDescController,
                     decoration: InputDecoration(
-                      labelText: 'キャンペーン詳細',
+                      labelText: AppLocalizations.of(context)!.general_キャンペーン詳細,
                       hintText:
                           '3月31日までの入会で入会金無料 + プロテイン1kg プレゼント!',
                       border: OutlineInputBorder(),
@@ -295,11 +295,11 @@ class _PartnerCampaignEditorScreenState
                   ListTile(
                     contentPadding: EdgeInsets.zero,
                     leading: const Icon(Icons.calendar_today),
-                    title: const Text('キャンペーン期限'),
+                    title: const Text(AppLocalizations.of(context)!.general_キャンペーン期限),
                     subtitle: Text(
                       _validUntil != null
                           ? '${_validUntil!.year}年${_validUntil!.month}月${_validUntil!.day}日まで'
-                          : '期限なし',
+                          : AppLocalizations.of(context)!.gym_期限なし,
                     ),
                     trailing: _validUntil != null
                         ? IconButton(
@@ -343,7 +343,7 @@ class _PartnerCampaignEditorScreenState
 
                   // キャンペーンバナー
                   Text(
-                    'キャンペーンバナー',
+                    AppLocalizations.of(context)!.general_キャンペーンバナー,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 8),

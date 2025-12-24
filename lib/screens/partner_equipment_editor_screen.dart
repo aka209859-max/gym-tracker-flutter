@@ -20,25 +20,25 @@ class _PartnerEquipmentEditorScreenState
 
   // マシン種類のマスタリスト
   final List<String> _availableEquipment = [
-    'フリーウエイト',
-    'スミスマシン',
+    AppLocalizations.of(context)!.general_フリーウエイト,
+    AppLocalizations.of(context)!.gym_スミスマシン,
     AppLocalizations.of(context)!.exerciseLegPress,
     AppLocalizations.of(context)!.exerciseBenchPress,
-    'ケーブルマシン',
-    'ランニングマシン',
+    AppLocalizations.of(context)!.general_ケーブルマシン,
+    AppLocalizations.of(context)!.gym_ランニングマシン,
     AppLocalizations.of(context)!.exerciseAerobicBike,
-    'ダンベル',
-    'バーベル',
+    AppLocalizations.of(context)!.dumbbell,
+    AppLocalizations.of(context)!.barbell,
     AppLocalizations.of(context)!.exerciseLatPulldown,
     AppLocalizations.of(context)!.exerciseLegExtension,
     AppLocalizations.of(context)!.exerciseLegCurl,
-    'アブドミナル',
+    AppLocalizations.of(context)!.general_アブドミナル,
     AppLocalizations.of(context)!.exerciseShoulderPress,
-    'チェストプレス',
-    'ハックスクワット',
-    'ケーブルクロスオーバー',
-    'ローイングマシン',
-    'ステップマシン',
+    AppLocalizations.of(context)!.exercise_チェストプレス,
+    AppLocalizations.of(context)!.general_ハックスクワット,
+    AppLocalizations.of(context)!.workout_ケーブルクロスオーバー,
+    AppLocalizations.of(context)!.workout_ローイングマシン,
+    AppLocalizations.of(context)!.general_ステップマシン,
     AppLocalizations.of(context)!.bodyPartOther,
   ];
 
@@ -232,7 +232,7 @@ class _PartnerEquipmentEditorScreenState
 
                   // マシンリスト
                   const Text(
-                    '設備・マシン情報',
+                    AppLocalizations.of(context)!.gym_設備マシン情報,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

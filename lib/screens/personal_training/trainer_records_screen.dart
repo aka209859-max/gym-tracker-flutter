@@ -47,7 +47,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
       });
     } catch (e) {
       setState(() {
-        _errorMessage = 'トレーナー記録の取得に失敗しました';
+        _errorMessage = AppLocalizations.of(context)!.error_トレーナー記録の取得に失敗しました;
         _isLoading = false;
       });
     }
@@ -191,7 +191,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'トレーナー記録',
+                                      AppLocalizations.of(context)!.general_トレーナー記録,
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
@@ -200,7 +200,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                                     ),
                                     SizedBox(height: 4),
                                     Text(
-                                      'トレーナーが記録したトレーニング履歴',
+                                      AppLocalizations.of(context)!.general_トレーナーが記録したトレーニング履歴,
                                       style: TextStyle(
                                         fontSize: 13,
                                         color: Colors.black54,
@@ -245,7 +245,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                               ElevatedButton.icon(
                                 onPressed: _fetchTrainerRecords,
                                 icon: const Icon(Icons.refresh),
-                                label: const Text('再読み込み'),
+                                label: const Text(AppLocalizations.of(context)!.general_再読み込み),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.orange,
                                   foregroundColor: Colors.white,
@@ -262,7 +262,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                                   Icon(Icons.inbox_outlined, size: 64, color: Colors.grey[300]),
                                   const SizedBox(height: 16),
                                   const Text(
-                                    'トレーナー記録がありません',
+                                    AppLocalizations.of(context)!.general_トレーナー記録がありません,
                                     style: TextStyle(
                                       fontSize: 16,
                                       color: Colors.black54,

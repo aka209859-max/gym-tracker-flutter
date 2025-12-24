@@ -27,13 +27,13 @@ class _WorkoutImportPreviewScreenState
 
   // 部位選択肢（ハードコード - 表示時に多言語化）
   static const List<String> _bodyPartOptions = [
-    '胸',      // Chest
-    '脚',      // Legs
-    '背中',    // Back
-    '肩',      // Shoulders
-    '上腕二頭筋', // Biceps
-    '上腕三頭筋', // Triceps
-    '有酸素',   // Cardio
+    AppLocalizations.of(context)!.bodyPartChest,      // Chest
+    AppLocalizations.of(context)!.bodyPartLegs,      // Legs
+    AppLocalizations.of(context)!.bodyPartBack,    // Back
+    AppLocalizations.of(context)!.bodyPartShoulders,      // Shoulders
+    AppLocalizations.of(context)!.bodyPart_上腕二頭筋, // Biceps
+    AppLocalizations.of(context)!.bodyPart_上腕三頭筋, // Triceps
+    AppLocalizations.of(context)!.exerciseCardio,   // Cardio
   ];
 
   @override
@@ -71,9 +71,9 @@ class _WorkoutImportPreviewScreenState
       // 背中
       AppLocalizations.of(context)!.exerciseLatPulldown: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.exerciseChinUp: AppLocalizations.of(context)!.bodyPartBack,
-      'チンニング（懸垂）': AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.workout_チンニング懸垂: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.exercisePullUp: AppLocalizations.of(context)!.bodyPartBack,
-      'ベントオーバーローイング': AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.workout_ベントオーバーローイング: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.exerciseDeadlift: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.exerciseSeatedRow: AppLocalizations.of(context)!.bodyPartBack,
       
@@ -82,13 +82,13 @@ class _WorkoutImportPreviewScreenState
       AppLocalizations.of(context)!.exerciseLegPress: AppLocalizations.of(context)!.bodyPartLegs,
       AppLocalizations.of(context)!.exerciseLegExtension: AppLocalizations.of(context)!.bodyPartLegs,
       AppLocalizations.of(context)!.exerciseLegCurl: AppLocalizations.of(context)!.bodyPartLegs,
-      'ランジ': AppLocalizations.of(context)!.bodyPartLegs,
+      AppLocalizations.of(context)!.workout_ランジ: AppLocalizations.of(context)!.bodyPartLegs,
       
       // 肩
       AppLocalizations.of(context)!.exerciseShoulderPress: AppLocalizations.of(context)!.bodyPartShoulders,
       AppLocalizations.of(context)!.exerciseSideRaise: AppLocalizations.of(context)!.bodyPartShoulders,
       AppLocalizations.of(context)!.exerciseFrontRaise: AppLocalizations.of(context)!.bodyPartShoulders,
-      'リアレイズ': AppLocalizations.of(context)!.bodyPartShoulders,
+      AppLocalizations.of(context)!.workout_リアレイズ: AppLocalizations.of(context)!.bodyPartShoulders,
       
       // 二頭
       AppLocalizations.of(context)!.exerciseBarbellCurl: AppLocalizations.of(context)!.bodyPartBiceps,
@@ -96,18 +96,18 @@ class _WorkoutImportPreviewScreenState
       AppLocalizations.of(context)!.exerciseHammerCurl: AppLocalizations.of(context)!.bodyPartBiceps,
       
       // 三頭
-      'トライセプスダウン': AppLocalizations.of(context)!.bodyPartTriceps,
+      AppLocalizations.of(context)!.workout_トライセプスダウン: AppLocalizations.of(context)!.bodyPartTriceps,
       AppLocalizations.of(context)!.exerciseTricepsExtension: AppLocalizations.of(context)!.bodyPartTriceps,
-      'フレンチプレス': AppLocalizations.of(context)!.bodyPartTriceps,
+      AppLocalizations.of(context)!.exercise_フレンチプレス: AppLocalizations.of(context)!.bodyPartTriceps,
       
       // 有酸素
       AppLocalizations.of(context)!.exerciseRunning: AppLocalizations.of(context)!.exerciseCardio,
-      'ウォーキング': AppLocalizations.of(context)!.exerciseCardio,
-      'バイク': AppLocalizations.of(context)!.exerciseCardio,
+      AppLocalizations.of(context)!.workout_ウォーキング: AppLocalizations.of(context)!.exerciseCardio,
+      AppLocalizations.of(context)!.workout_バイク: AppLocalizations.of(context)!.exerciseCardio,
       AppLocalizations.of(context)!.exerciseAerobicBike: AppLocalizations.of(context)!.exerciseCardio,
     };
     
-    return mapping[exerciseName] ?? '胸'; // デフォルト: 胸
+    return mapping[exerciseName] ?? AppLocalizations.of(context)!.bodyPartChest; // デフォルト: 胸
   }
 
   /// データをFirestoreに登録（安定化版）
@@ -389,7 +389,7 @@ class _WorkoutImportPreviewScreenState
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 4),
                             child: Text(
-                              'セット${setIndex + 1}: ${weight == 0 ? '自重' : '${weight}kg'} × ${reps}回',
+                              'セット${setIndex + 1}: ${weight == 0 ? AppLocalizations.of(context)!.bodyweight : '${weight}kg'} × ${reps}回',
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey.shade700,
@@ -455,7 +455,7 @@ class _WorkoutImportPreviewScreenState
                             ),
                           )
                         : const Text(
-                            '承認して取り込む',
+                            AppLocalizations.of(context)!.workout_承認して取り込む,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,

@@ -86,12 +86,12 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
           context,
           icon: Icons.calendar_today,
           iconColor: Colors.blue,
-          title: '予約状況',
+          title: AppLocalizations.of(context)!.general_予約状況,
           subtitle: AppLocalizations.of(context)!.confirm,
           onTap: () {
             // TODO: 予約状況画面へ遷移
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('予約状況機能は開発中です')),
+              const SnackBar(content: Text(AppLocalizations.of(context)!.general_予約状況機能は開発中です)),
             );
           },
         ),
@@ -102,12 +102,12 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
           context,
           icon: Icons.add_circle,
           iconColor: Colors.green,
-          title: '新規予約',
-          subtitle: 'トレーニングを予約する',
+          title: AppLocalizations.of(context)!.general_新規予約,
+          subtitle: AppLocalizations.of(context)!.general_トレーニングを予約する,
           onTap: () {
             // TODO: 新規予約画面へ遷移
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('新規予約機能は開発中です')),
+              const SnackBar(content: Text(AppLocalizations.of(context)!.general_新規予約機能は開発中です)),
             );
           },
         ),
@@ -118,12 +118,12 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
           context,
           icon: Icons.assignment,
           iconColor: Colors.orange,
-          title: 'トレーナー記録',
-          subtitle: 'トレーナーが記録したトレーニング履歴',
+          title: AppLocalizations.of(context)!.general_トレーナー記録,
+          subtitle: AppLocalizations.of(context)!.general_トレーナーが記録したトレーニング履歴,
           onTap: () {
             // TODO: トレーナー記録画面へ遷移
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('トレーナー記録機能は開発中です')),
+              const SnackBar(content: Text(AppLocalizations.of(context)!.general_トレーナー記録機能は開発中です)),
             );
           },
         ),

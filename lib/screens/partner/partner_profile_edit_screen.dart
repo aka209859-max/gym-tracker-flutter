@@ -21,13 +21,13 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
   bool _isLoading = false;
 
   final List<String> _availableExercises = [
-    'ベンチプレス', 'スクワット', 'デッドリフト', '懸垂',
-    'ショルダープレス', 'バーベルロー', 'レッグプレス', AppLocalizations.of(context)!.cardio,
+    AppLocalizations.of(context)!.exerciseBenchPress, AppLocalizations.of(context)!.exerciseSquat, AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exercisePullUp,
+    AppLocalizations.of(context)!.exerciseShoulderPress, AppLocalizations.of(context)!.profile_バーベルロー, AppLocalizations.of(context)!.exerciseLegPress, AppLocalizations.of(context)!.cardio,
   ];
 
   final List<String> _availableGoals = [
-    '筋力アップ', '筋肥大', 'ダイエット', '体力向上',
-    'ボディメイク', 'コンテスト出場', AppLocalizations.of(context)!.healthMaintenance,
+    AppLocalizations.of(context)!.profile_筋力アップ, AppLocalizations.of(context)!.goalMuscleGain, AppLocalizations.of(context)!.goalDiet, AppLocalizations.of(context)!.profile_体力向上,
+    AppLocalizations.of(context)!.profile_ボディメイク, AppLocalizations.of(context)!.profile_コンテスト出場, AppLocalizations.of(context)!.healthMaintenance,
   ];
 
   @override
@@ -95,13 +95,13 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
               controller: _bioController,
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.bio,
-                hintText: 'トレーニングについて自由に書いてください',
+                hintText: AppLocalizations.of(context)!.profile_トレーニングについて自由に書いてください,
                 border: OutlineInputBorder(),
               ),
               maxLines: 4,
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
-                  return '自己紹介を入力してください';
+                  return AppLocalizations.of(context)!.profile_自己紹介を入力してください;
                 }
                 return null;
               },
@@ -116,7 +116,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
               decoration: InputDecoration(border: OutlineInputBorder()),
               items: [
                 DropdownMenuItem(value: 'beginner', child: Text(AppLocalizations.of(context)!.beginner)),
-                DropdownMenuItem(value: 'intermediate', child: Text('中級者')),
+                DropdownMenuItem(value: 'intermediate', child: Text(AppLocalizations.of(context)!.levelIntermediate)),
                 DropdownMenuItem(value: 'advanced', child: Text(AppLocalizations.of(context)!.advanced)),
               ],
               onChanged: (value) {
@@ -126,7 +126,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
             const SizedBox(height: 24),
 
             // 好きな種目
-            const Text('好きな種目', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text(AppLocalizations.of(context)!.profile_好きな種目, style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,

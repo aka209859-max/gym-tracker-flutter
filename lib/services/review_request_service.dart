@@ -75,7 +75,7 @@ class ReviewRequestService {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '5回もトレーニングを記録していただき、ありがとうございます！',
+              AppLocalizations.of(context)!.general_5回もトレーニングを記録していただきありがとうございます,
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 16),
@@ -88,12 +88,12 @@ class ReviewRequestService {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('後で'),
+            child: const Text(AppLocalizations.of(context)!.later),
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
             icon: const Icon(Icons.star),
-            label: const Text('レビューする'),
+            label: const Text(AppLocalizations.of(context)!.general_レビューする),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.orange,
               foregroundColor: Colors.white,

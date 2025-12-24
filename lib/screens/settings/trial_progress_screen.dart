@@ -67,7 +67,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('トライアル進捗'),
+        title: const Text(AppLocalizations.of(context)!.subscription_トライアル進捗),
         centerTitle: true,
       ),
       body: _isLoading
@@ -107,23 +107,23 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
     IconData icon;
 
     if (_isTrialActive) {
-      title = 'プレミアムトライアル中';
+      title = AppLocalizations.of(context)!.subscription_プレミアムトライアル中;
       subtitle = '残り$_remainingDays日間、プレミアム機能をお楽しみください';
       color = Colors.green;
       icon = Icons.celebration;
     } else if (_isTrialUsed) {
-      title = 'トライアル期間終了';
-      subtitle = 'プレミアムプランにアップグレードして機能を継続利用';
+      title = AppLocalizations.of(context)!.subscription_トライアル期間終了;
+      subtitle = AppLocalizations.of(context)!.subscription_プレミアムプランにアップグレードして機能を継続利用;
       color = Colors.orange;
       icon = Icons.timer_off;
     } else if (_progress == 100) {
-      title = 'トライアル条件達成！';
-      subtitle = '自動的にプレミアム7日間トライアルが開始されました';
+      title = AppLocalizations.of(context)!.subscription_トライアル条件達成;
+      subtitle = AppLocalizations.of(context)!.subscription_自動的にプレミアム7日間トライアルが開始されました;
       color = Colors.blue;
       icon = Icons.star;
     } else {
-      title = 'トライアル達成まであと少し';
-      subtitle = '条件を達成してプレミアム7日間無料体験';
+      title = AppLocalizations.of(context)!.subscription_トライアル達成まであと少し;
+      subtitle = AppLocalizations.of(context)!.subscription_条件を達成してプレミアム7日間無料体験;
       color = Colors.grey;
       icon = Icons.flag;
     }
@@ -169,7 +169,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              '達成進捗',
+              AppLocalizations.of(context)!.subscription_達成進捗,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -202,8 +202,8 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
   Widget _buildConditionsList() {
     final conditionLabels = {
       'account_created': AppLocalizations.of(context)!.purchaseCompleted,
-      'profile_completed': 'プロフィール設定完了',
-      'first_workout_logged': 'トレーニング記録1回以上',
+      'profile_completed': AppLocalizations.of(context)!.subscription_プロフィール設定完了,
+      'first_workout_logged': AppLocalizations.of(context)!.subscription_トレーニング記録1回以上,
       'gym_searched': AppLocalizations.of(context)!.searchGym,
     };
 
@@ -214,7 +214,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'トライアル条件',
+              AppLocalizations.of(context)!.subscription_トライアル条件,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -267,7 +267,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
                 Icon(Icons.card_giftcard, color: Colors.blue[700]),
                 const SizedBox(width: 8),
                 Text(
-                  'トライアル特典',
+                  AppLocalizations.of(context)!.subscription_トライアル特典,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

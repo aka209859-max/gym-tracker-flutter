@@ -25,7 +25,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       imagePath: null,
     ),
     OnboardingPage(
-      title: '簡単トレーニング記録',
+      title: AppLocalizations.of(context)!.general_簡単トレーニング記録,
       description: '種目・重量・回数を入力するだけ！\nカレンダーで成長を可視化',
       icon: Icons.edit_note,
       color: Colors.green,
@@ -39,7 +39,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       imagePath: null,
     ),
     OnboardingPage(
-      title: '今すぐはじめよう！',
+      title: AppLocalizations.of(context)!.general_今すぐはじめよう,
       description: '最初のトレーニングを\n記録してみましょう',
       icon: Icons.rocket_launch,
       color: Colors.purple,
@@ -139,7 +139,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                   ),
                   child: Text(
-                    _currentPage < _pages.length - 1 ? AppLocalizations.of(context)!.next : 'はじめる！',
+                    _currentPage < _pages.length - 1 ? AppLocalizations.of(context)!.next : AppLocalizations.of(context)!.general_はじめる,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

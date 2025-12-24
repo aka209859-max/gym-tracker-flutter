@@ -37,7 +37,7 @@ class POAnalyticsScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           children: [
             const Text(
-              '今月のKPI',
+              AppLocalizations.of(context)!.general_今月のKPI,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
@@ -52,25 +52,25 @@ class POAnalyticsScreen extends StatelessWidget {
               childAspectRatio: 1.5,
               children: [
                 _KPICard(
-                  label: 'パーソナル会員数',
+                  label: AppLocalizations.of(context)!.general_パーソナル会員数,
                   value: '$totalMembers名',
                   icon: Icons.people,
                   color: Colors.blue,
                 ),
                 _KPICard(
-                  label: 'アクティブ会員',
+                  label: AppLocalizations.of(context)!.general_アクティブ会員,
                   value: '$activeMembers名',
                   icon: Icons.check_circle,
                   color: Colors.green,
                 ),
                 _KPICard(
-                  label: '休眠会員',
+                  label: AppLocalizations.of(context)!.general_休眠会員,
                   value: '$dormantMembers名',
                   icon: Icons.warning,
                   color: Colors.orange,
                 ),
                 _KPICard(
-                  label: '総セッション数',
+                  label: AppLocalizations.of(context)!.general_総セッション数,
                   value: '$totalSessions回',
                   icon: Icons.fitness_center,
                   color: Colors.purple,
@@ -83,7 +83,7 @@ class POAnalyticsScreen extends StatelessWidget {
             // アラートセクション
             if (dormantMembers > 0) ...[
               const Text(
-                'アラート',
+                AppLocalizations.of(context)!.general_アラート,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
@@ -92,15 +92,15 @@ class POAnalyticsScreen extends StatelessWidget {
                 child: ListTile(
                   leading: const Icon(Icons.error, color: Colors.orange),
                   title: Text('休眠会員: $dormantMembers名'),
-                  subtitle: const Text('最終セッションから2週間以上経過'),
+                  subtitle: const Text(AppLocalizations.of(context)!.general_最終セッションから2週間以上経過),
                   trailing: ElevatedButton(
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                            content: Text('一斉メッセージ機能は近日公開予定です')),
+                            content: Text(AppLocalizations.of(context)!.general_一斉メッセージ機能は近日公開予定です)),
                       );
                     },
-                    child: const Text('対応する'),
+                    child: const Text(AppLocalizations.of(context)!.general_対応する),
                   ),
                 ),
               ),

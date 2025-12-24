@@ -17,8 +17,8 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
   final TrainingPartnerService _partnerService = TrainingPartnerService();
   final SubscriptionService _subscriptionService = SubscriptionService();
 
-  String _selectedLocation = 'すべて';
-  String _selectedExperienceLevel = 'すべて';
+  String _selectedLocation = AppLocalizations.of(context)!.all;
+  String _selectedExperienceLevel = AppLocalizations.of(context)!.all;
   late String _selectedGoal;
   
   bool _canAccess = false;
@@ -26,33 +26,33 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
 
   // 都道府県リスト
   static const List<String> _prefectures = [
-    'すべて',
-    '北海道',
-    '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県',
-    '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県',
-    '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県',
-    '岐阜県', '静岡県', '愛知県', '三重県',
-    '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県',
-    '鳥取県', '島根県', '岡山県', '広島県', '山口県',
-    '徳島県', '香川県', '愛媛県', '高知県',
-    '福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県',
-    '沖縄県',
+    AppLocalizations.of(context)!.all,
+    AppLocalizations.of(context)!.profile_北海道,
+    AppLocalizations.of(context)!.prefectureAomori, AppLocalizations.of(context)!.prefectureIwate, AppLocalizations.of(context)!.prefectureMiyagi, AppLocalizations.of(context)!.prefectureAkita, AppLocalizations.of(context)!.prefectureYamagata, AppLocalizations.of(context)!.prefectureFukushima,
+    AppLocalizations.of(context)!.prefectureIbaraki, AppLocalizations.of(context)!.prefectureTochigi, AppLocalizations.of(context)!.prefectureGunma, AppLocalizations.of(context)!.prefectureSaitama, AppLocalizations.of(context)!.prefectureChiba, AppLocalizations.of(context)!.prefectureTokyo, AppLocalizations.of(context)!.prefectureKanagawa,
+    AppLocalizations.of(context)!.prefectureNiigata, AppLocalizations.of(context)!.prefectureToyama, AppLocalizations.of(context)!.prefectureIshikawa, AppLocalizations.of(context)!.prefectureFukui, AppLocalizations.of(context)!.prefectureYamanashi, AppLocalizations.of(context)!.prefectureNagano,
+    AppLocalizations.of(context)!.prefectureGifu, AppLocalizations.of(context)!.prefectureShizuoka, AppLocalizations.of(context)!.prefectureAichi, AppLocalizations.of(context)!.prefectureMie,
+    AppLocalizations.of(context)!.prefectureShiga, AppLocalizations.of(context)!.prefectureKyoto, AppLocalizations.of(context)!.prefectureOsaka, AppLocalizations.of(context)!.prefectureHyogo, AppLocalizations.of(context)!.prefectureNara, AppLocalizations.of(context)!.prefectureWakayama,
+    AppLocalizations.of(context)!.prefectureTottori, AppLocalizations.of(context)!.prefectureShimane, AppLocalizations.of(context)!.prefectureOkayama, AppLocalizations.of(context)!.prefectureHiroshima, AppLocalizations.of(context)!.prefectureYamaguchi,
+    AppLocalizations.of(context)!.prefectureTokushima, AppLocalizations.of(context)!.prefectureKagawa, AppLocalizations.of(context)!.prefectureEhime, AppLocalizations.of(context)!.prefectureKochi,
+    AppLocalizations.of(context)!.prefectureFukuoka, AppLocalizations.of(context)!.prefectureSaga, AppLocalizations.of(context)!.prefectureNagasaki, AppLocalizations.of(context)!.prefectureKumamoto, AppLocalizations.of(context)!.prefectureOita, AppLocalizations.of(context)!.prefectureMiyazaki, AppLocalizations.of(context)!.prefectureKagoshima,
+    AppLocalizations.of(context)!.prefectureOkinawa,
   ];
 
   static const List<String> _experienceLevels = [
-    'すべて',
-    '初心者',
-    '中級者',
-    '上級者',
+    AppLocalizations.of(context)!.all,
+    AppLocalizations.of(context)!.levelBeginner,
+    AppLocalizations.of(context)!.levelIntermediate,
+    AppLocalizations.of(context)!.levelAdvanced,
   ];
 
   static const List<String> _goals = [
-    'すべて',
-    '筋肥大',
-    '減量',
-    'パワー向上',
-    '健康維持',
-    '体力向上',
+    AppLocalizations.of(context)!.all,
+    AppLocalizations.of(context)!.goalMuscleGain,
+    AppLocalizations.of(context)!.goalWeightLoss,
+    AppLocalizations.of(context)!.general_パワー向上,
+    AppLocalizations.of(context)!.goalMaintenance,
+    AppLocalizations.of(context)!.profile_体力向上,
   ];
 
   @override
@@ -114,7 +114,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Proプラン限定機能です',
+              AppLocalizations.of(context)!.general_Proプラン限定機能です,
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             const SizedBox(height: 32),
@@ -125,7 +125,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
               ),
-              child: const Text('Proプランを見る'),
+              child: const Text(AppLocalizations.of(context)!.viewProPlan),
             ),
           ],
         ),
@@ -256,7 +256,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
           ),
           const SizedBox(height: 8),
           Text(
-            '居住地・経験レベル・目標で絞り込めます',
+            AppLocalizations.of(context)!.general_居住地経験レベル目標で絞り込めます,
             style: TextStyle(fontSize: 14, color: Colors.grey[500]),
           ),
         ],
@@ -314,7 +314,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
                 Icon(Icons.person_search, size: 80, color: Colors.grey[400]),
                 const SizedBox(height: 16),
                 Text(
-                  '該当するパートナーが見つかりませんでした',
+                  AppLocalizations.of(context)!.general_該当するパートナーが見つかりませんでした,
                   style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                 ),
                 SizedBox(height: 8),

@@ -136,7 +136,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
             const SizedBox(height: 24),
             // コメント入力
             const Text(
-              'コメント（任意）',
+              AppLocalizations.of(context)!.general_コメント任意,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
@@ -156,7 +156,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
               child: ElevatedButton(
                 onPressed: _submitReport,
                 child: const Text(
-                  '報告を送信',
+                  AppLocalizations.of(context)!.general_報告を送信,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -362,7 +362,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                 backgroundColor: Colors.orange,
                 padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
               ),
-              child: const Text('ありがとう！'),
+              child: const Text(AppLocalizations.of(context)!.general_ありがとう),
             ),
           ],
         ),
@@ -373,15 +373,15 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
   String _getCrowdLevelText(int level) {
     switch (level) {
       case 1:
-        return '空いています';
+        return AppLocalizations.of(context)!.gym_空いています;
       case 2:
-        return 'やや空き';
+        return AppLocalizations.of(context)!.moderatelyEmpty;
       case 3:
         return AppLocalizations.of(context)!.crowdLevelNormal;
       case 4:
-        return 'やや混雑';
+        return AppLocalizations.of(context)!.moderatelyCrowded;
       case 5:
-        return '超混雑';
+        return AppLocalizations.of(context)!.gym_超混雑;
       default:
         return AppLocalizations.of(context)!.unknown;
     }
@@ -390,15 +390,15 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
   String _getCrowdLevelDescription(int level) {
     switch (level) {
       case 1:
-        return 'ほとんど人がいません';
+        return AppLocalizations.of(context)!.general_ほとんど人がいません;
       case 2:
-        return '少し人がいますが、余裕があります';
+        return AppLocalizations.of(context)!.general_少し人がいますが余裕があります;
       case 3:
-        return '適度に人がいます';
+        return AppLocalizations.of(context)!.general_適度に人がいます;
       case 4:
-        return 'かなり混んでいます';
+        return AppLocalizations.of(context)!.general_かなり混んでいます;
       case 5:
-        return '非常に混雑しています';
+        return AppLocalizations.of(context)!.general_非常に混雑しています;
       default:
         return '';
     }

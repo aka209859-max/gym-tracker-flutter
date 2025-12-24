@@ -327,9 +327,9 @@ class SubscriptionService {
   /// プラン名を取得
   String getPlanName(SubscriptionType plan) {
     return switch (plan) {
-      SubscriptionType.free => '無料プラン',
-      SubscriptionType.premium => 'プレミアムプラン',
-      SubscriptionType.pro => 'プロプラン',
+      SubscriptionType.free => AppLocalizations.of(context)!.freePlan,
+      SubscriptionType.premium => AppLocalizations.of(context)!.subscription_プレミアムプラン,
+      SubscriptionType.pro => AppLocalizations.of(context)!.subscription_プロプラン,
     };
   }
   
@@ -358,8 +358,8 @@ class SubscriptionService {
   String getPlanPrice(SubscriptionType plan) {
     return switch (plan) {
       SubscriptionType.free => '¥0',
-      SubscriptionType.premium => '¥500/月',
-      SubscriptionType.pro => '¥980/月',
+      SubscriptionType.premium => AppLocalizations.of(context)!.subscription_500月,
+      SubscriptionType.pro => AppLocalizations.of(context)!.subscription_980月,
     };
   }
   
@@ -515,7 +515,7 @@ class SubscriptionService {
     final baseLimit = getAIUsageLimit(plan);
     
     if (baseLimit == 0) {
-      return 'AI機能は有料プランで利用可能です';
+      return AppLocalizations.of(context)!.subscription_AI機能は有料プランで利用可能です;
     }
     
     final currentUsage = await getCurrentMonthAIUsage();

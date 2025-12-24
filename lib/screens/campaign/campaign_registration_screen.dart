@@ -94,7 +94,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
   void didChangeDependencies() {
     super.didChangeDependencies();
     _popularApps = [
-      '筋トレMEMO',
+      AppLocalizations.of(context)!.general_筋トレMEMO,
       'FiNC',
       'Nike Training Club',
       'MyFitnessPal',
@@ -105,7 +105,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
 
   @override
   Widget build(BuildContext context) {
-    final benefit = widget.planType == 'premium' ? '2ヶ月無料' : '初月無料';
+    final benefit = widget.planType == 'premium' ? AppLocalizations.of(context)!.general_2ヶ月無料 : AppLocalizations.of(context)!.general_初月無料;
 
     return Scaffold(
       appBar: AppBar(
@@ -169,7 +169,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
             ),
             const SizedBox(height: 16),
             Text(
-              '他社アプリから乗り換えで',
+              AppLocalizations.of(context)!.general_他社アプリから乗り換えで,
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey[700],
@@ -193,7 +193,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                 borderRadius: BorderRadius.circular(20),
               ),
               child: const Text(
-                '期間限定キャンペーン',
+                AppLocalizations.of(context)!.general_期間限定キャンペーン,
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
@@ -219,7 +219,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
         ),
         const SizedBox(height: 8),
         Text(
-          '以前使っていた筋トレアプリを教えてください',
+          AppLocalizations.of(context)!.general_以前使っていた筋トレアプリを教えてください,
           style: TextStyle(
             fontSize: 14,
             color: Colors.grey[600],
@@ -246,14 +246,14 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                   TextFormField(
                     controller: _appNameController,
                     decoration: InputDecoration(
-                      labelText: 'アプリ名を入力',
+                      labelText: AppLocalizations.of(context)!.general_アプリ名を入力,
                       hintText: '例: トレーニング日記',
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) {
                       if (_selectedApp == AppLocalizations.of(context)!.other &&
                           (value == null || value.isEmpty)) {
-                        return 'アプリ名を入力してください';
+                        return AppLocalizations.of(context)!.general_アプリ名を入力してください;
                       }
                       return null;
                     },
@@ -290,7 +290,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
             ),
             SizedBox(height: 12),
             _buildConditionItem('1️⃣', AppLocalizations.of(context)!.emailNotRegistered),
-            _buildConditionItem('2️⃣', 'SNSで体験をシェア（テンプレート提供）'),
+            _buildConditionItem('2️⃣', AppLocalizations.of(context)!.general_SNSで体験をシェアテンプレート提供),
             _buildConditionItem('3️⃣', AppLocalizations.of(context)!.confirm),
             const SizedBox(height: 12),
             Container(
@@ -306,7 +306,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      '条件達成後、即座に特典が適用されます',
+                      AppLocalizations.of(context)!.general_条件達成後即座に特典が適用されます,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey[800],

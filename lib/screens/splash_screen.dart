@@ -156,7 +156,7 @@ class _SplashScreenState extends State<SplashScreen>
                     const SizedBox(height: 10),
                     // タグライン
                     Text(
-                      'あなたに最適なトレーニングを',
+                      AppLocalizations.of(context)!.general_あなたに最適なトレーニングを,
                       style: TextStyle(
                         color: Colors.white.withValues(alpha: 0.7),
                         fontSize: 14,

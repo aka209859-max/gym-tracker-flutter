@@ -29,20 +29,20 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
 
   // 設備候補
   final List<String> _facilityOptions = [
-    'シャワー室',
-    'サウナ',
-    'プール',
-    'スパ',
-    'ロッカールーム',
+    AppLocalizations.of(context)!.gym_シャワー室,
+    AppLocalizations.of(context)!.gym_サウナ,
+    AppLocalizations.of(context)!.gym_プール,
+    AppLocalizations.of(context)!.gym_スパ,
+    AppLocalizations.of(context)!.gym_ロッカールーム,
     AppLocalizations.of(context)!.personalTraining,
-    'グループレッスン',
+    AppLocalizations.of(context)!.gym_グループレッスン,
     'Wi-Fi',
-    '駐車場',
-    '24時間営業',
-    '女性専用エリア',
-    'ストレッチエリア',
-    '有酸素エリア',
-    'フリーウェイトエリア',
+    AppLocalizations.of(context)!.gym_駐車場,
+    AppLocalizations.of(context)!.gym_24時間営業,
+    AppLocalizations.of(context)!.gym_女性専用エリア,
+    AppLocalizations.of(context)!.gym_ストレッチエリア,
+    AppLocalizations.of(context)!.gym_有酸素エリア,
+    AppLocalizations.of(context)!.gym_フリーウェイトエリア,
   ];
 
   @override
@@ -63,7 +63,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
       if (gymDoc.exists) {
         final data = gymDoc.data();
         if (data == null) {
-          throw Exception('データの取得に失敗しました');
+          throw Exception(AppLocalizations.of(context)!.gym_データの取得に失敗しました);
         }
         setState(() {
           _equipment = data['equipment'] != null
@@ -138,7 +138,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
             TextField(
               controller: nameController,
               decoration: InputDecoration(
-                labelText: '器具名',
+                labelText: AppLocalizations.of(context)!.gym_器具名,
                 hintText: '例: レッグプレス',
               ),
             ),
@@ -146,7 +146,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
             TextField(
               controller: countController,
               decoration: InputDecoration(
-                labelText: '台数',
+                labelText: AppLocalizations.of(context)!.gym_台数,
               ),
               keyboardType: TextInputType.number,
             ),
@@ -233,7 +233,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  'マシン・器具',
+                  AppLocalizations.of(context)!.gym_マシン器具,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -314,7 +314,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              '施設・設備',
+              AppLocalizations.of(context)!.gym_施設設備,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

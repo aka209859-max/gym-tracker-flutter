@@ -175,7 +175,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '実施種目',
+                    AppLocalizations.of(context)!.workout_実施種目,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -293,7 +293,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                 displayText = '${weight}分 × ${reps}km';
               } else {
                 // v1.0.169: isTimeModeに基づいて秒数/回数を表示
-                final unit = isTimeMode ? '秒' : AppLocalizations.of(context)!.reps;
+                final unit = isTimeMode ? AppLocalizations.of(context)!.seconds : AppLocalizations.of(context)!.reps;
                 displayText = '${weight}kg × $reps$unit';
               }
               
@@ -557,12 +557,12 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
       
       final doc = await docRef.get();
       if (!doc.exists) {
-        throw Exception('ワークアウトが見つかりません');
+        throw Exception(AppLocalizations.of(context)!.workout_ワークアウトが見つかりません);
       }
       
       final data = doc.data();
       if (data == null) {
-        throw Exception('ワークアウトデータが空です');
+        throw Exception(AppLocalizations.of(context)!.workout_ワークアウトデータが空です);
       }
       
       // 🔍 デバッグ: データ構造を確認
@@ -741,7 +741,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('削除確認'),
+        title: Text(AppLocalizations.of(context)!.workout_削除確認),
         content: Text(AppLocalizations.of(context)!.deleteWorkoutConfirm),
         actions: [
           TextButton(

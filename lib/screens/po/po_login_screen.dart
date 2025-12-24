@@ -22,7 +22,7 @@ import 'po_dashboard_screen.dart';
 
       final userId = userCredential.user?.uid;
       if (userId == null) {
-        throw Exception('認証に失敗しました');
+        throw Exception(AppLocalizations.of(context)!.error_認証に失敗しました);
       }
 
       if (kDebugMode) {
@@ -44,12 +44,12 @@ import 'po_dashboard_screen.dart';
       final data = poDoc.data();
       if (data == null) {
         await FirebaseAuth.instance.signOut();
-        throw Exception('管理者データの取得に失敗しました');
+        throw Exception(AppLocalizations.of(context)!.error_管理者データの取得に失敗しました);
       }
       
       if (data['role'] != 'po') {
         await FirebaseAuth.instance.signOut();
-        throw Exception('PO管理者権限がありません');
+        throw Exception(AppLocalizations.of(context)!.general_PO管理者権限がありません);
       }
 
       if (kDebugMode) {
@@ -76,13 +76,13 @@ import 'po_dashboard_screen.dart';
           errorMsg = AppLocalizations.of(context)!.emailNotRegistered;
           break;
         case 'wrong-password':
-          errorMsg = 'パスワードが間違っています';
+          errorMsg = AppLocalizations.of(context)!.general_パスワードが間違っています;
           break;
         case 'invalid-email':
           errorMsg = AppLocalizations.of(context)!.invalidEmailFormat;
           break;
         case 'user-disabled':
-          errorMsg = 'このアカウントは無効化されています';
+          errorMsg = AppLocalizations.of(context)!.general_このアカウントは無効化されています;
           break;
         default:
           errorMsg = AppLocalizations.of(context)!.error;
@@ -129,7 +129,7 @@ import 'po_dashboard_screen.dart';
           .get();
 
       if (querySnapshot.docs.isEmpty) {
-        throw Exception('無効なアクセスコードです');
+        throw Exception(AppLocalizations.of(context)!.general_無効なアクセスコードです);
       }
 
       final poDoc = querySnapshot.docs.first;
@@ -211,7 +211,7 @@ import 'po_dashboard_screen.dart';
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'PO管理ページ',
+                  AppLocalizations.of(context)!.general_PO管理ページ,
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.grey.shade600,
@@ -492,10 +492,10 @@ import 'po_dashboard_screen.dart';
           textCapitalization: TextCapitalization.characters,
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return 'アクセスコードを入力してください';
+              return AppLocalizations.of(context)!.general_アクセスコードを入力してください;
             }
             if (value.length < 8) {
-              return 'アクセスコードは8文字以上です';
+              return AppLocalizations.of(context)!.general_アクセスコードは8文字以上です;
             }
             return null;
           },
@@ -515,7 +515,7 @@ import 'po_dashboard_screen.dart';
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  'アクセスコードは担当者から発行されたコードです',
+                  AppLocalizations.of(context)!.general_アクセスコードは担当者から発行されたコードです,
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.blue.shade700,

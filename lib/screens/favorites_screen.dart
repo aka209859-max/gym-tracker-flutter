@@ -162,7 +162,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           ),
           const SizedBox(height: 24),
           Text(
-            'お気に入りがありません',
+            AppLocalizations.of(context)!.general_お気に入りがありません,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -353,7 +353,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('すべて削除'),
+        title: Text(AppLocalizations.of(context)!.deleteAll),
         content: Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(

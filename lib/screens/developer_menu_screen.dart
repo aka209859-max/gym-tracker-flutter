@@ -337,7 +337,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                         Text(
                           'Apple審査対応のため、開発者メニューからのプラン変更機能は削除されました。\n\n'
                           'プラン変更はRevenueCat経由の正規課金のみ有効です。\n\n'
-                          'テストには「TestFlightサンドボックス課金」を使用してください。',
+                          AppLocalizations.of(context)!.general_テストにはTestFlightサンドボックス課金を使用してください,
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.black87,
@@ -364,7 +364,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                             Icon(Icons.psychology, color: Colors.deepPurple),
                             SizedBox(width: 8),
                             Text(
-                              'AI使用状況',
+                              AppLocalizations.of(context)!.general_AI使用状況,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -389,7 +389,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                 ElevatedButton.icon(
                   onPressed: _resetAIUsage,
                   icon: const Icon(Icons.refresh),
-                  label: const Text('AI使用回数をリセット'),
+                  label: const Text(AppLocalizations.of(context)!.general_AI使用回数をリセット),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.orange,
                     minimumSize: const Size.fromHeight(48),
@@ -402,7 +402,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                 ElevatedButton.icon(
                   onPressed: _resetOnboarding,
                   icon: const Icon(Icons.school),
-                  label: const Text('オンボーディングをリセット'),
+                  label: const Text(AppLocalizations.of(context)!.general_オンボーディングをリセット),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.purple,
                     foregroundColor: Colors.white,
@@ -457,7 +457,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                             Icon(Icons.info_outline, color: Colors.blue),
                             SizedBox(width: 8),
                             Text(
-                              '使い方',
+                              AppLocalizations.of(context)!.workout_使い方,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,

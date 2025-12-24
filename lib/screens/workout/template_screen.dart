@@ -84,7 +84,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ワークアウトテンプレート'),
+        title: const Text(AppLocalizations.of(context)!.workout_ワークアウトテンプレート),
         backgroundColor: theme.colorScheme.primary,
         foregroundColor: Colors.white,
         bottom: TabBar(
@@ -93,7 +93,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
           labelColor: Colors.white,
           unselectedLabelColor: Colors.white.withValues(alpha: 0.7),
           tabs: [
-            Tab(text: 'マイテンプレート', icon: Icon(Icons.folder, size: 20)),
+            Tab(text: AppLocalizations.of(context)!.workout_マイテンプレート, icon: Icon(Icons.folder, size: 20)),
             Tab(text: AppLocalizations.of(context)!.recommendation, icon: Icon(Icons.auto_awesome, size: 20)),
           ],
         ),
@@ -167,7 +167,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
                 Icon(Icons.folder_open, size: 64, color: Colors.grey[400]),
                 const SizedBox(height: 16),
                 Text(
-                  'テンプレートがありません',
+                  AppLocalizations.of(context)!.workout_テンプレートがありません,
                   style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                 ),
                 SizedBox(height: 8),

@@ -127,7 +127,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                         Icon(Icons.error_outline, size: 48, color: Colors.red[300]),
                         const SizedBox(height: 16),
                         Text(
-                          'メッセージの読み込みに失敗しました',
+                          AppLocalizations.of(context)!.error_メッセージの読み込みに失敗しました,
                           style: TextStyle(color: Colors.grey[600]),
                         ),
                       ],
@@ -325,7 +325,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
     final messageDate = DateTime(date.year, date.month, date.day);
 
     if (messageDate == today) {
-      return '今日';
+      return AppLocalizations.of(context)!.today;
     } else if (messageDate == yesterday) {
       return AppLocalizations.of(context)!.yesterday;
     } else {

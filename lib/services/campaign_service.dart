@@ -175,7 +175,7 @@ class CampaignService {
     required String previousAppName,
     required String planType,
   }) {
-    final benefit = planType == 'premium' ? '2ヶ月無料' : '初月無料';
+    final benefit = planType == 'premium' ? AppLocalizations.of(context)!.general_2ヶ月無料 : AppLocalizations.of(context)!.general_初月無料;
 
     return '''
 $previousAppName から GYM MATCH に乗り換えました！

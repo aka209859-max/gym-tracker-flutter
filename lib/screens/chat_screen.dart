@@ -61,7 +61,7 @@ class _ChatScreenState extends State<ChatScreen> {
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('メッセージ送信に失敗しました')),
+          const SnackBar(content: Text(AppLocalizations.of(context)!.error_メッセージ送信に失敗しました)),
         );
       }
     }
@@ -112,7 +112,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       children: [
                         Icon(Icons.error_outline, size: 48, color: Colors.red[300]),
                         const SizedBox(height: 16),
-                        const Text('メッセージの読み込みに失敗しました'),
+                        const Text(AppLocalizations.of(context)!.error_メッセージの読み込みに失敗しました),
                       ],
                     ),
                   );
@@ -128,7 +128,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         Icon(Icons.chat_bubble_outline, size: 64, color: Colors.grey[300]),
                         const SizedBox(height: 16),
                         Text(
-                          'メッセージを送信してみましょう',
+                          AppLocalizations.of(context)!.general_メッセージを送信してみましょう,
                           style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                         ),
                       ],

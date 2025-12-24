@@ -33,7 +33,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
     AppLocalizations.of(context)!.bodyPartLegs: false,
     AppLocalizations.of(context)!.bodyPartShoulders: false,
     AppLocalizations.of(context)!.bodyPartArms: false,
-    '腹筋': false,
+    AppLocalizations.of(context)!.bodyPart_腹筋: false,
     AppLocalizations.of(context)!.exerciseCardio: false,
     AppLocalizations.of(context)!.levelBeginner: false,
   };
@@ -132,7 +132,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
           IconButton(
             icon: const Icon(Icons.info_outline),
             onPressed: () => _showInfoDialog(),
-            tooltip: '使い方',
+            tooltip: AppLocalizations.of(context)!.workout_使い方,
           ),
         ],
       ),
@@ -213,7 +213,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
                       Icon(Icons.info_outline, color: Colors.orange.shade700, size: 20),
                       const SizedBox(width: 8),
                       Text(
-                        '無料プランの制限',
+                        AppLocalizations.of(context)!.workout_無料プランの制限,
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -338,7 +338,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  '提案されたメニュー',
+                  AppLocalizations.of(context)!.workout_提案されたメニュー,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -391,7 +391,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          '過去の提案',
+          AppLocalizations.of(context)!.workout_過去の提案,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -405,7 +405,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
             child: Padding(
               padding: EdgeInsets.all(24),
               child: Center(
-                child: Text('まだ履歴がありません'),
+                child: Text(AppLocalizations.of(context)!.workout_まだ履歴がありません),
               ),
             ),
           )
@@ -525,7 +525,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
 
   /// AIメニュー生成
   Future<void> _generateMenu(List<String> bodyParts) async {
-    ConsoleLogger.info('AIコーチング開始', tag: 'AI_COACHING');
+    ConsoleLogger.info(AppLocalizations.of(context)!.workout_AIコーチング開始, tag: 'AI_COACHING');
     
     // ステップ1: AI使用可能チェック（サブスク or クレジット）
     final canUse = await _creditService.canUseAI();
@@ -537,7 +537,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
       ConsoleLogger.debug('canEarnCreditFromAd結果: $canEarnFromAd', tag: 'AI_COACHING');
       
       if (canEarnFromAd && mounted) {
-        ConsoleLogger.info('リワード広告ダイアログを表示', tag: 'AI_COACHING');
+        ConsoleLogger.info(AppLocalizations.of(context)!.workout_リワード広告ダイアログを表示, tag: 'AI_COACHING');
         // ステップ3: リワード広告ダイアログ表示
         final watchedAd = await showDialog<bool>(
           context: context,
@@ -706,15 +706,15 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
   /// 部位別エクササイズを追加
   void _addBodyPartExercises(StringBuffer buffer, String bodyPart, bool isBeginner) {
     final exercises = {
-      AppLocalizations.of(context)!.bodyPartChest: [AppLocalizations.of(context)!.exerciseBenchPress, 'ダンベルフライ', 'ケーブルクロスオーバー'],
+      AppLocalizations.of(context)!.bodyPartChest: [AppLocalizations.of(context)!.exerciseBenchPress, AppLocalizations.of(context)!.workout_ダンベルフライ, AppLocalizations.of(context)!.workout_ケーブルクロスオーバー],
       AppLocalizations.of(context)!.bodyPartBack: [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, AppLocalizations.of(context)!.exerciseBentOverRow],
       AppLocalizations.of(context)!.bodyPartLegs: [AppLocalizations.of(context)!.exerciseSquat, AppLocalizations.of(context)!.exerciseLegPress, AppLocalizations.of(context)!.exerciseLegCurl],
       AppLocalizations.of(context)!.bodyPartShoulders: [AppLocalizations.of(context)!.exerciseShoulderPress, AppLocalizations.of(context)!.exerciseSideRaise, AppLocalizations.of(context)!.exerciseRearDeltFly],
       AppLocalizations.of(context)!.bodyPartArms: [AppLocalizations.of(context)!.exerciseBarbellCurl, AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseHammerCurl],
-      '腹筋': [AppLocalizations.of(context)!.exerciseCrunch, AppLocalizations.of(context)!.exercisePlank, AppLocalizations.of(context)!.exerciseLegRaise],
+      AppLocalizations.of(context)!.bodyPart_腹筋: [AppLocalizations.of(context)!.exerciseCrunch, AppLocalizations.of(context)!.exercisePlank, AppLocalizations.of(context)!.exerciseLegRaise],
     };
     
-    final targetExercises = exercises[bodyPart] ?? ['基本種目'];
+    final targetExercises = exercises[bodyPart] ?? [AppLocalizations.of(context)!.workout_基本種目];
     
     for (int i = 0; i < targetExercises.length && i < 3; i++) {
       buffer.writeln('### ${i + 1}. ${targetExercises[i]}');
@@ -879,7 +879,7 @@ ${bodyParts.join('、')}
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('AIコーチングについて'),
+        title: Text(AppLocalizations.of(context)!.workout_AIコーチングについて),
         content: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -946,7 +946,7 @@ ${bodyParts.join('、')}
           children: [
             Icon(Icons.info_outline, color: Colors.orange),
             SizedBox(width: 12),
-            Text('月間上限に達しました'),
+            Text(AppLocalizations.of(context)!.workout_月間上限に達しました),
           ],
         ),
         content: Column(
@@ -954,7 +954,7 @@ ${bodyParts.join('、')}
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '今月の無料動画視聴は上限（3回）に達しました。',
+              AppLocalizations.of(context)!.workout_今月の無料動画視聴は上限3回に達しました,
               style: TextStyle(fontSize: 14),
             ),
             SizedBox(height: 16),
@@ -995,7 +995,7 @@ ${bodyParts.join('、')}
               backgroundColor: Colors.blue.shade700,
               foregroundColor: Colors.white,
             ),
-            child: const Text('プランを見る'),
+            child: const Text(AppLocalizations.of(context)!.workout_プランを見る),
           ),
         ],
       ),
@@ -1011,7 +1011,7 @@ ${bodyParts.join('、')}
           children: [
             Icon(Icons.info_outline, color: Colors.orange),
             SizedBox(width: 12),
-            Text('月間上限に達しました'),
+            Text(AppLocalizations.of(context)!.workout_月間上限に達しました),
           ],
         ),
         content: Column(
@@ -1019,7 +1019,7 @@ ${bodyParts.join('、')}
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '今月のAI使用回数が上限に達しました。',
+              AppLocalizations.of(context)!.workout_今月のAI使用回数が上限に達しました,
               style: TextStyle(fontSize: 14),
             ),
             SizedBox(height: 16),

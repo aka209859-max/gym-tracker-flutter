@@ -66,7 +66,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) {
-        throw Exception('ログインが必要です');
+        throw Exception(AppLocalizations.of(context)!.loginRequired);
       }
 
       // ユーザー名を取得
@@ -102,7 +102,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('レビューを投稿しました！'),
+            content: Text(AppLocalizations.of(context)!.gym_レビューを投稿しました),
             backgroundColor: Colors.green,
           ),
         );
@@ -134,7 +134,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
           children: [
             Icon(Icons.workspace_premium, color: Colors.blue),
             SizedBox(width: 12),
-            Text('Premium機能'),
+            Text(AppLocalizations.of(context)!.gym_Premium機能),
           ],
         ),
         content: Column(
@@ -142,7 +142,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'レビュー投稿はPremium/Proプラン限定機能です。',
+              AppLocalizations.of(context)!.gym_レビュー投稿はPremiumProプラン限定機能です,
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 16),
@@ -174,7 +174,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
               backgroundColor: Colors.blue,
               foregroundColor: Colors.white,
             ),
-            child: const Text('プランを見る'),
+            child: const Text(AppLocalizations.of(context)!.workout_プランを見る),
           ),
         ],
       ),
@@ -235,7 +235,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
 
                     // 総合評価
                     _buildRatingSection(
-                      title: '総合評価',
+                      title: AppLocalizations.of(context)!.gym_総合評価,
                       rating: _overallRating,
                       icon: Icons.star,
                       color: Colors.amber,
@@ -249,7 +249,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
 
                     // 詳細評価
                     const Text(
-                      '詳細評価',
+                      AppLocalizations.of(context)!.gym_詳細評価,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -258,7 +258,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                     const SizedBox(height: 16),
 
                     _buildRatingSection(
-                      title: '混雑度の正確さ',
+                      title: AppLocalizations.of(context)!.gym_混雑度の正確さ,
                       rating: _crowdAccuracy,
                       icon: Icons.people,
                       color: Colors.blue,
@@ -271,7 +271,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                     const SizedBox(height: 12),
 
                     _buildRatingSection(
-                      title: '清潔さ',
+                      title: AppLocalizations.of(context)!.gym_清潔さ,
                       rating: _cleanliness,
                       icon: Icons.cleaning_services,
                       color: Colors.green,
@@ -284,7 +284,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                     const SizedBox(height: 12),
 
                     _buildRatingSection(
-                      title: 'スタッフの対応',
+                      title: AppLocalizations.of(context)!.gym_スタッフの対応,
                       rating: _staffFriendliness,
                       icon: Icons.person,
                       color: Colors.orange,
@@ -297,7 +297,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                     const SizedBox(height: 12),
 
                     _buildRatingSection(
-                      title: '初心者への優しさ',
+                      title: AppLocalizations.of(context)!.gym_初心者への優しさ,
                       rating: _beginnerFriendly,
                       icon: Icons.school,
                       color: Colors.purple,
@@ -323,15 +323,15 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                       maxLines: 5,
                       maxLength: 500,
                       decoration: InputDecoration(
-                        hintText: 'このジムの良かった点や改善点を教えてください',
+                        hintText: AppLocalizations.of(context)!.gym_このジムの良かった点や改善点を教えてください,
                         border: OutlineInputBorder(),
                       ),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'コメントを入力してください';
+                          return AppLocalizations.of(context)!.gym_コメントを入力してください;
                         }
                         if (value.trim().length < 10) {
-                          return '10文字以上入力してください';
+                          return AppLocalizations.of(context)!.gym_10文字以上入力してください;
                         }
                         return null;
                       },

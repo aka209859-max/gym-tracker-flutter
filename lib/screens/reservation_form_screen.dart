@@ -199,7 +199,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
                 ),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return 'お名前を入力してください';
+                    return AppLocalizations.of(context)!.general_お名前を入力してください;
                   }
                   return null;
                 },
@@ -219,7 +219,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
                 keyboardType: TextInputType.phone,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return '電話番号を入力してください';
+                    return AppLocalizations.of(context)!.general_電話番号を入力してください;
                   }
                   return null;
                 },
@@ -296,7 +296,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
               TextFormField(
                 controller: _messageController,
                 decoration: InputDecoration(
-                  labelText: 'その他ご要望（任意）',
+                  labelText: AppLocalizations.of(context)!.general_その他ご要望任意,
                   hintText: '例: 初めてのジム利用です',
                   prefixIcon: Icon(Icons.message),
                   border: OutlineInputBorder(),
@@ -354,7 +354,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
                           ),
                         )
                       : const Text(
-                          '予約申込を送信',
+                          AppLocalizations.of(context)!.general_予約申込を送信,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

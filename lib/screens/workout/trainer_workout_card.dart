@@ -248,13 +248,13 @@ class TrainerWorkoutCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   children: [
                     // トレーナー情報
-                    _buildInfoRow('トレーナー', record.trainerName),
+                    _buildInfoRow(AppLocalizations.of(context)!.trainers, record.trainerName),
                     _buildInfoRow(AppLocalizations.of(context)!.duration, '${record.duration}分'),
-                    _buildInfoRow('強度', _getIntensityLabel(context, record.intensity)),
+                    _buildInfoRow(AppLocalizations.of(context)!.workout_強度, _getIntensityLabel(context, record.intensity)),
                     
                     const SizedBox(height: 24),
                     const Text(
-                      '実施メニュー',
+                      AppLocalizations.of(context)!.workout_実施メニュー,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -296,7 +296,7 @@ class TrainerWorkoutCard extends StatelessWidget {
                     if (record.bodyMetrics != null) ...[
                       const SizedBox(height: 24),
                       const Text(
-                        '体組成',
+                        AppLocalizations.of(context)!.workout_体組成,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -324,7 +324,7 @@ class TrainerWorkoutCard extends StatelessWidget {
                     if (record.trainerNotes.isNotEmpty) ...[
                       const SizedBox(height: 24),
                       const Text(
-                        'トレーナーからのメッセージ',
+                        AppLocalizations.of(context)!.workout_トレーナーからのメッセージ,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -406,9 +406,9 @@ class TrainerWorkoutCard extends StatelessWidget {
   String _getIntensityLabel(BuildContext context, String intensity) {
     switch (intensity) {
       case 'low':
-        return '軽め';
+        return AppLocalizations.of(context)!.workout_軽め;
       case 'high':
-        return 'ハード';
+        return AppLocalizations.of(context)!.workout_ハード;
       case 'medium':
       default:
         return AppLocalizations.of(context)!.crowdLevelNormal;

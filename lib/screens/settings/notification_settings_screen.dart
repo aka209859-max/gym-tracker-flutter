@@ -104,7 +104,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: const Text(
-          '通知設定',
+          AppLocalizations.of(context)!.notificationSettings,
           style: TextStyle(
             color: Colors.white,
             fontSize: 18,
@@ -119,12 +119,12 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
         padding: const EdgeInsets.all(16),
         children: [
           // トレーニング通知
-          _buildSectionHeader('トレーニング'),
+          _buildSectionHeader(AppLocalizations.of(context)!.workout),
           _buildNotificationCard(
             icon: Icons.fitness_center,
             iconColor: Colors.blue,
-            title: 'トレーニングリマインダー',
-            subtitle: '毎日のトレーニングを通知',
+            title: AppLocalizations.of(context)!.workoutReminders,
+            subtitle: AppLocalizations.of(context)!.profile_毎日のトレーニングを通知,
             value: _workoutReminders,
             onChanged: (value) {
               setState(() => _workoutReminders = value);
@@ -140,7 +140,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
               child: ListTile(
                 leading: Icon(Icons.access_time, color: Colors.blue[700]),
                 title: const Text(
-                  'リマインダー時刻',
+                  AppLocalizations.of(context)!.profile_リマインダー時刻,
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ),
                 subtitle: Text(_formatTime(_reminderTime)),
@@ -154,8 +154,8 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
           _buildNotificationCard(
             icon: Icons.flag,
             iconColor: Colors.green,
-            title: '目標達成通知',
-            subtitle: '目標達成時にお知らせ',
+            title: AppLocalizations.of(context)!.profile_目標達成通知,
+            subtitle: AppLocalizations.of(context)!.profile_目標達成時にお知らせ,
             value: _goalProgress,
             onChanged: (value) {
               setState(() => _goalProgress = value);
@@ -166,12 +166,12 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
           const SizedBox(height: 24),
 
           // ソーシャル通知
-          _buildSectionHeader('ソーシャル'),
+          _buildSectionHeader(AppLocalizations.of(context)!.profile_ソーシャル),
           _buildNotificationCard(
             icon: Icons.message,
             iconColor: Colors.purple,
-            title: '新着メッセージ',
-            subtitle: 'メッセージ受信時に通知',
+            title: AppLocalizations.of(context)!.profile_新着メッセージ,
+            subtitle: AppLocalizations.of(context)!.profile_メッセージ受信時に通知,
             value: _newMessages,
             onChanged: (value) {
               setState(() => _newMessages = value);
@@ -183,8 +183,8 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
           _buildNotificationCard(
             icon: Icons.people,
             iconColor: Colors.orange,
-            title: 'パートナーリクエスト',
-            subtitle: 'リクエスト受信時に通知',
+            title: AppLocalizations.of(context)!.profile_パートナーリクエスト,
+            subtitle: AppLocalizations.of(context)!.profile_リクエスト受信時に通知,
             value: _partnerRequests,
             onChanged: (value) {
               setState(() => _partnerRequests = value);
@@ -195,12 +195,12 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
           const SizedBox(height: 24),
 
           // 一般通知
-          _buildSectionHeader('一般'),
+          _buildSectionHeader(AppLocalizations.of(context)!.general),
           _buildNotificationCard(
             icon: Icons.store,
             iconColor: Colors.teal,
-            title: 'ジム情報更新',
-            subtitle: 'お気に入りジムの更新通知',
+            title: AppLocalizations.of(context)!.profile_ジム情報更新,
+            subtitle: AppLocalizations.of(context)!.profile_お気に入りジムの更新通知,
             value: _gymUpdates,
             onChanged: (value) {
               setState(() => _gymUpdates = value);
@@ -212,8 +212,8 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
           _buildNotificationCard(
             icon: Icons.campaign,
             iconColor: Colors.red,
-            title: 'プロモーション',
-            subtitle: '特別オファーやキャンペーン',
+            title: AppLocalizations.of(context)!.profile_プロモーション,
+            subtitle: AppLocalizations.of(context)!.profile_特別オファーやキャンペーン,
             value: _promotions,
             onChanged: (value) {
               setState(() => _promotions = value);

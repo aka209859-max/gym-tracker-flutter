@@ -107,7 +107,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
           controller: controller,
           maxLines: 5,
           decoration: InputDecoration(
-            hintText: 'メモを入力してください',
+            hintText: AppLocalizations.of(context)!.workout_メモを入力してください,
             border: OutlineInputBorder(),
           ),
         ),
@@ -132,7 +132,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
         await _noteService.updateNote(note.id, result);
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('メモを更新しました')),
+            const SnackBar(content: Text(AppLocalizations.of(context)!.noteUpdated)),
           );
           _loadMemosWithWorkouts(); // リロード
         }
@@ -151,7 +151,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('メモを削除'),
+        title: Text(AppLocalizations.of(context)!.workout_メモを削除),
         content: Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(
@@ -211,7 +211,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        'メモはまだありません',
+                        AppLocalizations.of(context)!.workout_メモはまだありません,
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.grey.shade600,
@@ -272,7 +272,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
                                         Text(
                                           date != null
                                               ? DateFormat('yyyy/MM/dd').format(date)
-                                              : '日付不明',
+                                              : AppLocalizations.of(context)!.workout_日付不明,
                                           style: TextStyle(
                                             fontSize: 14,
                                             fontWeight: FontWeight.bold,

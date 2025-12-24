@@ -14,13 +14,13 @@ class SubscriptionManagementService {
 
   /// 解約・ダウングレード理由
   static const List<String> churnReasons = [
-    '料金が高い',
-    '使用頻度が低い',
-    '必要な機能がない',
-    'ジムを辞めた',
-    '他のアプリに移行',
-    '一時的に利用しない',
-    'その他',
+    AppLocalizations.of(context)!.subscription_料金が高い,
+    AppLocalizations.of(context)!.subscription_使用頻度が低い,
+    AppLocalizations.of(context)!.subscription_必要な機能がない,
+    AppLocalizations.of(context)!.subscription_ジムを辞めた,
+    AppLocalizations.of(context)!.subscription_他のアプリに移行,
+    AppLocalizations.of(context)!.subscription_一時的に利用しない,
+    AppLocalizations.of(context)!.bodyPartOther,
   ];
 
   /// サブスクリプションを一時停止
@@ -223,11 +223,11 @@ class SubscriptionManagementService {
   Map<String, String> suggestRetentionOption(String currentPlan, String reason) {
     // 理由に応じて最適な代替案を提案
     switch (reason) {
-      case '料金が高い':
+      case AppLocalizations.of(context)!.subscription_料金が高い:
         if (currentPlan == 'pro') {
           return {
             'type': 'downgrade',
-            'message': 'Premiumプランにダウングレードすれば月¥480節約できます',
+            'message': AppLocalizations.of(context)!.subscription_Premiumプランにダウングレードすれば月480節約できます,
           };
         } else {
           return {
@@ -236,25 +236,25 @@ class SubscriptionManagementService {
           };
         }
       
-      case '使用頻度が低い':
+      case AppLocalizations.of(context)!.subscription_使用頻度が低い:
         return {
           'type': 'pause',
-          'message': '一時停止で無駄な支払いを避けて、必要な時に再開できます',
+          'message': AppLocalizations.of(context)!.subscription_一時停止で無駄な支払いを避けて必要な時に再開できます,
         };
       
-      case 'ジムを辞めた':
+      case AppLocalizations.of(context)!.subscription_ジムを辞めた:
         return {
           'type': 'pause',
-          'message': '新しいジムが見つかるまで一時停止しませんか？',
+          'message': AppLocalizations.of(context)!.subscription_新しいジムが見つかるまで一時停止しませんか,
         };
       
-      case '一時的に利用しない':
+      case AppLocalizations.of(context)!.subscription_一時的に利用しない:
         return {
           'type': 'pause',
-          'message': '最大3ヶ月の一時停止で、復帰時もスムーズに再開できます',
+          'message': AppLocalizations.of(context)!.subscription_最大3ヶ月の一時停止で復帰時もスムーズに再開できます,
         };
       
-      case '必要な機能がない':
+      case AppLocalizations.of(context)!.subscription_必要な機能がない:
         if (currentPlan == 'pro' || currentPlan == 'premium') {
           return {
             'type': 'ai_pack',
@@ -263,13 +263,13 @@ class SubscriptionManagementService {
         }
         return {
           'type': 'downgrade',
-          'message': '無料プランでも基本機能は使えます',
+          'message': AppLocalizations.of(context)!.subscription_無料プランでも基本機能は使えます,
         };
       
       default:
         return {
           'type': 'pause',
-          'message': '解約前に1ヶ月の一時停止を試してみませんか？',
+          'message': AppLocalizations.of(context)!.subscription_解約前に1ヶ月の一時停止を試してみませんか,
         };
     }
   }

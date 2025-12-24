@@ -49,7 +49,7 @@ class AIAbusePreventionService {
           allowed: false,
           reason: '今月の利用上限（${MAX_AI_CALLS_PER_MONTH}回）に達しました。\n'
                  '異常な利用パターンが検出されました。\n'
-                 'サポートにお問い合わせください。',
+                 AppLocalizations.of(context)!.general_サポートにお問い合わせください,
           retryAfter: null,
         );
       }
@@ -141,10 +141,10 @@ class AIAbusePreventionService {
       }).length;
       
       if (recentCalls >= 10) {
-        await _flagUser(userId, 'rapid_calls', '5分以内に10回の連続呼び出し');
+        await _flagUser(userId, 'rapid_calls', AppLocalizations.of(context)!.general_5分以内に10回の連続呼び出し);
         return AnomalyDetectionResult(
           isAnomaly: true,
-          reason: 'ボット的な利用パターンが検出されました。',
+          reason: AppLocalizations.of(context)!.general_ボット的な利用パターンが検出されました,
           action: AnomalyAction.temporaryBlock,
         );
       }
@@ -157,10 +157,10 @@ class AIAbusePreventionService {
       }).length;
       
       if (logs.length > 20 && nightCalls / logs.length > 0.5) {
-        await _flagUser(userId, 'night_usage', '深夜時間帯に集中利用');
+        await _flagUser(userId, 'night_usage', AppLocalizations.of(context)!.general_深夜時間帯に集中利用);
         return AnomalyDetectionResult(
           isAnomaly: true,
-          reason: '自動化ツールの利用が疑われます。',
+          reason: AppLocalizations.of(context)!.general_自動化ツールの利用が疑われます,
           action: AnomalyAction.warning,
         );
       }
@@ -177,10 +177,10 @@ class AIAbusePreventionService {
         // 平均間隔が30秒未満（人間は考える時間が必要）
         final avgInterval = intervals.reduce((a, b) => a + b) / intervals.length;
         if (avgInterval < 30) {
-          await _flagUser(userId, 'rapid_automation', '平均30秒未満の連続利用');
+          await _flagUser(userId, 'rapid_automation', AppLocalizations.of(context)!.general_平均30秒未満の連続利用);
           return AnomalyDetectionResult(
             isAnomaly: true,
-            reason: '自動化スクリプトの利用が検出されました。',
+            reason: AppLocalizations.of(context)!.general_自動化スクリプトの利用が検出されました,
             action: AnomalyAction.permanentBlock,
           );
         }

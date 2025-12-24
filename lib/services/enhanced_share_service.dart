@@ -45,7 +45,7 @@ class EnhancedShareService {
       if (kDebugMode) print('❌ Instagram Stories シェアエラー: $e');
       // エラーをユーザーに表示
       if (context.mounted) {
-        _showError(context, 'シェアに失敗しました');
+        _showError(context, AppLocalizations.of(context)!.error_シェアに失敗しました);
       }
     }
   }
@@ -90,7 +90,7 @@ class EnhancedShareService {
             const SizedBox(width: 12),
             const Expanded(
               child: Text(
-                '新記録達成！',
+                AppLocalizations.of(context)!.general_新記録達成,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
@@ -131,7 +131,7 @@ class EnhancedShareService {
             ),
             const SizedBox(height: 16),
             const Text(
-              'この記録をSNSでシェアしますか？',
+              AppLocalizations.of(context)!.general_この記録をSNSでシェアしますか,
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
           ],
@@ -139,12 +139,12 @@ class EnhancedShareService {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('後で'),
+            child: const Text(AppLocalizations.of(context)!.later),
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
             icon: const Icon(Icons.share),
-            label: const Text('シェアする'),
+            label: const Text(AppLocalizations.of(context)!.general_シェアする),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.orange,
               foregroundColor: Colors.white,
@@ -174,7 +174,7 @@ class EnhancedShareService {
     try {
       final user = _auth.currentUser;
       if (user == null) {
-        _showError(context, 'ログインが必要です');
+        _showError(context, AppLocalizations.of(context)!.loginRequired);
         return;
       }
 
@@ -263,7 +263,7 @@ class EnhancedShareService {
       if (kDebugMode) print('❌ トレーニングシェアエラー: $e');
       if (context.mounted) {
         Navigator.of(context).pop();
-        _showError(context, 'シェアに失敗しました');
+        _showError(context, AppLocalizations.of(context)!.error_シェアに失敗しました);
       }
     }
   }
@@ -331,7 +331,7 @@ class EnhancedShareService {
             ),
             const SizedBox(height: 32),
             const Text(
-              '新記録達成！',
+              AppLocalizations.of(context)!.general_新記録達成,
               style: TextStyle(
                 fontSize: 48,
                 fontWeight: FontWeight.bold,

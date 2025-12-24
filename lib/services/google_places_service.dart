@@ -80,7 +80,7 @@ class GooglePlacesService {
           }
         }
         
-        if (data['status'] == 'OK') {
+        if (data['status'] == AppLocalizations.of(context)!.ok) {
           final results = data['results'] as List<dynamic>;
           if (kDebugMode) {
             print('   ✅ Found ${results.length} places');
@@ -125,33 +125,33 @@ class GooglePlacesService {
   List<GooglePlace> _filterNonGymFacilities(List<GooglePlace> places) {
     // 除外キーワードリスト（施設名に含まれていたら除外）
     const excludeKeywords = [
-      '体育館',
-      '公園',
-      '直売所',
-      '市民センター',
-      '公民館',
-      '図書館',
-      '役所',
-      '学校',
-      '武道館',
-      '陸上競技場',
-      '野球場',
-      'テニスコート',
-      '市役所',
-      '町役場',
-      '村役場',
-      '区役所',
-      '保健所',
-      '病院',
-      'クリニック',
-      '歯科',
-      'ホテル',
-      '旅館',
-      '温泉',
-      '銭湯',
-      'マッサージ',
-      '整体',
-      '接骨院',
+      AppLocalizations.of(context)!.general_体育館,
+      AppLocalizations.of(context)!.general_公園,
+      AppLocalizations.of(context)!.general_直売所,
+      AppLocalizations.of(context)!.general_市民センター,
+      AppLocalizations.of(context)!.general_公民館,
+      AppLocalizations.of(context)!.general_図書館,
+      AppLocalizations.of(context)!.general_役所,
+      AppLocalizations.of(context)!.general_学校,
+      AppLocalizations.of(context)!.general_武道館,
+      AppLocalizations.of(context)!.general_陸上競技場,
+      AppLocalizations.of(context)!.general_野球場,
+      AppLocalizations.of(context)!.gym_テニスコート,
+      AppLocalizations.of(context)!.general_市役所,
+      AppLocalizations.of(context)!.general_町役場,
+      AppLocalizations.of(context)!.general_村役場,
+      AppLocalizations.of(context)!.general_区役所,
+      AppLocalizations.of(context)!.general_保健所,
+      AppLocalizations.of(context)!.general_病院,
+      AppLocalizations.of(context)!.general_クリニック,
+      AppLocalizations.of(context)!.general_歯科,
+      AppLocalizations.of(context)!.general_ホテル,
+      AppLocalizations.of(context)!.general_旅館,
+      AppLocalizations.of(context)!.general_温泉,
+      AppLocalizations.of(context)!.general_銭湯,
+      AppLocalizations.of(context)!.general_マッサージ,
+      AppLocalizations.of(context)!.general_整体,
+      AppLocalizations.of(context)!.general_接骨院,
     ];
     
     return places.where((place) {
@@ -220,7 +220,7 @@ class GooglePlacesService {
           }
         }
         
-        if (data['status'] == 'OK' || data['status'] == 'ZERO_RESULTS') {
+        if (data['status'] == AppLocalizations.of(context)!.ok || data['status'] == 'ZERO_RESULTS') {
           final results = data['results'] as List<dynamic>? ?? [];
           if (kDebugMode) {
             print('   ✅ Found ${results.length} places');
@@ -312,7 +312,7 @@ class GooglePlacesService {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         
-        if (data['status'] == 'OK') {
+        if (data['status'] == AppLocalizations.of(context)!.ok) {
           final result = data['result'] as Map<String, dynamic>;
           
           // 🎯 Hiveにキャッシュ（30日TTL - Google規約準拠）

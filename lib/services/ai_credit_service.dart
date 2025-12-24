@@ -24,7 +24,7 @@ class AICreditService {
       if (user == null) {
         return CanUseAIResult(
           allowed: false,
-          reason: 'ログインが必要です',
+          reason: AppLocalizations.of(context)!.loginRequired,
         );
       }
       
@@ -53,7 +53,7 @@ class AICreditService {
         if (!rateLimitResult.allowed) {
           return CanUseAIResult(
             allowed: false,
-            reason: rateLimitResult.reason ?? 'レート制限に達しました',
+            reason: rateLimitResult.reason ?? AppLocalizations.of(context)!.general_レート制限に達しました,
           );
         }
         
@@ -70,7 +70,7 @@ class AICreditService {
         }
         return CanUseAIResult(
           allowed: false,
-          reason: '今月のAI利用回数（20回）を使い切りました',
+          reason: AppLocalizations.of(context)!.general_今月のAI利用回数20回を使い切りました,
         );
       }
       
@@ -90,13 +90,13 @@ class AICreditService {
       
       return CanUseAIResult(
         allowed: false,
-        reason: '今月のAI利用回数（3回）を使い切りました',
+        reason: AppLocalizations.of(context)!.general_今月のAI利用回数3回を使い切りました,
       );
     } catch (e) {
       print('❌ [canUseAI] エラー: $e');
       return CanUseAIResult(
         allowed: false,
-        reason: 'エラーが発生しました',
+        reason: AppLocalizations.of(context)!.errorOccurred,
       );
     }
   }

@@ -230,7 +230,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                'ジム画像',
+                                AppLocalizations.of(context)!.gym_ジム画像,
                                 style: TextStyle(
                                   color: Colors.white.withValues(alpha: 0.3),
                                   fontSize: 12,
@@ -369,7 +369,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                   Icon(Icons.people, color: Colors.grey, size: 24),
                   SizedBox(width: 8),
                   Text(
-                    '混雑度情報',
+                    AppLocalizations.of(context)!.gym_混雑度情報,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -396,7 +396,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '最初の報告者になりましょう！',
+                      AppLocalizations.of(context)!.gym_最初の報告者になりましょう,
                       style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                     ),
                   ],
@@ -415,7 +415,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                     );
                   },
                   icon: const Icon(Icons.edit),
-                  label: const Text('混雑度を報告する'),
+                  label: const Text(AppLocalizations.of(context)!.gym_混雑度を報告する),
                 ),
               ),
             ],
@@ -443,7 +443,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  '現在の混雑度',
+                  AppLocalizations.of(context)!.gym_現在の混雑度,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 Column(
@@ -515,7 +515,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                   );
                 },
                 icon: const Icon(Icons.edit),
-                label: const Text('混雑度を報告する'),
+                label: const Text(AppLocalizations.of(context)!.gym_混雑度を報告する),
               ),
             ),
           ],
@@ -539,7 +539,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                 Icon(Icons.info, color: Colors.blue, size: 24),
                 SizedBox(width: 8),
                 Text(
-                  '基本情報',
+                  AppLocalizations.of(context)!.gym_基本情報,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -554,8 +554,8 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
             // 月額料金は公式サイトで確認
             _buildInfoNotice(
               Icons.open_in_new,
-              '料金・詳細情報',
-              '最新の料金プランや設備情報は、ジムの公式サイトでご確認ください',
+              AppLocalizations.of(context)!.gym_料金詳細情報,
+              AppLocalizations.of(context)!.gym_最新の料金プランや設備情報はジムの公式サイトでご確認ください,
             ),
             const SizedBox(height: 16),
             // チェックインボタン
@@ -564,7 +564,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
               child: ElevatedButton.icon(
                 onPressed: _checkInToGym,
                 icon: const Icon(Icons.check_circle_outline),
-                label: const Text('このジムにチェックイン'),
+                label: const Text(AppLocalizations.of(context)!.gym_このジムにチェックイン),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   backgroundColor: Theme.of(context).colorScheme.primary,
@@ -685,7 +685,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
               Row(
                 children: [
                   const Text(
-                    '設備・マシン情報',
+                    AppLocalizations.of(context)!.gym_設備マシン情報,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(width: 8),
@@ -786,14 +786,14 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: const Text('Firebase設定が必要です'),
+                      title: const Text(AppLocalizations.of(context)!.gym_Firebase設定が必要です),
                       content: const Text(
                         'チェックイン機能を使用するには、Firebase Consoleで設定ファイルを取得し、firebase_options.dartを更新してください。',
                       ),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),
-                          child: const Text('了解'),
+                          child: const Text(AppLocalizations.of(context)!.gym_了解),
                         ),
                       ],
                     ),
@@ -865,7 +865,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
               child: OutlinedButton.icon(
                 onPressed: _isFavorite == null ? null : _toggleFavorite,
                 icon: Icon(_isFavorite == true ? Icons.favorite : Icons.favorite_border),
-                label: Text(_isFavorite == true ? 'お気に入り済み' : AppLocalizations.of(context)!.favorite),
+                label: Text(_isFavorite == true ? AppLocalizations.of(context)!.gym_お気に入り済み : AppLocalizations.of(context)!.favorite),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: _isFavorite == true ? Colors.pink : null,
                   side: BorderSide(
@@ -1019,7 +1019,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                 return Column(
                   children: reviews.map((doc) {
                     final data = doc.data() as Map<String, dynamic>;
-                    final userName = data['userName'] ?? 'ユーザー';
+                    final userName = data['userName'] ?? AppLocalizations.of(context)!.gym_ユーザー;
                     final overallRating = (data['overallRating'] ?? 0).toDouble();
                     final comment = data['comment'] ?? '';
                     final createdAt = (data['createdAt'] as Timestamp?)?.toDate();
@@ -1130,7 +1130,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                       Text('🏆', style: TextStyle(fontSize: 14)),
                       SizedBox(width: 4),
                       Text(
-                        '広告',
+                        AppLocalizations.of(context)!.gym_広告,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
@@ -1353,7 +1353,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '店舗に直接予約申込ができます',
+                      AppLocalizations.of(context)!.gym_店舗に直接予約申込ができます,
                       style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey[700],
@@ -1659,7 +1659,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
   String _getCrowdLevelText(int level) {
     switch (level) {
       case 1:
-        return '空いています';
+        return AppLocalizations.of(context)!.gym_空いています;
       case 2:
         return AppLocalizations.of(context)!.moderatelyEmpty;
       case 3:
@@ -1667,7 +1667,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
       case 4:
         return AppLocalizations.of(context)!.moderatelyCrowded;
       case 5:
-        return '超混雑';
+        return AppLocalizations.of(context)!.gym_超混雑;
       default:
         return AppLocalizations.of(context)!.unknown;
     }

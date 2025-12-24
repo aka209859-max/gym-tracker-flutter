@@ -45,22 +45,22 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
 
   // 利用可能なオプション
   final Map<String, String> _trainingGoals = {
-    'muscle_gain': '筋力増強',
-    'weight_loss': '減量',
-    'endurance': '持久力向上',
+    'muscle_gain': AppLocalizations.of(context)!.goalStrengthGain,
+    'weight_loss': AppLocalizations.of(context)!.goalWeightLoss,
+    'endurance': AppLocalizations.of(context)!.goalEndurance,
     'flexibility': AppLocalizations.of(context)!.goalFlexibility,
   };
 
   final Map<String, String> _experienceLevels = {
-    'beginner': '初心者',
-    'intermediate': '中級者',
-    'advanced': '上級者',
+    'beginner': AppLocalizations.of(context)!.levelBeginner,
+    'intermediate': AppLocalizations.of(context)!.levelIntermediate,
+    'advanced': AppLocalizations.of(context)!.levelAdvanced,
     'expert': AppLocalizations.of(context)!.levelExpert,
   };
 
   final Map<String, String> _genders = {
-    'male': '男性',
-    'female': '女性',
+    'male': AppLocalizations.of(context)!.genderMale,
+    'female': AppLocalizations.of(context)!.genderFemale,
     'other': AppLocalizations.of(context)!.other,
   };
 
@@ -93,7 +93,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
       // 位置情報取得失敗時は続行（フィルターから距離を除外）
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('位置情報を取得できませんでした')),
+          const SnackBar(content: Text(AppLocalizations.of(context)!.general_位置情報を取得できませんでした)),
         );
       }
     }
@@ -195,7 +195,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
             ],
 
             // トレーニング目標フィルター
-            const Text('トレーニング目標', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text(AppLocalizations.of(context)!.profile_トレーニング目標, style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
@@ -291,7 +291,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
               const Padding(
                 padding: EdgeInsets.only(top: 4),
                 child: Text(
-                  'あなたのBIG3平均1RMの±15%範囲内のユーザーのみ表示',
+                  AppLocalizations.of(context)!.general_あなたのBIG3平均1RMの15範囲内のユーザーのみ表示,
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ),
@@ -307,7 +307,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                       const SizedBox(width: 8),
                       const Expanded(
                         child: Text(
-                          '同じジム・時間帯の人のみ（±2時間）',
+                          AppLocalizations.of(context)!.general_同じジム時間帯の人のみ2時間,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -328,7 +328,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
               const Padding(
                 padding: EdgeInsets.only(top: 4),
                 child: Text(
-                  'あなたがよく行くジムで、同じ時間帯（±2時間）にトレーニングする人のみ表示',
+                  AppLocalizations.of(context)!.general_あなたがよく行くジムで同じ時間帯2時間にトレーニングする人のみ表示,
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ),
@@ -416,7 +416,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              '条件に一致するパートナーが見つかりませんでした',
+              AppLocalizations.of(context)!.general_条件に一致するパートナーが見つかりませんでした,
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey[600],
@@ -483,7 +483,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Proユーザーのみ表示中',
+                      AppLocalizations.of(context)!.general_Proユーザーのみ表示中,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -491,7 +491,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Proプランにアップグレードで全ユーザーを検索可能',
+                      AppLocalizations.of(context)!.general_Proプランにアップグレードで全ユーザーを検索可能,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey[700],

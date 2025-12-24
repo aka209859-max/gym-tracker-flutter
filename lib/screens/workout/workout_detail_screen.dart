@@ -52,14 +52,14 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
   // ✅ v1.0.168: 腹筋系種目かどうかを判定
   bool _isAbsExercise(String exerciseName) {
     const absExercises = [
-      'クランチ',
-      'レッグレイズ',
-      'プランク',
-      'アブローラー',
-      'ハンギングレッグレイズ',
-      'サイドプランク',
-      'バイシクルクランチ',
-      'ケーブルクランチ',
+      AppLocalizations.of(context)!.crunch,
+      AppLocalizations.of(context)!.legRaise,
+      AppLocalizations.of(context)!.plank,
+      AppLocalizations.of(context)!.abRoller,
+      AppLocalizations.of(context)!.hangingLegRaise,
+      AppLocalizations.of(context)!.sidePlank,
+      AppLocalizations.of(context)!.bicycleCrunch,
+      AppLocalizations.of(context)!.cableCrunch,
     ];
     return absExercises.contains(exerciseName);
   }
@@ -298,7 +298,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                         const SizedBox(
                           width: 40,
                           child: Text(
-                            'セット',
+                            AppLocalizations.of(context)!.workoutSetsLabel,
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
@@ -308,7 +308,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                         ),
                         const Expanded(
                           child: Text(
-                            '重さ',
+                            AppLocalizations.of(context)!.workout_重さ,
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
@@ -319,7 +319,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                         SizedBox(
                           width: 60,
                           child: Text(
-                            _isAbsExercise(exercise.name) ? '秒数' : '回数',
+                            _isAbsExercise(exercise.name) ? AppLocalizations.of(context)!.workout_秒数 : AppLocalizations.of(context)!.repsCount,
                             style: const TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
@@ -341,7 +341,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                         const SizedBox(
                           width: 40,
                           child: Text(
-                            '補助',
+                            AppLocalizations.of(context)!.workout_補助,
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
@@ -441,7 +441,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                         const Icon(Icons.note, size: 20),
                         const SizedBox(width: 8),
                         const Text(
-                          '記録時のメモ',
+                          AppLocalizations.of(context)!.workout_記録時のメモ,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -487,7 +487,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                   ),
                   const SizedBox(width: 8),
                   const Text(
-                    'トレーニングメモ',
+                    AppLocalizations.of(context)!.trainingMemo,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -528,7 +528,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                 ),
               ] else ...[
                 Text(
-                  'タップしてトレーニングの感想や気づきを記録',
+                  AppLocalizations.of(context)!.workout_タップしてトレーニングの感想や気づきを記録,
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey[600],
@@ -572,7 +572,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
       case SetType.failure:
         icon = Icons.local_fire_department;
         color = Colors.red;
-        label = '限界';
+        label = AppLocalizations.of(context)!.limit;
         break;
       default:
         return const SizedBox.shrink();

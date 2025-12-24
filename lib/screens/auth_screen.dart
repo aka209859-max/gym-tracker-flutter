@@ -137,15 +137,15 @@ class _AuthScreenState extends State<AuthScreen> {
       case 'user-not-found':
         return AppLocalizations.of(context)!.emailNotRegistered;
       case 'wrong-password':
-        return 'パスワードが正しくありません';
+        return AppLocalizations.of(context)!.incorrectPassword;
       case 'email-already-in-use':
         return AppLocalizations.of(context)!.emailNotRegistered;
       case 'invalid-email':
-        return 'メールアドレスの形式が正しくありません';
+        return AppLocalizations.of(context)!.invalidEmailFormat;
       case 'weak-password':
         return AppLocalizations.of(context)!.passwordMin6;
       case 'network-request-failed':
-        return 'ネットワーク接続を確認してください';
+        return AppLocalizations.of(context)!.general_ネットワーク接続を確認してください;
       default:
         return AppLocalizations.of(context)!.error;
     }
@@ -177,7 +177,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'フィットネスソーシャルマップ',
+                  AppLocalizations.of(context)!.general_フィットネスソーシャルマップ,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Colors.grey[600],
                       ),
@@ -202,7 +202,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             ),
                             validator: (value) {
                               if (!_isLogin && (value == null || value.trim().isEmpty)) {
-                                return '名前を入力してください';
+                                return AppLocalizations.of(context)!.general_名前を入力してください;
                               }
                               return null;
                             },
@@ -287,7 +287,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                   ),
                                 )
                               : Text(
-                                  _isLogin ? 'ログイン' : AppLocalizations.of(context)!.signUp,
+                                  _isLogin ? AppLocalizations.of(context)!.login : AppLocalizations.of(context)!.signUp,
                                   style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -310,7 +310,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         child: Text(
                           _isLogin
                               ? AppLocalizations.of(context)!.dontHaveAccount
-                              : '既にアカウントをお持ちの方はこちら',
+                              : AppLocalizations.of(context)!.general_既にアカウントをお持ちの方はこちら,
                         ),
                       ),
                     ],
@@ -321,7 +321,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
                 // 利用規約・プライバシーポリシー
                 Text(
-                  '続行することで、利用規約とプライバシーポリシーに同意したものとみなされます',
+                  AppLocalizations.of(context)!.general_続行することで利用規約とプライバシーポリシーに同意したものとみなされます,
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.grey[600],

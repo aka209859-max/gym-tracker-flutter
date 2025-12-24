@@ -29,7 +29,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
     
     if (code.isEmpty) {
       setState(() {
-        _errorMessage = '招待コードを入力してください';
+        _errorMessage = AppLocalizations.of(context)!.general_招待コードを入力してください;
       });
       return;
     }
@@ -72,7 +72,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '招待コードが正常に適用されました！',
+                  AppLocalizations.of(context)!.general_招待コードが正常に適用されました,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 16),
@@ -81,7 +81,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
                 Text('✅ 友達: AI使用回数 +3回'),
                 SizedBox(height: 16),
                 Text(
-                  '特典はすぐに反映されます！',
+                  AppLocalizations.of(context)!.general_特典はすぐに反映されます,
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ],
@@ -100,7 +100,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
       } else {
         setState(() {
           _isLoading = false;
-          _errorMessage = '招待コードの適用に失敗しました';
+          _errorMessage = AppLocalizations.of(context)!.error_招待コードの適用に失敗しました;
         });
       }
     } catch (e) {
@@ -115,7 +115,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('招待コードを使用'),
+        title: const Text(AppLocalizations.of(context)!.general_招待コードを使用),
         backgroundColor: Colors.deepPurple,
       ),
       body: SingleChildScrollView(
@@ -131,7 +131,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
             ),
             const SizedBox(height: 24),
             const Text(
-              '招待コードを入力',
+              AppLocalizations.of(context)!.general_招待コードを入力,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 24,
@@ -246,7 +246,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
                       ),
                     )
                   : const Text(
-                      '招待コードを使用',
+                      AppLocalizations.of(context)!.general_招待コードを使用,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -274,7 +274,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
                         Icon(Icons.stars, color: Colors.amber),
                         SizedBox(width: 8),
                         Text(
-                          '招待コードの特典',
+                          AppLocalizations.of(context)!.general_招待コードの特典,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

@@ -62,7 +62,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
             Icon(Icons.error_outline, size: 64, color: Colors.red[300]),
             const SizedBox(height: 16),
             Text(
-              'メッセージの読み込みに失敗しました',
+              AppLocalizations.of(context)!.error_メッセージの読み込みに失敗しました,
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
@@ -127,7 +127,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
       future: _messagingService.getUserInfo(otherUserId),
       builder: (context, snapshot) {
         final userInfo = snapshot.data;
-        final displayName = userInfo?['displayName'] ?? '不明なユーザー';
+        final displayName = userInfo?['displayName'] ?? AppLocalizations.of(context)!.general_不明なユーザー;
         final photoUrl = userInfo?['photoUrl'] as String?;
 
         return Card(

@@ -156,7 +156,7 @@ class MagicNumberService {
   /// Returns: ユーザーを励ますメッセージ
   String getProgressMessage(int count) {
     if (count == 0) {
-      return '最初の1記録を追加しましょう！';
+      return AppLocalizations.of(context)!.general_最初の1記録を追加しましょう;
     } else if (count == 1) {
       return 'いいスタートです！あと${magicNumberRecords - count}記録で習慣化達成！';
     } else if (count < magicNumberRecords) {

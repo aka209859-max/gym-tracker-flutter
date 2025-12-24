@@ -221,7 +221,7 @@ class _PartnerReservationSettingsScreenState
                           });
                         },
                         title: const Text(
-                          'ビジター利用を受け付ける',
+                          AppLocalizations.of(context)!.profile_ビジター利用を受け付ける,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -229,8 +229,8 @@ class _PartnerReservationSettingsScreenState
                         ),
                         subtitle: Text(
                           _acceptsVisitors
-                              ? 'ユーザーアプリに「ビジター可」バッジが表示されます'
-                              : '予約ボタンは非表示になります',
+                              ? AppLocalizations.of(context)!.profile_ユーザーアプリにビジター可バッジが表示されます
+                              : AppLocalizations.of(context)!.profile_予約ボタンは非表示になります,
                           style: const TextStyle(fontSize: 13),
                         ),
                         secondary: Icon(
@@ -307,7 +307,7 @@ class _PartnerReservationSettingsScreenState
                     // プレビュー
                     if (_acceptsVisitors) ...[
                       const Text(
-                        'ユーザーアプリでの表示プレビュー',
+                        AppLocalizations.of(context)!.profile_ユーザーアプリでの表示プレビュー,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

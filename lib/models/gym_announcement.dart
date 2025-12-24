@@ -103,17 +103,17 @@ extension AnnouncementTypeExtension on AnnouncementType {
   String get displayName {
     switch (this) {
       case AnnouncementType.general:
-        return 'お知らせ';
+        return AppLocalizations.of(context)!.announcement;
       case AnnouncementType.campaign:
-        return 'キャンペーン';
+        return AppLocalizations.of(context)!.gym_キャンペーン;
       case AnnouncementType.event:
-        return 'イベント';
+        return AppLocalizations.of(context)!.gym_イベント;
       case AnnouncementType.maintenance:
-        return 'メンテナンス';
+        return AppLocalizations.of(context)!.gym_メンテナンス;
       case AnnouncementType.newEquipment:
-        return '新規設備';
+        return AppLocalizations.of(context)!.gym_新規設備;
       case AnnouncementType.hours:
-        return '営業時間';
+        return AppLocalizations.of(context)!.hours;
     }
   }
   

@@ -103,7 +103,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
 
     if (weight == null && bodyFat == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('体重または体脂肪率を入力してください')),
+        const SnackBar(content: Text(AppLocalizations.of(context)!.general_体重または体脂肪率を入力してください)),
       );
       return;
     }
@@ -296,7 +296,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
       behavior: HitTestBehavior.translucent,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('体重・体脂肪率'),
+          title: const Text(AppLocalizations.of(context)!.profileBodyWeight),
           backgroundColor: theme.colorScheme.primary,
           foregroundColor: Colors.white,
         ),
@@ -315,7 +315,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            '今日の記録',
+                            AppLocalizations.of(context)!.general_今日の記録,
                             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 16),
@@ -330,7 +330,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                                 prefixIcon: Icon(Icons.calendar_today),
                               ),
                               child: Text(
-                                DateFormat('yyyy年MM月dd日').format(_selectedDate),
+                                DateFormat(AppLocalizations.of(context)!.dateFormatYearMonthDay).format(_selectedDate),
                               ),
                             ),
                           ),
@@ -492,7 +492,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                   },
                   activeColor: Colors.grey.shade400,
                 ),
-                Text('全て', style: TextStyle(fontSize: 14, color: Colors.grey.shade700)),
+                Text(AppLocalizations.of(context)!.general_全て, style: TextStyle(fontSize: 14, color: Colors.grey.shade700)),
               ],
             ),
           ],
@@ -649,7 +649,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                 final date = filtered[index]['date'] as DateTime;
                 final value = spot.y;
                 
-                final unit = _selectedChartType == ChartType.weight ? 'kg' : '%';
+                final unit = _selectedChartType == ChartType.weight ? AppLocalizations.of(context)!.kg : '%';
                 
                 return LineTooltipItem(
                   '${DateFormat('M/d').format(date)}\n${value.toStringAsFixed(1)}$unit',
@@ -697,7 +697,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
               Icon(Icons.analytics_outlined, size: 48, color: Colors.grey[400]),
               const SizedBox(height: 16),
               Text(
-                '記録がありません',
+                AppLocalizations.of(context)!.general_記録がありません,
                 style: TextStyle(fontSize: 16, color: Colors.grey[600]),
               ),
             ],
@@ -713,7 +713,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
           const Padding(
             padding: EdgeInsets.all(16),
             child: Text(
-              '記録履歴',
+              AppLocalizations.of(context)!.workout_記録履歴,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ),
@@ -737,7 +737,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                     size: 20,
                   ),
                 ),
-                title: Text(DateFormat('yyyy年MM月dd日').format(date)),
+                title: Text(DateFormat(AppLocalizations.of(context)!.dateFormatYearMonthDay).format(date)),
                 subtitle: Row(
                   children: [
                     if (weight != null) Text('体重: ${weight.toStringAsFixed(1)}kg'),

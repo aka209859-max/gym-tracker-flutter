@@ -171,7 +171,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                   children: [
                     // 種目リスト
                     const Text(
-                      'トレーニング種目',
+                      AppLocalizations.of(context)!.workout_トレーニング種目,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -248,7 +248,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                     if (widget.record.trainerNotes.isNotEmpty) ...[
                       const SizedBox(height: 24),
                       const Text(
-                        'トレーナーメモ',
+                        AppLocalizations.of(context)!.workout_トレーナーメモ,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

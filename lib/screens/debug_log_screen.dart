@@ -17,7 +17,7 @@ class _DebugLogScreenState extends State<DebugLogScreen> {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('デバッグログ'),
+        title: const Text(AppLocalizations.of(context)!.general_デバッグログ),
         backgroundColor: Colors.deepPurple,
         foregroundColor: Colors.white,
         actions: [
@@ -28,12 +28,12 @@ class _DebugLogScreenState extends State<DebugLogScreen> {
               Clipboard.setData(ClipboardData(text: logText));
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('ログをクリップボードにコピーしました'),
+                  content: Text(AppLocalizations.of(context)!.general_ログをクリップボードにコピーしました),
                   duration: Duration(seconds: 2),
                 ),
               );
             },
-            tooltip: 'ログをコピー',
+            tooltip: AppLocalizations.of(context)!.general_ログをコピー,
           ),
           IconButton(
             icon: const Icon(Icons.delete),
@@ -43,12 +43,12 @@ class _DebugLogScreenState extends State<DebugLogScreen> {
               });
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('ログをクリアしました'),
+                  content: Text(AppLocalizations.of(context)!.general_ログをクリアしました),
                   duration: Duration(seconds: 1),
                 ),
               );
             },
-            tooltip: 'ログをクリア',
+            tooltip: AppLocalizations.of(context)!.general_ログをクリア,
           ),
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -71,7 +71,7 @@ class _DebugLogScreenState extends State<DebugLogScreen> {
                   ),
                   SizedBox(height: 16),
                   Text(
-                    'まだログがありません',
+                    AppLocalizations.of(context)!.general_まだログがありません,
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.grey,

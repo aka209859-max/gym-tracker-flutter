@@ -108,14 +108,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             Icon(Icons.upload_file, color: Colors.purple),
             SizedBox(width: 8),
-            Text('データ取り込み'),
+            Text(AppLocalizations.of(context)!.profile_データ取り込み),
           ],
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             const Text(
-              'トレーニング記録をどの形式で取り込みますか？',
+              AppLocalizations.of(context)!.profile_トレーニング記録をどの形式で取り込みますか,
               style: TextStyle(fontSize: 14),
             ),
             const SizedBox(height: 20),
@@ -127,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               title: const Text('📸 写真から取り込み'),
               subtitle: const Text(
-                '他アプリのスクリーンショット',
+                AppLocalizations.of(context)!.profile_他アプリのスクリーンショット,
                 style: TextStyle(fontSize: 12),
               ),
               onTap: () => Navigator.pop(context, 'photo'),
@@ -141,7 +141,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               title: const Text('📄 CSVから取り込み'),
               subtitle: const Text(
-                'CSV形式のファイル',
+                AppLocalizations.of(context)!.profile_CSV形式のファイル,
                 style: TextStyle(fontSize: 12),
               ),
               onTap: () => Navigator.pop(context, 'csv'),
@@ -298,9 +298,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       } else if (file.path != null) {
         // Mobile: ファイルパスから読み込み
         // Note: file_pickerはモバイルでもbytesを提供するため、通常このパスは使用されない
-        throw Exception('ファイルの読み込みに失敗しました');
+        throw Exception(AppLocalizations.of(context)!.profile_ファイルの読み込みに失敗しました);
       } else {
-        throw Exception('ファイルデータが取得できませんでした');
+        throw Exception(AppLocalizations.of(context)!.profile_ファイルデータが取得できませんでした);
       }
 
       // CSV解析
@@ -380,7 +380,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'あなたの紹介コード',
+                AppLocalizations.of(context)!.profile_あなたの紹介コード,
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.grey,
@@ -420,7 +420,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         );
                       },
-                      tooltip: 'コピー',
+                      tooltip: AppLocalizations.of(context)!.copy,
                     ),
                   ],
                 ),
@@ -434,8 +434,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               const SizedBox(height: 8),
-              _buildRewardItem('あなた', 'AI使用回数 +5回'),
-              _buildRewardItem('友達', 'AI使用回数 +3回'),
+              _buildRewardItem(AppLocalizations.of(context)!.profile_あなた, 'AI使用回数 +5回'),
+              _buildRewardItem(AppLocalizations.of(context)!.profile_友達, 'AI使用回数 +3回'),
               const SizedBox(height: 16),
               Container(
                 padding: const EdgeInsets.all(12),
@@ -472,7 +472,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 );
               },
               icon: const Icon(Icons.share),
-              label: const Text('シェア'),
+              label: const Text(AppLocalizations.of(context)!.profile_シェア),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
                 foregroundColor: Colors.white,
@@ -603,7 +603,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    _userProfile?.displayName ?? 'トレーニングユーザー',
+                    _userProfile?.displayName ?? AppLocalizations.of(context)!.profile_トレーニングユーザー,
                     style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   if (isProUser) const SizedBox(width: 8),
@@ -947,7 +947,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
                   color: badgeColor?.withValues(alpha: 0.2) ?? 
-                      (badge == '有料プラン' ? Colors.amber[100] : Colors.blue[100]),
+                      (badge == AppLocalizations.of(context)!.profile_有料プラン ? Colors.amber[100] : Colors.blue[100]),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -956,7 +956,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
                     color: badgeColor ?? 
-                        (badge == '有料プラン' ? Colors.amber[900] : Colors.blue[900]),
+                        (badge == AppLocalizations.of(context)!.profile_有料プラン ? Colors.amber[900] : Colors.blue[900]),
                   ),
                 ),
               ),
@@ -981,7 +981,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               Icon(Icons.lock, color: Colors.amber[700]),
               const SizedBox(width: 8),
-              const Text('有料プラン限定機能'),
+              const Text(AppLocalizations.of(context)!.profile_有料プラン限定機能),
             ],
           ),
           content: Column(
@@ -994,7 +994,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(height: 16),
               Text(
-                '有料プランに加入すると以下の機能が利用可能になります：',
+                AppLocalizations.of(context)!.profile_有料プランに加入すると以下の機能が利用可能になります,
                 style: TextStyle(fontSize: 14, color: Colors.grey[700]),
               ),
               const SizedBox(height: 8),
@@ -1012,7 +1012,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Navigator.pop(context);
                 // TODO: Implement SubscriptionScreen
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('プラン詳細画面は近日公開予定です')),
+                  const SnackBar(content: Text(AppLocalizations.of(context)!.profile_プラン詳細画面は近日公開予定です)),
                 );
                 /*
                 Navigator.push(
@@ -1021,7 +1021,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ).then((_) => _loadUserData());
                 */
               },
-              child: const Text('プラン詳細を見る'),
+              child: const Text(AppLocalizations.of(context)!.profile_プラン詳細を見る),
             ),
           ],
         ),
@@ -1048,14 +1048,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('近日公開'),
+        title: const Text(AppLocalizations.of(context)!.profile_近日公開),
         content: Text(
           '$featureNameは現在開発中です。\n次回のアップデートでご利用いただけます。',
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('了解'),
+            child: const Text(AppLocalizations.of(context)!.gym_了解),
           ),
         ],
       ),
@@ -1223,7 +1223,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text('サービス利用条件・サブスクリプション'),
+              subtitle: const Text(AppLocalizations.of(context)!.profile_サービス利用条件サブスクリプション),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
@@ -1249,7 +1249,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               title: const Text(
-                '特定商取引法に基づく表記',
+                AppLocalizations.of(context)!.profile_特定商取引法に基づく表記,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -1286,7 +1286,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text('個人情報の取扱い'),
+              subtitle: const Text(AppLocalizations.of(context)!.profile_個人情報の取扱い),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () async {
                 Navigator.of(context).pop();
@@ -1296,7 +1296,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 } else {
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('プライバシーポリシーを開けませんでした')),
+                      const SnackBar(content: Text(AppLocalizations.of(context)!.subscription_プライバシーポリシーを開けませんでした)),
                     );
                   }
                 }

@@ -21,7 +21,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
   String? _selectedExercise;
   bool _isLoadingExercises = true;
 
-  final List<String> _periods = ['1ヶ月', '2ヶ月', '3ヶ月', '6ヶ月', '9ヶ月', '1年'];
+  final List<String> _periods = [AppLocalizations.of(context)!.workout_1ヶ月, AppLocalizations.of(context)!.workout_2ヶ月, AppLocalizations.of(context)!.workout_3ヶ月, AppLocalizations.of(context)!.workout_6ヶ月, AppLocalizations.of(context)!.workout_9ヶ月, AppLocalizations.of(context)!.workout_1年];
   List<String> _exercises = [];
 
   @override
@@ -186,7 +186,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
               ),
               const SizedBox(height: 8),
               Text(
-                'トレーニングを記録すると、ここに表示されます',
+                AppLocalizations.of(context)!.workout_トレーニングを記録するとここに表示されます,
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 14, color: Colors.grey[500]),
               ),
@@ -207,7 +207,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
           _buildBodyPartCategory(user.uid, AppLocalizations.of(context)!.bodyPartShoulders, Icons.fitness_center, Colors.orange),
           _buildBodyPartCategory(user.uid, AppLocalizations.of(context)!.bodyPartBiceps, Icons.fitness_center, Colors.purple),
           _buildBodyPartCategory(user.uid, AppLocalizations.of(context)!.bodyPartTriceps, Icons.fitness_center, Colors.pink),
-          _buildBodyPartCategory(user.uid, '腹筋', Icons.fitness_center, Colors.green),
+          _buildBodyPartCategory(user.uid, AppLocalizations.of(context)!.bodyPart_腹筋, Icons.fitness_center, Colors.green),
           _buildBodyPartCategory(user.uid, AppLocalizations.of(context)!.bodyPartLegs, Icons.fitness_center, Colors.brown),
           _buildBodyPartCategory(user.uid, AppLocalizations.of(context)!.exerciseCardio, Icons.directions_run, Colors.teal),
         ],
@@ -320,7 +320,7 @@ class PRDetailScreen extends StatefulWidget {
 class _PRDetailScreenState extends State<PRDetailScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final List<String> _periods = ['1ヶ月', '2ヶ月', '3ヶ月', '6ヶ月', '9ヶ月', '1年'];
+  final List<String> _periods = [AppLocalizations.of(context)!.workout_1ヶ月, AppLocalizations.of(context)!.workout_2ヶ月, AppLocalizations.of(context)!.workout_3ヶ月, AppLocalizations.of(context)!.workout_6ヶ月, AppLocalizations.of(context)!.workout_9ヶ月, AppLocalizations.of(context)!.workout_1年];
 
   @override
   void initState() {
@@ -397,7 +397,7 @@ class _PeriodView extends StatelessWidget {
                 Icon(Icons.fitness_center, size: 64, color: Colors.grey[400]),
                 const SizedBox(height: 16),
                 Text(
-                  'まだ記録がありません',
+                  AppLocalizations.of(context)!.workout_まだ記録がありません,
                   style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                 ),
               ],
@@ -423,7 +423,7 @@ class _PeriodView extends StatelessWidget {
                           getTitlesWidget: (value, meta) {
                             // 🔧 v1.0.246: 有酸素運動の場合は「分」、筋トレは「kg」
                             final isCardio = data.isNotEmpty && data.first.isCardio;
-                            final unit = isCardio ? AppLocalizations.of(context)!.minutes : 'kg';
+                            final unit = isCardio ? AppLocalizations.of(context)!.minutes : AppLocalizations.of(context)!.kg;
                             return Text(
                               '${value.toInt()}$unit',
                               style: const TextStyle(fontSize: 10),
@@ -496,22 +496,22 @@ class _PeriodView extends StatelessWidget {
     DateTime startDate;
 
     switch (period) {
-      case '1ヶ月':
+      case AppLocalizations.of(context)!.workout_1ヶ月:
         startDate = DateTime(now.year, now.month - 1, now.day);
         break;
-      case '2ヶ月':
+      case AppLocalizations.of(context)!.workout_2ヶ月:
         startDate = DateTime(now.year, now.month - 2, now.day);
         break;
-      case '3ヶ月':
+      case AppLocalizations.of(context)!.workout_3ヶ月:
         startDate = DateTime(now.year, now.month - 3, now.day);
         break;
-      case '6ヶ月':
+      case AppLocalizations.of(context)!.workout_6ヶ月:
         startDate = DateTime(now.year, now.month - 6, now.day);
         break;
-      case '9ヶ月':
+      case AppLocalizations.of(context)!.workout_9ヶ月:
         startDate = DateTime(now.year, now.month - 9, now.day);
         break;
-      case '1年':
+      case AppLocalizations.of(context)!.workout_1年:
         startDate = DateTime(now.year - 1, now.month, now.day);
         break;
       default:
@@ -611,7 +611,7 @@ class _PeriodView extends StatelessWidget {
     
     // 🔧 v1.0.246: 有酸素は「時間」、筋トレは「1RM」
     final label = isCardio ? AppLocalizations.of(context)!.time : AppLocalizations.of(context)!.oneRepMax;
-    final unit = isCardio ? AppLocalizations.of(context)!.minutes : 'kg';
+    final unit = isCardio ? AppLocalizations.of(context)!.minutes : AppLocalizations.of(context)!.kg;
 
     return Card(
       margin: const EdgeInsets.all(16),
@@ -695,7 +695,7 @@ class _PeriodView extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.all(16),
             child: Text(
-              '記録履歴',
+              AppLocalizations.of(context)!.workout_記録履歴,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ),
@@ -775,7 +775,7 @@ class ExerciseListScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'トレーニングを記録すると、ここに表示されます',
+                    AppLocalizations.of(context)!.workout_トレーニングを記録するとここに表示されます,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 14, color: Colors.grey[500]),
                   ),

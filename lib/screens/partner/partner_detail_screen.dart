@@ -54,7 +54,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('友達申請を送信しました')),
+          const SnackBar(content: Text(AppLocalizations.of(context)!.general_友達申請を送信しました)),
         );
         await _loadFriendshipStatus();
       }
@@ -93,7 +93,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('友達になってからメッセージを送信できます'),
+              content: Text(AppLocalizations.of(context)!.general_友達になってからメッセージを送信できます),
               backgroundColor: Colors.orange,
             ),
           );
@@ -138,7 +138,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('パートナー詳細'),
+        title: const Text(AppLocalizations.of(context)!.general_パートナー詳細),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -154,7 +154,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // 基本情報
-                  _buildInfoSection('基本情報', [
+                  _buildInfoSection(AppLocalizations.of(context)!.gym_基本情報, [
                     if (widget.partner.location != null)
                       _buildInfoRow(Icons.location_on, AppLocalizations.of(context)!.residence, widget.partner.location!),
                     if (widget.partner.experienceLevel != null)
@@ -183,7 +183,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
 
                   // トレーニング種目
                   if (widget.partner.preferredExercises.isNotEmpty)
-                    _buildInfoSection('好きな種目', [
+                    _buildInfoSection(AppLocalizations.of(context)!.profile_好きな種目, [
                       Wrap(
                         spacing: 8,
                         runSpacing: 8,
@@ -241,7 +241,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                 child: ElevatedButton.icon(
                   onPressed: _sendFriendRequest,
                   icon: const Icon(Icons.person_add),
-                  label: const Text('友達申請', style: TextStyle(fontSize: 16)),
+                  label: const Text(AppLocalizations.of(context)!.general_友達申請, style: TextStyle(fontSize: 16)),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     backgroundColor: Colors.blue,
@@ -255,7 +255,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                 child: ElevatedButton.icon(
                   onPressed: null,
                   icon: const Icon(Icons.schedule),
-                  label: const Text('申請中', style: TextStyle(fontSize: 16)),
+                  label: const Text(AppLocalizations.of(context)!.general_申請中, style: TextStyle(fontSize: 16)),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     backgroundColor: Colors.grey,
@@ -267,7 +267,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
               Column(
                 children: [
                   const Text(
-                    'この人から友達申請が届いています',
+                    AppLocalizations.of(context)!.general_この人から友達申請が届いています,
                     style: TextStyle(fontSize: 14, color: Colors.orange),
                   ),
                   const SizedBox(height: 8),
@@ -278,7 +278,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                           onPressed: () {
                             // TODO: 拒否処理
                           },
-                          child: const Text('拒否'),
+                          child: const Text(AppLocalizations.of(context)!.general_拒否),
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -288,7 +288,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                           onPressed: () {
                             // TODO: 承認処理
                           },
-                          child: const Text('承認'),
+                          child: const Text(AppLocalizations.of(context)!.general_承認),
                         ),
                       ),
                     ],
@@ -302,7 +302,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                 child: ElevatedButton.icon(
                   onPressed: _openChat,
                   icon: const Icon(Icons.message),
-                  label: const Text('メッセージを送る', style: TextStyle(fontSize: 16)),
+                  label: const Text(AppLocalizations.of(context)!.general_メッセージを送る, style: TextStyle(fontSize: 16)),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     backgroundColor: Colors.green,

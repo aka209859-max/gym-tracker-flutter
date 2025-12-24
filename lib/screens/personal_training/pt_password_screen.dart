@@ -51,12 +51,12 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
           .get();
 
       if (!userDoc.exists) {
-        throw Exception('ユーザー情報が見つかりません');
+        throw Exception(AppLocalizations.of(context)!.general_ユーザー情報が見つかりません);
       }
 
       final userData = userDoc.data();
       if (userData == null) {
-        throw Exception('データの取得に失敗しました');
+        throw Exception(AppLocalizations.of(context)!.gym_データの取得に失敗しました);
       }
       final useGymCommonPassword = userData['useGymCommonPassword'] as bool? ?? true;
       final gymId = userData['gymId'] as String?;
@@ -316,7 +316,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
                         ),
                       )
                     : const Text(
-                        '認証する',
+                        AppLocalizations.of(context)!.general_認証する,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

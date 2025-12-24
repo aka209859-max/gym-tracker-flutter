@@ -33,16 +33,16 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   // 都道府県リスト（ハードコード - ローカライズは表示時に対応）
   static const List<String> _prefectures = [
-    '北海道',
-    '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県',
-    '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県',
-    '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県',
-    '岐阜県', '静岡県', '愛知県', '三重県',
-    '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県',
-    '鳥取県', '島根県', '岡山県', '広島県', '山口県',
-    '徳島県', '香川県', '愛媛県', '高知県',
-    '福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県',
-    '沖縄県',
+    AppLocalizations.of(context)!.profile_北海道,
+    AppLocalizations.of(context)!.prefectureAomori, AppLocalizations.of(context)!.prefectureIwate, AppLocalizations.of(context)!.prefectureMiyagi, AppLocalizations.of(context)!.prefectureAkita, AppLocalizations.of(context)!.prefectureYamagata, AppLocalizations.of(context)!.prefectureFukushima,
+    AppLocalizations.of(context)!.prefectureIbaraki, AppLocalizations.of(context)!.prefectureTochigi, AppLocalizations.of(context)!.prefectureGunma, AppLocalizations.of(context)!.prefectureSaitama, AppLocalizations.of(context)!.prefectureChiba, AppLocalizations.of(context)!.prefectureTokyo, AppLocalizations.of(context)!.prefectureKanagawa,
+    AppLocalizations.of(context)!.prefectureNiigata, AppLocalizations.of(context)!.prefectureToyama, AppLocalizations.of(context)!.prefectureIshikawa, AppLocalizations.of(context)!.prefectureFukui, AppLocalizations.of(context)!.prefectureYamanashi, AppLocalizations.of(context)!.prefectureNagano,
+    AppLocalizations.of(context)!.prefectureGifu, AppLocalizations.of(context)!.prefectureShizuoka, AppLocalizations.of(context)!.prefectureAichi, AppLocalizations.of(context)!.prefectureMie,
+    AppLocalizations.of(context)!.prefectureShiga, AppLocalizations.of(context)!.prefectureKyoto, AppLocalizations.of(context)!.prefectureOsaka, AppLocalizations.of(context)!.prefectureHyogo, AppLocalizations.of(context)!.prefectureNara, AppLocalizations.of(context)!.prefectureWakayama,
+    AppLocalizations.of(context)!.prefectureTottori, AppLocalizations.of(context)!.prefectureShimane, AppLocalizations.of(context)!.prefectureOkayama, AppLocalizations.of(context)!.prefectureHiroshima, AppLocalizations.of(context)!.prefectureYamaguchi,
+    AppLocalizations.of(context)!.prefectureTokushima, AppLocalizations.of(context)!.prefectureKagawa, AppLocalizations.of(context)!.prefectureEhime, AppLocalizations.of(context)!.prefectureKochi,
+    AppLocalizations.of(context)!.prefectureFukuoka, AppLocalizations.of(context)!.prefectureSaga, AppLocalizations.of(context)!.prefectureNagasaki, AppLocalizations.of(context)!.prefectureKumamoto, AppLocalizations.of(context)!.prefectureOita, AppLocalizations.of(context)!.prefectureMiyazaki, AppLocalizations.of(context)!.prefectureKagoshima,
+    AppLocalizations.of(context)!.prefectureOkinawa,
   ];
 
   @override
@@ -242,11 +242,11 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           children: [
             Icon(Icons.diamond, color: Colors.amber),
             SizedBox(width: 8),
-            Text('Proプラン限定機能'),
+            Text(AppLocalizations.of(context)!.profile_Proプラン限定機能),
           ],
         ),
         content: const Text(
-          'Proプランにアップグレードしてご利用ください。',
+          AppLocalizations.of(context)!.profile_Proプランにアップグレードしてご利用ください,
         ),
         actions: [
           TextButton(
@@ -258,7 +258,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               Navigator.pop(context);
               // サブスクリプション画面へ遷移（実装済みと仮定）
             },
-            child: const Text('Proプランを見る'),
+            child: const Text(AppLocalizations.of(context)!.viewProPlan),
           ),
         ],
       ),
@@ -342,7 +342,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'タップして画像を変更',
+                      AppLocalizations.of(context)!.profile_タップして画像を変更,
                       style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                     ),
                     const SizedBox(height: 24),
@@ -357,7 +357,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       ),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'アカウント名を入力してください';
+                          return AppLocalizations.of(context)!.profile_アカウント名を入力してください;
                         }
                         return null;
                       },
@@ -390,7 +390,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     TextFormField(
                       controller: _bioController,
                       decoration: InputDecoration(
-                        labelText: '自己紹介（150文字以内）',
+                        labelText: AppLocalizations.of(context)!.profile_自己紹介150文字以内,
                         border: const OutlineInputBorder(),
                         prefixIcon: const Icon(Icons.edit),
                         helperText: '残り${150 - _bioController.text.length}文字',

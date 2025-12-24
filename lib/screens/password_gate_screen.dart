@@ -158,7 +158,7 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
-                    'β版テスト運用中',
+                    AppLocalizations.of(context)!.general_β版テスト運用中,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -172,7 +172,7 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
                 TextField(
                   controller: _passwordController,
                   decoration: InputDecoration(
-                    labelText: 'パスワード',
+                    labelText: AppLocalizations.of(context)!.password,
                     hintText: AppLocalizations.of(context)!.password,
                     prefixIcon: const Icon(Icons.vpn_key),
                     border: const OutlineInputBorder(),
@@ -220,7 +220,7 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
                               size: 20, color: Colors.blue[700]),
                           const SizedBox(width: 8),
                           Text(
-                            'β版テスト運用について',
+                            AppLocalizations.of(context)!.general_β版テスト運用について,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.blue[900],

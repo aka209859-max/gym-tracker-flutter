@@ -22,7 +22,7 @@ class PartnerDashboardScreen extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('パートナー管理画面'),
+            const Text(AppLocalizations.of(context)!.general_パートナー管理画面),
             Text(
               partnerAccess.gymName,
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
@@ -80,7 +80,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                     const Divider(),
                     const SizedBox(height: 8),
                     Text(
-                      'この管理画面から店舗情報・キャンペーンを即座に更新できます。変更は自動的にユーザーアプリに反映されます。',
+                      AppLocalizations.of(context)!.general_この管理画面から店舗情報キャンペーンを即座に更新できます変更は自動的にユーザーアプリに反映されます,
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey[700],
@@ -95,14 +95,14 @@ class PartnerDashboardScreen extends StatelessWidget {
             // 管理メニュー
             _buildMenuSection(
               context,
-              title: '広告・キャンペーン管理',
+              title: AppLocalizations.of(context)!.general_広告キャンペーン管理,
               icon: Icons.campaign,
               color: Colors.orange,
               items: [
                 _MenuItem(
                   icon: Icons.edit_note,
                   title: AppLocalizations.of(context)!.edit,
-                  subtitle: '期間限定キャンペーンを即座に更新',
+                  subtitle: AppLocalizations.of(context)!.general_期間限定キャンペーンを即座に更新,
                   enabled: partnerAccess.hasPermission('editCampaign'),
                   onTap: () {
                     Navigator.push(
@@ -118,8 +118,8 @@ class PartnerDashboardScreen extends StatelessWidget {
                 ),
                 _MenuItem(
                   icon: Icons.photo_library,
-                  title: '店舗画像管理',
-                  subtitle: '店舗・設備の写真をアップロード',
+                  title: AppLocalizations.of(context)!.general_店舗画像管理,
+                  subtitle: AppLocalizations.of(context)!.general_店舗設備の写真をアップロード,
                   enabled: partnerAccess.hasPermission('uploadPhotos'),
                   onTap: () {
                     Navigator.push(
@@ -139,14 +139,14 @@ class PartnerDashboardScreen extends StatelessWidget {
 
             _buildMenuSection(
               context,
-              title: '店舗基本情報',
+              title: AppLocalizations.of(context)!.general_店舗基本情報,
               icon: Icons.store,
               color: Colors.blue,
               items: [
                 _MenuItem(
                   icon: Icons.fitness_center,
                   title: AppLocalizations.of(context)!.edit,
-                  subtitle: 'マシン・設備の詳細を更新',
+                  subtitle: AppLocalizations.of(context)!.general_マシン設備の詳細を更新,
                   enabled: partnerAccess.hasPermission('editFacilities'),
                   onTap: () {
                     Navigator.push(
@@ -161,7 +161,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                 ),
                 _MenuItem(
                   icon: Icons.email,
-                  title: 'ビジター予約設定',
+                  title: AppLocalizations.of(context)!.general_ビジター予約設定,
                   subtitle: AppLocalizations.of(context)!.settings,
                   enabled: partnerAccess.hasPermission('editFacilities'),
                   onTap: () {
@@ -178,7 +178,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                 _MenuItem(
                   icon: Icons.access_time,
                   title: AppLocalizations.of(context)!.edit,
-                  subtitle: '営業時間・臨時休業のお知らせ',
+                  subtitle: AppLocalizations.of(context)!.general_営業時間臨時休業のお知らせ,
                   enabled: partnerAccess.hasPermission('editHours'),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -192,13 +192,13 @@ class PartnerDashboardScreen extends StatelessWidget {
 
             _buildMenuSection(
               context,
-              title: '分析・統計',
+              title: AppLocalizations.of(context)!.general_分析統計,
               icon: Icons.analytics,
               color: Colors.purple,
               items: [
                 _MenuItem(
                   icon: Icons.bar_chart,
-                  title: '閲覧統計',
+                  title: AppLocalizations.of(context)!.general_閲覧統計,
                   subtitle: AppLocalizations.of(context)!.confirm,
                   enabled: partnerAccess.hasPermission('viewAnalytics'),
                   onTap: () {

@@ -115,15 +115,15 @@ extension CampaignStatusExtension on CampaignStatus {
   String get displayName {
     switch (this) {
       case CampaignStatus.pending:
-        return '申請受付中';
+        return AppLocalizations.of(context)!.general_申請受付中;
       case CampaignStatus.awaitingPost:
-        return 'SNS投稿待ち';
+        return AppLocalizations.of(context)!.general_SNS投稿待ち;
       case CampaignStatus.checking:
-        return '自動確認中';
+        return AppLocalizations.of(context)!.general_自動確認中;
       case CampaignStatus.approved:
-        return '承認済み';
+        return AppLocalizations.of(context)!.general_承認済み;
       case CampaignStatus.rejected:
-        return '却下';
+        return AppLocalizations.of(context)!.general_却下;
     }
   }
 

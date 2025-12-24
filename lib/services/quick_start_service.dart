@@ -12,96 +12,96 @@ class QuickStartService {
 
   /// クイックスタートテンプレート（初心者向け）
   static final Map<String, List<Map<String, dynamic>>> templates = {
-    '胸トレ初心者': [
+    AppLocalizations.of(context)!.general_胸トレ初心者: [
       {
-        'name': 'ベンチプレス',
+        'name': AppLocalizations.of(context)!.exerciseBenchPress,
         'sets': 3,
         'reps': 10,
         'weight': 40.0,
-        'notes': 'バーベルを胸につけるイメージで',
+        'notes': AppLocalizations.of(context)!.general_バーベルを胸につけるイメージで,
       },
       {
-        'name': 'ダンベルフライ',
+        'name': AppLocalizations.of(context)!.workout_ダンベルフライ,
         'sets': 3,
         'reps': 12,
         'weight': 10.0,
-        'notes': '胸を大きく開くイメージで',
+        'notes': AppLocalizations.of(context)!.general_胸を大きく開くイメージで,
       },
       {
-        'name': 'プッシュアップ',
+        'name': AppLocalizations.of(context)!.general_プッシュアップ,
         'sets': 3,
         'reps': 15,
         'weight': 0.0,
-        'notes': '体幹をまっすぐに保つ',
+        'notes': AppLocalizations.of(context)!.general_体幹をまっすぐに保つ,
       },
     ],
-    '背中トレ初心者': [
+    AppLocalizations.of(context)!.general_背中トレ初心者: [
       {
-        'name': 'デッドリフト',
+        'name': AppLocalizations.of(context)!.exerciseDeadlift,
         'sets': 3,
         'reps': 8,
         'weight': 50.0,
-        'notes': '背中をまっすぐに保つ',
+        'notes': AppLocalizations.of(context)!.general_背中をまっすぐに保つ,
       },
       {
-        'name': 'ラットプルダウン',
+        'name': AppLocalizations.of(context)!.exerciseLatPulldown,
         'sets': 3,
         'reps': 12,
         'weight': 30.0,
-        'notes': '肩甲骨を寄せるイメージで',
+        'notes': AppLocalizations.of(context)!.general_肩甲骨を寄せるイメージで,
       },
       {
-        'name': 'ダンベルロウ',
+        'name': AppLocalizations.of(context)!.general_ダンベルロウ,
         'sets': 3,
         'reps': 10,
         'weight': 12.0,
-        'notes': '肘を後ろに引くイメージで',
+        'notes': AppLocalizations.of(context)!.general_肘を後ろに引くイメージで,
       },
     ],
-    '脚トレ初心者': [
+    AppLocalizations.of(context)!.general_脚トレ初心者: [
       {
-        'name': 'スクワット',
+        'name': AppLocalizations.of(context)!.exerciseSquat,
         'sets': 3,
         'reps': 10,
         'weight': 40.0,
-        'notes': '膝がつま先より前に出ないように',
+        'notes': AppLocalizations.of(context)!.general_膝がつま先より前に出ないように,
       },
       {
-        'name': 'レッグプレス',
+        'name': AppLocalizations.of(context)!.exerciseLegPress,
         'sets': 3,
         'reps': 12,
         'weight': 60.0,
-        'notes': '足全体で押すイメージで',
+        'notes': AppLocalizations.of(context)!.general_足全体で押すイメージで,
       },
       {
-        'name': 'レッグカール',
+        'name': AppLocalizations.of(context)!.exerciseLegCurl,
         'sets': 3,
         'reps': 15,
         'weight': 20.0,
-        'notes': 'ハムストリングスを意識',
+        'notes': AppLocalizations.of(context)!.general_ハムストリングスを意識,
       },
     ],
-    '全身トレ初心者': [
+    AppLocalizations.of(context)!.general_全身トレ初心者: [
       {
-        'name': 'スクワット',
+        'name': AppLocalizations.of(context)!.exerciseSquat,
         'sets': 3,
         'reps': 10,
         'weight': 40.0,
-        'notes': '下半身の王道種目',
+        'notes': AppLocalizations.of(context)!.general_下半身の王道種目,
       },
       {
-        'name': 'ベンチプレス',
+        'name': AppLocalizations.of(context)!.exerciseBenchPress,
         'sets': 3,
         'reps': 10,
         'weight': 40.0,
-        'notes': '上半身の押す動作',
+        'notes': AppLocalizations.of(context)!.general_上半身の押す動作,
       },
       {
-        'name': 'デッドリフト',
+        'name': AppLocalizations.of(context)!.exerciseDeadlift,
         'sets': 3,
         'reps': 8,
         'weight': 50.0,
-        'notes': '背中とハムストリングス',
+        'notes': AppLocalizations.of(context)!.general_背中とハムストリングス,
       },
     ],
   };

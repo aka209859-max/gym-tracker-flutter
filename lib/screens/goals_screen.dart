@@ -80,7 +80,7 @@ class _GoalsScreenState extends State<GoalsScreen>
           indicatorColor: Colors.white,
           tabs: [
             Tab(text: AppLocalizations.of(context)!.active),
-            Tab(text: '達成済み'),
+            Tab(text: AppLocalizations.of(context)!.general_達成済み),
           ],
         ),
       ),
@@ -96,7 +96,7 @@ class _GoalsScreenState extends State<GoalsScreen>
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _showCreateGoalDialog,
         icon: const Icon(Icons.add),
-        label: const Text('新しい目標'),
+        label: const Text(AppLocalizations.of(context)!.general_新しい目標),
       ),
     );
   }
@@ -111,7 +111,7 @@ class _GoalsScreenState extends State<GoalsScreen>
             Icon(Icons.flag, size: 64, color: Colors.grey[400]),
             const SizedBox(height: 16),
             Text(
-              'アクティブな目標がありません',
+              AppLocalizations.of(context)!.general_アクティブな目標がありません,
               style: TextStyle(fontSize: 16, color: Colors.grey[600]),
             ),
             SizedBox(height: 24),
@@ -148,7 +148,7 @@ class _GoalsScreenState extends State<GoalsScreen>
             Icon(Icons.emoji_events_outlined, size: 64, color: Colors.grey[400]),
             const SizedBox(height: 16),
             Text(
-              '達成した目標がありません',
+              AppLocalizations.of(context)!.general_達成した目標がありません,
               style: TextStyle(fontSize: 16, color: Colors.grey[600]),
             ),
           ],
@@ -377,7 +377,7 @@ class _GoalsScreenState extends State<GoalsScreen>
             // 目標値変更
             ListTile(
               leading: const Icon(Icons.edit, color: Colors.blue),
-              title: const Text('目標値を変更'),
+              title: const Text(AppLocalizations.of(context)!.general_目標値を変更),
               onTap: () {
                 Navigator.pop(context);
                 _showEditGoalDialog(goal);
@@ -451,7 +451,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // 目標タイプ選択
-                  const Text('目標タイプ', style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text(AppLocalizations.of(context)!.general_目標タイプ, style: TextStyle(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
                   DropdownButtonFormField<GoalType>(
                     value: selectedType,
@@ -462,11 +462,11 @@ class _GoalsScreenState extends State<GoalsScreen>
                     items: const [
                       DropdownMenuItem(
                         value: GoalType.weeklyWorkoutCount,
-                        child: Text('週間トレーニング回数'),
+                        child: Text(AppLocalizations.of(context)!.general_週間トレーニング回数),
                       ),
                       DropdownMenuItem(
                         value: GoalType.monthlyTotalWeight,
-                        child: Text('月間総重量'),
+                        child: Text(AppLocalizations.of(context)!.general_月間総重量),
                       ),
                     ],
                     onChanged: (value) {
@@ -492,7 +492,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      suffixText: selectedType == GoalType.weeklyWorkoutCount ? AppLocalizations.of(context)!.reps : 'kg',
+                      suffixText: selectedType == GoalType.weeklyWorkoutCount ? AppLocalizations.of(context)!.reps : AppLocalizations.of(context)!.kg,
                       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
                     onChanged: (value) {
@@ -518,7 +518,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                         Expanded(
                           child: Text(
                             selectedType == GoalType.weeklyWorkoutCount
-                                ? '週に何回トレーニングするか設定します'
+                                ? AppLocalizations.of(context)!.general_週に何回トレーニングするか設定します
                                 : AppLocalizations.of(context)!.settings,
                             style: TextStyle(fontSize: 12, color: Colors.blue[900]),
                           ),
@@ -612,7 +612,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                 
                 if (mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('目標値を更新しました')),
+                    const SnackBar(content: Text(AppLocalizations.of(context)!.general_目標値を更新しました)),
                   );
                 }
                 
