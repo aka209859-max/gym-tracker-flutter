@@ -657,9 +657,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                   foregroundColor: Colors.white,
                                   padding: const EdgeInsets.symmetric(vertical: 14),
                                 ),
-                                child: const Text(
+                                child: Text(
                                   AppLocalizations.of(context)!.subscriptionStartFreeTrial,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                   ),

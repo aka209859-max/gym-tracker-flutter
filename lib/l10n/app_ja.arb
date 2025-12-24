@@ -1406,7 +1406,7 @@
   "@bodyPartBalanceDays": {
     "placeholders": {
       "days": {
-        "type": "String"
+        "type": "Object"
       }
     }
   },

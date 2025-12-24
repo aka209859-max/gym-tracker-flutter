@@ -1044,7 +1044,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                           });
                         },
                         icon: const Icon(Icons.refresh),
-                        label: const Text(AppLocalizations.of(context)!.aiMenuRetryButton),
+                        label: Text(AppLocalizations.of(context)!.aiMenuRetryButton),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange.shade600,
                           foregroundColor: Colors.white,
