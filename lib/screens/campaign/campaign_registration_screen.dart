@@ -109,7 +109,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.general_842f4cca),
+        title: Text(AppLocalizations.of(context)!.general_842f4cca),
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())

@@ -205,7 +205,7 @@ class _PartnerCampaignEditorScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.general_85c6ea74),
+        title: Text(AppLocalizations.of(context)!.general_85c6ea74),
         elevation: 2,
         actions: [
           IconButton(

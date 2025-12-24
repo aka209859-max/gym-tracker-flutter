@@ -131,7 +131,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
       behavior: HitTestBehavior.translucent,
       child: Scaffold(
         appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.personalFactor_7a61c15b),
+        title: Text(AppLocalizations.of(context)!.personalFactor_7a61c15b),
         actions: [
           IconButton(
             icon: const Icon(Icons.help_outline),

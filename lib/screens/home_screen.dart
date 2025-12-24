@@ -5044,7 +5044,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           children: [
             Icon(levelIcon, color: levelColor, size: 32),
             const SizedBox(width: 12),
-            const Text(AppLocalizations.of(context)!.general_2b363a80),
+            Text(AppLocalizations.of(context)!.general_2b363a80),
           ],
         ),
         content: SingleChildScrollView(
@@ -5234,7 +5234,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           children: [
             Icon(Icons.psychology, color: Colors.blue[700], size: 32),
             const SizedBox(width: 12),
-            const Text(AppLocalizations.of(context)!.general_9879fe60),
+            Text(AppLocalizations.of(context)!.general_9879fe60),
           ],
         ),
         content: SingleChildScrollView(
@@ -5902,7 +5902,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text(AppLocalizations.of(context)!.profile_d15e7de3),
+              subtitle: Text(AppLocalizations.of(context)!.profile_d15e7de3),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(builderContext).pop();

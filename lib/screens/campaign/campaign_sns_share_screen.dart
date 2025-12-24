@@ -149,7 +149,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.general_1f4b1996),
+        title: Text(AppLocalizations.of(context)!.general_1f4b1996),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),

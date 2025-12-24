@@ -270,7 +270,7 @@ class _WorkoutImportPreviewScreenState
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.workout_602fcf4c),
+        title: Text(AppLocalizations.of(context)!.workout_602fcf4c),
         backgroundColor: const Color(0xFF1A237E),
       ),
       body: Column(

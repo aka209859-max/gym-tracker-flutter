@@ -381,7 +381,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            const Text(AppLocalizations.of(context)!.profile_f35ed075),
+            Text(AppLocalizations.of(context)!.profile_f35ed075),
             SizedBox(height: 8),
             _buildBenefitRow(AppLocalizations.of(context)!.searchGym),
             _buildBenefitRow(AppLocalizations.of(context)!.profile_b2818710),

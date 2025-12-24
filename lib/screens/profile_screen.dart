@@ -125,7 +125,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 backgroundColor: Colors.blue,
                 child: Icon(Icons.photo_camera, color: Colors.white),
               ),
-              title: const Text(AppLocalizations.of(context)!.profile_4bac693a),
+              title: Text(AppLocalizations.of(context)!.profile_4bac693a),
               subtitle: const Text(
                 AppLocalizations.of(context)!.profile_d752bd08,
                 style: TextStyle(fontSize: 12),
@@ -139,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 backgroundColor: Colors.green,
                 child: Icon(Icons.description, color: Colors.white),
               ),
-              title: const Text(AppLocalizations.of(context)!.profile_3cbb854e),
+              title: Text(AppLocalizations.of(context)!.profile_3cbb854e),
               subtitle: const Text(
                 AppLocalizations.of(context)!.profile_d97e2902,
                 style: TextStyle(fontSize: 12),
@@ -1179,7 +1179,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text(AppLocalizations.of(context)!.profile_d15e7de3),
+              subtitle: Text(AppLocalizations.of(context)!.profile_d15e7de3),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();

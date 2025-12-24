@@ -416,7 +416,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                 ElevatedButton.icon(
                   onPressed: _resetAllPhase1Features,
                   icon: const Icon(Icons.delete_forever),
-                  label: const Text(AppLocalizations.of(context)!.general_d5890bfa),
+                  label: Text(AppLocalizations.of(context)!.general_d5890bfa),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
                     foregroundColor: Colors.white,
