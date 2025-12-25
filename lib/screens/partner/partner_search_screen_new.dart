@@ -17,8 +17,8 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
   final TrainingPartnerService _partnerService = TrainingPartnerService();
   final SubscriptionService _subscriptionService = SubscriptionService();
 
-  String _selectedLocation = 'すべて';
-  String _selectedExperienceLevel = 'すべて';
+  String _selectedLocation = l10n.filterAll;
+  String _selectedExperienceLevel = l10n.filterAll;
   late String _selectedGoal;
   
   bool _canAccess = false;
@@ -26,33 +26,33 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
 
   // 都道府県リスト
   static const List<String> _prefectures = [
-    'すべて',
-    '北海道',
-    '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県',
-    '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県',
-    '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県',
-    '岐阜県', '静岡県', '愛知県', '三重県',
-    '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県',
-    '鳥取県', '島根県', '岡山県', '広島県', '山口県',
-    '徳島県', '香川県', '愛媛県', '高知県',
-    '福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県',
-    '沖縄県',
+    l10n.filterAll,
+    l10n.profile_afa342b7,
+    l10n.prefectureAomori, l10n.prefectureIwate, l10n.prefectureMiyagi, l10n.prefectureAkita, l10n.prefectureYamagata, l10n.prefectureFukushima,
+    l10n.prefectureIbaraki, l10n.prefectureTochigi, l10n.prefectureGunma, l10n.prefectureSaitama, l10n.prefectureChiba, l10n.prefectureTokyo, l10n.prefectureKanagawa,
+    l10n.prefectureNiigata, l10n.prefectureToyama, l10n.prefectureIshikawa, l10n.prefectureFukui, l10n.prefectureYamanashi, l10n.prefectureNagano,
+    l10n.prefectureGifu, l10n.prefectureShizuoka, l10n.prefectureAichi, l10n.prefectureMie,
+    l10n.prefectureShiga, l10n.prefectureKyoto, l10n.prefectureOsaka, l10n.prefectureHyogo, l10n.prefectureNara, l10n.prefectureWakayama,
+    l10n.prefectureTottori, l10n.prefectureShimane, l10n.prefectureOkayama, l10n.prefectureHiroshima, l10n.prefectureYamaguchi,
+    l10n.prefectureTokushima, l10n.prefectureKagawa, l10n.prefectureEhime, l10n.prefectureKochi,
+    l10n.prefectureFukuoka, l10n.prefectureSaga, l10n.prefectureNagasaki, l10n.prefectureKumamoto, l10n.prefectureOita, l10n.prefectureMiyazaki, l10n.prefectureKagoshima,
+    l10n.prefectureOkinawa,
   ];
 
   static const List<String> _experienceLevels = [
-    'すべて',
-    '初心者',
-    '中級者',
-    '上級者',
+    l10n.filterAll,
+    l10n.beginner,
+    l10n.intermediate,
+    l10n.advanced,
   ];
 
   static const List<String> _goals = [
-    'すべて',
-    '筋肥大',
-    '減量',
-    'パワー向上',
-    '健康維持',
-    '体力向上',
+    l10n.filterAll,
+    l10n.muscleGrowth,
+    l10n.goalWeightLoss,
+    l10n.general_8fdcc9c5,
+    l10n.healthMaintenance,
+    l10n.profile_64b9cf75,
   ];
 
   @override
@@ -106,18 +106,18 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.diamond, size: 80, color: Colors.amber),
+            Icon(Icons.diamond, size: 80, color: Colors.amber),
             SizedBox(height: 24),
             Text(
                           AppLocalizations.of(context)!.searchGym,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
-            const Text(
-              'Proプラン限定機能です',
+            SizedBox(height: 8),
+            Text(
+              l10n.general_9eba2cc5,
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/subscription');
@@ -125,7 +125,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
               ),
-              child: const Text('Proプランを見る'),
+              child: Text(l10n.viewProPlan),
             ),
           ],
         ),
@@ -161,7 +161,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               });
             },
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
 
           // 経験レベルフィルター
           DropdownButtonFormField<String>(
@@ -185,7 +185,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               });
             },
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
 
           // 目標フィルター
           DropdownButtonFormField<String>(
@@ -209,7 +209,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               });
             },
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
 
           // 検索開始ボタン
           SizedBox(
@@ -254,9 +254,9 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
             style: TextStyle(fontSize: 16, color: Colors.grey[600]),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
-            '居住地・経験レベル・目標で絞り込めます',
+            l10n.general_4f03a19c,
             style: TextStyle(fontSize: 14, color: Colors.grey[500]),
           ),
         ],
@@ -277,10 +277,10 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.error, size: 64, color: Colors.red),
+                Icon(Icons.error, size: 64, color: Colors.red),
                 SizedBox(height: 16),
                 Text(AppLocalizations.of(context)!.errorGeneric),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   '${snapshot.error}',
                   style: const TextStyle(fontSize: 12, color: Colors.grey),
@@ -301,7 +301,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
         }
 
         if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(child: CircularProgressIndicator());
         }
 
         final partners = snapshot.data!;
@@ -312,9 +312,9 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.person_search, size: 80, color: Colors.grey[400]),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Text(
-                  '該当するパートナーが見つかりませんでした',
+                  l10n.general_c814cc13,
                   style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                 ),
                 SizedBox(height: 8),
@@ -363,10 +363,10 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
                     ? NetworkImage(partner.profileImageUrl!)
                     : null,
                 child: partner.profileImageUrl == null
-                    ? const Icon(Icons.person, size: 30)
+                    ? Icon(Icons.person, size: 30)
                     : null,
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
 
               // プロフィール情報
               Expanded(
@@ -383,7 +383,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         if (partner.location != null)
                           Container(
                             padding: const EdgeInsets.symmetric(
@@ -398,7 +398,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Icon(Icons.location_on, size: 12, color: Colors.blue[700]),
-                                const SizedBox(width: 2),
+                                SizedBox(width: 2),
                                 Text(
                                   partner.location!,
                                   style: TextStyle(
@@ -411,21 +411,21 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
                           ),
                       ],
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
 
                     // 経験レベル
                     if (partner.experienceLevel != null)
                       Row(
                         children: [
                           Icon(Icons.fitness_center, size: 14, color: Colors.grey[600]),
-                          const SizedBox(width: 4),
+                          SizedBox(width: 4),
                           Text(
                             partner.experienceLevel!,
                             style: TextStyle(fontSize: 13, color: Colors.grey[600]),
                           ),
                         ],
                       ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
 
                     // 目標
                     if (partner.goals.isNotEmpty)
@@ -452,7 +452,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
                           );
                         }).toList(),
                       ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
 
                     // 自己紹介（省略表示）
                     if (partner.bio != null && partner.bio!.isNotEmpty)

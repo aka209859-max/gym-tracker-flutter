@@ -1,0 +1,38 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 23
+  Replacements: 21
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 3 × '\bconst\s+Text\s*\(' → 'Text('
+  ✅ Removed 18 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 1 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Removed 1 × '\bconst\s+Center\s*\(' → 'Center('
+  ✅ Replaced: 72時間以上... → l10n.general_863f2f6a
+  ✅ Replaced: まだ記録がありません... → l10n.workout_3ca27cb2
+  ✅ Replaced: アドバイス... → l10n.general_c443fe2a
+  ✅ Replaced: オーバートレーニングを防ぎ、常にベストコンディションで... → l10n.general_86e4d133
+  ✅ Replaced: トレーニングできるようサポートします。... → l10n.general_e373b708
+  ✅ Replaced: トレーニング後の疲労度を科学的に分析し、... → l10n.general_757bdf34
+  ✅ Replaced: 中程度... → l10n.general_ce061ec3
+  ✅ Replaced: 実施部位... → l10n.general_89c719c1
+  ✅ Replaced: 推奨回復時間... → l10n.general_f563accd
+  ✅ Replaced: 有効... → l10n.valid
+  ✅ Replaced: 本日のトレーニング... → l10n.general_b673dc9f
+  ✅ Replaced: 本日のトレーニング記録が見つかりません... → l10n.general_86a8de76
+  ✅ Replaced: 本日の全トレーニング終了... → l10n.general_60ef486a
+  ✅ Replaced: 極めて高い... → l10n.general_89a3d255
+  ✅ Replaced: 疲労度とアドバイスを表示します。... → l10n.general_8aeecaf0
+  ✅ Replaced: 疲労度レベル... → l10n.general_034a0b49
+  ✅ Replaced: 疲労度分析結果... → l10n.general_2779463b
+  ✅ Replaced: 疲労管理システムとは？... → l10n.general_f79781b6
+  ✅ Replaced: 総負荷量... → l10n.totalVolume
+  ✅ Replaced: 軽度... → l10n.general_91e882eb
+  ✅ Replaced: 高め... → l10n.general_da8ce224

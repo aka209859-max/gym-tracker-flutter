@@ -33,16 +33,16 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   // 都道府県リスト（ハードコード - ローカライズは表示時に対応）
   static const List<String> _prefectures = [
-    '北海道',
-    '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県',
-    '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県',
-    '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県',
-    '岐阜県', '静岡県', '愛知県', '三重県',
-    '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県',
-    '鳥取県', '島根県', '岡山県', '広島県', '山口県',
-    '徳島県', '香川県', '愛媛県', '高知県',
-    '福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県',
-    '沖縄県',
+    l10n.profile_afa342b7,
+    l10n.prefectureAomori, l10n.prefectureIwate, l10n.prefectureMiyagi, l10n.prefectureAkita, l10n.prefectureYamagata, l10n.prefectureFukushima,
+    l10n.prefectureIbaraki, l10n.prefectureTochigi, l10n.prefectureGunma, l10n.prefectureSaitama, l10n.prefectureChiba, l10n.prefectureTokyo, l10n.prefectureKanagawa,
+    l10n.prefectureNiigata, l10n.prefectureToyama, l10n.prefectureIshikawa, l10n.prefectureFukui, l10n.prefectureYamanashi, l10n.prefectureNagano,
+    l10n.prefectureGifu, l10n.prefectureShizuoka, l10n.prefectureAichi, l10n.prefectureMie,
+    l10n.prefectureShiga, l10n.prefectureKyoto, l10n.prefectureOsaka, l10n.prefectureHyogo, l10n.prefectureNara, l10n.prefectureWakayama,
+    l10n.prefectureTottori, l10n.prefectureShimane, l10n.prefectureOkayama, l10n.prefectureHiroshima, l10n.prefectureYamaguchi,
+    l10n.prefectureTokushima, l10n.prefectureKagawa, l10n.prefectureEhime, l10n.prefectureKochi,
+    l10n.prefectureFukuoka, l10n.prefectureSaga, l10n.prefectureNagasaki, l10n.prefectureKumamoto, l10n.prefectureOita, l10n.prefectureMiyazaki, l10n.prefectureKagoshima,
+    l10n.prefectureOkinawa,
   ];
 
   @override
@@ -245,8 +245,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             Text('Proプラン限定機能'),
           ],
         ),
-        content: const Text(
-          'Proプランにアップグレードしてご利用ください。',
+        content: Text(
+          l10n.profile_8c9edfc3,
         ),
         actions: [
           TextButton(
@@ -258,7 +258,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               Navigator.pop(context);
               // サブスクリプション画面へ遷移（実装済みと仮定）
             },
-            child: const Text('Proプランを見る'),
+            child: Text(l10n.viewProPlan),
           ),
         ],
       ),
@@ -279,7 +279,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         ],
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Form(
@@ -304,7 +304,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                         ? NetworkImage(_currentImageUrl!)
                                         : null) as ImageProvider?,
                                 child: _selectedImageBytes == null && _currentImageUrl == null
-                                    ? const Icon(Icons.person, size: 60, color: Colors.white)
+                                    ? Icon(Icons.person, size: 60, color: Colors.white)
                                     : null,
                               ),
                               // 画像選択中のローディング表示
@@ -316,7 +316,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                     color: Colors.black.withValues(alpha: 0.6),
                                     shape: BoxShape.circle,
                                   ),
-                                  child: const Center(
+                                  child: Center(
                                     child: CircularProgressIndicator(
                                       color: Colors.white,
                                     ),
@@ -330,7 +330,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                             child: CircleAvatar(
                               radius: 18,
                               backgroundColor: Theme.of(context).primaryColor,
-                              child: const Icon(
+                              child: Icon(
                                 Icons.camera_alt,
                                 size: 18,
                                 color: Colors.white,
@@ -340,12 +340,12 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Text(
-                      'タップして画像を変更',
+                      l10n.profile_d22ba9a1,
                       style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
 
                     // アカウント名
                     TextFormField(
@@ -357,12 +357,12 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       ),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'アカウント名を入力してください';
+                          return l10n.profile_4b13496c;
                         }
                         return null;
                       },
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
 
                     // 居住地
                     DropdownButtonFormField<String>(
@@ -384,7 +384,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         });
                       },
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
 
                     // 自己紹介
                     TextFormField(
@@ -392,14 +392,14 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       decoration: InputDecoration(
                         labelText: '自己紹介（150文字以内）',
                         border: const OutlineInputBorder(),
-                        prefixIcon: const Icon(Icons.edit),
+                        prefixIcon: Icon(Icons.edit),
                         helperText: '残り${150 - _bioController.text.length}文字',
                       ),
                       maxLines: 5,
                       maxLength: 150,
                       onChanged: (_) => setState(() {}),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
 
                     // 注意事項
                     Container(

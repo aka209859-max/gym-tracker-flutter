@@ -1,0 +1,68 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 12
+  Replacements: 51
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 2 × '\bconst\s+Text\s*\(' → 'Text('
+  ✅ Removed 5 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 3 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Removed 2 × '\bconst\s+Center\s*\(' → 'Center('
+  ✅ Replaced: Proプランにアップグレードしてご利用ください。... → l10n.profile_8c9edfc3
+  ✅ Replaced: Proプランを見る... → l10n.viewProPlan
+  ✅ Replaced: アカウント名を入力してください... → l10n.profile_4b13496c
+  ✅ Replaced: タップして画像を変更... → l10n.profile_d22ba9a1
+  ✅ Replaced: 三重県... → l10n.prefectureMie
+  ✅ Replaced: 京都府... → l10n.prefectureKyoto
+  ✅ Replaced: 佐賀県... → l10n.prefectureSaga
+  ✅ Replaced: 兵庫県... → l10n.prefectureHyogo
+  ✅ Replaced: 北海道... → l10n.profile_afa342b7
+  ✅ Replaced: 千葉県... → l10n.prefectureChiba
+  ✅ Replaced: 和歌山県... → l10n.prefectureWakayama
+  ✅ Replaced: 埼玉県... → l10n.prefectureSaitama
+  ✅ Replaced: 大分県... → l10n.prefectureOita
+  ✅ Replaced: 大阪府... → l10n.prefectureOsaka
+  ✅ Replaced: 奈良県... → l10n.prefectureNara
+  ✅ Replaced: 宮城県... → l10n.prefectureMiyagi
+  ✅ Replaced: 宮崎県... → l10n.prefectureMiyazaki
+  ✅ Replaced: 富山県... → l10n.prefectureToyama
+  ✅ Replaced: 山口県... → l10n.prefectureYamaguchi
+  ✅ Replaced: 山形県... → l10n.prefectureYamagata
+  ✅ Replaced: 山梨県... → l10n.prefectureYamanashi
+  ✅ Replaced: 岐阜県... → l10n.prefectureGifu
+  ✅ Replaced: 岡山県... → l10n.prefectureOkayama
+  ✅ Replaced: 岩手県... → l10n.prefectureIwate
+  ✅ Replaced: 島根県... → l10n.prefectureShimane
+  ✅ Replaced: 広島県... → l10n.prefectureHiroshima
+  ✅ Replaced: 徳島県... → l10n.prefectureTokushima
+  ✅ Replaced: 愛媛県... → l10n.prefectureEhime
+  ✅ Replaced: 愛知県... → l10n.prefectureAichi
+  ✅ Replaced: 新潟県... → l10n.prefectureNiigata
+  ✅ Replaced: 東京都... → l10n.prefectureTokyo
+  ✅ Replaced: 栃木県... → l10n.prefectureTochigi
+  ✅ Replaced: 沖縄県... → l10n.prefectureOkinawa
+  ✅ Replaced: 滋賀県... → l10n.prefectureShiga
+  ✅ Replaced: 熊本県... → l10n.prefectureKumamoto
+  ✅ Replaced: 石川県... → l10n.prefectureIshikawa
+  ✅ Replaced: 神奈川県... → l10n.prefectureKanagawa
+  ✅ Replaced: 福井県... → l10n.prefectureFukui
+  ✅ Replaced: 福岡県... → l10n.prefectureFukuoka
+  ✅ Replaced: 福島県... → l10n.prefectureFukushima
+  ✅ Replaced: 秋田県... → l10n.prefectureAkita
+  ✅ Replaced: 群馬県... → l10n.prefectureGunma
+  ✅ Replaced: 茨城県... → l10n.prefectureIbaraki
+  ✅ Replaced: 長崎県... → l10n.prefectureNagasaki
+  ✅ Replaced: 長野県... → l10n.prefectureNagano
+  ✅ Replaced: 青森県... → l10n.prefectureAomori
+  ✅ Replaced: 静岡県... → l10n.prefectureShizuoka
+  ✅ Replaced: 香川県... → l10n.prefectureKagawa
+  ✅ Replaced: 高知県... → l10n.prefectureKochi
+  ✅ Replaced: 鳥取県... → l10n.prefectureTottori
+  ✅ Replaced: 鹿児島県... → l10n.prefectureKagoshima

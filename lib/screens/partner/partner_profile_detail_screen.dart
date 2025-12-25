@@ -29,24 +29,24 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
   String? _permissionMessage;
 
   final Map<String, String> _trainingGoals = {
-    'muscle_gain': '筋力増強',
-    'weight_loss': '減量',
-    'endurance': '持久力向上',
+    'muscle_gain': l10n.goalStrengthGain,
+    'weight_loss': l10n.goalWeightLoss,
+    'endurance': l10n.goalEndurance,
     'flexibility': AppLocalizations.of(context)!.goalFlexibility,
   };
 
   final Map<String, String> _experienceLevels = {
-    'beginner': '初心者',
-    'intermediate': '中級者',
-    'advanced': '上級者',
+    'beginner': l10n.beginner,
+    'intermediate': l10n.intermediate,
+    'advanced': l10n.advanced,
     'expert': AppLocalizations.of(context)!.levelExpert,
   };
 
   final Map<String, String> _genders = {
-    'male': '男性',
-    'female': '女性',
+    'male': l10n.male,
+    'female': l10n.female,
     'other': AppLocalizations.of(context)!.other,
-    'not_specified': '未指定',
+    'not_specified': l10n.profile_a479de60,
   };
 
   final Map<String, String> _weekDays = {
@@ -88,7 +88,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
       if (mounted) {
         setState(() {
           _canSendRequest = false;
-          _permissionMessage = 'マッチングリクエスト送信はProプラン限定機能です。';
+          _permissionMessage = l10n.profile_e0342da8;
         });
       }
     }
@@ -109,7 +109,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
     
     if (_messageController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('メッセージを入力してください')),
+        const SnackBar(content: Text(l10n.profile_5cd65c3e)),
       );
       return;
     }
@@ -126,7 +126,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('マッチングリクエストを送信しました')),
+          const SnackBar(content: Text(l10n.profile_5b16043c)),
         );
         Navigator.pop(context);
       }
@@ -172,11 +172,11 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildSection(AppLocalizations.of(context)!.bio, widget.profile.bio ?? '自己紹介はありません'),
-                  const SizedBox(height: 24),
+                  _buildSection(AppLocalizations.of(context)!.bio, widget.profile.bio ?? l10n.profile_c1dcde32),
+                  SizedBox(height: 24),
                   
                   _buildSection(
-                    'トレーニング目標',
+                    l10n.profile_c7511bf1,
                     widget.profile.trainingGoals.isNotEmpty
                         ? widget.profile.trainingGoals
                             .where((goal) => goal != null && goal.isNotEmpty)
@@ -184,26 +184,26 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                             .join(', ')
                         : AppLocalizations.of(context)!.notSet,
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   
                   _buildSection(
                     AppLocalizations.of(context)!.experienceLevel,
                     _experienceLevels[widget.profile.experienceLevel] ?? widget.profile.experienceLevel,
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   
                   _buildSection(
-                    '好きな部位',
+                    l10n.profile_dfe6eee7,
                     widget.profile.preferredExercises.isNotEmpty
                         ? widget.profile.preferredExercises
                             .where((ex) => ex != null && ex.isNotEmpty)
                             .join(', ')
                         : AppLocalizations.of(context)!.notSet,
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   
                   _buildSection(
-                    '利用可能な曜日',
+                    l10n.profile_7db380c8,
                     widget.profile.availableDays.isNotEmpty
                         ? widget.profile.availableDays
                             .where((day) => day != null && day.isNotEmpty)
@@ -211,10 +211,10 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                             .join('、')
                         : AppLocalizations.of(context)!.notSet,
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   
                   _buildSection(
-                    '利用可能な時間帯',
+                    l10n.profile_1cfba3aa,
                     widget.profile.availableTimeSlots.isNotEmpty
                         ? widget.profile.availableTimeSlots
                             .where((slot) => slot != null && slot.isNotEmpty)
@@ -222,14 +222,14 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                             .join('、')
                         : AppLocalizations.of(context)!.notSet,
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   
                   if (widget.profile.preferredLocation != null)
                     _buildSection(
-                      '希望エリア',
+                      l10n.profile_6745b85b,
                       widget.profile.preferredLocation!,
                     ),
-                  const SizedBox(height: 32),
+                  SizedBox(height: 32),
                   
                   // マッチングリクエスト送信フォーム
                   _buildMatchRequestForm(),
@@ -248,13 +248,13 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.error_outline, size: 64, color: Colors.red),
+              Icon(Icons.error_outline, size: 64, color: Colors.red),
               SizedBox(height: 16),
               Text(AppLocalizations.of(context)!.error,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Text(
                 e.toString(),
                 style: const TextStyle(fontSize: 14, color: Colors.grey),
@@ -284,10 +284,10 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                 ? NetworkImage(widget.profile.photoUrl!)
                 : null,
             child: widget.profile.photoUrl == null
-                ? const Icon(Icons.person, size: 60)
+                ? Icon(Icons.person, size: 60)
                 : null,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           
           // 名前・年齢
           Text(
@@ -297,7 +297,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4),
           
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -309,9 +309,9 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                   color: Colors.grey[700],
                 ),
               ),
-              const SizedBox(width: 8),
-              const Text('•'),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
+              Text('•'),
+              SizedBox(width: 8),
               Text(
                 _genders[widget.profile.gender] ?? widget.profile.gender,
                 style: TextStyle(
@@ -321,14 +321,14 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           
           // レーティング
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.star, color: Colors.amber, size: 24),
-              const SizedBox(width: 4),
+              Icon(Icons.star, color: Colors.amber, size: 24),
+              SizedBox(width: 4),
               Text(
                 widget.profile.rating.toStringAsFixed(1),
                 style: const TextStyle(
@@ -336,7 +336,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Text(
                 '(${widget.profile.matchCount}マッチ)',
                 style: TextStyle(
@@ -366,30 +366,30 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                 ),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Icon(Icons.workspace_premium, color: Colors.white),
+              child: Icon(Icons.workspace_premium, color: Colors.white),
             ),
-            const SizedBox(width: 12),
-            const Text('Pro限定機能'),
+            SizedBox(width: 12),
+            Text('Pro限定機能'),
           ],
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'マッチングリクエスト送信は\nProプラン限定機能です',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
-            const Text('✨ Proプランの特典'),
+            SizedBox(height: 16),
+            Text('✨ Proプランの特典'),
             SizedBox(height: 8),
             _buildBenefitRow(AppLocalizations.of(context)!.searchGym),
-            _buildBenefitRow('マッチングリクエスト送信'),
-            _buildBenefitRow('メッセージ機能'),
+            _buildBenefitRow(l10n.profile_b2818710),
+            _buildBenefitRow(l10n.profile_a980ca9f),
             _buildBenefitRow('AI機能 無制限使用'),
-            _buildBenefitRow('全Premium機能'),
-            const SizedBox(height: 8),
-            const Text(
+            _buildBenefitRow(l10n.profile_8fdc9d03),
+            SizedBox(height: 8),
+            Text(
               '月額¥980（年間プラン32% OFF）',
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
@@ -412,7 +412,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               backgroundColor: Colors.amber,
               foregroundColor: Colors.white,
             ),
-            child: const Text('Proプランを見る'),
+            child: Text(l10n.viewProPlan),
           ),
         ],
       ),
@@ -424,8 +424,8 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
-          const Icon(Icons.check_circle, color: Colors.green, size: 20),
-          const SizedBox(width: 8),
+          Icon(Icons.check_circle, color: Colors.green, size: 20),
+          SizedBox(width: 8),
           Text(text, style: const TextStyle(fontSize: 14)),
         ],
       ),
@@ -444,7 +444,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
             color: Colors.grey,
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Text(
           content,
           style: const TextStyle(
@@ -464,14 +464,14 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
           children: [
             Row(
               children: [
-                const Text(
-                  'マッチングリクエスト',
+                Text(
+                  l10n.profile_0e655357,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 // ✅ Pro限定バッジ
                 if (!_canSendRequest)
                   Container(
@@ -482,8 +482,8 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                       ),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const Text(
-                      'PRO限定',
+                    child: Text(
+                      l10n.profile_3e89f30d,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -493,18 +493,18 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                   ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             TextField(
               controller: _messageController,
               maxLines: 4,
               maxLength: 200,
               decoration: InputDecoration(
-                hintText: '自己紹介やトレーニングの希望を書いてください',
+                hintText: l10n.profile_b78090c1,
                 border: OutlineInputBorder(),
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // ✅ Pro非対称可視性: Non-ProはアップグレードUIを表示
             if (!_canSendRequest)
@@ -517,10 +517,10 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                 ),
                 child: Column(
                   children: [
-                    const Icon(Icons.lock, color: Colors.amber, size: 32),
-                    const SizedBox(height: 8),
+                    Icon(Icons.lock, color: Colors.amber, size: 32),
+                    SizedBox(height: 8),
                     Text(
-                      _permissionMessage ?? 'Pro限定機能です',
+                      _permissionMessage ?? l10n.profile_35399a27,
                       style: const TextStyle(fontSize: 14),
                       textAlign: TextAlign.center,
                     ),
@@ -539,7 +539,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                       )
                     : null,
                 icon: _isSending
-                    ? const SizedBox(
+                    ? SizedBox(
                         width: 20,
                         height: 20,
                         child: CircularProgressIndicator(
@@ -552,8 +552,8 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                   _isSending
                       ? AppLocalizations.of(context)!.submitting
                       : !_canSendRequest
-                          ? 'Proプランにアップグレード'
-                          : 'リクエストを送る'
+                          ? l10n.profile_7d5e513b
+                          : l10n.profile_580ce520
                 ),
               ),
             ),

@@ -1,0 +1,44 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 39
+  Replacements: 28
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 8 × '\bconst\s+Text\s*\(' → 'Text('
+  ✅ Removed 25 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 6 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Replaced: PRO限定... → l10n.profile_3e89f30d
+  ✅ Replaced: Proプランにアップグレード... → l10n.profile_7d5e513b
+  ✅ Replaced: Proプランを見る... → l10n.viewProPlan
+  ✅ Replaced: Pro限定機能です... → l10n.profile_35399a27
+  ✅ Replaced: トレーニング目標... → l10n.profile_c7511bf1
+  ✅ Replaced: マッチングリクエスト... → l10n.profile_0e655357
+  ✅ Replaced: マッチングリクエストを送信しました... → l10n.profile_5b16043c
+  ✅ Replaced: マッチングリクエスト送信... → l10n.profile_b2818710
+  ✅ Replaced: マッチングリクエスト送信はProプラン限定機能です。... → l10n.profile_e0342da8
+  ✅ Replaced: メッセージを入力してください... → l10n.profile_5cd65c3e
+  ✅ Replaced: メッセージ機能... → l10n.profile_a980ca9f
+  ✅ Replaced: リクエストを送る... → l10n.profile_580ce520
+  ✅ Replaced: 上級者... → l10n.advanced
+  ✅ Replaced: 中級者... → l10n.intermediate
+  ✅ Replaced: 全Premium機能... → l10n.profile_8fdc9d03
+  ✅ Replaced: 初心者... → l10n.beginner
+  ✅ Replaced: 利用可能な時間帯... → l10n.profile_1cfba3aa
+  ✅ Replaced: 利用可能な曜日... → l10n.profile_7db380c8
+  ✅ Replaced: 女性... → l10n.female
+  ✅ Replaced: 好きな部位... → l10n.profile_dfe6eee7
+  ✅ Replaced: 希望エリア... → l10n.profile_6745b85b
+  ✅ Replaced: 持久力向上... → l10n.goalEndurance
+  ✅ Replaced: 未指定... → l10n.profile_a479de60
+  ✅ Replaced: 減量... → l10n.goalWeightLoss
+  ✅ Replaced: 男性... → l10n.male
+  ✅ Replaced: 筋力増強... → l10n.goalStrengthGain
+  ✅ Replaced: 自己紹介はありません... → l10n.profile_c1dcde32
+  ✅ Replaced: 自己紹介やトレーニングの希望を書いてください... → l10n.profile_b78090c1

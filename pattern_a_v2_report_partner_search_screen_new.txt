@@ -1,0 +1,77 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 21
+  Replacements: 60
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 2 × '\bconst\s+Text\s*\(' → 'Text('
+  ✅ Removed 15 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 3 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Removed 1 × '\bconst\s+Center\s*\(' → 'Center('
+  ✅ Replaced: Proプランを見る... → l10n.viewProPlan
+  ✅ Replaced: Proプラン限定機能です... → l10n.general_9eba2cc5
+  ✅ Replaced: すべて... → l10n.filterAll
+  ✅ Replaced: パワー向上... → l10n.general_8fdcc9c5
+  ✅ Replaced: 三重県... → l10n.prefectureMie
+  ✅ Replaced: 上級者... → l10n.advanced
+  ✅ Replaced: 中級者... → l10n.intermediate
+  ✅ Replaced: 京都府... → l10n.prefectureKyoto
+  ✅ Replaced: 佐賀県... → l10n.prefectureSaga
+  ✅ Replaced: 体力向上... → l10n.profile_64b9cf75
+  ✅ Replaced: 健康維持... → l10n.healthMaintenance
+  ✅ Replaced: 兵庫県... → l10n.prefectureHyogo
+  ✅ Replaced: 初心者... → l10n.beginner
+  ✅ Replaced: 北海道... → l10n.profile_afa342b7
+  ✅ Replaced: 千葉県... → l10n.prefectureChiba
+  ✅ Replaced: 和歌山県... → l10n.prefectureWakayama
+  ✅ Replaced: 埼玉県... → l10n.prefectureSaitama
+  ✅ Replaced: 大分県... → l10n.prefectureOita
+  ✅ Replaced: 大阪府... → l10n.prefectureOsaka
+  ✅ Replaced: 奈良県... → l10n.prefectureNara
+  ✅ Replaced: 宮城県... → l10n.prefectureMiyagi
+  ✅ Replaced: 宮崎県... → l10n.prefectureMiyazaki
+  ✅ Replaced: 富山県... → l10n.prefectureToyama
+  ✅ Replaced: 居住地・経験レベル・目標で絞り込めます... → l10n.general_4f03a19c
+  ✅ Replaced: 山口県... → l10n.prefectureYamaguchi
+  ✅ Replaced: 山形県... → l10n.prefectureYamagata
+  ✅ Replaced: 山梨県... → l10n.prefectureYamanashi
+  ✅ Replaced: 岐阜県... → l10n.prefectureGifu
+  ✅ Replaced: 岡山県... → l10n.prefectureOkayama
+  ✅ Replaced: 岩手県... → l10n.prefectureIwate
+  ✅ Replaced: 島根県... → l10n.prefectureShimane
+  ✅ Replaced: 広島県... → l10n.prefectureHiroshima
+  ✅ Replaced: 徳島県... → l10n.prefectureTokushima
+  ✅ Replaced: 愛媛県... → l10n.prefectureEhime
+  ✅ Replaced: 愛知県... → l10n.prefectureAichi
+  ✅ Replaced: 新潟県... → l10n.prefectureNiigata
+  ✅ Replaced: 東京都... → l10n.prefectureTokyo
+  ✅ Replaced: 栃木県... → l10n.prefectureTochigi
+  ✅ Replaced: 沖縄県... → l10n.prefectureOkinawa
+  ✅ Replaced: 減量... → l10n.goalWeightLoss
+  ✅ Replaced: 滋賀県... → l10n.prefectureShiga
+  ✅ Replaced: 熊本県... → l10n.prefectureKumamoto
+  ✅ Replaced: 石川県... → l10n.prefectureIshikawa
+  ✅ Replaced: 神奈川県... → l10n.prefectureKanagawa
+  ✅ Replaced: 福井県... → l10n.prefectureFukui
+  ✅ Replaced: 福岡県... → l10n.prefectureFukuoka
+  ✅ Replaced: 福島県... → l10n.prefectureFukushima
+  ✅ Replaced: 秋田県... → l10n.prefectureAkita
+  ✅ Replaced: 筋肥大... → l10n.muscleGrowth
+  ✅ Replaced: 群馬県... → l10n.prefectureGunma
+  ✅ Replaced: 茨城県... → l10n.prefectureIbaraki
+  ✅ Replaced: 該当するパートナーが見つかりませんでした... → l10n.general_c814cc13
+  ✅ Replaced: 長崎県... → l10n.prefectureNagasaki
+  ✅ Replaced: 長野県... → l10n.prefectureNagano
+  ✅ Replaced: 青森県... → l10n.prefectureAomori
+  ✅ Replaced: 静岡県... → l10n.prefectureShizuoka
+  ✅ Replaced: 香川県... → l10n.prefectureKagawa
+  ✅ Replaced: 高知県... → l10n.prefectureKochi
+  ✅ Replaced: 鳥取県... → l10n.prefectureTottori
+  ✅ Replaced: 鹿児島県... → l10n.prefectureKagoshima
