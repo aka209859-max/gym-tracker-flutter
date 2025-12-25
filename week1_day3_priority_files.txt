@@ -1,0 +1,95 @@
+# Week 1 Day 3 - 優先度高ファイル（10ファイル）
+
+## 🎯 目標: 200-300文字列置換
+
+### 📊 対象ファイル（日本語文字列数順）
+
+1. **lib/screens/workout/ai_coaching_screen_tabbed.dart** (207文字列)
+2. **lib/screens/workout/add_workout_screen.dart** (107文字列)
+3. **lib/screens/workout/create_template_screen.dart** (62文字列)
+4. **lib/screens/partner/partner_search_screen_new.dart** (62文字列)
+5. **lib/screens/profile_edit_screen.dart** (52文字列)
+6. **lib/screens/workout/ai_coaching_screen.dart** (34文字列)
+7. **lib/screens/partner/partner_profile_detail_screen.dart** (34文字列)
+8. **lib/screens/fatigue_management_screen.dart** (24文字列)
+9. **lib/screens/gym_detail_screen.dart** (21文字列)
+
+### 合計推定文字列数: 603文字列
+
+---
+
+## 📈 戦略
+
+### Phase 1: 大型ファイル（3ファイル）
+- ai_coaching_screen_tabbed.dart (207)
+- add_workout_screen.dart (107)
+- create_template_screen.dart (62)
+
+**合計**: 376文字列（目標200-300を大幅に達成）
+
+### Phase 2: 中型ファイル（6ファイル）
+- partner_search_screen_new.dart (62)
+- profile_edit_screen.dart (52)
+- ai_coaching_screen.dart (34)
+- partner_profile_detail_screen.dart (34)
+- fatigue_management_screen.dart (24)
+- gym_detail_screen.dart (21)
+
+**合計**: 227文字列
+
+---
+
+## 🛠️ 使用ツール
+- apply_pattern_a_v2.py (Day 2で実証済み)
+- arb_key_mappings.json (1,773 exact match)
+
+---
+
+## ⏱️ 推定所要時間
+- Phase 1: 1時間（大型3ファイル）
+- Phase 2: 1時間（中型6ファイル）
+- 合計: 2時間
+
+---
+
+## 📋 実行順序
+
+### Step 1: Phase 1 - 大型3ファイル（1時間）
+1. ai_coaching_screen_tabbed.dart
+2. add_workout_screen.dart
+3. create_template_screen.dart
+
+### Step 2: 検証とコミット（15分）
+- Pre-commit Hook 通過確認
+- Git commit & push
+
+### Step 3: Phase 2 - 中型6ファイル（1時間）
+4-9. 残り6ファイル一括処理
+
+### Step 4: 最終検証とレポート（15分）
+- Day 3 完了レポート作成
+- Git commit & push
+
+---
+
+## 📊 期待される成果
+
+### Day 2 + Day 3 合計
+- **Day 2**: 153文字列
+- **Day 3 Phase 1**: 376文字列
+- **合計**: 529文字列
+
+→ **Week 1目標（700-800）の約66%達成**
+
+---
+
+## 選定理由
+1. **workout系**: ユーザーが最も使う機能
+2. **ai_coaching系**: 重要な差別化機能
+3. **partner系**: コミュニティ機能の核
+4. **文字列数が多い**: 効率的に進捗を上げられる
+
+---
+
+**作成日時**: 2025-12-25  
+**ステータス**: Ready to execute
