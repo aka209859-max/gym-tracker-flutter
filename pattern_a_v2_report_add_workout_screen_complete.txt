@@ -1,0 +1,33 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 24
+  Replacements: 17
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 6 × '\bconst\s+Text\s*\(' → 'Text('
+  ✅ Removed 12 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 6 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Replaced: AIメニュー... → l10n.workout_ed08832f
+  ✅ Replaced: インターバルラン... → l10n.workout_aa4c3c64
+  ✅ Replaced: ウォーキング... → l10n.workout_e23f084e
+  ✅ Replaced: クロストレーナー... → l10n.workout_ba2fef80
+  ✅ Replaced: ケーブルプッシュダウン... → l10n.workout_22752b72
+  ✅ Replaced: サイクリング... → l10n.workout_cf6a6f5b
+  ✅ Replaced: ステッパー... → l10n.workout_f4ecb3c9
+  ✅ Replaced: セットを追加... → l10n.workout_68d6a303
+  ✅ Replaced: トレーニングを保存しました... → l10n.workout_498b0ea4
+  ✅ Replaced: 今日のトレーニングについてメモを残しましょう... → l10n.workout_be150460
+  ✅ Replaced: 休憩時間を設定... → l10n.workout_b23db97f
+  ✅ Replaced: 休憩時間設定... → l10n.workout_4a60472d
+  ✅ Replaced: 水泳... → l10n.workout_a90ed9c4
+  ✅ Replaced: 種目を追加してください... → l10n.workout_d90b7b6b
+  ✅ Replaced: 種目名を入力... → l10n.workout_a3dbb30d
+  ✅ Replaced: 補助なし... → l10n.workout_7b8e9d09
+  ✅ Replaced: 記録を保存... → l10n.workout_18f75a52

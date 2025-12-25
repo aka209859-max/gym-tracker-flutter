@@ -1,0 +1,22 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 22
+  Replacements: 6
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 7 × '\bconst\s+Text\s*\(' → 'Text('
+  ✅ Removed 11 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 4 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Replaced: この人から友達申請が届いています... → l10n.general_caeec09a
+  ✅ Replaced: メッセージを送る... → l10n.general_5010ff33
+  ✅ Replaced: 基本情報... → l10n.gym_0179630e
+  ✅ Replaced: 承認... → l10n.general_35db47a8
+  ✅ Replaced: 拒否... → l10n.general_a0d47aa4
+  ✅ Replaced: 申請中... → l10n.general_34fb6e79

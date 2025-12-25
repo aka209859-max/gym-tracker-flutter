@@ -45,22 +45,22 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
 
   // 利用可能なオプション
   final Map<String, String> _trainingGoals = {
-    'muscle_gain': '筋力増強',
-    'weight_loss': '減量',
-    'endurance': '持久力向上',
+    'muscle_gain': l10n.goalStrengthGain,
+    'weight_loss': l10n.goalWeightLoss,
+    'endurance': l10n.goalEndurance,
     'flexibility': AppLocalizations.of(context)!.goalFlexibility,
   };
 
   final Map<String, String> _experienceLevels = {
-    'beginner': '初心者',
-    'intermediate': '中級者',
-    'advanced': '上級者',
+    'beginner': l10n.beginner,
+    'intermediate': l10n.intermediate,
+    'advanced': l10n.advanced,
     'expert': AppLocalizations.of(context)!.levelExpert,
   };
 
   final Map<String, String> _genders = {
-    'male': '男性',
-    'female': '女性',
+    'male': l10n.male,
+    'female': l10n.female,
     'other': AppLocalizations.of(context)!.other,
   };
 
@@ -93,7 +93,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
       // 位置情報取得失敗時は続行（フィルターから距離を除外）
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('位置情報を取得できませんでした')),
+          const SnackBar(content: Text(l10n.general_8b92a0e1)),
         );
       }
     }
@@ -140,7 +140,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
         title: Text(AppLocalizations.of(context)!.partnerSearch),
         actions: [
           IconButton(
-            icon: const Icon(Icons.person_add),
+            icon: Icon(Icons.person_add),
             onPressed: _navigateToProfileEdit,
             tooltip: AppLocalizations.of(context)!.editProfile,
           ),
@@ -174,7 +174,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // 距離フィルター
             if (_currentLatitude != null && _currentLongitude != null) ...[
@@ -191,12 +191,12 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                   });
                 },
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
             ],
 
             // トレーニング目標フィルター
-            const Text('トレーニング目標', style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
+            Text(l10n.profile_c7511bf1, style: TextStyle(fontWeight: FontWeight.bold)),
+            SizedBox(height: 8),
             Wrap(
               spacing: 8,
               children: _trainingGoals.entries.map((entry) {
@@ -216,11 +216,11 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                 );
               }).toList(),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 経験レベルフィルター
             Text(AppLocalizations.of(context)!.experienceLevel, style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Wrap(
               spacing: 8,
               children: _experienceLevels.entries.map((entry) {
@@ -236,11 +236,11 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                 );
               }).toList(),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 性別フィルター
             Text(AppLocalizations.of(context)!.gender, style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Wrap(
               spacing: 8,
               children: _genders.entries.map((entry) {
@@ -260,7 +260,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                 );
               }).toList(),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // ✅ 実力ベースマッチング（±15% 1RM）
             Row(
@@ -268,9 +268,9 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                 Expanded(
                   child: Row(
                     children: [
-                      const Icon(Icons.fitness_center, size: 20, color: Colors.grey),
-                      const SizedBox(width: 8),
-                      const Text(
+                      Icon(Icons.fitness_center, size: 20, color: Colors.grey),
+                      SizedBox(width: 8),
+                      Text(
                         '実力が近い人のみ（±15% 1RM）',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
@@ -288,14 +288,14 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
               ],
             ),
             if (_enableStrengthFilter)
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(top: 4),
                 child: Text(
-                  'あなたのBIG3平均1RMの±15%範囲内のユーザーのみ表示',
+                  l10n.general_80d43a2b,
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // ✅ 時空間コンテキストマッチング
             Row(
@@ -303,9 +303,9 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                 Expanded(
                   child: Row(
                     children: [
-                      const Icon(Icons.place_outlined, size: 20, color: Colors.grey),
-                      const SizedBox(width: 8),
-                      const Expanded(
+                      Icon(Icons.place_outlined, size: 20, color: Colors.grey),
+                      SizedBox(width: 8),
+                      Expanded(
                         child: Text(
                           '同じジム・時間帯の人のみ（±2時間）',
                           style: TextStyle(fontWeight: FontWeight.bold),
@@ -325,14 +325,14 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
               ],
             ),
             if (_enableSpatiotemporalFilter)
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(top: 4),
                 child: Text(
                   'あなたがよく行くジムで、同じ時間帯（±2時間）にトレーニングする人のみ表示',
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 検索ボタン
             SizedBox(
@@ -351,7 +351,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
 
   Widget _buildSearchResults() {
     if (_isLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator());
     }
     
     // ✅ Pro非対称可視性: Free/Premiumユーザーには説明バナーを表示
@@ -363,13 +363,13 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.error_outline, size: 64, color: Colors.red),
+            Icon(Icons.error_outline, size: 64, color: Colors.red),
             SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.errorGeneric,
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(_errorMessage!),
             SizedBox(height: 16),
             ElevatedButton(
@@ -414,9 +414,9 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
               size: 64,
               color: Colors.grey[400],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
-              '条件に一致するパートナーが見つかりませんでした',
+              l10n.general_07460321,
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey[600],
@@ -475,23 +475,23 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                   ),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(Icons.workspace_premium, color: Colors.white, size: 32),
+                child: Icon(Icons.workspace_premium, color: Colors.white, size: 32),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Proユーザーのみ表示中',
+                    Text(
+                      l10n.general_4c0c946d,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Text(
-                      'Proプランにアップグレードで全ユーザーを検索可能',
+                      l10n.general_b96738b9,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey[700],
@@ -500,7 +500,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right, color: Colors.amber),
+              Icon(Icons.chevron_right, color: Colors.amber),
             ],
           ),
         ),
@@ -526,7 +526,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                         ? NetworkImage(profile.photoUrl!)
                         : null,
                     child: profile.photoUrl == null
-                        ? const Icon(Icons.person, size: 30)
+                        ? Icon(Icons.person, size: 30)
                         : null,
                   ),
                   // ✅ Proバッジ（Free/Premium検索者にのみ表示）
@@ -543,12 +543,12 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                           shape: BoxShape.circle,
                           border: Border.all(color: Colors.white, width: 2),
                         ),
-                        child: const Icon(Icons.workspace_premium, color: Colors.white, size: 14),
+                        child: Icon(Icons.workspace_premium, color: Colors.white, size: 14),
                       ),
                     ),
                 ],
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               
               // プロフィール情報
               Expanded(
@@ -564,7 +564,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Text(
                           '${profile.age}歳',
                           style: TextStyle(
@@ -574,7 +574,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Row(
                       children: [
                         Text(
@@ -586,7 +586,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                         ),
                         // ✅ 実力表示（平均1RM）
                         if (profile.average1RM != null) ...[
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                             decoration: BoxDecoration(
@@ -597,8 +597,8 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                const Icon(Icons.fitness_center, size: 12, color: Colors.blue),
-                                const SizedBox(width: 4),
+                                Icon(Icons.fitness_center, size: 12, color: Colors.blue),
+                                SizedBox(width: 4),
                                 Text(
                                   '${profile.average1RM!.toStringAsFixed(0)}kg',
                                   style: const TextStyle(
@@ -613,7 +613,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                         ],
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Wrap(
                       spacing: 4,
                       runSpacing: 4,
@@ -637,7 +637,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
               // レーティング
               Column(
                 children: [
-                  const Icon(Icons.star, color: Colors.amber, size: 20),
+                  Icon(Icons.star, color: Colors.amber, size: 20),
                   Text(
                     profile.rating.toStringAsFixed(1),
                     style: const TextStyle(

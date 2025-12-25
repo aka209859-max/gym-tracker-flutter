@@ -22,7 +22,7 @@ class PartnerDashboardScreen extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('パートナー管理画面'),
+            Text('パートナー管理画面'),
             Text(
               partnerAccess.gymName,
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
@@ -50,7 +50,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                           size: 32,
                           color: Theme.of(context).colorScheme.primary,
                         ),
-                        const SizedBox(width: 12),
+                        SizedBox(width: 12),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +62,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              const SizedBox(height: 4),
+                              SizedBox(height: 4),
                               Text(
                                 '🏆 β版パートナー',
                                 style: TextStyle(
@@ -76,11 +76,11 @@ class PartnerDashboardScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     const Divider(),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Text(
-                      'この管理画面から店舗情報・キャンペーンを即座に更新できます。変更は自動的にユーザーアプリに反映されます。',
+                      l10n.general_e6a22641,
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey[700],
@@ -90,19 +90,19 @@ class PartnerDashboardScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             // 管理メニュー
             _buildMenuSection(
               context,
-              title: '広告・キャンペーン管理',
+              title: l10n.general_0490ae0f,
               icon: Icons.campaign,
               color: Colors.orange,
               items: [
                 _MenuItem(
                   icon: Icons.edit_note,
                   title: AppLocalizations.of(context)!.edit,
-                  subtitle: '期間限定キャンペーンを即座に更新',
+                  subtitle: l10n.general_1588c96c,
                   enabled: partnerAccess.hasPermission('editCampaign'),
                   onTap: () {
                     Navigator.push(
@@ -118,8 +118,8 @@ class PartnerDashboardScreen extends StatelessWidget {
                 ),
                 _MenuItem(
                   icon: Icons.photo_library,
-                  title: '店舗画像管理',
-                  subtitle: '店舗・設備の写真をアップロード',
+                  title: l10n.general_64cab206,
+                  subtitle: l10n.general_4ae49c21,
                   enabled: partnerAccess.hasPermission('uploadPhotos'),
                   onTap: () {
                     Navigator.push(
@@ -135,18 +135,18 @@ class PartnerDashboardScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             _buildMenuSection(
               context,
-              title: '店舗基本情報',
+              title: l10n.general_28464ce8,
               icon: Icons.store,
               color: Colors.blue,
               items: [
                 _MenuItem(
                   icon: Icons.fitness_center,
                   title: AppLocalizations.of(context)!.edit,
-                  subtitle: 'マシン・設備の詳細を更新',
+                  subtitle: l10n.general_aa7af64f,
                   enabled: partnerAccess.hasPermission('editFacilities'),
                   onTap: () {
                     Navigator.push(
@@ -161,7 +161,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                 ),
                 _MenuItem(
                   icon: Icons.email,
-                  title: 'ビジター予約設定',
+                  title: l10n.general_ea0f11e0,
                   subtitle: AppLocalizations.of(context)!.settings,
                   enabled: partnerAccess.hasPermission('editFacilities'),
                   onTap: () {
@@ -178,7 +178,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                 _MenuItem(
                   icon: Icons.access_time,
                   title: AppLocalizations.of(context)!.edit,
-                  subtitle: '営業時間・臨時休業のお知らせ',
+                  subtitle: l10n.general_5cf61f1e,
                   enabled: partnerAccess.hasPermission('editHours'),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -188,17 +188,17 @@ class PartnerDashboardScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             _buildMenuSection(
               context,
-              title: '分析・統計',
+              title: l10n.general_96216a83,
               icon: Icons.analytics,
               color: Colors.purple,
               items: [
                 _MenuItem(
                   icon: Icons.bar_chart,
-                  title: '閲覧統計',
+                  title: l10n.general_e9e20dd1,
                   subtitle: AppLocalizations.of(context)!.confirm,
                   enabled: partnerAccess.hasPermission('viewAnalytics'),
                   onTap: () {
@@ -209,7 +209,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
 
             // ログアウトボタン
             OutlinedButton.icon(
@@ -241,7 +241,7 @@ class PartnerDashboardScreen extends StatelessWidget {
         Row(
           children: [
             Icon(icon, size: 20, color: color),
-            const SizedBox(width: 8),
+            SizedBox(width: 8),
             Text(
               title,
               style: TextStyle(
@@ -252,7 +252,7 @@ class PartnerDashboardScreen extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Card(
           elevation: 1,
           child: Column(
@@ -284,8 +284,8 @@ class PartnerDashboardScreen extends StatelessWidget {
         ),
       ),
       trailing: item.enabled
-          ? const Icon(Icons.chevron_right)
-          : const Icon(Icons.lock, size: 20, color: Colors.grey),
+          ? Icon(Icons.chevron_right)
+          : Icon(Icons.lock, size: 20, color: Colors.grey),
       enabled: item.enabled,
       onTap: item.onTap,
     );

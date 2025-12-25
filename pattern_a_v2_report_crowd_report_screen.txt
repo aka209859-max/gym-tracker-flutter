@@ -1,0 +1,27 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 25
+  Replacements: 11
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 3 × '\bconst\s+Text\s*\(' → 'Text('
+  ✅ Removed 18 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 4 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Replaced: ありがとう！... → l10n.general_6ff30ca2
+  ✅ Replaced: かなり混んでいます... → l10n.general_f1efa2a1
+  ✅ Replaced: ほとんど人がいません... → l10n.general_32d99a79
+  ✅ Replaced: やや混雑... → l10n.moderatelyCrowded
+  ✅ Replaced: やや空き... → l10n.moderatelyEmpty
+  ✅ Replaced: 報告を送信... → l10n.general_c989a28a
+  ✅ Replaced: 少し人がいますが、余裕があります... → l10n.general_1c845e05
+  ✅ Replaced: 空いています... → l10n.gym_e662330d
+  ✅ Replaced: 超混雑... → l10n.gym_181af51b
+  ✅ Replaced: 適度に人がいます... → l10n.general_5c408dba
+  ✅ Replaced: 非常に混雑しています... → l10n.general_b37aab80

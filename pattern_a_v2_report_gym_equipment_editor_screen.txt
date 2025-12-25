@@ -1,0 +1,33 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 11
+  Replacements: 16
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 2 × '\bconst\s+Text\s*\(' → 'Text('
+  ✅ Removed 5 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 3 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Removed 1 × '\bconst\s+Center\s*\(' → 'Center('
+  ✅ Replaced: 24時間営業... → l10n.gym_fc767436
+  ✅ Replaced: グループレッスン... → l10n.gym_0f5d9dd9
+  ✅ Replaced: サウナ... → l10n.gym_d816d814
+  ✅ Replaced: ストレッチエリア... → l10n.gym_7d1e3afa
+  ✅ Replaced: スパ... → l10n.gym_a88b1eac
+  ✅ Replaced: データの取得に失敗しました... → l10n.gym_c7e47d32
+  ✅ Replaced: フリーウェイトエリア... → l10n.gym_bdb55ce3
+  ✅ Replaced: プール... → l10n.gym_62b8a10f
+  ✅ Replaced: マシン・器具... → l10n.gym_841a92b0
+  ✅ Replaced: ロッカールーム... → l10n.gym_3f1c4a99
+  ✅ Replaced: 台数... → l10n.gym_d441d8be
+  ✅ Replaced: 器具名... → l10n.gym_17c1e0c7
+  ✅ Replaced: 女性専用エリア... → l10n.gym_ae762a12
+  ✅ Replaced: 施設・設備... → l10n.gym_36f6e41f
+  ✅ Replaced: 有酸素エリア... → l10n.gym_1741ee33
+  ✅ Replaced: 駐車場... → l10n.gym_6cec8734

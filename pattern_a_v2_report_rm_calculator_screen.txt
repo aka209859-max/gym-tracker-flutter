@@ -1,0 +1,31 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 56
+  Replacements: 15
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 12 × '\bconst\s+Text\s*\(' → 'Text('
+  ✅ Removed 40 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 4 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Replaced: 1RMを計算... → l10n.workout_c0a0d68f
+  ✅ Replaced: 1RM計算... → l10n.rmCalculator
+  ✅ Replaced: 20kgベース... → l10n.workout_2335c870
+  ✅ Replaced: RMについて... → l10n.workout_22a0ae55
+  ✅ Replaced: バーベルに必要なプレート組み合わせを計算... → l10n.workout_5dd09e2c
+  ✅ Replaced: プレートを計算... → l10n.workout_c0a474a8
+  ✅ Replaced: プレート計算機... → l10n.workout_ae263865
+  ✅ Replaced: 両側に同じ組み合わせを装着... → l10n.workout_726d4bbf
+  ✅ Replaced: 利用可能なプレート... → l10n.workout_2b9ba6e9
+  ✅ Replaced: 基本セット... → l10n.workout_903c82de
+  ✅ Replaced: 挙上した重量と回数から、1RMを計算します... → l10n.workout_9c0a4993
+  ✅ Replaced: 標準セット... → l10n.workout_4926a20c
+  ✅ Replaced: 正しい数値を入力してください... → l10n.workout_bc3633b9
+  ✅ Replaced: 片側のプレート... → l10n.workout_489b353c
+  ✅ Replaced: 計算ツール... → l10n.workout_0052814d

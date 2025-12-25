@@ -1,0 +1,29 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 15
+  Replacements: 12
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 1 × '\bconst\s+Text\s*\(' → 'Text('
+  ✅ Removed 9 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 4 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Removed 1 × '\bconst\s+Center\s*\(' → 'Center('
+  ✅ Replaced: アブドミナル... → l10n.general_921ddbac
+  ✅ Replaced: ケーブルクロスオーバー... → l10n.workout_c196525e
+  ✅ Replaced: ケーブルマシン... → l10n.general_34cda07f
+  ✅ Replaced: ステップマシン... → l10n.general_58db9535
+  ✅ Replaced: スミスマシン... → l10n.gym_8b54efdd
+  ✅ Replaced: ダンベル... → l10n.dumbbell
+  ✅ Replaced: チェストプレス... → l10n.exercise_cfc4f367
+  ✅ Replaced: ハックスクワット... → l10n.general_c2994ab4
+  ✅ Replaced: バーベル... → l10n.barbell
+  ✅ Replaced: ランニングマシン... → l10n.gym_40e07129
+  ✅ Replaced: ローイングマシン... → l10n.workout_4c6d7db7
+  ✅ Replaced: 設備・マシン情報... → l10n.gym_2689426f

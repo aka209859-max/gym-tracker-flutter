@@ -30,19 +30,19 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
   // 設備候補
   final List<String> _facilityOptions = [
     'シャワー室',
-    'サウナ',
-    'プール',
-    'スパ',
-    'ロッカールーム',
+    l10n.gym_d816d814,
+    l10n.gym_62b8a10f,
+    l10n.gym_a88b1eac,
+    l10n.gym_3f1c4a99,
     AppLocalizations.of(context)!.personalTraining,
-    'グループレッスン',
+    l10n.gym_0f5d9dd9,
     'Wi-Fi',
-    '駐車場',
-    '24時間営業',
-    '女性専用エリア',
-    'ストレッチエリア',
-    '有酸素エリア',
-    'フリーウェイトエリア',
+    l10n.gym_6cec8734,
+    l10n.gym_fc767436,
+    l10n.gym_ae762a12,
+    l10n.gym_7d1e3afa,
+    l10n.gym_1741ee33,
+    l10n.gym_bdb55ce3,
   ];
 
   @override
@@ -63,7 +63,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
       if (gymDoc.exists) {
         final data = gymDoc.data();
         if (data == null) {
-          throw Exception('データの取得に失敗しました');
+          throw Exception(l10n.gym_c7e47d32);
         }
         setState(() {
           _equipment = data['equipment'] != null
@@ -138,15 +138,15 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
             TextField(
               controller: nameController,
               decoration: InputDecoration(
-                labelText: '器具名',
+                labelText: l10n.gym_17c1e0c7,
                 hintText: '例: レッグプレス',
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             TextField(
               controller: countController,
               decoration: InputDecoration(
-                labelText: '台数',
+                labelText: l10n.gym_d441d8be,
               ),
               keyboardType: TextInputType.number,
             ),
@@ -190,7 +190,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
             TextButton.icon(
               onPressed: _isSaving ? null : _saveChanges,
               icon: _isSaving
-                  ? const SizedBox(
+                  ? SizedBox(
                       width: 16,
                       height: 16,
                       child: CircularProgressIndicator(strokeWidth: 2),
@@ -204,7 +204,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
         ],
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -212,7 +212,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
                 children: [
                   // マシン・器具セクション
                   _buildEquipmentSection(),
-                  const SizedBox(height: 32),
+                  SizedBox(height: 32),
                   
                   // 施設・設備セクション
                   _buildFacilitiesSection(),
@@ -232,8 +232,8 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'マシン・器具',
+                Text(
+                  l10n.gym_841a92b0,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -246,7 +246,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             if (_equipment.isEmpty)
               Center(
                 child: Padding(
@@ -263,7 +263,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
                     children: [
                       // 台数調整
                       IconButton(
-                        icon: const Icon(Icons.remove_circle_outline),
+                        icon: Icon(Icons.remove_circle_outline),
                         onPressed: () {
                           setState(() {
                             if (entry.value > 1) {
@@ -280,7 +280,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
                         ),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.add_circle_outline),
+                        icon: Icon(Icons.add_circle_outline),
                         onPressed: () {
                           setState(() {
                             _equipment[entry.key] = entry.value + 1;
@@ -289,7 +289,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
                       ),
                       // 削除
                       IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.red),
+                        icon: Icon(Icons.delete, color: Colors.red),
                         onPressed: () {
                           setState(() {
                             _equipment.remove(entry.key);
@@ -313,14 +313,14 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '施設・設備',
+            Text(
+              l10n.gym_36f6e41f,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Wrap(
               spacing: 8,
               runSpacing: 8,

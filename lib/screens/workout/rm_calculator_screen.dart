@@ -13,7 +13,7 @@ class RMCalculatorScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('計算ツール'),
+          title: Text(l10n.workout_0052814d),
           backgroundColor: theme.colorScheme.primary,
           bottom: TabBar(
             indicatorColor: Colors.white,
@@ -29,7 +29,7 @@ class RMCalculatorScreen extends StatelessWidget {
               fontWeight: FontWeight.normal,
             ),
             tabs: [
-              Tab(icon: Icon(Icons.calculate, size: 24), text: '1RM計算'),
+              Tab(icon: Icon(Icons.calculate, size: 24), text: l10n.rmCalculator),
               Tab(icon: Icon(Icons.fitness_center, size: 24), text: AppLocalizations.of(context)!.plateCalculator),
             ],
           ),
@@ -83,7 +83,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('正しい数値を入力してください'),
+          content: Text(l10n.workout_bc3633b9),
           backgroundColor: Colors.red,
         ),
       );
@@ -100,7 +100,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
         child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
+          Text(
             'RM (Repetition Maximum) 計算',
             style: TextStyle(
               fontSize: 24,
@@ -108,16 +108,16 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 8),
-          const Text(
-            '挙上した重量と回数から、1RMを計算します',
+          SizedBox(height: 8),
+          Text(
+            l10n.workout_9c0a4993,
             style: TextStyle(
               fontSize: 14,
               color: Colors.grey,
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 32),
+          SizedBox(height: 32),
           
           TextField(
             controller: _weightController,
@@ -127,7 +127,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
             decoration: InputDecoration(
               labelText: '重量 (kg)',
               hintText: '例: 80',
-              prefixIcon: const Icon(Icons.fitness_center),
+              prefixIcon: Icon(Icons.fitness_center),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -136,7 +136,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
             ),
           ),
           
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           
           TextField(
             controller: _repsController,
@@ -146,7 +146,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
             decoration: InputDecoration(
               labelText: AppLocalizations.of(context)!.repsCount,
               hintText: '例: 5',
-              prefixIcon: const Icon(Icons.repeat),
+              prefixIcon: Icon(Icons.repeat),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -155,7 +155,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
             ),
           ),
           
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           
           ElevatedButton(
             onPressed: () {
@@ -171,8 +171,8 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
               ),
               elevation: 2,
             ),
-            child: const Text(
-              '1RMを計算',
+            child: Text(
+              l10n.workout_c0a0d68f,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -180,7 +180,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
             ),
           ),
           
-          const SizedBox(height: 32),
+          SizedBox(height: 32),
           
           if (_rmResults != null) ...[
             Container(
@@ -203,8 +203,8 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                         color: Theme.of(context).colorScheme.primary,
                         size: 28,
                       ),
-                      const SizedBox(width: 8),
-                      const Text(
+                      SizedBox(width: 8),
+                      Text(
                         'RM計算結果（1～20RM）',
                         style: TextStyle(
                           fontSize: 18,
@@ -213,7 +213,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Container(
                     constraints: const BoxConstraints(maxHeight: 400),
                     child: ListView.builder(
@@ -263,7 +263,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                                         ),
                                       ),
                                     ),
-                                  if (rm == 1) const SizedBox(width: 8),
+                                  if (rm == 1) SizedBox(width: 8),
                                   Text(
                                     '${rm}RM',
                                     style: TextStyle(
@@ -290,7 +290,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                                           : Colors.black87,
                                     ),
                                   ),
-                                  const SizedBox(width: 4),
+                                  SizedBox(width: 4),
                                   Text(
                                     'kg',
                                     style: TextStyle(
@@ -311,7 +311,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
             ),
           ],
           
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           
           Container(
             padding: const EdgeInsets.all(16),
@@ -325,9 +325,9 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                 Row(
                   children: [
                     Icon(Icons.info_outline, color: Colors.grey[600]),
-                    const SizedBox(width: 8),
-                    const Text(
-                      'RMについて',
+                    SizedBox(width: 8),
+                    Text(
+                      l10n.workout_22a0ae55,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -335,7 +335,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 Text(
                   '• RM (Repetition Maximum)：特定の回数で挙上可能な最大重量\n'
                   '• 1RM：1回だけ挙上できる最大重量\n'
@@ -494,24 +494,24 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // タイトル
-          const Text(
-            'プレート計算機',
+          Text(
+            l10n.workout_ae263865,
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 8),
-          const Text(
-            'バーベルに必要なプレート組み合わせを計算',
+          SizedBox(height: 8),
+          Text(
+            l10n.workout_5dd09e2c,
             style: TextStyle(
               fontSize: 16,
               color: Colors.grey,
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 32),
+          SizedBox(height: 32),
           
           // プレート設定セクション
           Container(
@@ -537,9 +537,9 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                     Row(
                       children: [
                         Icon(Icons.settings, color: theme.colorScheme.primary, size: 24),
-                        const SizedBox(width: 8),
-                        const Text(
-                          '利用可能なプレート',
+                        SizedBox(width: 8),
+                        Text(
+                          l10n.workout_2b9ba6e9,
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -562,7 +562,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                 ),
                 
                 if (_showPlateSettings) ...[
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   
                   // クイック設定プリセット
                   Text(AppLocalizations.of(context)!.settings,
@@ -572,26 +572,26 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                       color: Colors.grey,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Row(
                     children: [
                       Expanded(
-                        child: _presetButton('標準セット', 'standard', theme),
+                        child: _presetButton(l10n.workout_4926a20c, 'standard', theme),
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Expanded(
-                        child: _presetButton('20kgベース', '20kg_base', theme),
+                        child: _presetButton(l10n.workout_2335c870, '20kg_base', theme),
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Expanded(
-                        child: _presetButton('基本セット', 'basic', theme),
+                        child: _presetButton(l10n.workout_903c82de, 'basic', theme),
                       ),
                     ],
                   ),
                   
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
                   const Divider(),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   
                   // プレート個別選択
                   Text(AppLocalizations.of(context)!.selectExercise,
@@ -601,7 +601,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                       color: Colors.grey,
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   
                   Wrap(
                     spacing: 8,
@@ -618,7 +618,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                 
                 // 選択中のプレート表示（常に表示）
                 if (!_showPlateSettings) ...[
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   Wrap(
                     spacing: 6,
                     runSpacing: 6,
@@ -649,7 +649,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
             ),
           ),
           
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           
           // バー重量選択
           Container(
@@ -665,8 +665,8 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                 Row(
                   children: [
                     Icon(Icons.straighten, color: Colors.grey[700], size: 22),
-                    const SizedBox(width: 8),
-                    const Text(
+                    SizedBox(width: 8),
+                    Text(
                       'バーの重量',
                       style: TextStyle(
                         fontSize: 16,
@@ -675,17 +675,17 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 Row(
                   children: [
                     Expanded(
                       child: _barWeightButton(20.0, '20kg\n(標準)', theme),
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Expanded(
                       child: _barWeightButton(15.0, '15kg\n(女性用)', theme),
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Expanded(
                       child: _barWeightButton(10.0, '10kg\n(軽量)', theme),
                     ),
@@ -695,7 +695,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
             ),
           ),
           
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           
           // 目標重量入力（大きく見やすく）
           TextField(
@@ -728,7 +728,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
             ),
           ),
           
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           
           // 計算ボタン（大きく）
           ElevatedButton(
@@ -745,8 +745,8 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
               ),
               elevation: 4,
             ),
-            child: const Text(
-              'プレートを計算',
+            child: Text(
+              l10n.workout_c0a474a8,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -754,7 +754,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
             ),
           ),
           
-          const SizedBox(height: 32),
+          SizedBox(height: 32),
           
           // 計算結果（視認性大幅改善）
           if (_plateResults != null && _plateResults!.isNotEmpty) ...[
@@ -794,25 +794,25 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                           color: theme.colorScheme.primary,
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.fitness_center,
                           color: Colors.white,
                           size: 32,
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: 12),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '片側のプレート',
+                            l10n.workout_489b353c,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
-                            '両側に同じ組み合わせを装着',
+                            l10n.workout_726d4bbf,
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.grey,
@@ -823,7 +823,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                     ],
                   ),
                   
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   
                   // プレートリスト（大きく見やすく）
                   ..._plateResults!.entries.map((entry) {
@@ -884,7 +884,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                             ),
                           ),
                           
-                          const SizedBox(width: 24),
+                          SizedBox(width: 24),
                           
                           // 乗算記号
                           Text(
@@ -896,7 +896,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                             ),
                           ),
                           
-                          const SizedBox(width: 24),
+                          SizedBox(width: 24),
                           
                           // 枚数表示（大きく）
                           Expanded(
@@ -927,7 +927,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                     );
                   }),
                   
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   
                   // 合計重量確認
                   Container(
@@ -939,8 +939,8 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.check_circle, color: Colors.green, size: 24),
-                        const SizedBox(width: 12),
+                        Icon(Icons.check_circle, color: Colors.green, size: 24),
+                        SizedBox(width: 12),
                         Text(
                           '合計: ${_calculateTotalWeight().toStringAsFixed(1)}kg',
                           style: const TextStyle(
@@ -956,7 +956,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
             ),
           ],
           
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           
           // 参考情報
           Container(
@@ -971,8 +971,8 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                 Row(
                   children: [
                     Icon(Icons.info_outline, color: Colors.grey[600]),
-                    const SizedBox(width: 8),
-                    const Text(
+                    SizedBox(width: 8),
+                    Text(
                       '使い方のヒント',
                       style: TextStyle(
                         fontSize: 16,
@@ -981,7 +981,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 Text(
                   '• ジムにあるプレートだけを選択してください\n'
                   '• プリセットから選択すると素早く設定できます\n'

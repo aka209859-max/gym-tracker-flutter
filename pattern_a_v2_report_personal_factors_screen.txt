@@ -1,0 +1,37 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 25
+  Replacements: 20
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 4 × '\bconst\s+Text\s*\(' → 'Text('
+  ✅ Removed 19 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 1 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Removed 1 × '\bconst\s+Center\s*\(' → 'Center('
+  ✅ Replaced: 0〜20の範囲で入力してください... → l10n.personalFactor_df82df91
+  ✅ Replaced: 0〜24の範囲で入力してください... → l10n.personalFactor_616dc22d
+  ✅ Replaced: 0〜500の範囲で入力してください... → l10n.personalFactor_b7206655
+  ✅ Replaced: 0〜50の範囲で入力してください... → l10n.personalFactor_47d86eef
+  ✅ Replaced: 10〜100の範囲で入力してください... → l10n.personalFactor_fb13f7ed
+  ✅ Replaced: 1日のタンパク質摂取量... → l10n.personalFactor_9f7b01f0
+  ✅ Replaced: PFM値が高いほど、同じトレーニングでも疲労度が高くなります... → l10n.personalFactor_a5772517
+  ✅ Replaced: この画面では、あなたの個人特性に基づいて疲労度計算を補正しま... → l10n.personalFactor_56a6d8a6
+  ✅ Replaced: グラム... → l10n.personalFactor_4da8beb5
+  ✅ Replaced: タンパク質摂取量を入力してください... → l10n.personalFactor_59352db7
+  ✅ Replaced: トレーニング終了後、最新の動的要因で自動計算されます... → l10n.personalFactor_24d99a0b
+  ✅ Replaced: トレーニング経験年数... → l10n.personalFactor_5a712682
+  ✅ Replaced: ユニット... → l10n.personalFactor_ec2007be
+  ✅ Replaced: 前日のアルコール摂取量... → l10n.personalFactor_e8aa7dea
+  ✅ Replaced: 動的要因... → l10n.personalFactor_380ea875
+  ✅ Replaced: 年齢を入力してください... → l10n.personalFactor_03a1c2ca
+  ✅ Replaced: 昨晩の睡眠時間... → l10n.personalFactor_db37d13b
+  ✅ Replaced: 睡眠時間を入力してください... → l10n.personalFactor_f3409cdd
+  ✅ Replaced: 経験年数を入力してください... → l10n.personalFactor_31098440
+  ✅ Replaced: 静的要因... → l10n.personalFactor_a8e6bc91

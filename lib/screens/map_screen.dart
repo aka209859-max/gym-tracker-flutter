@@ -97,7 +97,7 @@ class _MapScreenState extends State<MapScreen> {
                 _acquireLocationAndSearch();
               }
             },
-            child: const Text('はい、使用します'),
+            child: Text(l10n.general_c01ec2ac),
           ),
         ],
       ),
@@ -144,20 +144,20 @@ class _MapScreenState extends State<MapScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    '位置情報を取得できませんでした',
+                  Text(
+                    l10n.general_8b92a0e1,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 4),
                   Text(
                     kIsWeb 
-                      ? 'ブラウザで位置情報を許可してください'
+                      ? l10n.general_e4a4a1d1
                       : AppLocalizations.of(context)!.confirm,
                     style: const TextStyle(fontSize: 12),
                   ),
-                  const SizedBox(height: 4),
-                  const Text(
-                    '東京駅周辺のジムを表示しています',
+                  SizedBox(height: 4),
+                  Text(
+                    l10n.general_3d380ed0,
                     style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                   ),
                 ],
@@ -238,8 +238,8 @@ class _MapScreenState extends State<MapScreen> {
             facilities: place.types,
             phoneNumber: '',
             openingHours: place.openNow != null 
-                ? (place.openNow! ? AppLocalizations.of(context)!.open : '営業時間外')
-                : '営業時間不明',
+                ? (place.openNow! ? AppLocalizations.of(context)!.open : l10n.general_a2082b23)
+                : l10n.general_88133d74,
             monthlyFee: 0,
             rating: place.rating ?? 0.0,
             reviewCount: place.userRatingsTotal ?? 0,
@@ -320,7 +320,7 @@ class _MapScreenState extends State<MapScreen> {
         } else if (searchSucceeded && gyms.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('この地域にはジムが見つかりませんでした'),
+              content: Text(l10n.general_fe7a7194),
               backgroundColor: Colors.orange,
               duration: Duration(seconds: 3),
             ),
@@ -407,10 +407,10 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ジムマップ'),
+        title: Text(l10n.general_8a9d68db),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search),
+            icon: Icon(Icons.search),
             onPressed: () {
               Navigator.push(
                 context,
@@ -421,7 +421,7 @@ class _MapScreenState extends State<MapScreen> {
             },
           ),
           IconButton(
-            icon: const Icon(Icons.filter_list),
+            icon: Icon(Icons.filter_list),
             onPressed: _showFilterDialog,
           ),
         ],
@@ -436,7 +436,7 @@ class _MapScreenState extends State<MapScreen> {
               color: Colors.blue.withValues(alpha: 0.1),
               child: Row(
                 children: [
-                  const Icon(Icons.info_outline, color: Colors.blue, size: 20),
+                  Icon(Icons.info_outline, color: Colors.blue, size: 20),
                   SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -459,7 +459,7 @@ class _MapScreenState extends State<MapScreen> {
               color: Colors.green.withValues(alpha: 0.1),
               child: Row(
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     width: 20,
                     height: 20,
                     child: CircularProgressIndicator(strokeWidth: 2),
@@ -486,8 +486,8 @@ class _MapScreenState extends State<MapScreen> {
               color: Colors.green.withValues(alpha: 0.1),
               child: Row(
                 children: [
-                  const Icon(Icons.check_circle, color: Colors.green, size: 20),
-                  const SizedBox(width: 8),
+                  Icon(Icons.check_circle, color: Colors.green, size: 20),
+                  SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       'あなたの近くのジム ${_nearbyGyms.length}件を表示中',
@@ -513,7 +513,7 @@ class _MapScreenState extends State<MapScreen> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _isLoadingGPS ? null : _acquireLocationAndSearch,
         icon: _isLoadingGPS
-            ? const SizedBox(
+            ? SizedBox(
                 width: 20,
                 height: 20,
                 child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
@@ -531,10 +531,10 @@ class _MapScreenState extends State<MapScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.search_off, size: 64, color: Colors.grey),
-            const SizedBox(height: 16),
-            const Text(
-              '近くにジムが見つかりませんでした',
+            Icon(Icons.search_off, size: 64, color: Colors.grey),
+            SizedBox(height: 16),
+            Text(
+              l10n.general_303bea53,
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             SizedBox(height: 24),
@@ -564,14 +564,14 @@ class _MapScreenState extends State<MapScreen> {
         final filteredGyms = provider.getGymsByCrowdLevel(_crowdFilter);
 
         if (filteredGyms.isEmpty) {
-          return const Center(
+          return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.search_off, size: 64, color: Colors.grey),
                 SizedBox(height: 16),
                 Text(
-                  '条件に一致するジムが見つかりません',
+                  l10n.general_25d11492,
                   style: TextStyle(fontSize: 16, color: Colors.grey),
                 ),
               ],
@@ -616,10 +616,10 @@ class _MapScreenState extends State<MapScreen> {
       ),
       child: Row(
         children: [
-          const Icon(Icons.people, size: 20),
+          Icon(Icons.people, size: 20),
           SizedBox(width: 8),
           Text(AppLocalizations.of(context)!.workoutTypeFilter, style: TextStyle(fontWeight: FontWeight.bold)),
-          const SizedBox(width: 16),
+          SizedBox(width: 16),
           Expanded(
             child: Slider(
               value: _crowdFilter.toDouble(),
@@ -675,12 +675,12 @@ class _MapScreenState extends State<MapScreen> {
                       width: 80,
                       height: 80,
                       color: Colors.grey[300],
-                      child: const Icon(Icons.fitness_center, size: 32),
+                      child: Icon(Icons.fitness_center, size: 32),
                     );
                   },
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12),
               // ジム情報
               Expanded(
                 child: Column(
@@ -715,7 +715,7 @@ class _MapScreenState extends State<MapScreen> {
                               ],
                             ),
                           ),
-                          const SizedBox(width: 6),
+                          SizedBox(width: 6),
                         ],
                         Expanded(
                           child: Text(
@@ -730,25 +730,25 @@ class _MapScreenState extends State<MapScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Row(
                       children: [
-                        const Icon(Icons.star, size: 16, color: Colors.amber),
-                        const SizedBox(width: 4),
+                        Icon(Icons.star, size: 16, color: Colors.amber),
+                        SizedBox(width: 4),
                         Text(
                           '${gym.rating} (${gym.reviewCount})',
                           style: const TextStyle(fontSize: 12),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Text(
                       gym.address,
                       style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     // 混雑度インジケーター
                     _buildCrowdIndicator(gym),
                   ],
@@ -781,7 +781,7 @@ class _MapScreenState extends State<MapScreen> {
             size: 14,
             color: Color(gym.crowdLevelColor),
           ),
-          const SizedBox(width: 4),
+          SizedBox(width: 4),
           Text(
             gym.crowdLevelText,
             style: TextStyle(
@@ -805,7 +805,7 @@ class _MapScreenState extends State<MapScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(AppLocalizations.of(context)!.selectExercise),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             StatefulBuilder(
               builder: (context, setState) {
                 return Column(
@@ -847,7 +847,7 @@ class _MapScreenState extends State<MapScreen> {
   String _getCrowdLevelText(int level) {
     switch (level) {
       case 1:
-        return '空いています';
+        return l10n.gym_e662330d;
       case 2:
         return AppLocalizations.of(context)!.moderatelyEmpty;
       case 3:
@@ -855,7 +855,7 @@ class _MapScreenState extends State<MapScreen> {
       case 4:
         return AppLocalizations.of(context)!.moderatelyCrowded;
       case 5:
-        return '超混雑';
+        return l10n.gym_181af51b;
       default:
         return AppLocalizations.of(context)!.unknown;
     }

@@ -138,7 +138,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('パートナー詳細'),
+        title: Text('パートナー詳細'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -154,14 +154,14 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // 基本情報
-                  _buildInfoSection('基本情報', [
+                  _buildInfoSection(l10n.gym_0179630e, [
                     if (widget.partner.location != null)
                       _buildInfoRow(Icons.location_on, AppLocalizations.of(context)!.residence, widget.partner.location!),
                     if (widget.partner.experienceLevel != null)
                       _buildInfoRow(Icons.fitness_center, AppLocalizations.of(context)!.experienceLevel, widget.partner.experienceLevel!),
                   ]),
 
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // 目標
                   if (widget.partner.goals.isNotEmpty)
@@ -179,7 +179,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                       ),
                     ]),
 
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // トレーニング種目
                   if (widget.partner.preferredExercises.isNotEmpty)
@@ -197,7 +197,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                       ),
                     ]),
 
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // 自己紹介
                   if (widget.partner.bio != null && widget.partner.bio!.isNotEmpty)
@@ -240,8 +240,8 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: _sendFriendRequest,
-                  icon: const Icon(Icons.person_add),
-                  label: const Text('友達申請', style: TextStyle(fontSize: 16)),
+                  icon: Icon(Icons.person_add),
+                  label: Text('友達申請', style: TextStyle(fontSize: 16)),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     backgroundColor: Colors.blue,
@@ -254,8 +254,8 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: null,
-                  icon: const Icon(Icons.schedule),
-                  label: const Text('申請中', style: TextStyle(fontSize: 16)),
+                  icon: Icon(Icons.schedule),
+                  label: Text(l10n.general_34fb6e79, style: TextStyle(fontSize: 16)),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     backgroundColor: Colors.grey,
@@ -266,11 +266,11 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
             if (_friendshipStatus == FriendshipStatus.requestReceived)
               Column(
                 children: [
-                  const Text(
-                    'この人から友達申請が届いています',
+                  Text(
+                    l10n.general_caeec09a,
                     style: TextStyle(fontSize: 14, color: Colors.orange),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Row(
                     children: [
                       Expanded(
@@ -278,17 +278,17 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                           onPressed: () {
                             // TODO: 拒否処理
                           },
-                          child: const Text('拒否'),
+                          child: Text(l10n.general_a0d47aa4),
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: 12),
                       Expanded(
                         flex: 2,
                         child: ElevatedButton(
                           onPressed: () {
                             // TODO: 承認処理
                           },
-                          child: const Text('承認'),
+                          child: Text(l10n.general_35db47a8),
                         ),
                       ),
                     ],
@@ -301,8 +301,8 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: _openChat,
-                  icon: const Icon(Icons.message),
-                  label: const Text('メッセージを送る', style: TextStyle(fontSize: 16)),
+                  icon: Icon(Icons.message),
+                  label: Text(l10n.general_5010ff33, style: TextStyle(fontSize: 16)),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     backgroundColor: Colors.green,
@@ -328,10 +328,10 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                 ? NetworkImage(widget.partner.profileImageUrl!)
                 : null,
             child: widget.partner.profileImageUrl == null
-                ? const Icon(Icons.person, size: 60)
+                ? Icon(Icons.person, size: 60)
                 : null,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
 
           // 名前
           Text(
@@ -341,7 +341,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4),
 
           // 居住地
           if (widget.partner.location != null)
@@ -349,7 +349,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.location_on, size: 16, color: Colors.grey[600]),
-                const SizedBox(width: 4),
+                SizedBox(width: 4),
                 Text(
                   widget.partner.location!,
                   style: TextStyle(fontSize: 14, color: Colors.grey[600]),
@@ -372,7 +372,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         ...children,
       ],
     );
@@ -384,7 +384,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
       child: Row(
         children: [
           Icon(icon, size: 20, color: Colors.grey[600]),
-          const SizedBox(width: 12),
+          SizedBox(width: 12),
           Text(
             label,
             style: TextStyle(
@@ -393,7 +393,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 16),
           Expanded(
             child: Text(
               value,

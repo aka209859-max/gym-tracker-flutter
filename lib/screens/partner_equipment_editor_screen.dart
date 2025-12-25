@@ -21,24 +21,24 @@ class _PartnerEquipmentEditorScreenState
   // マシン種類のマスタリスト
   final List<String> _availableEquipment = [
     'フリーウエイト',
-    'スミスマシン',
+    l10n.gym_8b54efdd,
     AppLocalizations.of(context)!.exerciseLegPress,
     AppLocalizations.of(context)!.exerciseBenchPress,
-    'ケーブルマシン',
-    'ランニングマシン',
+    l10n.general_34cda07f,
+    l10n.gym_40e07129,
     AppLocalizations.of(context)!.exerciseAerobicBike,
-    'ダンベル',
-    'バーベル',
+    l10n.dumbbell,
+    l10n.barbell,
     AppLocalizations.of(context)!.exerciseLatPulldown,
     AppLocalizations.of(context)!.exerciseLegExtension,
     AppLocalizations.of(context)!.exerciseLegCurl,
-    'アブドミナル',
+    l10n.general_921ddbac,
     AppLocalizations.of(context)!.exerciseShoulderPress,
-    'チェストプレス',
-    'ハックスクワット',
-    'ケーブルクロスオーバー',
-    'ローイングマシン',
-    'ステップマシン',
+    l10n.exercise_cfc4f367,
+    l10n.general_c2994ab4,
+    l10n.workout_c196525e,
+    l10n.workout_4c6d7db7,
+    l10n.general_58db9535,
     AppLocalizations.of(context)!.bodyPartOther,
   ];
 
@@ -143,7 +143,7 @@ class _PartnerEquipmentEditorScreenState
           if (!_isLoading)
             IconButton(
               icon: _isSaving
-                  ? const SizedBox(
+                  ? SizedBox(
                       width: 24,
                       height: 24,
                       child: CircularProgressIndicator(
@@ -151,14 +151,14 @@ class _PartnerEquipmentEditorScreenState
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                       ),
                     )
-                  : const Icon(Icons.save),
+                  : Icon(Icons.save),
               onPressed: _isSaving ? null : _saveEquipmentData,
               tooltip: AppLocalizations.of(context)!.saveWorkout,
             ),
         ],
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -172,9 +172,9 @@ class _PartnerEquipmentEditorScreenState
                         padding: const EdgeInsets.all(12),
                         child: Row(
                           children: [
-                            const Icon(Icons.fitness_center,
+                            Icon(Icons.fitness_center,
                                 color: Colors.amber, size: 32),
-                            const SizedBox(width: 12),
+                            SizedBox(width: 12),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -186,7 +186,7 @@ class _PartnerEquipmentEditorScreenState
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  const SizedBox(height: 4),
+                                  SizedBox(height: 4),
                                   Text(
                                     _gym!.address,
                                     style: TextStyle(
@@ -201,7 +201,7 @@ class _PartnerEquipmentEditorScreenState
                         ),
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
                   ],
 
                   // 説明
@@ -228,17 +228,17 @@ class _PartnerEquipmentEditorScreenState
                     ),
                   ),
 
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // マシンリスト
-                  const Text(
-                    '設備・マシン情報',
+                  Text(
+                    l10n.gym_2689426f,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
 
                   // マシン選択リスト
                   ..._availableEquipment.map((equipment) {
@@ -259,7 +259,7 @@ class _PartnerEquipmentEditorScreenState
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 12),
+                            SizedBox(width: 12),
                             // 台数選択
                             Row(
                               children: [
@@ -268,7 +268,7 @@ class _PartnerEquipmentEditorScreenState
                                       ? () => _updateEquipmentCount(
                                           equipment, currentCount - 1)
                                       : null,
-                                  icon: const Icon(Icons.remove_circle_outline),
+                                  icon: Icon(Icons.remove_circle_outline),
                                   color: Colors.red[700],
                                 ),
                                 SizedBox(
@@ -287,7 +287,7 @@ class _PartnerEquipmentEditorScreenState
                                       ? () => _updateEquipmentCount(
                                           equipment, currentCount + 1)
                                       : null,
-                                  icon: const Icon(Icons.add_circle_outline),
+                                  icon: Icon(Icons.add_circle_outline),
                                   color: Colors.blue[700],
                                 ),
                               ],
@@ -298,7 +298,7 @@ class _PartnerEquipmentEditorScreenState
                     );
                   }),
 
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // 保存ボタン
                   SizedBox(
@@ -307,7 +307,7 @@ class _PartnerEquipmentEditorScreenState
                     child: ElevatedButton.icon(
                       onPressed: _isSaving ? null : _saveEquipmentData,
                       icon: _isSaving
-                          ? const SizedBox(
+                          ? SizedBox(
                               width: 20,
                               height: 20,
                               child: CircularProgressIndicator(

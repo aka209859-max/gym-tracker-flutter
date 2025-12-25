@@ -16,7 +16,7 @@ class POMemberDetailScreen extends StatelessWidget {
         title: Text(member.name),
         actions: [
           IconButton(
-            icon: const Icon(Icons.edit),
+            icon: Icon(Icons.edit),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(AppLocalizations.of(context)!.edit)),
@@ -35,26 +35,26 @@ class POMemberDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    '基本情報',
+                  Text(
+                    l10n.gym_0179630e,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 16),
-                  _InfoRow(label: '名前', value: member.name),
+                  SizedBox(height: 16),
+                  _InfoRow(label: l10n.name, value: member.name),
                   _InfoRow(label: AppLocalizations.of(context)!.email, value: member.email),
                   if (member.phoneNumber != null)
                     _InfoRow(label: AppLocalizations.of(context)!.gymPhone, value: member.phoneNumber!),
                   _InfoRow(
-                    label: '入会日',
+                    label: l10n.general_d583e5d0,
                     value: DateFormat('yyyy/MM/dd').format(member.joinedAt),
                   ),
-                  _InfoRow(label: '担当トレーナー', value: member.trainerName),
+                  _InfoRow(label: l10n.general_a82f5771, value: member.trainerName),
                 ],
               ),
             ),
           ),
 
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
 
           // 契約情報
           Card(
@@ -63,23 +63,23 @@ class POMemberDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    '契約情報',
+                  Text(
+                    l10n.general_f499f3a7,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 16),
                   _InfoRow(label: AppLocalizations.of(context)!.upgradePlan, value: member.planName),
                   _InfoRow(
-                    label: '総セッション数',
+                    label: l10n.general_71becd2b,
                     value: '${member.totalSessions}回',
                   ),
                   _InfoRow(
-                    label: '残りセッション',
+                    label: l10n.general_520812b8,
                     value: '${member.remainingSessions}回',
                   ),
                   if (member.lastSessionAt != null)
                     _InfoRow(
-                      label: '最終セッション',
+                      label: l10n.general_49c6c5b4,
                       value: DateFormat('yyyy/MM/dd')
                           .format(member.lastSessionAt!),
                     ),
@@ -88,7 +88,7 @@ class POMemberDetailScreen extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
 
           // ステータス
           Card(
@@ -101,7 +101,7 @@ class POMemberDetailScreen extends StatelessWidget {
                     member.isActive ? Icons.check_circle : Icons.warning,
                     color: member.isActive ? Colors.green : Colors.orange,
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Expanded(
                     child: Text(
                       member.isActive
@@ -120,30 +120,30 @@ class POMemberDetailScreen extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // アクションボタン
           ElevatedButton.icon(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('メッセージ機能は近日公開予定です')),
+                const SnackBar(content: Text(l10n.general_0dfb3c3b)),
               );
             },
-            icon: const Icon(Icons.message),
-            label: const Text('メッセージを送信'),
+            icon: Icon(Icons.message),
+            label: Text(l10n.general_ed353b30),
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(double.infinity, 48),
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           OutlinedButton.icon(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('セッション履歴は近日公開予定です')),
+                const SnackBar(content: Text(l10n.general_75a6ecb5)),
               );
             },
-            icon: const Icon(Icons.history),
-            label: const Text('セッション履歴を見る'),
+            icon: Icon(Icons.history),
+            label: Text(l10n.general_5573bee6),
             style: OutlinedButton.styleFrom(
               minimumSize: const Size(double.infinity, 48),
             ),

@@ -1,0 +1,33 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 39
+  Replacements: 14
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 3 × '\bconst\s+Text\s*\(' → 'Text('
+  ✅ Removed 22 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 10 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Removed 2 × '\bconst\s+Padding\s*\(' → 'Padding('
+  ✅ Removed 1 × '\bconst\s+Center\s*\(' → 'Center('
+  ✅ Removed 1 × '\bconst\s+Expanded\s*\(' → 'Expanded('
+  ✅ Replaced: Proプランにアップグレードで全ユーザーを検索可能... → l10n.general_b96738b9
+  ✅ Replaced: Proユーザーのみ表示中... → l10n.general_4c0c946d
+  ✅ Replaced: あなたのBIG3平均1RMの±15%範囲内のユーザーのみ表示... → l10n.general_80d43a2b
+  ✅ Replaced: トレーニング目標... → l10n.profile_c7511bf1
+  ✅ Replaced: 上級者... → l10n.advanced
+  ✅ Replaced: 中級者... → l10n.intermediate
+  ✅ Replaced: 位置情報を取得できませんでした... → l10n.general_8b92a0e1
+  ✅ Replaced: 初心者... → l10n.beginner
+  ✅ Replaced: 女性... → l10n.female
+  ✅ Replaced: 持久力向上... → l10n.goalEndurance
+  ✅ Replaced: 条件に一致するパートナーが見つかりませんでした... → l10n.general_07460321
+  ✅ Replaced: 減量... → l10n.goalWeightLoss
+  ✅ Replaced: 男性... → l10n.male
+  ✅ Replaced: 筋力増強... → l10n.goalStrengthGain

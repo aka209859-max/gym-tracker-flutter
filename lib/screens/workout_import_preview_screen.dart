@@ -29,11 +29,11 @@ class _WorkoutImportPreviewScreenState
   static const List<String> _bodyPartOptions = [
     '胸',      // Chest
     '脚',      // Legs
-    '背中',    // Back
+    l10n.bodyPartBack,    // Back
     '肩',      // Shoulders
-    '上腕二頭筋', // Biceps
-    '上腕三頭筋', // Triceps
-    '有酸素',   // Cardio
+    l10n.bodyPart_8efece65, // Biceps
+    l10n.bodyPart_c158cb15, // Triceps
+    l10n.bodyPartCardio,   // Cardio
   ];
 
   @override
@@ -71,9 +71,9 @@ class _WorkoutImportPreviewScreenState
       // 背中
       AppLocalizations.of(context)!.exerciseLatPulldown: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.exerciseChinUp: AppLocalizations.of(context)!.bodyPartBack,
-      'チンニング（懸垂）': AppLocalizations.of(context)!.bodyPartBack,
+      l10n.workout_4f6cd3a6: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.exercisePullUp: AppLocalizations.of(context)!.bodyPartBack,
-      'ベントオーバーローイング': AppLocalizations.of(context)!.bodyPartBack,
+      l10n.workout_e6ae79d7: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.exerciseDeadlift: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.exerciseSeatedRow: AppLocalizations.of(context)!.bodyPartBack,
       
@@ -82,13 +82,13 @@ class _WorkoutImportPreviewScreenState
       AppLocalizations.of(context)!.exerciseLegPress: AppLocalizations.of(context)!.bodyPartLegs,
       AppLocalizations.of(context)!.exerciseLegExtension: AppLocalizations.of(context)!.bodyPartLegs,
       AppLocalizations.of(context)!.exerciseLegCurl: AppLocalizations.of(context)!.bodyPartLegs,
-      'ランジ': AppLocalizations.of(context)!.bodyPartLegs,
+      l10n.workout_a19f4e60: AppLocalizations.of(context)!.bodyPartLegs,
       
       // 肩
       AppLocalizations.of(context)!.exerciseShoulderPress: AppLocalizations.of(context)!.bodyPartShoulders,
       AppLocalizations.of(context)!.exerciseSideRaise: AppLocalizations.of(context)!.bodyPartShoulders,
       AppLocalizations.of(context)!.exerciseFrontRaise: AppLocalizations.of(context)!.bodyPartShoulders,
-      'リアレイズ': AppLocalizations.of(context)!.bodyPartShoulders,
+      l10n.workout_61db805d: AppLocalizations.of(context)!.bodyPartShoulders,
       
       // 二頭
       AppLocalizations.of(context)!.exerciseBarbellCurl: AppLocalizations.of(context)!.bodyPartBiceps,
@@ -96,14 +96,14 @@ class _WorkoutImportPreviewScreenState
       AppLocalizations.of(context)!.exerciseHammerCurl: AppLocalizations.of(context)!.bodyPartBiceps,
       
       // 三頭
-      'トライセプスダウン': AppLocalizations.of(context)!.bodyPartTriceps,
+      l10n.workout_f2a8fd43: AppLocalizations.of(context)!.bodyPartTriceps,
       AppLocalizations.of(context)!.exerciseTricepsExtension: AppLocalizations.of(context)!.bodyPartTriceps,
-      'フレンチプレス': AppLocalizations.of(context)!.bodyPartTriceps,
+      l10n.exercise_f6d35c01: AppLocalizations.of(context)!.bodyPartTriceps,
       
       // 有酸素
       AppLocalizations.of(context)!.exerciseRunning: AppLocalizations.of(context)!.exerciseCardio,
-      'ウォーキング': AppLocalizations.of(context)!.exerciseCardio,
-      'バイク': AppLocalizations.of(context)!.exerciseCardio,
+      l10n.workout_e23f084e: AppLocalizations.of(context)!.exerciseCardio,
+      l10n.workout_57bd7c71: AppLocalizations.of(context)!.exerciseCardio,
       AppLocalizations.of(context)!.exerciseAerobicBike: AppLocalizations.of(context)!.exerciseCardio,
     };
     
@@ -233,7 +233,7 @@ class _WorkoutImportPreviewScreenState
                   AppLocalizations.of(context)!.error,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Text(
                   errorMsg,
                   style: const TextStyle(fontSize: 12),
@@ -270,7 +270,7 @@ class _WorkoutImportPreviewScreenState
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('📸 トレーニング記録の取り込み'),
+        title: Text('📸 トレーニング記録の取り込み'),
         backgroundColor: const Color(0xFF1A237E),
       ),
       body: Column(
@@ -282,8 +282,8 @@ class _WorkoutImportPreviewScreenState
             color: Colors.grey.shade100,
             child: Row(
               children: [
-                const Icon(Icons.calendar_today, color: Color(0xFF1A237E)),
-                const SizedBox(width: 12),
+                Icon(Icons.calendar_today, color: Color(0xFF1A237E)),
+                SizedBox(width: 12),
                 Text(
                   '日付: ${date.year}年${date.month}月${date.day}日',
                   style: const TextStyle(
@@ -316,8 +316,8 @@ class _WorkoutImportPreviewScreenState
                         // 種目名
                         Row(
                           children: [
-                            const Icon(Icons.fitness_center, color: Color(0xFF1A237E)),
-                            const SizedBox(width: 8),
+                            Icon(Icons.fitness_center, color: Color(0xFF1A237E)),
+                            SizedBox(width: 8),
                             Expanded(
                               child: Text(
                                 exerciseName,
@@ -329,7 +329,7 @@ class _WorkoutImportPreviewScreenState
                             ),
                           ],
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12),
                         
                         // 部位選択ドロップダウン
                         Container(
@@ -341,7 +341,7 @@ class _WorkoutImportPreviewScreenState
                           ),
                           child: Row(
                             children: [
-                              const Text(
+                              Text(
                                 '部位: ',
                                 style: TextStyle(
                                   fontSize: 14,
@@ -377,7 +377,7 @@ class _WorkoutImportPreviewScreenState
                             ],
                           ),
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12),
                         
                         // セット情報
                         ...sets.asMap().entries.map((entry) {
@@ -389,7 +389,7 @@ class _WorkoutImportPreviewScreenState
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 4),
                             child: Text(
-                              'セット${setIndex + 1}: ${weight == 0 ? '自重' : '${weight}kg'} × ${reps}回',
+                              'セット${setIndex + 1}: ${weight == 0 ? l10n.bodyweight : '${weight}kg'} × ${reps}回',
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey.shade700,
@@ -433,7 +433,7 @@ class _WorkoutImportPreviewScreenState
                     ),
                   ),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
                 Expanded(
                   flex: 2,
                   child: ElevatedButton(
@@ -446,7 +446,7 @@ class _WorkoutImportPreviewScreenState
                       ),
                     ),
                     child: _isImporting
-                        ? const SizedBox(
+                        ? SizedBox(
                             height: 20,
                             width: 20,
                             child: CircularProgressIndicator(
@@ -454,8 +454,8 @@ class _WorkoutImportPreviewScreenState
                               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                             ),
                           )
-                        : const Text(
-                            '承認して取り込む',
+                        : Text(
+                            l10n.workout_d55c6b11,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,

@@ -1,0 +1,30 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 12
+  Replacements: 14
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 3 × '\bconst\s+Text\s*\(' → 'Text('
+  ✅ Removed 7 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 2 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Replaced: ウォーキング... → l10n.workout_e23f084e
+  ✅ Replaced: チンニング（懸垂）... → l10n.workout_4f6cd3a6
+  ✅ Replaced: トライセプスダウン... → l10n.workout_f2a8fd43
+  ✅ Replaced: バイク... → l10n.workout_57bd7c71
+  ✅ Replaced: フレンチプレス... → l10n.exercise_f6d35c01
+  ✅ Replaced: ベントオーバーローイング... → l10n.workout_e6ae79d7
+  ✅ Replaced: ランジ... → l10n.workout_a19f4e60
+  ✅ Replaced: リアレイズ... → l10n.workout_61db805d
+  ✅ Replaced: 上腕三頭筋... → l10n.bodyPart_c158cb15
+  ✅ Replaced: 上腕二頭筋... → l10n.bodyPart_8efece65
+  ✅ Replaced: 承認して取り込む... → l10n.workout_d55c6b11
+  ✅ Replaced: 有酸素... → l10n.bodyPartCardio
+  ✅ Replaced: 背中... → l10n.bodyPartBack
+  ✅ Replaced: 自重... → l10n.bodyweight

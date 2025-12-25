@@ -78,8 +78,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     AppLocalizations.of(context)!.bodyPartBack: [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, AppLocalizations.of(context)!.exerciseBentOverRow, AppLocalizations.of(context)!.exerciseSeatedRow, AppLocalizations.of(context)!.exercisePullUp],
     AppLocalizations.of(context)!.bodyPartShoulders: [AppLocalizations.of(context)!.exerciseShoulderPress, AppLocalizations.of(context)!.exerciseSideRaise, AppLocalizations.of(context)!.exerciseFrontRaise, AppLocalizations.of(context)!.exerciseRearDeltFly, AppLocalizations.of(context)!.exerciseUprightRow],
     AppLocalizations.of(context)!.bodyPartBiceps: [AppLocalizations.of(context)!.exerciseBarbellCurl, AppLocalizations.of(context)!.exerciseDumbbellCurl, AppLocalizations.of(context)!.exerciseHammerCurl, AppLocalizations.of(context)!.exercisePreacherCurl, AppLocalizations.of(context)!.exerciseCableCurl],
-    AppLocalizations.of(context)!.bodyPartTriceps: [AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseSkullCrusher, 'ケーブルプッシュダウン', AppLocalizations.of(context)!.exerciseDips, AppLocalizations.of(context)!.exerciseKickback],
-    AppLocalizations.of(context)!.exerciseCardio: [AppLocalizations.of(context)!.exerciseRunning, 'サイクリング', AppLocalizations.of(context)!.exerciseAerobicBike, 'ステッパー', '水泳', 'インターバルラン', 'ウォーキング', 'クロストレーナー'],
+    AppLocalizations.of(context)!.bodyPartTriceps: [AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseSkullCrusher, l10n.workout_22752b72, AppLocalizations.of(context)!.exerciseDips, AppLocalizations.of(context)!.exerciseKickback],
+    AppLocalizations.of(context)!.exerciseCardio: [AppLocalizations.of(context)!.exerciseRunning, l10n.workout_cf6a6f5b, AppLocalizations.of(context)!.exerciseAerobicBike, l10n.workout_f4ecb3c9, l10n.workout_a90ed9c4, l10n.workout_aa4c3c64, l10n.workout_e23f084e, l10n.workout_ba2fef80],
   };
 
   @override
@@ -318,7 +318,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('休憩時間を設定'),
+        title: Text(l10n.workout_b23db97f),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: _restDurations.map((duration) {
@@ -348,7 +348,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         content: TextField(
           controller: controller,
           decoration: InputDecoration(
-            hintText: '種目名を入力',
+            hintText: l10n.workout_a3dbb30d,
             border: OutlineInputBorder(),
           ),
           autofocus: true,
@@ -401,7 +401,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   Future<void> _saveWorkout() async {
     if (_sets.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('種目を追加してください')),
+        const SnackBar(content: Text(l10n.workout_d90b7b6b)),
       );
       return;
     }
@@ -428,7 +428,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
 
       final workoutDoc = await FirebaseFirestore.instance.collection('workout_logs').add({
         'user_id': user.uid,
-        'muscle_group': _selectedMuscleGroup ?? 'AIメニュー',
+        'muscle_group': _selectedMuscleGroup ?? l10n.workout_ed08832f,
         'date': Timestamp.fromDate(_selectedDate),
         'start_time': Timestamp.fromDate(startTime),
         'end_time': Timestamp.fromDate(endTime),
@@ -460,7 +460,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       if (mounted) {
         Navigator.pop(context, true);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('トレーニングを保存しました')),
+          const SnackBar(content: Text(l10n.workout_498b0ea4)),
         );
       }
     } catch (e) {
@@ -493,9 +493,9 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               ),
             ),
           IconButton(
-            icon: const Icon(Icons.timer),
+            icon: Icon(Icons.timer),
             onPressed: _showRestTimerSettings,
-            tooltip: '休憩時間設定',
+            tooltip: l10n.workout_4a60472d,
           ),
         ],
       ),
@@ -558,11 +558,11 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     children: [
                       if (hasExercise)
                         IconButton(
-                          icon: const Icon(Icons.copy),
+                          icon: Icon(Icons.copy),
                           onPressed: () => _copyExerciseSets(exercise),
                           tooltip: AppLocalizations.of(context)!.copySet,
                         ),
-                      const Icon(Icons.chevron_right),
+                      Icon(Icons.chevron_right),
                     ],
                   ),
                   onTap: () => _addSet(exercise),
@@ -574,8 +574,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: OutlinedButton.icon(
                   onPressed: _showAddCustomExerciseDialog,
-                  icon: const Icon(Icons.add),
-                  label: const Text('種目を追加（カスタム）'),
+                  icon: Icon(Icons.add),
+                  label: Text('種目を追加（カスタム）'),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                   ),
@@ -617,16 +617,16 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       '📝 トレーニングメモ',
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     TextField(
                       controller: _memoController,
                       maxLines: 5,
                       decoration: InputDecoration(
-                        hintText: '今日のトレーニングについてメモを残しましょう',
+                        hintText: l10n.workout_be150460,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -653,8 +653,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text(
-                      '記録を保存',
+                    child: Text(
+                      l10n.workout_18f75a52,
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -687,7 +687,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   color: isCardio ? Colors.orange : Colors.blue, 
                   size: 20
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Text(
                   exerciseName,
                   style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -710,7 +710,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             
             // 💡前回記録バナー
             if (lastData != null) ...[
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
@@ -720,8 +720,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 ),
                 child: Row(
                   children: [
-                    const Text('💡', style: TextStyle(fontSize: 16)),
-                    const SizedBox(width: 8),
+                    Text('💡', style: TextStyle(fontSize: 16)),
+                    SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         '前回記録: ${lastData['weight']}kg x ${lastData['reps']}回\n今日の記録が次回の目標になります。',
@@ -733,7 +733,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               ),
             ],
             
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             
             // セット一覧
             ...sets.asMap().entries.map((entry) {
@@ -743,11 +743,11 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             }).toList(),
             
             // セット追加ボタン
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             OutlinedButton.icon(
               onPressed: () => _addSet(exerciseName),
-              icon: const Icon(Icons.add),
-              label: const Text('セットを追加'),
+              icon: Icon(Icons.add),
+              label: Text(l10n.workout_68d6a303),
               style: OutlinedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 40),
               ),
@@ -784,7 +784,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   ),
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12),
               
               // ✅ 修正: 有酸素なら「距離/時間」、筋トレなら「重量/回数」
               if (set.isCardio) ...[
@@ -808,7 +808,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     },
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 // 時間入力
                 Expanded(
                   child: TextField(
@@ -850,7 +850,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     },
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 // 回数入力
                 Expanded(
                   child: TextField(
@@ -873,11 +873,11 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 ),
               ],
               
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               
               // 削除ボタン
               IconButton(
-                icon: const Icon(Icons.delete, color: Colors.red),
+                icon: Icon(Icons.delete, color: Colors.red),
                 onPressed: () {
                   setState(() {
                     _sets.removeAt(globalIndex);
@@ -887,7 +887,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             ],
           ),
           
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           
           // 補助トグル ＋ 完了ボタン
           Row(
@@ -904,7 +904,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     set.hasAssist ? Icons.people : Icons.person,
                     size: 18,
                   ),
-                  label: Text(set.hasAssist ? '補助あり' : '補助なし'),
+                  label: Text(set.hasAssist ? '補助あり' : l10n.workout_7b8e9d09),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: set.hasAssist ? Colors.orange : Colors.grey,
                     side: BorderSide(
@@ -913,7 +913,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   ),
                 ),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               
               // 完了ボタン
               Expanded(

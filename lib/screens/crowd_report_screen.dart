@@ -71,7 +71,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
           children: [
             // 🎁 報酬進捗カード
             if (_nextMilestone != null) _buildRewardProgressCard(),
-            if (_nextMilestone != null) const SizedBox(height: 16),
+            if (_nextMilestone != null) SizedBox(height: 16),
             
             // ジム情報カード
             Card(
@@ -91,12 +91,12 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                             width: 60,
                             height: 60,
                             color: Colors.grey[300],
-                            child: const Icon(Icons.fitness_center),
+                            child: Icon(Icons.fitness_center),
                           );
                         },
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,7 +108,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(height: 4),
+                          SizedBox(height: 4),
                           Text(
                             widget.gym.address,
                             style: TextStyle(
@@ -125,21 +125,21 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             // 混雑度選択
             Text(
                           AppLocalizations.of(context)!.selectExercise,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             _buildCrowdLevelSelector(),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             // コメント入力
-            const Text(
+            Text(
               'コメント（任意）',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             TextField(
               controller: _commentController,
               maxLines: 3,
@@ -148,15 +148,15 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                 border: OutlineInputBorder(),
               ),
             ),
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
             // 送信ボタン
             SizedBox(
               width: double.infinity,
               height: 48,
               child: ElevatedButton(
                 onPressed: _submitReport,
-                child: const Text(
-                  '報告を送信',
+                child: Text(
+                  l10n.general_c989a28a,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -202,7 +202,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                     color: isSelected ? color : Colors.grey,
                     size: 28,
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: 16),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -215,7 +215,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                             color: isSelected ? color : Colors.black87,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4),
                         Text(
                           _getCrowdLevelDescription(level),
                           style: TextStyle(
@@ -300,8 +300,8 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
       SnackBar(
         content: Row(
           children: [
-            const Icon(Icons.check_circle, color: Colors.white),
-            const SizedBox(width: 12),
+            Icon(Icons.check_circle, color: Colors.white),
+            SizedBox(width: 12),
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -335,12 +335,12 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
+            Icon(
               Icons.celebration,
               size: 80,
               color: Colors.orange,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               milestone.title,
               textAlign: TextAlign.center,
@@ -349,20 +349,20 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
               milestone.description,
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 16),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             ElevatedButton(
               onPressed: () => Navigator.pop(context),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
                 padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
               ),
-              child: const Text('ありがとう！'),
+              child: Text(l10n.general_6ff30ca2),
             ),
           ],
         ),
@@ -373,15 +373,15 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
   String _getCrowdLevelText(int level) {
     switch (level) {
       case 1:
-        return '空いています';
+        return l10n.gym_e662330d;
       case 2:
-        return 'やや空き';
+        return l10n.moderatelyEmpty;
       case 3:
         return AppLocalizations.of(context)!.crowdLevelNormal;
       case 4:
-        return 'やや混雑';
+        return l10n.moderatelyCrowded;
       case 5:
-        return '超混雑';
+        return l10n.gym_181af51b;
       default:
         return AppLocalizations.of(context)!.unknown;
     }
@@ -390,15 +390,15 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
   String _getCrowdLevelDescription(int level) {
     switch (level) {
       case 1:
-        return 'ほとんど人がいません';
+        return l10n.general_32d99a79;
       case 2:
-        return '少し人がいますが、余裕があります';
+        return l10n.general_1c845e05;
       case 3:
-        return '適度に人がいます';
+        return l10n.general_5c408dba;
       case 4:
-        return 'かなり混んでいます';
+        return l10n.general_f1efa2a1;
       case 5:
-        return '非常に混雑しています';
+        return l10n.general_b37aab80;
       default:
         return '';
     }
@@ -436,8 +436,8 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
           children: [
             Row(
               children: [
-                const Icon(Icons.emoji_events, color: Colors.orange),
-                const SizedBox(width: 8),
+                Icon(Icons.emoji_events, color: Colors.orange),
+                SizedBox(width: 8),
                 Text(
                   '次の報酬まであと${_nextMilestone!.remaining}回！',
                   style: const TextStyle(
@@ -447,14 +447,14 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             LinearProgressIndicator(
               value: progress,
               backgroundColor: Colors.grey[300],
               valueColor: const AlwaysStoppedAnimation(Colors.orange),
               minHeight: 8,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -468,7 +468,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               '報酬: ${_nextMilestone!.reward}',
               style: const TextStyle(

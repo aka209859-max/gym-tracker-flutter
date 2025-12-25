@@ -1,0 +1,32 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 32
+  Replacements: 15
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 2 × '\bconst\s+Text\s*\(' → 'Text('
+  ✅ Removed 22 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 7 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Removed 1 × '\bconst\s+Expanded\s*\(' → 'Expanded('
+  ✅ Replaced: アブローラー... → l10n.exerciseAbRoller
+  ✅ Replaced: クランチ... → l10n.exerciseCrunch
+  ✅ Replaced: ケーブルクランチ... → l10n.exerciseCableCrunch
+  ✅ Replaced: サイドプランク... → l10n.exerciseSidePlank
+  ✅ Replaced: セット... → l10n.sets
+  ✅ Replaced: タップしてトレーニングの感想や気づきを記録... → l10n.workout_e5b3b7b2
+  ✅ Replaced: ハンギングレッグレイズ... → l10n.exerciseHangingLegRaise
+  ✅ Replaced: バイシクルクランチ... → l10n.exerciseBicycleCrunch
+  ✅ Replaced: プランク... → l10n.exercisePlank
+  ✅ Replaced: レッグレイズ... → l10n.exerciseLegRaise
+  ✅ Replaced: 回数... → l10n.repsCount
+  ✅ Replaced: 秒数... → l10n.workout_34d70475
+  ✅ Replaced: 補助... → l10n.workout_c6b41e99
+  ✅ Replaced: 重さ... → l10n.workout_2579352f
+  ✅ Replaced: 限界... → l10n.failureSet

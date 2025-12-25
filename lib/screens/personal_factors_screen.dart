@@ -131,16 +131,16 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
       behavior: HitTestBehavior.translucent,
       child: Scaffold(
         appBar: AppBar(
-        title: const Text('🔬 個人要因設定'),
+        title: Text('🔬 個人要因設定'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.help_outline),
+            icon: Icon(Icons.help_outline),
             onPressed: _showHelpDialog,
           ),
         ],
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Form(
@@ -150,19 +150,19 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                   children: [
                     // PFM表示カード
                     _buildPFMCard(),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
                     
                     // 静的要因セクション
-                    _buildSectionHeader('静的要因', '変更頻度: 低'),
-                    const SizedBox(height: 12),
+                    _buildSectionHeader(l10n.personalFactor_a8e6bc91, '変更頻度: 低'),
+                    SizedBox(height: 12),
                     _buildStaticFactorsCard(),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
                     
                     // 動的要因セクション
-                    _buildSectionHeader('動的要因', '変更頻度: 高（日々更新推奨）'),
-                    const SizedBox(height: 12),
+                    _buildSectionHeader(l10n.personalFactor_380ea875, '変更頻度: 高（日々更新推奨）'),
+                    SizedBox(height: 12),
                     _buildDynamicFactorsCard(),
-                    const SizedBox(height: 32),
+                    SizedBox(height: 32),
                     
                     // 保存ボタン
                     ElevatedButton(
@@ -175,12 +175,12 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                         backgroundColor: Colors.blue[700],
                         foregroundColor: Colors.white,
                       ),
-                      child: const Text(
+                      child: Text(
                         '💾 保存して PFM を更新',
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     
                     // 科学的根拠フッター
                     _buildScientificFooter(),
@@ -199,11 +199,11 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            const Text(
+            Text(
               '現在の Personal Factor Multiplier',
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               '${_currentPFM.toStringAsFixed(2)}x',
               style: TextStyle(
@@ -212,7 +212,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                 color: Colors.purple[700],
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               '基礎Training Loadに掛け算されます',
               style: TextStyle(fontSize: 12, color: Colors.grey[700]),
@@ -236,7 +236,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
           title,
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-        const SizedBox(height: 4),
+        SizedBox(height: 4),
         Text(
           subtitle,
           style: TextStyle(fontSize: 12, color: Colors.grey[600]),
@@ -266,16 +266,16 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return '年齢を入力してください';
+                  return l10n.personalFactor_03a1c2ca;
                 }
                 final age = int.tryParse(value);
                 if (age == null || age < 10 || age > 100) {
-                  return '10〜100の範囲で入力してください';
+                  return l10n.personalFactor_fb13f7ed;
                 }
                 return null;
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // トレーニング経験年数
             TextFormField(
@@ -284,7 +284,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               textInputAction: TextInputAction.next,
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
               decoration: InputDecoration(
-                labelText: 'トレーニング経験年数',
+                labelText: l10n.personalFactor_5a712682,
                 suffixText: AppLocalizations.of(context)!.annualPrice,
                 helperText: '<1年: 1.10x, 3-5年: 0.95x, 5+年: 0.90x',
                 helperMaxLines: 2,
@@ -292,11 +292,11 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return '経験年数を入力してください';
+                  return l10n.personalFactor_31098440;
                 }
                 final years = int.tryParse(value);
                 if (years == null || years < 0 || years > 50) {
-                  return '0〜50の範囲で入力してください';
+                  return l10n.personalFactor_47d86eef;
                 }
                 return null;
               },
@@ -320,7 +320,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               textInputAction: TextInputAction.next,
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
               decoration: InputDecoration(
-                labelText: '昨晩の睡眠時間',
+                labelText: l10n.personalFactor_db37d13b,
                 suffixText: AppLocalizations.of(context)!.time,
                 helperText: '<6時間: 1.15x, 8+時間: 0.95x',
                 helperMaxLines: 2,
@@ -328,16 +328,16 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return '睡眠時間を入力してください';
+                  return l10n.personalFactor_f3409cdd;
                 }
                 final hours = double.tryParse(value);
                 if (hours == null || hours < 0 || hours > 24) {
-                  return '0〜24の範囲で入力してください';
+                  return l10n.personalFactor_616dc22d;
                 }
                 return null;
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // タンパク質摂取量
             TextFormField(
@@ -346,24 +346,24 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               textInputAction: TextInputAction.next,
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
               decoration: InputDecoration(
-                labelText: '1日のタンパク質摂取量',
-                suffixText: 'グラム',
+                labelText: l10n.personalFactor_9f7b01f0,
+                suffixText: l10n.personalFactor_4da8beb5,
                 helperText: '<84g(1.2g/kg): 1.10x, 112+g(1.6g/kg): 0.95x (体重70kg想定)',
                 helperMaxLines: 3,
                 prefixIcon: Icon(Icons.restaurant),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'タンパク質摂取量を入力してください';
+                  return l10n.personalFactor_59352db7;
                 }
                 final protein = double.tryParse(value);
                 if (protein == null || protein < 0 || protein > 500) {
-                  return '0〜500の範囲で入力してください';
+                  return l10n.personalFactor_b7206655;
                 }
                 return null;
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // アルコール摂取量
             TextFormField(
@@ -372,8 +372,8 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               textInputAction: TextInputAction.done,
               onEditingComplete: () => FocusScope.of(context).unfocus(),
               decoration: InputDecoration(
-                labelText: '前日のアルコール摂取量',
-                suffixText: 'ユニット',
+                labelText: l10n.personalFactor_e8aa7dea,
+                suffixText: l10n.personalFactor_ec2007be,
                 helperText: '1ユニット毎に+5% (ビール350ml≒1.4ユニット)',
                 helperMaxLines: 2,
                 prefixIcon: Icon(Icons.local_bar),
@@ -384,7 +384,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                 }
                 final units = int.tryParse(value);
                 if (units == null || units < 0 || units > 20) {
-                  return '0〜20の範囲で入力してください';
+                  return l10n.personalFactor_df82df91;
                 }
                 return null;
               },
@@ -417,11 +417,11 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               'Personal Factor Multiplier (PFM) は、年齢・経験・睡眠・栄養・アルコールの5要素を統合して個人の疲労感受性を補正します。\n\n'
               '範囲: 0.7x - 1.3x (最小30%減〜最大30%増)\n'
-              'PFM値が高いほど、同じトレーニングでも疲労度が高くなります。',
+              l10n.personalFactor_a5772517,
               style: TextStyle(fontSize: 11, color: Colors.grey[700]),
             ),
           ],
@@ -446,18 +446,18 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                'この画面では、あなたの個人特性に基づいて疲労度計算を補正します。',
+              Text(
+                l10n.personalFactor_56a6d8a6,
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               _buildHelpSection(
                 '📊 静的要因',
                 '変更頻度が低い要素です:\n'
                 '• 年齢: 加齢による回復力の変化\n'
                 '• トレーニング経験: 適応能力の違い',
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               _buildHelpSection(
                 '⚡ 動的要因',
                 '日々変動する要素です:\n'
@@ -465,13 +465,13 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                 '• タンパク質摂取: 筋肉回復の材料\n'
                 '• アルコール: 回復阻害要因',
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               _buildHelpSection(
                 '🎯 推奨更新頻度',
                 '• 静的要因: 数ヶ月に1回\n'
                 '• 動的要因: トレーニング前日・当日に更新',
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
@@ -482,10 +482,10 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Icon(Icons.lightbulb, color: Colors.amber[700], size: 20),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        'トレーニング終了後、最新の動的要因で自動計算されます',
+                        l10n.personalFactor_24d99a0b,
                         style: TextStyle(fontSize: 12, color: Colors.grey[800]),
                       ),
                     ),
@@ -513,7 +513,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
           title,
           style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
         ),
-        const SizedBox(height: 4),
+        SizedBox(height: 4),
         Text(
           content,
           style: TextStyle(fontSize: 12, color: Colors.grey[700]),
