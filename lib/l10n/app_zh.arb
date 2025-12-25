@@ -3355,5 +3355,9 @@
   "autoGen_b714e319": "📋 传递模板数据：$templateData",
   "autoGen_51ce78c9": "您要删除“{template_name}”吗？",
   "autoGen_8a87562e": "每周一自动生成（演示模式下，由于尚未实现云函数，因此需要手动输入数据）",
-  "autoGen_15000674": "尝试次数 $retryCount/$maxRetries..."
+  "autoGen_15000674": "尝试次数 $retryCount/$maxRetries...",
+  "showDetailsSection": "显示详细信息",
+  "weightRatio": "重量比",
+  "frequency1to2": "每周1-2次",
+  "frequency3to4": "每周3-4次"
 }

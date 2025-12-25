@@ -3353,5 +3353,9 @@
   "autoGen_b714e319": "📋 Pasando datos de plantilla: $templateData",
   "autoGen_51ce78c9": "¿Quieres eliminar \"{template_name}\"?",
   "autoGen_8a87562e": "Generado automáticamente todos los lunes (en modo de demostración, se requieren datos manuales ya que la función Cloud no está implementada)",
-  "autoGen_15000674": "Intentos $retryCount/$maxRetries..."
+  "autoGen_15000674": "Intentos $retryCount/$maxRetries...",
+  "showDetailsSection": "Mostrar detalles",
+  "weightRatio": "Relación de peso",
+  "frequency1to2": "1-2 veces/semana",
+  "frequency3to4": "3-4 veces/semana"
 }

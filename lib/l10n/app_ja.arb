@@ -3782,5 +3782,9 @@
   "autoGen_b714e319": "📋 テンプレートデータを渡す: $templateData",
   "autoGen_51ce78c9": "{template_name}を削除しますか？",
   "autoGen_8a87562e": "毎週月曜日に自動生成されます\\n（デモモードではCloud Function未実装のため手動データが必要です）",
-  "autoGen_15000674": "試行 $retryCount/$maxRetries..."
+  "autoGen_15000674": "試行 $retryCount/$maxRetries...",
+  "showDetailsSection": "詳細セクションを表示",
+  "weightRatio": "ウェイトレシオ",
+  "frequency1to2": "週1-2回",
+  "frequency3to4": "週3-4回"
 }

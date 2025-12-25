@@ -3354,5 +3354,9 @@
   "autoGen_b714e319": "📋 Übergabe der Vorlagendaten: $templateData",
   "autoGen_51ce78c9": "Möchten Sie \"{template_name}\" löschen?",
   "autoGen_8a87562e": "Wird jeden Montag automatisch generiert (im Demo-Modus sind manuelle Daten erforderlich, da die Cloud-Funktion nicht implementiert ist).",
-  "autoGen_15000674": "Versuche $retryCount/$maxRetries..."
+  "autoGen_15000674": "Versuche $retryCount/$maxRetries...",
+  "showDetailsSection": "Details anzeigen",
+  "weightRatio": "Gewichtsverhältnis",
+  "frequency1to2": "1-2 mal/Woche",
+  "frequency3to4": "3-4 mal/Woche"
 }

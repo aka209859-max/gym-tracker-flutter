@@ -3352,5 +3352,9 @@
   "autoGen_b714e319": "📋 템플릿 데이터 전달: $templateData",
   "autoGen_51ce78c9": "'{template_name}'을 삭제하시겠습니까?",
   "autoGen_8a87562e": "매주 월요일에 자동으로 생성됩니다.\\n(데모 모드에서는 Cloud Function을 구현하지 않으므로 수동 데이터 필요)",
-  "autoGen_15000674": "시도 $retryCount/$maxRetries..."
+  "autoGen_15000674": "시도 $retryCount/$maxRetries...",
+  "showDetailsSection": "세부 정보 표시",
+  "weightRatio": "웨이트 비율",
+  "frequency1to2": "주 1-2회",
+  "frequency3to4": "주 3-4회"
 }

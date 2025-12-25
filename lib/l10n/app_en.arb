@@ -3325,5 +3325,9 @@
   "autoGen_b714e319": "📋 Passing template data: $templateData",
   "autoGen_51ce78c9": "Do you want to delete \"{template_name}\"?",
   "autoGen_8a87562e": "Automatically generated every Monday (in demo mode, manual data is required as Cloud Function is not implemented)",
-  "autoGen_15000674": "Attempts $retryCount/$maxRetries..."
+  "autoGen_15000674": "Attempts $retryCount/$maxRetries...",
+  "showDetailsSection": "Show Details Section",
+  "weightRatio": "Weight Ratio",
+  "frequency1to2": "1-2 times/week",
+  "frequency3to4": "3-4 times/week"
 }
