@@ -110,13 +110,13 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   
   // 懸垂系種目かどうかを判定
   bool _isPullUpExercise(String exerciseName) {
-    final pullUpVariations = [AppLocalizations.of(context)!.exercisePullUp, AppLocalizations.of(context)!.exerciseChinUp, 'プルアップ', 'チンアップ', 'ワイドグリッププルアップ'];
+    final pullUpVariations = [AppLocalizations.of(context)!.exercisePullUp, AppLocalizations.of(context)!.exerciseChinUp, l10n.workout_e3dc6687, l10n.workout_13a24951, l10n.workout_269bc3f6];
     return pullUpVariations.any((variation) => exerciseName.contains(variation));
   }
   
   // ✅ v1.0.167: 腹筋系種目かどうかを判定（懸垂と同じUI: 自重/重さ/秒数）
   bool _isAbsExercise(String exerciseName) {
-    final absExercises = _muscleGroupExercises['腹筋'] ?? [];
+    final absExercises = _muscleGroupExercises[l10n.bodyPart_ceb49fa1] ?? [];
     return absExercises.contains(exerciseName);
   }
 
@@ -148,14 +148,14 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     // 🔧 v1.0.297: 1回だけ初期化（context利用可能）
     if (!_isInitialized) {
       _muscleGroupExercises = {
-        AppLocalizations.of(context)!.bodyPartChest: [AppLocalizations.of(context)!.exerciseBenchPress, AppLocalizations.of(context)!.exerciseDumbbellPress, AppLocalizations.of(context)!.exerciseInclinePress, 'デクラインプレス', 'ダンベルフライ', 'インクラインフライ', 'ケーブルクロスオーバー', AppLocalizations.of(context)!.exerciseCableFly, AppLocalizations.of(context)!.exerciseDips, 'チェストプレスマシン', 'ペックフライマシン'],
-        AppLocalizations.of(context)!.bodyPartLegs: ['バーベルスクワット', 'フロントスクワット', 'ブルガリアンスクワット', AppLocalizations.of(context)!.exerciseSquat, AppLocalizations.of(context)!.exerciseLegPress, AppLocalizations.of(context)!.exerciseLegExtension, AppLocalizations.of(context)!.exerciseLegCurl, 'ルーマニアンデッドリフト', 'ランジ', 'レッグアブダクション', 'レッグアダクション', AppLocalizations.of(context)!.exerciseCalfRaise, 'ヒップスラスト'],
-        AppLocalizations.of(context)!.bodyPartBack: [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, 'ラットプルダウン（ワイド）', 'ラットプルダウン（ナロー）', AppLocalizations.of(context)!.exerciseChinUp, AppLocalizations.of(context)!.exercisePullUp, AppLocalizations.of(context)!.exerciseBentOverRow, 'ワンハンドダンベルロウ', 'Tバーロウ', AppLocalizations.of(context)!.exerciseSeatedRow, 'ケーブルロウ', 'バックエクステンション', 'シュラッグ'],
-        AppLocalizations.of(context)!.bodyPartShoulders: [AppLocalizations.of(context)!.exerciseShoulderPress, 'ダンベルショルダープレス', 'マシンショルダープレス', AppLocalizations.of(context)!.exerciseSideRaise, 'ケーブルサイドレイズ', AppLocalizations.of(context)!.exerciseFrontRaise, 'リアレイズ', AppLocalizations.of(context)!.exerciseRearDeltFly, 'ケーブルリアレイズ', AppLocalizations.of(context)!.exerciseUprightRow, 'フェイスプル'],
-        AppLocalizations.of(context)!.bodyPartBiceps: [AppLocalizations.of(context)!.exerciseBarbellCurl, 'EZバーカール', AppLocalizations.of(context)!.exerciseDumbbellCurl, 'ダンベルカール（オルタネイト）', AppLocalizations.of(context)!.exerciseHammerCurl, AppLocalizations.of(context)!.exercisePreacherCurl, 'インクラインダンベルカール', 'コンセントレーションカール', AppLocalizations.of(context)!.exerciseCableCurl, 'チンアップ（逆手懸垂）', '21カール', 'ドラッグカール', 'ゾットマンカール', 'マシンアームカール'],
-        AppLocalizations.of(context)!.bodyPartTriceps: ['トライセプスプレスダウン', 'ケーブルプレスダウン', 'ライイングトライセプスエクステンション', AppLocalizations.of(context)!.exerciseSkullCrusher, 'オーバーヘッドトライセプスエクステンション', AppLocalizations.of(context)!.exerciseDips, 'トライセプスキックバック', AppLocalizations.of(context)!.exerciseKickback, 'クローズグリップベンチプレス', 'ケーブルオーバーヘッドエクステンション', 'リバースグリッププレスダウン', 'ダンベルトライセプスエクステンション', 'JMプレス', 'ダイヤモンドプッシュアップ', 'ベンチディップス', 'マシンディップス'],
-        '腹筋': [AppLocalizations.of(context)!.exerciseCrunch, AppLocalizations.of(context)!.exerciseLegRaise, AppLocalizations.of(context)!.exerciseHangingLegRaise, AppLocalizations.of(context)!.exercisePlank, AppLocalizations.of(context)!.exerciseSidePlank, AppLocalizations.of(context)!.exerciseAbRoller, AppLocalizations.of(context)!.exerciseCableCrunch, AppLocalizations.of(context)!.exerciseBicycleCrunch, 'ロシアンツイスト', 'マウンテンクライマー', 'ドラゴンフラッグ', 'アブドミナルクランチマシン'],
-        AppLocalizations.of(context)!.exerciseCardio: [AppLocalizations.of(context)!.exerciseRunning, 'ランニング（トレッドミル）', 'ジョギング', 'ジョギング（屋外）', 'サイクリング', AppLocalizations.of(context)!.exerciseAerobicBike, 'ステッパー', '水泳', 'ローイングマシン', 'ウォーキング', 'ウォーキング（トレッドミル）', 'インターバルラン', 'クロストレーナー', 'バトルロープ', 'バーピージャンプ', 'マウンテンクライマー', 'マウンテンクライマー（高強度）'],
+        AppLocalizations.of(context)!.bodyPartChest: [AppLocalizations.of(context)!.exerciseBenchPress, AppLocalizations.of(context)!.exerciseDumbbellPress, AppLocalizations.of(context)!.exerciseInclinePress, l10n.exercise_11c97451, l10n.workout_e85fb0a4, l10n.workout_b18d1691, l10n.workout_c196525e, AppLocalizations.of(context)!.exerciseCableFly, AppLocalizations.of(context)!.exerciseDips, l10n.exercise_fbe3be86, l10n.workout_aaa776e7],
+        AppLocalizations.of(context)!.bodyPartLegs: [l10n.exercise_8c982e86, l10n.exercise_4e99d714, l10n.exercise_1602d233, AppLocalizations.of(context)!.exerciseSquat, AppLocalizations.of(context)!.exerciseLegPress, AppLocalizations.of(context)!.exerciseLegExtension, AppLocalizations.of(context)!.exerciseLegCurl, l10n.exercise_0afc8ed2, l10n.workout_a19f4e60, l10n.workout_4027c245, l10n.workout_dc27b01c, AppLocalizations.of(context)!.exerciseCalfRaise, l10n.workout_7cb5b362],
+        AppLocalizations.of(context)!.bodyPartBack: [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, 'ラットプルダウン（ワイド）', 'ラットプルダウン（ナロー）', AppLocalizations.of(context)!.exerciseChinUp, AppLocalizations.of(context)!.exercisePullUp, AppLocalizations.of(context)!.exerciseBentOverRow, l10n.workout_f67592f1, l10n.workout_78f50d3b, AppLocalizations.of(context)!.exerciseSeatedRow, l10n.workout_f8d1b968, l10n.workout_56b5390a, l10n.workout_600bfaf4],
+        AppLocalizations.of(context)!.bodyPartShoulders: [AppLocalizations.of(context)!.exerciseShoulderPress, l10n.exercise_b9e82d29, l10n.exercise_158c0c0a, AppLocalizations.of(context)!.exerciseSideRaise, l10n.workout_0d3898b0, AppLocalizations.of(context)!.exerciseFrontRaise, l10n.workout_61db805d, AppLocalizations.of(context)!.exerciseRearDeltFly, l10n.workout_a2742c19, AppLocalizations.of(context)!.exerciseUprightRow, l10n.workout_6a40751e],
+        AppLocalizations.of(context)!.bodyPartBiceps: [AppLocalizations.of(context)!.exerciseBarbellCurl, l10n.workout_6bc85042, AppLocalizations.of(context)!.exerciseDumbbellCurl, 'ダンベルカール（オルタネイト）', AppLocalizations.of(context)!.exerciseHammerCurl, AppLocalizations.of(context)!.exercisePreacherCurl, l10n.workout_9556156f, l10n.workout_6a8e2907, AppLocalizations.of(context)!.exerciseCableCurl, 'チンアップ（逆手懸垂）', l10n.workout_f7c7e985, l10n.workout_f3949316, l10n.workout_404e46d1, l10n.workout_6b330584],
+        AppLocalizations.of(context)!.bodyPartTriceps: [l10n.exercise_636fb74f, l10n.exercise_cba215fa, l10n.workout_41ae2e59, AppLocalizations.of(context)!.exerciseSkullCrusher, l10n.workout_f00eef45, AppLocalizations.of(context)!.exerciseDips, l10n.workout_4a6fa58a, AppLocalizations.of(context)!.exerciseKickback, l10n.exercise_a60f616c, l10n.workout_06bbf6c9, l10n.exercise_f48ee2b4, l10n.workout_7e5aac14, l10n.exercise_235597fb, l10n.workout_8a9a2d2b, l10n.workout_facbc0fc, l10n.workout_db390755],
+        l10n.bodyPart_ceb49fa1: [AppLocalizations.of(context)!.exerciseCrunch, AppLocalizations.of(context)!.exerciseLegRaise, AppLocalizations.of(context)!.exerciseHangingLegRaise, AppLocalizations.of(context)!.exercisePlank, AppLocalizations.of(context)!.exerciseSidePlank, AppLocalizations.of(context)!.exerciseAbRoller, AppLocalizations.of(context)!.exerciseCableCrunch, AppLocalizations.of(context)!.exerciseBicycleCrunch, l10n.workout_b2d699ea, l10n.workout_9bee258f, l10n.workout_eebef32f, l10n.workout_5be61342],
+        AppLocalizations.of(context)!.exerciseCardio: [AppLocalizations.of(context)!.exerciseRunning, 'ランニング（トレッドミル）', l10n.workout_285aeb0d, 'ジョギング（屋外）', l10n.workout_cf6a6f5b, AppLocalizations.of(context)!.exerciseAerobicBike, l10n.workout_f4ecb3c9, l10n.workout_a90ed9c4, l10n.workout_4c6d7db7, l10n.workout_e23f084e, 'ウォーキング（トレッドミル）', l10n.workout_aa4c3c64, l10n.workout_ba2fef80, l10n.workout_bc2d4a29, l10n.workout_fcdc095e, l10n.workout_9bee258f, 'マウンテンクライマー（高強度）'],
       };
       _isInitialized = true;
     }
@@ -614,8 +614,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         AppLocalizations.of(context)!.bodyPartBack: [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, AppLocalizations.of(context)!.exerciseBentOverRow, AppLocalizations.of(context)!.exerciseSeatedRow, AppLocalizations.of(context)!.exercisePullUp],
         AppLocalizations.of(context)!.bodyPartShoulders: [AppLocalizations.of(context)!.exerciseShoulderPress, AppLocalizations.of(context)!.exerciseSideRaise, AppLocalizations.of(context)!.exerciseFrontRaise, AppLocalizations.of(context)!.exerciseRearDeltFly, AppLocalizations.of(context)!.exerciseUprightRow],
         AppLocalizations.of(context)!.bodyPartBiceps: [AppLocalizations.of(context)!.exerciseBarbellCurl, AppLocalizations.of(context)!.exerciseDumbbellCurl, AppLocalizations.of(context)!.exerciseHammerCurl, AppLocalizations.of(context)!.exercisePreacherCurl, AppLocalizations.of(context)!.exerciseCableCurl],
-        AppLocalizations.of(context)!.bodyPartTriceps: [AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseSkullCrusher, 'ケーブルプッシュダウン', AppLocalizations.of(context)!.exerciseDips, AppLocalizations.of(context)!.exerciseKickback],
-        AppLocalizations.of(context)!.exerciseCardio: [AppLocalizations.of(context)!.exerciseRunning, 'サイクリング', AppLocalizations.of(context)!.exerciseAerobicBike, 'ステッパー', '水泳'],
+        AppLocalizations.of(context)!.bodyPartTriceps: [AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseSkullCrusher, l10n.workout_22752b72, AppLocalizations.of(context)!.exerciseDips, AppLocalizations.of(context)!.exerciseKickback],
+        AppLocalizations.of(context)!.exerciseCardio: [AppLocalizations.of(context)!.exerciseRunning, l10n.workout_cf6a6f5b, AppLocalizations.of(context)!.exerciseAerobicBike, l10n.workout_f4ecb3c9, l10n.workout_a90ed9c4],
       };
       
       _muscleGroupExercises.forEach((muscleGroup, exercises) {
@@ -751,7 +751,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         print('⚠️ ワークアウト履歴が1件もありません');
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('まだ記録がありません。最初のワークアウトを記録しましょう！')),
+            const SnackBar(content: Text(l10n.workout_404c0672)),
           );
         }
         return;
@@ -943,7 +943,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             Icon(Icons.alarm, color: Colors.green, size: 32),
             SizedBox(width: 12),
             Text(
-              '休憩終了！',
+              l10n.workout_ec97904d,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -952,8 +952,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             ),
           ],
         ),
-        content: const Text(
-          '次のセットに進みましょう！💪',
+        content: Text(
+          l10n.workout_4378d5d9,
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
         ),
         actions: [
@@ -1020,8 +1020,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                       onPressed: () => Navigator.pop(context),
                       child: Text(AppLocalizations.of(context)!.cancel, style: TextStyle(color: Colors.red)),
                     ),
-                    const Text(
-                      '休憩時間を設定',
+                    Text(
+                      l10n.workout_b23db97f,
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     TextButton(
@@ -1030,7 +1030,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                         Navigator.pop(context);
                         _startRestTimer(); // 設定後すぐにタイマー開始
                       },
-                      child: const Text('開始', style: TextStyle(fontWeight: FontWeight.bold)),
+                      child: Text(l10n.workout_eb87a812, style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
                   ],
                 ),
@@ -1156,7 +1156,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(DateFormat('yyyy/M/d (E)', 'ja').format(date)),
-                  trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                  trailing: Icon(Icons.arrow_forward_ios, size: 16),
                   onTap: () => Navigator.pop(context, record),
                 );
               },
@@ -1245,7 +1245,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
             ],
             TextField(
               controller: repsController,
@@ -1326,8 +1326,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       AppLocalizations.of(context)!.bodyPartBack: [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, AppLocalizations.of(context)!.exerciseBentOverRow, AppLocalizations.of(context)!.exerciseSeatedRow, AppLocalizations.of(context)!.exercisePullUp],
       AppLocalizations.of(context)!.bodyPartShoulders: [AppLocalizations.of(context)!.exerciseShoulderPress, AppLocalizations.of(context)!.exerciseSideRaise, AppLocalizations.of(context)!.exerciseFrontRaise, AppLocalizations.of(context)!.exerciseRearDeltFly, AppLocalizations.of(context)!.exerciseUprightRow],
       AppLocalizations.of(context)!.bodyPartBiceps: [AppLocalizations.of(context)!.exerciseBarbellCurl, AppLocalizations.of(context)!.exerciseDumbbellCurl, AppLocalizations.of(context)!.exerciseHammerCurl, AppLocalizations.of(context)!.exercisePreacherCurl, AppLocalizations.of(context)!.exerciseCableCurl],
-      AppLocalizations.of(context)!.bodyPartTriceps: [AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseSkullCrusher, 'ケーブルプッシュダウン', AppLocalizations.of(context)!.exerciseDips, AppLocalizations.of(context)!.exerciseKickback],
-      AppLocalizations.of(context)!.exerciseCardio: [AppLocalizations.of(context)!.exerciseRunning, 'サイクリング', AppLocalizations.of(context)!.exerciseAerobicBike, 'ステッパー', '水泳'],
+      AppLocalizations.of(context)!.bodyPartTriceps: [AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseSkullCrusher, l10n.workout_22752b72, AppLocalizations.of(context)!.exerciseDips, AppLocalizations.of(context)!.exerciseKickback],
+      AppLocalizations.of(context)!.exerciseCardio: [AppLocalizations.of(context)!.exerciseRunning, l10n.workout_cf6a6f5b, AppLocalizations.of(context)!.exerciseAerobicBike, l10n.workout_f4ecb3c9, l10n.workout_a90ed9c4],
     };
     
     final defaults = defaultExercises[_selectedMuscleGroup] ?? [];
@@ -1339,7 +1339,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('カスタム種目を削除'),
+        title: Text(l10n.workout_54d4f6f6),
         content: Text('「$exerciseName」を削除しますか？\nこの操作は取り消せません。'),
         actions: [
           TextButton(
@@ -1381,7 +1381,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         content: TextField(
           controller: controller,
           decoration: InputDecoration(
-            hintText: '種目名を入力',
+            hintText: l10n.workout_a3dbb30d,
             border: OutlineInputBorder(),
           ),
           autofocus: true,
@@ -1484,7 +1484,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               children: [
                 Icon(Icons.bed, color: Colors.white),
                 SizedBox(width: 8),
-                Text('オフ日として登録しました'),
+                Text(l10n.workout_da75109e),
               ],
             ),
             backgroundColor: Colors.green,
@@ -1564,7 +1564,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   Future<void> _saveWorkout() async {
     if (_selectedMuscleGroup == null || _sets.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('部位と種目を選択してください')),
+        const SnackBar(content: Text(l10n.workout_4c734626)),
       );
       return;
     }
@@ -1729,7 +1729,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       if (mounted) {
         Navigator.pop(context, true);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('トレーニングを保存しました')),
+          const SnackBar(content: Text(l10n.workout_498b0ea4)),
         );
         
         // 🎯 Phase 1: トレーニング記録後のAI導線ポップアップ
@@ -1782,8 +1782,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.timer, size: 18, color: Colors.white),
-                    const SizedBox(width: 6),
+                    Icon(Icons.timer, size: 18, color: Colors.white),
+                    SizedBox(width: 6),
                     Text(
                       '$_restSeconds秒',
                       style: const TextStyle(
@@ -1797,15 +1797,15 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.stop_circle),
+              icon: Icon(Icons.stop_circle),
               onPressed: _stopRestTimer,
-              tooltip: 'タイマー停止',
+              tooltip: l10n.workout_6218789d,
             ),
           ] else ...[
             TextButton.icon(
-              icon: const Icon(Icons.timer, color: Colors.white),
-              label: const Text(
-                'タイマー',
+              icon: Icon(Icons.timer, color: Colors.white),
+              label: Text(
+                l10n.workout_e6f170ef,
                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
               onPressed: _showRestTimerSettings,
@@ -1828,20 +1828,20 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     color: theme.colorScheme.primary,
                     size: 24,
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'トレーニング日',
+                        Text(
+                          l10n.workout_8a92c566,
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.grey,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4),
                         Text(
                           _formatDate(_selectedDate),
                           style: const TextStyle(
@@ -1855,19 +1855,19 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   // ✅ v1.0.178: オフボタン
                   OutlinedButton.icon(
                     onPressed: () => _saveRestDay(context),
-                    icon: const Icon(Icons.bed, size: 18),
-                    label: const Text('オフ'),
+                    icon: Icon(Icons.bed, size: 18),
+                    label: Text(l10n.workout_a0c22faa),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.green,
                       side: const BorderSide(color: Colors.green),
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   OutlinedButton.icon(
                     onPressed: () => _selectDate(context),
-                    icon: const Icon(Icons.edit_calendar, size: 18),
-                    label: const Text('変更'),
+                    icon: Icon(Icons.edit_calendar, size: 18),
+                    label: Text(l10n.workout_5c7bbafb),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: theme.colorScheme.primary,
                       side: BorderSide(color: theme.colorScheme.primary),
@@ -1940,7 +1940,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     children: [
                       Expanded(child: Text(exercise)),
                       if (isCustomExercise)
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.only(left: 4),
                           child: Icon(Icons.star, size: 14, color: Colors.amber),
                         ),
@@ -1951,18 +1951,18 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     children: [
                       if (hasExercise)
                         IconButton(
-                          icon: const Icon(Icons.copy),
+                          icon: Icon(Icons.copy),
                           onPressed: () => _copyExerciseSets(exercise),
                           tooltip: AppLocalizations.of(context)!.copySet,
                         ),
                       if (isCustomExercise)
                         IconButton(
-                          icon: const Icon(Icons.delete_outline, size: 18),
+                          icon: Icon(Icons.delete_outline, size: 18),
                           color: Colors.red,
                           onPressed: () => _confirmDeleteCustomExercise(exercise),
-                          tooltip: 'カスタム種目を削除',
+                          tooltip: l10n.workout_54d4f6f6,
                         ),
-                      const Icon(Icons.chevron_right),
+                      Icon(Icons.chevron_right),
                     ],
                   ),
                   onTap: () => _addSet(exercise),
@@ -1974,7 +1974,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: OutlinedButton.icon(
                   onPressed: _showAddCustomExerciseDialog,
-                  icon: const Icon(Icons.add),
+                  icon: Icon(Icons.add),
                   label: Text(AppLocalizations.of(context)!.addCustomExercise),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -2050,16 +2050,16 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       '📝 トレーニングメモ',
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     TextField(
                       controller: _memoController,
                       maxLines: 5,
                       decoration: InputDecoration(
-                        hintText: '今日のトレーニングについてメモを残しましょう',
+                        hintText: l10n.workout_be150460,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -2086,8 +2086,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text(
-                      '記録を保存',
+                    child: Text(
+                      l10n.workout_18f75a52,
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -2114,8 +2114,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           children: [
             Row(
               children: [
-                const Icon(Icons.fitness_center, color: Colors.blue, size: 20),
-                const SizedBox(width: 8),
+                Icon(Icons.fitness_center, color: Colors.blue, size: 20),
+                SizedBox(width: 8),
                 Text(
                   exerciseName,
                   style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -2124,7 +2124,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             ),
             
             // 前回をコピー & 一括入力ボタン（画像2の配置）
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Row(
               children: [
                 Expanded(
@@ -2135,20 +2135,20 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                       print('🔍 _lastWorkoutData: $_lastWorkoutData');
                       _showWorkoutHistoryDialog(exerciseName);
                     },
-                    icon: const Icon(Icons.history, size: 18),
-                    label: const Text('前回'),
+                    icon: Icon(Icons.history, size: 18),
+                    label: Text(l10n.workout_57b74023),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.purple,
                       side: const BorderSide(color: Colors.purple),
                     ),
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Expanded(
                   child: OutlinedButton.icon(
                     onPressed: () => _showBulkInputDialog(exerciseName),
-                    icon: const Icon(Icons.edit, size: 18),
-                    label: const Text('一括入力'),
+                    icon: Icon(Icons.edit, size: 18),
+                    label: Text(l10n.workout_779c0c7b),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.blue,
                       side: const BorderSide(color: Colors.blue),
@@ -2159,7 +2159,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             ),
             
             // 💡初回記録 or 前回記録バナー
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             
             // 🔧 v1.0.222: AIコーチからの場合は1RM情報も表示
             if (_isFromAICoach) ...[
@@ -2175,10 +2175,10 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   children: [
                     Row(
                       children: [
-                        const Text('🤖', style: TextStyle(fontSize: 16)),
-                        const SizedBox(width: 8),
+                        Text('🤖', style: TextStyle(fontSize: 16)),
+                        SizedBox(width: 8),
                         Text(
-                          'AIコーチの推奨',
+                          l10n.workout_400911f5,
                           style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
@@ -2207,7 +2207,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                                   color: Colors.green.shade900,
                                 ),
                               ),
-                              const SizedBox(height: 4),
+                              SizedBox(height: 4),
                               Text(
                                 'あなたのレベル ($userLevel) に合わせた重量・回数を設定しています',
                                 style: TextStyle(fontSize: 11, color: Colors.green.shade700),
@@ -2216,7 +2216,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                           );
                         } else {
                           return Text(
-                            '履歴データから最適な重量・回数を推奨しています',
+                            l10n.workout_207a9a37,
                             style: TextStyle(fontSize: 11, color: Colors.green.shade700),
                           );
                         }
@@ -2225,7 +2225,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
             ],
             
             if (lastData == null) ...[
@@ -2239,8 +2239,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 ),
                 child: Row(
                   children: [
-                    const Text('💡', style: TextStyle(fontSize: 16)),
-                    const SizedBox(width: 8),
+                    Text('💡', style: TextStyle(fontSize: 16)),
+                    SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         '初回記録\n今日の記録が次回の目標になります。全力で挑戦しましょう！',
@@ -2264,10 +2264,10 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   children: [
                     Row(
                       children: [
-                        const Text('📊', style: TextStyle(fontSize: 16)),
-                        const SizedBox(width: 8),
+                        Text('📊', style: TextStyle(fontSize: 16)),
+                        SizedBox(width: 8),
                         Text(
-                          '前回の記録',
+                          l10n.workout_565c4718,
                           style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
@@ -2276,7 +2276,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 6),
+                    SizedBox(height: 6),
                     Text(
                       _formatLastWorkoutData(lastData),
                       style: TextStyle(fontSize: 12, color: Colors.blue.shade700),
@@ -2286,7 +2286,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               ),
             ],
             
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             
             // セット一覧
             ...sets.asMap().entries.map((entry) {
@@ -2296,11 +2296,11 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             }).toList(),
             
             // セット追加ボタン
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             OutlinedButton.icon(
               onPressed: () => _addSet(exerciseName),
-              icon: const Icon(Icons.add),
-              label: const Text('セットを追加'),
+              icon: Icon(Icons.add),
+              label: Text(l10n.workout_68d6a303),
               style: OutlinedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 40),
               ),
@@ -2337,7 +2337,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   ),
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12),
               
               // 懸垂または腹筋の場合は自重/荷重モード切り替えを含む特別なUI
               if (_isPullUpExercise(set.exerciseName) || _isAbsExercise(set.exerciseName))
@@ -2369,10 +2369,10 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                                   width: set.isBodyweightMode ? 2 : 1,
                                 ),
                               ),
-                              child: const Text('自重', style: TextStyle(fontSize: 12)),
+                              child: Text(l10n.bodyweight, style: TextStyle(fontSize: 12)),
                             ),
                           ),
-                          const SizedBox(width: 4),
+                          SizedBox(width: 4),
                           Expanded(
                             child: OutlinedButton(
                               onPressed: () {
@@ -2394,14 +2394,14 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                                 ),
                               ),
                               child: Text(
-                                _isAbsExercise(set.exerciseName) ? '重さ' : '荷重', 
+                                _isAbsExercise(set.exerciseName) ? l10n.workout_2579352f : l10n.workout_63dbc040, 
                                 style: const TextStyle(fontSize: 12)
                               ),
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       // 荷重モードの場合のみ重量入力欄を表示
                       if (!set.isBodyweightMode)
                         TextFormField(
@@ -2429,9 +2429,9 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                             borderRadius: BorderRadius.circular(4),
                             color: Colors.grey[50],
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Text(
-                              '自重',
+                              l10n.bodyweight,
                               style: TextStyle(
                                 color: Colors.black54,
                                 fontWeight: FontWeight.w500,
@@ -2519,7 +2519,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     },
                   ),
                 ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               
               // 有酸素運動の場合は距離ベースかレップスベースかで分ける、腹筋の場合は「秒数/回数」、それ以外は「回数」
               Expanded(
@@ -2527,7 +2527,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   key: ValueKey('reps_${globalIndex}_${set.reps}'),
                   decoration: InputDecoration(
                     labelText: set.isCardio // 🔧 v1.0.226+242: Use stored flag
-                        ? (ExerciseMasterData.cardioUsesDistance(set.exerciseName) ? '距離 (km)' : '回数') // 🔧 v1.0.251: Distance vs Reps for cardio
+                        ? (ExerciseMasterData.cardioUsesDistance(set.exerciseName) ? '距離 (km)' : l10n.repsCount) // 🔧 v1.0.251: Distance vs Reps for cardio
                         : _isAbsExercise(set.exerciseName)
                             ? (set.isTimeMode ? AppLocalizations.of(context)!.seconds : AppLocalizations.of(context)!.repsCount)
                             : AppLocalizations.of(context)!.repsCount,
@@ -2546,11 +2546,11 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   },
                 ),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               
               // 削除ボタン
               IconButton(
-                icon: const Icon(Icons.delete, color: Colors.red),
+                icon: Icon(Icons.delete, color: Colors.red),
                 onPressed: () {
                   setState(() {
                     _sets.removeAt(globalIndex);
@@ -2560,7 +2560,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             ],
           ),
           
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           
           // セット種別選択
           Wrap(
@@ -2568,7 +2568,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             runSpacing: 4,
             children: [
               ChoiceChip(
-                label: const Text('通常', style: TextStyle(fontSize: 12)),
+                label: Text('通常', style: TextStyle(fontSize: 12)),
                 selected: set.setType == SetType.normal,
                 onSelected: (selected) {
                   if (selected) {
@@ -2579,7 +2579,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 },
               ),
               ChoiceChip(
-                label: const Text('W-UP', style: TextStyle(fontSize: 12)),
+                label: Text('W-UP', style: TextStyle(fontSize: 12)),
                 selected: set.setType == SetType.warmup,
                 onSelected: (selected) {
                   if (selected) {
@@ -2590,7 +2590,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 },
               ),
               ChoiceChip(
-                label: const Text('SS', style: TextStyle(fontSize: 12)),
+                label: Text('SS', style: TextStyle(fontSize: 12)),
                 selected: set.setType == SetType.superset,
                 onSelected: (selected) {
                   if (selected) {
@@ -2601,7 +2601,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 },
               ),
               ChoiceChip(
-                label: const Text('Drop', style: TextStyle(fontSize: 12)),
+                label: Text('Drop', style: TextStyle(fontSize: 12)),
                 selected: set.setType == SetType.dropset,
                 onSelected: (selected) {
                   if (selected) {
@@ -2625,7 +2625,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             ],
           ),
           
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           
           // 補助トグル ＋ セット完了チェック
           Row(
@@ -2642,7 +2642,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     set.hasAssist ? Icons.people : Icons.person,
                     size: 18,
                   ),
-                  label: Text(set.hasAssist ? '補助あり' : '補助なし'),
+                  label: Text(set.hasAssist ? '補助あり' : l10n.workout_7b8e9d09),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: set.hasAssist ? Colors.orange : Colors.grey,
                     side: BorderSide(
@@ -2651,7 +2651,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   ),
                 ),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               
               // セット完了チェック（インターバルはAppBarから開始）
               Expanded(
@@ -2665,7 +2665,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     set.isCompleted ? Icons.check_circle : Icons.check_circle_outline,
                     size: 18,
                   ),
-                  label: Text(set.isCompleted ? AppLocalizations.of(context)!.complete : '未完了'),
+                  label: Text(set.isCompleted ? AppLocalizations.of(context)!.complete : l10n.workout_2bf8f78c),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: set.isCompleted ? Colors.green : Colors.grey,
                     side: BorderSide(
@@ -2734,10 +2734,10 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 color: Colors.purple.shade600,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // タイトル
-            const Text(
+            Text(
               'AI疲労度分析を試してみませんか？',
               style: TextStyle(
                 fontSize: 18,
@@ -2745,7 +2745,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             
             // 説明
             Text(
@@ -2781,7 +2781,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               backgroundColor: Colors.purple.shade600,
               foregroundColor: Colors.white,
             ),
-            child: const Text('試してみる'),
+            child: Text('試してみる'),
           ),
         ],
       ),

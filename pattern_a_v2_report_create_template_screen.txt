@@ -1,0 +1,64 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 22
+  Replacements: 48
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 5 × '\bconst\s+Text\s*\(' → 'Text('
+  ✅ Removed 11 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 6 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Replaced: アップライトロウ... → l10n.exerciseUprightRow
+  ✅ Replaced: インクラインプレス... → l10n.exerciseInclinePress
+  ✅ Replaced: カスタム種目を追加... → l10n.addCustomExercise
+  ✅ Replaced: カーフレイズ... → l10n.exerciseCalfRaise
+  ✅ Replaced: キックバック... → l10n.exerciseKickback
+  ✅ Replaced: ケーブルカール... → l10n.exerciseCableCurl
+  ✅ Replaced: ケーブルフライ... → l10n.exerciseCableFly
+  ✅ Replaced: ケーブルプッシュダウン... → l10n.workout_22752b72
+  ✅ Replaced: サイドレイズ... → l10n.exerciseSideRaise
+  ✅ Replaced: ショルダープレス... → l10n.exerciseShoulderPress
+  ✅ Replaced: シーテッドロウ... → l10n.exerciseSeatedRow
+  ✅ Replaced: スカルクラッシャー... → l10n.exerciseSkullCrusher
+  ✅ Replaced: スクワット... → l10n.exerciseSquat
+  ✅ Replaced: セット数... → l10n.setsCount
+  ✅ Replaced: ダンベルカール... → l10n.exerciseDumbbellCurl
+  ✅ Replaced: ダンベルプレス... → l10n.exerciseDumbbellPress
+  ✅ Replaced: テンプレートを保存しました... → l10n.workout_dff9ccc1
+  ✅ Replaced: テンプレート作成... → l10n.createTemplate
+  ✅ Replaced: テンプレート名... → l10n.templateName
+  ✅ Replaced: テンプレート名を入力してください... → l10n.workout_e4a17e51
+  ✅ Replaced: ディップス... → l10n.exerciseDips
+  ✅ Replaced: デッドリフト... → l10n.exerciseDeadlift
+  ✅ Replaced: トライセプスエクステンション... → l10n.exerciseTricepsExtension
+  ✅ Replaced: ハンマーカール... → l10n.exerciseHammerCurl
+  ✅ Replaced: バーベルカール... → l10n.exerciseBarbellCurl
+  ✅ Replaced: フロントレイズ... → l10n.exerciseFrontRaise
+  ✅ Replaced: プリセットに戻る... → l10n.workout_16dc7c2c
+  ✅ Replaced: プリチャーカール... → l10n.exercisePreacherCurl
+  ✅ Replaced: ベンチプレス... → l10n.exerciseBenchPress
+  ✅ Replaced: ベントオーバーロウ... → l10n.exerciseBentOverRow
+  ✅ Replaced: ラットプルダウン... → l10n.exerciseLatPulldown
+  ✅ Replaced: リアデルトフライ... → l10n.exerciseRearDeltFly
+  ✅ Replaced: レッグエクステンション... → l10n.exerciseLegExtension
+  ✅ Replaced: レッグカール... → l10n.exerciseLegCurl
+  ✅ Replaced: レッグプレス... → l10n.exerciseLegPress
+  ✅ Replaced: 三頭... → l10n.bodyPartTriceps
+  ✅ Replaced: 主要部位... → l10n.workout_9b2523e6
+  ✅ Replaced: 二頭... → l10n.bodyPartBiceps
+  ✅ Replaced: 保存... → l10n.save
+  ✅ Replaced: 回数... → l10n.repsCount
+  ✅ Replaced: 懸垂... → l10n.exercisePullUp
+  ✅ Replaced: 種目... → l10n.exercise
+  ✅ Replaced: 種目を1つ以上追加してください... → l10n.workout_bf13cb6c
+  ✅ Replaced: 種目を追加してください... → l10n.workout_d90b7b6b
+  ✅ Replaced: 種目リスト... → l10n.workout_6e8a7475
+  ✅ Replaced: 種目追加... → l10n.workout_c3a95268
+  ✅ Replaced: 背中... → l10n.bodyPartBack
+  ✅ Replaced: 認証エラーが発生しました... → l10n.workout_07d18a44

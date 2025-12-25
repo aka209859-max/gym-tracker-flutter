@@ -1,0 +1,111 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 68
+  Replacements: 93
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 23 × '\bconst\s+Text\s*\(' → 'Text('
+  ✅ Removed 28 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 15 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Removed 1 × '\bconst\s+Padding\s*\(' → 'Padding('
+  ✅ Removed 1 × '\bconst\s+Center\s*\(' → 'Center('
+  ✅ Replaced: 21カール... → l10n.workout_f7c7e985
+  ✅ Replaced: AIコーチの推奨... → l10n.workout_400911f5
+  ✅ Replaced: EZバーカール... → l10n.workout_6bc85042
+  ✅ Replaced: JMプレス... → l10n.exercise_235597fb
+  ✅ Replaced: Tバーロウ... → l10n.workout_78f50d3b
+  ✅ Replaced: まだ記録がありません。最初のワークアウトを記録しましょう！... → l10n.workout_404c0672
+  ✅ Replaced: アブドミナルクランチマシン... → l10n.workout_5be61342
+  ✅ Replaced: インクラインダンベルカール... → l10n.workout_9556156f
+  ✅ Replaced: インクラインフライ... → l10n.workout_b18d1691
+  ✅ Replaced: インターバルラン... → l10n.workout_aa4c3c64
+  ✅ Replaced: ウォーキング... → l10n.workout_e23f084e
+  ✅ Replaced: オフ... → l10n.workout_a0c22faa
+  ✅ Replaced: オフ日として登録しました... → l10n.workout_da75109e
+  ✅ Replaced: オーバーヘッドトライセプスエクステンション... → l10n.workout_f00eef45
+  ✅ Replaced: カスタム種目を削除... → l10n.workout_54d4f6f6
+  ✅ Replaced: クロストレーナー... → l10n.workout_ba2fef80
+  ✅ Replaced: クローズグリップベンチプレス... → l10n.exercise_a60f616c
+  ✅ Replaced: ケーブルオーバーヘッドエクステンション... → l10n.workout_06bbf6c9
+  ✅ Replaced: ケーブルクロスオーバー... → l10n.workout_c196525e
+  ✅ Replaced: ケーブルサイドレイズ... → l10n.workout_0d3898b0
+  ✅ Replaced: ケーブルプッシュダウン... → l10n.workout_22752b72
+  ✅ Replaced: ケーブルプレスダウン... → l10n.exercise_cba215fa
+  ✅ Replaced: ケーブルリアレイズ... → l10n.workout_a2742c19
+  ✅ Replaced: ケーブルロウ... → l10n.workout_f8d1b968
+  ✅ Replaced: コンセントレーションカール... → l10n.workout_6a8e2907
+  ✅ Replaced: サイクリング... → l10n.workout_cf6a6f5b
+  ✅ Replaced: シュラッグ... → l10n.workout_600bfaf4
+  ✅ Replaced: ジョギング... → l10n.workout_285aeb0d
+  ✅ Replaced: ステッパー... → l10n.workout_f4ecb3c9
+  ✅ Replaced: セットを追加... → l10n.workout_68d6a303
+  ✅ Replaced: ゾットマンカール... → l10n.workout_404e46d1
+  ✅ Replaced: タイマー... → l10n.workout_e6f170ef
+  ✅ Replaced: タイマー停止... → l10n.workout_6218789d
+  ✅ Replaced: ダイヤモンドプッシュアップ... → l10n.workout_8a9a2d2b
+  ✅ Replaced: ダンベルショルダープレス... → l10n.exercise_b9e82d29
+  ✅ Replaced: ダンベルトライセプスエクステンション... → l10n.workout_7e5aac14
+  ✅ Replaced: ダンベルフライ... → l10n.workout_e85fb0a4
+  ✅ Replaced: チェストプレスマシン... → l10n.exercise_fbe3be86
+  ✅ Replaced: チンアップ... → l10n.workout_13a24951
+  ✅ Replaced: デクラインプレス... → l10n.exercise_11c97451
+  ✅ Replaced: トライセプスキックバック... → l10n.workout_4a6fa58a
+  ✅ Replaced: トライセプスプレスダウン... → l10n.exercise_636fb74f
+  ✅ Replaced: トレーニングを保存しました... → l10n.workout_498b0ea4
+  ✅ Replaced: トレーニング日... → l10n.workout_8a92c566
+  ✅ Replaced: ドラゴンフラッグ... → l10n.workout_eebef32f
+  ✅ Replaced: ドラッグカール... → l10n.workout_f3949316
+  ✅ Replaced: バックエクステンション... → l10n.workout_56b5390a
+  ✅ Replaced: バトルロープ... → l10n.workout_bc2d4a29
+  ✅ Replaced: バーピージャンプ... → l10n.workout_fcdc095e
+  ✅ Replaced: バーベルスクワット... → l10n.exercise_8c982e86
+  ✅ Replaced: ヒップスラスト... → l10n.workout_7cb5b362
+  ✅ Replaced: フェイスプル... → l10n.workout_6a40751e
+  ✅ Replaced: フロントスクワット... → l10n.exercise_4e99d714
+  ✅ Replaced: ブルガリアンスクワット... → l10n.exercise_1602d233
+  ✅ Replaced: プルアップ... → l10n.workout_e3dc6687
+  ✅ Replaced: ベンチディップス... → l10n.workout_facbc0fc
+  ✅ Replaced: ペックフライマシン... → l10n.workout_aaa776e7
+  ✅ Replaced: マウンテンクライマー... → l10n.workout_9bee258f
+  ✅ Replaced: マシンアームカール... → l10n.workout_6b330584
+  ✅ Replaced: マシンショルダープレス... → l10n.exercise_158c0c0a
+  ✅ Replaced: マシンディップス... → l10n.workout_db390755
+  ✅ Replaced: ライイングトライセプスエクステンション... → l10n.workout_41ae2e59
+  ✅ Replaced: ランジ... → l10n.workout_a19f4e60
+  ✅ Replaced: リアレイズ... → l10n.workout_61db805d
+  ✅ Replaced: リバースグリッププレスダウン... → l10n.exercise_f48ee2b4
+  ✅ Replaced: ルーマニアンデッドリフト... → l10n.exercise_0afc8ed2
+  ✅ Replaced: レッグアダクション... → l10n.workout_dc27b01c
+  ✅ Replaced: レッグアブダクション... → l10n.workout_4027c245
+  ✅ Replaced: ロシアンツイスト... → l10n.workout_b2d699ea
+  ✅ Replaced: ローイングマシン... → l10n.workout_4c6d7db7
+  ✅ Replaced: ワイドグリッププルアップ... → l10n.workout_269bc3f6
+  ✅ Replaced: ワンハンドダンベルロウ... → l10n.workout_f67592f1
+  ✅ Replaced: 一括入力... → l10n.workout_779c0c7b
+  ✅ Replaced: 今日のトレーニングについてメモを残しましょう... → l10n.workout_be150460
+  ✅ Replaced: 休憩時間を設定... → l10n.workout_b23db97f
+  ✅ Replaced: 休憩終了！... → l10n.workout_ec97904d
+  ✅ Replaced: 前回... → l10n.workout_57b74023
+  ✅ Replaced: 前回の記録... → l10n.workout_565c4718
+  ✅ Replaced: 回数... → l10n.repsCount
+  ✅ Replaced: 変更... → l10n.workout_5c7bbafb
+  ✅ Replaced: 履歴データから最適な重量・回数を推奨しています... → l10n.workout_207a9a37
+  ✅ Replaced: 未完了... → l10n.workout_2bf8f78c
+  ✅ Replaced: 次のセットに進みましょう！💪... → l10n.workout_4378d5d9
+  ✅ Replaced: 水泳... → l10n.workout_a90ed9c4
+  ✅ Replaced: 種目名を入力... → l10n.workout_a3dbb30d
+  ✅ Replaced: 腹筋... → l10n.bodyPart_ceb49fa1
+  ✅ Replaced: 自重... → l10n.bodyweight
+  ✅ Replaced: 荷重... → l10n.workout_63dbc040
+  ✅ Replaced: 補助なし... → l10n.workout_7b8e9d09
+  ✅ Replaced: 記録を保存... → l10n.workout_18f75a52
+  ✅ Replaced: 部位と種目を選択してください... → l10n.workout_4c734626
+  ✅ Replaced: 重さ... → l10n.workout_2579352f
+  ✅ Replaced: 開始... → l10n.workout_eb87a812

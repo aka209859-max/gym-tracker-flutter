@@ -149,7 +149,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                 );
               },
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             
             // タイトル
             Text(AppLocalizations.of(context)!.aiFatigueAnalysisWelcome,
@@ -159,7 +159,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // 説明
             Column(
@@ -168,19 +168,19 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                 _buildGuideItem(
                   icon: Icons.analytics,
                   title: '科学的な分析',
-                  description: 'あなたのトレーニングデータを基に、疲労度を科学的に分析します。',
+                  description: l10n.workout_762fc148,
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 _buildGuideItem(
                   icon: Icons.auto_awesome,
-                  title: '最適な提案',
-                  description: '回復時間とトレーニングメニューを自動で提案します。',
+                  title: l10n.workout_3f0bb9b4,
+                  description: l10n.workout_369dbcbd,
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 _buildGuideItem(
                   icon: Icons.trending_up,
-                  title: '成長を加速',
-                  description: 'パフォーマンスを最大化し、怪我のリスクを最小化します。',
+                  title: l10n.workout_e3e5061b,
+                  description: l10n.workout_d373a48f,
                 ),
               ],
             ),
@@ -238,7 +238,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
             color: Colors.purple.shade600,
           ),
         ),
-        const SizedBox(width: 12),
+        SizedBox(width: 12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -250,7 +250,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 4),
+              SizedBox(height: 4),
               Text(
                 description,
                 style: TextStyle(
@@ -325,7 +325,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                 ),
               ),
               subtitle: Text(AppLocalizations.of(context)!.pastTrainingRecords),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushNamed('/workout-memo');
@@ -351,13 +351,13 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                 ),
               ),
               subtitle: Text(AppLocalizations.of(context)!.editPersonalFactors),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushNamed('/personal-factors');
               },
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
           ],
         ),
       ),
@@ -372,7 +372,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
             appBar: AppBar(title: Text(AppLocalizations.of(context)!.aiCoaching)),
-            body: const Center(child: CircularProgressIndicator()),
+            body: Center(child: CircularProgressIndicator()),
           );
         }
 
@@ -403,7 +403,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
         foregroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings),
+            icon: Icon(Icons.settings),
             onPressed: _showSettingsMenu,
             tooltip: AppLocalizations.of(context)!.settings,
           ),
@@ -416,11 +416,11 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
           tabs: [
             Tab(
               icon: Icon(Icons.fitness_center),
-              text: 'メニュー提案',
+              text: l10n.workout_0185a259,
             ),
             Tab(
               icon: Icon(Icons.timeline),
-              text: '成長予測',
+              text: l10n.workout_fec3bf19,
             ),
             Tab(
               icon: Icon(Icons.analytics),
@@ -466,7 +466,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
   late final Map<String, bool> _selectedBodyParts;
   
   // 🔧 v1.0.217: レベル選択（初心者・中級者・上級者）
-  String _selectedLevel = '初心者'; // デフォルトは初心者
+  String _selectedLevel = l10n.beginner; // デフォルトは初心者
 
   // UI状態
   bool _isGenerating = false;
@@ -495,7 +495,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       'bodyPartLegs': false,
       'bodyPartShoulders': false,
       'bodyPartArms': false,
-      '腹筋': false,
+      l10n.bodyPart_ceb49fa1: false,
       'exerciseCardio': false,
     };
     _loadHistory();
@@ -610,30 +610,30 @@ class _AIMenuTabState extends State<_AIMenuTab>
         children: [
           // 説明文
           _buildDescription(),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // 🔧 v1.0.217: レベル選択
           _buildLevelSelector(),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // 部位選択
           _buildBodyPartSelector(),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // メニュー生成ボタン
           _buildGenerateButton(),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // 生成結果表示
           if (_generatedMenu != null) ...[
             _buildGeneratedMenu(),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
           ],
 
           // エラー表示
           if (_errorMessage != null) ...[
             _buildErrorMessage(),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
           ],
 
           // 履歴表示
@@ -663,9 +663,9 @@ class _AIMenuTabState extends State<_AIMenuTab>
                 ),
               ],
             ),
-            const SizedBox(height: 12),
-            const Text(
-              'トレーニングしたい部位を選択すると、AIが最適なメニューを提案します。',
+            SizedBox(height: 12),
+            Text(
+              l10n.workout_17f59b6a,
               style: TextStyle(fontSize: 14),
             ),
           ],
@@ -679,8 +679,8 @@ class _AIMenuTabState extends State<_AIMenuTab>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'トレーニングレベル',
+        Text(
+          l10n.workout_2dc1ee52,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -729,7 +729,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                 color: isSelected ? Colors.white : Colors.grey.shade600,
                 size: 28,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Text(
                 level,
                 style: TextStyle(
@@ -750,8 +750,8 @@ class _AIMenuTabState extends State<_AIMenuTab>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'トレーニング部位を選択',
+        Text(
+          l10n.workout_478bc20c,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -770,8 +770,8 @@ class _AIMenuTabState extends State<_AIMenuTab>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (isBeginner) ...[
-                    const Icon(Icons.school, size: 16, color: Colors.green),
-                    const SizedBox(width: 4),
+                    Icon(Icons.school, size: 16, color: Colors.green),
+                    SizedBox(width: 4),
                   ],
                   Text(part),
                 ],
@@ -813,7 +813,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
           _generateMenu(selectedParts);
         } : null,
         icon: _isGenerating
-            ? const SizedBox(
+            ? SizedBox(
                 width: 20,
                 height: 20,
                 child: CircularProgressIndicator(
@@ -843,8 +843,8 @@ class _AIMenuTabState extends State<_AIMenuTab>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  '提案されたメニュー',
+                Text(
+                  l10n.workout_ba5c8bd5,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -873,13 +873,13 @@ class _AIMenuTabState extends State<_AIMenuTab>
                       ),
                       label: Text(
                         _selectedExerciseIndices.length == _parsedExercises.length
-                            ? '全解除'
-                            : '全選択',
+                            ? l10n.workout_69593f57
+                            : l10n.workout_219e609f,
                         style: const TextStyle(fontSize: 12),
                       ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.save),
+                      icon: Icon(Icons.save),
                       onPressed: _saveMenu,
                       tooltip: AppLocalizations.of(context)!.saveWorkout,
                     ),
@@ -888,7 +888,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
               ],
             ),
             const Divider(),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             
             // 🔧 v1.0.220: パース済み種目リスト（チェックボックス付き）
             if (_parsedExercises.isNotEmpty) ...[
@@ -928,7 +928,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                             ),
                           ),
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             exercise.name,
@@ -943,7 +943,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4),
                         // 🔧 v1.0.237: 有酸素運動と筋トレで表示を分ける
                         if (exercise.isCardio) 
                           // 有酸素運動の表示: 距離/時間
@@ -972,7 +972,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                             ],
                           ),
                         if (exercise.description != null) ...[
-                          const SizedBox(height: 6),
+                          SizedBox(height: 6),
                           Text(
                             exercise.description!,
                             style: TextStyle(
@@ -988,14 +988,14 @@ class _AIMenuTabState extends State<_AIMenuTab>
               }).toList(),
               
               // 🔧 v1.0.222: トレーニングを開始ボタン（記録画面に遷移）
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: _selectedExerciseIndices.isEmpty
                       ? null
                       : _saveSelectedExercisesToWorkoutLog,
-                  icon: const Icon(Icons.fitness_center),
+                  icon: Icon(Icons.fitness_center),
                   label: Text(
                     'トレーニングを開始 (${_selectedExerciseIndices.length}種目)',
                   ),
@@ -1016,7 +1016,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                   child: Column(
                     children: [
                       Icon(Icons.warning_amber, color: Colors.orange.shade700, size: 48),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12),
                       Text(
                         AppLocalizations.of(context)!.aiMenuParseFailed,
                         style: TextStyle(
@@ -1025,7 +1025,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                           color: Colors.orange.shade900,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       Text(
                         'もう一度メニューを生成してください。\n問題が続く場合は、サポートにお問い合わせください。',
                         textAlign: TextAlign.center,
@@ -1034,7 +1034,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                           color: Colors.orange.shade700,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
                       ElevatedButton.icon(
                         onPressed: () {
                           setState(() {
@@ -1043,16 +1043,16 @@ class _AIMenuTabState extends State<_AIMenuTab>
                             _errorMessage = null;
                           });
                         },
-                        icon: const Icon(Icons.refresh),
+                        icon: Icon(Icons.refresh),
                         label: Text(AppLocalizations.of(context)!.aiMenuRetryButton),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange.shade600,
                           foregroundColor: Colors.white,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
                       const Divider(),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       // 🐛 デバッグ用: 生成されたテキストを表示
                       ExpansionTile(
                         title: Text(
@@ -1106,7 +1106,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       return Colors.deepPurple.shade400;
     } else if (bodyPart == '腕') { // 後方互換性
       return Colors.purple.shade300;
-    } else if (bodyPart == '腹筋') {
+    } else if (bodyPart == l10n.bodyPart_ceb49fa1) {
       return Colors.teal.shade400;
     } else {
       return Colors.grey.shade400;
@@ -1119,7 +1119,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       mainAxisSize: MainAxisSize.min,
       children: [
         Icon(icon, size: 14, color: Colors.grey.shade600),
-        const SizedBox(width: 4),
+        SizedBox(width: 4),
         Text(
           text,
           style: TextStyle(
@@ -1141,7 +1141,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
         child: Row(
           children: [
             Icon(Icons.error_outline, color: Colors.red.shade700),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             Expanded(
               child: Text(
                 _errorMessage!,
@@ -1162,22 +1162,22 @@ class _AIMenuTabState extends State<_AIMenuTab>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           '過去の提案',
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         if (_isLoadingHistory)
-          const Center(child: CircularProgressIndicator())
+          Center(child: CircularProgressIndicator())
         else if (_history.isEmpty)
           const Card(
             child: Padding(
               padding: EdgeInsets.all(24),
               child: Center(
-                child: Text('まだ履歴がありません'),
+                child: Text(l10n.workout_355e6980),
               ),
             ),
           )
@@ -1330,7 +1330,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
               if (mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('広告の読み込みに失敗しました。しばらくしてからお試しください。'),
+                    content: Text(l10n.workout_9d662a8d),
                     backgroundColor: Colors.red,
                   ),
                 );
@@ -1345,14 +1345,14 @@ class _AIMenuTabState extends State<_AIMenuTab>
         } else {
           // 今月の広告視聴上限に達している
           if (mounted) {
-            await _showUpgradeDialog('今月の無料AI利用回数を使い切りました');
+            await _showUpgradeDialog(l10n.workout_2ee7735b);
           }
           return;
         }
       } else {
         // 有料プランで月次上限に達している
         if (mounted) {
-          await _showUpgradeDialog('今月のAI利用回数を使い切りました');
+          await _showUpgradeDialog(l10n.workout_1b17a3c8);
         }
         return;
       }
@@ -1465,25 +1465,25 @@ class _AIMenuTabState extends State<_AIMenuTab>
       AppLocalizations.of(context)!.bodyPartChest: AppLocalizations.of(context)!.bodyPartChest,
       AppLocalizations.of(context)!.musclePecs: AppLocalizations.of(context)!.bodyPartChest,
       AppLocalizations.of(context)!.bodyPartBack: AppLocalizations.of(context)!.bodyPartBack,
-      '広背筋': AppLocalizations.of(context)!.bodyPartBack,
-      '僧帽筋': AppLocalizations.of(context)!.bodyPartBack,
+      l10n.workout_0f45a131: AppLocalizations.of(context)!.bodyPartBack,
+      l10n.workout_b06bf71b: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.bodyPartLegs: AppLocalizations.of(context)!.bodyPartLegs,
-      '大腿': AppLocalizations.of(context)!.bodyPartLegs,
-      '下半身': AppLocalizations.of(context)!.bodyPartLegs,
+      l10n.workout_0c28e8be: AppLocalizations.of(context)!.bodyPartLegs,
+      l10n.workout_10073d2e: AppLocalizations.of(context)!.bodyPartLegs,
       AppLocalizations.of(context)!.bodyPartShoulders: AppLocalizations.of(context)!.bodyPartShoulders,
-      '三角筋': AppLocalizations.of(context)!.bodyPartShoulders,
+      l10n.workout_da6d5d22: AppLocalizations.of(context)!.bodyPartShoulders,
       AppLocalizations.of(context)!.bodyPartBiceps: AppLocalizations.of(context)!.bodyPartBiceps,
-      '上腕二頭筋': AppLocalizations.of(context)!.bodyPartBiceps,
+      l10n.bodyPart_8efece65: AppLocalizations.of(context)!.bodyPartBiceps,
       AppLocalizations.of(context)!.bodyPartTriceps: AppLocalizations.of(context)!.bodyPartTriceps,
-      '上腕三頭筋': AppLocalizations.of(context)!.bodyPartTriceps,
+      l10n.bodyPart_c158cb15: AppLocalizations.of(context)!.bodyPartTriceps,
       '腕': '腕', // 後方互換性のため残す
-      '上腕': AppLocalizations.of(context)!.bodyPartArms,
-      '腹筋': '腹筋',
-      AppLocalizations.of(context)!.bodyPartAbs: '腹筋',
-      'コア': '腹筋',
-      '有酸素': '有酸素', // 🔧 v1.0.226: 有酸素運動対応
-      'カーディオ': AppLocalizations.of(context)!.exerciseCardio,
-      '心肺': AppLocalizations.of(context)!.exerciseCardio,
+      l10n.bodyPart_cc7dbde9: AppLocalizations.of(context)!.bodyPartArms,
+      l10n.bodyPart_ceb49fa1: l10n.bodyPart_ceb49fa1,
+      AppLocalizations.of(context)!.bodyPartAbs: l10n.bodyPart_ceb49fa1,
+      l10n.workout_3347b366: l10n.bodyPart_ceb49fa1,
+      l10n.bodyPartCardio: l10n.bodyPartCardio, // 🔧 v1.0.226: 有酸素運動対応
+      l10n.workout_5cd69285: AppLocalizations.of(context)!.exerciseCardio,
+      l10n.workout_ad5c696a: AppLocalizations.of(context)!.exerciseCardio,
     };
     
     debugPrint('🔍 パーサー開始: 全${lines.length}行を処理');
@@ -1637,7 +1637,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
         if (setsMatch != null) currentSets = int.tryParse(setsMatch.group(1)!);
       } else if (currentExerciseName.isNotEmpty) {
         // 種目の説明や詳細情報
-        if (line.startsWith('説明:') || line.startsWith('説明：')) {
+        if (line.startsWith(l10n.workout_f517d9ec) || line.startsWith(l10n.workout_5071705c)) {
           currentDescription = line.replaceFirst(RegExp(r'説明[:：]\s*'), '');
         } else if (!line.startsWith('■') && !line.startsWith('【') && !line.startsWith('##') && !line.startsWith('#')) {
           // 🔧 v1.0.224: *や・、•で始まる行、または通常の行から重量・回数・セット情報を抽出
@@ -1659,7 +1659,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
           final repsPattern = RegExp(r'回数[:：]?\s*(\d+)\s*(?:回|reps?)?');
           final setsPattern = RegExp(r'セット数[:：]?\s*(\d+)\s*(?:セット|sets?)?');
           
-          // パターン2: 単純な "XXkg", "XX回", "XXセット"
+          // パターン2: 単純な "XXkg", l10n.workout_b47211da, l10n.workout_fa854190
           final weightPattern2 = RegExp(r'(\d+(?:\.\d+)?)\s*(?:-\d+(?:\.\d+)?)?\s*kg');
           final repsPattern2 = RegExp(r'(\d+)\s*回');
           final setsPattern2 = RegExp(r'(\d+)\s*セット');
@@ -1702,11 +1702,11 @@ class _AIMenuTabState extends State<_AIMenuTab>
           
           // 🔧 v1.0.226: 休憩時間、ポイントなどの無関係な行をスキップ
           final isIgnoredLine = cleanLine.contains(AppLocalizations.of(context)!.restTime) || 
-                               cleanLine.contains('ポイント') ||
-                               cleanLine.contains('フォームのポイント') ||
-                               cleanLine.contains('説明') ||
-                               cleanLine.contains('高度なテクニック') ||
-                               cleanLine.contains('テクニックのポイント');
+                               cleanLine.contains(l10n.points) ||
+                               cleanLine.contains(l10n.workout_f87ab689) ||
+                               cleanLine.contains(l10n.workout_1acc9df7) ||
+                               cleanLine.contains(l10n.workout_695ead36) ||
+                               cleanLine.contains(l10n.workout_ad1f2968);
           
           // 説明の続き（重量・回数・セット情報がない場合、かつ無視すべき行ではない場合）
           if (!isIgnoredLine && currentDescription.isNotEmpty && weightMatch == null && repsMatch == null && timeMatch == null && setsMatch == null) {
@@ -1912,14 +1912,14 @@ class _AIMenuTabState extends State<_AIMenuTab>
       case 'ko':
         return '한국어로 자세한 설명을 제공하세요';
       case 'zh':
-        return '请用简体中文提供详细说明';
+        return l10n.workout_df5c2fc5;
       case 'zh_TW':
-        return '請用繁體中文提供詳細說明';
+        return l10n.workout_837b9b2e;
       case 'de':
         return 'Bitte geben Sie detaillierte Erklärungen auf Deutsch';
       case 'ja':
       default:
-        return '日本語で丁寧に説明';
+        return l10n.workout_7f865f4b;
     }
   }
 
@@ -2082,7 +2082,7 @@ $historyInfo
 - テクニックのポイント（ドロップセット、スーパーセット等）
 
 【条件】
-- ${targetParts.isEmpty ? "全身バランスよく" : targetParts.join('、')+"を重点的に"}
+- ${targetParts.isEmpty ? "全身バランスよく" : targetParts.join('、')+l10n.autoGen_a4e8ab60}
 ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- **有酸素運動のみ**を提案（筋トレ種目は含めない）\n- HIIT、持久走、インターバルなど多様な有酸素トレーニング" : "- フリーウェイト中心\n- 筋肥大を重視"}
 - 45-60分で完了
 - $languageInstruction
@@ -2159,11 +2159,11 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '無料プランでは、動画広告を視聴することでAI機能を1回利用できます。',
+            Text(
+              l10n.workout_27e98563,
               style: TextStyle(fontSize: 14, height: 1.6),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -2178,7 +2178,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
                       Icon(Icons.check_circle, color: Colors.green, size: 20),
                       SizedBox(width: 8),
                       Text(
-                        '月3回まで動画視聴でAI利用可能',
+                        l10n.workout_21745d7a,
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
@@ -2199,8 +2199,8 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
-            icon: const Icon(Icons.play_arrow),
-            label: const Text('動画を視聴'),
+            icon: Icon(Icons.play_arrow),
+            label: Text(l10n.workout_d489aa48),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade700,
               foregroundColor: Colors.white,
@@ -2221,7 +2221,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => const Center(
+        builder: (context) => Center(
           child: Card(
             child: Padding(
               padding: EdgeInsets.all(24.0),
@@ -2353,7 +2353,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('メニューを保存しました'),
+            content: Text(l10n.workout_b7932eef),
             backgroundColor: Colors.green,
           ),
         );
@@ -2422,7 +2422,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     _selectedBodyPart = l10n.musclePecs;
     _levels = [l10n.levelBeginner, l10n.levelIntermediate, l10n.levelAdvanced];
     _genders = [l10n.genderMale, l10n.genderFemale];
-    _bodyParts = [l10n.musclePecs, '上腕二頭筋', '大腿四頭筋', '三角筋', '広背筋'];
+    _bodyParts = [l10n.musclePecs, l10n.bodyPart_8efece65, l10n.workout_0c5ee6c6, l10n.workout_da6d5d22, l10n.workout_0f45a131];
     
     _loadUserData(); // 🆕 Phase 7: 年齢・体重を自動取得
   }
@@ -2644,7 +2644,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               if (mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('広告の読み込みに失敗しました。しばらくしてからお試しください。'),
+                    content: Text(l10n.workout_9d662a8d),
                     backgroundColor: Colors.red,
                   ),
                 );
@@ -2659,14 +2659,14 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         } else {
           // 今月の広告視聴上限に達している
           if (mounted) {
-            await _showUpgradeDialog('今月の無料AI利用回数を使い切りました');
+            await _showUpgradeDialog(l10n.workout_2ee7735b);
           }
           return;
         }
       } else {
         // 有料プランで月次上限に達している
         if (mounted) {
-          await _showUpgradeDialog('今月のAI利用回数を使い切りました');
+          await _showUpgradeDialog(l10n.workout_1b17a3c8);
         }
         return;
       }
@@ -2705,7 +2705,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     if (_userAge == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('年齢が未設定です。個人要因設定で年齢を登録してください。'),
+          content: Text(l10n.workout_b257cb17),
           backgroundColor: Colors.orange,
         ),
       );
@@ -2714,7 +2714,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     if (_latestBodyWeight == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('体重が記録されていません。体重を記録してください。'),
+          content: Text(l10n.workout_2375b9ab),
           backgroundColor: Colors.orange,
         ),
       );
@@ -2788,15 +2788,15 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           children: [
             // ヘッダー
             _buildHeader(),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             // 入力フォーム
             _buildInputForm(),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             // 予測実行ボタン
             _buildPredictButton(),
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
 
             // 予測結果
             if (_isLoading)
@@ -2856,18 +2856,18 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'あなたの情報を入力',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 🆕 Phase 7: 年齢表示（自動取得）
             _buildAutoLoadedDataDisplay(),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 対象部位
             _buildDropdownField(
@@ -2880,27 +2880,27 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 });
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 現在の1RM
             _build1RMInputField(),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 🆕 Phase 7: Weight Ratio & 客観的レベル表示
             if (_weightRatio != null) ...[
               _buildWeightRatioDisplay(),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
             ],
 
             // 🆕 Phase 7: 客観的レベル判定結果
             if (_objectiveLevel != null && _objectiveLevel != _selectedLevel) ...[
               _buildLevelWarning(),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
             ],
 
             // トレーニングレベル
             _buildDropdownField(
-              label: 'トレーニングレベル',
+              label: l10n.workout_2dc1ee52,
               value: _selectedLevel,
               items: _levels,
               onChanged: (value) {
@@ -2909,14 +2909,14 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 });
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // トレーニング頻度
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildSliderField(
-                  label: 'この部位のトレーニング頻度',
+                  label: l10n.autoGen_c157b7e9,
                   value: _selectedFrequency.toDouble(),
                   min: 1,
                   max: 6,
@@ -2928,7 +2928,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                   },
                   displayValue: '週${_selectedFrequency}回',
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
@@ -2942,14 +2942,14 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 🆕 v1.0.230: RPE（自覚的強度）スライダー
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildSliderField(
-                  label: '前回のトレーニングの強度（RPE）',
+                  label: l10n.autoGen_ec1bb9da,
                   value: _selectedRPE.toDouble(),
                   min: 6,
                   max: 10,
@@ -2961,7 +2961,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                   },
                   displayValue: _getRPELabel(_selectedRPE),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
@@ -2975,7 +2975,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 性別
             Column(
@@ -2991,7 +2991,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     });
                   },
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
@@ -3081,7 +3081,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         _executePrediction();
       },
       icon: _isLoading
-          ? const SizedBox(
+          ? SizedBox(
               width: 20,
               height: 20,
               child: CircularProgressIndicator(
@@ -3120,7 +3120,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         color: Colors.grey.shade100,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Text('予測結果がありません'),
+          child: Text(l10n.autoGen_4b5dcedc),
         ),
       );
     }
@@ -3150,7 +3150,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               ),
               SizedBox(height: 8),
               Text(
-                _predictionResult!['error']?.toString() ?? '不明なエラーが発生しました',
+                _predictionResult!['error']?.toString() ?? l10n.autoGen_03b65e41,
                 style: TextStyle(color: Colors.red.shade700),
               ),
             ],
@@ -3170,7 +3170,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            '予測データが不完全です。もう一度お試しください。',
+            l10n.autoGen_a2bbd225,
             style: TextStyle(color: Colors.orange.shade900),
           ),
         ),
@@ -3208,7 +3208,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     color: Colors.grey,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   '${predictedWeight.round()}kg',
                   style: TextStyle(
@@ -3217,7 +3217,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     color: Colors.green.shade700,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   '現在: ${currentWeight.round()}kg → +$growthPercentage%の成長',
                   style: const TextStyle(
@@ -3225,7 +3225,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     color: Colors.grey,
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
@@ -3236,7 +3236,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.info_outline, size: 16, color: Colors.blue.shade700),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Text(
                         '信頼区間: ${confidenceInterval['lower'].round()}-${confidenceInterval['upper'].round()}kg',
                         style: TextStyle(
@@ -3251,7 +3251,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             ),
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
 
         // 成長率カード
         Card(
@@ -3263,8 +3263,8 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 Row(
                   children: [
                     Icon(Icons.show_chart, color: Colors.blue.shade700),
-                    const SizedBox(width: 8),
-                    const Text(
+                    SizedBox(width: 8),
+                    Text(
                       '成長率',
                       style: TextStyle(
                         fontSize: 16,
@@ -3273,7 +3273,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -3285,7 +3285,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             ),
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
 
         // AI分析
         Card(
@@ -3306,19 +3306,19 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 _buildFormattedText(aiAnalysis),
               ],
             ),
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
 
         // 科学的根拠
         ScientificBasisSection(
           basis: scientificBasis.cast<Map<String, String>>(),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
 
         // 信頼度インジケーター
         Center(
@@ -3340,7 +3340,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             color: color,
           ),
         ),
-        const SizedBox(height: 4),
+        SizedBox(height: 4),
         Text(
           label,
           style: TextStyle(
@@ -3369,11 +3369,11 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '無料プランでは、動画広告を視聴することでAI機能を1回利用できます。',
+            Text(
+              l10n.workout_27e98563,
               style: TextStyle(fontSize: 14, height: 1.6),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -3388,7 +3388,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                       Icon(Icons.check_circle, color: Colors.green, size: 20),
                       SizedBox(width: 8),
                       Text(
-                        '月3回まで動画視聴でAI利用可能',
+                        l10n.workout_21745d7a,
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
@@ -3409,8 +3409,8 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
-            icon: const Icon(Icons.play_arrow),
-            label: const Text('動画を視聴'),
+            icon: Icon(Icons.play_arrow),
+            label: Text(l10n.workout_d489aa48),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade700,
               foregroundColor: Colors.white,
@@ -3431,7 +3431,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => const Center(
+        builder: (context) => Center(
           child: Card(
             child: Padding(
               padding: EdgeInsets.all(24.0),
@@ -3496,7 +3496,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           children: [
             Icon(Icons.workspace_premium, color: Colors.amber, size: 28),
             SizedBox(width: 12),
-            Text('プレミアムプランにアップグレード'),
+            Text(l10n.autoGen_7a1d4370),
           ],
         ),
         content: Column(
@@ -3507,27 +3507,27 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               message,
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
-            const Text(
-              'プレミアムプランなら:',
+            SizedBox(height: 16),
+            Text(
+              l10n.autoGen_9d99af7f,
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
-            const Text(
+            SizedBox(height: 8),
+            Text(
               '• 月10回までAI機能が使い放題\n'
               '• 広告なしで快適に利用\n'
               '• お気に入りジム無制限\n'
               '• レビュー投稿可能',
               style: TextStyle(fontSize: 13, height: 1.6),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: Colors.amber.shade50,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Text(
+              child: Text(
                 '月額 ¥500',
                 style: TextStyle(
                   fontSize: 18,
@@ -3553,7 +3553,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               backgroundColor: Colors.amber.shade700,
               foregroundColor: Colors.white,
             ),
-            child: const Text('アップグレード'),
+            child: Text('アップグレード'),
           ),
         ],
       ),
@@ -3673,7 +3673,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             icon: Icons.calendar_today,
             label: AppLocalizations.of(context)!.age,
             value: '$_userAge歳',
-            actionLabel: '変更',
+            actionLabel: l10n.workout_5c7bbafb,
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
@@ -3681,14 +3681,14 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           )
         else
           _buildWarningCard(
-            message: '年齢が未設定です。予測精度を高めるため、個人要因設定で年齢を登録してください。',
+            message: l10n.autoGen_f2350bf3,
             actionLabel: '設定する',
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
             ).then((_) => _loadUserAge()),
           ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
 
         // 体重表示
         if (_latestBodyWeight != null)
@@ -3705,7 +3705,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           )
         else
           _buildWarningCard(
-            message: '体重が記録されていません。予測精度を高めるため、体重を記録してください。',
+            message: l10n.autoGen_5754da52,
             actionLabel: '記録する',
             onTap: () => Navigator.push(
               context,
@@ -3734,7 +3734,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       child: Row(
         children: [
           Icon(icon, color: Colors.blue.shade700),
-          const SizedBox(width: 12),
+          SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -3781,7 +3781,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       child: Row(
         children: [
           Icon(Icons.warning_amber, color: Colors.orange.shade700),
-          const SizedBox(width: 12),
+          SizedBox(width: 12),
           Expanded(
             child: Text(
               message,
@@ -3828,7 +3828,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         }
         final weight = double.tryParse(value);
         if (weight == null) {
-          return '数値を入力してください';
+          return l10n.autoGen_2119ad31;
         }
         if (weight <= 0) {
           return AppLocalizations.of(context)!.enterAtLeast1kg;
@@ -3890,8 +3890,8 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           Row(
             children: [
               Icon(Icons.info_outline, color: Colors.amber.shade700),
-              const SizedBox(width: 8),
-              const Text(
+              SizedBox(width: 8),
+              Text(
                 'レベル判定の通知',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -3900,7 +3900,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             'あなたのWeight Ratio (${_weightRatio!.toStringAsFixed(2)}) から、'
             '客観的なレベルは「$_objectiveLevel」と判定されました。',
@@ -3913,7 +3913,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               color: Colors.grey.shade700,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           ElevatedButton(
             onPressed: () {
               setState(() {
@@ -3923,7 +3923,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.amber.shade700,
             ),
-            child: const Text('客観的レベルを使用する'),
+            child: Text(l10n.autoGen_306c1cc0),
           ),
         ],
       ),
@@ -3953,7 +3953,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
   // フォーム入力値
   final _formKey = GlobalKey<FormState>();
   late String _selectedBodyPart;
-  String _selectedExercise = 'ベンチプレス';  // 種目選択
+  String _selectedExercise = l10n.exerciseBenchPress;  // 種目選択
   int _currentSets = 12;
   int _currentFrequency = 2;
   late String _selectedLevel;
@@ -3996,21 +3996,21 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
       // 部位選択肢
       _bodyParts = [
         l10n.musclePecs,
-        '広背筋',
-        '大腿四頭筋',
-        '上腕二頭筋',
-        '上腕三頭筋',
-        '三角筋',
+        l10n.workout_0f45a131,
+        l10n.workout_0c5ee6c6,
+        l10n.bodyPart_8efece65,
+        l10n.bodyPart_c158cb15,
+        l10n.workout_da6d5d22,
       ];
 
       // 種目選択肢（部位ごと）
       _exercisesByBodyPart = {
-        l10n.musclePecs: [l10n.exerciseBenchPress, 'インクラインベンチプレス', 'ダンベルフライ', l10n.exerciseDips],
-        '広背筋': [l10n.exerciseDeadlift, l10n.exerciseLatPulldown, l10n.exerciseBentOverRow, l10n.exerciseChinUp],
-        '大腿四頭筋': [l10n.exerciseSquat, l10n.exerciseLegPress, l10n.exerciseLegExtension, 'ランジ'],
-        '上腕二頭筋': [l10n.exerciseBarbellCurl, l10n.exerciseDumbbellCurl, l10n.exerciseHammerCurl, 'プリーチャーカール'],
-        '上腕三頭筋': ['トライセプスプレスダウン', 'ライイングトライセプスエクステンション', l10n.exerciseDips, 'クローズグリップベンチプレス'],
-        '三角筋': [l10n.exerciseShoulderPress, l10n.exerciseSideRaise, l10n.exerciseFrontRaise, 'リアレイズ'],
+        l10n.musclePecs: [l10n.exerciseBenchPress, l10n.exercise_fbfc037a, l10n.workout_e85fb0a4, l10n.exerciseDips],
+        l10n.workout_0f45a131: [l10n.exerciseDeadlift, l10n.exerciseLatPulldown, l10n.exerciseBentOverRow, l10n.exerciseChinUp],
+        l10n.workout_0c5ee6c6: [l10n.exerciseSquat, l10n.exerciseLegPress, l10n.exerciseLegExtension, l10n.workout_a19f4e60],
+        l10n.bodyPart_8efece65: [l10n.exerciseBarbellCurl, l10n.exerciseDumbbellCurl, l10n.exerciseHammerCurl, l10n.workout_d7e8733c],
+        l10n.bodyPart_c158cb15: [l10n.exercise_636fb74f, l10n.workout_41ae2e59, l10n.exerciseDips, l10n.exercise_a60f616c],
+        l10n.workout_da6d5d22: [l10n.exerciseShoulderPress, l10n.exerciseSideRaise, l10n.exerciseFrontRaise, l10n.workout_61db805d],
       };
       
       _isInitialized = true;
@@ -4083,7 +4083,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               if (mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('広告の読み込みに失敗しました。しばらくしてからお試しください。'),
+                    content: Text(l10n.workout_9d662a8d),
                     backgroundColor: Colors.red,
                   ),
                 );
@@ -4098,14 +4098,14 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         } else {
           // 今月の広告視聴上限に達している
           if (mounted) {
-            await _showUpgradeDialog('今月の無料AI利用回数を使い切りました');
+            await _showUpgradeDialog(l10n.workout_2ee7735b);
           }
           return;
         }
       } else {
         // 有料プランで月次上限に達している
         if (mounted) {
-          await _showUpgradeDialog('今月のAI利用回数を使い切りました');
+          await _showUpgradeDialog(l10n.workout_1b17a3c8);
         }
         return;
       }
@@ -4127,7 +4127,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
       if (_userAge == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('年齢が未設定です。個人要因設定で年齢を登録してください。'),
+            content: Text(l10n.workout_b257cb17),
             backgroundColor: Colors.orange,
           ),
         );
@@ -4285,15 +4285,15 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           children: [
             // ヘッダー
             _buildHeader(),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             // 入力フォーム
             _buildInputForm(),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             // 分析実行ボタン
             _buildAnalyzeButton(),
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
 
             // 分析結果
             if (_isLoading)
@@ -4315,7 +4315,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Row(
           children: [
             Icon(Icons.analytics, size: 40, color: Colors.orange.shade700),
-            const SizedBox(width: 16),
+            SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -4328,9 +4328,9 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                       color: Colors.orange.shade900,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
-                    '最適なボリュームと頻度を科学的に分析',
+                    l10n.autoGen_4a776041,
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.grey.shade700,
@@ -4353,18 +4353,18 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '現在のトレーニング状況',
+            Text(
+              l10n.autoGen_9d44cf62,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 🆕 Phase 7.5: 年齢表示（自動取得）
             _buildAgeDisplay(),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 対象部位
             _buildDropdownField(
@@ -4381,11 +4381,11 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 });
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 種目選択
             _buildDropdownField(
-              label: '種目（プラトー検出用）',
+              label: l10n.autoGen_07ba3722,
               value: _selectedExercise,
               items: _availableExercises,
               onChanged: (value) {
@@ -4394,7 +4394,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 });
               },
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             Padding(
               padding: const EdgeInsets.only(left: 4),
               child: Text(
@@ -4406,18 +4406,18 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // プラトー検出トグル
             SwitchListTile(
-              title: const Text(
-                'プラトー（停滞期）検出',
+              title: Text(
+                l10n.autoGen_6619d354,
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
               ),
               subtitle: Text(
                 _enablePlateauDetection 
-                    ? '実際のトレーニング記録から自動検出します' 
-                    : '検出機能をOFFにしています',
+                    ? l10n.autoGen_6be4fd6d 
+                    : l10n.autoGen_2f465804,
                 style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
               ),
               value: _enablePlateauDetection,
@@ -4429,14 +4429,14 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               activeColor: Colors.orange.shade700,
               contentPadding: EdgeInsets.zero,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 週あたりセット数
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildSliderField(
-                  label: 'この部位の週あたりセット数',
+                  label: l10n.autoGen_64a1612a,
                   value: _currentSets.toDouble(),
                   min: 4,
                   max: 24,
@@ -4448,7 +4448,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                   },
                   displayValue: '${_currentSets}セット',
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
@@ -4462,14 +4462,14 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // トレーニング頻度
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildSliderField(
-                  label: 'この部位のトレーニング頻度',
+                  label: l10n.autoGen_c157b7e9,
                   value: _currentFrequency.toDouble(),
                   min: 1,
                   max: 6,
@@ -4481,7 +4481,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                   },
                   displayValue: '週${_currentFrequency}回',
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
@@ -4495,11 +4495,11 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // トレーニングレベル
             _buildDropdownField(
-              label: 'トレーニングレベル',
+              label: l10n.workout_2dc1ee52,
               value: _selectedLevel,
               items: _levels,
               onChanged: (value) {
@@ -4508,7 +4508,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 });
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 性別
             Column(
@@ -4524,7 +4524,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                     });
                   },
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
@@ -4588,7 +4588,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 context,
                 MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
               ).then((_) => _loadUserAge()),
-              child: const Text('変更'),
+              child: Text(l10n.workout_5c7bbafb),
             ),
           ],
         ),
@@ -4604,10 +4604,10 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Row(
           children: [
             Icon(Icons.warning_amber, color: Colors.orange.shade700),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             Expanded(
-              child: const Text(
-                '年齢が未設定です。予測精度を高めるため、個人要因設定で年齢を登録してください。',
+              child: Text(
+                l10n.autoGen_f2350bf3,
                 style: TextStyle(fontSize: 13),
               ),
             ),
@@ -4616,7 +4616,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 context,
                 MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
               ).then((_) => _loadUserAge()),
-              child: const Text('設定する'),
+              child: Text('設定する'),
             ),
           ],
         ),
@@ -4694,7 +4694,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         _executeAnalysis();
       },
       icon: _isLoading
-          ? const SizedBox(
+          ? SizedBox(
               width: 20,
               height: 20,
               child: CircularProgressIndicator(
@@ -4763,7 +4763,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               ),
               SizedBox(height: 8),
               Text(
-                _analysisResult!['error']?.toString() ?? '不明なエラーが発生しました',
+                _analysisResult!['error']?.toString() ?? l10n.autoGen_03b65e41,
                 style: TextStyle(color: Colors.red.shade700),
               ),
             ],
@@ -4783,7 +4783,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            '分析データが不完全です。もう一度お試しください。',
+            l10n.autoGen_15ac6a5e,
             style: TextStyle(color: Colors.orange.shade900),
           ),
         ),
@@ -4804,25 +4804,25 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         // ステータスサマリー（トグルOFFの場合はプラトー無視）
         _buildStatusSummary(volumeAnalysis, frequencyAnalysis, 
           _enablePlateauDetection && plateauDetected, growthTrend),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
 
         // ボリューム分析
         _buildVolumeAnalysis(volumeAnalysis),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
 
         // 頻度分析
         _buildFrequencyAnalysis(frequencyAnalysis),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
 
         // プラトー警告（トグルON かつ 検出された場合のみ表示）
         if (_enablePlateauDetection && plateauDetected) ...[
           _buildPlateauWarning(),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
         ],
 
         // 推奨アクション
         _buildRecommendations(recommendations),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
 
         // AI分析
         Card(
@@ -4843,19 +4843,19 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 _buildFormattedText(aiAnalysis),
               ],
             ),
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
 
         // 科学的根拠
         ScientificBasisSection(
           basis: scientificBasis.cast<Map<String, String>>(),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
 
         // 信頼度インジケーター
         Center(
@@ -4897,7 +4897,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Row(
           children: [
             Icon(statusIcon, size: 48, color: statusColor),
-            const SizedBox(width: 16),
+            SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -4910,7 +4910,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                       color: statusColor,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text(
                     '成長トレンド: ${trend['trend']}',
                     style: TextStyle(
@@ -4942,7 +4942,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         break;
       case 'suboptimal':
         statusColor = Colors.blue;
-        statusLabel = '最適以下';
+        statusLabel = l10n.autoGen_b1be274b;
         break;
       case 'insufficient':
         statusColor = Colors.orange;
@@ -4950,7 +4950,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         break;
       case 'excessive':
         statusColor = Colors.red;
-        statusLabel = '過剰';
+        statusLabel = l10n.autoGen_81ebe44b;
         break;
       default:
         statusColor = Colors.grey;
@@ -4966,8 +4966,8 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
             Row(
               children: [
                 Icon(Icons.bar_chart, color: Colors.blue.shade700),
-                const SizedBox(width: 8),
-                const Text(
+                SizedBox(width: 8),
+                Text(
                   'ボリューム分析',
                   style: TextStyle(
                     fontSize: 16,
@@ -4976,7 +4976,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Row(
               children: [
                 Container(
@@ -4995,7 +4995,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
               advice,
               style: const TextStyle(fontSize: 14, height: 1.6),
@@ -5021,7 +5021,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         break;
       case 'suboptimal':
         statusColor = Colors.blue;
-        statusLabel = '最適以下';
+        statusLabel = l10n.autoGen_b1be274b;
         break;
       case 'insufficient':
         statusColor = Colors.orange;
@@ -5029,7 +5029,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         break;
       case 'excessive':
         statusColor = Colors.red;
-        statusLabel = '過剰';
+        statusLabel = l10n.autoGen_81ebe44b;
         break;
       default:
         statusColor = Colors.grey;
@@ -5045,8 +5045,8 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
             Row(
               children: [
                 Icon(Icons.calendar_month, color: Colors.green.shade700),
-                const SizedBox(width: 8),
-                const Text(
+                SizedBox(width: 8),
+                Text(
                   '頻度分析',
                   style: TextStyle(
                     fontSize: 16,
@@ -5055,7 +5055,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Row(
               children: [
                 Container(
@@ -5074,7 +5074,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
               advice,
               style: const TextStyle(fontSize: 14, height: 1.6),
@@ -5094,7 +5094,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Row(
           children: [
             Icon(Icons.warning_amber, size: 40, color: Colors.orange.shade700),
-            const SizedBox(width: 16),
+            SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -5107,9 +5107,9 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                       color: Colors.orange.shade900,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
-                    '成長が停滞しています。トレーニングを変更しましょう。',
+                    l10n.autoGen_773d1c04,
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.grey.shade700,
@@ -5135,8 +5135,8 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
             Row(
               children: [
                 Icon(Icons.recommend, color: Colors.purple.shade700),
-                const SizedBox(width: 8),
-                const Text(
+                SizedBox(width: 8),
+                Text(
                   '推奨アクション',
                   style: TextStyle(
                     fontSize: 16,
@@ -5145,7 +5145,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             ...recommendations.map((rec) {
               final action = rec['action'] as String;
               final category = rec['category'] as String;
@@ -5177,7 +5177,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                         shape: BoxShape.circle,
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -5190,7 +5190,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          const SizedBox(height: 4),
+                          SizedBox(height: 4),
                           Text(
                             action,
                             style: const TextStyle(
@@ -5228,11 +5228,11 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              '無料プランでは、動画広告を視聴することでAI機能を1回利用できます。',
+            Text(
+              l10n.workout_27e98563,
               style: TextStyle(fontSize: 14, height: 1.6),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -5247,7 +5247,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                       Icon(Icons.check_circle, color: Colors.green, size: 20),
                       SizedBox(width: 8),
                       Text(
-                        '月3回まで動画視聴でAI利用可能',
+                        l10n.workout_21745d7a,
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
@@ -5268,8 +5268,8 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
-            icon: const Icon(Icons.play_arrow),
-            label: const Text('動画を視聴'),
+            icon: Icon(Icons.play_arrow),
+            label: Text(l10n.workout_d489aa48),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade700,
               foregroundColor: Colors.white,
@@ -5290,7 +5290,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => const Center(
+        builder: (context) => Center(
           child: Card(
             child: Padding(
               padding: EdgeInsets.all(24.0),
@@ -5355,7 +5355,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           children: [
             Icon(Icons.workspace_premium, color: Colors.amber, size: 28),
             SizedBox(width: 12),
-            Text('プレミアムプランにアップグレード'),
+            Text(l10n.autoGen_7a1d4370),
           ],
         ),
         content: Column(
@@ -5366,27 +5366,27 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               message,
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
-            const Text(
-              'プレミアムプランなら:',
+            SizedBox(height: 16),
+            Text(
+              l10n.autoGen_9d99af7f,
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
-            const Text(
+            SizedBox(height: 8),
+            Text(
               '• 月10回までAI機能が使い放題\n'
               '• 広告なしで快適に利用\n'
               '• お気に入りジム無制限\n'
               '• レビュー投稿可能',
               style: TextStyle(fontSize: 13, height: 1.6),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: Colors.amber.shade50,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Text(
+              child: Text(
                 '月額 ¥500',
                 style: TextStyle(
                   fontSize: 18,
@@ -5412,7 +5412,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               backgroundColor: Colors.amber.shade700,
               foregroundColor: Colors.white,
             ),
-            child: const Text('アップグレード'),
+            child: Text('アップグレード'),
           ),
         ],
       ),

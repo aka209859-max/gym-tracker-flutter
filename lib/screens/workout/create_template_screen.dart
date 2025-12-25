@@ -20,7 +20,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
   final List<TemplateExerciseBuilder> _exercises = [];
   bool _isSaving = false;
 
-  final List<String> _muscleGroups = ['胸', '背中', '脚', '肩', '二頭', '三頭'];
+  final List<String> _muscleGroups = ['胸', l10n.bodyPartBack, '脚', '肩', l10n.bodyPartBiceps, l10n.bodyPartTriceps];
   
   @override
   void initState() {
@@ -42,12 +42,12 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
   }
   
   final Map<String, List<String>> _muscleGroupExercises = {
-    '胸': ['ベンチプレス', 'ダンベルプレス', 'インクラインプレス', 'ケーブルフライ', 'ディップス'],
-    '脚': ['スクワット', 'レッグプレス', 'レッグエクステンション', 'レッグカール', 'カーフレイズ'],
-    '背中': ['デッドリフト', 'ラットプルダウン', 'ベントオーバーロウ', 'シーテッドロウ', '懸垂'],
-    '肩': ['ショルダープレス', 'サイドレイズ', 'フロントレイズ', 'リアデルトフライ', 'アップライトロウ'],
-    '二頭': ['バーベルカール', 'ダンベルカール', 'ハンマーカール', 'プリチャーカール', 'ケーブルカール'],
-    '三頭': ['トライセプスエクステンション', 'スカルクラッシャー', 'ケーブルプッシュダウン', 'ディップス', 'キックバック'],
+    '胸': [l10n.exerciseBenchPress, l10n.exerciseDumbbellPress, l10n.exerciseInclinePress, l10n.exerciseCableFly, l10n.exerciseDips],
+    '脚': [l10n.exerciseSquat, l10n.exerciseLegPress, l10n.exerciseLegExtension, l10n.exerciseLegCurl, l10n.exerciseCalfRaise],
+    l10n.bodyPartBack: [l10n.exerciseDeadlift, l10n.exerciseLatPulldown, l10n.exerciseBentOverRow, l10n.exerciseSeatedRow, l10n.exercisePullUp],
+    '肩': [l10n.exerciseShoulderPress, l10n.exerciseSideRaise, l10n.exerciseFrontRaise, l10n.exerciseRearDeltFly, l10n.exerciseUprightRow],
+    l10n.bodyPartBiceps: [l10n.exerciseBarbellCurl, l10n.exerciseDumbbellCurl, l10n.exerciseHammerCurl, l10n.exercisePreacherCurl, l10n.exerciseCableCurl],
+    l10n.bodyPartTriceps: [l10n.exerciseTricepsExtension, l10n.exerciseSkullCrusher, l10n.workout_22752b72, l10n.exerciseDips, l10n.exerciseKickback],
   };
 
   @override
@@ -63,14 +63,14 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('テンプレート作成'),
+        title: Text(l10n.createTemplate),
         backgroundColor: theme.colorScheme.primary,
         foregroundColor: Colors.white,
         actions: [
           TextButton.icon(
             onPressed: _isSaving ? null : _saveTemplate,
             icon: _isSaving
-                ? const SizedBox(
+                ? SizedBox(
                     width: 16,
                     height: 16,
                     child: CircularProgressIndicator(
@@ -78,9 +78,9 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                     ),
                   )
-                : const Icon(Icons.check, color: Colors.white),
-            label: const Text(
-              '保存',
+                : Icon(Icons.check, color: Colors.white),
+            label: Text(
+              l10n.save,
               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
           ),
@@ -95,22 +95,22 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
             TextFormField(
               controller: _nameController,
               decoration: InputDecoration(
-                labelText: 'テンプレート名',
+                labelText: l10n.templateName,
                 hintText: '例: 胸トレーニング A',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                prefixIcon: const Icon(Icons.label),
+                prefixIcon: Icon(Icons.label),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'テンプレート名を入力してください';
+                  return l10n.workout_e4a17e51;
                 }
                 return null;
               },
             ),
             
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // 説明（オプション）
             TextFormField(
@@ -121,19 +121,19 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                prefixIcon: const Icon(Icons.description),
+                prefixIcon: Icon(Icons.description),
               ),
               maxLines: 2,
             ),
             
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             
             // 部位選択
-            const Text(
-              '主要部位',
+            Text(
+              l10n.workout_9b2523e6,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Wrap(
               spacing: 8,
               runSpacing: 8,
@@ -156,20 +156,20 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
               }).toList(),
             ),
             
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             
             // 種目リスト
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  '種目リスト',
+                Text(
+                  l10n.workout_6e8a7475,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 TextButton.icon(
                   onPressed: _addExercise,
-                  icon: const Icon(Icons.add),
-                  label: const Text('種目追加'),
+                  icon: Icon(Icons.add),
+                  label: Text(l10n.workout_c3a95268),
                 ),
               ],
             ),
@@ -185,9 +185,9 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                 child: Column(
                   children: [
                     Icon(Icons.fitness_center, size: 48, color: Colors.grey[400]),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Text(
-                      '種目を追加してください',
+                      l10n.workout_d90b7b6b,
                       style: TextStyle(color: Colors.grey[600]),
                     ),
                   ],
@@ -200,7 +200,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                 return _buildExerciseCard(index, exercise);
               }),
             
-            const SizedBox(height: 80), // FAB用スペース
+            SizedBox(height: 80), // FAB用スペース
           ],
         ),
       ),
@@ -236,7 +236,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -250,8 +250,8 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                             border: const OutlineInputBorder(),
                             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                             suffixIcon: IconButton(
-                              icon: const Icon(Icons.list, size: 20),
-                              tooltip: 'プリセットに戻る',
+                              icon: Icon(Icons.list, size: 20),
+                              tooltip: l10n.workout_16dc7c2c,
                               onPressed: () {
                                 setState(() {
                                   exercise.isCustomExercise = false;
@@ -270,7 +270,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                         DropdownButtonFormField<String>(
                           value: exercise.exerciseName,
                           decoration: const InputDecoration(
-                            labelText: '種目',
+                            labelText: l10n.exercise,
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                           ),
@@ -288,7 +288,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                                 children: [
                                   Icon(Icons.add_circle_outline, size: 18, color: Colors.blue),
                                   SizedBox(width: 8),
-                                  Text('カスタム種目を追加', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+                                  Text(l10n.addCustomExercise, style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
                                 ],
                               ),
                             ),
@@ -311,7 +311,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.delete, color: Colors.red),
+                  icon: Icon(Icons.delete, color: Colors.red),
                   onPressed: () {
                     setState(() {
                       _exercises.removeAt(index);
@@ -321,7 +321,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
               ],
             ),
             
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             
             Row(
               children: [
@@ -329,7 +329,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                   child: TextFormField(
                     initialValue: exercise.targetSets.toString(),
                     decoration: const InputDecoration(
-                      labelText: 'セット数',
+                      labelText: l10n.setsCount,
                       border: OutlineInputBorder(),
                       contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
@@ -339,12 +339,12 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                     },
                   ),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
                 Expanded(
                   child: TextFormField(
                     initialValue: exercise.targetReps.toString(),
                     decoration: const InputDecoration(
-                      labelText: '回数',
+                      labelText: l10n.repsCount,
                       border: OutlineInputBorder(),
                       contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
@@ -354,7 +354,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                     },
                   ),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
                 Expanded(
                   child: TextFormField(
                     initialValue: exercise.targetWeight?.toString() ?? '',
@@ -396,7 +396,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
 
     if (_exercises.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('種目を1つ以上追加してください')),
+        const SnackBar(content: Text(l10n.workout_bf13cb6c)),
       );
       return;
     }
@@ -407,7 +407,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) {
         // 匿名ログイン実装により、この状態には通常到達しない
-        throw Exception('認証エラーが発生しました');
+        throw Exception(l10n.workout_07d18a44);
       }
 
       final template = WorkoutTemplate(
@@ -435,7 +435,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('テンプレートを保存しました')),
+          const SnackBar(content: Text(l10n.workout_dff9ccc1)),
         );
         Navigator.pop(context, true);
       }
