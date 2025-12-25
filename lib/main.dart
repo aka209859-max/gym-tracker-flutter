@@ -73,16 +73,16 @@ void main() async {
   // 日本語ロケール初期化（日付フォーマット用）
   try {
     await initializeDateFormatting('ja_JP', null);
-    ConsoleLogger.info(AppLocalizations.of(context)!.general_0e024233, tag: 'INIT');
+    ConsoleLogger.info('日本語ロケール初期化完了', tag: 'INIT');
   } catch (e) {
-    ConsoleLogger.warn(AppLocalizations.of(context)!.error_2def7135, tag: 'INIT');
+    ConsoleLogger.warn('日本語ロケール初期化失敗（Web環境では正常）', tag: 'INIT');
     // Web環境では失敗する可能性があるが、アプリ起動は継続
   }
   
   // Firebase初期化（エラー時はスキップしてデモモード）
   bool firebaseInitialized = false;
   try {
-    ConsoleLogger.info(AppLocalizations.of(context)!.general_890a33f3, tag: 'FIREBASE');
+    ConsoleLogger.info('Firebase初期化を開始', tag: 'FIREBASE');
     
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
@@ -254,7 +254,7 @@ void main() async {
     });
   }
   
-  print('🚀 アプリ起動開始 (Firebase: ${firebaseInitialized ? AppLocalizations.of(context)!.valid : AppLocalizations.of(context)!.invalid})');
+  print('🚀 アプリ起動開始 (Firebase: ${firebaseInitialized ? '有効' : '無効'})');
   
   runApp(const GymMatchApp());
 }
@@ -367,35 +367,35 @@ class _MainScreenState extends State<MainScreen> {
           NavigationDestination(
             icon: Icon(Icons.home_outlined),
             selectedIcon: Icon(Icons.home),
-            label: l10n?.navHome ?? AppLocalizations.of(context)!.navHome,
+            label: l10n?.navHome ?? 'ホーム',
           ),
           NavigationDestination(
             icon: Icon(Icons.history),
             selectedIcon: Icon(Icons.history),
-            label: l10n?.navWorkout ?? AppLocalizations.of(context)!.general_da63bff4,
+            label: l10n?.navWorkout ?? 'トレーニング',
           ),
           NavigationDestination(
             icon: Badge(
-              label: Text(AppLocalizations.of(context)!.navAI, style: TextStyle(fontSize: 8)),
+              label: Text(l10n?.navAI ?? 'AIコーチ', style: TextStyle(fontSize: 8)),
               backgroundColor: Colors.deepPurple,
               child: Icon(Icons.psychology_outlined),
             ),
             selectedIcon: Badge(
-              label: Text(AppLocalizations.of(context)!.navAI, style: TextStyle(fontSize: 8)),
+              label: Text(l10n?.navAI ?? 'AIコーチ', style: TextStyle(fontSize: 8)),
               backgroundColor: Colors.deepPurple,
               child: Icon(Icons.psychology),
             ),
-            label: l10n?.navAI ?? AppLocalizations.of(context)!.general_deb22de6,
+            label: l10n?.navAI ?? 'AIコーチ',
           ),
           NavigationDestination(
             icon: Icon(Icons.map_outlined),
             selectedIcon: Icon(Icons.map),
-            label: l10n?.navGym ?? AppLocalizations.of(context)!.gymSearch,
+            label: l10n?.navGym ?? 'ジム検索',
           ),
           NavigationDestination(
             icon: Icon(Icons.person_outline),
             selectedIcon: Icon(Icons.person),
-            label: l10n?.navProfile ?? AppLocalizations.of(context)!.profile,
+            label: l10n?.navProfile ?? 'プロフィール',
           ),
         ],
               ),
