@@ -1,0 +1,87 @@
+# Week 1 Day 4 - 優先度高ファイル（18ファイル）
+
+## 🎯 目標: 134-234文字列置換（Week 1 目標100%達成）
+
+### 📊 対象ファイル（日本語文字列数順）
+
+1. **lib/screens/settings/tokutei_shoutorihikihou_screen.dart** (19文字列)
+2. **lib/screens/workout/workout_detail_screen.dart** (18文字列)
+3. **lib/screens/workout_import_preview_screen.dart** (17文字列)
+4. **lib/screens/workout/add_workout_screen_complete.dart** (17文字列)
+5. **lib/screens/po/gym_equipment_editor_screen.dart** (16文字列)
+6. **lib/screens/personal_factors_screen.dart** (14文字列)
+7. **lib/screens/workout/rm_calculator_screen.dart** (13文字列)
+8. **lib/screens/po/po_member_detail_screen.dart** (13文字列)
+9. **lib/screens/partner_equipment_editor_screen.dart** (13文字列)
+10. **lib/screens/map_screen.dart** (13文字列)
+11. **lib/screens/workout/simple_workout_detail_screen.dart** (12文字列)
+12. **lib/screens/po/gym_announcement_editor_screen.dart** (12文字列)
+13. **lib/screens/partner_dashboard_screen.dart** (12文字列)
+14. **lib/screens/partner_campaign_editor_screen.dart** (12文字列)
+15. **lib/screens/gym_review_screen.dart** (12文字列)
+16. **lib/screens/partner/partner_search_screen.dart** (11文字列)
+17. **lib/screens/partner/partner_detail_screen.dart** (11文字列)
+18. **lib/screens/crowd_report_screen.dart** (11文字列)
+
+### 合計推定文字列数: 245文字列
+
+---
+
+## 📈 戦略
+
+### Phase 1: 全18ファイル一括処理
+- **目標**: 134-234文字列
+- **推定**: 245文字列（目標達成可能）
+- **方法**: apply_pattern_a_v2.py による一括処理
+
+---
+
+## 🛠️ 使用ツール
+- apply_pattern_a_v2.py (Day 2-3で実証済み)
+- arb_key_mappings.json (1,773 exact match)
+- 残りポテンシャル: 約1,200文字列
+
+---
+
+## ⏱️ 推定所要時間
+- 全18ファイル処理: 1時間
+- 検証とコミット: 15分
+- レポート作成: 15分
+- **合計**: 1.5時間
+
+---
+
+## 📊 期待される成果
+
+### Day 2 + Day 3 + Day 4 合計
+- **Day 2**: 153文字列
+- **Day 3**: 413文字列
+- **Day 4**: 245文字列（推定）
+- **合計**: 811文字列
+
+→ **Week 1目標（700-800）を完全達成（101-116%）！**
+
+---
+
+## 🎯 Week 1 目標達成後の状態
+
+### 翻訳適用率
+- **現在**: 566/1,000 (57%)
+- **Day 4後**: 811/1,000 (81%)
+- **Week 1目標**: 70-80%
+- **達成率**: **101-116%** 🎉
+
+---
+
+## 選定理由
+1. **settings系**: ユーザー設定画面
+2. **workout系**: トレーニング記録画面
+3. **po系**: ジムオーナー機能
+4. **partner系**: パートナー機能
+5. **文字列数が中規模**: 効率的に目標達成
+
+---
+
+**作成日時**: 2025-12-25  
+**ステータス**: Ready to execute  
+**期待成果**: Week 1 目標100%達成
