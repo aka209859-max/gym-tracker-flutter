@@ -1,0 +1,96 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 248
+  Replacements: 78
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 45 × '\bconst\s+Text\s*\(' → 'Text('
+  ✅ Removed 151 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 43 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Removed 1 × '\bconst\s+Padding\s*\(' → 'Padding('
+  ✅ Removed 8 × '\bconst\s+Expanded\s*\(' → 'Expanded('
+  ✅ Replaced: 30日間で5記録達成で習慣化！（継続率80%）... → l10n.general_baeb5820
+  ✅ Replaced: AIメニューを作成... → l10n.general_7fb375b8
+  ✅ Replaced: AI回数を追加... → l10n.general_b6269e2f
+  ✅ Replaced: AI無料利用×3回... → l10n.general_c1e4aaaf
+  ✅ Replaced: AI追加パック×1個（5回分、¥300相当）... → l10n.general_12b9787b
+  ✅ Replaced: Firestore更新の検証に失敗しました... → l10n.error_4788a149
+  ✅ Replaced: RPEスケール参考... → l10n.general_39933331
+  ✅ Replaced: あと少しで達成！今週中にいこう！... → l10n.general_f85e70e9
+  ✅ Replaced: あなたの招待コード... → l10n.general_d3a498ac
+  ✅ Replaced: ありがとう！... → l10n.general_6ff30ca2
+  ✅ Replaced: きつい運動... → l10n.general_7b4677c0
+  ✅ Replaced: この調子で続ければ、長期的な習慣になります... → l10n.general_7655cf33
+  ✅ Replaced: さあ、最初の記録を始めましょう！... → l10n.general_2f87b5bf
+  ✅ Replaced: すべて表示... → l10n.general_8991a176
+  ✅ Replaced: もうすぐ達成！... → l10n.general_d30b41b7
+  ✅ Replaced: アドバイス... → l10n.general_c443fe2a
+  ✅ Replaced: アンダートレーニング... → l10n.general_adc756de
+  ✅ Replaced: ウォームアップセット... → l10n.general_7339bc0f
+  ✅ Replaced: オフ... → l10n.workout_a0c22faa
+  ✅ Replaced: コードをコピーしました... → l10n.general_58a4e6c0
+  ✅ Replaced: システムをONにしてください... → l10n.general_fb4c7755
+  ✅ Replaced: システム状態... → l10n.general_1c98c756
+  ✅ Replaced: スタートダッシュ成功！... → l10n.general_8ab0963b
+  ✅ Replaced: スワイプで切替... → l10n.general_0b513207
+  ✅ Replaced: セッション全体を振り返り、最も適切な値を選択してください... → l10n.general_e8992ded
+  ✅ Replaced: セットを削除しました... → l10n.general_c51a7dc2
+  ✅ Replaced: データの取得に失敗しました... → l10n.gym_c7e47d32
+  ✅ Replaced: データ不足... → l10n.general_bc5a1c5b
+  ✅ Replaced: トレーニング目標を設定しましょう... → l10n.general_63e6dd3b
+  ✅ Replaced: トレーニング記録を編集... → l10n.general_99cab4c9
+  ✅ Replaced: ドロップセット... → l10n.general_71a798d0
+  ✅ Replaced: プルアップ... → l10n.workout_e3dc6687
+  ✅ Replaced: 不明... → l10n.unknown
+  ✅ Replaced: 中程度の運動... → l10n.general_b66ce898
+  ✅ Replaced: 今すぐシェア... → l10n.general_f5f90170
+  ✅ Replaced: 今日のトレーニング全体の主観的強度は？... → l10n.general_e965eb2c
+  ✅ Replaced: 今週のトレーニング... → l10n.general_eb6619e3
+  ✅ Replaced: 休息レベル... → l10n.general_2bc199e5
+  ✅ Replaced: 削除対象の記録が見つかりませんでした... → l10n.general_bb332935
+  ✅ Replaced: 危険... → l10n.general_5884053c
+  ✅ Replaced: 友達を招待... → l10n.profileInviteFriends
+  ✅ Replaced: 安全... → l10n.general_e66a2c6a
+  ✅ Replaced: 完全に力尽きるまで... → l10n.general_5c1f42bf
+  ✅ Replaced: 折り返し地点！その調子！... → l10n.general_080f2d45
+  ✅ Replaced: 招待された側... → l10n.general_50776211
+  ✅ Replaced: 招待した側... → l10n.general_3422ee22
+  ✅ Replaced: 招待コードをコピーしました！... → l10n.general_2489afc4
+  ✅ Replaced: 推奨回復時間... → l10n.general_f563accd
+  ✅ Replaced: 日付不明... → l10n.workout_3e8e25ce
+  ✅ Replaced: 日付範囲... → l10n.general_fb83494b
+  ✅ Replaced: 日付範囲を選択... → l10n.general_67002620
+  ✅ Replaced: 最大努力... → l10n.general_84f02dd9
+  ✅ Replaced: 月間... → l10n.general_7e8e1aae
+  ✅ Replaced: 本日のトレーニング記録が見つかりません... → l10n.general_86a8de76
+  ✅ Replaced: 本日の全トレーニング終了... → l10n.general_60ef486a
+  ✅ Replaced: 本番前の準備セット... → l10n.general_478df9bb
+  ✅ Replaced: 次のアップデートで実装予定... → l10n.general_b885375d
+  ✅ Replaced: 疲労度レベル... → l10n.general_034a0b49
+  ✅ Replaced: 目標を設定... → l10n.general_04640fff
+  ✅ Replaced: 目標達成済み！次の目標を設定しましょう... → l10n.general_160577cc
+  ✅ Replaced: 確定... → l10n.subscription_84b9d24c
+  ✅ Replaced: 科学的根拠に基づく疲労度分析... → l10n.general_efdf9333
+  ✅ Replaced: 紹介特典... → l10n.general_27d6e442
+  ✅ Replaced: 統計・分析... → l10n.general_03433587
+  ✅ Replaced: 続ける！... → l10n.general_231921de
+  ✅ Replaced: 総負荷量... → l10n.totalVolume
+  ✅ Replaced: 自重... → l10n.bodyweight
+  ✅ Replaced: 補助... → l10n.workout_c6b41e99
+  ✅ Replaced: 記録を削除しました... → l10n.general_aa5b02ca
+  ✅ Replaced: 警戒... → l10n.general_dcf6e7ad
+  ✅ Replaced: 軽い運動... → l10n.general_e41c5367
+  ✅ Replaced: 連続で行う2種目... → l10n.general_21df68a8
+  ✅ Replaced: 週次... → l10n.general_a19f5322
+  ✅ Replaced: 達成おめでとう！... → l10n.general_bd98a27d
+  ✅ Replaced: 重さ... → l10n.workout_2579352f
+  ✅ Replaced: 重量を落として限界まで... → l10n.general_5bd68fa7
+  ✅ Replaced: 開発者メニュー... → l10n.developerMenu
+  ✅ Replaced: 限界セット... → l10n.general_dad5d767
