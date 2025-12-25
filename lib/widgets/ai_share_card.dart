@@ -124,7 +124,7 @@ class AIShareCard extends StatelessWidget {
                     fontSize: 11,
                   ),
                 ),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.general_1297387e,
                   style: TextStyle(
                     color: Colors.white,

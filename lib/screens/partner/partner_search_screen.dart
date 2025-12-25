@@ -270,7 +270,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                     children: [
                       const Icon(Icons.fitness_center, size: 20, color: Colors.grey),
                       const SizedBox(width: 8),
-                      const Text(
+                      Text(
                         AppLocalizations.of(context)!.generatedKey_055759b3,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
@@ -482,7 +482,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.general_4c0c946d,
                       style: TextStyle(
                         fontSize: 16,

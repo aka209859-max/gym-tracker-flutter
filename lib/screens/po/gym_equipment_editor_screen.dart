@@ -232,7 +232,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.gym_841a92b0,
                   style: TextStyle(
                     fontSize: 18,
@@ -313,7 +313,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               AppLocalizations.of(context)!.gym_36f6e41f,
               style: TextStyle(
                 fontSize: 18,

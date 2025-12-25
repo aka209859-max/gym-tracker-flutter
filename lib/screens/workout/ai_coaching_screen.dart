@@ -223,7 +223,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.generatedKey_79ab5374
                     AppLocalizations.of(context)!.generatedKey_46daa8ca
                     AppLocalizations.of(context)!.workout_d35c3540,
@@ -337,7 +337,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.workout_ba5c8bd5,
                   style: TextStyle(
                     fontSize: 16,
@@ -390,7 +390,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           AppLocalizations.of(context)!.workout_5fcb26ba,
           style: TextStyle(
             fontSize: 16,
@@ -401,7 +401,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
         if (_isLoadingHistory)
           const Center(child: CircularProgressIndicator())
         else if (_history.isEmpty)
-          const Card(
+          Card(
             child: Padding(
               padding: EdgeInsets.all(24),
               child: Center(

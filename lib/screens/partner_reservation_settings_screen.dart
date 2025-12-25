@@ -220,7 +220,7 @@ class _PartnerReservationSettingsScreenState
                             _acceptsVisitors = value;
                           });
                         },
-                        title: const Text(
+                        title: Text(
                           AppLocalizations.of(context)!.profile_285758a8,
                           style: TextStyle(
                             fontSize: 16,
@@ -306,7 +306,7 @@ class _PartnerReservationSettingsScreenState
 
                     // プレビュー
                     if (_acceptsVisitors) ...[
-                      const Text(
+                      Text(
                         AppLocalizations.of(context)!.profile_599b1faa,
                         style: TextStyle(
                           fontSize: 16,

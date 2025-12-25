@@ -283,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               const SizedBox(height: 16),
               
               // タイトル
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.general_941f07f5,
                 style: TextStyle(
                   fontSize: 24,
@@ -318,7 +318,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     AppLocalizations.of(context)!.general_6ff30ca2,
                     style: TextStyle(
                       fontSize: 16,
@@ -466,7 +466,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     AppLocalizations.of(context)!.general_6ff30ca2,
                     style: TextStyle(
                       fontSize: 16,
@@ -1489,7 +1489,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ],
               ),
               const SizedBox(height: 12),
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.generatedKey_9cabffba,
                 style: TextStyle(
                   color: Colors.white,
@@ -1590,7 +1590,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'トレーニングのお知らせ 💪',
                   style: TextStyle(
                     fontSize: 16,
@@ -1599,7 +1599,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.generatedKey_5ff6013e,
                   style: TextStyle(
                     fontSize: 13,
@@ -1663,7 +1663,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.general_b17d877f,
                   style: TextStyle(
                     fontSize: 16,
@@ -1672,7 +1672,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.generatedKey_e199031a,
                   style: TextStyle(
                     fontSize: 13,
@@ -1804,7 +1804,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.general_eb6619e3,
                       style: TextStyle(
                         fontSize: 12,
@@ -1870,7 +1870,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             const SizedBox(height: 16),
             const Divider(height: 1, color: Colors.green),
             const SizedBox(height: 12),
-            const Text(
+            Text(
               AppLocalizations.of(context)!.general_ff0d16ff,
               style: TextStyle(
                 fontSize: 12,
@@ -2114,7 +2114,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     color: Colors.green,
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  child: const Text(
+                  child: Text(
                     AppLocalizations.of(context)!.workout_a0c22faa,
                     style: TextStyle(
                       color: Colors.white,
@@ -2226,7 +2226,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     );
                   },
                   icon: Icon(Icons.calculate, size: 18, color: theme.colorScheme.primary),
-                  label: const Text(
+                  label: Text(
                     AppLocalizations.of(context)!.general_dae8d109,
                     style: TextStyle(
                       fontSize: 14,
@@ -2349,7 +2349,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     );
                   },
                   icon: Icon(Icons.analytics, size: 18, color: theme.colorScheme.primary),
-                  label: const Text(
+                  label: Text(
                     AppLocalizations.of(context)!.general_a19f5322,
                     style: TextStyle(
                       fontSize: 14,
@@ -2585,7 +2585,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.generatedKey_16ea699e,
                   style: TextStyle(
                     fontSize: 14,
@@ -4568,7 +4568,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.general_1c98c756,
                       style: TextStyle(
                         color: Colors.white,
@@ -4844,7 +4844,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.general_e965eb2c,
                     style: TextStyle(
                       fontSize: 16,
@@ -4927,7 +4927,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           children: [
                             Icon(Icons.info_outline, size: 16, color: Colors.blue[700]),
                             const SizedBox(width: 6),
-                            const Text(
+                            Text(
                               AppLocalizations.of(context)!.general_39933331,
                               style: TextStyle(
                                 fontSize: 12,
@@ -4937,7 +4937,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           ],
                         ),
                         const SizedBox(height: 8),
-                        const Text(
+                        Text(
                           AppLocalizations.of(context)!.generatedKey_a215dfab,
                           style: TextStyle(fontSize: 11, height: 1.4),
                         ),
@@ -5098,7 +5098,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 children: [
                   Icon(Icons.lightbulb, color: Colors.amber[700], size: 20),
                   const SizedBox(width: 8),
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.general_c443fe2a,
                     style: TextStyle(
                       fontSize: 16,
@@ -5333,7 +5333,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         children: [
                           Icon(Icons.trending_up, color: Colors.blue[700], size: 18),
                           const SizedBox(width: 8),
-                          const Text(
+                          Text(
                             AppLocalizations.of(context)!.general_e07253c3,
                             style: TextStyle(
                               fontSize: 13,
@@ -5366,7 +5366,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 children: [
                   Icon(Icons.lightbulb, color: Colors.amber[700], size: 20),
                   const SizedBox(width: 8),
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.general_c443fe2a,
                     style: TextStyle(
                       fontSize: 16,
@@ -5596,7 +5596,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
               )
             else
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.general_160577cc,
                 style: TextStyle(
                   fontSize: 12,
@@ -5693,7 +5693,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             children: [
               Row(
                 children: [
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.general_d2afc264,
                     style: TextStyle(
                       fontSize: 16,
@@ -5964,7 +5964,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               const SizedBox(height: 20),
               
               // タイトル
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.general_1a42fb6b,
                 style: TextStyle(
                   fontSize: 26,
@@ -6001,7 +6001,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       children: [
                         Icon(Icons.star, color: Colors.amber, size: 24),
                         const SizedBox(width: 8),
-                        const Text(
+                        Text(
                           AppLocalizations.of(context)!.general_1fe3a7b5,
                           style: TextStyle(
                             fontSize: 18,
@@ -6012,7 +6012,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       ],
                     ),
                     const SizedBox(height: 8),
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.general_7655cf33,
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 13, color: Colors.black54),
@@ -6035,7 +6035,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     AppLocalizations.of(context)!.general_231921de,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
@@ -6347,7 +6347,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           
           // 紹介コード表示
           if (_referralCode != null) ...[
-            const Text(
+            Text(
               AppLocalizations.of(context)!.general_d3a498ac,
               style: TextStyle(
                 fontSize: 14,

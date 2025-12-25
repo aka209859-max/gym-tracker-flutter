@@ -113,7 +113,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            const Text(
+            Text(
               AppLocalizations.of(context)!.general_9eba2cc5,
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),

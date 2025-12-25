@@ -245,7 +245,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             Text(AppLocalizations.of(context)!.profile_f99be914),
           ],
         ),
-        content: const Text(
+        content: Text(
           AppLocalizations.of(context)!.profile_8c9edfc3,
         ),
         actions: [

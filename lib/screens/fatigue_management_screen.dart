@@ -276,7 +276,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                 children: [
                   Icon(Icons.lightbulb, color: Colors.amber[700], size: 20),
                   const SizedBox(width: 8),
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.general_c443fe2a,
                     style: TextStyle(
                       fontSize: 16,
@@ -383,7 +383,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                       children: [
                         Icon(Icons.psychology, color: Colors.blue[700], size: 28),
                         const SizedBox(width: 12),
-                        const Text(
+                        Text(
                           AppLocalizations.of(context)!.general_f79781b6,
                           style: TextStyle(
                             fontSize: 18,

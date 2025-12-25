@@ -144,7 +144,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.workout_36413c90,
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey),
               ),

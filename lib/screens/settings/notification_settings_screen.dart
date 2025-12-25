@@ -104,7 +104,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           AppLocalizations.of(context)!.notificationSettings,
           style: TextStyle(
             color: Colors.white,
@@ -140,7 +140,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
               elevation: 2,
               child: ListTile(
                 leading: Icon(Icons.access_time, color: Colors.blue[700]),
-                title: const Text(
+                title: Text(
                   AppLocalizations.of(context)!.profile_9b272b41,
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ),

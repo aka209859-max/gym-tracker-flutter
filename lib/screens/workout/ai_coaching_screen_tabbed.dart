@@ -664,7 +664,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
               ],
             ),
             const SizedBox(height: 12),
-            const Text(
+            Text(
               AppLocalizations.of(context)!.workout_17f59b6a,
               style: TextStyle(fontSize: 14),
             ),
@@ -679,7 +679,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           AppLocalizations.of(context)!.workout_2dc1ee52,
           style: TextStyle(
             fontSize: 16,
@@ -750,7 +750,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           AppLocalizations.of(context)!.workout_478bc20c,
           style: TextStyle(
             fontSize: 16,
@@ -843,7 +843,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.workout_ba5c8bd5,
                   style: TextStyle(
                     fontSize: 16,
@@ -1162,7 +1162,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           AppLocalizations.of(context)!.workout_5fcb26ba,
           style: TextStyle(
             fontSize: 16,
@@ -1173,7 +1173,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
         if (_isLoadingHistory)
           const Center(child: CircularProgressIndicator())
         else if (_history.isEmpty)
-          const Card(
+          Card(
             child: Padding(
               padding: EdgeInsets.all(24),
               child: Center(
@@ -2159,7 +2159,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? AppLocali
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               AppLocalizations.of(context)!.workout_27e98563,
               style: TextStyle(fontSize: 14, height: 1.6),
             ),
@@ -2856,7 +2856,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               AppLocalizations.of(context)!.info,
               style: TextStyle(
                 fontSize: 16,
@@ -3264,7 +3264,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                   children: [
                     Icon(Icons.show_chart, color: Colors.blue.shade700),
                     const SizedBox(width: 8),
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.general_f388c562,
                       style: TextStyle(
                         fontSize: 16,
@@ -3369,7 +3369,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               AppLocalizations.of(context)!.workout_27e98563,
               style: TextStyle(fontSize: 14, height: 1.6),
             ),
@@ -3508,12 +3508,12 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               AppLocalizations.of(context)!.generatedKey_9d99af7f,
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            const Text(
+            Text(
               AppLocalizations.of(context)!.generatedKey_67a989a2
               AppLocalizations.of(context)!.generatedKey_465a0c43
               AppLocalizations.of(context)!.generatedKey_6aa1053b
@@ -3527,7 +3527,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 color: Colors.amber.shade50,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Text(
+              child: Text(
                 AppLocalizations.of(context)!.monthlyPrice,
                 style: TextStyle(
                   fontSize: 18,
@@ -3891,7 +3891,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             children: [
               Icon(Icons.info_outline, color: Colors.amber.shade700),
               const SizedBox(width: 8),
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.notifications,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -4353,7 +4353,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               AppLocalizations.of(context)!.generatedKey_9d44cf62,
               style: TextStyle(
                 fontSize: 16,
@@ -4410,7 +4410,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
 
             // プラトー検出トグル
             SwitchListTile(
-              title: const Text(
+              title: Text(
                 AppLocalizations.of(context)!.generatedKey_6619d354,
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
               ),
@@ -4606,7 +4606,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
             Icon(Icons.warning_amber, color: Colors.orange.shade700),
             const SizedBox(width: 12),
             Expanded(
-              child: const Text(
+              child: Text(
                 AppLocalizations.of(context)!.generatedKey_f2350bf3,
                 style: TextStyle(fontSize: 13),
               ),
@@ -4967,7 +4967,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               children: [
                 Icon(Icons.bar_chart, color: Colors.blue.shade700),
                 const SizedBox(width: 8),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.analysis,
                   style: TextStyle(
                     fontSize: 16,
@@ -5046,7 +5046,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               children: [
                 Icon(Icons.calendar_month, color: Colors.green.shade700),
                 const SizedBox(width: 8),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.analysis,
                   style: TextStyle(
                     fontSize: 16,
@@ -5136,7 +5136,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               children: [
                 Icon(Icons.recommend, color: Colors.purple.shade700),
                 const SizedBox(width: 8),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.aiResponseActionPlan,
                   style: TextStyle(
                     fontSize: 16,
@@ -5228,7 +5228,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               AppLocalizations.of(context)!.workout_27e98563,
               style: TextStyle(fontSize: 14, height: 1.6),
             ),
@@ -5367,12 +5367,12 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               AppLocalizations.of(context)!.generatedKey_9d99af7f,
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            const Text(
+            Text(
               AppLocalizations.of(context)!.generatedKey_67a989a2
               AppLocalizations.of(context)!.generatedKey_465a0c43
               AppLocalizations.of(context)!.generatedKey_6aa1053b
@@ -5386,7 +5386,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 color: Colors.amber.shade50,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Text(
+              child: Text(
                 AppLocalizations.of(context)!.monthlyPrice,
                 style: TextStyle(
                   fontSize: 18,

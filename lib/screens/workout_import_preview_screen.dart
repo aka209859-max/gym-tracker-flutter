@@ -341,7 +341,7 @@ class _WorkoutImportPreviewScreenState
                           ),
                           child: Row(
                             children: [
-                              const Text(
+                              Text(
                                 AppLocalizations.of(context)!.workout_b98aa1b1,
                                 style: TextStyle(
                                   fontSize: 14,
@@ -454,7 +454,7 @@ class _WorkoutImportPreviewScreenState
                               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                             ),
                           )
-                        : const Text(
+                        : Text(
                             AppLocalizations.of(context)!.workout_d55c6b11,
                             style: TextStyle(
                               fontSize: 16,

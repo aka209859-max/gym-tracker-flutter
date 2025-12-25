@@ -55,7 +55,7 @@ class WorkoutShareCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 16),
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(

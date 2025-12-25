@@ -331,7 +331,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
               children: [
                 Icon(Icons.vpn_key, color: Colors.amber[700], size: 28),
                 const SizedBox(width: 8),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.general_c8bef2a9,
                   style: TextStyle(
                     fontSize: 16,

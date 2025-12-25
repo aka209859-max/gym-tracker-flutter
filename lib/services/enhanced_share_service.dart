@@ -123,7 +123,7 @@ class EnhancedShareService {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.general_75d64c1f,
                     style: TextStyle(fontSize: 14),
                   ),
@@ -131,7 +131,7 @@ class EnhancedShareService {
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               AppLocalizations.of(context)!.general_6720b74a,
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
@@ -331,7 +331,7 @@ class EnhancedShareService {
               size: 120,
             ),
             const SizedBox(height: 32),
-            const Text(
+            Text(
               AppLocalizations.of(context)!.general_a32e6bd5,
               style: TextStyle(
                 fontSize: 48,

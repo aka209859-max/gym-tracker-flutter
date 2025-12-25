@@ -80,7 +80,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                     ),
                   )
                 : const Icon(Icons.check, color: Colors.white),
-            label: const Text(
+            label: Text(
               AppLocalizations.of(context)!.buttonSave,
               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
@@ -130,7 +130,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
             const SizedBox(height: 24),
             
             // 部位選択
-            const Text(
+            Text(
               AppLocalizations.of(context)!.workout_9b2523e6,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
@@ -163,7 +163,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.workout_6e8a7475,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
@@ -269,7 +269,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                       else
                         DropdownButtonFormField<String>(
                           value: exercise.exerciseName,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             labelText: AppLocalizations.of(context)!.exercise,
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -282,7 +282,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                                       child: Text(name),
                                     )),
                             // カスタム種目追加オプション
-                            const DropdownMenuItem(
+                            DropdownMenuItem(
                               value: '___custom___',
                               child: Row(
                                 children: [
@@ -328,7 +328,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                 Expanded(
                   child: TextFormField(
                     initialValue: exercise.targetSets.toString(),
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: AppLocalizations.of(context)!.setsCount,
                       border: OutlineInputBorder(),
                       contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -343,7 +343,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                 Expanded(
                   child: TextFormField(
                     initialValue: exercise.targetReps.toString(),
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: AppLocalizations.of(context)!.repsCount,
                       border: OutlineInputBorder(),
                       contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),

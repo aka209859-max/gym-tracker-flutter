@@ -57,7 +57,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                       color: Colors.white,
                     ),
                     const SizedBox(height: 12),
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.subscription_e1e85327,
                       style: TextStyle(
                         fontSize: 28,
@@ -88,7 +88,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                       children: [
                         Icon(Icons.card_giftcard, color: Colors.amber.shade700),
                         const SizedBox(width: 8),
-                        const Text(
+                        Text(
                           AppLocalizations.of(context)!.subscription_2c0c51fb,
                           style: TextStyle(
                             fontSize: 20,
@@ -114,7 +114,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                             children: [
                               Icon(Icons.star, color: Colors.amber.shade600, size: 20),
                               const SizedBox(width: 8),
-                              const Text(
+                              Text(
                                 AppLocalizations.of(context)!.subscription_1d16adbb,
                                 style: TextStyle(
                                   fontSize: 18,
@@ -125,7 +125,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 12),
-                          const Text(
+                          Text(
                             AppLocalizations.of(context)!.subscription_3dd87f02,
                             style: TextStyle(fontSize: 14),
                           ),
@@ -139,7 +139,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                     const SizedBox(height: 16),
                     
                     // プレミアム特典リスト
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.subscription_a2e75082,
                       style: TextStyle(
                         fontSize: 16,
@@ -207,7 +207,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
-                        child: const Text(
+                        child: Text(
                           AppLocalizations.of(context)!.subscription_f9d161bd,
                           style: TextStyle(
                             fontSize: 16,

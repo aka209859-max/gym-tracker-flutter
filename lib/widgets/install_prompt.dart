@@ -279,7 +279,7 @@ class _InstallPromptState extends State<InstallPrompt> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   AppLocalizations.of(context)!.general_d2fff453,
                   style: TextStyle(
                     fontSize: 16,

@@ -130,7 +130,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
               color: Colors.deepPurple,
             ),
             const SizedBox(height: 24),
-            const Text(
+            Text(
               AppLocalizations.of(context)!.general_51121e8d,
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -245,7 +245,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                       ),
                     )
-                  : const Text(
+                  : Text(
                       AppLocalizations.of(context)!.general_999dddff,
                       style: TextStyle(
                         fontSize: 18,

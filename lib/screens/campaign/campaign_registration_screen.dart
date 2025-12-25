@@ -192,7 +192,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                 color: Colors.orange[100],
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: const Text(
+              child: Text(
                 AppLocalizations.of(context)!.general_809889ae,
                 style: TextStyle(
                   fontSize: 12,

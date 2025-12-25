@@ -121,7 +121,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.generatedKey_b55f1ed0,
                     style: TextStyle(
                       fontSize: 13,
@@ -261,7 +261,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                                 children: [
                                   Icon(Icons.inbox_outlined, size: 64, color: Colors.grey[300]),
                                   const SizedBox(height: 16),
-                                  const Text(
+                                  Text(
                                     AppLocalizations.of(context)!.general_f1fa038f,
                                     style: TextStyle(
                                       fontSize: 16,
@@ -269,7 +269,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                                     ),
                                   ),
                                   const SizedBox(height: 8),
-                                  const Text(
+                                  Text(
                                     AppLocalizations.of(context)!.generatedKey_5df71c9c,
                                     style: TextStyle(
                                       fontSize: 13,

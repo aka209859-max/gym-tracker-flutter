@@ -35,7 +35,7 @@ class POMemberDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.gym_0179630e,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
@@ -63,7 +63,7 @@ class POMemberDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.general_f499f3a7,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),

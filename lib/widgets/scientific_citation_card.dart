@@ -133,7 +133,7 @@ class _ScientificBasisSectionState extends State<ScientificBasisSection> {
               Icons.school,
               color: Colors.blue.shade700,
             ),
-            title: const Text(
+            title: Text(
               AppLocalizations.of(context)!.scientificBasis,
               style: TextStyle(
                 fontWeight: FontWeight.bold,

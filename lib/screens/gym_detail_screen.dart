@@ -442,7 +442,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.gym_dc16fe89,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
@@ -684,7 +684,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
             children: [
               Row(
                 children: [
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.gym_2689426f,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
@@ -787,7 +787,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                     context: context,
                     builder: (context) => AlertDialog(
                       title: Text(AppLocalizations.of(context)!.gym_b439391c),
-                      content: const Text(
+                      content: Text(
                         AppLocalizations.of(context)!.gym_585da793,
                       ),
                       actions: [

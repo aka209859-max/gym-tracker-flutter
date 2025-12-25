@@ -618,7 +618,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.workout_bc108eb8,
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
@@ -654,7 +654,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text(
+                    child: Text(
                       AppLocalizations.of(context)!.workout_18f75a52,
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
@@ -721,7 +721,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 ),
                 child: Row(
                   children: [
-                    const Text('💡', style: TextStyle(fontSize: 16)),
+                    Text('💡', style: TextStyle(fontSize: 16)),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(

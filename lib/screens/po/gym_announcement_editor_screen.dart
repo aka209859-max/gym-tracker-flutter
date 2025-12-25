@@ -204,7 +204,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // お知らせタイプ選択
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.gym_0dfe6c91,
                 style: TextStyle(
                   fontSize: 16,
@@ -284,7 +284,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                 ),
               
               // 画像アップロード
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.gym_b26e7c38,
                 style: TextStyle(
                   fontSize: 16,

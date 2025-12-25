@@ -114,7 +114,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
+            Text(
               AppLocalizations.of(context)!.profile_ec23f31d,
               style: TextStyle(fontSize: 14),
             ),
@@ -126,7 +126,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Icon(Icons.photo_camera, color: Colors.white),
               ),
               title: Text(AppLocalizations.of(context)!.profile_4bac693a),
-              subtitle: const Text(
+              subtitle: Text(
                 AppLocalizations.of(context)!.profile_d752bd08,
                 style: TextStyle(fontSize: 12),
               ),
@@ -140,7 +140,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Icon(Icons.description, color: Colors.white),
               ),
               title: Text(AppLocalizations.of(context)!.profile_3cbb854e),
-              subtitle: const Text(
+              subtitle: Text(
                 AppLocalizations.of(context)!.profile_d97e2902,
                 style: TextStyle(fontSize: 12),
               ),
@@ -379,7 +379,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.profile_fa33b86c,
                 style: TextStyle(
                   fontSize: 14,
@@ -426,7 +426,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.profile_11b58ebc,
                 style: TextStyle(
                   fontSize: 16,
@@ -443,7 +443,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.blue.shade50,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Text(
+                child: Text(
                   AppLocalizations.of(context)!.profile_09c89631,
                   style: TextStyle(fontSize: 12),
                 ),
@@ -1248,7 +1248,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.deepPurple.shade700,
                 ),
               ),
-              title: const Text(
+              title: Text(
                 AppLocalizations.of(context)!.profile_8af7bb61,
                 style: TextStyle(
                   fontSize: 16,

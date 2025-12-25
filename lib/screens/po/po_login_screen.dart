@@ -201,7 +201,7 @@ import 'po_dashboard_screen.dart';
                 const SizedBox(height: 24),
 
                 // タイトル
-                const Text(
+                Text(
                   'GYM MATCH',
                   style: TextStyle(
                     fontSize: 32,

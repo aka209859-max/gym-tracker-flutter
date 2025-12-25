@@ -98,7 +98,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                 Text(AppLocalizations.of(context)!.purchaseCompleted(AppLocalizations.of(context)!.aiAddonPack)),
               ],
             ),
-            content: const Text(
+            content: Text(
               AppLocalizations.of(context)!.generatedKey_1ea406c3
               AppLocalizations.of(context)!.general_6dc47887,
             ),
@@ -125,7 +125,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                 Text(AppLocalizations.of(context)!.error),
               ],
             ),
-            content: const Text('購入処理に失敗しました。\nもう一度お試しください。'),
+            content: Text('購入処理に失敗しました。\nもう一度お試しください。'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
@@ -270,7 +270,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
             const SizedBox(height: 24),
             
             // 追加購入パッケージ
-            const Text(
+            Text(
               AppLocalizations.of(context)!.aiAddonPack,
               style: TextStyle(
                 fontSize: 20,
@@ -370,7 +370,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                     color: Colors.orange,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Text(
+                  child: Text(
                     AppLocalizations.of(context)!.general_2adb470f,
                     style: TextStyle(
                       fontSize: 12,
@@ -459,7 +459,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                             valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                           ),
                         )
-                      : const Text(
+                      : Text(
                           AppLocalizations.of(context)!.general_c71038e7,
                           style: TextStyle(
                             fontSize: 16,

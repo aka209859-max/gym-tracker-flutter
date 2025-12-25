@@ -488,7 +488,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('🔍 削除デバッグ'),
+        title: Text('🔍 削除デバッグ'),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -540,7 +540,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
             ElevatedButton(
               onPressed: () => Navigator.pop(context),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
-              child: const Text('⚠️ 全削除防止'),
+              child: Text('⚠️ 全削除防止'),
             ),
         ],
       ),

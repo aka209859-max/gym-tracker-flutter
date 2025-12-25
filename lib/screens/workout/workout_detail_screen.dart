@@ -440,7 +440,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                       children: [
                         const Icon(Icons.note, size: 20),
                         const SizedBox(width: 8),
-                        const Text(
+                        Text(
                           AppLocalizations.of(context)!.workout_e5798fef,
                           style: TextStyle(
                             fontSize: 16,
@@ -486,7 +486,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                     color: theme.colorScheme.primary,
                   ),
                   const SizedBox(width: 8),
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.trainingMemo,
                     style: TextStyle(
                       fontSize: 18,

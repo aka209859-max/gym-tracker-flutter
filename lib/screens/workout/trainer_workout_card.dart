@@ -253,7 +253,7 @@ class TrainerWorkoutCard extends StatelessWidget {
                     _buildInfoRow(AppLocalizations.of(context)!.workout_c34d51a0, _getIntensityLabel(context, record.intensity)),
                     
                     const SizedBox(height: 24),
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.workout_6635091c,
                       style: TextStyle(
                         fontSize: 18,
@@ -295,7 +295,7 @@ class TrainerWorkoutCard extends StatelessWidget {
                     // 体組成
                     if (record.bodyMetrics != null) ...[
                       const SizedBox(height: 24),
-                      const Text(
+                      Text(
                         AppLocalizations.of(context)!.workout_85a5a0ad,
                         style: TextStyle(
                           fontSize: 18,
@@ -323,7 +323,7 @@ class TrainerWorkoutCard extends StatelessWidget {
                     // トレーナーメモ
                     if (record.trainerNotes.isNotEmpty) ...[
                       const SizedBox(height: 24),
-                      const Text(
+                      Text(
                         AppLocalizations.of(context)!.workout_ffc76989,
                         style: TextStyle(
                           fontSize: 18,

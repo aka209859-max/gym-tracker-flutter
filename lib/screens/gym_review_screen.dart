@@ -248,7 +248,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                     const SizedBox(height: 16),
 
                     // 詳細評価
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.gym_9ff748a0,
                       style: TextStyle(
                         fontSize: 18,

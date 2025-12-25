@@ -104,7 +104,7 @@ class PhaseMigrationScreen extends StatelessWidget {
                   size: 32,
                 ),
                 const SizedBox(width: 12),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.general_ecd7fa0b,
                   style: TextStyle(
                     fontSize: 24,
@@ -234,7 +234,7 @@ class PhaseMigrationScreen extends StatelessWidget {
             _buildInfoRow(AppLocalizations.of(context)!.general_036e50bf, cost, Icons.attach_money),
             _buildInfoRow(AppLocalizations.of(context)!.general_ee0515ff, accuracy, Icons.speed),
             const SizedBox(height: 12),
-            const Text(
+            Text(
               AppLocalizations.of(context)!.general_d8d1ba3a,
               style: TextStyle(
                 fontSize: 16,
@@ -297,7 +297,7 @@ class PhaseMigrationScreen extends StatelessWidget {
               children: [
                 Icon(Icons.lightbulb, color: Colors.amber.shade700, size: 28),
                 const SizedBox(width: 8),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.general_1aeb1c97,
                   style: TextStyle(
                     fontSize: 20,
@@ -325,7 +325,7 @@ class PhaseMigrationScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.general_b12e4926,
                     style: TextStyle(
                       fontSize: 16,

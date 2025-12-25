@@ -100,7 +100,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
         child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
+          Text(
             'RM (Repetition Maximum) 計算',
             style: TextStyle(
               fontSize: 24,
@@ -109,7 +109,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8),
-          const Text(
+          Text(
             AppLocalizations.of(context)!.workout_9c0a4993,
             style: TextStyle(
               fontSize: 14,
@@ -171,7 +171,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
               ),
               elevation: 2,
             ),
-            child: const Text(
+            child: Text(
               AppLocalizations.of(context)!.workout_c0a0d68f,
               style: TextStyle(
                 fontSize: 18,
@@ -204,7 +204,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                         size: 28,
                       ),
                       const SizedBox(width: 8),
-                      const Text(
+                      Text(
                         AppLocalizations.of(context)!.workout_eca81c63,
                         style: TextStyle(
                           fontSize: 18,
@@ -326,7 +326,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                   children: [
                     Icon(Icons.info_outline, color: Colors.grey[600]),
                     const SizedBox(width: 8),
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.workout_22a0ae55,
                       style: TextStyle(
                         fontSize: 16,
@@ -494,7 +494,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // タイトル
-          const Text(
+          Text(
             AppLocalizations.of(context)!.workout_ae263865,
             style: TextStyle(
               fontSize: 28,
@@ -503,7 +503,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8),
-          const Text(
+          Text(
             AppLocalizations.of(context)!.workout_5dd09e2c,
             style: TextStyle(
               fontSize: 16,
@@ -538,7 +538,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                       children: [
                         Icon(Icons.settings, color: theme.colorScheme.primary, size: 24),
                         const SizedBox(width: 8),
-                        const Text(
+                        Text(
                           AppLocalizations.of(context)!.workout_2b9ba6e9,
                           style: TextStyle(
                             fontSize: 18,
@@ -666,7 +666,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                   children: [
                     Icon(Icons.straighten, color: Colors.grey[700], size: 22),
                     const SizedBox(width: 8),
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.workout_1c6dabe4,
                       style: TextStyle(
                         fontSize: 16,
@@ -745,7 +745,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
               ),
               elevation: 4,
             ),
-            child: const Text(
+            child: Text(
               AppLocalizations.of(context)!.workout_c0a474a8,
               style: TextStyle(
                 fontSize: 20,
@@ -972,7 +972,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                   children: [
                     Icon(Icons.info_outline, color: Colors.grey[600]),
                     const SizedBox(width: 8),
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.workout_e903a9d4,
                       style: TextStyle(
                         fontSize: 16,

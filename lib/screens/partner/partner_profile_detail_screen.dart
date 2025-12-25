@@ -376,7 +376,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               AppLocalizations.of(context)!.generatedKey_8ab9dcf9,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
@@ -389,7 +389,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
             _buildBenefitRow(AppLocalizations.of(context)!.profile_3ba4fae0),
             _buildBenefitRow(AppLocalizations.of(context)!.profile_8fdc9d03),
             const SizedBox(height: 8),
-            const Text(
+            Text(
               AppLocalizations.of(context)!.generatedKey_152ba977,
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
@@ -464,7 +464,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
           children: [
             Row(
               children: [
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.profile_0e655357,
                   style: TextStyle(
                     fontSize: 18,
@@ -482,7 +482,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                       ),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const Text(
+                    child: Text(
                       AppLocalizations.of(context)!.profile_3e89f30d,
                       style: TextStyle(
                         fontSize: 12,

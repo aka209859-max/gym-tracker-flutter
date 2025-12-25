@@ -37,7 +37,7 @@ class POAnalyticsScreen extends StatelessWidget {
         return ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            const Text(
+            Text(
               AppLocalizations.of(context)!.general_66ac62bc,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
@@ -83,7 +83,7 @@ class POAnalyticsScreen extends StatelessWidget {
 
             // アラートセクション
             if (dormantMembers > 0) ...[
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.general_91f7143b,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),

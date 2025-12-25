@@ -266,7 +266,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
             if (_friendshipStatus == FriendshipStatus.requestReceived)
               Column(
                 children: [
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.general_caeec09a,
                     style: TextStyle(fontSize: 14, color: Colors.orange),
                   ),

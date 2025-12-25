@@ -33,7 +33,7 @@ class UpdateDialog extends StatelessWidget {
     return PopScope(
       canPop: !versionCheck.isForceUpdate, // 強制の場合は戻るボタン無効
       child: AlertDialog(
-        title: const Text(
+        title: Text(
           AppLocalizations.of(context)!.general_07b4f5d1,
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -41,7 +41,7 @@ class UpdateDialog extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        content: const Text(
+        content: Text(
           AppLocalizations.of(context)!.general_3f0af19e,
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -65,7 +65,7 @@ class UpdateDialog extends StatelessWidget {
                   } else {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
+                        SnackBar(
                           content: Text(AppLocalizations.of(context)!.general_d062e87e),
                         ),
                       );
@@ -74,7 +74,7 @@ class UpdateDialog extends StatelessWidget {
                 }
                 // 強制アップデートの場合はダイアログを閉じない
               },
-              child: const Text(
+              child: Text(
                 AppLocalizations.of(context)!.ok,
                 style: TextStyle(
                   fontSize: 17,

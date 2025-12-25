@@ -144,7 +144,7 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                     const SizedBox(height: 30),
                     // アプリ名（オプション）
-                    const Text(
+                    Text(
                       'GYM MATCH',
                       style: TextStyle(
                         color: Colors.white,

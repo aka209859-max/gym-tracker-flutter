@@ -175,7 +175,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                         backgroundColor: Colors.blue[700],
                         foregroundColor: Colors.white,
                       ),
-                      child: const Text(
+                      child: Text(
                         AppLocalizations.of(context)!.personalFactor_17960add,
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
@@ -199,7 +199,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            const Text(
+            Text(
               AppLocalizations.of(context)!.personalFactor_1a9ab501,
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
@@ -446,7 +446,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.personalFactor_56a6d8a6,
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),

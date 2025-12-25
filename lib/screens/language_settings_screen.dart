@@ -89,7 +89,7 @@ class LanguageSettingsScreen extends StatelessWidget {
                           style: const TextStyle(fontSize: 16),
                         ),
                         const SizedBox(height: 12),
-                        const Text(
+                        Text(
                           AppLocalizations.of(context)!.profile_510d373d,
                           style: TextStyle(
                             fontSize: 14,

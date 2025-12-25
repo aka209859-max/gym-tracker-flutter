@@ -169,7 +169,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                 // 警告メッセージ
                 Card(
                   color: Colors.orange.shade50,
-                  child: const ListTile(
+                  child: ListTile(
                     leading: Icon(Icons.warning, color: Colors.orange, size: 32),
                     title: Text(
                       '⚠️ 開発者専用',
@@ -238,7 +238,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
+                          Text(
                             AppLocalizations.of(context)!.general_7a793789,
                             style: TextStyle(
                               fontSize: 12,

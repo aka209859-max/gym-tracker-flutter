@@ -170,7 +170,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                   padding: const EdgeInsets.all(20),
                   children: [
                     // 種目リスト
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.workout_1501088c,
                       style: TextStyle(
                         fontSize: 16,
@@ -247,7 +247,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                     // トレーナーメモ
                     if (widget.record.trainerNotes.isNotEmpty) ...[
                       const SizedBox(height: 24),
-                      const Text(
+                      Text(
                         AppLocalizations.of(context)!.workout_927e07cf,
                         style: TextStyle(
                           fontSize: 16,

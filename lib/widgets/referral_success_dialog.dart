@@ -34,7 +34,7 @@ class ReferralSuccessDialog {
                 size: 32,
               ),
               const SizedBox(width: 12),
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.general_85d1b5d2,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -47,7 +47,7 @@ class ReferralSuccessDialog {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.general_31ec114c,
                 style: TextStyle(fontSize: 16),
               ),
@@ -62,7 +62,7 @@ class ReferralSuccessDialog {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.general_e1cf09e4,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -108,7 +108,7 @@ class ReferralSuccessDialog {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              child: const Text(
+              child: Text(
                 AppLocalizations.of(context)!.general_81e13f3b,
                 style: TextStyle(
                   fontSize: 16,
@@ -151,7 +151,7 @@ class ReferralSuccessDialog {
                 size: 32,
               ),
               const SizedBox(width: 12),
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.general_99c96084,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -179,7 +179,7 @@ class ReferralSuccessDialog {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.generatedKey_3efd8f7d,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -205,7 +205,7 @@ class ReferralSuccessDialog {
                 ),
               ),
               const SizedBox(height: 16),
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.general_8b3d7068,
                 style: TextStyle(
                   fontSize: 14,
@@ -232,7 +232,7 @@ class ReferralSuccessDialog {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              child: const Text(
+              child: Text(
                 AppLocalizations.of(context)!.general_d3c89caa,
                 style: TextStyle(
                   fontSize: 16,

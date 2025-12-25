@@ -413,7 +413,7 @@ class _PartnerCampaignEditorScreenState
                                   AlwaysStoppedAnimation<Color>(Colors.white),
                             ),
                           )
-                        : const Text(
+                        : Text(
                             AppLocalizations.of(context)!.general_a86eaa5d,
                             style: TextStyle(
                               fontSize: 18,

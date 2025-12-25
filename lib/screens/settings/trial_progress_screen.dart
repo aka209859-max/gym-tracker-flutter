@@ -168,7 +168,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
+            Text(
               AppLocalizations.of(context)!.subscription_740f887c,
               style: TextStyle(
                 fontSize: 18,
@@ -213,7 +213,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               AppLocalizations.of(context)!.subscription_0fca92cf,
               style: TextStyle(
                 fontSize: 18,
@@ -277,7 +277,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
               ],
             ),
             const SizedBox(height: 12),
-            const Text(
+            Text(
               AppLocalizations.of(context)!.subscription_19705f59,
               style: TextStyle(
                 fontSize: 16,

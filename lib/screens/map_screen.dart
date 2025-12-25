@@ -144,7 +144,7 @@ class _MapScreenState extends State<MapScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.general_8b92a0e1,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
@@ -156,7 +156,7 @@ class _MapScreenState extends State<MapScreen> {
                     style: const TextStyle(fontSize: 12),
                   ),
                   const SizedBox(height: 4),
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.general_3d380ed0,
                     style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                   ),
@@ -533,7 +533,7 @@ class _MapScreenState extends State<MapScreen> {
           children: [
             const Icon(Icons.search_off, size: 64, color: Colors.grey),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               AppLocalizations.of(context)!.general_303bea53,
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),

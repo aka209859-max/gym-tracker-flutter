@@ -40,7 +40,7 @@ class WeeklyStatsShareImage extends StatelessWidget {
             const SizedBox(height: 120),
             
             // タイトル
-            const Text(
+            Text(
               AppLocalizations.of(context)!.general_5fb75911,
               style: TextStyle(
                 fontSize: 56,

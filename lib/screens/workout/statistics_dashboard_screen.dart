@@ -378,7 +378,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
               children: [
                 Icon(Icons.calendar_today, color: theme.colorScheme.primary, size: 24),
                 const SizedBox(width: 12),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.workout_35f61292,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
@@ -454,7 +454,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
               ),
             ),
             const SizedBox(height: 8),
-            const Text(
+            Text(
               AppLocalizations.of(context)!.workout_a826db5c,
               style: TextStyle(
                 fontSize: 16,
@@ -479,7 +479,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
               children: [
                 Icon(Icons.date_range, color: theme.colorScheme.primary, size: 24),
                 const SizedBox(width: 12),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.workout_7643b53a,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
@@ -546,7 +546,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
               children: [
                 Icon(Icons.pie_chart, color: theme.colorScheme.primary, size: 24),
                 const SizedBox(width: 12),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.workout_a826808f,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),

@@ -124,7 +124,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     const SizedBox(height: 16),
                   
                   // プラン選択セクション
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.subscription_f129a868,
                     style: TextStyle(
                       fontSize: 22,
@@ -299,7 +299,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 ),
               ),
               const SizedBox(height: 12),
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.subscription_b3450cf6,
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -465,7 +465,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         color: Colors.orange,
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: const Text(
+                      child: Text(
                         AppLocalizations.of(context)!.subscription_623d5158,
                         style: TextStyle(
                           fontSize: 12,
@@ -642,7 +642,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                   foregroundColor: Colors.white,
                                   padding: const EdgeInsets.symmetric(vertical: 14),
                                 ),
-                                child: const Text(
+                                child: Text(
                                   AppLocalizations.of(context)!.subscription_bf804c6f,
                                   style: TextStyle(
                                     fontSize: 16,
@@ -683,7 +683,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               AppLocalizations.of(context)!.subscription_aaee0ad5,
               style: TextStyle(
                 fontSize: 20,
@@ -1243,7 +1243,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         color: Colors.orange,
                         borderRadius: BorderRadius.circular(4),
                       ),
-                      child: const Text(
+                      child: Text(
                         AppLocalizations.of(context)!.reps,
                         style: TextStyle(
                           fontSize: 12,
@@ -1307,7 +1307,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                           children: [
                             Icon(Icons.lightbulb, color: Colors.blue, size: 20),
                             const SizedBox(width: 8),
-                            const Text(
+                            Text(
                               AppLocalizations.of(context)!.subscription_1e449e5c,
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),

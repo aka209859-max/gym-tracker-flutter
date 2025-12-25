@@ -187,7 +187,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
             children: [
               Icon(Icons.warning_amber, color: Colors.orange.shade700),
               const SizedBox(width: 8),
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.profile_fdd46a75,
                 style: TextStyle(
                   fontSize: 16,
@@ -197,7 +197,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          const Text(
+          Text(
             AppLocalizations.of(context)!.generatedKey_d23452bf
             AppLocalizations.of(context)!.generatedKey_0cd63622
             AppLocalizations.of(context)!.generatedKey_0d5aaa39
@@ -285,12 +285,12 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          const Text(
+          Text(
             AppLocalizations.of(context)!.profile_669aed7f,
             style: TextStyle(fontSize: 13),
           ),
           const SizedBox(height: 8),
-          const Text(
+          Text(
             AppLocalizations.of(context)!.profile_01fd668e,
             style: TextStyle(
               fontSize: 14,
@@ -302,12 +302,12 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
             AppLocalizations.of(context)!.email,
             style: const TextStyle(fontSize: 13),
           ),
-          const Text(
+          Text(
             AppLocalizations.of(context)!.generatedKey_46e40811,
             style: TextStyle(fontSize: 13),
           ),
           const SizedBox(height: 4),
-          const Text(
+          Text(
             AppLocalizations.of(context)!.generatedKey_8033527d,
             style: TextStyle(fontSize: 12, color: Colors.grey),
           ),
@@ -318,7 +318,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
               color: Colors.yellow.shade50,
               borderRadius: BorderRadius.circular(6),
             ),
-            child: const Text(
+            child: Text(
               AppLocalizations.of(context)!.profile_3d8fc6c4,
               style: TextStyle(fontSize: 11, color: Colors.grey),
             ),

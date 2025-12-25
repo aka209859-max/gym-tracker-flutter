@@ -251,7 +251,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
               const SizedBox(height: 24),
 
               // 希望日選択
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.general_3cbc39ba,
                 style: TextStyle(
                   fontSize: 16,
@@ -353,7 +353,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
                             valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                           ),
                         )
-                      : const Text(
+                      : Text(
                           AppLocalizations.of(context)!.general_f4b23d12,
                           style: TextStyle(
                             fontSize: 16,

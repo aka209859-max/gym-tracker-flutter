@@ -119,7 +119,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.generatedKey_7cf32853
                     AppLocalizations.of(context)!.general_f5fcce57,
                     style: TextStyle(fontSize: 14),
@@ -333,7 +333,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.generatedKey_20458277
                     AppLocalizations.of(context)!.general_9d700689,
                     style: TextStyle(fontSize: 14),
@@ -351,7 +351,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.general_d1efcee6,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
@@ -424,7 +424,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                 padding: const EdgeInsets.all(24),
                 child: Column(
                   children: [
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.general_c9083826,
                       style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),

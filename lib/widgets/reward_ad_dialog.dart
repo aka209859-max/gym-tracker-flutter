@@ -107,7 +107,7 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
         
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text(AppLocalizations.of(context)!.error_6a111b24),
               backgroundColor: Colors.red,
             ),
@@ -129,7 +129,7 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
       if (mounted) {
         Navigator.of(context).pop(true); // trueを返して成功を通知
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Row(
               children: [
                 Icon(Icons.check_circle, color: Colors.white),
@@ -146,7 +146,7 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
       // 広告表示失敗
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(AppLocalizations.of(context)!.error_31ac752d),
             backgroundColor: Colors.red,
           ),
@@ -208,7 +208,7 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
                 ),
                 if (_remainingAds == 0) ...[
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.general_d3b805fc,
                     style: TextStyle(fontSize: 12, color: Colors.grey),
                   ),
@@ -217,7 +217,7 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
             ),
           ),
           const SizedBox(height: 16),
-          const Text(
+          Text(
             AppLocalizations.of(context)!.generatedKey_ee3d2398,
             style: TextStyle(fontSize: 12, color: Colors.grey),
           ),

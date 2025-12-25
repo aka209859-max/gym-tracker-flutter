@@ -81,7 +81,7 @@ class GymShareCard extends StatelessWidget {
                           color: Colors.amber,
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: const Row(
+                        child: Row(
                           children: [
                             Icon(Icons.star, color: Colors.white, size: 20),
                             SizedBox(width: 4),
@@ -190,7 +190,7 @@ class GymShareCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Row(
+                        Row(
                           children: [
                             Icon(Icons.local_offer, color: Colors.white, size: 24),
                             SizedBox(width: 8),
@@ -240,7 +240,7 @@ class GymShareCard extends StatelessWidget {
                         color: Colors.white.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: const Text(
+                      child: Text(
                         AppLocalizations.of(context)!.gym_fac3d027,
                         style: TextStyle(
                           color: Colors.white,

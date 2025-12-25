@@ -58,7 +58,7 @@ class StatisticsShareCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 16),
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -119,7 +119,7 @@ class StatisticsShareCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.workout_a826db5c,
                   style: TextStyle(
                     fontSize: 22,

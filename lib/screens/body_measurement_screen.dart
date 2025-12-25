@@ -314,7 +314,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             AppLocalizations.of(context)!.general_d279f4b3,
                             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                           ),
@@ -741,7 +741,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                 subtitle: Row(
                   children: [
                     if (weight != null) Text('体重: ${weight.toStringAsFixed(1)}kg'),
-                    if (weight != null && bodyFat != null) const Text('  •  '),
+                    if (weight != null && bodyFat != null) Text('  •  '),
                     if (bodyFat != null) Text('体脂肪率: ${bodyFat.toStringAsFixed(1)}%'),
                   ],
                 ),

@@ -315,7 +315,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
                           valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                         ),
                       )
-                    : const Text(
+                    : Text(
                         AppLocalizations.of(context)!.general_7c2f0a2b,
                         style: TextStyle(
                           fontSize: 16,

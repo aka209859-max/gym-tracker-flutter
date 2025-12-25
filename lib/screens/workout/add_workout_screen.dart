@@ -952,7 +952,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             ),
           ],
         ),
-        content: const Text(
+        content: Text(
           AppLocalizations.of(context)!.workout_4378d5d9,
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
         ),
@@ -1020,7 +1020,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                       onPressed: () => Navigator.pop(context),
                       child: Text(AppLocalizations.of(context)!.cancel, style: TextStyle(color: Colors.red)),
                     ),
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.workout_b23db97f,
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
@@ -1804,7 +1804,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           ] else ...[
             TextButton.icon(
               icon: const Icon(Icons.timer, color: Colors.white),
-              label: const Text(
+              label: Text(
                 AppLocalizations.of(context)!.workout_e6f170ef,
                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
@@ -1833,7 +1833,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           AppLocalizations.of(context)!.workout_8a92c566,
                           style: TextStyle(
                             fontSize: 12,
@@ -2050,7 +2050,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.workout_bc108eb8,
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
@@ -2086,7 +2086,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text(
+                    child: Text(
                       AppLocalizations.of(context)!.workout_18f75a52,
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
@@ -2175,7 +2175,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   children: [
                     Row(
                       children: [
-                        const Text('🤖', style: TextStyle(fontSize: 16)),
+                        Text('🤖', style: TextStyle(fontSize: 16)),
                         const SizedBox(width: 8),
                         Text(
                           AppLocalizations.of(context)!.workout_400911f5,
@@ -2239,7 +2239,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 ),
                 child: Row(
                   children: [
-                    const Text('💡', style: TextStyle(fontSize: 16)),
+                    Text('💡', style: TextStyle(fontSize: 16)),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
@@ -2264,7 +2264,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   children: [
                     Row(
                       children: [
-                        const Text('📊', style: TextStyle(fontSize: 16)),
+                        Text('📊', style: TextStyle(fontSize: 16)),
                         const SizedBox(width: 8),
                         Text(
                           AppLocalizations.of(context)!.workout_565c4718,
@@ -2601,7 +2601,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 },
               ),
               ChoiceChip(
-                label: const Text('Drop', style: TextStyle(fontSize: 12)),
+                label: Text('Drop', style: TextStyle(fontSize: 12)),
                 selected: set.setType == SetType.dropset,
                 onSelected: (selected) {
                   if (selected) {
@@ -2737,7 +2737,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             const SizedBox(height: 16),
             
             // タイトル
-            const Text(
+            Text(
               AppLocalizations.of(context)!.workout_0179c7df,
               style: TextStyle(
                 fontSize: 18,

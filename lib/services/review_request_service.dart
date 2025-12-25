@@ -61,7 +61,7 @@ class ReviewRequestService {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.star, color: Colors.orange, size: 32),
             SizedBox(width: 12),
@@ -71,7 +71,7 @@ class ReviewRequestService {
             ),
           ],
         ),
-        content: const Column(
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -94,7 +94,7 @@ class TermsOfServiceScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             AppLocalizations.of(context)!.profile_4f41f161,
             style: TextStyle(
               fontSize: 18,
@@ -113,7 +113,7 @@ class TermsOfServiceScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.profile_147e8136,
                   style: TextStyle(
                     fontSize: 16,
@@ -128,7 +128,7 @@ class TermsOfServiceScreen extends StatelessWidget {
                 const SizedBox(height: 4),
                 _buildPlanItem(AppLocalizations.of(context)!.proPlan, AppLocalizations.of(context)!.profile_bf865e58, Colors.purple),
                 const Divider(height: 24),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.profile_86ba31c5,
                   style: TextStyle(
                     fontSize: 14,
@@ -136,12 +136,12 @@ class TermsOfServiceScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.generatedKey_e73b7aa2,
                   style: TextStyle(fontSize: 13),
                 ),
                 const SizedBox(height: 12),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.profile_fbe7f25b,
                   style: TextStyle(
                     fontSize: 14,
@@ -149,12 +149,12 @@ class TermsOfServiceScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.profile_4347a89b,
                   style: TextStyle(fontSize: 13),
                 ),
                 const SizedBox(height: 12),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.profile_867becd2,
                   style: TextStyle(
                     fontSize: 14,
@@ -162,12 +162,12 @@ class TermsOfServiceScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.profile_198f91b5,
                   style: TextStyle(fontSize: 13),
                 ),
                 const SizedBox(height: 12),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.profile_d875e5b0,
                   style: TextStyle(
                     fontSize: 14,
@@ -175,7 +175,7 @@ class TermsOfServiceScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
+                Text(
                   AppLocalizations.of(context)!.profile_3305914b,
                   style: TextStyle(fontSize: 13),
                 ),
@@ -239,12 +239,12 @@ class TermsOfServiceScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          const Text(
+          Text(
             AppLocalizations.of(context)!.profile_dc441f37,
             style: TextStyle(fontSize: 13),
           ),
           const SizedBox(height: 8),
-          const Text(
+          Text(
             AppLocalizations.of(context)!.profile_01fd668e,
             style: TextStyle(
               fontSize: 14,
@@ -256,7 +256,7 @@ class TermsOfServiceScreen extends StatelessWidget {
             AppLocalizations.of(context)!.email,
             style: const TextStyle(fontSize: 13),
           ),
-          const Text(
+          Text(
             AppLocalizations.of(context)!.generatedKey_8033527d,
             style: TextStyle(fontSize: 12, color: Colors.grey),
           ),

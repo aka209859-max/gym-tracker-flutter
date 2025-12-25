@@ -72,7 +72,7 @@ class PaywallDialog extends StatelessWidget {
             const SizedBox(height: 20),
             
             // タイトル
-            const Text(
+            Text(
               AppLocalizations.of(context)!.general_7a4837ed,
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -209,7 +209,7 @@ class PaywallDialog extends StatelessWidget {
             const SizedBox(height: 20),
             
             // タイトル
-            const Text(
+            Text(
               AppLocalizations.of(context)!.general_0b2c2440,
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -221,7 +221,7 @@ class PaywallDialog extends StatelessWidget {
             const SizedBox(height: 12),
             
             // 説明
-            const Text(
+            Text(
               AppLocalizations.of(context)!.generatedKey_124470ff,
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -244,7 +244,7 @@ class PaywallDialog extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  const Text(
+                  Text(
                     'Premium Plan',
                     style: TextStyle(
                       color: Colors.white,
@@ -253,7 +253,7 @@ class PaywallDialog extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.subscription_c71bb2e2,
                     style: TextStyle(
                       color: Colors.white,
@@ -275,7 +275,7 @@ class PaywallDialog extends StatelessWidget {
                       color: Colors.amber,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Text(
+                    child: Text(
                       AppLocalizations.of(context)!.general_05848a73,
                       style: TextStyle(
                         color: Colors.black,
@@ -309,7 +309,7 @@ class PaywallDialog extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   AppLocalizations.of(context)!.general_9811cf34,
                   style: TextStyle(
                     fontSize: 18,
@@ -323,7 +323,7 @@ class PaywallDialog extends StatelessWidget {
             // 閉じるボタン
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text(
+              child: Text(
                 AppLocalizations.of(context)!.later,
                 style: TextStyle(
                   color: Colors.white,
@@ -374,7 +374,7 @@ class PaywallDialog extends StatelessWidget {
             const SizedBox(height: 20),
             
             // タイトル
-            const Text(
+            Text(
               AppLocalizations.of(context)!.generatedKey_7210fc11,
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -386,7 +386,7 @@ class PaywallDialog extends StatelessWidget {
             const SizedBox(height: 12),
             
             // 説明
-            const Text(
+            Text(
               AppLocalizations.of(context)!.generatedKey_067c77b6,
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -418,7 +418,7 @@ class PaywallDialog extends StatelessWidget {
                         size: 28,
                       ),
                       const SizedBox(width: 8),
-                      const Text(
+                      Text(
                         'Pro Plan',
                         style: TextStyle(
                           color: Colors.white,
@@ -429,7 +429,7 @@ class PaywallDialog extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.subscription_275ce1f5,
                     style: TextStyle(
                       color: Colors.white,
@@ -452,7 +452,7 @@ class PaywallDialog extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Text(
+                    child: Text(
                       AppLocalizations.of(context)!.general_d89e38c4,
                       style: TextStyle(
                         color: Colors.amber,
@@ -486,7 +486,7 @@ class PaywallDialog extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   AppLocalizations.of(context)!.general_c312150e,
                   style: TextStyle(
                     fontSize: 18,
@@ -500,7 +500,7 @@ class PaywallDialog extends StatelessWidget {
             // 閉じるボタン
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text(
+              child: Text(
                 AppLocalizations.of(context)!.later,
                 style: TextStyle(
                   color: Colors.white,
@@ -553,7 +553,7 @@ class PaywallDialog extends StatelessWidget {
         // 広告がまだ準備できていない場合はロード試行
         if (!rewardAdService.isAdReady()) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text(AppLocalizations.of(context)!.general_540c1855),
               duration: Duration(seconds: 2),
             ),
@@ -587,7 +587,7 @@ class PaywallDialog extends StatelessWidget {
           // 失敗時の処理
           if (!context.mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text(AppLocalizations.of(context)!.error_97a53f5f),
               duration: Duration(seconds: 2),
             ),

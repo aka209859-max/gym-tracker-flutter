@@ -103,7 +103,7 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
                   children: [
                     const Icon(Icons.info_outline, size: 64, color: Colors.blue),
                     const SizedBox(height: 16),
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.workout_73791c8e,
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),

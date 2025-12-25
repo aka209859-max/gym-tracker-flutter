@@ -135,7 +135,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
             _buildCrowdLevelSelector(),
             const SizedBox(height: 24),
             // コメント入力
-            const Text(
+            Text(
               AppLocalizations.of(context)!.general_58fd6db3,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
@@ -155,7 +155,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
               height: 48,
               child: ElevatedButton(
                 onPressed: _submitReport,
-                child: const Text(
+                child: Text(
                   AppLocalizations.of(context)!.general_c989a28a,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),

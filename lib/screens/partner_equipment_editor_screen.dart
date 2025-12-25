@@ -231,7 +231,7 @@ class _PartnerEquipmentEditorScreenState
                   const SizedBox(height: 24),
 
                   // マシンリスト
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.gym_2689426f,
                     style: TextStyle(
                       fontSize: 18,
