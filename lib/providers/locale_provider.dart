@@ -11,24 +11,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// - de: ドイツ語
 /// - es: スペイン語
 class LocaleProvider extends ChangeNotifier {
-  Locale _locale = Locale('ja'); // デフォルト: 日本語
+  Locale _locale = const Locale('ja'); // デフォルト: 日本語
   
   static const String _localeKey = 'app_locale';
   
   /// サポートされている言語リスト
   static const List<LocaleInfo> supportedLocales = [
-    LocaleInfo(locale: Locale('ja'), name: AppLocalizations.of(context)!.languageJapanese, nativeName: AppLocalizations.of(context)!.languageJapanese, flag: '🇯🇵'),
-    LocaleInfo(locale: Locale('en'), name: AppLocalizations.of(context)!.languageEnglish, nativeName: AppLocalizations.of(context)!.languageEnglish, flag: '🇺🇸'),
-    LocaleInfo(locale: Locale('ko'), name: 'Korean', nativeName: AppLocalizations.of(context)!.languageKorean, flag: '🇰🇷'),
-    LocaleInfo(locale: Locale('zh'), name: 'Chinese', nativeName: AppLocalizations.of(context)!.languageChinese, flag: '🇨🇳'),
-    LocaleInfo(locale: Locale('de'), name: 'German', nativeName: AppLocalizations.of(context)!.languageGerman, flag: '🇩🇪'),
-    LocaleInfo(locale: Locale('es'), name: 'Spanish', nativeName: AppLocalizations.of(context)!.languageSpanish, flag: '🇪🇸'),
+    LocaleInfo(locale: Locale('ja'), name: '日本語', nativeName: '日本語', flag: '🇯🇵'),
+    LocaleInfo(locale: Locale('en'), name: 'English', nativeName: 'English', flag: '🇺🇸'),
+    LocaleInfo(locale: Locale('ko'), name: 'Korean', nativeName: '한국어', flag: '🇰🇷'),
+    LocaleInfo(locale: Locale('zh'), name: 'Chinese', nativeName: '中文（简体）', flag: '🇨🇳'),
+    LocaleInfo(locale: Locale('de'), name: 'German', nativeName: 'Deutsch', flag: '🇩🇪'),
+    LocaleInfo(locale: Locale('es'), name: 'Spanish', nativeName: 'Español', flag: '🇪🇸'),
   ];
   
   Locale get locale => _locale;
-  
-  bool _isInitialized = false;
-  bool get isInitialized => _isInitialized;
   
   LocaleProvider() {
     _loadLocale();
@@ -45,16 +42,12 @@ class LocaleProvider extends ChangeNotifier {
         final isSupported = supportedLocales.any((info) => info.locale.languageCode == languageCode);
         if (isSupported) {
           _locale = Locale(languageCode);
+          notifyListeners();
           print('✅ 保存された言語設定を読み込み: $languageCode');
-        } else {
-          print('⚠️ サポートされていない言語コード: $languageCode (デフォルト: ja)');
         }
       }
     } catch (e) {
-      print('⚠️ 言語設定の読み込みに失敗: $e (デフォルト: ja)');
-    } finally {
-      _isInitialized = true;
-      notifyListeners();
+      print('⚠️ 言語設定の読み込みに失敗: $e');
     }
   }
   
