@@ -6,7 +6,7 @@ import '../../screens/workout/trainer_workout_detail_modal.dart';
 
 /// トレーナー記録一覧画面
 class TrainerRecordsScreen extends StatefulWidget {
-  TrainerRecordsScreen({super.key});
+  const TrainerRecordsScreen({super.key});
 
   @override
   State<TrainerRecordsScreen> createState() => _TrainerRecordsScreenState();
@@ -80,9 +80,9 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Color(0xFF3F51B5),
+        backgroundColor: const Color(0xFF3F51B5),
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: SafeArea(
         child: Column(
@@ -105,7 +105,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                       color: Colors.orange,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.fitness_center,
                       color: Colors.white,
                       size: 30,
@@ -120,9 +120,9 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                       color: Colors.black87,
                     ),
                   ),
-                  SizedBox(height: 4),
-                  Text(
-                    AppLocalizations.of(context)!.generatedKey_b55f1ed0,
+                  const SizedBox(height: 4),
+                  const Text(
+                    'プロトレーナーによる\nマンツーマン指導',
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.black54,
@@ -148,7 +148,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                       color: Colors.black87,
                     ),
                   ),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
 
                   // トレーナー記録メニュー
                   Container(
@@ -159,7 +159,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                         BoxShadow(
                           color: Colors.black.withValues(alpha: 0.05),
                           blurRadius: 8,
-                          offset: Offset(0, 2),
+                          offset: const Offset(0, 2),
                         ),
                       ],
                     ),
@@ -179,14 +179,14 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                                   color: Colors.orange[50],
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                child: Icon(
+                                child: const Icon(
                                   Icons.note_alt_outlined,
                                   color: Colors.orange,
                                   size: 24,
                                 ),
                               ),
-                              SizedBox(width: 16),
-                              Expanded(
+                              const SizedBox(width: 16),
+                              const Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -209,7 +209,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                                   ],
                                 ),
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.arrow_forward_ios,
                                 size: 18,
                                 color: Colors.black38,
@@ -224,27 +224,27 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
               ),
             ),
 
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
 
             // トレーナー記録リスト
             Expanded(
               child: _isLoading
-                  ? Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator())
                   : _errorMessage != null
                       ? Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(Icons.error_outline, size: 48, color: Colors.red[300]),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               Text(
                                 _errorMessage!,
-                                style: TextStyle(color: Colors.black54),
+                                style: const TextStyle(color: Colors.black54),
                               ),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               ElevatedButton.icon(
                                 onPressed: _fetchTrainerRecords,
-                                icon: Icon(Icons.refresh),
+                                icon: const Icon(Icons.refresh),
                                 label: Text(AppLocalizations.of(context)!.general_53b262c8),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.orange,
@@ -260,17 +260,17 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(Icons.inbox_outlined, size: 64, color: Colors.grey[300]),
-                                  SizedBox(height: 16),
-                                  Text(
+                                  const SizedBox(height: 16),
+                                  const Text(
                                     AppLocalizations.of(context)!.general_f1fa038f,
                                     style: TextStyle(
                                       fontSize: 16,
                                       color: Colors.black54,
                                     ),
                                   ),
-                                  SizedBox(height: 8),
-                                  Text(
-                                    AppLocalizations.of(context)!.generatedKey_5df71c9c,
+                                  const SizedBox(height: 8),
+                                  const Text(
+                                    'トレーナーが記録を共有すると\nここに表示されます',
                                     style: TextStyle(
                                       fontSize: 13,
                                       color: Colors.black38,

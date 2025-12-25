@@ -3,12 +3,11 @@ import 'package:provider/provider.dart';
 import '../gen/app_localizations.dart';
 import '../providers/locale_provider.dart';
 
-import 'package:gym_match/gen/app_localizations.dart';
 /// 言語設定画面
 /// 
 /// サポート言語（6言語）から選択して、アプリの表示言語を変更できます
 class LanguageSettingsScreen extends StatelessWidget {
-  LanguageSettingsScreen({super.key});
+  const LanguageSettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class LanguageSettingsScreen extends StatelessWidget {
           return ListTile(
             leading: Text(
               localeInfo.flag,
-              style: TextStyle(fontSize: 32),
+              style: const TextStyle(fontSize: 32),
             ),
             title: Text(
               localeInfo.nativeName,
@@ -53,7 +52,7 @@ class LanguageSettingsScreen extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
             trailing: isSelected
-                ? Icon(
+                ? const Icon(
                     Icons.check_circle,
                     color: Colors.blue,
                   )
@@ -70,9 +69,9 @@ class LanguageSettingsScreen extends StatelessWidget {
                   builder: (dialogContext) => AlertDialog(
                     title: Row(
                       children: [
-                        Text(localeInfo.flag, style: TextStyle(fontSize: 32)),
-                        SizedBox(width: 12),
-                        Expanded(
+                        Text(localeInfo.flag, style: const TextStyle(fontSize: 32)),
+                        const SizedBox(width: 12),
+                        const Expanded(
                           child: Text(
                             AppLocalizations.of(context)!.profile_5501a97a,
                             style: TextStyle(fontSize: 18),
@@ -85,11 +84,11 @@ class LanguageSettingsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          AppLocalizations.of(context)!.generatedKey_3aa92e14,
-                          style: TextStyle(fontSize: 16),
+                          '${localeInfo.nativeName}に変更されました。',
+                          style: const TextStyle(fontSize: 16),
                         ),
-                        SizedBox(height: 12),
-                        Text(
+                        const SizedBox(height: 12),
+                        const Text(
                           AppLocalizations.of(context)!.profile_510d373d,
                           style: TextStyle(
                             fontSize: 14,
@@ -108,7 +107,7 @@ class LanguageSettingsScreen extends StatelessWidget {
                         },
                         child: Text(
                           AppLocalizations.of(context)!.ok,
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         ),
                       ),
                     ],
@@ -130,17 +129,17 @@ class LanguageSettingsScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.language, size: 48, color: Colors.blue),
-            SizedBox(height: 8),
+            const Icon(Icons.language, size: 48, color: Colors.blue),
+            const SizedBox(height: 8),
             Text(
-              AppLocalizations.of(context)!.generatedKey_81de7e28,
+              'GYM MATCH - 6言語対応',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.grey[800],
               ),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Text(
               AppLocalizations.of(context)!.profile_21abb17c,
               style: TextStyle(

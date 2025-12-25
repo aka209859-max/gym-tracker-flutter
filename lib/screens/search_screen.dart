@@ -14,7 +14,7 @@ import 'gym_detail_screen.dart';
 
 /// 検索画面（GPS + テキスト検索）
 class SearchScreen extends StatefulWidget {
-  SearchScreen({super.key});
+  const SearchScreen({super.key});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -90,7 +90,7 @@ class _SearchScreenState extends State<SearchScreen> {
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 4,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -158,7 +158,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             child: _isSearching
-                ? SizedBox(
+                ? const SizedBox(
                     width: 20,
                     height: 20,
                     child: CircularProgressIndicator(strokeWidth: 2),
@@ -185,7 +185,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: ElevatedButton.icon(
                   onPressed: _isLoadingLocation ? null : _getCurrentLocation,
                   icon: _isLoadingLocation
-                      ? SizedBox(
+                      ? const SizedBox(
                           width: 16,
                           height: 16,
                           child: CircularProgressIndicator(strokeWidth: 2),
@@ -202,13 +202,13 @@ class _SearchScreenState extends State<SearchScreen> {
               if (_currentPosition != null) ...[
                 SizedBox(width: 12),
                 IconButton(
-                  icon: Icon(Icons.clear),
+                  icon: const Icon(Icons.clear),
                   onPressed: () {
                     setState(() {
                       _currentPosition = null;
                       // GPS位置をクリアするだけで、再検索はしない
                       if (kDebugMode) {
-                        print(AppLocalizations.of(context)!.general_a337a1ca);
+                        print('🗑️ GPS位置をクリア');
                       }
                     });
                   },
@@ -242,7 +242,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
                 Text(
                   '${_searchRadius.toStringAsFixed(0)}km',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -281,7 +281,7 @@ class _SearchScreenState extends State<SearchScreen> {
               size: 64,
               color: Colors.red.shade400,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               _errorMessage!,
               style: TextStyle(
@@ -371,7 +371,7 @@ class _SearchScreenState extends State<SearchScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  AppLocalizations.of(context)!.generatedKey_5c140a75,
+                  '全${sortedGyms.length}件中 ${startIndex + 1}-${endIndex > sortedGyms.length ? sortedGyms.length : endIndex}件を表示',
                   style: const TextStyle(fontSize: 12, color: Colors.black87),
                 ),
                 Text(
@@ -413,7 +413,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.1),
                   blurRadius: 4,
-                  offset: Offset(0, -2),
+                  offset: const Offset(0, -2),
                 ),
               ],
             ),
@@ -441,7 +441,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 // ページ番号表示
                 Text(
                   '$_currentPage / $_totalPages',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -502,12 +502,12 @@ class _SearchScreenState extends State<SearchScreen> {
                       width: 80,
                       height: 80,
                       color: Colors.grey[300],
-                      child: Icon(Icons.fitness_center, size: 32),
+                      child: const Icon(Icons.fitness_center, size: 32),
                     );
                   },
                 ),
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               // ジム情報
               Expanded(
                 child: Column(
@@ -588,12 +588,12 @@ class _SearchScreenState extends State<SearchScreen> {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     // 混雑度
                     _buildCrowdIndicator(gym),
                     // パートナー特典表示
                     if (gym.isPartner && gym.partnerBenefit != null) ...[
-                      SizedBox(height: 6),
+                      const SizedBox(height: 6),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                         decoration: BoxDecoration(
@@ -605,7 +605,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(Icons.local_offer, size: 12, color: Colors.green[700]),
-                            SizedBox(width: 4),
+                            const SizedBox(width: 4),
                             Flexible(
                               child: Text(
                                 gym.partnerBenefit!,
@@ -729,7 +729,7 @@ class _SearchScreenState extends State<SearchScreen> {
             size: 14,
             color: Color(gym.crowdLevelColor),
           ),
-          SizedBox(width: 4),
+          const SizedBox(width: 4),
           Text(
             gym.crowdLevelText,
             style: TextStyle(
@@ -795,7 +795,7 @@ class _SearchScreenState extends State<SearchScreen> {
         _applyFilters();
       } else {
         if (kDebugMode) {
-          print(AppLocalizations.of(context)!.general_5a7c338c);
+          print('ℹ️ テキスト検索が優先されるため、GPS検索はスキップ');
         }
       }
     } finally {
@@ -851,7 +851,7 @@ class _SearchScreenState extends State<SearchScreen> {
       if (_searchQuery.isNotEmpty) {
         // テキスト検索（全国対応 - エリア名 or ジム名）
         if (kDebugMode) {
-          print('📝 Text search: "$_searchQuery"');
+          print('📝 テキスト検索: "$_searchQuery"');
         }
         // 🏆 パートナー情報統合版API使用
         googleGyms = await _placesService.searchGymsByTextWithPartners(_searchQuery);
@@ -935,7 +935,7 @@ class _SearchScreenState extends State<SearchScreen> {
           print('   GPS座標: ${_currentPosition!.latitude}, ${_currentPosition!.longitude}');
         }
         if (_searchQuery.isNotEmpty) {
-          print('   Search query: "$_searchQuery"');
+          print('   検索クエリ: "$_searchQuery"');
         }
       }
       

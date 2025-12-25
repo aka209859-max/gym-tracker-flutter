@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 /// 利用規約画面
 class TermsOfServiceScreen extends StatelessWidget {
-  TermsOfServiceScreen({super.key});
+  const TermsOfServiceScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,40 +20,40 @@ class TermsOfServiceScreen extends StatelessWidget {
           children: [
             _buildSection(
               AppLocalizations.of(context)!.profile_6a8629ce,
-              AppLocalizations.of(context)!.generatedKey_68142d17,
+              'この利用規約（以下「本規約」）は、井上元（以下「開発者」）が提供するGYM MATCHアプリ（以下「本アプリ」）の利用条件を定めるものです。ユーザーは、本アプリを利用することにより、本規約に同意したものとみなされます。',
             ),
             _buildSection(
               AppLocalizations.of(context)!.profile_7a557256,
-              AppLocalizations.of(context)!.generatedKey_49167046
-              AppLocalizations.of(context)!.generatedKey_5db26dd7
-              AppLocalizations.of(context)!.generatedKey_54eb522c
-              AppLocalizations.of(context)!.generatedKey_3482f20a
-              AppLocalizations.of(context)!.generatedKey_6e6ed0f3
-              AppLocalizations.of(context)!.generatedKey_cfee6527,
+              '本アプリは、以下の機能を提供します：\n\n'
+              '• トレーニング記録の管理\n'
+              '• ジム検索・位置情報表示\n'
+              '• AIによるトレーニングメニュー提案\n'
+              '• トレーニングデータの分析・可視化\n'
+              '• 有料サブスクリプションプラン（Premium、Pro）',
             ),
             _buildSection(
               AppLocalizations.of(context)!.profile_94636bb4,
-              AppLocalizations.of(context)!.generatedKey_78cd69ae
-              AppLocalizations.of(context)!.generatedKey_0b46001b
-              AppLocalizations.of(context)!.generatedKey_bfe041dc
-              AppLocalizations.of(context)!.generatedKey_bd7bdb16
-              AppLocalizations.of(context)!.generatedKey_cfb0b943
-              AppLocalizations.of(context)!.profile_74198dd6,
+              'ユーザーは、本アプリの利用にあたり、以下の行為をしてはなりません：\n\n'
+              '• 法令または公序良俗に違反する行為\n'
+              '• 本アプリのサーバーまたはネットワークの機能を破壊したり、妨害したりする行為\n'
+              '• 他のユーザーに関する個人情報等を収集または蓄積する行為\n'
+              '• 不正アクセスをし、またはこれを試みる行為\n'
+              '• 本アプリの不具合を意図的に利用する行為',
             ),
             _buildSubscriptionSection(),
             _buildSection(
               AppLocalizations.of(context)!.profile_2324b2ad,
-              AppLocalizations.of(context)!.generatedKey_37dfeeec
-              AppLocalizations.of(context)!.profile_fa0a808b,
+              '• 開発者は、本アプリに起因してユーザーに生じたあらゆる損害について、一切の責任を負いません。\n'
+              '• 本アプリのトレーニング提案は参考情報であり、医学的アドバイスではありません。運動を始める前に医師に相談してください。',
             ),
             _buildSection(
               AppLocalizations.of(context)!.profile_177dff1d,
-              AppLocalizations.of(context)!.generatedKey_c4938e35
-              AppLocalizations.of(context)!.profile_bf244acc,
+              '• 本規約の解釈にあたっては、日本法を準拠法とします。\n'
+              '• 本アプリに関して紛争が生じた場合には、開発者の所在地を管轄する裁判所を専属的合意管轄とします。',
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildContactSection(context),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _buildDateSection(),
           ],
         ),
@@ -69,16 +69,16 @@ class TermsOfServiceScreen extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.blue,
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             content,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               height: 1.6,
             ),
@@ -94,7 +94,7 @@ class TermsOfServiceScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             AppLocalizations.of(context)!.profile_4f41f161,
             style: TextStyle(
               fontSize: 18,
@@ -102,7 +102,7 @@ class TermsOfServiceScreen extends StatelessWidget {
               color: Colors.blue,
             ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -113,7 +113,7 @@ class TermsOfServiceScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   AppLocalizations.of(context)!.profile_147e8136,
                   style: TextStyle(
                     fontSize: 16,
@@ -121,62 +121,62 @@ class TermsOfServiceScreen extends StatelessWidget {
                     color: Colors.blue,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 _buildPlanItem(AppLocalizations.of(context)!.profile_fd09fa4b, AppLocalizations.of(context)!.profile_68b026c0, Colors.grey),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 _buildPlanItem(AppLocalizations.of(context)!.premiumPlan, AppLocalizations.of(context)!.profile_c29470ee, Colors.green),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 _buildPlanItem(AppLocalizations.of(context)!.proPlan, AppLocalizations.of(context)!.profile_bf865e58, Colors.purple),
-                Divider(height: 24),
-                Text(
+                const Divider(height: 24),
+                const Text(
                   AppLocalizations.of(context)!.profile_86ba31c5,
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 4),
-                Text(
-                  AppLocalizations.of(context)!.generatedKey_e73b7aa2,
+                const SizedBox(height: 4),
+                const Text(
+                  'App内課金（Apple App Store）を通じて支払いが行われます。',
                   style: TextStyle(fontSize: 13),
                 ),
-                SizedBox(height: 12),
-                Text(
+                const SizedBox(height: 12),
+                const Text(
                   AppLocalizations.of(context)!.profile_fbe7f25b,
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 4),
-                Text(
+                const SizedBox(height: 4),
+                const Text(
                   AppLocalizations.of(context)!.profile_4347a89b,
                   style: TextStyle(fontSize: 13),
                 ),
-                SizedBox(height: 12),
-                Text(
+                const SizedBox(height: 12),
+                const Text(
                   AppLocalizations.of(context)!.profile_867becd2,
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 4),
-                Text(
-                  AppLocalizations.of(context)!.profile_198f91b5,
+                const SizedBox(height: 4),
+                const Text(
+                  'iOS: 設定 → Apple ID → サブスクリプション → GYM MATCH → サブスクリプションをキャンセル',
                   style: TextStyle(fontSize: 13),
                 ),
-                SizedBox(height: 12),
-                Text(
+                const SizedBox(height: 12),
+                const Text(
                   AppLocalizations.of(context)!.profile_d875e5b0,
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 4),
-                Text(
-                  AppLocalizations.of(context)!.profile_3305914b,
+                const SizedBox(height: 4),
+                const Text(
+                  'Appleの返金ポリシーに準拠します。返金については、App Storeサポートにお問い合わせください。',
                   style: TextStyle(fontSize: 13),
                 ),
               ],
@@ -192,11 +192,11 @@ class TermsOfServiceScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(Icons.check_circle, size: 16, color: color),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         Expanded(
           child: RichText(
             text: TextSpan(
-              style: TextStyle(fontSize: 13, color: Colors.black87),
+              style: const TextStyle(fontSize: 13, color: Colors.black87),
               children: [
                 TextSpan(
                   text: '$plan: ',
@@ -230,7 +230,7 @@ class TermsOfServiceScreen extends StatelessWidget {
               SizedBox(width: 8),
               Text(
                 AppLocalizations.of(context)!.contactUs,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.blue,
@@ -238,14 +238,14 @@ class TermsOfServiceScreen extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 12),
-          Text(
+          const SizedBox(height: 12),
+          const Text(
             AppLocalizations.of(context)!.profile_dc441f37,
             style: TextStyle(fontSize: 13),
           ),
-          SizedBox(height: 8),
-          Text(
-            AppLocalizations.of(context)!.profile_01fd668e,
+          const SizedBox(height: 8),
+          const Text(
+            '開発者: 井上元',
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
@@ -254,10 +254,10 @@ class TermsOfServiceScreen extends StatelessWidget {
           SizedBox(height: 4),
           Text(
             AppLocalizations.of(context)!.email,
-            style: TextStyle(fontSize: 13),
+            style: const TextStyle(fontSize: 13),
           ),
-          Text(
-            AppLocalizations.of(context)!.generatedKey_8033527d,
+          const Text(
+            '（対応時間: 平日 10:00-18:00）',
             style: TextStyle(fontSize: 12, color: Colors.grey),
           ),
         ],
@@ -276,15 +276,15 @@ class TermsOfServiceScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            AppLocalizations.of(context)!.profile_df278013,
+            '制定日: 2025年11月20日',
             style: TextStyle(fontSize: 12, color: Colors.grey),
           ),
           Text(
-            AppLocalizations.of(context)!.profile_4281fda9,
+            '最終更新日: 2025年11月20日',
             style: TextStyle(fontSize: 12, color: Colors.grey),
           ),
           Text(
-            AppLocalizations.of(context)!.profile_cf265521,
+            '施行日: 2025年11月20日',
             style: TextStyle(fontSize: 12, color: Colors.grey),
           ),
         ],

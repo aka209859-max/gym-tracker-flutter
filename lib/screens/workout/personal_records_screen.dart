@@ -9,7 +9,7 @@ import '../../services/exercise_master_data.dart'; // 🔧 v1.0.245: Problem 3 f
 
 /// パーソナルレコード画面
 class PersonalRecordsScreen extends StatefulWidget {
-  PersonalRecordsScreen({super.key});
+  const PersonalRecordsScreen({super.key});
 
   @override
   State<PersonalRecordsScreen> createState() => _PersonalRecordsScreenState();
@@ -120,7 +120,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
             appBar: AppBar(title: Text(AppLocalizations.of(context)!.personalRecord)),
-            body: Center(
+            body: const Center(
               child: CircularProgressIndicator(),
             ),
           );
@@ -184,7 +184,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
                 AppLocalizations.of(context)!.noWorkoutRecords,
                 style: TextStyle(fontSize: 16, color: Colors.grey[600]),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 AppLocalizations.of(context)!.workout_27312ddb,
                 textAlign: TextAlign.center,
@@ -240,10 +240,10 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
         ),
         title: Text(
           bodyPart,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
         subtitle: Text('${bodyPartExercises.length}種目'),
-        trailing: Icon(Icons.chevron_right),
+        trailing: const Icon(Icons.chevron_right),
         onTap: () {
           // 🔧 v1.0.253: 記録がない場合も遷移可能（空の一覧画面）
           Navigator.push(
@@ -281,10 +281,10 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
         ),
         title: Text(
           exerciseName,
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         subtitle: Text(AppLocalizations.of(context)!.confirm),
-        trailing: Icon(Icons.chevron_right),
+        trailing: const Icon(Icons.chevron_right),
         onTap: () {
           // 詳細画面（グラフ）へ遷移
           Navigator.push(
@@ -307,7 +307,7 @@ class PRDetailScreen extends StatefulWidget {
   final String userId;
   final String exerciseName;
 
-  PRDetailScreen({
+  const PRDetailScreen({
     super.key,
     required this.userId,
     required this.exerciseName,
@@ -368,7 +368,7 @@ class _PeriodView extends StatelessWidget {
   final String exercise;
   final String period;
 
-  _PeriodView({
+  const _PeriodView({
     required this.userId,
     required this.exercise,
     required this.period,
@@ -380,7 +380,7 @@ class _PeriodView extends StatelessWidget {
       future: _fetchPRData(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
 
         if (snapshot.hasError) {
@@ -395,7 +395,7 @@ class _PeriodView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.fitness_center, size: 64, color: Colors.grey[400]),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
                   AppLocalizations.of(context)!.workout_3ca27cb2,
                   style: TextStyle(fontSize: 16, color: Colors.grey[600]),
@@ -448,10 +448,10 @@ class _PeriodView extends StatelessWidget {
                           },
                         ),
                       ),
-                      topTitles: AxisTitles(
+                      topTitles: const AxisTitles(
                         sideTitles: SideTitles(showTitles: false),
                       ),
-                      rightTitles: AxisTitles(
+                      rightTitles: const AxisTitles(
                         sideTitles: SideTitles(showTitles: false),
                       ),
                     ),
@@ -467,7 +467,7 @@ class _PeriodView extends StatelessWidget {
                         isCurved: true,
                         color: Colors.blue,
                         barWidth: 3,
-                        dotData: FlDotData(show: true),
+                        dotData: const FlDotData(show: true),
                         belowBarData: BarAreaData(
                           show: true,
                           color: Colors.blue.withValues(alpha: 0.1),
@@ -622,9 +622,9 @@ class _PeriodView extends StatelessWidget {
           children: [
             Text(
               '${period}の成長',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -632,35 +632,35 @@ class _PeriodView extends StatelessWidget {
                   children: [
                     Text(
                       '開始時 ($label)',
-                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                      style: const TextStyle(fontSize: 12, color: Colors.grey),
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
                       '${start.calculated1RM.toStringAsFixed(1)}$unit',
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
-                Icon(Icons.arrow_forward, size: 32, color: Colors.grey),
+                const Icon(Icons.arrow_forward, size: 32, color: Colors.grey),
                 Column(
                   children: [
                     Text(
                       '現在 ($label)',
-                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                      style: const TextStyle(fontSize: 12, color: Colors.grey),
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
                       '${current.calculated1RM.toStringAsFixed(1)}$unit',
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ],
             ),
-            SizedBox(height: 12),
-            Divider(),
+            const SizedBox(height: 12),
+            const Divider(),
             SizedBox(height: 12),
             Center(
               child: Column(
@@ -668,10 +668,10 @@ class _PeriodView extends StatelessWidget {
                   Text(AppLocalizations.of(context)!.executeGrowthPrediction,
                     style: TextStyle(fontSize: 12, color: Colors.grey),
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
                     '+${growthValue.toStringAsFixed(1)}$unit (+${growthPercent.toStringAsFixed(1)}%)',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Colors.green,
@@ -692,7 +692,7 @@ class _PeriodView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(16),
             child: Text(
               AppLocalizations.of(context)!.workout_16013f46,
@@ -727,12 +727,12 @@ class _PeriodView extends StatelessWidget {
                 ),
                 title: Text(
                   title,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Text(subtitle),
                 trailing: Text(
                   DateFormat('MM/dd').format(record.achievedAt),
-                  style: TextStyle(color: Colors.grey),
+                  style: const TextStyle(color: Colors.grey),
                 ),
               );
             },
@@ -749,7 +749,7 @@ class ExerciseListScreen extends StatelessWidget {
   final String bodyPart;
   final List<String> exercises;
 
-  ExerciseListScreen({
+  const ExerciseListScreen({
     super.key,
     required this.userId,
     required this.bodyPart,
@@ -768,12 +768,12 @@ class ExerciseListScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.fitness_center, size: 64, color: Colors.grey[400]),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Text(
                     'まだ$bodyPartの記録がありません',
                     style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     AppLocalizations.of(context)!.workout_27312ddb,
                     textAlign: TextAlign.center,
@@ -805,7 +805,7 @@ class ExerciseListScreen extends StatelessWidget {
                     ),
                     title: Text(
                       exerciseName,
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text(AppLocalizations.of(context)!.confirm),
                     trailing: const Icon(Icons.chevron_right),

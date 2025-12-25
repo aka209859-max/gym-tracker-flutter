@@ -274,16 +274,16 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   color: Colors.orange.shade100,
                   shape: BoxShape.circle,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.celebration,
                   size: 48,
                   color: Colors.orange,
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               
               // タイトル
-              Text(
+              const Text(
                 AppLocalizations.of(context)!.general_941f07f5,
                 style: TextStyle(
                   fontSize: 24,
@@ -291,10 +291,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   color: Colors.orange,
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               
               // メッセージ
-              Text(
+              const Text(
                 'おめでとうございます！\n7日間連続でトレーニングを記録しました。\nこの調子で続けましょう！💪',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -303,7 +303,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   height: 1.5,
                 ),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               
               // 閉じるボタン
               SizedBox(
@@ -318,7 +318,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     AppLocalizations.of(context)!.general_6ff30ca2,
                     style: TextStyle(
                       fontSize: 16,
@@ -422,27 +422,27 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   color: Colors.amber.shade100,
                   shape: BoxShape.circle,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.emoji_events,
                   size: 48,
                   color: Colors.amber,
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               
               // タイトル
               Text(
                 milestone.message,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Colors.purple,
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               
               // メッセージ
-              Text(
+              const Text(
                 'すごい！マイルストーン達成です！\nこの調子で続けていきましょう！💪',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -451,7 +451,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   height: 1.5,
                 ),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               
               // 閉じるボタン
               SizedBox(
@@ -466,7 +466,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     AppLocalizations.of(context)!.general_6ff30ca2,
                     style: TextStyle(
                       fontSize: 16,
@@ -949,16 +949,16 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       final querySnapshot = await FirebaseFirestore.instance
           .collection('workout_logs')
           .where('user_id', isEqualTo: user.uid)
-          .get(GetOptions(source: Source.server));
+          .get(const GetOptions(source: Source.server));
 
       DebugLogger.instance.log('📊 全記録件数: ${querySnapshot.docs.length}');
       
       if (querySnapshot.docs.isEmpty) {
         DebugLogger.instance.log('⚠️ このユーザーの記録が見つかりません');
-        DebugLogger.instance.log(AppLocalizations.of(context)!.general_70b17b5b);
-        DebugLogger.instance.log(AppLocalizations.of(context)!.general_ce175fc5);
-        DebugLogger.instance.log(AppLocalizations.of(context)!.general_325dfd2b);
-        DebugLogger.instance.log(AppLocalizations.of(context)!.general_40dd331a);
+        DebugLogger.instance.log('   考えられる原因:');
+        DebugLogger.instance.log('   1. まだトレーニングを記録していない');
+        DebugLogger.instance.log('   2. Firestoreセキュリティルールで読み込みが拒否されている');
+        DebugLogger.instance.log('   3. 異なるユーザーアカウントでログインしている');
       }
 
       // 選択した日（年・月・日のみ）
@@ -977,7 +977,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           
           // データ構造をログ出力（最初の1件のみ）
           if (i == 0) {
-            DebugLogger.instance.log(AppLocalizations.of(context)!.general_802433f4);
+            DebugLogger.instance.log('📋 データ構造サンプル:');
             DebugLogger.instance.log('   muscle_group: ${data['muscle_group']?.runtimeType}');
             DebugLogger.instance.log('   date: ${data['date']?.runtimeType}');
             DebugLogger.instance.log('   sets: ${data['sets']?.runtimeType}');
@@ -1097,7 +1097,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               },
             ),
           IconButton(
-            icon: Icon(Icons.settings),
+            icon: const Icon(Icons.settings),
             onPressed: () => _showSettingsMenu(context),
             tooltip: AppLocalizations.of(context)!.settings,
           ),
@@ -1142,13 +1142,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               // Phase 2: 目標を上位表示（目標勾配効果最大化）
               _buildGoalsSection(theme),
               
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               
               // Phase 2: サブアクションボタン（テンプレートのみ）
               _buildActionButtons(theme),
             ],
             
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             
             // 月間サマリー統計
             _buildMonthlySummary(context, theme),
@@ -1164,7 +1164,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 child: AdWidget(ad: _bannerAd!),
               ),
             
-            SizedBox(height: 80), // FAB用のスペース確保
+            const SizedBox(height: 80), // FAB用のスペース確保
           ],
         ),
       ),
@@ -1174,7 +1174,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           final result = await Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AddWorkoutScreen(),
+              builder: (context) => const AddWorkoutScreen(),
             ),
           );
           
@@ -1266,12 +1266,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           // カレンダー（コンパクトな週表示）
           _buildCalendarCard(theme),
           
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           
           // 💡 今日のAI提案カード
           _buildAISuggestionCard(theme),
           
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           
           // 統計カード（タブ切替式・タップで統計ダッシュボードへ）
           GestureDetector(
@@ -1279,7 +1279,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => StatisticsDashboardScreen(),
+                  builder: (context) => const StatisticsDashboardScreen(),
                 ),
               );
             },
@@ -1293,7 +1293,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     BoxShadow(
                       color: Colors.black.withValues(alpha: 0.05),
                       blurRadius: 8,
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
@@ -1303,11 +1303,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       labelColor: theme.colorScheme.primary,
                       unselectedLabelColor: Colors.grey,
                       indicatorColor: theme.colorScheme.primary,
-                      labelStyle: TextStyle(
+                      labelStyle: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                       ),
-                      tabs: [
+                      tabs: const [
                         Tab(text: AppLocalizations.of(context)!.general_f6463be6),
                         Tab(text: AppLocalizations.of(context)!.general_7e8e1aae),
                         Tab(text: AppLocalizations.of(context)!.workoutTotalVolume),
@@ -1352,7 +1352,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   size: 12,
                   color: Colors.grey[600],
                 ),
-                SizedBox(width: 4),
+                const SizedBox(width: 4),
                 Text(
                   AppLocalizations.of(context)!.general_31869975,
                   style: TextStyle(
@@ -1388,10 +1388,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               color: theme.colorScheme.primary,
             ),
           ),
-          SizedBox(width: 6),
+          const SizedBox(width: 6),
           Text(
             unit,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               color: Colors.grey,
               fontWeight: FontWeight.w500,
@@ -1420,8 +1420,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         final remainingCredits = data?['credits'] ?? 0;
         final currentPlan = data?['plan'] ?? SubscriptionType.free;
         final displayText = currentPlan == SubscriptionType.pro
-            ? AppLocalizations.of(context)!.general_52d24f09
-            : AppLocalizations.of(context)!.generatedKey_88e64c29;
+            ? 'AI残回数: ∞'
+            : 'AI残回数: $remainingCredits回';
         
         return Container(
           padding: const EdgeInsets.all(16),
@@ -1436,7 +1436,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               BoxShadow(
                 color: Colors.purple.withValues(alpha: 0.3),
                 blurRadius: 12,
-                offset: Offset(0, 4),
+                offset: const Offset(0, 4),
               ),
             ],
           ),
@@ -1451,16 +1451,16 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.auto_awesome,
                       color: Colors.white,
                       size: 20,
                     ),
                   ),
-                  SizedBox(width: 12),
-                  Expanded(
+                  const SizedBox(width: 12),
+                  const Expanded(
                     child: Text(
-                      AppLocalizations.of(context)!.general_36a162c5,
+                      '💡 今日のAI提案',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -1479,7 +1479,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ),
                     child: Text(
                       displayText,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -1488,15 +1488,15 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ),
                 ],
               ),
-              SizedBox(height: 12),
-              Text(
-                AppLocalizations.of(context)!.generatedKey_9cabffba,
+              const SizedBox(height: 12),
+              const Text(
+                'あなた専用のトレーニングメニューを\nAIが科学的に分析します',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 13,
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               Row(
                 children: [
                   Expanded(
@@ -1507,7 +1507,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      AICoachingScreenTabbed(initialTabIndex: 0),
+                                      const AICoachingScreenTabbed(initialTabIndex: 0),
                                 ),
                               );
                             }
@@ -1567,7 +1567,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           BoxShadow(
             color: Colors.blue.withValues(alpha: 0.2),
             blurRadius: 8,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -1579,18 +1579,18 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               color: Colors.blue.shade100,
               shape: BoxShape.circle,
             ),
-            child: Icon(
+            child: const Icon(
               Icons.fitness_center,
               color: Colors.blue,
               size: 32,
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'トレーニングのお知らせ 💪',
                   style: TextStyle(
                     fontSize: 16,
@@ -1598,9 +1598,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     color: Colors.blue,
                   ),
                 ),
-                SizedBox(height: 4),
-                Text(
-                  AppLocalizations.of(context)!.generatedKey_5ff6013e,
+                const SizedBox(height: 4),
+                const Text(
+                  '前回のトレーニングから2日経過しました。\n今日もトレーニングしませんか？',
                   style: TextStyle(
                     fontSize: 13,
                     color: Colors.black87,
@@ -1640,7 +1640,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           BoxShadow(
             color: Colors.orange.withValues(alpha: 0.2),
             blurRadius: 8,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -1652,28 +1652,28 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               color: Colors.orange.shade100,
               shape: BoxShape.circle,
             ),
-            child: Icon(
+            child: const Icon(
               Icons.restart_alt,
               color: Colors.orange,
               size: 32,
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  AppLocalizations.of(context)!.general_b17d877f,
+                const Text(
+                  'お久しぶりです 🏋️',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.orange,
                   ),
                 ),
-                SizedBox(height: 4),
-                Text(
-                  AppLocalizations.of(context)!.generatedKey_e199031a,
+                const SizedBox(height: 4),
+                const Text(
+                  'しばらくトレーニングを記録していませんね。\nまた始めませんか？',
                   style: TextStyle(
                     fontSize: 13,
                     color: Colors.black87,
@@ -1713,7 +1713,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           BoxShadow(
             color: Colors.green.withValues(alpha: 0.2),
             blurRadius: 8,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -1728,16 +1728,16 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   color: Colors.green.shade100,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.local_fire_department,
                   color: Colors.orange,
                   size: 20,
                 ),
               ),
-              SizedBox(width: 12),
-              Expanded(
+              const SizedBox(width: 12),
+              const Expanded(
                 child: Text(
-                  AppLocalizations.of(context)!.general_1024fe10,
+                  '🔥 あなたの習慣',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -1765,15 +1765,15 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.local_fire_department,
                         size: 16,
                         color: Colors.deepOrange,
                       ),
-                      SizedBox(width: 4),
+                      const SizedBox(width: 4),
                       Text(
                         '連続 $_currentStreak 日',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                           color: Colors.deepOrange,
@@ -1782,11 +1782,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ],
                   ),
                 ),
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     '${_currentStreak}日連続記録中！',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 13,
                       color: Colors.black87,
                     ),
@@ -1794,7 +1794,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
           ],
           
           // 週間進捗
@@ -1804,7 +1804,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       AppLocalizations.of(context)!.general_eb6619e3,
                       style: TextStyle(
                         fontSize: 12,
@@ -1824,7 +1824,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         ),
                         Text(
                           ' / ${_weeklyProgress['goal']}回',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             color: Colors.black54,
                           ),
@@ -1851,10 +1851,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         minHeight: 12,
                       ),
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
                       '${((_weeklyProgress['current']! / _weeklyProgress['goal']!) * 100).clamp(0, 100).toInt()}% 達成',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 11,
                         color: Colors.black54,
                       ),
@@ -1867,11 +1867,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           
           // よくトレーニングする曜日
           if (_topTrainingDays.isNotEmpty) ...[
-            SizedBox(height: 16),
-            Divider(height: 1, color: Colors.green),
-            SizedBox(height: 12),
-            Text(
-              AppLocalizations.of(context)!.general_ff0d16ff,
+            const SizedBox(height: 16),
+            const Divider(height: 1, color: Colors.green),
+            const SizedBox(height: 12),
+            const Text(
+              '💡 あなたのトレーニングパターン',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
@@ -2068,7 +2068,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
-            offset: Offset(0, 4),
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -2114,7 +2114,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     color: Colors.green,
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  child: Text(
+                  child: const Text(
                     AppLocalizations.of(context)!.workout_a0c22faa,
                     style: TextStyle(
                       color: Colors.white,
@@ -2153,15 +2153,15 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             color: theme.colorScheme.primary,
             shape: BoxShape.circle,
           ),
-          markerDecoration: BoxDecoration(
+          markerDecoration: const BoxDecoration(
             color: Colors.transparent,  // ✅ v1.0.178: カスタムマーカーを使用するため透明に
           ),
           markersMaxCount: 1,
-          todayTextStyle: TextStyle(
+          todayTextStyle: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
-          selectedTextStyle: TextStyle(
+          selectedTextStyle: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
@@ -2169,7 +2169,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         headerStyle: HeaderStyle(
           formatButtonVisible: false,
           titleCentered: true,
-          titleTextStyle: TextStyle(
+          titleTextStyle: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -2193,7 +2193,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => TemplateScreen(),
+                        builder: (context) => const TemplateScreen(),
                       ),
                     );
                   },
@@ -2213,7 +2213,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ),
                 ),
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               // RM計算機
               Expanded(
                 child: OutlinedButton.icon(
@@ -2221,12 +2221,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => RMCalculatorScreen(),
+                        builder: (context) => const RMCalculatorScreen(),
                       ),
                     );
                   },
                   icon: Icon(Icons.calculate, size: 18, color: theme.colorScheme.primary),
-                  label: Text(
+                  label: const Text(
                     AppLocalizations.of(context)!.general_dae8d109,
                     style: TextStyle(
                       fontSize: 14,
@@ -2245,7 +2245,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ],
           ),
           
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           
           // パーソナルレコード & 部位別トラッキング
           Row(
@@ -2256,7 +2256,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PersonalRecordsScreen(),
+                        builder: (context) => const PersonalRecordsScreen(),
                       ),
                     );
                   },
@@ -2283,7 +2283,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => BodyPartTrackingScreen(),
+                        builder: (context) => const BodyPartTrackingScreen(),
                       ),
                     );
                   },
@@ -2306,7 +2306,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ],
           ),
           
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           
           // トレーニングメモ & 週次レポート
           Row(
@@ -2317,7 +2317,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => WorkoutMemoListScreen(),
+                        builder: (context) => const WorkoutMemoListScreen(),
                       ),
                     );
                   },
@@ -2337,19 +2337,19 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ),
                 ),
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Expanded(
                 child: OutlinedButton.icon(
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => WeeklyReportsScreen(),
+                        builder: (context) => const WeeklyReportsScreen(),
                       ),
                     );
                   },
                   icon: Icon(Icons.analytics, size: 18, color: theme.colorScheme.primary),
-                  label: Text(
+                  label: const Text(
                     AppLocalizations.of(context)!.general_a19f5322,
                     style: TextStyle(
                       fontSize: 14,
@@ -2393,7 +2393,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       
       int cleanedCount = 0;
       final now = DateTime.now();
-      final cleanupThreshold = now.subtract(Duration(hours: 24)); // 24時間前
+      final cleanupThreshold = now.subtract(const Duration(hours: 24)); // 24時間前
       
       for (var doc in querySnapshot.docs) {
         final data = doc.data();
@@ -2562,7 +2562,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.05),
                   blurRadius: 10,
-                  offset: Offset(0, 4),
+                  offset: const Offset(0, 4),
                 ),
               ],
             ),
@@ -2574,7 +2574,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   size: 64,
                   color: theme.colorScheme.primary.withValues(alpha: 0.5),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
                   AppLocalizations.of(context)!.general_2f87b5bf,
                   style: TextStyle(
@@ -2584,9 +2584,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 8),
-                Text(
-                  AppLocalizations.of(context)!.generatedKey_16ea699e,
+                const SizedBox(height: 8),
+                const Text(
+                  'トレーニングを記録して、\n進捗を可視化しましょう',
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey,
@@ -2666,7 +2666,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       color: Colors.grey,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 12,
@@ -2678,17 +2678,17 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ),
                     child: Row(
                       children: [
-                        Text(
+                        const Text(
                           'TOTAL',
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Text(
                           '$_totalDaysFromStart days',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
@@ -2702,7 +2702,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           ),
         ),
         
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         
         // トレーニング履歴
         _buildWorkoutHistory(context, theme),
@@ -2740,7 +2740,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
-              offset: Offset(0, 4),
+              offset: const Offset(0, 4),
             ),
           ],
         ),
@@ -2751,7 +2751,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               size: 48,
               color: Colors.grey[400],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               l10n.noWorkoutRecordsForDate(_selectedDay!.month, _selectedDay!.day),
               style: TextStyle(
@@ -2805,7 +2805,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
-            offset: Offset(0, 4),
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -2825,13 +2825,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       color: theme.colorScheme.primary,
                       size: 20,
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         _selectedDay != null && _isSameDay(_selectedDay!, DateTime.now())
                             ? l10n.todaysWorkout
                             : '${_selectedDay!.month}/${_selectedDay!.day}',  // Simplified date format
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
@@ -2840,7 +2840,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     // シェアボタン
                     if (_selectedDayWorkouts.isNotEmpty)
                       IconButton(
-                        icon: Icon(Icons.share, size: 20),
+                        icon: const Icon(Icons.share, size: 20),
                         onPressed: () => _handleShare(),
                         tooltip: AppLocalizations.of(context)!.shareWorkout,
                         padding: EdgeInsets.zero,
@@ -2855,13 +2855,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   segments: [
                     ButtonSegment(
                       value: 'strength',
-                      label: Text(l10n.strengthTrainingFilter, style: TextStyle(fontSize: 13)),
-                      icon: Icon(Icons.fitness_center, size: 18),
+                      label: Text(l10n.strengthTrainingFilter, style: const TextStyle(fontSize: 13)),
+                      icon: const Icon(Icons.fitness_center, size: 18),
                     ),
                     ButtonSegment(
                       value: 'cardio',
-                      label: Text(l10n.cardioFilter, style: TextStyle(fontSize: 13)),
-                      icon: Icon(Icons.directions_run, size: 18),
+                      label: Text(l10n.cardioFilter, style: const TextStyle(fontSize: 13)),
+                      icon: const Icon(Icons.directions_run, size: 18),
                     ),
                   ],
                   selected: {_homeWorkoutFilter},
@@ -2874,7 +2874,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     visualDensity: VisualDensity.compact,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
               ],
             ),
           ),
@@ -2907,7 +2907,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Icon(
                           _showSetTypeExplanation 
                             ? Icons.keyboard_arrow_up 
@@ -2948,7 +2948,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           AppLocalizations.of(context)!.superSet,
                           AppLocalizations.of(context)!.general_21df68a8,
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         _buildSetTypeExplanationRow(
                           Icons.trending_down,
                           Colors.blue,
@@ -3090,11 +3090,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               color: Colors.white,
                               size: 20,
                             ),
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                             Expanded(
                               child: Text(
                                 exerciseName,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
@@ -3103,15 +3103,15 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                             ),
                             // 編集ボタン（トレーニング記録画面に遷移）
                             IconButton(
-                              icon: Icon(Icons.edit, color: Colors.white, size: 18),
+                              icon: const Icon(Icons.edit, color: Colors.white, size: 18),
                               padding: const EdgeInsets.all(4),
-                              constraints: BoxConstraints(),
+                              constraints: const BoxConstraints(),
                               onPressed: () async {
                                 if (mounted) {
                                   await Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => WorkoutLogScreen(),
+                                      builder: (context) => const WorkoutLogScreen(),
                                     ),
                                   );
                                   _loadWorkoutsForSelectedDay();
@@ -3172,7 +3172,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                 child: Text(
                                   isCardio ? AppLocalizations.of(context)!.time : AppLocalizations.of(context)!.workout_2579352f,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 9,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black54,
@@ -3184,7 +3184,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                 child: Text(
                                   secondColumnHeader,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 9,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black54,
@@ -3204,8 +3204,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                     ),
                                   ),
                                 ),
-                              if (isCardio) Spacer(flex: 2),
-                              SizedBox(
+                              if (isCardio) const Spacer(flex: 2),
+                              const SizedBox(
                                 width: 24,
                                 child: Text(
                                   AppLocalizations.of(context)!.workout_c6b41e99,
@@ -3272,7 +3272,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               width: 24,
                               child: Text(
                                 '$setNumber',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 11,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -3281,7 +3281,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                             // SetTypeバッジ（通常セットは表示しない）
                             if (setType != workout_models.SetType.normal) ...[
                               _buildSetTypeBadge(setType, dropsetLevel),
-                              SizedBox(width: 4),
+                              const SizedBox(width: 4),
                             ],
                             // 重量
                             Expanded(
@@ -3296,16 +3296,16 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                       final isAbs = _isAbsExercise(exerciseName);
                                       
                                       // デバッグ出力
-                                      debugPrint(AppLocalizations.of(context)!.generatedKey_62bb229b);
+                                      debugPrint('🏋️ 重量表示: $exerciseName - weight: $weight, isBodyweightMode: $isBodyweightMode, isAbs: $isAbs');
                                       
                                       if (isCardio) {
-                                        return Text(AppLocalizations.of(context)!.minutes, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
+                                        return Text('$weight 分', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       } else if (isAbs && (isBodyweightMode || weight == 0.0)) {
                                         return Text(AppLocalizations.of(context)!.bodyweight, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       } else if (isBodyweightMode && weight == 0.0) {
                                         return Text(AppLocalizations.of(context)!.bodyweight, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       } else {
-                                        return Text('$weight Kg', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
+                                        return Text('$weight Kg', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       }
                                     }
                                   ),
@@ -3343,12 +3343,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                         if (ExerciseMasterData.cardioUsesDistance(setExerciseName)) {
                                           displayText = '$reps km';  // 距離を使う有酸素（ランニング等）
                                         } else {
-                                          displayText = AppLocalizations.of(context)!.reps;  // 回数を使う有酸素（バーピー等）
+                                          displayText = '$reps 回';  // 回数を使う有酸素（バーピー等）
                                         }
                                       } else if (isTimeMode) {
                                         displayText = '${reps}秒';   // 秒数モード（腹筋等）
                                       } else {
-                                        displayText = AppLocalizations.of(context)!.reps;    // 通常の回数
+                                        displayText = '$reps 回';    // 通常の回数
                                       }
                                       
                                       return Text(
@@ -3369,17 +3369,17 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                 child: Text(
                                   '${oneRM.toStringAsFixed(1)}Kg',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 9,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
                               ),
-                            if (isCardio) Spacer(flex: 2),
+                            if (isCardio) const Spacer(flex: 2),
                             SizedBox(
                               width: 24,
                               child: set['has_assist'] == true
-                                  ? Icon(
+                                  ? const Icon(
                                       Icons.people,
                                       size: 14,
                                       color: Colors.orange,
@@ -3389,10 +3389,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                             SizedBox(
                               width: 28,
                               child: IconButton(
-                                icon: Icon(Icons.delete_outline, size: 14),
+                                icon: const Icon(Icons.delete_outline, size: 14),
                                 color: Colors.red[400],
                                 padding: EdgeInsets.zero,
-                                constraints: BoxConstraints(),
+                                constraints: const BoxConstraints(),
                                 visualDensity: VisualDensity.compact,
                                 onPressed: () => _deleteWorkoutSet(
                                   set['workout_id'],
@@ -3433,7 +3433,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           'existing_workout_id': workoutId,  // 既存記録ID
                         };
                         
-                        print(AppLocalizations.of(context)!.generatedKey_cd7a5e77);
+                        print('📋 追加セット準備（＋ボタンから）: $exerciseName');
                         if (isCardio) {
                           print('   前回: ${lastWeight}分 × ${lastReps}km');
                         } else {
@@ -3464,7 +3464,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               color: Colors.grey[300],
                               shape: BoxShape.circle,
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.add,
                               color: Colors.white,
                               size: 24,
@@ -3500,7 +3500,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 child: TextField(
                   controller: _searchController,
                   decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.general_2e54ced5,
+                    hintText: '種目名で検索...',
                     prefixIcon: const Icon(Icons.search),
                     suffixIcon: _searchController.text.isNotEmpty
                         ? IconButton(
@@ -3591,7 +3591,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           
           // 検索結果表示
           if (_filteredWorkouts.isNotEmpty) ...[
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -3603,11 +3603,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.search, size: 20),
-                      SizedBox(width: 8),
+                      const Icon(Icons.search, size: 20),
+                      const SizedBox(width: 8),
                       Text(
                         '検索結果: ${_filteredWorkouts.length}件',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
@@ -3617,9 +3617,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   SizedBox(height: 12),
                   ListView.separated(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: _filteredWorkouts.length,
-                    separatorBuilder: (context, index) => Divider(height: 16),
+                    separatorBuilder: (context, index) => const Divider(height: 16),
                     itemBuilder: (context, index) {
                       final workout = _filteredWorkouts[index];
                       final date = (workout['date'] as Timestamp?)?.toDate();
@@ -3646,7 +3646,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 8),
+                              const SizedBox(width: 8),
                               Text(
                                 date != null ? '${date.year}/${date.month}/${date.day}' : AppLocalizations.of(context)!.workout_3e8e25ce,
                                 style: const TextStyle(
@@ -3764,8 +3764,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         results = results.where((workout) {
           final date = (workout['date'] as Timestamp?)?.toDate();
           if (date == null) return false;
-          return date.isAfter(_dateRangeFilter!.start.subtract(Duration(days: 1))) &&
-                 date.isBefore(_dateRangeFilter!.end.add(Duration(days: 1)));
+          return date.isAfter(_dateRangeFilter!.start.subtract(const Duration(days: 1))) &&
+                 date.isBefore(_dateRangeFilter!.end.add(const Duration(days: 1)));
         }).toList();
       }
       
@@ -3815,7 +3815,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       return FilterChip(
                         label: Text(
                           group,
-                          style: TextStyle(fontSize: 13),
+                          style: const TextStyle(fontSize: 13),
                         ),
                         labelPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
                         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
@@ -3832,11 +3832,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     }).toList(),
                   ),
                   
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   
                   // 日付範囲
                   Text(AppLocalizations.of(context)!.general_fb83494b, style: TextStyle(fontWeight: FontWeight.bold)),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   OutlinedButton.icon(
                     onPressed: () async {
                       final picked = await showDateRangePicker(
@@ -3853,7 +3853,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         });
                       }
                     },
-                    icon: Icon(Icons.calendar_today),
+                    icon: const Icon(Icons.calendar_today),
                     label: Text(
                       _dateRangeFilter == null
                           ? AppLocalizations.of(context)!.general_67002620
@@ -3941,7 +3941,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             children: [
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                 ),
@@ -4006,7 +4006,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(icon, size: 10, color: color),
-          SizedBox(width: 2),
+          const SizedBox(width: 2),
           Text(
             label,
             style: TextStyle(
@@ -4029,7 +4029,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.general_bd574e96),
-        content: Text(AppLocalizations.of(context)!.generatedKey_c676bfd2),
+        content: Text('「$exerciseName」の記録を削除しますか？\nこの操作は取り消せません。'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -4054,7 +4054,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     
     showModalBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) => Container(
@@ -4071,17 +4071,17 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               exerciseName,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             // 📊 4機能へのナビゲーション
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Text(
                 AppLocalizations.of(context)!.general_03433587,
@@ -4096,13 +4096,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               leading: Icon(Icons.emoji_events, color: Colors.amber),
               title: Text(AppLocalizations.of(context)!.prRecords),
               subtitle: Text(AppLocalizations.of(context)!.personalRecord),
-              trailing: Icon(Icons.chevron_right),
+              trailing: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PersonalRecordsScreen(),
+                    builder: (context) => const PersonalRecordsScreen(),
                   ),
                 );
               },
@@ -4111,13 +4111,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               leading: Icon(Icons.pie_chart, color: Colors.green),
               title: Text(AppLocalizations.of(context)!.byBodyPart),
               subtitle: Text(AppLocalizations.of(context)!.bodyPartTracking),
-              trailing: Icon(Icons.chevron_right),
+              trailing: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => BodyPartTrackingScreen(),
+                    builder: (context) => const BodyPartTrackingScreen(),
                   ),
                 );
               },
@@ -4126,33 +4126,33 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               leading: Icon(Icons.note, color: Colors.blue),
               title: Text(AppLocalizations.of(context)!.notes),
               subtitle: Text(AppLocalizations.of(context)!.trainingMemo),
-              trailing: Icon(Icons.chevron_right),
+              trailing: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => WorkoutMemoListScreen(),
+                    builder: (context) => const WorkoutMemoListScreen(),
                   ),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.analytics, color: Colors.purple),
+              leading: const Icon(Icons.analytics, color: Colors.purple),
               title: Text(AppLocalizations.of(context)!.general_a19f5322),
               subtitle: Text(AppLocalizations.of(context)!.weeklyReport),
-              trailing: Icon(Icons.chevron_right),
+              trailing: const Icon(Icons.chevron_right),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => WeeklyReportsScreen(),
+                    builder: (context) => const WeeklyReportsScreen(),
                   ),
                 );
               },
             ),
-            Divider(height: 32),
+            const Divider(height: 32),
             // 編集・削除（将来実装）
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -4175,7 +4175,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 _editWorkout(workoutId);
               },
             ),
-            Divider(),
+            const Divider(),
             // 削除ボタン
             ListTile(
               leading: Icon(Icons.delete, color: Colors.red),
@@ -4229,12 +4229,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         print('🔍 Before delete - total sets: ${sets.length}');
         
         // 指定された種目のセットだけをフィルタリング（削除）
-        print('🎯 Delete target: "$exerciseName" (length=${exerciseName.length})');
+        print('🎯 削除対象: "$exerciseName" (length=${exerciseName.length})');
         final remainingSets = sets.where((set) {
           if (set is Map<String, dynamic>) {
             final setExerciseName = set['exercise_name'] as String? ?? '';
             final isMatch = setExerciseName == exerciseName;
-            print('   Set comparison: "$setExerciseName" vs "$exerciseName" → Match=$isMatch');
+            print('   セット比較: "$setExerciseName" vs "$exerciseName" → Match=$isMatch');
             return setExerciseName != exerciseName;
           }
           return true;
@@ -4305,7 +4305,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             if (mounted) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(AppLocalizations.of(context)!.generatedKey_3ff76bd8),
+                  content: Text('「$exerciseName」を削除しました（残り${totalRemainingExercises}種目）'),
                   backgroundColor: Colors.green,
                 ),
               );
@@ -4370,7 +4370,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(AppLocalizations.of(context)!.generatedKey_3ff76bd8),
+                content: Text('「$exerciseName」を削除しました（残り${totalRemainingExercises}種目）'),
                 backgroundColor: Colors.green,
               ),
             );
@@ -4439,7 +4439,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       
       // ドキュメント情報をログ出力
       final data = docSnapshot.data();
-      print(AppLocalizations.of(context)!.general_1d0812c6);
+      print('📄 削除対象ドキュメント:');
       print('   - muscle_group: ${data?['muscle_group']}');
       print('   - sets: ${(data?['sets'] as List?)?.length ?? 0}セット');
       print('   - date: ${data?['date']}');
@@ -4516,7 +4516,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 BoxShadow(
                   color: Colors.blue.withValues(alpha: 0.3),
                   blurRadius: 12,
-                  offset: Offset(0, 6),
+                  offset: const Offset(0, 6),
                 ),
               ],
             ),
@@ -4531,19 +4531,19 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         color: Colors.white.withValues(alpha: 0.2),
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.psychology,
                         color: Colors.white,
                         size: 28,
                       ),
                     ),
-                    SizedBox(width: 16),
-                    Expanded(
+                    const SizedBox(width: 16),
+                    const Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            AppLocalizations.of(context)!.general_ccc38a4d,
+                            '🔬 疲労管理システム',
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -4562,13 +4562,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 
                 // ON/OFFスイッチ
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       AppLocalizations.of(context)!.general_1c98c756,
                       style: TextStyle(
                         color: Colors.white,
@@ -4589,7 +4589,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               content: Text(
                                 value ? '✅ 疲労管理システムを有効にしました' : '❌ 疲労管理システムを無効にしました',
                               ),
-                              duration: Duration(seconds: 2),
+                              duration: const Duration(seconds: 2),
                             ),
                           );
                         }
@@ -4600,7 +4600,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ],
                 ),
                 
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 
                 // 全トレーニング終了ボタン
                 SizedBox(
@@ -4624,7 +4624,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           size: 24,
                           color: isEnabled ? Colors.blue[700] : Colors.grey,
                         ),
-                        SizedBox(width: 12),
+                        const SizedBox(width: 12),
                         Text(
                           AppLocalizations.of(context)!.general_60ef486a,
                           style: TextStyle(
@@ -4639,7 +4639,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
                 
                 if (!isEnabled) ...[
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
@@ -4675,10 +4675,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     return Column(
       children: [
         Icon(icon, color: Colors.white, size: 24),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(
           value,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -4686,7 +4686,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         ),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 11,
             color: Colors.white70,
           ),
@@ -4706,7 +4706,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
       final today = DateTime.now();
       final todayStart = DateTime(today.year, today.month, today.day);
-      final todayEnd = todayStart.add(Duration(days: 1));
+      final todayEnd = todayStart.add(const Duration(days: 1));
 
       // シンプルクエリ（インデックス不要）+ メモリ内フィルタ
       final querySnapshot = await FirebaseFirestore.instance
@@ -4719,7 +4719,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         final data = doc.data();
         final date = (data['date'] as Timestamp?)?.toDate();
         if (date == null) return false;
-        return date.isAfter(todayStart.subtract(Duration(seconds: 1))) &&
+        return date.isAfter(todayStart.subtract(const Duration(seconds: 1))) &&
                date.isBefore(todayEnd);
       }).toList();
 
@@ -4814,7 +4814,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           SnackBar(
             content: Text('❌ エラー: $e'),
             backgroundColor: Colors.red,
-            duration: Duration(seconds: 4),
+            duration: const Duration(seconds: 4),
           ),
         );
       }
@@ -4836,7 +4836,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               children: [
                 Icon(Icons.psychology, color: Colors.blue, size: 28),
                 SizedBox(width: 12),
-                Text(AppLocalizations.of(context)!.general_9bef87b7),
+                Text('🔬 セッションRPE入力'),
               ],
             ),
             content: SingleChildScrollView(
@@ -4844,14 +4844,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     AppLocalizations.of(context)!.general_e965eb2c,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     AppLocalizations.of(context)!.general_e8992ded,
                     style: TextStyle(
@@ -4882,7 +4882,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                             color: _getRPEColor(selectedRPE),
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Text(
                           _getRPELabel(selectedRPE.toInt()),
                           style: TextStyle(
@@ -4896,7 +4896,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ),
                   ),
                   
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   
                   // スライダー
                   Slider(
@@ -4926,8 +4926,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         Row(
                           children: [
                             Icon(Icons.info_outline, size: 16, color: Colors.blue[700]),
-                            SizedBox(width: 6),
-                            Text(
+                            const SizedBox(width: 6),
+                            const Text(
                               AppLocalizations.of(context)!.general_39933331,
                               style: TextStyle(
                                 fontSize: 12,
@@ -4936,9 +4936,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                             ),
                           ],
                         ),
-                        SizedBox(height: 8),
-                        Text(
-                          AppLocalizations.of(context)!.generatedKey_a215dfab,
+                        const SizedBox(height: 8),
+                        const Text(
+                          '0-1: 休息\n2-3: 軽い運動\n4-6: 中程度の運動\n7-8: きつい運動\n9-10: 最大努力',
                           style: TextStyle(fontSize: 11, height: 1.4),
                         ),
                       ],
@@ -5035,7 +5035,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     
     final recoveryTime = recoveryHours >= 72 
         ? '${recoveryHours}時間以上' 
-        : AppLocalizations.of(context)!.generatedKey_e5d37f36;
+        : '$recoveryHours時間';
 
     showDialog(
       context: context,
@@ -5043,8 +5043,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         title: Row(
           children: [
             Icon(levelIcon, color: levelColor, size: 32),
-            SizedBox(width: 12),
-            Text(AppLocalizations.of(context)!.general_2b363a80),
+            const SizedBox(width: 12),
+            const Text('🔬 疲労度分析結果'),
           ],
         ),
         content: SingleChildScrollView(
@@ -5068,7 +5068,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         color: Colors.grey[700],
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       fatigueLevel,
                       style: TextStyle(
@@ -5077,7 +5077,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         color: levelColor,
                       ),
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
                       'Training Load: ${trainingLoad.toInt()} AU',
                       style: TextStyle(
@@ -5088,17 +5088,17 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               
               _buildInfoRow(AppLocalizations.of(context)!.general_f563accd, recoveryTime),
               
-              Divider(height: 32),
+              const Divider(height: 32),
               
               Row(
                 children: [
                   Icon(Icons.lightbulb, color: Colors.amber[700], size: 20),
-                  SizedBox(width: 8),
-                  Text(
+                  const SizedBox(width: 8),
+                  const Text(
                     AppLocalizations.of(context)!.general_c443fe2a,
                     style: TextStyle(
                       fontSize: 16,
@@ -5107,13 +5107,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ),
                 ],
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               Text(
                 advice,
-                style: TextStyle(fontSize: 14, height: 1.5),
+                style: const TextStyle(fontSize: 14, height: 1.5),
               ),
               
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               
               Container(
                 padding: const EdgeInsets.all(12),
@@ -5125,7 +5125,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 child: Row(
                   children: [
                     Icon(Icons.science, color: Colors.blue[700], size: 18),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         'Phase 2a実装完了\nFoster et al. (2001)のSession RPE理論を採用',
@@ -5165,7 +5165,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         ),
         Text(
           value,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold,
           ),
@@ -5233,8 +5233,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         title: Row(
           children: [
             Icon(Icons.psychology, color: Colors.blue[700], size: 32),
-            SizedBox(width: 12),
-            Text(AppLocalizations.of(context)!.general_9879fe60),
+            const SizedBox(width: 12),
+            const Text('🔬 総合疲労度分析'),
           ],
         ),
         content: SingleChildScrollView(
@@ -5292,8 +5292,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     Row(
                       children: [
                         Icon(Icons.person, color: Colors.purple[700], size: 18),
-                        SizedBox(width: 8),
-                        Text(
+                        const SizedBox(width: 8),
+                        const Text(
                           'Phase 2b: 個人補正係数 (PFM)',
                           style: TextStyle(
                             fontSize: 13,
@@ -5302,20 +5302,20 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         ),
                       ],
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       'PFM: ${pfm.toStringAsFixed(2)}x',
-                      style: TextStyle(fontSize: 12),
+                      style: const TextStyle(fontSize: 12),
                     ),
                     Text(
                       '基礎TL: ${baseTrainingLoad.toInt()} AU → 補正後: ${adjustedTrainingLoad.toInt()} AU',
-                      style: TextStyle(fontSize: 11),
+                      style: const TextStyle(fontSize: 11),
                     ),
                   ],
                 ),
               ),
               
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               
               // Phase 2c: ACWR詳細データ
               if (acwr != null) ...[
@@ -5332,9 +5332,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       Row(
                         children: [
                           Icon(Icons.trending_up, color: Colors.blue[700], size: 18),
-                          SizedBox(width: 8),
-                          Text(
-                            AppLocalizations.of(context)!.general_e07253c3,
+                          const SizedBox(width: 8),
+                          const Text(
+                            'Phase 2c: ACWR分析',
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.bold,
@@ -5342,31 +5342,31 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           ),
                         ],
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       _buildInfoRow('急性負荷 (7日)', '${acuteLoad.toInt()} AU'),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       _buildInfoRow('慢性負荷 (28日)', '${chronicLoad.toInt()} AU'),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       _buildInfoRow(AppLocalizations.of(context)!.general_80d63b4c, acwr.toStringAsFixed(2)),
                     ],
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
               ],
               
               // 疲労度レベル
               _buildInfoRow(AppLocalizations.of(context)!.general_034a0b49, baseFatigueLevel),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               _buildInfoRow(AppLocalizations.of(context)!.general_f563accd, '${recoveryHours}時間'),
               
-              Divider(height: 32),
+              const Divider(height: 32),
               
               // アドバイス
               Row(
                 children: [
                   Icon(Icons.lightbulb, color: Colors.amber[700], size: 20),
-                  SizedBox(width: 8),
-                  Text(
+                  const SizedBox(width: 8),
+                  const Text(
                     AppLocalizations.of(context)!.general_c443fe2a,
                     style: TextStyle(
                       fontSize: 16,
@@ -5375,23 +5375,23 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ),
                 ],
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               
               // Phase 2a アドバイス
               Text(
-                AppLocalizations.of(context)!.generatedKey_9beb17d9,
-                style: TextStyle(fontSize: 13, height: 1.5),
+                '【基礎分析】\n$baseAdvice',
+                style: const TextStyle(fontSize: 13, height: 1.5),
               ),
               
               if (acwr != null) ...[
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 Text(
-                  AppLocalizations.of(context)!.generatedKey_71f910d6,
-                  style: TextStyle(fontSize: 13, height: 1.5),
+                  '【ACWR分析】\n$acwrAdvice',
+                  style: const TextStyle(fontSize: 13, height: 1.5),
                 ),
               ],
               
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               
               // 科学的根拠表示
               Container(
@@ -5404,7 +5404,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 child: Row(
                   children: [
                     Icon(Icons.science, color: Colors.green[700], size: 18),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         'Phase 2a+2b+2c統合実装\nFoster (2001), Murray (2016), Windt & Gabbett (2017)',
@@ -5546,7 +5546,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ],
             ),
             
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             
             // 進捗表示
             Row(
@@ -5554,7 +5554,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               children: [
                 Text(
                   '${goal.currentValue} → ${goal.targetValue} ${goal.unit}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
@@ -5562,7 +5562,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
                 Text(
                   '${goal.progressPercent}%',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -5571,7 +5571,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ],
             ),
             
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             
             // プログレスバー（太め）
             ClipRRect(
@@ -5584,19 +5584,19 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ),
             ),
             
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             
             // 予測メッセージ
             if (!goal.isCompleted)
               Text(
-                AppLocalizations.of(context)!.generatedKey_838efe8a,
+                '残り${goal.daysRemaining}日 | 現在のペースを維持しよう',
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.white.withValues(alpha: 0.9),
                 ),
               )
             else
-              Text(
+              const Text(
                 AppLocalizations.of(context)!.general_160577cc,
                 style: TextStyle(
                   fontSize: 12,
@@ -5620,7 +5620,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => GoalsScreen(),
+                builder: (context) => const GoalsScreen(),
               ),
             );
             _loadActiveGoals();
@@ -5651,8 +5651,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     size: 28,
                   ),
                 ),
-                SizedBox(width: 16),
-                Expanded(
+                const SizedBox(width: 16),
+                const Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -5673,7 +5673,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ],
                   ),
                 ),
-                Icon(Icons.chevron_right, size: 28),
+                const Icon(Icons.chevron_right, size: 28),
               ],
             ),
           ),
@@ -5693,14 +5693,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             children: [
               Row(
                 children: [
-                  Text(
-                    AppLocalizations.of(context)!.general_d2afc264,
+                  const Text(
+                    '🎯 目標進捗',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                     decoration: BoxDecoration(
@@ -5723,7 +5723,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => GoalsScreen(),
+                      builder: (context) => const GoalsScreen(),
                     ),
                   );
                   _loadActiveGoals();
@@ -5870,13 +5870,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ),
               title: Text(
                 l10n.personalFactorsSettings,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               subtitle: Text(l10n.editPersonalFactors),
-              trailing: Icon(Icons.arrow_forward_ios, size: 16),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(builderContext).pop();
                 Navigator.of(builderContext).pushNamed('/personal-factors');
@@ -5902,7 +5902,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: Text(AppLocalizations.of(context)!.profile_d15e7de3),
+              subtitle: const Text('6言語対応 - グローバル展開中'),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(builderContext).pop();
@@ -5955,27 +5955,27 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.auto_awesome,
                   size: 56,
                   color: Colors.white,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               
               // タイトル
-              Text(
-                AppLocalizations.of(context)!.general_1a42fb6b,
+              const Text(
+                '🎉 習慣化達成！',
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
                   color: Colors.deepPurple,
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               
               // メッセージ
-              Text(
+              const Text(
                 '30日間で5記録を達成しました！\n\nあなたは継続できる人です💪\nこのペースを維持すれば、\n80%の確率で習慣化できます！',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -5984,7 +5984,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   height: 1.6,
                 ),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               
               // 統計情報
               Container(
@@ -6000,9 +6000,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.star, color: Colors.amber, size: 24),
-                        SizedBox(width: 8),
-                        Text(
-                          AppLocalizations.of(context)!.general_1fe3a7b5,
+                        const SizedBox(width: 8),
+                        const Text(
+                          '継続率 80%',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -6011,8 +6011,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         ),
                       ],
                     ),
-                    SizedBox(height: 8),
-                    Text(
+                    const SizedBox(height: 8),
+                    const Text(
                       AppLocalizations.of(context)!.general_7655cf33,
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 13, color: Colors.black54),
@@ -6020,7 +6020,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ],
                 ),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               
               // 閉じるボタン
               SizedBox(
@@ -6035,7 +6035,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     AppLocalizations.of(context)!.general_231921de,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
@@ -6087,7 +6087,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         // 紹介コードが取得できている場合のみ表示
         if (_referralCode != null && _referralCode!.isNotEmpty && mounted) {
           // 画面表示後に少し遅延してダイアログ表示
-          Future.delayed(Duration(seconds: 1), () {
+          Future.delayed(const Duration(seconds: 1), () {
             if (mounted) {
               _showReferralBanner();
             }
@@ -6112,7 +6112,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             SizedBox(width: 12),
             Expanded(
               child: Text(
-                AppLocalizations.of(context)!.general_ef4f68a1,
+                '🎁 友達を招待してAI5回分ゲット！',
                 style: TextStyle(fontSize: 18),
               ),
             ),
@@ -6123,13 +6123,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              AppLocalizations.of(context)!.generatedKey_9bae24d2,
-              style: TextStyle(
+              'あなたの招待コード: $_referralCode',
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -6153,27 +6153,27 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Row(
                     children: [
-                      Icon(Icons.person_add, size: 18, color: Colors.green),
-                      SizedBox(width: 8),
+                      const Icon(Icons.person_add, size: 18, color: Colors.green),
+                      const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          AppLocalizations.of(context)!.general_99ec23f0,
+                          '招待された側: AI無料利用×3回',
                           style: TextStyle(color: Colors.grey.shade700),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Row(
                     children: [
-                      Icon(Icons.redeem, size: 18, color: Colors.deepOrange),
-                      SizedBox(width: 8),
+                      const Icon(Icons.redeem, size: 18, color: Colors.deepOrange),
+                      const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          AppLocalizations.of(context)!.generatedKey_d0688916,
+                          '招待した側: AI追加パック×1個（5回分、¥300相当）',
                           style: TextStyle(color: Colors.grey.shade700),
                         ),
                       ),
@@ -6193,7 +6193,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             onPressed: () {
               Clipboard.setData(ClipboardData(text: _referralCode ?? ''));
               Share.share(
-                AppLocalizations.of(context)!.generatedKey_b8db302a
+                'GYM MATCHで一緒にトレーニングしよう！招待コード: $_referralCode\n\n'
                 'https://gym-match-e560d.web.app',
               );
               Navigator.pop(context);
@@ -6204,7 +6204,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
               );
             },
-            icon: Icon(Icons.share, size: 18),
+            icon: const Icon(Icons.share, size: 18),
             label: Text(AppLocalizations.of(context)!.general_f5f90170),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.orange,
@@ -6231,7 +6231,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           BoxShadow(
             color: Colors.deepOrange.withOpacity(0.1),
             blurRadius: 10,
-            offset: Offset(0, 4),
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -6248,14 +6248,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.card_giftcard,
                   color: Colors.white,
                   size: 24,
                 ),
               ),
-              SizedBox(width: 12),
-              Expanded(
+              const SizedBox(width: 12),
+              const Expanded(
                 child: Text(
                   AppLocalizations.of(context)!.profileInviteFriends,
                   style: TextStyle(
@@ -6274,7 +6274,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ),
                   child: Text(
                     '$_totalReferrals人招待済み',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
@@ -6283,7 +6283,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
             ],
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           
           // 特典説明
           Container(
@@ -6298,9 +6298,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.star, color: Colors.amber, size: 20),
-                    SizedBox(width: 8),
-                    Expanded(
+                    const Icon(Icons.star, color: Colors.amber, size: 20),
+                    const SizedBox(width: 8),
+                    const Expanded(
                       child: Text(
                         AppLocalizations.of(context)!.general_27d6e442,
                         style: TextStyle(
@@ -6312,12 +6312,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ),
                   ],
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 _buildBenefitRow(AppLocalizations.of(context)!.general_50776211, AppLocalizations.of(context)!.general_c1e4aaaf, Icons.psychology),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 _buildBenefitRow(AppLocalizations.of(context)!.general_3422ee22, AppLocalizations.of(context)!.general_12b9787b, Icons.redeem),
                 if (_discountCredits > 0) ...[
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
@@ -6326,11 +6326,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.celebration, color: Colors.deepOrange, size: 20),
-                        SizedBox(width: 8),
+                        const Icon(Icons.celebration, color: Colors.deepOrange, size: 20),
+                        const SizedBox(width: 8),
                         Text(
                           'AI追加パック獲得数: $_discountCredits個',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: Colors.deepOrange,
@@ -6343,11 +6343,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ],
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           
           // 紹介コード表示
           if (_referralCode != null) ...[
-            Text(
+            const Text(
               AppLocalizations.of(context)!.general_d3a498ac,
               style: TextStyle(
                 fontSize: 14,
@@ -6355,7 +6355,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 color: Colors.black87,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
@@ -6376,7 +6376,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.copy, color: Colors.deepOrange),
+                    icon: const Icon(Icons.copy, color: Colors.deepOrange),
                     onPressed: () {
                       // コピー機能は後で実装
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -6440,7 +6440,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           BoxShadow(
             color: Colors.deepPurple.withOpacity(0.1),
             blurRadius: 10,
-            offset: Offset(0, 4),
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -6457,14 +6457,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.auto_awesome,
                   color: Colors.white,
                   size: 24,
                 ),
               ),
-              SizedBox(width: 12),
-              Expanded(
+              const SizedBox(width: 12),
+              const Expanded(
                 child: Text(
                   AppLocalizations.of(context)!.general_d2794f1c,
                   style: TextStyle(
@@ -6482,7 +6482,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
                 child: Text(
                   '$_magicNumberCount/5記録',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
@@ -6491,7 +6491,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ),
             ],
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           
           // プログレスバー
           ClipRRect(
@@ -6503,18 +6503,18 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               minHeight: 12,
             ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           
           // メッセージ
           Text(
             message,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 15,
               color: Colors.black87,
               fontWeight: FontWeight.w500,
             ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           
           // 説明
           Container(
@@ -6526,8 +6526,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             child: Row(
               children: [
                 Icon(Icons.info_outline, size: 18, color: Colors.deepPurple.shade700),
-                SizedBox(width: 8),
-                Expanded(
+                const SizedBox(width: 8),
+                const Expanded(
                   child: Text(
                     AppLocalizations.of(context)!.general_baeb5820,
                     style: TextStyle(fontSize: 12, color: Colors.black87),

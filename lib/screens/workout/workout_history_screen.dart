@@ -13,7 +13,7 @@ import 'weekly_reports_screen.dart';
 /// - メモ: WorkoutMemoListScreen
 /// - 週次レポート: WeeklyReportsScreen
 class WorkoutHistoryScreen extends StatelessWidget {
-  WorkoutHistoryScreen({super.key});
+  const WorkoutHistoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@ import '../services/referral_service.dart';
 
 /// Referral code input screen
 class RedeemInviteCodeScreen extends StatefulWidget {
-  RedeemInviteCodeScreen({super.key});
+  const RedeemInviteCodeScreen({super.key});
 
   @override
   State<RedeemInviteCodeScreen> createState() => _RedeemInviteCodeScreenState();
@@ -124,13 +124,13 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Icon and title
-            Icon(
+            const Icon(
               Icons.card_giftcard,
               size: 80,
               color: Colors.deepPurple,
             ),
-            SizedBox(height: 24),
-            Text(
+            const SizedBox(height: 24),
+            const Text(
               AppLocalizations.of(context)!.general_51121e8d,
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -138,9 +138,9 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
-              AppLocalizations.of(context)!.generatedKey_8e38c4b2,
+              '友達の紹介コードを入力して\n特典をゲットしよう！',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14,
@@ -148,7 +148,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
                 height: 1.5,
               ),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
 
             // Referral code input field
             TextField(
@@ -156,7 +156,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
               enabled: !_isLoading,
               textCapitalization: TextCapitalization.characters,
               maxLength: 8,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 4,
@@ -206,12 +206,12 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.error_outline, color: Colors.red),
-                    SizedBox(width: 12),
+                    const Icon(Icons.error_outline, color: Colors.red),
+                    const SizedBox(width: 12),
                     Expanded(
                       child: Text(
                         _errorMessage!,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.red,
                           fontSize: 14,
                         ),
@@ -222,7 +222,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
               ),
             ],
 
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
 
             // Submit button
             ElevatedButton(
@@ -237,7 +237,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
                 elevation: 2,
               ),
               child: _isLoading
-                  ? SizedBox(
+                  ? const SizedBox(
                       height: 20,
                       width: 20,
                       child: CircularProgressIndicator(
@@ -245,7 +245,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                       ),
                     )
-                  : Text(
+                  : const Text(
                       AppLocalizations.of(context)!.general_999dddff,
                       style: TextStyle(
                         fontSize: 18,
@@ -254,7 +254,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
                     ),
             ),
 
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
 
             // Reward explanation
             Card(
@@ -282,7 +282,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 12),
+                    const SizedBox(height: 12),
                     _buildBenefitItem('✅ あなた: AI使用回数 +5回'),
                     _buildBenefitItem('✅ 友達: AI使用回数 +3回'),
                   ],
@@ -290,11 +290,11 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
               ),
             ),
 
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
 
             // Notes
             Text(
-              AppLocalizations.of(context)!.generatedKey_1cd8d542,
+              '※ 招待コードは1回のみ使用可能です\n※ 既に他のユーザーが使用したコードは無効です',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 12,

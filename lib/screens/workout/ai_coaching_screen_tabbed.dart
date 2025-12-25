@@ -104,7 +104,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
   /// 🎯 Phase 1: AI初回利用時のガイド
   Future<void> _showFirstTimeAIGuide() async {
     // UIが安定してから表示
-    await Future.delayed(Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 500));
     
     if (!mounted) return;
     
@@ -127,7 +127,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
             // アニメーションアイコン
             TweenAnimationBuilder<double>(
               tween: Tween(begin: 0.0, end: 1.0),
-              duration: Duration(milliseconds: 800),
+              duration: const Duration(milliseconds: 800),
               builder: (context, value, child) {
                 return Transform.scale(
                   scale: 0.5 + (value * 0.5),
@@ -149,7 +149,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                 );
               },
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             
             // タイトル
             Text(AppLocalizations.of(context)!.aiFatigueAnalysisWelcome,
@@ -159,7 +159,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             
             // 説明
             Column(
@@ -170,13 +170,13 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                   title: AppLocalizations.of(context)!.workout_8458abfe,
                   description: AppLocalizations.of(context)!.workout_762fc148,
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 _buildGuideItem(
                   icon: Icons.auto_awesome,
                   title: AppLocalizations.of(context)!.workout_3f0bb9b4,
                   description: AppLocalizations.of(context)!.workout_369dbcbd,
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 _buildGuideItem(
                   icon: Icons.trending_up,
                   title: AppLocalizations.of(context)!.workout_e3e5061b,
@@ -250,7 +250,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
                 description,
                 style: TextStyle(
@@ -270,7 +270,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
   void _showSettingsMenu() {
     showModalBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) => Container(
@@ -304,7 +304,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                 ],
               ),
             ),
-            Divider(height: 20),
+            const Divider(height: 20),
             // メニュー項目1: トレーニングメモ
             ListTile(
               leading: Container(
@@ -325,7 +325,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                 ),
               ),
               subtitle: Text(AppLocalizations.of(context)!.pastTrainingRecords),
-              trailing: Icon(Icons.arrow_forward_ios, size: 16),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushNamed('/workout-memo');
@@ -351,13 +351,13 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                 ),
               ),
               subtitle: Text(AppLocalizations.of(context)!.editPersonalFactors),
-              trailing: Icon(Icons.arrow_forward_ios, size: 16),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushNamed('/personal-factors');
               },
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
           ],
         ),
       ),
@@ -372,7 +372,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
             appBar: AppBar(title: Text(AppLocalizations.of(context)!.aiCoaching)),
-            body: Center(child: CircularProgressIndicator()),
+            body: const Center(child: CircularProgressIndicator()),
           );
         }
 
@@ -403,7 +403,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
         foregroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: Icon(Icons.settings),
+            icon: const Icon(Icons.settings),
             onPressed: _showSettingsMenu,
             tooltip: AppLocalizations.of(context)!.settings,
           ),
@@ -451,7 +451,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
 class _AIMenuTab extends StatefulWidget {
   final User user;
 
-  _AIMenuTab({required this.user});
+  const _AIMenuTab({required this.user});
 
   @override
   State<_AIMenuTab> createState() => _AIMenuTabState();
@@ -610,30 +610,30 @@ class _AIMenuTabState extends State<_AIMenuTab>
         children: [
           // 説明文
           _buildDescription(),
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
 
           // 🔧 v1.0.217: レベル選択
           _buildLevelSelector(),
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
 
           // 部位選択
           _buildBodyPartSelector(),
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
 
           // メニュー生成ボタン
           _buildGenerateButton(),
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
 
           // 生成結果表示
           if (_generatedMenu != null) ...[
             _buildGeneratedMenu(),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
           ],
 
           // エラー表示
           if (_errorMessage != null) ...[
             _buildErrorMessage(),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
           ],
 
           // 履歴表示
@@ -663,8 +663,8 @@ class _AIMenuTabState extends State<_AIMenuTab>
                 ),
               ],
             ),
-            SizedBox(height: 12),
-            Text(
+            const SizedBox(height: 12),
+            const Text(
               AppLocalizations.of(context)!.workout_17f59b6a,
               style: TextStyle(fontSize: 14),
             ),
@@ -679,7 +679,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           AppLocalizations.of(context)!.workout_2dc1ee52,
           style: TextStyle(
             fontSize: 16,
@@ -729,7 +729,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                 color: isSelected ? Colors.white : Colors.grey.shade600,
                 size: 28,
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 level,
                 style: TextStyle(
@@ -750,7 +750,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           AppLocalizations.of(context)!.workout_478bc20c,
           style: TextStyle(
             fontSize: 16,
@@ -813,7 +813,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
           _generateMenu(selectedParts);
         } : null,
         icon: _isGenerating
-            ? SizedBox(
+            ? const SizedBox(
                 width: 20,
                 height: 20,
                 child: CircularProgressIndicator(
@@ -843,7 +843,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   AppLocalizations.of(context)!.workout_ba5c8bd5,
                   style: TextStyle(
                     fontSize: 16,
@@ -875,11 +875,11 @@ class _AIMenuTabState extends State<_AIMenuTab>
                         _selectedExerciseIndices.length == _parsedExercises.length
                             ? AppLocalizations.of(context)!.workout_69593f57
                             : AppLocalizations.of(context)!.workout_219e609f,
-                        style: TextStyle(fontSize: 12),
+                        style: const TextStyle(fontSize: 12),
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.save),
+                      icon: const Icon(Icons.save),
                       onPressed: _saveMenu,
                       tooltip: AppLocalizations.of(context)!.saveWorkout,
                     ),
@@ -972,7 +972,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                             ],
                           ),
                         if (exercise.description != null) ...[
-                          SizedBox(height: 6),
+                          const SizedBox(height: 6),
                           Text(
                             exercise.description!,
                             style: TextStyle(
@@ -988,14 +988,14 @@ class _AIMenuTabState extends State<_AIMenuTab>
               }).toList(),
               
               // 🔧 v1.0.222: トレーニングを開始ボタン（記録画面に遷移）
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: _selectedExerciseIndices.isEmpty
                       ? null
                       : _saveSelectedExercisesToWorkoutLog,
-                  icon: Icon(Icons.fitness_center),
+                  icon: const Icon(Icons.fitness_center),
                   label: Text(
                     'トレーニングを開始 (${_selectedExerciseIndices.length}種目)',
                   ),
@@ -1016,7 +1016,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                   child: Column(
                     children: [
                       Icon(Icons.warning_amber, color: Colors.orange.shade700, size: 48),
-                      SizedBox(height: 12),
+                      const SizedBox(height: 12),
                       Text(
                         AppLocalizations.of(context)!.aiMenuParseFailed,
                         style: TextStyle(
@@ -1025,7 +1025,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                           color: Colors.orange.shade900,
                         ),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Text(
                         'もう一度メニューを生成してください。\n問題が続く場合は、サポートにお問い合わせください。',
                         textAlign: TextAlign.center,
@@ -1034,7 +1034,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                           color: Colors.orange.shade700,
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       ElevatedButton.icon(
                         onPressed: () {
                           setState(() {
@@ -1043,16 +1043,16 @@ class _AIMenuTabState extends State<_AIMenuTab>
                             _errorMessage = null;
                           });
                         },
-                        icon: Icon(Icons.refresh),
+                        icon: const Icon(Icons.refresh),
                         label: Text(AppLocalizations.of(context)!.aiMenuRetryButton),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange.shade600,
                           foregroundColor: Colors.white,
                         ),
                       ),
-                      SizedBox(height: 16),
-                      Divider(),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 16),
+                      const Divider(),
+                      const SizedBox(height: 8),
                       // 🐛 デバッグ用: 生成されたテキストを表示
                       ExpansionTile(
                         title: Text(
@@ -1069,7 +1069,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                             color: Colors.grey.shade100,
                             child: SelectableText(
                               _generatedMenu ?? '',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 11,
                                 fontFamily: 'monospace',
                               ),
@@ -1119,7 +1119,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       mainAxisSize: MainAxisSize.min,
       children: [
         Icon(icon, size: 14, color: Colors.grey.shade600),
-        SizedBox(width: 4),
+        const SizedBox(width: 4),
         Text(
           text,
           style: TextStyle(
@@ -1141,7 +1141,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
         child: Row(
           children: [
             Icon(Icons.error_outline, color: Colors.red.shade700),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             Expanded(
               child: Text(
                 _errorMessage!,
@@ -1162,18 +1162,18 @@ class _AIMenuTabState extends State<_AIMenuTab>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           AppLocalizations.of(context)!.workout_5fcb26ba,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
         if (_isLoadingHistory)
-          Center(child: CircularProgressIndicator())
+          const Center(child: CircularProgressIndicator())
         else if (_history.isEmpty)
-          Card(
+          const Card(
             child: Padding(
               padding: EdgeInsets.all(24),
               child: Center(
@@ -1226,14 +1226,14 @@ class _AIMenuTabState extends State<_AIMenuTab>
         spans.add(
           TextSpan(
             text: headingText,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
               height: 1.8,
             ),
           ),
         );
-        if (i < lines.length - 1) spans.add(TextSpan(text: '\n'));
+        if (i < lines.length - 1) spans.add(const TextSpan(text: '\n'));
         continue;
       }
 
@@ -1429,7 +1429,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
             SnackBar(
               content: Text('AI生成完了! ($statusMessage)'),
               backgroundColor: Colors.green,
-              duration: Duration(seconds: 2),
+              duration: const Duration(seconds: 2),
             ),
           );
         }
@@ -2159,11 +2159,11 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               AppLocalizations.of(context)!.workout_27e98563,
               style: TextStyle(fontSize: 14, height: 1.6),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -2199,7 +2199,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
-            icon: Icon(Icons.play_arrow),
+            icon: const Icon(Icons.play_arrow),
             label: Text(AppLocalizations.of(context)!.workout_d489aa48),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade700,
@@ -2244,7 +2244,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
     
     // 読み込み完了まで最大5秒待機
     for (int i = 0; i < 10; i++) {
-      await Future.delayed(Duration(milliseconds: 500));
+      await Future.delayed(const Duration(milliseconds: 500));
       if (rewardAdService.isAdReady()) {
         break;
       }
@@ -2788,15 +2788,15 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           children: [
             // ヘッダー
             _buildHeader(),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
 
             // 入力フォーム
             _buildInputForm(),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
 
             // 予測実行ボタン
             _buildPredictButton(),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
 
             // 予測結果
             if (_isLoading)
@@ -2856,18 +2856,18 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'あなたの情報を入力',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // 🆕 Phase 7: 年齢表示（自動取得）
             _buildAutoLoadedDataDisplay(),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // 対象部位
             _buildDropdownField(
@@ -2880,22 +2880,22 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 });
               },
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // 現在の1RM
             _build1RMInputField(),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // 🆕 Phase 7: Weight Ratio & 客観的レベル表示
             if (_weightRatio != null) ...[
               _buildWeightRatioDisplay(),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
             ],
 
             // 🆕 Phase 7: 客観的レベル判定結果
             if (_objectiveLevel != null && _objectiveLevel != _selectedLevel) ...[
               _buildLevelWarning(),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
             ],
 
             // トレーニングレベル
@@ -2942,7 +2942,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // 🆕 v1.0.230: RPE（自覚的強度）スライダー
             Column(
@@ -2961,7 +2961,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                   },
                   displayValue: _getRPELabel(_selectedRPE),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
@@ -2975,7 +2975,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // 性別
             Column(
@@ -3050,7 +3050,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(label, style: TextStyle(fontWeight: FontWeight.w500)),
+            Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
             Text(
               displayValue,
               style: TextStyle(
@@ -3081,7 +3081,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         _executePrediction();
       },
       icon: _isLoading
-          ? SizedBox(
+          ? const SizedBox(
               width: 20,
               height: 20,
               child: CircularProgressIndicator(
@@ -3217,15 +3217,15 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     color: Colors.green.shade700,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   '現在: ${currentWeight.round()}kg → +$growthPercentage%の成長',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: Colors.grey,
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
@@ -3236,7 +3236,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.info_outline, size: 16, color: Colors.blue.shade700),
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       Text(
                         '信頼区間: ${confidenceInterval['lower'].round()}-${confidenceInterval['upper'].round()}kg',
                         style: TextStyle(
@@ -3251,7 +3251,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             ),
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
 
         // 成長率カード
         Card(
@@ -3263,8 +3263,8 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 Row(
                   children: [
                     Icon(Icons.show_chart, color: Colors.blue.shade700),
-                    SizedBox(width: 8),
-                    Text(
+                    const SizedBox(width: 8),
+                    const Text(
                       AppLocalizations.of(context)!.general_f388c562,
                       style: TextStyle(
                         fontSize: 16,
@@ -3273,7 +3273,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     ),
                   ],
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -3285,7 +3285,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             ),
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
 
         // AI分析
         Card(
@@ -3318,7 +3318,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         ScientificBasisSection(
           basis: scientificBasis.cast<Map<String, String>>(),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
 
         // 信頼度インジケーター
         Center(
@@ -3340,7 +3340,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             color: color,
           ),
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Text(
           label,
           style: TextStyle(
@@ -3369,11 +3369,11 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               AppLocalizations.of(context)!.workout_27e98563,
               style: TextStyle(fontSize: 14, height: 1.6),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -3409,7 +3409,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
-            icon: Icon(Icons.play_arrow),
+            icon: const Icon(Icons.play_arrow),
             label: Text(AppLocalizations.of(context)!.workout_d489aa48),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade700,
@@ -3505,29 +3505,29 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           children: [
             Text(
               message,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'プレミアムプランなら:',
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
-            Text(
+            const SizedBox(height: 8),
+            const Text(
               '• 月10回までAI機能が使い放題\n'
               '• 広告なしで快適に利用\n'
               '• お気に入りジム無制限\n'
               '• レビュー投稿可能',
               style: TextStyle(fontSize: 13, height: 1.6),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: Colors.amber.shade50,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Text(
+              child: const Text(
                 '月額 ¥500',
                 style: TextStyle(
                   fontSize: 18,
@@ -3553,7 +3553,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               backgroundColor: Colors.amber.shade700,
               foregroundColor: Colors.white,
             ),
-            child: Text('アップグレード'),
+            child: const Text('アップグレード'),
           ),
         ],
       ),
@@ -3574,14 +3574,14 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         spans.add(
           TextSpan(
             text: headingText,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
               height: 1.8,
             ),
           ),
         );
-        if (i < lines.length - 1) spans.add(TextSpan(text: '\n'));
+        if (i < lines.length - 1) spans.add(const TextSpan(text: '\n'));
         continue;
       }
 
@@ -3622,7 +3622,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
 
     return RichText(
       text: TextSpan(
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 14,
           height: 1.6,
           color: Colors.black87,
@@ -3676,7 +3676,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             actionLabel: AppLocalizations.of(context)!.workout_5c7bbafb,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PersonalFactorsScreen()),
+              MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
             ).then((_) => _loadUserAge()),
           )
         else
@@ -3685,10 +3685,10 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             actionLabel: '設定する',
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PersonalFactorsScreen()),
+              MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
             ).then((_) => _loadUserAge()),
           ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
 
         // 体重表示
         if (_latestBodyWeight != null)
@@ -3781,11 +3781,11 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       child: Row(
         children: [
           Icon(Icons.warning_amber, color: Colors.orange.shade700),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           Expanded(
             child: Text(
               message,
-              style: TextStyle(fontSize: 13),
+              style: const TextStyle(fontSize: 13),
             ),
           ),
           TextButton(
@@ -3904,7 +3904,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           Text(
             'あなたのWeight Ratio (${_weightRatio!.toStringAsFixed(2)}) から、'
             '客観的なレベルは「$_objectiveLevel」と判定されました。',
-            style: TextStyle(fontSize: 13),
+            style: const TextStyle(fontSize: 13),
           ),
           Text(
             '選択中のレベル：「$_selectedLevel」',
@@ -3913,7 +3913,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               color: Colors.grey.shade700,
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           ElevatedButton(
             onPressed: () {
               setState(() {
@@ -3923,7 +3923,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.amber.shade700,
             ),
-            child: Text('客観的レベルを使用する'),
+            child: const Text('客観的レベルを使用する'),
           ),
         ],
       ),
@@ -4328,7 +4328,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                       color: Colors.orange.shade900,
                     ),
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
                     '最適なボリュームと頻度を科学的に分析',
                     style: TextStyle(
@@ -4353,18 +4353,18 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               '現在のトレーニング状況',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // 🆕 Phase 7.5: 年齢表示（自動取得）
             _buildAgeDisplay(),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // 対象部位
             _buildDropdownField(
@@ -4462,7 +4462,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // トレーニング頻度
             Column(
@@ -4481,7 +4481,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                   },
                   displayValue: '週${_currentFrequency}回',
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
@@ -4495,7 +4495,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // トレーニングレベル
             _buildDropdownField(
@@ -4508,7 +4508,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 });
               },
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // 性別
             Column(
@@ -4524,7 +4524,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                     });
                   },
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
@@ -4575,7 +4575,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                   ),
                   Text(
                     '$_userAge歳',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
@@ -4586,7 +4586,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
             TextButton(
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PersonalFactorsScreen()),
+                MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
               ).then((_) => _loadUserAge()),
               child: Text(AppLocalizations.of(context)!.workout_5c7bbafb),
             ),
@@ -4663,7 +4663,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(label, style: TextStyle(fontWeight: FontWeight.w500)),
+            Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
             Text(
               displayValue,
               style: TextStyle(
@@ -4694,7 +4694,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         _executeAnalysis();
       },
       icon: _isLoading
-          ? SizedBox(
+          ? const SizedBox(
               width: 20,
               height: 20,
               child: CircularProgressIndicator(
@@ -4804,25 +4804,25 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         // ステータスサマリー（トグルOFFの場合はプラトー無視）
         _buildStatusSummary(volumeAnalysis, frequencyAnalysis, 
           _enablePlateauDetection && plateauDetected, growthTrend),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
 
         // ボリューム分析
         _buildVolumeAnalysis(volumeAnalysis),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
 
         // 頻度分析
         _buildFrequencyAnalysis(frequencyAnalysis),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
 
         // プラトー警告（トグルON かつ 検出された場合のみ表示）
         if (_enablePlateauDetection && plateauDetected) ...[
           _buildPlateauWarning(),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
         ],
 
         // 推奨アクション
         _buildRecommendations(recommendations),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
 
         // AI分析
         Card(
@@ -4910,7 +4910,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                       color: statusColor,
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     '成長トレンド: ${trend['trend']}',
                     style: TextStyle(
@@ -4995,10 +4995,10 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Text(
               advice,
-              style: TextStyle(fontSize: 14, height: 1.6),
+              style: const TextStyle(fontSize: 14, height: 1.6),
             ),
           ],
         ),
@@ -5177,7 +5177,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                         shape: BoxShape.circle,
                       ),
                     ),
-                    SizedBox(width: 12),
+                    const SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -5190,10 +5190,10 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
                           Text(
                             action,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 14,
                               height: 1.4,
                             ),
@@ -5228,11 +5228,11 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               AppLocalizations.of(context)!.workout_27e98563,
               style: TextStyle(fontSize: 14, height: 1.6),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -5268,7 +5268,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
-            icon: Icon(Icons.play_arrow),
+            icon: const Icon(Icons.play_arrow),
             label: Text(AppLocalizations.of(context)!.workout_d489aa48),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade700,
@@ -5364,29 +5364,29 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           children: [
             Text(
               message,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'プレミアムプランなら:',
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
-            Text(
+            const SizedBox(height: 8),
+            const Text(
               '• 月10回までAI機能が使い放題\n'
               '• 広告なしで快適に利用\n'
               '• お気に入りジム無制限\n'
               '• レビュー投稿可能',
               style: TextStyle(fontSize: 13, height: 1.6),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: Colors.amber.shade50,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Text(
+              child: const Text(
                 '月額 ¥500',
                 style: TextStyle(
                   fontSize: 18,
@@ -5412,7 +5412,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               backgroundColor: Colors.amber.shade700,
               foregroundColor: Colors.white,
             ),
-            child: Text('アップグレード'),
+            child: const Text('アップグレード'),
           ),
         ],
       ),
@@ -5433,14 +5433,14 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         spans.add(
           TextSpan(
             text: headingText,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
               height: 1.8,
             ),
           ),
         );
-        if (i < lines.length - 1) spans.add(TextSpan(text: '\n'));
+        if (i < lines.length - 1) spans.add(const TextSpan(text: '\n'));
         continue;
       }
 

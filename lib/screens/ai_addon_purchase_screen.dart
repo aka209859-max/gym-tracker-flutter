@@ -7,7 +7,7 @@ import '../services/revenue_cat_service.dart';
 /// 
 /// AI使用回数を追加購入できる画面
 class AIAddonPurchaseScreen extends StatefulWidget {
-  AIAddonPurchaseScreen({super.key});
+  const AIAddonPurchaseScreen({super.key});
 
   @override
   State<AIAddonPurchaseScreen> createState() => _AIAddonPurchaseScreenState();
@@ -51,8 +51,8 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.general_a03febb3),
         content: Text(
-          AppLocalizations.of(context)!.generatedKey_96475ff8
-          AppLocalizations.of(context)!.generatedKey_b71ac08e
+          'AI追加パック（5回分）\n'
+          '料金: ¥300\n\n'
           '${AppLocalizations.of(context)!.addWorkout}',
         ),
         actions: [
@@ -98,8 +98,8 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                 Text(AppLocalizations.of(context)!.purchaseCompleted(AppLocalizations.of(context)!.aiAddonPack)),
               ],
             ),
-            content: Text(
-              AppLocalizations.of(context)!.generatedKey_1ea406c3
+            content: const Text(
+              'AI追加パック（5回分）を購入しました！\n'
               AppLocalizations.of(context)!.general_6dc47887,
             ),
             actions: [
@@ -125,7 +125,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                 Text(AppLocalizations.of(context)!.error),
               ],
             ),
-            content: Text('購入処理に失敗しました。\nもう一度お試しください。'),
+            content: const Text('購入処理に失敗しました。\nもう一度お試しください。'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
@@ -143,7 +143,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
         
         if (e.toString().contains('product not found') || 
             e.toString().contains(AppLocalizations.of(context)!.general_e322250e)) {
-          errorMessage = AppLocalizations.of(context)!.generatedKey_7a59299a
+          errorMessage = 'この商品は現在利用できません。\n'
                         AppLocalizations.of(context)!.general_b316392b;
         } else if (e.toString().contains('cancelled') || 
                    e.toString().contains(AppLocalizations.of(context)!.buttonCancel)) {
@@ -218,7 +218,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     
                     // プログレスバー
                     LinearProgressIndicator(
@@ -229,7 +229,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                         remaining <= 3 ? Colors.red : Colors.blue,
                       ),
                     ),
-                    SizedBox(height: 12),
+                    const SizedBox(height: 12),
                     
                     // 使用状況テキスト
                     Row(
@@ -243,7 +243,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                           ),
                         ),
                         Text(
-                          isProPlan ? AppLocalizations.of(context)!.general_c262c425 : AppLocalizations.of(context)!.generatedKey_031e7ade,
+                          isProPlan ? '残り: ∞' : '残り: $remaining回',
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -267,17 +267,17 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
               ),
             ),
             
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             
             // 追加購入パッケージ
-            Text(
+            const Text(
               AppLocalizations.of(context)!.aiAddonPack,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             
             // 5回パック
             _buildAddonPackageCard(
@@ -290,7 +290,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
               isRecommended: true,
             ),
             
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             
             // 説明セクション
             Card(
@@ -303,7 +303,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                     Row(
                       children: [
                         Icon(Icons.info_outline, color: Colors.blue[700], size: 20),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Text(
                           AppLocalizations.of(context)!.subscription_76b79b54,
                           style: TextStyle(
@@ -314,12 +314,12 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 12),
+                    const SizedBox(height: 12),
                     Text(
-                      AppLocalizations.of(context)!.generatedKey_9db89838
-                      AppLocalizations.of(context)!.generatedKey_c77de40c
-                      AppLocalizations.of(context)!.generatedKey_1775a032
-                      AppLocalizations.of(context)!.general_5d492514,
+                      '• 追加購入分は今月末まで有効です\n'
+                      '• 月が変わると追加購入分もリセットされます\n'
+                      '• 追加購入はいつでも可能です\n'
+                      '• プラン変更後も追加購入分は引き継がれます',
                       style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey[700],
@@ -370,8 +370,8 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                     color: Colors.orange,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Text(
-                    AppLocalizations.of(context)!.general_2adb470f,
+                  child: const Text(
+                    '💰 お得',
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
@@ -379,10 +379,10 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                     ),
                   ),
                 ),
-              if (isRecommended) SizedBox(height: 12),
+              if (isRecommended) const SizedBox(height: 12),
               
               Icon(icon, size: 48, color: color),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               
               Text(
                 title,
@@ -392,7 +392,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                   color: color,
                 ),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               
               Text(
                 subtitle,
@@ -401,7 +401,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                   color: Colors.grey[600],
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -409,16 +409,16 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                 children: [
                   Text(
                     price,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 4),
                     child: Text(
-                      AppLocalizations.of(context)!.generatedKey_c825e1b3,
+                      '/ $aiCount回',
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey[600],
@@ -427,7 +427,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               
               Text(
                 '1回あたり: ¥${(300 / aiCount).round()}',
@@ -436,7 +436,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                   color: Colors.grey[500],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               
               SizedBox(
                 width: double.infinity,
@@ -451,7 +451,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                     ),
                   ),
                   child: _isPurchasing
-                      ? SizedBox(
+                      ? const SizedBox(
                           height: 20,
                           width: 20,
                           child: CircularProgressIndicator(
@@ -459,7 +459,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                             valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                           ),
                         )
-                      : Text(
+                      : const Text(
                           AppLocalizations.of(context)!.general_c71038e7,
                           style: TextStyle(
                             fontSize: 16,

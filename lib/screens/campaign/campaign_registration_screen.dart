@@ -11,7 +11,7 @@ import 'campaign_sns_share_screen.dart';
 class CampaignRegistrationScreen extends StatefulWidget {
   final String planType; // 'premium' or 'pro'
 
-  CampaignRegistrationScreen({
+  const CampaignRegistrationScreen({
     super.key,
     required this.planType,
   });
@@ -109,7 +109,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.general_842f4cca),
+        title: const Text('🎉 乗り換え割キャンペーン'),
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -122,15 +122,15 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                   children: [
                     // キャンペーンヘッダー
                     _buildCampaignHeader(benefit),
-                    SizedBox(height: 32),
+                    const SizedBox(height: 32),
 
                     // アプリ選択セクション
                     _buildAppSelectionSection(),
-                    SizedBox(height: 32),
+                    const SizedBox(height: 32),
 
                     // 条件説明
                     _buildConditionsSection(benefit),
-                    SizedBox(height: 32),
+                    const SizedBox(height: 32),
 
                     // 申請ボタン
                     ElevatedButton(
@@ -142,7 +142,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                       ),
                       child: Text(
                         '✅ $benefitを申請する',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
@@ -167,7 +167,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
               size: 64,
               color: Colors.orange[700],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.general_7bce1523,
               style: TextStyle(
@@ -175,7 +175,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                 color: Colors.grey[700],
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               benefit,
               style: TextStyle(
@@ -184,7 +184,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                 color: Colors.orange[700],
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             // キャンペーン期間表示
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -192,7 +192,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                 color: Colors.orange[100],
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Text(
+              child: const Text(
                 AppLocalizations.of(context)!.general_809889ae,
                 style: TextStyle(
                   fontSize: 12,
@@ -212,12 +212,12 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
       children: [
         Text(
           AppLocalizations.of(context)!.selectExercise,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(
           AppLocalizations.of(context)!.general_7ae4abf7,
           style: TextStyle(
@@ -247,7 +247,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
                     controller: _appNameController,
                     decoration: InputDecoration(
                       labelText: AppLocalizations.of(context)!.general_67c0f232,
-                      hintText: AppLocalizations.of(context)!.general_fff14fa3,
+                      hintText: '例: トレーニング日記',
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) {
@@ -278,10 +278,10 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
             Row(
               children: [
                 Icon(Icons.info, color: Colors.blue[700]),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(
-                  AppLocalizations.of(context)!.generatedKey_674539cb,
-                  style: TextStyle(
+                  '$benefit獲得条件',
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -292,7 +292,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
             _buildConditionItem('1️⃣', AppLocalizations.of(context)!.emailNotRegistered),
             _buildConditionItem('2️⃣', AppLocalizations.of(context)!.general_2bf12e57),
             _buildConditionItem('3️⃣', AppLocalizations.of(context)!.confirm),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -303,7 +303,7 @@ class _CampaignRegistrationScreenState extends State<CampaignRegistrationScreen>
               child: Row(
                 children: [
                   Icon(Icons.bolt, color: Colors.amber[700], size: 20),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       AppLocalizations.of(context)!.general_4f0e203d,

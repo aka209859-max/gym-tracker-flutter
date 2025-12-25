@@ -17,52 +17,43 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
   final TrainingPartnerService _partnerService = TrainingPartnerService();
   final SubscriptionService _subscriptionService = SubscriptionService();
 
-  late String _selectedLocation;
-  late String _selectedExperienceLevel;
+  String _selectedLocation = AppLocalizations.of(context)!.all;
+  String _selectedExperienceLevel = AppLocalizations.of(context)!.all;
   late String _selectedGoal;
   
   bool _canAccess = false;
   bool _hasSearched = false; // 検索実行フラグ
 
-  // 都道府県リスト（ローカライズ対応）
-  static List<String> _getPrefectures(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    return [
-      l10n.all,
-      l10n.profile_afa342b7,
-      l10n.prefectureAomori, l10n.prefectureIwate, l10n.prefectureMiyagi, l10n.prefectureAkita, l10n.prefectureYamagata, l10n.prefectureFukushima,
-      l10n.prefectureIbaraki, l10n.prefectureTochigi, l10n.prefectureGunma, l10n.prefectureSaitama, l10n.prefectureChiba, l10n.prefectureTokyo, l10n.prefectureKanagawa,
-      l10n.prefectureNiigata, l10n.prefectureToyama, l10n.prefectureIshikawa, l10n.prefectureFukui, l10n.prefectureYamanashi, l10n.prefectureNagano,
-      l10n.prefectureGifu, l10n.prefectureShizuoka, l10n.prefectureAichi, l10n.prefectureMie,
-      l10n.prefectureShiga, l10n.prefectureKyoto, l10n.prefectureOsaka, l10n.prefectureHyogo, l10n.prefectureNara, l10n.prefectureWakayama,
-      l10n.prefectureTottori, l10n.prefectureShimane, l10n.prefectureOkayama, l10n.prefectureHiroshima, l10n.prefectureYamaguchi,
-      l10n.prefectureTokushima, l10n.prefectureKagawa, l10n.prefectureEhime, l10n.prefectureKochi,
-      l10n.prefectureFukuoka, l10n.prefectureSaga, l10n.prefectureNagasaki, l10n.prefectureKumamoto, l10n.prefectureOita, l10n.prefectureMiyazaki, l10n.prefectureKagoshima,
-      l10n.prefectureOkinawa,
-    ];
-  }
+  // 都道府県リスト
+  static const List<String> _prefectures = [
+    AppLocalizations.of(context)!.all,
+    AppLocalizations.of(context)!.profile_afa342b7,
+    AppLocalizations.of(context)!.prefectureAomori, AppLocalizations.of(context)!.prefectureIwate, AppLocalizations.of(context)!.prefectureMiyagi, AppLocalizations.of(context)!.prefectureAkita, AppLocalizations.of(context)!.prefectureYamagata, AppLocalizations.of(context)!.prefectureFukushima,
+    AppLocalizations.of(context)!.prefectureIbaraki, AppLocalizations.of(context)!.prefectureTochigi, AppLocalizations.of(context)!.prefectureGunma, AppLocalizations.of(context)!.prefectureSaitama, AppLocalizations.of(context)!.prefectureChiba, AppLocalizations.of(context)!.prefectureTokyo, AppLocalizations.of(context)!.prefectureKanagawa,
+    AppLocalizations.of(context)!.prefectureNiigata, AppLocalizations.of(context)!.prefectureToyama, AppLocalizations.of(context)!.prefectureIshikawa, AppLocalizations.of(context)!.prefectureFukui, AppLocalizations.of(context)!.prefectureYamanashi, AppLocalizations.of(context)!.prefectureNagano,
+    AppLocalizations.of(context)!.prefectureGifu, AppLocalizations.of(context)!.prefectureShizuoka, AppLocalizations.of(context)!.prefectureAichi, AppLocalizations.of(context)!.prefectureMie,
+    AppLocalizations.of(context)!.prefectureShiga, AppLocalizations.of(context)!.prefectureKyoto, AppLocalizations.of(context)!.prefectureOsaka, AppLocalizations.of(context)!.prefectureHyogo, AppLocalizations.of(context)!.prefectureNara, AppLocalizations.of(context)!.prefectureWakayama,
+    AppLocalizations.of(context)!.prefectureTottori, AppLocalizations.of(context)!.prefectureShimane, AppLocalizations.of(context)!.prefectureOkayama, AppLocalizations.of(context)!.prefectureHiroshima, AppLocalizations.of(context)!.prefectureYamaguchi,
+    AppLocalizations.of(context)!.prefectureTokushima, AppLocalizations.of(context)!.prefectureKagawa, AppLocalizations.of(context)!.prefectureEhime, AppLocalizations.of(context)!.prefectureKochi,
+    AppLocalizations.of(context)!.prefectureFukuoka, AppLocalizations.of(context)!.prefectureSaga, AppLocalizations.of(context)!.prefectureNagasaki, AppLocalizations.of(context)!.prefectureKumamoto, AppLocalizations.of(context)!.prefectureOita, AppLocalizations.of(context)!.prefectureMiyazaki, AppLocalizations.of(context)!.prefectureKagoshima,
+    AppLocalizations.of(context)!.prefectureOkinawa,
+  ];
 
-  static List<String> _getExperienceLevels(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    return [
-      l10n.all,
-      l10n.levelBeginner,
-      l10n.levelIntermediate,
-      l10n.levelAdvanced,
-    ];
-  }
+  static const List<String> _experienceLevels = [
+    AppLocalizations.of(context)!.all,
+    AppLocalizations.of(context)!.levelBeginner,
+    AppLocalizations.of(context)!.levelIntermediate,
+    AppLocalizations.of(context)!.levelAdvanced,
+  ];
 
-  static List<String> _getGoals(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    return [
-      l10n.all,
-      l10n.goalMuscleGain,
-      l10n.goalWeightLoss,
-      l10n.general_8fdcc9c5,
-      l10n.goalMaintenance,
-      l10n.profile_64b9cf75,
-    ];
-  }
+  static const List<String> _goals = [
+    AppLocalizations.of(context)!.all,
+    AppLocalizations.of(context)!.goalMuscleGain,
+    AppLocalizations.of(context)!.goalWeightLoss,
+    AppLocalizations.of(context)!.general_8fdcc9c5,
+    AppLocalizations.of(context)!.goalMaintenance,
+    AppLocalizations.of(context)!.profile_64b9cf75,
+  ];
 
   @override
   void initState() {
@@ -73,10 +64,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final l10n = AppLocalizations.of(context)!;
-    _selectedLocation = l10n.all;
-    _selectedExperienceLevel = l10n.all;
-    _selectedGoal = l10n.filterAll;
+    _selectedGoal = AppLocalizations.of(context)!.filterAll;
   }
 
   Future<void> _checkAccess() async {
@@ -161,7 +149,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               fillColor: Colors.white,
               prefixIcon: Icon(Icons.location_on),
             ),
-            items: _getPrefectures(context)
+            items: _prefectures
                 .map((location) => DropdownMenuItem(
                       value: location,
                       child: Text(location),
@@ -185,7 +173,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               fillColor: Colors.white,
               prefixIcon: Icon(Icons.fitness_center),
             ),
-            items: _getExperienceLevels(context)
+            items: _experienceLevels
                 .map((level) => DropdownMenuItem(
                       value: level,
                       child: Text(level),
@@ -209,7 +197,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               fillColor: Colors.white,
               prefixIcon: Icon(Icons.flag),
             ),
-            items: _getGoals(context)
+            items: _goals
                 .map((goal) => DropdownMenuItem(
                       value: goal,
                       child: Text(goal),

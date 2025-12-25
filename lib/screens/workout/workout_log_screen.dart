@@ -18,7 +18,7 @@ import '../../widgets/workout_share_image.dart';
 
 /// トレーニング記録一覧画面
 class WorkoutLogScreen extends StatefulWidget {
-  WorkoutLogScreen({super.key});
+  const WorkoutLogScreen({super.key});
 
   @override
   State<WorkoutLogScreen> createState() => _WorkoutLogScreenState();
@@ -43,13 +43,13 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
     
     try {
       // Firebase初期化を十分に待機（3秒に延長）
-      await Future.delayed(Duration(seconds: 3));
+      await Future.delayed(const Duration(seconds: 3));
       
       print('📱 [WorkoutLogScreen] Firebase確認中...');
       
       final user = FirebaseAuth.instance.currentUser;
       
-      print('📱 [WorkoutLogScreen] Current user: ${user?.uid ?? "null"}');
+      print('📱 [WorkoutLogScreen] 現在のユーザー: ${user?.uid ?? "null"}');
       
       if (user == null) {
         print('🔐 [WorkoutLogScreen] 自動ログイン開始...');
@@ -62,10 +62,10 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
         while (userCredential == null && retryCount < maxRetries) {
           try {
             retryCount++;
-            print(AppLocalizations.of(context)!.generatedKey_15000674);
+            print('   試行 $retryCount/$maxRetries...');
             
             userCredential = await FirebaseAuth.instance.signInAnonymously().timeout(
-              Duration(seconds: 15),
+              const Duration(seconds: 15),
               onTimeout: () {
                 throw Exception(AppLocalizations.of(context)!.login);
               },
@@ -76,8 +76,8 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
           } catch (e) {
             print('   試行 $retryCount 失敗: $e');
             if (retryCount < maxRetries) {
-              print(AppLocalizations.of(context)!.workout_8a86d09a);
-              await Future.delayed(Duration(seconds: 2));
+              print('   2秒後に再試行...');
+              await Future.delayed(const Duration(seconds: 2));
             } else {
               print('❌ 最大試行回数に達しました');
               rethrow;
@@ -86,7 +86,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
         }
         
         // ログイン後、少し待ってからUI更新
-        await Future.delayed(Duration(milliseconds: 500));
+        await Future.delayed(const Duration(milliseconds: 500));
       } else {
         print('✅ [WorkoutLogScreen] 既にログイン済み: ${user.uid}');
       }
@@ -119,7 +119,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
         appBar: AppBar(
           title: Text(AppLocalizations.of(context)!.trainingLog),
         ),
-        body: Center(
+        body: const Center(
           child: CircularProgressIndicator(),
         ),
       );
@@ -153,7 +153,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.warning_amber_rounded, size: 80, color: Colors.orange),
+                  const Icon(Icons.warning_amber_rounded, size: 80, color: Colors.orange),
                   SizedBox(height: 24),
                   Text(AppLocalizations.of(context)!.authenticationError,
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -174,7 +174,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
                       ),
                       child: Text(
                         AppLocalizations.of(context)!.error,
-                        style: TextStyle(fontSize: 12, color: Colors.red),
+                        style: const TextStyle(fontSize: 12, color: Colors.red),
                       ),
                     ),
                   ],
@@ -215,7 +215,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
       // 今日の自己記録を取得（インデックス不要のシンプルクエリ）
       final today = DateTime.now();
       final todayStart = DateTime(today.year, today.month, today.day);
-      final todayEnd = todayStart.add(Duration(days: 1));
+      final todayEnd = todayStart.add(const Duration(days: 1));
 
       final snapshot = await FirebaseFirestore.instance
           .collection('workout_logs')
@@ -313,7 +313,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
         title: Text(AppLocalizations.of(context)!.trainingLog),
         actions: [
           IconButton(
-            icon: Icon(Icons.share),
+            icon: const Icon(Icons.share),
             onPressed: () => _handleShare(user),
             tooltip: AppLocalizations.of(context)!.shareWorkout,
           ),
@@ -473,7 +473,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => AddWorkoutScreen(),
+                            builder: (context) => const AddWorkoutScreen(),
                           ),
                         );
                       },
@@ -620,7 +620,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
                     borderRadius: BorderRadius.circular(16),
                   ),
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 // 種目情報のスケルトン
                 Row(
                   children: [
@@ -632,7 +632,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
                         borderRadius: BorderRadius.circular(4),
                       ),
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Container(
                       width: 120,
                       height: 14,
@@ -667,7 +667,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => WeeklyReportsScreen(),
+                  builder: (context) => const WeeklyReportsScreen(),
                 ),
               );
             },
@@ -681,7 +681,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PersonalRecordsScreen(),
+                  builder: (context) => const PersonalRecordsScreen(),
                 ),
               );
             },
@@ -695,7 +695,7 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BodyPartTrackingScreen(),
+                  builder: (context) => const BodyPartTrackingScreen(),
                 ),
               );
             },
@@ -749,10 +749,10 @@ class _QuickAccessCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(icon, color: color, size: 32),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
@@ -780,7 +780,7 @@ class _SimpleWorkoutCard extends StatelessWidget {
   final String workoutId;
   final Map<String, dynamic> workoutData;
 
-  _SimpleWorkoutCard({
+  const _SimpleWorkoutCard({
     required this.workoutId,
     required this.workoutData,
   });
@@ -838,7 +838,7 @@ class _SimpleWorkoutCard extends StatelessWidget {
                     size: 16,
                     color: Colors.grey[600],
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
                     DateFormat('yyyy/MM/dd (E)', 'ja').format(date),
                     style: TextStyle(
@@ -847,7 +847,7 @@ class _SimpleWorkoutCard extends StatelessWidget {
                       color: Colors.grey[800],
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   if (duration != null)
                     Container(
                       padding: const EdgeInsets.symmetric(
@@ -859,7 +859,7 @@ class _SimpleWorkoutCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
-                        AppLocalizations.of(context)!.minutes,
+                        '$duration分',
                         style: TextStyle(
                           fontSize: 12,
                           color: Theme.of(context)

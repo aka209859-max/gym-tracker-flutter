@@ -126,7 +126,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
     final snapshot = await FirebaseFirestore.instance
         .collection('workout_logs')
         .where('user_id', isEqualTo: userId)
-        .get(GetOptions(source: Source.server));
+        .get(const GetOptions(source: Source.server));
 
     print('📊 全ドキュメント数: ${snapshot.docs.length}');
     
@@ -134,7 +134,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
     final filteredDocs = snapshot.docs.where((doc) {
       final data = doc.data();
       final date = (data['date'] as Timestamp).toDate();
-      return date.isAfter(weekStart.subtract(Duration(seconds: 1)));
+      return date.isAfter(weekStart.subtract(const Duration(seconds: 1)));
     }).toList();
     
     print('📊 週間フィルタ後: ${filteredDocs.length}件');
@@ -149,7 +149,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
       print('   データ: ${data.keys.toList()}');
       
       final date = (data['date'] as Timestamp).toDate();
-      print(AppLocalizations.of(context)!.generatedKey_08b72f35);
+      print('   日付: $date');
       workoutDates.add(DateFormat('yyyy-MM-dd').format(date));
       
       final sets = data['sets'] as List<dynamic>? ?? [];
@@ -157,12 +157,12 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
       totalSets += sets.length;
       
       final muscleGroup = data['muscle_group'] as String? ?? AppLocalizations.of(context)!.unknown;
-      print(AppLocalizations.of(context)!.generatedKey_62a594cf);
+      print('   筋肉グループ: $muscleGroup');
       
       // 有酸素運動の時間のみを集計（筋トレは除外）
       if (muscleGroup == AppLocalizations.of(context)!.exerciseCardio) {
         // 有酸素運動の場合、weightフィールドが「時間（分）」を表す
-        print(AppLocalizations.of(context)!.workout_9e9bc482);
+        print('   🏃 有酸素運動データ');
         
         // 各セットのweightフィールドから時間を取得
         for (final set in sets) {
@@ -182,8 +182,8 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
 
     print('\n📊 === 週間統計最終結果 ===');
     print('   トレーニング日数: ${workoutDates.length}日');
-    print(AppLocalizations.of(context)!.generatedKey_fd2964d7);
-    print(AppLocalizations.of(context)!.generatedKey_74f074ea);
+    print('   総セット数: $totalSets');
+    print('   有酸素時間: $totalMinutes分');
     print('=========================\n');
     
     if (mounted) {
@@ -203,7 +203,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
     final snapshot = await FirebaseFirestore.instance
         .collection('workout_logs')
         .where('user_id', isEqualTo: userId)
-        .get(GetOptions(source: Source.server));
+        .get(const GetOptions(source: Source.server));
 
     print('📊 全ドキュメント数: ${snapshot.docs.length}');
     
@@ -211,7 +211,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
     final filteredDocs = snapshot.docs.where((doc) {
       final data = doc.data();
       final date = (data['date'] as Timestamp).toDate();
-      return date.isAfter(monthStart.subtract(Duration(seconds: 1)));
+      return date.isAfter(monthStart.subtract(const Duration(seconds: 1)));
     }).toList();
     
     print('📊 月間フィルタ後: ${filteredDocs.length}件');
@@ -290,7 +290,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
         final today = DateTime.now();
         final todayOnly = DateTime(today.year, today.month, today.day);
         
-        if (dateOnly == todayOnly || dateOnly == todayOnly.subtract(Duration(days: 1))) {
+        if (dateOnly == todayOnly || dateOnly == todayOnly.subtract(const Duration(days: 1))) {
           streak = 1;
           lastDate = dateOnly;
         } else {
@@ -321,7 +321,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
         appBar: AppBar(
           title: Text(AppLocalizations.of(context)!.workout_d558b4a3),
         ),
-        body: Center(child: CircularProgressIndicator()),
+        body: const Center(child: CircularProgressIndicator()),
       );
     }
 
@@ -330,7 +330,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
         title: Text(AppLocalizations.of(context)!.workout_d558b4a3),
         actions: [
           IconButton(
-            icon: Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh),
             onPressed: _loadStatistics,
             tooltip: AppLocalizations.of(context)!.update,
           ),
@@ -339,26 +339,26 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
       body: RefreshIndicator(
         onRefresh: _loadStatistics,
         child: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // 週間概要カード
               _buildWeeklySummaryCard(theme),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               
               // ストリークカード
               _buildStreakCard(theme),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               
               // 月間統計カード
               _buildMonthlySummaryCard(theme),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               
               // 部位別トレーニンググラフ
               _buildMuscleGroupChart(theme),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
             ],
           ),
         ),
@@ -377,8 +377,8 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
             Row(
               children: [
                 Icon(Icons.calendar_today, color: theme.colorScheme.primary, size: 24),
-                SizedBox(width: 12),
-                Text(
+                const SizedBox(width: 12),
+                const Text(
                   AppLocalizations.of(context)!.workout_35f61292,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
@@ -405,7 +405,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               children: [
                 Expanded(
@@ -443,18 +443,18 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
         ),
         child: Column(
           children: [
-            Icon(Icons.local_fire_department, color: Colors.white, size: 48),
-            SizedBox(height: 12),
+            const Icon(Icons.local_fire_department, color: Colors.white, size: 48),
+            const SizedBox(height: 12),
             Text(
               '$_currentStreak日連続',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
-            SizedBox(height: 8),
-            Text(
+            const SizedBox(height: 8),
+            const Text(
               AppLocalizations.of(context)!.workout_a826db5c,
               style: TextStyle(
                 fontSize: 16,
@@ -478,8 +478,8 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
             Row(
               children: [
                 Icon(Icons.date_range, color: theme.colorScheme.primary, size: 24),
-                SizedBox(width: 12),
-                Text(
+                const SizedBox(width: 12),
+                const Text(
                   AppLocalizations.of(context)!.workout_7643b53a,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
@@ -521,7 +521,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
           child: Column(
             children: [
               Icon(Icons.bar_chart, size: 64, color: Colors.grey[400]),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 AppLocalizations.of(context)!.workout_ce2a2744,
                 style: TextStyle(fontSize: 16, color: Colors.grey[600]),
@@ -545,8 +545,8 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
             Row(
               children: [
                 Icon(Icons.pie_chart, color: theme.colorScheme.primary, size: 24),
-                SizedBox(width: 12),
-                Text(
+                const SizedBox(width: 12),
+                const Text(
                   AppLocalizations.of(context)!.workout_a826808f,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
@@ -606,15 +606,15 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
     return Column(
       children: [
         Icon(icon, color: color, size: 32),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(
           value,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Text(
           label,
           style: TextStyle(

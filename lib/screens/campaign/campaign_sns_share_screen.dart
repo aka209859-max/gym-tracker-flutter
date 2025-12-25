@@ -12,7 +12,7 @@ import '../../services/campaign_service.dart';
 class CampaignSnsShareScreen extends StatefulWidget {
   final CampaignApplication application;
 
-  CampaignSnsShareScreen({
+  const CampaignSnsShareScreen({
     super.key,
     required this.application,
   });
@@ -51,7 +51,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
     try {
       await Share.share(
         _template,
-        subject: AppLocalizations.of(context)!.general_fe603f63,
+        subject: 'GYM MATCH 乗り換え体験',
       );
     } catch (e) {
       if (mounted) {
@@ -115,14 +115,14 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CircularProgressIndicator(),
+            const CircularProgressIndicator(),
             SizedBox(height: 16),
             Text(
                           AppLocalizations.of(context)!.confirm,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               AppLocalizations.of(context)!.general_4dbf836e,
               textAlign: TextAlign.center,
@@ -149,7 +149,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.general_1f4b1996),
+        title: const Text('📱 SNSでシェア'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
@@ -158,25 +158,25 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
           children: [
             // ステップ表示
             _buildStepIndicator(),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
 
             // ユニークコード表示
             _buildUniqueCodeCard(),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
 
             // テンプレート表示
             _buildTemplateCard(),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
 
             // 投稿手順
             _buildInstructionsCard(),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
 
             // アクションボタン
             if (!_hasPosted) ...[
               ElevatedButton.icon(
                 onPressed: _copyToClipboard,
-                icon: Icon(Icons.copy),
+                icon: const Icon(Icons.copy),
                 label: Text(AppLocalizations.of(context)!.general_a1817327),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(16),
@@ -184,10 +184,10 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
                   foregroundColor: Colors.white,
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               ElevatedButton.icon(
                 onPressed: _shareToSns,
-                icon: Icon(Icons.share),
+                icon: const Icon(Icons.share),
                 label: Text(AppLocalizations.of(context)!.general_b5b7e374),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(16),
@@ -195,8 +195,8 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
                   foregroundColor: Colors.white,
                 ),
               ),
-              SizedBox(height: 24),
-              Divider(),
+              const SizedBox(height: 24),
+              const Divider(),
               SizedBox(height: 16),
               Text(
                 AppLocalizations.of(context)!.purchaseCompleted(AppLocalizations.of(context)!.general_140fbc0e),
@@ -207,7 +207,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               ElevatedButton(
                 onPressed: _isPosting ? null : _confirmPosted,
                 style: ElevatedButton.styleFrom(
@@ -216,7 +216,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
                   foregroundColor: Colors.white,
                 ),
                 child: _isPosting
-                    ? SizedBox(
+                    ? const SizedBox(
                         height: 20,
                         width: 20,
                         child: CircularProgressIndicator(
@@ -226,7 +226,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
                       )
                     : Text(
                         '✅ 投稿しました（$benefit獲得）',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
@@ -330,8 +330,8 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.vpn_key, color: Colors.amber[700], size: 28),
-                SizedBox(width: 8),
-                Text(
+                const SizedBox(width: 8),
+                const Text(
                   AppLocalizations.of(context)!.general_c8bef2a9,
                   style: TextStyle(
                     fontSize: 16,
@@ -340,7 +340,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
               decoration: BoxDecoration(
@@ -359,7 +359,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Text(
               '⚠️ このコードを投稿に必ず含めてください',
               style: TextStyle(
@@ -395,7 +395,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -404,12 +404,12 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
               ),
               child: SelectableText(
                 _template,
-                style: TextStyle(fontSize: 14, height: 1.5),
+                style: const TextStyle(fontSize: 14, height: 1.5),
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Text(
-              AppLocalizations.of(context)!.general_277a7cf0,
+              '💡 自由に編集してOKですが、認証コードとハッシュタグは必須です',
               style: TextStyle(
                 fontSize: 12,
                 color: Colors.grey[600],
@@ -442,7 +442,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             _buildInstructionStep('1', AppLocalizations.of(context)!.general_3ad25210),
             _buildInstructionStep('2', AppLocalizations.of(context)!.general_e8477f45),
             _buildInstructionStep('3', AppLocalizations.of(context)!.general_d9c86932),

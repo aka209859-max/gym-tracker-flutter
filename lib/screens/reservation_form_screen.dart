@@ -156,21 +156,21 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
                   padding: const EdgeInsets.all(12),
                   child: Row(
                     children: [
-                      Icon(Icons.fitness_center, 
+                      const Icon(Icons.fitness_center, 
                         color: Colors.orange, size: 32),
-                      SizedBox(width: 12),
+                      const SizedBox(width: 12),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               widget.gym.name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 4),
+                            const SizedBox(height: 4),
                             Text(
                               widget.gym.address,
                               style: TextStyle(
@@ -186,14 +186,14 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
                 ),
               ),
 
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
 
               // 氏名入力
               TextFormField(
                 controller: _nameController,
                 decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)!.general_a3751722,
-                  hintText: AppLocalizations.of(context)!.general_22f70c10,
+                  labelText: 'お名前 *',
+                  hintText: '山田 太郎',
                   prefixIcon: Icon(Icons.person),
                   border: OutlineInputBorder(),
                 ),
@@ -205,13 +205,13 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
                 },
               ),
 
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               // 電話番号入力
               TextFormField(
                 controller: _phoneController,
                 decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)!.general_1b4a8f3e,
+                  labelText: '電話番号 *',
                   hintText: '090-1234-5678',
                   prefixIcon: Icon(Icons.phone),
                   border: OutlineInputBorder(),
@@ -225,7 +225,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
                 },
               ),
 
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               // メールアドレス入力
               TextFormField(
@@ -248,24 +248,24 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
                 },
               ),
 
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
 
               // 希望日選択
-              Text(
-                AppLocalizations.of(context)!.general_3cbc39ba,
+              const Text(
+                '希望日時 *',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
 
               Row(
                 children: [
                   Expanded(
                     child: OutlinedButton.icon(
                       onPressed: () => _selectDate(context),
-                      icon: Icon(Icons.calendar_today),
+                      icon: const Icon(Icons.calendar_today),
                       label: Text(
                         '${_selectedDate.year}/${_selectedDate.month}/${_selectedDate.day}',
                       ),
@@ -274,11 +274,11 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Expanded(
                     child: OutlinedButton.icon(
                       onPressed: () => _selectTime(context),
-                      icon: Icon(Icons.access_time),
+                      icon: const Icon(Icons.access_time),
                       label: Text(
                         '${_selectedTime.hour.toString().padLeft(2, '0')}:${_selectedTime.minute.toString().padLeft(2, '0')}',
                       ),
@@ -290,21 +290,21 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
                 ],
               ),
 
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
 
               // その他要望
               TextFormField(
                 controller: _messageController,
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)!.general_ec0e7b9d,
-                  hintText: AppLocalizations.of(context)!.general_3919dbe4,
+                  hintText: '例: 初めてのジム利用です',
                   prefixIcon: Icon(Icons.message),
                   border: OutlineInputBorder(),
                 ),
                 maxLines: 3,
               ),
 
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
 
               // 注意事項
               Container(
@@ -318,10 +318,10 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Icon(Icons.info_outline, color: Colors.blue[700], size: 20),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        AppLocalizations.of(context)!.generatedKey_8bc67a22,
+                        '※ 予約申込後、店舗から確認のご連絡があります。\n※ この申込は仮予約です。店舗の確認をもって予約確定となります。',
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.blue[900],
@@ -332,7 +332,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
                 ),
               ),
 
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
 
               // 送信ボタン
               SizedBox(
@@ -345,7 +345,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
                     foregroundColor: Colors.white,
                   ),
                   child: _isSubmitting
-                      ? SizedBox(
+                      ? const SizedBox(
                           width: 24,
                           height: 24,
                           child: CircularProgressIndicator(
@@ -353,7 +353,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
                             valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                           ),
                         )
-                      : Text(
+                      : const Text(
                           AppLocalizations.of(context)!.general_f4b23d12,
                           style: TextStyle(
                             fontSize: 16,

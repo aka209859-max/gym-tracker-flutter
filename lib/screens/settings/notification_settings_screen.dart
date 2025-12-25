@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:gym_match/gen/app_localizations.dart';
 /// 通知設定画面
 class NotificationSettingsScreen extends StatefulWidget {
   const NotificationSettingsScreen({super.key});
@@ -86,7 +85,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(AppLocalizations.of(context)!.generatedKey_360787f9),
+            content: Text('リマインダー時刻を${_formatTime(_reminderTime)}に設定しました'),
             backgroundColor: Colors.green,
           ),
         );
@@ -104,7 +103,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           AppLocalizations.of(context)!.notificationSettings,
           style: TextStyle(
             color: Colors.white,
@@ -114,7 +113,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
@@ -135,23 +134,23 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
           
           // リマインダー時刻設定（ワークアウトリマインダーがONの場合）
           if (_workoutReminders) ...[
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Card(
               elevation: 2,
               child: ListTile(
                 leading: Icon(Icons.access_time, color: Colors.blue[700]),
-                title: Text(
+                title: const Text(
                   AppLocalizations.of(context)!.profile_9b272b41,
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ),
                 subtitle: Text(_formatTime(_reminderTime)),
-                trailing: Icon(Icons.edit, size: 20),
+                trailing: const Icon(Icons.edit, size: 20),
                 onTap: _selectTime,
               ),
             ),
           ],
 
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           _buildNotificationCard(
             icon: Icons.flag,
             iconColor: Colors.green,
@@ -164,7 +163,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
             },
           ),
 
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
 
           // ソーシャル通知
           _buildSectionHeader(AppLocalizations.of(context)!.profile_ac37b7eb),
@@ -180,7 +179,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
             },
           ),
 
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           _buildNotificationCard(
             icon: Icons.people,
             iconColor: Colors.orange,
@@ -193,7 +192,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
             },
           ),
 
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
 
           // 一般通知
           _buildSectionHeader(AppLocalizations.of(context)!.general),
@@ -209,7 +208,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
             },
           ),
 
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           _buildNotificationCard(
             icon: Icons.campaign,
             iconColor: Colors.red,
@@ -222,7 +221,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
             },
           ),
 
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
 
           // 説明テキスト
           Container(
@@ -235,10 +234,10 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
             child: Row(
               children: [
                 Icon(Icons.info_outline, color: Colors.blue[700], size: 24),
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    AppLocalizations.of(context)!.generatedKey_e67c4c69,
+                    '通知は端末の設定でも管理できます。\n設定アプリ > 通知 からご確認ください。',
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.blue[900],

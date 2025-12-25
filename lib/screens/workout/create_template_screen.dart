@@ -5,7 +5,7 @@ import '../../models/workout_template.dart';
 
 /// テンプレート作成画面
 class CreateTemplateScreen extends StatefulWidget {
-  CreateTemplateScreen({super.key});
+  const CreateTemplateScreen({super.key});
 
   @override
   State<CreateTemplateScreen> createState() => _CreateTemplateScreenState();
@@ -70,7 +70,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
           TextButton.icon(
             onPressed: _isSaving ? null : _saveTemplate,
             icon: _isSaving
-                ? SizedBox(
+                ? const SizedBox(
                     width: 16,
                     height: 16,
                     child: CircularProgressIndicator(
@@ -78,8 +78,8 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                     ),
                   )
-                : Icon(Icons.check, color: Colors.white),
-            label: Text(
+                : const Icon(Icons.check, color: Colors.white),
+            label: const Text(
               AppLocalizations.of(context)!.buttonSave,
               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
@@ -100,7 +100,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                prefixIcon: Icon(Icons.label),
+                prefixIcon: const Icon(Icons.label),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -110,7 +110,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
               },
             ),
             
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             
             // 説明（オプション）
             TextFormField(
@@ -121,19 +121,19 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                prefixIcon: Icon(Icons.description),
+                prefixIcon: const Icon(Icons.description),
               ),
               maxLines: 2,
             ),
             
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             
             // 部位選択
-            Text(
+            const Text(
               AppLocalizations.of(context)!.workout_9b2523e6,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Wrap(
               spacing: 8,
               runSpacing: 8,
@@ -156,19 +156,19 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
               }).toList(),
             ),
             
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             
             // 種目リスト
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   AppLocalizations.of(context)!.workout_6e8a7475,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 TextButton.icon(
                   onPressed: _addExercise,
-                  icon: Icon(Icons.add),
+                  icon: const Icon(Icons.add),
                   label: Text(AppLocalizations.of(context)!.workout_c3a95268),
                 ),
               ],
@@ -185,7 +185,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                 child: Column(
                   children: [
                     Icon(Icons.fitness_center, size: 48, color: Colors.grey[400]),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       AppLocalizations.of(context)!.workout_d90b7b6b,
                       style: TextStyle(color: Colors.grey[600]),
@@ -200,7 +200,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                 return _buildExerciseCard(index, exercise);
               }),
             
-            SizedBox(height: 80), // FAB用スペース
+            const SizedBox(height: 80), // FAB用スペース
           ],
         ),
       ),
@@ -236,7 +236,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                     ),
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -247,7 +247,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                           initialValue: exercise.exerciseName,
                           decoration: InputDecoration(
                             labelText: AppLocalizations.of(context)!.workout_923d0cbb,
-                            border: OutlineInputBorder(),
+                            border: const OutlineInputBorder(),
                             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                             suffixIcon: IconButton(
                               icon: Icon(Icons.list, size: 20), tooltip: AppLocalizations.of(context)!.workout_16dc7c2c,
@@ -268,7 +268,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                       else
                         DropdownButtonFormField<String>(
                           value: exercise.exerciseName,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: AppLocalizations.of(context)!.exercise,
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -281,7 +281,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                                       child: Text(name),
                                     )),
                             // カスタム種目追加オプション
-                            DropdownMenuItem(
+                            const DropdownMenuItem(
                               value: '___custom___',
                               child: Row(
                                 children: [
@@ -310,7 +310,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.delete, color: Colors.red),
+                  icon: const Icon(Icons.delete, color: Colors.red),
                   onPressed: () {
                     setState(() {
                       _exercises.removeAt(index);
@@ -320,14 +320,14 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
               ],
             ),
             
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             
             Row(
               children: [
                 Expanded(
                   child: TextFormField(
                     initialValue: exercise.targetSets.toString(),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: AppLocalizations.of(context)!.setsCount,
                       border: OutlineInputBorder(),
                       contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -338,11 +338,11 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                     },
                   ),
                 ),
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
                 Expanded(
                   child: TextFormField(
                     initialValue: exercise.targetReps.toString(),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: AppLocalizations.of(context)!.repsCount,
                       border: OutlineInputBorder(),
                       contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -353,11 +353,11 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                     },
                   ),
                 ),
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
                 Expanded(
                   child: TextFormField(
                     initialValue: exercise.targetWeight?.toString() ?? '',
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: '重量(kg)',
                       border: OutlineInputBorder(),
                       contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),

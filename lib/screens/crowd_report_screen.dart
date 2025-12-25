@@ -91,24 +91,24 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                             width: 60,
                             height: 60,
                             color: Colors.grey[300],
-                            child: Icon(Icons.fitness_center),
+                            child: const Icon(Icons.fitness_center),
                           );
                         },
                       ),
                     ),
-                    SizedBox(width: 12),
+                    const SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             widget.gym.name,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
                           Text(
                             widget.gym.address,
                             style: TextStyle(
@@ -125,37 +125,37 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             // 混雑度選択
             Text(
                           AppLocalizations.of(context)!.selectExercise,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildCrowdLevelSelector(),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             // コメント入力
-            Text(
+            const Text(
               AppLocalizations.of(context)!.general_58fd6db3,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               controller: _commentController,
               maxLines: 3,
               decoration: InputDecoration(
-                hintText: AppLocalizations.of(context)!.general_61cf8cef,
+                hintText: '例: 平日の夕方は結構混んでます',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             // 送信ボタン
             SizedBox(
               width: double.infinity,
               height: 48,
               child: ElevatedButton(
                 onPressed: _submitReport,
-                child: Text(
+                child: const Text(
                   AppLocalizations.of(context)!.general_c989a28a,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
@@ -280,7 +280,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
           SnackBar(
             content: Text(AppLocalizations.of(context)!.errorGeneric),
             backgroundColor: Colors.red,
-            duration: Duration(seconds: 5),
+            duration: const Duration(seconds: 5),
           ),
         );
       }
@@ -300,8 +300,8 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
       SnackBar(
         content: Row(
           children: [
-            Icon(Icons.check_circle, color: Colors.white),
-            SizedBox(width: 12),
+            const Icon(Icons.check_circle, color: Colors.white),
+            const SizedBox(width: 12),
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -309,16 +309,16 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                 children: [
                   Text(
                     '✅ ${result.message}',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Text(AppLocalizations.of(context)!.generatedKey_9ff70568),
+                  Text('🎁 AI 1回分をプレゼント！（報告${result.reportCount}回目）'),
                 ],
               ),
             ),
           ],
         ),
         backgroundColor: Colors.green,
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
       ),
     );
   }
@@ -335,27 +335,27 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
+            const Icon(
               Icons.celebration,
               size: 80,
               color: Colors.orange,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               milestone.title,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Text(
               milestone.description,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () => Navigator.pop(context),
               style: ElevatedButton.styleFrom(
@@ -407,17 +407,17 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
   Color _getCrowdLevelColor(int level) {
     switch (level) {
       case 1:
-        return Color(0xFF4CAF50); // Green
+        return const Color(0xFF4CAF50); // Green
       case 2:
-        return Color(0xFF8BC34A); // Light Green
+        return const Color(0xFF8BC34A); // Light Green
       case 3:
-        return Color(0xFFFFC107); // Amber
+        return const Color(0xFFFFC107); // Amber
       case 4:
-        return Color(0xFFFF9800); // Orange
+        return const Color(0xFFFF9800); // Orange
       case 5:
-        return Color(0xFFF44336); // Red
+        return const Color(0xFFF44336); // Red
       default:
-        return Color(0xFF9E9E9E); // Grey
+        return const Color(0xFF9E9E9E); // Grey
     }
   }
   
@@ -436,10 +436,10 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
           children: [
             Row(
               children: [
-                Icon(Icons.emoji_events, color: Colors.orange),
-                SizedBox(width: 8),
+                const Icon(Icons.emoji_events, color: Colors.orange),
+                const SizedBox(width: 8),
                 Text(
-                  AppLocalizations.of(context)!.generatedKey_f0f0c7f4,
+                  '次の報酬まであと${_nextMilestone!.remaining}回！',
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

@@ -80,7 +80,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
       if (_scrollController.hasClients) {
         _scrollController.animateTo(
           0,
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           curve: Curves.easeOut,
         );
       }
@@ -107,13 +107,13 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(AppLocalizations.of(context)!.generatedKey_b6a2b2e7),
-            SizedBox(height: 16),
+            Text('${widget.partner.displayName}さんをブロックしますか？'),
+            const SizedBox(height: 16),
             Text(
-              AppLocalizations.of(context)!.general_0cdd8f95
-              AppLocalizations.of(context)!.generatedKey_f073e2b1
-              AppLocalizations.of(context)!.generatedKey_3f52e845
-              AppLocalizations.of(context)!.general_dd7cc19f,
+              'ブロックすると:\n'
+              '• メッセージの送受信ができなくなります\n'
+              '• 検索結果に表示されなくなります\n'
+              '• 相手からあなたのプロフィールが見られなくなります',
               style: TextStyle(fontSize: 13, color: Colors.grey[700]),
             ),
           ],
@@ -173,7 +173,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(AppLocalizations.of(context)!.selectExercise),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 ...[
                   AppLocalizations.of(context)!.inappropriateContent,
                   AppLocalizations.of(context)!.general_43115ef3,
@@ -194,7 +194,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
                     dense: true,
                   );
                 }),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextField(
                   controller: detailsController,
                   decoration: InputDecoration(
@@ -263,7 +263,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
               }
             },
             itemBuilder: (context) => [
-              PopupMenuItem(
+              const PopupMenuItem(
                 value: 'block',
                 child: Row(
                   children: [
@@ -277,7 +277,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
                 value: 'report',
                 child: Row(
                   children: [
-                    Icon(Icons.flag, size: 20),
+                    const Icon(Icons.flag, size: 20),
                     SizedBox(width: 8),
                     Text(AppLocalizations.of(context)!.report),
                   ],
@@ -305,7 +305,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
                 }
 
                 if (!snapshot.hasData) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
 
                 final messages = snapshot.data!.docs;
@@ -401,7 +401,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.2),
-            offset: Offset(0, -1),
+            offset: const Offset(0, -1),
             blurRadius: 4,
           ),
         ],
@@ -413,7 +413,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
               child: TextField(
                 controller: _messageController,
                 decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.general_94ebce72,
+                  hintText: 'メッセージを入力...',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24),
                     borderSide: BorderSide.none,

@@ -71,7 +71,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
         centerTitle: true,
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -79,16 +79,16 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
                 children: [
                   // トライアル状態カード
                   _buildTrialStatusCard(),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                   
                   // 進捗表示
                   if (!_isTrialActive && !_isTrialUsed) ...[
                     _buildProgressIndicator(),
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
                     
                     // 条件リスト
                     _buildConditionsList(),
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
                   ],
                   
                   // トライアル内容説明
@@ -108,7 +108,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
 
     if (_isTrialActive) {
       title = AppLocalizations.of(context)!.subscription_a3287c96;
-      subtitle = AppLocalizations.of(context)!.generatedKey_87967650;
+      subtitle = '残り$_remainingDays日間、プレミアム機能をお楽しみください';
       color = Colors.green;
       icon = Icons.celebration;
     } else if (_isTrialUsed) {
@@ -135,7 +135,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
         child: Column(
           children: [
             Icon(icon, size: 64, color: color),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               title,
               style: TextStyle(
@@ -145,7 +145,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               subtitle,
               style: TextStyle(
@@ -168,7 +168,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               AppLocalizations.of(context)!.subscription_740f887c,
               style: TextStyle(
                 fontSize: 18,
@@ -185,7 +185,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
             ),
           ],
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
         LinearProgressIndicator(
           value: _progress / 100,
           minHeight: 8,
@@ -213,14 +213,14 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               AppLocalizations.of(context)!.subscription_0fca92cf,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ...conditionLabels.entries.map((entry) {
               final isAchieved = _conditions[entry.key] ?? false;
               return Padding(
@@ -232,7 +232,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
                       color: isAchieved ? Colors.green : Colors.grey,
                       size: 24,
                     ),
-                    SizedBox(width: 12),
+                    const SizedBox(width: 12),
                     Expanded(
                       child: Text(
                         entry.value.toString(),
@@ -265,7 +265,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
             Row(
               children: [
                 Icon(Icons.card_giftcard, color: Colors.blue[700]),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(
                   AppLocalizations.of(context)!.subscription_f578bedc,
                   style: TextStyle(
@@ -276,21 +276,21 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 12),
-            Text(
-              AppLocalizations.of(context)!.subscription_19705f59,
+            const SizedBox(height: 12),
+            const Text(
+              '✨ プレミアムプラン 7日間無料',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
-              AppLocalizations.of(context)!.generatedKey_5117983a
-              AppLocalizations.of(context)!.generatedKey_d42111dd
-              AppLocalizations.of(context)!.generatedKey_496b48ae
-              AppLocalizations.of(context)!.generatedKey_7a7b91ca
-              AppLocalizations.of(context)!.subscription_71bca8ba,
+              '• AI機能 月10回\n'
+              '• お気に入り登録無制限\n'
+              '• ジムレビュー投稿\n'
+              '• 混雑度アラート通知\n'
+              '• 高度なフィルター検索',
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey[700],

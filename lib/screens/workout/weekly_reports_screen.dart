@@ -7,7 +7,7 @@ import '../../models/weekly_report.dart';
 
 /// 週次レポート画面
 class WeeklyReportsScreen extends StatefulWidget {
-  WeeklyReportsScreen({super.key});
+  const WeeklyReportsScreen({super.key});
 
   @override
   State<WeeklyReportsScreen> createState() => _WeeklyReportsScreenState();
@@ -39,7 +39,7 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
             appBar: AppBar(title: Text(AppLocalizations.of(context)!.weeklyReport)),
-            body: Center(
+            body: const Center(
               child: CircularProgressIndicator(),
             ),
           );
@@ -76,7 +76,7 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
         title: Text(AppLocalizations.of(context)!.weeklyReport),
         actions: [
           IconButton(
-            icon: Icon(Icons.settings),
+            icon: const Icon(Icons.settings),
             onPressed: () {
               _showReportSettings(context);
             },
@@ -91,7 +91,7 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
             .snapshots(), // orderByを削除
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (snapshot.hasError) {
@@ -101,15 +101,15 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.info_outline, size: 64, color: Colors.blue),
-                    SizedBox(height: 16),
-                    Text(
+                    const Icon(Icons.info_outline, size: 64, color: Colors.blue),
+                    const SizedBox(height: 16),
+                    const Text(
                       AppLocalizations.of(context)!.workout_73791c8e,
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
-                      AppLocalizations.of(context)!.generatedKey_8a87562e,
+                      '毎週月曜日に自動生成されます\n（デモモードではCloud Function未実装のため手動データが必要です）',
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                     ),
@@ -125,12 +125,12 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.assessment, size: 64, color: Colors.grey[400]),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Text(
                     AppLocalizations.of(context)!.workout_6fa5ecc7,
                     style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     AppLocalizations.of(context)!.workout_c604389d,
                     style: TextStyle(fontSize: 12, color: Colors.grey[500]),
@@ -195,7 +195,7 @@ class _WeeklyReportsScreenState extends State<WeeklyReportsScreen> {
 class _ReportCard extends StatelessWidget {
   final WeeklyReport report;
 
-  _ReportCard({required this.report});
+  const _ReportCard({required this.report});
 
   @override
   Widget build(BuildContext context) {
@@ -205,10 +205,10 @@ class _ReportCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       child: ExpansionTile(
-        leading: Icon(Icons.calendar_today, color: Colors.blue),
+        leading: const Icon(Icons.calendar_today, color: Colors.blue),
         title: Text(
           weekRange,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         subtitle: Text('${report.totalWorkouts}回 • ${report.totalMinutes}分'),
         children: [
@@ -239,9 +239,9 @@ class _ReportCard extends StatelessWidget {
                   ],
                 ),
 
-                SizedBox(height: 16),
-                Divider(),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
+                const Divider(),
+                const SizedBox(height: 16),
 
                 // 部位別実施状況
                 _buildSection(
@@ -260,9 +260,9 @@ class _ReportCard extends StatelessWidget {
 
                 // レコメンデーション
                 if (report.recommendations != null) ...[
-                  SizedBox(height: 16),
-                  Divider(),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
+                  const Divider(),
+                  const SizedBox(height: 16),
                   _buildRecommendations(report.recommendations!),
                 ],
               ],
@@ -279,9 +279,9 @@ class _ReportCard extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
         ...children,
       ],
     );
@@ -389,7 +389,7 @@ class _BodyPartRow extends StatelessWidget {
                 width: 50,
                 child: Text(
                   part,
-                  style: TextStyle(fontSize: 13),
+                  style: const TextStyle(fontSize: 13),
                 ),
               ),
               Expanded(
@@ -415,11 +415,11 @@ class _BodyPartRow extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               SizedBox(
                 width: 30,
                 child: Text(
-                  AppLocalizations.of(context)!.reps,
+                  '$count回',
                   style: const TextStyle(
                       fontSize: 12, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.right,

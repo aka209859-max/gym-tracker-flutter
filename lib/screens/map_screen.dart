@@ -74,7 +74,7 @@ class _MapScreenState extends State<MapScreen> {
           ],
         ),
         content: Text(
-          AppLocalizations.of(context)!.generatedKey_f4f68181,
+          '${AppLocalizations.of(context)!.searchGym}\n※位置情報は検索のみに使用され、保存されません。',
           style: TextStyle(fontSize: 14),
         ),
         actions: [
@@ -112,7 +112,7 @@ class _MapScreenState extends State<MapScreen> {
 
     try {
       if (kDebugMode) {
-        debugPrint(AppLocalizations.of(context)!.general_1d85fea7);
+        debugPrint('🌍 GPS位置情報を取得中...');
       }
 
       Position? position = await _locationService.getCurrentLocation();
@@ -144,7 +144,7 @@ class _MapScreenState extends State<MapScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     AppLocalizations.of(context)!.general_8b92a0e1,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
@@ -153,10 +153,10 @@ class _MapScreenState extends State<MapScreen> {
                     kIsWeb 
                       ? AppLocalizations.of(context)!.general_e4a4a1d1
                       : AppLocalizations.of(context)!.confirm,
-                    style: TextStyle(fontSize: 12),
+                    style: const TextStyle(fontSize: 12),
                   ),
-                  SizedBox(height: 4),
-                  Text(
+                  const SizedBox(height: 4),
+                  const Text(
                     AppLocalizations.of(context)!.general_3d380ed0,
                     style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                   ),
@@ -184,7 +184,7 @@ class _MapScreenState extends State<MapScreen> {
       
       try {
         if (kDebugMode) {
-          debugPrint(AppLocalizations.of(context)!.general_af01f3fc);
+          debugPrint('🌐 Google Places APIで周辺のジムを検索中...');
         }
         
         final places = await _placesService.searchNearbyGyms(
@@ -192,10 +192,10 @@ class _MapScreenState extends State<MapScreen> {
           longitude: position.longitude,
           radiusMeters: 5000,
         ).timeout(
-          Duration(seconds: 15),
+          const Duration(seconds: 15),
           onTimeout: () {
             if (kDebugMode) {
-              debugPrint(AppLocalizations.of(context)!.general_e6d6fa86);
+              debugPrint('⏱️ Google Places API timeout - フォールバックします');
             }
             throw TimeoutException('Google Places API timeout');
           },
@@ -224,7 +224,7 @@ class _MapScreenState extends State<MapScreen> {
           // パートナー統合失敗時もGoogle Placesデータをそのまま使用
           if (kDebugMode) {
             debugPrint('⚠️ パートナー統合失敗: $mergeError');
-            debugPrint(AppLocalizations.of(context)!.general_07c37d11);
+            debugPrint('   Google Placesデータをそのまま使用します');
           }
           
           // Google PlaceをGymに変換（パートナー情報なし）
@@ -263,13 +263,13 @@ class _MapScreenState extends State<MapScreen> {
         
       } on TimeoutException catch (e) {
         if (kDebugMode) {
-          debugPrint(AppLocalizations.of(context)!.generatedKey_4087785c);
-          debugPrint(AppLocalizations.of(context)!.general_bbad8051);
+          debugPrint('⏱️ Google Places APIタイムアウト: $e');
+          debugPrint('   フォールバック: サンプルデータを使用します');
         }
       } catch (e) {
         if (kDebugMode) {
           debugPrint('⚠️ Google Places API検索エラー: $e');
-          debugPrint(AppLocalizations.of(context)!.general_bbad8051);
+          debugPrint('   フォールバック: サンプルデータを使用します');
         }
       }
       
@@ -283,7 +283,7 @@ class _MapScreenState extends State<MapScreen> {
           final firestoreGyms = await FirebaseFirestore.instance
               .collection('gyms')
               .get()
-              .timeout(Duration(seconds: 10));
+              .timeout(const Duration(seconds: 10));
           
           gyms = firestoreGyms.docs
               .map((doc) => Gym.fromFirestore(doc))
@@ -302,7 +302,7 @@ class _MapScreenState extends State<MapScreen> {
         }
       } else if (gyms.isEmpty) {
         if (kDebugMode) {
-          debugPrint(AppLocalizations.of(context)!.generatedKey_d014a7b1);
+          debugPrint('ℹ️ 検索結果が0件です（この地域にジムが存在しない可能性）');
         }
       }
         
@@ -314,7 +314,7 @@ class _MapScreenState extends State<MapScreen> {
             SnackBar(
               content: Text(AppLocalizations.of(context)!.searchGym),
               backgroundColor: Colors.green,
-              duration: Duration(seconds: 2),
+              duration: const Duration(seconds: 2),
             ),
           );
         } else if (searchSucceeded && gyms.isEmpty) {
@@ -378,7 +378,7 @@ class _MapScreenState extends State<MapScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(AppLocalizations.of(context)!.generatedKey_e197bc84),
+            content: Text('${gyms.length}件のジムが見つかりました'),
             backgroundColor: Colors.green,
           ),
         );
@@ -410,18 +410,18 @@ class _MapScreenState extends State<MapScreen> {
         title: Text(AppLocalizations.of(context)!.general_8a9d68db),
         actions: [
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SearchScreen(),
+                  builder: (context) => const SearchScreen(),
                 ),
               );
             },
           ),
           IconButton(
-            icon: Icon(Icons.filter_list),
+            icon: const Icon(Icons.filter_list),
             onPressed: _showFilterDialog,
           ),
         ],
@@ -436,7 +436,7 @@ class _MapScreenState extends State<MapScreen> {
               color: Colors.blue.withValues(alpha: 0.1),
               child: Row(
                 children: [
-                  Icon(Icons.info_outline, color: Colors.blue, size: 20),
+                  const Icon(Icons.info_outline, color: Colors.blue, size: 20),
                   SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -459,7 +459,7 @@ class _MapScreenState extends State<MapScreen> {
               color: Colors.green.withValues(alpha: 0.1),
               child: Row(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                     height: 20,
                     child: CircularProgressIndicator(strokeWidth: 2),
@@ -486,11 +486,11 @@ class _MapScreenState extends State<MapScreen> {
               color: Colors.green.withValues(alpha: 0.1),
               child: Row(
                 children: [
-                  Icon(Icons.check_circle, color: Colors.green, size: 20),
-                  SizedBox(width: 8),
+                  const Icon(Icons.check_circle, color: Colors.green, size: 20),
+                  const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      AppLocalizations.of(context)!.generatedKey_934c5ba2,
+                      'あなたの近くのジム ${_nearbyGyms.length}件を表示中',
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
@@ -513,13 +513,13 @@ class _MapScreenState extends State<MapScreen> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _isLoadingGPS ? null : _acquireLocationAndSearch,
         icon: _isLoadingGPS
-            ? SizedBox(
+            ? const SizedBox(
                 width: 20,
                 height: 20,
                 child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
               )
             : Icon(Icons.my_location),
-        label: Text(_isLoadingGPS ? AppLocalizations.of(context)!.general_8b582e14 : AppLocalizations.of(context)!.currentLocation),
+        label: Text(_isLoadingGPS ? '検索中...' : AppLocalizations.of(context)!.currentLocation),
       ),
     );
   }
@@ -531,9 +531,9 @@ class _MapScreenState extends State<MapScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.search_off, size: 64, color: Colors.grey),
-            SizedBox(height: 16),
-            Text(
+            const Icon(Icons.search_off, size: 64, color: Colors.grey),
+            const SizedBox(height: 16),
+            const Text(
               AppLocalizations.of(context)!.general_303bea53,
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
@@ -564,7 +564,7 @@ class _MapScreenState extends State<MapScreen> {
         final filteredGyms = provider.getGymsByCrowdLevel(_crowdFilter);
 
         if (filteredGyms.isEmpty) {
-          return Center(
+          return const Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -610,13 +610,13 @@ class _MapScreenState extends State<MapScreen> {
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 4,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
       child: Row(
         children: [
-          Icon(Icons.people, size: 20),
+          const Icon(Icons.people, size: 20),
           SizedBox(width: 8),
           Text(AppLocalizations.of(context)!.workoutTypeFilter, style: TextStyle(fontWeight: FontWeight.bold)),
           const SizedBox(width: 16),
@@ -675,12 +675,12 @@ class _MapScreenState extends State<MapScreen> {
                       width: 80,
                       height: 80,
                       color: Colors.grey[300],
-                      child: Icon(Icons.fitness_center, size: 32),
+                      child: const Icon(Icons.fitness_center, size: 32),
                     );
                   },
                 ),
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               // ジム情報
               Expanded(
                 child: Column(
@@ -781,7 +781,7 @@ class _MapScreenState extends State<MapScreen> {
             size: 14,
             color: Color(gym.crowdLevelColor),
           ),
-          SizedBox(width: 4),
+          const SizedBox(width: 4),
           Text(
             gym.crowdLevelText,
             style: TextStyle(
@@ -805,7 +805,7 @@ class _MapScreenState extends State<MapScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(AppLocalizations.of(context)!.selectExercise),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             StatefulBuilder(
               builder: (context, setState) {
                 return Column(

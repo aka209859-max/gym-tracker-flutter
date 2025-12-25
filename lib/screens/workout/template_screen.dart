@@ -8,7 +8,7 @@ import 'add_workout_screen.dart';
 
 /// テンプレート一覧画面
 class TemplateScreen extends StatefulWidget {
-  TemplateScreen({super.key});
+  const TemplateScreen({super.key});
 
   @override
   State<TemplateScreen> createState() => _TemplateScreenState();
@@ -50,7 +50,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
             appBar: AppBar(title: Text(AppLocalizations.of(context)!.templates)),
-            body: Center(child: CircularProgressIndicator()),
+            body: const Center(child: CircularProgressIndicator()),
           );
         }
 
@@ -110,7 +110,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
           final result = await Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CreateTemplateScreen(),
+              builder: (context) => const CreateTemplateScreen(),
             ),
           );
           if (result == true) {
@@ -135,7 +135,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting && !snapshot.hasData) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
 
         if (snapshot.hasError) {
@@ -165,7 +165,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.folder_open, size: 64, color: Colors.grey[400]),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
                   AppLocalizations.of(context)!.workout_156c3331,
                   style: TextStyle(fontSize: 16, color: Colors.grey[600]),
@@ -235,7 +235,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
                       size: 24,
                     ),
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
                   
                   // タイトル・説明
                   Expanded(
@@ -247,7 +247,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
                             Expanded(
                               child: Text(
                                 template.name,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -275,7 +275,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
                           ],
                         ),
                         if (template.description != null) ...[
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
                           Text(
                             template.description!,
                             style: TextStyle(
@@ -291,7 +291,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
                   // メニューボタン
                   if (!isDefault)
                     PopupMenuButton<String>(
-                      icon: Icon(Icons.more_vert),
+                      icon: const Icon(Icons.more_vert),
                       onSelected: (value) {
                         if (value == 'delete') {
                           _deleteTemplate(template);
@@ -343,7 +343,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
                 Row(
                   children: [
                     Icon(Icons.check_circle, size: 14, color: Colors.grey[600]),
-                    SizedBox(width: 4),
+                    const SizedBox(width: 4),
                     Text(
                       '使用回数: ${template.usageCount}回',
                       style: TextStyle(fontSize: 12, color: Colors.grey[600]),
@@ -388,7 +388,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
           }).toList(),
         };
         
-        print(AppLocalizations.of(context)!.generatedKey_b714e319);
+        print('📋 テンプレートデータを渡す: $templateData');
         
         final result = await Navigator.push(
           context,
@@ -422,7 +422,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
       context: context,
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.deleteTemplate),
-        content: Text(AppLocalizations.of(context)!.generatedKey_51ce78c9),
+        content: Text('「${template.name}」を削除しますか？'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
