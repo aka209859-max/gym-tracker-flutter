@@ -1,0 +1,13 @@
+# Week 1 Day 2 - 優先度高ファイル（5ファイル）
+
+lib/screens/home_screen.dart
+lib/screens/profile_screen.dart
+lib/screens/settings_screen.dart
+lib/screens/onboarding/onboarding_screen.dart
+lib/screens/subscription_screen.dart
+
+# 選定理由:
+# 1. ユーザーが最も頻繁に使う画面
+# 2. 重要なUI文字列が多い
+# 3. 多言語化の効果が最も大きい
+# 4. Pattern A（Widget内）が多く、安全に置換可能

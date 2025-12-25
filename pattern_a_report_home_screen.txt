@@ -1,0 +1,59 @@
+================================================================================
+Pattern A Application Report
+Generated: 2025-12-25 22:09:49
+================================================================================
+
+📊 Statistics:
+  Total replacements attempted: 5
+  Safe replacements made: 5
+  Unsafe contexts skipped: 81
+  Exact matches used: 5
+
+================================================================================
+📝 Detailed Replacement Log:
+================================================================================
+
+1. File: lib/screens/home_screen.dart
+   Line: 4143
+   Japanese: 週次
+   ARB Key: general_a19f5322
+   Old: '週次'
+   New: l10n.general_a19f5322
+   Context: Text\s*\(
+   Safe: True
+
+2. File: lib/screens/home_screen.dart
+   Line: 4433
+   Japanese: 削除対象の記録が見つかりませんでした
+   ARB Key: general_bb332935
+   Old: '削除対象の記録が見つかりませんでした'
+   New: l10n.general_bb332935
+   Context: Text\s*\(
+   Safe: True
+
+3. File: lib/screens/home_screen.dart
+   Line: 4459
+   Japanese: 記録を削除しました
+   ARB Key: general_aa5b02ca
+   Old: '記録を削除しました'
+   New: l10n.general_aa5b02ca
+   Context: Text\s*\(
+   Safe: True
+
+4. File: lib/screens/home_screen.dart
+   Line: 4731
+   Japanese: 本日のトレーニング記録が見つかりません
+   ARB Key: general_86a8de76
+   Old: '本日のトレーニング記録が見つかりません'
+   New: l10n.general_86a8de76
+   Context: Text\s*\(
+   Safe: True
+
+5. File: lib/screens/home_screen.dart
+   Line: 6203
+   Japanese: 招待コードをコピーしました！
+   ARB Key: general_2489afc4
+   Old: '招待コードをコピーしました！'
+   New: l10n.general_2489afc4
+   Context: Text\s*\(
+   Safe: True
