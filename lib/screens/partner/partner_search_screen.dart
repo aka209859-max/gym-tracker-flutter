@@ -45,22 +45,22 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
 
   // 利用可能なオプション
   final Map<String, String> _trainingGoals = {
-    'muscle_gain': l10n.goalStrengthGain,
-    'weight_loss': l10n.goalWeightLoss,
-    'endurance': l10n.goalEndurance,
+    'muscle_gain': AppLocalizations.of(context)!.goalStrengthGain,
+    'weight_loss': AppLocalizations.of(context)!.goalWeightLoss,
+    'endurance': AppLocalizations.of(context)!.goalEndurance,
     'flexibility': AppLocalizations.of(context)!.goalFlexibility,
   };
 
   final Map<String, String> _experienceLevels = {
-    'beginner': l10n.beginner,
-    'intermediate': l10n.intermediate,
-    'advanced': l10n.advanced,
+    'beginner': AppLocalizations.of(context)!.beginner,
+    'intermediate': AppLocalizations.of(context)!.intermediate,
+    'advanced': AppLocalizations.of(context)!.advanced,
     'expert': AppLocalizations.of(context)!.levelExpert,
   };
 
   final Map<String, String> _genders = {
-    'male': l10n.male,
-    'female': l10n.female,
+    'male': AppLocalizations.of(context)!.male,
+    'female': AppLocalizations.of(context)!.female,
     'other': AppLocalizations.of(context)!.other,
   };
 
@@ -93,7 +93,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
       // 位置情報取得失敗時は続行（フィルターから距離を除外）
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(l10n.general_8b92a0e1)),
+          const SnackBar(content: Text(AppLocalizations.of(context)!.general_8b92a0e1)),
         );
       }
     }
@@ -135,6 +135,8 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+      final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.partnerSearch),

@@ -1019,7 +1019,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                 return Column(
                   children: reviews.map((doc) {
                     final data = doc.data() as Map<String, dynamic>;
-                    final userName = data['userName'] ?? l10n.gym_d2109d2d;
+                    final userName = data['userName'] ?? AppLocalizations.of(context)!.gym_d2109d2d;
                     final overallRating = (data['overallRating'] ?? 0).toDouble();
                     final comment = data['comment'] ?? '';
                     final createdAt = (data['createdAt'] as Timestamp?)?.toDate();
@@ -1130,7 +1130,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                       Text('🏆', style: TextStyle(fontSize: 14)),
                       SizedBox(width: 4),
                       Text(
-                        l10n.gym_45a96aae,
+                        AppLocalizations.of(context)!.gym_45a96aae,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
@@ -1353,7 +1353,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      l10n.gym_6aaedfbd,
+                      AppLocalizations.of(context)!.gym_6aaedfbd,
                       style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey[700],
@@ -1659,7 +1659,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
   String _getCrowdLevelText(int level) {
     switch (level) {
       case 1:
-        return l10n.gym_e662330d;
+        return AppLocalizations.of(context)!.gym_e662330d;
       case 2:
         return AppLocalizations.of(context)!.moderatelyEmpty;
       case 3:
@@ -1667,7 +1667,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
       case 4:
         return AppLocalizations.of(context)!.moderatelyCrowded;
       case 5:
-        return l10n.gym_181af51b;
+        return AppLocalizations.of(context)!.gym_181af51b;
       default:
         return AppLocalizations.of(context)!.unknown;
     }

@@ -30,19 +30,19 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
   // 設備候補
   final List<String> _facilityOptions = [
     'シャワー室',
-    l10n.gym_d816d814,
-    l10n.gym_62b8a10f,
-    l10n.gym_a88b1eac,
-    l10n.gym_3f1c4a99,
+    AppLocalizations.of(context)!.gym_d816d814,
+    AppLocalizations.of(context)!.gym_62b8a10f,
+    AppLocalizations.of(context)!.gym_a88b1eac,
+    AppLocalizations.of(context)!.gym_3f1c4a99,
     AppLocalizations.of(context)!.personalTraining,
-    l10n.gym_0f5d9dd9,
+    AppLocalizations.of(context)!.gym_0f5d9dd9,
     'Wi-Fi',
-    l10n.gym_6cec8734,
-    l10n.gym_fc767436,
-    l10n.gym_ae762a12,
-    l10n.gym_7d1e3afa,
-    l10n.gym_1741ee33,
-    l10n.gym_bdb55ce3,
+    AppLocalizations.of(context)!.gym_6cec8734,
+    AppLocalizations.of(context)!.gym_fc767436,
+    AppLocalizations.of(context)!.gym_ae762a12,
+    AppLocalizations.of(context)!.gym_7d1e3afa,
+    AppLocalizations.of(context)!.gym_1741ee33,
+    AppLocalizations.of(context)!.gym_bdb55ce3,
   ];
 
   @override
@@ -63,7 +63,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
       if (gymDoc.exists) {
         final data = gymDoc.data();
         if (data == null) {
-          throw Exception(l10n.gym_c7e47d32);
+          throw Exception(AppLocalizations.of(context)!.gym_c7e47d32);
         }
         setState(() {
           _equipment = data['equipment'] != null
@@ -138,7 +138,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
             TextField(
               controller: nameController,
               decoration: InputDecoration(
-                labelText: l10n.gym_17c1e0c7,
+                labelText: AppLocalizations.of(context)!.gym_17c1e0c7,
                 hintText: '例: レッグプレス',
               ),
             ),
@@ -146,7 +146,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
             TextField(
               controller: countController,
               decoration: InputDecoration(
-                labelText: l10n.gym_d441d8be,
+                labelText: AppLocalizations.of(context)!.gym_d441d8be,
               ),
               keyboardType: TextInputType.number,
             ),
@@ -182,6 +182,8 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
 
   @override
   Widget build(BuildContext context) {
+      final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.edit),

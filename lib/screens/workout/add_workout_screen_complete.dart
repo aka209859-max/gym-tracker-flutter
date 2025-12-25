@@ -318,7 +318,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(l10n.workout_b23db97f),
+        title: Text(AppLocalizations.of(context)!.workout_b23db97f),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: _restDurations.map((duration) {
@@ -348,7 +348,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         content: TextField(
           controller: controller,
           decoration: InputDecoration(
-            hintText: l10n.workout_a3dbb30d,
+            hintText: AppLocalizations.of(context)!.workout_a3dbb30d,
             border: OutlineInputBorder(),
           ),
           autofocus: true,
@@ -401,7 +401,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   Future<void> _saveWorkout() async {
     if (_sets.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text(l10n.workout_d90b7b6b)),
+        const SnackBar(content: Text(AppLocalizations.of(context)!.workout_d90b7b6b)),
       );
       return;
     }
@@ -428,7 +428,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
 
       final workoutDoc = await FirebaseFirestore.instance.collection('workout_logs').add({
         'user_id': user.uid,
-        'muscle_group': _selectedMuscleGroup ?? l10n.workout_ed08832f,
+        'muscle_group': _selectedMuscleGroup ?? AppLocalizations.of(context)!.workout_ed08832f,
         'date': Timestamp.fromDate(_selectedDate),
         'start_time': Timestamp.fromDate(startTime),
         'end_time': Timestamp.fromDate(endTime),
@@ -460,7 +460,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       if (mounted) {
         Navigator.pop(context, true);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(l10n.workout_498b0ea4)),
+          const SnackBar(content: Text(AppLocalizations.of(context)!.workout_498b0ea4)),
         );
       }
     } catch (e) {
@@ -474,6 +474,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
 
   @override
   Widget build(BuildContext context) {
+      final l10n = AppLocalizations.of(context)!;
+
     final theme = Theme.of(context);
     
     return Scaffold(

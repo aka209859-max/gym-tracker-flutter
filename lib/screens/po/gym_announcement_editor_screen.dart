@@ -96,7 +96,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(l10n.gym_6604883b),
+            content: Text(AppLocalizations.of(context)!.gym_6604883b),
             backgroundColor: Colors.green,
           ),
         );
@@ -176,6 +176,8 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
 
   @override
   Widget build(BuildContext context) {
+      final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.announcement == null ? l10n.gym_afa40a0c : AppLocalizations.of(context)!.edit),

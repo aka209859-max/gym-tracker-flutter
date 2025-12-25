@@ -97,7 +97,7 @@ class _MapScreenState extends State<MapScreen> {
                 _acquireLocationAndSearch();
               }
             },
-            child: Text(l10n.general_c01ec2ac),
+            child: Text(AppLocalizations.of(context)!.general_c01ec2ac),
           ),
         ],
       ),
@@ -145,19 +145,19 @@ class _MapScreenState extends State<MapScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    l10n.general_8b92a0e1,
+                    AppLocalizations.of(context)!.general_8b92a0e1,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 4),
                   Text(
                     kIsWeb 
-                      ? l10n.general_e4a4a1d1
+                      ? AppLocalizations.of(context)!.general_e4a4a1d1
                       : AppLocalizations.of(context)!.confirm,
                     style: const TextStyle(fontSize: 12),
                   ),
                   SizedBox(height: 4),
                   Text(
-                    l10n.general_3d380ed0,
+                    AppLocalizations.of(context)!.general_3d380ed0,
                     style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
                   ),
                 ],
@@ -239,7 +239,7 @@ class _MapScreenState extends State<MapScreen> {
             phoneNumber: '',
             openingHours: place.openNow != null 
                 ? (place.openNow! ? AppLocalizations.of(context)!.open : l10n.general_a2082b23)
-                : l10n.general_88133d74,
+                : AppLocalizations.of(context)!.general_88133d74,
             monthlyFee: 0,
             rating: place.rating ?? 0.0,
             reviewCount: place.userRatingsTotal ?? 0,
@@ -320,7 +320,7 @@ class _MapScreenState extends State<MapScreen> {
         } else if (searchSucceeded && gyms.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(l10n.general_fe7a7194),
+              content: Text(AppLocalizations.of(context)!.general_fe7a7194),
               backgroundColor: Colors.orange,
               duration: Duration(seconds: 3),
             ),
@@ -405,6 +405,8 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
+      final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.general_8a9d68db),
@@ -847,7 +849,7 @@ class _MapScreenState extends State<MapScreen> {
   String _getCrowdLevelText(int level) {
     switch (level) {
       case 1:
-        return l10n.gym_e662330d;
+        return AppLocalizations.of(context)!.gym_e662330d;
       case 2:
         return AppLocalizations.of(context)!.moderatelyEmpty;
       case 3:
@@ -855,7 +857,7 @@ class _MapScreenState extends State<MapScreen> {
       case 4:
         return AppLocalizations.of(context)!.moderatelyCrowded;
       case 5:
-        return l10n.gym_181af51b;
+        return AppLocalizations.of(context)!.gym_181af51b;
       default:
         return AppLocalizations.of(context)!.unknown;
     }

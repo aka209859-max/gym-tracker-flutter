@@ -21,24 +21,24 @@ class _PartnerEquipmentEditorScreenState
   // マシン種類のマスタリスト
   final List<String> _availableEquipment = [
     'フリーウエイト',
-    l10n.gym_8b54efdd,
+    AppLocalizations.of(context)!.gym_8b54efdd,
     AppLocalizations.of(context)!.exerciseLegPress,
     AppLocalizations.of(context)!.exerciseBenchPress,
-    l10n.general_34cda07f,
-    l10n.gym_40e07129,
+    AppLocalizations.of(context)!.general_34cda07f,
+    AppLocalizations.of(context)!.gym_40e07129,
     AppLocalizations.of(context)!.exerciseAerobicBike,
-    l10n.dumbbell,
-    l10n.barbell,
+    AppLocalizations.of(context)!.dumbbell,
+    AppLocalizations.of(context)!.barbell,
     AppLocalizations.of(context)!.exerciseLatPulldown,
     AppLocalizations.of(context)!.exerciseLegExtension,
     AppLocalizations.of(context)!.exerciseLegCurl,
-    l10n.general_921ddbac,
+    AppLocalizations.of(context)!.general_921ddbac,
     AppLocalizations.of(context)!.exerciseShoulderPress,
-    l10n.exercise_cfc4f367,
-    l10n.general_c2994ab4,
-    l10n.workout_c196525e,
-    l10n.workout_4c6d7db7,
-    l10n.general_58db9535,
+    AppLocalizations.of(context)!.exercise_cfc4f367,
+    AppLocalizations.of(context)!.general_c2994ab4,
+    AppLocalizations.of(context)!.workout_c196525e,
+    AppLocalizations.of(context)!.workout_4c6d7db7,
+    AppLocalizations.of(context)!.general_58db9535,
     AppLocalizations.of(context)!.bodyPartOther,
   ];
 
@@ -135,6 +135,8 @@ class _PartnerEquipmentEditorScreenState
 
   @override
   Widget build(BuildContext context) {
+      final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.edit),

@@ -115,7 +115,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              l10n.profile_ec23f31d,
+              AppLocalizations.of(context)!.profile_ec23f31d,
               style: TextStyle(fontSize: 14),
             ),
             SizedBox(height: 20),
@@ -127,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               title: Text('📸 写真から取り込み'),
               subtitle: Text(
-                l10n.profile_d752bd08,
+                AppLocalizations.of(context)!.profile_d752bd08,
                 style: TextStyle(fontSize: 12),
               ),
               onTap: () => Navigator.pop(context, 'photo'),
@@ -141,7 +141,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               title: Text('📄 CSVから取り込み'),
               subtitle: Text(
-                l10n.profile_d97e2902,
+                AppLocalizations.of(context)!.profile_d97e2902,
                 style: TextStyle(fontSize: 12),
               ),
               onTap: () => Navigator.pop(context, 'csv'),
@@ -300,7 +300,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         // Note: file_pickerはモバイルでもbytesを提供するため、通常このパスは使用されない
         throw Exception('ファイルの読み込みに失敗しました');
       } else {
-        throw Exception(l10n.profile_81578c7e);
+        throw Exception(AppLocalizations.of(context)!.profile_81578c7e);
       }
 
       // CSV解析
@@ -380,7 +380,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                l10n.profile_fa33b86c,
+                AppLocalizations.of(context)!.profile_fa33b86c,
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.grey,
@@ -420,7 +420,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         );
                       },
-                      tooltip: l10n.copy,
+                      tooltip: AppLocalizations.of(context)!.copy,
                     ),
                   ],
                 ),
@@ -434,8 +434,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               SizedBox(height: 8),
-              _buildRewardItem(l10n.profile_7128a2b9, 'AI使用回数 +5回'),
-              _buildRewardItem(l10n.profile_e6a7ff8b, 'AI使用回数 +3回'),
+              _buildRewardItem(AppLocalizations.of(context)!.profile_7128a2b9, 'AI使用回数 +5回'),
+              _buildRewardItem(AppLocalizations.of(context)!.profile_e6a7ff8b, 'AI使用回数 +3回'),
               SizedBox(height: 16),
               Container(
                 padding: const EdgeInsets.all(12),
@@ -472,7 +472,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 );
               },
               icon: Icon(Icons.share),
-              label: Text(l10n.profile_02387262),
+              label: Text(AppLocalizations.of(context)!.profile_02387262),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
                 foregroundColor: Colors.white,
@@ -981,7 +981,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               Icon(Icons.lock, color: Colors.amber[700]),
               SizedBox(width: 8),
-              Text(l10n.profile_467baa7c),
+              Text(AppLocalizations.of(context)!.profile_467baa7c),
             ],
           ),
           content: Column(
@@ -994,7 +994,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               SizedBox(height: 16),
               Text(
-                l10n.profile_a793420c,
+                AppLocalizations.of(context)!.profile_a793420c,
                 style: TextStyle(fontSize: 14, color: Colors.grey[700]),
               ),
               SizedBox(height: 8),
@@ -1012,7 +1012,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Navigator.pop(context);
                 // TODO: Implement SubscriptionScreen
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text(l10n.profile_7f49351b)),
+                  const SnackBar(content: Text(AppLocalizations.of(context)!.profile_7f49351b)),
                 );
                 /*
                 Navigator.push(
@@ -1021,7 +1021,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ).then((_) => _loadUserData());
                 */
               },
-              child: Text(l10n.profile_2871f0ae),
+              child: Text(AppLocalizations.of(context)!.profile_2871f0ae),
             ),
           ],
         ),
@@ -1048,14 +1048,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(l10n.profile_b217155b),
+        title: Text(AppLocalizations.of(context)!.profile_b217155b),
         content: Text(
           '$featureNameは現在開発中です。\n次回のアップデートでご利用いただけます。',
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(l10n.gym_95877b1f),
+            child: Text(AppLocalizations.of(context)!.gym_95877b1f),
           ),
         ],
       ),
@@ -1296,7 +1296,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 } else {
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text(l10n.subscription_f8882591)),
+                      const SnackBar(content: Text(AppLocalizations.of(context)!.subscription_f8882591)),
                     );
                   }
                 }

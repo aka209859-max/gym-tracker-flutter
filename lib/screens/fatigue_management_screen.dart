@@ -90,7 +90,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(l10n.general_86a8de76),
+              content: Text(AppLocalizations.of(context)!.general_86a8de76),
               backgroundColor: Colors.orange,
             ),
           );
@@ -181,29 +181,29 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
     IconData levelIcon;
     
     if (fatigueScore < 30) {
-      fatigueLevel = l10n.general_91e882eb;
+      fatigueLevel = AppLocalizations.of(context)!.general_91e882eb;
       levelColor = Colors.green;
       levelIcon = Icons.sentiment_satisfied;
       advice = '良好なトレーニングでした！\n軽いストレッチと十分な水分補給をしましょう。';
       recoveryTime = AppLocalizations.of(context)!.allDay;
     } else if (fatigueScore < 50) {
-      fatigueLevel = l10n.general_ce061ec3;
+      fatigueLevel = AppLocalizations.of(context)!.general_ce061ec3;
       levelColor = Colors.blue;
       levelIcon = Icons.sentiment_neutral;
       advice = '適度な負荷のトレーニングでした。\n7-8時間の睡眠とタンパク質補給を心がけましょう。';
       recoveryTime = '36-48時間';
     } else if (fatigueScore < 70) {
-      fatigueLevel = l10n.general_da8ce224;
+      fatigueLevel = AppLocalizations.of(context)!.general_da8ce224;
       levelColor = Colors.orange;
       levelIcon = Icons.sentiment_dissatisfied;
       advice = '高強度のトレーニングでした。\n十分な休息と栄養補給が必要です。無理せず回復を優先しましょう。';
       recoveryTime = '48-72時間';
     } else {
-      fatigueLevel = l10n.general_89a3d255;
+      fatigueLevel = AppLocalizations.of(context)!.general_89a3d255;
       levelColor = Colors.red;
       levelIcon = Icons.warning;
       advice = '非常に高強度のトレーニングでした。\n今日は完全休養を推奨します。睡眠・栄養・ストレッチを重視してください。';
-      recoveryTime = l10n.general_863f2f6a;
+      recoveryTime = AppLocalizations.of(context)!.general_863f2f6a;
     }
 
     showDialog(
@@ -213,7 +213,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
           children: [
             Icon(levelIcon, color: levelColor, size: 32),
             SizedBox(width: 12),
-            Text(l10n.general_2779463b),
+            Text(AppLocalizations.of(context)!.general_2779463b),
           ],
         ),
         content: SingleChildScrollView(
@@ -232,7 +232,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                 child: Column(
                   children: [
                     Text(
-                      l10n.general_034a0b49,
+                      AppLocalizations.of(context)!.general_034a0b49,
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey[700],
@@ -263,11 +263,11 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
               // トレーニング内容サマリー
               _buildInfoRow(AppLocalizations.of(context)!.totalSets, '$totalSets セット'),
               SizedBox(height: 8),
-              _buildInfoRow(l10n.totalVolume, '${totalVolumeLoad.toStringAsFixed(0)} kg'),
+              _buildInfoRow(AppLocalizations.of(context)!.totalVolume, '${totalVolumeLoad.toStringAsFixed(0)} kg'),
               SizedBox(height: 8),
-              _buildInfoRow(l10n.general_89c719c1, bodyParts.join('、')),
+              _buildInfoRow(AppLocalizations.of(context)!.general_89c719c1, bodyParts.join('、')),
               SizedBox(height: 8),
-              _buildInfoRow(l10n.general_f563accd, recoveryTime),
+              _buildInfoRow(AppLocalizations.of(context)!.general_f563accd, recoveryTime),
               
               const Divider(height: 32),
               
@@ -277,7 +277,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                   Icon(Icons.lightbulb, color: Colors.amber[700], size: 20),
                   SizedBox(width: 8),
                   Text(
-                    l10n.general_c443fe2a,
+                    AppLocalizations.of(context)!.general_c443fe2a,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

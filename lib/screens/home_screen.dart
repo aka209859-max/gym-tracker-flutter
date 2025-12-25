@@ -319,7 +319,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ),
                   ),
                   child: Text(
-                    l10n.general_6ff30ca2,
+                    AppLocalizations.of(context)!.general_6ff30ca2,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -467,7 +467,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ),
                   ),
                   child: Text(
-                    l10n.general_6ff30ca2,
+                    AppLocalizations.of(context)!.general_6ff30ca2,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -843,7 +843,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           final l10n = AppLocalizations.of(context)!;
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(l10n.noShareableRecords),
+              content: Text(AppLocalizations.of(context)!.noShareableRecords),
               backgroundColor: Colors.orange,
             ),
           );
@@ -2419,7 +2419,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           // 空セットが見つかった
           if (validSets.isEmpty) {
             // 全セットが空の場合、ドキュメント削除
-            print('   🗑️ 空データ削除: ${doc.id} (作成: ${createdAt?.toString() ?? l10n.unknown})');
+            print('   🗑️ 空データ削除: ${doc.id} (作成: ${createdAt?.toString() ?? AppLocalizations.of(context)!.unknown})');
             await FirebaseFirestore.instance
                 .collection('workout_logs')
                 .doc(doc.id)
@@ -2500,7 +2500,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         print('❌ ドキュメントデータが存在しません');
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text(l10n.gym_c7e47d32)),
+            const SnackBar(content: Text(AppLocalizations.of(context)!.gym_c7e47d32)),
           );
         }
         return;
@@ -2534,7 +2534,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(l10n.general_c51a7dc2)),
+          const SnackBar(content: Text(AppLocalizations.of(context)!.general_c51a7dc2)),
         );
       }
     } catch (e) {
@@ -2577,7 +2577,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
                 SizedBox(height: 16),
                 Text(
-                  l10n.general_2f87b5bf,
+                  AppLocalizations.of(context)!.general_2f87b5bf,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -2639,7 +2639,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ),
                   SizedBox(width: 12),
                   Text(
-                    l10n.monthlyArchive,
+                    AppLocalizations.of(context)!.monthlyArchive,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -2754,7 +2754,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
             SizedBox(height: 16),
             Text(
-              l10n.noWorkoutRecordsForDate(_selectedDay!.month, _selectedDay!.day),
+              AppLocalizations.of(context)!.noWorkoutRecordsForDate(_selectedDay!.month, _selectedDay!.day),
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey[600],
@@ -2830,7 +2830,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     Expanded(
                       child: Text(
                         _selectedDay != null && _isSameDay(_selectedDay!, DateTime.now())
-                            ? l10n.todaysWorkout
+                            ? AppLocalizations.of(context)!.todaysWorkout
                             : '${_selectedDay!.month}/${_selectedDay!.day}',  // Simplified date format
                         style: const TextStyle(
                           fontSize: 16,
@@ -2856,12 +2856,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   segments: [
                     ButtonSegment(
                       value: 'strength',
-                      label: Text(l10n.strengthTrainingFilter, style: const TextStyle(fontSize: 13)),
+                      label: Text(AppLocalizations.of(context)!.strengthTrainingFilter, style: const TextStyle(fontSize: 13)),
                       icon: Icon(Icons.fitness_center, size: 18),
                     ),
                     ButtonSegment(
                       value: 'cardio',
-                      label: Text(l10n.cardioFilter, style: const TextStyle(fontSize: 13)),
+                      label: Text(AppLocalizations.of(context)!.cardioFilter, style: const TextStyle(fontSize: 13)),
                       icon: Icon(Icons.directions_run, size: 18),
                     ),
                   ],
@@ -2938,8 +2938,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           Icons.heat_pump,
                           Colors.orange,
                           'WU',
-                          l10n.general_7339bc0f,
-                          l10n.general_478df9bb,
+                          AppLocalizations.of(context)!.general_7339bc0f,
+                          AppLocalizations.of(context)!.general_478df9bb,
                         ),
                         SizedBox(height: 8),
                         _buildSetTypeExplanationRow(
@@ -2947,23 +2947,23 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           Colors.purple,
                           'SS',
                           AppLocalizations.of(context)!.superSet,
-                          l10n.general_21df68a8,
+                          AppLocalizations.of(context)!.general_21df68a8,
                         ),
                         SizedBox(height: 8),
                         _buildSetTypeExplanationRow(
                           Icons.trending_down,
                           Colors.blue,
                           'DS',
-                          l10n.general_71a798d0,
-                          l10n.general_5bd68fa7,
+                          AppLocalizations.of(context)!.general_71a798d0,
+                          AppLocalizations.of(context)!.general_5bd68fa7,
                         ),
                         SizedBox(height: 8),
                         _buildSetTypeExplanationRow(
                           Icons.local_fire_department,
                           Colors.red,
                           AppLocalizations.of(context)!.limit,
-                          l10n.general_dad5d767,
-                          l10n.general_5c1f42bf,
+                          AppLocalizations.of(context)!.general_dad5d767,
+                          AppLocalizations.of(context)!.general_5c1f42bf,
                         ),
                       ],
                     ),
@@ -3118,7 +3118,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                   _loadWorkoutsForSelectedDay();
                                 }
                               },
-                              tooltip: l10n.general_99cab4c9,
+                              tooltip: AppLocalizations.of(context)!.general_99cab4c9,
                             ),
                           ],
                         ),
@@ -3209,7 +3209,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               SizedBox(
                                 width: 24,
                                 child: Text(
-                                  l10n.workout_c6b41e99,
+                                  AppLocalizations.of(context)!.workout_c6b41e99,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 9,
@@ -3302,9 +3302,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                       if (isCardio) {
                                         return Text('$weight 分', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       } else if (isAbs && (isBodyweightMode || weight == 0.0)) {
-                                        return Text(l10n.bodyweight, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
+                                        return Text(AppLocalizations.of(context)!.bodyweight, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       } else if (isBodyweightMode && weight == 0.0) {
-                                        return Text(l10n.bodyweight, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
+                                        return Text(AppLocalizations.of(context)!.bodyweight, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       } else {
                                         return Text('$weight Kg', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       }
@@ -3649,7 +3649,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               ),
                               SizedBox(width: 8),
                               Text(
-                                date != null ? '${date.year}/${date.month}/${date.day}' : l10n.workout_3e8e25ce,
+                                date != null ? '${date.year}/${date.month}/${date.day}' : AppLocalizations.of(context)!.workout_3e8e25ce,
                                 style: const TextStyle(
                                   fontSize: 12,
                                   color: Colors.grey,
@@ -3836,7 +3836,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   SizedBox(height: 16),
                   
                   // 日付範囲
-                  Text(l10n.general_fb83494b, style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text(AppLocalizations.of(context)!.general_fb83494b, style: TextStyle(fontWeight: FontWeight.bold)),
                   SizedBox(height: 8),
                   OutlinedButton.icon(
                     onPressed: () async {
@@ -3857,7 +3857,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     icon: Icon(Icons.calendar_today),
                     label: Text(
                       _dateRangeFilter == null
-                          ? l10n.general_67002620
+                          ? AppLocalizations.of(context)!.general_67002620
                           : '${_dateRangeFilter!.start.month}/${_dateRangeFilter!.start.day} - ${_dateRangeFilter!.end.month}/${_dateRangeFilter!.end.day}',
                     ),
                   ),
@@ -4085,7 +4085,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Text(
-                l10n.general_03433587,
+                AppLocalizations.of(context)!.general_03433587,
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -4140,7 +4140,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
             ListTile(
               leading: Icon(Icons.analytics, color: Colors.purple),
-              title: Text(l10n.general_a19f5322),
+              title: Text(AppLocalizations.of(context)!.general_a19f5322),
               subtitle: Text(AppLocalizations.of(context)!.weeklyReport),
               trailing: Icon(Icons.chevron_right),
               onTap: () {
@@ -4169,7 +4169,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ListTile(
               leading: Icon(Icons.edit, color: Colors.blue),
               title: Text(AppLocalizations.of(context)!.edit),
-              subtitle: Text(l10n.general_b885375d),
+              subtitle: Text(AppLocalizations.of(context)!.general_b885375d),
               enabled: false,
               onTap: () {
                 Navigator.pop(context);
@@ -4277,7 +4277,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 
                 if (verifySets.length != remainingSets.length) {
                   print('⚠️ 警告: セット数が一致しません！');
-                  throw Exception(l10n.error_4788a149);
+                  throw Exception(AppLocalizations.of(context)!.error_4788a149);
                 }
               }
             }
@@ -4430,7 +4430,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(l10n.general_bb332935),
+              content: Text(AppLocalizations.of(context)!.general_bb332935),
               backgroundColor: Colors.orange,
             ),
           );
@@ -4456,7 +4456,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(l10n.general_aa5b02ca),
+            content: Text(AppLocalizations.of(context)!.general_aa5b02ca),
             backgroundColor: Colors.green,
           ),
         );
@@ -4552,7 +4552,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                             ),
                           ),
                           Text(
-                            l10n.general_efdf9333,
+                            AppLocalizations.of(context)!.general_efdf9333,
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.white70,
@@ -4570,7 +4570,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      l10n.general_1c98c756,
+                      AppLocalizations.of(context)!.general_1c98c756,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -4627,7 +4627,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         ),
                         SizedBox(width: 12),
                         Text(
-                          l10n.general_60ef486a,
+                          AppLocalizations.of(context)!.general_60ef486a,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -4653,7 +4653,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            l10n.general_fb4c7755,
+                            AppLocalizations.of(context)!.general_fb4c7755,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 12,
@@ -4728,7 +4728,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(l10n.general_86a8de76),
+              content: Text(AppLocalizations.of(context)!.general_86a8de76),
               backgroundColor: Colors.orange,
             ),
           );
@@ -4846,7 +4846,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    l10n.general_e965eb2c,
+                    AppLocalizations.of(context)!.general_e965eb2c,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -4854,7 +4854,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    l10n.general_e8992ded,
+                    AppLocalizations.of(context)!.general_e8992ded,
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.grey[600],
@@ -4929,7 +4929,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                             Icon(Icons.info_outline, size: 16, color: Colors.blue[700]),
                             SizedBox(width: 6),
                             Text(
-                              l10n.general_39933331,
+                              AppLocalizations.of(context)!.general_39933331,
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
@@ -4958,7 +4958,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: _getRPEColor(selectedRPE),
                 ),
-                child: Text(l10n.subscription_84b9d24c),
+                child: Text(AppLocalizations.of(context)!.subscription_84b9d24c),
               ),
             ],
           );
@@ -4980,22 +4980,22 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     switch (rpe) {
       case 0:
       case 1:
-        return l10n.general_2bc199e5;
+        return AppLocalizations.of(context)!.general_2bc199e5;
       case 2:
       case 3:
-        return l10n.general_e41c5367;
+        return AppLocalizations.of(context)!.general_e41c5367;
       case 4:
       case 5:
       case 6:
-        return l10n.general_b66ce898;
+        return AppLocalizations.of(context)!.general_b66ce898;
       case 7:
       case 8:
-        return l10n.general_7b4677c0;
+        return AppLocalizations.of(context)!.general_7b4677c0;
       case 9:
       case 10:
-        return l10n.general_84f02dd9;
+        return AppLocalizations.of(context)!.general_84f02dd9;
       default:
-        return l10n.general_b66ce898;
+        return AppLocalizations.of(context)!.general_b66ce898;
     }
   }
 
@@ -5063,7 +5063,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 child: Column(
                   children: [
                     Text(
-                      l10n.general_034a0b49,
+                      AppLocalizations.of(context)!.general_034a0b49,
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey[700],
@@ -5091,7 +5091,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ),
               SizedBox(height: 20),
               
-              _buildInfoRow(l10n.general_f563accd, recoveryTime),
+              _buildInfoRow(AppLocalizations.of(context)!.general_f563accd, recoveryTime),
               
               const Divider(height: 32),
               
@@ -5100,7 +5100,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   Icon(Icons.lightbulb, color: Colors.amber[700], size: 20),
                   SizedBox(width: 8),
                   Text(
-                    l10n.general_c443fe2a,
+                    AppLocalizations.of(context)!.general_c443fe2a,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -5205,27 +5205,27 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       case 'green':
         trafficLightColor = Colors.green;
         trafficLightIcon = Icons.check_circle;
-        trafficLightLabel = l10n.general_e66a2c6a;
+        trafficLightLabel = AppLocalizations.of(context)!.general_e66a2c6a;
         break;
       case 'yellow':
         trafficLightColor = Colors.amber;
         trafficLightIcon = Icons.warning;
-        trafficLightLabel = l10n.general_dcf6e7ad;
+        trafficLightLabel = AppLocalizations.of(context)!.general_dcf6e7ad;
         break;
       case 'red':
         trafficLightColor = Colors.red;
         trafficLightIcon = Icons.error;
-        trafficLightLabel = l10n.general_5884053c;
+        trafficLightLabel = AppLocalizations.of(context)!.general_5884053c;
         break;
       case 'blue':
         trafficLightColor = Colors.blue;
         trafficLightIcon = Icons.trending_down;
-        trafficLightLabel = l10n.general_adc756de;
+        trafficLightLabel = AppLocalizations.of(context)!.general_adc756de;
         break;
       default:
         trafficLightColor = Colors.grey;
         trafficLightIcon = Icons.help;
-        trafficLightLabel = l10n.general_bc5a1c5b;
+        trafficLightLabel = AppLocalizations.of(context)!.general_bc5a1c5b;
     }
     
     showDialog(
@@ -5356,9 +5356,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ],
               
               // 疲労度レベル
-              _buildInfoRow(l10n.general_034a0b49, baseFatigueLevel),
+              _buildInfoRow(AppLocalizations.of(context)!.general_034a0b49, baseFatigueLevel),
               SizedBox(height: 8),
-              _buildInfoRow(l10n.general_f563accd, '${recoveryHours}時間'),
+              _buildInfoRow(AppLocalizations.of(context)!.general_f563accd, '${recoveryHours}時間'),
               
               const Divider(height: 32),
               
@@ -5368,7 +5368,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   Icon(Icons.lightbulb, color: Colors.amber[700], size: 20),
                   SizedBox(width: 8),
                   Text(
-                    l10n.general_c443fe2a,
+                    AppLocalizations.of(context)!.general_c443fe2a,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -5449,22 +5449,22 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     String motivationMessage;
     String motivationEmoji;
     if (goal.isCompleted) {
-      motivationMessage = l10n.general_bd98a27d;
+      motivationMessage = AppLocalizations.of(context)!.general_bd98a27d;
       motivationEmoji = '🎉';
     } else if (progress >= 0.95) {
-      motivationMessage = l10n.general_f85e70e9;
+      motivationMessage = AppLocalizations.of(context)!.general_f85e70e9;
       motivationEmoji = '🎉';
     } else if (progress >= 0.85) {
       motivationMessage = 'あと${remaining.toStringAsFixed(0)}${goal.unit}で達成！';
       motivationEmoji = '🔥';
     } else if (progress >= 0.70) {
-      motivationMessage = l10n.general_d30b41b7;
+      motivationMessage = AppLocalizations.of(context)!.general_d30b41b7;
       motivationEmoji = '💪';
     } else if (progress >= 0.50) {
-      motivationMessage = l10n.general_080f2d45;
+      motivationMessage = AppLocalizations.of(context)!.general_080f2d45;
       motivationEmoji = '📈';
     } else {
-      motivationMessage = l10n.general_8ab0963b;
+      motivationMessage = AppLocalizations.of(context)!.general_8ab0963b;
       motivationEmoji = '🎯';
     }
     
@@ -5598,7 +5598,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               )
             else
               Text(
-                l10n.general_160577cc,
+                AppLocalizations.of(context)!.general_160577cc,
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.white,
@@ -5658,14 +5658,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        l10n.general_04640fff,
+                        AppLocalizations.of(context)!.general_04640fff,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
-                        l10n.general_63e6dd3b,
+                        AppLocalizations.of(context)!.general_63e6dd3b,
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.grey,
@@ -5709,7 +5709,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
-                      l10n.general_0b513207,
+                      AppLocalizations.of(context)!.general_0b513207,
                       style: TextStyle(
                         fontSize: 10,
                         color: theme.colorScheme.primary,
@@ -5729,7 +5729,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   );
                   _loadActiveGoals();
                 },
-                child: Text(l10n.general_8991a176),
+                child: Text(AppLocalizations.of(context)!.general_8991a176),
               ),
             ],
           ),
@@ -5819,7 +5819,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   Icon(Icons.settings, color: Colors.deepPurple.shade700),
                   SizedBox(width: 12),
                   Text(
-                    l10n.settingsMenu,
+                    AppLocalizations.of(context)!.settingsMenu,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -5843,13 +5843,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
               ),
               title: Text(
-                l10n.trainingMemo,
+                AppLocalizations.of(context)!.trainingMemo,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: Text(l10n.pastTrainingRecords),
+              subtitle: Text(AppLocalizations.of(context)!.pastTrainingRecords),
               trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(builderContext).pop();
@@ -5870,13 +5870,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
               ),
               title: Text(
-                l10n.personalFactorsSettings,
+                AppLocalizations.of(context)!.personalFactorsSettings,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: Text(l10n.editPersonalFactors),
+              subtitle: Text(AppLocalizations.of(context)!.editPersonalFactors),
               trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(builderContext).pop();
@@ -5897,7 +5897,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
               ),
               title: Text(
-                l10n.languageSettings,
+                AppLocalizations.of(context)!.languageSettings,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -6014,7 +6014,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      l10n.general_7655cf33,
+                      AppLocalizations.of(context)!.general_7655cf33,
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 13, color: Colors.black54),
                     ),
@@ -6037,7 +6037,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ),
                   ),
                   child: Text(
-                    l10n.general_231921de,
+                    AppLocalizations.of(context)!.general_231921de,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -6146,7 +6146,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       Icon(Icons.star, color: Colors.orange, size: 20),
                       SizedBox(width: 8),
                       Text(
-                        l10n.general_27d6e442,
+                        AppLocalizations.of(context)!.general_27d6e442,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
@@ -6200,13 +6200,13 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(l10n.general_2489afc4),
+                  content: Text(AppLocalizations.of(context)!.general_2489afc4),
                   duration: Duration(seconds: 2),
                 ),
               );
             },
             icon: Icon(Icons.share, size: 18),
-            label: Text(l10n.general_f5f90170),
+            label: Text(AppLocalizations.of(context)!.general_f5f90170),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.orange,
               foregroundColor: Colors.white,
@@ -6258,7 +6258,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  l10n.profileInviteFriends,
+                  AppLocalizations.of(context)!.profileInviteFriends,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -6303,7 +6303,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        l10n.general_27d6e442,
+                        AppLocalizations.of(context)!.general_27d6e442,
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
@@ -6314,9 +6314,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   ],
                 ),
                 SizedBox(height: 12),
-                _buildBenefitRow(l10n.general_50776211, l10n.general_c1e4aaaf, Icons.psychology),
+                _buildBenefitRow(AppLocalizations.of(context)!.general_50776211, AppLocalizations.of(context)!.general_c1e4aaaf, Icons.psychology),
                 SizedBox(height: 8),
-                _buildBenefitRow(l10n.general_3422ee22, l10n.general_12b9787b, Icons.redeem),
+                _buildBenefitRow(AppLocalizations.of(context)!.general_3422ee22, AppLocalizations.of(context)!.general_12b9787b, Icons.redeem),
                 if (_discountCredits > 0) ...[
                   SizedBox(height: 12),
                   Container(
@@ -6349,7 +6349,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           // 紹介コード表示
           if (_referralCode != null) ...[
             Text(
-              l10n.general_d3a498ac,
+              AppLocalizations.of(context)!.general_d3a498ac,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
@@ -6381,7 +6381,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     onPressed: () {
                       // コピー機能は後で実装
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text(l10n.general_58a4e6c0)),
+                        const SnackBar(content: Text(AppLocalizations.of(context)!.general_58a4e6c0)),
                       );
                     },
                   ),
@@ -6530,7 +6530,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    l10n.general_baeb5820,
+                    AppLocalizations.of(context)!.general_baeb5820,
                     style: TextStyle(fontSize: 12, color: Colors.black87),
                   ),
                 ),

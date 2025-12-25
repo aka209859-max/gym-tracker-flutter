@@ -66,7 +66,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) {
-        throw Exception(l10n.signInRequired);
+        throw Exception(AppLocalizations.of(context)!.signInRequired);
       }
 
       // ユーザー名を取得
@@ -102,7 +102,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(l10n.gym_07855ac3),
+            content: Text(AppLocalizations.of(context)!.gym_07855ac3),
             backgroundColor: Colors.green,
           ),
         );
@@ -142,7 +142,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              l10n.gym_309f83b8,
+              AppLocalizations.of(context)!.gym_309f83b8,
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 16),
@@ -174,7 +174,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
               backgroundColor: Colors.blue,
               foregroundColor: Colors.white,
             ),
-            child: Text(l10n.workout_aa5018ba),
+            child: Text(AppLocalizations.of(context)!.workout_aa5018ba),
           ),
         ],
       ),
@@ -183,6 +183,8 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
 
   @override
   Widget build(BuildContext context) {
+      final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.submitReview),

@@ -7,6 +7,8 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('特定商取引法に基づく表記'),

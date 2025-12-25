@@ -60,6 +60,8 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
 
   @override
   Widget build(BuildContext context) {
+      final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.reportCrowd),
@@ -362,7 +364,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                 backgroundColor: Colors.orange,
                 padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
               ),
-              child: Text(l10n.general_6ff30ca2),
+              child: Text(AppLocalizations.of(context)!.general_6ff30ca2),
             ),
           ],
         ),
@@ -373,15 +375,15 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
   String _getCrowdLevelText(int level) {
     switch (level) {
       case 1:
-        return l10n.gym_e662330d;
+        return AppLocalizations.of(context)!.gym_e662330d;
       case 2:
-        return l10n.moderatelyEmpty;
+        return AppLocalizations.of(context)!.moderatelyEmpty;
       case 3:
         return AppLocalizations.of(context)!.crowdLevelNormal;
       case 4:
-        return l10n.moderatelyCrowded;
+        return AppLocalizations.of(context)!.moderatelyCrowded;
       case 5:
-        return l10n.gym_181af51b;
+        return AppLocalizations.of(context)!.gym_181af51b;
       default:
         return AppLocalizations.of(context)!.unknown;
     }
@@ -390,15 +392,15 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
   String _getCrowdLevelDescription(int level) {
     switch (level) {
       case 1:
-        return l10n.general_32d99a79;
+        return AppLocalizations.of(context)!.general_32d99a79;
       case 2:
-        return l10n.general_1c845e05;
+        return AppLocalizations.of(context)!.general_1c845e05;
       case 3:
-        return l10n.general_5c408dba;
+        return AppLocalizations.of(context)!.general_5c408dba;
       case 4:
-        return l10n.general_f1efa2a1;
+        return AppLocalizations.of(context)!.general_f1efa2a1;
       case 5:
-        return l10n.general_b37aab80;
+        return AppLocalizations.of(context)!.general_b37aab80;
       default:
         return '';
     }

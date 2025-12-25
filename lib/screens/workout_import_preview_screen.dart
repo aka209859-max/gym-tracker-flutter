@@ -29,11 +29,11 @@ class _WorkoutImportPreviewScreenState
   static const List<String> _bodyPartOptions = [
     '胸',      // Chest
     '脚',      // Legs
-    l10n.bodyPartBack,    // Back
+    AppLocalizations.of(context)!.bodyPartBack,    // Back
     '肩',      // Shoulders
-    l10n.bodyPart_8efece65, // Biceps
-    l10n.bodyPart_c158cb15, // Triceps
-    l10n.bodyPartCardio,   // Cardio
+    AppLocalizations.of(context)!.bodyPart_8efece65, // Biceps
+    AppLocalizations.of(context)!.bodyPart_c158cb15, // Triceps
+    AppLocalizations.of(context)!.bodyPartCardio,   // Cardio
   ];
 
   @override
@@ -264,6 +264,8 @@ class _WorkoutImportPreviewScreenState
 
   @override
   Widget build(BuildContext context) {
+      final l10n = AppLocalizations.of(context)!;
+
     final dateString = widget.extractedData['date'] as String?;
     final date = dateString != null ? DateTime.parse(dateString) : DateTime.now();
     final exercises = widget.extractedData['exercises'] as List<dynamic>? ?? [];

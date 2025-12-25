@@ -29,24 +29,24 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
   String? _permissionMessage;
 
   final Map<String, String> _trainingGoals = {
-    'muscle_gain': l10n.goalStrengthGain,
-    'weight_loss': l10n.goalWeightLoss,
-    'endurance': l10n.goalEndurance,
+    'muscle_gain': AppLocalizations.of(context)!.goalStrengthGain,
+    'weight_loss': AppLocalizations.of(context)!.goalWeightLoss,
+    'endurance': AppLocalizations.of(context)!.goalEndurance,
     'flexibility': AppLocalizations.of(context)!.goalFlexibility,
   };
 
   final Map<String, String> _experienceLevels = {
-    'beginner': l10n.beginner,
-    'intermediate': l10n.intermediate,
-    'advanced': l10n.advanced,
+    'beginner': AppLocalizations.of(context)!.beginner,
+    'intermediate': AppLocalizations.of(context)!.intermediate,
+    'advanced': AppLocalizations.of(context)!.advanced,
     'expert': AppLocalizations.of(context)!.levelExpert,
   };
 
   final Map<String, String> _genders = {
-    'male': l10n.male,
-    'female': l10n.female,
+    'male': AppLocalizations.of(context)!.male,
+    'female': AppLocalizations.of(context)!.female,
     'other': AppLocalizations.of(context)!.other,
-    'not_specified': l10n.profile_a479de60,
+    'not_specified': AppLocalizations.of(context)!.profile_a479de60,
   };
 
   final Map<String, String> _weekDays = {
@@ -88,7 +88,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
       if (mounted) {
         setState(() {
           _canSendRequest = false;
-          _permissionMessage = l10n.profile_e0342da8;
+          _permissionMessage = AppLocalizations.of(context)!.profile_e0342da8;
         });
       }
     }
@@ -109,7 +109,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
     
     if (_messageController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text(l10n.profile_5cd65c3e)),
+        const SnackBar(content: Text(AppLocalizations.of(context)!.profile_5cd65c3e)),
       );
       return;
     }
@@ -126,7 +126,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(l10n.profile_5b16043c)),
+          const SnackBar(content: Text(AppLocalizations.of(context)!.profile_5b16043c)),
         );
         Navigator.pop(context);
       }
@@ -384,10 +384,10 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
             Text('✨ Proプランの特典'),
             SizedBox(height: 8),
             _buildBenefitRow(AppLocalizations.of(context)!.searchGym),
-            _buildBenefitRow(l10n.profile_b2818710),
-            _buildBenefitRow(l10n.profile_a980ca9f),
+            _buildBenefitRow(AppLocalizations.of(context)!.profile_b2818710),
+            _buildBenefitRow(AppLocalizations.of(context)!.profile_a980ca9f),
             _buildBenefitRow('AI機能 無制限使用'),
-            _buildBenefitRow(l10n.profile_8fdc9d03),
+            _buildBenefitRow(AppLocalizations.of(context)!.profile_8fdc9d03),
             SizedBox(height: 8),
             Text(
               '月額¥980（年間プラン32% OFF）',
@@ -412,7 +412,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               backgroundColor: Colors.amber,
               foregroundColor: Colors.white,
             ),
-            child: Text(l10n.viewProPlan),
+            child: Text(AppLocalizations.of(context)!.viewProPlan),
           ),
         ],
       ),
@@ -465,7 +465,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
             Row(
               children: [
                 Text(
-                  l10n.profile_0e655357,
+                  AppLocalizations.of(context)!.profile_0e655357,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -483,7 +483,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      l10n.profile_3e89f30d,
+                      AppLocalizations.of(context)!.profile_3e89f30d,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -500,7 +500,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               maxLines: 4,
               maxLength: 200,
               decoration: InputDecoration(
-                hintText: l10n.profile_b78090c1,
+                hintText: AppLocalizations.of(context)!.profile_b78090c1,
                 border: OutlineInputBorder(),
               ),
             ),
@@ -520,7 +520,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                     Icon(Icons.lock, color: Colors.amber, size: 32),
                     SizedBox(height: 8),
                     Text(
-                      _permissionMessage ?? l10n.profile_35399a27,
+                      _permissionMessage ?? AppLocalizations.of(context)!.profile_35399a27,
                       style: const TextStyle(fontSize: 14),
                       textAlign: TextAlign.center,
                     ),
@@ -552,8 +552,8 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                   _isSending
                       ? AppLocalizations.of(context)!.submitting
                       : !_canSendRequest
-                          ? l10n.profile_7d5e513b
-                          : l10n.profile_580ce520
+                          ? AppLocalizations.of(context)!.profile_7d5e513b
+                          : AppLocalizations.of(context)!.profile_580ce520
                 ),
               ),
             ),

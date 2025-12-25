@@ -52,14 +52,14 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
   // ✅ v1.0.168: 腹筋系種目かどうかを判定
   bool _isAbsExercise(String exerciseName) {
     const absExercises = [
-      l10n.exerciseCrunch,
-      l10n.exerciseLegRaise,
-      l10n.exercisePlank,
-      l10n.exerciseAbRoller,
-      l10n.exerciseHangingLegRaise,
-      l10n.exerciseSidePlank,
-      l10n.exerciseBicycleCrunch,
-      l10n.exerciseCableCrunch,
+      AppLocalizations.of(context)!.exerciseCrunch,
+      AppLocalizations.of(context)!.exerciseLegRaise,
+      AppLocalizations.of(context)!.exercisePlank,
+      AppLocalizations.of(context)!.exerciseAbRoller,
+      AppLocalizations.of(context)!.exerciseHangingLegRaise,
+      AppLocalizations.of(context)!.exerciseSidePlank,
+      AppLocalizations.of(context)!.exerciseBicycleCrunch,
+      AppLocalizations.of(context)!.exerciseCableCrunch,
     ];
     return absExercises.contains(exerciseName);
   }
@@ -72,12 +72,12 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
     final result = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(_workoutNote == null ? l10n.addNote : l10n.editNote),
+        title: Text(_workoutNote == null ? AppLocalizations.of(context)!.addNote : AppLocalizations.of(context)!.editNote),
         content: TextField(
           controller: controller,
           maxLines: 8,
           decoration: InputDecoration(
-            hintText: l10n.noteHint,
+            hintText: AppLocalizations.of(context)!.noteHint,
             border: const OutlineInputBorder(),
           ),
           autofocus: true,
@@ -85,16 +85,16 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(l10n.cancel),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           if (_workoutNote != null)
             TextButton(
               onPressed: () => Navigator.pop(context, '__DELETE__'),
-              child: Text(l10n.delete, style: const TextStyle(color: Colors.red)),
+              child: Text(AppLocalizations.of(context)!.delete, style: const TextStyle(color: Colors.red)),
             ),
           FilledButton(
             onPressed: () => Navigator.pop(context, controller.text),
-            child: Text(l10n.save),
+            child: Text(AppLocalizations.of(context)!.save),
           ),
         ],
       ),
@@ -128,7 +128,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
         });
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(l10n.noteSaved), backgroundColor: Colors.green),
+            SnackBar(content: Text(AppLocalizations.of(context)!.noteSaved), backgroundColor: Colors.green),
           );
         }
       } else {
@@ -139,14 +139,14 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
         });
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(l10n.noteUpdated), backgroundColor: Colors.green),
+            SnackBar(content: Text(AppLocalizations.of(context)!.noteUpdated), backgroundColor: Colors.green),
           );
         }
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.noteSaveFailed(e.toString())), backgroundColor: Colors.red),
+          SnackBar(content: Text(AppLocalizations.of(context)!.noteSaveFailed(e.toString())), backgroundColor: Colors.red),
         );
       }
     }
@@ -163,14 +163,14 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
         });
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(l10n.noteDeleted)),
+            SnackBar(content: Text(AppLocalizations.of(context)!.noteDeleted)),
           );
         }
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.noteDeleteFailed(e.toString())), backgroundColor: Colors.red),
+          SnackBar(content: Text(AppLocalizations.of(context)!.noteDeleteFailed(e.toString())), backgroundColor: Colors.red),
         );
       }
     }

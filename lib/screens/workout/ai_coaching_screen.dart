@@ -33,7 +33,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
     AppLocalizations.of(context)!.bodyPartLegs: false,
     AppLocalizations.of(context)!.bodyPartShoulders: false,
     AppLocalizations.of(context)!.bodyPartArms: false,
-    l10n.bodyPart_ceb49fa1: false,
+    AppLocalizations.of(context)!.bodyPart_ceb49fa1: false,
     AppLocalizations.of(context)!.exerciseCardio: false,
     AppLocalizations.of(context)!.levelBeginner: false,
   };
@@ -537,7 +537,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
       ConsoleLogger.debug('canEarnCreditFromAd結果: $canEarnFromAd', tag: 'AI_COACHING');
       
       if (canEarnFromAd && mounted) {
-        ConsoleLogger.info(l10n.workout_3cdc9d1b, tag: 'AI_COACHING');
+        ConsoleLogger.info(AppLocalizations.of(context)!.workout_3cdc9d1b, tag: 'AI_COACHING');
         // ステップ3: リワード広告ダイアログ表示
         final watchedAd = await showDialog<bool>(
           context: context,
@@ -714,7 +714,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
       l10n.bodyPart_ceb49fa1: [AppLocalizations.of(context)!.exerciseCrunch, AppLocalizations.of(context)!.exercisePlank, AppLocalizations.of(context)!.exerciseLegRaise],
     };
     
-    final targetExercises = exercises[bodyPart] ?? [l10n.workout_065a723e];
+    final targetExercises = exercises[bodyPart] ?? [AppLocalizations.of(context)!.workout_065a723e];
     
     for (int i = 0; i < targetExercises.length && i < 3; i++) {
       buffer.writeln('### ${i + 1}. ${targetExercises[i]}');
@@ -879,7 +879,7 @@ ${bodyParts.join('、')}
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(l10n.workout_47f85b9f),
+        title: Text(AppLocalizations.of(context)!.workout_47f85b9f),
         content: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -946,7 +946,7 @@ ${bodyParts.join('、')}
           children: [
             Icon(Icons.info_outline, color: Colors.orange),
             SizedBox(width: 12),
-            Text(l10n.workout_42a622a9),
+            Text(AppLocalizations.of(context)!.workout_42a622a9),
           ],
         ),
         content: Column(
@@ -995,7 +995,7 @@ ${bodyParts.join('、')}
               backgroundColor: Colors.blue.shade700,
               foregroundColor: Colors.white,
             ),
-            child: Text(l10n.workout_aa5018ba),
+            child: Text(AppLocalizations.of(context)!.workout_aa5018ba),
           ),
         ],
       ),
@@ -1011,7 +1011,7 @@ ${bodyParts.join('、')}
           children: [
             Icon(Icons.info_outline, color: Colors.orange),
             SizedBox(width: 12),
-            Text(l10n.workout_42a622a9),
+            Text(AppLocalizations.of(context)!.workout_42a622a9),
           ],
         ),
         content: Column(
@@ -1019,7 +1019,7 @@ ${bodyParts.join('、')}
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              l10n.workout_03c8c351,
+              AppLocalizations.of(context)!.workout_03c8c351,
               style: TextStyle(fontSize: 14),
             ),
             SizedBox(height: 16),

@@ -136,6 +136,8 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+      final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('パートナー詳細'),

@@ -7,6 +7,8 @@ class RMCalculatorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      final l10n = AppLocalizations.of(context)!;
+
     final theme = Theme.of(context);
     
     return DefaultTabController(
@@ -83,7 +85,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(l10n.workout_bc3633b9),
+          content: Text(AppLocalizations.of(context)!.workout_bc3633b9),
           backgroundColor: Colors.red,
         ),
       );

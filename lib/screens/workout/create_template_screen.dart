@@ -20,7 +20,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
   final List<TemplateExerciseBuilder> _exercises = [];
   bool _isSaving = false;
 
-  final List<String> _muscleGroups = ['胸', l10n.bodyPartBack, '脚', '肩', l10n.bodyPartBiceps, l10n.bodyPartTriceps];
+  final List<String> _muscleGroups = ['胸', AppLocalizations.of(context)!.bodyPartBack, '脚', '肩', AppLocalizations.of(context)!.bodyPartBiceps, AppLocalizations.of(context)!.bodyPartTriceps];
   
   @override
   void initState() {
@@ -42,12 +42,12 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
   }
   
   final Map<String, List<String>> _muscleGroupExercises = {
-    '胸': [l10n.exerciseBenchPress, l10n.exerciseDumbbellPress, l10n.exerciseInclinePress, l10n.exerciseCableFly, l10n.exerciseDips],
-    '脚': [l10n.exerciseSquat, l10n.exerciseLegPress, l10n.exerciseLegExtension, l10n.exerciseLegCurl, l10n.exerciseCalfRaise],
-    l10n.bodyPartBack: [l10n.exerciseDeadlift, l10n.exerciseLatPulldown, l10n.exerciseBentOverRow, l10n.exerciseSeatedRow, l10n.exercisePullUp],
-    '肩': [l10n.exerciseShoulderPress, l10n.exerciseSideRaise, l10n.exerciseFrontRaise, l10n.exerciseRearDeltFly, l10n.exerciseUprightRow],
-    l10n.bodyPartBiceps: [l10n.exerciseBarbellCurl, l10n.exerciseDumbbellCurl, l10n.exerciseHammerCurl, l10n.exercisePreacherCurl, l10n.exerciseCableCurl],
-    l10n.bodyPartTriceps: [l10n.exerciseTricepsExtension, l10n.exerciseSkullCrusher, l10n.workout_22752b72, l10n.exerciseDips, l10n.exerciseKickback],
+    '胸': [AppLocalizations.of(context)!.exerciseBenchPress, AppLocalizations.of(context)!.exerciseDumbbellPress, AppLocalizations.of(context)!.exerciseInclinePress, AppLocalizations.of(context)!.exerciseCableFly, AppLocalizations.of(context)!.exerciseDips],
+    '脚': [AppLocalizations.of(context)!.exerciseSquat, AppLocalizations.of(context)!.exerciseLegPress, AppLocalizations.of(context)!.exerciseLegExtension, AppLocalizations.of(context)!.exerciseLegCurl, AppLocalizations.of(context)!.exerciseCalfRaise],
+    AppLocalizations.of(context)!.bodyPartBack: [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, AppLocalizations.of(context)!.exerciseBentOverRow, AppLocalizations.of(context)!.exerciseSeatedRow, AppLocalizations.of(context)!.exercisePullUp],
+    '肩': [AppLocalizations.of(context)!.exerciseShoulderPress, AppLocalizations.of(context)!.exerciseSideRaise, AppLocalizations.of(context)!.exerciseFrontRaise, AppLocalizations.of(context)!.exerciseRearDeltFly, AppLocalizations.of(context)!.exerciseUprightRow],
+    AppLocalizations.of(context)!.bodyPartBiceps: [AppLocalizations.of(context)!.exerciseBarbellCurl, AppLocalizations.of(context)!.exerciseDumbbellCurl, AppLocalizations.of(context)!.exerciseHammerCurl, AppLocalizations.of(context)!.exercisePreacherCurl, AppLocalizations.of(context)!.exerciseCableCurl],
+    AppLocalizations.of(context)!.bodyPartTriceps: [AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseSkullCrusher, AppLocalizations.of(context)!.workout_22752b72, AppLocalizations.of(context)!.exerciseDips, AppLocalizations.of(context)!.exerciseKickback],
   };
 
   @override
@@ -396,7 +396,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
 
     if (_exercises.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text(l10n.workout_bf13cb6c)),
+        const SnackBar(content: Text(AppLocalizations.of(context)!.workout_bf13cb6c)),
       );
       return;
     }
@@ -407,7 +407,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) {
         // 匿名ログイン実装により、この状態には通常到達しない
-        throw Exception(l10n.workout_07d18a44);
+        throw Exception(AppLocalizations.of(context)!.workout_07d18a44);
       }
 
       final template = WorkoutTemplate(
@@ -435,7 +435,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(l10n.workout_dff9ccc1)),
+          const SnackBar(content: Text(AppLocalizations.of(context)!.workout_dff9ccc1)),
         );
         Navigator.pop(context, true);
       }

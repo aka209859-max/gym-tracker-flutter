@@ -957,7 +957,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('プランを${newPlan == SubscriptionType.free ? l10n.workout_5c7bbafb : 'アップグレード'}しますか？'),
+        title: Text('プランを${newPlan == SubscriptionType.free ? AppLocalizations.of(context)!.workout_5c7bbafb : 'アップグレード'}しますか？'),
         content: Text(
           '${_subscriptionService.getPlanName(newPlan)}に変更します。\n\n'
           '料金: $price ($billingPeriod)',
@@ -969,7 +969,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
-            child: Text(l10n.subscription_84b9d24c),
+            child: Text(AppLocalizations.of(context)!.subscription_84b9d24c),
           ),
         ],
       ),
@@ -1108,7 +1108,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(l10n.subscription_471c73c1),
+              content: Text(AppLocalizations.of(context)!.subscription_471c73c1),
               backgroundColor: Colors.green,
             ),
           );
@@ -1120,7 +1120,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(l10n.subscription_8449b990),
+              content: Text(AppLocalizations.of(context)!.subscription_8449b990),
               backgroundColor: Colors.orange,
             ),
           );
@@ -1167,7 +1167,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     } else if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(l10n.subscription_1bc3e774),
+          content: Text(AppLocalizations.of(context)!.subscription_1bc3e774),
           backgroundColor: Colors.red,
         ),
       );
@@ -1347,12 +1347,12 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 SizedBox(height: 16),
                 
                 // 理由選択
-                Text(l10n.subscription_1ffe5eae, style: TextStyle(fontWeight: FontWeight.bold)),
+                Text(AppLocalizations.of(context)!.subscription_1ffe5eae, style: TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(height: 8),
                 DropdownButtonFormField<String>(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: l10n.subscription_90a2e4d0,
+                    hintText: AppLocalizations.of(context)!.subscription_90a2e4d0,
                   ),
                   value: selectedReason,
                   items: SubscriptionManagementService.churnReasons.map((reason) {
@@ -1404,7 +1404,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 backgroundColor: Colors.blue,
                 foregroundColor: Colors.white,
               ),
-              child: Text(l10n.subscription_cddeade5),
+              child: Text(AppLocalizations.of(context)!.subscription_cddeade5),
             ),
           ],
         ),
@@ -1416,17 +1416,17 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   List<String> _getLostFeatures() {
     if (_currentPlan == SubscriptionType.pro) {
       return [
-        l10n.subscription_2939d15b,
-        l10n.subscription_8232b2c6,
-        l10n.subscription_4fb5def4,
+        AppLocalizations.of(context)!.subscription_2939d15b,
+        AppLocalizations.of(context)!.subscription_8232b2c6,
+        AppLocalizations.of(context)!.subscription_4fb5def4,
       ];
     } else if (_currentPlan == SubscriptionType.premium) {
       return [
-        l10n.subscription_95d4c56c,
-        l10n.subscription_8c2b9430,
+        AppLocalizations.of(context)!.subscription_95d4c56c,
+        AppLocalizations.of(context)!.subscription_8c2b9430,
         AppLocalizations.of(context)!.subscriptionDetailedStats,
         AppLocalizations.of(context)!.postGymReviews,
-        l10n.subscription_f9025e06,
+        AppLocalizations.of(context)!.subscription_f9025e06,
       ];
     }
     return [];
@@ -1437,7 +1437,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(l10n.subscription_f56f5454),
+        title: Text(AppLocalizations.of(context)!.subscription_f56f5454),
         content: const SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

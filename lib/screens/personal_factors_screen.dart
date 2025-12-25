@@ -126,6 +126,8 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
 
   @override
   Widget build(BuildContext context) {
+      final l10n = AppLocalizations.of(context)!;
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       behavior: HitTestBehavior.translucent,
@@ -447,7 +449,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                l10n.personalFactor_56a6d8a6,
+                AppLocalizations.of(context)!.personalFactor_56a6d8a6,
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 16),
@@ -485,7 +487,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                     SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        l10n.personalFactor_24d99a0b,
+                        AppLocalizations.of(context)!.personalFactor_24d99a0b,
                         style: TextStyle(fontSize: 12, color: Colors.grey[800]),
                       ),
                     ),

@@ -75,6 +75,8 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+      final l10n = AppLocalizations.of(context)!;
+
     final theme = Theme.of(context);
     final data = widget.workoutData;
     
@@ -557,12 +559,12 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
       
       final doc = await docRef.get();
       if (!doc.exists) {
-        throw Exception(l10n.workout_eefd8bda);
+        throw Exception(AppLocalizations.of(context)!.workout_eefd8bda);
       }
       
       final data = doc.data();
       if (data == null) {
-        throw Exception(l10n.workout_5ccef23e);
+        throw Exception(AppLocalizations.of(context)!.workout_5ccef23e);
       }
       
       // 🔍 デバッグ: データ構造を確認
@@ -741,7 +743,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(l10n.workout_f1f6bea2),
+        title: Text(AppLocalizations.of(context)!.workout_f1f6bea2),
         content: Text(AppLocalizations.of(context)!.deleteWorkoutConfirm),
         actions: [
           TextButton(

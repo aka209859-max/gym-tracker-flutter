@@ -116,7 +116,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   
   // ✅ v1.0.167: 腹筋系種目かどうかを判定（懸垂と同じUI: 自重/重さ/秒数）
   bool _isAbsExercise(String exerciseName) {
-    final absExercises = _muscleGroupExercises[l10n.bodyPart_ceb49fa1] ?? [];
+    final absExercises = _muscleGroupExercises[AppLocalizations.of(context)!.bodyPart_ceb49fa1] ?? [];
     return absExercises.contains(exerciseName);
   }
 
@@ -371,13 +371,13 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     int reps;
     
     final l10n = AppLocalizations.of(context)!;
-    if (userLevel == l10n.levelBeginner) {
+    if (userLevel == AppLocalizations.of(context)!.levelBeginner) {
       percentage = 0.65; // 65%
       reps = 12;
-    } else if (userLevel == l10n.levelIntermediate) {
+    } else if (userLevel == AppLocalizations.of(context)!.levelIntermediate) {
       percentage = 0.75; // 75%
       reps = 10;
-    } else if (userLevel == l10n.levelAdvanced) {
+    } else if (userLevel == AppLocalizations.of(context)!.levelAdvanced) {
       percentage = 0.80; // 80%
       reps = 8;
     } else {
@@ -751,7 +751,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         print('⚠️ ワークアウト履歴が1件もありません');
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text(l10n.workout_404c0672)),
+            const SnackBar(content: Text(AppLocalizations.of(context)!.workout_404c0672)),
           );
         }
         return;
@@ -943,7 +943,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             Icon(Icons.alarm, color: Colors.green, size: 32),
             SizedBox(width: 12),
             Text(
-              l10n.workout_ec97904d,
+              AppLocalizations.of(context)!.workout_ec97904d,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -953,7 +953,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           ],
         ),
         content: Text(
-          l10n.workout_4378d5d9,
+          AppLocalizations.of(context)!.workout_4378d5d9,
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
         ),
         actions: [
@@ -1021,7 +1021,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                       child: Text(AppLocalizations.of(context)!.cancel, style: TextStyle(color: Colors.red)),
                     ),
                     Text(
-                      l10n.workout_b23db97f,
+                      AppLocalizations.of(context)!.workout_b23db97f,
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     TextButton(
@@ -1030,7 +1030,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                         Navigator.pop(context);
                         _startRestTimer(); // 設定後すぐにタイマー開始
                       },
-                      child: Text(l10n.workout_eb87a812, style: TextStyle(fontWeight: FontWeight.bold)),
+                      child: Text(AppLocalizations.of(context)!.workout_eb87a812, style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
                   ],
                 ),
@@ -1339,7 +1339,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(l10n.workout_54d4f6f6),
+        title: Text(AppLocalizations.of(context)!.workout_54d4f6f6),
         content: Text('「$exerciseName」を削除しますか？\nこの操作は取り消せません。'),
         actions: [
           TextButton(
@@ -1381,7 +1381,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         content: TextField(
           controller: controller,
           decoration: InputDecoration(
-            hintText: l10n.workout_a3dbb30d,
+            hintText: AppLocalizations.of(context)!.workout_a3dbb30d,
             border: OutlineInputBorder(),
           ),
           autofocus: true,
@@ -1484,7 +1484,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               children: [
                 Icon(Icons.bed, color: Colors.white),
                 SizedBox(width: 8),
-                Text(l10n.workout_da75109e),
+                Text(AppLocalizations.of(context)!.workout_da75109e),
               ],
             ),
             backgroundColor: Colors.green,
@@ -1564,7 +1564,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   Future<void> _saveWorkout() async {
     if (_selectedMuscleGroup == null || _sets.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text(l10n.workout_4c734626)),
+        const SnackBar(content: Text(AppLocalizations.of(context)!.workout_4c734626)),
       );
       return;
     }
@@ -1729,7 +1729,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       if (mounted) {
         Navigator.pop(context, true);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(l10n.workout_498b0ea4)),
+          const SnackBar(content: Text(AppLocalizations.of(context)!.workout_498b0ea4)),
         );
         
         // 🎯 Phase 1: トレーニング記録後のAI導線ポップアップ
