@@ -181,8 +181,8 @@ class GoalService {
       final date = (data['date'] as Timestamp?)?.toDate();
       
       if (date != null &&
-          date.isAfter(startDate.subtract(const Duration(seconds: 1))) &&
-          date.isBefore(endDate.add(const Duration(seconds: 1)))) {
+          date.isAfter(startDate.subtract(Duration(seconds: 1))) &&
+          date.isBefore(endDate.add(Duration(seconds: 1)))) {
         final sets = data['sets'] as List<dynamic>?;
         if (sets == null) continue;
 

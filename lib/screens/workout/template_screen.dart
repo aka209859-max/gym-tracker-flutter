@@ -8,7 +8,7 @@ import 'add_workout_screen.dart';
 
 /// テンプレート一覧画面
 class TemplateScreen extends StatefulWidget {
-  const TemplateScreen({super.key});
+  TemplateScreen({super.key});
 
   @override
   State<TemplateScreen> createState() => _TemplateScreenState();
@@ -50,7 +50,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
             appBar: AppBar(title: Text(AppLocalizations.of(context)!.templates)),
-            body: const Center(child: CircularProgressIndicator()),
+            body: Center(child: CircularProgressIndicator()),
           );
         }
 
@@ -110,7 +110,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
           final result = await Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const CreateTemplateScreen(),
+              builder: (context) => CreateTemplateScreen(),
             ),
           );
           if (result == true) {
@@ -135,7 +135,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting && !snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(child: CircularProgressIndicator());
         }
 
         if (snapshot.hasError) {
@@ -165,7 +165,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.folder_open, size: 64, color: Colors.grey[400]),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Text(
                   AppLocalizations.of(context)!.workout_156c3331,
                   style: TextStyle(fontSize: 16, color: Colors.grey[600]),
@@ -235,7 +235,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
                       size: 24,
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   
                   // タイトル・説明
                   Expanded(
@@ -247,7 +247,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
                             Expanded(
                               child: Text(
                                 template.name,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -275,7 +275,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
                           ],
                         ),
                         if (template.description != null) ...[
-                          const SizedBox(height: 4),
+                          SizedBox(height: 4),
                           Text(
                             template.description!,
                             style: TextStyle(
@@ -291,7 +291,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
                   // メニューボタン
                   if (!isDefault)
                     PopupMenuButton<String>(
-                      icon: const Icon(Icons.more_vert),
+                      icon: Icon(Icons.more_vert),
                       onSelected: (value) {
                         if (value == 'delete') {
                           _deleteTemplate(template);
@@ -343,7 +343,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
                 Row(
                   children: [
                     Icon(Icons.check_circle, size: 14, color: Colors.grey[600]),
-                    const SizedBox(width: 4),
+                    SizedBox(width: 4),
                     Text(
                       '使用回数: ${template.usageCount}回',
                       style: TextStyle(fontSize: 12, color: Colors.grey[600]),

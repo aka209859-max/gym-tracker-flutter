@@ -183,7 +183,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
           TextButton.icon(
             onPressed: _isSaving ? null : _saveAnnouncement,
             icon: _isSaving
-                ? const SizedBox(
+                ? SizedBox(
                     width: 16,
                     height: 16,
                     child: CircularProgressIndicator(strokeWidth: 2),
@@ -211,7 +211,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Wrap(
                 spacing: 8,
                 children: AnnouncementType.values.map((type) {
@@ -228,7 +228,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                   );
                 }).toList(),
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
               
               // タイトル入力
               TextFormField(
@@ -245,7 +245,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                   return null;
                 },
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               
               // 本文入力
               TextFormField(
@@ -263,7 +263,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                   return null;
                 },
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               
               // クーポンコード（キャンペーンの場合）
               if (_selectedType == AnnouncementType.campaign)
@@ -279,7 +279,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                         prefixIcon: Icon(Icons.local_offer),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                   ],
                 ),
               
@@ -291,7 +291,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               if (_uploadedImageUrl != null)
                 Stack(
                   children: [
@@ -308,7 +308,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                       top: 8,
                       right: 8,
                       child: IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.red),
+                        icon: Icon(Icons.delete, color: Colors.red),
                         onPressed: () {
                           setState(() {
                             _uploadedImageUrl = null;
@@ -325,7 +325,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                 OutlinedButton.icon(
                   onPressed: _isUploading ? null : _pickAndUploadImage,
                   icon: _isUploading
-                      ? const SizedBox(
+                      ? SizedBox(
                           width: 16,
                           height: 16,
                           child: CircularProgressIndicator(strokeWidth: 2),
@@ -333,10 +333,10 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                       : Icon(Icons.add_photo_alternate),
                   label: Text(_isUploading ? AppLocalizations.of(context)!.gym_725430f7 : AppLocalizations.of(context)!.selectExercise),
                   style: OutlinedButton.styleFrom(
-                    minimumSize: const Size(double.infinity, 50),
+                    minimumSize: Size(double.infinity, 50),
                   ),
                 ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
               
               // 有効期限設定
               Text(AppLocalizations.of(context)!.expiryDate,
@@ -345,14 +345,14 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               OutlinedButton.icon(
                 onPressed: () async {
                   final date = await showDatePicker(
                     context: context,
-                    initialDate: _validUntil ?? DateTime.now().add(const Duration(days: 30)),
+                    initialDate: _validUntil ?? DateTime.now().add(Duration(days: 30)),
                     firstDate: DateTime.now(),
-                    lastDate: DateTime.now().add(const Duration(days: 365)),
+                    lastDate: DateTime.now().add(Duration(days: 365)),
                   );
                   if (date != null) {
                     setState(() {
@@ -360,14 +360,14 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                     });
                   }
                 },
-                icon: const Icon(Icons.calendar_today),
+                icon: Icon(Icons.calendar_today),
                 label: Text(
                   _validUntil == null
                       ? AppLocalizations.of(context)!.gym_5d1d7a5c
                       : '${_validUntil!.year}/${_validUntil!.month}/${_validUntil!.day}',
                 ),
                 style: OutlinedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 50),
+                  minimumSize: Size(double.infinity, 50),
                 ),
               ),
               if (_validUntil != null)
@@ -377,7 +377,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                       _validUntil = null;
                     });
                   },
-                  icon: const Icon(Icons.clear),
+                  icon: Icon(Icons.clear),
                   label: Text(AppLocalizations.of(context)!.gym_4f509a03),
                 ),
             ],

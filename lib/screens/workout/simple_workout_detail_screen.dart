@@ -11,7 +11,7 @@ class SimpleWorkoutDetailScreen extends StatefulWidget {
   final String workoutId;
   final Map<String, dynamic> workoutData;
 
-  const SimpleWorkoutDetailScreen({
+  SimpleWorkoutDetailScreen({
     super.key,
     required this.workoutId,
     required this.workoutData,
@@ -131,13 +131,13 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                 children: [
                   Text(
                     DateFormat('yyyy年MM月dd日 (E)', 'ja').format(date),
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Row(
                     children: [
                       Container(
@@ -148,13 +148,13 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                         ),
                         child: Text(
                           muscleGroup,
-                          style: const TextStyle(color: Colors.white, fontSize: 16),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: 12),
                       Text(
                         durationText,
-                        style: const TextStyle(color: Colors.white70, fontSize: 14),
+                        style: TextStyle(color: Colors.white70, fontSize: 14),
                       ),
                     ],
                   ),
@@ -182,7 +182,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                       color: theme.colorScheme.primary,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   ...exerciseMap.entries.map((entry) {
                     return _buildExerciseCard(entry.key, entry.value, theme);
                   }).toList(),
@@ -212,11 +212,11 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                   SizedBox(width: 8),
                   Text(
                     AppLocalizations.of(context)!.trainingMemo,
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  const Spacer(),
+                  Spacer(),
                   if (_isLoadingNote)
-                    const SizedBox(
+                    SizedBox(
                       width: 20,
                       height: 20,
                       child: CircularProgressIndicator(strokeWidth: 2),
@@ -229,9 +229,9 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                 ],
               ),
               if (_workoutNote != null) ...[
-                const SizedBox(height: 12),
-                const Divider(),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
+                Divider(),
+                SizedBox(height: 12),
                 Text(
                   _workoutNote!.content,
                   style: TextStyle(fontSize: 14, color: Colors.grey[800]),
@@ -264,16 +264,16 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
             Row(
               children: [
                 Icon(Icons.fitness_center, color: theme.colorScheme.primary),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     exerciseName,
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
                 // 🗑️ 種目削除ボタン
                 IconButton(
-                  icon: const Icon(Icons.delete_outline, color: Colors.red),
+                  icon: Icon(Icons.delete_outline, color: Colors.red),
                   onPressed: () => _confirmDeleteExercise(exerciseName),
                   tooltip: AppLocalizations.of(context)!.deleteExercise,
                 ),
@@ -318,10 +318,10 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 16),
                     Text(
                       displayText,
-                      style: const TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16),
                     ),
                   ],
                 ),
@@ -495,29 +495,29 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(AppLocalizations.of(context)!.generatedKey_6ece374b),
-              const SizedBox(height: 16),
-              const Divider(),
-              const SizedBox(height: 8),
-              Text('🎯 $targetInfo', style: const TextStyle(fontSize: 11, fontFamily: 'monospace')),
-              const SizedBox(height: 8),
-              Text('📊 現在の種目: ${currentExerciseNames.join(", ")}', style: const TextStyle(fontSize: 11)),
-              Text('📊 削除後の種目: ${afterDeleteExerciseNames.join(", ")}', style: const TextStyle(fontSize: 11)),
-              Text('📊 現在のセット数: ${sets.length}', style: const TextStyle(fontSize: 11)),
+              SizedBox(height: 16),
+              Divider(),
+              SizedBox(height: 8),
+              Text('🎯 $targetInfo', style: TextStyle(fontSize: 11, fontFamily: 'monospace')),
+              SizedBox(height: 8),
+              Text('📊 現在の種目: ${currentExerciseNames.join(", ")}', style: TextStyle(fontSize: 11)),
+              Text('📊 削除後の種目: ${afterDeleteExerciseNames.join(", ")}', style: TextStyle(fontSize: 11)),
+              Text('📊 現在のセット数: ${sets.length}', style: TextStyle(fontSize: 11)),
               Text('📊 削除後のセット数: ${afterDeleteSets.length}', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: afterDeleteSets.isEmpty ? Colors.red : Colors.green)),
-              const SizedBox(height: 8),
-              const Divider(),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
+              Divider(),
+              SizedBox(height: 8),
               Text('🔍 セット詳細:', style: TextStyle(fontSize: 11, color: Colors.grey[700], fontWeight: FontWeight.bold)),
-              const SizedBox(height: 4),
+              SizedBox(height: 4),
               ...setDetails.map((detail) => Padding(
                 padding: const EdgeInsets.only(bottom: 2),
-                child: Text(detail, style: const TextStyle(fontSize: 10, fontFamily: 'monospace')),
+                child: Text(detail, style: TextStyle(fontSize: 10, fontFamily: 'monospace')),
               )),
               if (exercises != null) ...[
-                const SizedBox(height: 8),
-                const Divider(),
+                SizedBox(height: 8),
+                Divider(),
                 Text('⚠️ exercises フィールド検出: ${exercises.runtimeType}', 
-                  style: const TextStyle(fontSize: 11, color: Colors.orange)),
+                  style: TextStyle(fontSize: 11, color: Colors.orange)),
               ],
             ],
           ),

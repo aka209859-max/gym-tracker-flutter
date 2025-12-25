@@ -10,7 +10,7 @@ import 'partner_reservation_settings_screen.dart';
 class PartnerDashboardScreen extends StatelessWidget {
   final PartnerAccess partnerAccess;
 
-  const PartnerDashboardScreen({
+  PartnerDashboardScreen({
     super.key,
     required this.partnerAccess,
   });
@@ -25,7 +25,7 @@ class PartnerDashboardScreen extends StatelessWidget {
             Text(AppLocalizations.of(context)!.general_912246dc),
             Text(
               partnerAccess.gymName,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
             ),
           ],
         ),
@@ -50,19 +50,19 @@ class PartnerDashboardScreen extends StatelessWidget {
                           size: 32,
                           color: Theme.of(context).colorScheme.primary,
                         ),
-                        const SizedBox(width: 12),
+                        SizedBox(width: 12),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 partnerAccess.gymName,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              const SizedBox(height: 4),
+                              SizedBox(height: 4),
                               Text(
                                 AppLocalizations.of(context)!.general_01dd1fe6,
                                 style: TextStyle(
@@ -76,9 +76,9 @@ class PartnerDashboardScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
-                    const Divider(),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 16),
+                    Divider(),
+                    SizedBox(height: 8),
                     Text(
                       AppLocalizations.of(context)!.general_e6a22641,
                       style: TextStyle(
@@ -90,7 +90,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             // 管理メニュー
             _buildMenuSection(
@@ -135,7 +135,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             _buildMenuSection(
               context,
@@ -188,7 +188,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             _buildMenuSection(
               context,
@@ -209,7 +209,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
 
             // ログアウトボタン
             OutlinedButton.icon(

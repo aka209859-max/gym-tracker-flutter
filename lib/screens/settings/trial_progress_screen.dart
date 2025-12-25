@@ -71,7 +71,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
         centerTitle: true,
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -79,16 +79,16 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
                 children: [
                   // トライアル状態カード
                   _buildTrialStatusCard(),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   
                   // 進捗表示
                   if (!_isTrialActive && !_isTrialUsed) ...[
                     _buildProgressIndicator(),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
                     
                     // 条件リスト
                     _buildConditionsList(),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
                   ],
                   
                   // トライアル内容説明
@@ -135,7 +135,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
         child: Column(
           children: [
             Icon(icon, size: 64, color: color),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               title,
               style: TextStyle(
@@ -145,7 +145,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               subtitle,
               style: TextStyle(
@@ -185,7 +185,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
             ),
           ],
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         LinearProgressIndicator(
           value: _progress / 100,
           minHeight: 8,
@@ -220,7 +220,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             ...conditionLabels.entries.map((entry) {
               final isAchieved = _conditions[entry.key] ?? false;
               return Padding(
@@ -232,7 +232,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
                       color: isAchieved ? Colors.green : Colors.grey,
                       size: 24,
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12),
                     Expanded(
                       child: Text(
                         entry.value.toString(),
@@ -265,7 +265,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
             Row(
               children: [
                 Icon(Icons.card_giftcard, color: Colors.blue[700]),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Text(
                   AppLocalizations.of(context)!.subscription_f578bedc,
                   style: TextStyle(
@@ -276,7 +276,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
               AppLocalizations.of(context)!.subscription_19705f59,
               style: TextStyle(
@@ -284,7 +284,7 @@ class _TrialProgressScreenState extends State<TrialProgressScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               AppLocalizations.of(context)!.generatedKey_5117983a
               AppLocalizations.of(context)!.generatedKey_d42111dd

@@ -202,7 +202,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
         elevation: 2,
         actions: [
           if (_isUploading)
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(16),
               child: SizedBox(
                 width: 20,
@@ -215,14 +215,14 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
             )
           else
             IconButton(
-              icon: const Icon(Icons.add_photo_alternate),
+              icon: Icon(Icons.add_photo_alternate),
               onPressed: _pickAndUploadPhotos,
               tooltip: AppLocalizations.of(context)!.addWorkout,
             ),
         ],
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : _photoUrls.isEmpty
               ? _buildEmptyState()
               : _buildPhotoGrid(),
@@ -241,7 +241,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
               size: 80,
               color: Colors.grey[300],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.general_150daaa6,
               style: TextStyle(
@@ -250,7 +250,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
                 color: Colors.grey[600],
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               AppLocalizations.of(context)!.generatedKey_66304a49,
               textAlign: TextAlign.center,
@@ -287,7 +287,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
             children: [
               Text(
                 AppLocalizations.of(context)!.emailNotRegistered,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),

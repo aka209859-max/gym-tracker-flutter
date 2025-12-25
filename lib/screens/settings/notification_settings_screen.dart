@@ -114,7 +114,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
@@ -135,7 +135,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
           
           // リマインダー時刻設定（ワークアウトリマインダーがONの場合）
           if (_workoutReminders) ...[
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Card(
               elevation: 2,
               child: ListTile(
@@ -145,13 +145,13 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ),
                 subtitle: Text(_formatTime(_reminderTime)),
-                trailing: const Icon(Icons.edit, size: 20),
+                trailing: Icon(Icons.edit, size: 20),
                 onTap: _selectTime,
               ),
             ),
           ],
 
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           _buildNotificationCard(
             icon: Icons.flag,
             iconColor: Colors.green,
@@ -164,7 +164,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
             },
           ),
 
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // ソーシャル通知
           _buildSectionHeader(AppLocalizations.of(context)!.profile_ac37b7eb),
@@ -180,7 +180,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
             },
           ),
 
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           _buildNotificationCard(
             icon: Icons.people,
             iconColor: Colors.orange,
@@ -193,7 +193,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
             },
           ),
 
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // 一般通知
           _buildSectionHeader(AppLocalizations.of(context)!.general),
@@ -209,7 +209,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
             },
           ),
 
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           _buildNotificationCard(
             icon: Icons.campaign,
             iconColor: Colors.red,
@@ -222,7 +222,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
             },
           ),
 
-          const SizedBox(height: 32),
+          SizedBox(height: 32),
 
           // 説明テキスト
           Container(
@@ -235,7 +235,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
             child: Row(
               children: [
                 Icon(Icons.info_outline, color: Colors.blue[700], size: 24),
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     AppLocalizations.of(context)!.generatedKey_e67c4c69,

@@ -16,7 +16,7 @@ class ReferralSuccessDialog {
     ConfettiAnimation.show(context);
 
     // 成功ダイアログ表示
-    Future.delayed(const Duration(milliseconds: 500), () {
+    Future.delayed(Duration(milliseconds: 500), () {
       if (!context.mounted) return;
 
       showDialog(
@@ -28,12 +28,12 @@ class ReferralSuccessDialog {
           ),
           title: Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.celebration,
                 color: Colors.orange,
                 size: 32,
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12),
               Text(
                 AppLocalizations.of(context)!.general_85d1b5d2,
                 style: TextStyle(
@@ -51,7 +51,7 @@ class ReferralSuccessDialog {
                 AppLocalizations.of(context)!.general_31ec114c,
                 style: TextStyle(fontSize: 16),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -70,14 +70,14 @@ class ReferralSuccessDialog {
                         color: Colors.orange,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     _buildBonusItem(
                       icon: Icons.smart_toy,
                       title: AppLocalizations.of(context)!.aiCoaching,
                       value: AppLocalizations.of(context)!.reps,
                       description: AppLocalizations.of(context)!.general_ffe34333,
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     _buildBonusItem(
                       icon: Icons.workspace_premium,
                       title: AppLocalizations.of(context)!.general_7db414f2,
@@ -87,8 +87,8 @@ class ReferralSuccessDialog {
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
-              const Text(
+              SizedBox(height: 16),
+              Text(
                 '💪 今すぐトレーニングを記録して、AIコーチングを試してみましょう！',
                 style: TextStyle(
                   fontSize: 14,
@@ -133,7 +133,7 @@ class ReferralSuccessDialog {
     ConfettiAnimation.show(context);
 
     // 成功ダイアログ表示
-    Future.delayed(const Duration(milliseconds: 500), () {
+    Future.delayed(Duration(milliseconds: 500), () {
       if (!context.mounted) return;
 
       showDialog(
@@ -145,12 +145,12 @@ class ReferralSuccessDialog {
           ),
           title: Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.celebration,
                 color: Colors.green,
                 size: 32,
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12),
               Text(
                 AppLocalizations.of(context)!.general_99c96084,
                 style: TextStyle(
@@ -166,9 +166,9 @@ class ReferralSuccessDialog {
             children: [
               Text(
                 AppLocalizations.of(context)!.generatedKey_32518a63,
-                style: const TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -187,14 +187,14 @@ class ReferralSuccessDialog {
                         color: Colors.green,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     _buildBonusItem(
                       icon: Icons.smart_toy,
                       title: AppLocalizations.of(context)!.aiCoaching,
                       value: AppLocalizations.of(context)!.reps,
                       description: AppLocalizations.of(context)!.general_89a02b48,
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     _buildBonusItem(
                       icon: Icons.workspace_premium,
                       title: AppLocalizations.of(context)!.general_7db414f2,
@@ -204,7 +204,7 @@ class ReferralSuccessDialog {
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Text(
                 AppLocalizations.of(context)!.general_8b3d7068,
                 style: TextStyle(

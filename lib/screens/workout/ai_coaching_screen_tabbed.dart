@@ -104,7 +104,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
   /// 🎯 Phase 1: AI初回利用時のガイド
   Future<void> _showFirstTimeAIGuide() async {
     // UIが安定してから表示
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(Duration(milliseconds: 500));
     
     if (!mounted) return;
     
@@ -127,7 +127,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
             // アニメーションアイコン
             TweenAnimationBuilder<double>(
               tween: Tween(begin: 0.0, end: 1.0),
-              duration: const Duration(milliseconds: 800),
+              duration: Duration(milliseconds: 800),
               builder: (context, value, child) {
                 return Transform.scale(
                   scale: 0.5 + (value * 0.5),
@@ -149,7 +149,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                 );
               },
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             
             // タイトル
             Text(AppLocalizations.of(context)!.aiFatigueAnalysisWelcome,
@@ -159,7 +159,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // 説明
             Column(
@@ -170,13 +170,13 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                   title: AppLocalizations.of(context)!.workout_8458abfe,
                   description: AppLocalizations.of(context)!.workout_762fc148,
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 _buildGuideItem(
                   icon: Icons.auto_awesome,
                   title: AppLocalizations.of(context)!.workout_3f0bb9b4,
                   description: AppLocalizations.of(context)!.workout_369dbcbd,
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 _buildGuideItem(
                   icon: Icons.trending_up,
                   title: AppLocalizations.of(context)!.workout_e3e5061b,
@@ -250,7 +250,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 4),
+              SizedBox(height: 4),
               Text(
                 description,
                 style: TextStyle(
@@ -270,7 +270,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
   void _showSettingsMenu() {
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) => Container(
@@ -304,7 +304,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                 ],
               ),
             ),
-            const Divider(height: 20),
+            Divider(height: 20),
             // メニュー項目1: トレーニングメモ
             ListTile(
               leading: Container(
@@ -325,7 +325,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                 ),
               ),
               subtitle: Text(AppLocalizations.of(context)!.pastTrainingRecords),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushNamed('/workout-memo');
@@ -351,13 +351,13 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
                 ),
               ),
               subtitle: Text(AppLocalizations.of(context)!.editPersonalFactors),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushNamed('/personal-factors');
               },
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
           ],
         ),
       ),
@@ -372,7 +372,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
             appBar: AppBar(title: Text(AppLocalizations.of(context)!.aiCoaching)),
-            body: const Center(child: CircularProgressIndicator()),
+            body: Center(child: CircularProgressIndicator()),
           );
         }
 
@@ -403,7 +403,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
         foregroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings),
+            icon: Icon(Icons.settings),
             onPressed: _showSettingsMenu,
             tooltip: AppLocalizations.of(context)!.settings,
           ),
@@ -451,7 +451,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
 class _AIMenuTab extends StatefulWidget {
   final User user;
 
-  const _AIMenuTab({required this.user});
+  _AIMenuTab({required this.user});
 
   @override
   State<_AIMenuTab> createState() => _AIMenuTabState();
@@ -610,30 +610,30 @@ class _AIMenuTabState extends State<_AIMenuTab>
         children: [
           // 説明文
           _buildDescription(),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // 🔧 v1.0.217: レベル選択
           _buildLevelSelector(),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // 部位選択
           _buildBodyPartSelector(),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // メニュー生成ボタン
           _buildGenerateButton(),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // 生成結果表示
           if (_generatedMenu != null) ...[
             _buildGeneratedMenu(),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
           ],
 
           // エラー表示
           if (_errorMessage != null) ...[
             _buildErrorMessage(),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
           ],
 
           // 履歴表示
@@ -663,7 +663,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
               AppLocalizations.of(context)!.workout_17f59b6a,
               style: TextStyle(fontSize: 14),
@@ -729,7 +729,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                 color: isSelected ? Colors.white : Colors.grey.shade600,
                 size: 28,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Text(
                 level,
                 style: TextStyle(
@@ -813,7 +813,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
           _generateMenu(selectedParts);
         } : null,
         icon: _isGenerating
-            ? const SizedBox(
+            ? SizedBox(
                 width: 20,
                 height: 20,
                 child: CircularProgressIndicator(
@@ -875,11 +875,11 @@ class _AIMenuTabState extends State<_AIMenuTab>
                         _selectedExerciseIndices.length == _parsedExercises.length
                             ? AppLocalizations.of(context)!.workout_69593f57
                             : AppLocalizations.of(context)!.workout_219e609f,
-                        style: const TextStyle(fontSize: 12),
+                        style: TextStyle(fontSize: 12),
                       ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.save),
+                      icon: Icon(Icons.save),
                       onPressed: _saveMenu,
                       tooltip: AppLocalizations.of(context)!.saveWorkout,
                     ),
@@ -972,7 +972,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                             ],
                           ),
                         if (exercise.description != null) ...[
-                          const SizedBox(height: 6),
+                          SizedBox(height: 6),
                           Text(
                             exercise.description!,
                             style: TextStyle(
@@ -988,14 +988,14 @@ class _AIMenuTabState extends State<_AIMenuTab>
               }).toList(),
               
               // 🔧 v1.0.222: トレーニングを開始ボタン（記録画面に遷移）
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: _selectedExerciseIndices.isEmpty
                       ? null
                       : _saveSelectedExercisesToWorkoutLog,
-                  icon: const Icon(Icons.fitness_center),
+                  icon: Icon(Icons.fitness_center),
                   label: Text(
                     'トレーニングを開始 (${_selectedExerciseIndices.length}種目)',
                   ),
@@ -1016,7 +1016,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                   child: Column(
                     children: [
                       Icon(Icons.warning_amber, color: Colors.orange.shade700, size: 48),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12),
                       Text(
                         AppLocalizations.of(context)!.aiMenuParseFailed,
                         style: TextStyle(
@@ -1025,7 +1025,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                           color: Colors.orange.shade900,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       Text(
                         AppLocalizations.of(context)!.generatedKey_2482dab0,
                         textAlign: TextAlign.center,
@@ -1034,7 +1034,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                           color: Colors.orange.shade700,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
                       ElevatedButton.icon(
                         onPressed: () {
                           setState(() {
@@ -1043,16 +1043,16 @@ class _AIMenuTabState extends State<_AIMenuTab>
                             _errorMessage = null;
                           });
                         },
-                        icon: const Icon(Icons.refresh),
+                        icon: Icon(Icons.refresh),
                         label: Text(AppLocalizations.of(context)!.aiMenuRetryButton),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange.shade600,
                           foregroundColor: Colors.white,
                         ),
                       ),
-                      const SizedBox(height: 16),
-                      const Divider(),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 16),
+                      Divider(),
+                      SizedBox(height: 8),
                       // 🐛 デバッグ用: 生成されたテキストを表示
                       ExpansionTile(
                         title: Text(
@@ -1069,7 +1069,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                             color: Colors.grey.shade100,
                             child: SelectableText(
                               _generatedMenu ?? '',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 11,
                                 fontFamily: 'monospace',
                               ),
@@ -1119,7 +1119,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       mainAxisSize: MainAxisSize.min,
       children: [
         Icon(icon, size: 14, color: Colors.grey.shade600),
-        const SizedBox(width: 4),
+        SizedBox(width: 4),
         Text(
           text,
           style: TextStyle(
@@ -1141,7 +1141,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
         child: Row(
           children: [
             Icon(Icons.error_outline, color: Colors.red.shade700),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             Expanded(
               child: Text(
                 _errorMessage!,
@@ -1169,9 +1169,9 @@ class _AIMenuTabState extends State<_AIMenuTab>
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         if (_isLoadingHistory)
-          const Center(child: CircularProgressIndicator())
+          Center(child: CircularProgressIndicator())
         else if (_history.isEmpty)
           Card(
             child: Padding(
@@ -1226,14 +1226,14 @@ class _AIMenuTabState extends State<_AIMenuTab>
         spans.add(
           TextSpan(
             text: headingText,
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
               height: 1.8,
             ),
           ),
         );
-        if (i < lines.length - 1) spans.add(const TextSpan(text: '\n'));
+        if (i < lines.length - 1) spans.add(TextSpan(text: '\n'));
         continue;
       }
 
@@ -1429,7 +1429,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
             SnackBar(
               content: Text('AI生成完了! ($statusMessage)'),
               backgroundColor: Colors.green,
-              duration: const Duration(seconds: 2),
+              duration: Duration(seconds: 2),
             ),
           );
         }
@@ -2163,7 +2163,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? AppLocali
               AppLocalizations.of(context)!.workout_27e98563,
               style: TextStyle(fontSize: 14, height: 1.6),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -2199,7 +2199,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? AppLocali
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
-            icon: const Icon(Icons.play_arrow),
+            icon: Icon(Icons.play_arrow),
             label: Text(AppLocalizations.of(context)!.workout_d489aa48),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade700,
@@ -2221,7 +2221,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? AppLocali
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => const Center(
+        builder: (context) => Center(
           child: Card(
             child: Padding(
               padding: EdgeInsets.all(24.0),
@@ -2244,7 +2244,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? AppLocali
     
     // 読み込み完了まで最大5秒待機
     for (int i = 0; i < 10; i++) {
-      await Future.delayed(const Duration(milliseconds: 500));
+      await Future.delayed(Duration(milliseconds: 500));
       if (rewardAdService.isAdReady()) {
         break;
       }
@@ -2788,15 +2788,15 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           children: [
             // ヘッダー
             _buildHeader(),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             // 入力フォーム
             _buildInputForm(),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             // 予測実行ボタン
             _buildPredictButton(),
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
 
             // 予測結果
             if (_isLoading)
@@ -2863,11 +2863,11 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 🆕 Phase 7: 年齢表示（自動取得）
             _buildAutoLoadedDataDisplay(),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 対象部位
             _buildDropdownField(
@@ -2880,22 +2880,22 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 });
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 現在の1RM
             _build1RMInputField(),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 🆕 Phase 7: Weight Ratio & 客観的レベル表示
             if (_weightRatio != null) ...[
               _buildWeightRatioDisplay(),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
             ],
 
             // 🆕 Phase 7: 客観的レベル判定結果
             if (_objectiveLevel != null && _objectiveLevel != _selectedLevel) ...[
               _buildLevelWarning(),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
             ],
 
             // トレーニングレベル
@@ -2909,7 +2909,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 });
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // トレーニング頻度
             Column(
@@ -2928,7 +2928,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                   },
                   displayValue: '週${_selectedFrequency}回',
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
@@ -2942,7 +2942,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 🆕 v1.0.230: RPE（自覚的強度）スライダー
             Column(
@@ -2961,7 +2961,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                   },
                   displayValue: _getRPELabel(_selectedRPE),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
@@ -2975,7 +2975,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 性別
             Column(
@@ -2991,7 +2991,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     });
                   },
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
@@ -3050,7 +3050,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
+            Text(label, style: TextStyle(fontWeight: FontWeight.w500)),
             Text(
               displayValue,
               style: TextStyle(
@@ -3081,7 +3081,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         _executePrediction();
       },
       icon: _isLoading
-          ? const SizedBox(
+          ? SizedBox(
               width: 20,
               height: 20,
               child: CircularProgressIndicator(
@@ -3208,7 +3208,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     color: Colors.grey,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   '${predictedWeight.round()}kg',
                   style: TextStyle(
@@ -3217,15 +3217,15 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     color: Colors.green.shade700,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   AppLocalizations.of(context)!.generatedKey_1a33d843,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey,
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
@@ -3236,7 +3236,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.info_outline, size: 16, color: Colors.blue.shade700),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Text(
                         '信頼区間: ${confidenceInterval['lower'].round()}-${confidenceInterval['upper'].round()}kg',
                         style: TextStyle(
@@ -3251,7 +3251,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             ),
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
 
         // 成長率カード
         Card(
@@ -3263,7 +3263,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 Row(
                   children: [
                     Icon(Icons.show_chart, color: Colors.blue.shade700),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Text(
                       AppLocalizations.of(context)!.general_f388c562,
                       style: TextStyle(
@@ -3273,7 +3273,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -3285,7 +3285,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             ),
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
 
         // AI分析
         Card(
@@ -3318,7 +3318,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         ScientificBasisSection(
           basis: scientificBasis.cast<Map<String, String>>(),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
 
         // 信頼度インジケーター
         Center(
@@ -3340,7 +3340,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             color: color,
           ),
         ),
-        const SizedBox(height: 4),
+        SizedBox(height: 4),
         Text(
           label,
           style: TextStyle(
@@ -3373,7 +3373,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               AppLocalizations.of(context)!.workout_27e98563,
               style: TextStyle(fontSize: 14, height: 1.6),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -3409,7 +3409,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
-            icon: const Icon(Icons.play_arrow),
+            icon: Icon(Icons.play_arrow),
             label: Text(AppLocalizations.of(context)!.workout_d489aa48),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade700,
@@ -3431,7 +3431,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => const Center(
+        builder: (context) => Center(
           child: Card(
             child: Padding(
               padding: EdgeInsets.all(24.0),
@@ -3454,7 +3454,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     
     // 読み込み完了まで最大5秒待機
     for (int i = 0; i < 10; i++) {
-      await Future.delayed(const Duration(milliseconds: 500));
+      await Future.delayed(Duration(milliseconds: 500));
       if (rewardAdService.isAdReady()) {
         break;
       }
@@ -3505,14 +3505,14 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           children: [
             Text(
               message,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.generatedKey_9d99af7f,
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               AppLocalizations.of(context)!.generatedKey_67a989a2
               AppLocalizations.of(context)!.generatedKey_465a0c43
@@ -3520,7 +3520,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               AppLocalizations.of(context)!.reviews,
               style: TextStyle(fontSize: 13, height: 1.6),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -3574,14 +3574,14 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         spans.add(
           TextSpan(
             text: headingText,
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
               height: 1.8,
             ),
           ),
         );
-        if (i < lines.length - 1) spans.add(const TextSpan(text: '\n'));
+        if (i < lines.length - 1) spans.add(TextSpan(text: '\n'));
         continue;
       }
 
@@ -3605,7 +3605,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           spans.add(
             TextSpan(
               text: match.group(1),
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
           );
           lastIndex = match.end;
@@ -3616,13 +3616,13 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       }
 
       if (i < lines.length - 1) {
-        spans.add(const TextSpan(text: '\n'));
+        spans.add(TextSpan(text: '\n'));
       }
     }
 
     return RichText(
       text: TextSpan(
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 14,
           height: 1.6,
           color: Colors.black87,
@@ -3676,7 +3676,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             actionLabel: AppLocalizations.of(context)!.workout_5c7bbafb,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
+              MaterialPageRoute(builder: (context) => PersonalFactorsScreen()),
             ).then((_) => _loadUserAge()),
           )
         else
@@ -3685,10 +3685,10 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             actionLabel: AppLocalizations.of(context)!.settings,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
+              MaterialPageRoute(builder: (context) => PersonalFactorsScreen()),
             ).then((_) => _loadUserAge()),
           ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
 
         // 体重表示
         if (_latestBodyWeight != null)
@@ -3700,7 +3700,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             actionLabel: AppLocalizations.of(context)!.update,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const BodyMeasurementScreen()),
+              MaterialPageRoute(builder: (context) => BodyMeasurementScreen()),
             ).then((_) => _loadLatestBodyWeight()),
           )
         else
@@ -3781,11 +3781,11 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       child: Row(
         children: [
           Icon(Icons.warning_amber, color: Colors.orange.shade700),
-          const SizedBox(width: 12),
+          SizedBox(width: 12),
           Expanded(
             child: Text(
               message,
-              style: const TextStyle(fontSize: 13),
+              style: TextStyle(fontSize: 13),
             ),
           ),
           TextButton(
@@ -3865,7 +3865,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 ),
                 Text(
                   '${_weightRatio!.toStringAsFixed(2)} (1RM ${_currentOneRM!.toStringAsFixed(1)}kg ÷ 体重 ${_latestBodyWeight!.toStringAsFixed(1)}kg)',
-                  style: const TextStyle(fontSize: 14),
+                  style: TextStyle(fontSize: 14),
                 ),
               ],
             ),
@@ -3890,7 +3890,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           Row(
             children: [
               Icon(Icons.info_outline, color: Colors.amber.shade700),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Text(
                 AppLocalizations.of(context)!.notifications,
                 style: TextStyle(
@@ -3900,11 +3900,11 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             AppLocalizations.of(context)!.generatedKey_1a7bfb82
             AppLocalizations.of(context)!.generatedKey_3c9b6149,
-            style: const TextStyle(fontSize: 13),
+            style: TextStyle(fontSize: 13),
           ),
           Text(
             AppLocalizations.of(context)!.generatedKey_a5688ebc,
@@ -3913,7 +3913,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               color: Colors.grey.shade700,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           ElevatedButton(
             onPressed: () {
               setState(() {
@@ -4285,15 +4285,15 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           children: [
             // ヘッダー
             _buildHeader(),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             // 入力フォーム
             _buildInputForm(),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             // 分析実行ボタン
             _buildAnalyzeButton(),
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
 
             // 分析結果
             if (_isLoading)
@@ -4315,7 +4315,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Row(
           children: [
             Icon(Icons.analytics, size: 40, color: Colors.orange.shade700),
-            const SizedBox(width: 16),
+            SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -4328,7 +4328,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                       color: Colors.orange.shade900,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
                     AppLocalizations.of(context)!.generatedKey_4a776041,
                     style: TextStyle(
@@ -4360,11 +4360,11 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 🆕 Phase 7.5: 年齢表示（自動取得）
             _buildAgeDisplay(),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 対象部位
             _buildDropdownField(
@@ -4381,7 +4381,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 });
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 種目選択
             _buildDropdownField(
@@ -4394,7 +4394,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 });
               },
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             Padding(
               padding: const EdgeInsets.only(left: 4),
               child: Text(
@@ -4406,7 +4406,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // プラトー検出トグル
             SwitchListTile(
@@ -4429,7 +4429,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               activeColor: Colors.orange.shade700,
               contentPadding: EdgeInsets.zero,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 週あたりセット数
             Column(
@@ -4448,7 +4448,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                   },
                   displayValue: '${_currentSets}セット',
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
@@ -4462,7 +4462,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // トレーニング頻度
             Column(
@@ -4481,7 +4481,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                   },
                   displayValue: '週${_currentFrequency}回',
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
@@ -4495,7 +4495,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // トレーニングレベル
             _buildDropdownField(
@@ -4508,7 +4508,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 });
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 性別
             Column(
@@ -4524,7 +4524,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                     });
                   },
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
@@ -4575,7 +4575,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                   ),
                   Text(
                     '$_userAge歳',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
@@ -4586,7 +4586,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
             TextButton(
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
+                MaterialPageRoute(builder: (context) => PersonalFactorsScreen()),
               ).then((_) => _loadUserAge()),
               child: Text(AppLocalizations.of(context)!.workout_5c7bbafb),
             ),
@@ -4604,7 +4604,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Row(
           children: [
             Icon(Icons.warning_amber, color: Colors.orange.shade700),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             Expanded(
               child: Text(
                 AppLocalizations.of(context)!.generatedKey_f2350bf3,
@@ -4614,7 +4614,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
             TextButton(
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
+                MaterialPageRoute(builder: (context) => PersonalFactorsScreen()),
               ).then((_) => _loadUserAge()),
               child: Text(AppLocalizations.of(context)!.settings),
             ),
@@ -4663,7 +4663,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
+            Text(label, style: TextStyle(fontWeight: FontWeight.w500)),
             Text(
               displayValue,
               style: TextStyle(
@@ -4694,7 +4694,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         _executeAnalysis();
       },
       icon: _isLoading
-          ? const SizedBox(
+          ? SizedBox(
               width: 20,
               height: 20,
               child: CircularProgressIndicator(
@@ -4804,25 +4804,25 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         // ステータスサマリー（トグルOFFの場合はプラトー無視）
         _buildStatusSummary(volumeAnalysis, frequencyAnalysis, 
           _enablePlateauDetection && plateauDetected, growthTrend),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
 
         // ボリューム分析
         _buildVolumeAnalysis(volumeAnalysis),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
 
         // 頻度分析
         _buildFrequencyAnalysis(frequencyAnalysis),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
 
         // プラトー警告（トグルON かつ 検出された場合のみ表示）
         if (_enablePlateauDetection && plateauDetected) ...[
           _buildPlateauWarning(),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
         ],
 
         // 推奨アクション
         _buildRecommendations(recommendations),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
 
         // AI分析
         Card(
@@ -4843,19 +4843,19 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 _buildFormattedText(aiAnalysis),
               ],
             ),
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
 
         // 科学的根拠
         ScientificBasisSection(
           basis: scientificBasis.cast<Map<String, String>>(),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
 
         // 信頼度インジケーター
         Center(
@@ -4897,7 +4897,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Row(
           children: [
             Icon(statusIcon, size: 48, color: statusColor),
-            const SizedBox(width: 16),
+            SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -4910,7 +4910,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                       color: statusColor,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text(
                     '成長トレンド: ${trend['trend']}',
                     style: TextStyle(
@@ -4966,7 +4966,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
             Row(
               children: [
                 Icon(Icons.bar_chart, color: Colors.blue.shade700),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Text(
                   AppLocalizations.of(context)!.analysis,
                   style: TextStyle(
@@ -4976,7 +4976,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Row(
               children: [
                 Container(
@@ -4995,10 +4995,10 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
               advice,
-              style: const TextStyle(fontSize: 14, height: 1.6),
+              style: TextStyle(fontSize: 14, height: 1.6),
             ),
           ],
         ),
@@ -5045,7 +5045,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
             Row(
               children: [
                 Icon(Icons.calendar_month, color: Colors.green.shade700),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Text(
                   AppLocalizations.of(context)!.analysis,
                   style: TextStyle(
@@ -5055,7 +5055,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Row(
               children: [
                 Container(
@@ -5074,10 +5074,10 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
               advice,
-              style: const TextStyle(fontSize: 14, height: 1.6),
+              style: TextStyle(fontSize: 14, height: 1.6),
             ),
           ],
         ),
@@ -5094,7 +5094,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Row(
           children: [
             Icon(Icons.warning_amber, size: 40, color: Colors.orange.shade700),
-            const SizedBox(width: 16),
+            SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -5107,7 +5107,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                       color: Colors.orange.shade900,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
                     AppLocalizations.of(context)!.generatedKey_773d1c04,
                     style: TextStyle(
@@ -5135,7 +5135,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
             Row(
               children: [
                 Icon(Icons.recommend, color: Colors.purple.shade700),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Text(
                   AppLocalizations.of(context)!.aiResponseActionPlan,
                   style: TextStyle(
@@ -5177,7 +5177,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                         shape: BoxShape.circle,
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -5190,10 +5190,10 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          const SizedBox(height: 4),
+                          SizedBox(height: 4),
                           Text(
                             action,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 14,
                               height: 1.4,
                             ),
@@ -5232,7 +5232,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               AppLocalizations.of(context)!.workout_27e98563,
               style: TextStyle(fontSize: 14, height: 1.6),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -5268,7 +5268,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
-            icon: const Icon(Icons.play_arrow),
+            icon: Icon(Icons.play_arrow),
             label: Text(AppLocalizations.of(context)!.workout_d489aa48),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade700,
@@ -5290,7 +5290,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => const Center(
+        builder: (context) => Center(
           child: Card(
             child: Padding(
               padding: EdgeInsets.all(24.0),
@@ -5313,7 +5313,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
     
     // 読み込み完了まで最大5秒待機
     for (int i = 0; i < 10; i++) {
-      await Future.delayed(const Duration(milliseconds: 500));
+      await Future.delayed(Duration(milliseconds: 500));
       if (rewardAdService.isAdReady()) {
         break;
       }
@@ -5364,14 +5364,14 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           children: [
             Text(
               message,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.generatedKey_9d99af7f,
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               AppLocalizations.of(context)!.generatedKey_67a989a2
               AppLocalizations.of(context)!.generatedKey_465a0c43
@@ -5379,7 +5379,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               AppLocalizations.of(context)!.reviews,
               style: TextStyle(fontSize: 13, height: 1.6),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -5433,14 +5433,14 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         spans.add(
           TextSpan(
             text: headingText,
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
               height: 1.8,
             ),
           ),
         );
-        if (i < lines.length - 1) spans.add(const TextSpan(text: '\n'));
+        if (i < lines.length - 1) spans.add(TextSpan(text: '\n'));
         continue;
       }
 

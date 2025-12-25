@@ -205,12 +205,12 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(AppLocalizations.of(context)!.delete),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               DateFormat(AppLocalizations.of(context)!.general_d908e55a).format(date),
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             if (weight != null) Text('体重: ${weight.toStringAsFixed(1)}kg'),
             if (bodyFat != null) Text('体脂肪率: ${bodyFat.toStringAsFixed(1)}%'),
           ],
@@ -318,7 +318,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                             AppLocalizations.of(context)!.general_d279f4b3,
                             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           
                           // 日付選択
                           InkWell(
@@ -334,7 +334,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           
                           // 体重入力
                           TextField(
@@ -348,7 +348,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                             textInputAction: TextInputAction.next,
                             onEditingComplete: () => FocusScope.of(context).nextFocus(),
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           
                           // 体脂肪率入力
                           TextField(
@@ -362,7 +362,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                             textInputAction: TextInputAction.done,
                             onEditingComplete: () => FocusScope.of(context).unfocus(),
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           
                           // 保存ボタン
                           ElevatedButton(
@@ -382,12 +382,12 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                     ),
                   ),
                   
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   
                   // グラフ
                   if (_measurements.isNotEmpty) ...[
                     _buildWeightChart(theme),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
                   ],
                   
                   // 履歴リスト
@@ -435,7 +435,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
               ],
             ),
             
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // ✅ 最新値を横に表示（文字の重なりを解消）
             Row(
@@ -444,13 +444,13 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
               children: [
                 Text(
                   _selectedChartType == ChartType.weight ? AppLocalizations.of(context)!.bodyWeight : AppLocalizations.of(context)!.bodyFatRate,
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(width: 16),
+                SizedBox(width: 16),
                 if (_selectedChartType == ChartType.weight && latestWeight != null)
                   Text(
                     latestWeight.toStringAsFixed(1),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Colors.red,
@@ -459,7 +459,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                 if (_selectedChartType == ChartType.bodyFat && latestBodyFat != null)
                   Text(
                     latestBodyFat.toStringAsFixed(1),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Colors.red,
@@ -468,7 +468,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
               ],
             ),
             
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // グラフ本体
             SizedBox(
@@ -476,7 +476,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
               child: _buildLineChart(theme),
             ),
             
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // 期間切り替えスイッチ
             Row(
@@ -695,7 +695,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
           child: Column(
             children: [
               Icon(Icons.analytics_outlined, size: 48, color: Colors.grey[400]),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Text(
                 AppLocalizations.of(context)!.general_175145c8,
                 style: TextStyle(fontSize: 16, color: Colors.grey[600]),
@@ -710,7 +710,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.all(16),
             child: Text(
               AppLocalizations.of(context)!.workout_16013f46,
@@ -719,9 +719,9 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
           ),
           ListView.separated(
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
+            physics: NeverScrollableScrollPhysics(),
             itemCount: _measurements.length,
-            separatorBuilder: (context, index) => const Divider(height: 1),
+            separatorBuilder: (context, index) => Divider(height: 1),
             itemBuilder: (context, index) {
               final measurement = _measurements[index];
               final date = measurement['date'] as DateTime;
@@ -746,7 +746,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                   ],
                 ),
                 trailing: IconButton(
-                  icon: const Icon(Icons.delete_outline, color: Colors.red),
+                  icon: Icon(Icons.delete_outline, color: Colors.red),
                   onPressed: () => _confirmDelete(measurement),
                   tooltip: AppLocalizations.of(context)!.remove,
                 ),

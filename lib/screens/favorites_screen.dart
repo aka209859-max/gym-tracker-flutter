@@ -142,7 +142,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         ],
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : _favoriteGyms.isEmpty
               ? _buildEmptyState()
               : _buildFavoritesList(),
@@ -160,7 +160,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             size: 80,
             color: Colors.grey[400],
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           Text(
             AppLocalizations.of(context)!.general_a15b95ca,
             style: TextStyle(
@@ -193,8 +193,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           color: Theme.of(context).colorScheme.surfaceContainerHighest,
           child: Row(
             children: [
-              const Icon(Icons.favorite, color: Colors.red, size: 20),
-              const SizedBox(width: 8),
+              Icon(Icons.favorite, color: Colors.red, size: 20),
+              SizedBox(width: 8),
               Text(
                 AppLocalizations.of(context)!.generatedKey_248390f0,
                 style: const TextStyle(
@@ -272,32 +272,32 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   children: [
                     Text(
                       gym.name,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Row(
                       children: [
-                        const Icon(Icons.star, size: 16, color: Colors.amber),
-                        const SizedBox(width: 4),
+                        Icon(Icons.star, size: 16, color: Colors.amber),
+                        SizedBox(width: 4),
                         Text(
                           '${gym.rating} (${gym.reviewCount})',
-                          style: const TextStyle(fontSize: 12),
+                          style: TextStyle(fontSize: 12),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Text(
                       gym.address,
                       style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     
                     // 確実な情報のみ表示
                     Row(
@@ -314,11 +314,11 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                           ),
                           child: Row(
                             children: [
-                              const Icon(Icons.open_in_new, size: 12, color: Colors.blue),
+                              Icon(Icons.open_in_new, size: 12, color: Colors.blue),
                               SizedBox(width: 4),
                               Text(
                                 AppLocalizations.of(context)!.confirm,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 11,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.blue,

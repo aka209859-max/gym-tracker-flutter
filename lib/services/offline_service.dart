@@ -293,9 +293,9 @@ class OfflineService {
         final result = await FirebaseFirestore.instance
             .collection('_connection_test')  // テスト用コレクション
             .limit(1)
-            .get(const GetOptions(source: Source.server))  // 強制的にサーバーから取得
+            .get(GetOptions(source: Source.server))  // 強制的にサーバーから取得
             .timeout(
-              const Duration(milliseconds: 500),  // ✅ v1.0.187: 1秒→500msに短縮
+              Duration(milliseconds: 500),  // ✅ v1.0.187: 1秒→500msに短縮
               onTimeout: () {
                 debugPrint('📴 [Firestore] タイムアウト (500ms)');
                 throw TimeoutException('Firestore connection timeout');

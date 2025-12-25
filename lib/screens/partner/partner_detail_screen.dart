@@ -10,7 +10,7 @@ import 'chat_screen_partner.dart';
 class PartnerDetailScreen extends StatefulWidget {
   final TrainingPartner partner;
 
-  const PartnerDetailScreen({super.key, required this.partner});
+  PartnerDetailScreen({super.key, required this.partner});
 
   @override
   State<PartnerDetailScreen> createState() => _PartnerDetailScreenState();
@@ -145,7 +145,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
           children: [
             // ヘッダー
             _buildHeader(),
-            const Divider(height: 1),
+            Divider(height: 1),
 
             // プロフィール詳細
             Padding(
@@ -161,7 +161,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                       _buildInfoRow(Icons.fitness_center, AppLocalizations.of(context)!.experienceLevel, widget.partner.experienceLevel!),
                   ]),
 
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // 目標
                   if (widget.partner.goals.isNotEmpty)
@@ -179,7 +179,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                       ),
                     ]),
 
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // トレーニング種目
                   if (widget.partner.preferredExercises.isNotEmpty)
@@ -197,14 +197,14 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                       ),
                     ]),
 
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // 自己紹介
                   if (widget.partner.bio != null && widget.partner.bio!.isNotEmpty)
                     _buildInfoSection(AppLocalizations.of(context)!.bio, [
                       Text(
                         widget.partner.bio!,
-                        style: const TextStyle(fontSize: 15, height: 1.6),
+                        style: TextStyle(fontSize: 15, height: 1.6),
                       ),
                     ]),
                 ],
@@ -220,7 +220,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
   /// 画面下部のボタンを構築
   Widget _buildBottomButtons() {
     if (_isLoading) {
-      return const SafeArea(
+      return SafeArea(
         child: Padding(
           padding: EdgeInsets.all(16),
           child: Center(child: CircularProgressIndicator()),
@@ -240,7 +240,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: _sendFriendRequest,
-                  icon: const Icon(Icons.person_add),
+                  icon: Icon(Icons.person_add),
                   label: Text(AppLocalizations.of(context)!.general_8596907f, style: TextStyle(fontSize: 16)),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
@@ -254,7 +254,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: null,
-                  icon: const Icon(Icons.schedule),
+                  icon: Icon(Icons.schedule),
                   label: Text(AppLocalizations.of(context)!.general_34fb6e79, style: TextStyle(fontSize: 16)),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
@@ -270,7 +270,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                     AppLocalizations.of(context)!.general_caeec09a,
                     style: TextStyle(fontSize: 14, color: Colors.orange),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Row(
                     children: [
                       Expanded(
@@ -281,7 +281,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                           child: Text(AppLocalizations.of(context)!.general_a0d47aa4),
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: 12),
                       Expanded(
                         flex: 2,
                         child: ElevatedButton(
@@ -301,7 +301,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: _openChat,
-                  icon: const Icon(Icons.message),
+                  icon: Icon(Icons.message),
                   label: Text(AppLocalizations.of(context)!.general_5010ff33, style: TextStyle(fontSize: 16)),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),

@@ -52,7 +52,7 @@ class WorkoutSet {
 class AddWorkoutScreen extends StatefulWidget {
   final Map<String, dynamic>? templateData;
   
-  const AddWorkoutScreen({super.key, this.templateData});
+  AddWorkoutScreen({super.key, this.templateData});
 
   @override
   State<AddWorkoutScreen> createState() => _AddWorkoutScreenState();
@@ -253,7 +253,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           SnackBar(
             content: Text(AppLocalizations.of(context)!.generatedKey_d4d0a508),
             backgroundColor: Colors.green,
-            duration: const Duration(seconds: 2),
+            duration: Duration(seconds: 2),
           ),
         );
       }
@@ -565,7 +565,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           SnackBar(
             content: Text('オフライン保存エラー: $e'),
             backgroundColor: Colors.red,
-            duration: const Duration(seconds: 5),
+            duration: Duration(seconds: 5),
           ),
         );
       }
@@ -895,7 +895,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       if (!mounted) return;
       
       // 追加で0.5秒後にもう一度鳴らす（より目立つように）
-      await Future.delayed(const Duration(milliseconds: 500));
+      await Future.delayed(Duration(milliseconds: 500));
       
       // ✅ v1.0.162: 再度mountedチェック
       if (!mounted) return;
@@ -985,7 +985,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     });
     
     // ✅ v1.0.162: 5秒後に自動的にダイアログを閉じる（ダブルpop防止）
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(Duration(seconds: 5), () {
       if (mounted && _isRestDialogShowing && Navigator.canPop(context)) {
         _isRestDialogShowing = false;
         Navigator.pop(context);
@@ -1149,14 +1149,14 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 return ListTile(
                   leading: CircleAvatar(
                     backgroundColor: Colors.purple.shade100,
-                    child: Text('${index + 1}', style: const TextStyle(color: Colors.purple)),
+                    child: Text('${index + 1}', style: TextStyle(color: Colors.purple)),
                   ),
                   title: Text(
                     '$weight kg × $reps reps',
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(DateFormat('yyyy/M/d (E)', 'ja').format(date)),
-                  trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                  trailing: Icon(Icons.arrow_forward_ios, size: 16),
                   onTap: () => Navigator.pop(context, record),
                 );
               },
@@ -1188,7 +1188,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(AppLocalizations.of(context)!.generatedKey_6184b271),
-            duration: const Duration(seconds: 2),
+            duration: Duration(seconds: 2),
             backgroundColor: Colors.green,
           ),
         );
@@ -1245,7 +1245,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
             ],
             TextField(
               controller: repsController,
@@ -1312,7 +1312,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               ? '一括入力完了: 自重 × ${result['reps']!.toInt()} reps'
               : '一括入力完了: ${result['weight']} kg × ${result['reps']!.toInt()} reps'
           ),
-          duration: const Duration(seconds: 2),
+          duration: Duration(seconds: 2),
         ),
       );
     }
@@ -1724,7 +1724,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       }
 
       // Firestoreの書き込み完了を確実に待機（500ms）
-      await Future.delayed(const Duration(milliseconds: 500));
+      await Future.delayed(Duration(milliseconds: 500));
 
       if (mounted) {
         Navigator.pop(context, true);
@@ -1750,7 +1750,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(AppLocalizations.of(context)!.saveFailed(e.toString())),
-            duration: const Duration(seconds: 5),
+            duration: Duration(seconds: 5),
             backgroundColor: Colors.red,
           ),
         );
@@ -1782,11 +1782,11 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.timer, size: 18, color: Colors.white),
-                    const SizedBox(width: 6),
+                    Icon(Icons.timer, size: 18, color: Colors.white),
+                    SizedBox(width: 6),
                     Text(
                       '$_restSeconds秒',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -1797,13 +1797,13 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.stop_circle),
+              icon: Icon(Icons.stop_circle),
               onPressed: _stopRestTimer,
               tooltip: AppLocalizations.of(context)!.workout_6218789d,
             ),
           ] else ...[
             TextButton.icon(
-              icon: const Icon(Icons.timer, color: Colors.white),
+              icon: Icon(Icons.timer, color: Colors.white),
               label: Text(
                 AppLocalizations.of(context)!.workout_e6f170ef,
                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -1828,7 +1828,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     color: theme.colorScheme.primary,
                     size: 24,
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1841,10 +1841,10 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4),
                         Text(
                           _formatDate(_selectedDate),
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -1855,18 +1855,18 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   // ✅ v1.0.178: オフボタン
                   OutlinedButton.icon(
                     onPressed: () => _saveRestDay(context),
-                    icon: const Icon(Icons.bed, size: 18),
+                    icon: Icon(Icons.bed, size: 18),
                     label: Text(AppLocalizations.of(context)!.workout_a0c22faa),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.green,
-                      side: const BorderSide(color: Colors.green),
+                      side: BorderSide(color: Colors.green),
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   OutlinedButton.icon(
                     onPressed: () => _selectDate(context),
-                    icon: const Icon(Icons.edit_calendar, size: 18),
+                    icon: Icon(Icons.edit_calendar, size: 18),
                     label: Text(AppLocalizations.of(context)!.workout_5c7bbafb),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: theme.colorScheme.primary,
@@ -1877,7 +1877,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 ],
               ),
             ),
-            const Divider(height: 1, thickness: 1),
+            Divider(height: 1, thickness: 1),
             
             // 部位選択（横スクロール）
             Container(
@@ -1923,7 +1923,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 padding: const EdgeInsets.all(16),
                 child: Text(
                   AppLocalizations.of(context)!.generatedKey_f36e4e45,
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
               
@@ -1940,7 +1940,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     children: [
                       Expanded(child: Text(exercise)),
                       if (isCustomExercise)
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.only(left: 4),
                           child: Icon(Icons.star, size: 14, color: Colors.amber),
                         ),
@@ -1951,18 +1951,18 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     children: [
                       if (hasExercise)
                         IconButton(
-                          icon: const Icon(Icons.copy),
+                          icon: Icon(Icons.copy),
                           onPressed: () => _copyExerciseSets(exercise),
                           tooltip: AppLocalizations.of(context)!.copySet,
                         ),
                       if (isCustomExercise)
                         IconButton(
-                          icon: const Icon(Icons.delete_outline, size: 18),
+                          icon: Icon(Icons.delete_outline, size: 18),
                           color: Colors.red,
                           onPressed: () => _confirmDeleteCustomExercise(exercise),
                           tooltip: AppLocalizations.of(context)!.workout_54d4f6f6,
                         ),
-                      const Icon(Icons.chevron_right),
+                      Icon(Icons.chevron_right),
                     ],
                   ),
                   onTap: () => _addSet(exercise),
@@ -1974,7 +1974,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: OutlinedButton.icon(
                   onPressed: _showAddCustomExerciseDialog,
-                  icon: const Icon(Icons.add),
+                  icon: Icon(Icons.add),
                   label: Text(AppLocalizations.of(context)!.addCustomExercise),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -1993,7 +1993,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     Text(AppLocalizations.of(context)!.sets,
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    const Spacer(),
+                    Spacer(),
                     // 🔧 v1.0.248: ワークアウトタイプフィルタータブ（筋トレ/有酸素の2部屋制）
                     SegmentedButton<WorkoutTypeFilter>(
                       segments: [
@@ -2054,7 +2054,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                       AppLocalizations.of(context)!.workout_bc108eb8,
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     TextField(
                       controller: _memoController,
                       maxLines: 5,
@@ -2114,17 +2114,17 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           children: [
             Row(
               children: [
-                const Icon(Icons.fitness_center, color: Colors.blue, size: 20),
-                const SizedBox(width: 8),
+                Icon(Icons.fitness_center, color: Colors.blue, size: 20),
+                SizedBox(width: 8),
                 Text(
                   exerciseName,
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
             
             // 前回をコピー & 一括入力ボタン（画像2の配置）
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Row(
               children: [
                 Expanded(
@@ -2135,23 +2135,23 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                       print('🔍 _lastWorkoutData: $_lastWorkoutData');
                       _showWorkoutHistoryDialog(exerciseName);
                     },
-                    icon: const Icon(Icons.history, size: 18),
+                    icon: Icon(Icons.history, size: 18),
                     label: Text(AppLocalizations.of(context)!.workout_57b74023),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.purple,
-                      side: const BorderSide(color: Colors.purple),
+                      side: BorderSide(color: Colors.purple),
                     ),
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Expanded(
                   child: OutlinedButton.icon(
                     onPressed: () => _showBulkInputDialog(exerciseName),
-                    icon: const Icon(Icons.edit, size: 18),
+                    icon: Icon(Icons.edit, size: 18),
                     label: Text(AppLocalizations.of(context)!.workout_779c0c7b),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.blue,
-                      side: const BorderSide(color: Colors.blue),
+                      side: BorderSide(color: Colors.blue),
                     ),
                   ),
                 ),
@@ -2159,7 +2159,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             ),
             
             // 💡初回記録 or 前回記録バナー
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             
             // 🔧 v1.0.222: AIコーチからの場合は1RM情報も表示
             if (_isFromAICoach) ...[
@@ -2176,7 +2176,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     Row(
                       children: [
                         Text('🤖', style: TextStyle(fontSize: 16)),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Text(
                           AppLocalizations.of(context)!.workout_400911f5,
                           style: TextStyle(
@@ -2207,7 +2207,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                                   color: Colors.green.shade900,
                                 ),
                               ),
-                              const SizedBox(height: 4),
+                              SizedBox(height: 4),
                               Text(
                                 AppLocalizations.of(context)!.generatedKey_7b01524a,
                                 style: TextStyle(fontSize: 11, color: Colors.green.shade700),
@@ -2225,7 +2225,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
             ],
             
             if (lastData == null) ...[
@@ -2240,7 +2240,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 child: Row(
                   children: [
                     Text('💡', style: TextStyle(fontSize: 16)),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         AppLocalizations.of(context)!.generatedKey_2873d010,
@@ -2265,7 +2265,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     Row(
                       children: [
                         Text('📊', style: TextStyle(fontSize: 16)),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Text(
                           AppLocalizations.of(context)!.workout_565c4718,
                           style: TextStyle(
@@ -2276,7 +2276,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 6),
+                    SizedBox(height: 6),
                     Text(
                       _formatLastWorkoutData(lastData),
                       style: TextStyle(fontSize: 12, color: Colors.blue.shade700),
@@ -2286,7 +2286,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               ),
             ],
             
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             
             // セット一覧
             ...sets.asMap().entries.map((entry) {
@@ -2296,10 +2296,10 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             }).toList(),
             
             // セット追加ボタン
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             OutlinedButton.icon(
               onPressed: () => _addSet(exerciseName),
-              icon: const Icon(Icons.add),
+              icon: Icon(Icons.add),
               label: Text(AppLocalizations.of(context)!.workout_68d6a303),
               style: OutlinedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 40),
@@ -2337,7 +2337,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   ),
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12),
               
               // 懸垂または腹筋の場合は自重/荷重モード切り替えを含む特別なUI
               if (_isPullUpExercise(set.exerciseName) || _isAbsExercise(set.exerciseName))
@@ -2358,21 +2358,21 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                               },
                               style: OutlinedButton.styleFrom(
                                 backgroundColor: set.isBodyweightMode 
-                                    ? const Color(0xFF3F51B5) 
+                                    ? Color(0xFF3F51B5) 
                                     : Colors.white,
                                 foregroundColor: set.isBodyweightMode 
                                     ? Colors.white 
-                                    : const Color(0xFF3F51B5),
+                                    : Color(0xFF3F51B5),
                                 padding: const EdgeInsets.symmetric(vertical: 8),
                                 side: BorderSide(
-                                  color: const Color(0xFF3F51B5),
+                                  color: Color(0xFF3F51B5),
                                   width: set.isBodyweightMode ? 2 : 1,
                                 ),
                               ),
                               child: Text(AppLocalizations.of(context)!.bodyweight, style: TextStyle(fontSize: 12)),
                             ),
                           ),
-                          const SizedBox(width: 4),
+                          SizedBox(width: 4),
                           Expanded(
                             child: OutlinedButton(
                               onPressed: () {
@@ -2382,33 +2382,33 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                               },
                               style: OutlinedButton.styleFrom(
                                 backgroundColor: !set.isBodyweightMode 
-                                    ? const Color(0xFF3F51B5) 
+                                    ? Color(0xFF3F51B5) 
                                     : Colors.white,
                                 foregroundColor: !set.isBodyweightMode 
                                     ? Colors.white 
-                                    : const Color(0xFF3F51B5),
+                                    : Color(0xFF3F51B5),
                                 padding: const EdgeInsets.symmetric(vertical: 8),
                                 side: BorderSide(
-                                  color: const Color(0xFF3F51B5),
+                                  color: Color(0xFF3F51B5),
                                   width: !set.isBodyweightMode ? 2 : 1,
                                 ),
                               ),
                               child: Text(
                                 _isAbsExercise(set.exerciseName) ? AppLocalizations.of(context)!.workout_2579352f : AppLocalizations.of(context)!.workout_63dbc040, 
-                                style: const TextStyle(fontSize: 12)
+                                style: TextStyle(fontSize: 12)
                               ),
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       // 荷重モードの場合のみ重量入力欄を表示
                       if (!set.isBodyweightMode)
                         TextFormField(
                           key: ValueKey('weight_${globalIndex}_${set.weight}'),
                           decoration: InputDecoration(
                             labelText: _isAbsExercise(set.exerciseName) ? '重さ (kg)' : '荷重 (kg)',
-                            border: const OutlineInputBorder(),
+                            border: OutlineInputBorder(),
                             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                           ),
                           keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -2429,7 +2429,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                             borderRadius: BorderRadius.circular(4),
                             color: Colors.grey[50],
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Text(
                               AppLocalizations.of(context)!.bodyweight,
                               style: TextStyle(
@@ -2453,14 +2453,14 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                                 },
                                 style: OutlinedButton.styleFrom(
                                   backgroundColor: !set.isTimeMode 
-                                      ? const Color(0xFF4CAF50) 
+                                      ? Color(0xFF4CAF50) 
                                       : Colors.white,
                                   foregroundColor: !set.isTimeMode 
                                       ? Colors.white 
-                                      : const Color(0xFF4CAF50),
+                                      : Color(0xFF4CAF50),
                                   padding: const EdgeInsets.symmetric(vertical: 8),
                                   side: BorderSide(
-                                    color: const Color(0xFF4CAF50),
+                                    color: Color(0xFF4CAF50),
                                     width: !set.isTimeMode ? 2 : 1,
                                   ),
                                 ),
@@ -2477,14 +2477,14 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                                 },
                                 style: OutlinedButton.styleFrom(
                                   backgroundColor: set.isTimeMode 
-                                      ? const Color(0xFF4CAF50) 
+                                      ? Color(0xFF4CAF50) 
                                       : Colors.white,
                                   foregroundColor: set.isTimeMode 
                                       ? Colors.white 
-                                      : const Color(0xFF4CAF50),
+                                      : Color(0xFF4CAF50),
                                   padding: const EdgeInsets.symmetric(vertical: 8),
                                   side: BorderSide(
-                                    color: const Color(0xFF4CAF50),
+                                    color: Color(0xFF4CAF50),
                                     width: set.isTimeMode ? 2 : 1,
                                   ),
                                 ),
@@ -2504,7 +2504,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     key: ValueKey('weight_${globalIndex}_${set.weight}'),
                     decoration: InputDecoration(
                       labelText: set.isCardio ? '時間 (分)' : '重量 (kg)', // 🔧 v1.0.226+242: Use stored flag
-                      border: const OutlineInputBorder(),
+                      border: OutlineInputBorder(),
                       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
                     keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -2519,7 +2519,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     },
                   ),
                 ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               
               // 有酸素運動の場合は距離ベースかレップスベースかで分ける、腹筋の場合は「秒数/回数」、それ以外は「回数」
               Expanded(
@@ -2531,7 +2531,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                         : _isAbsExercise(set.exerciseName)
                             ? (set.isTimeMode ? AppLocalizations.of(context)!.seconds : AppLocalizations.of(context)!.repsCount)
                             : AppLocalizations.of(context)!.repsCount,
-                    border: const OutlineInputBorder(),
+                    border: OutlineInputBorder(),
                     contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   ),
                   keyboardType: TextInputType.number,
@@ -2546,11 +2546,11 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   },
                 ),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               
               // 削除ボタン
               IconButton(
-                icon: const Icon(Icons.delete, color: Colors.red),
+                icon: Icon(Icons.delete, color: Colors.red),
                 onPressed: () {
                   setState(() {
                     _sets.removeAt(globalIndex);
@@ -2560,7 +2560,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             ],
           ),
           
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           
           // セット種別選択
           Wrap(
@@ -2579,7 +2579,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 },
               ),
               ChoiceChip(
-                label: const Text('W-UP', style: TextStyle(fontSize: 12)),
+                label: Text('W-UP', style: TextStyle(fontSize: 12)),
                 selected: set.setType == SetType.warmup,
                 onSelected: (selected) {
                   if (selected) {
@@ -2590,7 +2590,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 },
               ),
               ChoiceChip(
-                label: const Text('SS', style: TextStyle(fontSize: 12)),
+                label: Text('SS', style: TextStyle(fontSize: 12)),
                 selected: set.setType == SetType.superset,
                 onSelected: (selected) {
                   if (selected) {
@@ -2625,7 +2625,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             ],
           ),
           
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           
           // 補助トグル ＋ セット完了チェック
           Row(
@@ -2651,7 +2651,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   ),
                 ),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               
               // セット完了チェック（インターバルはAppBarから開始）
               Expanded(
@@ -2734,7 +2734,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 color: Colors.purple.shade600,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // タイトル
             Text(
@@ -2745,7 +2745,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             
             // 説明
             Text(

@@ -210,7 +210,7 @@ class _PartnerCampaignEditorScreenState
         actions: [
           IconButton(
             icon: _isSaving
-                ? const SizedBox(
+                ? SizedBox(
                     width: 20,
                     height: 20,
                     child: CircularProgressIndicator(
@@ -218,7 +218,7 @@ class _PartnerCampaignEditorScreenState
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                     ),
                   )
-                : const Icon(Icons.save),
+                : Icon(Icons.save),
             onPressed: _isSaving ? null : _saveCampaign,
             tooltip: AppLocalizations.of(context)!.save,
           ),
@@ -233,9 +233,9 @@ class _PartnerCampaignEditorScreenState
                 children: [
                   // リアルタイムプレビュー
                   _buildPreviewCard(),
-                  const SizedBox(height: 24),
-                  const Divider(thickness: 2),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
+                  Divider(thickness: 2),
+                  SizedBox(height: 24),
 
                   // 基本特典
                   Text(
@@ -255,14 +255,14 @@ class _PartnerCampaignEditorScreenState
                     maxLength: 50,
                     onChanged: (_) => setState(() {}),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // キャンペーン情報
                   Text(
                     AppLocalizations.of(context)!.general_809889ae,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   TextFormField(
                     controller: _campaignTitleController,
                     decoration: InputDecoration(
@@ -274,7 +274,7 @@ class _PartnerCampaignEditorScreenState
                     maxLength: 100,
                     onChanged: (_) => setState(() {}),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
 
                   TextFormField(
                     controller: _campaignDescController,
@@ -289,12 +289,12 @@ class _PartnerCampaignEditorScreenState
                     maxLength: 500,
                     onChanged: (_) => setState(() {}),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
 
                   // 期限選択
                   ListTile(
                     contentPadding: EdgeInsets.zero,
-                    leading: const Icon(Icons.calendar_today),
+                    leading: Icon(Icons.calendar_today),
                     title: Text(AppLocalizations.of(context)!.general_1a095336),
                     subtitle: Text(
                       _validUntil != null
@@ -303,7 +303,7 @@ class _PartnerCampaignEditorScreenState
                     ),
                     trailing: _validUntil != null
                         ? IconButton(
-                            icon: const Icon(Icons.clear),
+                            icon: Icon(Icons.clear),
                             onPressed: () {
                               setState(() {
                                 _validUntil = null;
@@ -317,7 +317,7 @@ class _PartnerCampaignEditorScreenState
                         initialDate: _validUntil ?? DateTime.now(),
                         firstDate: DateTime.now(),
                         lastDate:
-                            DateTime.now().add(const Duration(days: 365)),
+                            DateTime.now().add(Duration(days: 365)),
                       );
                       if (date != null) {
                         setState(() {
@@ -326,7 +326,7 @@ class _PartnerCampaignEditorScreenState
                       }
                     },
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
 
                   TextFormField(
                     controller: _couponCodeController,
@@ -339,14 +339,14 @@ class _PartnerCampaignEditorScreenState
                     textCapitalization: TextCapitalization.characters,
                     onChanged: (_) => setState(() {}),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // キャンペーンバナー
                   Text(
                     AppLocalizations.of(context)!.general_cb4f1541,
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   if (_bannerImage != null || _currentBannerUrl != null)
                     Stack(
                       children: [
@@ -370,7 +370,7 @@ class _PartnerCampaignEditorScreenState
                           top: 8,
                           right: 8,
                           child: IconButton(
-                            icon: const Icon(Icons.close, color: Colors.red),
+                            icon: Icon(Icons.close, color: Colors.red),
                             style: IconButton.styleFrom(
                               backgroundColor: Colors.white,
                             ),
@@ -393,7 +393,7 @@ class _PartnerCampaignEditorScreenState
                         padding: const EdgeInsets.symmetric(vertical: 16),
                       ),
                     ),
-                  const SizedBox(height: 32),
+                  SizedBox(height: 32),
 
                   // 保存ボタン
                   ElevatedButton(
@@ -404,7 +404,7 @@ class _PartnerCampaignEditorScreenState
                       foregroundColor: Colors.white,
                     ),
                     child: _isSaving
-                        ? const SizedBox(
+                        ? SizedBox(
                             height: 20,
                             width: 20,
                             child: CircularProgressIndicator(
@@ -530,14 +530,14 @@ class _PartnerCampaignEditorScreenState
                   const SizedBox(width: 4),
                   Text(
                     '${_validUntil!.month}/${_validUntil!.day}まで',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.red,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
             ],
 
             // クーポンコード
@@ -557,7 +557,7 @@ class _PartnerCampaignEditorScreenState
                   children: [
                     Icon(Icons.confirmation_number,
                         color: Colors.amber[700]),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Text(
                       'クーポン: ${_couponCodeController.text.toUpperCase()}',
                       style: TextStyle(

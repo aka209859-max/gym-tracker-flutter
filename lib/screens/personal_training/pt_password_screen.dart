@@ -6,7 +6,7 @@ import 'trainer_records_screen.dart';
 
 /// パーソナルトレーニング認証画面
 class PTPasswordScreen extends StatefulWidget {
-  const PTPasswordScreen({super.key});
+  PTPasswordScreen({super.key});
 
   @override
   State<PTPasswordScreen> createState() => _PTPasswordScreenState();
@@ -91,7 +91,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
       if (mounted) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => const TrainerRecordsScreen(),
+            builder: (context) => TrainerRecordsScreen(),
           ),
         );
       }
@@ -119,9 +119,9 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: const Color(0xFF3F51B5),
+        backgroundColor: Color(0xFF3F51B5),
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -129,7 +129,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 40),
+              SizedBox(height: 40),
 
               // アイコン
               Container(
@@ -139,14 +139,14 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
                   color: Colors.orange[50],
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.lock_outline,
                   size: 40,
                   color: Colors.orange,
                 ),
               ),
 
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
 
               // タイトル
               Text(
@@ -159,7 +159,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
                 textAlign: TextAlign.center,
               ),
 
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
 
               // 説明文
               Text(
@@ -172,7 +172,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
                 textAlign: TextAlign.center,
               ),
 
-              const SizedBox(height: 40),
+              SizedBox(height: 40),
 
               // メールアドレス表示
               Container(
@@ -187,16 +187,16 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
                   children: [
                     Text(
                       AppLocalizations.of(context)!.email,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 12,
                         color: Colors.black54,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Text(
                       email,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
                         color: Colors.black87,
                         fontWeight: FontWeight.w600,
@@ -206,7 +206,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
                 ),
               ),
 
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
 
               // パスワード入力
               Column(
@@ -214,7 +214,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
                 children: [
                   Text(
                     AppLocalizations.of(context)!.password,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
                       color: Colors.black87,
                       fontWeight: FontWeight.w600,
@@ -276,7 +276,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
                   child: Row(
                     children: [
                       Icon(Icons.error_outline, color: Colors.red[700], size: 20),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Expanded(
                         child: Text(
                           _errorMessage!,
@@ -291,7 +291,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
                 ),
               ],
 
-              const SizedBox(height: 32),
+              SizedBox(height: 32),
 
               // 認証ボタン
               ElevatedButton(
@@ -307,7 +307,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
                   disabledBackgroundColor: Colors.grey[300],
                 ),
                 child: _isLoading
-                    ? const SizedBox(
+                    ? SizedBox(
                         height: 20,
                         width: 20,
                         child: CircularProgressIndicator(
@@ -324,7 +324,7 @@ class _PTPasswordScreenState extends State<PTPasswordScreen> {
                       ),
               ),
 
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
 
               // 注意書き
               Container(

@@ -88,7 +88,7 @@ class AdMobService {
       _bannerAd = BannerAd(
         adUnitId: bannerAdUnitId,
         size: AdSize.banner,
-        request: const AdRequest(),
+        request: AdRequest(),
         listener: BannerAdListener(
           onAdLoaded: (Ad ad) {
             debugPrint('✅ バナー広告読み込み成功');

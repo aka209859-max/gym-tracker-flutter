@@ -40,7 +40,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   void _nextPage() {
     if (_currentPage < 3) { // 🎯 4ページに変更
       _pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
+        duration: Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     } else {
@@ -162,7 +162,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           SizedBox(height: 40),
           Text(
             AppLocalizations.of(context)!.trainingExperience,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
               fontSize: 28,
               fontWeight: FontWeight.bold,
@@ -227,7 +227,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           SizedBox(height: 40),
           Text(
             AppLocalizations.of(context)!.trainingGoal,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
               fontSize: 28,
               fontWeight: FontWeight.bold,
@@ -292,13 +292,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           SizedBox(height: 40),
           Text(
             AppLocalizations.of(context)!.trainingFrequency,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
               fontSize: 28,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Text(
             AppLocalizations.of(context)!.general_146fc72d,
             style: TextStyle(
@@ -410,7 +410,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
             if (isSelected)
-              const Icon(
+              Icon(
                 Icons.check_circle,
                 color: Colors.purple,
                 size: 28,
@@ -428,11 +428,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         padding: const EdgeInsets.all(24.0),
         child: Column(
           children: [
-          const SizedBox(height: 40),
+          SizedBox(height: 40),
           // アニメーションアイコン
           TweenAnimationBuilder<double>(
             tween: Tween(begin: 0.0, end: 1.0),
-            duration: const Duration(seconds: 2),
+            duration: Duration(seconds: 2),
             builder: (context, value, child) {
               return Transform.scale(
                 scale: 0.8 + (value * 0.2),
@@ -445,7 +445,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       color: Colors.purple.withOpacity(0.2),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.rocket_launch,
                       size: 60,
                       color: Colors.purple,
@@ -458,13 +458,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           SizedBox(height: 40),
           Text(
             AppLocalizations.of(context)!.ready,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
               fontSize: 32,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             AppLocalizations.of(context)!.welcomeToGymMatch,
             style: TextStyle(
@@ -473,7 +473,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 60),
+          SizedBox(height: 60),
           // 機能紹介カード
           _buildFeatureCard(
             icon: Icons.fitness_center,
@@ -495,10 +495,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             description: AppLocalizations.of(context)!.achievementSupport,
             delay: 400,
           ),
-          const SizedBox(height: 32),
+          SizedBox(height: 32),
           // 🎁 紹介コード入力（Task 10: バイラルループ）
           _buildReferralCodeSection(),
-          const SizedBox(height: 100), // 下部に余白追加
+          SizedBox(height: 100), // 下部に余白追加
         ],
       ),
     ),
@@ -509,7 +509,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget _buildReferralCodeSection() {
     return TweenAnimationBuilder<double>(
       tween: Tween(begin: 0.0, end: 1.0),
-      duration: const Duration(milliseconds: 1000),
+      duration: Duration(milliseconds: 1000),
       builder: (context, value, child) {
         return Opacity(
           opacity: value,
@@ -527,8 +527,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.card_giftcard, color: Colors.orange, size: 20),
-                    const SizedBox(width: 8),
+                    Icon(Icons.card_giftcard, color: Colors.orange, size: 20),
+                    SizedBox(width: 8),
                     Text(
                       AppLocalizations.of(context)!.general_81245a16,
                       style: TextStyle(
@@ -539,7 +539,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 CheckboxListTile(
                   value: _hasReferralCode,
                   onChanged: (value) {
@@ -559,10 +559,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   activeColor: Colors.orange,
                 ),
                 if (_hasReferralCode) ...[
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   TextField(
                     controller: _referralCodeController,
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       hintText: 'GYM12ABC',
                       hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
@@ -578,12 +578,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
-                        borderSide: const BorderSide(color: Colors.orange, width: 2),
+                        borderSide: BorderSide(color: Colors.orange, width: 2),
                       ),
-                      prefixIcon: const Icon(Icons.confirmation_number, color: Colors.orange),
+                      prefixIcon: Icon(Icons.confirmation_number, color: Colors.orange),
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text(
                     AppLocalizations.of(context)!.earnedAiCredits,
                     style: TextStyle(
@@ -652,7 +652,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4),
                         Text(
                           description,
                           style: TextStyle(

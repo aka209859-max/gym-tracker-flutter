@@ -109,7 +109,7 @@ class ScientificCitationCard extends StatelessWidget {
 class ScientificBasisSection extends StatefulWidget {
   final List<Map<String, String>> basis;
 
-  const ScientificBasisSection({
+  ScientificBasisSection({
     super.key,
     required this.basis,
   });
@@ -159,7 +159,7 @@ class _ScientificBasisSectionState extends State<ScientificBasisSection> {
             ),
           ),
           if (_isExpanded) ...[
-            const Divider(height: 1),
+            Divider(height: 1),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -184,7 +184,7 @@ class _ScientificBasisSectionState extends State<ScientificBasisSection> {
 class ConfidenceIndicator extends StatelessWidget {
   final int paperCount;
 
-  const ConfidenceIndicator({
+  ConfidenceIndicator({
     super.key,
     required this.paperCount,
   });

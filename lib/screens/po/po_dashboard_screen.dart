@@ -11,7 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 /// 2. サイドバーナビゲーション
 /// 3. ログアウト機能
 class PODashboardScreen extends StatefulWidget {
-  const PODashboardScreen({super.key});
+  PODashboardScreen({super.key});
 
   @override
   State<PODashboardScreen> createState() => _PODashboardScreenState();
@@ -141,14 +141,14 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
         foregroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: Icon(Icons.logout),
             onPressed: _logout,
             tooltip: AppLocalizations.of(context)!.logout,
           ),
         ],
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : SafeArea(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(16),
@@ -158,12 +158,12 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
                     // ジム名表示
                     Text(
                       _gymName,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Text(
                       AppLocalizations.of(context)!.general_d99061be,
                       style: TextStyle(
@@ -171,7 +171,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
                         color: Colors.grey.shade600,
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
 
                     // KPIカード
                     _buildKPICard(
@@ -180,21 +180,21 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
                       icon: Icons.people,
                       color: Colors.blue,
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     _buildKPICard(
                       title: AppLocalizations.of(context)!.general_58b46f8e,
                       value: _activeMembers.toString(),
                       icon: Icons.trending_up,
                       color: Colors.green,
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     _buildKPICard(
                       title: AppLocalizations.of(context)!.general_3a99254a,
                       value: _dormantMembers.toString(),
                       icon: Icons.trending_down,
                       color: Colors.orange,
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
 
                     // 機能ボタン（仮実装）
                     _buildFeatureButton(
@@ -207,7 +207,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
                         );
                       },
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     _buildFeatureButton(
                       title: AppLocalizations.of(context)!.general_119d8156,
                       subtitle: AppLocalizations.of(context)!.general_f86194c5,

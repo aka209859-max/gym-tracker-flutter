@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 class WeeklyStatsShareImage extends StatelessWidget {
   final Map<String, dynamic> weeklyStats;
 
-  const WeeklyStatsShareImage({
+  WeeklyStatsShareImage({
     super.key,
     required this.weeklyStats,
   });
@@ -37,7 +37,7 @@ class WeeklyStatsShareImage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 120),
+            SizedBox(height: 120),
             
             // タイトル
             Text(
@@ -50,7 +50,7 @@ class WeeklyStatsShareImage extends StatelessWidget {
               ),
             ),
             
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // 日付範囲
             Text(
@@ -61,7 +61,7 @@ class WeeklyStatsShareImage extends StatelessWidget {
               ),
             ),
             
-            const SizedBox(height: 80),
+            SizedBox(height: 80),
             
             // 統計カード
             _buildStatCard(
@@ -72,7 +72,7 @@ class WeeklyStatsShareImage extends StatelessWidget {
               color: Colors.blue,
             ),
             
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
             
             _buildStatCard(
               icon: Icons.show_chart,
@@ -82,7 +82,7 @@ class WeeklyStatsShareImage extends StatelessWidget {
               color: Colors.orange,
             ),
             
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
             
             _buildStatCard(
               icon: Icons.grid_on,
@@ -92,7 +92,7 @@ class WeeklyStatsShareImage extends StatelessWidget {
               color: Colors.green,
             ),
             
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
             
             _buildStatCard(
               icon: Icons.trending_up,

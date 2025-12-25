@@ -10,7 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class WorkoutImportPreviewScreen extends StatefulWidget {
   final Map<String, dynamic> extractedData;
 
-  const WorkoutImportPreviewScreen({
+  WorkoutImportPreviewScreen({
     super.key,
     required this.extractedData,
   });
@@ -147,7 +147,7 @@ class _WorkoutImportPreviewScreenState
       
       final endTime = endTimeString != null && endTimeString.isNotEmpty
           ? DateTime.parse('${dateString}T$endTimeString')
-          : startTime.add(const Duration(hours: 1)); // デフォルトは1時間後
+          : startTime.add(Duration(hours: 1)); // デフォルトは1時間後
       
       debugPrint('✅ [IMPORT] トレーニング時間: ${startTime.hour}:${startTime.minute} → ${endTime.hour}:${endTime.minute}');
 
@@ -203,10 +203,10 @@ class _WorkoutImportPreviewScreenState
           SnackBar(
             content: Text(
               '✅ ${exercises.length}種目のトレーニング記録を取り込みました',
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
             backgroundColor: Colors.green.shade700,
-            duration: const Duration(seconds: 3),
+            duration: Duration(seconds: 3),
           ),
         );
         
@@ -231,12 +231,12 @@ class _WorkoutImportPreviewScreenState
               children: [
                 Text(
                   AppLocalizations.of(context)!.error,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Text(
                   errorMsg,
-                  style: const TextStyle(fontSize: 12),
+                  style: TextStyle(fontSize: 12),
                 ),
               ],
             ),
@@ -316,12 +316,12 @@ class _WorkoutImportPreviewScreenState
                         // 種目名
                         Row(
                           children: [
-                            const Icon(Icons.fitness_center, color: Color(0xFF1A237E)),
-                            const SizedBox(width: 8),
+                            Icon(Icons.fitness_center, color: Color(0xFF1A237E)),
+                            SizedBox(width: 8),
                             Expanded(
                               child: Text(
                                 exerciseName,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -329,7 +329,7 @@ class _WorkoutImportPreviewScreenState
                             ),
                           ],
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12),
                         
                         // 部位選択ドロップダウン
                         Container(
@@ -358,7 +358,7 @@ class _WorkoutImportPreviewScreenState
                                       value: bodyPart,
                                       child: Text(
                                         bodyPart,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -377,7 +377,7 @@ class _WorkoutImportPreviewScreenState
                             ],
                           ),
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12),
                         
                         // セット情報
                         ...sets.asMap().entries.map((entry) {
@@ -414,7 +414,7 @@ class _WorkoutImportPreviewScreenState
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.1),
                   blurRadius: 4,
-                  offset: const Offset(0, -2),
+                  offset: Offset(0, -2),
                 ),
               ],
             ),
@@ -425,28 +425,28 @@ class _WorkoutImportPreviewScreenState
                     onPressed: _isImporting ? null : () => Navigator.of(context).pop(),
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      side: const BorderSide(color: Colors.grey),
+                      side: BorderSide(color: Colors.grey),
                     ),
                     child: Text(
                       AppLocalizations.of(context)!.cancel,
-                      style: const TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16),
                     ),
                   ),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
                 Expanded(
                   flex: 2,
                   child: ElevatedButton(
                     onPressed: _isImporting ? null : _importData,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF1A237E),
+                      backgroundColor: Color(0xFF1A237E),
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
                     child: _isImporting
-                        ? const SizedBox(
+                        ? SizedBox(
                             height: 20,
                             width: 20,
                             child: CircularProgressIndicator(

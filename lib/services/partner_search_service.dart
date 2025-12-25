@@ -325,7 +325,7 @@ class PartnerSearchService {
       final userDoc = await _firestore
           .collection('users')
           .doc(targetUserId)
-          .get(const GetOptions(source: Source.cache)); // キャッシュ優先で高速化
+          .get(GetOptions(source: Source.cache)); // キャッシュ優先で高速化
       
       if (!userDoc.exists) return SubscriptionType.free;
       

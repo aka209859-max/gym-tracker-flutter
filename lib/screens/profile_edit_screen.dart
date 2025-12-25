@@ -11,7 +11,7 @@ import '../services/subscription_service.dart';
 class ProfileEditScreen extends StatefulWidget {
   final TrainingPartner? currentProfile;
 
-  const ProfileEditScreen({super.key, this.currentProfile});
+  ProfileEditScreen({super.key, this.currentProfile});
 
   @override
   State<ProfileEditScreen> createState() => _ProfileEditScreenState();
@@ -131,7 +131,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           SnackBar(
             content: Text(AppLocalizations.of(context)!.selectExercise),
             backgroundColor: Colors.green,
-            duration: const Duration(seconds: 2),
+            duration: Duration(seconds: 2),
           ),
         );
       } else {
@@ -304,7 +304,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                         ? NetworkImage(_currentImageUrl!)
                                         : null) as ImageProvider?,
                                 child: _selectedImageBytes == null && _currentImageUrl == null
-                                    ? const Icon(Icons.person, size: 60, color: Colors.white)
+                                    ? Icon(Icons.person, size: 60, color: Colors.white)
                                     : null,
                               ),
                               // 画像選択中のローディング表示
@@ -316,7 +316,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                     color: Colors.black.withValues(alpha: 0.6),
                                     shape: BoxShape.circle,
                                   ),
-                                  child: const Center(
+                                  child: Center(
                                     child: CircularProgressIndicator(
                                       color: Colors.white,
                                     ),
@@ -330,7 +330,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                             child: CircleAvatar(
                               radius: 18,
                               backgroundColor: Theme.of(context).primaryColor,
-                              child: const Icon(
+                              child: Icon(
                                 Icons.camera_alt,
                                 size: 18,
                                 color: Colors.white,
@@ -340,12 +340,12 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Text(
                       AppLocalizations.of(context)!.profile_d22ba9a1,
                       style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
 
                     // アカウント名
                     TextFormField(
@@ -362,7 +362,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         return null;
                       },
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
 
                     // 居住地
                     DropdownButtonFormField<String>(
@@ -384,22 +384,22 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         });
                       },
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
 
                     // 自己紹介
                     TextFormField(
                       controller: _bioController,
                       decoration: InputDecoration(
                         labelText: AppLocalizations.of(context)!.profile_bac23994,
-                        border: const OutlineInputBorder(),
-                        prefixIcon: const Icon(Icons.edit),
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.edit),
                         helperText: '残り${150 - _bioController.text.length}文字',
                       ),
                       maxLines: 5,
                       maxLength: 150,
                       onChanged: (_) => setState(() {}),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
 
                     // 注意事項
                     Container(

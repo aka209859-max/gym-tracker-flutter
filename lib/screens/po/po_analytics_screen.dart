@@ -7,7 +7,7 @@ import 'package:gym_match/gen/app_localizations.dart';
 class POAnalyticsScreen extends StatelessWidget {
   final String partnerId;
 
-  const POAnalyticsScreen({super.key, required this.partnerId});
+  POAnalyticsScreen({super.key, required this.partnerId});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class POAnalyticsScreen extends StatelessWidget {
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(child: CircularProgressIndicator());
         }
 
         final members = snapshot.hasData
@@ -41,13 +41,13 @@ class POAnalyticsScreen extends StatelessWidget {
               AppLocalizations.of(context)!.general_66ac62bc,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // KPIカード
             GridView.count(
               crossAxisCount: 2,
               shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
               mainAxisSpacing: 12,
               crossAxisSpacing: 12,
               childAspectRatio: 1.5,
@@ -79,7 +79,7 @@ class POAnalyticsScreen extends StatelessWidget {
               ],
             ),
 
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             // アラートセクション
             if (dormantMembers > 0) ...[
@@ -87,11 +87,11 @@ class POAnalyticsScreen extends StatelessWidget {
                 AppLocalizations.of(context)!.general_91f7143b,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               Card(
                 color: Colors.orange[50],
                 child: ListTile(
-                  leading: const Icon(Icons.error, color: Colors.orange),
+                  leading: Icon(Icons.error, color: Colors.orange),
                   title: Text(AppLocalizations.of(context)!.generatedKey_dc33a754),
                   subtitle: Text(AppLocalizations.of(context)!.general_0126c6d7),
                   trailing: ElevatedButton(

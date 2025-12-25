@@ -7,7 +7,7 @@ import 'gym_detail_screen.dart';
 
 /// 訪問履歴画面
 class VisitHistoryScreen extends StatefulWidget {
-  const VisitHistoryScreen({super.key});
+  VisitHistoryScreen({super.key});
 
   @override
   State<VisitHistoryScreen> createState() => _VisitHistoryScreenState();
@@ -94,14 +94,14 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
         elevation: 2,
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: Icon(Icons.refresh),
             onPressed: _loadVisitHistory,
             tooltip: AppLocalizations.of(context)!.refresh,
           ),
         ],
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : _error != null
               ? _buildErrorView()
               : _histories.isEmpty
@@ -118,16 +118,16 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.error_outline, size: 64, color: Colors.red[300]),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               _error!,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 14),
+              style: TextStyle(fontSize: 14),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             ElevatedButton.icon(
               onPressed: _loadVisitHistory,
-              icon: const Icon(Icons.refresh),
+              icon: Icon(Icons.refresh),
               label: Text(AppLocalizations.of(context)!.general_53b262c8),
             ),
           ],
@@ -157,7 +157,7 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
                 color: Colors.grey[600],
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
               AppLocalizations.of(context)!.generatedKey_6d64f0af,
               textAlign: TextAlign.center,
@@ -247,7 +247,7 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
                   ],
                 ),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               // ジム情報
               Expanded(
                 child: Column(
@@ -255,18 +255,18 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
                   children: [
                     Text(
                       history.gymName,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Row(
                       children: [
                         Icon(Icons.access_time, size: 14, color: Colors.grey[600]),
-                        const SizedBox(width: 4),
+                        SizedBox(width: 4),
                         Text(
                           timeFormat.format(history.visitedAt),
                           style: TextStyle(
@@ -276,7 +276,7 @@ class _VisitHistoryScreenState extends State<VisitHistoryScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Text(
                       history.gymAddress,
                       style: TextStyle(

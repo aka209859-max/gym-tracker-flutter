@@ -12,7 +12,7 @@ import '../subscription_screen.dart';
 class PartnerProfileDetailScreen extends StatefulWidget {
   final PartnerProfile profile;
 
-  const PartnerProfileDetailScreen({
+  PartnerProfileDetailScreen({
     super.key,
     required this.profile,
   });
@@ -164,7 +164,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
             // ヘッダー部分
             _buildHeader(),
             
-            const Divider(height: 1),
+            Divider(height: 1),
             
             // 詳細情報
             Padding(
@@ -173,7 +173,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildSection(AppLocalizations.of(context)!.bio, widget.profile.bio ?? AppLocalizations.of(context)!.profile_c1dcde32),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   
                   _buildSection(
                     AppLocalizations.of(context)!.profile_c7511bf1,
@@ -184,13 +184,13 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                             .join(', ')
                         : AppLocalizations.of(context)!.notSet,
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   
                   _buildSection(
                     AppLocalizations.of(context)!.experienceLevel,
                     _experienceLevels[widget.profile.experienceLevel] ?? widget.profile.experienceLevel,
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   
                   _buildSection(
                     AppLocalizations.of(context)!.profile_dfe6eee7,
@@ -200,7 +200,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                             .join(', ')
                         : AppLocalizations.of(context)!.notSet,
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   
                   _buildSection(
                     AppLocalizations.of(context)!.profile_7db380c8,
@@ -211,7 +211,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                             .join('、')
                         : AppLocalizations.of(context)!.notSet,
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   
                   _buildSection(
                     AppLocalizations.of(context)!.profile_1cfba3aa,
@@ -222,14 +222,14 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                             .join('、')
                         : AppLocalizations.of(context)!.notSet,
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   
                   if (widget.profile.preferredLocation != null)
                     _buildSection(
                       AppLocalizations.of(context)!.profile_6745b85b,
                       widget.profile.preferredLocation!,
                     ),
-                  const SizedBox(height: 32),
+                  SizedBox(height: 32),
                   
                   // マッチングリクエスト送信フォーム
                   _buildMatchRequestForm(),
@@ -248,16 +248,16 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.error_outline, size: 64, color: Colors.red),
+              Icon(Icons.error_outline, size: 64, color: Colors.red),
               SizedBox(height: 16),
               Text(AppLocalizations.of(context)!.error,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Text(
                 e.toString(),
-                style: const TextStyle(fontSize: 14, color: Colors.grey),
+                style: TextStyle(fontSize: 14, color: Colors.grey),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 24),
@@ -321,22 +321,22 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           
           // レーティング
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.star, color: Colors.amber, size: 24),
-              const SizedBox(width: 4),
+              Icon(Icons.star, color: Colors.amber, size: 24),
+              SizedBox(width: 4),
               Text(
                 widget.profile.rating.toStringAsFixed(1),
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Text(
                 '(${widget.profile.matchCount}マッチ)',
                 style: TextStyle(
@@ -361,14 +361,14 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
+                gradient: LinearGradient(
                   colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
                 ),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Icon(Icons.workspace_premium, color: Colors.white),
+              child: Icon(Icons.workspace_premium, color: Colors.white),
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             Text(AppLocalizations.of(context)!.profile_3d9421a7),
           ],
         ),
@@ -380,7 +380,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               AppLocalizations.of(context)!.generatedKey_8ab9dcf9,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(AppLocalizations.of(context)!.profile_f35ed075),
             SizedBox(height: 8),
             _buildBenefitRow(AppLocalizations.of(context)!.searchGym),
@@ -388,7 +388,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
             _buildBenefitRow(AppLocalizations.of(context)!.profile_a980ca9f),
             _buildBenefitRow(AppLocalizations.of(context)!.profile_3ba4fae0),
             _buildBenefitRow(AppLocalizations.of(context)!.profile_8fdc9d03),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               AppLocalizations.of(context)!.generatedKey_152ba977,
               style: TextStyle(fontSize: 14, color: Colors.grey),
@@ -405,7 +405,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => const SubscriptionScreen()),
+                MaterialPageRoute(builder: (_) => SubscriptionScreen()),
               );
             },
             style: ElevatedButton.styleFrom(
@@ -424,9 +424,9 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
-          const Icon(Icons.check_circle, color: Colors.green, size: 20),
-          const SizedBox(width: 8),
-          Text(text, style: const TextStyle(fontSize: 14)),
+          Icon(Icons.check_circle, color: Colors.green, size: 20),
+          SizedBox(width: 8),
+          Text(text, style: TextStyle(fontSize: 14)),
         ],
       ),
     );
@@ -438,16 +438,16 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
       children: [
         Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
             color: Colors.grey,
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Text(
           content,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 16,
           ),
         ),
@@ -471,13 +471,13 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 // ✅ Pro限定バッジ
                 if (!_canSendRequest)
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      gradient: const LinearGradient(
+                      gradient: LinearGradient(
                         colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
                       ),
                       borderRadius: BorderRadius.circular(12),
@@ -493,7 +493,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                   ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             TextField(
               controller: _messageController,
@@ -504,7 +504,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                 border: OutlineInputBorder(),
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // ✅ Pro非対称可視性: Non-ProはアップグレードUIを表示
             if (!_canSendRequest)
@@ -517,11 +517,11 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                 ),
                 child: Column(
                   children: [
-                    const Icon(Icons.lock, color: Colors.amber, size: 32),
-                    const SizedBox(height: 8),
+                    Icon(Icons.lock, color: Colors.amber, size: 32),
+                    SizedBox(height: 8),
                     Text(
                       _permissionMessage ?? AppLocalizations.of(context)!.profile_35399a27,
-                      style: const TextStyle(fontSize: 14),
+                      style: TextStyle(fontSize: 14),
                       textAlign: TextAlign.center,
                     ),
                   ],
@@ -539,7 +539,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                       )
                     : null,
                 icon: _isSending
-                    ? const SizedBox(
+                    ? SizedBox(
                         width: 20,
                         height: 20,
                         child: CircularProgressIndicator(

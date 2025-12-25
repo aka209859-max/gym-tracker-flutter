@@ -167,7 +167,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   size: 80,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Text(
                   'FitSync',
                   style: Theme.of(context).textTheme.headlineLarge?.copyWith(
@@ -175,14 +175,14 @@ class _AuthScreenState extends State<AuthScreen> {
                         color: Theme.of(context).colorScheme.primary,
                       ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   AppLocalizations.of(context)!.general_3fc0f668,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Colors.grey[600],
                       ),
                 ),
-                const SizedBox(height: 48),
+                SizedBox(height: 48),
 
                 // フォーム
                 Form(
@@ -228,7 +228,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           return null;
                         },
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
 
                       // パスワード入力
                       TextFormField(
@@ -249,7 +249,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           return null;
                         },
                       ),
-                      const SizedBox(height: 24),
+                      SizedBox(height: 24),
 
                       // エラーメッセージ表示
                       if (_errorMessage != null)
@@ -278,7 +278,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             foregroundColor: Colors.white,
                           ),
                           child: _isLoading
-                              ? const SizedBox(
+                              ? SizedBox(
                                   width: 24,
                                   height: 24,
                                   child: CircularProgressIndicator(
@@ -288,14 +288,14 @@ class _AuthScreenState extends State<AuthScreen> {
                                 )
                               : Text(
                                   _isLogin ? AppLocalizations.of(context)!.login : AppLocalizations.of(context)!.signUp,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
 
                       // モード切り替えボタン
                       TextButton(
@@ -317,7 +317,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 32),
+                SizedBox(height: 32),
 
                 // 利用規約・プライバシーポリシー
                 Text(

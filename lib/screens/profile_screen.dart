@@ -118,10 +118,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               AppLocalizations.of(context)!.profile_ec23f31d,
               style: TextStyle(fontSize: 14),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             // 写真から取り込み
             ListTile(
-              leading: const CircleAvatar(
+              leading: CircleAvatar(
                 backgroundColor: Colors.blue,
                 child: Icon(Icons.photo_camera, color: Colors.white),
               ),
@@ -132,10 +132,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               onTap: () => Navigator.pop(context, 'photo'),
             ),
-            const Divider(),
+            Divider(),
             // CSVから取り込み
             ListTile(
-              leading: const CircleAvatar(
+              leading: CircleAvatar(
                 backgroundColor: Colors.green,
                 child: Icon(Icons.description, color: Colors.white),
               ),
@@ -184,7 +184,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (context) => const Center(
+          builder: (context) => Center(
             child: Card(
               child: Padding(
                 padding: EdgeInsets.all(24),
@@ -272,7 +272,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (context) => const Center(
+          builder: (context) => Center(
             child: Card(
               child: Padding(
                 padding: EdgeInsets.all(24),
@@ -332,7 +332,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           SnackBar(
             content: Text('❌ CSV解析エラー: $e'),
             backgroundColor: Colors.red.shade700,
-            duration: const Duration(seconds: 4),
+            duration: Duration(seconds: 4),
           ),
         );
       }
@@ -360,17 +360,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.orange.shade100,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.card_giftcard,
                   color: Colors.orange,
                   size: 28,
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12),
               Expanded(
                 child: Text(
                   AppLocalizations.of(context)!.profileInviteFriends,
-                  style: const TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20),
                 ),
               ),
             ],
@@ -387,7 +387,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -400,7 +400,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Expanded(
                       child: Text(
                         referralCode,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 2,
@@ -409,7 +409,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.copy, color: Colors.orange),
+                      icon: Icon(Icons.copy, color: Colors.orange),
                       onPressed: () {
                         Clipboard.setData(ClipboardData(text: referralCode));
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -425,7 +425,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               Text(
                 AppLocalizations.of(context)!.profile_11b58ebc,
                 style: TextStyle(
@@ -433,10 +433,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               _buildRewardItem(AppLocalizations.of(context)!.profile_7128a2b9, AppLocalizations.of(context)!.navAI),
               _buildRewardItem(AppLocalizations.of(context)!.profile_e6a7ff8b, AppLocalizations.of(context)!.navAI),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
@@ -471,7 +471,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 );
               },
-              icon: const Icon(Icons.share),
+              icon: Icon(Icons.share),
               label: Text(AppLocalizations.of(context)!.profile_02387262),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
@@ -504,17 +504,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
               color: Colors.orange.shade100,
               shape: BoxShape.circle,
             ),
-            child: const Icon(
+            child: Icon(
               Icons.check_circle,
               color: Colors.orange,
               size: 16,
             ),
           ),
-          const SizedBox(width: 8),
+          SizedBox(width: 8),
           Expanded(
             child: Text(
               '$title: $reward',
-              style: const TextStyle(fontSize: 14),
+              style: TextStyle(fontSize: 14),
             ),
           ),
         ],
@@ -586,7 +586,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: CircleAvatar(
                         radius: 16,
                         backgroundColor: Theme.of(context).primaryColor,
-                        child: const Icon(
+                        child: Icon(
                           Icons.edit,
                           size: 16,
                           color: Colors.white,
@@ -596,7 +596,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             GestureDetector(
               onTap: isProUser ? _navigateToProfileEdit : null,
               child: Row(
@@ -604,15 +604,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   Text(
                     _userProfile?.displayName ?? AppLocalizations.of(context)!.profile_b86259b0,
-                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  if (isProUser) const SizedBox(width: 8),
+                  if (isProUser) SizedBox(width: 8),
                   if (isProUser)
                     Icon(Icons.edit, size: 18, color: Colors.grey[600]),
                 ],
               ),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             Text(
               _userProfile?.bio ?? AppLocalizations.of(context)!.profile_750e8971,
               style: TextStyle(fontSize: 12, color: Colors.grey[600]),
@@ -626,7 +626,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const SubscriptionScreen()),
+                  MaterialPageRoute(builder: (context) => SubscriptionScreen()),
                 ).then((_) => _loadUserData());
               },
               borderRadius: BorderRadius.circular(20),
@@ -651,7 +651,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             : Theme.of(context).colorScheme.onPrimaryContainer,
                       ),
                     ),
-                    const SizedBox(width: 4),
+                    SizedBox(width: 4),
                     Icon(
                       Icons.arrow_forward_ios,
                       size: 12,
@@ -777,22 +777,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               title: Text(
                 '💰 ${l10n.aiAddonPurchase}',
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
               subtitle: Text(
                 l10n.aiAddonSubtitle,
-                style: const TextStyle(fontSize: 12),
+                style: TextStyle(fontSize: 12),
               ),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const AIAddonPurchaseScreen()),
+                  MaterialPageRoute(builder: (context) => AIAddonPurchaseScreen()),
                 ).then((_) => _loadUserData());
               },
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
         ],
         // デザインテーマ選択は削除（Energetic系に固定）
         _buildMenuCard(
@@ -803,11 +803,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const FavoritesScreen()),
+              MaterialPageRoute(builder: (context) => FavoritesScreen()),
             ).then((_) => _loadUserData());
           },
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         // 🏆 達成バッジ
         _buildMenuCard(
           context,
@@ -817,11 +817,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const AchievementsScreen()),
+              MaterialPageRoute(builder: (context) => AchievementsScreen()),
             );
           },
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         _buildMenuCard(
           context,
           icon: Icons.monitor_weight,
@@ -830,11 +830,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const BodyMeasurementScreen()),
+              MaterialPageRoute(builder: (context) => BodyMeasurementScreen()),
             );
           },
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         _buildMenuCard(
           context,
           icon: Icons.history,
@@ -843,11 +843,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const VisitHistoryScreen()),
+              MaterialPageRoute(builder: (context) => VisitHistoryScreen()),
             );
           },
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         _buildMenuCard(
           context,
           icon: Icons.people,
@@ -856,11 +856,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const PartnerScreen()),
+              MaterialPageRoute(builder: (context) => PartnerScreen()),
             );
           },
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         _buildMenuCard(
           context,
           icon: Icons.message,
@@ -871,11 +871,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const MessagesScreen()),
+              MaterialPageRoute(builder: (context) => MessagesScreen()),
             );
           },
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         _buildMenuCard(
           context,
           icon: Icons.card_giftcard,
@@ -900,7 +900,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             );
           },
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         _buildMenuCard(
           context,
           icon: Icons.card_giftcard,
@@ -911,7 +911,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           onTap: () async {
             final result = await Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const RedeemInviteCodeScreen()),
+              MaterialPageRoute(builder: (context) => RedeemInviteCodeScreen()),
             );
             
             if (result == true) {
@@ -942,7 +942,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             Text(title),
             if (badge != null) ...[
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
@@ -964,7 +964,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
         subtitle: Text(subtitle),
-        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+        trailing: Icon(Icons.arrow_forward_ios, size: 16),
         onTap: onTap,
       ),
     );
@@ -980,7 +980,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           title: Row(
             children: [
               Icon(Icons.lock, color: Colors.amber[700]),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Text(AppLocalizations.of(context)!.profile_467baa7c),
             ],
           ),
@@ -990,14 +990,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               Text(
                 AppLocalizations.of(context)!.generatedKey_dee40980,
-                style: const TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Text(
                 AppLocalizations.of(context)!.profile_a793420c,
                 style: TextStyle(fontSize: 14, color: Colors.grey[700]),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               _buildFeatureItem(AppLocalizations.of(context)!.profile_9789e99b),
               _buildFeatureItem(AppLocalizations.of(context)!.subscription_4ee5c60b),
             ],
@@ -1017,7 +1017,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 /*
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const SubscriptionScreen()),
+                  MaterialPageRoute(builder: (context) => SubscriptionScreen()),
                 ).then((_) => _loadUserData());
                 */
               },
@@ -1036,9 +1036,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
-          const Icon(Icons.check_circle, color: Colors.green, size: 16),
-          const SizedBox(width: 8),
-          Expanded(child: Text(text, style: const TextStyle(fontSize: 14))),
+          Icon(Icons.check_circle, color: Colors.green, size: 16),
+          SizedBox(width: 8),
+          Expanded(child: Text(text, style: TextStyle(fontSize: 14))),
         ],
       ),
     );
@@ -1067,7 +1067,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) => DraggableScrollableSheet(
@@ -1079,7 +1079,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           padding: const EdgeInsets.only(top: 20, bottom: 40),
           child: ListView(
             controller: scrollController,
-            physics: const BouncingScrollPhysics(),
+            physics: BouncingScrollPhysics(),
             children: [
             // ハンドル
             Container(
@@ -1107,7 +1107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
-            const Divider(height: 20),
+            Divider(height: 20),
             // メニュー項目1: トレーニングメモ
             ListTile(
               leading: Container(
@@ -1128,7 +1128,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               subtitle: Text(AppLocalizations.of(context)!.pastTrainingRecords),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushNamed('/workout-memo');
@@ -1154,7 +1154,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               subtitle: Text(AppLocalizations.of(context)!.editPersonalFactors),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushNamed('/personal-factors');
@@ -1180,18 +1180,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               subtitle: Text(AppLocalizations.of(context)!.profile_d15e7de3),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const LanguageSettingsScreen(),
+                    builder: (context) => LanguageSettingsScreen(),
                   ),
                 );
               },
             ),
-            const Divider(height: 20),
+            Divider(height: 20),
             // 法的情報セクション
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -1224,13 +1224,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               subtitle: Text(AppLocalizations.of(context)!.profile_eba72fb4),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const TermsOfServiceScreen(),
+                    builder: (context) => TermsOfServiceScreen(),
                   ),
                 );
               },
@@ -1256,13 +1256,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               subtitle: Text(AppLocalizations.of(context)!.sellerInfo),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const TokuteiShoutorihikihouScreen(),
+                    builder: (context) => TokuteiShoutorihikihouScreen(),
                   ),
                 );
               },
@@ -1287,7 +1287,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               subtitle: Text(AppLocalizations.of(context)!.profile_c82575f0),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () async {
                 Navigator.of(context).pop();
                 final url = Uri.parse('https://gym-match-e560d.web.app/privacy_policy.html');

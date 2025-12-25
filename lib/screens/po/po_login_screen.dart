@@ -61,7 +61,7 @@ import 'po_dashboard_screen.dart';
       if (mounted) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => const PODashboardScreen(),
+            builder: (context) => PODashboardScreen(),
           ),
         );
       }
@@ -192,13 +192,13 @@ import 'po_dashboard_screen.dart';
                     color: Colors.blue.shade700,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.fitness_center,
                     size: 64,
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
 
                 // タイトル
                 Text(
@@ -209,7 +209,7 @@ import 'po_dashboard_screen.dart';
                     color: Colors.black87,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   AppLocalizations.of(context)!.general_5de90c88,
                   style: TextStyle(
@@ -218,7 +218,7 @@ import 'po_dashboard_screen.dart';
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                const SizedBox(height: 48),
+                SizedBox(height: 48),
 
                 // ログイン方法切り替えタブ
                 Container(
@@ -229,7 +229,7 @@ import 'po_dashboard_screen.dart';
                       BoxShadow(
                         color: Colors.black.withValues(alpha: 0.05),
                         blurRadius: 10,
-                        offset: const Offset(0, 2),
+                        offset: Offset(0, 2),
                       ),
                     ],
                   ),
@@ -289,7 +289,7 @@ import 'po_dashboard_screen.dart';
 
                 // エラーメッセージ
                 if (_errorMessage != null) ...[
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
@@ -300,7 +300,7 @@ import 'po_dashboard_screen.dart';
                     child: Row(
                       children: [
                         Icon(Icons.error_outline, color: Colors.red.shade700, size: 20),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             _errorMessage!,
@@ -315,7 +315,7 @@ import 'po_dashboard_screen.dart';
                   ),
                 ],
 
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
 
                 // ヘルプテキスト
                 Text(
@@ -359,7 +359,7 @@ import 'po_dashboard_screen.dart';
               size: 20,
               color: isSelected ? Colors.white : Colors.grey.shade600,
             ),
-            const SizedBox(width: 8),
+            SizedBox(width: 8),
             Text(
               label,
               style: TextStyle(
@@ -385,7 +385,7 @@ import 'po_dashboard_screen.dart';
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             labelText: AppLocalizations.of(context)!.email,
-            prefixIcon: const Icon(Icons.email_outlined),
+            prefixIcon: Icon(Icons.email_outlined),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
             ),
@@ -402,7 +402,7 @@ import 'po_dashboard_screen.dart';
             return null;
           },
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
 
         // パスワード
         TextFormField(
@@ -410,7 +410,7 @@ import 'po_dashboard_screen.dart';
           obscureText: _obscurePassword,
           decoration: InputDecoration(
             labelText: AppLocalizations.of(context)!.password,
-            prefixIcon: const Icon(Icons.lock_outline),
+            prefixIcon: Icon(Icons.lock_outline),
             suffixIcon: IconButton(
               icon: Icon(
                 _obscurePassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
@@ -437,7 +437,7 @@ import 'po_dashboard_screen.dart';
             return null;
           },
         ),
-        const SizedBox(height: 24),
+        SizedBox(height: 24),
 
         // ログインボタン
         ElevatedButton(
@@ -452,7 +452,7 @@ import 'po_dashboard_screen.dart';
             elevation: 0,
           ),
           child: _isLoading
-              ? const SizedBox(
+              ? SizedBox(
                   height: 20,
                   width: 20,
                   child: CircularProgressIndicator(
@@ -482,7 +482,7 @@ import 'po_dashboard_screen.dart';
           decoration: InputDecoration(
             labelText: AppLocalizations.of(context)!.accessCode,
             hintText: AppLocalizations.of(context)!.generatedKey_39cc3687,
-            prefixIcon: const Icon(Icons.key_outlined),
+            prefixIcon: Icon(Icons.key_outlined),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
             ),
@@ -500,7 +500,7 @@ import 'po_dashboard_screen.dart';
             return null;
           },
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
 
         // 説明テキスト
         Container(
@@ -512,7 +512,7 @@ import 'po_dashboard_screen.dart';
           child: Row(
             children: [
               Icon(Icons.info_outline, color: Colors.blue.shade700, size: 20),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Expanded(
                 child: Text(
                   AppLocalizations.of(context)!.general_c932d178,
@@ -525,7 +525,7 @@ import 'po_dashboard_screen.dart';
             ],
           ),
         ),
-        const SizedBox(height: 24),
+        SizedBox(height: 24),
 
         // ログインボタン
         ElevatedButton(
@@ -540,7 +540,7 @@ import 'po_dashboard_screen.dart';
             elevation: 0,
           ),
           child: _isLoading
-              ? const SizedBox(
+              ? SizedBox(
                   height: 20,
                   width: 20,
                   child: CircularProgressIndicator(

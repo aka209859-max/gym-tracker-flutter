@@ -40,7 +40,7 @@ class PartnerMergeService {
           .collection('gyms')
           .get()  // 全ジムを取得してマッチング（パートナーフラグは後で確認）
           .timeout(
-            const Duration(seconds: 10),
+            Duration(seconds: 10),
             onTimeout: () {
               if (kDebugMode) {
                 print('⏱️ Firestore timeout - continuing without partner data');

@@ -111,7 +111,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
         ),
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : Column(
               children: [
                 _buildStatsSection(theme),
@@ -202,7 +202,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
     return Column(
       children: [
         Icon(icon, color: color, size: 32),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Text(
           value,
           style: TextStyle(
@@ -225,7 +225,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
   /// バッジリスト
   Widget _buildBadgeList(List<Achievement> badges, ThemeData theme) {
     if (badges.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(AppLocalizations.of(context)!.general_398db801),
       );
     }

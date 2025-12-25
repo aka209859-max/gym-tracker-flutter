@@ -153,9 +153,9 @@ class _MapScreenState extends State<MapScreen> {
                     kIsWeb 
                       ? AppLocalizations.of(context)!.general_e4a4a1d1
                       : AppLocalizations.of(context)!.confirm,
-                    style: const TextStyle(fontSize: 12),
+                    style: TextStyle(fontSize: 12),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
                     AppLocalizations.of(context)!.general_3d380ed0,
                     style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
@@ -192,7 +192,7 @@ class _MapScreenState extends State<MapScreen> {
           longitude: position.longitude,
           radiusMeters: 5000,
         ).timeout(
-          const Duration(seconds: 15),
+          Duration(seconds: 15),
           onTimeout: () {
             if (kDebugMode) {
               debugPrint(AppLocalizations.of(context)!.general_e6d6fa86);
@@ -283,7 +283,7 @@ class _MapScreenState extends State<MapScreen> {
           final firestoreGyms = await FirebaseFirestore.instance
               .collection('gyms')
               .get()
-              .timeout(const Duration(seconds: 10));
+              .timeout(Duration(seconds: 10));
           
           gyms = firestoreGyms.docs
               .map((doc) => Gym.fromFirestore(doc))
@@ -314,7 +314,7 @@ class _MapScreenState extends State<MapScreen> {
             SnackBar(
               content: Text(AppLocalizations.of(context)!.searchGym),
               backgroundColor: Colors.green,
-              duration: const Duration(seconds: 2),
+              duration: Duration(seconds: 2),
             ),
           );
         } else if (searchSucceeded && gyms.isEmpty) {
@@ -410,18 +410,18 @@ class _MapScreenState extends State<MapScreen> {
         title: Text(AppLocalizations.of(context)!.general_8a9d68db),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search),
+            icon: Icon(Icons.search),
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const SearchScreen(),
+                  builder: (context) => SearchScreen(),
                 ),
               );
             },
           ),
           IconButton(
-            icon: const Icon(Icons.filter_list),
+            icon: Icon(Icons.filter_list),
             onPressed: _showFilterDialog,
           ),
         ],
@@ -436,7 +436,7 @@ class _MapScreenState extends State<MapScreen> {
               color: Colors.blue.withValues(alpha: 0.1),
               child: Row(
                 children: [
-                  const Icon(Icons.info_outline, color: Colors.blue, size: 20),
+                  Icon(Icons.info_outline, color: Colors.blue, size: 20),
                   SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -459,7 +459,7 @@ class _MapScreenState extends State<MapScreen> {
               color: Colors.green.withValues(alpha: 0.1),
               child: Row(
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     width: 20,
                     height: 20,
                     child: CircularProgressIndicator(strokeWidth: 2),
@@ -486,8 +486,8 @@ class _MapScreenState extends State<MapScreen> {
               color: Colors.green.withValues(alpha: 0.1),
               child: Row(
                 children: [
-                  const Icon(Icons.check_circle, color: Colors.green, size: 20),
-                  const SizedBox(width: 8),
+                  Icon(Icons.check_circle, color: Colors.green, size: 20),
+                  SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       AppLocalizations.of(context)!.generatedKey_934c5ba2,
@@ -513,7 +513,7 @@ class _MapScreenState extends State<MapScreen> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _isLoadingGPS ? null : _acquireLocationAndSearch,
         icon: _isLoadingGPS
-            ? const SizedBox(
+            ? SizedBox(
                 width: 20,
                 height: 20,
                 child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
@@ -531,8 +531,8 @@ class _MapScreenState extends State<MapScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.search_off, size: 64, color: Colors.grey),
-            const SizedBox(height: 16),
+            Icon(Icons.search_off, size: 64, color: Colors.grey),
+            SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.general_303bea53,
               style: TextStyle(fontSize: 16, color: Colors.grey),
@@ -564,7 +564,7 @@ class _MapScreenState extends State<MapScreen> {
         final filteredGyms = provider.getGymsByCrowdLevel(_crowdFilter);
 
         if (filteredGyms.isEmpty) {
-          return const Center(
+          return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -610,13 +610,13 @@ class _MapScreenState extends State<MapScreen> {
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 4,
-            offset: const Offset(0, 2),
+            offset: Offset(0, 2),
           ),
         ],
       ),
       child: Row(
         children: [
-          const Icon(Icons.people, size: 20),
+          Icon(Icons.people, size: 20),
           SizedBox(width: 8),
           Text(AppLocalizations.of(context)!.workoutTypeFilter, style: TextStyle(fontWeight: FontWeight.bold)),
           const SizedBox(width: 16),
@@ -675,12 +675,12 @@ class _MapScreenState extends State<MapScreen> {
                       width: 80,
                       height: 80,
                       color: Colors.grey[300],
-                      child: const Icon(Icons.fitness_center, size: 32),
+                      child: Icon(Icons.fitness_center, size: 32),
                     );
                   },
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12),
               // ジム情報
               Expanded(
                 child: Column(
@@ -781,7 +781,7 @@ class _MapScreenState extends State<MapScreen> {
             size: 14,
             color: Color(gym.crowdLevelColor),
           ),
-          const SizedBox(width: 4),
+          SizedBox(width: 4),
           Text(
             gym.crowdLevelText,
             style: TextStyle(
@@ -805,7 +805,7 @@ class _MapScreenState extends State<MapScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(AppLocalizations.of(context)!.selectExercise),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             StatefulBuilder(
               builder: (context, setState) {
                 return Column(

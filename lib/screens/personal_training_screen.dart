@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 /// パーソナルトレーニング画面
 /// 予約状況確認、新規予約、トレーナー記録閲覧
 class PersonalTrainingScreen extends StatefulWidget {
-  const PersonalTrainingScreen({super.key});
+  PersonalTrainingScreen({super.key});
 
   @override
   State<PersonalTrainingScreen> createState() => _PersonalTrainingScreenState();
@@ -24,7 +24,7 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
           children: [
             // ヘッダーカード
             _buildHeaderCard(context),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             
             // メニューセクション
             _buildMenuSection(context),
@@ -54,7 +54,7 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               AppLocalizations.of(context)!.generatedKey_9772ef29,
               textAlign: TextAlign.center,
@@ -79,7 +79,7 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         
         // 予約状況
         _buildMenuCard(
@@ -95,7 +95,7 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
             );
           },
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         
         // 新規予約
         _buildMenuCard(
@@ -111,7 +111,7 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
             );
           },
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         
         // トレーナー記録
         _buildMenuCard(

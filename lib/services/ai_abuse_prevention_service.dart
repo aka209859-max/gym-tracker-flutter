@@ -29,7 +29,7 @@ class AIAbusePreventionService {
         return RateLimitResult(
           allowed: false,
           reason: AppLocalizations.of(context)!.generatedKey_fc1a79ee,
-          retryAfter: const Duration(hours: 1),
+          retryAfter: Duration(hours: 1),
         );
       }
       

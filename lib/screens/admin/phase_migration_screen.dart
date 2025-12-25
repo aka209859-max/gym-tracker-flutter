@@ -7,7 +7,7 @@ import '../../config/crowd_data_config.dart';
 /// 管理者が現在のデータ戦略フェーズを確認し、
 /// 次フェーズへの移行準備をサポートする画面
 class PhaseMigrationScreen extends StatelessWidget {
-  const PhaseMigrationScreen({super.key});
+  PhaseMigrationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class PhaseMigrationScreen extends StatelessWidget {
           children: [
             // 現在のフェーズ表示
             _buildCurrentPhaseCard(),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             
             // フェーズ1の詳細
             _buildPhaseCard(
@@ -41,7 +41,7 @@ class PhaseMigrationScreen extends StatelessWidget {
               ],
               isActive: CrowdDataConfig.currentPhase == CrowdDataPhase.phase1,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // フェーズ2の詳細
             _buildPhaseCard(
@@ -59,7 +59,7 @@ class PhaseMigrationScreen extends StatelessWidget {
               ],
               isActive: CrowdDataConfig.currentPhase == CrowdDataPhase.phase2,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // フェーズ3の詳細
             _buildPhaseCard(
@@ -77,7 +77,7 @@ class PhaseMigrationScreen extends StatelessWidget {
               ],
               isActive: CrowdDataConfig.currentPhase == CrowdDataPhase.phase3,
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             
             // 移行ガイドライン
             _buildMigrationGuideCard(),
@@ -103,7 +103,7 @@ class PhaseMigrationScreen extends StatelessWidget {
                   color: Colors.deepPurple,
                   size: 32,
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
                 Text(
                   AppLocalizations.of(context)!.general_ecd7fa0b,
                   style: TextStyle(
@@ -113,7 +113,7 @@ class PhaseMigrationScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -126,17 +126,17 @@ class PhaseMigrationScreen extends StatelessWidget {
                 children: [
                   Text(
                     CrowdDataConfig.phaseDescription,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.deepPurple,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Row(
                     children: [
                       Icon(Icons.attach_money, size: 20, color: Colors.green),
-                      const SizedBox(width: 4),
+                      SizedBox(width: 4),
                       Text(
                         '月額コスト: ${CrowdDataConfig.estimatedMonthlyCost}',
                         style: TextStyle(
@@ -199,7 +199,7 @@ class PhaseMigrationScreen extends StatelessWidget {
                       color: Colors.blue,
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    child: const Text(
+                    child: Text(
                       'ACTIVE',
                       style: TextStyle(
                         color: Colors.white,
@@ -208,7 +208,7 @@ class PhaseMigrationScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                if (isActive) const SizedBox(width: 8),
+                if (isActive) SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     title,
@@ -221,7 +221,7 @@ class PhaseMigrationScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               description,
               style: TextStyle(
@@ -229,11 +229,11 @@ class PhaseMigrationScreen extends StatelessWidget {
                 color: Colors.grey[700],
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             _buildInfoRow(AppLocalizations.of(context)!.general_713ba0e2, revenue, Icons.trending_up),
             _buildInfoRow(AppLocalizations.of(context)!.general_036e50bf, cost, Icons.attach_money),
             _buildInfoRow(AppLocalizations.of(context)!.general_ee0515ff, accuracy, Icons.speed),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
               AppLocalizations.of(context)!.general_d8d1ba3a,
               style: TextStyle(
@@ -264,7 +264,7 @@ class PhaseMigrationScreen extends StatelessWidget {
       child: Row(
         children: [
           Icon(icon, size: 18, color: Colors.grey[600]),
-          const SizedBox(width: 8),
+          SizedBox(width: 8),
           Text(
             '$label: ',
             style: TextStyle(
@@ -274,7 +274,7 @@ class PhaseMigrationScreen extends StatelessWidget {
           ),
           Text(
             value,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
             ),
@@ -296,7 +296,7 @@ class PhaseMigrationScreen extends StatelessWidget {
             Row(
               children: [
                 Icon(Icons.lightbulb, color: Colors.amber.shade700, size: 28),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Text(
                   AppLocalizations.of(context)!.general_1aeb1c97,
                   style: TextStyle(
@@ -306,7 +306,7 @@ class PhaseMigrationScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             _buildGuideItem(
               AppLocalizations.of(context)!.general_10819990,
               AppLocalizations.of(context)!.general_2e4b390b,
@@ -315,7 +315,7 @@ class PhaseMigrationScreen extends StatelessWidget {
               AppLocalizations.of(context)!.general_6947183d,
               AppLocalizations.of(context)!.general_f5e6812d,
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(

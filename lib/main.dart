@@ -144,7 +144,7 @@ void main() async {
 
   // ATTリクエストは起動後にバックグラウンドで実行（スプラッシュ表示中）
   if (!kIsWeb) {
-    Future.delayed(const Duration(milliseconds: 500)).then((_) async {
+    Future.delayed(Duration(milliseconds: 500)).then((_) async {
       try {
         final status = await AppTrackingTransparency.requestTrackingAuthorization();
         print(AppLocalizations.of(context)!.generatedKey_f7cf4b71);
@@ -257,11 +257,11 @@ void main() async {
   
   print('🚀 アプリ起動開始 (Firebase: ${firebaseInitialized ? AppLocalizations.of(context)!.valid : AppLocalizations.of(context)!.invalid})');
   
-  runApp(const GymMatchApp());
+  runApp(GymMatchApp());
 }
 
 class GymMatchApp extends StatelessWidget {
-  const GymMatchApp({super.key});
+  GymMatchApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -300,16 +300,16 @@ class GymMatchApp extends StatelessWidget {
               ),
               // 開発者メニュー: リリースビルドでは無効化
               if (!kReleaseMode)
-                '/developer_menu': (context) => const DeveloperMenuScreen(),
-              '/workout-memo': (context) => const WorkoutMemoListScreen(),
-              '/personal-factors': (context) => const PersonalFactorsScreen(),
-              '/subscription': (context) => const SubscriptionScreen(),
+                '/developer_menu': (context) => DeveloperMenuScreen(),
+              '/workout-memo': (context) => WorkoutMemoListScreen(),
+              '/personal-factors': (context) => PersonalFactorsScreen(),
+              '/subscription': (context) => SubscriptionScreen(),
               // 🔧 v1.0.224: AIコーチからのトレーニング記録画面遷移
-              '/add-workout': (context) => const AddWorkoutScreen(),
+              '/add-workout': (context) => AddWorkoutScreen(),
             },
             onUnknownRoute: (settings) {
               return MaterialPageRoute(
-                builder: (context) => const SplashScreen(),
+                builder: (context) => SplashScreen(),
               );
             },
           );
@@ -320,7 +320,7 @@ class GymMatchApp extends StatelessWidget {
 }
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -328,11 +328,11 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = [
-    const HomeScreen(),  // ホーム（カレンダー・統計・AI提案）
-    const WorkoutHistoryScreen(),  // トレーニング履歴（部位別・PR・メモ・週次）
-    const AICoachingScreenTabbed(),  // AI機能（メニュー生成・成長予測・効果分析）
-    const MapScreen(),  // ジム検索（リアルタイム混雑度）
-    const ProfileScreen(),  // プロフィール・設定
+    HomeScreen(),  // ホーム（カレンダー・統計・AI提案）
+    WorkoutHistoryScreen(),  // トレーニング履歴（部位別・PR・メモ・週次）
+    AICoachingScreenTabbed(),  // AI機能（メニュー生成・成長予測・効果分析）
+    MapScreen(),  // ジム検索（リアルタイム混雑度）
+    ProfileScreen(),  // プロフィール・設定
   ];
 
   @override
@@ -357,7 +357,7 @@ class _MainScreenState extends State<MainScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               // AdMobバナー広告（無料プランのみ）
-              const AdMobBanner(),
+              AdMobBanner(),
               // ナビゲーションバー
               NavigationBar(
                 selectedIndex: navigationProvider.selectedIndex,
@@ -366,22 +366,22 @@ class _MainScreenState extends State<MainScreen> {
                 },
         destinations: [
           NavigationDestination(
-            icon: const Icon(Icons.home_outlined),
-            selectedIcon: const Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
+            selectedIcon: Icon(Icons.home),
             label: l10n?.navHome ?? AppLocalizations.of(context)!.navHome,
           ),
           NavigationDestination(
-            icon: const Icon(Icons.history),
-            selectedIcon: const Icon(Icons.history),
+            icon: Icon(Icons.history),
+            selectedIcon: Icon(Icons.history),
             label: l10n?.navWorkout ?? AppLocalizations.of(context)!.general_da63bff4,
           ),
           NavigationDestination(
-            icon: const Badge(
+            icon: Badge(
               label: Text(AppLocalizations.of(context)!.navAI, style: TextStyle(fontSize: 8)),
               backgroundColor: Colors.deepPurple,
               child: Icon(Icons.psychology_outlined),
             ),
-            selectedIcon: const Badge(
+            selectedIcon: Badge(
               label: Text(AppLocalizations.of(context)!.navAI, style: TextStyle(fontSize: 8)),
               backgroundColor: Colors.deepPurple,
               child: Icon(Icons.psychology),
@@ -389,13 +389,13 @@ class _MainScreenState extends State<MainScreen> {
             label: l10n?.navAI ?? AppLocalizations.of(context)!.general_deb22de6,
           ),
           NavigationDestination(
-            icon: const Icon(Icons.map_outlined),
-            selectedIcon: const Icon(Icons.map),
+            icon: Icon(Icons.map_outlined),
+            selectedIcon: Icon(Icons.map),
             label: l10n?.navGym ?? AppLocalizations.of(context)!.gymSearch,
           ),
           NavigationDestination(
-            icon: const Icon(Icons.person_outline),
-            selectedIcon: const Icon(Icons.person),
+            icon: Icon(Icons.person_outline),
+            selectedIcon: Icon(Icons.person),
             label: l10n?.navProfile ?? AppLocalizations.of(context)!.profile,
           ),
         ],
@@ -410,7 +410,7 @@ class _MainScreenState extends State<MainScreen> {
 
 /// ローディング画面
 class _LoadingScreen extends StatelessWidget {
-  const _LoadingScreen();
+  _LoadingScreen();
 
   @override
   Widget build(BuildContext context) {

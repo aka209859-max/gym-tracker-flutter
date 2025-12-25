@@ -142,7 +142,7 @@ class _SplashScreenState extends State<SplashScreen>
                         ),
                       ),
                     ),
-                    const SizedBox(height: 30),
+                    SizedBox(height: 30),
                     // アプリ名（オプション）
                     Text(
                       'GYM MATCH',
@@ -153,7 +153,7 @@ class _SplashScreenState extends State<SplashScreen>
                         letterSpacing: 2,
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10),
                     // タグライン
                     Text(
                       AppLocalizations.of(context)!.general_6c0544e0,

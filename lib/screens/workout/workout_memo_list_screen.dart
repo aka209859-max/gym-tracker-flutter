@@ -198,7 +198,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
         foregroundColor: Colors.white,
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : _memosWithWorkouts.isEmpty
               ? Center(
                   child: Column(
@@ -209,7 +209,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
                         size: 80,
                         color: Colors.grey.shade400,
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
                       Text(
                         AppLocalizations.of(context)!.workout_b19f3279,
                         style: TextStyle(
@@ -268,7 +268,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
                                           size: 16,
                                           color: Colors.purple.shade700,
                                         ),
-                                        const SizedBox(width: 4),
+                                        SizedBox(width: 4),
                                         Text(
                                           date != null
                                               ? DateFormat('yyyy/MM/dd').format(date)

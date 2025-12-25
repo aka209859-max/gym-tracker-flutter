@@ -162,7 +162,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
         backgroundColor: Colors.deepPurple,
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : ListView(
               padding: const EdgeInsets.all(16),
               children: [
@@ -185,7 +185,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                   ),
                 ),
                 
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 
                 // 🆔 現在のユーザーUID表示（CEO用）
                 Card(
@@ -208,7 +208,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12),
                         if (_currentUserUid != null) ...[
                           Container(
                             padding: const EdgeInsets.all(12),
@@ -222,7 +222,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                                 Expanded(
                                   child: SelectableText(
                                     _currentUserUid!,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontFamily: 'monospace',
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold,
@@ -230,14 +230,14 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                                   ),
                                 ),
                                 IconButton(
-                                  icon: const Icon(Icons.copy, color: Colors.green),
+                                  icon: Icon(Icons.copy, color: Colors.green),
                                   onPressed: _copyUidToClipboard,
                                   tooltip: AppLocalizations.of(context)!.copy,
                                 ),
                               ],
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: 8),
                           Text(
                             AppLocalizations.of(context)!.general_7a793789,
                             style: TextStyle(
@@ -255,7 +255,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                   ),
                 ),
                 
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 
                 // 現在のプラン表示
                 Card(
@@ -286,7 +286,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                           ],
                         ),
                         if (_currentPlan != null) ...[
-                          const SizedBox(height: 8),
+                          SizedBox(height: 8),
                           Text(
                             _subscriptionService.getPlanDescription(_currentPlan!),
                             style: TextStyle(
@@ -294,7 +294,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                               color: Colors.grey.shade700,
                             ),
                           ),
-                          const SizedBox(height: 4),
+                          SizedBox(height: 4),
                           Text(
                             _subscriptionService.getPlanPrice(_currentPlan!),
                             style: TextStyle(
@@ -309,12 +309,12 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                   ),
                 ),
                 
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 
                 // ⚠️ プラン変更機能は削除（Apple審査対応）
                 Card(
                   color: Colors.red.shade50,
-                  child: const Padding(
+                  child: Padding(
                     padding: EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -349,7 +349,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                   ),
                 ),
                 
-                const SizedBox(height: 32),
+                SizedBox(height: 32),
                 
                 // AI使用状況
                 Card(
@@ -372,23 +372,23 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12),
                         if (_aiUsageStatus != null)
                           Text(
                             _aiUsageStatus!,
-                            style: const TextStyle(fontSize: 14),
+                            style: TextStyle(fontSize: 14),
                           ),
                       ],
                     ),
                   ),
                 ),
                 
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 
                 // AI使用回数リセットボタン
                 ElevatedButton.icon(
                   onPressed: _resetAIUsage,
-                  icon: const Icon(Icons.refresh),
+                  icon: Icon(Icons.refresh),
                   label: Text(AppLocalizations.of(context)!.general_072d6e04),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.orange,
@@ -396,12 +396,12 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                   ),
                 ),
                 
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 
                 // オンボーディングリセットボタン
                 ElevatedButton.icon(
                   onPressed: _resetOnboarding,
-                  icon: const Icon(Icons.school),
+                  icon: Icon(Icons.school),
                   label: Text(AppLocalizations.of(context)!.general_3d79955d),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.purple,
@@ -410,12 +410,12 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                   ),
                 ),
                 
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 
                 // Phase 1機能全リセットボタン
                 ElevatedButton.icon(
                   onPressed: _resetAllPhase1Features,
-                  icon: const Icon(Icons.delete_forever),
+                  icon: Icon(Icons.delete_forever),
                   label: Text(AppLocalizations.of(context)!.general_d5890bfa),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
@@ -424,12 +424,12 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                   ),
                 ),
                 
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 
                 // リセット後の説明
                 Card(
                   color: Colors.red.shade50,
-                  child: const Padding(
+                  child: Padding(
                     padding: EdgeInsets.all(12),
                     child: Text(
                       '⚠️ Phase 1リセット後は必ずアプリを再起動してください\n'
@@ -442,7 +442,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                   ),
                 ),
                 
-                const SizedBox(height: 32),
+                SizedBox(height: 32),
                 
                 // 使い方ガイド
                 Card(
@@ -465,7 +465,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12),
                         Text(
                           AppLocalizations.of(context)!.generatedKey_91c9449a
                           AppLocalizations.of(context)!.generatedKey_734a59b9

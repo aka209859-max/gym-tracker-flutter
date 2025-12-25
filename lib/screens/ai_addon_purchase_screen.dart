@@ -7,7 +7,7 @@ import '../services/revenue_cat_service.dart';
 /// 
 /// AI使用回数を追加購入できる画面
 class AIAddonPurchaseScreen extends StatefulWidget {
-  const AIAddonPurchaseScreen({super.key});
+  AIAddonPurchaseScreen({super.key});
 
   @override
   State<AIAddonPurchaseScreen> createState() => _AIAddonPurchaseScreenState();
@@ -218,7 +218,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: 20),
                     
                     // プログレスバー
                     LinearProgressIndicator(
@@ -229,7 +229,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                         remaining <= 3 ? Colors.red : Colors.blue,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     
                     // 使用状況テキスト
                     Row(
@@ -267,7 +267,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
               ),
             ),
             
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             
             // 追加購入パッケージ
             Text(
@@ -277,7 +277,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             
             // 5回パック
             _buildAddonPackageCard(
@@ -290,7 +290,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
               isRecommended: true,
             ),
             
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             
             // 説明セクション
             Card(
@@ -303,7 +303,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                     Row(
                       children: [
                         Icon(Icons.info_outline, color: Colors.blue[700], size: 20),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Text(
                           AppLocalizations.of(context)!.subscription_76b79b54,
                           style: TextStyle(
@@ -314,7 +314,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     Text(
                       AppLocalizations.of(context)!.generatedKey_9db89838
                       AppLocalizations.of(context)!.generatedKey_c77de40c
@@ -379,10 +379,10 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                     ),
                   ),
                 ),
-              if (isRecommended) const SizedBox(height: 12),
+              if (isRecommended) SizedBox(height: 12),
               
               Icon(icon, size: 48, color: color),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               
               Text(
                 title,
@@ -392,7 +392,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                   color: color,
                 ),
               ),
-              const SizedBox(height: 4),
+              SizedBox(height: 4),
               
               Text(
                 subtitle,
@@ -401,7 +401,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                   color: Colors.grey[600],
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -409,12 +409,12 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                 children: [
                   Text(
                     price,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 4),
                     child: Text(
@@ -427,7 +427,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 4),
+              SizedBox(height: 4),
               
               Text(
                 '1回あたり: ¥${(300 / aiCount).round()}',
@@ -436,7 +436,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                   color: Colors.grey[500],
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               
               SizedBox(
                 width: double.infinity,
@@ -451,7 +451,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                     ),
                   ),
                   child: _isPurchasing
-                      ? const SizedBox(
+                      ? SizedBox(
                           height: 20,
                           width: 20,
                           child: CircularProgressIndicator(

@@ -7,7 +7,7 @@ import 'chat_screen.dart';
 
 /// メッセージ一覧画面
 class MessagingScreen extends StatefulWidget {
-  const MessagingScreen({super.key});
+  MessagingScreen({super.key});
 
   @override
   State<MessagingScreen> createState() => _MessagingScreenState();
@@ -27,7 +27,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
         stream: _messagingService.getConversationsStream(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator());
           }
 
           if (snapshot.hasError) {
@@ -60,17 +60,17 @@ class _MessagingScreenState extends State<MessagingScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.error_outline, size: 64, color: Colors.red[300]),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.error_4c43efe6,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               error,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 12),
             ),
           ],
         ),
@@ -220,7 +220,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4),
                         Text(
                           conversation.lastMessage,
                           style: TextStyle(

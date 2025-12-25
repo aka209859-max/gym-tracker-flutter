@@ -82,14 +82,14 @@ class EnhancedShareService {
                 color: Colors.orange.shade100,
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.emoji_events,
                 color: Colors.orange,
                 size: 32,
               ),
             ),
-            const SizedBox(width: 12),
-            const Expanded(
+            SizedBox(width: 12),
+            Expanded(
               child: Text(
                 AppLocalizations.of(context)!.general_a32e6bd5,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -103,9 +103,9 @@ class EnhancedShareService {
           children: [
             Text(
               AppLocalizations.of(context)!.generatedKey_efdeb364,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -116,13 +116,13 @@ class EnhancedShareService {
                 children: [
                   Text(
                     '${newWeight.toStringAsFixed(1)} kg × $reps reps',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Colors.orange,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text(
                     AppLocalizations.of(context)!.general_75d64c1f,
                     style: TextStyle(fontSize: 14),
@@ -130,7 +130,7 @@ class EnhancedShareService {
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.general_6720b74a,
               style: TextStyle(fontSize: 14, color: Colors.grey),
@@ -144,7 +144,7 @@ class EnhancedShareService {
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
-            icon: const Icon(Icons.share),
+            icon: Icon(Icons.share),
             label: Text(AppLocalizations.of(context)!.general_c544a2d9),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.orange,
@@ -325,12 +325,12 @@ class EnhancedShareService {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
+            Icon(
               Icons.emoji_events,
               color: Colors.white,
               size: 120,
             ),
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
             Text(
               AppLocalizations.of(context)!.general_a32e6bd5,
               style: TextStyle(

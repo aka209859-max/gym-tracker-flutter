@@ -19,7 +19,7 @@ import '../../utils/app_logger.dart';
 /// - 部位選択UI（チップ式）
 /// - メニュー保存・履歴表示
 class AICoachingScreen extends StatefulWidget {
-  const AICoachingScreen({super.key});
+  AICoachingScreen({super.key});
 
   @override
   State<AICoachingScreen> createState() => _AICoachingScreenState();
@@ -107,7 +107,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
             appBar: AppBar(title: Text(AppLocalizations.of(context)!.aiCoaching)),
-            body: const Center(child: CircularProgressIndicator()),
+            body: Center(child: CircularProgressIndicator()),
           );
         }
 
@@ -130,7 +130,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
         title: Text(AppLocalizations.of(context)!.aiCoaching),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline),
+            icon: Icon(Icons.info_outline),
             onPressed: () => _showInfoDialog(),
             tooltip: AppLocalizations.of(context)!.workout_9e8d8121,
           ),
@@ -143,26 +143,26 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
           children: [
             // 説明文
             _buildDescription(),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             // 部位選択
             _buildBodyPartSelector(),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             // メニュー生成ボタン
             _buildGenerateButton(),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             // 生成結果表示
             if (_generatedMenu != null) ...[
               _buildGeneratedMenu(),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
             ],
 
             // エラー表示
             if (_errorMessage != null) ...[
               _buildErrorMessage(),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
             ],
 
             // 履歴表示
@@ -197,7 +197,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
             Text(AppLocalizations.of(context)!.selectExercise,
               style: TextStyle(fontSize: 14),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -211,7 +211,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
                   Row(
                     children: [
                       Icon(Icons.info_outline, color: Colors.orange.shade700, size: 20),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Text(
                         AppLocalizations.of(context)!.workout_f8ad9a0a,
                         style: TextStyle(
@@ -222,7 +222,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text(
                     AppLocalizations.of(context)!.generatedKey_79ab5374
                     AppLocalizations.of(context)!.generatedKey_46daa8ca
@@ -307,7 +307,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
           _generateMenu(selectedParts);
         } : null,
         icon: _isGenerating
-            ? const SizedBox(
+            ? SizedBox(
                 width: 20,
                 height: 20,
                 child: CircularProgressIndicator(
@@ -345,14 +345,14 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.save),
+                  icon: Icon(Icons.save),
                   onPressed: _saveMenu,
                   tooltip: AppLocalizations.of(context)!.saveWorkout,
                 ),
               ],
             ),
-            const Divider(),
-            const SizedBox(height: 8),
+            Divider(),
+            SizedBox(height: 8),
             _buildFormattedText(_generatedMenu!),
           ],
         ),
@@ -369,7 +369,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
         child: Row(
           children: [
             Icon(Icons.error_outline, color: Colors.red.shade700),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             Expanded(
               child: Text(
                 _errorMessage!,
@@ -397,9 +397,9 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         if (_isLoadingHistory)
-          const Center(child: CircularProgressIndicator())
+          Center(child: CircularProgressIndicator())
         else if (_history.isEmpty)
           Card(
             child: Padding(
@@ -459,14 +459,14 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
         spans.add(
           TextSpan(
             text: headingText,
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
               height: 1.8,
             ),
           ),
         );
-        if (i < lines.length - 1) spans.add(const TextSpan(text: '\n'));
+        if (i < lines.length - 1) spans.add(TextSpan(text: '\n'));
         continue;
       }
 
@@ -494,7 +494,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
           spans.add(
             TextSpan(
               text: match.group(1),
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
           );
           lastIndex = match.end;
@@ -507,13 +507,13 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
 
       // 改行追加（最終行以外）
       if (i < lines.length - 1) {
-        spans.add(const TextSpan(text: '\n'));
+        spans.add(TextSpan(text: '\n'));
       }
     }
 
     return RichText(
       text: TextSpan(
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 14,
           height: 1.6,
           color: Colors.black87,
@@ -541,7 +541,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
         // ステップ3: リワード広告ダイアログ表示
         final watchedAd = await showDialog<bool>(
           context: context,
-          builder: (context) => const RewardAdDialog(),
+          builder: (context) => RewardAdDialog(),
         );
         
         ConsoleLogger.debug(AppLocalizations.of(context)!.generatedKey_5a65e7d3, tag: 'AI_COACHING');
@@ -598,7 +598,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
           }
         }),
       ).timeout(
-        const Duration(seconds: 10),
+        Duration(seconds: 10),
         onTimeout: () {
           AppLogger.warning(AppLocalizations.of(context)!.workout_18ebf2f6, tag: 'AI_COACHING');
           throw TimeoutException('API request timed out');
@@ -1047,7 +1047,7 @@ ${bodyParts.join('、')}
               // AI追加購入画面へ遷移
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AIAddonPurchaseScreen()),
+                MaterialPageRoute(builder: (context) => AIAddonPurchaseScreen()),
               );
             },
             style: ElevatedButton.styleFrom(

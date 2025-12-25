@@ -11,7 +11,7 @@ import 'package:gym_match/gen/app_localizations.dart';
 class UpdateDialog extends StatelessWidget {
   final VersionCheckResult versionCheck;
 
-  const UpdateDialog({
+  UpdateDialog({
     super.key,
     required this.versionCheck,
   });

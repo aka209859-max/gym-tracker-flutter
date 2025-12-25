@@ -43,7 +43,7 @@ class SubscriptionService {
     try {
       // 🔧 タイムアウト追加: 5秒以内に取得できない場合はスキップ
       final customerInfo = await Purchases.getCustomerInfo().timeout(
-        const Duration(seconds: 5),
+        Duration(seconds: 5),
         onTimeout: () {
           print(AppLocalizations.of(context)!.subscription_9140a28e);
           throw TimeoutException('RevenueCat timeout');
@@ -106,9 +106,9 @@ class SubscriptionService {
           final userDoc = await FirebaseFirestore.instance
               .collection('users')
               .doc(user.uid)
-              .get(const GetOptions(source: Source.serverAndCache))
+              .get(GetOptions(source: Source.serverAndCache))
               .timeout(
-                const Duration(seconds: 3),
+                Duration(seconds: 3),
                 onTimeout: () {
                   print(AppLocalizations.of(context)!.subscription_99a7f530);
                   throw TimeoutException('Firestore timeout');

@@ -74,7 +74,7 @@ class NotificationService {
       '${muscleGroup}の回復完了！💪',
       AppLocalizations.of(context)!.general_39e26ea4,
       tz.TZDateTime.now(tz.local).add(delay),
-      const NotificationDetails(
+      NotificationDetails(
         iOS: DarwinNotificationDetails(),
       ),
       uiLocalNotificationDateInterpretation:
@@ -92,7 +92,7 @@ class NotificationService {
       2, // notification ID
       title,
       message,
-      const NotificationDetails(
+      NotificationDetails(
         iOS: DarwinNotificationDetails(),
       ),
     );
@@ -106,7 +106,7 @@ class NotificationService {
       3, // notification ID
       '${streakDays}日間連続達成！🔥',
       AppLocalizations.of(context)!.generatedKey_ec0ce4f0,
-      const NotificationDetails(
+      NotificationDetails(
         iOS: DarwinNotificationDetails(),
       ),
     );

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 /// 利用規約画面
 class TermsOfServiceScreen extends StatelessWidget {
-  const TermsOfServiceScreen({super.key});
+  TermsOfServiceScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +51,9 @@ class TermsOfServiceScreen extends StatelessWidget {
               AppLocalizations.of(context)!.generatedKey_c4938e35
               AppLocalizations.of(context)!.profile_bf244acc,
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             _buildContactSection(context),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             _buildDateSection(),
           ],
         ),
@@ -69,16 +69,16 @@ class TermsOfServiceScreen extends StatelessWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.blue,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             content,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
               height: 1.6,
             ),
@@ -102,7 +102,7 @@ class TermsOfServiceScreen extends StatelessWidget {
               color: Colors.blue,
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -121,13 +121,13 @@ class TermsOfServiceScreen extends StatelessWidget {
                     color: Colors.blue,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 _buildPlanItem(AppLocalizations.of(context)!.profile_fd09fa4b, AppLocalizations.of(context)!.profile_68b026c0, Colors.grey),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 _buildPlanItem(AppLocalizations.of(context)!.premiumPlan, AppLocalizations.of(context)!.profile_c29470ee, Colors.green),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 _buildPlanItem(AppLocalizations.of(context)!.proPlan, AppLocalizations.of(context)!.profile_bf865e58, Colors.purple),
-                const Divider(height: 24),
+                Divider(height: 24),
                 Text(
                   AppLocalizations.of(context)!.profile_86ba31c5,
                   style: TextStyle(
@@ -135,12 +135,12 @@ class TermsOfServiceScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Text(
                   AppLocalizations.of(context)!.generatedKey_e73b7aa2,
                   style: TextStyle(fontSize: 13),
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 Text(
                   AppLocalizations.of(context)!.profile_fbe7f25b,
                   style: TextStyle(
@@ -148,12 +148,12 @@ class TermsOfServiceScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Text(
                   AppLocalizations.of(context)!.profile_4347a89b,
                   style: TextStyle(fontSize: 13),
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 Text(
                   AppLocalizations.of(context)!.profile_867becd2,
                   style: TextStyle(
@@ -161,12 +161,12 @@ class TermsOfServiceScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Text(
                   AppLocalizations.of(context)!.profile_198f91b5,
                   style: TextStyle(fontSize: 13),
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 Text(
                   AppLocalizations.of(context)!.profile_d875e5b0,
                   style: TextStyle(
@@ -174,7 +174,7 @@ class TermsOfServiceScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Text(
                   AppLocalizations.of(context)!.profile_3305914b,
                   style: TextStyle(fontSize: 13),
@@ -192,11 +192,11 @@ class TermsOfServiceScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(Icons.check_circle, size: 16, color: color),
-        const SizedBox(width: 8),
+        SizedBox(width: 8),
         Expanded(
           child: RichText(
             text: TextSpan(
-              style: const TextStyle(fontSize: 13, color: Colors.black87),
+              style: TextStyle(fontSize: 13, color: Colors.black87),
               children: [
                 TextSpan(
                   text: '$plan: ',
@@ -230,7 +230,7 @@ class TermsOfServiceScreen extends StatelessWidget {
               SizedBox(width: 8),
               Text(
                 AppLocalizations.of(context)!.contactUs,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.blue,
@@ -238,12 +238,12 @@ class TermsOfServiceScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Text(
             AppLocalizations.of(context)!.profile_dc441f37,
             style: TextStyle(fontSize: 13),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             AppLocalizations.of(context)!.profile_01fd668e,
             style: TextStyle(
@@ -254,7 +254,7 @@ class TermsOfServiceScreen extends StatelessWidget {
           SizedBox(height: 4),
           Text(
             AppLocalizations.of(context)!.email,
-            style: const TextStyle(fontSize: 13),
+            style: TextStyle(fontSize: 13),
           ),
           Text(
             AppLocalizations.of(context)!.generatedKey_8033527d,

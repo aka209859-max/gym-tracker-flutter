@@ -12,7 +12,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class GymEquipmentEditorScreen extends StatefulWidget {
   final String gymId;
   
-  const GymEquipmentEditorScreen({
+  GymEquipmentEditorScreen({
     super.key,
     required this.gymId,
   });
@@ -142,7 +142,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
                 hintText: AppLocalizations.of(context)!.gym_ad4f70f3,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             TextField(
               controller: countController,
               decoration: InputDecoration(
@@ -190,7 +190,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
             TextButton.icon(
               onPressed: _isSaving ? null : _saveChanges,
               icon: _isSaving
-                  ? const SizedBox(
+                  ? SizedBox(
                       width: 16,
                       height: 16,
                       child: CircularProgressIndicator(strokeWidth: 2),
@@ -204,7 +204,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
         ],
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -212,7 +212,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
                 children: [
                   // マシン・器具セクション
                   _buildEquipmentSection(),
-                  const SizedBox(height: 32),
+                  SizedBox(height: 32),
                   
                   // 施設・設備セクション
                   _buildFacilitiesSection(),
@@ -246,7 +246,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             if (_equipment.isEmpty)
               Center(
                 child: Padding(
@@ -274,13 +274,13 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
                       ),
                       Text(
                         '${entry.value}台',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.add_circle_outline),
+                        icon: Icon(Icons.add_circle_outline),
                         onPressed: () {
                           setState(() {
                             _equipment[entry.key] = entry.value + 1;
@@ -289,7 +289,7 @@ class _GymEquipmentEditorScreenState extends State<GymEquipmentEditorScreen> {
                       ),
                       // 削除
                       IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.red),
+                        icon: Icon(Icons.delete, color: Colors.red),
                         onPressed: () {
                           setState(() {
                             _equipment.remove(entry.key);

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 /// パートナーリクエスト画面（未実装）
 class PartnerRequestsScreen extends StatelessWidget {
-  const PartnerRequestsScreen({super.key});
+  PartnerRequestsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class PartnerRequestsScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.person_add, size: 80, color: Colors.grey[400]),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.general_e2ae645c,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.grey[700]),

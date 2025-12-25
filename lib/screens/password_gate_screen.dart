@@ -109,7 +109,7 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
-      return const Scaffold(
+      return Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
         ),
@@ -136,7 +136,7 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
                   size: 80,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
 
                 // タイトル
                 Text(
@@ -145,7 +145,7 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
 
                 // サブタイトル
                 Container(
@@ -166,7 +166,7 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 48),
+                SizedBox(height: 48),
 
                 // パスワード入力欄
                 TextField(
@@ -174,14 +174,14 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
                   decoration: InputDecoration(
                     labelText: AppLocalizations.of(context)!.password,
                     hintText: AppLocalizations.of(context)!.password,
-                    prefixIcon: const Icon(Icons.vpn_key),
-                    border: const OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.vpn_key),
+                    border: OutlineInputBorder(),
                     errorText: _errorMessage,
                   ),
                   obscureText: true,
                   onSubmitted: (_) => _verifyPassword(),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
 
                 // ログインボタン
                 SizedBox(
@@ -201,7 +201,7 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 32),
+                SizedBox(height: 32),
 
                 // 注意書き
                 Container(
@@ -218,7 +218,7 @@ class _PasswordGateScreenState extends State<PasswordGateScreen> {
                         children: [
                           Icon(Icons.info_outline,
                               size: 20, color: Colors.blue[700]),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8),
                           Text(
                             AppLocalizations.of(context)!.general_4f700ca2,
                             style: TextStyle(

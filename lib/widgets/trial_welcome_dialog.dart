@@ -29,7 +29,7 @@ class TrialWelcomeDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       child: Container(
-        constraints: const BoxConstraints(maxWidth: 400),
+        constraints: BoxConstraints(maxWidth: 400),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -51,12 +51,12 @@ class TrialWelcomeDialog extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.celebration,
                       size: 64,
                       color: Colors.white,
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     Text(
                       AppLocalizations.of(context)!.subscription_e1e85327,
                       style: TextStyle(
@@ -65,7 +65,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Text(
                       AppLocalizations.of(context)!.subscription_55b8a61a,
                       style: TextStyle(
@@ -87,7 +87,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                     Row(
                       children: [
                         Icon(Icons.card_giftcard, color: Colors.amber.shade700),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Text(
                           AppLocalizations.of(context)!.subscription_2c0c51fb,
                           style: TextStyle(
@@ -97,7 +97,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     
                     // トライアル条件カード
                     Container(
@@ -113,7 +113,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                           Row(
                             children: [
                               Icon(Icons.star, color: Colors.amber.shade600, size: 20),
-                              const SizedBox(width: 8),
+                              SizedBox(width: 8),
                               Text(
                                 AppLocalizations.of(context)!.subscription_1d16adbb,
                                 style: TextStyle(
@@ -124,19 +124,19 @@ class TrialWelcomeDialog extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12),
                           Text(
                             AppLocalizations.of(context)!.subscription_3dd87f02,
                             style: TextStyle(fontSize: 14),
                           ),
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12),
                           _buildConditionItem('1. プロフィール設定を完了'),
                           _buildConditionItem(AppLocalizations.of(context)!.subscription_f50d3215),
                           _buildConditionItem(AppLocalizations.of(context)!.subscription_2ae35955),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     
                     // プレミアム特典リスト
                     Text(
@@ -146,13 +146,13 @@ class TrialWelcomeDialog extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     _buildBenefitItem(AppLocalizations.of(context)!.subscription_a1d7b68f),
                     _buildBenefitItem(AppLocalizations.of(context)!.subscription_87af865e),
                     _buildBenefitItem(AppLocalizations.of(context)!.subscription_3a23222d),
                     _buildBenefitItem(AppLocalizations.of(context)!.subscription_823a5d48),
                     _buildBenefitItem(AppLocalizations.of(context)!.subscription_715332a5),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     
                     // 注意事項
                     Container(
@@ -165,7 +165,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                       child: Row(
                         children: [
                           Icon(Icons.info_outline, color: Colors.amber.shade800, size: 20),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8),
                           Expanded(
                             child: Text(
                               AppLocalizations.of(context)!.subscription_b2159b40,
@@ -195,7 +195,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const TrialProgressScreen(),
+                              builder: (context) => TrialProgressScreen(),
                             ),
                           );
                         },
@@ -216,7 +216,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     TextButton(
                       onPressed: () => Navigator.pop(context),
                       child: Text(AppLocalizations.of(context)!.subscription_441ff03f),

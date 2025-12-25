@@ -8,7 +8,7 @@ import 'package:gym_match/gen/app_localizations.dart';
 /// 
 /// サポート言語（6言語）から選択して、アプリの表示言語を変更できます
 class LanguageSettingsScreen extends StatelessWidget {
-  const LanguageSettingsScreen({super.key});
+  LanguageSettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class LanguageSettingsScreen extends StatelessWidget {
           return ListTile(
             leading: Text(
               localeInfo.flag,
-              style: const TextStyle(fontSize: 32),
+              style: TextStyle(fontSize: 32),
             ),
             title: Text(
               localeInfo.nativeName,
@@ -53,7 +53,7 @@ class LanguageSettingsScreen extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
             trailing: isSelected
-                ? const Icon(
+                ? Icon(
                     Icons.check_circle,
                     color: Colors.blue,
                   )
@@ -70,9 +70,9 @@ class LanguageSettingsScreen extends StatelessWidget {
                   builder: (dialogContext) => AlertDialog(
                     title: Row(
                       children: [
-                        Text(localeInfo.flag, style: const TextStyle(fontSize: 32)),
-                        const SizedBox(width: 12),
-                        const Expanded(
+                        Text(localeInfo.flag, style: TextStyle(fontSize: 32)),
+                        SizedBox(width: 12),
+                        Expanded(
                           child: Text(
                             AppLocalizations.of(context)!.profile_5501a97a,
                             style: TextStyle(fontSize: 18),
@@ -86,9 +86,9 @@ class LanguageSettingsScreen extends StatelessWidget {
                       children: [
                         Text(
                           AppLocalizations.of(context)!.generatedKey_3aa92e14,
-                          style: const TextStyle(fontSize: 16),
+                          style: TextStyle(fontSize: 16),
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12),
                         Text(
                           AppLocalizations.of(context)!.profile_510d373d,
                           style: TextStyle(
@@ -108,7 +108,7 @@ class LanguageSettingsScreen extends StatelessWidget {
                         },
                         child: Text(
                           AppLocalizations.of(context)!.ok,
-                          style: const TextStyle(fontSize: 16),
+                          style: TextStyle(fontSize: 16),
                         ),
                       ),
                     ],
@@ -130,8 +130,8 @@ class LanguageSettingsScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.language, size: 48, color: Colors.blue),
-            const SizedBox(height: 8),
+            Icon(Icons.language, size: 48, color: Colors.blue),
+            SizedBox(height: 8),
             Text(
               AppLocalizations.of(context)!.generatedKey_81de7e28,
               style: TextStyle(
@@ -140,7 +140,7 @@ class LanguageSettingsScreen extends StatelessWidget {
                 color: Colors.grey[800],
               ),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             Text(
               AppLocalizations.of(context)!.profile_21abb17c,
               style: TextStyle(

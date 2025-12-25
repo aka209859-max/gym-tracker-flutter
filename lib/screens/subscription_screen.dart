@@ -96,7 +96,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           if (defaultTargetPlatform == TargetPlatform.iOS || kIsWeb)
             TextButton(
               onPressed: _restorePurchases,
-              child: const Text(
+              child: Text(
                 'Restore',
                 style: TextStyle(
                   color: Colors.white,
@@ -115,13 +115,13 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 children: [
                   // 現在のプラン表示
                   _buildCurrentPlanCard(),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   
                   // AI追加購入カード（有料プランのみ）
                   if (_currentPlan != SubscriptionType.free)
                     _buildAIAddonCard(),
                   if (_currentPlan != SubscriptionType.free)
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                   
                   // プラン選択セクション
                   Text(
@@ -131,7 +131,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   
                   // 無料プラン
                   _buildPlanCard(
@@ -152,11 +152,11 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     color: Colors.grey,
                     icon: Icons.account_circle,
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   
                   // 月額/年額切り替えトグル
                   _buildBillingPeriodToggle(),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   
                   // Premium プラン
                   _buildPlanCard(
@@ -180,7 +180,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     icon: Icons.workspace_premium,
                     isPopular: true,
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   
                   // Pro プラン
                   _buildPlanCard(
@@ -201,22 +201,22 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     icon: Icons.emoji_events,
                   ),
                   
-                  const SizedBox(height: 32),
+                  SizedBox(height: 32),
                   
                   // 機能比較テーブル
                   _buildFeatureComparisonTable(),
                   
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   
                   // 注意事項
                   _buildNoticeCard(),
                   
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   
                   // AI追加パック購入カード（全ユーザー対象）
                   _buildAIAddonCard(),
                   
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   
                   // 利用規約とプライバシーポリシー（Apple審査必須）
                   _buildLegalLinksCard(),
@@ -253,7 +253,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             Text(AppLocalizations.of(context)!.currentPlan,
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             Text(
               _subscriptionService.getPlanName(_currentPlan),
               style: TextStyle(
@@ -262,7 +262,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 color: planColor,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             // 永年プラン表示
             if (_hasLifetimePlan) ...[
               Container(
@@ -278,13 +278,13 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     BoxShadow(
                       color: Colors.orange.withValues(alpha: 0.3),
                       blurRadius: 8,
-                      offset: const Offset(0, 2),
+                      offset: Offset(0, 2),
                     ),
                   ],
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
+                  children: [
                     Icon(Icons.stars, color: Colors.white, size: 20),
                     SizedBox(width: 8),
                     Text(
@@ -298,7 +298,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               Text(
                 AppLocalizations.of(context)!.subscription_b3450cf6,
                 textAlign: TextAlign.center,
@@ -310,7 +310,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             ] else ...[
               Text(
                 _subscriptionService.getPlanPrice(_currentPlan),
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
                 ),
@@ -319,8 +319,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             
             // ✅ プラン管理ボタン（有料プランのみ、永年プランは除外）
             if (_currentPlan != SubscriptionType.free && !_hasLifetimePlan) ...[
-              const SizedBox(height: 16),
-              const Divider(),
+              SizedBox(height: 16),
+              Divider(),
               SizedBox(height: 12),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -568,11 +568,11 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                           size: 20,
                           color: color,
                         ),
-                        const SizedBox(width: 12),
+                        SizedBox(width: 12),
                         Expanded(
                           child: Text(
                             feature,
-                            style: const TextStyle(fontSize: 14),
+                            style: TextStyle(fontSize: 14),
                           ),
                         ),
                       ],
@@ -599,13 +599,13 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(Icons.celebration, color: Colors.green, size: 20),
-                          const SizedBox(width: 8),
+                          Icon(Icons.celebration, color: Colors.green, size: 20),
+                          SizedBox(width: 8),
                           Text(
                             type == SubscriptionType.premium
                                 ? AppLocalizations.of(context)!.subscription_f7ec6c91
                                 : AppLocalizations.of(context)!.subscription_2fe3bc16,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                               color: Colors.green,
@@ -614,7 +614,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                   ],
                   
                   // 登録ボタン
@@ -659,7 +659,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                 ),
                                 child: Text(
                                   AppLocalizations.of(context)!.subscriptionStartFreeTrial,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -719,7 +719,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         children: [
           Expanded(
             flex: 3,
-            child: Text(feature, style: const TextStyle(fontSize: 14)),
+            child: Text(feature, style: TextStyle(fontSize: 14)),
           ),
           Expanded(
             child: Center(
@@ -765,7 +765,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             Row(
               children: [
                 Icon(Icons.info_outline, color: Colors.blue[700], size: 20),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Text(
                   AppLocalizations.of(context)!.subscription_76b79b54,
                   style: TextStyle(
@@ -776,7 +776,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
               AppLocalizations.of(context)!.generatedKey_5f00a229
               AppLocalizations.of(context)!.generatedKey_87c8ba71
@@ -802,7 +802,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            const Text(
+            Text(
               'Legal Information',
               style: TextStyle(
                 fontSize: 16,
@@ -810,7 +810,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 color: Colors.black87,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -839,8 +839,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         );
                       }
                     },
-                    icon: const Icon(Icons.description, size: 20),
-                    label: const Text(
+                    icon: Icon(Icons.description, size: 20),
+                    label: Text(
                       'Terms of Use',
                       style: TextStyle(fontSize: 13),
                     ),
@@ -850,7 +850,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   ),
                 ),
                 
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 
                 // プライバシーポリシーリンク
                 Expanded(
@@ -1008,7 +1008,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (context) => const Center(
+          builder: (context) => Center(
             child: CircularProgressIndicator(),
           ),
         );
@@ -1075,7 +1075,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           SnackBar(
             content: Text('購入に失敗しました: ${e.toString()}'),
             backgroundColor: Colors.red,
-            duration: const Duration(seconds: 4),
+            duration: Duration(seconds: 4),
           ),
         );
       }
@@ -1090,7 +1090,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (context) => const Center(
+          builder: (context) => Center(
             child: CircularProgressIndicator(),
           ),
         );
@@ -1180,7 +1180,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       elevation: 3,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
-        side: const BorderSide(color: Colors.blue, width: 2),
+        side: BorderSide(color: Colors.blue, width: 2),
       ),
       child: InkWell(
         onTap: () async {
@@ -1188,7 +1188,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           final result = await Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const AIAddonPurchaseScreen(),
+              builder: (context) => AIAddonPurchaseScreen(),
             ),
           );
           
@@ -1208,7 +1208,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   color: Colors.blue.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.bolt,
                   color: Colors.blue,
                   size: 32,
@@ -1233,7 +1233,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         color: Colors.grey[600],
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 8,
@@ -1255,7 +1255,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   ],
                 ),
               ),
-              const Icon(
+              Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.blue,
                 size: 20,
@@ -1282,7 +1282,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           title: Row(
             children: [
               Icon(Icons.arrow_downward, color: Colors.blue),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Text(AppLocalizations.of(context)!.generatedKey_a3361465),
             ],
           ),
@@ -1306,29 +1306,29 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         Row(
                           children: [
                             Icon(Icons.lightbulb, color: Colors.blue, size: 20),
-                            const SizedBox(width: 8),
+                            SizedBox(width: 8),
                             Text(
                               AppLocalizations.of(context)!.subscription_1e449e5c,
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8),
                         Text(
                           _managementService.suggestRetentionOption(
                             _currentPlan.toString().split('.').last,
                             selectedReason!,
                           )['message']!,
-                          style: const TextStyle(fontSize: 14),
+                          style: TextStyle(fontSize: 14),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                 ],
                 
                 Text(AppLocalizations.of(context)!.generatedKey_ea012ccb),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 
                 // 失う機能のリスト
                 ..._getLostFeatures().map((feature) {
@@ -1336,19 +1336,19 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Row(
                       children: [
-                        const Icon(Icons.remove_circle_outline, color: Colors.red, size: 18),
-                        const SizedBox(width: 8),
-                        Expanded(child: Text(feature, style: const TextStyle(fontSize: 14))),
+                        Icon(Icons.remove_circle_outline, color: Colors.red, size: 18),
+                        SizedBox(width: 8),
+                        Expanded(child: Text(feature, style: TextStyle(fontSize: 14))),
                       ],
                     ),
                   );
                 }).toList(),
                 
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 
                 // 理由選択
                 Text(AppLocalizations.of(context)!.subscription_1ffe5eae, style: TextStyle(fontWeight: FontWeight.bold)),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 DropdownButtonFormField<String>(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -1438,7 +1438,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.subscription_f56f5454),
-        content: const SingleChildScrollView(
+        content: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,

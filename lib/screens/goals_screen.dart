@@ -85,7 +85,7 @@ class _GoalsScreenState extends State<GoalsScreen>
         ),
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : TabBarView(
               controller: _tabController,
               children: [
@@ -95,7 +95,7 @@ class _GoalsScreenState extends State<GoalsScreen>
             ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _showCreateGoalDialog,
-        icon: const Icon(Icons.add),
+        icon: Icon(Icons.add),
         label: Text(AppLocalizations.of(context)!.general_6b0cabf8),
       ),
     );
@@ -109,7 +109,7 @@ class _GoalsScreenState extends State<GoalsScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.flag, size: 64, color: Colors.grey[400]),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.general_01b23520,
               style: TextStyle(fontSize: 16, color: Colors.grey[600]),
@@ -146,7 +146,7 @@ class _GoalsScreenState extends State<GoalsScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.emoji_events_outlined, size: 64, color: Colors.grey[400]),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.general_46a04781,
               style: TextStyle(fontSize: 16, color: Colors.grey[600]),
@@ -229,7 +229,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                       children: [
                         Text(
                           goal.name,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -348,7 +348,7 @@ class _GoalsScreenState extends State<GoalsScreen>
   void _showGoalOptions(Goal goal) {
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) => Container(
@@ -365,25 +365,25 @@ class _GoalsScreenState extends State<GoalsScreen>
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               goal.name,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             // 目標値変更
             ListTile(
-              leading: const Icon(Icons.edit, color: Colors.blue),
+              leading: Icon(Icons.edit, color: Colors.blue),
               title: Text(AppLocalizations.of(context)!.general_fbfd31d9),
               onTap: () {
                 Navigator.pop(context);
                 _showEditGoalDialog(goal);
               },
             ),
-            const Divider(),
+            Divider(),
             // 削除
             ListTile(
               leading: Icon(Icons.delete, color: Colors.red),
@@ -452,14 +452,14 @@ class _GoalsScreenState extends State<GoalsScreen>
                 children: [
                   // 目標タイプ選択
                   Text(AppLocalizations.of(context)!.general_654c46cb, style: TextStyle(fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   DropdownButtonFormField<GoalType>(
                     value: selectedType,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
-                    items: const [
+                    items: [
                       DropdownMenuItem(
                         value: GoalType.weeklyWorkoutCount,
                         child: Text(AppLocalizations.of(context)!.general_e9b451c8),
@@ -482,7 +482,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                     },
                   ),
                   
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   
                   // 目標値入力
                   Text(AppLocalizations.of(context)!.targetValue, style: TextStyle(fontWeight: FontWeight.bold)),
@@ -502,7 +502,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                     },
                   ),
                   
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   
                   // ヒント表示
                   Container(
@@ -589,7 +589,7 @@ class _GoalsScreenState extends State<GoalsScreen>
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.targetValue,
-                border: const OutlineInputBorder(),
+                border: OutlineInputBorder(),
                 suffixText: goal.unit,
               ),
               onChanged: (value) {

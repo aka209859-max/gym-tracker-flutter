@@ -184,14 +184,14 @@ class WorkoutShareImage extends StatelessWidget {
             width: 20,
             child: Text(
               '$setNumber',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
                 color: Colors.black87,
               ),
             ),
           ),
-          const SizedBox(width: 4),
+          SizedBox(width: 4),
           
           // SetTypeバッジ（通常セット以外）
           if (setTypeBadge != null)
@@ -203,7 +203,7 @@ class WorkoutShareImage extends StatelessWidget {
               ),
               child: Text(
                 setTypeBadge,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
                   fontSize: 9,
                   fontWeight: FontWeight.bold,
@@ -211,7 +211,7 @@ class WorkoutShareImage extends StatelessWidget {
               ),
             ),
           
-          const SizedBox(width: 8),
+          SizedBox(width: 8),
           
           // 重量×回数（自重モードまたは重量0の場合は「自重」と表示）
           Expanded(

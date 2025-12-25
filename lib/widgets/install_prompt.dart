@@ -96,7 +96,7 @@ class _InstallPromptState extends State<InstallPrompt> {
       child: Container(
         margin: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             colors: [Color(0xFF1E88E5), Color(0xFF1565C0)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -106,7 +106,7 @@ class _InstallPromptState extends State<InstallPrompt> {
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.2),
               blurRadius: 12,
-              offset: const Offset(0, 4),
+              offset: Offset(0, 4),
             ),
           ],
         ),
@@ -124,14 +124,14 @@ class _InstallPromptState extends State<InstallPrompt> {
                       color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.download_for_offline,
                       color: Colors.white,
                       size: 32,
                     ),
                   ),
-                  const SizedBox(width: 16),
-                  const Expanded(
+                  SizedBox(width: 16),
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -155,38 +155,38 @@ class _InstallPromptState extends State<InstallPrompt> {
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.close, color: Colors.white),
+                    icon: Icon(Icons.close, color: Colors.white),
                     onPressed: _dismissPrompt,
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Row(
                 children: [
                   Expanded(
                     child: OutlinedButton.icon(
                       onPressed: _dismissPrompt,
-                      icon: const Icon(Icons.cancel_outlined),
+                      icon: Icon(Icons.cancel_outlined),
                       label: Text(AppLocalizations.of(context)!.later),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: Colors.white,
-                        side: const BorderSide(color: Colors.white70),
+                        side: BorderSide(color: Colors.white70),
                         padding: const EdgeInsets.symmetric(vertical: 12),
                       ),
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Expanded(
                     flex: 2,
                     child: ElevatedButton.icon(
                       onPressed: () {
                         _showInstallInstructions(context);
                       },
-                      icon: const Icon(Icons.add_to_home_screen),
+                      icon: Icon(Icons.add_to_home_screen),
                       label: Text(AppLocalizations.of(context)!.general_0d8d60bb),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        foregroundColor: const Color(0xFF1E88E5),
+                        foregroundColor: Color(0xFF1E88E5),
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         elevation: 0,
                       ),
@@ -207,7 +207,7 @@ class _InstallPromptState extends State<InstallPrompt> {
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
@@ -221,17 +221,17 @@ class _InstallPromptState extends State<InstallPrompt> {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1E88E5).withValues(alpha: 0.1),
+                    color: Color(0xFF1E88E5).withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.download_for_offline,
                     color: Color(0xFF1E88E5),
                     size: 32,
                   ),
                 ),
-                const SizedBox(width: 16),
-                const Expanded(
+                SizedBox(width: 16),
+                Expanded(
                   child: Text(
                     AppLocalizations.of(context)!.general_c8137971,
                     style: TextStyle(
@@ -241,30 +241,30 @@ class _InstallPromptState extends State<InstallPrompt> {
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.close),
+                  icon: Icon(Icons.close),
                   onPressed: () => Navigator.pop(context),
                 ),
               ],
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             _buildInstructionStep(
               1,
               AppLocalizations.of(context)!.general_46f1d23e,
               AppLocalizations.of(context)!.general_0c5f6229,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             _buildInstructionStep(
               2,
               AppLocalizations.of(context)!.general_7458083c,
               AppLocalizations.of(context)!.general_a07846c5,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             _buildInstructionStep(
               3,
               AppLocalizations.of(context)!.general_a42b1cc6,
               AppLocalizations.of(context)!.general_c17d5af8,
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -273,7 +273,7 @@ class _InstallPromptState extends State<InstallPrompt> {
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF1E88E5),
+                  backgroundColor: Color(0xFF1E88E5),
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),

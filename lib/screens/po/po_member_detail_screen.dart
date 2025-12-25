@@ -7,7 +7,7 @@ import '../../models/pt_member.dart';
 class POMemberDetailScreen extends StatelessWidget {
   final PTMember member;
 
-  const POMemberDetailScreen({super.key, required this.member});
+  POMemberDetailScreen({super.key, required this.member});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class POMemberDetailScreen extends StatelessWidget {
         title: Text(member.name),
         actions: [
           IconButton(
-            icon: const Icon(Icons.edit),
+            icon: Icon(Icons.edit),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(AppLocalizations.of(context)!.edit)),
@@ -39,7 +39,7 @@ class POMemberDetailScreen extends StatelessWidget {
                     AppLocalizations.of(context)!.gym_0179630e,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   _InfoRow(label: AppLocalizations.of(context)!.name, value: member.name),
                   _InfoRow(label: AppLocalizations.of(context)!.email, value: member.email),
                   if (member.phoneNumber != null)
@@ -54,7 +54,7 @@ class POMemberDetailScreen extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
 
           // 契約情報
           Card(
@@ -88,7 +88,7 @@ class POMemberDetailScreen extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
 
           // ステータス
           Card(
@@ -101,7 +101,7 @@ class POMemberDetailScreen extends StatelessWidget {
                     member.isActive ? Icons.check_circle : Icons.warning,
                     color: member.isActive ? Colors.green : Colors.orange,
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Expanded(
                     child: Text(
                       member.isActive
@@ -120,7 +120,7 @@ class POMemberDetailScreen extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // アクションボタン
           ElevatedButton.icon(
@@ -129,20 +129,20 @@ class POMemberDetailScreen extends StatelessWidget {
                 SnackBar(content: Text(AppLocalizations.of(context)!.general_0dfb3c3b)),
               );
             },
-            icon: const Icon(Icons.message),
+            icon: Icon(Icons.message),
             label: Text(AppLocalizations.of(context)!.general_ed353b30),
             style: ElevatedButton.styleFrom(
-              minimumSize: const Size(double.infinity, 48),
+              minimumSize: Size(double.infinity, 48),
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           OutlinedButton.icon(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(AppLocalizations.of(context)!.general_75a6ecb5)),
               );
             },
-            icon: const Icon(Icons.history),
+            icon: Icon(Icons.history),
             label: Text(AppLocalizations.of(context)!.general_5573bee6),
             style: OutlinedButton.styleFrom(
               minimumSize: const Size(double.infinity, 48),

@@ -19,11 +19,11 @@ class LocationService {
         try {
           debugPrint('🔄 Geolocator.getCurrentPosition() 呼び出し中...');
           final position = await Geolocator.getCurrentPosition(
-            locationSettings: const LocationSettings(
+            locationSettings: LocationSettings(
               accuracy: LocationAccuracy.high,
             ),
           ).timeout(
-            const Duration(seconds: 10),
+            Duration(seconds: 10),
             onTimeout: () {
               debugPrint(AppLocalizations.of(context)!.generatedKey_090cb8e9);
               throw TimeoutException('Location timeout');
@@ -75,11 +75,11 @@ class LocationService {
       // 現在地を取得
       debugPrint('🔄 GPS位置情報取得中...');
       final position = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(
+        locationSettings: LocationSettings(
           accuracy: LocationAccuracy.high,
         ),
       ).timeout(
-        const Duration(seconds: 15),
+        Duration(seconds: 15),
         onTimeout: () {
           debugPrint(AppLocalizations.of(context)!.generatedKey_8679dd9c);
           throw TimeoutException('Location timeout');

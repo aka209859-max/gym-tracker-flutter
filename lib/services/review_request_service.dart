@@ -93,7 +93,7 @@ class ReviewRequestService {
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
-            icon: const Icon(Icons.star),
+            icon: Icon(Icons.star),
             label: Text(AppLocalizations.of(context)!.general_7442ed3d),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.orange,

@@ -189,7 +189,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
         centerTitle: true,
       ),
       body: _isSubmitting
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Form(
@@ -203,15 +203,15 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                         padding: const EdgeInsets.all(16),
                         child: Row(
                           children: [
-                            const Icon(Icons.fitness_center, size: 40),
-                            const SizedBox(width: 16),
+                            Icon(Icons.fitness_center, size: 40),
+                            SizedBox(width: 16),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     widget.gym.name,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -231,7 +231,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
 
                     // 総合評価
                     _buildRatingSection(
@@ -245,7 +245,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                         });
                       },
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
 
                     // 詳細評価
                     Text(
@@ -255,7 +255,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
 
                     _buildRatingSection(
                       title: AppLocalizations.of(context)!.gym_59aa0844,
@@ -268,7 +268,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                         });
                       },
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
 
                     _buildRatingSection(
                       title: AppLocalizations.of(context)!.gym_972e9a95,
@@ -281,7 +281,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                         });
                       },
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
 
                     _buildRatingSection(
                       title: AppLocalizations.of(context)!.gym_a649b7f0,
@@ -294,7 +294,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                         });
                       },
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
 
                     _buildRatingSection(
                       title: AppLocalizations.of(context)!.gym_e1e3e550,
@@ -307,7 +307,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                         });
                       },
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
 
                     // コメント入力
                     Text(
@@ -317,7 +317,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     TextFormField(
                       controller: _commentController,
                       maxLines: 5,
@@ -336,7 +336,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                         return null;
                       },
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
 
                     // 投稿ボタン
                     SizedBox(

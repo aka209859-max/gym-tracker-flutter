@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 /// 特定商取引法に基づく表記画面
 class TokuteiShoutorihikihouScreen extends StatelessWidget {
-  const TokuteiShoutorihikihouScreen({super.key});
+  TokuteiShoutorihikihouScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +38,15 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             _buildInfoTable(context),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             _buildImportantNotice(),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             _buildRelatedLinks(context),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             _buildContactSection(context),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             _buildDateSection(),
           ],
         ),
@@ -164,7 +164,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
             padding: const EdgeInsets.all(12),
             child: Text(
               value,
-              style: const TextStyle(fontSize: 13, height: 1.5),
+              style: TextStyle(fontSize: 13, height: 1.5),
             ),
           ),
         ],
@@ -186,7 +186,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
           Row(
             children: [
               Icon(Icons.warning_amber, color: Colors.orange.shade700),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Text(
                 AppLocalizations.of(context)!.profile_fdd46a75,
                 style: TextStyle(
@@ -196,7 +196,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Text(
             AppLocalizations.of(context)!.generatedKey_d23452bf
             AppLocalizations.of(context)!.generatedKey_0cd63622
@@ -273,7 +273,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
           Row(
             children: [
               Icon(Icons.contact_mail, color: Colors.deepPurple.shade700),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Text(
                 AppLocalizations.of(context)!.profile_f43c41bb,
                 style: TextStyle(
@@ -284,12 +284,12 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Text(
             AppLocalizations.of(context)!.profile_669aed7f,
             style: TextStyle(fontSize: 13),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             AppLocalizations.of(context)!.profile_01fd668e,
             style: TextStyle(
@@ -300,18 +300,18 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
           SizedBox(height: 4),
           Text(
             AppLocalizations.of(context)!.email,
-            style: const TextStyle(fontSize: 13),
+            style: TextStyle(fontSize: 13),
           ),
           Text(
             AppLocalizations.of(context)!.generatedKey_46e40811,
             style: TextStyle(fontSize: 13),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4),
           Text(
             AppLocalizations.of(context)!.generatedKey_8033527d,
             style: TextStyle(fontSize: 12, color: Colors.grey),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(

@@ -49,7 +49,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
           content: Text(
             value ? '✅ 疲労管理システムを有効にしました' : '❌ 疲労管理システムを無効にしました',
           ),
-          duration: const Duration(seconds: 2),
+          duration: Duration(seconds: 2),
         ),
       );
     }
@@ -77,7 +77,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
 
       final today = DateTime.now();
       final todayStart = DateTime(today.year, today.month, today.day);
-      final todayEnd = todayStart.add(const Duration(days: 1));
+      final todayEnd = todayStart.add(Duration(days: 1));
 
       final querySnapshot = await FirebaseFirestore.instance
           .collection('workout_logs')
@@ -149,7 +149,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
           SnackBar(
             content: Text('❌ エラー: $e'),
             backgroundColor: Colors.red,
-            duration: const Duration(seconds: 4),
+            duration: Duration(seconds: 4),
           ),
         );
       }
@@ -212,7 +212,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
         title: Row(
           children: [
             Icon(levelIcon, color: levelColor, size: 32),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             Text(AppLocalizations.of(context)!.general_2779463b),
           ],
         ),
@@ -238,7 +238,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                         color: Colors.grey[700],
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Text(
                       fatigueLevel,
                       style: TextStyle(
@@ -247,7 +247,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                         color: levelColor,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Text(
                       'スコア: ${fatigueScore.toInt()} / 100',
                       style: TextStyle(
@@ -258,24 +258,24 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               
               // トレーニング内容サマリー
               _buildInfoRow(AppLocalizations.of(context)!.totalSets, AppLocalizations.of(context)!.generatedKey_6fc271f8),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               _buildInfoRow(AppLocalizations.of(context)!.workoutTotalVolume, '${totalVolumeLoad.toStringAsFixed(0)} kg'),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               _buildInfoRow(AppLocalizations.of(context)!.general_89c719c1, bodyParts.join('、')),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               _buildInfoRow(AppLocalizations.of(context)!.general_f563accd, recoveryTime),
               
-              const Divider(height: 32),
+              Divider(height: 32),
               
               // アドバイス
               Row(
                 children: [
                   Icon(Icons.lightbulb, color: Colors.amber[700], size: 20),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Text(
                     AppLocalizations.of(context)!.general_c443fe2a,
                     style: TextStyle(
@@ -285,13 +285,13 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               Text(
                 advice,
-                style: const TextStyle(fontSize: 14, height: 1.5),
+                style: TextStyle(fontSize: 14, height: 1.5),
               ),
               
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               
               // 科学的根拠（プレースホルダー）
               Container(
@@ -303,7 +303,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                 child: Row(
                   children: [
                     Icon(Icons.science, color: Colors.blue[700], size: 18),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         AppLocalizations.of(context)!.general_f2cf271b,
@@ -342,7 +342,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
         ),
         Text(
           value,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold,
           ),
@@ -358,7 +358,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
         appBar: AppBar(
           title: Text(AppLocalizations.of(context)!.fatigueManagementSystem),
         ),
-        body: const Center(child: CircularProgressIndicator()),
+        body: Center(child: CircularProgressIndicator()),
       );
     }
 
@@ -382,7 +382,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                     Row(
                       children: [
                         Icon(Icons.psychology, color: Colors.blue[700], size: 28),
-                        const SizedBox(width: 12),
+                        SizedBox(width: 12),
                         Text(
                           AppLocalizations.of(context)!.general_f79781b6,
                           style: TextStyle(
@@ -392,7 +392,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     Text(
                       AppLocalizations.of(context)!.general_757bdf34
                       AppLocalizations.of(context)!.generatedKey_365b72d7
@@ -408,7 +408,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             
             // ON/OFFスイッチ
             Card(
@@ -434,7 +434,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             
             // 全トレーニング終了ボタン
             SizedBox(
@@ -449,15 +449,15 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                   ),
                 ),
                 child: _isEndingWorkout
-                    ? const CircularProgressIndicator(color: Colors.white)
+                    ? CircularProgressIndicator(color: Colors.white)
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(Icons.check_circle, size: 28),
-                          const SizedBox(width: 12),
+                          Icon(Icons.check_circle, size: 28),
+                          SizedBox(width: 12),
                           Text(
                             AppLocalizations.of(context)!.general_60ef486a,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -466,7 +466,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                       ),
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             
             // 注意事項
             if (_isEnabled) ...[
@@ -504,7 +504,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
               ),
             ],
             
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             
             // 本日のトレーニング状況
             Card(

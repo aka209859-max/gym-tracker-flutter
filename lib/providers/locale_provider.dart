@@ -12,7 +12,7 @@ import 'package:gym_match/gen/app_localizations.dart';
 /// - de: ドイツ語
 /// - es: スペイン語
 class LocaleProvider extends ChangeNotifier {
-  Locale _locale = const Locale('ja'); // デフォルト: 日本語
+  Locale _locale = Locale('ja'); // デフォルト: 日本語
   
   static const String _localeKey = 'app_locale';
   

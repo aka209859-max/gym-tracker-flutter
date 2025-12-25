@@ -134,13 +134,13 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
         title: Text(AppLocalizations.of(context)!.personalFactor_7a61c15b),
         actions: [
           IconButton(
-            icon: const Icon(Icons.help_outline),
+            icon: Icon(Icons.help_outline),
             onPressed: _showHelpDialog,
           ),
         ],
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Form(
@@ -150,19 +150,19 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                   children: [
                     // PFM表示カード
                     _buildPFMCard(),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
                     
                     // 静的要因セクション
                     _buildSectionHeader(AppLocalizations.of(context)!.personalFactor_a8e6bc91, AppLocalizations.of(context)!.personalFactor_fe2e1a9a),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     _buildStaticFactorsCard(),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
                     
                     // 動的要因セクション
                     _buildSectionHeader(AppLocalizations.of(context)!.personalFactor_380ea875, AppLocalizations.of(context)!.generatedKey_5f66300d),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     _buildDynamicFactorsCard(),
-                    const SizedBox(height: 32),
+                    SizedBox(height: 32),
                     
                     // 保存ボタン
                     ElevatedButton(
@@ -180,7 +180,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     
                     // 科学的根拠フッター
                     _buildScientificFooter(),
@@ -203,7 +203,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               AppLocalizations.of(context)!.personalFactor_1a9ab501,
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               '${_currentPFM.toStringAsFixed(2)}x',
               style: TextStyle(
@@ -212,7 +212,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                 color: Colors.purple[700],
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               AppLocalizations.of(context)!.personalFactor_6e00fd9c,
               style: TextStyle(fontSize: 12, color: Colors.grey[700]),
@@ -234,9 +234,9 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-        const SizedBox(height: 4),
+        SizedBox(height: 4),
         Text(
           subtitle,
           style: TextStyle(fontSize: 12, color: Colors.grey[600]),
@@ -275,7 +275,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                 return null;
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // トレーニング経験年数
             TextFormField(
@@ -337,7 +337,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                 return null;
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // タンパク質摂取量
             TextFormField(
@@ -363,7 +363,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                 return null;
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // アルコール摂取量
             TextFormField(
@@ -417,7 +417,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               AppLocalizations.of(context)!.generatedKey_2b6b9ab2
               '範囲: 0.7x - 1.3x (最小30%減〜最大30%増)\n'
@@ -450,14 +450,14 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                 AppLocalizations.of(context)!.personalFactor_56a6d8a6,
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               _buildHelpSection(
                 '📊 静的要因',
                 AppLocalizations.of(context)!.generatedKey_38fecd64
                 AppLocalizations.of(context)!.generatedKey_ecb9080a
                 AppLocalizations.of(context)!.personalFactor_bc1b3d5b,
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               _buildHelpSection(
                 AppLocalizations.of(context)!.personalFactor_6a75ad83,
                 AppLocalizations.of(context)!.generatedKey_b9c37a72
@@ -465,13 +465,13 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                 AppLocalizations.of(context)!.generatedKey_b905afe2
                 AppLocalizations.of(context)!.personalFactor_63b473a6,
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               _buildHelpSection(
                 AppLocalizations.of(context)!.personalFactor_669f4356,
                 AppLocalizations.of(context)!.generatedKey_43279a59
                 AppLocalizations.of(context)!.personalFactor_6fbc6841,
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
@@ -482,7 +482,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Icon(Icons.lightbulb, color: Colors.amber[700], size: 20),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         AppLocalizations.of(context)!.personalFactor_24d99a0b,
