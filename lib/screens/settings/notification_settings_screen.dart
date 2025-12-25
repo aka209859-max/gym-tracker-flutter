@@ -103,8 +103,8 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: const Text(
-          '通知設定',
+        title: Text(
+          l10n.notificationSettings,
           style: TextStyle(
             color: Colors.white,
             fontSize: 18,
@@ -119,12 +119,12 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
         padding: const EdgeInsets.all(16),
         children: [
           // トレーニング通知
-          _buildSectionHeader('トレーニング'),
+          _buildSectionHeader(l10n.workout),
           _buildNotificationCard(
             icon: Icons.fitness_center,
             iconColor: Colors.blue,
-            title: 'トレーニングリマインダー',
-            subtitle: '毎日のトレーニングを通知',
+            title: l10n.workoutReminders,
+            subtitle: l10n.profile_5d327b0d,
             value: _workoutReminders,
             onChanged: (value) {
               setState(() => _workoutReminders = value);
@@ -134,28 +134,28 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
           
           // リマインダー時刻設定（ワークアウトリマインダーがONの場合）
           if (_workoutReminders) ...[
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Card(
               elevation: 2,
               child: ListTile(
                 leading: Icon(Icons.access_time, color: Colors.blue[700]),
-                title: const Text(
+                title: Text(
                   'リマインダー時刻',
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ),
                 subtitle: Text(_formatTime(_reminderTime)),
-                trailing: const Icon(Icons.edit, size: 20),
+                trailing: Icon(Icons.edit, size: 20),
                 onTap: _selectTime,
               ),
             ),
           ],
 
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           _buildNotificationCard(
             icon: Icons.flag,
             iconColor: Colors.green,
-            title: '目標達成通知',
-            subtitle: '目標達成時にお知らせ',
+            title: l10n.profile_07143ba3,
+            subtitle: l10n.profile_143190c5,
             value: _goalProgress,
             onChanged: (value) {
               setState(() => _goalProgress = value);
@@ -163,15 +163,15 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
             },
           ),
 
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // ソーシャル通知
           _buildSectionHeader('ソーシャル'),
           _buildNotificationCard(
             icon: Icons.message,
             iconColor: Colors.purple,
-            title: '新着メッセージ',
-            subtitle: 'メッセージ受信時に通知',
+            title: l10n.profile_aee8f242,
+            subtitle: l10n.profile_652e4f2a,
             value: _newMessages,
             onChanged: (value) {
               setState(() => _newMessages = value);
@@ -179,12 +179,12 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
             },
           ),
 
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           _buildNotificationCard(
             icon: Icons.people,
             iconColor: Colors.orange,
-            title: 'パートナーリクエスト',
-            subtitle: 'リクエスト受信時に通知',
+            title: l10n.profile_01b6f7d1,
+            subtitle: l10n.profile_786b22b4,
             value: _partnerRequests,
             onChanged: (value) {
               setState(() => _partnerRequests = value);
@@ -192,15 +192,15 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
             },
           ),
 
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // 一般通知
           _buildSectionHeader('一般'),
           _buildNotificationCard(
             icon: Icons.store,
             iconColor: Colors.teal,
-            title: 'ジム情報更新',
-            subtitle: 'お気に入りジムの更新通知',
+            title: l10n.profile_39a1a356,
+            subtitle: l10n.profile_12c898c4,
             value: _gymUpdates,
             onChanged: (value) {
               setState(() => _gymUpdates = value);
@@ -208,12 +208,12 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
             },
           ),
 
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           _buildNotificationCard(
             icon: Icons.campaign,
             iconColor: Colors.red,
-            title: 'プロモーション',
-            subtitle: '特別オファーやキャンペーン',
+            title: l10n.profile_3cfc9048,
+            subtitle: l10n.profile_04e477db,
             value: _promotions,
             onChanged: (value) {
               setState(() => _promotions = value);
@@ -221,7 +221,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
             },
           ),
 
-          const SizedBox(height: 32),
+          SizedBox(height: 32),
 
           // 説明テキスト
           Container(
@@ -234,7 +234,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
             child: Row(
               children: [
                 Icon(Icons.info_outline, color: Colors.blue[700], size: 24),
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     '通知は端末の設定でも管理できます。\n設定アプリ > 通知 からご確認ください。',

@@ -178,7 +178,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           SizedBox(height: 40),
           _buildOptionCard(
-            title: '初心者',
+            title: l10n.beginner,
             subtitle: AppLocalizations.of(context)!.beginnerDesc,
             icon: Icons.self_improvement,
             isSelected: _selectedTrainingLevel == AppLocalizations.of(context)!.beginner,
@@ -190,7 +190,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           SizedBox(height: 16),
           _buildOptionCard(
-            title: '中級者',
+            title: l10n.intermediate,
             subtitle: AppLocalizations.of(context)!.intermediateDesc,
             icon: Icons.fitness_center,
             isSelected: _selectedTrainingLevel == AppLocalizations.of(context)!.intermediate,
@@ -203,7 +203,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           SizedBox(height: 16),
           _buildOptionCard(
             title: AppLocalizations.of(context)!.advanced,
-            subtitle: '2年以上の継続的な経験あり',
+            subtitle: l10n.advancedDesc,
             icon: Icons.emoji_events,
             isSelected: _selectedTrainingLevel == AppLocalizations.of(context)!.advanced,
             onTap: () {
@@ -243,7 +243,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           SizedBox(height: 40),
           _buildOptionCard(
-            title: '筋肥大',
+            title: l10n.muscleGrowth,
             subtitle: AppLocalizations.of(context)!.muscleGrowthDesc,
             icon: Icons.volunteer_activism,
             isSelected: _selectedTrainingGoal == AppLocalizations.of(context)!.muscleGrowth,
@@ -255,7 +255,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           SizedBox(height: 16),
           _buildOptionCard(
-            title: 'ダイエット',
+            title: l10n.dietGoal,
             subtitle: AppLocalizations.of(context)!.dietGoalDesc,
             icon: Icons.trending_down,
             isSelected: _selectedTrainingGoal == AppLocalizations.of(context)!.dietGoal,
@@ -267,7 +267,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           SizedBox(height: 16),
           _buildOptionCard(
-            title: '健康維持',
+            title: l10n.healthMaintenance,
             subtitle: AppLocalizations.of(context)!.healthMaintenanceDesc,
             icon: Icons.favorite,
             isSelected: _selectedTrainingGoal == AppLocalizations.of(context)!.healthMaintenance,
@@ -298,9 +298,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Text(
-            '頻度に応じた最適なボリュームを提案します',
+            l10n.general_146fc72d,
             style: TextStyle(
               color: Colors.white.withOpacity(0.7),
               fontSize: 16,
@@ -332,7 +332,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           SizedBox(height: 16),
           _buildOptionCard(
-            title: '週5回以上',
+            title: l10n.frequency5plus,
             subtitle: AppLocalizations.of(context)!.dailyTraining,
             icon: Icons.event_repeat,
             isSelected: _selectedTrainingFrequency == AppLocalizations.of(context)!.frequency5plus,
@@ -385,7 +385,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 size: 32,
               ),
             ),
-            const SizedBox(width: 16),
+            SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -398,7 +398,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
                     subtitle,
                     style: TextStyle(
@@ -410,7 +410,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
             if (isSelected)
-              const Icon(
+              Icon(
                 Icons.check_circle,
                 color: Colors.purple,
                 size: 28,
@@ -428,7 +428,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         padding: const EdgeInsets.all(24.0),
         child: Column(
           children: [
-          const SizedBox(height: 40),
+          SizedBox(height: 40),
           // アニメーションアイコン
           TweenAnimationBuilder<double>(
             tween: Tween(begin: 0.0, end: 1.0),
@@ -445,7 +445,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       color: Colors.purple.withOpacity(0.2),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.rocket_launch,
                       size: 60,
                       color: Colors.purple,
@@ -464,7 +464,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             'GYM MATCHで最高のトレーニング体験を',
             style: TextStyle(
@@ -473,32 +473,32 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 60),
+          SizedBox(height: 60),
           // 機能紹介カード
           _buildFeatureCard(
             icon: Icons.fitness_center,
             title: AppLocalizations.of(context)!.workoutRecords,
-            description: '簡単にワークアウトを記録・管理',
+            description: l10n.general_a708f25a,
             delay: 0,
           ),
           SizedBox(height: 16),
           _buildFeatureCard(
             icon: Icons.psychology,
-            title: 'AI疲労度分析',
+            title: l10n.aiAnalysis,
             description: AppLocalizations.of(context)!.aiAnalysisDesc,
             delay: 200,
           ),
           SizedBox(height: 16),
           _buildFeatureCard(
             icon: Icons.emoji_events,
-            title: '目標達成',
+            title: l10n.general_ed434def,
             description: AppLocalizations.of(context)!.achievementSupport,
             delay: 400,
           ),
-          const SizedBox(height: 32),
+          SizedBox(height: 32),
           // 🎁 紹介コード入力（Task 10: バイラルループ）
           _buildReferralCodeSection(),
-          const SizedBox(height: 100), // 下部に余白追加
+          SizedBox(height: 100), // 下部に余白追加
         ],
       ),
     ),
@@ -527,10 +527,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.card_giftcard, color: Colors.orange, size: 20),
-                    const SizedBox(width: 8),
+                    Icon(Icons.card_giftcard, color: Colors.orange, size: 20),
+                    SizedBox(width: 8),
                     Text(
-                      '紹介コードをお持ちですか？',
+                      l10n.general_81245a16,
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.9),
                         fontSize: 14,
@@ -539,7 +539,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 CheckboxListTile(
                   value: _hasReferralCode,
                   onChanged: (value) {
@@ -548,7 +548,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     });
                   },
                   title: Text(
-                    '紹介コードを入力する',
+                    l10n.general_bef2e703,
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.8),
                       fontSize: 13,
@@ -559,7 +559,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   activeColor: Colors.orange,
                 ),
                 if (_hasReferralCode) ...[
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   TextField(
                     controller: _referralCodeController,
                     style: const TextStyle(color: Colors.white),
@@ -580,10 +580,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         borderRadius: BorderRadius.circular(8),
                         borderSide: const BorderSide(color: Colors.orange, width: 2),
                       ),
-                      prefixIcon: const Icon(Icons.confirmation_number, color: Colors.orange),
+                      prefixIcon: Icon(Icons.confirmation_number, color: Colors.orange),
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text(
                     '✨ AI無料利用×3回を獲得！',
                     style: TextStyle(
@@ -639,7 +639,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       size: 24,
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: 16),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -652,7 +652,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4),
                         Text(
                           description,
                           style: TextStyle(
@@ -701,7 +701,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
           ),
           child: Text(
-            _currentPage < 3 ? '次へ' : AppLocalizations.of(context)!.getStarted, // 🎯 4ページに変更
+            _currentPage < 3 ? l10n.next : AppLocalizations.of(context)!.getStarted, // 🎯 4ページに変更
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,

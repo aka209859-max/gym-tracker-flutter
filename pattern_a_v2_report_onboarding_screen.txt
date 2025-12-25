@@ -1,0 +1,29 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 18
+  Replacements: 14
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 14 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 4 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Replaced: 2年以上の継続的な経験あり... → l10n.advancedDesc
+  ✅ Replaced: AI疲労度分析... → l10n.aiAnalysis
+  ✅ Replaced: ダイエット... → l10n.dietGoal
+  ✅ Replaced: 中級者... → l10n.intermediate
+  ✅ Replaced: 健康維持... → l10n.healthMaintenance
+  ✅ Replaced: 初心者... → l10n.beginner
+  ✅ Replaced: 次へ... → l10n.next
+  ✅ Replaced: 目標達成... → l10n.general_ed434def
+  ✅ Replaced: 筋肥大... → l10n.muscleGrowth
+  ✅ Replaced: 簡単にワークアウトを記録・管理... → l10n.general_a708f25a
+  ✅ Replaced: 紹介コードをお持ちですか？... → l10n.general_81245a16
+  ✅ Replaced: 紹介コードを入力する... → l10n.general_bef2e703
+  ✅ Replaced: 週5回以上... → l10n.frequency5plus
+  ✅ Replaced: 頻度に応じた最適なボリュームを提案します... → l10n.general_146fc72d

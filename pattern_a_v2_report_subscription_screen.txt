@@ -1,0 +1,47 @@
+================================================================================
+Pattern A Application Report v2
+================================================================================
+
+📊 Statistics:
+  const removed: 62
+  Replacements: 30
+  Skipped (unsafe): 0
+
+================================================================================
+Detailed Log:
+================================================================================
+
+  ✅ Removed 16 × '\bconst\s+Text\s*\(' → 'Text('
+  ✅ Removed 38 × '\bconst\s+SizedBox\s*\(' → 'SizedBox('
+  ✅ Removed 6 × '\bconst\s+Icon\s*\(' → 'Icon('
+  ✅ Removed 2 × '\bconst\s+Center\s*\(' → 'Center('
+  ✅ Replaced: 14日間無料トライアル... → l10n.subscription_2fe3bc16
+  ✅ Replaced: 30日間無料トライアル... → l10n.subscription_f7ec6c91
+  ✅ Replaced: AI機能が月20回→月3回に制限... → l10n.subscription_95d4c56c
+  ✅ Replaced: AI機能が無制限→月20回に制限... → l10n.subscription_2939d15b
+  ✅ Replaced: お気に入り保存... → l10n.subscription_9217a80b
+  ✅ Replaced: お気に入り無制限→制限あり... → l10n.subscription_8c2b9430
+  ✅ Replaced: このプランに変更... → l10n.subscription_bf804c6f
+  ✅ Replaced: ご利用について... → l10n.subscription_76b79b54
+  ✅ Replaced: トレーニングパートナー検索... → l10n.subscription_8232b2c6
+  ✅ Replaced: プライバシーポリシーを開けませんでした... → l10n.subscription_f8882591
+  ✅ Replaced: プラン変更に失敗しました... → l10n.subscription_1bc3e774
+  ✅ Replaced: プラン変更手順... → l10n.subscription_f56f5454
+  ✅ Replaced: メッセージング... → l10n.subscription_f19cb091
+  ✅ Replaced: メッセージング機能... → l10n.subscription_4fb5def4
+  ✅ Replaced: レビュー投稿... → l10n.subscription_397839f3
+  ✅ Replaced: 全国のジム検索... → l10n.subscription_d59bc6e4
+  ✅ Replaced: 営業時間確認... → l10n.subscription_1c65be25
+  ✅ Replaced: 基本情報閲覧... → l10n.subscription_0a2805b1
+  ✅ Replaced: 変更... → l10n.workout_5c7bbafb
+  ✅ Replaced: 変更する... → l10n.subscription_cddeade5
+  ✅ Replaced: 変更理由... → l10n.subscription_1ffe5eae
+  ✅ Replaced: 広告が表示されます... → l10n.subscription_f9025e06
+  ✅ Replaced: 復元可能な購入履歴がありませんでした... → l10n.subscription_8449b990
+  ✅ Replaced: 成長予測・効果分析... → l10n.subscription_52f5cfb1
+  ✅ Replaced: 機能比較... → l10n.subscription_aaee0ad5
+  ✅ Replaced: 永久無料... → l10n.subscription_95db4a6f
+  ✅ Replaced: 混雑度表示... → l10n.subscription_cd8c3359
+  ✅ Replaced: 確定... → l10n.subscription_84b9d24c
+  ✅ Replaced: 購入履歴を復元しました！... → l10n.subscription_471c73c1
+  ✅ Replaced: 選択してください... → l10n.subscription_90a2e4d0

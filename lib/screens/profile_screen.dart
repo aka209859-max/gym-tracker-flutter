@@ -114,20 +114,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              'トレーニング記録をどの形式で取り込みますか？',
+            Text(
+              l10n.profile_ec23f31d,
               style: TextStyle(fontSize: 14),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             // 写真から取り込み
             ListTile(
               leading: const CircleAvatar(
                 backgroundColor: Colors.blue,
                 child: Icon(Icons.photo_camera, color: Colors.white),
               ),
-              title: const Text('📸 写真から取り込み'),
-              subtitle: const Text(
-                '他アプリのスクリーンショット',
+              title: Text('📸 写真から取り込み'),
+              subtitle: Text(
+                l10n.profile_d752bd08,
                 style: TextStyle(fontSize: 12),
               ),
               onTap: () => Navigator.pop(context, 'photo'),
@@ -139,9 +139,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 backgroundColor: Colors.green,
                 child: Icon(Icons.description, color: Colors.white),
               ),
-              title: const Text('📄 CSVから取り込み'),
-              subtitle: const Text(
-                'CSV形式のファイル',
+              title: Text('📄 CSVから取り込み'),
+              subtitle: Text(
+                l10n.profile_d97e2902,
                 style: TextStyle(fontSize: 12),
               ),
               onTap: () => Navigator.pop(context, 'csv'),
@@ -184,7 +184,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (context) => const Center(
+          builder: (context) => Center(
             child: Card(
               child: Padding(
                 padding: EdgeInsets.all(24),
@@ -272,7 +272,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (context) => const Center(
+          builder: (context) => Center(
             child: Card(
               child: Padding(
                 padding: EdgeInsets.all(24),
@@ -300,7 +300,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         // Note: file_pickerはモバイルでもbytesを提供するため、通常このパスは使用されない
         throw Exception('ファイルの読み込みに失敗しました');
       } else {
-        throw Exception('ファイルデータが取得できませんでした');
+        throw Exception(l10n.profile_81578c7e);
       }
 
       // CSV解析
@@ -360,13 +360,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.orange.shade100,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.card_giftcard,
                   color: Colors.orange,
                   size: 28,
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12),
               Expanded(
                 child: Text(
                   AppLocalizations.of(context)!.profileInviteFriends,
@@ -379,15 +379,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'あなたの紹介コード',
+              Text(
+                l10n.profile_fa33b86c,
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.grey,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -409,7 +409,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.copy, color: Colors.orange),
+                      icon: Icon(Icons.copy, color: Colors.orange),
                       onPressed: () {
                         Clipboard.setData(ClipboardData(text: referralCode));
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -420,30 +420,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         );
                       },
-                      tooltip: 'コピー',
+                      tooltip: l10n.copy,
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
-              const Text(
+              SizedBox(height: 20),
+              Text(
                 '🎁 紹介特典',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
-              _buildRewardItem('あなた', 'AI使用回数 +5回'),
-              _buildRewardItem('友達', 'AI使用回数 +3回'),
-              const SizedBox(height: 16),
+              SizedBox(height: 8),
+              _buildRewardItem(l10n.profile_7128a2b9, 'AI使用回数 +5回'),
+              _buildRewardItem(l10n.profile_e6a7ff8b, 'AI使用回数 +3回'),
+              SizedBox(height: 16),
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Colors.blue.shade50,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Text(
+                child: Text(
                   '💡 友達がこのコードを入力すると、両方に特典が届きます！',
                   style: TextStyle(fontSize: 12),
                 ),
@@ -471,8 +471,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 );
               },
-              icon: const Icon(Icons.share),
-              label: const Text('シェア'),
+              icon: Icon(Icons.share),
+              label: Text(l10n.profile_02387262),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
                 foregroundColor: Colors.white,
@@ -504,13 +504,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               color: Colors.orange.shade100,
               shape: BoxShape.circle,
             ),
-            child: const Icon(
+            child: Icon(
               Icons.check_circle,
               color: Colors.orange,
               size: 16,
             ),
           ),
-          const SizedBox(width: 8),
+          SizedBox(width: 8),
           Expanded(
             child: Text(
               '$title: $reward',
@@ -530,7 +530,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: Text(l10n.navProfile),
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings),
+            icon: Icon(Icons.settings),
             onPressed: () => _showSettingsMenu(context),
             tooltip: l10n.settings,
           ),
@@ -542,7 +542,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             // プロフィールヘッダー
             _buildProfileHeader(context),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             // メニューリスト
             _buildMenuList(context),
           ],
@@ -586,7 +586,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: CircleAvatar(
                         radius: 16,
                         backgroundColor: Theme.of(context).primaryColor,
-                        child: const Icon(
+                        child: Icon(
                           Icons.edit,
                           size: 16,
                           color: Colors.white,
@@ -596,7 +596,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             GestureDetector(
               onTap: isProUser ? _navigateToProfileEdit : null,
               child: Row(
@@ -606,13 +606,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     _userProfile?.displayName ?? 'トレーニングユーザー',
                     style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  if (isProUser) const SizedBox(width: 8),
+                  if (isProUser) SizedBox(width: 8),
                   if (isProUser)
                     Icon(Icons.edit, size: 18, color: Colors.grey[600]),
                 ],
               ),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             Text(
               _userProfile?.bio ?? 'GYM MATCHへようこそ',
               style: TextStyle(fontSize: 12, color: Colors.grey[600]),
@@ -620,7 +620,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             // プランバッジ（タップ可能）
             InkWell(
               onTap: () {
@@ -651,7 +651,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             : Theme.of(context).colorScheme.onPrimaryContainer,
                       ),
                     ),
-                    const SizedBox(width: 4),
+                    SizedBox(width: 4),
                     Icon(
                       Icons.arrow_forward_ios,
                       size: 12,
@@ -684,7 +684,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 color: Colors.purple[700],
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.photo_camera, color: Colors.white),
+              child: Icon(Icons.photo_camera, color: Colors.white),
             ),
             title: Text(
               '📸 ${l10n.importFromPhoto}',
@@ -694,11 +694,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               l10n.importFromPhotoSubtitle,
               style: const TextStyle(fontSize: 12),
             ),
-            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+            trailing: Icon(Icons.arrow_forward_ios, size: 16),
             onTap: _importWorkoutData,
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         // 🔬 個人要因設定（Phase 2b）
         Card(
           elevation: 2,
@@ -710,7 +710,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 color: Colors.blue[700],
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.psychology, color: Colors.white),
+              child: Icon(Icons.psychology, color: Colors.white),
             ),
             title: Text(
               '🔬 ${l10n.personalFactorsSettings}',
@@ -720,7 +720,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               l10n.editPersonalFactors,
               style: const TextStyle(fontSize: 12),
             ),
-            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+            trailing: Icon(Icons.arrow_forward_ios, size: 16),
             onTap: () {
               Navigator.push(
                 context,
@@ -729,7 +729,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             },
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         // パーソナルトレーニング
         Card(
           elevation: 2,
@@ -741,7 +741,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 color: Colors.orange[700],
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.fitness_center, color: Colors.white),
+              child: Icon(Icons.fitness_center, color: Colors.white),
             ),
             title: Text(
               '💪 ${l10n.personalTraining}',
@@ -751,7 +751,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               l10n.personalTrainingSubtitle,
               style: const TextStyle(fontSize: 12),
             ),
-            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+            trailing: Icon(Icons.arrow_forward_ios, size: 16),
             onTap: () {
               Navigator.push(
                 context,
@@ -760,7 +760,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             },
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         // 💰 AI追加購入（有料プラン会員のみ表示）
         if (_currentPlan != SubscriptionType.free) ...[
           Card(
@@ -773,7 +773,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.blue[700],
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.auto_awesome, color: Colors.white),
+                child: Icon(Icons.auto_awesome, color: Colors.white),
               ),
               title: Text(
                 '💰 ${l10n.aiAddonPurchase}',
@@ -783,7 +783,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 l10n.aiAddonSubtitle,
                 style: const TextStyle(fontSize: 12),
               ),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.push(
                   context,
@@ -792,7 +792,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
         ],
         // デザインテーマ選択は削除（Energetic系に固定）
         _buildMenuCard(
@@ -807,7 +807,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ).then((_) => _loadUserData());
           },
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         // 🏆 達成バッジ
         _buildMenuCard(
           context,
@@ -821,7 +821,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             );
           },
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         _buildMenuCard(
           context,
           icon: Icons.monitor_weight,
@@ -834,7 +834,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             );
           },
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         _buildMenuCard(
           context,
           icon: Icons.history,
@@ -847,7 +847,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             );
           },
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         _buildMenuCard(
           context,
           icon: Icons.people,
@@ -860,7 +860,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             );
           },
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         _buildMenuCard(
           context,
           icon: Icons.message,
@@ -875,7 +875,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             );
           },
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         _buildMenuCard(
           context,
           icon: Icons.card_giftcard,
@@ -900,7 +900,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             );
           },
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         _buildMenuCard(
           context,
           icon: Icons.card_giftcard,
@@ -942,12 +942,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             Text(title),
             if (badge != null) ...[
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
                   color: badgeColor?.withValues(alpha: 0.2) ?? 
-                      (badge == '有料プラン' ? Colors.amber[100] : Colors.blue[100]),
+                      (badge == l10n.profile_236a0d66 ? Colors.amber[100] : Colors.blue[100]),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -956,7 +956,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
                     color: badgeColor ?? 
-                        (badge == '有料プラン' ? Colors.amber[900] : Colors.blue[900]),
+                        (badge == l10n.profile_236a0d66 ? Colors.amber[900] : Colors.blue[900]),
                   ),
                 ),
               ),
@@ -964,7 +964,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
         subtitle: Text(subtitle),
-        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+        trailing: Icon(Icons.arrow_forward_ios, size: 16),
         onTap: onTap,
       ),
     );
@@ -980,8 +980,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           title: Row(
             children: [
               Icon(Icons.lock, color: Colors.amber[700]),
-              const SizedBox(width: 8),
-              const Text('有料プラン限定機能'),
+              SizedBox(width: 8),
+              Text(l10n.profile_467baa7c),
             ],
           ),
           content: Column(
@@ -992,12 +992,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 '$featureNameは有料プラン会員限定の機能です。',
                 style: const TextStyle(fontSize: 16),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Text(
-                '有料プランに加入すると以下の機能が利用可能になります：',
+                l10n.profile_a793420c,
                 style: TextStyle(fontSize: 14, color: Colors.grey[700]),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               _buildFeatureItem('🤝 トレーニングパートナーマッチング'),
               _buildFeatureItem('💬 メッセージング機能'),
             ],
@@ -1012,7 +1012,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Navigator.pop(context);
                 // TODO: Implement SubscriptionScreen
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('プラン詳細画面は近日公開予定です')),
+                  const SnackBar(content: Text(l10n.profile_7f49351b)),
                 );
                 /*
                 Navigator.push(
@@ -1021,7 +1021,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ).then((_) => _loadUserData());
                 */
               },
-              child: const Text('プラン詳細を見る'),
+              child: Text(l10n.profile_2871f0ae),
             ),
           ],
         ),
@@ -1036,8 +1036,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
-          const Icon(Icons.check_circle, color: Colors.green, size: 16),
-          const SizedBox(width: 8),
+          Icon(Icons.check_circle, color: Colors.green, size: 16),
+          SizedBox(width: 8),
           Expanded(child: Text(text, style: const TextStyle(fontSize: 14))),
         ],
       ),
@@ -1048,14 +1048,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('近日公開'),
+        title: Text(l10n.profile_b217155b),
         content: Text(
           '$featureNameは現在開発中です。\n次回のアップデートでご利用いただけます。',
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('了解'),
+            child: Text(l10n.gym_95877b1f),
           ),
         ],
       ),
@@ -1128,7 +1128,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               subtitle: Text(AppLocalizations.of(context)!.pastTrainingRecords),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushNamed('/workout-memo');
@@ -1154,7 +1154,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               subtitle: Text(AppLocalizations.of(context)!.editPersonalFactors),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushNamed('/personal-factors');
@@ -1179,8 +1179,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text('6言語対応 - グローバル展開中'),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              subtitle: Text('6言語対応 - グローバル展開中'),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.push(
@@ -1223,8 +1223,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text('サービス利用条件・サブスクリプション'),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              subtitle: Text('サービス利用条件・サブスクリプション'),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.push(
@@ -1248,7 +1248,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.deepPurple.shade700,
                 ),
               ),
-              title: const Text(
+              title: Text(
                 '特定商取引法に基づく表記',
                 style: TextStyle(
                   fontSize: 16,
@@ -1256,7 +1256,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               subtitle: Text(AppLocalizations.of(context)!.sellerInfo),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.push(
@@ -1286,8 +1286,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Text('個人情報の取扱い'),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              subtitle: Text('個人情報の取扱い'),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () async {
                 Navigator.of(context).pop();
                 final url = Uri.parse('https://gym-match-e560d.web.app/privacy_policy.html');
@@ -1296,13 +1296,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 } else {
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('プライバシーポリシーを開けませんでした')),
+                      const SnackBar(content: Text(l10n.subscription_f8882591)),
                     );
                   }
                 }
               },
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
           ],
         ),
       ),
