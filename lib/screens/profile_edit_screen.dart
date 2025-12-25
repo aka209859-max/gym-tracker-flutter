@@ -100,7 +100,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
       // ユーザーがキャンセルした場合
       if (pickedFile == null) {
-        debugPrint(AppLocalizations.of(context)!.profile_03f0d2c9);
+        debugPrint('ℹ️ 画像選択がキャンセルされました');
         if (mounted) {
           setState(() {
             _isPickingImage = false;
@@ -114,7 +114,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       debugPrint('📏 ファイルパス: ${pickedFile.path}');
       
       // バイト配列読み込み（この部分で時間がかかる可能性あり）
-      debugPrint(AppLocalizations.of(context)!.profile_2ba96572);
+      debugPrint('💾 バイト配列読み込み中...');
       final bytes = await pickedFile.readAsBytes();
       debugPrint('✅ 画像読み込み完了: ${bytes.length} bytes (${(bytes.length / 1024).toStringAsFixed(2)} KB)');
       
@@ -139,7 +139,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       }
     } catch (e, stackTrace) {
       debugPrint('❌ 画像選択エラー: $e');
-      debugPrint(AppLocalizations.of(context)!.generatedKey_c3070099);
+      debugPrint('📋 スタックトレース: $stackTrace');
       
       if (mounted) {
         setState(() {
@@ -351,7 +351,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     TextFormField(
                       controller: _displayNameController,
                       decoration: InputDecoration(
-                        labelText: AppLocalizations.of(context)!.profile_5ff2d647,
+                        labelText: 'アカウント名 *',
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.person),
                       ),

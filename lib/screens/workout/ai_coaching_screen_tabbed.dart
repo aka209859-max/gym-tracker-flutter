@@ -1027,7 +1027,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                       ),
                       SizedBox(height: 8),
                       Text(
-                        AppLocalizations.of(context)!.generatedKey_2482dab0,
+                        'もう一度メニューを生成してください。\n問題が続く場合は、サポートにお問い合わせください。',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 13,
@@ -1056,7 +1056,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                       // 🐛 デバッグ用: 生成されたテキストを表示
                       ExpansionTile(
                         title: Text(
-                          AppLocalizations.of(context)!.workout_c04154e0,
+                          '🐛 デバッグ: 生成されたテキストを見る',
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.red.shade700,
@@ -1406,7 +1406,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
         debugPrint('✅ AIクレジット消費: $consumeSuccess');
         
         // 🔧 v1.0.223: メニューをパースして種目抽出
-        debugPrint(AppLocalizations.of(context)!.generatedKey_a900ede4);
+        debugPrint('📄 生成されたメニュー（最初の500文字）:\n${text.substring(0, text.length > 500 ? 500 : text.length)}');
         
         final parsedExercises = _parseGeneratedMenu(text, bodyParts);
         
@@ -1492,7 +1492,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       line = line.trim();
       if (line.isEmpty) continue;
       
-      debugPrint(AppLocalizations.of(context)!.generatedKey_61691a5f);
+      debugPrint('  📄 処理中: $line');
       
       // 🔧 v1.0.226: 部位の検出（■、【】、## または単一#で囲まれた部位名）
       // ### はサブセクションなので無視
@@ -1511,7 +1511,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       
       // ### はサブセクション（スキップ）
       if (line.startsWith('###')) {
-        debugPrint(AppLocalizations.of(context)!.generatedKey_dc7f876e);
+        debugPrint('  ⏭️  サブセクションをスキップ: $line');
         continue;
       }
       
@@ -1697,7 +1697,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
           
           // デバッグ: パース状態を確認
           if (currentExerciseName.isNotEmpty && (weightMatch != null || repsMatch != null || timeMatch != null || setsMatch != null)) {
-            debugPrint(AppLocalizations.of(context)!.generatedKey_160fcdc4);
+            debugPrint('  📝 現在の状態 ($currentExerciseName): weight=$currentWeight, reps=$currentReps, sets=$currentSets');
           }
           
           // 🔧 v1.0.226: 休憩時間、ポイントなどの無関係な行をスキップ
@@ -1761,7 +1761,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
     debugPrint('📝 パース結果: ${exercises.length}種目抽出');
     if (exercises.isEmpty) {
       debugPrint('❌ エラー: 1つも種目が抽出できませんでした！');
-      debugPrint(AppLocalizations.of(context)!.workout_db744940);
+      debugPrint('📋 最後の状態:');
       debugPrint('  - currentExerciseName: $currentExerciseName');
       debugPrint('  - currentBodyPart: $currentBodyPart');
       debugPrint('  - currentWeight: $currentWeight');
@@ -1930,7 +1930,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
     // トレーニング履歴情報を構築
     String historyInfo = '';
     if (_exerciseHistory.isNotEmpty) {
-      historyInfo = AppLocalizations.of(context)!.generatedKey_8b926449;
+      historyInfo = '\n【直近1ヶ月のトレーニング履歴】\n';
       for (final entry in _exerciseHistory.entries) {
         final exerciseName = entry.key;
         final maxWeight = entry.value['maxWeight'];
@@ -1938,7 +1938,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
         final totalSets = entry.value['totalSets'];
         historyInfo += '- $exerciseName: 最大重量=${maxWeight}kg, 推定1RM=${max1RM?.toStringAsFixed(1)}kg, 総セット数=$totalSets\n';
       }
-      historyInfo += AppLocalizations.of(context)!.generatedKey_8e3d3911;
+      historyInfo += '\n上記の履歴を参考に、適切な重量と回数を提案してください。\n';
     }
     
     final targetParts = bodyParts;
@@ -2033,18 +2033,18 @@ $historyInfo
 
 【条件】
 - ${targetParts.join('、')}を重点的にトレーニング
-${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? AppLocalizations.of(context)!.generatedKey_6809c323 : AppLocalizations.of(context)!.exercise}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- **有酸素運動のみ**を提案（筋トレ種目は含めない）" : "- 基本種目中心"}
 - 30-45分で完了
 - $languageInstruction
 
 **重要: 各種目に具体的な重量と回数を必ず記載してください。有酸素運動の場合は重量0kg、時間をXX分形式で記載してください。**
-${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? AppLocalizations.of(context)!.generatedKey_f6c819db : ""}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対厳守: 有酸素運動データベースの種目のみ使用すること。ベンチプレス、スクワットなどの筋トレ種目は絶対に含めないこと。**" : ""}
 ''';
       }
     } else if (_selectedLevel == AppLocalizations.of(context)!.levelIntermediate) {
       // 中級者向け
       return '''
-あなたはプロのパーソナルトレーナーです。筋トレ中級者向けの「${targetParts.isEmpty ? AppLocalizations.of(context)!.general_e999c1ce : targetParts.join('、')}」トレーニングメニューを提案してください。
+あなたはプロのパーソナルトレーナーです。筋トレ中級者向けの「${targetParts.isEmpty ? "全身" : targetParts.join('、')}」トレーニングメニューを提案してください。
 
 $_advancedExerciseDatabase
 $historyInfo
@@ -2082,18 +2082,18 @@ $historyInfo
 - テクニックのポイント（ドロップセット、スーパーセット等）
 
 【条件】
-- ${targetParts.isEmpty ? AppLocalizations.of(context)!.generatedKey_1e50fa08 : targetParts.join('、')+AppLocalizations.of(context)!.generatedKey_a4e8ab60}
-${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? AppLocalizations.of(context)!.generatedKey_130d85e6 : AppLocalizations.of(context)!.generatedKey_ed8be540}
+- ${targetParts.isEmpty ? "全身バランスよく" : targetParts.join('、')+"を重点的に"}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- **有酸素運動のみ**を提案（筋トレ種目は含めない）\n- HIIT、持久走、インターバルなど多様な有酸素トレーニング" : "- フリーウェイト中心\n- 筋肥大を重視"}
 - 45-60分で完了
 - $languageInstruction
 
 **重要: 各種目に具体的な重量と回数を必ず記載してください。有酸素運動の場合は重量0kg、時間をXX分形式で記載してください。**
-${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? AppLocalizations.of(context)!.generatedKey_d8a431d6 : ""}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対厳守: 有酸素運動データベースの種目のみ使用すること。ベンチプレス、スクワット、デッドリフトなどの筋トレ種目は絶対に含めないこと。**" : ""}
 ''';
     } else {
       // 上級者向け
       return '''
-あなたはプロのパーソナルトレーナーです。筋トレ上級者向けの「${targetParts.isEmpty ? AppLocalizations.of(context)!.general_e999c1ce : targetParts.join('、')}」トレーニングメニューを提案してください。
+あなたはプロのパーソナルトレーナーです。筋トレ上級者向けの「${targetParts.isEmpty ? "全身" : targetParts.join('、')}」トレーニングメニューを提案してください。
 
 $_advancedExerciseDatabase
 $historyInfo
@@ -2131,13 +2131,13 @@ $historyInfo
 - 高度なテクニック（ピラミッド法、5x5法等）
 
 【条件】
-- ${targetParts.isEmpty ? AppLocalizations.of(context)!.intensityMaximal : targetParts.join('、')+AppLocalizations.of(context)!.to}
-${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? AppLocalizations.of(context)!.generatedKey_de5ee3b4 : AppLocalizations.of(context)!.generatedKey_32442929}
+- ${targetParts.isEmpty ? "全身最大限に" : targetParts.join('、')+"を極限まで"}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- **有酸素運動のみ**を提案（筋トレ種目は含めない）\n- HIIT、タバタ式、持久走など高強度有酸素トレーニング" : "- 高重量フリーウェイト中心\n- 最大筋力向上を重視"}
 - 60-90分で完了
 - $languageInstruction
 
 **重要: 各種目に具体的な重量と回数を必ず記載してください。有酸素運動の場合は重量0kg、時間をXX分形式で記載してください。**
-${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? AppLocalizations.of(context)!.generatedKey_7669a5d7 : ""}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対厳守: 有酸素運動データベースの種目のみ使用すること。ベンチプレス、スクワット、デッドリフト、ショルダープレスなどの筋トレ種目は絶対に含めないこと。**" : ""}
 ''';
     }
   }
@@ -2221,7 +2221,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? AppLocali
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => Center(
+        builder: (context) => const Center(
           child: Card(
             child: Padding(
               padding: EdgeInsets.all(24.0),
@@ -2230,7 +2230,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? AppLocali
                 children: [
                   CircularProgressIndicator(),
                   SizedBox(height: 16),
-                  Text(AppLocalizations.of(context)!.workout_65c94ed8),
+                  Text('広告を読み込んでいます...'),
                 ],
               ),
             ),
@@ -2264,7 +2264,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? AppLocali
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(AppLocalizations.of(context)!.workout_29c0d7c0),
+              content: Text('🎁 AI機能1回分を獲得しました!'),
               backgroundColor: Colors.green,
               duration: Duration(seconds: 2),
             ),
@@ -2857,7 +2857,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              AppLocalizations.of(context)!.info,
+              'あなたの情報を入力',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -2871,7 +2871,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
 
             // 対象部位
             _buildDropdownField(
-              label: AppLocalizations.of(context)!.bodyPart,
+              label: '対象部位',
               value: _selectedBodyPart,
               items: _bodyParts,
               onChanged: (value) {
@@ -2909,14 +2909,14 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 });
               },
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // トレーニング頻度
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildSliderField(
-                  label: AppLocalizations.of(context)!.generatedKey_c157b7e9,
+                  label: 'この部位のトレーニング頻度',
                   value: _selectedFrequency.toDouble(),
                   min: 1,
                   max: 6,
@@ -2928,11 +2928,11 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                   },
                   displayValue: '週${_selectedFrequency}回',
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
-                    AppLocalizations.of(context)!.generatedKey_2748529d,
+                    '※ 選択した部位（$_selectedBodyPart）を週に何回トレーニングするか',
                     style: TextStyle(
                       fontSize: 11,
                       color: Colors.grey.shade600,
@@ -2949,7 +2949,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildSliderField(
-                  label: AppLocalizations.of(context)!.generatedKey_ec1bb9da,
+                  label: '前回のトレーニングの強度（RPE）',
                   value: _selectedRPE.toDouble(),
                   min: 6,
                   max: 10,
@@ -2991,11 +2991,11 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     });
                   },
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
-                    AppLocalizations.of(context)!.generatedKey_f64d1e09,
+                    '※ 女性は上半身の相対的筋力向上率が男性より高い（Roberts 2020）',
                     style: TextStyle(
                       fontSize: 11,
                       color: Colors.grey.shade600,
@@ -3120,7 +3120,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         color: Colors.grey.shade100,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Text(AppLocalizations.of(context)!.generatedKey_4b5dcedc),
+          child: Text('予測結果がありません'),
         ),
       );
     }
@@ -3139,7 +3139,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                   Icon(Icons.error_outline, color: Colors.red),
                   SizedBox(width: 8),
                   Text(
-                    AppLocalizations.of(context)!.error,
+                    '予測エラー',
                     style: TextStyle(
                       color: Colors.red,
                       fontWeight: FontWeight.bold,
@@ -3150,7 +3150,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               ),
               SizedBox(height: 8),
               Text(
-                _predictionResult!['error']?.toString() ?? AppLocalizations.of(context)!.generatedKey_03b65e41,
+                _predictionResult!['error']?.toString() ?? '不明なエラーが発生しました',
                 style: TextStyle(color: Colors.red.shade700),
               ),
             ],
@@ -3170,7 +3170,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            AppLocalizations.of(context)!.generatedKey_a2bbd225,
+            '予測データが不完全です。もう一度お試しください。',
             style: TextStyle(color: Colors.orange.shade900),
           ),
         ),
@@ -3208,7 +3208,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                     color: Colors.grey,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   '${predictedWeight.round()}kg',
                   style: TextStyle(
@@ -3219,7 +3219,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 ),
                 SizedBox(height: 8),
                 Text(
-                  AppLocalizations.of(context)!.generatedKey_1a33d843,
+                  '現在: ${currentWeight.round()}kg → +$growthPercentage%の成長',
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey,
@@ -3277,8 +3277,8 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _buildStatItem(AppLocalizations.of(context)!.mon, '+$monthlyRate%', Colors.blue),
-                    _buildStatItem(AppLocalizations.of(context)!.aiPromptWeeklyGrowthRate, '+${weeklyRate.toStringAsFixed(1)}%', Colors.green),
+                    _buildStatItem('月次成長', '+$monthlyRate%', Colors.blue),
+                    _buildStatItem('週次成長', '+${weeklyRate.toStringAsFixed(1)}%', Colors.green),
                   ],
                 ),
               ],
@@ -3431,7 +3431,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => Center(
+        builder: (context) => const Center(
           child: Card(
             child: Padding(
               padding: EdgeInsets.all(24.0),
@@ -3440,7 +3440,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 children: [
                   CircularProgressIndicator(),
                   SizedBox(height: 16),
-                  Text(AppLocalizations.of(context)!.workout_65c94ed8),
+                  Text('広告を読み込んでいます...'),
                 ],
               ),
             ),
@@ -3454,7 +3454,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     
     // 読み込み完了まで最大5秒待機
     for (int i = 0; i < 10; i++) {
-      await Future.delayed(Duration(milliseconds: 500));
+      await Future.delayed(const Duration(milliseconds: 500));
       if (rewardAdService.isAdReady()) {
         break;
       }
@@ -3474,7 +3474,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(AppLocalizations.of(context)!.workout_29c0d7c0),
+              content: Text('🎁 AI機能1回分を獲得しました!'),
               backgroundColor: Colors.green,
               duration: Duration(seconds: 2),
             ),
@@ -3496,7 +3496,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           children: [
             Icon(Icons.workspace_premium, color: Colors.amber, size: 28),
             SizedBox(width: 12),
-            Text(AppLocalizations.of(context)!.generatedKey_7a1d4370),
+            Text('プレミアムプランにアップグレード'),
           ],
         ),
         content: Column(
@@ -3509,15 +3509,15 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             ),
             SizedBox(height: 16),
             Text(
-              AppLocalizations.of(context)!.generatedKey_9d99af7f,
+              'プレミアムプランなら:',
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),
             Text(
-              AppLocalizations.of(context)!.generatedKey_67a989a2
-              AppLocalizations.of(context)!.generatedKey_465a0c43
-              AppLocalizations.of(context)!.generatedKey_6aa1053b
-              AppLocalizations.of(context)!.reviews,
+              '• 月10回までAI機能が使い放題\n'
+              '• 広告なしで快適に利用\n'
+              '• お気に入りジム無制限\n'
+              '• レビュー投稿可能',
               style: TextStyle(fontSize: 13, height: 1.6),
             ),
             SizedBox(height: 16),
@@ -3528,7 +3528,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                AppLocalizations.of(context)!.monthlyPrice,
+                '月額 ¥500',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -3553,7 +3553,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               backgroundColor: Colors.amber.shade700,
               foregroundColor: Colors.white,
             ),
-            child: Text(AppLocalizations.of(context)!.upgradePlan),
+            child: Text('アップグレード'),
           ),
         ],
       ),
@@ -3605,7 +3605,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           spans.add(
             TextSpan(
               text: match.group(1),
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           );
           lastIndex = match.end;
@@ -3616,7 +3616,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       }
 
       if (i < lines.length - 1) {
-        spans.add(TextSpan(text: '\n'));
+        spans.add(const TextSpan(text: '\n'));
       }
     }
 
@@ -3637,12 +3637,12 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     switch (rpe) {
       case 6:
       case 7:
-        return AppLocalizations.of(context)!.generatedKey_583fa8ea;
+        return 'RPE $rpe（余裕あり）';
       case 8:
       case 9:
-        return AppLocalizations.of(context)!.generatedKey_63907130;
+        return 'RPE $rpe（適正）';
       case 10:
-        return AppLocalizations.of(context)!.generatedKey_7eeda4db;
+        return 'RPE $rpe（限界）';
       default:
         return 'RPE $rpe';
     }
@@ -3651,11 +3651,11 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
   /// 🆕 v1.0.230: RPE説明文を取得
   String _getRPEDescription(int rpe) {
     if (rpe <= 7) {
-      return AppLocalizations.of(context)!.generatedKey_4f031aa5;
+      return '※ まだ余裕があった場合、予測成長率を10%アップします';
     } else if (rpe >= 10) {
-      return AppLocalizations.of(context)!.generatedKey_314da5ec;
+      return '※ 限界まで追い込んだ場合、過労を考慮して予測成長率を20%ダウンします';
     } else {
-      return AppLocalizations.of(context)!.generatedKey_4c28c887;
+      return '※ 適正な強度でトレーニングできた場合、標準の成長率で予測します';
     }
   }
 
@@ -3681,8 +3681,8 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           )
         else
           _buildWarningCard(
-            message: AppLocalizations.of(context)!.generatedKey_f2350bf3,
-            actionLabel: AppLocalizations.of(context)!.settings,
+            message: '年齢が未設定です。予測精度を高めるため、個人要因設定で年齢を登録してください。',
+            actionLabel: '設定する',
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => PersonalFactorsScreen()),
@@ -3700,13 +3700,13 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             actionLabel: AppLocalizations.of(context)!.update,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => BodyMeasurementScreen()),
+              MaterialPageRoute(builder: (context) => const BodyMeasurementScreen()),
             ).then((_) => _loadLatestBodyWeight()),
           )
         else
           _buildWarningCard(
-            message: AppLocalizations.of(context)!.generatedKey_5754da52,
-            actionLabel: AppLocalizations.of(context)!.navWorkout,
+            message: '体重が記録されていません。予測精度を高めるため、体重を記録してください。',
+            actionLabel: '記録する',
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const BodyMeasurementScreen()),
@@ -3802,7 +3802,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     return TextFormField(
       controller: _oneRMController, // 🔧 Phase 7 Fix: controllerを使用
       decoration: InputDecoration(
-        labelText: AppLocalizations.of(context)!.generatedKey_63037294,
+        labelText: '現在の1RM (kg)',
         border: OutlineInputBorder(),
         prefixIcon: Icon(Icons.fitness_center),
       ),
@@ -3828,7 +3828,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         }
         final weight = double.tryParse(value);
         if (weight == null) {
-          return AppLocalizations.of(context)!.generatedKey_2119ad31;
+          return '数値を入力してください';
         }
         if (weight <= 0) {
           return AppLocalizations.of(context)!.enterAtLeast1kg;
@@ -3865,7 +3865,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 ),
                 Text(
                   '${_weightRatio!.toStringAsFixed(2)} (1RM ${_currentOneRM!.toStringAsFixed(1)}kg ÷ 体重 ${_latestBodyWeight!.toStringAsFixed(1)}kg)',
-                  style: TextStyle(fontSize: 14),
+                  style: const TextStyle(fontSize: 14),
                 ),
               ],
             ),
@@ -3890,9 +3890,9 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           Row(
             children: [
               Icon(Icons.info_outline, color: Colors.amber.shade700),
-              SizedBox(width: 8),
-              Text(
-                AppLocalizations.of(context)!.notifications,
+              const SizedBox(width: 8),
+              const Text(
+                'レベル判定の通知',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 14,
@@ -3900,14 +3900,14 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               ),
             ],
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
-            AppLocalizations.of(context)!.generatedKey_1a7bfb82
-            AppLocalizations.of(context)!.generatedKey_3c9b6149,
+            'あなたのWeight Ratio (${_weightRatio!.toStringAsFixed(2)}) から、'
+            '客観的なレベルは「$_objectiveLevel」と判定されました。',
             style: TextStyle(fontSize: 13),
           ),
           Text(
-            AppLocalizations.of(context)!.generatedKey_a5688ebc,
+            '選択中のレベル：「$_selectedLevel」',
             style: TextStyle(
               fontSize: 13,
               color: Colors.grey.shade700,
@@ -3923,7 +3923,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.amber.shade700,
             ),
-            child: Text(AppLocalizations.of(context)!.generatedKey_306c1cc0),
+            child: Text('客観的レベルを使用する'),
           ),
         ],
       ),
@@ -4285,15 +4285,15 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           children: [
             // ヘッダー
             _buildHeader(),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
 
             // 入力フォーム
             _buildInputForm(),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
 
             // 分析実行ボタン
             _buildAnalyzeButton(),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
 
             // 分析結果
             if (_isLoading)
@@ -4315,13 +4315,13 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Row(
           children: [
             Icon(Icons.analytics, size: 40, color: Colors.orange.shade700),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.workout,
+                    'トレーニング効果分析',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -4330,7 +4330,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                   ),
                   SizedBox(height: 4),
                   Text(
-                    AppLocalizations.of(context)!.generatedKey_4a776041,
+                    '最適なボリュームと頻度を科学的に分析',
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.grey.shade700,
@@ -4354,7 +4354,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              AppLocalizations.of(context)!.generatedKey_9d44cf62,
+              '現在のトレーニング状況',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -4368,7 +4368,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
 
             // 対象部位
             _buildDropdownField(
-              label: AppLocalizations.of(context)!.bodyPart,
+              label: '対象部位',
               value: _selectedBodyPart,
               items: _bodyParts,
               onChanged: (value) {
@@ -4381,11 +4381,11 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 });
               },
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // 種目選択
             _buildDropdownField(
-              label: AppLocalizations.of(context)!.generatedKey_07ba3722,
+              label: '種目（プラトー検出用）',
               value: _selectedExercise,
               items: _availableExercises,
               onChanged: (value) {
@@ -4394,11 +4394,11 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 });
               },
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Padding(
               padding: const EdgeInsets.only(left: 4),
               child: Text(
-                AppLocalizations.of(context)!.generatedKey_baf66fdd,
+                '※ 同じ種目で4回連続同じ重量の場合、停滞を検出',
                 style: TextStyle(
                   fontSize: 11,
                   color: Colors.grey.shade600,
@@ -4406,18 +4406,18 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // プラトー検出トグル
             SwitchListTile(
-              title: Text(
-                AppLocalizations.of(context)!.generatedKey_6619d354,
+              title: const Text(
+                'プラトー（停滞期）検出',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
               ),
               subtitle: Text(
                 _enablePlateauDetection 
-                    ? AppLocalizations.of(context)!.generatedKey_6be4fd6d 
-                    : AppLocalizations.of(context)!.generatedKey_2f465804,
+                    ? '実際のトレーニング記録から自動検出します' 
+                    : '検出機能をOFFにしています',
                 style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
               ),
               value: _enablePlateauDetection,
@@ -4429,14 +4429,14 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               activeColor: Colors.orange.shade700,
               contentPadding: EdgeInsets.zero,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // 週あたりセット数
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildSliderField(
-                  label: AppLocalizations.of(context)!.generatedKey_64a1612a,
+                  label: 'この部位の週あたりセット数',
                   value: _currentSets.toDouble(),
                   min: 4,
                   max: 24,
@@ -4448,11 +4448,11 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                   },
                   displayValue: '${_currentSets}セット',
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
-                    AppLocalizations.of(context)!.generatedKey_39b6d7da,
+                    '※ $_selectedBodyPart のトレーニングで週に実施する総セット数',
                     style: TextStyle(
                       fontSize: 11,
                       color: Colors.grey.shade600,
@@ -4469,7 +4469,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildSliderField(
-                  label: AppLocalizations.of(context)!.generatedKey_c157b7e9,
+                  label: 'この部位のトレーニング頻度',
                   value: _currentFrequency.toDouble(),
                   min: 1,
                   max: 6,
@@ -4485,7 +4485,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
-                    AppLocalizations.of(context)!.generatedKey_79dd0aa5,
+                    '※ $_selectedBodyPart を週に何回トレーニングするか',
                     style: TextStyle(
                       fontSize: 11,
                       color: Colors.grey.shade600,
@@ -4528,7 +4528,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: Text(
-                    AppLocalizations.of(context)!.generatedKey_f64d1e09,
+                    '※ 女性は上半身の相対的筋力向上率が男性より高い（Roberts 2020）',
                     style: TextStyle(
                       fontSize: 11,
                       color: Colors.grey.shade600,
@@ -4604,19 +4604,19 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Row(
           children: [
             Icon(Icons.warning_amber, color: Colors.orange.shade700),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             Expanded(
-              child: Text(
-                AppLocalizations.of(context)!.generatedKey_f2350bf3,
+              child: const Text(
+                '年齢が未設定です。予測精度を高めるため、個人要因設定で年齢を登録してください。',
                 style: TextStyle(fontSize: 13),
               ),
             ),
             TextButton(
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PersonalFactorsScreen()),
+                MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
               ).then((_) => _loadUserAge()),
-              child: Text(AppLocalizations.of(context)!.settings),
+              child: const Text('設定する'),
             ),
           ],
         ),
@@ -4703,7 +4703,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               ),
             )
           : Icon(Icons.auto_graph),
-      label: Text(_isLoading ? AppLocalizations.of(context)!.aiAnalyzing : AppLocalizations.of(context)!.analysis),
+      label: Text(_isLoading ? AppLocalizations.of(context)!.aiAnalyzing : '効果を分析'),
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 16),
         backgroundColor: Colors.orange.shade700,
@@ -4733,7 +4733,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         color: Colors.grey.shade100,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Text(AppLocalizations.of(context)!.analysis),
+          child: Text('分析結果がありません'),
         ),
       );
     }
@@ -4752,7 +4752,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                   Icon(Icons.error_outline, color: Colors.red),
                   SizedBox(width: 8),
                   Text(
-                    AppLocalizations.of(context)!.error,
+                    '分析エラー',
                     style: TextStyle(
                       color: Colors.red,
                       fontWeight: FontWeight.bold,
@@ -4763,7 +4763,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               ),
               SizedBox(height: 8),
               Text(
-                _analysisResult!['error']?.toString() ?? AppLocalizations.of(context)!.generatedKey_03b65e41,
+                _analysisResult!['error']?.toString() ?? '不明なエラーが発生しました',
                 style: TextStyle(color: Colors.red.shade700),
               ),
             ],
@@ -4783,7 +4783,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            AppLocalizations.of(context)!.generatedKey_15ac6a5e,
+            '分析データが不完全です。もう一度お試しください。',
             style: TextStyle(color: Colors.orange.shade900),
           ),
         ),
@@ -4843,19 +4843,19 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                     ),
                   ],
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 _buildFormattedText(aiAnalysis),
               ],
             ),
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
 
         // 科学的根拠
         ScientificBasisSection(
           basis: scientificBasis.cast<Map<String, String>>(),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
 
         // 信頼度インジケーター
         Center(
@@ -4879,15 +4879,15 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
     if (plateau) {
       statusColor = Colors.orange;
       statusIcon = Icons.warning;
-      statusMessage = AppLocalizations.of(context)!.generatedKey_aa70969d;
+      statusMessage = 'プラトー検出：改善が必要';
     } else if (volume['status'] == 'optimal' && frequency['status'] == 'optimal') {
       statusColor = Colors.green;
       statusIcon = Icons.check_circle;
-      statusMessage = AppLocalizations.of(context)!.workout;
+      statusMessage = '最適なトレーニング中';
     } else {
       statusColor = Colors.blue;
       statusIcon = Icons.info;
-      statusMessage = AppLocalizations.of(context)!.improved;
+      statusMessage = '改善の余地あり';
     }
 
     return Card(
@@ -4897,7 +4897,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Row(
           children: [
             Icon(statusIcon, size: 48, color: statusColor),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -4938,19 +4938,19 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
     switch (status) {
       case 'optimal':
         statusColor = Colors.green;
-        statusLabel = AppLocalizations.of(context)!.optimalProgram;
+        statusLabel = '最適';
         break;
       case 'suboptimal':
         statusColor = Colors.blue;
-        statusLabel = AppLocalizations.of(context)!.generatedKey_b1be274b;
+        statusLabel = '最適以下';
         break;
       case 'insufficient':
         statusColor = Colors.orange;
-        statusLabel = AppLocalizations.of(context)!.general_e2e5bc42;
+        statusLabel = '不足';
         break;
       case 'excessive':
         statusColor = Colors.red;
-        statusLabel = AppLocalizations.of(context)!.generatedKey_81ebe44b;
+        statusLabel = '過剰';
         break;
       default:
         statusColor = Colors.grey;
@@ -4966,9 +4966,9 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
             Row(
               children: [
                 Icon(Icons.bar_chart, color: Colors.blue.shade700),
-                SizedBox(width: 8),
-                Text(
-                  AppLocalizations.of(context)!.analysis,
+                const SizedBox(width: 8),
+                const Text(
+                  'ボリューム分析',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -4976,7 +4976,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Row(
               children: [
                 Container(
@@ -5017,19 +5017,19 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
     switch (status) {
       case 'optimal':
         statusColor = Colors.green;
-        statusLabel = AppLocalizations.of(context)!.optimalProgram;
+        statusLabel = '最適';
         break;
       case 'suboptimal':
         statusColor = Colors.blue;
-        statusLabel = AppLocalizations.of(context)!.generatedKey_b1be274b;
+        statusLabel = '最適以下';
         break;
       case 'insufficient':
         statusColor = Colors.orange;
-        statusLabel = AppLocalizations.of(context)!.general_e2e5bc42;
+        statusLabel = '不足';
         break;
       case 'excessive':
         statusColor = Colors.red;
-        statusLabel = AppLocalizations.of(context)!.generatedKey_81ebe44b;
+        statusLabel = '過剰';
         break;
       default:
         statusColor = Colors.grey;
@@ -5045,9 +5045,9 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
             Row(
               children: [
                 Icon(Icons.calendar_month, color: Colors.green.shade700),
-                SizedBox(width: 8),
-                Text(
-                  AppLocalizations.of(context)!.analysis,
+                const SizedBox(width: 8),
+                const Text(
+                  '頻度分析',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -5055,7 +5055,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Row(
               children: [
                 Container(
@@ -5074,10 +5074,10 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Text(
               advice,
-              style: TextStyle(fontSize: 14, height: 1.6),
+              style: const TextStyle(fontSize: 14, height: 1.6),
             ),
           ],
         ),
@@ -5094,22 +5094,22 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Row(
           children: [
             Icon(Icons.warning_amber, size: 40, color: Colors.orange.shade700),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.general_2bc17100,
+                    'プラトー検出',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.orange.shade900,
                     ),
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
-                    AppLocalizations.of(context)!.generatedKey_773d1c04,
+                    '成長が停滞しています。トレーニングを変更しましょう。',
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.grey.shade700,
@@ -5135,9 +5135,9 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
             Row(
               children: [
                 Icon(Icons.recommend, color: Colors.purple.shade700),
-                SizedBox(width: 8),
-                Text(
-                  AppLocalizations.of(context)!.aiResponseActionPlan,
+                const SizedBox(width: 8),
+                const Text(
+                  '推奨アクション',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -5290,7 +5290,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => Center(
+        builder: (context) => const Center(
           child: Card(
             child: Padding(
               padding: EdgeInsets.all(24.0),
@@ -5299,7 +5299,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 children: [
                   CircularProgressIndicator(),
                   SizedBox(height: 16),
-                  Text(AppLocalizations.of(context)!.workout_65c94ed8),
+                  Text('広告を読み込んでいます...'),
                 ],
               ),
             ),
@@ -5313,7 +5313,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
     
     // 読み込み完了まで最大5秒待機
     for (int i = 0; i < 10; i++) {
-      await Future.delayed(Duration(milliseconds: 500));
+      await Future.delayed(const Duration(milliseconds: 500));
       if (rewardAdService.isAdReady()) {
         break;
       }
@@ -5333,7 +5333,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(AppLocalizations.of(context)!.workout_29c0d7c0),
+              content: Text('🎁 AI機能1回分を獲得しました!'),
               backgroundColor: Colors.green,
               duration: Duration(seconds: 2),
             ),
@@ -5355,7 +5355,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           children: [
             Icon(Icons.workspace_premium, color: Colors.amber, size: 28),
             SizedBox(width: 12),
-            Text(AppLocalizations.of(context)!.generatedKey_7a1d4370),
+            Text('プレミアムプランにアップグレード'),
           ],
         ),
         content: Column(
@@ -5368,15 +5368,15 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
             ),
             SizedBox(height: 16),
             Text(
-              AppLocalizations.of(context)!.generatedKey_9d99af7f,
+              'プレミアムプランなら:',
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),
             Text(
-              AppLocalizations.of(context)!.generatedKey_67a989a2
-              AppLocalizations.of(context)!.generatedKey_465a0c43
-              AppLocalizations.of(context)!.generatedKey_6aa1053b
-              AppLocalizations.of(context)!.reviews,
+              '• 月10回までAI機能が使い放題\n'
+              '• 広告なしで快適に利用\n'
+              '• お気に入りジム無制限\n'
+              '• レビュー投稿可能',
               style: TextStyle(fontSize: 13, height: 1.6),
             ),
             SizedBox(height: 16),
@@ -5387,7 +5387,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                AppLocalizations.of(context)!.monthlyPrice,
+                '月額 ¥500',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -5412,7 +5412,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               backgroundColor: Colors.amber.shade700,
               foregroundColor: Colors.white,
             ),
-            child: Text(AppLocalizations.of(context)!.upgradePlan),
+            child: Text('アップグレード'),
           ),
         ],
       ),

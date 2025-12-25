@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:gym_match/gen/app_localizations.dart';
 /// FitSync デザインテーマ定義
 class AppThemes {
   // ========== デザイン案A: エネルギッシュ系 ==========
@@ -145,7 +144,7 @@ class AppThemes {
   static Map<String, Map<String, dynamic>> themeDescriptions = {
     'energetic': {
       'name': AppLocalizations.of(context)!.general_afb4b3be,
-      'description': AppLocalizations.of(context)!.generatedKey_fafd554e,
+      'description': 'ダークブルー × エナジーオレンジ\n活力とモチベーションを刺激',
       'colors': {
         'primary': Color(0xFF1a237e),
         'secondary': Color(0xFFff6f00),
@@ -154,7 +153,7 @@ class AppThemes {
     },
     'motivation': {
       'name': AppLocalizations.of(context)!.general_97925d41,
-      'description': AppLocalizations.of(context)!.generatedKey_1a20cd60,
+      'description': 'パワーレッド × シルバー\n情熱と力強さを表現',
       'colors': {
         'primary': Color(0xFFc62828),
         'secondary': Color(0xFF757575),

@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../models/workout_template.dart';
 
-import 'package:gym_match/gen/app_localizations.dart';
 /// テンプレート作成画面
 class CreateTemplateScreen extends StatefulWidget {
   CreateTemplateScreen({super.key});
@@ -97,7 +96,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
               controller: _nameController,
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.templateName,
-                hintText: AppLocalizations.of(context)!.bodyPart_356365ff,
+                hintText: '例: 胸トレーニング A',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -118,7 +117,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
               controller: _descriptionController,
               decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.workout_51018497,
-                hintText: AppLocalizations.of(context)!.bodyPart_ec73d9e6,
+                hintText: '例: 胸を集中的に鍛えるメニュー',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),

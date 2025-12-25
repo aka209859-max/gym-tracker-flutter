@@ -250,7 +250,7 @@ class _WorkoutImportPreviewScreenState
           ),
         );
         
-        debugPrint(AppLocalizations.of(context)!.generatedKey_fbe877fb);
+        debugPrint('🔙 [IMPORT] エラー後もプレビュー画面に留まります（ユーザーが閉じるまで）');
         // エラー時は画面を閉じない（ユーザーが再試行またはキャンセルを選択）
       }
     } finally {
@@ -270,7 +270,7 @@ class _WorkoutImportPreviewScreenState
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.workout_602fcf4c),
+        title: const Text('📸 トレーニング記録の取り込み'),
         backgroundColor: const Color(0xFF1A237E),
       ),
       body: Column(
@@ -316,12 +316,12 @@ class _WorkoutImportPreviewScreenState
                         // 種目名
                         Row(
                           children: [
-                            Icon(Icons.fitness_center, color: Color(0xFF1A237E)),
-                            SizedBox(width: 8),
+                            const Icon(Icons.fitness_center, color: Color(0xFF1A237E)),
+                            const SizedBox(width: 8),
                             Expanded(
                               child: Text(
                                 exerciseName,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -329,7 +329,7 @@ class _WorkoutImportPreviewScreenState
                             ),
                           ],
                         ),
-                        SizedBox(height: 12),
+                        const SizedBox(height: 12),
                         
                         // 部位選択ドロップダウン
                         Container(
@@ -342,7 +342,7 @@ class _WorkoutImportPreviewScreenState
                           child: Row(
                             children: [
                               Text(
-                                AppLocalizations.of(context)!.workout_b98aa1b1,
+                                '部位: ',
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,

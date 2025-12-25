@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:gym_match/gen/app_localizations.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';  // ✅ v1.0.177: Network detection
 import '../models/gym.dart';
 import '../models/workout_log.dart';
@@ -293,9 +292,9 @@ class OfflineService {
         final result = await FirebaseFirestore.instance
             .collection('_connection_test')  // テスト用コレクション
             .limit(1)
-            .get(GetOptions(source: Source.server))  // 強制的にサーバーから取得
+            .get(const GetOptions(source: Source.server))  // 強制的にサーバーから取得
             .timeout(
-              Duration(milliseconds: 500),  // ✅ v1.0.187: 1秒→500msに短縮
+              const Duration(milliseconds: 500),  // ✅ v1.0.187: 1秒→500msに短縮
               onTimeout: () {
                 debugPrint('📴 [Firestore] タイムアウト (500ms)');
                 throw TimeoutException('Firestore connection timeout');
@@ -314,7 +313,7 @@ class OfflineService {
         }
         
         if (hasPendingWrites) {
-          debugPrint(AppLocalizations.of(context)!.generatedKey_8f0b1ef3);
+          debugPrint('📴 [Firestore] 保留中の書き込みあり（オフライン） - ${duration}ms');
           return false;
         }
         

@@ -5,7 +5,6 @@
 library;
 
 import 'dart:convert';
-import 'package:gym_match/gen/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'scientific_database.dart';
 import 'ai_response_optimizer.dart';
@@ -104,7 +103,7 @@ class TrainingAnalysisService {
       };
     } catch (e, stackTrace) {
       print('❌❌❌ analyzeTrainingEffect全体エラー: $e');
-      print(AppLocalizations.of(context)!.generatedKey_f9edcc24);
+      print('スタックトレース: $stackTrace');
       return {
         'success': false,
         'error': 'トレーニング効果分析に失敗しました: $e',
@@ -128,7 +127,7 @@ class TrainingAnalysisService {
     if (currentSets < minSets) {
       status = 'insufficient'; // 不足
       suggestedChange = minSets - currentSets;
-      advice = AppLocalizations.of(context)!.generatedKey_c6a86fbe;
+      advice = '週${suggestedChange}セット追加で、+${(suggestedChange * 0.37).toStringAsFixed(1)}%の成長期待（Schoenfeld 2017）';
     } else if (currentSets < optimalSets) {
       status = 'suboptimal'; // 最適以下
       suggestedChange = optimalSets - currentSets;
@@ -207,10 +206,10 @@ class TrainingAnalysisService {
       message = '週+${weeklyGrowth.toStringAsFixed(1)}%：素晴らしい成長ペース！';
     } else if (weeklyGrowth > 1.0) {
       trend = 'good'; // 良好
-      message = AppLocalizations.of(context)!.generatedKey_d4c99375;
+      message = '週+${weeklyGrowth.toStringAsFixed(1)}%：順調に成長中';
     } else if (weeklyGrowth > 0) {
       trend = 'slow'; // 遅い
-      message = AppLocalizations.of(context)!.generatedKey_1a22c661;
+      message = '週+${weeklyGrowth.toStringAsFixed(1)}%：成長ペースが遅め';
     } else {
       trend = 'plateau'; // 停滞
       message = AppLocalizations.of(context)!.general_c13355bf;
@@ -273,7 +272,7 @@ class TrainingAnalysisService {
     recommendations.add({
       'priority': 'medium',
       'category': AppLocalizations.of(context)!.recovery,
-      'action': AppLocalizations.of(context)!.generatedKey_c42311e6,
+      'action': '同一部位は${restDays}日空ける（MPS上昇期間：48時間）',
       'basis': 'Davies et al. 2024',
     });
 
@@ -317,7 +316,7 @@ class TrainingAnalysisService {
       return cachedResponse;
     }
     
-    print(AppLocalizations.of(context)!.general_7fcf1e3a);
+    print('⏳ トレーニング分析: API呼び出し中...');
     
     final prompt = '''
 ${ScientificDatabase.getSystemPrompt()}
@@ -334,7 +333,7 @@ ${ScientificDatabase.getSystemPrompt()}
 ・ボリューム評価：${volumeAnalysis['status']}
 ・頻度評価：${frequencyAnalysis['status']}
 ・成長トレンド：${growthTrend['trend']}
-・プラトー検出：${plateauDetected ? AppLocalizations.of(context)!.adSupported : AppLocalizations.of(context)!.noAds}
+・プラトー検出：${plateauDetected ? 'あり' : 'なし'}
 
 【推奨プログラム】
 ・$bodyPart のボリューム：週${recommendedVolume['optimal']}セット（${recommendedVolume['min']}-${recommendedVolume['max']}セット）
@@ -342,7 +341,7 @@ ${ScientificDatabase.getSystemPrompt()}
 ・効果量：ES=${recommendedFreq['effectSize']}
 
 【重要】
-「週${recommendedFreq['frequencyAppLocalizations.of(context)!.generatedKey_7ffb5fe4frequency']}回トレーニングすること
+「週${recommendedFreq['frequency']}回」= 同一部位（$bodyPart）を週に${recommendedFreq['frequency']}回トレーニングすること
 例：月曜・水曜・金曜に$bodyPart のトレーニングを実施（週3回）
 
 以下の形式で簡潔に回答してください（300文字以内）：
@@ -413,28 +412,28 @@ ${ScientificDatabase.getSystemPrompt()}
   ) {
     final buffer = StringBuffer();
     
-    buffer.writeln(AppLocalizations.of(context)!.general_ad569e32);
+    buffer.writeln('## トレーニング効果の評価');
     if (volumeAnalysis['status'] == 'optimal' && frequencyAnalysis['status'] == 'optimal') {
       buffer.writeln(AppLocalizations.of(context)!.general_b2d3af2b);
     } else {
       buffer.writeln(AppLocalizations.of(context)!.general_5be1d3e2);
     }
     
-    buffer.writeln(AppLocalizations.of(context)!.generatedKey_2462056f);
+    buffer.writeln('\n## 最優先改善ポイント');
     if (volumeAnalysis['status'] == 'insufficient') {
-      buffer.writeln('週${volumeAnalysis['suggestedChangeAppLocalizations.of(context)!.generatedKey_4b2314e5);
+      buffer.writeln('週${volumeAnalysis['suggestedChange']}セット追加で、筋肥大効果が向上します（Schoenfeld 2017）。');
     } else if (volumeAnalysis['status'] == 'excessive') {
-      buffer.writeln(AppLocalizations.of(context)!.generatedKey_09692629suggestedChangeAppLocalizations.of(context)!.generatedKey_2c6c48e2);
+      buffer.writeln('現在のボリュームは過剰です。週${-volumeAnalysis['suggestedChange']}セット削減で回復時間を確保しましょう。');
     } else if (plateauDetected) {
       buffer.writeln(AppLocalizations.of(context)!.general_e72d4ca1);
     } else {
       buffer.writeln('${volumeAnalysis['advice']}');
     }
     
-    buffer.writeln(AppLocalizations.of(context)!.generatedKey_1ab642e9);
+    buffer.writeln('\n## 具体的アクションプラン');
     buffer.writeln('* 今週から: ${volumeAnalysis['advice']}');
     buffer.writeln('* トレーニング頻度: ${frequencyAnalysis['advice']}');
-    buffer.writeln(AppLocalizations.of(context)!.generatedKey_1f550f64);
+    buffer.writeln('* 回復時間: $bodyPartは${ScientificDatabase.getRecommendedRestDays(level, bodyPart)}日空ける');
     
     return buffer.toString();
   }
@@ -444,7 +443,7 @@ ${ScientificDatabase.getSystemPrompt()}
     return [
       {
         'citation': 'Schoenfeld et al. 2017',
-        'finding': AppLocalizations.of(context)!.generatedKey_e9e092c8,
+        'finding': 'セット追加ごとに+0.37%の成長',
         'effectSize': 'N/A',
       },
       {

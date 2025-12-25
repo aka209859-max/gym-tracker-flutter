@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:gym_match/gen/app_localizations.dart';
 /// ワークアウトテンプレートのモデル
 class WorkoutTemplate {
   final String id;
@@ -120,7 +119,7 @@ class DefaultTemplates {
     return WorkoutTemplate(
       id: 'default_ppl_push',
       userId: userId,
-      name: AppLocalizations.of(context)!.generatedKey_0638fdb1,
+      name: 'PPL - Push Day（胸・肩・三頭）',
       description: AppLocalizations.of(context)!.workout_d166d14e,
       muscleGroup: AppLocalizations.of(context)!.bodyPartChest,
       isDefault: true,
@@ -140,7 +139,7 @@ class DefaultTemplates {
     return WorkoutTemplate(
       id: 'default_ppl_pull',
       userId: userId,
-      name: AppLocalizations.of(context)!.generatedKey_00774b87,
+      name: 'PPL - Pull Day（背中・二頭）',
       description: AppLocalizations.of(context)!.workout_1ee91d2d,
       muscleGroup: AppLocalizations.of(context)!.bodyPartBack,
       isDefault: true,
@@ -160,7 +159,7 @@ class DefaultTemplates {
     return WorkoutTemplate(
       id: 'default_ppl_legs',
       userId: userId,
-      name: AppLocalizations.of(context)!.generatedKey_97a5ec80,
+      name: 'PPL - Legs Day（脚）',
       description: AppLocalizations.of(context)!.workout_77da4eeb,
       muscleGroup: AppLocalizations.of(context)!.bodyPartLegs,
       isDefault: true,
@@ -180,7 +179,7 @@ class DefaultTemplates {
     return WorkoutTemplate(
       id: 'default_full_body',
       userId: userId,
-      name: AppLocalizations.of(context)!.workout_d5f6d383,
+      name: 'フルボディ - 初心者向け',
       description: AppLocalizations.of(context)!.workout_2701c303,
       muscleGroup: AppLocalizations.of(context)!.bodyPartChest,
       isDefault: true,
