@@ -20,8 +20,8 @@ class TrainingPartner {
     this.bio,
     this.location,
     this.experienceLevel,
-    this.goals = [],
-    this.preferredExercises = [],
+    this.goals = const [],
+    this.preferredExercises = const [],
     required this.createdAt,
     required this.updatedAt,
   });

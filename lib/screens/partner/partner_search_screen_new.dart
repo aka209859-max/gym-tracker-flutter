@@ -7,7 +7,7 @@ import 'partner_detail_screen.dart';
 
 /// パートナー検索画面（実装版）
 class PartnerSearchScreenNew extends StatefulWidget {
-  PartnerSearchScreenNew({super.key});
+  const PartnerSearchScreenNew({super.key});
 
   @override
   State<PartnerSearchScreenNew> createState() => _PartnerSearchScreenNewState();
@@ -89,7 +89,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
         children: [
           // 検索フィルター
           _buildSearchFilters(),
-          Divider(height: 1),
+          const Divider(height: 1),
           // 検索結果
           Expanded(
             child: _hasSearched ? _buildSearchResults() : _buildInitialState(),
@@ -106,18 +106,18 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.diamond, size: 80, color: Colors.amber),
+            const Icon(Icons.diamond, size: 80, color: Colors.amber),
             SizedBox(height: 24),
             Text(
                           AppLocalizations.of(context)!.searchGym,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
-            Text(
+            const SizedBox(height: 8),
+            const Text(
               AppLocalizations.of(context)!.general_9eba2cc5,
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/subscription');
@@ -161,7 +161,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               });
             },
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
 
           // 経験レベルフィルター
           DropdownButtonFormField<String>(
@@ -185,7 +185,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               });
             },
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
 
           // 目標フィルター
           DropdownButtonFormField<String>(
@@ -209,7 +209,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               });
             },
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           // 検索開始ボタン
           SizedBox(
@@ -254,7 +254,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
             style: TextStyle(fontSize: 16, color: Colors.grey[600]),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             AppLocalizations.of(context)!.general_4f03a19c,
             style: TextStyle(fontSize: 14, color: Colors.grey[500]),
@@ -277,13 +277,13 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.error, size: 64, color: Colors.red),
+                const Icon(Icons.error, size: 64, color: Colors.red),
                 SizedBox(height: 16),
                 Text(AppLocalizations.of(context)!.errorGeneric),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   '${snapshot.error}',
-                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                  style: const TextStyle(fontSize: 12, color: Colors.grey),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 16),
@@ -301,7 +301,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
         }
 
         if (!snapshot.hasData) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
 
         final partners = snapshot.data!;
@@ -312,7 +312,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.person_search, size: 80, color: Colors.grey[400]),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
                   AppLocalizations.of(context)!.general_c814cc13,
                   style: TextStyle(fontSize: 16, color: Colors.grey[600]),

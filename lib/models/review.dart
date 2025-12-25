@@ -29,7 +29,7 @@ class Review {
     this.staffFriendliness = 3.0,
     this.beginnerFriendly = 3.0,
     this.comment = '',
-    this.imageUrls = [],
+    this.imageUrls = const [],
     required this.createdAt,
     this.likeCount = 0,
   });
