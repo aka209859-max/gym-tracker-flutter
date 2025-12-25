@@ -95,14 +95,14 @@ class AppThemes {
   static ThemeData professionalTheme = ThemeData(
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: const Color(0xFF1976d2), // NexaJPブルー
-      primary: const Color(0xFF1976d2),
-      secondary: const Color(0xFF388e3c), // アクティブグリーン
-      surface: const Color(0xFFf5f5f5), // ライトグレー
+      seedColor: Color(0xFF1976d2), // NexaJPブルー
+      primary: Color(0xFF1976d2),
+      secondary: Color(0xFF388e3c), // アクティブグリーン
+      surface: Color(0xFFf5f5f5), // ライトグレー
       brightness: Brightness.light,
     ),
-    scaffoldBackgroundColor: const Color(0xFFf5f5f5),
-    appBarTheme: const AppBarTheme(
+    scaffoldBackgroundColor: Color(0xFFf5f5f5),
+    appBarTheme: AppBarTheme(
       centerTitle: true,
       elevation: 0,
       backgroundColor: Color(0xFF1976d2),
@@ -118,7 +118,7 @@ class AppThemes {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF388e3c),
+        backgroundColor: Color(0xFF388e3c),
         foregroundColor: Colors.white,
         elevation: 4,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
@@ -127,7 +127,7 @@ class AppThemes {
         ),
       ),
     ),
-    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: Color(0xFF388e3c),
       foregroundColor: Colors.white,
       elevation: 6,

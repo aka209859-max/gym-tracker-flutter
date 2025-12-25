@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 /// デバッグログ画面（スマホでログを確認するため）
 class DebugLogScreen extends StatefulWidget {
-  const DebugLogScreen({super.key});
+  DebugLogScreen({super.key});
 
   @override
   State<DebugLogScreen> createState() => _DebugLogScreenState();
@@ -22,7 +22,7 @@ class _DebugLogScreenState extends State<DebugLogScreen> {
         foregroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: const Icon(Icons.copy),
+            icon: Icon(Icons.copy),
             onPressed: () {
               final logText = logs.join('\n');
               Clipboard.setData(ClipboardData(text: logText));
@@ -36,7 +36,7 @@ class _DebugLogScreenState extends State<DebugLogScreen> {
             tooltip: AppLocalizations.of(context)!.general_d889d870,
           ),
           IconButton(
-            icon: const Icon(Icons.delete),
+            icon: Icon(Icons.delete),
             onPressed: () {
               setState(() {
                 DebugLogger.instance.clearLogs();
@@ -51,7 +51,7 @@ class _DebugLogScreenState extends State<DebugLogScreen> {
             tooltip: AppLocalizations.of(context)!.general_a0854d25,
           ),
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: Icon(Icons.refresh),
             onPressed: () {
               setState(() {});
             },

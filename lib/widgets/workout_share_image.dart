@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../utils/one_rm_calculator.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// トレーニングシェア用画像Widget
 /// 
 /// SNSシェア用の美しい画像を生成
@@ -183,14 +184,14 @@ class WorkoutShareImage extends StatelessWidget {
             width: 20,
             child: Text(
               '$setNumber',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
                 color: Colors.black87,
               ),
             ),
           ),
-          const SizedBox(width: 4),
+          SizedBox(width: 4),
           
           // SetTypeバッジ（通常セット以外）
           if (setTypeBadge != null)
@@ -202,7 +203,7 @@ class WorkoutShareImage extends StatelessWidget {
               ),
               child: Text(
                 setTypeBadge,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
                   fontSize: 9,
                   fontWeight: FontWeight.bold,
@@ -210,13 +211,13 @@ class WorkoutShareImage extends StatelessWidget {
               ),
             ),
           
-          const SizedBox(width: 8),
+          SizedBox(width: 8),
           
           // 重量×回数（自重モードまたは重量0の場合は「自重」と表示）
           Expanded(
             child: Text(
               (isBodyweightMode || weight == 0.0)
-                ? '自重 × $reps reps'
+                ? AppLocalizations.of(context)!.generatedKey_9d72b3b7
                 : '$weight kg × $reps reps',
               style: const TextStyle(
                 fontSize: 13,

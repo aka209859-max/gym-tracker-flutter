@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import '../models/gym.dart';
 import '../models/google_place.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// パートナージム情報統合サービス
 /// 
 /// Google Places APIで取得したジムと、Firestoreのパートナージム情報を統合
@@ -39,7 +40,7 @@ class PartnerMergeService {
           .collection('gyms')
           .get()  // 全ジムを取得してマッチング（パートナーフラグは後で確認）
           .timeout(
-            const Duration(seconds: 10),
+            Duration(seconds: 10),
             onTimeout: () {
               if (kDebugMode) {
                 print('⏱️ Firestore timeout - continuing without partner data');
@@ -79,7 +80,7 @@ class PartnerMergeService {
     } catch (e) {
       if (kDebugMode) {
         print('⚠️ Failed to fetch partner gyms from Firestore: $e');
-        print('   GPS検索は通常通り継続されます（パートナージム情報なし）');
+        print(AppLocalizations.of(context)!.generatedKey_ec81117e);
       }
       // エラー時も空のキャッシュを設定
       _partnerGymsCache = [];

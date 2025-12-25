@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/workout_log.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// 時空間コンテキストマッチングサービス
 /// 
 /// 同じジムで同じ時間帯（±2時間）にトレーニングする
@@ -218,7 +219,7 @@ class SpatiotemporalMatchingService {
       final data = await getMostFrequentGymAndTime(userId);
       
       if (data['gymId'] == null) {
-        print('ℹ️ ユーザー $userId: ジムデータなし、更新スキップ');
+        print(AppLocalizations.of(context)!.generatedKey_cd451e40);
         return;
       }
 

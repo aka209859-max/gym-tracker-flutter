@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// レビュー依頼サービス（ASO最適化）
 /// 
 /// 5回目のトレーニング記録後に自動的にレビューを依頼
@@ -60,17 +61,17 @@ class ReviewRequestService {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        title: const Row(
+        title: Row(
           children: [
             Icon(Icons.star, color: Colors.orange, size: 32),
             SizedBox(width: 12),
             Text(
-              'GYM MATCH を気に入っていますか？',
+              AppLocalizations.of(context)!.general_c1182ccf,
               style: TextStyle(fontSize: 18),
             ),
           ],
         ),
-        content: const Column(
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -80,7 +81,7 @@ class ReviewRequestService {
             ),
             SizedBox(height: 16),
             Text(
-              'よろしければ、App Store でレビューをお願いします。\nあなたのフィードバックがアプリの改善に役立ちます！',
+              AppLocalizations.of(context)!.generatedKey_722dc403,
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
           ],
@@ -92,7 +93,7 @@ class ReviewRequestService {
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
-            icon: const Icon(Icons.star),
+            icon: Icon(Icons.star),
             label: Text(AppLocalizations.of(context)!.general_7442ed3d),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.orange,
@@ -169,7 +170,7 @@ class ReviewRequestService {
   Future<void> _markAsDeclined() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('review_declined_at', DateTime.now().toIso8601String());
-    print('ℹ️ レビュー拒否: ${_cooldownDays}日間はリクエストしません');
+    print(AppLocalizations.of(context)!.generatedKey_c6000590);
   }
 
   /// レビュー済みかチェック

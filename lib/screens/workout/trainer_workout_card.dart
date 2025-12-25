@@ -186,7 +186,7 @@ class TrainerWorkoutCard extends StatelessWidget {
         minChildSize: 0.5,
         maxChildSize: 0.95,
         builder: (context, scrollController) => Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
           ),
@@ -240,7 +240,7 @@ class TrainerWorkoutCard extends StatelessWidget {
                   ],
                 ),
               ),
-              const Divider(height: 32),
+              Divider(height: 32),
               // コンテンツ
               Expanded(
                 child: ListView(
@@ -252,15 +252,15 @@ class TrainerWorkoutCard extends StatelessWidget {
                     _buildInfoRow(AppLocalizations.of(context)!.duration, '${record.duration}分'),
                     _buildInfoRow(AppLocalizations.of(context)!.workout_c34d51a0, _getIntensityLabel(context, record.intensity)),
                     
-                    const SizedBox(height: 24),
-                    const Text(
+                    SizedBox(height: 24),
+                    Text(
                       AppLocalizations.of(context)!.workout_6635091c,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     
                     // 全種目リスト
                     ...record.exercises.map((exercise) => Card(
@@ -272,13 +272,13 @@ class TrainerWorkoutCard extends StatelessWidget {
                           children: [
                             Text(
                               exercise.name,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             if (exercise.formattedDetails.isNotEmpty) ...[
-                              const SizedBox(height: 8),
+                              SizedBox(height: 8),
                               Text(
                                 exercise.formattedDetails,
                                 style: TextStyle(
@@ -294,8 +294,8 @@ class TrainerWorkoutCard extends StatelessWidget {
                     
                     // 体組成
                     if (record.bodyMetrics != null) ...[
-                      const SizedBox(height: 24),
-                      const Text(
+                      SizedBox(height: 24),
+                      Text(
                         AppLocalizations.of(context)!.workout_85a5a0ad,
                         style: TextStyle(
                           fontSize: 18,
@@ -322,8 +322,8 @@ class TrainerWorkoutCard extends StatelessWidget {
                     
                     // トレーナーメモ
                     if (record.trainerNotes.isNotEmpty) ...[
-                      const SizedBox(height: 24),
-                      const Text(
+                      SizedBox(height: 24),
+                      Text(
                         AppLocalizations.of(context)!.workout_ffc76989,
                         style: TextStyle(
                           fontSize: 18,
@@ -374,7 +374,7 @@ class TrainerWorkoutCard extends StatelessWidget {
           ),
           Text(
             value,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
@@ -390,10 +390,10 @@ class TrainerWorkoutCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: const TextStyle(fontSize: 14)),
+          Text(label, style: TextStyle(fontSize: 14)),
           Text(
             value,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
             ),

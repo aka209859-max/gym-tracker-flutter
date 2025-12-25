@@ -7,7 +7,7 @@ import 'gym_detail_screen.dart';
 
 /// ジム一覧画面
 class GymListScreen extends StatefulWidget {
-  const GymListScreen({super.key});
+  GymListScreen({super.key});
 
   @override
   State<GymListScreen> createState() => _GymListScreenState();
@@ -24,7 +24,7 @@ class _GymListScreenState extends State<GymListScreen> {
         title: Text(l10n.gymList),
         actions: [
           PopupMenuButton<String>(
-            icon: const Icon(Icons.sort),
+            icon: Icon(Icons.sort),
             onSelected: (value) {
               setState(() {
                 _sortBy = value;
@@ -176,22 +176,22 @@ class _GymListScreenState extends State<GymListScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   // 料金
                   Row(
                     children: [
                       Icon(Icons.attach_money, size: 16, color: Colors.grey[600]),
-                      const SizedBox(width: 4),
+                      SizedBox(width: 4),
                       Text(
                         '月額 ¥${gym.monthlyFee.toStringAsFixed(0)}',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   // 混雑度インジケーター
                   _buildCrowdIndicator(gym),
                 ],
@@ -222,9 +222,9 @@ class _GymListScreenState extends State<GymListScreen> {
             size: 16,
             color: Color(gym.crowdLevelColor),
           ),
-          const SizedBox(width: 6),
+          SizedBox(width: 6),
           Text(
-            '現在の混雑度: ${gym.crowdLevelText}',
+            AppLocalizations.of(context)!.generatedKey_c930c91e,
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.bold,

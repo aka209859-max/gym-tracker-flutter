@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// 疲労管理システムサービス
 /// 
 /// Phase 2a: セッションRPEベースの科学的疲労度予測
@@ -145,7 +146,7 @@ class FatigueManagementService {
         'label': AppLocalizations.of(context)!.general_91e882eb,
         'color': 'green',
         'recoveryHours': 24,
-        'advice': '良好なトレーニングでした！\n軽いストレッチと十分な水分補給をしましょう。',
+        'advice': AppLocalizations.of(context)!.generatedKey_3a6be6b1,
       };
     } else if (trainingLoad < 500) {
       // レベル2: 中程度（最適）
@@ -154,7 +155,7 @@ class FatigueManagementService {
         'label': AppLocalizations.of(context)!.general_ce061ec3,
         'color': 'blue',
         'recoveryHours': 36,
-        'advice': '適度な負荷のトレーニングでした。\n7-8時間の睡眠とタンパク質補給（体重1kgあたり1.6g以上）を心がけましょう。',
+        'advice': AppLocalizations.of(context)!.generatedKey_3f7f8f41,
       };
     } else if (trainingLoad < 700) {
       // レベル3: 高め（警戒）
@@ -163,7 +164,7 @@ class FatigueManagementService {
         'label': AppLocalizations.of(context)!.general_da8ce224,
         'color': 'orange',
         'recoveryHours': 48,
-        'advice': '高強度のトレーニングでした。\n十分な休息と栄養補給が必要です。無理せず回復を優先しましょう。',
+        'advice': AppLocalizations.of(context)!.generatedKey_2cfbd017,
       };
     } else {
       // レベル4: 極めて高い（危険）
@@ -172,7 +173,7 @@ class FatigueManagementService {
         'label': AppLocalizations.of(context)!.general_89a3d255,
         'color': 'red',
         'recoveryHours': 72,
-        'advice': '非常に高強度のトレーニングでした。\n今日は完全休養を推奨します。睡眠8時間以上、高タンパク質食、ストレッチを重視してください。',
+        'advice': AppLocalizations.of(context)!.generatedKey_07ee9ffa,
       };
     }
   }

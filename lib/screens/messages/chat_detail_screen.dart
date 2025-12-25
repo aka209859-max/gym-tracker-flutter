@@ -90,11 +90,11 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                   ? Icon(Icons.person, size: 20, color: Colors.grey[600])
                   : null,
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             Expanded(
               child: Text(
                 widget.otherUserName,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -116,7 +116,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
               stream: _chatService.getMessages(widget.conversationId),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
+                  return Center(child: CircularProgressIndicator());
                 }
 
                 if (snapshot.hasError) {
@@ -125,7 +125,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.error_outline, size: 48, color: Colors.red[300]),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16),
                         Text(
                           AppLocalizations.of(context)!.error_4c43efe6,
                           style: TextStyle(color: Colors.grey[600]),
@@ -143,9 +143,9 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.chat_bubble_outline, size: 80, color: Colors.grey[300]),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16),
                         Text(
-                          'メッセージを送信して\n会話を始めましょう',
+                          AppLocalizations.of(context)!.generatedKey_0a9c8389,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 16,
@@ -233,7 +233,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(width: 8),
+                              SizedBox(width: 8),
                               Text(
                                 '${message.timestamp.hour}:${message.timestamp.minute.toString().padLeft(2, '0')}',
                                 style: TextStyle(
@@ -260,7 +260,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.05),
                   blurRadius: 10,
-                  offset: const Offset(0, -2),
+                  offset: Offset(0, -2),
                 ),
               ],
             ),
@@ -272,7 +272,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                     child: TextField(
                       controller: _messageController,
                       decoration: InputDecoration(
-                        hintText: 'メッセージを入力...',
+                        hintText: AppLocalizations.of(context)!.general_94ebce72,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(24),
                           borderSide: BorderSide.none,
@@ -289,7 +289,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                       onSubmitted: (_) => _sendMessage(),
                     ),
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   IconButton(
                     onPressed: _sendMessage,
                     icon: Icon(
@@ -321,7 +321,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
   String _formatDate(DateTime date) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
-    final yesterday = today.subtract(const Duration(days: 1));
+    final yesterday = today.subtract(Duration(days: 1));
     final messageDate = DateTime(date.year, date.month, date.day);
 
     if (messageDate == today) {

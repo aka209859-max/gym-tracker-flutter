@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/personal_record.dart';
 import 'pr_tracking_service.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// 実力ベースマッチングサービス（±15% 1RM）
 /// 
 /// ユーザーの主要種目（BIG3）の1RM平均値を計算し、
@@ -29,7 +30,7 @@ class StrengthMatchingService {
       final allPRs = await _prService.getAllPRs(userId);
       
       if (allPRs.isEmpty) {
-        print('ℹ️ ユーザー $userId: PR記録なし');
+        print(AppLocalizations.of(context)!.generatedKey_eda7517f);
         return null;
       }
 
@@ -41,7 +42,7 @@ class StrengthMatchingService {
       }).toList();
 
       if (big3PRs.isEmpty) {
-        print('ℹ️ ユーザー $userId: BIG3記録なし');
+        print(AppLocalizations.of(context)!.generatedKey_6c8eecab);
         return null;
       }
 
@@ -90,7 +91,7 @@ class StrengthMatchingService {
       final average1RM = await calculateAverage1RM(userId);
       
       if (average1RM == null) {
-        print('ℹ️ ユーザー $userId: 1RM更新スキップ（記録なし）');
+        print(AppLocalizations.of(context)!.generatedKey_0a2b3839);
         return;
       }
 

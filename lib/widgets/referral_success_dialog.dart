@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'confetti_animation.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// 紹介成功ダイアログ（v1.02強化版）
 /// 
 /// 紹介コード適用時・友達が参加した時に表示
@@ -15,7 +16,7 @@ class ReferralSuccessDialog {
     ConfettiAnimation.show(context);
 
     // 成功ダイアログ表示
-    Future.delayed(const Duration(milliseconds: 500), () {
+    Future.delayed(Duration(milliseconds: 500), () {
       if (!context.mounted) return;
 
       showDialog(
@@ -27,13 +28,13 @@ class ReferralSuccessDialog {
           ),
           title: Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.celebration,
                 color: Colors.orange,
                 size: 32,
               ),
-              const SizedBox(width: 12),
-              const Text(
+              SizedBox(width: 12),
+              Text(
                 AppLocalizations.of(context)!.general_85d1b5d2,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -46,11 +47,11 @@ class ReferralSuccessDialog {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.general_31ec114c,
                 style: TextStyle(fontSize: 16),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -61,33 +62,33 @@ class ReferralSuccessDialog {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      '🎁 あなたの特典',
+                    Text(
+                      AppLocalizations.of(context)!.general_e1cf09e4,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                         color: Colors.orange,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     _buildBonusItem(
                       icon: Icons.smart_toy,
                       title: AppLocalizations.of(context)!.aiCoaching,
-                      value: '×$aiBonus回',
+                      value: AppLocalizations.of(context)!.reps,
                       description: AppLocalizations.of(context)!.general_ffe34333,
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     _buildBonusItem(
                       icon: Icons.workspace_premium,
                       title: AppLocalizations.of(context)!.general_7db414f2,
-                      value: '$premiumDays日間',
+                      value: AppLocalizations.of(context)!.generatedKey_1397c615,
                       description: AppLocalizations.of(context)!.general_9b63b1e6,
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
-              const Text(
+              SizedBox(height: 16),
+              Text(
                 '💪 今すぐトレーニングを記録して、AIコーチングを試してみましょう！',
                 style: TextStyle(
                   fontSize: 14,
@@ -107,7 +108,7 @@ class ReferralSuccessDialog {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              child: const Text(
+              child: Text(
                 AppLocalizations.of(context)!.general_81e13f3b,
                 style: TextStyle(
                   fontSize: 16,
@@ -132,7 +133,7 @@ class ReferralSuccessDialog {
     ConfettiAnimation.show(context);
 
     // 成功ダイアログ表示
-    Future.delayed(const Duration(milliseconds: 500), () {
+    Future.delayed(Duration(milliseconds: 500), () {
       if (!context.mounted) return;
 
       showDialog(
@@ -144,13 +145,13 @@ class ReferralSuccessDialog {
           ),
           title: Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.celebration,
                 color: Colors.green,
                 size: 32,
               ),
-              const SizedBox(width: 12),
-              const Text(
+              SizedBox(width: 12),
+              Text(
                 AppLocalizations.of(context)!.general_99c96084,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -164,10 +165,10 @@ class ReferralSuccessDialog {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '$friendNameさんがGYM MATCHに参加しました！',
-                style: const TextStyle(fontSize: 16),
+                AppLocalizations.of(context)!.generatedKey_32518a63,
+                style: TextStyle(fontSize: 16),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -178,34 +179,34 @@ class ReferralSuccessDialog {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      '🎁 紹介特典（豪華版）',
+                    Text(
+                      AppLocalizations.of(context)!.generatedKey_3efd8f7d,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                         color: Colors.green,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     _buildBonusItem(
                       icon: Icons.smart_toy,
                       title: AppLocalizations.of(context)!.aiCoaching,
-                      value: '×$aiBonus回',
+                      value: AppLocalizations.of(context)!.reps,
                       description: AppLocalizations.of(context)!.general_89a02b48,
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     _buildBonusItem(
                       icon: Icons.workspace_premium,
                       title: AppLocalizations.of(context)!.general_7db414f2,
-                      value: '$premiumDays日間',
+                      value: AppLocalizations.of(context)!.generatedKey_1397c615,
                       description: AppLocalizations.of(context)!.general_9b63b1e6,
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
-              const Text(
-                '🚀 友達をもっと誘って、さらに特典をゲットしよう！',
+              SizedBox(height: 16),
+              Text(
+                AppLocalizations.of(context)!.general_8b3d7068,
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.grey,
@@ -231,7 +232,7 @@ class ReferralSuccessDialog {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              child: const Text(
+              child: Text(
                 AppLocalizations.of(context)!.general_d3c89caa,
                 style: TextStyle(
                   fontSize: 16,

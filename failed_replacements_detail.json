@@ -1,0 +1,15 @@
+{
+  "lib/screens/workout/add_workout_screen.dart": [],
+  "lib/screens/workout/ai_coaching_screen.dart": [],
+  "lib/screens/home_screen.dart": [],
+  "lib/screens/map_screen.dart": [],
+  "lib/screens/partner_dashboard_screen.dart": [],
+  "lib/screens/search_screen.dart": [],
+  "lib/services/admob_service.dart": [],
+  "lib/services/campaign_service.dart": [],
+  "lib/services/revenue_cat_service.dart": [],
+  "lib/services/scientific_database.dart": [],
+  "lib/widgets/referral_success_dialog.dart": [],
+  "lib/screens/workout/ai_coaching_screen_tabbed.dart": [],
+  "lib/screens/workout/workout_log_screen.dart": []
+}

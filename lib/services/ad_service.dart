@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// AdMob広告管理サービス
 class AdService {
   static final AdService _instance = AdService._internal();
@@ -16,7 +17,7 @@ class AdService {
     
     // Web環境ではAdMobをスキップ
     if (kIsWeb) {
-      print('🌐 Web環境のためAdMob初期化をスキップ');
+      print(AppLocalizations.of(context)!.general_36030a98);
       _isInitialized = true;
       return;
     }

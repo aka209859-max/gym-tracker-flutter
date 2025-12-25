@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// プラン種類
 enum SubscriptionType {
   free,      // 無料プラン
@@ -42,9 +43,9 @@ class SubscriptionService {
     try {
       // 🔧 タイムアウト追加: 5秒以内に取得できない場合はスキップ
       final customerInfo = await Purchases.getCustomerInfo().timeout(
-        const Duration(seconds: 5),
+        Duration(seconds: 5),
         onTimeout: () {
-          print('⏱️ RevenueCat タイムアウト - キャッシュ使用');
+          print(AppLocalizations.of(context)!.subscription_9140a28e);
           throw TimeoutException('RevenueCat timeout');
         },
       );
@@ -90,7 +91,7 @@ class SubscriptionService {
           print('⚡ メモリキャッシュ使用: $_memoryCache (キャッシュ年齢: ${cacheAge.inMinutes}分)');
           return _memoryCache!;
         } else {
-          print('⏰ メモリキャッシュ期限切れ - 再取得');
+          print(AppLocalizations.of(context)!.subscription_9d1ab19a);
           _memoryCache = null;
           _memoryCacheTimestamp = null;
         }
@@ -105,11 +106,11 @@ class SubscriptionService {
           final userDoc = await FirebaseFirestore.instance
               .collection('users')
               .doc(user.uid)
-              .get(const GetOptions(source: Source.serverAndCache))
+              .get(GetOptions(source: Source.serverAndCache))
               .timeout(
-                const Duration(seconds: 3),
+                Duration(seconds: 3),
                 onTimeout: () {
-                  print('⏱️ Firestore timeout - キャッシュ使用');
+                  print(AppLocalizations.of(context)!.subscription_99a7f530);
                   throw TimeoutException('Firestore timeout');
                 },
               );
@@ -149,7 +150,7 @@ class SubscriptionService {
           // キャッシュにフォールバック
           final cachedPlan = await _loadPlanCache();
           if (cachedPlan != null) {
-            print('📦 キャッシュからプラン取得: $cachedPlan');
+            print(AppLocalizations.of(context)!.generatedKey_7e61d723);
             _memoryCache = cachedPlan;
             _memoryCacheTimestamp = DateTime.now();
             
@@ -174,7 +175,7 @@ class SubscriptionService {
       // 最後の手段: キャッシュ
       final cachedPlan = await _loadPlanCache();
       if (cachedPlan != null) {
-        print('📦 エラー時キャッシュ使用: $cachedPlan');
+        print(AppLocalizations.of(context)!.generatedKey_c23f34d7);
         _memoryCache = cachedPlan;
         _memoryCacheTimestamp = DateTime.now();
         return cachedPlan;
@@ -336,9 +337,9 @@ class SubscriptionService {
   /// プラン説明を取得
   String getPlanDescription(SubscriptionType plan) {
     return switch (plan) {
-      SubscriptionType.free => 'ジム検索 + AI混雑度予測 + トレーニング記録 + AI機能月3回',
-      SubscriptionType.premium => 'AI機能月20回（AIコーチ・成長予測・効果分析） + お気に入り無制限 + レビュー投稿',
-      SubscriptionType.pro => 'AI機能無制限（AIコーチ・成長予測・効果分析） + パートナー検索 + メッセージング',
+      SubscriptionType.free => AppLocalizations.of(context)!.subscription_c282c326,
+      SubscriptionType.premium => AppLocalizations.of(context)!.generatedKey_5815bad8,
+      SubscriptionType.pro => AppLocalizations.of(context)!.generatedKey_3124e6e1,
     };
   }
   
@@ -524,7 +525,7 @@ class SubscriptionService {
     final remaining = totalLimit - currentUsage;
     
     if (remaining <= 0) {
-      return '今月のAI使用回数を使い切りました (${currentUsage}/${totalLimit}回)\n💰 追加購入で継続利用可能';
+      return AppLocalizations.of(context)!.generatedKey_19653147;
     }
     
     if (addonLimit > 0) {

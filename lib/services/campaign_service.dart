@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:math';
 import '../models/campaign_application.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// キャンペーン管理サービス
 /// 
 /// 完全自動化されたキャンペーンシステム
@@ -98,8 +99,8 @@ class CampaignService {
     // 必須条件チェック
     final requiredElements = {
       'uniqueCode': uniqueCode,
-      'hashtag1': '#GymMatch乗り換え割',
-      'hashtag2': '#AI筋トレ分析',
+      'hashtag1': AppLocalizations.of(context)!.general_aa28e7fd,
+      'hashtag2': AppLocalizations.of(context)!.general_3f3aa3c9,
     };
 
     // ユニークコードチェック
@@ -108,8 +109,8 @@ class CampaignService {
     }
 
     // ハッシュタグチェック
-    if (!postContent.contains('#GymMatch乗り換え割') ||
-        !postContent.contains('#AI筋トレ分析')) {
+    if (!postContent.contains(AppLocalizations.of(context)!.general_aa28e7fd) ||
+        !postContent.contains(AppLocalizations.of(context)!.general_3f3aa3c9)) {
       return false;
     }
 
@@ -180,7 +181,7 @@ class CampaignService {
     return '''
 $previousAppName から GYM MATCH に乗り換えました！
 
-AIが過去のトレーニングデータを分析して、自分の弱点を"明確化"してくれた。今まで「なんとなく」やってたトレーニングが、「確信」に変わった感覚。
+AIが過去のトレーニングデータを分析して、自分の弱点をAppLocalizations.of(context)!.generatedKey_0a0a8439してくれた。今まで「なんとなく」やってたトレーニングが、「確信」に変わった感覚。
 
 乗り換え割で$benefitは嬉しい！
 

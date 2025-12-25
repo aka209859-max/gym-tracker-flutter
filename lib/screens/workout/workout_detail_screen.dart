@@ -10,7 +10,7 @@ import '../../services/workout_note_service.dart';
 class WorkoutDetailScreen extends StatefulWidget {
   final WorkoutLog workout;
 
-  const WorkoutDetailScreen({super.key, required this.workout});
+  WorkoutDetailScreen({super.key, required this.workout});
 
   @override
   State<WorkoutDetailScreen> createState() => _WorkoutDetailScreenState();
@@ -78,7 +78,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
           maxLines: 8,
           decoration: InputDecoration(
             hintText: l10n.noteHint,
-            border: const OutlineInputBorder(),
+            border: OutlineInputBorder(),
           ),
           autofocus: true,
         ),
@@ -90,7 +90,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
           if (_workoutNote != null)
             TextButton(
               onPressed: () => Navigator.pop(context, '__DELETE__'),
-              child: Text(l10n.delete, style: const TextStyle(color: Colors.red)),
+              child: Text(l10n.delete, style: TextStyle(color: Colors.red)),
             ),
           FilledButton(
             onPressed: () => Navigator.pop(context, controller.text),
@@ -250,7 +250,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                         const SizedBox(width: 8),
                         Text(
                           widget.workout.gymName!,
-                          style: const TextStyle(fontSize: 14),
+                          style: TextStyle(fontSize: 14),
                         ),
                       ],
                     ),
@@ -260,7 +260,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
             ),
           ),
 
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
 
           // 種目リスト
           ...widget.workout.exercises.map((exercise) {
@@ -279,11 +279,11 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                           materialTapTargetSize:
                               MaterialTapTargetSize.shrinkWrap,
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             exercise.name,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -291,11 +291,11 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     // セットリスト（テーブル形式ヘッダー）
                     Row(
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           width: 40,
                           child: Text(
                             AppLocalizations.of(context)!.workoutSetsLabel,
@@ -306,7 +306,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                             ),
                           ),
                         ),
-                        const Expanded(
+                        Expanded(
                           child: Text(
                             AppLocalizations.of(context)!.workout_2579352f,
                             style: TextStyle(
@@ -320,14 +320,14 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                           width: 60,
                           child: Text(
                             _isAbsExercise(exercise.name) ? AppLocalizations.of(context)!.workout_34d70475 : AppLocalizations.of(context)!.repsCount,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
                               color: Colors.grey,
                             ),
                           ),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           width: 60,
                           child: Text(
                             'RM',
@@ -338,7 +338,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           width: 40,
                           child: Text(
                             AppLocalizations.of(context)!.workout_c6b41e99,
@@ -393,20 +393,20 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                                 (set.isTimeMode ?? false)
                                     ? '${set.actualReps ?? set.targetReps}秒'
                                     : '${set.actualReps ?? set.targetReps}回',
-                                style: const TextStyle(fontSize: 13),
+                                style: TextStyle(fontSize: 13),
                               ),
                             ),
                             SizedBox(
                               width: 60,
                               child: Text(
                                 '${oneRM.toStringAsFixed(1)}Kg',
-                                style: const TextStyle(fontSize: 11),
+                                style: TextStyle(fontSize: 11),
                               ),
                             ),
                             SizedBox(
                               width: 40,
                               child: set.hasAssist == true
-                                  ? const Icon(
+                                  ? Icon(
                                       Icons.people,
                                       size: 16,
                                       color: Colors.orange,
@@ -424,12 +424,12 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
           }),
 
           // トレーニングメモ（新機能）
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           _buildNoteSection(),
 
           // 既存のworkout.notesメモ（互換性のため残す）
           if (widget.workout.notes != null && widget.workout.notes!.isNotEmpty) ...[
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -438,9 +438,9 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.note, size: 20),
-                        const SizedBox(width: 8),
-                        const Text(
+                        Icon(Icons.note, size: 20),
+                        SizedBox(width: 8),
+                        Text(
                           AppLocalizations.of(context)!.workout_e5798fef,
                           style: TextStyle(
                             fontSize: 16,
@@ -449,10 +449,10 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Text(
                       widget.workout.notes!,
-                      style: const TextStyle(fontSize: 14),
+                      style: TextStyle(fontSize: 14),
                     ),
                   ],
                 ),
@@ -485,17 +485,17 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                     size: 24,
                     color: theme.colorScheme.primary,
                   ),
-                  const SizedBox(width: 8),
-                  const Text(
+                  SizedBox(width: 8),
+                  Text(
                     AppLocalizations.of(context)!.trainingMemo,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Spacer(),
+                  Spacer(),
                   if (_isLoadingNote)
-                    const SizedBox(
+                    SizedBox(
                       width: 20,
                       height: 20,
                       child: CircularProgressIndicator(strokeWidth: 2),
@@ -507,19 +507,19 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                     ),
                 ],
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               if (_workoutNote != null) ...[
                 Text(
                   _workoutNote!.content,
-                  style: const TextStyle(fontSize: 14, height: 1.5),
+                  style: TextStyle(fontSize: 14, height: 1.5),
                   maxLines: 5,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Row(
                   children: [
                     Icon(Icons.access_time, size: 12, color: Colors.grey[600]),
-                    const SizedBox(width: 4),
+                    SizedBox(width: 4),
                     Text(
                       '更新: ${DateFormat('yyyy/MM/dd HH:mm').format(_workoutNote!.updatedAt)}',
                       style: TextStyle(fontSize: 11, color: Colors.grey[600]),

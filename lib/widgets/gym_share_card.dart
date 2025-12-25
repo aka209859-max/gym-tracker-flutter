@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/gym.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// ジム情報シェア用カードウィジェット
 /// 「こんなの作りました！」スタイルのTwitter投稿用
 class GymShareCard extends StatelessWidget {
@@ -59,7 +60,7 @@ class GymShareCard extends StatelessWidget {
                         color: Colors.white.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: const Text(
+                      child: Text(
                         'GYM MATCH',
                         style: TextStyle(
                           color: Colors.white,
@@ -69,7 +70,7 @@ class GymShareCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Spacer(),
+                    Spacer(),
                     if (gym.isPartner && includePartnerInfo)
                       Container(
                         padding: const EdgeInsets.symmetric(
@@ -80,7 +81,7 @@ class GymShareCard extends StatelessWidget {
                           color: Colors.amber,
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: const Row(
+                        child: Row(
                           children: [
                             Icon(Icons.star, color: Colors.white, size: 20),
                             SizedBox(width: 4),
@@ -147,7 +148,7 @@ class GymShareCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -160,12 +161,12 @@ class GymShareCard extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.location_on, color: Colors.white, size: 20),
-                      const SizedBox(width: 8),
+                      Icon(Icons.location_on, color: Colors.white, size: 20),
+                      SizedBox(width: 8),
                       Flexible(
                         child: Text(
                           gym.address,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
                           ),
@@ -176,7 +177,7 @@ class GymShareCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Spacer(),
+                Spacer(),
                 // パートナー特典（該当する場合のみ）
                 if (gym.isPartner && includePartnerInfo && gym.campaignTitle != null) ...[
                   Container(
@@ -189,7 +190,7 @@ class GymShareCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Row(
+                        Row(
                           children: [
                             Icon(Icons.local_offer, color: Colors.white, size: 24),
                             SizedBox(width: 8),
@@ -203,17 +204,17 @@ class GymShareCard extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8),
                         Text(
                           gym.campaignTitle!,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         if (gym.campaignValidUntil != null) ...[
-                          const SizedBox(height: 4),
+                          SizedBox(height: 4),
                           Text(
                             '~${_formatDate(gym.campaignValidUntil!)}まで',
                             style: TextStyle(
@@ -225,7 +226,7 @@ class GymShareCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                 ],
                 // フッター
                 Row(
@@ -239,8 +240,8 @@ class GymShareCard extends StatelessWidget {
                         color: Colors.white.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: const Text(
-                        '📱 GYM MATCHアプリで詳細を見る',
+                      child: Text(
+                        AppLocalizations.of(context)!.gym_fac3d027,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,

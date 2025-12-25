@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// 
 /// 初回起動時に表示し、アプリの使い方を案内
 class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({super.key});
+  OnboardingScreen({super.key});
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
@@ -18,29 +18,29 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   final List<OnboardingPage> _pages = [
     OnboardingPage(
-      title: 'GYM MATCH へようこそ！',
-      description: 'トレーニングを記録して、\nAIがあなた専用のメニューを提案します',
+      title: AppLocalizations.of(context)!.general_8410f819,
+      description: AppLocalizations.of(context)!.generatedKey_159877ec,
       icon: Icons.fitness_center,
       color: Colors.blue,
       imagePath: null,
     ),
     OnboardingPage(
       title: AppLocalizations.of(context)!.general_b8985d41,
-      description: '種目・重量・回数を入力するだけ！\nカレンダーで成長を可視化',
+      description: AppLocalizations.of(context)!.generatedKey_1628fbdf,
       icon: Icons.edit_note,
       color: Colors.green,
       imagePath: null,
     ),
     OnboardingPage(
-      title: 'AI コーチング',
-      description: 'Google Gemini 2.0 が\nあなたに最適なメニューを自動生成',
+      title: AppLocalizations.of(context)!.general_d53a30ce,
+      description: AppLocalizations.of(context)!.generatedKey_b8679c80,
       icon: Icons.smart_toy,
       color: Colors.orange,
       imagePath: null,
     ),
     OnboardingPage(
       title: AppLocalizations.of(context)!.general_08f3d852,
-      description: '最初のトレーニングを\n記録してみましょう',
+      description: AppLocalizations.of(context)!.generatedKey_97fc7921,
       icon: Icons.rocket_launch,
       color: Colors.purple,
       imagePath: null,
@@ -65,7 +65,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   void _nextPage() {
     if (_currentPage < _pages.length - 1) {
       _pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
+        duration: Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     } else {

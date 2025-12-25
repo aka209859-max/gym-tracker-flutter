@@ -9,7 +9,7 @@ class TrainerWorkoutDetailModal extends StatefulWidget {
   final TrainerWorkoutRecord record;
   final VoidCallback? onSave;
 
-  const TrainerWorkoutDetailModal({
+  TrainerWorkoutDetailModal({
     super.key,
     required this.record,
     this.onSave,
@@ -130,7 +130,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                                   color: Colors.orange,
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                child: const Text(
+                                child: Text(
                                   '(パーソナルトレーニング)',
                                   style: TextStyle(
                                     color: Colors.white,
@@ -141,10 +141,10 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: 8),
                           Text(
                             widget.record.formattedDate,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                               color: Colors.black87,
@@ -154,14 +154,14 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                       ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.close),
+                      icon: Icon(Icons.close),
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                   ],
                 ),
               ),
 
-              const Divider(height: 1),
+              Divider(height: 1),
 
               // コンテンツ
               Expanded(
@@ -170,7 +170,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                   padding: const EdgeInsets.all(20),
                   children: [
                     // 種目リスト
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.workout_1501088c,
                       style: TextStyle(
                         fontSize: 16,
@@ -178,7 +178,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                         color: Colors.black87,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     ...widget.record.exercises.map((exercise) => Container(
                       margin: const EdgeInsets.only(bottom: 12),
                       padding: const EdgeInsets.all(16),
@@ -192,19 +192,19 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                         children: [
                           Text(
                             exercise.name,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                               color: Colors.black87,
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: 8),
                           Row(
                             children: [
                               _buildMetricChip('${exercise.weight}kg', Icons.fitness_center),
-                              const SizedBox(width: 8),
+                              SizedBox(width: 8),
                               _buildMetricChip('${exercise.reps}回', Icons.repeat),
-                              const SizedBox(width: 8),
+                              SizedBox(width: 8),
                               _buildMetricChip('${exercise.sets}セット', Icons.format_list_numbered),
                             ],
                           ),
@@ -246,8 +246,8 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
 
                     // トレーナーメモ
                     if (widget.record.trainerNotes.isNotEmpty) ...[
-                      const SizedBox(height: 24),
-                      const Text(
+                      SizedBox(height: 24),
+                      Text(
                         AppLocalizations.of(context)!.workout_927e07cf,
                         style: TextStyle(
                           fontSize: 16,
@@ -255,7 +255,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                           color: Colors.black87,
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12),
                       Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
@@ -265,7 +265,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                         ),
                         child: Text(
                           widget.record.trainerNotes,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
                             color: Colors.black87,
                             height: 1.6,
@@ -274,13 +274,13 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                       ),
                     ],
 
-                    const SizedBox(height: 32),
+                    SizedBox(height: 32),
 
                     // 保存ボタン
                     ElevatedButton.icon(
                       onPressed: _isSaving ? null : _saveAsPersonalRecord,
                       icon: _isSaving
-                          ? const SizedBox(
+                          ? SizedBox(
                               width: 20,
                               height: 20,
                               child: CircularProgressIndicator(
@@ -289,7 +289,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                               ),
                             )
                           : Icon(Icons.save),
-                      label: Text(_isSaving ? '保存中...' : AppLocalizations.of(context)!.save),
+                      label: Text(_isSaving ? AppLocalizations.of(context)!.workout_20388583 : AppLocalizations.of(context)!.save),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange,
                         foregroundColor: Colors.white,
@@ -302,7 +302,7 @@ class _TrainerWorkoutDetailModalState extends State<TrainerWorkoutDetailModal> {
                       ),
                     ),
 
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
 
                     // 説明テキスト
                     Container(

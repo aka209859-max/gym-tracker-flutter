@@ -265,7 +265,7 @@ JSON形式例:
       }
 
       // CSV解析
-      final List<List<dynamic>> csvRows = const CsvToListConverter().convert(
+      final List<List<dynamic>> csvRows = CsvToListConverter().convert(
         csvContent,
         eol: '\n',
         shouldParseNumbers: true,

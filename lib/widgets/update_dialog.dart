@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../services/version_check_service.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// アップデート促進ダイアログ
 /// 
 /// 🎯 機能:
@@ -10,7 +11,7 @@ import '../services/version_check_service.dart';
 class UpdateDialog extends StatelessWidget {
   final VersionCheckResult versionCheck;
 
-  const UpdateDialog({
+  UpdateDialog({
     super.key,
     required this.versionCheck,
   });
@@ -32,7 +33,7 @@ class UpdateDialog extends StatelessWidget {
     return PopScope(
       canPop: !versionCheck.isForceUpdate, // 強制の場合は戻るボタン無効
       child: AlertDialog(
-        title: const Text(
+        title: Text(
           AppLocalizations.of(context)!.general_07b4f5d1,
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -40,7 +41,7 @@ class UpdateDialog extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        content: const Text(
+        content: Text(
           AppLocalizations.of(context)!.general_3f0af19e,
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -64,8 +65,8 @@ class UpdateDialog extends StatelessWidget {
                   } else {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('App Storeを開けませんでした'),
+                        SnackBar(
+                          content: Text(AppLocalizations.of(context)!.general_d062e87e),
                         ),
                       );
                     }
@@ -73,7 +74,7 @@ class UpdateDialog extends StatelessWidget {
                 }
                 // 強制アップデートの場合はダイアログを閉じない
               },
-              child: const Text(
+              child: Text(
                 AppLocalizations.of(context)!.ok,
                 style: TextStyle(
                   fontSize: 17,

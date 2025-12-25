@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'dart:async';
 
@@ -43,7 +44,7 @@ class WorkoutSet {
 class AddWorkoutScreen extends StatefulWidget {
   final Map<String, dynamic>? templateData;
   
-  const AddWorkoutScreen({super.key, this.templateData});
+  AddWorkoutScreen({super.key, this.templateData});
 
   @override
   State<AddWorkoutScreen> createState() => _AddWorkoutScreenState();
@@ -164,7 +165,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       }
       
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('AIコーチから${exercises.length}種目を読み込みました')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.generatedKey_61221654)),
       );
     });
   }
@@ -184,7 +185,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   
   void _applyTemplateDataIfProvided() {
     if (widget.templateData != null) {
-      print('📋 テンプレートデータを適用: ${widget.templateData}');
+      print(AppLocalizations.of(context)!.generatedKey_c5928230);
       
       final muscleGroup = widget.templateData!['muscle_group'] as String?;
       if (muscleGroup != null) {
@@ -295,7 +296,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       _restSeconds = _selectedRestDuration;
     });
     
-    _restTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _restTimer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         if (_restSeconds > 0) {
           _restSeconds--;
@@ -394,7 +395,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     });
     
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('${exerciseSets.length}セットをコピーしました')),
+      SnackBar(content: Text(AppLocalizations.of(context)!.generatedKey_7c8d26de)),
     );
   }
 
@@ -488,12 +489,12 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
                   '休憩 $_restSeconds秒',
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
           IconButton(
-            icon: const Icon(Icons.timer),
+            icon: Icon(Icons.timer),
             onPressed: _showRestTimerSettings,
             tooltip: AppLocalizations.of(context)!.workout_4a60472d,
           ),
@@ -540,8 +541,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
-                  '$_selectedMuscleGroupの種目',
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  AppLocalizations.of(context)!.generatedKey_f36e4e45,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
               
@@ -558,11 +559,11 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     children: [
                       if (hasExercise)
                         IconButton(
-                          icon: const Icon(Icons.copy),
+                          icon: Icon(Icons.copy),
                           onPressed: () => _copyExerciseSets(exercise),
                           tooltip: AppLocalizations.of(context)!.copySet,
                         ),
-                      const Icon(Icons.chevron_right),
+                      Icon(Icons.chevron_right),
                     ],
                   ),
                   onTap: () => _addSet(exercise),
@@ -574,7 +575,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: OutlinedButton.icon(
                   onPressed: _showAddCustomExerciseDialog,
-                  icon: const Icon(Icons.add),
+                  icon: Icon(Icons.add),
                   label: Text(AppLocalizations.of(context)!.workout_268deae1),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -590,7 +591,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 padding: const EdgeInsets.all(16),
                 child: Text(
                   AppLocalizations.of(context)!.sets,
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
               
@@ -617,11 +618,11 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      '📝 トレーニングメモ',
+                    Text(
+                      AppLocalizations.of(context)!.workout_bc108eb8,
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     TextField(
                       controller: _memoController,
                       maxLines: 5,
@@ -653,7 +654,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text(
+                    child: Text(
                       AppLocalizations.of(context)!.workout_18f75a52,
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
@@ -687,10 +688,10 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   color: isCardio ? Colors.orange : Colors.blue, 
                   size: 20
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Text(
                   exerciseName,
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 if (isCardio) ...[
                   SizedBox(width: 8),
@@ -710,7 +711,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             
             // 💡前回記録バナー
             if (lastData != null) ...[
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
@@ -720,11 +721,11 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 ),
                 child: Row(
                   children: [
-                    const Text('💡', style: TextStyle(fontSize: 16)),
-                    const SizedBox(width: 8),
+                    Text('💡', style: TextStyle(fontSize: 16)),
+                    SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        '前回記録: ${lastData['weight']}kg x ${lastData['reps']}回\n今日の記録が次回の目標になります。',
+                        '前回記録: ${lastData['weight']}kg x ${lastData['repsAppLocalizations.of(context)!.generatedKey_aef11465,
                         style: TextStyle(fontSize: 12, color: Colors.purple.shade700),
                       ),
                     ),
@@ -733,7 +734,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               ),
             ],
             
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             
             // セット一覧
             ...sets.asMap().entries.map((entry) {
@@ -743,10 +744,10 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             }).toList(),
             
             // セット追加ボタン
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             OutlinedButton.icon(
               onPressed: () => _addSet(exerciseName),
-              icon: const Icon(Icons.add),
+              icon: Icon(Icons.add),
               label: Text(AppLocalizations.of(context)!.workout_68d6a303),
               style: OutlinedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 40),
@@ -808,7 +809,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     },
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 // 時間入力
                 Expanded(
                   child: TextField(
@@ -850,7 +851,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     },
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 // 回数入力
                 Expanded(
                   child: TextField(
@@ -873,11 +874,11 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 ),
               ],
               
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               
               // 削除ボタン
               IconButton(
-                icon: const Icon(Icons.delete, color: Colors.red),
+                icon: Icon(Icons.delete, color: Colors.red),
                 onPressed: () {
                   setState(() {
                     _sets.removeAt(globalIndex);
@@ -887,7 +888,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             ],
           ),
           
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           
           // 補助トグル ＋ 完了ボタン
           Row(
@@ -913,7 +914,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   ),
                 ),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               
               // 完了ボタン
               Expanded(

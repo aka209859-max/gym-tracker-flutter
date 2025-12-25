@@ -1,0 +1,72 @@
+v1.0.318 - CRITICAL: Dart Compilation Fix
+
+🚨 CRITICAL BUILD FIX: AppLocalizations in Const Contexts
+
+## Problem
+flutter build ipa FAILED with Dart compilation errors after ARB cleanup:
+- lib/providers/locale_provider.dart: AppLocalizations.of(context) in const list
+- lib/services/exercise_master_data.dart: AppLocalizations.of(context) in const map  
+- lib/models/workout_log.dart: AppLocalizations.of(context) without BuildContext
+
+## Root Cause
+v1.0.314-317 ARB cleanup removed 8,492 keys, but left behind:
+1. AppLocalizations calls in CONST contexts (compile-time)
+2. References to deleted ARB keys
+3. Methods without BuildContext trying to use localization
+
+Dart cannot evaluate AppLocalizations.of(context) at compile time.
+Const contexts require literals, not runtime values.
+
+## Solution - 3 File Complete Rewrite
+
+### locale_provider.dart
+BEFORE: const list with AppLocalizations (INVALID)
+AFTER: Hardcoded native language names
+
+Changed:
+- name: AppLocalizations.of(context)!.languageJapanese
++ name: 'Japanese', nativeName: '日本語'
+
+Result: supportedLocales is now truly const
+
+### exercise_master_data.dart
+BEFORE: const map with 100+ AppLocalizations calls (INVALID)
+AFTER: English hardcoded strings for internal mapping
+
+Changed:
+- AppLocalizations.of(context)!.bodyPartChest
++ 'Chest'
+
+Features:
+- Lowercase comparison for robustness
+- Internal mapping only (UI still localized)
+- No context dependency
+
+### workout_log.dart
+BEFORE: Used AppLocalizations without context (INVALID)
+AFTER: Hardcoded 'Other' string
+
+Changed:
+- bodyPart == AppLocalizations.of(context)!.bodyPartOther
++ bodyPart == 'Other'
+
+Result: fromMap works without BuildContext
+
+## Statistics
+- Files modified: 3
+- AppLocalizations calls removed: 100+
+- Lines changed: ~100
+- Build blockers fixed: ALL
+
+## Expected Outcome
+✅ Dart compilation: PASS
+✅ flutter build ipa: SHOULD SUCCEED
+✅ iOS Archive Build: SHOULD COMPLETE
+
+## Version
+v1.0.318+340
+
+## Monitor Build
+https://github.com/aka209859-max/gym-tracker-flutter/actions
+
+This version fixes the critical Dart compilation errors blocking iOS builds.

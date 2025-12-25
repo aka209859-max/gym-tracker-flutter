@@ -5,6 +5,7 @@ import '../services/ai_credit_service.dart';
 import '../screens/subscription_screen.dart';
 import '../screens/ai_addon_purchase_screen.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// ペイウォールダイアログ種別
 enum PaywallType {
   aiLimitReached,  // AI利用回数上限到達
@@ -46,8 +47,8 @@ class PaywallDialog extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              const Color(0xFF0A0E27),
-              const Color(0xFF1A1E3F),
+              Color(0xFF0A0E27),
+              Color(0xFF1A1E3F),
             ],
           ),
           borderRadius: BorderRadius.circular(20),
@@ -62,16 +63,16 @@ class PaywallDialog extends StatelessWidget {
                 color: Colors.orange.withOpacity(0.2),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.psychology,
                 size: 48,
                 color: Colors.orange,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             
             // タイトル
-            const Text(
+            Text(
               AppLocalizations.of(context)!.general_7a4837ed,
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -80,7 +81,7 @@ class PaywallDialog extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             
             // 説明
             Text(
@@ -91,11 +92,11 @@ class PaywallDialog extends StatelessWidget {
                 fontSize: 14,
               ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             
             // オプション0: 動画視聴で1回分ゲット（NEW!）
             _buildRewardAdOption(context),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             
             // オプション1: AI追加パック（お得！）
             _buildOptionCard(
@@ -109,12 +110,12 @@ class PaywallDialog extends StatelessWidget {
                 Navigator.of(context).pop();
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const AIAddonPurchaseScreen(),
+                    builder: (context) => AIAddonPurchaseScreen(),
                   ),
                 );
               },
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             
             // オプション2: Premium Plan
             _buildOptionCard(
@@ -128,12 +129,12 @@ class PaywallDialog extends StatelessWidget {
                 Navigator.of(context).pop();
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const SubscriptionScreen(),
+                    builder: (context) => SubscriptionScreen(),
                   ),
                 );
               },
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             
             // オプション3: Pro Plan
             _buildOptionCard(
@@ -147,12 +148,12 @@ class PaywallDialog extends StatelessWidget {
                 Navigator.of(context).pop();
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const SubscriptionScreen(),
+                    builder: (context) => SubscriptionScreen(),
                   ),
                 );
               },
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             
             // 閉じるボタン
             TextButton(
@@ -199,16 +200,16 @@ class PaywallDialog extends StatelessWidget {
                 color: Colors.white.withOpacity(0.2),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.celebration,
                 size: 48,
                 color: Colors.amber,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             
             // タイトル
-            const Text(
+            Text(
               AppLocalizations.of(context)!.general_0b2c2440,
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -217,18 +218,18 @@ class PaywallDialog extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             
             // 説明
-            const Text(
-              '素晴らしい継続力です！\nさらに快適なトレーニング体験をお楽しみください',
+            Text(
+              AppLocalizations.of(context)!.generatedKey_124470ff,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 14,
               ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             
             // Premium Plan訴求
             Container(
@@ -243,7 +244,7 @@ class PaywallDialog extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  const Text(
+                  Text(
                     'Premium Plan',
                     style: TextStyle(
                       color: Colors.white,
@@ -251,8 +252,8 @@ class PaywallDialog extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
+                  SizedBox(height: 8),
+                  Text(
                     AppLocalizations.of(context)!.subscription_c71bb2e2,
                     style: TextStyle(
                       color: Colors.white,
@@ -260,11 +261,11 @@ class PaywallDialog extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  _buildFeatureRow(Icons.psychology, 'AI分析 10回/月'),
+                  SizedBox(height: 16),
+                  _buildFeatureRow(Icons.psychology, AppLocalizations.of(context)!.general_6fe5838b),
                   _buildFeatureRow(Icons.block, AppLocalizations.of(context)!.noAds),
                   _buildFeatureRow(Icons.show_chart, AppLocalizations.of(context)!.general_c75214b2),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
@@ -274,7 +275,7 @@ class PaywallDialog extends StatelessWidget {
                       color: Colors.amber,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Text(
+                    child: Text(
                       AppLocalizations.of(context)!.general_05848a73,
                       style: TextStyle(
                         color: Colors.black,
@@ -286,7 +287,7 @@ class PaywallDialog extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             
             // CTAボタン
             SizedBox(
@@ -296,7 +297,7 @@ class PaywallDialog extends StatelessWidget {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const SubscriptionScreen(),
+                      builder: (context) => SubscriptionScreen(),
                     ),
                   );
                 },
@@ -308,7 +309,7 @@ class PaywallDialog extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   AppLocalizations.of(context)!.general_9811cf34,
                   style: TextStyle(
                     fontSize: 18,
@@ -317,12 +318,12 @@ class PaywallDialog extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             
             // 閉じるボタン
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text(
+              child: Text(
                 AppLocalizations.of(context)!.later,
                 style: TextStyle(
                   color: Colors.white,
@@ -364,17 +365,17 @@ class PaywallDialog extends StatelessWidget {
                 color: Colors.white.withOpacity(0.2),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.people,
                 size: 48,
                 color: Colors.white,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             
             // タイトル
-            const Text(
-              'トレーニングパートナーを\n見つけよう',
+            Text(
+              AppLocalizations.of(context)!.generatedKey_7210fc11,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
@@ -382,18 +383,18 @@ class PaywallDialog extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             
             // 説明
-            const Text(
-              '孤独なトレーニングから卒業\n同じジム・同じ目標の仲間と一緒に成長',
+            Text(
+              AppLocalizations.of(context)!.generatedKey_067c77b6,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 14,
               ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             
             // Pro Plan訴求
             Container(
@@ -411,13 +412,13 @@ class PaywallDialog extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.emoji_events,
                         color: Colors.amber,
                         size: 28,
                       ),
-                      const SizedBox(width: 8),
-                      const Text(
+                      SizedBox(width: 8),
+                      Text(
                         'Pro Plan',
                         style: TextStyle(
                           color: Colors.white,
@@ -427,8 +428,8 @@ class PaywallDialog extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
+                  SizedBox(height: 8),
+                  Text(
                     AppLocalizations.of(context)!.subscription_275ce1f5,
                     style: TextStyle(
                       color: Colors.white,
@@ -436,12 +437,12 @@ class PaywallDialog extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  _buildFeatureRow(Icons.people, 'パートナー検索 🆕'),
-                  _buildFeatureRow(Icons.chat, 'メッセージング機能 🆕'),
-                  _buildFeatureRow(Icons.psychology, 'AI分析 30回/月'),
+                  SizedBox(height: 16),
+                  _buildFeatureRow(Icons.people, AppLocalizations.of(context)!.general_0f30314e),
+                  _buildFeatureRow(Icons.chat, AppLocalizations.of(context)!.general_61a9d8cc),
+                  _buildFeatureRow(Icons.psychology, AppLocalizations.of(context)!.general_ff8f35a7),
                   _buildFeatureRow(Icons.block, AppLocalizations.of(context)!.noAds),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
@@ -451,7 +452,7 @@ class PaywallDialog extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Text(
+                    child: Text(
                       AppLocalizations.of(context)!.general_d89e38c4,
                       style: TextStyle(
                         color: Colors.amber,
@@ -463,7 +464,7 @@ class PaywallDialog extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             
             // CTAボタン
             SizedBox(
@@ -473,7 +474,7 @@ class PaywallDialog extends StatelessWidget {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const SubscriptionScreen(),
+                      builder: (context) => SubscriptionScreen(),
                     ),
                   );
                 },
@@ -485,8 +486,8 @@ class PaywallDialog extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: const Text(
-                  'Pro Planを試す',
+                child: Text(
+                  AppLocalizations.of(context)!.general_c312150e,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -494,12 +495,12 @@ class PaywallDialog extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             
             // 閉じるボタン
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text(
+              child: Text(
                 AppLocalizations.of(context)!.later,
                 style: TextStyle(
                   color: Colors.white,
@@ -523,10 +524,10 @@ class PaywallDialog extends StatelessWidget {
             color: Colors.white,
             size: 20,
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12),
           Text(
             text,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
               fontSize: 14,
             ),
@@ -552,8 +553,8 @@ class PaywallDialog extends StatelessWidget {
         // 広告がまだ準備できていない場合はロード試行
         if (!rewardAdService.isAdReady()) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('広告を準備中です...しばらくお待ちください'),
+            SnackBar(
+              content: Text(AppLocalizations.of(context)!.general_540c1855),
               duration: Duration(seconds: 2),
             ),
           );
@@ -576,9 +577,9 @@ class PaywallDialog extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                '🎁 AI機能1回分を獲得しました！(残り${remaining}回)',
+                AppLocalizations.of(context)!.generatedKey_57df266a,
               ),
-              duration: const Duration(seconds: 3),
+              duration: Duration(seconds: 3),
               backgroundColor: Colors.green,
             ),
           );
@@ -586,7 +587,7 @@ class PaywallDialog extends StatelessWidget {
           // 失敗時の処理
           if (!context.mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text(AppLocalizations.of(context)!.error_97a53f5f),
               duration: Duration(seconds: 2),
             ),

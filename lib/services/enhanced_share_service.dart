@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class EnhancedShareService {
           mimeType: 'image/png',
           name: 'gym_match_story.png',
         )],
-        text: 'GYM MATCHでトレーニング記録をシェア！\n#GYMMATCH #筋トレ記録 #ジム\n\nhttps://gym-match-e560d.web.app',
+        text: AppLocalizations.of(context)!.generatedKey_99ca4bf5,
       );
     } catch (e) {
       if (kDebugMode) print('❌ Instagram Stories シェアエラー: $e');
@@ -81,14 +82,14 @@ class EnhancedShareService {
                 color: Colors.orange.shade100,
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.emoji_events,
                 color: Colors.orange,
                 size: 32,
               ),
             ),
-            const SizedBox(width: 12),
-            const Expanded(
+            SizedBox(width: 12),
+            Expanded(
               child: Text(
                 AppLocalizations.of(context)!.general_a32e6bd5,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -101,10 +102,10 @@ class EnhancedShareService {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '$exerciseName で新記録を達成しました！',
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              AppLocalizations.of(context)!.generatedKey_efdeb364,
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -115,22 +116,22 @@ class EnhancedShareService {
                 children: [
                   Text(
                     '${newWeight.toStringAsFixed(1)} kg × $reps reps',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Colors.orange,
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    '🎉 素晴らしい！',
+                  SizedBox(height: 8),
+                  Text(
+                    AppLocalizations.of(context)!.general_75d64c1f,
                     style: TextStyle(fontSize: 14),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 16),
-            const Text(
+            SizedBox(height: 16),
+            Text(
               AppLocalizations.of(context)!.general_6720b74a,
               style: TextStyle(fontSize: 14, color: Colors.grey),
             ),
@@ -143,7 +144,7 @@ class EnhancedShareService {
           ),
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
-            icon: const Icon(Icons.share),
+            icon: Icon(Icons.share),
             label: Text(AppLocalizations.of(context)!.general_c544a2d9),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.orange,
@@ -180,7 +181,7 @@ class EnhancedShareService {
 
       // ローディング表示
       if (context.mounted) {
-        _showLoadingDialog(context, '統計画像を生成中...');
+        _showLoadingDialog(context, AppLocalizations.of(context)!.general_8f6d635c);
       }
 
       // 週間統計を取得
@@ -236,7 +237,7 @@ class EnhancedShareService {
     required List<WorkoutExerciseGroup> exercises,
   }) async {
     try {
-      _showLoadingDialog(context, '画像を生成中...');
+      _showLoadingDialog(context, AppLocalizations.of(context)!.workout_56143742);
 
       final shareWidget = WorkoutShareImage(
         date: date,
@@ -324,13 +325,13 @@ class EnhancedShareService {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
+            Icon(
               Icons.emoji_events,
               color: Colors.white,
               size: 120,
             ),
-            const SizedBox(height: 32),
-            const Text(
+            SizedBox(height: 32),
+            Text(
               AppLocalizations.of(context)!.general_a32e6bd5,
               style: TextStyle(
                 fontSize: 48,

@@ -4,7 +4,7 @@ import '../../services/partner_service.dart';
 
 /// パートナープロフィール編集画面（簡易版）
 class PartnerProfileEditScreen extends StatefulWidget {
-  const PartnerProfileEditScreen({super.key});
+  PartnerProfileEditScreen({super.key});
 
   @override
   State<PartnerProfileEditScreen> createState() => _PartnerProfileEditScreenState();
@@ -83,7 +83,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: Form(
         key: _formKey,
@@ -106,7 +106,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
                 return null;
               },
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             // 経験レベル
             Text(AppLocalizations.of(context)!.experienceLevel, style: TextStyle(fontWeight: FontWeight.bold)),
@@ -123,11 +123,11 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
                 setState(() => _experienceLevel = value!);
               },
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             // 好きな種目
             Text(AppLocalizations.of(context)!.profile_539d673a, style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Wrap(
               spacing: 8,
               runSpacing: 8,
@@ -148,11 +148,11 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
                 );
               }).toList(),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
 
             // 目標
             Text(AppLocalizations.of(context)!.goal, style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Wrap(
               spacing: 8,
               runSpacing: 8,
@@ -173,7 +173,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
                 );
               }).toList(),
             ),
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
 
             ElevatedButton(
               onPressed: _isLoading ? null : _save,

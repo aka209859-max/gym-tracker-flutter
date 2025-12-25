@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'dart:math' show cos, sqrt, asin;
 import '../models/partner_profile.dart';
 import 'subscription_service.dart';
@@ -123,10 +124,10 @@ class PartnerSearchService {
         final spatioData = await _spatiotemporalService.getMostFrequentGymAndTime(userId);
         userGymId = spatioData['gymId'];
         userPreferredHours = spatioData['preferredHours'] ?? [];
-        print('🕐 時空間フィルター有効 - 検索者のジム: $userGymId, 時間: $userPreferredHours');
+        print(AppLocalizations.of(context)!.generatedKey_65c6cedc);
       }
       
-      print('🔍 パートナー検索: ${currentUserPlan.toString().split(".").last}ユーザー (Pro非対称: ${isProUser ? "全員検索可能" : "Pro限定"})');
+      print('🔍 パートナー検索: ${currentUserPlan.toString().split(".").last}ユーザー (Pro非対称: ${isProUser ? "全員検索可能" : AppLocalizations.of(context)!.profile_35399a27})');
       
       // 基本クエリ: 公開プロフィールのみ、自分以外
       Query query = _firestore.collection('partner_profiles')
@@ -149,7 +150,7 @@ class PartnerSearchService {
         if (!isProUser) {
           final targetUserPlan = await _getTargetUserPlan(doc.id);
           if (targetUserPlan != SubscriptionType.pro) {
-            print('⏭️ Skip: ${doc.id} (Free/Premium) - 検索者がNon-Pro');
+            print(AppLocalizations.of(context)!.generatedKey_7f8184e6);
             continue; // Free/Premiumユーザーを除外
           }
         }
@@ -157,7 +158,7 @@ class PartnerSearchService {
         // ✅ 実力ベースマッチングフィルター（±15% 1RM）
         if (enableStrengthFilter && userAverage1RM != null) {
           if (!_strengthService.isStrengthMatch(userAverage1RM, profile.average1RM)) {
-            print('⏭️ Skip: ${doc.id} - 実力差が大きい');
+            print(AppLocalizations.of(context)!.generatedKey_61b4bd56);
             continue; // ±15%範囲外を除外
           }
         }
@@ -324,7 +325,7 @@ class PartnerSearchService {
       final userDoc = await _firestore
           .collection('users')
           .doc(targetUserId)
-          .get(const GetOptions(source: Source.cache)); // キャッシュ優先で高速化
+          .get(GetOptions(source: Source.cache)); // キャッシュ優先で高速化
       
       if (!userDoc.exists) return SubscriptionType.free;
       
@@ -357,7 +358,7 @@ class PartnerSearchService {
     } else {
       return {
         'canSend': false, 
-        'reason': 'マッチングリクエスト送信はProプラン限定機能です。\nProプランにアップグレードしてパートナーとつながりましょう！',
+        'reason': AppLocalizations.of(context)!.generatedKey_f3cdae64,
         'currentPlan': currentUserPlan.toString().split('.').last,
       };
     }

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user_profile.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// Phase 2b + 2c: 高度な疲労管理システム
 /// 
 /// Phase 2b: Personal Factor Multipliers (PFM)
@@ -246,19 +247,19 @@ class AdvancedFatigueService {
     if (acwr < 0.8) {
       riskLevel = 'undertraining';
       riskColor = 'blue';
-      advice = 'トレーニング負荷が低すぎます。\n徐々に負荷を上げることでパフォーマンス向上が期待できます。';
+      advice = AppLocalizations.of(context)!.generatedKey_dfb8009a;
     } else if (acwr >= 0.8 && acwr <= 1.3) {
       riskLevel = 'optimal';
       riskColor = 'green';
-      advice = '理想的なトレーニング負荷です！\n現在のペースを維持しましょう。怪我リスクは最小です。';
+      advice = AppLocalizations.of(context)!.generatedKey_b49536ed;
     } else if (acwr > 1.3 && acwr <= 1.5) {
       riskLevel = 'caution';
       riskColor = 'yellow';
-      advice = '警戒ゾーンです。\n怪我のリスクがやや高まっています。回復を優先し、次回は負荷を少し下げましょう。';
+      advice = AppLocalizations.of(context)!.generatedKey_8bcd57bf;
     } else {
       riskLevel = 'danger';
       riskColor = 'red';
-      advice = '危険ゾーンです！\n怪我のリスクが高い状態です。今日は完全休養を推奨します。';
+      advice = AppLocalizations.of(context)!.generatedKey_7a24bc71;
     }
     
     return {

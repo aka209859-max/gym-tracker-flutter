@@ -2,6 +2,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 
@@ -73,7 +74,7 @@ class NotificationService {
       '${muscleGroup}の回復完了！💪',
       AppLocalizations.of(context)!.general_39e26ea4,
       tz.TZDateTime.now(tz.local).add(delay),
-      const NotificationDetails(
+      NotificationDetails(
         iOS: DarwinNotificationDetails(),
       ),
       uiLocalNotificationDateInterpretation:
@@ -91,7 +92,7 @@ class NotificationService {
       2, // notification ID
       title,
       message,
-      const NotificationDetails(
+      NotificationDetails(
         iOS: DarwinNotificationDetails(),
       ),
     );
@@ -104,8 +105,8 @@ class NotificationService {
     await _notifications.show(
       3, // notification ID
       '${streakDays}日間連続達成！🔥',
-      '次は${streakDays + 7}日間連続を目指そう',
-      const NotificationDetails(
+      AppLocalizations.of(context)!.generatedKey_ec0ce4f0,
+      NotificationDetails(
         iOS: DarwinNotificationDetails(),
       ),
     );
@@ -199,8 +200,8 @@ class NotificationService {
     
     await _notifications.show(
       DateTime.now().millisecondsSinceEpoch % 100000, // 一意のID
-      '🟢 $gymName が空いています！',
-      '$levelText - 今がチャンス！',
+      AppLocalizations.of(context)!.generatedKey_6f3ae622,
+      AppLocalizations.of(context)!.generatedKey_b9e68d6a,
       details,
     );
   }

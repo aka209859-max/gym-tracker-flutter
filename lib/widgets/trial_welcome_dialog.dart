@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../screens/settings/trial_progress_screen.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// 無料トライアル案内ダイアログ
 /// 
 /// アプリ初回起動時に表示
@@ -28,7 +29,7 @@ class TrialWelcomeDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       child: Container(
-        constraints: const BoxConstraints(maxWidth: 400),
+        constraints: BoxConstraints(maxWidth: 400),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -50,13 +51,13 @@ class TrialWelcomeDialog extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.celebration,
                       size: 64,
                       color: Colors.white,
                     ),
-                    const SizedBox(height: 12),
-                    const Text(
+                    SizedBox(height: 12),
+                    Text(
                       AppLocalizations.of(context)!.subscription_e1e85327,
                       style: TextStyle(
                         fontSize: 28,
@@ -64,9 +65,9 @@ class TrialWelcomeDialog extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Text(
-                      'GYM MATCHへ',
+                      AppLocalizations.of(context)!.subscription_55b8a61a,
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.white.withValues(alpha: 0.9),
@@ -86,8 +87,8 @@ class TrialWelcomeDialog extends StatelessWidget {
                     Row(
                       children: [
                         Icon(Icons.card_giftcard, color: Colors.amber.shade700),
-                        const SizedBox(width: 8),
-                        const Text(
+                        SizedBox(width: 8),
+                        Text(
                           AppLocalizations.of(context)!.subscription_2c0c51fb,
                           style: TextStyle(
                             fontSize: 20,
@@ -96,7 +97,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     
                     // トライアル条件カード
                     Container(
@@ -112,8 +113,8 @@ class TrialWelcomeDialog extends StatelessWidget {
                           Row(
                             children: [
                               Icon(Icons.star, color: Colors.amber.shade600, size: 20),
-                              const SizedBox(width: 8),
-                              const Text(
+                              SizedBox(width: 8),
+                              Text(
                                 AppLocalizations.of(context)!.subscription_1d16adbb,
                                 style: TextStyle(
                                   fontSize: 18,
@@ -123,35 +124,35 @@ class TrialWelcomeDialog extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 12),
-                          const Text(
+                          SizedBox(height: 12),
+                          Text(
                             AppLocalizations.of(context)!.subscription_3dd87f02,
                             style: TextStyle(fontSize: 14),
                           ),
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12),
                           _buildConditionItem('1. プロフィール設定を完了'),
-                          _buildConditionItem('2. トレーニング記録を1回入力'),
-                          _buildConditionItem('3. ジム検索を1回実行'),
+                          _buildConditionItem(AppLocalizations.of(context)!.subscription_f50d3215),
+                          _buildConditionItem(AppLocalizations.of(context)!.subscription_2ae35955),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     
                     // プレミアム特典リスト
-                    const Text(
-                      '✨ プレミアム特典',
+                    Text(
+                      AppLocalizations.of(context)!.subscription_a2e75082,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    _buildBenefitItem('🤖 AI機能 月10回'),
-                    _buildBenefitItem('❤️ お気に入り無制限'),
-                    _buildBenefitItem('📝 ジムレビュー投稿'),
-                    _buildBenefitItem('🔔 混雑度アラート通知'),
-                    _buildBenefitItem('🎯 高度なフィルター検索'),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 8),
+                    _buildBenefitItem(AppLocalizations.of(context)!.subscription_a1d7b68f),
+                    _buildBenefitItem(AppLocalizations.of(context)!.subscription_87af865e),
+                    _buildBenefitItem(AppLocalizations.of(context)!.subscription_3a23222d),
+                    _buildBenefitItem(AppLocalizations.of(context)!.subscription_823a5d48),
+                    _buildBenefitItem(AppLocalizations.of(context)!.subscription_715332a5),
+                    SizedBox(height: 16),
                     
                     // 注意事項
                     Container(
@@ -164,7 +165,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                       child: Row(
                         children: [
                           Icon(Icons.info_outline, color: Colors.amber.shade800, size: 20),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8),
                           Expanded(
                             child: Text(
                               AppLocalizations.of(context)!.subscription_b2159b40,
@@ -194,7 +195,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const TrialProgressScreen(),
+                              builder: (context) => TrialProgressScreen(),
                             ),
                           );
                         },
@@ -206,7 +207,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
-                        child: const Text(
+                        child: Text(
                           AppLocalizations.of(context)!.subscription_f9d161bd,
                           style: TextStyle(
                             fontSize: 16,
@@ -215,7 +216,7 @@ class TrialWelcomeDialog extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     TextButton(
                       onPressed: () => Navigator.pop(context),
                       child: Text(AppLocalizations.of(context)!.subscription_441ff03f),

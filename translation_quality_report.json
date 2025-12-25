@@ -1,0 +1,44 @@
+{
+  "total_keys": 3335,
+  "total_validations": 20010,
+  "by_language": {
+    "de": {
+      "total": 3335,
+      "icu_errors": 0,
+      "quality_ok": 3335,
+      "error_examples": []
+    },
+    "en": {
+      "total": 3335,
+      "icu_errors": 0,
+      "quality_ok": 3335,
+      "error_examples": []
+    },
+    "es": {
+      "total": 3335,
+      "icu_errors": 0,
+      "quality_ok": 3335,
+      "error_examples": []
+    },
+    "ko": {
+      "total": 3335,
+      "icu_errors": 0,
+      "quality_ok": 3335,
+      "error_examples": []
+    },
+    "zh": {
+      "total": 3335,
+      "icu_errors": 0,
+      "quality_ok": 3335,
+      "error_examples": []
+    },
+    "zh_TW": {
+      "total": 3335,
+      "icu_errors": 0,
+      "quality_ok": 3335,
+      "error_examples": []
+    }
+  },
+  "total_icu_errors": 0,
+  "total_quality_ok": 20010
+}

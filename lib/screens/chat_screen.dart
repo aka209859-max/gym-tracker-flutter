@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../services/messaging_service.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// チャット画面
 class ChatScreen extends StatefulWidget {
   final String conversationId;
@@ -54,7 +55,7 @@ class _ChatScreenState extends State<ChatScreen> {
       if (_scrollController.hasClients) {
         _scrollController.animateTo(
           0,
-          duration: const Duration(milliseconds: 300),
+          duration: Duration(milliseconds: 300),
           curve: Curves.easeOut,
         );
       }
@@ -79,10 +80,10 @@ class _ChatScreenState extends State<ChatScreen> {
                   ? NetworkImage(widget.otherUserPhotoUrl!)
                   : null,
               child: widget.otherUserPhotoUrl == null
-                  ? const Icon(Icons.person, size: 18)
+                  ? Icon(Icons.person, size: 18)
                   : null,
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             Expanded(
               child: Text(
                 widget.otherUserName,
@@ -102,7 +103,7 @@ class _ChatScreenState extends State<ChatScreen> {
               stream: _messagingService.getMessagesStream(widget.conversationId),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
+                  return Center(child: CircularProgressIndicator());
                 }
 
                 if (snapshot.hasError) {
@@ -111,7 +112,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.error_outline, size: 48, color: Colors.red[300]),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16),
                         Text(AppLocalizations.of(context)!.error_4c43efe6),
                       ],
                     ),
@@ -126,7 +127,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.chat_bubble_outline, size: 64, color: Colors.grey[300]),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16),
                         Text(
                           AppLocalizations.of(context)!.general_af9ce1e7,
                           style: TextStyle(fontSize: 14, color: Colors.grey[600]),
@@ -200,7 +201,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       color: isMyMessage ? Colors.white : Colors.black87,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
                     DateFormat('HH:mm').format(message.createdAt),
                     style: TextStyle(
@@ -228,7 +229,7 @@ class _ChatScreenState extends State<ChatScreen> {
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 4,
-            offset: const Offset(0, -2),
+            offset: Offset(0, -2),
           ),
         ],
       ),
@@ -239,7 +240,7 @@ class _ChatScreenState extends State<ChatScreen> {
               child: TextField(
                 controller: _messageController,
                 decoration: InputDecoration(
-                  hintText: 'メッセージを入力...',
+                  hintText: AppLocalizations.of(context)!.general_94ebce72,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24),
                     borderSide: BorderSide.none,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// Task 27: トレーニング記録シェア用カード
 class WorkoutShareCard extends StatelessWidget {
   final DateTime date;
@@ -53,8 +54,8 @@ class WorkoutShareCard extends StatelessWidget {
                   size: 36,
                 ),
               ),
-              const SizedBox(width: 16),
-              const Column(
+              SizedBox(width: 16),
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -107,7 +108,7 @@ class WorkoutShareCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Row(
                   children: [
                     Container(
@@ -121,7 +122,7 @@ class WorkoutShareCard extends StatelessWidget {
                       ),
                       child: Text(
                         muscleGroup,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -133,7 +134,7 @@ class WorkoutShareCard extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // セット詳細
           Container(
@@ -183,7 +184,7 @@ class WorkoutShareCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        SizedBox(width: 16),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -196,7 +197,7 @@ class WorkoutShareCard extends StatelessWidget {
                                   color: Colors.grey.shade800,
                                 ),
                               ),
-                              const SizedBox(height: 4),
+                              SizedBox(height: 4),
                               Text(
                                 '${weight}kg × ${reps}回',
                                 style: TextStyle(
@@ -214,7 +215,7 @@ class WorkoutShareCard extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // サマリー統計
           Container(
@@ -246,12 +247,12 @@ class WorkoutShareCard extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 30),
+          SizedBox(height: 30),
 
           // フッター
           Center(
             child: Text(
-              '#GYMMATCH #筋トレ記録',
+              AppLocalizations.of(context)!.workout_b3b53405,
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.white.withValues(alpha: 0.8),

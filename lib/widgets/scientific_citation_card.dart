@@ -5,6 +5,7 @@ library;
 
 import 'package:flutter/material.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// 科学的引用カード
 class ScientificCitationCard extends StatelessWidget {
   final String citation;
@@ -108,7 +109,7 @@ class ScientificCitationCard extends StatelessWidget {
 class ScientificBasisSection extends StatefulWidget {
   final List<Map<String, String>> basis;
 
-  const ScientificBasisSection({
+  ScientificBasisSection({
     super.key,
     required this.basis,
   });
@@ -132,7 +133,7 @@ class _ScientificBasisSectionState extends State<ScientificBasisSection> {
               Icons.school,
               color: Colors.blue.shade700,
             ),
-            title: const Text(
+            title: Text(
               AppLocalizations.of(context)!.scientificBasis,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -140,7 +141,7 @@ class _ScientificBasisSectionState extends State<ScientificBasisSection> {
               ),
             ),
             subtitle: Text(
-              '${widget.basis.length}本の査読付き論文',
+              AppLocalizations.of(context)!.generatedKey_d6ef4230,
               style: TextStyle(
                 fontSize: 12,
                 color: Colors.grey.shade600,
@@ -158,7 +159,7 @@ class _ScientificBasisSectionState extends State<ScientificBasisSection> {
             ),
           ),
           if (_isExpanded) ...[
-            const Divider(height: 1),
+            Divider(height: 1),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -183,7 +184,7 @@ class _ScientificBasisSectionState extends State<ScientificBasisSection> {
 class ConfidenceIndicator extends StatelessWidget {
   final int paperCount;
 
-  const ConfidenceIndicator({
+  ConfidenceIndicator({
     super.key,
     required this.paperCount,
   });

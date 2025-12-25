@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// メッセージ一覧画面（マッチング相手のみ）
 class MessagesScreen extends StatefulWidget {
-  const MessagesScreen({super.key});
+  MessagesScreen({super.key});
 
   @override
   State<MessagesScreen> createState() => _MessagesScreenState();
@@ -40,7 +40,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
+                  return Center(child: CircularProgressIndicator());
                 }
 
                 if (snapshot.hasError) {
@@ -87,7 +87,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(Icons.chat_bubble_outline, size: 80, color: Colors.grey[400]),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             AppLocalizations.of(context)!.general_00af6a9c,
             style: TextStyle(fontSize: 18, color: Colors.grey[600]),
@@ -117,11 +117,11 @@ class _MessagesScreenState extends State<MessagesScreen> {
       child: ListTile(
         leading: CircleAvatar(
           backgroundColor: Theme.of(context).colorScheme.primary,
-          child: const Icon(Icons.person, color: Colors.white),
+          child: Icon(Icons.person, color: Colors.white),
         ),
         title: Text(
           AppLocalizations.of(context)!.findPartner,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
           lastMessage.isEmpty ? AppLocalizations.of(context)!.general_c69c0c2d : lastMessage,

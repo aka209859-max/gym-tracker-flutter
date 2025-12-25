@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// AI分析結果をSNSシェア用に美しく表示するカード
 class AIShareCard extends StatelessWidget {
   final String title;
@@ -48,14 +49,14 @@ class AIShareCard extends StatelessWidget {
                   color: Colors.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.fitness_center,
                   color: Colors.white,
                   size: 24,
                 ),
               ),
-              const SizedBox(width: 12),
-              const Expanded(
+              SizedBox(width: 12),
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -80,18 +81,18 @@ class AIShareCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           
           // タイトル
           Text(
             title,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4),
           Text(
             analysisType,
             style: TextStyle(
@@ -99,12 +100,12 @@ class AIShareCard extends StatelessWidget {
               fontSize: 12,
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
           
           // データ表示
           ..._buildDataWidgets(),
           
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
           
           // フッター: 日付とブランディング
           Container(
@@ -118,13 +119,13 @@ class AIShareCard extends StatelessWidget {
               children: [
                 Text(
                   '${timestamp.year}/${timestamp.month}/${timestamp.day}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white70,
                     fontSize: 11,
                   ),
                 ),
-                const Text(
-                  '📱 App Store で入手',
+                Text(
+                  AppLocalizations.of(context)!.general_1297387e,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 11,
@@ -162,7 +163,7 @@ class AIShareCard extends StatelessWidget {
         label: AppLocalizations.of(context)!.general_6e52e168,
         value: '${currentWeight.round()}kg',
       ),
-      const SizedBox(height: 12),
+      SizedBox(height: 12),
       
       // 予測RM
       _buildStatRow(
@@ -171,7 +172,7 @@ class AIShareCard extends StatelessWidget {
         value: '${predictedWeight.round()}kg',
         highlighted: true,
       ),
-      const SizedBox(height: 12),
+      SizedBox(height: 12),
       
       // 成長率
       _buildStatRow(
@@ -195,7 +196,7 @@ class AIShareCard extends StatelessWidget {
         label: AppLocalizations.of(context)!.general_14bc4f05,
         value: volumeStatus,
       ),
-      const SizedBox(height: 12),
+      SizedBox(height: 12),
       
       // 頻度評価
       _buildStatRow(

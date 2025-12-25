@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -23,7 +24,7 @@ class WorkoutShareService {
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => const Center(
+        builder: (context) => Center(
           child: Card(
             child: Padding(
               padding: EdgeInsets.all(24),
@@ -32,7 +33,7 @@ class WorkoutShareService {
                 children: [
                   CircularProgressIndicator(),
                   SizedBox(height: 16),
-                  Text('画像を生成中...'),
+                  Text(AppLocalizations.of(context)!.workout_56143742),
                 ],
               ),
             ),
@@ -57,7 +58,7 @@ class WorkoutShareService {
       // 画像をシェア
       await Share.shareXFiles(
         [XFile.fromData(imageBytes, mimeType: 'image/png', name: 'workout_${date.toIso8601String()}.png')],
-        text: 'GYM MATCHでトレーニング記録をシェア！ #GYMMATCH #筋トレ記録',
+        text: AppLocalizations.of(context)!.workout_f19bdb91,
       );
     } catch (e) {
       // エラー処理

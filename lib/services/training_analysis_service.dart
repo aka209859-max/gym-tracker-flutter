@@ -378,7 +378,7 @@ ${ScientificDatabase.getSystemPrompt()}
             'topK': 40,
           },
         }),
-      ).timeout(const Duration(seconds: 5)); // 5秒タイムアウト（高速フォールバック）
+      ).timeout(Duration(seconds: 5)); // 5秒タイムアウト（高速フォールバック）
 
       if (response.statusCode == 200) {
         final data = jsonDecode(utf8.decode(response.bodyBytes));

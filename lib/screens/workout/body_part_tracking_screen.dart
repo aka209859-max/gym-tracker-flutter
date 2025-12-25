@@ -12,7 +12,7 @@ import '../../models/workout_log.dart';
 /// - 不足部位のアラート表示
 /// - 視覚的なプログレスバー
 class BodyPartTrackingScreen extends StatefulWidget {
-  const BodyPartTrackingScreen({super.key});
+  BodyPartTrackingScreen({super.key});
 
   @override
   State<BodyPartTrackingScreen> createState() => _BodyPartTrackingScreenState();
@@ -57,7 +57,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
         if (authSnapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
             appBar: AppBar(title: Text(AppLocalizations.of(context)!.bodyPartTracking)),
-            body: const Center(
+            body: Center(
               child: CircularProgressIndicator(),
             ),
           );
@@ -97,7 +97,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
         stream: _getWorkoutsStream(user.uid),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator());
           }
 
           if (snapshot.hasError) {
@@ -133,7 +133,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
-            offset: const Offset(0, -2),
+            offset: Offset(0, -2),
           ),
         ],
       ),
@@ -144,15 +144,15 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 AppLocalizations.of(context)!.workout_36413c90,
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               SizedBox(
                 width: double.infinity,
                 child: SegmentedButton<int>(
-                  segments: const [
+                  segments: [
                     ButtonSegment(value: 7, label: Text(AppLocalizations.of(context)!.workout_7097f864)),
                     ButtonSegment(value: 30, label: Text(AppLocalizations.of(context)!.workout_593f53b5)),
                     ButtonSegment(value: 90, label: Text(AppLocalizations.of(context)!.workout_e80812be)),
@@ -163,7 +163,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
                   },
                   style: ButtonStyle(
                     textStyle: WidgetStateProperty.all(
-                      const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                     padding: WidgetStateProperty.all(
                       const EdgeInsets.symmetric(vertical: 12),
@@ -201,8 +201,8 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
           // ヘッダー（期間表示）
           Row(
             children: [
-              const Icon(Icons.analytics_outlined, size: 20, color: Colors.blue),
-              const SizedBox(width: 8),
+              Icon(Icons.analytics_outlined, size: 20, color: Colors.blue),
+              SizedBox(width: 8),
               Text(
                 AppLocalizations.of(context)!.bodyPartBalanceDays(_periodDays),
                 style: const TextStyle(
@@ -222,7 +222,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
                 maxCount,
               )),
 
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
 
           // 不足部位アラート（目立つ配置）
           if (insufficientParts.isNotEmpty) _buildInsufficientAlert(insufficientParts),
@@ -253,13 +253,13 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
                 children: [
                   Text(
                     displayName,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   if (isInsufficient) ...[
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Icon(Icons.warning_amber_rounded, 
                          size: 18, 
                          color: Colors.orange.shade700),
@@ -269,14 +269,14 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
               Row(
                 children: [
                   Text(
-                    '$count回',
+                    AppLocalizations.of(context)!.reps,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: color,
                     ),
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Text(
                     '${(percentage * 100).toStringAsFixed(0)}%',
                     style: TextStyle(
@@ -288,7 +288,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
               ),
             ],
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 10),
           // 大きなプログレスバー
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
@@ -321,7 +321,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
               Icon(Icons.warning_amber_rounded, 
                    color: Colors.orange.shade700, 
                    size: 24),
-              const SizedBox(width: 12),
+              SizedBox(width: 12),
               Text(
                 AppLocalizations.of(context)!.workout_e03f69fa,
                 style: TextStyle(
@@ -332,7 +332,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Wrap(
             spacing: 8,
             runSpacing: 8,
@@ -355,7 +355,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
               );
             }).toList(),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Text(
             AppLocalizations.of(context)!.workout_2f9761ff,
             style: TextStyle(
@@ -401,7 +401,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
                 color: Colors.grey.shade600,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               AppLocalizations.of(context)!.workout_b3e9f505,
               textAlign: TextAlign.center,

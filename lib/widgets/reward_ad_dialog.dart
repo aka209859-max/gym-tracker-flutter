@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/reward_ad_service.dart';
@@ -63,8 +64,8 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
 
     // Web環境の場合はモック広告（テスト用）
     if (kIsWeb) {
-      debugPrint('🌐 Web環境: モック広告を表示');
-      await Future.delayed(const Duration(seconds: 2)); // 広告視聴をシミュレート
+      debugPrint(AppLocalizations.of(context)!.general_80e87040);
+      await Future.delayed(Duration(seconds: 2)); // 広告視聴をシミュレート
       
       // クレジット付与
       await _creditService.addAICredit(1);
@@ -77,7 +78,7 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
       if (mounted) {
         Navigator.of(context).pop(true); // trueを返して成功を通知
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Row(
               children: [
                 Icon(Icons.check_circle, color: Colors.white),
@@ -106,7 +107,7 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
         
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text(AppLocalizations.of(context)!.error_6a111b24),
               backgroundColor: Colors.red,
             ),
@@ -128,7 +129,7 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
       if (mounted) {
         Navigator.of(context).pop(true); // trueを返して成功を通知
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Row(
               children: [
                 Icon(Icons.check_circle, color: Colors.white),
@@ -145,7 +146,7 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
       // 広告表示失敗
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(AppLocalizations.of(context)!.error_31ac752d),
             backgroundColor: Colors.red,
           ),
@@ -160,8 +161,8 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
       title: Row(
         children: [
           Icon(Icons.play_circle, color: Colors.red[600], size: 32),
-          const SizedBox(width: 12),
-          const Expanded(
+          SizedBox(width: 12),
+          Expanded(
             child: Text(
               AppLocalizations.of(context)!.general_bc95e298,
               style: TextStyle(fontSize: 18),
@@ -175,11 +176,11 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
         children: [
           Text(
             kIsWeb
-                ? '【Web版テストモード】\nボタンを押すと2秒後にAIクレジットを獲得できます'
+                ? AppLocalizations.of(context)!.generatedKey_5db1bca7
                 : AppLocalizations.of(context)!.general_a6551e30,
-            style: const TextStyle(fontSize: 14),
+            style: TextStyle(fontSize: 14),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(12),
@@ -193,11 +194,11 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.info_outline, color: Colors.blue, size: 20),
-                    const SizedBox(width: 8),
+                    Icon(Icons.info_outline, color: Colors.blue, size: 20),
+                    SizedBox(width: 8),
                     Text(
-                      '今月あと$_remainingAds回視聴できます',
-                      style: const TextStyle(
+                      AppLocalizations.of(context)!.generatedKey_54f0f5d8,
+                      style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
@@ -206,8 +207,8 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
                   ],
                 ),
                 if (_remainingAds == 0) ...[
-                  const SizedBox(height: 8),
-                  const Text(
+                  SizedBox(height: 8),
+                  Text(
                     AppLocalizations.of(context)!.general_d3b805fc,
                     style: TextStyle(fontSize: 12, color: Colors.grey),
                   ),
@@ -215,9 +216,9 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
               ],
             ),
           ),
-          const SizedBox(height: 16),
-          const Text(
-            '💡 無制限にAI機能を使いたい方は、Premiumプラン（月10回）またはProプラン（月30回）へのアップグレードをご検討ください',
+          SizedBox(height: 16),
+          Text(
+            AppLocalizations.of(context)!.generatedKey_ee3d2398,
             style: TextStyle(fontSize: 12, color: Colors.grey),
           ),
         ],
@@ -234,7 +235,7 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
             foregroundColor: Colors.white,
           ),
           child: _isLoading
-              ? const SizedBox(
+              ? SizedBox(
                   width: 20,
                   height: 20,
                   child: CircularProgressIndicator(

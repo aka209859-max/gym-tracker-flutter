@@ -7,7 +7,7 @@ import '../models/gym.dart';
 class PartnerEquipmentEditorScreen extends StatefulWidget {
   final String gymId;
 
-  const PartnerEquipmentEditorScreen({super.key, required this.gymId});
+  PartnerEquipmentEditorScreen({super.key, required this.gymId});
 
   @override
   State<PartnerEquipmentEditorScreen> createState() =>
@@ -143,7 +143,7 @@ class _PartnerEquipmentEditorScreenState
           if (!_isLoading)
             IconButton(
               icon: _isSaving
-                  ? const SizedBox(
+                  ? SizedBox(
                       width: 24,
                       height: 24,
                       child: CircularProgressIndicator(
@@ -151,7 +151,7 @@ class _PartnerEquipmentEditorScreenState
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                       ),
                     )
-                  : const Icon(Icons.save),
+                  : Icon(Icons.save),
               onPressed: _isSaving ? null : _saveEquipmentData,
               tooltip: AppLocalizations.of(context)!.saveWorkout,
             ),
@@ -172,21 +172,21 @@ class _PartnerEquipmentEditorScreenState
                         padding: const EdgeInsets.all(12),
                         child: Row(
                           children: [
-                            const Icon(Icons.fitness_center,
+                            Icon(Icons.fitness_center,
                                 color: Colors.amber, size: 32),
-                            const SizedBox(width: 12),
+                            SizedBox(width: 12),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     _gym!.name,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  const SizedBox(height: 4),
+                                  SizedBox(height: 4),
                                   Text(
                                     _gym!.address,
                                     style: TextStyle(
@@ -201,7 +201,7 @@ class _PartnerEquipmentEditorScreenState
                         ),
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
                   ],
 
                   // 説明
@@ -228,10 +228,10 @@ class _PartnerEquipmentEditorScreenState
                     ),
                   ),
 
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // マシンリスト
-                  const Text(
+                  Text(
                     AppLocalizations.of(context)!.gym_2689426f,
                     style: TextStyle(
                       fontSize: 18,
@@ -268,7 +268,7 @@ class _PartnerEquipmentEditorScreenState
                                       ? () => _updateEquipmentCount(
                                           equipment, currentCount - 1)
                                       : null,
-                                  icon: const Icon(Icons.remove_circle_outline),
+                                  icon: Icon(Icons.remove_circle_outline),
                                   color: Colors.red[700],
                                 ),
                                 SizedBox(
@@ -276,7 +276,7 @@ class _PartnerEquipmentEditorScreenState
                                   child: Text(
                                     '$currentCount',
                                     textAlign: TextAlign.center,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -287,7 +287,7 @@ class _PartnerEquipmentEditorScreenState
                                       ? () => _updateEquipmentCount(
                                           equipment, currentCount + 1)
                                       : null,
-                                  icon: const Icon(Icons.add_circle_outline),
+                                  icon: Icon(Icons.add_circle_outline),
                                   color: Colors.blue[700],
                                 ),
                               ],
@@ -298,7 +298,7 @@ class _PartnerEquipmentEditorScreenState
                     );
                   }),
 
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
 
                   // 保存ボタン
                   SizedBox(
@@ -307,7 +307,7 @@ class _PartnerEquipmentEditorScreenState
                     child: ElevatedButton.icon(
                       onPressed: _isSaving ? null : _saveEquipmentData,
                       icon: _isSaving
-                          ? const SizedBox(
+                          ? SizedBox(
                               width: 20,
                               height: 20,
                               child: CircularProgressIndicator(

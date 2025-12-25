@@ -122,7 +122,7 @@ class _PartnerReservationSettingsScreenState
           if (!_isLoading)
             IconButton(
               icon: _isSaving
-                  ? const SizedBox(
+                  ? SizedBox(
                       width: 24,
                       height: 24,
                       child: CircularProgressIndicator(
@@ -130,7 +130,7 @@ class _PartnerReservationSettingsScreenState
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                       ),
                     )
-                  : const Icon(Icons.save),
+                  : Icon(Icons.save),
               onPressed: _isSaving ? null : _saveSettings,
               tooltip: AppLocalizations.of(context)!.save,
             ),
@@ -153,21 +153,21 @@ class _PartnerReservationSettingsScreenState
                           padding: const EdgeInsets.all(12),
                           child: Row(
                             children: [
-                              const Icon(Icons.fitness_center,
+                              Icon(Icons.fitness_center,
                                   color: Colors.orange, size: 32),
-                              const SizedBox(width: 12),
+                              SizedBox(width: 12),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       _gym!.name,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    const SizedBox(height: 4),
+                                    SizedBox(height: 4),
                                     Text(
                                       _gym!.address,
                                       style: TextStyle(
@@ -182,7 +182,7 @@ class _PartnerReservationSettingsScreenState
                           ),
                         ),
                       ),
-                      const SizedBox(height: 24),
+                      SizedBox(height: 24),
                     ],
 
                     // 説明
@@ -209,7 +209,7 @@ class _PartnerReservationSettingsScreenState
                       ),
                     ),
 
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
 
                     // ビジター受付ON/OFF
                     Card(
@@ -220,7 +220,7 @@ class _PartnerReservationSettingsScreenState
                             _acceptsVisitors = value;
                           });
                         },
-                        title: const Text(
+                        title: Text(
                           AppLocalizations.of(context)!.profile_285758a8,
                           style: TextStyle(
                             fontSize: 16,
@@ -231,7 +231,7 @@ class _PartnerReservationSettingsScreenState
                           _acceptsVisitors
                               ? AppLocalizations.of(context)!.profile_a54b51da
                               : AppLocalizations.of(context)!.profile_b3857acd,
-                          style: const TextStyle(fontSize: 13),
+                          style: TextStyle(fontSize: 13),
                         ),
                         secondary: Icon(
                           _acceptsVisitors ? Icons.check_circle : Icons.cancel,
@@ -242,7 +242,7 @@ class _PartnerReservationSettingsScreenState
                       ),
                     ),
 
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
 
                     // メールアドレス設定
                     Text(AppLocalizations.of(context)!.email,
@@ -276,7 +276,7 @@ class _PartnerReservationSettingsScreenState
                       },
                     ),
 
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
 
                     // 注意事項
                     Container(
@@ -291,10 +291,10 @@ class _PartnerReservationSettingsScreenState
                         children: [
                           Icon(Icons.warning_amber,
                               color: Colors.orange[700], size: 20),
-                          const SizedBox(width: 8),
-                          const Expanded(
+                          SizedBox(width: 8),
+                          Expanded(
                             child: Text(
-                              '※ 複数店舗を運営されている場合は、各店舗ごとに異なるメールアドレスを設定してください。\n※ 予約通知は現在Firebase Functions経由で送信されます（別途設定が必要です）。',
+                              AppLocalizations.of(context)!.generatedKey_78d3c5fd,
                               style: TextStyle(fontSize: 12),
                             ),
                           ),
@@ -302,11 +302,11 @@ class _PartnerReservationSettingsScreenState
                       ),
                     ),
 
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
 
                     // プレビュー
                     if (_acceptsVisitors) ...[
-                      const Text(
+                      Text(
                         AppLocalizations.of(context)!.profile_599b1faa,
                         style: TextStyle(
                           fontSize: 16,
@@ -381,7 +381,7 @@ class _PartnerReservationSettingsScreenState
                           ),
                         ),
                       ),
-                      const SizedBox(height: 24),
+                      SizedBox(height: 24),
                     ],
 
                     // 保存ボタン
@@ -391,7 +391,7 @@ class _PartnerReservationSettingsScreenState
                       child: ElevatedButton.icon(
                         onPressed: _isSaving ? null : _saveSettings,
                         icon: _isSaving
-                            ? const SizedBox(
+                            ? SizedBox(
                                 width: 20,
                                 height: 20,
                                 child: CircularProgressIndicator(

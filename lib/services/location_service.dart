@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:geolocator/geolocator.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import 'package:flutter/foundation.dart' show kIsWeb, debugPrint;
 
 /// 位置情報検索サービス
@@ -12,19 +13,19 @@ class LocationService {
       
       // Web環境の特別処理
       if (kIsWeb) {
-        debugPrint('🌐 Web環境: ブラウザ位置情報APIを使用');
+        debugPrint(AppLocalizations.of(context)!.general_2bd94c9d);
         
         // Webの場合、権限チェックをスキップして直接取得を試みる
         try {
           debugPrint('🔄 Geolocator.getCurrentPosition() 呼び出し中...');
           final position = await Geolocator.getCurrentPosition(
-            locationSettings: const LocationSettings(
+            locationSettings: LocationSettings(
               accuracy: LocationAccuracy.high,
             ),
           ).timeout(
-            const Duration(seconds: 10),
+            Duration(seconds: 10),
             onTimeout: () {
-              debugPrint('⏱️ Web位置情報取得タイムアウト（10秒）');
+              debugPrint(AppLocalizations.of(context)!.generatedKey_090cb8e9);
               throw TimeoutException('Location timeout');
             },
           );
@@ -32,55 +33,55 @@ class LocationService {
           return position;
         } catch (webError) {
           debugPrint('❌ Web位置情報エラー: $webError');
-          debugPrint('💡 ヒント: ブラウザで位置情報権限を許可してください');
+          debugPrint(AppLocalizations.of(context)!.general_37acecab);
           return null;
         }
       }
       
       // モバイル環境の処理
-      debugPrint('📱 モバイル環境: ネイティブGPS使用');
+      debugPrint(AppLocalizations.of(context)!.general_d77b5b43);
       
       // 位置情報サービスが有効かチェック
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
         debugPrint('❌ 位置情報サービスが無効です');
-        debugPrint('💡 ヒント: 端末の設定で位置情報サービスを有効にしてください');
+        debugPrint(AppLocalizations.of(context)!.general_e07cfdcb);
         return null;
       }
       debugPrint('✅ 位置情報サービス: 有効');
 
       // 位置情報の権限をチェック
       LocationPermission permission = await Geolocator.checkPermission();
-      debugPrint('📋 現在の権限ステータス: $permission');
+      debugPrint(AppLocalizations.of(context)!.generatedKey_c715bd7b);
       
       if (permission == LocationPermission.denied) {
-        debugPrint('🔔 位置情報権限をリクエスト中...');
+        debugPrint(AppLocalizations.of(context)!.general_1797dd9a);
         permission = await Geolocator.requestPermission();
-        debugPrint('📋 権限リクエスト結果: $permission');
+        debugPrint(AppLocalizations.of(context)!.generatedKey_6fe636e4);
         
         if (permission == LocationPermission.denied) {
           debugPrint('❌ 位置情報権限が拒否されました');
-          debugPrint('💡 ヒント: アプリの権限設定で位置情報を許可してください');
+          debugPrint(AppLocalizations.of(context)!.general_5dbf576a);
           return null;
         }
       }
 
       if (permission == LocationPermission.deniedForever) {
         debugPrint('❌ 位置情報権限が永久に拒否されています');
-        debugPrint('💡 ヒント: 端末の設定 → アプリ → GYM MATCH → 位置情報を「常に許可」に変更してください');
+        debugPrint(AppLocalizations.of(context)!.general_35e3ba11);
         return null;
       }
 
       // 現在地を取得
       debugPrint('🔄 GPS位置情報取得中...');
       final position = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(
+        locationSettings: LocationSettings(
           accuracy: LocationAccuracy.high,
         ),
       ).timeout(
-        const Duration(seconds: 15),
+        Duration(seconds: 15),
         onTimeout: () {
-          debugPrint('⏱️ GPS位置情報取得タイムアウト（15秒）');
+          debugPrint(AppLocalizations.of(context)!.generatedKey_8679dd9c);
           throw TimeoutException('Location timeout');
         },
       );
@@ -90,7 +91,7 @@ class LocationService {
       return position;
     } catch (e, stackTrace) {
       debugPrint('❌ 位置情報取得エラー: $e');
-      debugPrint('📋 スタックトレース: $stackTrace');
+      debugPrint(AppLocalizations.of(context)!.generatedKey_c3070099);
       return null;
     }
   }

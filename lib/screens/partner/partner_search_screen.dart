@@ -16,7 +16,7 @@ import '../subscription_screen.dart';
 /// - プロフィール詳細表示
 /// - マッチングリクエスト送信
 class PartnerSearchScreen extends StatefulWidget {
-  const PartnerSearchScreen({super.key});
+  PartnerSearchScreen({super.key});
 
   @override
   State<PartnerSearchScreen> createState() => _PartnerSearchScreenState();
@@ -140,7 +140,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
         title: Text(AppLocalizations.of(context)!.partnerSearch),
         actions: [
           IconButton(
-            icon: const Icon(Icons.person_add),
+            icon: Icon(Icons.person_add),
             onPressed: _navigateToProfileEdit,
             tooltip: AppLocalizations.of(context)!.editProfile,
           ),
@@ -174,7 +174,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // 距離フィルター
             if (_currentLatitude != null && _currentLongitude != null) ...[
@@ -191,12 +191,12 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                   });
                 },
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
             ],
 
             // トレーニング目標フィルター
             Text(AppLocalizations.of(context)!.profile_c7511bf1, style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Wrap(
               spacing: 8,
               children: _trainingGoals.entries.map((entry) {
@@ -216,11 +216,11 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                 );
               }).toList(),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 経験レベルフィルター
             Text(AppLocalizations.of(context)!.experienceLevel, style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Wrap(
               spacing: 8,
               children: _experienceLevels.entries.map((entry) {
@@ -236,11 +236,11 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                 );
               }).toList(),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 性別フィルター
             Text(AppLocalizations.of(context)!.gender, style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Wrap(
               spacing: 8,
               children: _genders.entries.map((entry) {
@@ -260,7 +260,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                 );
               }).toList(),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // ✅ 実力ベースマッチング（±15% 1RM）
             Row(
@@ -268,10 +268,10 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                 Expanded(
                   child: Row(
                     children: [
-                      const Icon(Icons.fitness_center, size: 20, color: Colors.grey),
-                      const SizedBox(width: 8),
-                      const Text(
-                        '実力が近い人のみ（±15% 1RM）',
+                      Icon(Icons.fitness_center, size: 20, color: Colors.grey),
+                      SizedBox(width: 8),
+                      Text(
+                        AppLocalizations.of(context)!.generatedKey_055759b3,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -288,14 +288,14 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
               ],
             ),
             if (_enableStrengthFilter)
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(top: 4),
                 child: Text(
                   AppLocalizations.of(context)!.general_80d43a2b,
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             
             // ✅ 時空間コンテキストマッチング
             Row(
@@ -303,9 +303,9 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                 Expanded(
                   child: Row(
                     children: [
-                      const Icon(Icons.place_outlined, size: 20, color: Colors.grey),
-                      const SizedBox(width: 8),
-                      const Expanded(
+                      Icon(Icons.place_outlined, size: 20, color: Colors.grey),
+                      SizedBox(width: 8),
+                      Expanded(
                         child: Text(
                           AppLocalizations.of(context)!.general_726613df,
                           style: TextStyle(fontWeight: FontWeight.bold),
@@ -325,14 +325,14 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
               ],
             ),
             if (_enableSpatiotemporalFilter)
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(top: 4),
                 child: Text(
                   AppLocalizations.of(context)!.general_aaed5769,
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // 検索ボタン
             SizedBox(
@@ -351,7 +351,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
 
   Widget _buildSearchResults() {
     if (_isLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator());
     }
     
     // ✅ Pro非対称可視性: Free/Premiumユーザーには説明バナーを表示
@@ -363,13 +363,13 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.error_outline, size: 64, color: Colors.red),
+            Icon(Icons.error_outline, size: 64, color: Colors.red),
             SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.errorGeneric,
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(_errorMessage!),
             SizedBox(height: 16),
             ElevatedButton(
@@ -414,7 +414,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
               size: 64,
               color: Colors.grey[400],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.general_07460321,
               style: TextStyle(
@@ -460,7 +460,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const SubscriptionScreen()),
+            MaterialPageRoute(builder: (_) => SubscriptionScreen()),
           );
         },
         child: Padding(
@@ -470,26 +470,26 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  gradient: const LinearGradient(
+                  gradient: LinearGradient(
                     colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
                   ),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(Icons.workspace_premium, color: Colors.white, size: 32),
+                child: Icon(Icons.workspace_premium, color: Colors.white, size: 32),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       AppLocalizations.of(context)!.general_4c0c946d,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Text(
                       AppLocalizations.of(context)!.general_b96738b9,
                       style: TextStyle(
@@ -624,7 +624,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                         return Chip(
                           label: Text(
                             _trainingGoals[goal] ?? goal,
-                            style: const TextStyle(fontSize: 12),
+                            style: TextStyle(fontSize: 12),
                           ),
                           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         );
@@ -637,10 +637,10 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
               // レーティング
               Column(
                 children: [
-                  const Icon(Icons.star, color: Colors.amber, size: 20),
+                  Icon(Icons.star, color: Colors.amber, size: 20),
                   Text(
                     profile.rating.toStringAsFixed(1),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// アプリバージョンチェックサービス
 /// 
 /// 🎯 機能:
@@ -32,7 +33,7 @@ class VersionCheckService {
       final currentBuildNumber = int.tryParse(packageInfo.buildNumber) ?? 0; // 例: 112
 
       if (kDebugMode) {
-        print('📱 現在のバージョン: $currentVersion (Build: $currentBuildNumber)');
+        print(AppLocalizations.of(context)!.generatedKey_f1d9a7a9);
       }
 
       // Firestoreから最新バージョン情報を取得
@@ -65,9 +66,9 @@ class VersionCheckService {
       
       // アップデートメッセージ
       final updateMessage = data['update_message'] as String? ?? 
-          '新しいバージョンが利用可能です。\nアップデートをお願いします。';
+          AppLocalizations.of(context)!.generatedKey_3142cb33;
       final forceUpdateMessage = data['force_update_message'] as String? ?? 
-          '必須アップデートがあります。\nアプリを最新版に更新してください。';
+          AppLocalizations.of(context)!.generatedKey_a5e97b2b;
       
       // App Store URL（iOS用）
       final appStoreUrl = data['app_store_url'] as String? ?? 
@@ -81,7 +82,7 @@ class VersionCheckService {
       // 強制アップデートチェック（最小バージョンより古い）
       if (minBuildNumber != null && currentBuildNumber < minBuildNumber) {
         if (kDebugMode) {
-          print('🚨 強制アップデートが必要: $currentBuildNumber < $minBuildNumber');
+          print(AppLocalizations.of(context)!.generatedKey_d9ad81bc);
         }
         return VersionCheckResult(
           shouldUpdate: true,
@@ -98,7 +99,7 @@ class VersionCheckService {
       // 推奨アップデートチェック（推奨バージョンより古い）
       if (recommendedBuildNumber != null && currentBuildNumber < recommendedBuildNumber) {
         if (kDebugMode) {
-          print('💡 アップデート推奨: $currentBuildNumber < $recommendedBuildNumber');
+          print(AppLocalizations.of(context)!.generatedKey_96c869d4);
         }
         return VersionCheckResult(
           shouldUpdate: true,

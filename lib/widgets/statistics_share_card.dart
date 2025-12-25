@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:gym_match/gen/app_localizations.dart';
 /// Task 27: 統計データシェア用カード
 class StatisticsShareCard extends StatelessWidget {
   final int weeklyWorkoutDays;
@@ -56,8 +57,8 @@ class StatisticsShareCard extends StatelessWidget {
                   size: 36,
                 ),
               ),
-              const SizedBox(width: 16),
-              const Column(
+              SizedBox(width: 16),
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -80,7 +81,7 @@ class StatisticsShareCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 40),
+          SizedBox(height: 40),
 
           // ストリークカード（目立つように）
           Container(
@@ -97,28 +98,28 @@ class StatisticsShareCard extends StatelessWidget {
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.3),
                   blurRadius: 10,
-                  offset: const Offset(0, 5),
+                  offset: Offset(0, 5),
                 ),
               ],
             ),
             child: Column(
               children: [
-                const Icon(
+                Icon(
                   Icons.local_fire_department,
                   color: Colors.white,
                   size: 64,
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Text(
-                  '$currentStreak日連続',
-                  style: const TextStyle(
+                  AppLocalizations.of(context)!.generatedKey_d84c0c56,
+                  style: TextStyle(
                     fontSize: 48,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 8),
-                const Text(
+                SizedBox(height: 8),
+                Text(
                   AppLocalizations.of(context)!.workout_a826db5c,
                   style: TextStyle(
                     fontSize: 22,
@@ -128,7 +129,7 @@ class StatisticsShareCard extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // 週間統計
           Container(
@@ -147,7 +148,7 @@ class StatisticsShareCard extends StatelessWidget {
                       color: Colors.deepPurple.shade700,
                       size: 28,
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12),
                     Text(
                       AppLocalizations.of(context)!.general_124aaff7,
                       style: TextStyle(
@@ -158,7 +159,7 @@ class StatisticsShareCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -188,7 +189,7 @@ class StatisticsShareCard extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // 月間統計
           Container(
@@ -207,7 +208,7 @@ class StatisticsShareCard extends StatelessWidget {
                       color: Colors.deepPurple.shade700,
                       size: 28,
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12),
                     Text(
                       AppLocalizations.of(context)!.general_d2429b27,
                       style: TextStyle(
@@ -218,7 +219,7 @@ class StatisticsShareCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -241,7 +242,7 @@ class StatisticsShareCard extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
 
           // 部位別トレーニングバランス
           if (muscleGroupCount.isNotEmpty)
@@ -261,7 +262,7 @@ class StatisticsShareCard extends StatelessWidget {
                         color: Colors.deepPurple.shade700,
                         size: 28,
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: 12),
                       Text(
                         AppLocalizations.of(context)!.general_5aa4062e,
                         style: TextStyle(
@@ -311,7 +312,7 @@ class StatisticsShareCard extends StatelessWidget {
                                   alignment: Alignment.center,
                                   child: Text(
                                     '${entry.value}回',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
@@ -328,12 +329,12 @@ class StatisticsShareCard extends StatelessWidget {
                 ],
               ),
             ),
-          const SizedBox(height: 30),
+          SizedBox(height: 30),
 
           // フッター
           Center(
             child: Text(
-              '#GYMMATCH #トレーニング統計 #筋トレ継続',
+              AppLocalizations.of(context)!.general_142a2f0e,
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.white.withValues(alpha: 0.8),
@@ -356,7 +357,7 @@ class StatisticsShareCard extends StatelessWidget {
     return Column(
       children: [
         Icon(icon, color: color, size: 36),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Text(
           label,
           style: TextStyle(
@@ -365,7 +366,7 @@ class StatisticsShareCard extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 4),
+        SizedBox(height: 4),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -379,7 +380,7 @@ class StatisticsShareCard extends StatelessWidget {
                 color: Colors.grey.shade800,
               ),
             ),
-            const SizedBox(width: 4),
+            SizedBox(width: 4),
             Text(
               unit,
               style: TextStyle(

@@ -8,7 +8,7 @@ import 'po_member_detail_screen.dart';
 class POMembersScreen extends StatefulWidget {
   final String partnerId;
 
-  const POMembersScreen({super.key, required this.partnerId});
+  POMembersScreen({super.key, required this.partnerId});
 
   @override
   State<POMembersScreen> createState() => _POMembersScreenState();
@@ -49,7 +49,7 @@ class _POMembersScreenState extends State<POMembersScreen> {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
+                  return Center(child: CircularProgressIndicator());
                 }
 
                 if (snapshot.hasError) {
@@ -63,13 +63,13 @@ class _POMembersScreenState extends State<POMembersScreen> {
                       children: [
                         Icon(Icons.people_outline,
                             size: 64, color: Colors.grey[400]),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16),
                         Text(
                           AppLocalizations.of(context)!.general_ab9c4e26,
                           style:
                               TextStyle(fontSize: 16, color: Colors.grey[600]),
                         ),
-                        const SizedBox(height: 24),
+                        SizedBox(height: 24),
                       ],
                     ),
                   );
@@ -111,22 +111,22 @@ class _POMembersScreenState extends State<POMembersScreen> {
                           Expanded(
                             child: _SummaryCard(
                               label: AppLocalizations.of(context)!.active,
-                              value: '$activeCount名',
+                              value: AppLocalizations.of(context)!.generatedKey_f02ab35b,
                               color: Colors.green,
                             ),
                           ),
-                          const SizedBox(width: 12),
+                          SizedBox(width: 12),
                           Expanded(
                             child: _SummaryCard(
                               label: AppLocalizations.of(context)!.general_a9de8b69,
-                              value: '$dormantCount名',
+                              value: AppLocalizations.of(context)!.generatedKey_133c129a,
                               color: Colors.orange,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
 
                     // 会員リスト
                     Expanded(
@@ -235,19 +235,19 @@ class _MemberCard extends StatelessWidget {
                   CircleAvatar(
                     child: Text(member.name[0]),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           member.name,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4),
                         Text(
                           '担当: ${member.trainerName}',
                           style: TextStyle(
@@ -280,7 +280,7 @@ class _MemberCard extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               Row(
                 children: [
                   Expanded(
@@ -291,7 +291,7 @@ class _MemberCard extends StatelessWidget {
                   ),
                   if (daysSince != null)
                     Text(
-                      '最終: $daysSince日前',
+                      AppLocalizations.of(context)!.generatedKey_0bbe6198,
                       style: TextStyle(
                         fontSize: 12,
                         color: daysSince > 14 ? Colors.red : Colors.grey[700],
