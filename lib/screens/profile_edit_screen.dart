@@ -31,8 +31,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   bool _isLoading = false;
   bool _isPickingImage = false; // 画像選択中フラグ
 
-  // 都道府県リスト（ハードコード - ローカライズは表示時に対応）
-  static const List<String> _prefectures = [
+  // 都道府県リスト（多言語化対応）
+  List<String> _prefectures(BuildContext context) => [
     AppLocalizations.of(context)!.profile_afa342b7,
     AppLocalizations.of(context)!.prefectureAomori, AppLocalizations.of(context)!.prefectureIwate, AppLocalizations.of(context)!.prefectureMiyagi, AppLocalizations.of(context)!.prefectureAkita, AppLocalizations.of(context)!.prefectureYamagata, AppLocalizations.of(context)!.prefectureFukushima,
     AppLocalizations.of(context)!.prefectureIbaraki, AppLocalizations.of(context)!.prefectureTochigi, AppLocalizations.of(context)!.prefectureGunma, AppLocalizations.of(context)!.prefectureSaitama, AppLocalizations.of(context)!.prefectureChiba, AppLocalizations.of(context)!.prefectureTokyo, AppLocalizations.of(context)!.prefectureKanagawa,
@@ -372,7 +372,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.location_on),
                       ),
-                      items: _prefectures
+                      items: _prefectures(context)
                           .map((prefecture) => DropdownMenuItem(
                                 value: prefecture,
                                 child: Text(prefecture),

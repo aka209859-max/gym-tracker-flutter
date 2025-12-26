@@ -25,8 +25,8 @@ class _WorkoutImportPreviewScreenState
   late Map<int, String> _selectedBodyParts; // 種目インデックス → 選択された部位
   bool _isImporting = false;
 
-  // 部位選択肢（ハードコード - 表示時に多言語化）
-  static const List<String> _bodyPartOptions = [
+  // 部位選択肢（多言語化対応）
+  List<String> _bodyPartOptions(BuildContext context) => [
     '胸',      // Chest
     '脚',      // Legs
     AppLocalizations.of(context)!.bodyPartBack,    // Back
@@ -355,7 +355,7 @@ class _WorkoutImportPreviewScreenState
                                   value: _selectedBodyParts[index],
                                   isExpanded: true,
                                   underline: const SizedBox.shrink(),
-                                  items: _bodyPartOptions.map((bodyPart) {
+                                  items: _bodyPartOptions(context).map((bodyPart) {
                                     return DropdownMenuItem(
                                       value: bodyPart,
                                       child: Text(
