@@ -4029,7 +4029,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     return await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('記録を削除'),
+        title: Text(AppLocalizations.of(context)!.deleteWorkoutConfirm),
         content: Text('「$exerciseName」の記録を削除しますか？\nこの操作は取り消せません。'),
         actions: [
           TextButton(
@@ -4483,7 +4483,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     // 編集画面に遷移（AddWorkoutScreenを編集モードで開く）
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('編集機能は次のアップデートで実装予定です'),
+        content: Text(AppLocalizations.of(context)!.general_d2802ea4),
         duration: Duration(seconds: 2),
       ),
     );
@@ -4837,7 +4837,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               children: [
                 Icon(Icons.psychology, color: Colors.blue, size: 28),
                 SizedBox(width: 12),
-                Text('🔬 セッションRPE入力'),
+                Text(AppLocalizations.of(context)!.general_9bef87b7),
               ],
             ),
             content: SingleChildScrollView(
@@ -5045,7 +5045,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           children: [
             Icon(levelIcon, color: levelColor, size: 32),
             SizedBox(width: 12),
-            Text('🔬 疲労度分析結果'),
+            Text(AppLocalizations.of(context)!.general_2b363a80),
           ],
         ),
         content: SingleChildScrollView(
@@ -5235,7 +5235,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           children: [
             Icon(Icons.psychology, color: Colors.blue[700], size: 32),
             SizedBox(width: 12),
-            Text('🔬 総合疲労度分析'),
+            Text(AppLocalizations.of(context)!.general_9879fe60),
           ],
         ),
         content: SingleChildScrollView(
@@ -5903,7 +5903,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: Text('6言語対応 - グローバル展開中'),
+              subtitle: Text(AppLocalizations.of(context)!.profile_d15e7de3),
               trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(builderContext).pop();

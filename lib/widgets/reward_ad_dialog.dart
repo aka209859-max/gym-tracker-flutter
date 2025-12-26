@@ -225,7 +225,7 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
       actions: [
         TextButton(
           onPressed: _isLoading ? null : () => Navigator.of(context).pop(false),
-          child: const Text('キャンセル'),
+          child: const Text(AppLocalizations.of(context)!.cancel),
         ),
         ElevatedButton(
           onPressed: _isLoading || _remainingAds == 0 ? null : _watchAd,
@@ -242,7 +242,7 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                   ),
                 )
-              : const Text('動画を見る'),
+              : const Text(AppLocalizations.of(context)!.general_3968b846),
         ),
       ],
     );
