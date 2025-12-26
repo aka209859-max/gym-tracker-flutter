@@ -108,7 +108,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             Icon(Icons.upload_file, color: Colors.purple),
             SizedBox(width: 8),
-            Text('データ取り込み'),
+            Text(AppLocalizations.of(context)!.profile_dataImport),
           ],
         ),
         content: Column(
@@ -193,7 +193,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     CircularProgressIndicator(),
                     SizedBox(height: 16),
-                    Text('画像を解析しています...'),
+                    Text(AppLocalizations.of(context)!.profile_analyzingImage),
                   ],
                 ),
               ),

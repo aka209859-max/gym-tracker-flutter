@@ -1,0 +1,25 @@
+# Week 2 Day 1 - New ARB keys to add
+
+# ai_coaching_screen_tabbed.dart
+general_navigationError: "画面遷移に失敗しました"
+general_configure: "設定する"
+workout_noAnalysisResults: "分析結果がありません"
+
+# add_workout_screen.dart
+workout_offlineSaveError: "オフライン保存エラー"
+workout_recordApplied: "記録を反映しました"
+workout_historyFetchError: "履歴の取得に失敗しました"
+workout_alreadyRestDay: "この日は既にオフ日として登録されています"
+workout_restDaySaveError: "オフ日の保存に失敗しました"
+workout_normal: "通常"
+general_tryIt: "試してみる"
+
+# profile_screen.dart
+profile_dataImport: "データ取り込み"
+profile_analyzingImage: "画像を解析しています..."
+profile_imageAnalysisError: "画像解析エラー"
+profile_csvParseError: "CSV解析エラー"
+general_codeCopied: "コードをコピーしました！"
+general_shareMessageCopied: "シェア用メッセージをコピーしました！"
+
+Total: 17 new keys

@@ -3329,5 +3329,22 @@
   "showDetailsSection": "Show Details Section",
   "weightRatio": "Weight Ratio",
   "frequency1to2": "1-2 times/week",
-  "frequency3to4": "3-4 times/week"
+  "frequency3to4": "3-4 times/week",
+  "general_navigationError": "Screen transition failed",
+  "general_configure": "Configure",
+  "workout_noAnalysisResults": "No analysis results",
+  "workout_offlineSaveError": "Offline save error",
+  "workout_recordApplied": "Record applied",
+  "workout_historyFetchError": "Failed to fetch history",
+  "workout_alreadyRestDay": "This day is already registered as a rest day",
+  "workout_restDaySaveError": "Failed to save rest day",
+  "workout_normal": "Normal",
+  "general_tryIt": "Try it",
+  "profile_dataImport": "Data Import",
+  "profile_analyzingImage": "Analyzing image...",
+  "profile_imageAnalysisError": "Image analysis error",
+  "profile_csvParseError": "CSV parse error",
+  "general_codeCopied": "Code copied!",
+  "general_shareMessageCopied": "Share message copied!",
+  "general_fileSizeTooLarge": "File size too large (5MB or less)"
 }

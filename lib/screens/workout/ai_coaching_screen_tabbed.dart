@@ -2159,7 +2159,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
           children: [
             Icon(Icons.play_circle_outline, color: Colors.blue, size: 28),
             SizedBox(width: 12),
-            Text('動画でAI機能解放'),
+            Text(AppLocalizations.of(context)!.workout_80a340fe),
           ],
         ),
         content: Column(
@@ -2237,7 +2237,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
                 children: [
                   CircularProgressIndicator(),
                   SizedBox(height: 16),
-                  Text('広告を読み込んでいます...'),
+                  Text(AppLocalizations.of(context)!.workout_65c94ed8),
                 ],
               ),
             ),
@@ -2330,7 +2330,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('画面遷移に失敗しました: $e'),
+            content: Text(AppLocalizations.of(context)!.general_navigationError + ': $e'),
             backgroundColor: Colors.red,
           ),
         );
@@ -2375,7 +2375,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('保存に失敗しました: $e'),
+            content: Text(AppLocalizations.of(context)!.saveWorkoutError + ': $e'),
             backgroundColor: Colors.red,
           ),
         );
@@ -2703,7 +2703,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     if (oneRM == null || oneRM <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('有効な1RMを入力してください'),
+          content: Text(AppLocalizations.of(context)!.workout_199dd9c4),
           backgroundColor: Colors.red,
         ),
       );
@@ -3369,7 +3369,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           children: [
             Icon(Icons.play_circle_outline, color: Colors.blue, size: 28),
             SizedBox(width: 12),
-            Text('動画でAI機能解放'),
+            Text(AppLocalizations.of(context)!.workout_80a340fe),
           ],
         ),
         content: Column(
@@ -3447,7 +3447,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                 children: [
                   CircularProgressIndicator(),
                   SizedBox(height: 16),
-                  Text('広告を読み込んでいます...'),
+                  Text(AppLocalizations.of(context)!.workout_65c94ed8),
                 ],
               ),
             ),
@@ -3560,7 +3560,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               backgroundColor: Colors.amber.shade700,
               foregroundColor: Colors.white,
             ),
-            child: Text('アップグレード'),
+            child: Text(AppLocalizations.of(context)!.upgradeToPremium),
           ),
         ],
       ),
@@ -4624,7 +4624,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 context,
                 MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
               ).then((_) => _loadUserAge()),
-              child: Text('設定する'),
+              child: Text(AppLocalizations.of(context)!.general_configure),
             ),
           ],
         ),
@@ -4741,7 +4741,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         color: Colors.grey.shade100,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Text('分析結果がありません'),
+          child: Text(AppLocalizations.of(context)!.workout_noAnalysisResults),
         ),
       );
     }
@@ -5229,7 +5229,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           children: [
             Icon(Icons.play_circle_outline, color: Colors.blue, size: 28),
             SizedBox(width: 12),
-            Text('動画でAI機能解放'),
+            Text(AppLocalizations.of(context)!.workout_80a340fe),
           ],
         ),
         content: Column(
@@ -5307,7 +5307,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 children: [
                   CircularProgressIndicator(),
                   SizedBox(height: 16),
-                  Text('広告を読み込んでいます...'),
+                  Text(AppLocalizations.of(context)!.workout_65c94ed8),
                 ],
               ),
             ),
@@ -5420,7 +5420,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               backgroundColor: Colors.amber.shade700,
               foregroundColor: Colors.white,
             ),
-            child: Text('アップグレード'),
+            child: Text(AppLocalizations.of(context)!.upgradeToPremium),
           ),
         ],
       ),

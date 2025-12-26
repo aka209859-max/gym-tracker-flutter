@@ -563,7 +563,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('オフライン保存エラー: $e'),
+            content: Text(AppLocalizations.of(context)!.workout_offlineSaveError + ': $e'),
             backgroundColor: Colors.red,
             duration: const Duration(seconds: 5),
           ),
@@ -1187,7 +1187,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('記録を反映しました: $weight kg × $reps reps'),
+            content: Text(AppLocalizations.of(context)!.workout_recordApplied + ': $weight kg × $reps reps'),
             duration: const Duration(seconds: 2),
             backgroundColor: Colors.green,
           ),
@@ -1197,7 +1197,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       print('❌ 履歴表示エラー: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('履歴の取得に失敗しました: $e'), backgroundColor: Colors.red),
+          SnackBar(content: Text(AppLocalizations.of(context)!.workout_historyFetchError + ': $e'), backgroundColor: Colors.red),
         );
       }
     }
@@ -1460,7 +1460,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('この日は既にオフ日として登録されています'),
+              content: Text(AppLocalizations.of(context)!.workout_alreadyRestDay),
               backgroundColor: Colors.orange,
             ),
           );
@@ -1501,7 +1501,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('オフ日の保存に失敗しました: $e'),
+            content: Text(AppLocalizations.of(context)!.workout_restDaySaveError + ': $e'),
             backgroundColor: Colors.red,
           ),
         );
@@ -2568,7 +2568,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             runSpacing: 4,
             children: [
               ChoiceChip(
-                label: Text('通常', style: TextStyle(fontSize: 12)),
+                label: Text(AppLocalizations.of(context)!.workout_normal, style: TextStyle(fontSize: 12)),
                 selected: set.setType == SetType.normal,
                 onSelected: (selected) {
                   if (selected) {
@@ -2781,7 +2781,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               backgroundColor: Colors.purple.shade600,
               foregroundColor: Colors.white,
             ),
-            child: Text('試してみる'),
+            child: Text(AppLocalizations.of(context)!.general_tryIt),
           ),
         ],
       ),

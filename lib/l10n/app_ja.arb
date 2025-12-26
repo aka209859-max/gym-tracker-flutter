@@ -3786,5 +3786,22 @@
   "showDetailsSection": "詳細セクションを表示",
   "weightRatio": "ウェイトレシオ",
   "frequency1to2": "週1-2回",
-  "frequency3to4": "週3-4回"
+  "frequency3to4": "週3-4回",
+  "general_navigationError": "画面遷移に失敗しました",
+  "general_configure": "設定する",
+  "workout_noAnalysisResults": "分析結果がありません",
+  "workout_offlineSaveError": "オフライン保存エラー",
+  "workout_recordApplied": "記録を反映しました",
+  "workout_historyFetchError": "履歴の取得に失敗しました",
+  "workout_alreadyRestDay": "この日は既にオフ日として登録されています",
+  "workout_restDaySaveError": "オフ日の保存に失敗しました",
+  "workout_normal": "通常",
+  "general_tryIt": "試してみる",
+  "profile_dataImport": "データ取り込み",
+  "profile_analyzingImage": "画像を解析しています...",
+  "profile_imageAnalysisError": "画像解析エラー",
+  "profile_csvParseError": "CSV解析エラー",
+  "general_codeCopied": "コードをコピーしました！",
+  "general_shareMessageCopied": "シェア用メッセージをコピーしました！",
+  "general_fileSizeTooLarge": "ファイルサイズが大きすぎます（5MB以下）"
 }
