@@ -459,7 +459,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                       border: OutlineInputBorder(),
                       contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
-                    items: const [
+                    items: [
                       DropdownMenuItem(
                         value: GoalType.weeklyWorkoutCount,
                         child: Text(AppLocalizations.of(context)!.general_e9b451c8),
