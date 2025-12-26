@@ -527,12 +527,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.navProfile),
+        title: Text(AppLocalizations.of(context)!.navProfile),
         actions: [
           IconButton(
             icon: Icon(Icons.settings),
             onPressed: () => _showSettingsMenu(context),
-            tooltip: l10n.settings,
+            tooltip: AppLocalizations.of(context)!.settings,
           ),
         ],
       ),
@@ -687,11 +687,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Icon(Icons.photo_camera, color: Colors.white),
             ),
             title: Text(
-              '📸 ${l10n.importFromPhoto}',
+              '📸 ${AppLocalizations.of(context)!.importFromPhoto}',
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             subtitle: Text(
-              l10n.importFromPhotoSubtitle,
+              AppLocalizations.of(context)!.importFromPhotoSubtitle,
               style: const TextStyle(fontSize: 12),
             ),
             trailing: Icon(Icons.arrow_forward_ios, size: 16),
@@ -713,11 +713,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Icon(Icons.psychology, color: Colors.white),
             ),
             title: Text(
-              '🔬 ${l10n.personalFactorsSettings}',
+              '🔬 ${AppLocalizations.of(context)!.personalFactorsSettings}',
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             subtitle: Text(
-              l10n.editPersonalFactors,
+              AppLocalizations.of(context)!.editPersonalFactors,
               style: const TextStyle(fontSize: 12),
             ),
             trailing: Icon(Icons.arrow_forward_ios, size: 16),
@@ -744,11 +744,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Icon(Icons.fitness_center, color: Colors.white),
             ),
             title: Text(
-              '💪 ${l10n.personalTraining}',
+              '💪 ${AppLocalizations.of(context)!.personalTraining}',
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             subtitle: Text(
-              l10n.personalTrainingSubtitle,
+              AppLocalizations.of(context)!.personalTrainingSubtitle,
               style: const TextStyle(fontSize: 12),
             ),
             trailing: Icon(Icons.arrow_forward_ios, size: 16),
@@ -776,11 +776,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Icon(Icons.auto_awesome, color: Colors.white),
               ),
               title: Text(
-                '💰 ${l10n.aiAddonPurchase}',
+                '💰 ${AppLocalizations.of(context)!.aiAddonPurchase}',
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               subtitle: Text(
-                l10n.aiAddonSubtitle,
+                AppLocalizations.of(context)!.aiAddonSubtitle,
                 style: const TextStyle(fontSize: 12),
               ),
               trailing: Icon(Icons.arrow_forward_ios, size: 16),
@@ -798,8 +798,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _buildMenuCard(
           context,
           icon: Icons.favorite,
-          title: l10n.favorites,
-          subtitle: l10n.favoritesCount(_favoriteCount),
+          title: AppLocalizations.of(context)!.favorites,
+          subtitle: AppLocalizations.of(context)!.favoritesCount(_favoriteCount),
           onTap: () {
             Navigator.push(
               context,
@@ -812,8 +812,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _buildMenuCard(
           context,
           icon: Icons.emoji_events,
-          title: l10n.achievements,
-          subtitle: l10n.pastTrainingRecords,  // Reusing this key for now
+          title: AppLocalizations.of(context)!.achievements,
+          subtitle: AppLocalizations.of(context)!.pastTrainingRecords,  // Reusing this key for now
           onTap: () {
             Navigator.push(
               context,
@@ -838,8 +838,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _buildMenuCard(
           context,
           icon: Icons.history,
-          title: l10n.visitHistory,
-          subtitle: l10n.gymDetails,  // Reusing key
+          title: AppLocalizations.of(context)!.visitHistory,
+          subtitle: AppLocalizations.of(context)!.gymDetails,  // Reusing key
           onTap: () {
             Navigator.push(
               context,
@@ -851,8 +851,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _buildMenuCard(
           context,
           icon: Icons.people,
-          title: l10n.trainingPartners,
-          subtitle: l10n.partnersCount(_trainingPartnerCount),
+          title: AppLocalizations.of(context)!.trainingPartners,
+          subtitle: AppLocalizations.of(context)!.partnersCount(_trainingPartnerCount),
           onTap: () {
             Navigator.push(
               context,
@@ -864,8 +864,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _buildMenuCard(
           context,
           icon: Icons.message,
-          title: l10n.messages,
-          subtitle: _unreadMessages > 0 ? l10n.unreadMessages(_unreadMessages) : l10n.messages,
+          title: AppLocalizations.of(context)!.messages,
+          subtitle: _unreadMessages > 0 ? AppLocalizations.of(context)!.unreadMessages(_unreadMessages) : AppLocalizations.of(context)!.messages,
           badge: _unreadMessages > 0 ? '$_unreadMessages' : null,
           badgeColor: Colors.red,
           onTap: () {
@@ -904,9 +904,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _buildMenuCard(
           context,
           icon: Icons.card_giftcard,
-          title: l10n.inviteCode,
-          subtitle: l10n.campaignRegistration,
-          badge: l10n.proPlan,  // Reusing for badge
+          title: AppLocalizations.of(context)!.inviteCode,
+          subtitle: AppLocalizations.of(context)!.campaignRegistration,
+          badge: AppLocalizations.of(context)!.proPlan,  // Reusing for badge
           badgeColor: Colors.amber,
           onTap: () async {
             final result = await Navigator.push(
@@ -947,7 +947,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
                   color: badgeColor?.withValues(alpha: 0.2) ?? 
-                      (badge == l10n.profile_236a0d66 ? Colors.amber[100] : Colors.blue[100]),
+                      (badge == AppLocalizations.of(context)!.profile_236a0d66 ? Colors.amber[100] : Colors.blue[100]),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -956,7 +956,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
                     color: badgeColor ?? 
-                        (badge == l10n.profile_236a0d66 ? Colors.amber[900] : Colors.blue[900]),
+                        (badge == AppLocalizations.of(context)!.profile_236a0d66 ? Colors.amber[900] : Colors.blue[900]),
                   ),
                 ),
               ),
@@ -1012,7 +1012,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Navigator.pop(context);
                 // TODO: Implement SubscriptionScreen
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text(AppLocalizations.of(context)!.profile_7f49351b)),
+                  SnackBar(content: Text(AppLocalizations.of(context)!.profile_7f49351b)),
                 );
                 /*
                 Navigator.push(
@@ -1296,7 +1296,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 } else {
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text(AppLocalizations.of(context)!.subscription_f8882591)),
+                      SnackBar(content: Text(AppLocalizations.of(context)!.subscription_f8882591)),
                     );
                   }
                 }

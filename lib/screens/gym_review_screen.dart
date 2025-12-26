@@ -237,7 +237,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
 
                     // 総合評価
                     _buildRatingSection(
-                      title: l10n.gym_9bbdadad,
+                      title: AppLocalizations.of(context)!.gym_9bbdadad,
                       rating: _overallRating,
                       icon: Icons.star,
                       color: Colors.amber,
@@ -251,7 +251,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
 
                     // 詳細評価
                     Text(
-                      l10n.gym_9ff748a0,
+                      AppLocalizations.of(context)!.gym_9ff748a0,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -260,7 +260,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                     SizedBox(height: 16),
 
                     _buildRatingSection(
-                      title: l10n.gym_59aa0844,
+                      title: AppLocalizations.of(context)!.gym_59aa0844,
                       rating: _crowdAccuracy,
                       icon: Icons.people,
                       color: Colors.blue,
@@ -273,7 +273,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                     SizedBox(height: 12),
 
                     _buildRatingSection(
-                      title: l10n.gym_972e9a95,
+                      title: AppLocalizations.of(context)!.gym_972e9a95,
                       rating: _cleanliness,
                       icon: Icons.cleaning_services,
                       color: Colors.green,
@@ -286,7 +286,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                     SizedBox(height: 12),
 
                     _buildRatingSection(
-                      title: l10n.gym_a649b7f0,
+                      title: AppLocalizations.of(context)!.gym_a649b7f0,
                       rating: _staffFriendliness,
                       icon: Icons.person,
                       color: Colors.orange,
@@ -299,7 +299,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                     SizedBox(height: 12),
 
                     _buildRatingSection(
-                      title: l10n.gym_e1e3e550,
+                      title: AppLocalizations.of(context)!.gym_e1e3e550,
                       rating: _beginnerFriendly,
                       icon: Icons.school,
                       color: Colors.purple,
@@ -325,15 +325,15 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
                       maxLines: 5,
                       maxLength: 500,
                       decoration: InputDecoration(
-                        hintText: l10n.gym_0c16050e,
+                        hintText: AppLocalizations.of(context)!.gym_0c16050e,
                         border: OutlineInputBorder(),
                       ),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return l10n.gym_f68a6177;
+                          return AppLocalizations.of(context)!.gym_f68a6177;
                         }
                         if (value.trim().length < 10) {
-                          return l10n.gym_56366b67;
+                          return AppLocalizations.of(context)!.gym_56366b67;
                         }
                         return null;
                       },

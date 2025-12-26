@@ -463,15 +463,15 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
   IconData _getMuscleGroupIcon(String muscleGroup) {
     final l10n = AppLocalizations.of(context)!;
     
-    if (muscleGroup == l10n.bodyPartChest) {
+    if (muscleGroup == AppLocalizations.of(context)!.bodyPartChest) {
       return Icons.favorite;
-    } else if (muscleGroup == l10n.bodyPartBack) {
+    } else if (muscleGroup == AppLocalizations.of(context)!.bodyPartBack) {
       return Icons.backpack;
-    } else if (muscleGroup == l10n.bodyPartLegs) {
+    } else if (muscleGroup == AppLocalizations.of(context)!.bodyPartLegs) {
       return Icons.directions_run;
-    } else if (muscleGroup == l10n.bodyPartShoulders) {
+    } else if (muscleGroup == AppLocalizations.of(context)!.bodyPartShoulders) {
       return Icons.fitness_center;
-    } else if (muscleGroup == l10n.bodyPartBiceps || muscleGroup == l10n.bodyPartTriceps) {
+    } else if (muscleGroup == AppLocalizations.of(context)!.bodyPartBiceps || muscleGroup == AppLocalizations.of(context)!.bodyPartTriceps) {
       return Icons.front_hand;
     } else {
       return Icons.fitness_center;

@@ -38,19 +38,19 @@ class POMemberDetailScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    l10n.gym_0179630e,
+                    AppLocalizations.of(context)!.gym_0179630e,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 16),
-                  _InfoRow(label: l10n.name, value: member.name),
+                  _InfoRow(label: AppLocalizations.of(context)!.name, value: member.name),
                   _InfoRow(label: AppLocalizations.of(context)!.email, value: member.email),
                   if (member.phoneNumber != null)
                     _InfoRow(label: AppLocalizations.of(context)!.gymPhone, value: member.phoneNumber!),
                   _InfoRow(
-                    label: l10n.general_d583e5d0,
+                    label: AppLocalizations.of(context)!.general_d583e5d0,
                     value: DateFormat('yyyy/MM/dd').format(member.joinedAt),
                   ),
-                  _InfoRow(label: l10n.general_a82f5771, value: member.trainerName),
+                  _InfoRow(label: AppLocalizations.of(context)!.general_a82f5771, value: member.trainerName),
                 ],
               ),
             ),
@@ -66,22 +66,22 @@ class POMemberDetailScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    l10n.general_f499f3a7,
+                    AppLocalizations.of(context)!.general_f499f3a7,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 16),
                   _InfoRow(label: AppLocalizations.of(context)!.upgradePlan, value: member.planName),
                   _InfoRow(
-                    label: l10n.general_71becd2b,
+                    label: AppLocalizations.of(context)!.general_71becd2b,
                     value: '${member.totalSessions}回',
                   ),
                   _InfoRow(
-                    label: l10n.general_520812b8,
+                    label: AppLocalizations.of(context)!.general_520812b8,
                     value: '${member.remainingSessions}回',
                   ),
                   if (member.lastSessionAt != null)
                     _InfoRow(
-                      label: l10n.general_49c6c5b4,
+                      label: AppLocalizations.of(context)!.general_49c6c5b4,
                       value: DateFormat('yyyy/MM/dd')
                           .format(member.lastSessionAt!),
                     ),
@@ -128,11 +128,11 @@ class POMemberDetailScreen extends StatelessWidget {
           ElevatedButton.icon(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text(l10n.general_0dfb3c3b)),
+                const SnackBar(content: Text(AppLocalizations.of(context)!.general_0dfb3c3b)),
               );
             },
             icon: Icon(Icons.message),
-            label: Text(l10n.general_ed353b30),
+            label: Text(AppLocalizations.of(context)!.general_ed353b30),
             style: ElevatedButton.styleFrom(
               minimumSize: const Size(double.infinity, 48),
             ),
@@ -141,11 +141,11 @@ class POMemberDetailScreen extends StatelessWidget {
           OutlinedButton.icon(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text(l10n.general_75a6ecb5)),
+                const SnackBar(content: Text(AppLocalizations.of(context)!.general_75a6ecb5)),
               );
             },
             icon: Icon(Icons.history),
-            label: Text(l10n.general_5573bee6),
+            label: Text(AppLocalizations.of(context)!.general_5573bee6),
             style: OutlinedButton.styleFrom(
               minimumSize: const Size(double.infinity, 48),
             ),

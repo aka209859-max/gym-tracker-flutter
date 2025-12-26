@@ -26,7 +26,7 @@ class WorkoutHistoryScreen extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            l10n.workoutHistory,
+            AppLocalizations.of(context)!.workoutHistory,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
@@ -42,19 +42,19 @@ class WorkoutHistoryScreen extends StatelessWidget {
             tabs: [
               Tab(
                 icon: const Icon(Icons.accessibility_new),
-                text: l10n.byBodyPart,
+                text: AppLocalizations.of(context)!.byBodyPart,
               ),
               Tab(
                 icon: const Icon(Icons.trending_up),
-                text: l10n.personalRecords,
+                text: AppLocalizations.of(context)!.personalRecords,
               ),
               Tab(
                 icon: const Icon(Icons.note_add),
-                text: l10n.memo,
+                text: AppLocalizations.of(context)!.memo,
               ),
               Tab(
                 icon: const Icon(Icons.bar_chart),
-                text: l10n.weeklyReport,
+                text: AppLocalizations.of(context)!.weeklyReport,
               ),
             ],
           ),

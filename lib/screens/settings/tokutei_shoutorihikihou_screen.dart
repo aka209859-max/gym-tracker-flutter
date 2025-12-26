@@ -59,41 +59,41 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
   Widget _buildInfoTable(BuildContext context) {
     return Column(
       children: [
-        _buildTableRow(AppLocalizations.of(context)!.sellerInfo, l10n.profile_59e09c4e),
-        _buildTableRow(l10n.profile_7161d981, l10n.profile_59e09c4e),
-        _buildTableRow(l10n.profile_91e0eed0, '〒839-0817\n福岡県久留米市瀬下町243'),
+        _buildTableRow(AppLocalizations.of(context)!.sellerInfo, AppLocalizations.of(context)!.profile_59e09c4e),
+        _buildTableRow(AppLocalizations.of(context)!.profile_7161d981, AppLocalizations.of(context)!.profile_59e09c4e),
+        _buildTableRow(AppLocalizations.of(context)!.profile_91e0eed0, '〒839-0817\n福岡県久留米市瀬下町243'),
         _buildTableRow(
           AppLocalizations.of(context)!.contactUs,
           'メールアドレス: i.hajime1219@outlook.jp\n（対応時間: 平日 10:00-18:00）',
         ),
         _buildTableRow(
-          l10n.profile_29ca7fb7,
+          AppLocalizations.of(context)!.profile_29ca7fb7,
           'Premiumプラン: ¥500/月（税込）\n'
           'Proプラン: ¥980/月（税込）\n\n'
           '※Freeプランは無料です\n'
-          l10n.profile_bd3aeb0d,
+          AppLocalizations.of(context)!.profile_bd3aeb0d,
         ),
         _buildTableRow(
-          l10n.profile_f8bb87b8,
-          l10n.profile_97da4259,
+          AppLocalizations.of(context)!.profile_f8bb87b8,
+          AppLocalizations.of(context)!.profile_97da4259,
         ),
         _buildTableRow(
-          l10n.profile_86ba31c5,
+          AppLocalizations.of(context)!.profile_86ba31c5,
           'Apple App Store決済（App内課金）\n'
           '※クレジットカード、デビットカード、Apple IDに登録された支払い方法による決済',
         ),
         _buildTableRow(
-          l10n.profile_6f82bbb3,
+          AppLocalizations.of(context)!.profile_6f82bbb3,
           '• サブスクリプション購入時に即時決済\n'
           '• 以降、毎月自動更新（解約しない限り継続課金）\n'
           '• 更新日の24時間前までに自動更新が行われます',
         ),
         _buildTableRow(
-          l10n.profile_8ed4c222,
-          AppLocalizations.of(context)!.purchaseCompleted(l10n.profile_9c377ca2),
+          AppLocalizations.of(context)!.profile_8ed4c222,
+          AppLocalizations.of(context)!.purchaseCompleted(AppLocalizations.of(context)!.profile_9c377ca2),
         ),
         _buildTableRow(
-          l10n.profile_50dc61bb,
+          AppLocalizations.of(context)!.profile_50dc61bb,
           'デジタルコンテンツの性質上、原則として返品・返金はお受けできません。\n\n'
           'ただし、以下の場合は返金申請が可能です：\n'
           '• Apple App Storeの返金ポリシーに基づく正当な理由がある場合\n'
@@ -103,7 +103,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
           'Apple App Storeサポートへ直接お問い合わせください。',
         ),
         _buildTableRow(
-          l10n.profile_867becd2,
+          AppLocalizations.of(context)!.profile_867becd2,
           'iOS:\n'
           '${AppLocalizations.of(context)!.cancel}\n'
           '注意事項:\n'
@@ -112,7 +112,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
           '• 解約後、Freeプランに自動的に移行されます',
         ),
         _buildTableRow(
-          l10n.profile_4460c18e,
+          AppLocalizations.of(context)!.profile_4460c18e,
           'GYM MATCH - トレーニング管理アプリ\n\n'
           '主な機能:\n'
           '• トレーニング記録の管理・保存\n'
@@ -126,7 +126,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
           '• Proプラン: 広告非表示、AI機能月30回利用可能',
         ),
         _buildTableRow(
-          l10n.profile_6b419664,
+          AppLocalizations.of(context)!.profile_6b419664,
           'iOS 12.0以降のiPhone/iPad\n※安定した動作にはiOS 14.0以降を推奨',
         ),
       ],
@@ -277,7 +277,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
               Icon(Icons.contact_mail, color: Colors.deepPurple.shade700),
               SizedBox(width: 8),
               Text(
-                l10n.profile_f43c41bb,
+                AppLocalizations.of(context)!.profile_f43c41bb,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -288,7 +288,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
           ),
           SizedBox(height: 12),
           Text(
-            l10n.profile_669aed7f,
+            AppLocalizations.of(context)!.profile_669aed7f,
             style: TextStyle(fontSize: 13),
           ),
           SizedBox(height: 8),

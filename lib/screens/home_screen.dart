@@ -1092,7 +1092,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           if (kDebugMode)
             IconButton(
               icon: Icon(Icons.developer_mode),
-              tooltip: l10n.developerMenu,
+              tooltip: AppLocalizations.of(context)!.developerMenu,
               onPressed: () {
                 Navigator.pushNamed(context, '/developer_menu');
               },
@@ -1244,8 +1244,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               SizedBox(width: 8),
               Text(
                 _isAdvancedSectionsExpanded
-                    ? l10n.hideDetailsSection
-                    : l10n.showDetailsSection,
+                    ? AppLocalizations.of(context)!.hideDetailsSection
+                    : AppLocalizations.of(context)!.showDetailsSection,
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -1310,8 +1310,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       ),
                       tabs: const [
                         Tab(text: '7日間'),
-                        Tab(text: l10n.general_7e8e1aae),
-                        Tab(text: l10n.totalVolume),
+                        Tab(text: AppLocalizations.of(context)!.general_7e8e1aae),
+                        Tab(text: AppLocalizations.of(context)!.totalVolume),
                       ],
                     ),
                     SizedBox(
@@ -1526,8 +1526,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       ),
                       label: Text(
                         remainingCredits > 0
-                            ? l10n.general_7fb375b8
-                            : l10n.general_b6269e2f,
+                            ? AppLocalizations.of(context)!.general_7fb375b8
+                            : AppLocalizations.of(context)!.general_b6269e2f,
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -1806,7 +1806,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      l10n.general_eb6619e3,
+                      AppLocalizations.of(context)!.general_eb6619e3,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.black54,
@@ -2116,7 +2116,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
-                    l10n.workout_a0c22faa,
+                    AppLocalizations.of(context)!.workout_a0c22faa,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 8,
@@ -2351,7 +2351,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   },
                   icon: Icon(Icons.analytics, size: 18, color: theme.colorScheme.primary),
                   label: Text(
-                    l10n.general_a19f5322,
+                    AppLocalizations.of(context)!.general_a19f5322,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -2458,7 +2458,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
   /// v1.0.170: 懸垂種目の判定
   bool _isPullUpExercise(String exerciseName) {
-    final pullUpKeywords = [AppLocalizations.of(context)!.exercisePullUp, AppLocalizations.of(context)!.exerciseChinUp, l10n.workout_e3dc6687];
+    final pullUpKeywords = [AppLocalizations.of(context)!.exercisePullUp, AppLocalizations.of(context)!.exerciseChinUp, AppLocalizations.of(context)!.workout_e3dc6687];
     return pullUpKeywords.any((keyword) => exerciseName.contains(keyword));
   }
 
@@ -2500,7 +2500,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         print('❌ ドキュメントデータが存在しません');
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text(AppLocalizations.of(context)!.gym_c7e47d32)),
+            SnackBar(content: Text(AppLocalizations.of(context)!.gym_c7e47d32)),
           );
         }
         return;
@@ -2534,7 +2534,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppLocalizations.of(context)!.general_c51a7dc2)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.general_c51a7dc2)),
         );
       }
     } catch (e) {
@@ -3171,7 +3171,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                               Expanded(
                                 flex: 2,
                                 child: Text(
-                                  isCardio ? AppLocalizations.of(context)!.time : l10n.workout_2579352f,
+                                  isCardio ? AppLocalizations.of(context)!.time : AppLocalizations.of(context)!.workout_2579352f,
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     fontSize: 9,
@@ -6381,7 +6381,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     onPressed: () {
                       // コピー機能は後で実装
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text(AppLocalizations.of(context)!.general_58a4e6c0)),
+                        SnackBar(content: Text(AppLocalizations.of(context)!.general_58a4e6c0)),
                       );
                     },
                   ),

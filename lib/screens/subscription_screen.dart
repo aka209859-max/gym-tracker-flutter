@@ -138,13 +138,13 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     type: SubscriptionType.free,
                     name: AppLocalizations.of(context)!.freePlan,
                     price: '¥0',
-                    priceUnit: l10n.subscription_95db4a6f,
+                    priceUnit: AppLocalizations.of(context)!.subscription_95db4a6f,
                     features: [
-                      l10n.subscription_d59bc6e4,
+                      AppLocalizations.of(context)!.subscription_d59bc6e4,
                       AppLocalizations.of(context)!.gpsSearch,
-                      l10n.subscription_0a2805b1,
-                      l10n.subscription_cd8c3359,
-                      l10n.subscription_1c65be25,
+                      AppLocalizations.of(context)!.subscription_0a2805b1,
+                      AppLocalizations.of(context)!.subscription_cd8c3359,
+                      AppLocalizations.of(context)!.subscription_1c65be25,
                       '📝 トレーニング記録',
                       '🤖 AI機能月3回',
                       '📢 広告表示あり',
@@ -603,8 +603,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                           SizedBox(width: 8),
                           Text(
                             type == SubscriptionType.premium
-                                ? l10n.subscription_f7ec6c91
-                                : l10n.subscription_2fe3bc16,
+                                ? AppLocalizations.of(context)!.subscription_f7ec6c91
+                                : AppLocalizations.of(context)!.subscription_2fe3bc16,
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
@@ -643,7 +643,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                   padding: const EdgeInsets.symmetric(vertical: 14),
                                 ),
                                 child: Text(
-                                  l10n.subscription_bf804c6f,
+                                  AppLocalizations.of(context)!.subscription_bf804c6f,
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -684,7 +684,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              l10n.subscription_aaee0ad5,
+              AppLocalizations.of(context)!.subscription_aaee0ad5,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -693,14 +693,14 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             SizedBox(height: 16),
             _buildComparisonRow(AppLocalizations.of(context)!.gymSearch, true, true, true),
             _buildComparisonRow(AppLocalizations.of(context)!.gpsSearch, true, true, true),
-            _buildComparisonRow(l10n.subscription_cd8c3359, true, true, true),
+            _buildComparisonRow(AppLocalizations.of(context)!.subscription_cd8c3359, true, true, true),
             _buildComparisonRow(AppLocalizations.of(context)!.trainingLog, true, true, true),
             _buildComparisonRow(AppLocalizations.of(context)!.subscriptionNoAds, false, true, true),
-            _buildComparisonRow(l10n.subscription_9217a80b, false, true, true),
-            _buildComparisonRow(l10n.subscription_397839f3, false, true, true),
-            _buildComparisonRow(l10n.subscription_52f5cfb1, false, true, true),
+            _buildComparisonRow(AppLocalizations.of(context)!.subscription_9217a80b, false, true, true),
+            _buildComparisonRow(AppLocalizations.of(context)!.subscription_397839f3, false, true, true),
+            _buildComparisonRow(AppLocalizations.of(context)!.subscription_52f5cfb1, false, true, true),
             _buildComparisonRow(AppLocalizations.of(context)!.partnerSearch, false, false, true),
-            _buildComparisonRow(l10n.subscription_f19cb091, false, false, true),
+            _buildComparisonRow(AppLocalizations.of(context)!.subscription_f19cb091, false, false, true),
           ],
         ),
       ),
@@ -767,7 +767,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 Icon(Icons.info_outline, color: Colors.blue[700], size: 20),
                 SizedBox(width: 8),
                 Text(
-                  l10n.subscription_76b79b54,
+                  AppLocalizations.of(context)!.subscription_76b79b54,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -871,7 +871,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text(l10n.subscription_f8882591),
+                            content: Text(AppLocalizations.of(context)!.subscription_f8882591),
                             duration: Duration(seconds: 2),
                           ),
                         );

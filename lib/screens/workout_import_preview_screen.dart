@@ -71,9 +71,9 @@ class _WorkoutImportPreviewScreenState
       // 背中
       AppLocalizations.of(context)!.exerciseLatPulldown: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.exerciseChinUp: AppLocalizations.of(context)!.bodyPartBack,
-      l10n.workout_4f6cd3a6: AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.workout_4f6cd3a6: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.exercisePullUp: AppLocalizations.of(context)!.bodyPartBack,
-      l10n.workout_e6ae79d7: AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.workout_e6ae79d7: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.exerciseDeadlift: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.exerciseSeatedRow: AppLocalizations.of(context)!.bodyPartBack,
       
@@ -82,13 +82,13 @@ class _WorkoutImportPreviewScreenState
       AppLocalizations.of(context)!.exerciseLegPress: AppLocalizations.of(context)!.bodyPartLegs,
       AppLocalizations.of(context)!.exerciseLegExtension: AppLocalizations.of(context)!.bodyPartLegs,
       AppLocalizations.of(context)!.exerciseLegCurl: AppLocalizations.of(context)!.bodyPartLegs,
-      l10n.workout_a19f4e60: AppLocalizations.of(context)!.bodyPartLegs,
+      AppLocalizations.of(context)!.workout_a19f4e60: AppLocalizations.of(context)!.bodyPartLegs,
       
       // 肩
       AppLocalizations.of(context)!.exerciseShoulderPress: AppLocalizations.of(context)!.bodyPartShoulders,
       AppLocalizations.of(context)!.exerciseSideRaise: AppLocalizations.of(context)!.bodyPartShoulders,
       AppLocalizations.of(context)!.exerciseFrontRaise: AppLocalizations.of(context)!.bodyPartShoulders,
-      l10n.workout_61db805d: AppLocalizations.of(context)!.bodyPartShoulders,
+      AppLocalizations.of(context)!.workout_61db805d: AppLocalizations.of(context)!.bodyPartShoulders,
       
       // 二頭
       AppLocalizations.of(context)!.exerciseBarbellCurl: AppLocalizations.of(context)!.bodyPartBiceps,
@@ -96,14 +96,14 @@ class _WorkoutImportPreviewScreenState
       AppLocalizations.of(context)!.exerciseHammerCurl: AppLocalizations.of(context)!.bodyPartBiceps,
       
       // 三頭
-      l10n.workout_f2a8fd43: AppLocalizations.of(context)!.bodyPartTriceps,
+      AppLocalizations.of(context)!.workout_f2a8fd43: AppLocalizations.of(context)!.bodyPartTriceps,
       AppLocalizations.of(context)!.exerciseTricepsExtension: AppLocalizations.of(context)!.bodyPartTriceps,
-      l10n.exercise_f6d35c01: AppLocalizations.of(context)!.bodyPartTriceps,
+      AppLocalizations.of(context)!.exercise_f6d35c01: AppLocalizations.of(context)!.bodyPartTriceps,
       
       // 有酸素
       AppLocalizations.of(context)!.exerciseRunning: AppLocalizations.of(context)!.exerciseCardio,
-      l10n.workout_e23f084e: AppLocalizations.of(context)!.exerciseCardio,
-      l10n.workout_57bd7c71: AppLocalizations.of(context)!.exerciseCardio,
+      AppLocalizations.of(context)!.workout_e23f084e: AppLocalizations.of(context)!.exerciseCardio,
+      AppLocalizations.of(context)!.workout_57bd7c71: AppLocalizations.of(context)!.exerciseCardio,
       AppLocalizations.of(context)!.exerciseAerobicBike: AppLocalizations.of(context)!.exerciseCardio,
     };
     
@@ -391,7 +391,7 @@ class _WorkoutImportPreviewScreenState
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 4),
                             child: Text(
-                              'セット${setIndex + 1}: ${weight == 0 ? l10n.bodyweight : '${weight}kg'} × ${reps}回',
+                              'セット${setIndex + 1}: ${weight == 0 ? AppLocalizations.of(context)!.bodyweight : '${weight}kg'} × ${reps}回',
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey.shade700,
@@ -457,7 +457,7 @@ class _WorkoutImportPreviewScreenState
                             ),
                           )
                         : Text(
-                            l10n.workout_d55c6b11,
+                            AppLocalizations.of(context)!.workout_d55c6b11,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,

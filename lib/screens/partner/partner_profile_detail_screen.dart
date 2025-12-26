@@ -109,7 +109,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
     
     if (_messageController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text(AppLocalizations.of(context)!.profile_5cd65c3e)),
+        SnackBar(content: Text(AppLocalizations.of(context)!.profile_5cd65c3e)),
       );
       return;
     }
@@ -126,7 +126,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppLocalizations.of(context)!.profile_5b16043c)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.profile_5b16043c)),
         );
         Navigator.pop(context);
       }
@@ -172,11 +172,11 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildSection(AppLocalizations.of(context)!.bio, widget.profile.bio ?? l10n.profile_c1dcde32),
+                  _buildSection(AppLocalizations.of(context)!.bio, widget.profile.bio ?? AppLocalizations.of(context)!.profile_c1dcde32),
                   SizedBox(height: 24),
                   
                   _buildSection(
-                    l10n.profile_c7511bf1,
+                    AppLocalizations.of(context)!.profile_c7511bf1,
                     widget.profile.trainingGoals.isNotEmpty
                         ? widget.profile.trainingGoals
                             .where((goal) => goal != null && goal.isNotEmpty)
@@ -193,7 +193,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                   SizedBox(height: 24),
                   
                   _buildSection(
-                    l10n.profile_dfe6eee7,
+                    AppLocalizations.of(context)!.profile_dfe6eee7,
                     widget.profile.preferredExercises.isNotEmpty
                         ? widget.profile.preferredExercises
                             .where((ex) => ex != null && ex.isNotEmpty)
@@ -203,7 +203,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                   SizedBox(height: 24),
                   
                   _buildSection(
-                    l10n.profile_7db380c8,
+                    AppLocalizations.of(context)!.profile_7db380c8,
                     widget.profile.availableDays.isNotEmpty
                         ? widget.profile.availableDays
                             .where((day) => day != null && day.isNotEmpty)
@@ -214,7 +214,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                   SizedBox(height: 24),
                   
                   _buildSection(
-                    l10n.profile_1cfba3aa,
+                    AppLocalizations.of(context)!.profile_1cfba3aa,
                     widget.profile.availableTimeSlots.isNotEmpty
                         ? widget.profile.availableTimeSlots
                             .where((slot) => slot != null && slot.isNotEmpty)
@@ -226,7 +226,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                   
                   if (widget.profile.preferredLocation != null)
                     _buildSection(
-                      l10n.profile_6745b85b,
+                      AppLocalizations.of(context)!.profile_6745b85b,
                       widget.profile.preferredLocation!,
                     ),
                   SizedBox(height: 32),

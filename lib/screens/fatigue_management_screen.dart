@@ -384,7 +384,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                         Icon(Icons.psychology, color: Colors.blue[700], size: 28),
                         SizedBox(width: 12),
                         Text(
-                          l10n.general_f79781b6,
+                          AppLocalizations.of(context)!.general_f79781b6,
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -394,10 +394,10 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                     ),
                     SizedBox(height: 12),
                     Text(
-                      l10n.general_757bdf34
+                      AppLocalizations.of(context)!.general_757bdf34
                       '最適な回復期間とアドバイスを提供します。\n\n'
-                      l10n.general_86e4d133
-                      l10n.general_e373b708,
+                      AppLocalizations.of(context)!.general_86e4d133
+                      AppLocalizations.of(context)!.general_e373b708,
                       style: TextStyle(
                         fontSize: 14,
                         height: 1.5,
@@ -422,7 +422,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Text(
-                  _isEnabled ? l10n.valid : AppLocalizations.of(context)!.invalid,
+                  _isEnabled ? AppLocalizations.of(context)!.valid : AppLocalizations.of(context)!.invalid,
                   style: TextStyle(
                     color: _isEnabled ? Colors.green : Colors.grey,
                     fontWeight: FontWeight.bold,
@@ -456,7 +456,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                           Icon(Icons.check_circle, size: 28),
                           SizedBox(width: 12),
                           Text(
-                            l10n.general_60ef486a,
+                            AppLocalizations.of(context)!.general_60ef486a,
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -472,7 +472,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
             if (_isEnabled) ...[
               Text(
                 '💡 全トレーニング終了ボタンを押すと、本日のトレーニング記録を分析し、'
-                l10n.general_8aeecaf0,
+                AppLocalizations.of(context)!.general_8aeecaf0,
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey[600],
@@ -514,9 +514,9 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
                   color: _hasWorkoutToday ? Colors.green : Colors.grey,
                   size: 32,
                 ),
-                title: Text(l10n.general_b673dc9f),
+                title: Text(AppLocalizations.of(context)!.general_b673dc9f),
                 subtitle: Text(
-                  _hasWorkoutToday ? AppLocalizations.of(context)!.purchaseCompleted : l10n.workout_3ca27cb2,
+                  _hasWorkoutToday ? AppLocalizations.of(context)!.purchaseCompleted : AppLocalizations.of(context)!.workout_3ca27cb2,
                   style: TextStyle(
                     color: _hasWorkoutToday ? Colors.green : Colors.grey,
                   ),

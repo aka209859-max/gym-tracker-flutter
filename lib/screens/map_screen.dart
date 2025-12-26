@@ -238,7 +238,7 @@ class _MapScreenState extends State<MapScreen> {
             facilities: place.types,
             phoneNumber: '',
             openingHours: place.openNow != null 
-                ? (place.openNow! ? AppLocalizations.of(context)!.open : l10n.general_a2082b23)
+                ? (place.openNow! ? AppLocalizations.of(context)!.open : AppLocalizations.of(context)!.general_a2082b23)
                 : AppLocalizations.of(context)!.general_88133d74,
             monthlyFee: 0,
             rating: place.rating ?? 0.0,
@@ -409,7 +409,7 @@ class _MapScreenState extends State<MapScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.general_8a9d68db),
+        title: Text(AppLocalizations.of(context)!.general_8a9d68db),
         actions: [
           IconButton(
             icon: Icon(Icons.search),
@@ -536,7 +536,7 @@ class _MapScreenState extends State<MapScreen> {
             Icon(Icons.search_off, size: 64, color: Colors.grey),
             SizedBox(height: 16),
             Text(
-              l10n.general_303bea53,
+              AppLocalizations.of(context)!.general_303bea53,
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             SizedBox(height: 24),
@@ -573,7 +573,7 @@ class _MapScreenState extends State<MapScreen> {
                 Icon(Icons.search_off, size: 64, color: Colors.grey),
                 SizedBox(height: 16),
                 Text(
-                  l10n.general_25d11492,
+                  AppLocalizations.of(context)!.general_25d11492,
                   style: TextStyle(fontSize: 16, color: Colors.grey),
                 ),
               ],

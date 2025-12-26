@@ -132,7 +132,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
           IconButton(
             icon: Icon(Icons.info_outline),
             onPressed: () => _showInfoDialog(),
-            tooltip: l10n.workout_9e8d8121,
+            tooltip: AppLocalizations.of(context)!.workout_9e8d8121,
           ),
         ],
       ),
@@ -213,7 +213,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
                       Icon(Icons.info_outline, color: Colors.orange.shade700, size: 20),
                       SizedBox(width: 8),
                       Text(
-                        l10n.workout_f8ad9a0a,
+                        AppLocalizations.of(context)!.workout_f8ad9a0a,
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -338,7 +338,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  l10n.workout_ba5c8bd5,
+                  AppLocalizations.of(context)!.workout_ba5c8bd5,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -405,7 +405,7 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
             child: Padding(
               padding: EdgeInsets.all(24),
               child: Center(
-                child: Text(l10n.workout_355e6980),
+                child: Text(AppLocalizations.of(context)!.workout_355e6980),
               ),
             ),
           )
@@ -706,12 +706,12 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
   /// 部位別エクササイズを追加
   void _addBodyPartExercises(StringBuffer buffer, String bodyPart, bool isBeginner) {
     final exercises = {
-      AppLocalizations.of(context)!.bodyPartChest: [AppLocalizations.of(context)!.exerciseBenchPress, l10n.workout_e85fb0a4, l10n.workout_c196525e],
+      AppLocalizations.of(context)!.bodyPartChest: [AppLocalizations.of(context)!.exerciseBenchPress, AppLocalizations.of(context)!.workout_e85fb0a4, AppLocalizations.of(context)!.workout_c196525e],
       AppLocalizations.of(context)!.bodyPartBack: [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, AppLocalizations.of(context)!.exerciseBentOverRow],
       AppLocalizations.of(context)!.bodyPartLegs: [AppLocalizations.of(context)!.exerciseSquat, AppLocalizations.of(context)!.exerciseLegPress, AppLocalizations.of(context)!.exerciseLegCurl],
       AppLocalizations.of(context)!.bodyPartShoulders: [AppLocalizations.of(context)!.exerciseShoulderPress, AppLocalizations.of(context)!.exerciseSideRaise, AppLocalizations.of(context)!.exerciseRearDeltFly],
       AppLocalizations.of(context)!.bodyPartArms: [AppLocalizations.of(context)!.exerciseBarbellCurl, AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseHammerCurl],
-      l10n.bodyPart_ceb49fa1: [AppLocalizations.of(context)!.exerciseCrunch, AppLocalizations.of(context)!.exercisePlank, AppLocalizations.of(context)!.exerciseLegRaise],
+      AppLocalizations.of(context)!.bodyPart_ceb49fa1: [AppLocalizations.of(context)!.exerciseCrunch, AppLocalizations.of(context)!.exercisePlank, AppLocalizations.of(context)!.exerciseLegRaise],
     };
     
     final targetExercises = exercises[bodyPart] ?? [AppLocalizations.of(context)!.workout_065a723e];

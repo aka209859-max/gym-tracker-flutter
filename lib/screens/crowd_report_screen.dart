@@ -158,7 +158,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
               child: ElevatedButton(
                 onPressed: _submitReport,
                 child: Text(
-                  l10n.general_c989a28a,
+                  AppLocalizations.of(context)!.general_c989a28a,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),

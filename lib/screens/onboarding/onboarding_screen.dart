@@ -178,7 +178,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           SizedBox(height: 40),
           _buildOptionCard(
-            title: l10n.beginner,
+            title: AppLocalizations.of(context)!.beginner,
             subtitle: AppLocalizations.of(context)!.beginnerDesc,
             icon: Icons.self_improvement,
             isSelected: _selectedTrainingLevel == AppLocalizations.of(context)!.beginner,
@@ -190,7 +190,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           SizedBox(height: 16),
           _buildOptionCard(
-            title: l10n.intermediate,
+            title: AppLocalizations.of(context)!.intermediate,
             subtitle: AppLocalizations.of(context)!.intermediateDesc,
             icon: Icons.fitness_center,
             isSelected: _selectedTrainingLevel == AppLocalizations.of(context)!.intermediate,
@@ -203,7 +203,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           SizedBox(height: 16),
           _buildOptionCard(
             title: AppLocalizations.of(context)!.advanced,
-            subtitle: l10n.advancedDesc,
+            subtitle: AppLocalizations.of(context)!.advancedDesc,
             icon: Icons.emoji_events,
             isSelected: _selectedTrainingLevel == AppLocalizations.of(context)!.advanced,
             onTap: () {
@@ -243,7 +243,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           SizedBox(height: 40),
           _buildOptionCard(
-            title: l10n.muscleGrowth,
+            title: AppLocalizations.of(context)!.muscleGrowth,
             subtitle: AppLocalizations.of(context)!.muscleGrowthDesc,
             icon: Icons.volunteer_activism,
             isSelected: _selectedTrainingGoal == AppLocalizations.of(context)!.muscleGrowth,
@@ -255,7 +255,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           SizedBox(height: 16),
           _buildOptionCard(
-            title: l10n.dietGoal,
+            title: AppLocalizations.of(context)!.dietGoal,
             subtitle: AppLocalizations.of(context)!.dietGoalDesc,
             icon: Icons.trending_down,
             isSelected: _selectedTrainingGoal == AppLocalizations.of(context)!.dietGoal,
@@ -267,7 +267,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           SizedBox(height: 16),
           _buildOptionCard(
-            title: l10n.healthMaintenance,
+            title: AppLocalizations.of(context)!.healthMaintenance,
             subtitle: AppLocalizations.of(context)!.healthMaintenanceDesc,
             icon: Icons.favorite,
             isSelected: _selectedTrainingGoal == AppLocalizations.of(context)!.healthMaintenance,
@@ -300,7 +300,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           SizedBox(height: 12),
           Text(
-            l10n.general_146fc72d,
+            AppLocalizations.of(context)!.general_146fc72d,
             style: TextStyle(
               color: Colors.white.withOpacity(0.7),
               fontSize: 16,
@@ -332,7 +332,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           SizedBox(height: 16),
           _buildOptionCard(
-            title: l10n.frequency5plus,
+            title: AppLocalizations.of(context)!.frequency5plus,
             subtitle: AppLocalizations.of(context)!.dailyTraining,
             icon: Icons.event_repeat,
             isSelected: _selectedTrainingFrequency == AppLocalizations.of(context)!.frequency5plus,
@@ -478,20 +478,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           _buildFeatureCard(
             icon: Icons.fitness_center,
             title: AppLocalizations.of(context)!.workoutRecords,
-            description: l10n.general_a708f25a,
+            description: AppLocalizations.of(context)!.general_a708f25a,
             delay: 0,
           ),
           SizedBox(height: 16),
           _buildFeatureCard(
             icon: Icons.psychology,
-            title: l10n.aiAnalysis,
+            title: AppLocalizations.of(context)!.aiAnalysis,
             description: AppLocalizations.of(context)!.aiAnalysisDesc,
             delay: 200,
           ),
           SizedBox(height: 16),
           _buildFeatureCard(
             icon: Icons.emoji_events,
-            title: l10n.general_ed434def,
+            title: AppLocalizations.of(context)!.general_ed434def,
             description: AppLocalizations.of(context)!.achievementSupport,
             delay: 400,
           ),
@@ -530,7 +530,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     Icon(Icons.card_giftcard, color: Colors.orange, size: 20),
                     SizedBox(width: 8),
                     Text(
-                      l10n.general_81245a16,
+                      AppLocalizations.of(context)!.general_81245a16,
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.9),
                         fontSize: 14,
@@ -548,7 +548,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     });
                   },
                   title: Text(
-                    l10n.general_bef2e703,
+                    AppLocalizations.of(context)!.general_bef2e703,
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.8),
                       fontSize: 13,
@@ -701,7 +701,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
           ),
           child: Text(
-            _currentPage < 3 ? l10n.next : AppLocalizations.of(context)!.getStarted, // 🎯 4ページに変更
+            _currentPage < 3 ? AppLocalizations.of(context)!.next : AppLocalizations.of(context)!.getStarted, // 🎯 4ページに変更
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,

@@ -156,7 +156,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // 基本情報
-                  _buildInfoSection(l10n.gym_0179630e, [
+                  _buildInfoSection(AppLocalizations.of(context)!.gym_0179630e, [
                     if (widget.partner.location != null)
                       _buildInfoRow(Icons.location_on, AppLocalizations.of(context)!.residence, widget.partner.location!),
                     if (widget.partner.experienceLevel != null)
@@ -257,7 +257,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                 child: ElevatedButton.icon(
                   onPressed: null,
                   icon: Icon(Icons.schedule),
-                  label: Text(l10n.general_34fb6e79, style: TextStyle(fontSize: 16)),
+                  label: Text(AppLocalizations.of(context)!.general_34fb6e79, style: TextStyle(fontSize: 16)),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     backgroundColor: Colors.grey,
@@ -269,7 +269,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
               Column(
                 children: [
                   Text(
-                    l10n.general_caeec09a,
+                    AppLocalizations.of(context)!.general_caeec09a,
                     style: TextStyle(fontSize: 14, color: Colors.orange),
                   ),
                   SizedBox(height: 8),
@@ -280,7 +280,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                           onPressed: () {
                             // TODO: 拒否処理
                           },
-                          child: Text(l10n.general_a0d47aa4),
+                          child: Text(AppLocalizations.of(context)!.general_a0d47aa4),
                         ),
                       ),
                       SizedBox(width: 12),
@@ -290,7 +290,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                           onPressed: () {
                             // TODO: 承認処理
                           },
-                          child: Text(l10n.general_35db47a8),
+                          child: Text(AppLocalizations.of(context)!.general_35db47a8),
                         ),
                       ),
                     ],
@@ -304,7 +304,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                 child: ElevatedButton.icon(
                   onPressed: _openChat,
                   icon: Icon(Icons.message),
-                  label: Text(l10n.general_5010ff33, style: TextStyle(fontSize: 16)),
+                  label: Text(AppLocalizations.of(context)!.general_5010ff33, style: TextStyle(fontSize: 16)),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     backgroundColor: Colors.green,

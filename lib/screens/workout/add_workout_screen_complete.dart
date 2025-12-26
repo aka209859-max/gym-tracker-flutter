@@ -78,8 +78,8 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     AppLocalizations.of(context)!.bodyPartBack: [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, AppLocalizations.of(context)!.exerciseBentOverRow, AppLocalizations.of(context)!.exerciseSeatedRow, AppLocalizations.of(context)!.exercisePullUp],
     AppLocalizations.of(context)!.bodyPartShoulders: [AppLocalizations.of(context)!.exerciseShoulderPress, AppLocalizations.of(context)!.exerciseSideRaise, AppLocalizations.of(context)!.exerciseFrontRaise, AppLocalizations.of(context)!.exerciseRearDeltFly, AppLocalizations.of(context)!.exerciseUprightRow],
     AppLocalizations.of(context)!.bodyPartBiceps: [AppLocalizations.of(context)!.exerciseBarbellCurl, AppLocalizations.of(context)!.exerciseDumbbellCurl, AppLocalizations.of(context)!.exerciseHammerCurl, AppLocalizations.of(context)!.exercisePreacherCurl, AppLocalizations.of(context)!.exerciseCableCurl],
-    AppLocalizations.of(context)!.bodyPartTriceps: [AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseSkullCrusher, l10n.workout_22752b72, AppLocalizations.of(context)!.exerciseDips, AppLocalizations.of(context)!.exerciseKickback],
-    AppLocalizations.of(context)!.exerciseCardio: [AppLocalizations.of(context)!.exerciseRunning, l10n.workout_cf6a6f5b, AppLocalizations.of(context)!.exerciseAerobicBike, l10n.workout_f4ecb3c9, l10n.workout_a90ed9c4, l10n.workout_aa4c3c64, l10n.workout_e23f084e, l10n.workout_ba2fef80],
+    AppLocalizations.of(context)!.bodyPartTriceps: [AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseSkullCrusher, AppLocalizations.of(context)!.workout_22752b72, AppLocalizations.of(context)!.exerciseDips, AppLocalizations.of(context)!.exerciseKickback],
+    AppLocalizations.of(context)!.exerciseCardio: [AppLocalizations.of(context)!.exerciseRunning, AppLocalizations.of(context)!.workout_cf6a6f5b, AppLocalizations.of(context)!.exerciseAerobicBike, AppLocalizations.of(context)!.workout_f4ecb3c9, AppLocalizations.of(context)!.workout_a90ed9c4, AppLocalizations.of(context)!.workout_aa4c3c64, AppLocalizations.of(context)!.workout_e23f084e, AppLocalizations.of(context)!.workout_ba2fef80],
   };
 
   @override
@@ -401,7 +401,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
   Future<void> _saveWorkout() async {
     if (_sets.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text(AppLocalizations.of(context)!.workout_d90b7b6b)),
+        SnackBar(content: Text(AppLocalizations.of(context)!.workout_d90b7b6b)),
       );
       return;
     }
@@ -460,7 +460,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       if (mounted) {
         Navigator.pop(context, true);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppLocalizations.of(context)!.workout_498b0ea4)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.workout_498b0ea4)),
         );
       }
     } catch (e) {
@@ -497,7 +497,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           IconButton(
             icon: Icon(Icons.timer),
             onPressed: _showRestTimerSettings,
-            tooltip: l10n.workout_4a60472d,
+            tooltip: AppLocalizations.of(context)!.workout_4a60472d,
           ),
         ],
       ),
@@ -628,7 +628,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                       controller: _memoController,
                       maxLines: 5,
                       decoration: InputDecoration(
-                        hintText: l10n.workout_be150460,
+                        hintText: AppLocalizations.of(context)!.workout_be150460,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -656,7 +656,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                       ),
                     ),
                     child: Text(
-                      l10n.workout_18f75a52,
+                      AppLocalizations.of(context)!.workout_18f75a52,
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -749,7 +749,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
             OutlinedButton.icon(
               onPressed: () => _addSet(exerciseName),
               icon: Icon(Icons.add),
-              label: Text(l10n.workout_68d6a303),
+              label: Text(AppLocalizations.of(context)!.workout_68d6a303),
               style: OutlinedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 40),
               ),
@@ -906,7 +906,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                     set.hasAssist ? Icons.people : Icons.person,
                     size: 18,
                   ),
-                  label: Text(set.hasAssist ? '補助あり' : l10n.workout_7b8e9d09),
+                  label: Text(set.hasAssist ? '補助あり' : AppLocalizations.of(context)!.workout_7b8e9d09),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: set.hasAssist ? Colors.orange : Colors.grey,
                     side: BorderSide(

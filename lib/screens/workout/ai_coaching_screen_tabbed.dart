@@ -416,11 +416,11 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
           tabs: [
             Tab(
               icon: Icon(Icons.fitness_center),
-              text: l10n.workout_0185a259,
+              text: AppLocalizations.of(context)!.workout_0185a259,
             ),
             Tab(
               icon: Icon(Icons.timeline),
-              text: l10n.workout_fec3bf19,
+              text: AppLocalizations.of(context)!.workout_fec3bf19,
             ),
             Tab(
               icon: Icon(Icons.analytics),
@@ -466,7 +466,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
   late final Map<String, bool> _selectedBodyParts;
   
   // 🔧 v1.0.217: レベル選択（初心者・中級者・上級者）
-  String _selectedLevel = AppLocalizations.of(context)!.beginner; // デフォルトは初心者
+  late String _selectedLevel; // デフォルトは初心者（didChangeDependenciesで初期化）
 
   // UI状態
   bool _isGenerating = false;
@@ -500,6 +500,13 @@ class _AIMenuTabState extends State<_AIMenuTab>
     };
     _loadHistory();
     _loadWorkoutHistory(); // 🔧 v1.0.217: トレーニング履歴を読み込む
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // 🔧 Phase 2 Fix: context依存の初期化はここで実行
+    _selectedLevel = AppLocalizations.of(context)!.beginner;
   }
 
   /// 履歴読み込み
@@ -665,7 +672,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
             ),
             SizedBox(height: 12),
             Text(
-              l10n.workout_17f59b6a,
+              AppLocalizations.of(context)!.workout_17f59b6a,
               style: TextStyle(fontSize: 14),
             ),
           ],
@@ -680,7 +687,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          l10n.workout_2dc1ee52,
+          AppLocalizations.of(context)!.workout_2dc1ee52,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -751,7 +758,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          l10n.workout_478bc20c,
+          AppLocalizations.of(context)!.workout_478bc20c,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -844,7 +851,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  l10n.workout_ba5c8bd5,
+                  AppLocalizations.of(context)!.workout_ba5c8bd5,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -873,8 +880,8 @@ class _AIMenuTabState extends State<_AIMenuTab>
                       ),
                       label: Text(
                         _selectedExerciseIndices.length == _parsedExercises.length
-                            ? l10n.workout_69593f57
-                            : l10n.workout_219e609f,
+                            ? AppLocalizations.of(context)!.workout_69593f57
+                            : AppLocalizations.of(context)!.workout_219e609f,
                         style: const TextStyle(fontSize: 12),
                       ),
                     ),
@@ -1092,21 +1099,21 @@ class _AIMenuTabState extends State<_AIMenuTab>
   Color _getBodyPartColor(String bodyPart) {
     final l10n = AppLocalizations.of(context)!;
     
-    if (bodyPart == l10n.bodyPartChest) {
+    if (bodyPart == AppLocalizations.of(context)!.bodyPartChest) {
       return Colors.red.shade400;
-    } else if (bodyPart == l10n.bodyPartBack) {
+    } else if (bodyPart == AppLocalizations.of(context)!.bodyPartBack) {
       return Colors.blue.shade400;
-    } else if (bodyPart == l10n.bodyPartLegs) {
+    } else if (bodyPart == AppLocalizations.of(context)!.bodyPartLegs) {
       return Colors.green.shade400;
-    } else if (bodyPart == l10n.bodyPartShoulders) {
+    } else if (bodyPart == AppLocalizations.of(context)!.bodyPartShoulders) {
       return Colors.orange.shade400;
-    } else if (bodyPart == l10n.bodyPartBiceps) {
+    } else if (bodyPart == AppLocalizations.of(context)!.bodyPartBiceps) {
       return Colors.purple.shade400;
-    } else if (bodyPart == l10n.bodyPartTriceps) {
+    } else if (bodyPart == AppLocalizations.of(context)!.bodyPartTriceps) {
       return Colors.deepPurple.shade400;
     } else if (bodyPart == '腕') { // 後方互換性
       return Colors.purple.shade300;
-    } else if (bodyPart == l10n.bodyPart_ceb49fa1) {
+    } else if (bodyPart == AppLocalizations.of(context)!.bodyPart_ceb49fa1) {
       return Colors.teal.shade400;
     } else {
       return Colors.grey.shade400;
@@ -1177,7 +1184,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
             child: Padding(
               padding: EdgeInsets.all(24),
               child: Center(
-                child: Text(l10n.workout_355e6980),
+                child: Text(AppLocalizations.of(context)!.workout_355e6980),
               ),
             ),
           )
@@ -1465,25 +1472,25 @@ class _AIMenuTabState extends State<_AIMenuTab>
       AppLocalizations.of(context)!.bodyPartChest: AppLocalizations.of(context)!.bodyPartChest,
       AppLocalizations.of(context)!.musclePecs: AppLocalizations.of(context)!.bodyPartChest,
       AppLocalizations.of(context)!.bodyPartBack: AppLocalizations.of(context)!.bodyPartBack,
-      l10n.workout_0f45a131: AppLocalizations.of(context)!.bodyPartBack,
-      l10n.workout_b06bf71b: AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.workout_0f45a131: AppLocalizations.of(context)!.bodyPartBack,
+      AppLocalizations.of(context)!.workout_b06bf71b: AppLocalizations.of(context)!.bodyPartBack,
       AppLocalizations.of(context)!.bodyPartLegs: AppLocalizations.of(context)!.bodyPartLegs,
-      l10n.workout_0c28e8be: AppLocalizations.of(context)!.bodyPartLegs,
-      l10n.workout_10073d2e: AppLocalizations.of(context)!.bodyPartLegs,
+      AppLocalizations.of(context)!.workout_0c28e8be: AppLocalizations.of(context)!.bodyPartLegs,
+      AppLocalizations.of(context)!.workout_10073d2e: AppLocalizations.of(context)!.bodyPartLegs,
       AppLocalizations.of(context)!.bodyPartShoulders: AppLocalizations.of(context)!.bodyPartShoulders,
-      l10n.workout_da6d5d22: AppLocalizations.of(context)!.bodyPartShoulders,
+      AppLocalizations.of(context)!.workout_da6d5d22: AppLocalizations.of(context)!.bodyPartShoulders,
       AppLocalizations.of(context)!.bodyPartBiceps: AppLocalizations.of(context)!.bodyPartBiceps,
-      l10n.bodyPart_8efece65: AppLocalizations.of(context)!.bodyPartBiceps,
+      AppLocalizations.of(context)!.bodyPart_8efece65: AppLocalizations.of(context)!.bodyPartBiceps,
       AppLocalizations.of(context)!.bodyPartTriceps: AppLocalizations.of(context)!.bodyPartTriceps,
-      l10n.bodyPart_c158cb15: AppLocalizations.of(context)!.bodyPartTriceps,
+      AppLocalizations.of(context)!.bodyPart_c158cb15: AppLocalizations.of(context)!.bodyPartTriceps,
       '腕': '腕', // 後方互換性のため残す
-      l10n.bodyPart_cc7dbde9: AppLocalizations.of(context)!.bodyPartArms,
+      AppLocalizations.of(context)!.bodyPart_cc7dbde9: AppLocalizations.of(context)!.bodyPartArms,
       AppLocalizations.of(context)!.bodyPart_ceb49fa1: AppLocalizations.of(context)!.bodyPart_ceb49fa1,
-      AppLocalizations.of(context)!.bodyPartAbs: l10n.bodyPart_ceb49fa1,
+      AppLocalizations.of(context)!.bodyPartAbs: AppLocalizations.of(context)!.bodyPart_ceb49fa1,
       AppLocalizations.of(context)!.workout_3347b366: AppLocalizations.of(context)!.bodyPart_ceb49fa1,
       AppLocalizations.of(context)!.bodyPartCardio: AppLocalizations.of(context)!.bodyPartCardio, // 🔧 v1.0.226: 有酸素運動対応
-      l10n.workout_5cd69285: AppLocalizations.of(context)!.exerciseCardio,
-      l10n.workout_ad5c696a: AppLocalizations.of(context)!.exerciseCardio,
+      AppLocalizations.of(context)!.workout_5cd69285: AppLocalizations.of(context)!.exerciseCardio,
+      AppLocalizations.of(context)!.workout_ad5c696a: AppLocalizations.of(context)!.exerciseCardio,
     };
     
     debugPrint('🔍 パーサー開始: 全${lines.length}行を処理');
@@ -2900,7 +2907,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
 
             // トレーニングレベル
             _buildDropdownField(
-              label: l10n.workout_2dc1ee52,
+              label: AppLocalizations.of(context)!.workout_2dc1ee52,
               value: _selectedLevel,
               items: _levels,
               onChanged: (value) {
@@ -2916,7 +2923,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildSliderField(
-                  label: l10n.autoGen_c157b7e9,
+                  label: AppLocalizations.of(context)!.autoGen_c157b7e9,
                   value: _selectedFrequency.toDouble(),
                   min: 1,
                   max: 6,
@@ -2949,7 +2956,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildSliderField(
-                  label: l10n.autoGen_ec1bb9da,
+                  label: AppLocalizations.of(context)!.autoGen_ec1bb9da,
                   value: _selectedRPE.toDouble(),
                   min: 6,
                   max: 10,
@@ -3120,7 +3127,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         color: Colors.grey.shade100,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Text(l10n.autoGen_4b5dcedc),
+          child: Text(AppLocalizations.of(context)!.autoGen_4b5dcedc),
         ),
       );
     }
@@ -3150,7 +3157,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               ),
               SizedBox(height: 8),
               Text(
-                _predictionResult!['error']?.toString() ?? l10n.autoGen_03b65e41,
+                _predictionResult!['error']?.toString() ?? AppLocalizations.of(context)!.autoGen_03b65e41,
                 style: TextStyle(color: Colors.red.shade700),
               ),
             ],
@@ -3170,7 +3177,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            l10n.autoGen_a2bbd225,
+            AppLocalizations.of(context)!.autoGen_a2bbd225,
             style: TextStyle(color: Colors.orange.shade900),
           ),
         ),
@@ -3370,7 +3377,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              l10n.workout_27e98563,
+              AppLocalizations.of(context)!.workout_27e98563,
               style: TextStyle(fontSize: 14, height: 1.6),
             ),
             SizedBox(height: 16),
@@ -3388,7 +3395,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                       Icon(Icons.check_circle, color: Colors.green, size: 20),
                       SizedBox(width: 8),
                       Text(
-                        l10n.workout_21745d7a,
+                        AppLocalizations.of(context)!.workout_21745d7a,
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
@@ -3410,7 +3417,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
             icon: Icon(Icons.play_arrow),
-            label: Text(l10n.workout_d489aa48),
+            label: Text(AppLocalizations.of(context)!.workout_d489aa48),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade700,
               foregroundColor: Colors.white,
@@ -4330,7 +4337,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                   ),
                   SizedBox(height: 4),
                   Text(
-                    l10n.autoGen_4a776041,
+                    AppLocalizations.of(context)!.autoGen_4a776041,
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.grey.shade700,
@@ -4354,7 +4361,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              l10n.autoGen_9d44cf62,
+              AppLocalizations.of(context)!.autoGen_9d44cf62,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -4385,7 +4392,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
 
             // 種目選択
             _buildDropdownField(
-              label: l10n.autoGen_07ba3722,
+              label: AppLocalizations.of(context)!.autoGen_07ba3722,
               value: _selectedExercise,
               items: _availableExercises,
               onChanged: (value) {
@@ -4411,13 +4418,13 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
             // プラトー検出トグル
             SwitchListTile(
               title: Text(
-                l10n.autoGen_6619d354,
+                AppLocalizations.of(context)!.autoGen_6619d354,
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
               ),
               subtitle: Text(
                 _enablePlateauDetection 
-                    ? l10n.autoGen_6be4fd6d 
-                    : l10n.autoGen_2f465804,
+                    ? AppLocalizations.of(context)!.autoGen_6be4fd6d 
+                    : AppLocalizations.of(context)!.autoGen_2f465804,
                 style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
               ),
               value: _enablePlateauDetection,
@@ -4436,7 +4443,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildSliderField(
-                  label: l10n.autoGen_64a1612a,
+                  label: AppLocalizations.of(context)!.autoGen_64a1612a,
                   value: _currentSets.toDouble(),
                   min: 4,
                   max: 24,
@@ -4469,7 +4476,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildSliderField(
-                  label: l10n.autoGen_c157b7e9,
+                  label: AppLocalizations.of(context)!.autoGen_c157b7e9,
                   value: _currentFrequency.toDouble(),
                   min: 1,
                   max: 6,
@@ -4499,7 +4506,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
 
             // トレーニングレベル
             _buildDropdownField(
-              label: l10n.workout_2dc1ee52,
+              label: AppLocalizations.of(context)!.workout_2dc1ee52,
               value: _selectedLevel,
               items: _levels,
               onChanged: (value) {
@@ -4588,7 +4595,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 context,
                 MaterialPageRoute(builder: (context) => const PersonalFactorsScreen()),
               ).then((_) => _loadUserAge()),
-              child: Text(l10n.workout_5c7bbafb),
+              child: Text(AppLocalizations.of(context)!.workout_5c7bbafb),
             ),
           ],
         ),
@@ -4607,7 +4614,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
             SizedBox(width: 12),
             Expanded(
               child: Text(
-                l10n.autoGen_f2350bf3,
+                AppLocalizations.of(context)!.autoGen_f2350bf3,
                 style: TextStyle(fontSize: 13),
               ),
             ),
@@ -4763,7 +4770,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               ),
               SizedBox(height: 8),
               Text(
-                _analysisResult!['error']?.toString() ?? l10n.autoGen_03b65e41,
+                _analysisResult!['error']?.toString() ?? AppLocalizations.of(context)!.autoGen_03b65e41,
                 style: TextStyle(color: Colors.red.shade700),
               ),
             ],
@@ -4783,7 +4790,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            l10n.autoGen_15ac6a5e,
+            AppLocalizations.of(context)!.autoGen_15ac6a5e,
             style: TextStyle(color: Colors.orange.shade900),
           ),
         ),
@@ -4942,7 +4949,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         break;
       case 'suboptimal':
         statusColor = Colors.blue;
-        statusLabel = l10n.autoGen_b1be274b;
+        statusLabel = AppLocalizations.of(context)!.autoGen_b1be274b;
         break;
       case 'insufficient':
         statusColor = Colors.orange;
@@ -4950,7 +4957,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         break;
       case 'excessive':
         statusColor = Colors.red;
-        statusLabel = l10n.autoGen_81ebe44b;
+        statusLabel = AppLocalizations.of(context)!.autoGen_81ebe44b;
         break;
       default:
         statusColor = Colors.grey;
@@ -5021,7 +5028,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         break;
       case 'suboptimal':
         statusColor = Colors.blue;
-        statusLabel = l10n.autoGen_b1be274b;
+        statusLabel = AppLocalizations.of(context)!.autoGen_b1be274b;
         break;
       case 'insufficient':
         statusColor = Colors.orange;
@@ -5029,7 +5036,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         break;
       case 'excessive':
         statusColor = Colors.red;
-        statusLabel = l10n.autoGen_81ebe44b;
+        statusLabel = AppLocalizations.of(context)!.autoGen_81ebe44b;
         break;
       default:
         statusColor = Colors.grey;
@@ -5109,7 +5116,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                   ),
                   SizedBox(height: 4),
                   Text(
-                    l10n.autoGen_773d1c04,
+                    AppLocalizations.of(context)!.autoGen_773d1c04,
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.grey.shade700,
@@ -5229,7 +5236,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              l10n.workout_27e98563,
+              AppLocalizations.of(context)!.workout_27e98563,
               style: TextStyle(fontSize: 14, height: 1.6),
             ),
             SizedBox(height: 16),
@@ -5247,7 +5254,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                       Icon(Icons.check_circle, color: Colors.green, size: 20),
                       SizedBox(width: 8),
                       Text(
-                        l10n.workout_21745d7a,
+                        AppLocalizations.of(context)!.workout_21745d7a,
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
@@ -5269,7 +5276,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           ElevatedButton.icon(
             onPressed: () => Navigator.of(context).pop(true),
             icon: Icon(Icons.play_arrow),
-            label: Text(l10n.workout_d489aa48),
+            label: Text(AppLocalizations.of(context)!.workout_d489aa48),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade700,
               foregroundColor: Colors.white,

@@ -82,7 +82,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                     const Divider(),
                     SizedBox(height: 8),
                     Text(
-                      l10n.general_e6a22641,
+                      AppLocalizations.of(context)!.general_e6a22641,
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey[700],
@@ -97,14 +97,14 @@ class PartnerDashboardScreen extends StatelessWidget {
             // 管理メニュー
             _buildMenuSection(
               context,
-              title: l10n.general_0490ae0f,
+              title: AppLocalizations.of(context)!.general_0490ae0f,
               icon: Icons.campaign,
               color: Colors.orange,
               items: [
                 _MenuItem(
                   icon: Icons.edit_note,
                   title: AppLocalizations.of(context)!.edit,
-                  subtitle: l10n.general_1588c96c,
+                  subtitle: AppLocalizations.of(context)!.general_1588c96c,
                   enabled: partnerAccess.hasPermission('editCampaign'),
                   onTap: () {
                     Navigator.push(
@@ -120,8 +120,8 @@ class PartnerDashboardScreen extends StatelessWidget {
                 ),
                 _MenuItem(
                   icon: Icons.photo_library,
-                  title: l10n.general_64cab206,
-                  subtitle: l10n.general_4ae49c21,
+                  title: AppLocalizations.of(context)!.general_64cab206,
+                  subtitle: AppLocalizations.of(context)!.general_4ae49c21,
                   enabled: partnerAccess.hasPermission('uploadPhotos'),
                   onTap: () {
                     Navigator.push(
@@ -141,14 +141,14 @@ class PartnerDashboardScreen extends StatelessWidget {
 
             _buildMenuSection(
               context,
-              title: l10n.general_28464ce8,
+              title: AppLocalizations.of(context)!.general_28464ce8,
               icon: Icons.store,
               color: Colors.blue,
               items: [
                 _MenuItem(
                   icon: Icons.fitness_center,
                   title: AppLocalizations.of(context)!.edit,
-                  subtitle: l10n.general_aa7af64f,
+                  subtitle: AppLocalizations.of(context)!.general_aa7af64f,
                   enabled: partnerAccess.hasPermission('editFacilities'),
                   onTap: () {
                     Navigator.push(
@@ -163,7 +163,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                 ),
                 _MenuItem(
                   icon: Icons.email,
-                  title: l10n.general_ea0f11e0,
+                  title: AppLocalizations.of(context)!.general_ea0f11e0,
                   subtitle: AppLocalizations.of(context)!.settings,
                   enabled: partnerAccess.hasPermission('editFacilities'),
                   onTap: () {
@@ -180,7 +180,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                 _MenuItem(
                   icon: Icons.access_time,
                   title: AppLocalizations.of(context)!.edit,
-                  subtitle: l10n.general_5cf61f1e,
+                  subtitle: AppLocalizations.of(context)!.general_5cf61f1e,
                   enabled: partnerAccess.hasPermission('editHours'),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -194,13 +194,13 @@ class PartnerDashboardScreen extends StatelessWidget {
 
             _buildMenuSection(
               context,
-              title: l10n.general_96216a83,
+              title: AppLocalizations.of(context)!.general_96216a83,
               icon: Icons.analytics,
               color: Colors.purple,
               items: [
                 _MenuItem(
                   icon: Icons.bar_chart,
-                  title: l10n.general_e9e20dd1,
+                  title: AppLocalizations.of(context)!.general_e9e20dd1,
                   subtitle: AppLocalizations.of(context)!.confirm,
                   enabled: partnerAccess.hasPermission('viewAnalytics'),
                   onTap: () {

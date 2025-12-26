@@ -234,7 +234,7 @@ class _PartnerEquipmentEditorScreenState
 
                   // マシンリスト
                   Text(
-                    l10n.gym_2689426f,
+                    AppLocalizations.of(context)!.gym_2689426f,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

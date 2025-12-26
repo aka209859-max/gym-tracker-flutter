@@ -104,7 +104,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
         title: Text(
-          l10n.notificationSettings,
+          AppLocalizations.of(context)!.notificationSettings,
           style: TextStyle(
             color: Colors.white,
             fontSize: 18,
@@ -119,12 +119,12 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
         padding: const EdgeInsets.all(16),
         children: [
           // トレーニング通知
-          _buildSectionHeader(l10n.workout),
+          _buildSectionHeader(AppLocalizations.of(context)!.workout),
           _buildNotificationCard(
             icon: Icons.fitness_center,
             iconColor: Colors.blue,
-            title: l10n.workoutReminders,
-            subtitle: l10n.profile_5d327b0d,
+            title: AppLocalizations.of(context)!.workoutReminders,
+            subtitle: AppLocalizations.of(context)!.profile_5d327b0d,
             value: _workoutReminders,
             onChanged: (value) {
               setState(() => _workoutReminders = value);
@@ -154,8 +154,8 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
           _buildNotificationCard(
             icon: Icons.flag,
             iconColor: Colors.green,
-            title: l10n.profile_07143ba3,
-            subtitle: l10n.profile_143190c5,
+            title: AppLocalizations.of(context)!.profile_07143ba3,
+            subtitle: AppLocalizations.of(context)!.profile_143190c5,
             value: _goalProgress,
             onChanged: (value) {
               setState(() => _goalProgress = value);
@@ -170,8 +170,8 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
           _buildNotificationCard(
             icon: Icons.message,
             iconColor: Colors.purple,
-            title: l10n.profile_aee8f242,
-            subtitle: l10n.profile_652e4f2a,
+            title: AppLocalizations.of(context)!.profile_aee8f242,
+            subtitle: AppLocalizations.of(context)!.profile_652e4f2a,
             value: _newMessages,
             onChanged: (value) {
               setState(() => _newMessages = value);
@@ -183,8 +183,8 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
           _buildNotificationCard(
             icon: Icons.people,
             iconColor: Colors.orange,
-            title: l10n.profile_01b6f7d1,
-            subtitle: l10n.profile_786b22b4,
+            title: AppLocalizations.of(context)!.profile_01b6f7d1,
+            subtitle: AppLocalizations.of(context)!.profile_786b22b4,
             value: _partnerRequests,
             onChanged: (value) {
               setState(() => _partnerRequests = value);
@@ -199,8 +199,8 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
           _buildNotificationCard(
             icon: Icons.store,
             iconColor: Colors.teal,
-            title: l10n.profile_39a1a356,
-            subtitle: l10n.profile_12c898c4,
+            title: AppLocalizations.of(context)!.profile_39a1a356,
+            subtitle: AppLocalizations.of(context)!.profile_12c898c4,
             value: _gymUpdates,
             onChanged: (value) {
               setState(() => _gymUpdates = value);
@@ -212,8 +212,8 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
           _buildNotificationCard(
             icon: Icons.campaign,
             iconColor: Colors.red,
-            title: l10n.profile_3cfc9048,
-            subtitle: l10n.profile_04e477db,
+            title: AppLocalizations.of(context)!.profile_3cfc9048,
+            subtitle: AppLocalizations.of(context)!.profile_04e477db,
             value: _promotions,
             onChanged: (value) {
               setState(() => _promotions = value);

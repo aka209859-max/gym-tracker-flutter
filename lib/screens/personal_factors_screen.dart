@@ -155,13 +155,13 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                     SizedBox(height: 24),
                     
                     // 静的要因セクション
-                    _buildSectionHeader(l10n.personalFactor_a8e6bc91, '変更頻度: 低'),
+                    _buildSectionHeader(AppLocalizations.of(context)!.personalFactor_a8e6bc91, '変更頻度: 低'),
                     SizedBox(height: 12),
                     _buildStaticFactorsCard(),
                     SizedBox(height: 24),
                     
                     // 動的要因セクション
-                    _buildSectionHeader(l10n.personalFactor_380ea875, '変更頻度: 高（日々更新推奨）'),
+                    _buildSectionHeader(AppLocalizations.of(context)!.personalFactor_380ea875, '変更頻度: 高（日々更新推奨）'),
                     SizedBox(height: 12),
                     _buildDynamicFactorsCard(),
                     SizedBox(height: 32),
@@ -268,11 +268,11 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return l10n.personalFactor_03a1c2ca;
+                  return AppLocalizations.of(context)!.personalFactor_03a1c2ca;
                 }
                 final age = int.tryParse(value);
                 if (age == null || age < 10 || age > 100) {
-                  return l10n.personalFactor_fb13f7ed;
+                  return AppLocalizations.of(context)!.personalFactor_fb13f7ed;
                 }
                 return null;
               },
@@ -286,7 +286,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               textInputAction: TextInputAction.next,
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
               decoration: InputDecoration(
-                labelText: l10n.personalFactor_5a712682,
+                labelText: AppLocalizations.of(context)!.personalFactor_5a712682,
                 suffixText: AppLocalizations.of(context)!.annualPrice,
                 helperText: '<1年: 1.10x, 3-5年: 0.95x, 5+年: 0.90x',
                 helperMaxLines: 2,
@@ -294,11 +294,11 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return l10n.personalFactor_31098440;
+                  return AppLocalizations.of(context)!.personalFactor_31098440;
                 }
                 final years = int.tryParse(value);
                 if (years == null || years < 0 || years > 50) {
-                  return l10n.personalFactor_47d86eef;
+                  return AppLocalizations.of(context)!.personalFactor_47d86eef;
                 }
                 return null;
               },
@@ -322,7 +322,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               textInputAction: TextInputAction.next,
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
               decoration: InputDecoration(
-                labelText: l10n.personalFactor_db37d13b,
+                labelText: AppLocalizations.of(context)!.personalFactor_db37d13b,
                 suffixText: AppLocalizations.of(context)!.time,
                 helperText: '<6時間: 1.15x, 8+時間: 0.95x',
                 helperMaxLines: 2,
@@ -330,11 +330,11 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return l10n.personalFactor_f3409cdd;
+                  return AppLocalizations.of(context)!.personalFactor_f3409cdd;
                 }
                 final hours = double.tryParse(value);
                 if (hours == null || hours < 0 || hours > 24) {
-                  return l10n.personalFactor_616dc22d;
+                  return AppLocalizations.of(context)!.personalFactor_616dc22d;
                 }
                 return null;
               },
@@ -348,19 +348,19 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               textInputAction: TextInputAction.next,
               onEditingComplete: () => FocusScope.of(context).nextFocus(),
               decoration: InputDecoration(
-                labelText: l10n.personalFactor_9f7b01f0,
-                suffixText: l10n.personalFactor_4da8beb5,
+                labelText: AppLocalizations.of(context)!.personalFactor_9f7b01f0,
+                suffixText: AppLocalizations.of(context)!.personalFactor_4da8beb5,
                 helperText: '<84g(1.2g/kg): 1.10x, 112+g(1.6g/kg): 0.95x (体重70kg想定)',
                 helperMaxLines: 3,
                 prefixIcon: Icon(Icons.restaurant),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return l10n.personalFactor_59352db7;
+                  return AppLocalizations.of(context)!.personalFactor_59352db7;
                 }
                 final protein = double.tryParse(value);
                 if (protein == null || protein < 0 || protein > 500) {
-                  return l10n.personalFactor_b7206655;
+                  return AppLocalizations.of(context)!.personalFactor_b7206655;
                 }
                 return null;
               },
@@ -374,8 +374,8 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
               textInputAction: TextInputAction.done,
               onEditingComplete: () => FocusScope.of(context).unfocus(),
               decoration: InputDecoration(
-                labelText: l10n.personalFactor_e8aa7dea,
-                suffixText: l10n.personalFactor_ec2007be,
+                labelText: AppLocalizations.of(context)!.personalFactor_e8aa7dea,
+                suffixText: AppLocalizations.of(context)!.personalFactor_ec2007be,
                 helperText: '1ユニット毎に+5% (ビール350ml≒1.4ユニット)',
                 helperMaxLines: 2,
                 prefixIcon: Icon(Icons.local_bar),
@@ -386,7 +386,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
                 }
                 final units = int.tryParse(value);
                 if (units == null || units < 0 || units > 20) {
-                  return l10n.personalFactor_df82df91;
+                  return AppLocalizations.of(context)!.personalFactor_df82df91;
                 }
                 return null;
               },
@@ -423,7 +423,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
             Text(
               'Personal Factor Multiplier (PFM) は、年齢・経験・睡眠・栄養・アルコールの5要素を統合して個人の疲労感受性を補正します。\n\n'
               '範囲: 0.7x - 1.3x (最小30%減〜最大30%増)\n'
-              l10n.personalFactor_a5772517,
+              AppLocalizations.of(context)!.personalFactor_a5772517,
               style: TextStyle(fontSize: 11, color: Colors.grey[700]),
             ),
           ],

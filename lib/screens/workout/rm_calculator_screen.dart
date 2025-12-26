@@ -15,7 +15,7 @@ class RMCalculatorScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(l10n.workout_0052814d),
+          title: Text(AppLocalizations.of(context)!.workout_0052814d),
           backgroundColor: theme.colorScheme.primary,
           bottom: TabBar(
             indicatorColor: Colors.white,
@@ -31,7 +31,7 @@ class RMCalculatorScreen extends StatelessWidget {
               fontWeight: FontWeight.normal,
             ),
             tabs: [
-              Tab(icon: Icon(Icons.calculate, size: 24), text: l10n.rmCalculator),
+              Tab(icon: Icon(Icons.calculate, size: 24), text: AppLocalizations.of(context)!.rmCalculator),
               Tab(icon: Icon(Icons.fitness_center, size: 24), text: AppLocalizations.of(context)!.plateCalculator),
             ],
           ),
@@ -112,7 +112,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
           ),
           SizedBox(height: 8),
           Text(
-            l10n.workout_9c0a4993,
+            AppLocalizations.of(context)!.workout_9c0a4993,
             style: TextStyle(
               fontSize: 14,
               color: Colors.grey,
@@ -174,7 +174,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
               elevation: 2,
             ),
             child: Text(
-              l10n.workout_c0a0d68f,
+              AppLocalizations.of(context)!.workout_c0a0d68f,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -329,7 +329,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                     Icon(Icons.info_outline, color: Colors.grey[600]),
                     SizedBox(width: 8),
                     Text(
-                      l10n.workout_22a0ae55,
+                      AppLocalizations.of(context)!.workout_22a0ae55,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -497,7 +497,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
         children: [
           // タイトル
           Text(
-            l10n.workout_ae263865,
+            AppLocalizations.of(context)!.workout_ae263865,
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
@@ -506,7 +506,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
           ),
           SizedBox(height: 8),
           Text(
-            l10n.workout_5dd09e2c,
+            AppLocalizations.of(context)!.workout_5dd09e2c,
             style: TextStyle(
               fontSize: 16,
               color: Colors.grey,
@@ -541,7 +541,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                         Icon(Icons.settings, color: theme.colorScheme.primary, size: 24),
                         SizedBox(width: 8),
                         Text(
-                          l10n.workout_2b9ba6e9,
+                          AppLocalizations.of(context)!.workout_2b9ba6e9,
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -578,15 +578,15 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                   Row(
                     children: [
                       Expanded(
-                        child: _presetButton(l10n.workout_4926a20c, 'standard', theme),
+                        child: _presetButton(AppLocalizations.of(context)!.workout_4926a20c, 'standard', theme),
                       ),
                       SizedBox(width: 8),
                       Expanded(
-                        child: _presetButton(l10n.workout_2335c870, '20kg_base', theme),
+                        child: _presetButton(AppLocalizations.of(context)!.workout_2335c870, '20kg_base', theme),
                       ),
                       SizedBox(width: 8),
                       Expanded(
-                        child: _presetButton(l10n.workout_903c82de, 'basic', theme),
+                        child: _presetButton(AppLocalizations.of(context)!.workout_903c82de, 'basic', theme),
                       ),
                     ],
                   ),
@@ -748,7 +748,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
               elevation: 4,
             ),
             child: Text(
-              l10n.workout_c0a474a8,
+              AppLocalizations.of(context)!.workout_c0a474a8,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -807,14 +807,14 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            l10n.workout_489b353c,
+                            AppLocalizations.of(context)!.workout_489b353c,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
-                            l10n.workout_726d4bbf,
+                            AppLocalizations.of(context)!.workout_726d4bbf,
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.grey,

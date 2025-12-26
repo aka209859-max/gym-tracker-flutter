@@ -93,7 +93,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
       // 位置情報取得失敗時は続行（フィルターから距離を除外）
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppLocalizations.of(context)!.general_8b92a0e1)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.general_8b92a0e1)),
         );
       }
     }
@@ -197,7 +197,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
             ],
 
             // トレーニング目標フィルター
-            Text(l10n.profile_c7511bf1, style: TextStyle(fontWeight: FontWeight.bold)),
+            Text(AppLocalizations.of(context)!.profile_c7511bf1, style: TextStyle(fontWeight: FontWeight.bold)),
             SizedBox(height: 8),
             Wrap(
               spacing: 8,
@@ -293,7 +293,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
               Padding(
                 padding: EdgeInsets.only(top: 4),
                 child: Text(
-                  l10n.general_80d43a2b,
+                  AppLocalizations.of(context)!.general_80d43a2b,
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ),
@@ -418,7 +418,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
             ),
             SizedBox(height: 16),
             Text(
-              l10n.general_07460321,
+              AppLocalizations.of(context)!.general_07460321,
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey[600],
@@ -485,7 +485,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      l10n.general_4c0c946d,
+                      AppLocalizations.of(context)!.general_4c0c946d,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -493,7 +493,7 @@ class _PartnerSearchScreenState extends State<PartnerSearchScreen> {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      l10n.general_b96738b9,
+                      AppLocalizations.of(context)!.general_b96738b9,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey[700],

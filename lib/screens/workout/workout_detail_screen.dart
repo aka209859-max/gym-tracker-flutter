@@ -189,7 +189,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.workoutDetail),
+        title: Text(AppLocalizations.of(context)!.workoutDetail),
         actions: [
           IconButton(
             icon: Icon(Icons.edit),
@@ -298,7 +298,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                         SizedBox(
                           width: 40,
                           child: Text(
-                            l10n.sets,
+                            AppLocalizations.of(context)!.sets,
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
@@ -308,7 +308,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                         ),
                         Expanded(
                           child: Text(
-                            l10n.workout_2579352f,
+                            AppLocalizations.of(context)!.workout_2579352f,
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
@@ -319,7 +319,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                         SizedBox(
                           width: 60,
                           child: Text(
-                            _isAbsExercise(exercise.name) ? l10n.workout_34d70475 : l10n.repsCount,
+                            _isAbsExercise(exercise.name) ? AppLocalizations.of(context)!.workout_34d70475 : AppLocalizations.of(context)!.repsCount,
                             style: const TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
@@ -341,7 +341,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                         SizedBox(
                           width: 40,
                           child: Text(
-                            l10n.workout_c6b41e99,
+                            AppLocalizations.of(context)!.workout_c6b41e99,
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
@@ -528,7 +528,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                 ),
               ] else ...[
                 Text(
-                  l10n.workout_e5b3b7b2,
+                  AppLocalizations.of(context)!.workout_e5b3b7b2,
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey[600],
@@ -572,7 +572,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
       case SetType.failure:
         icon = Icons.local_fire_department;
         color = Colors.red;
-        label = l10n.failureSet;
+        label = AppLocalizations.of(context)!.failureSet;
         break;
       default:
         return const SizedBox.shrink();

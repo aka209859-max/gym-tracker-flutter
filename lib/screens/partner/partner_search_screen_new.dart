@@ -116,7 +116,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
             ),
             SizedBox(height: 8),
             Text(
-              l10n.general_9eba2cc5,
+              AppLocalizations.of(context)!.general_9eba2cc5,
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             SizedBox(height: 32),
@@ -127,7 +127,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
               ),
-              child: Text(l10n.viewProPlan),
+              child: Text(AppLocalizations.of(context)!.viewProPlan),
             ),
           ],
         ),
@@ -258,7 +258,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
           ),
           SizedBox(height: 8),
           Text(
-            l10n.general_4f03a19c,
+            AppLocalizations.of(context)!.general_4f03a19c,
             style: TextStyle(fontSize: 14, color: Colors.grey[500]),
           ),
         ],
@@ -316,7 +316,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
                 Icon(Icons.person_search, size: 80, color: Colors.grey[400]),
                 SizedBox(height: 16),
                 Text(
-                  l10n.general_c814cc13,
+                  AppLocalizations.of(context)!.general_c814cc13,
                   style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                 ),
                 SizedBox(height: 8),

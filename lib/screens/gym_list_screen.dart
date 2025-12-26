@@ -21,7 +21,7 @@ class _GymListScreenState extends State<GymListScreen> {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.gymList),
+        title: Text(AppLocalizations.of(context)!.gymList),
         actions: [
           PopupMenuButton<String>(
             icon: const Icon(Icons.sort),

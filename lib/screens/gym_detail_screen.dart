@@ -396,7 +396,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      l10n.gym_923e40e1,
+                      AppLocalizations.of(context)!.gym_923e40e1,
                       style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                     ),
                   ],
@@ -415,7 +415,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                     );
                   },
                   icon: Icon(Icons.edit),
-                  label: Text(l10n.gym_29c93cdb),
+                  label: Text(AppLocalizations.of(context)!.gym_29c93cdb),
                 ),
               ),
             ],
@@ -443,7 +443,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  l10n.gym_dc16fe89,
+                  AppLocalizations.of(context)!.gym_dc16fe89,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 Column(
@@ -515,7 +515,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                   );
                 },
                 icon: Icon(Icons.edit),
-                label: Text(l10n.gym_29c93cdb),
+                label: Text(AppLocalizations.of(context)!.gym_29c93cdb),
               ),
             ),
           ],
@@ -539,7 +539,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                 Icon(Icons.info, color: Colors.blue, size: 24),
                 SizedBox(width: 8),
                 Text(
-                  l10n.gym_0179630e,
+                  AppLocalizations.of(context)!.gym_0179630e,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -554,8 +554,8 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
             // 月額料金は公式サイトで確認
             _buildInfoNotice(
               Icons.open_in_new,
-              l10n.gym_a44956f8,
-              l10n.gym_e83fdce4,
+              AppLocalizations.of(context)!.gym_a44956f8,
+              AppLocalizations.of(context)!.gym_e83fdce4,
             ),
             SizedBox(height: 16),
             // チェックインボタン
@@ -564,7 +564,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
               child: ElevatedButton.icon(
                 onPressed: _checkInToGym,
                 icon: Icon(Icons.check_circle_outline),
-                label: Text(l10n.gym_5c490300),
+                label: Text(AppLocalizations.of(context)!.gym_5c490300),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   backgroundColor: Theme.of(context).colorScheme.primary,
@@ -685,7 +685,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
               Row(
                 children: [
                   Text(
-                    l10n.gym_2689426f,
+                    AppLocalizations.of(context)!.gym_2689426f,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(width: 8),
@@ -786,14 +786,14 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: Text(l10n.gym_b439391c),
+                      title: Text(AppLocalizations.of(context)!.gym_b439391c),
                       content: Text(
                         'チェックイン機能を使用するには、Firebase Consoleで設定ファイルを取得し、firebase_options.dartを更新してください。',
                       ),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),
-                          child: Text(l10n.gym_95877b1f),
+                          child: Text(AppLocalizations.of(context)!.gym_95877b1f),
                         ),
                       ],
                     ),
@@ -865,7 +865,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
               child: OutlinedButton.icon(
                 onPressed: _isFavorite == null ? null : _toggleFavorite,
                 icon: Icon(_isFavorite == true ? Icons.favorite : Icons.favorite_border),
-                label: Text(_isFavorite == true ? l10n.gym_c4a78c77 : AppLocalizations.of(context)!.favorite),
+                label: Text(_isFavorite == true ? AppLocalizations.of(context)!.gym_c4a78c77 : AppLocalizations.of(context)!.favorite),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: _isFavorite == true ? Colors.pink : null,
                   side: BorderSide(

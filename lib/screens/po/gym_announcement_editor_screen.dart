@@ -180,7 +180,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.announcement == null ? l10n.gym_afa40a0c : AppLocalizations.of(context)!.edit),
+        title: Text(widget.announcement == null ? AppLocalizations.of(context)!.gym_afa40a0c : AppLocalizations.of(context)!.edit),
         actions: [
           TextButton.icon(
             onPressed: _isSaving ? null : _saveAnnouncement,
@@ -207,7 +207,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
             children: [
               // お知らせタイプ選択
               Text(
-                l10n.gym_0dfe6c91,
+                AppLocalizations.of(context)!.gym_0dfe6c91,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -242,7 +242,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                 ),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return l10n.gym_0be017ad;
+                    return AppLocalizations.of(context)!.gym_0be017ad;
                   }
                   return null;
                 },
@@ -253,14 +253,14 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
               TextFormField(
                 controller: _contentController,
                 decoration: InputDecoration(
-                  labelText: l10n.gym_0edea1b7,
-                  hintText: l10n.gym_b23cb9bd,
+                  labelText: AppLocalizations.of(context)!.gym_0edea1b7,
+                  hintText: AppLocalizations.of(context)!.gym_b23cb9bd,
                   border: OutlineInputBorder(),
                 ),
                 maxLines: 5,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return l10n.gym_524e1d73;
+                    return AppLocalizations.of(context)!.gym_524e1d73;
                   }
                   return null;
                 },
@@ -287,7 +287,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
               
               // 画像アップロード
               Text(
-                l10n.gym_b26e7c38,
+                AppLocalizations.of(context)!.gym_b26e7c38,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -365,7 +365,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                 icon: Icon(Icons.calendar_today),
                 label: Text(
                   _validUntil == null
-                      ? l10n.gym_5d1d7a5c
+                      ? AppLocalizations.of(context)!.gym_5d1d7a5c
                       : '${_validUntil!.year}/${_validUntil!.month}/${_validUntil!.day}',
                 ),
                 style: OutlinedButton.styleFrom(
@@ -380,7 +380,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                     });
                   },
                   icon: Icon(Icons.clear),
-                  label: Text(l10n.gym_4f509a03),
+                  label: Text(AppLocalizations.of(context)!.gym_4f509a03),
                 ),
             ],
           ),

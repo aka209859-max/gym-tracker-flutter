@@ -342,7 +342,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      l10n.profile_d22ba9a1,
+                      AppLocalizations.of(context)!.profile_d22ba9a1,
                       style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                     ),
                     SizedBox(height: 24),
@@ -357,7 +357,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       ),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return l10n.profile_4b13496c;
+                          return AppLocalizations.of(context)!.profile_4b13496c;
                         }
                         return null;
                       },

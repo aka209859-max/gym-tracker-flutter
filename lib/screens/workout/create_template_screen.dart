@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../models/workout_template.dart';
 
 /// テンプレート作成画面
@@ -16,16 +17,32 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   
-  String _selectedMuscleGroup = '胸';
+  late String _selectedMuscleGroup; // didChangeDependenciesで初期化
   final List<TemplateExerciseBuilder> _exercises = [];
   bool _isSaving = false;
 
-  final List<String> _muscleGroups = ['胸', AppLocalizations.of(context)!.bodyPartBack, '脚', '肩', AppLocalizations.of(context)!.bodyPartBiceps, AppLocalizations.of(context)!.bodyPartTriceps];
+  late List<String> _muscleGroups; // didChangeDependenciesで初期化
   
   @override
   void initState() {
     super.initState();
     _autoLoginIfNeeded();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // 🔧 Phase 2 Fix: context依存の初期化はここで実行
+    _selectedMuscleGroup = '胸';
+    _muscleGroups = ['胸', AppLocalizations.of(context)!.bodyPartBack, '脚', '肩', AppLocalizations.of(context)!.bodyPartBiceps, AppLocalizations.of(context)!.bodyPartTriceps];
+    _muscleGroupExercises = {
+      '胸': [AppLocalizations.of(context)!.exerciseBenchPress, AppLocalizations.of(context)!.exerciseDumbbellPress, AppLocalizations.of(context)!.exerciseInclinePress, AppLocalizations.of(context)!.exerciseCableFly, AppLocalizations.of(context)!.exerciseDips],
+      '脚': [AppLocalizations.of(context)!.exerciseSquat, AppLocalizations.of(context)!.exerciseLegPress, AppLocalizations.of(context)!.exerciseLegExtension, AppLocalizations.of(context)!.exerciseLegCurl, AppLocalizations.of(context)!.exerciseCalfRaise],
+      AppLocalizations.of(context)!.bodyPartBack: [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, AppLocalizations.of(context)!.exerciseBentOverRow, AppLocalizations.of(context)!.exerciseSeatedRow, AppLocalizations.of(context)!.exercisePullUp],
+      '肩': [AppLocalizations.of(context)!.exerciseShoulderPress, AppLocalizations.of(context)!.exerciseSideRaise, AppLocalizations.of(context)!.exerciseFrontRaise, AppLocalizations.of(context)!.exerciseRearDeltFly, AppLocalizations.of(context)!.exerciseUprightRow],
+      AppLocalizations.of(context)!.bodyPartBiceps: [AppLocalizations.of(context)!.exerciseBarbellCurl, AppLocalizations.of(context)!.exerciseDumbbellCurl, AppLocalizations.of(context)!.exerciseHammerCurl, AppLocalizations.of(context)!.exercisePreacherCurl, AppLocalizations.of(context)!.exerciseCableCurl],
+      AppLocalizations.of(context)!.bodyPartTriceps: [AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseSkullCrusher, AppLocalizations.of(context)!.workout_22752b72, AppLocalizations.of(context)!.exerciseDips, AppLocalizations.of(context)!.exerciseKickback],
+    };
   }
   
   /// 未ログイン時に自動的に匿名ログイン
@@ -41,14 +58,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
     }
   }
   
-  final Map<String, List<String>> _muscleGroupExercises = {
-    '胸': [AppLocalizations.of(context)!.exerciseBenchPress, AppLocalizations.of(context)!.exerciseDumbbellPress, AppLocalizations.of(context)!.exerciseInclinePress, AppLocalizations.of(context)!.exerciseCableFly, AppLocalizations.of(context)!.exerciseDips],
-    '脚': [AppLocalizations.of(context)!.exerciseSquat, AppLocalizations.of(context)!.exerciseLegPress, AppLocalizations.of(context)!.exerciseLegExtension, AppLocalizations.of(context)!.exerciseLegCurl, AppLocalizations.of(context)!.exerciseCalfRaise],
-    AppLocalizations.of(context)!.bodyPartBack: [AppLocalizations.of(context)!.exerciseDeadlift, AppLocalizations.of(context)!.exerciseLatPulldown, AppLocalizations.of(context)!.exerciseBentOverRow, AppLocalizations.of(context)!.exerciseSeatedRow, AppLocalizations.of(context)!.exercisePullUp],
-    '肩': [AppLocalizations.of(context)!.exerciseShoulderPress, AppLocalizations.of(context)!.exerciseSideRaise, AppLocalizations.of(context)!.exerciseFrontRaise, AppLocalizations.of(context)!.exerciseRearDeltFly, AppLocalizations.of(context)!.exerciseUprightRow],
-    AppLocalizations.of(context)!.bodyPartBiceps: [AppLocalizations.of(context)!.exerciseBarbellCurl, AppLocalizations.of(context)!.exerciseDumbbellCurl, AppLocalizations.of(context)!.exerciseHammerCurl, AppLocalizations.of(context)!.exercisePreacherCurl, AppLocalizations.of(context)!.exerciseCableCurl],
-    AppLocalizations.of(context)!.bodyPartTriceps: [AppLocalizations.of(context)!.exerciseTricepsExtension, AppLocalizations.of(context)!.exerciseSkullCrusher, AppLocalizations.of(context)!.workout_22752b72, AppLocalizations.of(context)!.exerciseDips, AppLocalizations.of(context)!.exerciseKickback],
-  };
+  late Map<String, List<String>> _muscleGroupExercises; // didChangeDependenciesで初期化
 
   @override
   void dispose() {
@@ -63,7 +73,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.createTemplate),
+        title: Text(AppLocalizations.of(context)!.createTemplate),
         backgroundColor: theme.colorScheme.primary,
         foregroundColor: Colors.white,
         actions: [
@@ -80,7 +90,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                   )
                 : Icon(Icons.check, color: Colors.white),
             label: Text(
-              l10n.save,
+              AppLocalizations.of(context)!.save,
               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
           ),
@@ -95,7 +105,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
             TextFormField(
               controller: _nameController,
               decoration: InputDecoration(
-                labelText: l10n.templateName,
+                labelText: AppLocalizations.of(context)!.templateName,
                 hintText: '例: 胸トレーニング A',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -104,7 +114,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return l10n.workout_e4a17e51;
+                  return AppLocalizations.of(context)!.workout_e4a17e51;
                 }
                 return null;
               },
@@ -130,7 +140,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
             
             // 部位選択
             Text(
-              l10n.workout_9b2523e6,
+              AppLocalizations.of(context)!.workout_9b2523e6,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),
@@ -163,13 +173,13 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  l10n.workout_6e8a7475,
+                  AppLocalizations.of(context)!.workout_6e8a7475,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 TextButton.icon(
                   onPressed: _addExercise,
                   icon: Icon(Icons.add),
-                  label: Text(l10n.workout_c3a95268),
+                  label: Text(AppLocalizations.of(context)!.workout_c3a95268),
                 ),
               ],
             ),
@@ -187,7 +197,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                     Icon(Icons.fitness_center, size: 48, color: Colors.grey[400]),
                     SizedBox(height: 8),
                     Text(
-                      l10n.workout_d90b7b6b,
+                      AppLocalizations.of(context)!.workout_d90b7b6b,
                       style: TextStyle(color: Colors.grey[600]),
                     ),
                   ],
@@ -251,7 +261,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                             suffixIcon: IconButton(
                               icon: Icon(Icons.list, size: 20),
-                              tooltip: l10n.workout_16dc7c2c,
+                              tooltip: AppLocalizations.of(context)!.workout_16dc7c2c,
                               onPressed: () {
                                 setState(() {
                                   exercise.isCustomExercise = false;
@@ -270,7 +280,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                         DropdownButtonFormField<String>(
                           value: exercise.exerciseName,
                           decoration: const InputDecoration(
-                            labelText: l10n.exercise,
+                            labelText: AppLocalizations.of(context)!.exercise,
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                           ),
@@ -288,7 +298,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                                 children: [
                                   Icon(Icons.add_circle_outline, size: 18, color: Colors.blue),
                                   SizedBox(width: 8),
-                                  Text(l10n.addCustomExercise, style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+                                  Text(AppLocalizations.of(context)!.addCustomExercise, style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
                                 ],
                               ),
                             ),
@@ -329,7 +339,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                   child: TextFormField(
                     initialValue: exercise.targetSets.toString(),
                     decoration: const InputDecoration(
-                      labelText: l10n.setsCount,
+                      labelText: AppLocalizations.of(context)!.setsCount,
                       border: OutlineInputBorder(),
                       contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
@@ -344,7 +354,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                   child: TextFormField(
                     initialValue: exercise.targetReps.toString(),
                     decoration: const InputDecoration(
-                      labelText: l10n.repsCount,
+                      labelText: AppLocalizations.of(context)!.repsCount,
                       border: OutlineInputBorder(),
                       contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
@@ -396,7 +406,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
 
     if (_exercises.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text(AppLocalizations.of(context)!.workout_bf13cb6c)),
+        SnackBar(content: Text(AppLocalizations.of(context)!.workout_bf13cb6c)),
       );
       return;
     }
@@ -435,7 +445,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppLocalizations.of(context)!.workout_dff9ccc1)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.workout_dff9ccc1)),
         );
         Navigator.pop(context, true);
       }
