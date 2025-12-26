@@ -17,15 +17,15 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
   final TrainingPartnerService _partnerService = TrainingPartnerService();
   final SubscriptionService _subscriptionService = SubscriptionService();
 
-  String _selectedLocation = AppLocalizations.of(context)!.filterAll;
-  String _selectedExperienceLevel = AppLocalizations.of(context)!.filterAll;
+  late String _selectedLocation;
+  late String _selectedExperienceLevel;
   late String _selectedGoal;
   
   bool _canAccess = false;
   bool _hasSearched = false; // 検索実行フラグ
 
-  // 都道府県リスト
-  static const List<String> _prefectures = [
+  // 都道府県リスト（多言語化対応）
+  List<String> _prefectures(BuildContext context) => [
     AppLocalizations.of(context)!.filterAll,
     AppLocalizations.of(context)!.profile_afa342b7,
     AppLocalizations.of(context)!.prefectureAomori, AppLocalizations.of(context)!.prefectureIwate, AppLocalizations.of(context)!.prefectureMiyagi, AppLocalizations.of(context)!.prefectureAkita, AppLocalizations.of(context)!.prefectureYamagata, AppLocalizations.of(context)!.prefectureFukushima,
@@ -39,14 +39,14 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
     AppLocalizations.of(context)!.prefectureOkinawa,
   ];
 
-  static const List<String> _experienceLevels = [
+  List<String> _experienceLevels(BuildContext context) => [
     AppLocalizations.of(context)!.filterAll,
     AppLocalizations.of(context)!.beginner,
     AppLocalizations.of(context)!.intermediate,
     AppLocalizations.of(context)!.advanced,
   ];
 
-  static const List<String> _goals = [
+  List<String> _goals(BuildContext context) => [
     AppLocalizations.of(context)!.filterAll,
     AppLocalizations.of(context)!.muscleGrowth,
     AppLocalizations.of(context)!.goalWeightLoss,
@@ -64,6 +64,8 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _selectedLocation = AppLocalizations.of(context)!.filterAll;
+    _selectedExperienceLevel = AppLocalizations.of(context)!.filterAll;
     _selectedGoal = AppLocalizations.of(context)!.filterAll;
   }
 
@@ -149,7 +151,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               fillColor: Colors.white,
               prefixIcon: Icon(Icons.location_on),
             ),
-            items: _prefectures
+            items: _prefectures(context)
                 .map((location) => DropdownMenuItem(
                       value: location,
                       child: Text(location),
@@ -173,7 +175,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               fillColor: Colors.white,
               prefixIcon: Icon(Icons.fitness_center),
             ),
-            items: _experienceLevels
+            items: _experienceLevels(context)
                 .map((level) => DropdownMenuItem(
                       value: level,
                       child: Text(level),
@@ -197,7 +199,7 @@ class _PartnerSearchScreenNewState extends State<PartnerSearchScreenNew> {
               fillColor: Colors.white,
               prefixIcon: Icon(Icons.flag),
             ),
-            items: _goals
+            items: _goals(context)
                 .map((goal) => DropdownMenuItem(
                       value: goal,
                       child: Text(goal),
