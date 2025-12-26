@@ -162,7 +162,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                   Icon(Icons.cloud_off, color: Colors.white),
                   SizedBox(width: 8),
                   Expanded(
-                    child: Text('📴 オフライン保存しました\nオンライン復帰時に自動同期されます'),
+                    child: Text(AppLocalizations.of(context)!.body_offlineSaved),
                   ),
                 ],
               ),
@@ -211,8 +211,8 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            if (weight != null) Text('体重: ${weight.toStringAsFixed(1)}kg'),
-            if (bodyFat != null) Text('体脂肪率: ${bodyFat.toStringAsFixed(1)}%'),
+            if (weight != null) Text(AppLocalizations.of(context)!.body_weightKg.replaceAll('{weight}', weight.toStringAsFixed(1))),
+            if (bodyFat != null) Text(AppLocalizations.of(context)!.body_bodyFatPercent.replaceAll('{bodyFat}', bodyFat.toStringAsFixed(1))),
           ],
         ),
         actions: [
@@ -740,9 +740,9 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                 title: Text(DateFormat('yyyy年MM月dd日').format(date)),
                 subtitle: Row(
                   children: [
-                    if (weight != null) Text('体重: ${weight.toStringAsFixed(1)}kg'),
+                    if (weight != null) Text(AppLocalizations.of(context)!.body_weightKg.replaceAll('{weight}', weight.toStringAsFixed(1))),
                     if (weight != null && bodyFat != null) const Text('  •  '),
-                    if (bodyFat != null) Text('体脂肪率: ${bodyFat.toStringAsFixed(1)}%'),
+                    if (bodyFat != null) Text(AppLocalizations.of(context)!.body_bodyFatPercent.replaceAll('{bodyFat}', bodyFat.toStringAsFixed(1))),
                   ],
                 ),
                 trailing: IconButton(

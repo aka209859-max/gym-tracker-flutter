@@ -82,7 +82,7 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
               children: [
                 Icon(Icons.check_circle, color: Colors.white),
                 SizedBox(width: 8),
-                Text('✅ AIクレジット1回分を獲得しました！（テストモード）'),
+                Text(AppLocalizations.of(context)!.reward_creditEarnedTest),
               ],
             ),
             backgroundColor: Colors.green,
@@ -107,7 +107,7 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('広告の読み込みに失敗しました。もう一度お試しください。'),
+              content: Text(AppLocalizations.of(context)!.reward_adLoadFailed),
               backgroundColor: Colors.red,
             ),
           );
@@ -146,7 +146,7 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('広告の表示に失敗しました。しばらく待ってからお試しください。'),
+            content: Text(AppLocalizations.of(context)!.reward_adDisplayFailed),
             backgroundColor: Colors.red,
           ),
         );

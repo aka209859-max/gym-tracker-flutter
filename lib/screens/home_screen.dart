@@ -905,7 +905,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('シェアに失敗しました: $e'),
+            content: Text(AppLocalizations.of(context)!.home_shareFailed.replaceAll('{error}', e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -2541,7 +2541,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       print('❌ セット削除エラー: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('削除エラー: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.home_deleteError.replaceAll('{error}', e.toString()))),
         );
       }
     }
@@ -3300,7 +3300,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                       debugPrint('🏋️ 重量表示: $exerciseName - weight: $weight, isBodyweightMode: $isBodyweightMode, isAbs: $isAbs');
                                       
                                       if (isCardio) {
-                                        return Text('$weight 分', style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
+                                        return Text(AppLocalizations.of(context)!.home_weightMinutes.replaceAll('{weight}', weight.toString()), style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       } else if (isAbs && (isBodyweightMode || weight == 0.0)) {
                                         return Text(AppLocalizations.of(context)!.bodyweight, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       } else if (isBodyweightMode && weight == 0.0) {
@@ -4030,7 +4030,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.deleteWorkoutConfirm),
-        content: Text('「$exerciseName」の記録を削除しますか？\nこの操作は取り消せません。'),
+        content: Text(AppLocalizations.of(context)!.home_deleteRecordConfirm.replaceAll('{exerciseName}', exerciseName)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -4306,7 +4306,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             if (mounted) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('「$exerciseName」を削除しました（残り${totalRemainingExercises}種目）'),
+                  content: Text(AppLocalizations.of(context)!.home_deleteRecordSuccess.replaceAll('{exerciseName}', exerciseName).replaceAll('{count}', totalRemainingExercises.toString())),
                   backgroundColor: Colors.green,
                 ),
               );
@@ -4316,7 +4316,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             if (mounted) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('削除に失敗しました: $updateError'),
+                  content: Text(AppLocalizations.of(context)!.home_deleteFailed.replaceAll('{error}', updateError.toString())),
                   backgroundColor: Colors.red,
                 ),
               );
@@ -4371,7 +4371,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('「$exerciseName」を削除しました（残り${totalRemainingExercises}種目）'),
+                content: Text(AppLocalizations.of(context)!.home_deleteRecordSuccess.replaceAll('{exerciseName}', exerciseName).replaceAll('{count}', totalRemainingExercises.toString())),
                 backgroundColor: Colors.green,
               ),
             );
@@ -4813,7 +4813,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('❌ エラー: $e'),
+            content: Text(AppLocalizations.of(context)!.home_generalError.replaceAll('{error}', e.toString())),
             backgroundColor: Colors.red,
             duration: const Duration(seconds: 4),
           ),

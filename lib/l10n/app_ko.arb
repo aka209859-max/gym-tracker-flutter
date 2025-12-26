@@ -3373,5 +3373,22 @@
   "profile_csvParseError": "CSV parse error",
   "general_codeCopied": "Code copied!",
   "general_shareMessageCopied": "Share message copied!",
-  "general_fileSizeTooLarge": "File size too large (5MB or less)"
+  "general_fileSizeTooLarge": "File size too large (5MB or less)",
+  "home_shareFailed": "공유 실패: {error}",
+  "home_deleteError": "삭제 오류: {error}",
+  "home_weightMinutes": "{weight} 분",
+  "home_deleteRecordConfirm": "\"{exerciseName}\" 기록을 삭제하시겠습니까?\n이 작업은 취소할 수 없습니다.",
+  "home_deleteRecordSuccess": "\"{exerciseName}\"을(를) 삭제했습니다 (남은 운동 {count}개)",
+  "home_deleteFailed": "삭제 실패: {error}",
+  "home_generalError": "❌ 오류: {error}",
+  "goals_loadFailed": "목표 로드 실패: {error}",
+  "goals_deleteConfirm": "\"{goalName}\"을(를) 삭제하시겠습니까?\n이 작업은 취소할 수 없습니다.",
+  "goals_updateFailed": "업데이트 실패: {error}",
+  "goals_editTitle": "{goalName} 편집",
+  "body_offlineSaved": "📴 오프라인 저장됨\n온라인 복구 시 자동 동기화",
+  "body_weightKg": "체중: {weight}kg",
+  "body_bodyFatPercent": "체지방률: {bodyFat}%",
+  "reward_adLoadFailed": "광고 로드 실패. 다시 시도해주세요.",
+  "reward_adDisplayFailed": "광고 표시 실패. 잠시 후 다시 시도해주세요.",
+  "reward_creditEarnedTest": "✅ AI 크레딧 1회분 획득! (테스트 모드)"
 }

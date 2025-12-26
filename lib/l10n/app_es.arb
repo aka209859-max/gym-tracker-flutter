@@ -3374,5 +3374,22 @@
   "profile_csvParseError": "CSV parse error",
   "general_codeCopied": "Code copied!",
   "general_shareMessageCopied": "Share message copied!",
-  "general_fileSizeTooLarge": "File size too large (5MB or less)"
+  "general_fileSizeTooLarge": "File size too large (5MB or less)",
+  "home_shareFailed": "Error al compartir: {error}",
+  "home_deleteError": "Error al eliminar: {error}",
+  "home_weightMinutes": "{weight} min",
+  "home_deleteRecordConfirm": "¿Eliminar registro de \"{exerciseName}\"?\nEsta acción no se puede deshacer.",
+  "home_deleteRecordSuccess": "\"{exerciseName}\" eliminado ({count} ejercicios restantes)",
+  "home_deleteFailed": "Error al eliminar: {error}",
+  "home_generalError": "❌ Error: {error}",
+  "goals_loadFailed": "Error al cargar objetivos: {error}",
+  "goals_deleteConfirm": "¿Eliminar \"{goalName}\"?\nEsta acción no se puede deshacer.",
+  "goals_updateFailed": "Error al actualizar: {error}",
+  "goals_editTitle": "Editar {goalName}",
+  "body_offlineSaved": "📴 Guardado sin conexión\nSe sincronizará cuando esté en línea",
+  "body_weightKg": "Peso: {weight}kg",
+  "body_bodyFatPercent": "Grasa corporal: {bodyFat}%",
+  "reward_adLoadFailed": "Error al cargar anuncio. Por favor, inténtelo de nuevo.",
+  "reward_adDisplayFailed": "Error al mostrar anuncio. Por favor, inténtelo más tarde.",
+  "reward_creditEarnedTest": "✅ ¡Ganaste 1 crédito de IA! (Modo de prueba)"
 }

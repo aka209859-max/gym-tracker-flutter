@@ -3375,5 +3375,22 @@
   "profile_csvParseError": "CSV parse error",
   "general_codeCopied": "Code copied!",
   "general_shareMessageCopied": "Share message copied!",
-  "general_fileSizeTooLarge": "File size too large (5MB or less)"
+  "general_fileSizeTooLarge": "File size too large (5MB or less)",
+  "home_shareFailed": "Teilen fehlgeschlagen: {error}",
+  "home_deleteError": "Löschfehler: {error}",
+  "home_weightMinutes": "{weight} Min.",
+  "home_deleteRecordConfirm": "Aufzeichnung für \"{exerciseName}\" löschen?\nDiese Aktion kann nicht rückgängig gemacht werden.",
+  "home_deleteRecordSuccess": "\"{exerciseName}\" gelöscht ({count} Übungen verbleibend)",
+  "home_deleteFailed": "Löschen fehlgeschlagen: {error}",
+  "home_generalError": "❌ Fehler: {error}",
+  "goals_loadFailed": "Ziele laden fehlgeschlagen: {error}",
+  "goals_deleteConfirm": "\"{goalName}\" löschen?\nDiese Aktion kann nicht rückgängig gemacht werden.",
+  "goals_updateFailed": "Aktualisierung fehlgeschlagen: {error}",
+  "goals_editTitle": "{goalName} bearbeiten",
+  "body_offlineSaved": "📴 Offline gespeichert\nWird bei Online-Verbindung synchronisiert",
+  "body_weightKg": "Gewicht: {weight}kg",
+  "body_bodyFatPercent": "Körperfett: {bodyFat}%",
+  "reward_adLoadFailed": "Anzeige konnte nicht geladen werden. Bitte versuchen Sie es erneut.",
+  "reward_adDisplayFailed": "Anzeige konnte nicht angezeigt werden. Bitte versuchen Sie es später erneut.",
+  "reward_creditEarnedTest": "✅ 1 AI-Guthaben verdient! (Testmodus)"
 }

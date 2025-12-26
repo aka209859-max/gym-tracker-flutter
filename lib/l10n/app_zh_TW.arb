@@ -3376,5 +3376,22 @@
   "profile_csvParseError": "CSV parse error",
   "general_codeCopied": "Code copied!",
   "general_shareMessageCopied": "Share message copied!",
-  "general_fileSizeTooLarge": "File size too large (5MB or less)"
+  "general_fileSizeTooLarge": "File size too large (5MB or less)",
+  "home_shareFailed": "分享失敗: {error}",
+  "home_deleteError": "刪除錯誤: {error}",
+  "home_weightMinutes": "{weight} 分鐘",
+  "home_deleteRecordConfirm": "刪除\"{exerciseName}\"的記錄？\n此操作無法撤銷。",
+  "home_deleteRecordSuccess": "已刪除\"{exerciseName}\"（剩餘{count}個項目）",
+  "home_deleteFailed": "刪除失敗: {error}",
+  "home_generalError": "❌ 錯誤: {error}",
+  "goals_loadFailed": "載入目標失敗: {error}",
+  "goals_deleteConfirm": "刪除\"{goalName}\"？\n此操作無法撤銷。",
+  "goals_updateFailed": "更新失敗: {error}",
+  "goals_editTitle": "編輯 {goalName}",
+  "body_offlineSaved": "📴 已離線儲存\n線上恢復時自動同步",
+  "body_weightKg": "體重: {weight}kg",
+  "body_bodyFatPercent": "體脂率: {bodyFat}%",
+  "reward_adLoadFailed": "載入廣告失敗。請重試。",
+  "reward_adDisplayFailed": "顯示廣告失敗。請稍後重試。",
+  "reward_creditEarnedTest": "✅ 獲得1次AI積分！（測試模式）"
 }

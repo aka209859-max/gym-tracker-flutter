@@ -3346,5 +3346,22 @@
   "profile_csvParseError": "CSV parse error",
   "general_codeCopied": "Code copied!",
   "general_shareMessageCopied": "Share message copied!",
-  "general_fileSizeTooLarge": "File size too large (5MB or less)"
+  "general_fileSizeTooLarge": "File size too large (5MB or less)",
+  "home_shareFailed": "Failed to share: {error}",
+  "home_deleteError": "Delete error: {error}",
+  "home_weightMinutes": "{weight} min",
+  "home_deleteRecordConfirm": "Delete record for \"{exerciseName}\"?\nThis action cannot be undone.",
+  "home_deleteRecordSuccess": "Deleted \"{exerciseName}\" ({count} exercises remaining)",
+  "home_deleteFailed": "Failed to delete: {error}",
+  "home_generalError": "❌ Error: {error}",
+  "goals_loadFailed": "Failed to load goals: {error}",
+  "goals_deleteConfirm": "Delete \"{goalName}\"?\nThis action cannot be undone.",
+  "goals_updateFailed": "Failed to update: {error}",
+  "goals_editTitle": "Edit {goalName}",
+  "body_offlineSaved": "📴 Saved offline\nWill sync when online",
+  "body_weightKg": "Weight: {weight}kg",
+  "body_bodyFatPercent": "Body fat: {bodyFat}%",
+  "reward_adLoadFailed": "Failed to load ad. Please try again.",
+  "reward_adDisplayFailed": "Failed to display ad. Please try again later.",
+  "reward_creditEarnedTest": "✅ Earned 1 AI credit! (Test mode)"
 }

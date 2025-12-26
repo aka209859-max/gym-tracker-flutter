@@ -3376,5 +3376,22 @@
   "profile_csvParseError": "CSV parse error",
   "general_codeCopied": "Code copied!",
   "general_shareMessageCopied": "Share message copied!",
-  "general_fileSizeTooLarge": "File size too large (5MB or less)"
+  "general_fileSizeTooLarge": "File size too large (5MB or less)",
+  "home_shareFailed": "分享失败: {error}",
+  "home_deleteError": "删除错误: {error}",
+  "home_weightMinutes": "{weight} 分钟",
+  "home_deleteRecordConfirm": "删除\"{exerciseName}\"的记录？\n此操作无法撤消。",
+  "home_deleteRecordSuccess": "已删除\"{exerciseName}\"（剩余{count}个项目）",
+  "home_deleteFailed": "删除失败: {error}",
+  "home_generalError": "❌ 错误: {error}",
+  "goals_loadFailed": "加载目标失败: {error}",
+  "goals_deleteConfirm": "删除\"{goalName}\"？\n此操作无法撤消。",
+  "goals_updateFailed": "更新失败: {error}",
+  "goals_editTitle": "编辑 {goalName}",
+  "body_offlineSaved": "📴 已离线保存\n在线恢复时自动同步",
+  "body_weightKg": "体重: {weight}kg",
+  "body_bodyFatPercent": "体脂率: {bodyFat}%",
+  "reward_adLoadFailed": "加载广告失败。请重试。",
+  "reward_adDisplayFailed": "显示广告失败。请稍后重试。",
+  "reward_creditEarnedTest": "✅ 获得1次AI积分！（测试模式）"
 }

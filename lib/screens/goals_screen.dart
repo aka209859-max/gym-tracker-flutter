@@ -57,7 +57,7 @@ class _GoalsScreenState extends State<GoalsScreen>
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('目標の読み込みに失敗しました: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.goals_loadFailed.replaceAll('{error}', e.toString()))),
         );
       }
       setState(() {
@@ -414,7 +414,7 @@ class _GoalsScreenState extends State<GoalsScreen>
       context: context,
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.delete),
-        content: Text('「$goalName」を削除しますか？\nこの操作は取り消せません。'),
+        content: Text(AppLocalizations.of(context)!.goals_deleteConfirm.replaceAll('{goalName}', goalName)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -580,7 +580,7 @@ class _GoalsScreenState extends State<GoalsScreen>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('${goal.name}を編集'),
+        title: Text(AppLocalizations.of(context)!.goals_editTitle.replaceAll('{goalName}', goal.name)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -620,7 +620,7 @@ class _GoalsScreenState extends State<GoalsScreen>
               } catch (e) {
                 if (mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('更新に失敗しました: $e')),
+                    SnackBar(content: Text(AppLocalizations.of(context)!.goals_updateFailed.replaceAll('{error}', e.toString()))),
                   );
                 }
               }

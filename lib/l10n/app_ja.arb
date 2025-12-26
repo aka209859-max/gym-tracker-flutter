@@ -3803,5 +3803,22 @@
   "profile_csvParseError": "CSV解析エラー",
   "general_codeCopied": "コードをコピーしました！",
   "general_shareMessageCopied": "シェア用メッセージをコピーしました！",
-  "general_fileSizeTooLarge": "ファイルサイズが大きすぎます（5MB以下）"
+  "general_fileSizeTooLarge": "ファイルサイズが大きすぎます（5MB以下）",
+  "home_shareFailed": "シェアに失敗しました: {error}",
+  "home_deleteError": "削除エラー: {error}",
+  "home_weightMinutes": "{weight} 分",
+  "home_deleteRecordConfirm": "「{exerciseName}」の記録を削除しますか？\nこの操作は取り消せません。",
+  "home_deleteRecordSuccess": "「{exerciseName}」を削除しました（残り{count}種目）",
+  "home_deleteFailed": "削除に失敗しました: {error}",
+  "home_generalError": "❌ エラー: {error}",
+  "goals_loadFailed": "目標の読み込みに失敗しました: {error}",
+  "goals_deleteConfirm": "「{goalName}」を削除しますか？\nこの操作は取り消せません。",
+  "goals_updateFailed": "更新に失敗しました: {error}",
+  "goals_editTitle": "{goalName}を編集",
+  "body_offlineSaved": "📴 オフライン保存しました\nオンライン復帰時に自動同期されます",
+  "body_weightKg": "体重: {weight}kg",
+  "body_bodyFatPercent": "体脂肪率: {bodyFat}%",
+  "reward_adLoadFailed": "広告の読み込みに失敗しました。もう一度お試しください。",
+  "reward_adDisplayFailed": "広告の表示に失敗しました。しばらく待ってからお試しください。",
+  "reward_creditEarnedTest": "✅ AIクレジット1回分を獲得しました！（テストモード）"
 }
