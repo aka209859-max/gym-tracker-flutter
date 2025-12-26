@@ -1308,8 +1308,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                       ),
-                      tabs: const [
-                        Tab(text: '7日間'),
+                      tabs: [
+                        const Tab(text: '7日間'),
                         Tab(text: AppLocalizations.of(context)!.general_7e8e1aae),
                         Tab(text: AppLocalizations.of(context)!.totalVolume),
                       ],

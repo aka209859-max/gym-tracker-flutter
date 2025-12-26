@@ -422,7 +422,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
             SizedBox(height: 8),
             Text(
               'Personal Factor Multiplier (PFM) は、年齢・経験・睡眠・栄養・アルコールの5要素を統合して個人の疲労感受性を補正します。\n\n'
-              '範囲: 0.7x - 1.3x (最小30%減〜最大30%増)\n'
+              '範囲: 0.7x - 1.3x (最小30%減〜最大30%増)\n' +
               AppLocalizations.of(context)!.personalFactor_a5772517,
               style: TextStyle(fontSize: 11, color: Colors.grey[700]),
             ),

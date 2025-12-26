@@ -70,7 +70,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
           AppLocalizations.of(context)!.profile_29ca7fb7,
           'Premiumプラン: ¥500/月（税込）\n'
           'Proプラン: ¥980/月（税込）\n\n'
-          '※Freeプランは無料です\n'
+          '※Freeプランは無料です\n' +
           AppLocalizations.of(context)!.profile_bd3aeb0d,
         ),
         _buildTableRow(

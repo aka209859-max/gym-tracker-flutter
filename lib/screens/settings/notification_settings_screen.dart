@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../gen/app_localizations.dart';
 
 /// 通知設定画面
 class NotificationSettingsScreen extends StatefulWidget {

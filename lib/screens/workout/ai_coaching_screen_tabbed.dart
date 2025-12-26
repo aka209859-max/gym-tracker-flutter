@@ -1180,9 +1180,9 @@ class _AIMenuTabState extends State<_AIMenuTab>
         if (_isLoadingHistory)
           Center(child: CircularProgressIndicator())
         else if (_history.isEmpty)
-          const Card(
+          Card(
             child: Padding(
-              padding: EdgeInsets.all(24),
+              padding: const EdgeInsets.all(24),
               child: Center(
                 child: Text(AppLocalizations.of(context)!.workout_355e6980),
               ),
@@ -3960,7 +3960,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
   // フォーム入力値
   final _formKey = GlobalKey<FormState>();
   late String _selectedBodyPart;
-  String _selectedExercise = AppLocalizations.of(context)!.exerciseBenchPress;  // 種目選択
+  late String _selectedExercise;  // 種目選択（didChangeDependenciesで初期化）
   int _currentSets = 12;
   int _currentFrequency = 2;
   late String _selectedLevel;
@@ -3994,6 +3994,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
       final l10n = AppLocalizations.of(context)!;
       
       _selectedBodyPart = AppLocalizations.of(context)!.musclePecs;
+      _selectedExercise = AppLocalizations.of(context)!.exerciseBenchPress; // 🔧 Phase 2 Fix
       _selectedLevel = AppLocalizations.of(context)!.levelIntermediate;
       _selectedGender = AppLocalizations.of(context)!.genderFemale;
       

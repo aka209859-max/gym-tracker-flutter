@@ -535,12 +535,12 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              children: const [
-                Icon(Icons.info, color: Colors.blue, size: 24),
-                SizedBox(width: 8),
+              children: [
+                const Icon(Icons.info, color: Colors.blue, size: 24),
+                const SizedBox(width: 8),
                 Text(
                   AppLocalizations.of(context)!.gym_0179630e,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
