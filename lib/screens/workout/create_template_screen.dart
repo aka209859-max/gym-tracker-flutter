@@ -279,10 +279,10 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                       else
                         DropdownButtonFormField<String>(
                           value: exercise.exerciseName,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             labelText: AppLocalizations.of(context)!.exercise,
-                            border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                            border: const OutlineInputBorder(),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                           ),
                           items: [
                             // プリセット種目
@@ -292,13 +292,13 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                                       child: Text(name),
                                     )),
                             // カスタム種目追加オプション
-                            const DropdownMenuItem(
+                            DropdownMenuItem(
                               value: '___custom___',
                               child: Row(
                                 children: [
-                                  Icon(Icons.add_circle_outline, size: 18, color: Colors.blue),
-                                  SizedBox(width: 8),
-                                  Text(AppLocalizations.of(context)!.addCustomExercise, style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+                                  const Icon(Icons.add_circle_outline, size: 18, color: Colors.blue),
+                                  const SizedBox(width: 8),
+                                  Text(AppLocalizations.of(context)!.addCustomExercise, style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
                                 ],
                               ),
                             ),
@@ -338,10 +338,10 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                 Expanded(
                   child: TextFormField(
                     initialValue: exercise.targetSets.toString(),
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: AppLocalizations.of(context)!.setsCount,
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      border: const OutlineInputBorder(),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
@@ -353,10 +353,10 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
                 Expanded(
                   child: TextFormField(
                     initialValue: exercise.targetReps.toString(),
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: AppLocalizations.of(context)!.repsCount,
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      border: const OutlineInputBorder(),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
