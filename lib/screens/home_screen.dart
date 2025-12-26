@@ -905,7 +905,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(AppLocalizations.of(context)!.home_shareFailed(e.toString())),
+            content: Text(AppLocalizations.of(context)!.home_shareFailed(error: e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -2541,7 +2541,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       print('❌ セット削除エラー: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context)!.home_deleteError(e.toString()))),
+          SnackBar(content: Text(AppLocalizations.of(context)!.home_deleteError(error: e.toString()))),
         );
       }
     }
@@ -3300,7 +3300,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                       debugPrint('🏋️ 重量表示: $exerciseName - weight: $weight, isBodyweightMode: $isBodyweightMode, isAbs: $isAbs');
                                       
                                       if (isCardio) {
-                                        return Text(AppLocalizations.of(context)!.home_weightMinutes(weight.toString()), style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
+                                        return Text(AppLocalizations.of(context)!.home_weightMinutes(weight: weight.toString()), style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       } else if (isAbs && (isBodyweightMode || weight == 0.0)) {
                                         return Text(AppLocalizations.of(context)!.bodyweight, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       } else if (isBodyweightMode && weight == 0.0) {
@@ -4030,7 +4030,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.deleteWorkoutConfirm),
-        content: Text(AppLocalizations.of(context)!.home_deleteRecordConfirm(exerciseName)),
+        content: Text(AppLocalizations.of(context)!.home_deleteRecordConfirm(exerciseName: exerciseName)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -4306,7 +4306,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             if (mounted) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(AppLocalizations.of(context)!.home_deleteRecordSuccess(exerciseName, totalRemainingExercises.toString())),
+                  content: Text(AppLocalizations.of(context)!.home_deleteRecordSuccess(exerciseName: exerciseName, count: totalRemainingExercises.toString())),
                   backgroundColor: Colors.green,
                 ),
               );
@@ -4316,7 +4316,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             if (mounted) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(AppLocalizations.of(context)!.home_deleteFailed(updateError.toString())),
+                  content: Text(AppLocalizations.of(context)!.home_deleteFailed(error: updateError.toString())),
                   backgroundColor: Colors.red,
                 ),
               );
@@ -4371,7 +4371,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(AppLocalizations.of(context)!.home_deleteRecordSuccess(exerciseName, totalRemainingExercises.toString())),
+                content: Text(AppLocalizations.of(context)!.home_deleteRecordSuccess(exerciseName: exerciseName, count: totalRemainingExercises.toString())),
                 backgroundColor: Colors.green,
               ),
             );
@@ -4813,7 +4813,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(AppLocalizations.of(context)!.home_generalError(e.toString())),
+            content: Text(AppLocalizations.of(context)!.home_generalError(error: e.toString())),
             backgroundColor: Colors.red,
             duration: const Duration(seconds: 4),
           ),

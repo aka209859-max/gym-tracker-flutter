@@ -57,7 +57,7 @@ class _GoalsScreenState extends State<GoalsScreen>
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context)!.goals_loadFailed(e.toString()))),
+          SnackBar(content: Text(AppLocalizations.of(context)!.goals_loadFailed(error: e.toString()))),
         );
       }
       setState(() {
@@ -414,7 +414,7 @@ class _GoalsScreenState extends State<GoalsScreen>
       context: context,
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.delete),
-        content: Text(AppLocalizations.of(context)!.goals_deleteConfirm(goalName)),
+        content: Text(AppLocalizations.of(context)!.goals_deleteConfirm(goalName: goalName)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -580,7 +580,7 @@ class _GoalsScreenState extends State<GoalsScreen>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.goals_editTitle(goal.name)),
+        title: Text(AppLocalizations.of(context)!.goals_editTitle(goalName: goal.name)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -620,7 +620,7 @@ class _GoalsScreenState extends State<GoalsScreen>
               } catch (e) {
                 if (mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(AppLocalizations.of(context)!.goals_updateFailed(e.toString()))),
+                    SnackBar(content: Text(AppLocalizations.of(context)!.goals_updateFailed(error: e.toString()))),
                   );
                 }
               }

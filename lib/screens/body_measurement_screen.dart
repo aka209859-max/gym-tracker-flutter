@@ -211,8 +211,8 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            if (weight != null) Text(AppLocalizations.of(context)!.body_weightKg(weight.toStringAsFixed(1))),
-            if (bodyFat != null) Text(AppLocalizations.of(context)!.body_bodyFatPercent(bodyFat.toStringAsFixed(1))),
+            if (weight != null) Text(AppLocalizations.of(context)!.body_weightKg(weight: weight.toStringAsFixed(1))),
+            if (bodyFat != null) Text(AppLocalizations.of(context)!.body_bodyFatPercent(bodyFat: bodyFat.toStringAsFixed(1))),
           ],
         ),
         actions: [
@@ -740,9 +740,9 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                 title: Text(DateFormat('yyyy年MM月dd日').format(date)),
                 subtitle: Row(
                   children: [
-                    if (weight != null) Text(AppLocalizations.of(context)!.body_weightKg(weight.toStringAsFixed(1))),
+                    if (weight != null) Text(AppLocalizations.of(context)!.body_weightKg(weight: weight.toStringAsFixed(1))),
                     if (weight != null && bodyFat != null) const Text('  •  '),
-                    if (bodyFat != null) Text(AppLocalizations.of(context)!.body_bodyFatPercent(bodyFat.toStringAsFixed(1))),
+                    if (bodyFat != null) Text(AppLocalizations.of(context)!.body_bodyFatPercent(bodyFat: bodyFat.toStringAsFixed(1))),
                   ],
                 ),
                 trailing: IconButton(
