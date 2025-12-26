@@ -3820,5 +3820,99 @@
   "body_bodyFatPercent": "体脂肪率: {bodyFat}%",
   "reward_adLoadFailed": "広告の読み込みに失敗しました。もう一度お試しください。",
   "reward_adDisplayFailed": "広告の表示に失敗しました。しばらく待ってからお試しください。",
-  "reward_creditEarnedTest": "✅ AIクレジット1回分を獲得しました！（テストモード）"
+  "reward_creditEarnedTest": "✅ AIクレジット1回分を獲得しました！（テストモード）",
+  "@home_shareFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_deleteError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_weightMinutes": {
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_deleteRecordConfirm": {
+    "placeholders": {
+      "exerciseName": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_deleteRecordSuccess": {
+    "placeholders": {
+      "exerciseName": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_deleteFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_generalError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@goals_loadFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@goals_deleteConfirm": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      }
+    }
+  },
+  "@goals_updateFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@goals_editTitle": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      }
+    }
+  },
+  "@body_weightKg": {
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
+  "@body_bodyFatPercent": {
+    "placeholders": {
+      "bodyFat": {
+        "type": "String"
+      }
+    }
+  }
 }

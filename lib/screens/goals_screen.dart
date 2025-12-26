@@ -96,7 +96,7 @@ class _GoalsScreenState extends State<GoalsScreen>
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _showCreateGoalDialog,
         icon: const Icon(Icons.add),
-        label: const Text(AppLocalizations.of(context)!.general_6b0cabf8),
+        label: Text(AppLocalizations.of(context)!.general_6b0cabf8),
       ),
     );
   }
@@ -377,7 +377,7 @@ class _GoalsScreenState extends State<GoalsScreen>
             // 目標値変更
             ListTile(
               leading: const Icon(Icons.edit, color: Colors.blue),
-              title: const Text(AppLocalizations.of(context)!.general_fbfd31d9),
+              title: Text(AppLocalizations.of(context)!.general_fbfd31d9),
               onTap: () {
                 Navigator.pop(context);
                 _showEditGoalDialog(goal);
@@ -451,7 +451,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // 目標タイプ選択
-                  const Text(AppLocalizations.of(context)!.general_654c46cb, TextStyle(fontWeight: FontWeight.bold)),
+                  Text(AppLocalizations.of(context)!.general_654c46cb, style: TextStyle(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
                   DropdownButtonFormField<GoalType>(
                     value: selectedType,
@@ -612,7 +612,7 @@ class _GoalsScreenState extends State<GoalsScreen>
                 
                 if (mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text(AppLocalizations.of(context)!.general_583ed93e)),
+                    SnackBar(content: Text(AppLocalizations.of(context)!.general_583ed93e)),
                   );
                 }
                 

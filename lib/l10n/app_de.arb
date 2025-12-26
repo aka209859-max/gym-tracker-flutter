@@ -3392,5 +3392,99 @@
   "body_bodyFatPercent": "Körperfett: {bodyFat}%",
   "reward_adLoadFailed": "Anzeige konnte nicht geladen werden. Bitte versuchen Sie es erneut.",
   "reward_adDisplayFailed": "Anzeige konnte nicht angezeigt werden. Bitte versuchen Sie es später erneut.",
-  "reward_creditEarnedTest": "✅ 1 AI-Guthaben verdient! (Testmodus)"
+  "reward_creditEarnedTest": "✅ 1 AI-Guthaben verdient! (Testmodus)",
+  "@home_shareFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_deleteError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_weightMinutes": {
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_deleteRecordConfirm": {
+    "placeholders": {
+      "exerciseName": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_deleteRecordSuccess": {
+    "placeholders": {
+      "exerciseName": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_deleteFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_generalError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@goals_loadFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@goals_deleteConfirm": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      }
+    }
+  },
+  "@goals_updateFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@goals_editTitle": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      }
+    }
+  },
+  "@body_weightKg": {
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
+  "@body_bodyFatPercent": {
+    "placeholders": {
+      "bodyFat": {
+        "type": "String"
+      }
+    }
+  }
 }
