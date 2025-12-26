@@ -3487,5 +3487,10 @@
         "type": "String"
       }
     }
-  }
+  },
+  "workout_offlineSaved": "📴 已离线保存\n恢复在线时将自动同步",
+  "workout_iconAI": "🤖",
+  "workout_iconIdea": "💡",
+  "workout_iconStats": "📊",
+  "workout_setsCopied": "已复制{count}组"
 }

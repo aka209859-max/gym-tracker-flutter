@@ -3914,5 +3914,30 @@
         "type": "String"
       }
     }
+  },
+  "workout_offlineSaved": "📴 オフライン保存しました\nオンライン復帰時に自動同期されます",
+  "workout_iconAI": "🤖",
+  "workout_iconIdea": "💡",
+  "workout_iconStats": "📊",
+  "workout_setsCopied": "{count}セットをコピーしました",
+  "@workout_offlineSaved": {
+    "description": "オフライン保存完了メッセージ"
+  },
+  "@workout_iconAI": {
+    "description": "AIアイコン絵文字"
+  },
+  "@workout_iconIdea": {
+    "description": "アイデアアイコン絵文字"
+  },
+  "@workout_iconStats": {
+    "description": "統計アイコン絵文字"
+  },
+  "@workout_setsCopied": {
+    "description": "セットコピー完了メッセージ",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   }
 }

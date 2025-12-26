@@ -3457,5 +3457,10 @@
         "type": "String"
       }
     }
-  }
+  },
+  "workout_offlineSaved": "📴 Saved offline\nWill sync automatically when back online",
+  "workout_iconAI": "🤖",
+  "workout_iconIdea": "💡",
+  "workout_iconStats": "📊",
+  "workout_setsCopied": "{count} sets copied"
 }

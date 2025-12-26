@@ -3484,5 +3484,10 @@
         "type": "String"
       }
     }
-  }
+  },
+  "workout_offlineSaved": "📴 오프라인으로 저장됨\n온라인 복귀 시 자동 동기화됩니다",
+  "workout_iconAI": "🤖",
+  "workout_iconIdea": "💡",
+  "workout_iconStats": "📊",
+  "workout_setsCopied": "{count}세트 복사됨"
 }

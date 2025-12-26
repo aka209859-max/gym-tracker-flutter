@@ -547,7 +547,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 Icon(Icons.cloud_off, color: Colors.white),
                 SizedBox(width: 8),
                 Expanded(
-                  child: Text('📴 オフライン保存しました\nオンライン復帰時に自動同期されます'),
+                  child: Text(AppLocalizations.of(context)!.workout_offlineSaved),
                 ),
               ],
             ),
@@ -1557,7 +1557,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     });
     
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('${exerciseSets.length}セットをコピーしました')),
+      SnackBar(content: Text(AppLocalizations.of(context)!.workout_setsCopied(exerciseSets.length))),
     );
   }
 
@@ -2175,7 +2175,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   children: [
                     Row(
                       children: [
-                        Text('🤖', style: TextStyle(fontSize: 16)),
+                        Text(AppLocalizations.of(context)!.workout_iconAI, style: TextStyle(fontSize: 16)),
                         SizedBox(width: 8),
                         Text(
                           AppLocalizations.of(context)!.workout_400911f5,
@@ -2239,7 +2239,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 ),
                 child: Row(
                   children: [
-                    Text('💡', style: TextStyle(fontSize: 16)),
+                    Text(AppLocalizations.of(context)!.workout_iconIdea, style: TextStyle(fontSize: 16)),
                     SizedBox(width: 8),
                     Expanded(
                       child: Text(
@@ -2264,7 +2264,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                   children: [
                     Row(
                       children: [
-                        Text('📊', style: TextStyle(fontSize: 16)),
+                        Text(AppLocalizations.of(context)!.workout_iconStats, style: TextStyle(fontSize: 16)),
                         SizedBox(width: 8),
                         Text(
                           AppLocalizations.of(context)!.workout_565c4718,
