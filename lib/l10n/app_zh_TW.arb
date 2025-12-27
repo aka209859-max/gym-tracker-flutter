@@ -3500,5 +3500,10 @@
   "workout_bulkInput": "{exerciseName}的批量輸入",
   "workout_deleteConfirm": "刪除「{exerciseName}」？\n此操作無法撤銷。",
   "workout_deleteSuccess": "已刪除「{exerciseName}」",
-  "workout_customExerciseSaved": "已將「{exerciseName}」保存為自訂動作"
+  "workout_customExerciseSaved": "已將「{exerciseName}」保存為自訂動作",
+  "profile_importFromPhoto": "📸 從照片匯入",
+  "profile_importFromCSV": "📄 從CSV匯入",
+  "profile_fileSizeTooLarge": "❌ 檔案大小過大（最大5MB）",
+  "profile_parsingCSV": "正在解析CSV檔案...",
+  "profile_multiLanguageSupport": "支援6種語言 - 全球擴張"
 }

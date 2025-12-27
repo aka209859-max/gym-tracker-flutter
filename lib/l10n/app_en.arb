@@ -3470,5 +3470,10 @@
   "workout_bulkInput": "Bulk Input for {exerciseName}",
   "workout_deleteConfirm": "Delete \"{exerciseName}\"?\nThis action cannot be undone.",
   "workout_deleteSuccess": "\"{exerciseName}\" deleted",
-  "workout_customExerciseSaved": "\"{exerciseName}\" saved as custom exercise"
+  "workout_customExerciseSaved": "\"{exerciseName}\" saved as custom exercise",
+  "profile_importFromPhoto": "📸 Import from Photo",
+  "profile_importFromCSV": "📄 Import from CSV",
+  "profile_fileSizeTooLarge": "❌ File size too large (5MB max)",
+  "profile_parsingCSV": "Parsing CSV file...",
+  "profile_multiLanguageSupport": "6 Languages - Global Expansion"
 }

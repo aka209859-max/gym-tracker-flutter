@@ -125,7 +125,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 backgroundColor: Colors.blue,
                 child: Icon(Icons.photo_camera, color: Colors.white),
               ),
-              title: Text('📸 写真から取り込み'),
+              title: Text(AppLocalizations.of(context)!.profile_importFromPhoto),
               subtitle: Text(
                 AppLocalizations.of(context)!.profile_d752bd08,
                 style: TextStyle(fontSize: 12),
@@ -139,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 backgroundColor: Colors.green,
                 child: Icon(Icons.description, color: Colors.white),
               ),
-              title: Text('📄 CSVから取り込み'),
+              title: Text(AppLocalizations.of(context)!.profile_importFromCSV),
               subtitle: Text(
                 AppLocalizations.of(context)!.profile_d97e2902,
                 style: TextStyle(fontSize: 12),
@@ -259,7 +259,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('❌ ファイルサイズが大きすぎます（5MB以下）'),
+              content: Text(AppLocalizations.of(context)!.profile_fileSizeTooLarge),
               backgroundColor: Colors.red,
             ),
           );
@@ -281,7 +281,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     CircularProgressIndicator(),
                     SizedBox(height: 16),
-                    Text('CSVファイルを解析しています...'),
+                    Text(AppLocalizations.of(context)!.profile_parsingCSV),
                   ],
                 ),
               ),
@@ -1179,7 +1179,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: Text('6言語対応 - グローバル展開中'),
+              subtitle: Text(AppLocalizations.of(context)!.profile_multiLanguageSupport),
               trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();

@@ -3497,5 +3497,10 @@
   "workout_bulkInput": "{exerciseName}의 일괄 입력",
   "workout_deleteConfirm": "\"{exerciseName}\"를 삭제하시겠습니까?\n이 작업은 취소할 수 없습니다.",
   "workout_deleteSuccess": "\"{exerciseName}\"를 삭제했습니다",
-  "workout_customExerciseSaved": "\"{exerciseName}\"를 맞춤 운동으로 저장했습니다"
+  "workout_customExerciseSaved": "\"{exerciseName}\"를 맞춤 운동으로 저장했습니다",
+  "profile_importFromPhoto": "📸 사진에서 가져오기",
+  "profile_importFromCSV": "📄 CSV에서 가져오기",
+  "profile_fileSizeTooLarge": "❌ 파일 크기가 너무 큽니다 (5MB 이하)",
+  "profile_parsingCSV": "CSV 파일 분석 중...",
+  "profile_multiLanguageSupport": "6개 언어 지원 - 글로벌 확장"
 }

@@ -4019,5 +4019,10 @@
         "example": "マイトレーニング"
       }
     }
-  }
+  },
+  "profile_importFromPhoto": "📸 写真から取り込み",
+  "profile_importFromCSV": "📄 CSVから取り込み",
+  "profile_fileSizeTooLarge": "❌ ファイルサイズが大きすぎます（5MB以下）",
+  "profile_parsingCSV": "CSVファイルを解析しています...",
+  "profile_multiLanguageSupport": "6言語対応 - グローバル展開中"
 }

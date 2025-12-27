@@ -3499,5 +3499,10 @@
   "workout_bulkInput": "Masseneingabe für {exerciseName}",
   "workout_deleteConfirm": "\"{exerciseName}\" löschen?\nDiese Aktion kann nicht rückgängig gemacht werden.",
   "workout_deleteSuccess": "\"{exerciseName}\" gelöscht",
-  "workout_customExerciseSaved": "\"{exerciseName}\" als benutzerdefinierte Übung gespeichert"
+  "workout_customExerciseSaved": "\"{exerciseName}\" als benutzerdefinierte Übung gespeichert",
+  "profile_importFromPhoto": "📸 Aus Foto importieren",
+  "profile_importFromCSV": "📄 Aus CSV importieren",
+  "profile_fileSizeTooLarge": "❌ Dateigröße zu groß (max. 5MB)",
+  "profile_parsingCSV": "CSV-Datei wird analysiert...",
+  "profile_multiLanguageSupport": "6 Sprachen - Globale Expansion"
 }

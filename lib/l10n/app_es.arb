@@ -3498,5 +3498,10 @@
   "workout_bulkInput": "Entrada masiva para {exerciseName}",
   "workout_deleteConfirm": "¿Eliminar \"{exerciseName}\"?\nEsta acción no se puede deshacer.",
   "workout_deleteSuccess": "\"{exerciseName}\" eliminado",
-  "workout_customExerciseSaved": "\"{exerciseName}\" guardado como ejercicio personalizado"
+  "workout_customExerciseSaved": "\"{exerciseName}\" guardado como ejercicio personalizado",
+  "profile_importFromPhoto": "📸 Importar desde foto",
+  "profile_importFromCSV": "📄 Importar desde CSV",
+  "profile_fileSizeTooLarge": "❌ Tamaño de archivo demasiado grande (máx. 5MB)",
+  "profile_parsingCSV": "Analizando archivo CSV...",
+  "profile_multiLanguageSupport": "6 idiomas - Expansión global"
 }
