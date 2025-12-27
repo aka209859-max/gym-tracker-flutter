@@ -3490,5 +3490,10 @@
   "workout_iconAI": "🤖",
   "workout_iconIdea": "💡",
   "workout_iconStats": "📊",
-  "workout_setsCopied": "{count} series copiadas"
+  "workout_setsCopied": "{count} series copiadas",
+  "workout_aiMenuLoaded": "Menú de AI Coach cargado ({count} ejercicios)",
+  "workout_aiMenuLoadFailed": "Error al cargar datos del AI Coach: {error}",
+  "workout_noHistory": "Sin historial para {exerciseName}",
+  "workout_pastRecords": "Registros anteriores de {exerciseName}",
+  "workout_bulkInput": "Entrada masiva para {exerciseName}"
 }

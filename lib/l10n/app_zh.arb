@@ -3492,5 +3492,10 @@
   "workout_iconAI": "🤖",
   "workout_iconIdea": "💡",
   "workout_iconStats": "📊",
-  "workout_setsCopied": "已复制{count}组"
+  "workout_setsCopied": "已复制{count}组",
+  "workout_aiMenuLoaded": "已加载AI教练菜单（{count}个动作）",
+  "workout_aiMenuLoadFailed": "加载AI教练数据失败：{error}",
+  "workout_noHistory": "{exerciseName}没有历史记录",
+  "workout_pastRecords": "{exerciseName}的过去记录",
+  "workout_bulkInput": "{exerciseName}的批量输入"
 }

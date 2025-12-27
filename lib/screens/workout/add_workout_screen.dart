@@ -251,7 +251,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('AIコーチの推奨メニューを読み込みました (${selectedExercises.length}種目)'),
+            content: Text(AppLocalizations.of(context)!.workout_aiMenuLoaded(selectedExercises.length)),
             backgroundColor: Colors.green,
             duration: const Duration(seconds: 2),
           ),
@@ -264,7 +264,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('AIコーチデータの読み込みに失敗しました: $e'),
+            content: Text(AppLocalizations.of(context)!.workout_aiMenuLoadFailed(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -1123,7 +1123,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
 
       if (exerciseHistory.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('$exerciseNameの履歴がありません')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.workout_noHistory(exerciseName))),
         );
         return;
       }
@@ -1134,7 +1134,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       final selected = await showDialog<Map<String, dynamic>>(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('$exerciseNameの過去記録'),
+          title: Text(AppLocalizations.of(context)!.workout_pastRecords(exerciseName)),
           content: SizedBox(
             width: double.maxFinite,
             child: ListView.builder(
@@ -1229,7 +1229,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     final result = await showDialog<Map<String, double>>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('$exerciseNameの一括入力'),
+        title: Text(AppLocalizations.of(context)!.workout_bulkInput(exerciseName)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
