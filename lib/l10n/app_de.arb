@@ -3506,5 +3506,15 @@
   "profile_parsingCSV": "CSV-Datei wird analysiert...",
   "profile_multiLanguageSupport": "6 Sprachen - Globale Expansion",
   "profile_codeCopied": "✅ Code kopiert!",
-  "profile_shareMessageCopied": "✅ Teilnachricht kopiert!"
+  "profile_shareMessageCopied": "✅ Teilnachricht kopiert!",
+  "subscription_planManagement": "Planverwaltung",
+  "subscription_termsOpenFailed": "Nutzungsbedingungen konnten nicht geöffnet werden",
+  "subscription_cancelInAppStore": "Um zum kostenlosen Plan zu wechseln, kündigen Sie Ihr Abonnement in den App Store-Einstellungen",
+  "subscription_purchaseFailed": "Kauf fehlgeschlagen: {error}",
+  "subscription_restoreFailed": "Wiederherstellung fehlgeschlagen: {error}",
+  "subscription_changeTo": "Zu {planName} wechseln",
+  "subscription_changeWarning": "Der Wechsel zu {planName} schränkt die folgenden Funktionen ein:",
+  "subscription_changeInAppStore": "Bitte wechseln Sie in den App Store-Einstellungen zu {planName}",
+  "subscription_step1": "1. Öffnen Sie die iPhone-Einstellungen",
+  "subscription_step2": "2. Tippen Sie oben auf [Apple ID]"
 }

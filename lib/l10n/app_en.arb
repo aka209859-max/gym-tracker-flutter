@@ -3477,5 +3477,15 @@
   "profile_parsingCSV": "Parsing CSV file...",
   "profile_multiLanguageSupport": "6 Languages - Global Expansion",
   "profile_codeCopied": "✅ Code copied!",
-  "profile_shareMessageCopied": "✅ Share message copied!"
+  "profile_shareMessageCopied": "✅ Share message copied!",
+  "subscription_planManagement": "Plan Management",
+  "subscription_termsOpenFailed": "Failed to open terms of service",
+  "subscription_cancelInAppStore": "To switch to the free plan, cancel your subscription in App Store settings",
+  "subscription_purchaseFailed": "Purchase failed: {error}",
+  "subscription_restoreFailed": "Restore failed: {error}",
+  "subscription_changeTo": "Change to {planName}",
+  "subscription_changeWarning": "Changing to {planName} will restrict the following features:",
+  "subscription_changeInAppStore": "Please change to {planName} in App Store settings",
+  "subscription_step1": "1. Open iPhone Settings app",
+  "subscription_step2": "2. Tap [Apple ID] at the top"
 }

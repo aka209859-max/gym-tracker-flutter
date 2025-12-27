@@ -3505,5 +3505,15 @@
   "profile_parsingCSV": "Analizando archivo CSV...",
   "profile_multiLanguageSupport": "6 idiomas - Expansión global",
   "profile_codeCopied": "✅ ¡Código copiado!",
-  "profile_shareMessageCopied": "✅ ¡Mensaje compartido copiado!"
+  "profile_shareMessageCopied": "✅ ¡Mensaje compartido copiado!",
+  "subscription_planManagement": "Gestión de planes",
+  "subscription_termsOpenFailed": "No se pudieron abrir los términos de servicio",
+  "subscription_cancelInAppStore": "Para cambiar al plan gratuito, cancele su suscripción en la configuración de App Store",
+  "subscription_purchaseFailed": "Error en la compra: {error}",
+  "subscription_restoreFailed": "Error en la restauración: {error}",
+  "subscription_changeTo": "Cambiar a {planName}",
+  "subscription_changeWarning": "Cambiar a {planName} restringirá las siguientes funciones:",
+  "subscription_changeInAppStore": "Por favor, cambie a {planName} en la configuración de App Store",
+  "subscription_step1": "1. Abra la aplicación Ajustes de iPhone",
+  "subscription_step2": "2. Toque [Apple ID] en la parte superior"
 }

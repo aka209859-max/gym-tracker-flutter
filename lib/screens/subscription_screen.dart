@@ -88,7 +88,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('プラン管理'),
+        title: Text(AppLocalizations.of(context)!.subscription_planManagement),
         centerTitle: true,
         actions: [
           // 購入復元ボタン（iOS専用 - Apple審査対応）
@@ -833,7 +833,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('利用規約を開けませんでした'),
+                            content: Text(AppLocalizations.of(context)!.subscription_termsOpenFailed),
                             duration: Duration(seconds: 2),
                           ),
                         );
@@ -981,7 +981,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('無料プランへの変更は、App Store設定でサブスクリプションをキャンセルしてください'),
+              content: Text(AppLocalizations.of(context)!.subscription_cancelInAppStore),
               duration: Duration(seconds: 4),
               backgroundColor: Colors.orange,
             ),
@@ -1073,7 +1073,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('購入に失敗しました: ${e.toString()}'),
+            content: Text(AppLocalizations.of(context)!.subscription_purchaseFailed(e.toString())),
             backgroundColor: Colors.red,
             duration: const Duration(seconds: 4),
           ),
@@ -1140,7 +1140,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('復元に失敗しました: ${e.toString()}'),
+            content: Text(AppLocalizations.of(context)!.subscription_restoreFailed(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -1283,7 +1283,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             children: [
               Icon(Icons.arrow_downward, color: Colors.blue),
               SizedBox(width: 8),
-              Text('$targetPlanName に変更'),
+              Text(AppLocalizations.of(context)!.subscription_changeTo(targetPlanName)),
             ],
           ),
           content: SingleChildScrollView(
@@ -1327,7 +1327,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   SizedBox(height: 16),
                 ],
                 
-                Text('$targetPlanName に変更すると、以下の機能が制限されます：'),
+                Text(AppLocalizations.of(context)!.subscription_changeWarning(targetPlanName)),
                 SizedBox(height: 12),
                 
                 // 失う機能のリスト
@@ -1385,7 +1385,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 if (success && mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('App Store設定から$targetPlanNameへ変更してください'),
+                      content: Text(AppLocalizations.of(context)!.subscription_changeInAppStore(targetPlanName)),
                       backgroundColor: Colors.blue,
                       duration: Duration(seconds: 5),
                       action: SnackBarAction(
@@ -1443,9 +1443,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('1. iPhoneの「設定」アプリを開く'),
+              Text(AppLocalizations.of(context)!.subscription_step1),
               SizedBox(height: 8),
-              Text('2. 一番上の[Apple ID]をタップ'),
+              Text(AppLocalizations.of(context)!.subscription_step2),
               SizedBox(height: 8),
               Text('3. 「サブスクリプション」をタップ'),
               SizedBox(height: 8),

@@ -3507,5 +3507,15 @@
   "profile_parsingCSV": "正在解析CSV檔案...",
   "profile_multiLanguageSupport": "支援6種語言 - 全球擴張",
   "profile_codeCopied": "✅ 代碼已複製！",
-  "profile_shareMessageCopied": "✅ 分享訊息已複製！"
+  "profile_shareMessageCopied": "✅ 分享訊息已複製！",
+  "subscription_planManagement": "方案管理",
+  "subscription_termsOpenFailed": "無法開啟服務條款",
+  "subscription_cancelInAppStore": "要切換到免費方案，請在App Store設定中取消訂閱",
+  "subscription_purchaseFailed": "購買失敗：{error}",
+  "subscription_restoreFailed": "恢復失敗：{error}",
+  "subscription_changeTo": "更改為{planName}",
+  "subscription_changeWarning": "更改為{planName}將限制以下功能：",
+  "subscription_changeInAppStore": "請在App Store設定中更改為{planName}",
+  "subscription_step1": "1. 開啟iPhone設定應用程式",
+  "subscription_step2": "2. 點擊頂部的[Apple ID]"
 }

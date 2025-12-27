@@ -3504,5 +3504,15 @@
   "profile_parsingCSV": "CSV 파일 분석 중...",
   "profile_multiLanguageSupport": "6개 언어 지원 - 글로벌 확장",
   "profile_codeCopied": "✅ 코드를 복사했습니다!",
-  "profile_shareMessageCopied": "✅ 공유 메시지를 복사했습니다!"
+  "profile_shareMessageCopied": "✅ 공유 메시지를 복사했습니다!",
+  "subscription_planManagement": "플랜 관리",
+  "subscription_termsOpenFailed": "이용약관을 열 수 없습니다",
+  "subscription_cancelInAppStore": "무료 플랜으로 변경하려면 App Store 설정에서 구독을 취소하세요",
+  "subscription_purchaseFailed": "구매 실패: {error}",
+  "subscription_restoreFailed": "복원 실패: {error}",
+  "subscription_changeTo": "{planName}으로 변경",
+  "subscription_changeWarning": "{planName}으로 변경하면 다음 기능이 제한됩니다:",
+  "subscription_changeInAppStore": "App Store 설정에서 {planName}으로 변경하세요",
+  "subscription_step1": "1. iPhone 설정 앱 열기",
+  "subscription_step2": "2. 맨 위의 [Apple ID] 탭하기"
 }

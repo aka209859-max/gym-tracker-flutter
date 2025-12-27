@@ -4044,5 +4044,60 @@
     }
   },
   "profile_codeCopied": "✅ コードをコピーしました！",
-  "profile_shareMessageCopied": "✅ シェア用メッセージをコピーしました！"
+  "profile_shareMessageCopied": "✅ シェア用メッセージをコピーしました！",
+  "subscription_planManagement": "プラン管理",
+  "subscription_termsOpenFailed": "利用規約を開けませんでした",
+  "subscription_cancelInAppStore": "無料プランへの変更は、App Store設定でサブスクリプションをキャンセルしてください",
+  "subscription_purchaseFailed": "購入に失敗しました: {error}",
+  "@subscription_purchaseFailed": {
+    "description": "サブスクリプション購入失敗メッセージ",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Payment declined"
+      }
+    }
+  },
+  "subscription_restoreFailed": "復元に失敗しました: {error}",
+  "@subscription_restoreFailed": {
+    "description": "サブスクリプション復元失敗メッセージ",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "No purchases found"
+      }
+    }
+  },
+  "subscription_changeTo": "{planName} に変更",
+  "@subscription_changeTo": {
+    "description": "プラン変更ボタンラベル",
+    "placeholders": {
+      "planName": {
+        "type": "String",
+        "example": "プレミアムプラン"
+      }
+    }
+  },
+  "subscription_changeWarning": "{planName} に変更すると、以下の機能が制限されます：",
+  "@subscription_changeWarning": {
+    "description": "プラン変更時の警告メッセージ",
+    "placeholders": {
+      "planName": {
+        "type": "String",
+        "example": "無料プラン"
+      }
+    }
+  },
+  "subscription_changeInAppStore": "App Store設定から{planName}へ変更してください",
+  "@subscription_changeInAppStore": {
+    "description": "App Storeでのプラン変更案内",
+    "placeholders": {
+      "planName": {
+        "type": "String",
+        "example": "無料プラン"
+      }
+    }
+  },
+  "subscription_step1": "1. iPhoneの「設定」アプリを開く",
+  "subscription_step2": "2. 一番上の[Apple ID]をタップ"
 }
