@@ -3536,5 +3536,13 @@
   "gym_reviewFeature": "• 헬스장 리뷰 게시",
   "gym_aiUsageLimit": "• AI 기능 월 10회 사용",
   "gym_unlimitedFavorites": "• 무제한 즐겨찾기",
-  "gym_detailedStats": "• 상세 혼잡도 통계"
+  "gym_detailedStats": "• 상세 혼잡도 통계",
+  "dev_uidCopied": "✅ UID 복사됨\n{uid}",
+  "dev_aiUsageReset": "✅ AI 사용 횟수 초기화됨",
+  "dev_resetFailed": "❌ 초기화 실패: {error}",
+  "dev_onboardingReset": "✅ 온보딩 초기화됨\n앱을 재시작하세요",
+  "dev_phase1Reset": "✅ Phase 1 기능 모두 초기화됨\n앱을 재시작하세요",
+  "dev_resetAiUsage": "AI 사용 횟수 초기화",
+  "dev_resetOnboarding": "온보딩 초기화",
+  "dev_resetPhase1": "Phase 1 기능 모두 초기화"
 }

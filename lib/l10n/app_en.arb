@@ -3509,5 +3509,13 @@
   "gym_reviewFeature": "• Post gym reviews",
   "gym_aiUsageLimit": "• Use AI features 10 times per month",
   "gym_unlimitedFavorites": "• Unlimited favorites",
-  "gym_detailedStats": "• Detailed crowd statistics"
+  "gym_detailedStats": "• Detailed crowd statistics",
+  "dev_uidCopied": "✅ UID copied\n{uid}",
+  "dev_aiUsageReset": "✅ AI usage count reset",
+  "dev_resetFailed": "❌ Reset failed: {error}",
+  "dev_onboardingReset": "✅ Onboarding reset\nPlease restart the app",
+  "dev_phase1Reset": "✅ All Phase 1 features reset\nPlease restart the app",
+  "dev_resetAiUsage": "Reset AI usage count",
+  "dev_resetOnboarding": "Reset onboarding",
+  "dev_resetPhase1": "Reset all Phase 1 features"
 }

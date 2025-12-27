@@ -52,7 +52,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
       
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('✅ UIDをコピーしました\n$_currentUserUid'),
+          content: Text(AppLocalizations.of(context)!.dev_uidCopied(_currentUserUid)),
           backgroundColor: Colors.green,
           duration: const Duration(seconds: 3),
         ),
@@ -72,7 +72,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
       
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('✅ AI使用回数をリセットしました'),
+          content: Text(AppLocalizations.of(context)!.dev_aiUsageReset),
           backgroundColor: Colors.green,
         ),
       );
@@ -82,7 +82,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
       
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('❌ リセット失敗: $e'),
+          content: Text(AppLocalizations.of(context)!.dev_resetFailed(e.toString())),
           backgroundColor: Colors.red,
         ),
       );
@@ -98,7 +98,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
       
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('✅ オンボーディングをリセットしました\nアプリを再起動してください'),
+          content: Text(AppLocalizations.of(context)!.dev_onboardingReset),
           backgroundColor: Colors.green,
           duration: Duration(seconds: 5),
         ),
@@ -108,7 +108,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
       
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('❌ リセット失敗: $e'),
+          content: Text(AppLocalizations.of(context)!.dev_resetFailed(e.toString())),
           backgroundColor: Colors.red,
         ),
       );
@@ -137,7 +137,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
       
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('✅ Phase 1機能をすべてリセットしました\nアプリを再起動してください'),
+          content: Text(AppLocalizations.of(context)!.dev_phase1Reset),
           backgroundColor: Colors.green,
           duration: Duration(seconds: 5),
         ),
@@ -147,7 +147,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
       
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('❌ リセット失敗: $e'),
+          content: Text(AppLocalizations.of(context)!.dev_resetFailed(e.toString())),
           backgroundColor: Colors.red,
         ),
       );
@@ -389,7 +389,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                 ElevatedButton.icon(
                   onPressed: _resetAIUsage,
                   icon: const Icon(Icons.refresh),
-                  label: const Text('AI使用回数をリセット'),
+                  label: Text(AppLocalizations.of(context)!.dev_resetAiUsage),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.orange,
                     minimumSize: const Size.fromHeight(48),
@@ -402,7 +402,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                 ElevatedButton.icon(
                   onPressed: _resetOnboarding,
                   icon: const Icon(Icons.school),
-                  label: const Text('オンボーディングをリセット'),
+                  label: Text(AppLocalizations.of(context)!.dev_resetOnboarding),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.purple,
                     foregroundColor: Colors.white,
@@ -416,7 +416,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
                 ElevatedButton.icon(
                   onPressed: _resetAllPhase1Features,
                   icon: const Icon(Icons.delete_forever),
-                  label: const Text('Phase 1機能をすべてリセット'),
+                  label: Text(AppLocalizations.of(context)!.dev_resetPhase1),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
                     foregroundColor: Colors.white,

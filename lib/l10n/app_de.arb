@@ -3538,5 +3538,13 @@
   "gym_reviewFeature": "• Fitnessstudio-Bewertungen veröffentlichen",
   "gym_aiUsageLimit": "• KI-Funktionen 10 Mal pro Monat nutzen",
   "gym_unlimitedFavorites": "• Unbegrenzte Favoriten",
-  "gym_detailedStats": "• Detaillierte Auslastungsstatistiken"
+  "gym_detailedStats": "• Detaillierte Auslastungsstatistiken",
+  "dev_uidCopied": "✅ UID kopiert\n{uid}",
+  "dev_aiUsageReset": "✅ KI-Nutzungszähler zurückgesetzt",
+  "dev_resetFailed": "❌ Zurücksetzen fehlgeschlagen: {error}",
+  "dev_onboardingReset": "✅ Onboarding zurückgesetzt\nBitte App neu starten",
+  "dev_phase1Reset": "✅ Alle Phase 1 Funktionen zurückgesetzt\nBitte App neu starten",
+  "dev_resetAiUsage": "KI-Nutzungszähler zurücksetzen",
+  "dev_resetOnboarding": "Onboarding zurücksetzen",
+  "dev_resetPhase1": "Alle Phase 1 Funktionen zurücksetzen"
 }

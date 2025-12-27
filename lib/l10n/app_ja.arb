@@ -4246,5 +4246,31 @@
   "gym_reviewFeature": "• ジムレビューの投稿",
   "gym_aiUsageLimit": "• AI機能を月10回使用",
   "gym_unlimitedFavorites": "• お気に入り無制限",
-  "gym_detailedStats": "• 詳細な混雑度統計"
+  "gym_detailedStats": "• 詳細な混雑度統計",
+  "dev_uidCopied": "✅ UIDをコピーしました\n{uid}",
+  "@dev_uidCopied": {
+    "description": "開発者メニュー: UID コピー成功",
+    "placeholders": {
+      "uid": {
+        "type": "String",
+        "example": "abc123xyz"
+      }
+    }
+  },
+  "dev_aiUsageReset": "✅ AI使用回数をリセットしました",
+  "dev_resetFailed": "❌ リセット失敗: {error}",
+  "@dev_resetFailed": {
+    "description": "開発者メニュー: リセット失敗",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+  "dev_onboardingReset": "✅ オンボーディングをリセットしました\nアプリを再起動してください",
+  "dev_phase1Reset": "✅ Phase 1機能をすべてリセットしました\nアプリを再起動してください",
+  "dev_resetAiUsage": "AI使用回数をリセット",
+  "dev_resetOnboarding": "オンボーディングをリセット",
+  "dev_resetPhase1": "Phase 1機能をすべてリセット"
 }

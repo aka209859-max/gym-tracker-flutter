@@ -3539,5 +3539,13 @@
   "gym_reviewFeature": "• 發布健身房評論",
   "gym_aiUsageLimit": "• 每月使用AI功能10次",
   "gym_unlimitedFavorites": "• 無限收藏",
-  "gym_detailedStats": "• 詳細擁擠度統計"
+  "gym_detailedStats": "• 詳細擁擠度統計",
+  "dev_uidCopied": "✅ 已複製UID\n{uid}",
+  "dev_aiUsageReset": "✅ AI使用次數已重設",
+  "dev_resetFailed": "❌ 重設失敗：{error}",
+  "dev_onboardingReset": "✅ 引導流程已重設\n請重啟應用程式",
+  "dev_phase1Reset": "✅ Phase 1功能已全部重設\n請重啟應用程式",
+  "dev_resetAiUsage": "重設AI使用次數",
+  "dev_resetOnboarding": "重設引導流程",
+  "dev_resetPhase1": "重設所有Phase 1功能"
 }

@@ -3537,5 +3537,13 @@
   "gym_reviewFeature": "• Publicar reseñas de gimnasios",
   "gym_aiUsageLimit": "• Usar funciones de IA 10 veces al mes",
   "gym_unlimitedFavorites": "• Favoritos ilimitados",
-  "gym_detailedStats": "• Estadísticas detalladas de aforo"
+  "gym_detailedStats": "• Estadísticas detalladas de aforo",
+  "dev_uidCopied": "✅ UID copiado\n{uid}",
+  "dev_aiUsageReset": "✅ Contador de uso de IA restablecido",
+  "dev_resetFailed": "❌ Error al restablecer: {error}",
+  "dev_onboardingReset": "✅ Onboarding restablecido\nPor favor, reinicie la app",
+  "dev_phase1Reset": "✅ Todas las funciones de Phase 1 restablecidas\nPor favor, reinicie la app",
+  "dev_resetAiUsage": "Restablecer contador de uso de IA",
+  "dev_resetOnboarding": "Restablecer onboarding",
+  "dev_resetPhase1": "Restablecer todas las funciones de Phase 1"
 }
