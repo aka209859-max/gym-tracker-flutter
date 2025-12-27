@@ -3502,5 +3502,7 @@
   "profile_importFromCSV": "📄 CSV에서 가져오기",
   "profile_fileSizeTooLarge": "❌ 파일 크기가 너무 큽니다 (5MB 이하)",
   "profile_parsingCSV": "CSV 파일 분석 중...",
-  "profile_multiLanguageSupport": "6개 언어 지원 - 글로벌 확장"
+  "profile_multiLanguageSupport": "6개 언어 지원 - 글로벌 확장",
+  "profile_codeCopied": "✅ 코드를 복사했습니다!",
+  "profile_shareMessageCopied": "✅ 공유 메시지를 복사했습니다!"
 }

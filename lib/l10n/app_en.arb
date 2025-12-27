@@ -3475,5 +3475,7 @@
   "profile_importFromCSV": "📄 Import from CSV",
   "profile_fileSizeTooLarge": "❌ File size too large (5MB max)",
   "profile_parsingCSV": "Parsing CSV file...",
-  "profile_multiLanguageSupport": "6 Languages - Global Expansion"
+  "profile_multiLanguageSupport": "6 Languages - Global Expansion",
+  "profile_codeCopied": "✅ Code copied!",
+  "profile_shareMessageCopied": "✅ Share message copied!"
 }

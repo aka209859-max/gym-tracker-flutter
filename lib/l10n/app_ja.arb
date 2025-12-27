@@ -4024,5 +4024,25 @@
   "profile_importFromCSV": "📄 CSVから取り込み",
   "profile_fileSizeTooLarge": "❌ ファイルサイズが大きすぎます（5MB以下）",
   "profile_parsingCSV": "CSVファイルを解析しています...",
-  "profile_multiLanguageSupport": "6言語対応 - グローバル展開中"
+  "profile_multiLanguageSupport": "6言語対応 - グローバル展開中",
+  "@profile_imageAnalysisError": {
+    "description": "画像解析失敗時のエラーメッセージ",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Invalid format"
+      }
+    }
+  },
+  "@profile_csvParseError": {
+    "description": "CSV解析失敗時のエラーメッセージ",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Invalid CSV format"
+      }
+    }
+  },
+  "profile_codeCopied": "✅ コードをコピーしました！",
+  "profile_shareMessageCopied": "✅ シェア用メッセージをコピーしました！"
 }

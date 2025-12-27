@@ -3505,5 +3505,7 @@
   "profile_importFromCSV": "📄 从CSV导入",
   "profile_fileSizeTooLarge": "❌ 文件大小过大（最大5MB）",
   "profile_parsingCSV": "正在解析CSV文件...",
-  "profile_multiLanguageSupport": "支持6种语言 - 全球扩张"
+  "profile_multiLanguageSupport": "支持6种语言 - 全球扩张",
+  "profile_codeCopied": "✅ 代码已复制！",
+  "profile_shareMessageCopied": "✅ 分享消息已复制！"
 }

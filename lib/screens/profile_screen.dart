@@ -232,7 +232,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         // エラーメッセージ
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('❌ 画像解析エラー: $e'),
+            content: Text(AppLocalizations.of(context)!.profile_imageAnalysisError(e.toString())),
             backgroundColor: Colors.red.shade700,
           ),
         );
@@ -330,7 +330,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         // エラーメッセージ
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('❌ CSV解析エラー: $e'),
+            content: Text(AppLocalizations.of(context)!.profile_csvParseError(e.toString())),
             backgroundColor: Colors.red.shade700,
             duration: const Duration(seconds: 4),
           ),
@@ -414,7 +414,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Clipboard.setData(ClipboardData(text: referralCode));
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('✅ コードをコピーしました！'),
+                            content: Text(AppLocalizations.of(context)!.profile_codeCopied),
                             backgroundColor: Colors.green,
                             duration: Duration(seconds: 2),
                           ),
@@ -466,7 +466,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('✅ シェア用メッセージをコピーしました！'),
+                    content: Text(AppLocalizations.of(context)!.profile_shareMessageCopied),
                     backgroundColor: Colors.green,
                   ),
                 );
