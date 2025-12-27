@@ -1438,22 +1438,22 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.subscription_f56f5454),
-        content: const SingleChildScrollView(
+        content: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(AppLocalizations.of(context)!.subscription_step1),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(AppLocalizations.of(context)!.subscription_step2),
-              SizedBox(height: 8),
-              Text('3. 「サブスクリプション」をタップ'),
-              SizedBox(height: 8),
-              Text('4. 「GYM MATCH」を選択'),
-              SizedBox(height: 8),
-              Text('5. 希望のプランを選択'),
-              SizedBox(height: 12),
-              Text(
+              const SizedBox(height: 8),
+              const Text('3. 「サブスクリプション」をタップ'),
+              const SizedBox(height: 8),
+              const Text('4. 「GYM MATCH」を選択'),
+              const SizedBox(height: 8),
+              const Text('5. 希望のプランを選択'),
+              const SizedBox(height: 12),
+              const Text(
                 '※ 現在のプラン期間が終了後に新プランが適用されます',
                 style: TextStyle(fontSize: 12, color: Colors.grey),
               ),
