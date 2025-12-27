@@ -3522,5 +3522,11 @@
   "workout_debugTargetInfo": "🎯 {targetInfo}",
   "workout_debugCurrentExercises": "📊 Aktuelle Übungen: {exercises}",
   "workout_debugAfterDeleteExercises": "📊 Nach Löschung: {exercises}",
-  "workout_debugCurrentSetsCount": "📊 Aktuelle Sätze: {count}"
+  "workout_debugCurrentSetsCount": "📊 Aktuelle Sätze: {count}",
+  "workout_debugAfterDeleteSetsCount": "📊 Sätze nach Löschung: {count}",
+  "workout_debugSetDetails": "🔍 Satzdetails:",
+  "workout_debugExercisesField": "⚠️ exercises-Feld erkannt: {type}",
+  "workout_preventFullDelete": "⚠️ Vollständige Löschung verhindern",
+  "workout_exerciseDeletedWithCount": "\"{exerciseName}\" gelöscht ({remainingExercises} verbleibend)",
+  "workout_exerciseDeletedWithCountNum": "\"{exerciseName}\" gelöscht ({count} Übungen verbleibend)"
 }

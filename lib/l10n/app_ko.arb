@@ -3520,5 +3520,11 @@
   "workout_debugTargetInfo": "🎯 {targetInfo}",
   "workout_debugCurrentExercises": "📊 현재 운동: {exercises}",
   "workout_debugAfterDeleteExercises": "📊 삭제 후: {exercises}",
-  "workout_debugCurrentSetsCount": "📊 현재 세트 수: {count}"
+  "workout_debugCurrentSetsCount": "📊 현재 세트 수: {count}",
+  "workout_debugAfterDeleteSetsCount": "📊 삭제 후 세트 수: {count}",
+  "workout_debugSetDetails": "🔍 세트 상세:",
+  "workout_debugExercisesField": "⚠️ exercises 필드 감지: {type}",
+  "workout_preventFullDelete": "⚠️ 전체 삭제 방지",
+  "workout_exerciseDeletedWithCount": "\"{exerciseName}\" 삭제됨 (남은 운동: {remainingExercises})",
+  "workout_exerciseDeletedWithCountNum": "\"{exerciseName}\" 삭제됨 (남은 운동: {count}개)"
 }

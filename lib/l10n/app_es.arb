@@ -3521,5 +3521,11 @@
   "workout_debugTargetInfo": "🎯 {targetInfo}",
   "workout_debugCurrentExercises": "📊 Ejercicios actuales: {exercises}",
   "workout_debugAfterDeleteExercises": "📊 Después de eliminar: {exercises}",
-  "workout_debugCurrentSetsCount": "📊 Series actuales: {count}"
+  "workout_debugCurrentSetsCount": "📊 Series actuales: {count}",
+  "workout_debugAfterDeleteSetsCount": "📊 Series después de eliminar: {count}",
+  "workout_debugSetDetails": "🔍 Detalles de series:",
+  "workout_debugExercisesField": "⚠️ Campo exercises detectado: {type}",
+  "workout_preventFullDelete": "⚠️ Prevenir eliminación total",
+  "workout_exerciseDeletedWithCount": "\"{exerciseName}\" eliminado (restantes: {remainingExercises})",
+  "workout_exerciseDeletedWithCountNum": "\"{exerciseName}\" eliminado ({count} ejercicios restantes)"
 }

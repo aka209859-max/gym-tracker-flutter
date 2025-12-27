@@ -4150,5 +4150,55 @@
         "example": "5"
       }
     }
+  },
+  "workout_debugAfterDeleteSetsCount": "📊 削除後のセット数: {count}",
+  "@workout_debugAfterDeleteSetsCount": {
+    "description": "デバッグ用削除後のセット数",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "workout_debugSetDetails": "🔍 セット詳細:",
+  "workout_debugExercisesField": "⚠️ exercises フィールド検出: {type}",
+  "@workout_debugExercisesField": {
+    "description": "デバッグ用exercisesフィールド型情報",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "List<String>"
+      }
+    }
+  },
+  "workout_preventFullDelete": "⚠️ 全削除防止",
+  "workout_exerciseDeletedWithCount": "「{exerciseName}」を削除しました（残り{remainingExercises}種目）",
+  "@workout_exerciseDeletedWithCount": {
+    "description": "種目削除成功メッセージ（残り種目数付き）",
+    "placeholders": {
+      "exerciseName": {
+        "type": "String",
+        "example": "ベンチプレス"
+      },
+      "remainingExercises": {
+        "type": "String",
+        "example": "スクワット, デッドリフト"
+      }
+    }
+  },
+  "workout_exerciseDeletedWithCountNum": "「{exerciseName}」を削除しました（残り{count}種目）",
+  "@workout_exerciseDeletedWithCountNum": {
+    "description": "種目削除成功メッセージ（残り種目数）",
+    "placeholders": {
+      "exerciseName": {
+        "type": "String",
+        "example": "ベンチプレス"
+      },
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
   }
 }

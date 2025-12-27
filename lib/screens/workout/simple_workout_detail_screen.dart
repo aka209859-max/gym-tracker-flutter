@@ -505,11 +505,11 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
               Text(AppLocalizations.of(context)!.workout_debugCurrentExercises(currentExerciseNames.join(\", \")), style: const TextStyle(fontSize: 11)),
               Text(AppLocalizations.of(context)!.workout_debugAfterDeleteExercises(afterDeleteExerciseNames.join(\", \")), style: const TextStyle(fontSize: 11)),
               Text(AppLocalizations.of(context)!.workout_debugCurrentSetsCount(sets.length), style: const TextStyle(fontSize: 11)),
-              Text('📊 削除後のセット数: ${afterDeleteSets.length}', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: afterDeleteSets.isEmpty ? Colors.red : Colors.green)),
+              Text(AppLocalizations.of(context)!.workout_debugAfterDeleteSetsCount(afterDeleteSets.length), style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: afterDeleteSets.isEmpty ? Colors.red : Colors.green)),
               SizedBox(height: 8),
               const Divider(),
               SizedBox(height: 8),
-              Text('🔍 セット詳細:', style: TextStyle(fontSize: 11, color: Colors.grey[700], fontWeight: FontWeight.bold)),
+              Text(AppLocalizations.of(context)!.workout_debugSetDetails, style: TextStyle(fontSize: 11, color: Colors.grey[700], fontWeight: FontWeight.bold)),
               SizedBox(height: 4),
               ...setDetails.map((detail) => Padding(
                 padding: const EdgeInsets.only(bottom: 2),
@@ -518,7 +518,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
               if (exercises != null) ...[
                 SizedBox(height: 8),
                 const Divider(),
-                Text('⚠️ exercises フィールド検出: ${exercises.runtimeType}', 
+                Text(AppLocalizations.of(context)!.workout_debugExercisesField(exercises.runtimeType.toString()), 
                   style: const TextStyle(fontSize: 11, color: Colors.orange)),
               ],
             ],
@@ -542,7 +542,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
             ElevatedButton(
               onPressed: () => Navigator.pop(context),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
-              child: Text('⚠️ 全削除防止'),
+              child: Text(AppLocalizations.of(context)!.workout_preventFullDelete),
             ),
         ],
       ),
@@ -652,7 +652,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('「$exerciseName」を削除しました（残り${remainingExerciseNames}種目）'),
+            content: Text(AppLocalizations.of(context)!.workout_exerciseDeletedWithCount(exerciseName, remainingExerciseNames)),
             backgroundColor: Colors.green,
           ),
         );
@@ -711,7 +711,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('「$exerciseName」を削除しました（残り${exercises.length}種目）'),
+            content: Text(AppLocalizations.of(context)!.workout_exerciseDeletedWithCountNum(exerciseName, exercises.length)),
             backgroundColor: Colors.green,
           ),
         );

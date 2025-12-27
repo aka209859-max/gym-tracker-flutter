@@ -3523,5 +3523,11 @@
   "workout_debugTargetInfo": "🎯 {targetInfo}",
   "workout_debugCurrentExercises": "📊 目前動作：{exercises}",
   "workout_debugAfterDeleteExercises": "📊 刪除後：{exercises}",
-  "workout_debugCurrentSetsCount": "📊 目前組數：{count}"
+  "workout_debugCurrentSetsCount": "📊 目前組數：{count}",
+  "workout_debugAfterDeleteSetsCount": "📊 刪除後組數：{count}",
+  "workout_debugSetDetails": "🔍 組詳情：",
+  "workout_debugExercisesField": "⚠️ 偵測到exercises欄位：{type}",
+  "workout_preventFullDelete": "⚠️ 防止全部刪除",
+  "workout_exerciseDeletedWithCount": "已刪除「{exerciseName}」（剩餘：{remainingExercises}）",
+  "workout_exerciseDeletedWithCountNum": "已刪除「{exerciseName}」（剩餘{count}個動作）"
 }

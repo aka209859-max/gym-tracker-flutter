@@ -3493,5 +3493,11 @@
   "workout_debugTargetInfo": "🎯 {targetInfo}",
   "workout_debugCurrentExercises": "📊 Current exercises: {exercises}",
   "workout_debugAfterDeleteExercises": "📊 After delete: {exercises}",
-  "workout_debugCurrentSetsCount": "📊 Current sets: {count}"
+  "workout_debugCurrentSetsCount": "📊 Current sets: {count}",
+  "workout_debugAfterDeleteSetsCount": "📊 After delete sets: {count}",
+  "workout_debugSetDetails": "🔍 Set details:",
+  "workout_debugExercisesField": "⚠️ exercises field detected: {type}",
+  "workout_preventFullDelete": "⚠️ Prevent full delete",
+  "workout_exerciseDeletedWithCount": "\"{exerciseName}\" deleted ({remainingExercises} remaining)",
+  "workout_exerciseDeletedWithCountNum": "\"{exerciseName}\" deleted ({count} exercises remaining)"
 }
