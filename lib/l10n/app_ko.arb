@@ -3514,5 +3514,11 @@
   "subscription_changeWarning": "{planName}으로 변경하면 다음 기능이 제한됩니다:",
   "subscription_changeInAppStore": "App Store 설정에서 {planName}으로 변경하세요",
   "subscription_step1": "1. iPhone 설정 앱 열기",
-  "subscription_step2": "2. 맨 위의 [Apple ID] 탭하기"
+  "subscription_step2": "2. 맨 위의 [Apple ID] 탭하기",
+  "workout_deleteDebug": "🔍 삭제 디버그",
+  "workout_deleteConfirmExercise": "\"{exerciseName}\"를 삭제하시겠습니까?",
+  "workout_debugTargetInfo": "🎯 {targetInfo}",
+  "workout_debugCurrentExercises": "📊 현재 운동: {exercises}",
+  "workout_debugAfterDeleteExercises": "📊 삭제 후: {exercises}",
+  "workout_debugCurrentSetsCount": "📊 현재 세트 수: {count}"
 }

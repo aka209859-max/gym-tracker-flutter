@@ -3517,5 +3517,11 @@
   "subscription_changeWarning": "更改为{planName}将限制以下功能：",
   "subscription_changeInAppStore": "请在App Store设置中更改为{planName}",
   "subscription_step1": "1. 打开iPhone设置应用",
-  "subscription_step2": "2. 点击顶部的[Apple ID]"
+  "subscription_step2": "2. 点击顶部的[Apple ID]",
+  "workout_deleteDebug": "🔍 删除调试",
+  "workout_deleteConfirmExercise": "删除\"{exerciseName}\"？",
+  "workout_debugTargetInfo": "🎯 {targetInfo}",
+  "workout_debugCurrentExercises": "📊 当前动作：{exercises}",
+  "workout_debugAfterDeleteExercises": "📊 删除后：{exercises}",
+  "workout_debugCurrentSetsCount": "📊 当前组数：{count}"
 }

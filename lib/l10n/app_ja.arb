@@ -4099,5 +4099,56 @@
     }
   },
   "subscription_step1": "1. iPhoneの「設定」アプリを開く",
-  "subscription_step2": "2. 一番上の[Apple ID]をタップ"
+  "subscription_step2": "2. 一番上の[Apple ID]をタップ",
+  "workout_deleteDebug": "🔍 削除デバッグ",
+  "workout_deleteConfirmExercise": "「{exerciseName}」を削除しますか？",
+  "@workout_deleteConfirmExercise": {
+    "description": "種目削除の確認メッセージ（デバッグ用）",
+    "placeholders": {
+      "exerciseName": {
+        "type": "String",
+        "example": "ベンチプレス"
+      }
+    }
+  },
+  "workout_debugTargetInfo": "🎯 {targetInfo}",
+  "@workout_debugTargetInfo": {
+    "description": "デバッグ用ターゲット情報",
+    "placeholders": {
+      "targetInfo": {
+        "type": "String",
+        "example": "Exercise index: 2"
+      }
+    }
+  },
+  "workout_debugCurrentExercises": "📊 現在の種目: {exercises}",
+  "@workout_debugCurrentExercises": {
+    "description": "デバッグ用現在の種目一覧",
+    "placeholders": {
+      "exercises": {
+        "type": "String",
+        "example": "ベンチプレス, スクワット"
+      }
+    }
+  },
+  "workout_debugAfterDeleteExercises": "📊 削除後の種目: {exercises}",
+  "@workout_debugAfterDeleteExercises": {
+    "description": "デバッグ用削除後の種目一覧",
+    "placeholders": {
+      "exercises": {
+        "type": "String",
+        "example": "スクワット"
+      }
+    }
+  },
+  "workout_debugCurrentSetsCount": "📊 現在のセット数: {count}",
+  "@workout_debugCurrentSetsCount": {
+    "description": "デバッグ用現在のセット数",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  }
 }

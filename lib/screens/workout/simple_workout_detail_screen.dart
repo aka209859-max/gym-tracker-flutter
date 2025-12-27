@@ -490,21 +490,21 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('🔍 削除デバッグ'),
+        title: Text(AppLocalizations.of(context)!.workout_deleteDebug),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('「$exerciseName」を削除しますか？'),
+              Text(AppLocalizations.of(context)!.workout_deleteConfirmExercise(exerciseName)),
               SizedBox(height: 16),
               const Divider(),
               SizedBox(height: 8),
-              Text('🎯 $targetInfo', style: const TextStyle(fontSize: 11, fontFamily: 'monospace')),
+              Text(AppLocalizations.of(context)!.workout_debugTargetInfo(targetInfo), style: const TextStyle(fontSize: 11, fontFamily: 'monospace')),
               SizedBox(height: 8),
-              Text('📊 現在の種目: ${currentExerciseNames.join(", ")}', style: const TextStyle(fontSize: 11)),
-              Text('📊 削除後の種目: ${afterDeleteExerciseNames.join(", ")}', style: const TextStyle(fontSize: 11)),
-              Text('📊 現在のセット数: ${sets.length}', style: const TextStyle(fontSize: 11)),
+              Text(AppLocalizations.of(context)!.workout_debugCurrentExercises(currentExerciseNames.join(\", \")), style: const TextStyle(fontSize: 11)),
+              Text(AppLocalizations.of(context)!.workout_debugAfterDeleteExercises(afterDeleteExerciseNames.join(\", \")), style: const TextStyle(fontSize: 11)),
+              Text(AppLocalizations.of(context)!.workout_debugCurrentSetsCount(sets.length), style: const TextStyle(fontSize: 11)),
               Text('📊 削除後のセット数: ${afterDeleteSets.length}', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: afterDeleteSets.isEmpty ? Colors.red : Colors.green)),
               SizedBox(height: 8),
               const Divider(),

@@ -3515,5 +3515,11 @@
   "subscription_changeWarning": "Cambiar a {planName} restringirá las siguientes funciones:",
   "subscription_changeInAppStore": "Por favor, cambie a {planName} en la configuración de App Store",
   "subscription_step1": "1. Abra la aplicación Ajustes de iPhone",
-  "subscription_step2": "2. Toque [Apple ID] en la parte superior"
+  "subscription_step2": "2. Toque [Apple ID] en la parte superior",
+  "workout_deleteDebug": "🔍 Debug de eliminación",
+  "workout_deleteConfirmExercise": "¿Eliminar \"{exerciseName}\"?",
+  "workout_debugTargetInfo": "🎯 {targetInfo}",
+  "workout_debugCurrentExercises": "📊 Ejercicios actuales: {exercises}",
+  "workout_debugAfterDeleteExercises": "📊 Después de eliminar: {exercises}",
+  "workout_debugCurrentSetsCount": "📊 Series actuales: {count}"
 }
