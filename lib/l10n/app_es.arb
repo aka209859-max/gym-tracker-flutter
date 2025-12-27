@@ -3527,5 +3527,9 @@
   "workout_debugExercisesField": "⚠️ Campo exercises detectado: {type}",
   "workout_preventFullDelete": "⚠️ Prevenir eliminación total",
   "workout_exerciseDeletedWithCount": "\"{exerciseName}\" eliminado (restantes: {remainingExercises})",
-  "workout_exerciseDeletedWithCountNum": "\"{exerciseName}\" eliminado ({count} ejercicios restantes)"
+  "workout_exerciseDeletedWithCountNum": "\"{exerciseName}\" eliminado ({count} ejercicios restantes)",
+  "ai_generationComplete": "¡Generación de IA completa! ({status})",
+  "ai_rewardEarned": "🎁 ¡1 uso de IA obtenido!",
+  "ai_predictionComplete": "¡Predicción de IA completa! ({status})",
+  "ai_analysisComplete": "¡Análisis de IA completo! ({status})"
 }

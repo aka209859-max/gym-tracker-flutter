@@ -1434,7 +1434,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
           final statusMessage = await creditService.getAIUsageStatus();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('AI生成完了! ($statusMessage)'),
+              content: Text(AppLocalizations.of(context)!.ai_generationComplete(statusMessage)),
               backgroundColor: Colors.green,
               duration: const Duration(seconds: 2),
             ),
@@ -2271,7 +2271,7 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('🎁 AI機能1回分を獲得しました!'),
+              content: Text(AppLocalizations.of(context)!.ai_rewardEarned),
               backgroundColor: Colors.green,
               duration: Duration(seconds: 2),
             ),
@@ -2755,7 +2755,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           final statusMessage = await creditService.getAIUsageStatus();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('AI予測完了! ($statusMessage)'),
+              content: Text(AppLocalizations.of(context)!.ai_predictionComplete(statusMessage)),
               backgroundColor: Colors.green,
               duration: const Duration(seconds: 2),
             ),
@@ -3481,7 +3481,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('🎁 AI機能1回分を獲得しました!'),
+              content: Text(AppLocalizations.of(context)!.ai_rewardEarned),
               backgroundColor: Colors.green,
               duration: Duration(seconds: 2),
             ),
@@ -4174,7 +4174,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           final statusMessage = await creditService.getAIUsageStatus();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('AI分析完了! ($statusMessage)'),
+              content: Text(AppLocalizations.of(context)!.ai_analysisComplete(statusMessage)),
               backgroundColor: Colors.green,
               duration: const Duration(seconds: 2),
             ),
@@ -5341,7 +5341,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('🎁 AI機能1回分を獲得しました!'),
+              content: Text(AppLocalizations.of(context)!.ai_rewardEarned),
               backgroundColor: Colors.green,
               duration: Duration(seconds: 2),
             ),

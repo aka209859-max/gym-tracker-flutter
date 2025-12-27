@@ -3528,5 +3528,9 @@
   "workout_debugExercisesField": "⚠️ exercises-Feld erkannt: {type}",
   "workout_preventFullDelete": "⚠️ Vollständige Löschung verhindern",
   "workout_exerciseDeletedWithCount": "\"{exerciseName}\" gelöscht ({remainingExercises} verbleibend)",
-  "workout_exerciseDeletedWithCountNum": "\"{exerciseName}\" gelöscht ({count} Übungen verbleibend)"
+  "workout_exerciseDeletedWithCountNum": "\"{exerciseName}\" gelöscht ({count} Übungen verbleibend)",
+  "ai_generationComplete": "KI-Generierung abgeschlossen! ({status})",
+  "ai_rewardEarned": "🎁 1 KI-Nutzung erhalten!",
+  "ai_predictionComplete": "KI-Vorhersage abgeschlossen! ({status})",
+  "ai_analysisComplete": "KI-Analyse abgeschlossen! ({status})"
 }

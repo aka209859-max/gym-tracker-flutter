@@ -4200,5 +4200,36 @@
         "example": "2"
       }
     }
+  },
+  "ai_generationComplete": "AI生成完了! ({status})",
+  "@ai_generationComplete": {
+    "description": "AI生成完了通知",
+    "placeholders": {
+      "status": {
+        "type": "String",
+        "example": "メニュー生成成功"
+      }
+    }
+  },
+  "ai_rewardEarned": "🎁 AI機能1回分を獲得しました!",
+  "ai_predictionComplete": "AI予測完了! ({status})",
+  "@ai_predictionComplete": {
+    "description": "AI予測完了通知",
+    "placeholders": {
+      "status": {
+        "type": "String",
+        "example": "予測成功"
+      }
+    }
+  },
+  "ai_analysisComplete": "AI分析完了! ({status})",
+  "@ai_analysisComplete": {
+    "description": "AI分析完了通知",
+    "placeholders": {
+      "status": {
+        "type": "String",
+        "example": "分析成功"
+      }
+    }
   }
 }

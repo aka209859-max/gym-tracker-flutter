@@ -3526,5 +3526,9 @@
   "workout_debugExercisesField": "⚠️ exercises 필드 감지: {type}",
   "workout_preventFullDelete": "⚠️ 전체 삭제 방지",
   "workout_exerciseDeletedWithCount": "\"{exerciseName}\" 삭제됨 (남은 운동: {remainingExercises})",
-  "workout_exerciseDeletedWithCountNum": "\"{exerciseName}\" 삭제됨 (남은 운동: {count}개)"
+  "workout_exerciseDeletedWithCountNum": "\"{exerciseName}\" 삭제됨 (남은 운동: {count}개)",
+  "ai_generationComplete": "AI 생성 완료! ({status})",
+  "ai_rewardEarned": "🎁 AI 기능 1회 획득!",
+  "ai_predictionComplete": "AI 예측 완료! ({status})",
+  "ai_analysisComplete": "AI 분석 완료! ({status})"
 }

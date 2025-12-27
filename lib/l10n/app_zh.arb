@@ -3529,5 +3529,9 @@
   "workout_debugExercisesField": "⚠️ 检测到exercises字段：{type}",
   "workout_preventFullDelete": "⚠️ 防止全部删除",
   "workout_exerciseDeletedWithCount": "已删除\"{exerciseName}\"（剩余：{remainingExercises}）",
-  "workout_exerciseDeletedWithCountNum": "已删除\"{exerciseName}\"（剩余{count}个动作）"
+  "workout_exerciseDeletedWithCountNum": "已删除\"{exerciseName}\"（剩余{count}个动作）",
+  "ai_generationComplete": "AI生成完成！（{status}）",
+  "ai_rewardEarned": "🎁 获得AI功能使用1次！",
+  "ai_predictionComplete": "AI预测完成！（{status}）",
+  "ai_analysisComplete": "AI分析完成！（{status}）"
 }
