@@ -652,7 +652,7 @@ class _SimpleWorkoutDetailScreenState extends State<SimpleWorkoutDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(AppLocalizations.of(context)!.workout_exerciseDeletedWithCount(exerciseName, remainingExerciseNames)),
+            content: Text(AppLocalizations.of(context)!.workout_exerciseDeletedWithCountNum(exerciseName, remainingExerciseNames)),
             backgroundColor: Colors.green,
           ),
         );
