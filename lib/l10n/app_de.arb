@@ -3532,5 +3532,11 @@
   "ai_generationComplete": "KI-Generierung abgeschlossen! ({status})",
   "ai_rewardEarned": "🎁 1 KI-Nutzung erhalten!",
   "ai_predictionComplete": "KI-Vorhersage abgeschlossen! ({status})",
-  "ai_analysisComplete": "KI-Analyse abgeschlossen! ({status})"
+  "ai_analysisComplete": "KI-Analyse abgeschlossen! ({status})",
+  "gym_reviewPostFailed": "Bewertungsveröffentlichung fehlgeschlagen: {error}",
+  "gym_premiumFeature": "Premium-Funktion",
+  "gym_reviewFeature": "• Fitnessstudio-Bewertungen veröffentlichen",
+  "gym_aiUsageLimit": "• KI-Funktionen 10 Mal pro Monat nutzen",
+  "gym_unlimitedFavorites": "• Unbegrenzte Favoriten",
+  "gym_detailedStats": "• Detaillierte Auslastungsstatistiken"
 }

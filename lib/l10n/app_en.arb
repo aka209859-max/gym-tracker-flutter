@@ -3503,5 +3503,11 @@
   "ai_generationComplete": "AI generation complete! ({status})",
   "ai_rewardEarned": "🎁 Earned 1 AI usage credit!",
   "ai_predictionComplete": "AI prediction complete! ({status})",
-  "ai_analysisComplete": "AI analysis complete! ({status})"
+  "ai_analysisComplete": "AI analysis complete! ({status})",
+  "gym_reviewPostFailed": "Review post failed: {error}",
+  "gym_premiumFeature": "Premium Feature",
+  "gym_reviewFeature": "• Post gym reviews",
+  "gym_aiUsageLimit": "• Use AI features 10 times per month",
+  "gym_unlimitedFavorites": "• Unlimited favorites",
+  "gym_detailedStats": "• Detailed crowd statistics"
 }

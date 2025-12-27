@@ -3531,5 +3531,11 @@
   "ai_generationComplete": "¡Generación de IA completa! ({status})",
   "ai_rewardEarned": "🎁 ¡1 uso de IA obtenido!",
   "ai_predictionComplete": "¡Predicción de IA completa! ({status})",
-  "ai_analysisComplete": "¡Análisis de IA completo! ({status})"
+  "ai_analysisComplete": "¡Análisis de IA completo! ({status})",
+  "gym_reviewPostFailed": "Error al publicar reseña: {error}",
+  "gym_premiumFeature": "Función Premium",
+  "gym_reviewFeature": "• Publicar reseñas de gimnasios",
+  "gym_aiUsageLimit": "• Usar funciones de IA 10 veces al mes",
+  "gym_unlimitedFavorites": "• Favoritos ilimitados",
+  "gym_detailedStats": "• Estadísticas detalladas de aforo"
 }

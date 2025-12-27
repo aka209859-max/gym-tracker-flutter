@@ -4231,5 +4231,20 @@
         "example": "分析成功"
       }
     }
-  }
+  },
+  "gym_reviewPostFailed": "レビュー投稿に失敗しました: {error}",
+  "@gym_reviewPostFailed": {
+    "description": "レビュー投稿失敗メッセージ",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "ネットワークエラー"
+      }
+    }
+  },
+  "gym_premiumFeature": "Premium機能",
+  "gym_reviewFeature": "• ジムレビューの投稿",
+  "gym_aiUsageLimit": "• AI機能を月10回使用",
+  "gym_unlimitedFavorites": "• お気に入り無制限",
+  "gym_detailedStats": "• 詳細な混雑度統計"
 }

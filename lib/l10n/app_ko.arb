@@ -3530,5 +3530,11 @@
   "ai_generationComplete": "AI 생성 완료! ({status})",
   "ai_rewardEarned": "🎁 AI 기능 1회 획득!",
   "ai_predictionComplete": "AI 예측 완료! ({status})",
-  "ai_analysisComplete": "AI 분석 완료! ({status})"
+  "ai_analysisComplete": "AI 분석 완료! ({status})",
+  "gym_reviewPostFailed": "리뷰 게시 실패: {error}",
+  "gym_premiumFeature": "프리미엄 기능",
+  "gym_reviewFeature": "• 헬스장 리뷰 게시",
+  "gym_aiUsageLimit": "• AI 기능 월 10회 사용",
+  "gym_unlimitedFavorites": "• 무제한 즐겨찾기",
+  "gym_detailedStats": "• 상세 혼잡도 통계"
 }

@@ -112,7 +112,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('レビュー投稿に失敗しました: $e'),
+            content: Text(AppLocalizations.of(context)!.gym_reviewPostFailed(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -134,7 +134,7 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
           children: [
             Icon(Icons.workspace_premium, color: Colors.blue),
             SizedBox(width: 12),
-            Text('Premium機能'),
+            Text(AppLocalizations.of(context)!.gym_premiumFeature),
           ],
         ),
         content: Column(
@@ -154,10 +154,10 @@ class _GymReviewScreenState extends State<GymReviewScreen> {
               ),
             ),
             SizedBox(height: 8),
-            Text('• ジムレビューの投稿', style: TextStyle(fontSize: 14)),
-            Text('• AI機能を月10回使用', style: TextStyle(fontSize: 14)),
-            Text('• お気に入り無制限', style: TextStyle(fontSize: 14)),
-            Text('• 詳細な混雑度統計', style: TextStyle(fontSize: 14)),
+            Text(AppLocalizations.of(context)!.gym_reviewFeature, style: const TextStyle(fontSize: 14)),
+            Text(AppLocalizations.of(context)!.gym_aiUsageLimit, style: const TextStyle(fontSize: 14)),
+            Text(AppLocalizations.of(context)!.gym_unlimitedFavorites, style: const TextStyle(fontSize: 14)),
+            Text(AppLocalizations.of(context)!.gym_detailedStats, style: const TextStyle(fontSize: 14)),
           ],
         ),
         actions: [

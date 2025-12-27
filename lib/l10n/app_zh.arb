@@ -3533,5 +3533,11 @@
   "ai_generationComplete": "AI生成完成！（{status}）",
   "ai_rewardEarned": "🎁 获得AI功能使用1次！",
   "ai_predictionComplete": "AI预测完成！（{status}）",
-  "ai_analysisComplete": "AI分析完成！（{status}）"
+  "ai_analysisComplete": "AI分析完成！（{status}）",
+  "gym_reviewPostFailed": "评论发布失败：{error}",
+  "gym_premiumFeature": "高级功能",
+  "gym_reviewFeature": "• 发布健身房评论",
+  "gym_aiUsageLimit": "• 每月使用AI功能10次",
+  "gym_unlimitedFavorites": "• 无限收藏",
+  "gym_detailedStats": "• 详细拥挤度统计"
 }
