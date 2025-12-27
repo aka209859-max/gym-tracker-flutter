@@ -3467,5 +3467,8 @@
   "workout_aiMenuLoadFailed": "Failed to load AI Coach data: {error}",
   "workout_noHistory": "No history for {exerciseName}",
   "workout_pastRecords": "Past Records for {exerciseName}",
-  "workout_bulkInput": "Bulk Input for {exerciseName}"
+  "workout_bulkInput": "Bulk Input for {exerciseName}",
+  "workout_deleteConfirm": "Delete \"{exerciseName}\"?\nThis action cannot be undone.",
+  "workout_deleteSuccess": "\"{exerciseName}\" deleted",
+  "workout_customExerciseSaved": "\"{exerciseName}\" saved as custom exercise"
 }

@@ -3496,5 +3496,8 @@
   "workout_aiMenuLoadFailed": "Fehler beim Laden der AI-Coach-Daten: {error}",
   "workout_noHistory": "Keine Historie für {exerciseName}",
   "workout_pastRecords": "Bisherige Aufzeichnungen für {exerciseName}",
-  "workout_bulkInput": "Masseneingabe für {exerciseName}"
+  "workout_bulkInput": "Masseneingabe für {exerciseName}",
+  "workout_deleteConfirm": "\"{exerciseName}\" löschen?\nDiese Aktion kann nicht rückgängig gemacht werden.",
+  "workout_deleteSuccess": "\"{exerciseName}\" gelöscht",
+  "workout_customExerciseSaved": "\"{exerciseName}\" als benutzerdefinierte Übung gespeichert"
 }

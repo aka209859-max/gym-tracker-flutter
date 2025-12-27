@@ -3989,5 +3989,35 @@
         "example": "ベンチプレス"
       }
     }
+  },
+  "workout_deleteConfirm": "「{exerciseName}」を削除しますか？\nこの操作は取り消せません。",
+  "@workout_deleteConfirm": {
+    "description": "種目削除の確認メッセージ",
+    "placeholders": {
+      "exerciseName": {
+        "type": "String",
+        "example": "ベンチプレス"
+      }
+    }
+  },
+  "workout_deleteSuccess": "「{exerciseName}」を削除しました",
+  "@workout_deleteSuccess": {
+    "description": "種目削除成功メッセージ",
+    "placeholders": {
+      "exerciseName": {
+        "type": "String",
+        "example": "ベンチプレス"
+      }
+    }
+  },
+  "workout_customExerciseSaved": "「{exerciseName}」をカスタム種目として保存しました",
+  "@workout_customExerciseSaved": {
+    "description": "カスタム種目保存成功メッセージ",
+    "placeholders": {
+      "exerciseName": {
+        "type": "String",
+        "example": "マイトレーニング"
+      }
+    }
   }
 }

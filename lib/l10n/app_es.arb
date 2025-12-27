@@ -3495,5 +3495,8 @@
   "workout_aiMenuLoadFailed": "Error al cargar datos del AI Coach: {error}",
   "workout_noHistory": "Sin historial para {exerciseName}",
   "workout_pastRecords": "Registros anteriores de {exerciseName}",
-  "workout_bulkInput": "Entrada masiva para {exerciseName}"
+  "workout_bulkInput": "Entrada masiva para {exerciseName}",
+  "workout_deleteConfirm": "¿Eliminar \"{exerciseName}\"?\nEsta acción no se puede deshacer.",
+  "workout_deleteSuccess": "\"{exerciseName}\" eliminado",
+  "workout_customExerciseSaved": "\"{exerciseName}\" guardado como ejercicio personalizado"
 }

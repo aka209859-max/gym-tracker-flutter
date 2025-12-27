@@ -3494,5 +3494,8 @@
   "workout_aiMenuLoadFailed": "AI 코치 데이터 로드 실패: {error}",
   "workout_noHistory": "{exerciseName}의 기록이 없습니다",
   "workout_pastRecords": "{exerciseName}의 과거 기록",
-  "workout_bulkInput": "{exerciseName}의 일괄 입력"
+  "workout_bulkInput": "{exerciseName}의 일괄 입력",
+  "workout_deleteConfirm": "\"{exerciseName}\"를 삭제하시겠습니까?\n이 작업은 취소할 수 없습니다.",
+  "workout_deleteSuccess": "\"{exerciseName}\"를 삭제했습니다",
+  "workout_customExerciseSaved": "\"{exerciseName}\"를 맞춤 운동으로 저장했습니다"
 }

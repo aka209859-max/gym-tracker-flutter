@@ -1340,7 +1340,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.workout_54d4f6f6),
-        content: Text('「$exerciseName」を削除しますか？\nこの操作は取り消せません。'),
+        content: Text(AppLocalizations.of(context)!.workout_deleteConfirm(exerciseName)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -1364,7 +1364,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('「$exerciseName」を削除しました')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.workout_deleteSuccess(exerciseName))),
         );
       }
     }
@@ -1413,7 +1413,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('「$result」をカスタム種目として保存しました')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.workout_customExerciseSaved(result))),
         );
       }
     }

@@ -3497,5 +3497,8 @@
   "workout_aiMenuLoadFailed": "載入AI教練數據失敗：{error}",
   "workout_noHistory": "{exerciseName}沒有歷史記錄",
   "workout_pastRecords": "{exerciseName}的過去記錄",
-  "workout_bulkInput": "{exerciseName}的批量輸入"
+  "workout_bulkInput": "{exerciseName}的批量輸入",
+  "workout_deleteConfirm": "刪除「{exerciseName}」？\n此操作無法撤銷。",
+  "workout_deleteSuccess": "已刪除「{exerciseName}」",
+  "workout_customExerciseSaved": "已將「{exerciseName}」保存為自訂動作"
 }
