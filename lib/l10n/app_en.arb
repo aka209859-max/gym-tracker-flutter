@@ -3608,5 +3608,15 @@
       }
     }
   },
-  "home_recordPrompt": "Record your training\nand visualize your progress"
+  "home_recordPrompt": "Record your training\nand visualize your progress",
+  "subscription_restore": "Restore",
+  "subscription_lifetimeProPlan": "Lifetime Pro Plan (∞)",
+  "subscription_lifetimePlanDescription": "Unlimited AI features | Ad-free | All features forever",
+  "subscription_popularBadge": "⭐ Most Popular",
+  "subscription_legalInformation": "Legal Information",
+  "subscription_termsOfUse": "Terms of Use",
+  "subscription_privacyPolicy": "Privacy Policy",
+  "subscription_agreementText": "By subscribing, you agree to our Terms of Use and Privacy Policy",
+  "subscription_aiAddonPrice": "¥300 / 5 times",
+  "subscription_cancelInstruction3": "3. Tap \\\"Subscriptions\\\""
 }

@@ -4640,5 +4640,15 @@
       }
     }
   },
-  "home_recordPrompt": "トレーニングを記録して、\n進捗を可視化しましょう"
+  "home_recordPrompt": "トレーニングを記録して、\n進捗を可視化しましょう",
+  "subscription_restore": "Restore",
+  "subscription_lifetimeProPlan": "永年Proプラン（∞）",
+  "subscription_lifetimePlanDescription": "AI機能無制限 | 広告なし | すべての機能を永久利用",
+  "subscription_popularBadge": "⭐ 人気No.1",
+  "subscription_legalInformation": "Legal Information",
+  "subscription_termsOfUse": "Terms of Use",
+  "subscription_privacyPolicy": "Privacy Policy",
+  "subscription_agreementText": "By subscribing, you agree to our Terms of Use and Privacy Policy",
+  "subscription_aiAddonPrice": "¥300 / 5回",
+  "subscription_cancelInstruction3": "3. 「サブスクリプション」をタップ"
 }

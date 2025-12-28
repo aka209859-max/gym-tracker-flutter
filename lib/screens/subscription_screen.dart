@@ -97,7 +97,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             TextButton(
               onPressed: _restorePurchases,
               child: Text(
-                'Restore',
+                AppLocalizations.of(context)!.subscription_restore,
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -288,7 +288,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     Icon(Icons.stars, color: Colors.white, size: 20),
                     SizedBox(width: 8),
                     Text(
-                      '永年Proプラン（∞）',
+                      AppLocalizations.of(context)!.subscription_lifetimeProPlan,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -300,7 +300,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               ),
               SizedBox(height: 12),
               Text(
-                'AI機能無制限 | 広告なし | すべての機能を永久利用',
+                AppLocalizations.of(context)!.subscription_lifetimePlanDescription,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 12,
@@ -466,7 +466,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
-                        '⭐ 人気No.1',
+                        AppLocalizations.of(context)!.subscription_popularBadge,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
@@ -803,7 +803,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         child: Column(
           children: [
             Text(
-              'Legal Information',
+              AppLocalizations.of(context)!.subscription_legalInformation,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -841,7 +841,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     },
                     icon: Icon(Icons.description, size: 20),
                     label: Text(
-                      'Terms of Use',
+                      AppLocalizations.of(context)!.subscription_termsOfUse,
                       style: TextStyle(fontSize: 13),
                     ),
                     style: TextButton.styleFrom(
@@ -879,7 +879,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     },
                     icon: Icon(Icons.privacy_tip, size: 20),
                     label: Text(
-                      'Privacy Policy',
+                      AppLocalizations.of(context)!.subscription_privacyPolicy,
                       style: TextStyle(fontSize: 13),
                     ),
                     style: TextButton.styleFrom(
@@ -891,7 +891,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             ),
             SizedBox(height: 8),
             Text(
-              'By subscribing, you agree to our Terms of Use and Privacy Policy',
+              AppLocalizations.of(context)!.subscription_agreementText,
               style: TextStyle(
                 fontSize: 11,
                 color: Colors.grey[600],
@@ -1244,7 +1244,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(
-                        '¥300 / 5回',
+                        AppLocalizations.of(context)!.subscription_aiAddonPrice,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
@@ -1447,7 +1447,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               const SizedBox(height: 8),
               Text(AppLocalizations.of(context)!.subscription_step2),
               const SizedBox(height: 8),
-              const Text('3. 「サブスクリプション」をタップ'),
+              Text(AppLocalizations.of(context)!.subscription_cancelInstruction3),
               const SizedBox(height: 8),
               const Text('4. 「GYM MATCH」を選択'),
               const SizedBox(height: 8),

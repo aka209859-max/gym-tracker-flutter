@@ -3635,5 +3635,15 @@
       }
     }
   },
-  "home_recordPrompt": "운동을 기록하고\n진척도를 시각화하세요"
+  "home_recordPrompt": "운동을 기록하고\n진척도를 시각화하세요",
+  "subscription_restore": "복원",
+  "subscription_lifetimeProPlan": "평생 Pro 플랜（∞）",
+  "subscription_lifetimePlanDescription": "무제한 AI 기능 | 광고 없음 | 모든 기능 영구 이용",
+  "subscription_popularBadge": "⭐ 인기 1위",
+  "subscription_legalInformation": "법적 정보",
+  "subscription_termsOfUse": "이용 약관",
+  "subscription_privacyPolicy": "개인정보 보호정책",
+  "subscription_agreementText": "구독하면 이용 약관 및 개인정보 보호정책에 동의하는 것입니다",
+  "subscription_aiAddonPrice": "¥300 / 5회",
+  "subscription_cancelInstruction3": "3. \\\"구독\\\"을 탭하세요"
 }

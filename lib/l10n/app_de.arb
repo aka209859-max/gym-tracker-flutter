@@ -3637,5 +3637,15 @@
       }
     }
   },
-  "home_recordPrompt": "Zeichne dein Training auf\nund visualisiere deinen Fortschritt"
+  "home_recordPrompt": "Zeichne dein Training auf\nund visualisiere deinen Fortschritt",
+  "subscription_restore": "Wiederherstellen",
+  "subscription_lifetimeProPlan": "Lebenslanger Pro-Plan (∞)",
+  "subscription_lifetimePlanDescription": "Unbegrenzte KI-Funktionen | Werbefrei | Alle Funktionen für immer",
+  "subscription_popularBadge": "⭐ Am beliebtesten",
+  "subscription_legalInformation": "Rechtliche Informationen",
+  "subscription_termsOfUse": "Nutzungsbedingungen",
+  "subscription_privacyPolicy": "Datenschutzrichtlinie",
+  "subscription_agreementText": "Durch das Abonnieren stimmen Sie unseren Nutzungsbedingungen und Datenschutzrichtlinien zu",
+  "subscription_aiAddonPrice": "¥300 / 5 Mal",
+  "subscription_cancelInstruction3": "3. Tippe auf \\\"Abonnements\\\""
 }

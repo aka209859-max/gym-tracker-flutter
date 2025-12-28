@@ -3638,5 +3638,15 @@
       }
     }
   },
-  "home_recordPrompt": "記錄訓練\n可視化您的進度"
+  "home_recordPrompt": "記錄訓練\n可視化您的進度",
+  "subscription_restore": "恢復",
+  "subscription_lifetimeProPlan": "終身Pro計劃（∞）",
+  "subscription_lifetimePlanDescription": "無限AI功能 | 無廣告 | 永久使用所有功能",
+  "subscription_popularBadge": "⭐ 最受歡迎",
+  "subscription_legalInformation": "法律資訊",
+  "subscription_termsOfUse": "使用條款",
+  "subscription_privacyPolicy": "隱私政策",
+  "subscription_agreementText": "訂閱即表示您同意我們的使用條款和隱私政策",
+  "subscription_aiAddonPrice": "¥300 / 5次",
+  "subscription_cancelInstruction3": "3. 點擊「訂閱」"
 }
