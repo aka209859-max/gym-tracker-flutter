@@ -284,7 +284,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
+                  children: [
                     Icon(Icons.stars, color: Colors.white, size: 20),
                     SizedBox(width: 8),
                     Text(
