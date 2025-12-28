@@ -3547,5 +3547,10 @@
   "dev_phase1Reset": "✅ Phase 1功能已全部重置\n请重启应用",
   "dev_resetAiUsage": "重置AI使用次数",
   "dev_resetOnboarding": "重置引导流程",
-  "dev_resetPhase1": "重置所有Phase 1功能"
+  "dev_resetPhase1": "重置所有Phase 1功能",
+  "workout_aiCoachLoaded": "从AI教练加载了{count}个动作",
+  "workout_restDurationSeconds": "{seconds}秒",
+  "workout_setsCopiedCount": "已复制{count}组",
+  "workout_restSeconds": "休息{seconds}秒",
+  "workout_addCustomExercise": "添加动作（自定义）"
 }

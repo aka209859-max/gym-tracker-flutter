@@ -4272,5 +4272,49 @@
   "dev_phase1Reset": "✅ Phase 1機能をすべてリセットしました\nアプリを再起動してください",
   "dev_resetAiUsage": "AI使用回数をリセット",
   "dev_resetOnboarding": "オンボーディングをリセット",
-  "dev_resetPhase1": "Phase 1機能をすべてリセット"
+  "dev_resetPhase1": "Phase 1機能をすべてリセット",
+  "workout_aiCoachLoaded": "AIコーチから{count}種目を読み込みました",
+  "@workout_aiCoachLoaded": {
+    "description": "Message shown when exercises are loaded from AI Coach",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "workout_restDurationSeconds": "{seconds}秒",
+  "@workout_restDurationSeconds": {
+    "description": "Rest duration in seconds",
+    "placeholders": {
+      "seconds": {
+        "type": "int",
+        "example": "60"
+      }
+    }
+  },
+  "workout_setsCopiedCount": "{count}セットをコピーしました",
+  "@workout_setsCopiedCount": {
+    "description": "Message shown when sets are copied",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "workout_restSeconds": "休憩 {seconds}秒",
+  "@workout_restSeconds": {
+    "description": "Rest time display in seconds",
+    "placeholders": {
+      "seconds": {
+        "type": "int",
+        "example": "60"
+      }
+    }
+  },
+  "workout_addCustomExercise": "種目を追加（カスタム）",
+  "@workout_addCustomExercise": {
+    "description": "Button label to add custom exercise"
+  }
 }

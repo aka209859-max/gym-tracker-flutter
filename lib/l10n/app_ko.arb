@@ -3544,5 +3544,10 @@
   "dev_phase1Reset": "✅ Phase 1 기능 모두 초기화됨\n앱을 재시작하세요",
   "dev_resetAiUsage": "AI 사용 횟수 초기화",
   "dev_resetOnboarding": "온보딩 초기화",
-  "dev_resetPhase1": "Phase 1 기능 모두 초기화"
+  "dev_resetPhase1": "Phase 1 기능 모두 초기화",
+  "workout_aiCoachLoaded": "AI 코치에서 {count}개 운동을 불러왔습니다",
+  "workout_restDurationSeconds": "{seconds}초",
+  "workout_setsCopiedCount": "{count}세트를 복사했습니다",
+  "workout_restSeconds": "휴식 {seconds}초",
+  "workout_addCustomExercise": "운동 추가 (커스텀)"
 }

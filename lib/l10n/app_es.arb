@@ -3545,5 +3545,10 @@
   "dev_phase1Reset": "✅ Todas las funciones de Phase 1 restablecidas\nPor favor, reinicie la app",
   "dev_resetAiUsage": "Restablecer contador de uso de IA",
   "dev_resetOnboarding": "Restablecer onboarding",
-  "dev_resetPhase1": "Restablecer todas las funciones de Phase 1"
+  "dev_resetPhase1": "Restablecer todas las funciones de Phase 1",
+  "workout_aiCoachLoaded": "Se cargaron {count} ejercicios del Entrenador IA",
+  "workout_restDurationSeconds": "{seconds} seg",
+  "workout_setsCopiedCount": "Se copiaron {count} series",
+  "workout_restSeconds": "Descanso {seconds} seg",
+  "workout_addCustomExercise": "Agregar Ejercicio (Personalizado)"
 }

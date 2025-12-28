@@ -165,7 +165,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
       }
       
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('AIコーチから${exercises.length}種目を読み込みました')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.workout_aiCoachLoaded(exercises.length))),
       );
     });
   }
@@ -324,7 +324,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
           mainAxisSize: MainAxisSize.min,
           children: _restDurations.map((duration) {
             return RadioListTile<int>(
-              title: Text('${duration}秒'),
+              title: Text(AppLocalizations.of(context)!.workout_restDurationSeconds(duration)),
               value: duration,
               groupValue: _selectedRestDuration,
               onChanged: (value) {
@@ -395,7 +395,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
     });
     
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('${exerciseSets.length}セットをコピーしました')),
+      SnackBar(content: Text(AppLocalizations.of(context)!.workout_setsCopiedCount(exerciseSets.length))),
     );
   }
 
@@ -490,7 +490,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
-                  '休憩 $_restSeconds秒',
+                  AppLocalizations.of(context)!.workout_restSeconds(_restSeconds),
                   style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -578,7 +578,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 child: OutlinedButton.icon(
                   onPressed: _showAddCustomExerciseDialog,
                   icon: Icon(Icons.add),
-                  label: Text('種目を追加（カスタム）'),
+                  label: Text(AppLocalizations.of(context)!.workout_addCustomExercise),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                   ),

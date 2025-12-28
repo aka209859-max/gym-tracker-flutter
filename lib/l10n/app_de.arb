@@ -3546,5 +3546,10 @@
   "dev_phase1Reset": "✅ Alle Phase 1 Funktionen zurückgesetzt\nBitte App neu starten",
   "dev_resetAiUsage": "KI-Nutzungszähler zurücksetzen",
   "dev_resetOnboarding": "Onboarding zurücksetzen",
-  "dev_resetPhase1": "Alle Phase 1 Funktionen zurücksetzen"
+  "dev_resetPhase1": "Alle Phase 1 Funktionen zurücksetzen",
+  "workout_aiCoachLoaded": "{count} Übungen vom KI-Trainer geladen",
+  "workout_restDurationSeconds": "{seconds} Sek",
+  "workout_setsCopiedCount": "{count} Sätze kopiert",
+  "workout_restSeconds": "Pause {seconds} Sek",
+  "workout_addCustomExercise": "Übung hinzufügen (Benutzerdefiniert)"
 }

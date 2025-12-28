@@ -3517,5 +3517,10 @@
   "dev_phase1Reset": "✅ All Phase 1 features reset\nPlease restart the app",
   "dev_resetAiUsage": "Reset AI usage count",
   "dev_resetOnboarding": "Reset onboarding",
-  "dev_resetPhase1": "Reset all Phase 1 features"
+  "dev_resetPhase1": "Reset all Phase 1 features",
+  "workout_aiCoachLoaded": "Loaded {count} exercises from AI Coach",
+  "workout_restDurationSeconds": "{seconds} sec",
+  "workout_setsCopiedCount": "Copied {count} sets",
+  "workout_restSeconds": "Rest {seconds} sec",
+  "workout_addCustomExercise": "Add Exercise (Custom)"
 }
