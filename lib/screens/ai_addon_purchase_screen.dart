@@ -49,10 +49,9 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('AI追加パックを購入しますか？'),
+        title: Text(AppLocalizations.of(context)!.aiAddon_purchaseConfirm),
         content: Text(
-          'AI追加パック（5回分）\n'
-          '料金: ¥300\n\n'
+          AppLocalizations.of(context)!.aiAddon_packDetails + '\n\n'
           '${AppLocalizations.of(context)!.addWorkout}',
         ),
         actions: [
@@ -66,7 +65,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
               backgroundColor: Colors.blue,
               foregroundColor: Colors.white,
             ),
-            child: const Text('購入する'),
+            child: Text(AppLocalizations.of(context)!.aiAddon_purchase),
           ),
         ],
       ),
@@ -125,7 +124,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
                 Text(AppLocalizations.of(context)!.error),
               ],
             ),
-            content: const Text('購入処理に失敗しました。\nもう一度お試しください。'),
+            content: Text(AppLocalizations.of(context)!.aiAddon_purchaseFailed),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),

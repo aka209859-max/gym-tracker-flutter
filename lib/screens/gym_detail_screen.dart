@@ -158,7 +158,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
               Icon(Icons.check_circle, color: Colors.white),
               SizedBox(width: 12),
               Expanded(
-                child: Text('${widget.gym.name}にチェックインしました'),
+                child: Text(AppLocalizations.of(context)!.gym_checkedIn(widget.gym.name)),
               ),
             ],
           ),

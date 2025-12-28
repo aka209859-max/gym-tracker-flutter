@@ -64,7 +64,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
               children: [
                 Icon(Icons.celebration, color: Colors.amber, size: 32),
                 SizedBox(width: 12),
-                Text('🎉 登録完了！'),
+                Text(AppLocalizations.of(context)!.invite_registrationComplete),
               ],
             ),
             content: Column(
@@ -72,16 +72,16 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '招待コードが正常に適用されました！',
+                  AppLocalizations.of(context)!.invite_codeApplied,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 16),
-                Text('✅ あなた: AI使用回数 +5回'),
+                Text(AppLocalizations.of(context)!.invite_yourReward),
                 SizedBox(height: 8),
-                Text('✅ 友達: AI使用回数 +3回'),
+                Text(AppLocalizations.of(context)!.invite_friendReward),
                 SizedBox(height: 16),
                 Text(
-                  '特典はすぐに反映されます！',
+                  AppLocalizations.of(context)!.invite_benefitsApplied,
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ],

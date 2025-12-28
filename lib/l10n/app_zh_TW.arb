@@ -3557,5 +3557,15 @@
   "calculators_invalidInput": "請輸入有效的重量和次數",
   "calculators_oneRMCalculator": "1RM計算機",
   "calculators_oneRMDescription": "1RM（1次最大重複）是您可以舉起一次的最大重量。\n使用Epley公式計算估計的1RM。",
-  "calculators_barWeightError": "請輸入大於槓鈴重量（{barWeight}kg）的重量"
+  "calculators_barWeightError": "請輸入大於槓鈴重量（{barWeight}kg）的重量",
+  "invite_registrationComplete": "🎉 註冊完成！",
+  "invite_codeApplied": "邀請碼已成功套用！",
+  "invite_yourReward": "✅ 您：AI使用次數 +5次",
+  "invite_friendReward": "✅ 朋友：AI使用次數 +3次",
+  "invite_benefitsApplied": "獎勵將立即生效！",
+  "gym_checkedIn": "已簽到{gymName}",
+  "aiAddon_purchaseConfirm": "購買AI附加包？",
+  "aiAddon_packDetails": "AI附加包（5次）\n價格：¥300",
+  "aiAddon_purchase": "購買",
+  "aiAddon_purchaseFailed": "購買失敗。\n請重試。"
 }

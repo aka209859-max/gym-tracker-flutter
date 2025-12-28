@@ -4343,5 +4343,51 @@
         "example": "20.0"
       }
     }
+  },
+  "invite_registrationComplete": "🎉 登録完了！",
+  "@invite_registrationComplete": {
+    "description": "Success message title when invitation code is registered"
+  },
+  "invite_codeApplied": "招待コードが正常に適用されました！",
+  "@invite_codeApplied": {
+    "description": "Success message when invitation code is applied"
+  },
+  "invite_yourReward": "✅ あなた: AI使用回数 +5回",
+  "@invite_yourReward": {
+    "description": "Your reward for using invitation code"
+  },
+  "invite_friendReward": "✅ 友達: AI使用回数 +3回",
+  "@invite_friendReward": {
+    "description": "Friend's reward for invitation code"
+  },
+  "invite_benefitsApplied": "特典はすぐに反映されます！",
+  "@invite_benefitsApplied": {
+    "description": "Message that benefits are applied immediately"
+  },
+  "gym_checkedIn": "{gymName}にチェックインしました",
+  "@gym_checkedIn": {
+    "description": "Message shown when checked in to a gym",
+    "placeholders": {
+      "gymName": {
+        "type": "String",
+        "example": "Gold's Gym"
+      }
+    }
+  },
+  "aiAddon_purchaseConfirm": "AI追加パックを購入しますか？",
+  "@aiAddon_purchaseConfirm": {
+    "description": "Confirmation dialog title for AI addon purchase"
+  },
+  "aiAddon_packDetails": "AI追加パック（5回分）\n料金: ¥300",
+  "@aiAddon_packDetails": {
+    "description": "AI addon pack details with price"
+  },
+  "aiAddon_purchase": "購入する",
+  "@aiAddon_purchase": {
+    "description": "Purchase button label"
+  },
+  "aiAddon_purchaseFailed": "購入処理に失敗しました。\nもう一度お試しください。",
+  "@aiAddon_purchaseFailed": {
+    "description": "Error message when purchase fails"
   }
 }

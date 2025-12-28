@@ -3554,5 +3554,15 @@
   "calculators_invalidInput": "유효한 무게와 횟수를 입력하세요",
   "calculators_oneRMCalculator": "1RM 계산기",
   "calculators_oneRMDescription": "1RM (1 Rep Max)은 1회 들어올릴 수 있는 최대 무게입니다.\nEpley 공식을 사용하여 추정 1RM을 계산합니다.",
-  "calculators_barWeightError": "바 무게 ({barWeight}kg)보다 큰 무게를 입력하세요"
+  "calculators_barWeightError": "바 무게 ({barWeight}kg)보다 큰 무게를 입력하세요",
+  "invite_registrationComplete": "🎉 등록 완료!",
+  "invite_codeApplied": "초대 코드가 성공적으로 적용되었습니다!",
+  "invite_yourReward": "✅ 당신: AI 사용 횟수 +5회",
+  "invite_friendReward": "✅ 친구: AI 사용 횟수 +3회",
+  "invite_benefitsApplied": "혜택이 즉시 적용됩니다!",
+  "gym_checkedIn": "{gymName}에 체크인했습니다",
+  "aiAddon_purchaseConfirm": "AI 추가 팩을 구매하시겠습니까?",
+  "aiAddon_packDetails": "AI 추가 팩 (5회)\n가격: ¥300",
+  "aiAddon_purchase": "구매",
+  "aiAddon_purchaseFailed": "구매 실패.\n다시 시도해 주세요."
 }

@@ -3556,5 +3556,15 @@
   "calculators_invalidInput": "Bitte geben Sie gültiges Gewicht und Wiederholungen ein",
   "calculators_oneRMCalculator": "1RM-Rechner",
   "calculators_oneRMDescription": "1RM (1 Rep Max) ist das maximale Gewicht, das Sie einmal heben können.\nBerechnet geschätztes 1RM mit der Epley-Formel.",
-  "calculators_barWeightError": "Bitte geben Sie ein Gewicht größer als das Stangengewicht ({barWeight}kg) ein"
+  "calculators_barWeightError": "Bitte geben Sie ein Gewicht größer als das Stangengewicht ({barWeight}kg) ein",
+  "invite_registrationComplete": "🎉 Registrierung Abgeschlossen!",
+  "invite_codeApplied": "Einladungscode erfolgreich angewendet!",
+  "invite_yourReward": "✅ Sie: +5 KI-Nutzungen",
+  "invite_friendReward": "✅ Freund: +3 KI-Nutzungen",
+  "invite_benefitsApplied": "Vorteile werden sofort angewendet!",
+  "gym_checkedIn": "Bei {gymName} eingecheckt",
+  "aiAddon_purchaseConfirm": "KI-Zusatzpaket kaufen?",
+  "aiAddon_packDetails": "KI-Zusatzpaket (5 Nutzungen)\nPreis: ¥300",
+  "aiAddon_purchase": "Kaufen",
+  "aiAddon_purchaseFailed": "Kauf fehlgeschlagen.\nBitte versuchen Sie es erneut."
 }

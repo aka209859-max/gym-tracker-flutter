@@ -3555,5 +3555,15 @@
   "calculators_invalidInput": "Por favor ingrese peso y repeticiones válidos",
   "calculators_oneRMCalculator": "Calculadora 1RM",
   "calculators_oneRMDescription": "1RM (1 Rep Max) es el peso máximo que puedes levantar una vez.\nCalcula el 1RM estimado usando la fórmula de Epley.",
-  "calculators_barWeightError": "Por favor ingrese un peso mayor que el peso de la barra ({barWeight}kg)"
+  "calculators_barWeightError": "Por favor ingrese un peso mayor que el peso de la barra ({barWeight}kg)",
+  "invite_registrationComplete": "🎉 ¡Registro Completo!",
+  "invite_codeApplied": "¡Código de invitación aplicado con éxito!",
+  "invite_yourReward": "✅ Tú: +5 usos de IA",
+  "invite_friendReward": "✅ Amigo: +3 usos de IA",
+  "invite_benefitsApplied": "¡Los beneficios se aplicarán de inmediato!",
+  "gym_checkedIn": "Registrado en {gymName}",
+  "aiAddon_purchaseConfirm": "¿Comprar Paquete Adicional de IA?",
+  "aiAddon_packDetails": "Paquete Adicional de IA (5 usos)\nPrecio: ¥300",
+  "aiAddon_purchase": "Comprar",
+  "aiAddon_purchaseFailed": "Compra fallida.\nPor favor, inténtelo de nuevo."
 }

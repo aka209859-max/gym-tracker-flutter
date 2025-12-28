@@ -3527,5 +3527,15 @@
   "calculators_invalidInput": "Please enter valid weight and reps",
   "calculators_oneRMCalculator": "1RM Calculator",
   "calculators_oneRMDescription": "1RM (1 Rep Max) is the maximum weight you can lift for one repetition.\nCalculates estimated 1RM using the Epley formula.",
-  "calculators_barWeightError": "Please enter a weight greater than the bar weight ({barWeight}kg)"
+  "calculators_barWeightError": "Please enter a weight greater than the bar weight ({barWeight}kg)",
+  "invite_registrationComplete": "🎉 Registration Complete!",
+  "invite_codeApplied": "Invitation code applied successfully!",
+  "invite_yourReward": "✅ You: +5 AI uses",
+  "invite_friendReward": "✅ Friend: +3 AI uses",
+  "invite_benefitsApplied": "Benefits will be applied immediately!",
+  "gym_checkedIn": "Checked in to {gymName}",
+  "aiAddon_purchaseConfirm": "Purchase AI Add-on Pack?",
+  "aiAddon_packDetails": "AI Add-on Pack (5 uses)\nPrice: ¥300",
+  "aiAddon_purchase": "Purchase",
+  "aiAddon_purchaseFailed": "Purchase failed.\nPlease try again."
 }
