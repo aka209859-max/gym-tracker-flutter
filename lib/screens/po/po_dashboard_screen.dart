@@ -136,7 +136,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PO管理ダッシュボード'),
+        title: Text(AppLocalizations.of(context)!.po_dashboardTitle),
         backgroundColor: Colors.blue.shade700,
         foregroundColor: Colors.white,
         actions: [
@@ -203,7 +203,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
                       icon: Icons.people_outline,
                       onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('会員管理画面は次のフェーズで実装予定')),
+                          SnackBar(content: Text(AppLocalizations.of(context)!.po_memberManagementComingSoon)),
                         );
                       },
                     ),
@@ -214,7 +214,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
                       icon: Icons.calendar_today_outlined,
                       onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('セッション管理画面は次のフェーズで実装予定')),
+                          SnackBar(content: Text(AppLocalizations.of(context)!.po_sessionManagementComingSoon)),
                         );
                       },
                     ),
@@ -225,7 +225,7 @@ class _PODashboardScreenState extends State<PODashboardScreen> {
                       icon: Icons.analytics_outlined,
                       onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('分析画面は次のフェーズで実装予定')),
+                          SnackBar(content: Text(AppLocalizations.of(context)!.po_analyticsComingSoon)),
                         );
                       },
                     ),

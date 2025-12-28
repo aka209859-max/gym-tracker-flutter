@@ -3588,5 +3588,21 @@
   "favorites_removeAll": "모두 제거",
   "gymDetail_shareFailed": "공유 실패: {error}",
   "gymDetail_trophy": "🏆",
-  "gymDetail_error": "오류: {error}"
+  "gymDetail_error": "오류: {error}",
+  "chat_blockConfirm": "{name}님을 차단하시겠습니까?",
+  "chat_blockButton": "차단",
+  "chat_blocked": "차단했습니다",
+  "chat_reported": "신고가 접수되었습니다. 협조해 주셔서 감사합니다.",
+  "chat_blockAction": "차단하기",
+  "debug_title": "디버그 로그",
+  "debug_logCopied": "로그를 클립보드에 복사했습니다",
+  "debug_logCleared": "로그를 지웠습니다",
+  "po_dashboardTitle": "PO 관리 대시보드",
+  "po_memberManagementComingSoon": "회원 관리 화면은 다음 단계에서 구현 예정",
+  "po_sessionManagementComingSoon": "세션 관리 화면은 다음 단계에서 구현 예정",
+  "po_analyticsComingSoon": "분석 화면은 다음 단계에서 구현 예정",
+  "partnerPhotos_uploadSuccess": "✅ {count}개 이미지를 업로드했습니다!",
+  "partnerPhotos_uploadFailed": "❌ 업로드 실패: {error}",
+  "partnerPhotos_deleteConfirm": "이미지 삭제",
+  "partnerPhotos_title": "매장 이미지 관리"
 }

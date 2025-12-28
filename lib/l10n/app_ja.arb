@@ -4527,5 +4527,87 @@
         "example": "Unknown error"
       }
     }
+  },
+  "chat_blockConfirm": "{name}さんをブロックしますか？",
+  "@chat_blockConfirm": {
+    "description": "Confirmation dialog to block a user",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "田中太郎"
+      }
+    }
+  },
+  "chat_blockButton": "ブロック",
+  "@chat_blockButton": {
+    "description": "Block button label"
+  },
+  "chat_blocked": "ブロックしました",
+  "@chat_blocked": {
+    "description": "Success message after blocking"
+  },
+  "chat_reported": "通報を受け付けました。ご協力ありがとうございます。",
+  "@chat_reported": {
+    "description": "Success message after reporting"
+  },
+  "chat_blockAction": "ブロックする",
+  "@chat_blockAction": {
+    "description": "Block action label"
+  },
+  "debug_title": "デバッグログ",
+  "@debug_title": {
+    "description": "Debug log screen title"
+  },
+  "debug_logCopied": "ログをクリップボードにコピーしました",
+  "@debug_logCopied": {
+    "description": "Success message when log is copied"
+  },
+  "debug_logCleared": "ログをクリアしました",
+  "@debug_logCleared": {
+    "description": "Success message when log is cleared"
+  },
+  "po_dashboardTitle": "PO管理ダッシュボード",
+  "@po_dashboardTitle": {
+    "description": "PO management dashboard title"
+  },
+  "po_memberManagementComingSoon": "会員管理画面は次のフェーズで実装予定",
+  "@po_memberManagementComingSoon": {
+    "description": "Coming soon message for member management"
+  },
+  "po_sessionManagementComingSoon": "セッション管理画面は次のフェーズで実装予定",
+  "@po_sessionManagementComingSoon": {
+    "description": "Coming soon message for session management"
+  },
+  "po_analyticsComingSoon": "分析画面は次のフェーズで実装予定",
+  "@po_analyticsComingSoon": {
+    "description": "Coming soon message for analytics"
+  },
+  "partnerPhotos_uploadSuccess": "✅ {count}枚の画像をアップロードしました！",
+  "@partnerPhotos_uploadSuccess": {
+    "description": "Success message after uploading photos",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "partnerPhotos_uploadFailed": "❌ アップロード失敗: {error}",
+  "@partnerPhotos_uploadFailed": {
+    "description": "Error message when upload fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+  "partnerPhotos_deleteConfirm": "画像を削除",
+  "@partnerPhotos_deleteConfirm": {
+    "description": "Delete image confirmation title"
+  },
+  "partnerPhotos_title": "店舗画像管理",
+  "@partnerPhotos_title": {
+    "description": "Store photo management screen title"
   }
 }

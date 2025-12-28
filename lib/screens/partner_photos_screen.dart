@@ -109,7 +109,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('✅ ${images.length}枚の画像をアップロードしました！'),
+            content: Text(AppLocalizations.of(context)!.partnerPhotos_uploadSuccess(images.length)),
             backgroundColor: Colors.green,
           ),
         );
@@ -122,7 +122,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('❌ アップロード失敗: $e'),
+            content: Text(AppLocalizations.of(context)!.partnerPhotos_uploadFailed(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -139,7 +139,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('画像を削除'),
+        title: Text(AppLocalizations.of(context)!.partnerPhotos_deleteConfirm),
         content: Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(
@@ -198,7 +198,7 @@ class _PartnerPhotosScreenState extends State<PartnerPhotosScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('店舗画像管理'),
+        title: Text(AppLocalizations.of(context)!.partnerPhotos_title),
         elevation: 2,
         actions: [
           if (_isUploading)

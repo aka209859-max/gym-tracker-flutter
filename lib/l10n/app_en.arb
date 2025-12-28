@@ -3561,5 +3561,21 @@
   "favorites_removeAll": "Remove All",
   "gymDetail_shareFailed": "Share failed: {error}",
   "gymDetail_trophy": "🏆",
-  "gymDetail_error": "Error: {error}"
+  "gymDetail_error": "Error: {error}",
+  "chat_blockConfirm": "Block {name}?",
+  "chat_blockButton": "Block",
+  "chat_blocked": "Blocked",
+  "chat_reported": "Report received. Thank you for your cooperation.",
+  "chat_blockAction": "Block",
+  "debug_title": "Debug Log",
+  "debug_logCopied": "Log copied to clipboard",
+  "debug_logCleared": "Log cleared",
+  "po_dashboardTitle": "PO Management Dashboard",
+  "po_memberManagementComingSoon": "Member management screen coming in next phase",
+  "po_sessionManagementComingSoon": "Session management screen coming in next phase",
+  "po_analyticsComingSoon": "Analytics screen coming in next phase",
+  "partnerPhotos_uploadSuccess": "✅ Uploaded {count} images!",
+  "partnerPhotos_uploadFailed": "❌ Upload failed: {error}",
+  "partnerPhotos_deleteConfirm": "Delete Image",
+  "partnerPhotos_title": "Store Image Management"
 }

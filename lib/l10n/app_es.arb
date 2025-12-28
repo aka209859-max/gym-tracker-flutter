@@ -3589,5 +3589,21 @@
   "favorites_removeAll": "Eliminar Todo",
   "gymDetail_shareFailed": "Error al compartir: {error}",
   "gymDetail_trophy": "🏆",
-  "gymDetail_error": "Error: {error}"
+  "gymDetail_error": "Error: {error}",
+  "chat_blockConfirm": "¿Bloquear a {name}?",
+  "chat_blockButton": "Bloquear",
+  "chat_blocked": "Bloqueado",
+  "chat_reported": "Reporte recibido. Gracias por su cooperación.",
+  "chat_blockAction": "Bloquear",
+  "debug_title": "Registro de Depuración",
+  "debug_logCopied": "Registro copiado al portapapeles",
+  "debug_logCleared": "Registro borrado",
+  "po_dashboardTitle": "Panel de Gestión PO",
+  "po_memberManagementComingSoon": "Pantalla de gestión de miembros próximamente",
+  "po_sessionManagementComingSoon": "Pantalla de gestión de sesiones próximamente",
+  "po_analyticsComingSoon": "Pantalla de análisis próximamente",
+  "partnerPhotos_uploadSuccess": "✅ ¡Se subieron {count} imágenes!",
+  "partnerPhotos_uploadFailed": "❌ Error al subir: {error}",
+  "partnerPhotos_deleteConfirm": "Eliminar Imagen",
+  "partnerPhotos_title": "Gestión de Imágenes de Tienda"
 }

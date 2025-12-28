@@ -17,7 +17,7 @@ class _DebugLogScreenState extends State<DebugLogScreen> {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('デバッグログ'),
+        title: Text(AppLocalizations.of(context)!.debug_title),
         backgroundColor: Colors.deepPurple,
         foregroundColor: Colors.white,
         actions: [
@@ -28,7 +28,7 @@ class _DebugLogScreenState extends State<DebugLogScreen> {
               Clipboard.setData(ClipboardData(text: logText));
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('ログをクリップボードにコピーしました'),
+                  content: Text(AppLocalizations.of(context)!.debug_logCopied),
                   duration: Duration(seconds: 2),
                 ),
               );
@@ -43,7 +43,7 @@ class _DebugLogScreenState extends State<DebugLogScreen> {
               });
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('ログをクリアしました'),
+                  content: Text(AppLocalizations.of(context)!.debug_logCleared),
                   duration: Duration(seconds: 1),
                 ),
               );

@@ -3591,5 +3591,21 @@
   "favorites_removeAll": "全部删除",
   "gymDetail_shareFailed": "分享失败：{error}",
   "gymDetail_trophy": "🏆",
-  "gymDetail_error": "错误：{error}"
+  "gymDetail_error": "错误：{error}",
+  "chat_blockConfirm": "屏蔽{name}？",
+  "chat_blockButton": "屏蔽",
+  "chat_blocked": "已屏蔽",
+  "chat_reported": "已接受举报。感谢您的合作。",
+  "chat_blockAction": "屏蔽",
+  "debug_title": "调试日志",
+  "debug_logCopied": "日志已复制到剪贴板",
+  "debug_logCleared": "日志已清除",
+  "po_dashboardTitle": "PO管理仪表板",
+  "po_memberManagementComingSoon": "会员管理界面将在下一阶段实现",
+  "po_sessionManagementComingSoon": "会话管理界面将在下一阶段实现",
+  "po_analyticsComingSoon": "分析界面将在下一阶段实现",
+  "partnerPhotos_uploadSuccess": "✅ 已上传{count}张图片！",
+  "partnerPhotos_uploadFailed": "❌ 上传失败：{error}",
+  "partnerPhotos_deleteConfirm": "删除图片",
+  "partnerPhotos_title": "店铺图片管理"
 }

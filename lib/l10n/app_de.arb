@@ -3590,5 +3590,21 @@
   "favorites_removeAll": "Alle entfernen",
   "gymDetail_shareFailed": "Teilen fehlgeschlagen: {error}",
   "gymDetail_trophy": "🏆",
-  "gymDetail_error": "Fehler: {error}"
+  "gymDetail_error": "Fehler: {error}",
+  "chat_blockConfirm": "{name} blockieren?",
+  "chat_blockButton": "Blockieren",
+  "chat_blocked": "Blockiert",
+  "chat_reported": "Meldung erhalten. Vielen Dank für Ihre Mitarbeit.",
+  "chat_blockAction": "Blockieren",
+  "debug_title": "Debug-Protokoll",
+  "debug_logCopied": "Protokoll in Zwischenablage kopiert",
+  "debug_logCleared": "Protokoll gelöscht",
+  "po_dashboardTitle": "PO-Verwaltungs-Dashboard",
+  "po_memberManagementComingSoon": "Mitgliederverwaltungsbildschirm in nächster Phase",
+  "po_sessionManagementComingSoon": "Sitzungsverwaltungsbildschirm in nächster Phase",
+  "po_analyticsComingSoon": "Analysebildschirm in nächster Phase",
+  "partnerPhotos_uploadSuccess": "✅ {count} Bilder hochgeladen!",
+  "partnerPhotos_uploadFailed": "❌ Upload fehlgeschlagen: {error}",
+  "partnerPhotos_deleteConfirm": "Bild löschen",
+  "partnerPhotos_title": "Geschäftsbildverwaltung"
 }

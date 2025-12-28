@@ -107,7 +107,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('${widget.partner.displayName}さんをブロックしますか？'),
+            Text(AppLocalizations.of(context)!.chat_blockConfirm(widget.partner.displayName)),
             const SizedBox(height: 16),
             Text(
               'ブロックすると:\n'
@@ -126,7 +126,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
           ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            child: const Text('ブロック'),
+            child: Text(AppLocalizations.of(context)!.chat_blockButton),
           ),
         ],
       ),
@@ -144,7 +144,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('ブロックしました')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.chat_blocked)),
         );
         Navigator.pop(context);
       }
@@ -236,7 +236,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('通報を受け付けました。ご協力ありがとうございます。')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.chat_reported)),
         );
       }
     } catch (e) {
@@ -269,7 +269,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
                   children: [
                     Icon(Icons.block, size: 20),
                     SizedBox(width: 8),
-                    Text('ブロックする'),
+                    Text(AppLocalizations.of(context)!.chat_blockAction),
                   ],
                 ),
               ),
