@@ -263,7 +263,7 @@ class _ChatScreenPartnerState extends State<ChatScreenPartner> {
               }
             },
             itemBuilder: (context) => [
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'block',
                 child: Row(
                   children: [

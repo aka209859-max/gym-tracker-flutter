@@ -225,7 +225,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
   /// バッジリスト
   Widget _buildBadgeList(List<Achievement> badges, ThemeData theme) {
     if (badges.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(AppLocalizations.of(context)!.achievements_noBadges),
       );
     }
