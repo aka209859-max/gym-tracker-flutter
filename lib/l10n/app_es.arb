@@ -3550,5 +3550,10 @@
   "workout_restDurationSeconds": "{seconds} seg",
   "workout_setsCopiedCount": "Se copiaron {count} series",
   "workout_restSeconds": "Descanso {seconds} seg",
-  "workout_addCustomExercise": "Agregar Ejercicio (Personalizado)"
+  "workout_addCustomExercise": "Agregar Ejercicio (Personalizado)",
+  "calculators_title": "Calculadoras",
+  "calculators_invalidInput": "Por favor ingrese peso y repeticiones válidos",
+  "calculators_oneRMCalculator": "Calculadora 1RM",
+  "calculators_oneRMDescription": "1RM (1 Rep Max) es el peso máximo que puedes levantar una vez.\nCalcula el 1RM estimado usando la fórmula de Epley.",
+  "calculators_barWeightError": "Por favor ingrese un peso mayor que el peso de la barra ({barWeight}kg)"
 }

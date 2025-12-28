@@ -3549,5 +3549,10 @@
   "workout_restDurationSeconds": "{seconds}초",
   "workout_setsCopiedCount": "{count}세트를 복사했습니다",
   "workout_restSeconds": "휴식 {seconds}초",
-  "workout_addCustomExercise": "운동 추가 (커스텀)"
+  "workout_addCustomExercise": "운동 추가 (커스텀)",
+  "calculators_title": "계산 도구",
+  "calculators_invalidInput": "유효한 무게와 횟수를 입력하세요",
+  "calculators_oneRMCalculator": "1RM 계산기",
+  "calculators_oneRMDescription": "1RM (1 Rep Max)은 1회 들어올릴 수 있는 최대 무게입니다.\nEpley 공식을 사용하여 추정 1RM을 계산합니다.",
+  "calculators_barWeightError": "바 무게 ({barWeight}kg)보다 큰 무게를 입력하세요"
 }

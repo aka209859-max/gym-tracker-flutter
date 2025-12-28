@@ -4316,5 +4316,32 @@
   "workout_addCustomExercise": "種目を追加（カスタム）",
   "@workout_addCustomExercise": {
     "description": "Button label to add custom exercise"
+  },
+  "calculators_title": "計算ツール",
+  "@calculators_title": {
+    "description": "Title for calculators screen"
+  },
+  "calculators_invalidInput": "有効な重量と回数を入力してください",
+  "@calculators_invalidInput": {
+    "description": "Error message for invalid weight and reps input"
+  },
+  "calculators_oneRMCalculator": "1RM計算機",
+  "@calculators_oneRMCalculator": {
+    "description": "Title for 1RM calculator section"
+  },
+  "calculators_oneRMDescription": "1RM (1 Rep Max) は、1回だけ持ち上げられる最大重量です。\nEpley式を使用して推定1RMを計算します。",
+  "@calculators_oneRMDescription": {
+    "description": "Description of 1RM calculator using Epley formula"
+  },
+  "calculators_barWeightError": "バー重量 ({barWeight}kg) より大きい重量を入力してください",
+  "@calculators_barWeightError": {
+    "description": "Error message when entered weight is less than bar weight",
+    "placeholders": {
+      "barWeight": {
+        "type": "double",
+        "format": "decimalPattern",
+        "example": "20.0"
+      }
+    }
   }
 }

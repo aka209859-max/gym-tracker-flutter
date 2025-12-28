@@ -3522,5 +3522,10 @@
   "workout_restDurationSeconds": "{seconds} sec",
   "workout_setsCopiedCount": "Copied {count} sets",
   "workout_restSeconds": "Rest {seconds} sec",
-  "workout_addCustomExercise": "Add Exercise (Custom)"
+  "workout_addCustomExercise": "Add Exercise (Custom)",
+  "calculators_title": "Calculators",
+  "calculators_invalidInput": "Please enter valid weight and reps",
+  "calculators_oneRMCalculator": "1RM Calculator",
+  "calculators_oneRMDescription": "1RM (1 Rep Max) is the maximum weight you can lift for one repetition.\nCalculates estimated 1RM using the Epley formula.",
+  "calculators_barWeightError": "Please enter a weight greater than the bar weight ({barWeight}kg)"
 }

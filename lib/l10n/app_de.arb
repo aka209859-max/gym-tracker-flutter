@@ -3551,5 +3551,10 @@
   "workout_restDurationSeconds": "{seconds} Sek",
   "workout_setsCopiedCount": "{count} Sätze kopiert",
   "workout_restSeconds": "Pause {seconds} Sek",
-  "workout_addCustomExercise": "Übung hinzufügen (Benutzerdefiniert)"
+  "workout_addCustomExercise": "Übung hinzufügen (Benutzerdefiniert)",
+  "calculators_title": "Rechner",
+  "calculators_invalidInput": "Bitte geben Sie gültiges Gewicht und Wiederholungen ein",
+  "calculators_oneRMCalculator": "1RM-Rechner",
+  "calculators_oneRMDescription": "1RM (1 Rep Max) ist das maximale Gewicht, das Sie einmal heben können.\nBerechnet geschätztes 1RM mit der Epley-Formel.",
+  "calculators_barWeightError": "Bitte geben Sie ein Gewicht größer als das Stangengewicht ({barWeight}kg) ein"
 }

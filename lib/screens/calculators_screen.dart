@@ -14,7 +14,7 @@ class CalculatorsScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('計算ツール'),
+          title: Text(AppLocalizations.of(context)!.calculators_title),
           bottom: TabBar(
             tabs: [
               Tab(icon: Icon(Icons.calculate), text: '1RM計算'),
@@ -53,7 +53,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
 
     if (weight == null || reps == null || weight <= 0 || reps <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('有効な重量と回数を入力してください')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.calculators_invalidInput)),
       );
       return;
     }
@@ -109,7 +109,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                       Icon(Icons.info_outline, color: Colors.blue[700]),
                       const SizedBox(width: 8),
                       Text(
-                        '1RM計算機',
+                        AppLocalizations.of(context)!.calculators_oneRMCalculator,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -119,9 +119,8 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    '1RM (1 Rep Max) は、1回だけ持ち上げられる最大重量です。\n'
-                    'Epley式を使用して推定1RMを計算します。',
+                  Text(
+                    AppLocalizations.of(context)!.calculators_oneRMDescription,
                     style: TextStyle(fontSize: 14),
                   ),
                 ],
@@ -278,7 +277,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
 
     if (targetWeight == null || targetWeight <= _barWeight) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('バー重量 (${_barWeight}kg) より大きい重量を入力してください')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.calculators_barWeightError(_barWeight))),
       );
       return;
     }

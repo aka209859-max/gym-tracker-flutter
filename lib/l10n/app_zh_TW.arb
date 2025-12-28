@@ -3552,5 +3552,10 @@
   "workout_restDurationSeconds": "{seconds}秒",
   "workout_setsCopiedCount": "已複製{count}組",
   "workout_restSeconds": "休息{seconds}秒",
-  "workout_addCustomExercise": "新增動作（自訂）"
+  "workout_addCustomExercise": "新增動作（自訂）",
+  "calculators_title": "計算工具",
+  "calculators_invalidInput": "請輸入有效的重量和次數",
+  "calculators_oneRMCalculator": "1RM計算機",
+  "calculators_oneRMDescription": "1RM（1次最大重複）是您可以舉起一次的最大重量。\n使用Epley公式計算估計的1RM。",
+  "calculators_barWeightError": "請輸入大於槓鈴重量（{barWeight}kg）的重量"
 }
