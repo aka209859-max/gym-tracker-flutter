@@ -3647,5 +3647,53 @@
   "subscription_privacyPolicy": "Datenschutzrichtlinie",
   "subscription_agreementText": "Durch das Abonnieren stimmen Sie unseren Nutzungsbedingungen und Datenschutzrichtlinien zu",
   "subscription_aiAddonPrice": "¥300 / 5 Mal",
-  "subscription_cancelInstruction3": "3. Tippe auf \\\"Abonnements\\\""
+  "subscription_cancelInstruction3": "3. Tippe auf \\\"Abonnements\\\"",
+  "profile_referralBonusTitle": "🎁 Empfehlungsbonus",
+  "profile_referralBonusHint": "💡 Wenn dein Freund diesen Code eingibt, erhalten beide Belohnungen!",
+  "profile_referralShareMessage": "Lass uns zusammen auf GYM MATCH trainieren!\\n\\nEmpfehlungscode: {referralCode}\\nErhalte 3 KI-Nutzungen!\\n\\nhttps://gym-match-e560d.web.app",
+  "@profile_referralShareMessage": {
+    "placeholders": {
+      "referralCode": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_errorMessage": "❌ Fehler: {error}",
+  "@profile_errorMessage": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_rewardItem": "{title}: {reward}",
+  "@profile_rewardItem": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "reward": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_defaultUsername": "Trainingsbenutzer",
+  "profile_defaultBio": "Willkommen bei GYM MATCH",
+  "profile_referralRewardDescription": "KI x5 Mal + Geworbene Person erhält auch KI x3 Mal",
+  "profile_premiumOnlyFeature": "{featureName} ist eine Funktion exklusiv für Premium-Plan-Mitglieder.",
+  "@profile_premiumOnlyFeature": {
+    "placeholders": {
+      "featureName": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_featureInDevelopment": "{featureName} befindet sich derzeit in der Entwicklung.\\nEs wird im nächsten Update verfügbar sein.",
+  "@profile_featureInDevelopment": {
+    "placeholders": {
+      "featureName": {
+        "type": "String"
+      }
+    }
+  }
 }

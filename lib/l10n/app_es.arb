@@ -3646,5 +3646,53 @@
   "subscription_privacyPolicy": "Política de privacidad",
   "subscription_agreementText": "Al suscribirte, aceptas nuestros Términos de uso y Política de privacidad",
   "subscription_aiAddonPrice": "¥300 / 5 veces",
-  "subscription_cancelInstruction3": "3. Toca \\\"Suscripciones\\\""
+  "subscription_cancelInstruction3": "3. Toca \\\"Suscripciones\\\"",
+  "profile_referralBonusTitle": "🎁 Bono de referencia",
+  "profile_referralBonusHint": "💡 Cuando tu amigo ingrese este código, ¡ambos recibirán recompensas!",
+  "profile_referralShareMessage": "¡Entrenemos juntos en GYM MATCH!\\n\\nCódigo de referencia: {referralCode}\\n¡Obtén 3 usos de IA!\\n\\nhttps://gym-match-e560d.web.app",
+  "@profile_referralShareMessage": {
+    "placeholders": {
+      "referralCode": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_errorMessage": "❌ Error: {error}",
+  "@profile_errorMessage": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_rewardItem": "{title}: {reward}",
+  "@profile_rewardItem": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "reward": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_defaultUsername": "Usuario de entrenamiento",
+  "profile_defaultBio": "Bienvenido a GYM MATCH",
+  "profile_referralRewardDescription": "AI x5 veces + La persona referida también obtiene AI x3 veces",
+  "profile_premiumOnlyFeature": "{featureName} es una función exclusiva para miembros del plan premium.",
+  "@profile_premiumOnlyFeature": {
+    "placeholders": {
+      "featureName": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_featureInDevelopment": "{featureName} está actualmente en desarrollo.\\nEstará disponible en la próxima actualización.",
+  "@profile_featureInDevelopment": {
+    "placeholders": {
+      "featureName": {
+        "type": "String"
+      }
+    }
+  }
 }

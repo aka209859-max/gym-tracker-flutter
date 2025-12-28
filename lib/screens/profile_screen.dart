@@ -427,7 +427,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               SizedBox(height: 20),
               Text(
-                '🎁 紹介特典',
+                AppLocalizations.of(context)!.profile_referralBonusTitle,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -444,7 +444,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  '💡 友達がこのコードを入力すると、両方に特典が届きます！',
+                  AppLocalizations.of(context)!.profile_referralBonusHint,
                   style: TextStyle(fontSize: 12),
                 ),
               ),
@@ -486,7 +486,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('❌ エラー: ${e.toString()}'),
+          content: Text(AppLocalizations.of(context)!.profile_errorMessage(e.toString())),
           backgroundColor: Colors.red,
         ),
       );
@@ -513,7 +513,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           SizedBox(width: 8),
           Expanded(
             child: Text(
-              '$title: $reward',
+              AppLocalizations.of(context)!.profile_rewardItem(title, reward),
               style: const TextStyle(fontSize: 14),
             ),
           ),
@@ -603,7 +603,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    _userProfile?.displayName ?? 'トレーニングユーザー',
+                    _userProfile?.displayName ?? AppLocalizations.of(context)!.profile_defaultUsername,
                     style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   if (isProUser) SizedBox(width: 8),
@@ -614,7 +614,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             SizedBox(height: 4),
             Text(
-              _userProfile?.bio ?? 'GYM MATCHへようこそ',
+              _userProfile?.bio ?? AppLocalizations.of(context)!.profile_defaultBio,
               style: TextStyle(fontSize: 12, color: Colors.grey[600]),
               textAlign: TextAlign.center,
               maxLines: 2,
@@ -880,7 +880,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           context,
           icon: Icons.card_giftcard,
           title: AppLocalizations.of(context)!.profileInviteFriends,
-          subtitle: 'AI x5回 + 紹介された人もAI x3回',
+          subtitle: AppLocalizations.of(context)!.profile_referralRewardDescription,
           badge: 'NEW',
           badgeColor: Colors.orange,
           onTap: () {
@@ -989,7 +989,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '$featureNameは有料プラン会員限定の機能です。',
+                AppLocalizations.of(context)!.profile_premiumOnlyFeature(featureName),
                 style: const TextStyle(fontSize: 16),
               ),
               SizedBox(height: 16),
@@ -1050,7 +1050,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.profile_b217155b),
         content: Text(
-          '$featureNameは現在開発中です。\n次回のアップデートでご利用いただけます。',
+          AppLocalizations.of(context)!.profile_featureInDevelopment(featureName),
         ),
         actions: [
           TextButton(

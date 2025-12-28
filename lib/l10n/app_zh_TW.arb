@@ -3648,5 +3648,53 @@
   "subscription_privacyPolicy": "隱私政策",
   "subscription_agreementText": "訂閱即表示您同意我們的使用條款和隱私政策",
   "subscription_aiAddonPrice": "¥300 / 5次",
-  "subscription_cancelInstruction3": "3. 點擊「訂閱」"
+  "subscription_cancelInstruction3": "3. 點擊「訂閱」",
+  "profile_referralBonusTitle": "🎁 推薦獎勵",
+  "profile_referralBonusHint": "💡 當您的朋友輸入此代碼時，雙方都將獲得獎勵！",
+  "profile_referralShareMessage": "一起在GYM MATCH上訓練吧！\\n\\n推薦碼：{referralCode}\\n獲得3次AI使用！\\n\\nhttps://gym-match-e560d.web.app",
+  "@profile_referralShareMessage": {
+    "placeholders": {
+      "referralCode": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_errorMessage": "❌ 錯誤：{error}",
+  "@profile_errorMessage": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_rewardItem": "{title}：{reward}",
+  "@profile_rewardItem": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "reward": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_defaultUsername": "訓練用戶",
+  "profile_defaultBio": "歡迎來到GYM MATCH",
+  "profile_referralRewardDescription": "AI x5次 + 被推薦人也獲得AI x3次",
+  "profile_premiumOnlyFeature": "{featureName}是高級計劃會員專屬功能。",
+  "@profile_premiumOnlyFeature": {
+    "placeholders": {
+      "featureName": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_featureInDevelopment": "{featureName}目前正在開發中。\\n下次更新時即可使用。",
+  "@profile_featureInDevelopment": {
+    "placeholders": {
+      "featureName": {
+        "type": "String"
+      }
+    }
+  }
 }

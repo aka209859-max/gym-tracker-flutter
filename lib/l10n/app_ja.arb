@@ -4650,5 +4650,53 @@
   "subscription_privacyPolicy": "Privacy Policy",
   "subscription_agreementText": "By subscribing, you agree to our Terms of Use and Privacy Policy",
   "subscription_aiAddonPrice": "¥300 / 5回",
-  "subscription_cancelInstruction3": "3. 「サブスクリプション」をタップ"
+  "subscription_cancelInstruction3": "3. 「サブスクリプション」をタップ",
+  "profile_referralBonusTitle": "🎁 紹介特典",
+  "profile_referralBonusHint": "💡 友達がこのコードを入力すると、両方に特典が届きます！",
+  "profile_referralShareMessage": "GYM MATCHで一緒にトレーニングしませんか？\\n\\n紹介コード: {referralCode}\\nAI使用回数3回がもらえます！\\n\\nhttps://gym-match-e560d.web.app",
+  "@profile_referralShareMessage": {
+    "placeholders": {
+      "referralCode": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_errorMessage": "❌ エラー: {error}",
+  "@profile_errorMessage": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_rewardItem": "{title}: {reward}",
+  "@profile_rewardItem": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "reward": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_defaultUsername": "トレーニングユーザー",
+  "profile_defaultBio": "GYM MATCHへようこそ",
+  "profile_referralRewardDescription": "AI x5回 + 紹介された人もAI x3回",
+  "profile_premiumOnlyFeature": "{featureName}は有料プラン会員限定の機能です。",
+  "@profile_premiumOnlyFeature": {
+    "placeholders": {
+      "featureName": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_featureInDevelopment": "{featureName}は現在開発中です。\\n次回のアップデートでご利用いただけます。",
+  "@profile_featureInDevelopment": {
+    "placeholders": {
+      "featureName": {
+        "type": "String"
+      }
+    }
+  }
 }
