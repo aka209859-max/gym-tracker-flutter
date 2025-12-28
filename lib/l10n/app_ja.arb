@@ -4389,5 +4389,25 @@
   "aiAddon_purchaseFailed": "購入処理に失敗しました。\nもう一度お試しください。",
   "@aiAddon_purchaseFailed": {
     "description": "Error message when purchase fails"
+  },
+  "weeklyReports_recommendation": "週次レコメンデーション",
+  "@weeklyReports_recommendation": {
+    "description": "Title for weekly recommendation feature"
+  },
+  "weeklyReports_recommendationSubtitle": "推奨曜日とメニュー提案を表示",
+  "@weeklyReports_recommendationSubtitle": {
+    "description": "Subtitle explaining weekly recommendation feature"
+  },
+  "bodyPart_days7": "7日",
+  "@bodyPart_days7": {
+    "description": "7 days period selector"
+  },
+  "bodyPart_days30": "30日",
+  "@bodyPart_days30": {
+    "description": "30 days period selector"
+  },
+  "bodyPart_days90": "90日",
+  "@bodyPart_days90": {
+    "description": "90 days period selector"
   }
 }

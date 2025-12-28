@@ -3566,5 +3566,10 @@
   "aiAddon_purchaseConfirm": "KI-Zusatzpaket kaufen?",
   "aiAddon_packDetails": "KI-Zusatzpaket (5 Nutzungen)\nPreis: ¥300",
   "aiAddon_purchase": "Kaufen",
-  "aiAddon_purchaseFailed": "Kauf fehlgeschlagen.\nBitte versuchen Sie es erneut."
+  "aiAddon_purchaseFailed": "Kauf fehlgeschlagen.\nBitte versuchen Sie es erneut.",
+  "weeklyReports_recommendation": "Wöchentliche Empfehlung",
+  "weeklyReports_recommendationSubtitle": "Empfohlene Tage und Menüvorschläge anzeigen",
+  "bodyPart_days7": "7 Tage",
+  "bodyPart_days30": "30 Tage",
+  "bodyPart_days90": "90 Tage"
 }

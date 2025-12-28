@@ -3567,5 +3567,10 @@
   "aiAddon_purchaseConfirm": "購買AI附加包？",
   "aiAddon_packDetails": "AI附加包（5次）\n價格：¥300",
   "aiAddon_purchase": "購買",
-  "aiAddon_purchaseFailed": "購買失敗。\n請重試。"
+  "aiAddon_purchaseFailed": "購買失敗。\n請重試。",
+  "weeklyReports_recommendation": "每週推薦",
+  "weeklyReports_recommendationSubtitle": "顯示推薦的日期和菜單建議",
+  "bodyPart_days7": "7天",
+  "bodyPart_days30": "30天",
+  "bodyPart_days90": "90天"
 }

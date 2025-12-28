@@ -153,9 +153,9 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
                 width: double.infinity,
                 child: SegmentedButton<int>(
                   segments: const [
-                    ButtonSegment(value: 7, label: Text('7日')),
-                    ButtonSegment(value: 30, label: Text('30日')),
-                    ButtonSegment(value: 90, label: Text('90日')),
+                    ButtonSegment(value: 7, label: Text(AppLocalizations.of(context)!.bodyPart_days7)),
+                    ButtonSegment(value: 30, label: Text(AppLocalizations.of(context)!.bodyPart_days30)),
+                    ButtonSegment(value: 90, label: Text(AppLocalizations.of(context)!.bodyPart_days90)),
                   ],
                   selected: {_periodDays},
                   onSelectionChanged: (Set<int> selected) {

@@ -3564,5 +3564,10 @@
   "aiAddon_purchaseConfirm": "AI 추가 팩을 구매하시겠습니까?",
   "aiAddon_packDetails": "AI 추가 팩 (5회)\n가격: ¥300",
   "aiAddon_purchase": "구매",
-  "aiAddon_purchaseFailed": "구매 실패.\n다시 시도해 주세요."
+  "aiAddon_purchaseFailed": "구매 실패.\n다시 시도해 주세요.",
+  "weeklyReports_recommendation": "주간 추천",
+  "weeklyReports_recommendationSubtitle": "추천 요일 및 메뉴 제안 표시",
+  "bodyPart_days7": "7일",
+  "bodyPart_days30": "30일",
+  "bodyPart_days90": "90일"
 }

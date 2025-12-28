@@ -3537,5 +3537,10 @@
   "aiAddon_purchaseConfirm": "Purchase AI Add-on Pack?",
   "aiAddon_packDetails": "AI Add-on Pack (5 uses)\nPrice: ¥300",
   "aiAddon_purchase": "Purchase",
-  "aiAddon_purchaseFailed": "Purchase failed.\nPlease try again."
+  "aiAddon_purchaseFailed": "Purchase failed.\nPlease try again.",
+  "weeklyReports_recommendation": "Weekly Recommendation",
+  "weeklyReports_recommendationSubtitle": "Show recommended days and menu suggestions",
+  "bodyPart_days7": "7 days",
+  "bodyPart_days30": "30 days",
+  "bodyPart_days90": "90 days"
 }

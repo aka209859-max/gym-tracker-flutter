@@ -3565,5 +3565,10 @@
   "aiAddon_purchaseConfirm": "¿Comprar Paquete Adicional de IA?",
   "aiAddon_packDetails": "Paquete Adicional de IA (5 usos)\nPrecio: ¥300",
   "aiAddon_purchase": "Comprar",
-  "aiAddon_purchaseFailed": "Compra fallida.\nPor favor, inténtelo de nuevo."
+  "aiAddon_purchaseFailed": "Compra fallida.\nPor favor, inténtelo de nuevo.",
+  "weeklyReports_recommendation": "Recomendación Semanal",
+  "weeklyReports_recommendationSubtitle": "Mostrar días recomendados y sugerencias de menú",
+  "bodyPart_days7": "7 días",
+  "bodyPart_days30": "30 días",
+  "bodyPart_days90": "90 días"
 }
