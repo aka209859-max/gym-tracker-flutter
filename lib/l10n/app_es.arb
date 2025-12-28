@@ -3605,5 +3605,36 @@
   "partnerPhotos_uploadSuccess": "✅ ¡Se subieron {count} imágenes!",
   "partnerPhotos_uploadFailed": "❌ Error al subir: {error}",
   "partnerPhotos_deleteConfirm": "Eliminar Imagen",
-  "partnerPhotos_title": "Gestión de Imágenes de Tienda"
+  "partnerPhotos_title": "Gestión de Imágenes de Tienda",
+  "home_streakTitle": "¡7 días seguidos logrados!",
+  "home_streakMessage": "¡Felicidades!\nHas registrado entrenamientos durante 7 días seguidos.\n¡Sigue así! 💪",
+  "home_milestoneMessage": "¡Increíble! ¡Hito alcanzado!\n¡Sigue a este ritmo! 💪",
+  "home_tapToShowStats": "Toca para mostrar estadísticas detalladas",
+  "home_aiSuggestionTitle": "💡 Sugerencia de IA de hoy",
+  "home_aiSuggestionPrompt": "IA analiza científicamente\ntu menú de entrenamiento personalizado",
+  "home_currentStreakDays": "{days} días seguidos",
+  "@home_currentStreakDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "home_streakRecording": "¡Registrando durante {days} días seguidos!",
+  "@home_streakRecording": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "home_weeklyProgressPercent": "{percent}% logrado",
+  "@home_weeklyProgressPercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "home_recordPrompt": "Registra tu entrenamiento\ny visualiza tu progreso"
 }

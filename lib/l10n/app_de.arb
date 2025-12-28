@@ -3606,5 +3606,36 @@
   "partnerPhotos_uploadSuccess": "✅ {count} Bilder hochgeladen!",
   "partnerPhotos_uploadFailed": "❌ Upload fehlgeschlagen: {error}",
   "partnerPhotos_deleteConfirm": "Bild löschen",
-  "partnerPhotos_title": "Geschäftsbildverwaltung"
+  "partnerPhotos_title": "Geschäftsbildverwaltung",
+  "home_streakTitle": "7 Tage in Folge erreicht!",
+  "home_streakMessage": "Herzlichen Glückwunsch!\nDu hast 7 Tage in Folge trainiert.\nMach weiter so! 💪",
+  "home_milestoneMessage": "Großartig! Meilenstein erreicht!\nMach in diesem Tempo weiter! 💪",
+  "home_tapToShowStats": "Tippen, um detaillierte Statistiken anzuzeigen",
+  "home_aiSuggestionTitle": "💡 Heutige KI-Empfehlung",
+  "home_aiSuggestionPrompt": "KI analysiert wissenschaftlich\ndein personalisiertes Trainingsmenü",
+  "home_currentStreakDays": "{days} Tage in Folge",
+  "@home_currentStreakDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "home_streakRecording": "{days} Tage hintereinander aufgezeichnet!",
+  "@home_streakRecording": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "home_weeklyProgressPercent": "{percent}% erreicht",
+  "@home_weeklyProgressPercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "home_recordPrompt": "Zeichne dein Training auf\nund visualisiere deinen Fortschritt"
 }

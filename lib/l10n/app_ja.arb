@@ -4609,5 +4609,36 @@
   "partnerPhotos_title": "店舗画像管理",
   "@partnerPhotos_title": {
     "description": "Store photo management screen title"
-  }
+  },
+  "home_streakTitle": "7日連続達成！",
+  "home_streakMessage": "おめでとうございます！\n7日間連続でトレーニングを記録しました。\nこの調子で続けましょう！💪",
+  "home_milestoneMessage": "すごい！マイルストーン達成です！\nこの調子で続けていきましょう！💪",
+  "home_tapToShowStats": "タップして詳細統計を表示",
+  "home_aiSuggestionTitle": "💡 今日のAI提案",
+  "home_aiSuggestionPrompt": "あなた専用のトレーニングメニューを\nAIが科学的に分析します",
+  "home_currentStreakDays": "連続 {days} 日",
+  "@home_currentStreakDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "home_streakRecording": "{days}日連続記録中！",
+  "@home_streakRecording": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "home_weeklyProgressPercent": "{percent}% 達成",
+  "@home_weeklyProgressPercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "home_recordPrompt": "トレーニングを記録して、\n進捗を可視化しましょう"
 }

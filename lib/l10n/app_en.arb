@@ -3577,5 +3577,36 @@
   "partnerPhotos_uploadSuccess": "✅ Uploaded {count} images!",
   "partnerPhotos_uploadFailed": "❌ Upload failed: {error}",
   "partnerPhotos_deleteConfirm": "Delete Image",
-  "partnerPhotos_title": "Store Image Management"
+  "partnerPhotos_title": "Store Image Management",
+  "home_streakTitle": "7-Day Streak Achieved!",
+  "home_streakMessage": "Congratulations!\nYou've recorded training for 7 consecutive days.\nKeep up the great work! 💪",
+  "home_milestoneMessage": "Amazing! Milestone achieved!\nKeep going at this pace! 💪",
+  "home_tapToShowStats": "Tap to show detailed statistics",
+  "home_aiSuggestionTitle": "💡 Today's AI Suggestion",
+  "home_aiSuggestionPrompt": "AI scientifically analyzes\nyour personalized training menu",
+  "home_currentStreakDays": "{days}-day streak",
+  "@home_currentStreakDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "home_streakRecording": "Recording for {days} consecutive days!",
+  "@home_streakRecording": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "home_weeklyProgressPercent": "{percent}% achieved",
+  "@home_weeklyProgressPercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "home_recordPrompt": "Record your training\nand visualize your progress"
 }

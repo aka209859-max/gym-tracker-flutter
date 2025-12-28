@@ -284,7 +284,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               
               // タイトル
               Text(
-                '7日連続達成！',
+                AppLocalizations.of(context)!.home_streakTitle,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -295,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               
               // メッセージ
               Text(
-                'おめでとうございます！\n7日間連続でトレーニングを記録しました。\nこの調子で続けましょう！💪',
+                AppLocalizations.of(context)!.home_streakMessage,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
@@ -443,7 +443,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               
               // メッセージ
               Text(
-                'すごい！マイルストーン達成です！\nこの調子で続けていきましょう！💪',
+                AppLocalizations.of(context)!.home_milestoneMessage,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
@@ -1355,7 +1355,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
                 SizedBox(width: 4),
                 Text(
-                  'タップして詳細統計を表示',
+                  AppLocalizations.of(context)!.home_tapToShowStats,
                   style: TextStyle(
                     fontSize: 10,
                     color: Colors.grey[600],
@@ -1461,7 +1461,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      '💡 今日のAI提案',
+                      AppLocalizations.of(context)!.home_aiSuggestionTitle,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -1491,7 +1491,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ),
               SizedBox(height: 12),
               Text(
-                'あなた専用のトレーニングメニューを\nAIが科学的に分析します',
+                AppLocalizations.of(context)!.home_aiSuggestionPrompt,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 13,
@@ -1773,7 +1773,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       ),
                       SizedBox(width: 4),
                       Text(
-                        '連続 $_currentStreak 日',
+                        AppLocalizations.of(context)!.home_currentStreakDays(_currentStreak),
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -1786,7 +1786,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    '${_currentStreak}日連続記録中！',
+                    AppLocalizations.of(context)!.home_streakRecording(_currentStreak),
                     style: const TextStyle(
                       fontSize: 13,
                       color: Colors.black87,
@@ -1854,7 +1854,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      '${((_weeklyProgress['current']! / _weeklyProgress['goal']!) * 100).clamp(0, 100).toInt()}% 達成',
+                      AppLocalizations.of(context)!.home_weeklyProgressPercent(((_weeklyProgress['current']! / _weeklyProgress['goal']!) * 100).clamp(0, 100).toInt()),
                       style: const TextStyle(
                         fontSize: 11,
                         color: Colors.black54,
@@ -2587,7 +2587,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
                 SizedBox(height: 8),
                 Text(
-                  'トレーニングを記録して、\n進捗を可視化しましょう',
+                  AppLocalizations.of(context)!.home_recordPrompt,
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey,

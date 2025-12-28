@@ -3607,5 +3607,36 @@
   "partnerPhotos_uploadSuccess": "✅ 已上传{count}张图片！",
   "partnerPhotos_uploadFailed": "❌ 上传失败：{error}",
   "partnerPhotos_deleteConfirm": "删除图片",
-  "partnerPhotos_title": "店铺图片管理"
+  "partnerPhotos_title": "店铺图片管理",
+  "home_streakTitle": "连续7天达成！",
+  "home_streakMessage": "恭喜！\n您已连续记录训练7天。\n继续保持！💪",
+  "home_milestoneMessage": "太棒了！达成里程碑！\n继续保持这个节奏！💪",
+  "home_tapToShowStats": "点击显示详细统计",
+  "home_aiSuggestionTitle": "💡 今日AI建议",
+  "home_aiSuggestionPrompt": "AI科学分析\n您的专属训练菜单",
+  "home_currentStreakDays": "连续 {days} 天",
+  "@home_currentStreakDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "home_streakRecording": "连续记录 {days} 天！",
+  "@home_streakRecording": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "home_weeklyProgressPercent": "完成 {percent}%",
+  "@home_weeklyProgressPercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "home_recordPrompt": "记录训练\n可视化您的进度"
 }
