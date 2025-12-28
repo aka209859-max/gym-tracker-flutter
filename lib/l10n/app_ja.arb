@@ -4409,5 +4409,33 @@
   "bodyPart_days90": "90日",
   "@bodyPart_days90": {
     "description": "90 days period selector"
+  },
+  "campaign_templateCopied": "✅ テンプレートをコピーしました！",
+  "@campaign_templateCopied": {
+    "description": "Success message when campaign template is copied"
+  },
+  "campaign_snsShare": "📱 SNSでシェア",
+  "@campaign_snsShare": {
+    "description": "Title for SNS share screen"
+  },
+  "campaign_copyTemplate": "テンプレートをコピー",
+  "@campaign_copyTemplate": {
+    "description": "Button label to copy template"
+  },
+  "partner_friendRequestSent": "友達申請を送信しました",
+  "@partner_friendRequestSent": {
+    "description": "Success message when friend request is sent"
+  },
+  "partner_friendRequiredForMessage": "友達になってからメッセージを送信できます",
+  "@partner_friendRequiredForMessage": {
+    "description": "Message explaining that friendship is required to send messages"
+  },
+  "partner_detailTitle": "パートナー詳細",
+  "@partner_detailTitle": {
+    "description": "Title for partner detail screen"
+  },
+  "partner_sendFriendRequest": "友達申請",
+  "@partner_sendFriendRequest": {
+    "description": "Button label to send friend request"
   }
 }

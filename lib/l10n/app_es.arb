@@ -3570,5 +3570,12 @@
   "weeklyReports_recommendationSubtitle": "Mostrar días recomendados y sugerencias de menú",
   "bodyPart_days7": "7 días",
   "bodyPart_days30": "30 días",
-  "bodyPart_days90": "90 días"
+  "bodyPart_days90": "90 días",
+  "campaign_templateCopied": "✅ ¡Plantilla copiada!",
+  "campaign_snsShare": "📱 Compartir en Redes Sociales",
+  "campaign_copyTemplate": "Copiar Plantilla",
+  "partner_friendRequestSent": "Solicitud de amistad enviada",
+  "partner_friendRequiredForMessage": "Puedes enviar mensajes después de ser amigos",
+  "partner_detailTitle": "Detalles del Compañero",
+  "partner_sendFriendRequest": "Enviar Solicitud de Amistad"
 }

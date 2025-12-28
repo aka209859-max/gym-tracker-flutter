@@ -54,7 +54,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('友達申請を送信しました')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.partner_friendRequestSent)),
         );
         await _loadFriendshipStatus();
       }
@@ -93,7 +93,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('友達になってからメッセージを送信できます'),
+              content: Text(AppLocalizations.of(context)!.partner_friendRequiredForMessage),
               backgroundColor: Colors.orange,
             ),
           );
@@ -140,7 +140,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('パートナー詳細'),
+        title: Text(AppLocalizations.of(context)!.partner_detailTitle),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -243,7 +243,7 @@ class _PartnerDetailScreenState extends State<PartnerDetailScreen> {
                 child: ElevatedButton.icon(
                   onPressed: _sendFriendRequest,
                   icon: Icon(Icons.person_add),
-                  label: Text('友達申請', style: TextStyle(fontSize: 16)),
+                  label: Text(AppLocalizations.of(context)!.partner_sendFriendRequest, style: TextStyle(fontSize: 16)),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     backgroundColor: Colors.blue,

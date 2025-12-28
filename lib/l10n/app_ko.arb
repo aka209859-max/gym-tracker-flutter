@@ -3569,5 +3569,12 @@
   "weeklyReports_recommendationSubtitle": "추천 요일 및 메뉴 제안 표시",
   "bodyPart_days7": "7일",
   "bodyPart_days30": "30일",
-  "bodyPart_days90": "90일"
+  "bodyPart_days90": "90일",
+  "campaign_templateCopied": "✅ 템플릿을 복사했습니다!",
+  "campaign_snsShare": "📱 SNS에 공유",
+  "campaign_copyTemplate": "템플릿 복사",
+  "partner_friendRequestSent": "친구 요청을 보냈습니다",
+  "partner_friendRequiredForMessage": "친구가 된 후 메시지를 보낼 수 있습니다",
+  "partner_detailTitle": "파트너 상세정보",
+  "partner_sendFriendRequest": "친구 요청 보내기"
 }

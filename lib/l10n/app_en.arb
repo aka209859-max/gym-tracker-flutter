@@ -3542,5 +3542,12 @@
   "weeklyReports_recommendationSubtitle": "Show recommended days and menu suggestions",
   "bodyPart_days7": "7 days",
   "bodyPart_days30": "30 days",
-  "bodyPart_days90": "90 days"
+  "bodyPart_days90": "90 days",
+  "campaign_templateCopied": "✅ Template copied!",
+  "campaign_snsShare": "📱 Share on SNS",
+  "campaign_copyTemplate": "Copy Template",
+  "partner_friendRequestSent": "Friend request sent",
+  "partner_friendRequiredForMessage": "You can send messages after becoming friends",
+  "partner_detailTitle": "Partner Details",
+  "partner_sendFriendRequest": "Send Friend Request"
 }

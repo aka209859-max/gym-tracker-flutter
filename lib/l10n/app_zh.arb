@@ -3572,5 +3572,12 @@
   "weeklyReports_recommendationSubtitle": "显示推荐的日期和菜单建议",
   "bodyPart_days7": "7天",
   "bodyPart_days30": "30天",
-  "bodyPart_days90": "90天"
+  "bodyPart_days90": "90天",
+  "campaign_templateCopied": "✅ 已复制模板！",
+  "campaign_snsShare": "📱 分享到社交媒体",
+  "campaign_copyTemplate": "复制模板",
+  "partner_friendRequestSent": "已发送好友申请",
+  "partner_friendRequiredForMessage": "成为好友后才能发送消息",
+  "partner_detailTitle": "伙伴详情",
+  "partner_sendFriendRequest": "发送好友申请"
 }

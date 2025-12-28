@@ -3571,5 +3571,12 @@
   "weeklyReports_recommendationSubtitle": "Empfohlene Tage und Menüvorschläge anzeigen",
   "bodyPart_days7": "7 Tage",
   "bodyPart_days30": "30 Tage",
-  "bodyPart_days90": "90 Tage"
+  "bodyPart_days90": "90 Tage",
+  "campaign_templateCopied": "✅ Vorlage kopiert!",
+  "campaign_snsShare": "📱 Auf Social Media teilen",
+  "campaign_copyTemplate": "Vorlage kopieren",
+  "partner_friendRequestSent": "Freundschaftsanfrage gesendet",
+  "partner_friendRequiredForMessage": "Sie können Nachrichten senden, nachdem Sie Freunde geworden sind",
+  "partner_detailTitle": "Partnerdetails",
+  "partner_sendFriendRequest": "Freundschaftsanfrage senden"
 }

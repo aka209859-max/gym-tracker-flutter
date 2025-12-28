@@ -39,7 +39,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('✅ テンプレートをコピーしました！'),
+          content: Text(AppLocalizations.of(context)!.campaign_templateCopied),
           backgroundColor: Colors.green,
           duration: Duration(seconds: 2),
         ),
@@ -149,7 +149,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('📱 SNSでシェア'),
+        title: Text(AppLocalizations.of(context)!.campaign_snsShare),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
@@ -177,7 +177,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
               ElevatedButton.icon(
                 onPressed: _copyToClipboard,
                 icon: const Icon(Icons.copy),
-                label: const Text('テンプレートをコピー'),
+                label: Text(AppLocalizations.of(context)!.campaign_copyTemplate),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(16),
                   backgroundColor: Colors.blue[700],
