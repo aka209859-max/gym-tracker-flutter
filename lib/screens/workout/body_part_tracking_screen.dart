@@ -152,7 +152,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
               SizedBox(
                 width: double.infinity,
                 child: SegmentedButton<int>(
-                  segments: const [
+                  segments: [
                     ButtonSegment(value: 7, label: Text(AppLocalizations.of(context)!.bodyPart_days7)),
                     ButtonSegment(value: 30, label: Text(AppLocalizations.of(context)!.bodyPart_days30)),
                     ButtonSegment(value: 90, label: Text(AppLocalizations.of(context)!.bodyPart_days90)),
