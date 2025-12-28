@@ -912,7 +912,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('シェアに失敗しました: $e'),
+            content: Text(AppLocalizations.of(context)!.gymDetail_shareFailed(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -1127,7 +1127,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('🏆', style: TextStyle(fontSize: 14)),
+                      Text(AppLocalizations.of(context)!.gymDetail_trophy, style: TextStyle(fontSize: 14)),
                       SizedBox(width: 4),
                       Text(
                         AppLocalizations.of(context)!.gym_45a96aae,
@@ -1629,7 +1629,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('エラー: $e'),
+            content: Text(AppLocalizations.of(context)!.gymDetail_error(e.toString())),
             backgroundColor: Colors.red,
           ),
         );

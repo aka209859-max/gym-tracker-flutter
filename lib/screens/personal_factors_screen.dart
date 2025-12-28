@@ -97,7 +97,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('✅ 保存完了！現在のPFM: ${newPFM.toStringAsFixed(2)}x'),
+            content: Text(AppLocalizations.of(context)!.personalFactors_saved(newPFM.toStringAsFixed(2))),
             backgroundColor: Colors.green,
           ),
         );
@@ -106,7 +106,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('❌ 保存エラー: $e'),
+            content: Text(AppLocalizations.of(context)!.personalFactors_saveError(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -133,7 +133,7 @@ class _PersonalFactorsScreenState extends State<PersonalFactorsScreen> {
       behavior: HitTestBehavior.translucent,
       child: Scaffold(
         appBar: AppBar(
-        title: Text('🔬 個人要因設定'),
+        title: Text(AppLocalizations.of(context)!.personalFactors_title),
         actions: [
           IconButton(
             icon: Icon(Icons.help_outline),

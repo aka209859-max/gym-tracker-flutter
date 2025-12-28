@@ -3579,5 +3579,17 @@
   "partner_friendRequestSent": "已发送好友申请",
   "partner_friendRequiredForMessage": "成为好友后才能发送消息",
   "partner_detailTitle": "伙伴详情",
-  "partner_sendFriendRequest": "发送好友申请"
+  "partner_sendFriendRequest": "发送好友申请",
+  "achievements_loadFailed": "加载徽章失败：{error}",
+  "achievements_title": "成就徽章",
+  "achievements_noBadges": "没有徽章",
+  "personalFactors_saved": "✅ 保存完成！当前PFM：{pfm}x",
+  "personalFactors_saveError": "❌ 保存错误：{error}",
+  "personalFactors_title": "🔬 个人因素设置",
+  "favorites_removeConfirm": "从收藏中删除\"{gymName}\"？",
+  "favorites_removed": "已从收藏中删除{gymName}",
+  "favorites_removeAll": "全部删除",
+  "gymDetail_shareFailed": "分享失败：{error}",
+  "gymDetail_trophy": "🏆",
+  "gymDetail_error": "错误：{error}"
 }

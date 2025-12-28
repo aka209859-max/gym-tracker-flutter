@@ -3549,5 +3549,17 @@
   "partner_friendRequestSent": "Friend request sent",
   "partner_friendRequiredForMessage": "You can send messages after becoming friends",
   "partner_detailTitle": "Partner Details",
-  "partner_sendFriendRequest": "Send Friend Request"
+  "partner_sendFriendRequest": "Send Friend Request",
+  "achievements_loadFailed": "Failed to load badges: {error}",
+  "achievements_title": "Achievement Badges",
+  "achievements_noBadges": "No badges",
+  "personalFactors_saved": "✅ Saved! Current PFM: {pfm}x",
+  "personalFactors_saveError": "❌ Save error: {error}",
+  "personalFactors_title": "🔬 Personal Factors Settings",
+  "favorites_removeConfirm": "Remove \"{gymName}\" from favorites?",
+  "favorites_removed": "Removed {gymName} from favorites",
+  "favorites_removeAll": "Remove All",
+  "gymDetail_shareFailed": "Share failed: {error}",
+  "gymDetail_trophy": "🏆",
+  "gymDetail_error": "Error: {error}"
 }

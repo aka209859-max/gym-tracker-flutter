@@ -3577,5 +3577,17 @@
   "partner_friendRequestSent": "Solicitud de amistad enviada",
   "partner_friendRequiredForMessage": "Puedes enviar mensajes después de ser amigos",
   "partner_detailTitle": "Detalles del Compañero",
-  "partner_sendFriendRequest": "Enviar Solicitud de Amistad"
+  "partner_sendFriendRequest": "Enviar Solicitud de Amistad",
+  "achievements_loadFailed": "Error al cargar insignias: {error}",
+  "achievements_title": "Insignias de Logro",
+  "achievements_noBadges": "Sin insignias",
+  "personalFactors_saved": "✅ ¡Guardado! PFM actual: {pfm}x",
+  "personalFactors_saveError": "❌ Error al guardar: {error}",
+  "personalFactors_title": "🔬 Configuración de Factores Personales",
+  "favorites_removeConfirm": "¿Eliminar \"{gymName}\" de favoritos?",
+  "favorites_removed": "Se eliminó {gymName} de favoritos",
+  "favorites_removeAll": "Eliminar Todo",
+  "gymDetail_shareFailed": "Error al compartir: {error}",
+  "gymDetail_trophy": "🏆",
+  "gymDetail_error": "Error: {error}"
 }

@@ -81,7 +81,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('バッジの読み込みに失敗しました: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.achievements_loadFailed(e.toString()))),
         );
       }
       setState(() {
@@ -96,7 +96,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('達成バッジ'),
+        title: Text(AppLocalizations.of(context)!.achievements_title),
         bottom: TabBar(
           controller: _tabController,
           labelColor: Colors.white,
@@ -226,7 +226,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
   Widget _buildBadgeList(List<Achievement> badges, ThemeData theme) {
     if (badges.isEmpty) {
       return const Center(
-        child: Text('バッジがありません'),
+        child: Text(AppLocalizations.of(context)!.achievements_noBadges),
       );
     }
 

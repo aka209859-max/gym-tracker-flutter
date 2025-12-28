@@ -4437,5 +4437,95 @@
   "partner_sendFriendRequest": "友達申請",
   "@partner_sendFriendRequest": {
     "description": "Button label to send friend request"
+  },
+  "achievements_loadFailed": "バッジの読み込みに失敗しました: {error}",
+  "@achievements_loadFailed": {
+    "description": "Error message when badge loading fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+  "achievements_title": "達成バッジ",
+  "@achievements_title": {
+    "description": "Title for achievements screen"
+  },
+  "achievements_noBadges": "バッジがありません",
+  "@achievements_noBadges": {
+    "description": "Message when user has no badges"
+  },
+  "personalFactors_saved": "✅ 保存完了！現在のPFM: {pfm}x",
+  "@personalFactors_saved": {
+    "description": "Success message after saving personal factors",
+    "placeholders": {
+      "pfm": {
+        "type": "String",
+        "example": "1.23"
+      }
+    }
+  },
+  "personalFactors_saveError": "❌ 保存エラー: {error}",
+  "@personalFactors_saveError": {
+    "description": "Error message when saving fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+  "personalFactors_title": "🔬 個人要因設定",
+  "@personalFactors_title": {
+    "description": "Title for personal factors settings screen"
+  },
+  "favorites_removeConfirm": "「{gymName}」をお気に入りから削除しますか？",
+  "@favorites_removeConfirm": {
+    "description": "Confirmation dialog to remove gym from favorites",
+    "placeholders": {
+      "gymName": {
+        "type": "String",
+        "example": "Gold's Gym"
+      }
+    }
+  },
+  "favorites_removed": "{gymName} をお気に入りから削除しました",
+  "@favorites_removed": {
+    "description": "Success message after removing from favorites",
+    "placeholders": {
+      "gymName": {
+        "type": "String",
+        "example": "Gold's Gym"
+      }
+    }
+  },
+  "favorites_removeAll": "すべて削除",
+  "@favorites_removeAll": {
+    "description": "Button label to remove all favorites"
+  },
+  "gymDetail_shareFailed": "シェアに失敗しました: {error}",
+  "@gymDetail_shareFailed": {
+    "description": "Error message when sharing fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "No share target"
+      }
+    }
+  },
+  "gymDetail_trophy": "🏆",
+  "@gymDetail_trophy": {
+    "description": "Trophy emoji"
+  },
+  "gymDetail_error": "エラー: {error}",
+  "@gymDetail_error": {
+    "description": "Generic error message",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Unknown error"
+      }
+    }
   }
 }

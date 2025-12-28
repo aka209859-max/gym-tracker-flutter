@@ -3578,5 +3578,17 @@
   "partner_friendRequestSent": "Freundschaftsanfrage gesendet",
   "partner_friendRequiredForMessage": "Sie können Nachrichten senden, nachdem Sie Freunde geworden sind",
   "partner_detailTitle": "Partnerdetails",
-  "partner_sendFriendRequest": "Freundschaftsanfrage senden"
+  "partner_sendFriendRequest": "Freundschaftsanfrage senden",
+  "achievements_loadFailed": "Fehler beim Laden von Abzeichen: {error}",
+  "achievements_title": "Erfolgsabzeichen",
+  "achievements_noBadges": "Keine Abzeichen",
+  "personalFactors_saved": "✅ Gespeichert! Aktueller PFM: {pfm}x",
+  "personalFactors_saveError": "❌ Speicherfehler: {error}",
+  "personalFactors_title": "🔬 Persönliche Faktoreneinstellungen",
+  "favorites_removeConfirm": "\"{gymName}\" aus Favoriten entfernen?",
+  "favorites_removed": "{gymName} aus Favoriten entfernt",
+  "favorites_removeAll": "Alle entfernen",
+  "gymDetail_shareFailed": "Teilen fehlgeschlagen: {error}",
+  "gymDetail_trophy": "🏆",
+  "gymDetail_error": "Fehler: {error}"
 }

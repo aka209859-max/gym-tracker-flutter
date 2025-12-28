@@ -3576,5 +3576,17 @@
   "partner_friendRequestSent": "친구 요청을 보냈습니다",
   "partner_friendRequiredForMessage": "친구가 된 후 메시지를 보낼 수 있습니다",
   "partner_detailTitle": "파트너 상세정보",
-  "partner_sendFriendRequest": "친구 요청 보내기"
+  "partner_sendFriendRequest": "친구 요청 보내기",
+  "achievements_loadFailed": "배지 로드 실패: {error}",
+  "achievements_title": "업적 배지",
+  "achievements_noBadges": "배지가 없습니다",
+  "personalFactors_saved": "✅ 저장 완료! 현재 PFM: {pfm}x",
+  "personalFactors_saveError": "❌ 저장 오류: {error}",
+  "personalFactors_title": "🔬 개인 요인 설정",
+  "favorites_removeConfirm": "\"{gymName}\"을(를) 즐겨찾기에서 제거하시겠습니까?",
+  "favorites_removed": "{gymName}을(를) 즐겨찾기에서 제거했습니다",
+  "favorites_removeAll": "모두 제거",
+  "gymDetail_shareFailed": "공유 실패: {error}",
+  "gymDetail_trophy": "🏆",
+  "gymDetail_error": "오류: {error}"
 }
