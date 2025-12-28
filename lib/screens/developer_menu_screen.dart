@@ -52,7 +52,7 @@ class _DeveloperMenuScreenState extends State<DeveloperMenuScreen> {
       
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(AppLocalizations.of(context)!.dev_uidCopied(_currentUserUid)),
+          content: Text(AppLocalizations.of(context)!.dev_uidCopied(_currentUserUid ?? '')),
           backgroundColor: Colors.green,
           duration: const Duration(seconds: 3),
         ),
