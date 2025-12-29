@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -98,6 +99,9 @@ class WorkoutImportService {
               'maxOutputTokens': 2048,
             }
           }),
+        ).timeout(
+          const Duration(seconds: 30),
+          onTimeout: () => throw TimeoutException('Workout import API request timeout'),
         );
 
       if (kDebugMode) {

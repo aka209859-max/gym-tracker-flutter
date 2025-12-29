@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -1399,6 +1400,9 @@ class _AIMenuTabState extends State<_AIMenuTab>
             'maxOutputTokens': 2048,
           }
         }),
+      ).timeout(
+        const Duration(seconds: 30),
+        onTimeout: () => throw TimeoutException('AI menu generation request timeout'),
       );
 
       if (response.statusCode == 200) {

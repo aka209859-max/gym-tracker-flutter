@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -63,6 +64,9 @@ class GooglePlacesService {
         headers: {
           'X-Ios-Bundle-Identifier': 'com.nexa.gymmatch',
         },
+      ).timeout(
+        const Duration(seconds: 30),
+        onTimeout: () => throw TimeoutException('Google Places API request timeout'),
       );
 
       if (kDebugMode) {
@@ -203,6 +207,9 @@ class GooglePlacesService {
         headers: {
           'X-Ios-Bundle-Identifier': 'com.nexa.gymmatch',
         },
+      ).timeout(
+        const Duration(seconds: 30),
+        onTimeout: () => throw TimeoutException('Google Places API request timeout'),
       );
 
       if (kDebugMode) {
@@ -307,6 +314,9 @@ class GooglePlacesService {
         headers: {
           'X-Ios-Bundle-Identifier': 'com.nexa.gymmatch',
         },
+      ).timeout(
+        const Duration(seconds: 30),
+        onTimeout: () => throw TimeoutException('Google Places API request timeout'),
       );
 
       if (response.statusCode == 200) {
