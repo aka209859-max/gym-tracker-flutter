@@ -1449,9 +1449,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               const SizedBox(height: 8),
               Text(AppLocalizations.of(context)!.subscription_cancelInstruction3),
               const SizedBox(height: 8),
-              const Text(AppLocalizations.of(context)!.subscription_step4),
+              Text(AppLocalizations.of(context)!.subscription_step4),
               const SizedBox(height: 8),
-              const Text(AppLocalizations.of(context)!.subscription_step5),
+              Text(AppLocalizations.of(context)!.subscription_step5),
               const SizedBox(height: 12),
               const Text(
                 '※ 現在のプラン期間が終了後に新プランが適用されます',

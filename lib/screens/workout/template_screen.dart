@@ -84,7 +84,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.workoutTemplate_title),
+        title: Text(AppLocalizations.of(context)!.workoutTemplate_title),
         backgroundColor: theme.colorScheme.primary,
         foregroundColor: Colors.white,
         bottom: TabBar(
