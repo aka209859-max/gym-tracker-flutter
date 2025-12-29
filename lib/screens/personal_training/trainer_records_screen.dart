@@ -58,7 +58,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
     // 保存成功メッセージ
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('✅ トレーニング記録を保存しました'),
+        content: Text(AppLocalizations.of(context)!.trainerRecords_saved),
         backgroundColor: Colors.green,
         duration: Duration(seconds: 2),
       ),
@@ -245,7 +245,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                               ElevatedButton.icon(
                                 onPressed: _fetchTrainerRecords,
                                 icon: const Icon(Icons.refresh),
-                                label: const Text('再読み込み'),
+                                label: const Text(AppLocalizations.of(context)!.trainerRecords_reload),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.orange,
                                   foregroundColor: Colors.white,

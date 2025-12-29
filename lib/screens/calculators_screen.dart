@@ -238,7 +238,7 @@ class _OneRMCalculatorTabState extends State<_OneRMCalculatorTab> {
                       leading: CircleAvatar(
                         child: Text('${entry.key}'),
                       ),
-                      title: Text('${entry.key}回'),
+                      title: Text(AppLocalizations.of(context)!.calculators_repsCount(entry.key.toString())),
                       trailing: Text(
                         '${entry.value.toStringAsFixed(1)} kg',
                         style: const TextStyle(
@@ -497,7 +497,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
                             ),
                           ),
                         ),
-                        title: Text('${entry.key} kg プレート'),
+                        title: Text(AppLocalizations.of(context)!.calculators_plateWeight(entry.key.toString())),
                         trailing: Text(
                           '× ${entry.value}枚',
                           style: const TextStyle(

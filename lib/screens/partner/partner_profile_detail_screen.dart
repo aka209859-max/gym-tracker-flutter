@@ -310,7 +310,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
                 ),
               ),
               SizedBox(width: 8),
-              Text('•'),
+              Text(AppLocalizations.of(context)!.partnerProfile_bullet),
               SizedBox(width: 8),
               Text(
                 _genders[widget.profile.gender] ?? widget.profile.gender,
@@ -369,7 +369,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               child: Icon(Icons.workspace_premium, color: Colors.white),
             ),
             SizedBox(width: 12),
-            Text('Pro限定機能'),
+            Text(AppLocalizations.of(context)!.partnerProfile_proOnlyFeature),
           ],
         ),
         content: Column(
@@ -381,7 +381,7 @@ class _PartnerProfileDetailScreenState extends State<PartnerProfileDetailScreen>
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 16),
-            Text('✨ Proプランの特典'),
+            Text(AppLocalizations.of(context)!.partnerProfile_proBenefits),
             SizedBox(height: 8),
             _buildBenefitRow(AppLocalizations.of(context)!.searchGym),
             _buildBenefitRow(AppLocalizations.of(context)!.profile_b2818710),

@@ -149,7 +149,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         // エラーの詳細をユーザーに表示
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('画像の読み込みに失敗しました\n$e'),
+            content: Text(AppLocalizations.of(context)!.profileEdit_imageLoadError(e.toString())),
             backgroundColor: Colors.red,
             duration: Duration(seconds: 5),
             action: SnackBarAction(
@@ -242,7 +242,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           children: [
             Icon(Icons.diamond, color: Colors.amber),
             SizedBox(width: 8),
-            Text('Proプラン限定機能'),
+            Text(AppLocalizations.of(context)!.profileEdit_proOnlyFeature),
           ],
         ),
         content: Text(

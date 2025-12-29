@@ -88,7 +88,7 @@ class _PartnerReservationSettingsScreenState
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('✅ 予約設定を更新しました！'),
+            content: Text(AppLocalizations.of(context)!.partnerReservation_updated),
             backgroundColor: Colors.green,
           ),
         );
@@ -98,7 +98,7 @@ class _PartnerReservationSettingsScreenState
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('❌ 保存に失敗しました: $e'),
+            content: Text(AppLocalizations.of(context)!.partnerReservation_saveError(e.toString())),
             backgroundColor: Colors.red,
           ),
         );

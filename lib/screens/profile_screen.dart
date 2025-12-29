@@ -1223,7 +1223,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: Text('サービス利用条件・サブスクリプション'),
+              subtitle: Text(AppLocalizations.of(context)!.profile_termsAndSubscription),
               trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.of(context).pop();
@@ -1286,7 +1286,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: Text('個人情報の取扱い'),
+              subtitle: Text(AppLocalizations.of(context)!.profile_privacyPolicy),
               trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () async {
                 Navigator.of(context).pop();

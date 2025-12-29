@@ -91,16 +91,16 @@ class POAnalyticsScreen extends StatelessWidget {
                 color: Colors.orange[50],
                 child: ListTile(
                   leading: const Icon(Icons.error, color: Colors.orange),
-                  title: Text('休眠会員: $dormantMembers名'),
-                  subtitle: const Text('最終セッションから2週間以上経過'),
+                  title: Text(AppLocalizations.of(context)!.poAnalytics_dormantMembers(dormantMembers.toString())),
+                  subtitle: const Text(AppLocalizations.of(context)!.poAnalytics_dormantDescription),
                   trailing: ElevatedButton(
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                            content: Text('一斉メッセージ機能は近日公開予定です')),
+                            content: Text(AppLocalizations.of(context)!.poAnalytics_broadcastComingSoon)),
                       );
                     },
-                    child: const Text('対応する'),
+                    child: const Text(AppLocalizations.of(context)!.poAnalytics_respond),
                   ),
                 ),
               ),

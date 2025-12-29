@@ -242,7 +242,7 @@ class _PersonalRecordsScreenState extends State<PersonalRecordsScreen>
           bodyPart,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
-        subtitle: Text('${bodyPartExercises.length}種目'),
+        subtitle: Text(AppLocalizations.of(context)!.personalRecords_exerciseCount(bodyPartExercises.length.toString())),
         trailing: const Icon(Icons.chevron_right),
         onTap: () {
           // 🔧 v1.0.253: 記録がない場合も遷移可能（空の一覧画面）
@@ -760,7 +760,7 @@ class ExerciseListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('$bodyPart - PR記録'),
+        title: Text(AppLocalizations.of(context)!.personalRecords_bodyPartTitle(bodyPart)),
       ),
       body: exercises.isEmpty
           ? Center(

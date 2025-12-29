@@ -330,7 +330,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                                 prefixIcon: Icon(Icons.calendar_today),
                               ),
                               child: Text(
-                                DateFormat('yyyy年MM月dd日').format(_selectedDate),
+                                DateFormat(AppLocalizations.of(context)!.bodyMeasurement_dateFormat).format(_selectedDate),
                               ),
                             ),
                           ),
@@ -737,11 +737,11 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                     size: 20,
                   ),
                 ),
-                title: Text(DateFormat('yyyy年MM月dd日').format(date)),
+                title: Text(DateFormat(AppLocalizations.of(context)!.bodyMeasurement_dateFormat).format(date)),
                 subtitle: Row(
                   children: [
                     if (weight != null) Text(AppLocalizations.of(context)!.body_weightKg(weight.toStringAsFixed(1))),
-                    if (weight != null && bodyFat != null) const Text('  •  '),
+                    if (weight != null && bodyFat != null) const Text(AppLocalizations.of(context)!.bodyMeasurement_bulletSeparator),
                     if (bodyFat != null) Text(AppLocalizations.of(context)!.body_bodyFatPercent(bodyFat.toStringAsFixed(1))),
                   ],
                 ),

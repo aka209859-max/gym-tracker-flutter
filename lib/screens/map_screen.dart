@@ -70,7 +70,7 @@ class _MapScreenState extends State<MapScreen> {
           children: [
             Icon(Icons.location_on, color: Colors.blue),
             SizedBox(width: 8),
-            Text('位置情報を使用しますか？'),
+            Text(AppLocalizations.of(context)!.map_locationPermission),
           ],
         ),
         content: Text(
@@ -378,7 +378,7 @@ class _MapScreenState extends State<MapScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${gyms.length}件のジムが見つかりました'),
+            content: Text(AppLocalizations.of(context)!.map_gymsFound(gyms.length.toString())),
             backgroundColor: Colors.green,
           ),
         );

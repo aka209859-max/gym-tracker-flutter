@@ -108,7 +108,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
         // 成功メッセージ
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('✅ 予約申込を送信しました！店舗から連絡があります。'),
+            content: Text(AppLocalizations.of(context)!.reservation_submitted),
             backgroundColor: Colors.green,
             duration: Duration(seconds: 3),
           ),
@@ -121,7 +121,7 @@ class _ReservationFormScreenState extends State<ReservationFormScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('❌ 予約送信に失敗しました: $e'),
+            content: Text(AppLocalizations.of(context)!.reservation_submitError(e.toString())),
             backgroundColor: Colors.red,
           ),
         );

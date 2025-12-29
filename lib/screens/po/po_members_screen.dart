@@ -27,9 +27,9 @@ class _POMembersScreenState extends State<POMembersScreen> {
             padding: const EdgeInsets.all(16),
             child: SegmentedButton<String>(
               segments: [
-                ButtonSegment(value: 'all', label: Text('全会員')),
+                ButtonSegment(value: 'all', label: Text(AppLocalizations.of(context)!.poMembers_allMembers)),
                 ButtonSegment(value: 'active', label: Text(AppLocalizations.of(context)!.active)),
-                ButtonSegment(value: 'dormant', label: Text('休眠中')),
+                ButtonSegment(value: 'dormant', label: Text(AppLocalizations.of(context)!.poMembers_dormant)),
               ],
               selected: {_filterStatus},
               onSelectionChanged: (Set<String> newSelection) {
@@ -102,7 +102,7 @@ class _POMembersScreenState extends State<POMembersScreen> {
                         children: [
                           Expanded(
                             child: _SummaryCard(
-                              label: '全会員',
+                              label: AppLocalizations.of(context)!.poMembers_allMembers,
                               value: '${members.length}名',
                               color: Colors.blue,
                             ),
@@ -118,7 +118,7 @@ class _POMembersScreenState extends State<POMembersScreen> {
                           const SizedBox(width: 12),
                           Expanded(
                             child: _SummaryCard(
-                              label: '休眠中',
+                              label: AppLocalizations.of(context)!.poMembers_dormant,
                               value: '$dormantCount名',
                               color: Colors.orange,
                             ),
@@ -268,7 +268,7 @@ class _MemberCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      member.isActive ? AppLocalizations.of(context)!.active : '休眠中',
+                      member.isActive ? AppLocalizations.of(context)!.active : AppLocalizations.of(context)!.poMembers_dormant,
                       style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.bold,

@@ -116,7 +116,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
               decoration: InputDecoration(border: OutlineInputBorder()),
               items: [
                 DropdownMenuItem(value: 'beginner', child: Text(AppLocalizations.of(context)!.beginner)),
-                DropdownMenuItem(value: 'intermediate', child: Text('中級者')),
+                DropdownMenuItem(value: 'intermediate', child: Text(AppLocalizations.of(context)!.partnerProfileEdit_intermediateLevel)),
                 DropdownMenuItem(value: 'advanced', child: Text(AppLocalizations.of(context)!.advanced)),
               ],
               onChanged: (value) {
@@ -126,7 +126,7 @@ class _PartnerProfileEditScreenState extends State<PartnerProfileEditScreen> {
             const SizedBox(height: 24),
 
             // 好きな種目
-            const Text('好きな種目', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text(AppLocalizations.of(context)!.partnerProfileEdit_favoriteExercises, style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,

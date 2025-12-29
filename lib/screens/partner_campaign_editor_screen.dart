@@ -112,7 +112,7 @@ class _PartnerCampaignEditorScreenState
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('画像の読み込みに失敗しました: $e'),
+            content: Text(AppLocalizations.of(context)!.partnerCampaign_imageLoadError(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -172,7 +172,7 @@ class _PartnerCampaignEditorScreenState
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('✅ キャンペーンを保存しました！ユーザーアプリに即反映されます'),
+            content: Text(AppLocalizations.of(context)!.partnerCampaign_saved),
             backgroundColor: Colors.green,
             duration: Duration(seconds: 3),
           ),
@@ -189,7 +189,7 @@ class _PartnerCampaignEditorScreenState
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('❌ 保存に失敗しました: $e'),
+            content: Text(AppLocalizations.of(context)!.partnerCampaign_saveError(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -207,7 +207,7 @@ class _PartnerCampaignEditorScreenState
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('🏆 キャンペーン編集'),
+        title: Text(AppLocalizations.of(context)!.partnerCampaign_editorTitle),
         elevation: 2,
         actions: [
           IconButton(

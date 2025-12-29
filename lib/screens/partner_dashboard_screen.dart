@@ -24,7 +24,7 @@ class PartnerDashboardScreen extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('パートナー管理画面'),
+            Text(AppLocalizations.of(context)!.partnerDashboard_title),
             Text(
               partnerAccess.gymName,
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
@@ -184,7 +184,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                   enabled: partnerAccess.hasPermission('editHours'),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('🚧 実装予定の機能です')),
+                      const SnackBar(content: Text(AppLocalizations.of(context)!.partnerDashboard_comingSoon)),
                     );
                   },
                 ),
@@ -205,7 +205,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                   enabled: partnerAccess.hasPermission('viewAnalytics'),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('🚧 実装予定の機能です')),
+                      const SnackBar(content: Text(AppLocalizations.of(context)!.partnerDashboard_comingSoon)),
                     );
                   },
                 ),

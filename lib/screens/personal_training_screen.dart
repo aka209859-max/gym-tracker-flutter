@@ -91,7 +91,7 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
           onTap: () {
             // TODO: 予約状況画面へ遷移
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('予約状況機能は開発中です')),
+              const SnackBar(content: Text(AppLocalizations.of(context)!.personalTraining_reservationComingSoon)),
             );
           },
         ),
@@ -107,7 +107,7 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
           onTap: () {
             // TODO: 新規予約画面へ遷移
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('新規予約機能は開発中です')),
+              const SnackBar(content: Text(AppLocalizations.of(context)!.personalTraining_newReservationComingSoon)),
             );
           },
         ),
@@ -123,7 +123,7 @@ class _PersonalTrainingScreenState extends State<PersonalTrainingScreen> {
           onTap: () {
             // TODO: トレーナー記録画面へ遷移
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('トレーナー記録機能は開発中です')),
+              const SnackBar(content: Text(AppLocalizations.of(context)!.personalTraining_trainerRecordComingSoon)),
             );
           },
         ),

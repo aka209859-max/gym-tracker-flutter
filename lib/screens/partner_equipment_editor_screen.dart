@@ -109,7 +109,7 @@ class _PartnerEquipmentEditorScreenState
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('✅ 設備情報を更新しました！'),
+            content: Text(AppLocalizations.of(context)!.partnerEquipment_updated),
             backgroundColor: Colors.green,
           ),
         );
@@ -119,7 +119,7 @@ class _PartnerEquipmentEditorScreenState
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('❌ 保存に失敗しました: $e'),
+            content: Text(AppLocalizations.of(context)!.partnerEquipment_saveError(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
