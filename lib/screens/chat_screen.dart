@@ -112,7 +112,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       children: [
                         Icon(Icons.error_outline, size: 48, color: Colors.red[300]),
                         const SizedBox(height: 16),
-                        const Text(AppLocalizations.of(context)!.chat_loadMessageError),
+                        Text(AppLocalizations.of(context)!.chat_loadMessageError),
                       ],
                     ),
                   );

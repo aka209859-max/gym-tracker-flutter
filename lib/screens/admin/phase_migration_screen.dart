@@ -13,7 +13,7 @@ class PhaseMigrationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.admin_phaseMigrationTitle),
+        title: Text(AppLocalizations.of(context)!.admin_phaseMigrationTitle),
         backgroundColor: Colors.deepPurple,
       ),
       body: SingleChildScrollView(

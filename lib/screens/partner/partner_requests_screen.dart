@@ -9,7 +9,7 @@ class PartnerRequestsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.partnerRequests_title),
+        title: Text(AppLocalizations.of(context)!.partnerRequests_title),
       ),
       body: Center(
         child: Column(

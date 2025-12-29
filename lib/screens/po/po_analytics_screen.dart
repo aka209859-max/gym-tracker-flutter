@@ -92,7 +92,7 @@ class POAnalyticsScreen extends StatelessWidget {
                 child: ListTile(
                   leading: const Icon(Icons.error, color: Colors.orange),
                   title: Text(AppLocalizations.of(context)!.poAnalytics_dormantMembers(dormantMembers.toString())),
-                  subtitle: const Text(AppLocalizations.of(context)!.poAnalytics_dormantDescription),
+                  subtitle: Text(AppLocalizations.of(context)!.poAnalytics_dormantDescription),
                   trailing: ElevatedButton(
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -100,7 +100,7 @@ class POAnalyticsScreen extends StatelessWidget {
                             content: Text(AppLocalizations.of(context)!.poAnalytics_broadcastComingSoon)),
                       );
                     },
-                    child: const Text(AppLocalizations.of(context)!.poAnalytics_respond),
+                    child: Text(AppLocalizations.of(context)!.poAnalytics_respond),
                   ),
                 ),
               ),
