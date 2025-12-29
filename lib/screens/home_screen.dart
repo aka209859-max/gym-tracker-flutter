@@ -1854,7 +1854,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      AppLocalizations.of(context)!.home_weeklyProgressPercent(((_weeklyProgress['current']! / _weeklyProgress['goal']!) * 100).clamp(0, 100).toInt()),
+                      AppLocalizations.of(context)!.home_weeklyProgressPercent(
+                        _weeklyProgress['goal']! > 0
+                            ? ((_weeklyProgress['current']! / _weeklyProgress['goal']!) * 100).clamp(0, 100).toInt()
+                            : 0
+                      ),
                       style: const TextStyle(
                         fontSize: 11,
                         color: Colors.black54,
@@ -2450,6 +2454,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   
   // 1RM計算式（Epley formula - より正確で高回数にも対応）
   double _calculate1RM(double weight, int reps) {
+    if (reps <= 0) return weight; // ゼロ除算防止
     if (reps == 1) return weight;
     // Epley式: 1RM = 重量 × (1 + 回数 / 30)
     // 高回数でも正確に計算できる

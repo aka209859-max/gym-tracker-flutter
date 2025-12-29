@@ -427,7 +427,9 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
   Widget _buildRewardProgressCard() {
     if (_nextMilestone == null) return const SizedBox.shrink();
     
-    final progress = _userReportCount / _nextMilestone!.target;
+    final progress = _nextMilestone!.target > 0
+        ? _userReportCount / _nextMilestone!.target
+        : 0.0;
     
     return Card(
       color: Colors.orange.withAlpha(20),
