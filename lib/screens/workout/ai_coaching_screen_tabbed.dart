@@ -512,7 +512,9 @@ class _AIMenuTabState extends State<_AIMenuTab>
 
   /// 履歴読み込み
   Future<void> _loadHistory() async {
+    if (mounted) {
     setState(() => _isLoadingHistory = true);
+    }
 
     try {
       final snapshot = await FirebaseFirestore.instance
@@ -523,21 +525,27 @@ class _AIMenuTabState extends State<_AIMenuTab>
           .limit(10)
           .get();
 
+      if (mounted) {
       setState(() {
         _history = snapshot.docs
             .map((doc) => {'id': doc.id, ...doc.data()})
             .toList();
         _isLoadingHistory = false;
       });
+      }
     } catch (e) {
       debugPrint('❌ 履歴読み込みエラー: $e');
+      if (mounted) {
       setState(() => _isLoadingHistory = false);
+      }
     }
   }
   
   /// 🔧 v1.0.217: 直近1ヶ月のトレーニング履歴を読み込み、1RMを自動計算
   Future<void> _loadWorkoutHistory() async {
+    if (mounted) {
     setState(() => _isLoadingWorkoutHistory = true);
+    }
     
     try {
       // 1ヶ月前の日付
@@ -593,10 +601,12 @@ class _AIMenuTabState extends State<_AIMenuTab>
         }
       }
       
+      if (mounted) {
       setState(() {
         _exerciseHistory = exerciseData;
         _isLoadingWorkoutHistory = false;
       });
+      }
       
       debugPrint('✅ トレーニング履歴読み込み完了: ${exerciseData.length}種目');
       for (final entry in exerciseData.entries) {
@@ -604,7 +614,9 @@ class _AIMenuTabState extends State<_AIMenuTab>
       }
     } catch (e) {
       debugPrint('❌ トレーニング履歴読み込みエラー: $e');
+      if (mounted) {
       setState(() => _isLoadingWorkoutHistory = false);
+      }
     }
   }
 
@@ -724,9 +736,11 @@ class _AIMenuTabState extends State<_AIMenuTab>
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: () {
+          if (mounted) {
           setState(() {
             _selectedLevel = level;
           });
+          }
         },
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
@@ -786,9 +800,11 @@ class _AIMenuTabState extends State<_AIMenuTab>
               ),
               selected: isSelected,
               onSelected: (selected) {
+                if (mounted) {
                 setState(() {
                   _selectedBodyParts[part] = selected;
                 });
+                }
               },
               selectedColor: isBeginner
                   ? Colors.green.shade100
@@ -863,6 +879,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                     // 全選択/全解除ボタン
                     TextButton.icon(
                       onPressed: () {
+                        if (mounted) {
                         setState(() {
                           if (_selectedExerciseIndices.length == _parsedExercises.length) {
                             _selectedExerciseIndices.clear();
@@ -872,6 +889,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                             );
                           }
                         });
+                        }
                       },
                       icon: Icon(
                         _selectedExerciseIndices.length == _parsedExercises.length
@@ -911,6 +929,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                   child: CheckboxListTile(
                     value: isSelected,
                     onChanged: (value) {
+                      if (mounted) {
                       setState(() {
                         if (value == true) {
                           _selectedExerciseIndices.add(index);
@@ -918,6 +937,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                           _selectedExerciseIndices.remove(index);
                         }
                       });
+                      }
                     },
                     title: Row(
                       children: [
@@ -1045,11 +1065,13 @@ class _AIMenuTabState extends State<_AIMenuTab>
                       SizedBox(height: 16),
                       ElevatedButton.icon(
                         onPressed: () {
+                          if (mounted) {
                           setState(() {
                             _generatedMenu = null;
                             _parsedExercises.clear();
                             _errorMessage = null;
                           });
+                          }
                         },
                         icon: Icon(Icons.refresh),
                         label: Text(AppLocalizations.of(context)!.aiMenuRetryButton),
@@ -1369,11 +1391,13 @@ class _AIMenuTabState extends State<_AIMenuTab>
     // ========================================
     // 🤖 Step 4: AI生成処理（クレジット消費含む）
     // ========================================
+    if (mounted) {
     setState(() {
       _isGenerating = true;
       _errorMessage = null;
       _generatedMenu = null;
     });
+    }
 
     try {
       debugPrint('🤖 Gemini APIでメニュー生成開始: ${bodyParts.join(', ')}');
@@ -1426,12 +1450,14 @@ class _AIMenuTabState extends State<_AIMenuTab>
           debugPrint('⚠️ 警告: パースされた種目が0件です。メニューの形式を確認してください。');
         }
         
+        if (mounted) {
         setState(() {
           _generatedMenu = text;
           _parsedExercises = parsedExercises;
           _selectedExerciseIndices.clear(); // 選択をリセット
           _isGenerating = false;
         });
+        }
         
         // 残りクレジット表示
         if (mounted) {
@@ -1449,10 +1475,12 @@ class _AIMenuTabState extends State<_AIMenuTab>
       }
     } catch (e) {
       debugPrint('❌ メニュー生成エラー: $e');
+      if (mounted) {
       setState(() {
         _errorMessage = 'メニュー生成に失敗しました: $e';
         _isGenerating = false;
       });
+      }
     }
   }
   
@@ -2325,9 +2353,11 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
         );
         
         // 戻ってきたら選択をリセット
+        if (mounted) {
         setState(() {
           _selectedExerciseIndices.clear();
         });
+        }
       }
     } catch (e) {
       debugPrint('❌ トレーニング記録画面への遷移エラー: $e');
@@ -2470,9 +2500,11 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       final userProfile = await advancedFatigueService.getUserProfile();
       
       if (mounted) {
+        if (mounted) {
         setState(() {
           _userAge = userProfile.age;
         });
+        }
       }
     } catch (e) {
       debugPrint('⚠️ [Phase 7] 年齢取得エラー: $e');
@@ -2490,10 +2522,12 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       if (userId == null) {
         debugPrint('⚠️ [Phase 7] ユーザーIDが取得できません（未ログイン）');
         if (mounted) {
+          if (mounted) {
           setState(() {
             _latestBodyWeight = null;
             _weightRecordedAt = null;
           });
+          }
         }
         return;
       }
@@ -2511,10 +2545,12 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       if (snapshot.docs.isEmpty) {
         debugPrint('⚠️ [Phase 7] データが0件です。体重記録画面で保存してください。');
         if (mounted) {
+          if (mounted) {
           setState(() {
             _latestBodyWeight = null;
             _weightRecordedAt = null;
           });
+          }
         }
         return;
       }
@@ -2559,10 +2595,12 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
 
       if (weight != null && weight > 0) {
         if (mounted) {
+          if (mounted) {
           setState(() {
             _latestBodyWeight = weight.toDouble();
             _weightRecordedAt = recordDate?.toDate();
           });
+          }
           
           // 🎯 Weight Ratio計算準備完了の通知
           debugPrint('🎯 [Phase 7] Weight Ratio計算準備完了: 体重=${weight}kg');
@@ -2570,20 +2608,24 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       } else {
         debugPrint('⚠️ [Phase 7] 体重データが無効またはゼロ: weight=$weight');
         if (mounted) {
+          if (mounted) {
           setState(() {
             _latestBodyWeight = null;
             _weightRecordedAt = null;
           });
+          }
         }
       }
     } catch (e, stack) {
       debugPrint('❌ [Phase 7] 体重取得で例外発生: $e');
       debugPrint('   StackTrace: $stack');
       if (mounted) {
+        if (mounted) {
         setState(() {
           _latestBodyWeight = null;
           _weightRecordedAt = null;
         });
+        }
       }
     }
   }
@@ -2591,10 +2633,12 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
   /// Weight Ratioを計算し、客観的レベルを判定
   void _calculateWeightRatioAndLevel(double oneRM) {
     if (_latestBodyWeight == null || _latestBodyWeight! <= 0) {
+      if (mounted) {
       setState(() {
         _weightRatio = null;
         _objectiveLevel = null;
       });
+      }
       return;
     }
 
@@ -2606,11 +2650,13 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       gender: _selectedGender,
     );
 
+    if (mounted) {
     setState(() {
       _currentOneRM = oneRM;
       _weightRatio = ratio;
       _objectiveLevel = detectedLevel;
     });
+    }
   }
 
   /// 成長予測を実行(サブスクリプションチェック統合)
@@ -2686,10 +2732,12 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
     // ========================================
     // 🤖 Step 4: AI予測処理(クレジット消費含む)
     // ========================================
+    if (mounted) {
     setState(() {
       _isLoading = true;
       _predictionResult = null;
     });
+    }
 
     // 🆕 Phase 7: 必須データのバリデーション
     // 🔧 Phase 7 Fix: _oneRMControllerから1RMを取得
@@ -2768,14 +2816,17 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
       }
 
       if (mounted) {
+        if (mounted) {
         setState(() {
           _predictionResult = result;
           _isLoading = false;
         });
+        }
       }
     } catch (e) {
       print('❌ 成長予測例外: $e');
       if (mounted) {
+        if (mounted) {
         setState(() {
           _predictionResult = {
             'success': false,
@@ -2783,6 +2834,7 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           };
           _isLoading = false;
         });
+        }
       }
     }
   }
@@ -2886,9 +2938,11 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               value: _selectedBodyPart,
               items: _bodyParts,
               onChanged: (value) {
+                if (mounted) {
                 setState(() {
                   _selectedBodyPart = value!;
                 });
+                }
               },
             ),
             SizedBox(height: 16),
@@ -2915,9 +2969,11 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
               value: _selectedLevel,
               items: _levels,
               onChanged: (value) {
+                if (mounted) {
                 setState(() {
                   _selectedLevel = value!;
                 });
+                }
               },
             ),
             SizedBox(height: 16),
@@ -2933,9 +2989,11 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                   max: 6,
                   divisions: 5,
                   onChanged: (value) {
+                    if (mounted) {
                     setState(() {
                       _selectedFrequency = value.toInt();
                     });
+                    }
                   },
                   displayValue: '週${_selectedFrequency}回',
                 ),
@@ -2966,9 +3024,11 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                   max: 10,
                   divisions: 4,
                   onChanged: (value) {
+                    if (mounted) {
                     setState(() {
                       _selectedRPE = value.toInt();
                     });
+                    }
                   },
                   displayValue: _getRPELabel(_selectedRPE),
                 ),
@@ -2997,9 +3057,11 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
                   value: _selectedGender,
                   items: [AppLocalizations.of(context)!.genderMale, AppLocalizations.of(context)!.genderFemale],
                   onChanged: (value) {
+                    if (mounted) {
                     setState(() {
                       _selectedGender = value!;
                     });
+                    }
                   },
                 ),
                 SizedBox(height: 4),
@@ -3826,11 +3888,13 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           _calculateWeightRatioAndLevel(oneRM);
         } else {
           // 🔧 Phase 7 Fix: 無効な入力時はWeight Ratioをクリア
+          if (mounted) {
           setState(() {
             _currentOneRM = null;
             _weightRatio = null;
             _objectiveLevel = null;
           });
+          }
         }
       },
       validator: (value) {
@@ -3927,9 +3991,11 @@ class _GrowthPredictionTabState extends State<_GrowthPredictionTab>
           SizedBox(height: 8),
           ElevatedButton(
             onPressed: () {
+              if (mounted) {
               setState(() {
                 _selectedLevel = _objectiveLevel!;
               });
+              }
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.amber.shade700,
@@ -4043,9 +4109,11 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
       final userProfile = await advancedFatigueService.getUserProfile();
       
       if (mounted) {
+        if (mounted) {
         setState(() {
           _userAge = userProfile.age;
         });
+        }
       }
     } catch (e) {
       debugPrint('⚠️ [Phase 7.5] 年齢取得エラー: $e');
@@ -4126,10 +4194,12 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
     // ========================================
     // 🤖 Step 4: AI分析処理(クレジット消費含む)
     // ========================================
+    if (mounted) {
     setState(() {
       _isLoading = true;
       _analysisResult = null;
     });
+    }
 
     try {
       print('🚀 効果分析開始...');
@@ -4187,14 +4257,17 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
       }
 
       if (mounted) {
+        if (mounted) {
         setState(() {
           _analysisResult = result;
           _isLoading = false;
         });
+        }
       }
     } catch (e) {
       print('❌ 効果分析例外: $e');
       if (mounted) {
+        if (mounted) {
         setState(() {
           _analysisResult = {
             'success': false,
@@ -4202,6 +4275,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
           };
           _isLoading = false;
         });
+        }
       }
     }
   }
@@ -4384,6 +4458,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               value: _selectedBodyPart,
               items: _bodyParts,
               onChanged: (value) {
+                if (mounted) {
                 setState(() {
                   _selectedBodyPart = value!;
                   // 部位変更時に種目を自動選択
@@ -4391,6 +4466,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                       ? _availableExercises.first 
                       : AppLocalizations.of(context)!.exerciseBenchPress;
                 });
+                }
               },
             ),
             SizedBox(height: 16),
@@ -4401,9 +4477,11 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               value: _selectedExercise,
               items: _availableExercises,
               onChanged: (value) {
+                if (mounted) {
                 setState(() {
                   _selectedExercise = value!;
                 });
+                }
               },
             ),
             SizedBox(height: 4),
@@ -4434,9 +4512,11 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               ),
               value: _enablePlateauDetection,
               onChanged: (value) {
+                if (mounted) {
                 setState(() {
                   _enablePlateauDetection = value;
                 });
+                }
               },
               activeColor: Colors.orange.shade700,
               contentPadding: EdgeInsets.zero,
@@ -4454,9 +4534,11 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                   max: 24,
                   divisions: 20,
                   onChanged: (value) {
+                    if (mounted) {
                     setState(() {
                       _currentSets = value.toInt();
                     });
+                    }
                   },
                   displayValue: '${_currentSets}セット',
                 ),
@@ -4487,9 +4569,11 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                   max: 6,
                   divisions: 5,
                   onChanged: (value) {
+                    if (mounted) {
                     setState(() {
                       _currentFrequency = value.toInt();
                     });
+                    }
                   },
                   displayValue: '週${_currentFrequency}回',
                 ),
@@ -4515,9 +4599,11 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
               value: _selectedLevel,
               items: _levels,
               onChanged: (value) {
+                if (mounted) {
                 setState(() {
                   _selectedLevel = value!;
                 });
+                }
               },
             ),
             SizedBox(height: 16),
@@ -4531,9 +4617,11 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                   value: _selectedGender,
                   items: [AppLocalizations.of(context)!.genderMale, AppLocalizations.of(context)!.genderFemale],
                   onChanged: (value) {
+                    if (mounted) {
                     setState(() {
                       _selectedGender = value!;
                     });
+                    }
                   },
                 ),
                 SizedBox(height: 4),
