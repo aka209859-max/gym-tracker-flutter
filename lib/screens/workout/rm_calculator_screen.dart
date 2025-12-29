@@ -447,7 +447,7 @@ class _PlateCalculatorTabState extends State<_PlateCalculatorTab> {
     if (targetWeight == null || targetWeight <= _barWeight) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('バーの重量（${_barWeight}kg）より大きい値を入力してください'),
+          content: Text(AppLocalizations.of(context)!.rmCalculator_barWeightError(_barWeight.toString())),
           backgroundColor: Colors.red,
         ),
       );

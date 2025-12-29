@@ -210,7 +210,7 @@ class _ReportCard extends StatelessWidget {
           weekRange,
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-        subtitle: Text('${report.totalWorkouts}回 • ${report.totalMinutes}分'),
+        subtitle: Text(AppLocalizations.of(context)!.weeklyReports_workoutsSummary(report.totalWorkouts.toString(), report.totalMinutes.toString())),
         children: [
           Padding(
             padding: const EdgeInsets.all(16),

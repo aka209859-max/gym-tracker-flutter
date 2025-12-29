@@ -11,7 +11,7 @@ class TokuteiShoutorihikihouScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('特定商取引法に基づく表記'),
+        title: Text(AppLocalizations.of(context)!.settings_commercialTransactionAct),
         backgroundColor: Colors.deepPurple,
         foregroundColor: Colors.white,
       ),

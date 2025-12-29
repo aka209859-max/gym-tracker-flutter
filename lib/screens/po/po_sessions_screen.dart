@@ -27,7 +27,7 @@ class POSessionsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             const Chip(
-              label: Text('近日公開予定'),
+              label: Text(AppLocalizations.of(context)!.poSessions_comingSoon),
               backgroundColor: Colors.blue,
               labelStyle: TextStyle(color: Colors.white),
             ),

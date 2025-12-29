@@ -86,7 +86,7 @@ class _NotificationSettingsScreenState extends State<NotificationSettingsScreen>
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('リマインダー時刻を${_formatTime(_reminderTime)}に設定しました'),
+            content: Text(AppLocalizations.of(context)!.notificationSettings_reminderSet(_formatTime(_reminderTime))),
             backgroundColor: Colors.green,
           ),
         );

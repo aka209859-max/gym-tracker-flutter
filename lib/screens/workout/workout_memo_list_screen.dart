@@ -132,7 +132,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
         await _noteService.updateNote(note.id, result);
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('メモを更新しました')),
+            const SnackBar(content: Text(AppLocalizations.of(context)!.workoutMemo_updated)),
           );
           _loadMemosWithWorkouts(); // リロード
         }
@@ -151,7 +151,7 @@ class _WorkoutMemoListScreenState extends State<WorkoutMemoListScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('メモを削除'),
+        title: Text(AppLocalizations.of(context)!.workoutMemo_delete),
         content: Text(AppLocalizations.of(context)!.delete),
         actions: [
           TextButton(

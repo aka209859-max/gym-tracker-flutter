@@ -147,7 +147,7 @@ class _FatigueManagementScreenState extends State<FatigueManagementScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('❌ エラー: $e'),
+            content: Text(AppLocalizations.of(context)!.fatigue_errorMessage(e.toString())),
             backgroundColor: Colors.red,
             duration: const Duration(seconds: 4),
           ),

@@ -452,7 +452,7 @@ class _CreateTemplateScreenState extends State<CreateTemplateScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('保存エラー: $e')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.workoutTemplate_saveError(e.toString()))),
         );
       }
     } finally {

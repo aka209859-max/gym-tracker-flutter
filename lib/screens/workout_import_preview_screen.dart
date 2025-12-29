@@ -272,7 +272,7 @@ class _WorkoutImportPreviewScreenState
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('📸 トレーニング記録の取り込み'),
+        title: Text(AppLocalizations.of(context)!.workoutImport_title),
         backgroundColor: const Color(0xFF1A237E),
       ),
       body: Column(

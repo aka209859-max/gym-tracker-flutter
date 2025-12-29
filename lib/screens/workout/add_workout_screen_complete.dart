@@ -723,7 +723,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 ),
                 child: Row(
                   children: [
-                    Text('💡', style: TextStyle(fontSize: 16)),
+                    Text(AppLocalizations.of(context)!.workout_lightbulbIcon, style: TextStyle(fontSize: 16)),
                     SizedBox(width: 8),
                     Expanded(
                       child: Text(

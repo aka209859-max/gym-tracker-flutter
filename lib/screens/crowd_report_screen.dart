@@ -313,7 +313,7 @@ class _CrowdReportScreenState extends State<CrowdReportScreen> {
                     '✅ ${result.message}',
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Text('🎁 AI 1回分をプレゼント！（報告${result.reportCount}回目）'),
+                  Text(AppLocalizations.of(context)!.crowdReport_aiReward(result.reportCount.toString())),
                 ],
               ),
             ),

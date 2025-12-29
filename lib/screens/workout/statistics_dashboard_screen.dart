@@ -319,7 +319,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
     if (_isLoading) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('統計ダッシュボード'),
+          title: const Text(AppLocalizations.of(context)!.statisticsDashboard_title),
         ),
         body: const Center(child: CircularProgressIndicator()),
       );
@@ -327,7 +327,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('統計ダッシュボード'),
+        title: const Text(AppLocalizations.of(context)!.statisticsDashboard_title),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),

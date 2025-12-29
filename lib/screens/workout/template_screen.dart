@@ -84,7 +84,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ワークアウトテンプレート'),
+        title: const Text(AppLocalizations.of(context)!.workoutTemplate_title),
         backgroundColor: theme.colorScheme.primary,
         foregroundColor: Colors.white,
         bottom: TabBar(
@@ -422,7 +422,7 @@ class _TemplateScreenState extends State<TemplateScreen> with SingleTickerProvid
       context: context,
       builder: (context) => AlertDialog(
         title: Text(AppLocalizations.of(context)!.deleteTemplate),
-        content: Text('「${template.name}」を削除しますか？'),
+        content: Text(AppLocalizations.of(context)!.workoutTemplate_deleteConfirm(template.name)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),

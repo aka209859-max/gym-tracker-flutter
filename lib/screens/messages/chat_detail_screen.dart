@@ -65,7 +65,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('メッセージの送信に失敗しました: $e'),
+            content: Text(AppLocalizations.of(context)!.messages_sendError(e.toString())),
             backgroundColor: Colors.red,
           ),
         );

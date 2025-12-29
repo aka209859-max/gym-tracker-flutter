@@ -188,7 +188,7 @@ class _CampaignSnsShareScreenState extends State<CampaignSnsShareScreen> {
               ElevatedButton.icon(
                 onPressed: _shareToSns,
                 icon: const Icon(Icons.share),
-                label: const Text('SNSアプリで投稿'),
+                label: const Text(AppLocalizations.of(context)!.campaign_shareOnSNS),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(16),
                   backgroundColor: Colors.green[700],
