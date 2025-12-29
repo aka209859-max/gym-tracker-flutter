@@ -245,7 +245,7 @@ class _TrainerRecordsScreenState extends State<TrainerRecordsScreen> {
                               ElevatedButton.icon(
                                 onPressed: _fetchTrainerRecords,
                                 icon: const Icon(Icons.refresh),
-                                label: const Text(AppLocalizations.of(context)!.trainerRecords_reload),
+                                label: Text(AppLocalizations.of(context)!.trainerRecords_reload),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.orange,
                                   foregroundColor: Colors.white,

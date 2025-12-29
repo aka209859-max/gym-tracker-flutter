@@ -186,7 +186,7 @@ class _AIAddonPurchaseScreenState extends State<AIAddonPurchaseScreen> {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.aiAddon_purchaseTitle),
+        title: Text(AppLocalizations.of(context)!.aiAddon_purchaseTitle),
         centerTitle: true,
         backgroundColor: theme.colorScheme.primary,
         foregroundColor: Colors.white,

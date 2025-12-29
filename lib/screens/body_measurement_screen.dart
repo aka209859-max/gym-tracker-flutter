@@ -741,7 +741,7 @@ class _BodyMeasurementScreenState extends State<BodyMeasurementScreen> {
                 subtitle: Row(
                   children: [
                     if (weight != null) Text(AppLocalizations.of(context)!.body_weightKg(weight.toStringAsFixed(1))),
-                    if (weight != null && bodyFat != null) const Text(AppLocalizations.of(context)!.bodyMeasurement_bulletSeparator),
+                    if (weight != null && bodyFat != null) Text(AppLocalizations.of(context)!.bodyMeasurement_bulletSeparator),
                     if (bodyFat != null) Text(AppLocalizations.of(context)!.body_bodyFatPercent(bodyFat.toStringAsFixed(1))),
                   ],
                 ),

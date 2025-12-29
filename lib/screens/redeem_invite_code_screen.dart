@@ -115,7 +115,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppLocalizations.of(context)!.redeemInvite_useInviteCode),
+        title: Text(AppLocalizations.of(context)!.redeemInvite_useInviteCode),
         backgroundColor: Colors.deepPurple,
       ),
       body: SingleChildScrollView(
@@ -245,7 +245,7 @@ class _RedeemInviteCodeScreenState extends State<RedeemInviteCodeScreen> {
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                       ),
                     )
-                  : const Text(
+                  : Text(
                       AppLocalizations.of(context)!.redeemInvite_useInviteCode,
                       style: TextStyle(
                         fontSize: 18,
