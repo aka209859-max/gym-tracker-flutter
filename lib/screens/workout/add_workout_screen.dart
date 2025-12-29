@@ -2601,7 +2601,7 @@ class _AddWorkoutScreenState extends State<AddWorkoutScreen> {
                 },
               ),
               ChoiceChip(
-                label: Text('Drop', style: TextStyle(fontSize: 12)),
+                label: Text(AppLocalizations.of(context)!.workout_setType_drop, style: TextStyle(fontSize: 12)),
                 selected: set.setType == SetType.dropset,
                 onSelected: (selected) {
                   if (selected) {

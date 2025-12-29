@@ -3764,5 +3764,6 @@
   "weeklyReports_workoutsSummary": "{workouts} entrenamientos • {minutes} min",
   "workoutMemo_updated": "Nota actualizada",
   "workoutMemo_delete": "Eliminar Nota",
-  "workoutImport_title": "📸 Importar Registro de Entrenamiento"
+  "workoutImport_title": "📸 Importar Registro de Entrenamiento",
+  "workout_setType_drop": "Drop Set"
 }

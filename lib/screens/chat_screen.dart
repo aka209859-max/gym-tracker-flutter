@@ -61,7 +61,7 @@ class _ChatScreenState extends State<ChatScreen> {
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text(AppLocalizations.of(context)!.chat_sendMessageError)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.chat_sendMessageError)),
         );
       }
     }

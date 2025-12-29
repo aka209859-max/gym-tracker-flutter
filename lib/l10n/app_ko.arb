@@ -3763,5 +3763,6 @@
   "weeklyReports_workoutsSummary": "{workouts}회 • {minutes}분",
   "workoutMemo_updated": "메모가 업데이트되었습니다",
   "workoutMemo_delete": "메모 삭제",
-  "workoutImport_title": "📸 트레이닝 기록 가져오기"
+  "workoutImport_title": "📸 트레이닝 기록 가져오기",
+  "workout_setType_drop": "드롭세트"
 }

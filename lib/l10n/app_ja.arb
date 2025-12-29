@@ -4768,5 +4768,6 @@
   "weeklyReports_workoutsSummary": "{workouts}回 • {minutes}分",
   "workoutMemo_updated": "メモを更新しました",
   "workoutMemo_delete": "メモを削除",
-  "workoutImport_title": "📸 トレーニング記録の取り込み"
+  "workoutImport_title": "📸 トレーニング記録の取り込み",
+  "workout_setType_drop": "ドロップセット"
 }

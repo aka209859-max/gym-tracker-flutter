@@ -128,7 +128,7 @@ class POMemberDetailScreen extends StatelessWidget {
           ElevatedButton.icon(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text(AppLocalizations.of(context)!.general_0dfb3c3b)),
+                SnackBar(content: Text(AppLocalizations.of(context)!.general_0dfb3c3b)),
               );
             },
             icon: Icon(Icons.message),
@@ -141,7 +141,7 @@ class POMemberDetailScreen extends StatelessWidget {
           OutlinedButton.icon(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text(AppLocalizations.of(context)!.general_75a6ecb5)),
+                SnackBar(content: Text(AppLocalizations.of(context)!.general_75a6ecb5)),
               );
             },
             icon: Icon(Icons.history),

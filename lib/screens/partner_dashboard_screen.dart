@@ -184,7 +184,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                   enabled: partnerAccess.hasPermission('editHours'),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text(AppLocalizations.of(context)!.partnerDashboard_comingSoon)),
+                      SnackBar(content: Text(AppLocalizations.of(context)!.partnerDashboard_comingSoon)),
                     );
                   },
                 ),
@@ -205,7 +205,7 @@ class PartnerDashboardScreen extends StatelessWidget {
                   enabled: partnerAccess.hasPermission('viewAnalytics'),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text(AppLocalizations.of(context)!.partnerDashboard_comingSoon)),
+                      SnackBar(content: Text(AppLocalizations.of(context)!.partnerDashboard_comingSoon)),
                     );
                   },
                 ),

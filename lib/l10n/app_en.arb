@@ -3736,5 +3736,6 @@
   "weeklyReports_workoutsSummary": "{workouts} workouts • {minutes} min",
   "workoutMemo_updated": "Memo updated",
   "workoutMemo_delete": "Delete Memo",
-  "workoutImport_title": "📸 Import Training Record"
+  "workoutImport_title": "📸 Import Training Record",
+  "workout_setType_drop": "Drop"
 }

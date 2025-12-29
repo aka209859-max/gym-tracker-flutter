@@ -3766,5 +3766,6 @@
   "weeklyReports_workoutsSummary": "{workouts}次 • {minutes}分钟",
   "workoutMemo_updated": "备忘录已更新",
   "workoutMemo_delete": "删除备忘录",
-  "workoutImport_title": "📸 导入训练记录"
+  "workoutImport_title": "📸 导入训练记录",
+  "workout_setType_drop": "递减组"
 }
