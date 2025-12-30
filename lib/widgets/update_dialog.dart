@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 import '../services/version_check_service.dart';
 
 /// アップデート促進ダイアログ

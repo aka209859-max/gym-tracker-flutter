@@ -3311,7 +3311,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                                       } else if (isBodyweightMode && weight == 0.0) {
                                         return Text(AppLocalizations.of(context)!.bodyweight, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       } else {
-                                        return Text(AppLocalizations.of(context)!.weightKg.replaceAll('{weight}', weight.toString()), style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
+                                        return Text(AppLocalizations.of(context)!.weightKg(weight), style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold));
                                       }
                                     }
                                   ),
