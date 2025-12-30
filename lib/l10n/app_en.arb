@@ -3749,5 +3749,13 @@
   "announcementType_newEquipment": "New Equipment",
   "announcementType_hours": "Business Hours",
   "reward_adCreditEarned": "You earned 1 AI credit!",
-  "ai_menuGenerationError": "Menu generation failed"
+  "ai_menuGenerationError": "Menu generation failed",
+  "@weightKg": {
+    "placeholders": {
+      "weight": {
+        "type": "double",
+        "format": "decimalPattern"
+      }
+    }
+  }
 }

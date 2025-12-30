@@ -3777,5 +3777,13 @@
   "announcementType_newEquipment": "Nuevo Equipo",
   "announcementType_hours": "Horario",
   "reward_adCreditEarned": "¡Has ganado 1 crédito de AI!",
-  "ai_menuGenerationError": "Error al generar el menú"
+  "ai_menuGenerationError": "Error al generar el menú",
+  "@weightKg": {
+    "placeholders": {
+      "weight": {
+        "type": "double",
+        "format": "decimalPattern"
+      }
+    }
+  }
 }

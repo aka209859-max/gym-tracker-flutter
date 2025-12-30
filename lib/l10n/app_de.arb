@@ -3778,5 +3778,13 @@
   "announcementType_newEquipment": "Neue Ausrüstung",
   "announcementType_hours": "Öffnungszeiten",
   "reward_adCreditEarned": "Sie haben 1 KI-Guthaben verdient!",
-  "ai_menuGenerationError": "Menügenerierung fehlgeschlagen"
+  "ai_menuGenerationError": "Menügenerierung fehlgeschlagen",
+  "@weightKg": {
+    "placeholders": {
+      "weight": {
+        "type": "double",
+        "format": "decimalPattern"
+      }
+    }
+  }
 }
