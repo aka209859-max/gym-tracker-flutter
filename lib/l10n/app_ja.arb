@@ -4780,5 +4780,6 @@
   "announcementType_maintenance": "メンテナンス",
   "announcementType_newEquipment": "新規設備",
   "announcementType_hours": "営業時間",
-  "reward_adCreditEarned": "AIクレジット1回分を獲得しました！"
+  "reward_adCreditEarned": "AIクレジット1回分を獲得しました！",
+  "ai_menuGenerationError": "メニュー生成に失敗しました"
 }

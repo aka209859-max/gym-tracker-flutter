@@ -3778,5 +3778,6 @@
   "announcementType_maintenance": "维护",
   "announcementType_newEquipment": "新设备",
   "announcementType_hours": "营业时间",
-  "reward_adCreditEarned": "获得了1次AI积分！"
+  "reward_adCreditEarned": "获得了1次AI积分！",
+  "ai_menuGenerationError": "菜单生成失败"
 }

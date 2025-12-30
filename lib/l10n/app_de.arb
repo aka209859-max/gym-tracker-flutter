@@ -3777,5 +3777,6 @@
   "announcementType_maintenance": "Wartung",
   "announcementType_newEquipment": "Neue Ausrüstung",
   "announcementType_hours": "Öffnungszeiten",
-  "reward_adCreditEarned": "Sie haben 1 KI-Guthaben verdient!"
+  "reward_adCreditEarned": "Sie haben 1 KI-Guthaben verdient!",
+  "ai_menuGenerationError": "Menügenerierung fehlgeschlagen"
 }

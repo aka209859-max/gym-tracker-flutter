@@ -3748,5 +3748,6 @@
   "announcementType_maintenance": "Maintenance",
   "announcementType_newEquipment": "New Equipment",
   "announcementType_hours": "Business Hours",
-  "reward_adCreditEarned": "You earned 1 AI credit!"
+  "reward_adCreditEarned": "You earned 1 AI credit!",
+  "ai_menuGenerationError": "Menu generation failed"
 }

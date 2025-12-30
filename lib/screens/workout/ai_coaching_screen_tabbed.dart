@@ -489,16 +489,8 @@ class _AIMenuTabState extends State<_AIMenuTab>
   @override
   void initState() {
     super.initState();
-    // 部位選択状態を初期化
-    _selectedBodyParts = {
-      'bodyPartChest': false,
-      'bodyPartBack': false,
-      'bodyPartLegs': false,
-      'bodyPartShoulders': false,
-      'bodyPartArms': false,
-      AppLocalizations.of(context)!.bodyPart_ceb49fa1: false,
-      'exerciseCardio': false,
-    };
+    // 注: _selectedBodyParts の初期化は didChangeDependencies() で実行
+    // （AppLocalizationsへのアクセスが必要なため）
     _loadHistory();
     _loadWorkoutHistory(); // 🔧 v1.0.217: トレーニング履歴を読み込む
   }
@@ -508,6 +500,19 @@ class _AIMenuTabState extends State<_AIMenuTab>
     super.didChangeDependencies();
     // 🔧 Phase 2 Fix: context依存の初期化はここで実行
     _selectedLevel = AppLocalizations.of(context)!.beginner;
+    
+    // 🔧 Build #24.1 Fix: 部位選択状態を多言語で初期化
+    if (_selectedBodyParts.isEmpty) {
+      _selectedBodyParts = {
+        AppLocalizations.of(context)!.bodyPartChest: false,
+        AppLocalizations.of(context)!.bodyPartBack: false,
+        AppLocalizations.of(context)!.bodyPartLegs: false,
+        AppLocalizations.of(context)!.bodyPartShoulders: false,
+        AppLocalizations.of(context)!.bodyPartArms: false,
+        AppLocalizations.of(context)!.bodyPart_ceb49fa1: false,
+        AppLocalizations.of(context)!.exerciseCardio: false,
+      };
+    }
   }
 
   /// 履歴読み込み
@@ -1491,7 +1496,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       debugPrint('❌ メニュー生成エラー: $e');
       if (mounted) {
       setState(() {
-        _errorMessage = 'メニュー生成に失敗しました: $e';
+        _errorMessage = '${AppLocalizations.of(context)!.ai_menuGenerationError}: $e';
         _isGenerating = false;
       });
       }
