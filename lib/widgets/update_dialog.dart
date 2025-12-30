@@ -64,8 +64,8 @@ class UpdateDialog extends StatelessWidget {
                   } else {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('App Storeを開けませんでした'),
+                        SnackBar(
+                          content: Text(AppLocalizations.of(context)!.update_appStoreError),
                         ),
                       );
                     }

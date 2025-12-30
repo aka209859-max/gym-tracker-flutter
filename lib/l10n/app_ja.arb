@@ -4769,5 +4769,16 @@
   "workoutMemo_updated": "メモを更新しました",
   "workoutMemo_delete": "メモを削除",
   "workoutImport_title": "📸 トレーニング記録の取り込み",
-  "workout_setType_drop": "ドロップセット"
+  "workout_setType_drop": "ドロップセット",
+  "achievements_tab_pr": "PR",
+  "achievements_unlockDate": "解除",
+  "achievements_condition": "条件",
+  "update_appStoreError": "App Storeを開けませんでした",
+  "announcementType_general": "お知らせ",
+  "announcementType_campaign": "キャンペーン",
+  "announcementType_event": "イベント",
+  "announcementType_maintenance": "メンテナンス",
+  "announcementType_newEquipment": "新規設備",
+  "announcementType_hours": "営業時間",
+  "reward_adCreditEarned": "AIクレジット1回分を獲得しました！"
 }

@@ -3767,5 +3767,16 @@
   "workoutMemo_updated": "備忘錄已更新",
   "workoutMemo_delete": "刪除備忘錄",
   "workoutImport_title": "📸 匯入訓練記錄",
-  "workout_setType_drop": "遞減組"
+  "workout_setType_drop": "遞減組",
+  "achievements_tab_pr": "PR",
+  "achievements_unlockDate": "解鎖",
+  "achievements_condition": "條件",
+  "update_appStoreError": "無法開啟App Store",
+  "announcementType_general": "通知",
+  "announcementType_campaign": "活動",
+  "announcementType_event": "活動",
+  "announcementType_maintenance": "維護",
+  "announcementType_newEquipment": "新設備",
+  "announcementType_hours": "營業時間",
+  "reward_adCreditEarned": "獲得了1次AI積分！"
 }

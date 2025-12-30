@@ -56,6 +56,24 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
     }
   }
 
+  /// 🆕 Build #24.1: お知らせタイプの多言語表示名取得
+  String _getAnnouncementTypeName(AnnouncementType type) {
+    switch (type) {
+      case AnnouncementType.general:
+        return AppLocalizations.of(context)!.announcementType_general;
+      case AnnouncementType.campaign:
+        return AppLocalizations.of(context)!.announcementType_campaign;
+      case AnnouncementType.event:
+        return AppLocalizations.of(context)!.announcementType_event;
+      case AnnouncementType.maintenance:
+        return AppLocalizations.of(context)!.announcementType_maintenance;
+      case AnnouncementType.newEquipment:
+        return AppLocalizations.of(context)!.announcementType_newEquipment;
+      case AnnouncementType.hours:
+        return AppLocalizations.of(context)!.announcementType_hours;
+    }
+  }
+
   @override
   void dispose() {
     _titleController.dispose();
@@ -218,7 +236,7 @@ class _GymAnnouncementEditorScreenState extends State<GymAnnouncementEditorScree
                 spacing: 8,
                 children: AnnouncementType.values.map((type) {
                   return ChoiceChip(
-                    label: Text('${type.icon} ${type.displayName}'),
+                    label: Text('${type.icon} ${_getAnnouncementTypeName(type)}'),
                     selected: _selectedType == type,
                     onSelected: (selected) {
                       if (selected) {

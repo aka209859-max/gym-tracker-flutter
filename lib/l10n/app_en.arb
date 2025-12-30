@@ -3737,5 +3737,16 @@
   "workoutMemo_updated": "Memo updated",
   "workoutMemo_delete": "Delete Memo",
   "workoutImport_title": "📸 Import Training Record",
-  "workout_setType_drop": "Drop"
+  "workout_setType_drop": "Drop",
+  "achievements_tab_pr": "PR",
+  "achievements_unlockDate": "Unlocked",
+  "achievements_condition": "Condition",
+  "update_appStoreError": "Could not open App Store",
+  "announcementType_general": "Announcement",
+  "announcementType_campaign": "Campaign",
+  "announcementType_event": "Event",
+  "announcementType_maintenance": "Maintenance",
+  "announcementType_newEquipment": "New Equipment",
+  "announcementType_hours": "Business Hours",
+  "reward_adCreditEarned": "You earned 1 AI credit!"
 }

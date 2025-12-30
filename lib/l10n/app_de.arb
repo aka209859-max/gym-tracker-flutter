@@ -3766,5 +3766,16 @@
   "workoutMemo_updated": "Notiz aktualisiert",
   "workoutMemo_delete": "Notiz löschen",
   "workoutImport_title": "📸 Trainingsaufzeichnung importieren",
-  "workout_setType_drop": "Drop-Set"
+  "workout_setType_drop": "Drop-Set",
+  "achievements_tab_pr": "PR",
+  "achievements_unlockDate": "Freigeschaltet",
+  "achievements_condition": "Bedingung",
+  "update_appStoreError": "App Store konnte nicht geöffnet werden",
+  "announcementType_general": "Ankündigung",
+  "announcementType_campaign": "Kampagne",
+  "announcementType_event": "Veranstaltung",
+  "announcementType_maintenance": "Wartung",
+  "announcementType_newEquipment": "Neue Ausrüstung",
+  "announcementType_hours": "Öffnungszeiten",
+  "reward_adCreditEarned": "Sie haben 1 KI-Guthaben verdient!"
 }

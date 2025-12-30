@@ -106,7 +106,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
             Tab(text: AppLocalizations.of(context)!.all),
             Tab(text: '継続'),
             Tab(text: AppLocalizations.of(context)!.totalWeight),
-            Tab(text: 'PR'),
+            Tab(text: AppLocalizations.of(context)!.achievements_tab_pr),
           ],
         ),
       ),
@@ -342,7 +342,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            '解除: ${DateFormat('yyyy/MM/dd').format(badge.unlockedAt!)}',
+                            '${AppLocalizations.of(context)!.achievements_unlockDate}: ${DateFormat('yyyy/MM/dd').format(badge.unlockedAt!)}',                            
                             style: TextStyle(
                               fontSize: 12,
                               color: theme.colorScheme.primary.withValues(alpha: 0.7),
@@ -362,7 +362,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            '条件: ${_getCategoryLabel(badge.category)} ${badge.threshold}${_getCategoryUnit(badge.category)}',
+                            '${AppLocalizations.of(context)!.achievements_condition}: ${_getCategoryLabel(badge.category)} ${badge.threshold}${_getCategoryUnit(badge.category)}',
                             style: const TextStyle(
                               fontSize: 12,
                               color: Colors.grey,

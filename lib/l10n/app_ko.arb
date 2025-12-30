@@ -3764,5 +3764,16 @@
   "workoutMemo_updated": "메모가 업데이트되었습니다",
   "workoutMemo_delete": "메모 삭제",
   "workoutImport_title": "📸 트레이닝 기록 가져오기",
-  "workout_setType_drop": "드롭세트"
+  "workout_setType_drop": "드롭세트",
+  "achievements_tab_pr": "PR",
+  "achievements_unlockDate": "잠금 해제",
+  "achievements_condition": "조건",
+  "update_appStoreError": "App Store를 열 수 없습니다",
+  "announcementType_general": "공지",
+  "announcementType_campaign": "캠페인",
+  "announcementType_event": "이벤트",
+  "announcementType_maintenance": "유지보수",
+  "announcementType_newEquipment": "신규 장비",
+  "announcementType_hours": "영업 시간",
+  "reward_adCreditEarned": "AI 크레딧 1회를 획득했습니다!"
 }

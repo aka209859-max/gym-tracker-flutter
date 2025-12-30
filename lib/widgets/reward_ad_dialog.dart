@@ -133,7 +133,7 @@ class _RewardAdDialogState extends State<RewardAdDialog> {
               children: [
                 Icon(Icons.check_circle, color: Colors.white),
                 SizedBox(width: 8),
-                Text('✅ AIクレジット1回分を獲得しました！'),
+                Text('✅ ${AppLocalizations.of(context)!.reward_adCreditEarned}'),
               ],
             ),
             backgroundColor: Colors.green,
