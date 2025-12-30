@@ -620,8 +620,22 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
           AppLogger.debug('AIクレジット残高: ${await _creditService.getAICredits()}', tag: 'AI_COACHING');
         }
 
+        // ========================================
+        // 🆕 Build #24.1: 多言語翻訳（日本語以外の場合）
+        // ========================================
+        String finalMenu = text;
+        final locale = AppLocalizations.of(context)!.localeName;
+        
+        if (locale != 'ja') {
+          AppLogger.info('🌐 非日本語ユーザー検出（$locale）→ 翻訳開始', tag: 'AI_COACHING');
+          finalMenu = await _translateMenuToLanguage(text);
+          AppLogger.info('✅ 翻訳完了: ${finalMenu.length}文字', tag: 'AI_COACHING');
+        } else {
+          AppLogger.info('🇯🇵 日本語ユーザー → 翻訳スキップ', tag: 'AI_COACHING');
+        }
+
         setState(() {
-          _generatedMenu = text;
+          _generatedMenu = finalMenu;
           _isGenerating = false;
         });
 
@@ -727,6 +741,106 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
         buffer.writeln('- 回数: 8-12回');
         buffer.writeln('- 休憩: 60-90秒\n');
       }
+    }
+  }
+
+  /// 🆕 Build #24.1: AI生成メニューを他言語に翻訳（Gemini 2.0 Flash Exp使用）
+  /// 日本語以外のユーザー向けに、生成されたメニューを翻訳する
+  Future<String> _translateMenuToLanguage(String japaneseMenu) async {
+    final locale = AppLocalizations.of(context)!.localeName;
+    
+    // 日本語ユーザーの場合は翻訳不要
+    if (locale == 'ja') {
+      return japaneseMenu;
+    }
+    
+    // 翻訳先言語の決定
+    String targetLanguage;
+    switch (locale) {
+      case 'en':
+        targetLanguage = 'English';
+        break;
+      case 'es':
+        targetLanguage = 'Spanish';
+        break;
+      case 'ko':
+        targetLanguage = 'Korean';
+        break;
+      case 'zh':
+        targetLanguage = 'Simplified Chinese';
+        break;
+      case 'zh_TW':
+        targetLanguage = 'Traditional Chinese';
+        break;
+      case 'de':
+        targetLanguage = 'German';
+        break;
+      default:
+        targetLanguage = 'English'; // デフォルトは英語
+    }
+    
+    AppLogger.info('🌐 メニュー翻訳開始: 日本語 → $targetLanguage', tag: 'AI_COACHING');
+    
+    try {
+      // Gemini 2.0 Flash Exp API呼び出し（翻訳用）
+      final response = await http.post(
+        Uri.parse(
+            'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=AIzaSyAFVfcWzXDTtc9Rk3Zr5OGRx63FXpMAHqY'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'contents': [
+            {
+              'parts': [
+                {
+                  'text': '''
+You are a professional translator specializing in fitness and training content.
+
+Please translate the following Japanese workout menu to $targetLanguage.
+
+**IMPORTANT RULES:**
+1. Keep the exact same format and structure
+2. Preserve all numbers (weight, reps, sets, rest time)
+3. Keep markdown formatting (##, **, *, etc.)
+4. Translate exercise names accurately
+5. Translate explanations and notes
+6. Keep "kg", "回" (reps), "セット" (sets) format or translate appropriately
+
+**Japanese Menu to Translate:**
+
+$japaneseMenu
+
+**Translated Menu in $targetLanguage:**
+''',
+                }
+              ]
+            }
+          ],
+          'generationConfig': {
+            'temperature': 0.3, // 一貫性のある翻訳のため低く設定
+            'topK': 20,
+            'topP': 0.85,
+            'maxOutputTokens': 3000, // 翻訳結果用に少し多めに確保
+          }
+        }),
+      ).timeout(
+        const Duration(seconds: 30),
+        onTimeout: () => throw TimeoutException('Translation request timeout'),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final translatedText =
+            data['candidates'][0]['content']['parts'][0]['text'] as String;
+        
+        AppLogger.info('✅ 翻訳完了: ${translatedText.length}文字', tag: 'AI_COACHING');
+        return translatedText;
+      } else {
+        throw Exception('Translation API Error: ${response.statusCode}');
+      }
+    } catch (e) {
+      AppLogger.warning('⚠️ 翻訳エラー（日本語メニューを返します）: $e', tag: 'AI_COACHING');
+      // 翻訳失敗時は日本語メニューをそのまま返す（フォールバック）
+      return japaneseMenu;
     }
   }
 
