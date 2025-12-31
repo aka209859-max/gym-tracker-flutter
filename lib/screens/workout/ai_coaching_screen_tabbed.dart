@@ -465,6 +465,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
 
   // 部位選択状態（有酸素追加）
   late final Map<String, bool> _selectedBodyParts;
+  bool _selectedBodyPartsInitialized = false;
   
   // 🔧 v1.0.217: レベル選択（初心者・中級者・上級者）
   late String _selectedLevel; // デフォルトは初心者（didChangeDependenciesで初期化）
@@ -501,8 +502,8 @@ class _AIMenuTabState extends State<_AIMenuTab>
     // 🔧 Phase 2 Fix: context依存の初期化はここで実行
     _selectedLevel = AppLocalizations.of(context)!.beginner;
     
-    // 🔧 Build #24.1 Fix: 部位選択状態を多言語で初期化
-    if (_selectedBodyParts.isEmpty) {
+    // 🔧 Build #24.1 Hotfix8: 部位選択状態を多言語で初期化（初期化フラグ使用）
+    if (!_selectedBodyPartsInitialized) {
       _selectedBodyParts = {
         AppLocalizations.of(context)!.bodyPartChest: false,
         AppLocalizations.of(context)!.bodyPartBack: false,
@@ -512,6 +513,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
         AppLocalizations.of(context)!.bodyPart_ceb49fa1: false,
         AppLocalizations.of(context)!.exerciseCardio: false,
       };
+      _selectedBodyPartsInitialized = true;
     }
   }
 
