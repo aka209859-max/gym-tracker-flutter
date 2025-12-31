@@ -389,43 +389,122 @@ class AIPredictionService {
     final systemPrompt = ScientificDatabase.getSystemPrompt();
     
     switch (locale) {
-      case 'en':
+      case 'es':
         return '''
 $systemPrompt
 
-[USER INFORMATION]
-・Target Muscle: $bodyPart
-・Current 1RM: ${currentWeight}kg
-・Training Level: $level
-・Current Frequency: $bodyPart training ${frequency}x/week
-・Gender: $gender
-・Age: $age years
+[INFORMACIÓN DEL USUARIO]
+・Músculo objetivo: $bodyPart
+・1RM actual: ${currentWeight}kg
+・Nivel de entrenamiento: $level
+・Frecuencia actual: $bodyPart ${frequency}x/semana
+・Género: $gender
+・Edad: $age años
 
-[PREDICTION RESULTS]
-・Prediction Period: $monthsAhead months
-・Predicted 1RM: ${predictedWeight.round()}kg
-・Growth Rate: +${(monthlyRate * 100).round()}%/month
-・Weekly Growth Rate: +${(weeklyRate * 100 * 10).round() / 10}%/week
+[RESULTADOS DE PREDICCIÓN]
+・Período de predicción: $monthsAhead meses
+・1RM previsto: ${predictedWeight.round()}kg
+・Tasa de crecimiento: +${(monthlyRate * 100).round()}%/mes
+・Tasa de crecimiento semanal: +${(weeklyRate * 100 * 10).round() / 10}%/semana
 
-[RECOMMENDED PROGRAM]
-・$bodyPart Training: ${recommendedFreq['frequency']}x/week
-・$bodyPart Volume: ${recommendedVolume['optimal']} sets/week
-・Effect Size: ES=${recommendedFreq['effectSize']}
+[PROGRAMA RECOMENDADO]
+・Entrenamiento de $bodyPart: ${recommendedFreq['frequency']}x/semana
+・Volumen de $bodyPart: ${recommendedVolume['optimal']} series/semana
+・Tamaño del efecto: ES=${recommendedFreq['effectSize']}
 
-[IMPORTANT]
-"${recommendedFreq['frequency']}x/week" = Training the same muscle group ($bodyPart) ${recommendedFreq['frequency']} times per week
-Based on meta-analysis by Grgic et al. 2018
+[IMPORTANTE]
+"${recommendedFreq['frequency']}x/semana" = Entrenar el mismo grupo muscular ($bodyPart) ${recommendedFreq['frequency']} veces por semana
+Basado en el metaanálisis de Grgic et al. 2018
 
-Please respond in the following format (within 300 words):
+Por favor responda en el siguiente formato (dentro de 300 palabras):
 
-## Scientific Basis for Growth Prediction
-(Explain growth rate by level and its scientific basis)
+## Base Científica para la Predicción de Crecimiento
+(Explicar la tasa de crecimiento por nivel y su base científica)
 
-## Recommended Action Plan
-(Suggest specific training frequency, volume, and load progression)
+## Plan de Acción Recomendado
+(Sugerir frecuencia de entrenamiento específica, volumen y progresión de carga)
 
-## Keys to Success
-(List 3 most important points)
+## Claves del Éxito
+(Listar los 3 puntos más importantes)
+''';
+
+      case 'zh':
+      case 'zh_TW':
+        return '''
+$systemPrompt
+
+[用户信息]
+・目标肌肉：$bodyPart
+・当前1RM：${currentWeight}kg
+・训练水平：$level
+・当前频率：$bodyPart 每周${frequency}次训练
+・性别：$gender
+・年龄：$age岁
+
+[预测结果]
+・预测期间：${monthsAhead}个月
+・预测1RM：${predictedWeight.round()}kg
+・增长率：每月+${(monthlyRate * 100).round()}%
+・每周增长率：每周+${(weeklyRate * 100 * 10).round() / 10}%
+
+[推荐计划]
+・$bodyPart 训练：每周${recommendedFreq['frequency']}次
+・$bodyPart 训练量：每周${recommendedVolume['optimal']}组
+・效应量：ES=${recommendedFreq['effectSize']}
+
+[重要]
+"每周${recommendedFreq['frequency']}次" = 每周训练同一部位（$bodyPart）${recommendedFreq['frequency']}次
+基于Grgic et al. 2018的元分析
+
+请按以下格式回答（300字以内）：
+
+## 成长预测的科学依据
+（解释各水平的增长率及其依据）
+
+## 推荐行动计划
+（建议具体的训练频率、训练量和负荷递增）
+
+## 成功关键
+（列出最重要的3点）
+''';
+
+      case 'de':
+        return '''
+$systemPrompt
+
+[BENUTZERINFORMATIONEN]
+・Zielmuskel: $bodyPart
+・Aktuelles 1RM: ${currentWeight}kg
+・Trainingsniveau: $level
+・Aktuelle Häufigkeit: $bodyPart ${frequency}x/Woche Training
+・Geschlecht: $gender
+・Alter: $age Jahre
+
+[VORHERSAGEERGEBNISSE]
+・Vorhersagezeitraum: $monthsAhead Monate
+・Vorhergesagtes 1RM: ${predictedWeight.round()}kg
+・Wachstumsrate: +${(monthlyRate * 100).round()}%/Monat
+・Wöchentliche Wachstumsrate: +${(weeklyRate * 100 * 10).round() / 10}%/Woche
+
+[EMPFOHLENES PROGRAMM]
+・$bodyPart Training: ${recommendedFreq['frequency']}x/Woche
+・$bodyPart Volumen: ${recommendedVolume['optimal']} Sätze/Woche
+・Effektgröße: ES=${recommendedFreq['effectSize']}
+
+[WICHTIG]
+"${recommendedFreq['frequency']}x/Woche" = Training der gleichen Muskelgruppe ($bodyPart) ${recommendedFreq['frequency']} Mal pro Woche
+Basierend auf der Meta-Analyse von Grgic et al. 2018
+
+Bitte antworten Sie im folgenden Format (innerhalb von 300 Wörtern):
+
+## Wissenschaftliche Grundlage für Wachstumsvorhersage
+(Erklären Sie die Wachstumsrate nach Niveau und ihre wissenschaftliche Basis)
+
+## Empfohlener Aktionsplan
+(Schlagen Sie spezifische Trainingshäufigkeit, Volumen und Lastprogression vor)
+
+## Schlüssel zum Erfolg
+(Listen Sie die 3 wichtigsten Punkte auf)
 ''';
 
       case 'ko':
@@ -465,6 +544,45 @@ Grgic et al. 2018의 메타 분석 기반
 
 ## 성공의 열쇠
 (가장 중요한 3가지 포인트)
+''';
+
+      case 'en':
+        return '''
+$systemPrompt
+
+[USER INFORMATION]
+・Target Muscle: $bodyPart
+・Current 1RM: ${currentWeight}kg
+・Training Level: $level
+・Current Frequency: $bodyPart training ${frequency}x/week
+・Gender: $gender
+・Age: $age years
+
+[PREDICTION RESULTS]
+・Prediction Period: $monthsAhead months
+・Predicted 1RM: ${predictedWeight.round()}kg
+・Growth Rate: +${(monthlyRate * 100).round()}%/month
+・Weekly Growth Rate: +${(weeklyRate * 100 * 10).round() / 10}%/week
+
+[RECOMMENDED PROGRAM]
+・$bodyPart Training: ${recommendedFreq['frequency']}x/week
+・$bodyPart Volume: ${recommendedVolume['optimal']} sets/week
+・Effect Size: ES=${recommendedFreq['effectSize']}
+
+[IMPORTANT]
+"${recommendedFreq['frequency']}x/week" = Training the same muscle group ($bodyPart) ${recommendedFreq['frequency']} times per week
+Based on meta-analysis by Grgic et al. 2018
+
+Please respond in the following format (within 300 words):
+
+## Scientific Basis for Growth Prediction
+(Explain growth rate by level and its scientific basis)
+
+## Recommended Action Plan
+(Suggest specific training frequency, volume, and load progression)
+
+## Keys to Success
+(List 3 most important points)
 ''';
 
       case 'ja':

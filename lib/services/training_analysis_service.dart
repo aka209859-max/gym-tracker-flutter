@@ -322,16 +322,21 @@ class TrainingAnalysisService {
     
     print('⏳ トレーニング分析: API呼び出し中...');
     
-    // 🆕 Build #24.1 Hotfix9.1: Multilingual prompt construction
-    final prompt = locale == 'ja' 
-        ? _buildJapaneseAnalysisPrompt(
-            bodyPart, level, gender, age, currentSetsPerWeek, currentFrequency,
-            volumeAnalysis, frequencyAnalysis, growthTrend, plateauDetected,
-            recommendedVolume, recommendedFreq)
-        : _buildEnglishAnalysisPrompt(
-            bodyPart, level, gender, age, currentSetsPerWeek, currentFrequency,
-            volumeAnalysis, frequencyAnalysis, growthTrend, plateauDetected,
-            recommendedVolume, recommendedFreq, locale);
+    // 🆕 Build #24.1 Hotfix9.4: Multilingual prompt construction for all languages
+    final prompt = _buildMultilingualAnalysisPrompt(
+        locale: locale,
+        bodyPart: bodyPart,
+        level: level,
+        gender: gender,
+        age: age,
+        currentSetsPerWeek: currentSetsPerWeek,
+        currentFrequency: currentFrequency,
+        volumeAnalysis: volumeAnalysis,
+        frequencyAnalysis: frequencyAnalysis,
+        growthTrend: growthTrend,
+        plateauDetected: plateauDetected,
+        recommendedVolume: recommendedVolume,
+        recommendedFreq: recommendedFreq);
 
     try {
       final response = await http.post(
@@ -454,23 +459,225 @@ class TrainingAnalysisService {
     }).toList();
   }
   
-  /// 🆕 Build #24.1 Hotfix9: Japanese analysis prompt construction
-  static String _buildJapaneseAnalysisPrompt(
-    String bodyPart,
-    String level,
-    String gender,
-    int age,
-    int currentSetsPerWeek,
-    int currentFrequency,
-    Map<String, dynamic> volumeAnalysis,
-    Map<String, dynamic> frequencyAnalysis,
-    Map<String, dynamic> growthTrend,
-    bool plateauDetected,
-    Map<String, int> recommendedVolume,
-    Map<String, dynamic> recommendedFreq,
-  ) {
-    return '''
-${ScientificDatabase.getSystemPrompt()}
+  /// 🆕 Build #24.1 Hotfix9.4: Multilingual analysis prompt construction
+  static String _buildMultilingualAnalysisPrompt({
+    required String locale,
+    required String bodyPart,
+    required String level,
+    required String gender,
+    required int age,
+    required int currentSetsPerWeek,
+    required int currentFrequency,
+    required Map<String, dynamic> volumeAnalysis,
+    required Map<String, dynamic> frequencyAnalysis,
+    required Map<String, dynamic> growthTrend,
+    required bool plateauDetected,
+    required Map<String, int> recommendedVolume,
+    required Map<String, dynamic> recommendedFreq,
+  }) {
+    final systemPrompt = ScientificDatabase.getSystemPrompt();
+    
+    switch (locale) {
+      case 'ko':
+        return '''
+$systemPrompt
+
+[분석 대상]
+・부위：$bodyPart
+・레벨：$level
+・성별：$gender
+・나이：${age}세
+
+[현재 상황]
+・$bodyPart 트레이닝：주 ${currentSetsPerWeek}세트 실행 중
+・$bodyPart 트레이닝 빈도：주 ${currentFrequency}회
+・볼륨 평가：${volumeAnalysis['status']}
+・빈도 평가：${frequencyAnalysis['status']}
+・성장 트렌드：${growthTrend['trend']}
+・플래토 감지：${plateauDetected ? '있음' : '없음'}
+
+[추천 프로그램]
+・$bodyPart 볼륨：주 ${recommendedVolume['optimal']}세트 (${recommendedVolume['min']}-${recommendedVolume['max']}세트)
+・$bodyPart 트레이닝 빈도：주 ${recommendedFreq['frequency']}회
+・효과 크기：ES=${recommendedFreq['effectSize']}
+
+[중요]
+"주 ${recommendedFreq['frequency']}회" = 같은 부위($bodyPart)를 주에 ${recommendedFreq['frequency']}회 트레이닝하는 것
+예: 월요일·수요일·금요일에 $bodyPart 트레이닝 실시 (주 3회)
+
+다음 형식으로 간결하게 답변해주세요 (300자 이내):
+
+## 트레이닝 효과 평가
+(현재 프로그램의 과학적 평가)
+
+## 최우선 개선 포인트
+(가장 효과적인 개선책 1가지)
+
+## 구체적 액션 플랜
+(이번 주부터 실행할 수 있는 3가지 액션)
+''';
+
+      case 'es':
+        return '''
+$systemPrompt
+
+[OBJETIVO DE ANÁLISIS]
+・Parte del cuerpo：$bodyPart
+・Nivel：$level
+・Género：$gender
+・Edad：$age años
+
+[SITUACIÓN ACTUAL]
+・Entrenamiento de $bodyPart：${currentSetsPerWeek} series/semana actualmente
+・Frecuencia de entrenamiento de $bodyPart：${currentFrequency} veces/semana
+・Evaluación de volumen：${volumeAnalysis['status']}
+・Evaluación de frecuencia：${frequencyAnalysis['status']}
+・Tendencia de crecimiento：${growthTrend['trend']}
+・Detección de meseta：${plateauDetected ? 'Detectada' : 'No detectada'}
+
+[PROGRAMA RECOMENDADO]
+・Volumen de $bodyPart：${recommendedVolume['optimal']} series/semana (${recommendedVolume['min']}-${recommendedVolume['max']} series)
+・Frecuencia de entrenamiento de $bodyPart：${recommendedFreq['frequency']} veces/semana
+・Tamaño del efecto：ES=${recommendedFreq['effectSize']}
+
+[IMPORTANTE]
+"${recommendedFreq['frequency']} veces/semana" = Entrenar la misma parte del cuerpo ($bodyPart) ${recommendedFreq['frequency']} veces por semana
+Ejemplo: Entrenar $bodyPart los lunes, miércoles y viernes (3 veces/semana)
+
+Por favor responda concisamente en el siguiente formato (dentro de 300 palabras):
+
+## Evaluación del Efecto del Entrenamiento
+(Evaluación científica del programa actual)
+
+## Punto de Mejora Prioritario
+(La estrategia de mejora más efectiva - un elemento)
+
+## Plan de Acción Específico
+(Tres acciones para implementar a partir de esta semana)
+''';
+
+      case 'zh':
+      case 'zh_TW':
+        return '''
+$systemPrompt
+
+[分析对象]
+・部位：$bodyPart
+・水平：$level
+・性别：$gender
+・年龄：${age}岁
+
+[当前情况]
+・$bodyPart 训练：目前每周${currentSetsPerWeek}组
+・$bodyPart 训练频率：每周${currentFrequency}次
+・训练量评估：${volumeAnalysis['status']}
+・频率评估：${frequencyAnalysis['status']}
+・增长趋势：${growthTrend['trend']}
+・平台期检测：${plateauDetected ? '检测到' : '未检测到'}
+
+[推荐计划]
+・$bodyPart 训练量：每周${recommendedVolume['optimal']}组（${recommendedVolume['min']}-${recommendedVolume['max']}组）
+・$bodyPart 训练频率：每周${recommendedFreq['frequency']}次
+・效应量：ES=${recommendedFreq['effectSize']}
+
+[重要]
+"每周${recommendedFreq['frequency']}次" = 每周训练同一部位（$bodyPart）${recommendedFreq['frequency']}次
+例：周一·周三·周五进行$bodyPart训练（每周3次）
+
+请按以下格式简要回答（300字以内）：
+
+## 训练效果评估
+（当前计划的科学评价）
+
+## 最优先改进要点
+（最有效的改进策略 - 一项）
+
+## 具体行动计划
+（从本周开始可以执行的3个行动）
+''';
+
+      case 'de':
+        return '''
+$systemPrompt
+
+[ANALYSEZIEL]
+・Körperteil：$bodyPart
+・Niveau：$level
+・Geschlecht：$gender
+・Alter：$age Jahre
+
+[AKTUELLE SITUATION]
+・$bodyPart Training：Derzeit ${currentSetsPerWeek} Sätze/Woche
+・$bodyPart Trainingshäufigkeit：${currentFrequency} Mal/Woche
+・Volumenbewertung：${volumeAnalysis['status']}
+・Häufigkeitsbewertung：${frequencyAnalysis['status']}
+・Wachstumstrend：${growthTrend['trend']}
+・Plateau-Erkennung：${plateauDetected ? 'Erkannt' : 'Nicht erkannt'}
+
+[EMPFOHLENES PROGRAMM]
+・$bodyPart Volumen：${recommendedVolume['optimal']} Sätze/Woche (${recommendedVolume['min']}-${recommendedVolume['max']} Sätze)
+・$bodyPart Trainingshäufigkeit：${recommendedFreq['frequency']} Mal/Woche
+・Effektgröße：ES=${recommendedFreq['effectSize']}
+
+[WICHTIG]
+"${recommendedFreq['frequency']} Mal/Woche" = Training des gleichen Körperteils ($bodyPart) ${recommendedFreq['frequency']} Mal pro Woche
+Beispiel: Training von $bodyPart montags, mittwochs und freitags (3 Mal/Woche)
+
+Bitte antworten Sie prägnant im folgenden Format (innerhalb von 300 Wörtern):
+
+## Bewertung des Trainingseffekts
+(Wissenschaftliche Bewertung des aktuellen Programms)
+
+## Prioritäre Verbesserung
+(Die effektivste Verbesserungsstrategie - ein Punkt)
+
+## Spezifischer Aktionsplan
+(Drei Aktionen, die ab dieser Woche umgesetzt werden können)
+''';
+
+      case 'en':
+        return '''
+$systemPrompt
+
+[ANALYSIS TARGET]
+・Body Part: $bodyPart
+・Level: $level
+・Gender: $gender
+・Age: $age years old
+
+[CURRENT SITUATION]
+・$bodyPart training: ${currentSetsPerWeek} sets/week currently implemented
+・$bodyPart training frequency: ${currentFrequency} times/week
+・Volume assessment: ${volumeAnalysis['status']}
+・Frequency assessment: ${frequencyAnalysis['status']}
+・Growth trend: ${growthTrend['trend']}
+・Plateau detection: ${plateauDetected ? 'Detected' : 'Not detected'}
+
+[RECOMMENDED PROGRAM]
+・$bodyPart volume: ${recommendedVolume['optimal']} sets/week (${recommendedVolume['min']}-${recommendedVolume['max']} sets)
+・$bodyPart training frequency: ${recommendedFreq['frequency']} times/week
+・Effect size: ES=${recommendedFreq['effectSize']}
+
+[IMPORTANT]
+"${recommendedFreq['frequency']} times/week" = Train the same body part ($bodyPart) ${recommendedFreq['frequency']} times per week
+Example: Train $bodyPart on Monday, Wednesday, Friday (3 times/week)
+
+Please respond concisely in the following format (within 300 words):
+
+## Training Effect Assessment
+(Scientific evaluation of current program)
+
+## Top Priority Improvement
+(Most effective improvement strategy - one item)
+
+## Specific Action Plan
+(Three actions to implement starting this week)
+''';
+
+      case 'ja':
+      default:
+        return '''
+$systemPrompt
 
 【分析対象】
 ・部位：$bodyPart
@@ -506,83 +713,6 @@ ${ScientificDatabase.getSystemPrompt()}
 ## 具体的アクションプラン
 （今週から実行できる3つのアクション）
 ''';
-  }
-  
-  /// 🆕 Build #24.1 Hotfix9: English analysis prompt construction
-
-  static String _buildEnglishAnalysisPrompt(
-    String bodyPart,
-    String level,
-    String gender,
-    int age,
-    int currentSetsPerWeek,
-    int currentFrequency,
-    Map<String, dynamic> volumeAnalysis,
-    Map<String, dynamic> frequencyAnalysis,
-    Map<String, dynamic> growthTrend,
-    bool plateauDetected,
-    Map<String, int> recommendedVolume,
-    Map<String, dynamic> recommendedFreq,
-    String locale,
-  ) {
-    // Determine language instruction
-    String languageInstruction;
-    switch (locale) {
-      case 'es':
-        languageInstruction = 'Por favor responda en español';
-        break;
-      case 'ko':
-        languageInstruction = '한국어로 답변해 주세요';
-        break;
-      case 'zh':
-      case 'zh_TW':
-        languageInstruction = '请用中文回答';
-        break;
-      case 'de':
-        languageInstruction = 'Bitte antworten Sie auf Deutsch';
-        break;
-      default:
-        languageInstruction = 'Please respond in English';
     }
-    
-    return '''
-${ScientificDatabase.getSystemPrompt()}
-
-【Analysis Target】
-・Body Part: $bodyPart
-・Level: $level
-・Gender: $gender
-・Age: $age years old
-
-【Current Situation】
-・$bodyPart training: ${currentSetsPerWeek} sets/week currently implemented
-・$bodyPart training frequency: ${currentFrequency} times/week
-・Volume assessment: ${volumeAnalysis['status']}
-・Frequency assessment: ${frequencyAnalysis['status']}
-・Growth trend: ${growthTrend['trend']}
-・Plateau detection: ${plateauDetected ? 'Detected' : 'Not detected'}
-
-【Recommended Program】
-・$bodyPart volume: ${recommendedVolume['optimal']} sets/week (${recommendedVolume['min']}-${recommendedVolume['max']} sets)
-・$bodyPart training frequency: ${recommendedFreq['frequency']} times/week
-・Effect size: ES=${recommendedFreq['effectSize']}
-
-【Important】
-"${recommendedFreq['frequency']} times/week" = Train the same body part ($bodyPart) ${recommendedFreq['frequency']} times per week
-Example: Train $bodyPart on Monday, Wednesday, Friday (3 times/week)
-
-Please respond concisely in the following format (within 300 words):
-
-## Training Effect Assessment
-(Scientific evaluation of current program)
-
-## Top Priority Improvement
-(Most effective improvement strategy - one item)
-
-## Specific Action Plan
-(Three actions to implement starting this week)
-
-$languageInstruction
-''';
   }
 }
