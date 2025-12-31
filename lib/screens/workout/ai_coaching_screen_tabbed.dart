@@ -2134,14 +2134,24 @@ $japaneseMenu
   /// 🔧 v1.0.217: プロンプト構築（レベル別 + トレーニング履歴考慮 + v1.0.219: レベル別種目DB）
   /// 🆕 v1.0.301: 多言語対応追加
   /// 🔄 Build #24.1 Hotfix10: 日本語で生成→翻訳方式（種目DBと互換性保持）
-  /// 🆕 Build #24.1 Hotfix9.3: ロケールに応じてプロンプトを切り替え
+  /// 🆕 Build #24.1 Hotfix9.4: 言語別に完全に専用のプロンプトを生成
   String _buildPrompt(List<String> bodyParts) {
     final locale = AppLocalizations.of(context)!.localeName;
     
-    if (locale == 'ja') {
-      return _buildJapanesePrompt(bodyParts);
-    } else {
-      return _buildEnglishPrompt(bodyParts);
+    switch (locale) {
+      case 'ja':
+        return _buildJapanesePrompt(bodyParts);
+      case 'ko':
+        return _buildKoreanPrompt(bodyParts);
+      case 'es':
+        return _buildSpanishPrompt(bodyParts);
+      case 'zh':
+      case 'zh_TW':
+        return _buildChinesePrompt(bodyParts);
+      case 'de':
+        return _buildGermanPrompt(bodyParts);
+      default:
+        return _buildEnglishPrompt(bodyParts);
     }
   }
   
@@ -2596,6 +2606,852 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- Sugges
 
 **Important: Always specify concrete weight and reps for each exercise. For cardio exercises, use weight 0kg and duration in XX minutes format. Use only cardio exercises when cardio is selected.**
 ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**STRICTLY: Use ONLY exercises from cardio database. Never include bench press, squats, deadlifts, shoulder press, or other weight training exercises.**" : ""}
+''';
+    }
+  }
+  
+  /// 🆕 Build #24.1 Hotfix9.4: 韓国語専用プロンプト（完全にローカライズ）
+  String _buildKoreanPrompt(List<String> bodyParts) {
+    // トレーニング履歴情報を構築
+    String historyInfo = '';
+    if (_exerciseHistory.isNotEmpty) {
+      historyInfo = '\n【최근 1개월 트레이닝 기록】\n';
+      for (final entry in _exerciseHistory.entries) {
+        final exerciseName = entry.key;
+        final maxWeight = entry.value['maxWeight'];
+        final max1RM = entry.value['max1RM'];
+        final totalSets = entry.value['totalSets'];
+        historyInfo += '- $exerciseName: 최대 중량=${maxWeight}kg, 추정 1RM=${max1RM?.toStringAsFixed(1)}kg, 총 세트 수=$totalSets\n';
+      }
+      historyInfo += '\n위 기록을 참고하여 적절한 중량과 횟수를 제안해 주세요.\n';
+    }
+    
+    final targetParts = bodyParts;
+    final currentLevel = _selectedLevel;
+    
+    // 初心者レベル
+    if (currentLevel == AppLocalizations.of(context)!.levelBeginner) {
+      if (targetParts.isEmpty) {
+        return '''
+당신은 전문 퍼스널 트레이너입니다. 초보자를 위한 전신 트레이닝 메뉴를 제안해 주세요.
+
+$_beginnerExerciseDatabase
+$historyInfo
+【대상】
+- 헬스장 초보자 (1~3개월 경력)
+- 기초 체력 향상을 목표로 하는 분
+- 트레이닝 자세를 배우고 싶은 분
+
+【제안 형식】
+**반드시 다음 형식으로 출력하세요:**
+
+\`\`\`
+## 부위별 트레이닝 메뉴
+
+**종목 1: 종목명**
+* 무게: XXkg
+* 횟수: XX회
+* 세트 수: X세트
+* 휴식 시간: XX초
+* 자세 포인트: 설명
+
+**종목 2: 종목명**
+* 무게: XXkg
+* 횟수: XX회
+* 세트 수: X세트
+\`\`\`
+
+각 종목에 대해 다음 정보를 포함해 주세요:
+- 종목명 (종목 데이터베이스에서 선택)
+- **구체적인 중량 (kg)** ← 기록이 있으면 참고, 없으면 초보자 추천 중량
+  ※유산소 운동의 경우 "무게: 0kg"으로 하고, 횟수 대신 "지속: XX분"을 기재
+- **횟수 (10-15회)** ← 유산소의 경우 "지속: 20-30분"
+- 세트 수 (2-3세트) ← 유산소의 경우 "1세트"
+- 휴식 시간 (90-120초)
+- 초보자를 위한 자세 포인트
+
+【조건】
+- 모든 부위를 균형 있게 트레이닝
+- 기본 종목 중심
+- 30-45분 내 완료 가능
+
+**중요: 각 종목에 구체적인 중량과 횟수를 반드시 기재하세요. 유산소 운동의 경우 중량 0kg, 시간을 XX분 형식으로 기재하세요.**
+''';
+      } else {
+        return '''
+당신은 전문 퍼스널 트레이너입니다. 초보자를 위한 "${targetParts.join(', ')}" 트레이닝 메뉴를 제안해 주세요.
+
+$_beginnerExerciseDatabase
+$historyInfo
+【대상】
+- 헬스장 초보자 (1~3개월 경력)
+- ${targetParts.join(', ')}를 집중적으로 단련하고 싶은 분
+
+【제안 형식】
+**반드시 다음 형식으로 출력하세요:**
+
+\`\`\`
+## 부위별 트레이닝 메뉴
+
+**종목 1: 종목명**
+* 무게: XXkg
+* 횟수: XX회
+* 세트 수: X세트
+* 휴식 시간: XX초
+* 자세 포인트: 설명
+
+**종목 2: 종목명**
+* 무게: XXkg
+* 횟수: XX회
+* 세트 수: X세트
+\`\`\`
+
+각 종목에 대해 다음 정보를 포함해 주세요:
+- 종목명 (종목 데이터베이스에서 선택)
+- **구체적인 중량 (kg)** ← 기록이 있으면 참고, 없으면 초보자 추천 중량
+  ※유산소 운동의 경우 "무게: 0kg"으로 하고, 횟수 대신 "지속: XX분"을 기재
+- **횟수 (10-15회)** ← 유산소의 경우 "지속: 20-30분"
+- 세트 수 (2-3세트) ← 유산소의 경우 "1세트"
+- 휴식 시간 (90-120초)
+- 자세 포인트
+
+【조건】
+- ${targetParts.join(', ')}를 집중적으로 트레이닝
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- **유산소 운동만** 제안 (근력 운동은 포함하지 마세요)" : "- 기본 종목 중심"}
+- 30-45분 내 완료 가능
+
+**중요: 각 종목에 구체적인 중량과 횟수를 반드시 기재하세요. 유산소 운동의 경우 중량 0kg, 시간을 XX분 형식으로 기재하세요.**
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**절대 엄수: 유산소 운동 데이터베이스의 종목만 사용하세요. 벤치 프레스, 스쿼트 등의 근력 운동 종목은 절대 포함하지 마세요.**" : ""}
+''';
+      }
+    } else if (currentLevel == AppLocalizations.of(context)!.levelIntermediate) {
+      // 中級者向け
+      return '''
+당신은 전문 퍼스널 트레이너입니다. 중급자를 위한 "${targetParts.isEmpty ? "전신" : targetParts.join(', ')}" 트레이닝 메뉴를 제안해 주세요.
+
+$_advancedExerciseDatabase
+$historyInfo
+【대상】
+- 중급 트레이너 (6개월~2년 경력)
+- 근력과 근비대를 목표로 하는 분
+- 더 고급 기술을 습득하고 싶은 분
+
+【제안 형식】
+**반드시 다음 형식으로 출력하세요:**
+
+\`\`\`
+## 부위별 트레이닝 메뉴
+
+**종목 1: 종목명**
+* 무게: XXkg
+* 횟수: XX회
+* 세트 수: X세트
+* 휴식 시간: XX초
+* 팁: 설명
+
+**종목 2: 종목명**
+* 무게: XXkg
+* 횟수: XX회
+* 세트 수: X세트
+\`\`\`
+
+각 종목에 대해 다음 정보를 포함해 주세요:
+- 종목명 (종목 데이터베이스에서 선택)
+- **구체적인 중량 (kg)** ← 기록 1RM의 70-85%를 목안으로 제안
+  ※유산소 운동의 경우 "무게: 0kg"으로 하고, 횟수 대신 "지속: XX분"을 기재
+- **횟수 (8-12회)** ← 유산소의 경우 "지속: 30-45분" 또는 "인터벌 형식"
+- 세트 수 (3-4세트) ← 유산소의 경우 "1세트"
+- 휴식 시간 (60-90초)
+- 기술 팁 (드롭 세트, 슈퍼 세트 등)
+
+【조건】
+- ${targetParts.isEmpty ? "모든 부위를 균형 있게 트레이닝" : "${targetParts.join(', ')}를 집중적으로 트레이닝"}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- **유산소 운동만** 제안 (근력 운동은 포함하지 마세요)\n- 다양한 유산소: HIIT, 지구력 달리기, 인터벌 등" : "- 프리 웨이트 중심\n- 근비대 강조"}
+- 45-60분 내 완료 가능
+
+**중요: 각 종목에 구체적인 중량과 횟수를 반드시 기재하세요. 유산소 운동의 경우 중량 0kg, 시간을 XX분 형식으로 기재하세요.**
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**절대 엄수: 유산소 운동 데이터베이스의 종목만 사용하세요. 벤치 프레스, 스쿼트, 데드리프트 등의 근력 운동 종목은 절대 포함하지 마세요.**" : ""}
+''';
+    } else {
+      // 上級者向け
+      return '''
+당신은 전문 퍼스널 트레이너입니다. 고급자를 위한 "${targetParts.isEmpty ? "전신" : targetParts.join(', ')}" 트레이닝 메뉴를 제안해 주세요.
+
+$_advancedExerciseDatabase
+$historyInfo
+【대상】
+- 고급 트레이너 (2년 이상 경력)
+- 최대 근력과 근육 성장을 목표로 하는 분
+- 고강도 트레이닝에 익숙한 분
+
+【제안 형식】
+**반드시 다음 형식으로 출력하세요:**
+
+\`\`\`
+## 부위별 트레이닝 메뉴
+
+**종목 1: 종목명**
+* 무게: XXkg (기록 1RM 기준: 85-95%)
+* 횟수: XX회 (5-8회, 또는 유산소의 경우: HIIT XX분 또는 지구력 달리기 XX분)
+* 세트 수: X세트 (4-5세트, 유산소의 경우: 1세트)
+* 휴식 시간: XX초 (120-180초)
+* 고급 기술: 피라미드법, 5x5법 등
+
+**종목 2: 종목명**
+* 무게: XXkg
+* 횟수: XX회
+* 세트 수: X세트
+\`\`\`
+
+각 종목에 대해 다음 정보를 포함해 주세요:
+- 종목명 (데이터베이스에서 선택)
+- **구체적인 중량 (kg)** ← 기록 1RM의 85-95%를 목표로 제안
+  ※유산소 운동의 경우 "무게: 0kg"으로 하고, 횟수 대신 "지속: XX분"을 기재
+- **횟수 (5-8회)** ← 유산소의 경우 "HIIT 형식 XX분" 또는 "지구력 달리기 XX분"
+- 세트 수 (4-5세트) ← 유산소의 경우 "1세트"
+- 휴식 시간 (120-180초)
+- 고급 기술 (피라미드, 5x5 등)
+
+【조건】
+- ${targetParts.isEmpty ? "전신을 최대한 부하로 트레이닝" : "${targetParts.join(', ')}를 극한까지 트레이닝"}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- **유산소 운동만** 제안\n- 다양한 유산소: HIIT, 지구력, 인터벌 등" : "- 복합 운동 강조\n- 근력 최대화"}
+- 60-90분 내 완료 가능
+
+**중요: 각 종목에 구체적인 중량과 횟수를 반드시 기재하세요. 유산소 운동의 경우 중량 0kg, 시간을 XX분 형식으로 기재하세요. 유산소 선택 시 유산소 운동만 사용하세요.**
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**절대 엄수: 유산소 운동 데이터베이스의 종목만 사용하세요. 벤치 프레스, 스쿼트, 데드리프트, 숄더 프레스 등의 근력 운동 종목은 절대 포함하지 마세요.**" : ""}
+''';
+    }
+  }
+  
+  /// 🆕 Build #24.1 Hotfix9.4: スペイン語専用プロンプト（完全にローカライズ）
+  String _buildSpanishPrompt(List<String> bodyParts) {
+    // トレーニング履歴情報を構築
+    String historyInfo = '';
+    if (_exerciseHistory.isNotEmpty) {
+      historyInfo = '\n【Historial de entrenamiento (últimos 30 días)】\n';
+      for (final entry in _exerciseHistory.entries) {
+        final exerciseName = entry.key;
+        final maxWeight = entry.value['maxWeight'];
+        final max1RM = entry.value['max1RM'];
+        final totalSets = entry.value['totalSets'];
+        historyInfo += '- $exerciseName: Peso máximo=${maxWeight}kg, 1RM estimado=${max1RM?.toStringAsFixed(1)}kg, Total de series=$totalSets\n';
+      }
+      historyInfo += '\nPor favor, utiliza el historial anterior para sugerir pesos y repeticiones apropiados.\n';
+    }
+    
+    final targetParts = bodyParts;
+    final currentLevel = _selectedLevel;
+    
+    // 初心者レベル
+    if (currentLevel == AppLocalizations.of(context)!.levelBeginner) {
+      if (targetParts.isEmpty) {
+        return '''
+Eres un entrenador personal profesional. Por favor, sugiere un menú de entrenamiento de cuerpo completo para principiantes.
+
+$_beginnerExerciseDatabase
+$historyInfo
+【Público objetivo】
+- Principiantes del gimnasio (1-3 meses de experiencia)
+- Aquellos que buscan desarrollar condición física básica
+- Aquellos que quieren aprender la forma adecuada
+
+【Formato de salida】
+**Por favor, sigue estrictamente este formato:**
+
+\`\`\`
+## Menú de entrenamiento por parte del cuerpo
+
+**Ejercicio 1: Nombre del ejercicio**
+* Peso: XXkg
+* Repeticiones: XX
+* Series: X
+* Tiempo de descanso: XXseg
+* Consejos de forma: Explicación
+
+**Ejercicio 2: Nombre del ejercicio**
+* Peso: XXkg
+* Repeticiones: XX
+* Series: X
+\`\`\`
+
+Por favor, incluye la siguiente información para cada ejercicio:
+- Nombre del ejercicio (seleccionado de la base de datos de ejercicios)
+- **Peso específico (kg)** ← Usa el historial como referencia, o sugiere pesos amigables para principiantes
+  ※Para ejercicios cardiovasculares, usa "Peso: 0kg" y especifica "Duración: XX minutos" en lugar de repeticiones
+- **Repeticiones (10-15)** ← Para cardio, usa "Duración: 20-30 minutos"
+- Series (2-3 series) ← Para cardio, usa "1 serie"
+- Tiempo de descanso (90-120 segundos)
+- Consejos de forma para principiantes
+
+【Condiciones】
+- Entrenamiento equilibrado en todas las partes del cuerpo
+- Enfoque en ejercicios básicos
+- Completable en 30-45 minutos
+
+**Importante: Siempre especifica el peso y las repeticiones concretas para cada ejercicio. Para ejercicios cardiovasculares, usa peso 0kg y especifica la duración en formato XX minutos.**
+''';
+      } else {
+        return '''
+Eres un entrenador personal profesional. Por favor, sugiere un menú de entrenamiento de "${targetParts.join(', ')}" para principiantes.
+
+$_beginnerExerciseDatabase
+$historyInfo
+【Público objetivo】
+- Principiantes del gimnasio (1-3 meses de experiencia)
+- Aquellos que quieren enfocarse en entrenar ${targetParts.join(', ')}
+
+【Formato de salida】
+**Por favor, sigue estrictamente este formato:**
+
+\`\`\`
+## Menú de entrenamiento por parte del cuerpo
+
+**Ejercicio 1: Nombre del ejercicio**
+* Peso: XXkg
+* Repeticiones: XX
+* Series: X
+* Tiempo de descanso: XXseg
+* Consejos de forma: Explicación
+
+**Ejercicio 2: Nombre del ejercicio**
+* Peso: XXkg
+* Repeticiones: XX
+* Series: X
+\`\`\`
+
+Por favor, incluye la siguiente información para cada ejercicio:
+- Nombre del ejercicio (seleccionado de la base de datos de ejercicios)
+- **Peso específico (kg)** ← Usa el historial como referencia, o sugiere pesos amigables para principiantes
+  ※Para ejercicios cardiovasculares, usa "Peso: 0kg" y especifica "Duración: XX minutos" en lugar de repeticiones
+- **Repeticiones (10-15)** ← Para cardio, usa "Duración: 20-30 minutos"
+- Series (2-3 series) ← Para cardio, usa "1 serie"
+- Tiempo de descanso (90-120 segundos)
+- Consejos de forma
+
+【Condiciones】
+- Enfoque en entrenar ${targetParts.join(', ')}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- Sugiere **solo ejercicios cardiovasculares** (no incluyas entrenamiento con pesas)" : "- Enfoque en ejercicios básicos"}
+- Completable en 30-45 minutos
+
+**Importante: Siempre especifica el peso y las repeticiones concretas para cada ejercicio. Para ejercicios cardiovasculares, usa peso 0kg y especifica la duración en formato XX minutos.**
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**ESTRICTAMENTE: Usa SOLO ejercicios de la base de datos cardiovascular. Nunca incluyas press de banca, sentadillas u otros ejercicios de entrenamiento con pesas.**" : ""}
+''';
+      }
+    } else if (currentLevel == AppLocalizations.of(context)!.levelIntermediate) {
+      return '''
+Eres un entrenador personal profesional. Por favor, sugiere un menú de entrenamiento de "${targetParts.isEmpty ? "cuerpo completo" : targetParts.join(', ')}" para intermedios.
+
+$_advancedExerciseDatabase
+$historyInfo
+【Público objetivo】
+- Practicantes intermedios (6 meses a 2 años de experiencia)
+- Aquellos que buscan fuerza e hipertrofia muscular
+- Aquellos que quieren dominar técnicas más avanzadas
+
+【Formato de salida】
+**Por favor, sigue estrictamente este formato:**
+
+\`\`\`
+## Menú de entrenamiento por parte del cuerpo
+
+**Ejercicio 1: Nombre del ejercicio**
+* Peso: XXkg
+* Repeticiones: XX
+* Series: X
+* Tiempo de descanso: XXseg
+* Consejos: Explicación
+
+**Ejercicio 2: Nombre del ejercicio**
+* Peso: XXkg
+* Repeticiones: XX
+* Series: X
+\`\`\`
+
+Por favor, incluye la siguiente información para cada ejercicio:
+- Nombre del ejercicio (seleccionado de la base de datos de ejercicios)
+- **Peso específico (kg)** ← Sugiere 70-85% del 1RM histórico
+  ※Para ejercicios cardiovasculares, usa "Peso: 0kg" y especifica "Duración: XX minutos" en lugar de repeticiones
+- **Repeticiones (8-12)** ← Para cardio, usa "Duración: 30-45 minutos" o "Formato de intervalos"
+- Series (3-4 series) ← Para cardio, usa "1 serie"
+- Tiempo de descanso (60-90 segundos)
+- Consejos de técnica (series descendentes, superseries, etc.)
+
+【Condiciones】
+- ${targetParts.isEmpty ? "Entrenamiento equilibrado en todas las partes del cuerpo" : "Enfoque intensivo en ${targetParts.join(', ')}"}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- Sugiere **solo ejercicios cardiovasculares** (no incluyas entrenamiento con pesas)\n- Variedad de cardio: HIIT, carrera de resistencia, intervalos, etc." : "- Enfoque en pesas libres\n- Énfasis en hipertrofia muscular"}
+- Completable en 45-60 minutos
+
+**Importante: Siempre especifica el peso y las repeticiones concretas para cada ejercicio. Para ejercicios cardiovasculares, usa peso 0kg y especifica la duración en formato XX minutos.**
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**ESTRICTAMENTE: Usa SOLO ejercicios de la base de datos cardiovascular. Nunca incluyas press de banca, sentadillas, peso muerto u otros ejercicios de entrenamiento con pesas.**" : ""}
+''';
+    } else {
+      return '''
+Eres un entrenador personal profesional. Por favor, sugiere un menú de entrenamiento de "${targetParts.isEmpty ? "cuerpo completo" : targetParts.join(', ')}" para avanzados.
+
+$_advancedExerciseDatabase
+$historyInfo
+【Público objetivo】
+- Practicantes avanzados (más de 2 años de experiencia)
+- Aquellos que buscan fuerza máxima y crecimiento muscular
+- Aquellos experimentados con entrenamiento de alta intensidad
+
+【Formato de salida】
+**Por favor, sigue estrictamente este formato:**
+
+\`\`\`
+## Menú de entrenamiento por parte del cuerpo
+
+**Ejercicio 1: Nombre del ejercicio**
+* Peso: XXkg (basado en 1RM histórico: 85-95%)
+* Repeticiones: XX (5-8 repeticiones, o para cardio: HIIT XX minutos o Carrera de resistencia XX minutos)
+* Series: X (4-5 series, para cardio: 1 serie)
+* Tiempo de descanso: XXseg (120-180 segundos)
+* Técnicas avanzadas: Método piramidal, método 5x5, etc.
+
+**Ejercicio 2: Nombre del ejercicio**
+* Peso: XXkg
+* Repeticiones: XX
+* Series: X
+\`\`\`
+
+Por favor, incluye la siguiente información para cada ejercicio:
+- Nombre del ejercicio (seleccionado de la base de datos)
+- **Peso específico (kg)** ← Sugiere 85-95% del 1RM histórico
+  ※Para ejercicios cardiovasculares, usa "Peso: 0kg" y especifica "Duración: XX minutos" en lugar de repeticiones
+- **Repeticiones (5-8)** ← Para cardio, usa "Formato HIIT XX minutos" o "Carrera de resistencia XX minutos"
+- Series (4-5 series) ← Para cardio, usa "1 serie"
+- Tiempo de descanso (120-180 segundos)
+- Técnicas avanzadas (piramidal, 5x5, etc.)
+
+【Condiciones】
+- ${targetParts.isEmpty ? "Entrenamiento de cuerpo completo con carga máxima" : "Entrena ${targetParts.join(', ')} al límite absoluto"}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- Sugiere **solo ejercicios cardiovasculares**\n- Mezcla de cardio: HIIT, resistencia, intervalos, etc." : "- Énfasis en movimientos compuestos\n- Maximizar la fuerza"}
+- Completable en 60-90 minutos
+
+**Importante: Siempre especifica el peso y las repeticiones concretas para cada ejercicio. Para ejercicios cardiovasculares, usa peso 0kg y duración en formato XX minutos. Usa solo ejercicios cardiovasculares cuando se seleccione cardio.**
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**ESTRICTAMENTE: Usa SOLO ejercicios de la base de datos cardiovascular. Nunca incluyas press de banca, sentadillas, peso muerto, press de hombros u otros ejercicios de entrenamiento con pesas.**" : ""}
+''';
+    }
+  }
+  
+  /// 🆕 Build #24.1 Hotfix9.4: 中国語専用プロンプト（完全にローカライズ）
+  String _buildChinesePrompt(List<String> bodyParts) {
+    // トレーニング履歴情報を構築
+    String historyInfo = '';
+    if (_exerciseHistory.isNotEmpty) {
+      historyInfo = '\n【最近1个月的训练记录】\n';
+      for (final entry in _exerciseHistory.entries) {
+        final exerciseName = entry.key;
+        final maxWeight = entry.value['maxWeight'];
+        final max1RM = entry.value['max1RM'];
+        final totalSets = entry.value['totalSets'];
+        historyInfo += '- $exerciseName: 最大重量=${maxWeight}kg, 估计1RM=${max1RM?.toStringAsFixed(1)}kg, 总组数=$totalSets\n';
+      }
+      historyInfo += '\n请参考上述记录，建议适当的重量和次数。\n';
+    }
+    
+    final targetParts = bodyParts;
+    final currentLevel = _selectedLevel;
+    
+    // 初心者レベル
+    if (currentLevel == AppLocalizations.of(context)!.levelBeginner) {
+      if (targetParts.isEmpty) {
+        return '''
+你是一名专业的私人教练。请为初学者建议全身训练菜单。
+
+$_beginnerExerciseDatabase
+$historyInfo
+【目标对象】
+- 健身房初学者（1-3个月经验）
+- 希望打造基础体能的人
+- 想要学习训练姿势的人
+
+【建议格式】
+**请严格按照以下格式输出：**
+
+\`\`\`
+## 部位训练菜单
+
+**项目 1: 项目名称**
+* 重量: XXkg
+* 次数: XX次
+* 组数: X组
+* 休息时间: XX秒
+* 姿势要点: 说明
+
+**项目 2: 项目名称**
+* 重量: XXkg
+* 次数: XX次
+* 组数: X组
+\`\`\`
+
+请为每个项目包含以下信息：
+- 项目名称（从项目数据库中选择）
+- **具体重量（kg）** ← 如有记录请参考，否则建议初学者适用重量
+  ※有氧运动的情况下使用"重量: 0kg"，并用"持续: XX分钟"代替次数
+- **次数（10-15次）** ← 有氧运动的情况下使用"持续: 20-30分钟"
+- 组数（2-3组）← 有氧运动的情况下使用"1组"
+- 休息时间（90-120秒）
+- 初学者姿势要点
+
+【条件】
+- 所有部位均衡训练
+- 以基础项目为中心
+- 30-45分钟内完成
+
+**重要：每个项目必须记载具体的重量和次数。有氧运动的情况下重量0kg，时间用XX分钟格式记载。**
+''';
+      } else {
+        return '''
+你是一名专业的私人教练。请为初学者建议"${targetParts.join('、')}"训练菜单。
+
+$_beginnerExerciseDatabase
+$historyInfo
+【目标对象】
+- 健身房初学者（1-3个月经验）
+- 希望重点锻炼${targetParts.join('、')}的人
+
+【建议格式】
+**请严格按照以下格式输出：**
+
+\`\`\`
+## 部位训练菜单
+
+**项目 1: 项目名称**
+* 重量: XXkg
+* 次数: XX次
+* 组数: X组
+* 休息时间: XX秒
+* 姿势要点: 说明
+
+**项目 2: 项目名称**
+* 重量: XXkg
+* 次数: XX次
+* 组数: X组
+\`\`\`
+
+请为每个项目包含以下信息：
+- 项目名称（从项目数据库中选择）
+- **具体重量（kg）** ← 如有记录请参考，否则建议初学者适用重量
+  ※有氧运动的情况下使用"重量: 0kg"，并用"持续: XX分钟"代替次数
+- **次数（10-15次）** ← 有氧运动的情况下使用"持续: 20-30分钟"
+- 组数（2-3组）← 有氧运动的情况下使用"1组"
+- 休息时间（90-120秒）
+- 姿势要点
+
+【条件】
+- 重点训练${targetParts.join('、')}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- **仅建议有氧运动**（不包括力量训练）" : "- 以基础项目为中心"}
+- 30-45分钟内完成
+
+**重要：每个项目必须记载具体的重量和次数。有氧运动的情况下重量0kg，时间用XX分钟格式记载。**
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**绝对遵守：仅使用有氧运动数据库中的项目。绝对不要包括卧推、深蹲等力量训练项目。**" : ""}
+''';
+      }
+    } else if (currentLevel == AppLocalizations.of(context)!.levelIntermediate) {
+      return '''
+你是一名专业的私人教练。请为中级者建议"${targetParts.isEmpty ? "全身" : targetParts.join('、')}"训练菜单。
+
+$_advancedExerciseDatabase
+$historyInfo
+【目标对象】
+- 中级训练者（6个月到2年经验）
+- 以力量和肌肥大为目标的人
+- 想要掌握更高级技术的人
+
+【建议格式】
+**请严格按照以下格式输出：**
+
+\`\`\`
+## 部位训练菜单
+
+**项目 1: 项目名称**
+* 重量: XXkg
+* 次数: XX次
+* 组数: X组
+* 休息时间: XX秒
+* 提示: 说明
+
+**项目 2: 项目名称**
+* 重量: XXkg
+* 次数: XX次
+* 组数: X组
+\`\`\`
+
+请为每个项目包含以下信息：
+- 项目名称（从项目数据库中选择）
+- **具体重量（kg）** ← 建议记录1RM的70-85%
+  ※有氧运动的情况下使用"重量: 0kg"，并用"持续: XX分钟"代替次数
+- **次数（8-12次）** ← 有氧运动的情况下使用"持续: 30-45分钟"或"间歇格式"
+- 组数（3-4组）← 有氧运动的情况下使用"1组"
+- 休息时间（60-90秒）
+- 技术提示（递减组、超级组等）
+
+【条件】
+- ${targetParts.isEmpty ? "所有部位均衡训练" : "重点训练${targetParts.join('、')}"}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- **仅建议有氧运动**（不包括力量训练）\n- 多样化有氧：HIIT、耐力跑、间歇等" : "- 以自由重量为中心\n- 强调肌肥大"}
+- 45-60分钟内完成
+
+**重要：每个项目必须记载具体的重量和次数。有氧运动的情况下重量0kg，时间用XX分钟格式记载。**
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**绝对遵守：仅使用有氧运动数据库中的项目。绝对不要包括卧推、深蹲、硬拉等力量训练项目。**" : ""}
+''';
+    } else {
+      return '''
+你是一名专业的私人教练。请为高级者建议"${targetParts.isEmpty ? "全身" : targetParts.join('、')}"训练菜单。
+
+$_advancedExerciseDatabase
+$historyInfo
+【目标对象】
+- 高级训练者（2年以上经验）
+- 以最大力量和肌肉生长为目标的人
+- 熟悉高强度训练的人
+
+【建议格式】
+**请严格按照以下格式输出：**
+
+\`\`\`
+## 部位训练菜单
+
+**项目 1: 项目名称**
+* 重量: XXkg（基于记录1RM：85-95%）
+* 次数: XX次（5-8次，或有氧运动的情况下：HIIT XX分钟或耐力跑XX分钟）
+* 组数: X组（4-5组，有氧运动的情况下：1组）
+* 休息时间: XX秒（120-180秒）
+* 高级技术: 金字塔法、5x5法等
+
+**项目 2: 项目名称**
+* 重量: XXkg
+* 次数: XX次
+* 组数: X组
+\`\`\`
+
+请为每个项目包含以下信息：
+- 项目名称（从数据库中选择）
+- **具体重量（kg）** ← 建议记录1RM的85-95%
+  ※有氧运动的情况下使用"重量: 0kg"，并用"持续: XX分钟"代替次数
+- **次数（5-8次）** ← 有氧运动的情况下使用"HIIT格式XX分钟"或"耐力跑XX分钟"
+- 组数（4-5组）← 有氧运动的情况下使用"1组"
+- 休息时间（120-180秒）
+- 高级技术（金字塔、5x5等）
+
+【条件】
+- ${targetParts.isEmpty ? "全身以最大负荷训练" : "${targetParts.join('、')}训练到极限"}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- **仅建议有氧运动**\n- 多样化有氧：HIIT、耐力、间歇等" : "- 强调复合运动\n- 最大化力量"}
+- 60-90分钟内完成
+
+**重要：每个项目必须记载具体的重量和次数。有氧运动的情况下重量0kg，时间用XX分钟格式记载。选择有氧运动时仅使用有氧运动。**
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**绝对遵守：仅使用有氧运动数据库中的项目。绝对不要包括卧推、深蹲、硬拉、肩推等力量训练项目。**" : ""}
+''';
+    }
+  }
+  
+  /// 🆕 Build #24.1 Hotfix9.4: ドイツ語専用プロンプト（完全にローカライズ）
+  String _buildGermanPrompt(List<String> bodyParts) {
+    // トレーニング履歴情報を構築
+    String historyInfo = '';
+    if (_exerciseHistory.isNotEmpty) {
+      historyInfo = '\n【Trainingshistorie (letzte 30 Tage)】\n';
+      for (final entry in _exerciseHistory.entries) {
+        final exerciseName = entry.key;
+        final maxWeight = entry.value['maxWeight'];
+        final max1RM = entry.value['max1RM'];
+        final totalSets = entry.value['totalSets'];
+        historyInfo += '- $exerciseName: Maximalgewicht=${maxWeight}kg, Geschätztes 1RM=${max1RM?.toStringAsFixed(1)}kg, Gesamtsätze=$totalSets\n';
+      }
+      historyInfo += '\nBitte verwenden Sie die obige Historie, um geeignete Gewichte und Wiederholungen vorzuschlagen.\n';
+    }
+    
+    final targetParts = bodyParts;
+    final currentLevel = _selectedLevel;
+    
+    // 初心者レベル
+    if (currentLevel == AppLocalizations.of(context)!.levelBeginner) {
+      if (targetParts.isEmpty) {
+        return '''
+Sie sind ein professioneller Personal Trainer. Bitte schlagen Sie ein Ganzkörper-Trainingsmenü für Anfänger vor.
+
+$_beginnerExerciseDatabase
+$historyInfo
+【Zielgruppe】
+- Fitness-Anfänger (1-3 Monate Erfahrung)
+- Diejenigen, die eine grundlegende Fitness aufbauen möchten
+- Diejenigen, die die richtige Form lernen möchten
+
+【Ausgabeformat】
+**Bitte folgen Sie strikt diesem Format:**
+
+\`\`\`
+## Trainingsmenü nach Körperteilen
+
+**Übung 1: Übungsname**
+* Gewicht: XXkg
+* Wiederholungen: XX
+* Sätze: X
+* Pausenzeit: XXSek
+* Formtipps: Erklärung
+
+**Übung 2: Übungsname**
+* Gewicht: XXkg
+* Wiederholungen: XX
+* Sätze: X
+\`\`\`
+
+Bitte fügen Sie für jede Übung folgende Informationen hinzu:
+- Übungsname (aus der Übungsdatenbank ausgewählt)
+- **Spezifisches Gewicht (kg)** ← Verwenden Sie die Historie als Referenz oder schlagen Sie anfängerfreundliche Gewichte vor
+  ※Für Cardio-Übungen verwenden Sie "Gewicht: 0kg" und geben Sie "Dauer: XX Minuten" anstelle von Wiederholungen an
+- **Wiederholungen (10-15)** ← Für Cardio verwenden Sie "Dauer: 20-30 Minuten"
+- Sätze (2-3 Sätze) ← Für Cardio verwenden Sie "1 Satz"
+- Pausenzeit (90-120 Sekunden)
+- Formtipps für Anfänger
+
+【Bedingungen】
+- Ausgewogenes Training aller Körperteile
+- Fokus auf grundlegende Übungen
+- In 30-45 Minuten abschließbar
+
+**Wichtig: Geben Sie immer konkretes Gewicht und Wiederholungen für jede Übung an. Für Cardio-Übungen verwenden Sie Gewicht 0kg und geben Sie die Dauer im Format XX Minuten an.**
+''';
+      } else {
+        return '''
+Sie sind ein professioneller Personal Trainer. Bitte schlagen Sie ein "${targetParts.join(', ')}" Trainingsmenü für Anfänger vor.
+
+$_beginnerExerciseDatabase
+$historyInfo
+【Zielgruppe】
+- Fitness-Anfänger (1-3 Monate Erfahrung)
+- Diejenigen, die sich auf das Training von ${targetParts.join(', ')} konzentrieren möchten
+
+【Ausgabeformat】
+**Bitte folgen Sie strikt diesem Format:**
+
+\`\`\`
+## Trainingsmenü nach Körperteilen
+
+**Übung 1: Übungsname**
+* Gewicht: XXkg
+* Wiederholungen: XX
+* Sätze: X
+* Pausenzeit: XXSek
+* Formtipps: Erklärung
+
+**Übung 2: Übungsname**
+* Gewicht: XXkg
+* Wiederholungen: XX
+* Sätze: X
+\`\`\`
+
+Bitte fügen Sie für jede Übung folgende Informationen hinzu:
+- Übungsname (aus der Übungsdatenbank ausgewählt)
+- **Spezifisches Gewicht (kg)** ← Verwenden Sie die Historie als Referenz oder schlagen Sie anfängerfreundliche Gewichte vor
+  ※Für Cardio-Übungen verwenden Sie "Gewicht: 0kg" und geben Sie "Dauer: XX Minuten" anstelle von Wiederholungen an
+- **Wiederholungen (10-15)** ← Für Cardio verwenden Sie "Dauer: 20-30 Minuten"
+- Sätze (2-3 Sätze) ← Für Cardio verwenden Sie "1 Satz"
+- Pausenzeit (90-120 Sekunden)
+- Formtipps
+
+【Bedingungen】
+- Fokus auf Training von ${targetParts.join(', ')}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- Schlagen Sie **nur Cardio-Übungen** vor (kein Krafttraining einschließen)" : "- Fokus auf grundlegende Übungen"}
+- In 30-45 Minuten abschließbar
+
+**Wichtig: Geben Sie immer konkretes Gewicht und Wiederholungen für jede Übung an. Für Cardio-Übungen verwenden Sie Gewicht 0kg und geben Sie die Dauer im Format XX Minuten an.**
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**STRIKT: Verwenden Sie NUR Übungen aus der Cardio-Datenbank. Fügen Sie niemals Bankdrücken, Kniebeugen oder andere Krafttrainingsübungen hinzu.**" : ""}
+''';
+      }
+    } else if (currentLevel == AppLocalizations.of(context)!.levelIntermediate) {
+      return '''
+Sie sind ein professioneller Personal Trainer. Bitte schlagen Sie ein "${targetParts.isEmpty ? "Ganzkörper" : targetParts.join(', ')}" Trainingsmenü für Fortgeschrittene vor.
+
+$_advancedExerciseDatabase
+$historyInfo
+【Zielgruppe】
+- Fortgeschrittene Trainierende (6 Monate bis 2 Jahre Erfahrung)
+- Diejenigen, die Kraft und Muskelhypertrophie anstreben
+- Diejenigen, die fortgeschrittenere Techniken beherrschen möchten
+
+【Ausgabeformat】
+**Bitte folgen Sie strikt diesem Format:**
+
+\`\`\`
+## Trainingsmenü nach Körperteilen
+
+**Übung 1: Übungsname**
+* Gewicht: XXkg
+* Wiederholungen: XX
+* Sätze: X
+* Pausenzeit: XXSek
+* Tipps: Erklärung
+
+**Übung 2: Übungsname**
+* Gewicht: XXkg
+* Wiederholungen: XX
+* Sätze: X
+\`\`\`
+
+Bitte fügen Sie für jede Übung folgende Informationen hinzu:
+- Übungsname (aus der Übungsdatenbank ausgewählt)
+- **Spezifisches Gewicht (kg)** ← Schlagen Sie 70-85% des historischen 1RM vor
+  ※Für Cardio-Übungen verwenden Sie "Gewicht: 0kg" und geben Sie "Dauer: XX Minuten" anstelle von Wiederholungen an
+- **Wiederholungen (8-12)** ← Für Cardio verwenden Sie "Dauer: 30-45 Minuten" oder "Intervallformat"
+- Sätze (3-4 Sätze) ← Für Cardio verwenden Sie "1 Satz"
+- Pausenzeit (60-90 Sekunden)
+- Technik-Tipps (Drop-Sets, Supersätze, etc.)
+
+【Bedingungen】
+- ${targetParts.isEmpty ? "Ausgewogenes Training aller Körperteile" : "Intensiver Fokus auf ${targetParts.join(', ')}"}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- Schlagen Sie **nur Cardio-Übungen** vor (kein Krafttraining einschließen)\n- Vielfalt von Cardio: HIIT, Ausdauerlauf, Intervalle, etc." : "- Fokus auf freie Gewichte\n- Betonung auf Muskelhypertrophie"}
+- In 45-60 Minuten abschließbar
+
+**Wichtig: Geben Sie immer konkretes Gewicht und Wiederholungen für jede Übung an. Für Cardio-Übungen verwenden Sie Gewicht 0kg und geben Sie die Dauer im Format XX Minuten an.**
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**STRIKT: Verwenden Sie NUR Übungen aus der Cardio-Datenbank. Fügen Sie niemals Bankdrücken, Kniebeugen, Kreuzheben oder andere Krafttrainingsübungen hinzu.**" : ""}
+''';
+    } else {
+      return '''
+Sie sind ein professioneller Personal Trainer. Bitte schlagen Sie ein "${targetParts.isEmpty ? "Ganzkörper" : targetParts.join(', ')}" Trainingsmenü für Experten vor.
+
+$_advancedExerciseDatabase
+$historyInfo
+【Zielgruppe】
+- Experten-Trainierende (mehr als 2 Jahre Erfahrung)
+- Diejenigen, die maximale Kraft und Muskelwachstum anstreben
+- Diejenigen, die mit hochintensivem Training vertraut sind
+
+【Ausgabeformat】
+**Bitte folgen Sie strikt diesem Format:**
+
+\`\`\`
+## Trainingsmenü nach Körperteilen
+
+**Übung 1: Übungsname**
+* Gewicht: XXkg (basierend auf historischem 1RM: 85-95%)
+* Wiederholungen: XX (5-8 Wiederholungen, oder für Cardio: HIIT XX Minuten oder Ausdauerlauf XX Minuten)
+* Sätze: X (4-5 Sätze, für Cardio: 1 Satz)
+* Pausenzeit: XXSek (120-180 Sekunden)
+* Fortgeschrittene Techniken: Pyramidenmethode, 5x5-Methode, etc.
+
+**Übung 2: Übungsname**
+* Gewicht: XXkg
+* Wiederholungen: XX
+* Sätze: X
+\`\`\`
+
+Bitte fügen Sie für jede Übung folgende Informationen hinzu:
+- Übungsname (aus der Datenbank ausgewählt)
+- **Spezifisches Gewicht (kg)** ← Schlagen Sie 85-95% des historischen 1RM vor
+  ※Für Cardio-Übungen verwenden Sie "Gewicht: 0kg" und geben Sie "Dauer: XX Minuten" anstelle von Wiederholungen an
+- **Wiederholungen (5-8)** ← Für Cardio verwenden Sie "HIIT-Format XX Minuten" oder "Ausdauerlauf XX Minuten"
+- Sätze (4-5 Sätze) ← Für Cardio verwenden Sie "1 Satz"
+- Pausenzeit (120-180 Sekunden)
+- Fortgeschrittene Techniken (Pyramide, 5x5, etc.)
+
+【Bedingungen】
+- ${targetParts.isEmpty ? "Ganzkörper-Training mit maximaler Last" : "Trainieren Sie ${targetParts.join(', ')} bis zur absoluten Grenze"}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- Schlagen Sie **nur Cardio-Übungen** vor\n- Mix von Cardio: HIIT, Ausdauer, Intervalle, etc." : "- Betonung auf zusammengesetzte Bewegungen\n- Maximierung der Kraft"}
+- In 60-90 Minuten abschließbar
+
+**Wichtig: Geben Sie immer konkretes Gewicht und Wiederholungen für jede Übung an. Für Cardio-Übungen verwenden Sie Gewicht 0kg und Dauer im Format XX Minuten. Verwenden Sie nur Cardio-Übungen, wenn Cardio ausgewählt ist.**
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**STRIKT: Verwenden Sie NUR Übungen aus der Cardio-Datenbank. Fügen Sie niemals Bankdrücken, Kniebeugen, Kreuzheben, Schulterdrücken oder andere Krafttrainingsübungen hinzu.**" : ""}
 ''';
     }
   }
