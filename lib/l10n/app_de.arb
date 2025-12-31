@@ -45,7 +45,7 @@
   "sets": "Sätze",
   "reps": "Wdh.",
   "weight": "Gewicht",
-  "weightKg": "Gewicht kg",
+  "weightKg": "{weight} kg",
   "@weightKg": {
     "placeholders": {
       "weight": {

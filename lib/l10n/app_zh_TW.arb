@@ -45,7 +45,7 @@
   "sets": "放",
   "reps": "時代",
   "weight": "重量",
-  "weightKg": "重量（公斤）",
+  "weightKg": "{weight}公斤",
   "@weightKg": {
     "placeholders": {
       "weight": {

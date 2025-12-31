@@ -45,7 +45,7 @@
   "sets": "colocar",
   "reps": "veces",
   "weight": "peso",
-  "weightKg": "{peso}kg",
+  "weightKg": "{weight}kg",
   "@weightKg": {
     "placeholders": {
       "weight": {
