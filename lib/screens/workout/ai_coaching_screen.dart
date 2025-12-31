@@ -27,16 +27,9 @@ class AICoachingScreen extends StatefulWidget {
 
 class _AICoachingScreenState extends State<AICoachingScreen> {
   // 部位選択状態（有酸素・初心者追加）
-  final Map<String, bool> _selectedBodyParts = {
-    AppLocalizations.of(context)!.bodyPartChest: false,
-    AppLocalizations.of(context)!.bodyPartBack: false,
-    AppLocalizations.of(context)!.bodyPartLegs: false,
-    AppLocalizations.of(context)!.bodyPartShoulders: false,
-    AppLocalizations.of(context)!.bodyPartArms: false,
-    AppLocalizations.of(context)!.bodyPart_ceb49fa1: false,
-    AppLocalizations.of(context)!.exerciseCardio: false,
-    AppLocalizations.of(context)!.levelBeginner: false,
-  };
+  // 🔧 Build #24.1 Hotfix6: context依存の初期化はdidChangeDependenciesで実行
+  late final Map<String, bool> _selectedBodyParts;
+  bool _selectedBodyPartsInitialized = false;
 
   // UI状態
   bool _isGenerating = false;
@@ -54,8 +47,29 @@ class _AICoachingScreenState extends State<AICoachingScreen> {
   @override
   void initState() {
     super.initState();
+    // 注: _selectedBodyParts の初期化は didChangeDependencies() で実行
+    // （AppLocalizationsへのアクセスが必要なため）
     _autoLoginIfNeeded();
     _loadHistory();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // 🔧 Build #24.1 Hotfix6: context依存の初期化はここで実行
+    if (!_selectedBodyPartsInitialized) {
+      _selectedBodyParts = {
+        AppLocalizations.of(context)!.bodyPartChest: false,
+        AppLocalizations.of(context)!.bodyPartBack: false,
+        AppLocalizations.of(context)!.bodyPartLegs: false,
+        AppLocalizations.of(context)!.bodyPartShoulders: false,
+        AppLocalizations.of(context)!.bodyPartArms: false,
+        AppLocalizations.of(context)!.bodyPart_ceb49fa1: false,
+        AppLocalizations.of(context)!.exerciseCardio: false,
+        AppLocalizations.of(context)!.levelBeginner: false,
+      };
+      _selectedBodyPartsInitialized = true;
+    }
   }
 
   /// 未ログイン時に自動的に匿名ログイン
