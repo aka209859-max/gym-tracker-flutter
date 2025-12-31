@@ -3761,5 +3761,12 @@
   "subscriptionFeatureAI20": "🤖 AI features 20x/month (Coach/Growth/Effect total)",
   "subscriptionFeatureGrowthAnalysis": "📈 Growth prediction and effect analysis",
   "subscriptionFeatureAIUnlimited": "🤖 Unlimited AI features (Coach/Growth/Effect)",
-  "paywallGrowthPredictionMessage": "Don't miss your growth prediction"
+  "paywallGrowthPredictionMessage": "Don't miss your growth prediction",
+  "aiMenuParseFailedMessage": "Please try generating the menu again.\nIf the problem persists, please contact support.",
+  "aiMenuDebugTitle": "🐛 Debug: View generated text",
+  "aiMenuScientificAnalysis": "Scientific Analysis",
+  "aiMenuHistoryTitle": "Past Suggestions",
+  "aiMenuSetsSuffix": " sets",
+  "aiMenuRepsSuffix": " reps",
+  "aiMenuMinutesSuffix": " min"
 }

@@ -3791,5 +3791,12 @@
   "subscriptionFeatureAI20": "🤖 AI功能每月20次（教练/成长/效果总计）",
   "subscriptionFeatureGrowthAnalysis": "📈 成长预测和效果分析",
   "subscriptionFeatureAIUnlimited": "🤖 无限AI功能（教练/成长/效果）",
-  "paywallGrowthPredictionMessage": "不要错过您的成长预测"
+  "paywallGrowthPredictionMessage": "不要错过您的成长预测",
+  "aiMenuParseFailedMessage": "请再次生成菜单。\n如果问题持续，请联系客服。",
+  "aiMenuDebugTitle": "🐛 调试：查看生成的文本",
+  "aiMenuScientificAnalysis": "科学分析",
+  "aiMenuHistoryTitle": "历史建议",
+  "aiMenuSetsSuffix": "组",
+  "aiMenuRepsSuffix": "次",
+  "aiMenuMinutesSuffix": "分钟"
 }

@@ -4785,5 +4785,12 @@
   "subscriptionFeatureAI20": "🤖 AI機能月20回（AIコーチ・成長予測・効果分析合計）",
   "subscriptionFeatureGrowthAnalysis": "📈 成長予測と効果分析",
   "subscriptionFeatureAIUnlimited": "🤖 AI機能無制限（AIコーチ・成長予測・効果分析）",
-  "paywallGrowthPredictionMessage": "あなたの成長予測を見逃さないために"
+  "paywallGrowthPredictionMessage": "あなたの成長予測を見逃さないために",
+  "aiMenuParseFailedMessage": "もう一度メニューを生成してください。\n問題が続く場合は、サポートにお問い合わせください。",
+  "aiMenuDebugTitle": "🐛 デバッグ: 生成されたテキストを見る",
+  "aiMenuScientificAnalysis": "科学的な分析",
+  "aiMenuHistoryTitle": "過去の提案",
+  "aiMenuSetsSuffix": "セット",
+  "aiMenuRepsSuffix": "回",
+  "aiMenuMinutesSuffix": "分"
 }

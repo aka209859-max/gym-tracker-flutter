@@ -168,7 +168,7 @@ class _AICoachingScreenTabbedState extends State<AICoachingScreenTabbed>
               children: [
                 _buildGuideItem(
                   icon: Icons.analytics,
-                  title: '科学的な分析',
+                  title: AppLocalizations.of(context)!.aiMenuScientificAnalysis,
                   description: AppLocalizations.of(context)!.workout_762fc148,
                 ),
                 SizedBox(height: 12),
@@ -988,9 +988,9 @@ class _AIMenuTabState extends State<_AIMenuTab>
                               if (exercise.distance != null && exercise.distance! > 0)
                                 _buildInfoChip(Icons.straighten, '${exercise.distance}km'),
                               if (exercise.duration != null)
-                                _buildInfoChip(Icons.timer, '${exercise.duration}分'),
+                                _buildInfoChip(Icons.timer, '${exercise.duration}${AppLocalizations.of(context)!.aiMenuMinutesSuffix}'),
                               if (exercise.sets != null)
-                                _buildInfoChip(Icons.layers, '${exercise.sets}セット'),
+                                _buildInfoChip(Icons.layers, '${exercise.sets}${AppLocalizations.of(context)!.aiMenuSetsSuffix}'),
                             ],
                           )
                         else
@@ -1001,9 +1001,9 @@ class _AIMenuTabState extends State<_AIMenuTab>
                               if (exercise.weight != null)
                                 _buildInfoChip(Icons.fitness_center, '${exercise.weight}kg'),
                               if (exercise.reps != null)
-                                _buildInfoChip(Icons.repeat, '${exercise.reps}回'),
+                                _buildInfoChip(Icons.repeat, '${exercise.reps}${AppLocalizations.of(context)!.aiMenuRepsSuffix}'),
                               if (exercise.sets != null)
-                                _buildInfoChip(Icons.layers, '${exercise.sets}セット'),
+                                _buildInfoChip(Icons.layers, '${exercise.sets}${AppLocalizations.of(context)!.aiMenuSetsSuffix}'),
                             ],
                           ),
                         if (exercise.description != null) ...[
@@ -1062,7 +1062,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                       ),
                       SizedBox(height: 8),
                       Text(
-                        'もう一度メニューを生成してください。\n問題が続く場合は、サポートにお問い合わせください。',
+                        AppLocalizations.of(context)!.aiMenuParseFailedMessage,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 13,
@@ -1093,7 +1093,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
                       // 🐛 デバッグ用: 生成されたテキストを表示
                       ExpansionTile(
                         title: Text(
-                          '🐛 デバッグ: 生成されたテキストを見る',
+                          AppLocalizations.of(context)!.aiMenuDebugTitle,
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.red.shade700,
@@ -1200,7 +1200,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '過去の提案',
+          AppLocalizations.of(context)!.aiMenuHistoryTitle,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,

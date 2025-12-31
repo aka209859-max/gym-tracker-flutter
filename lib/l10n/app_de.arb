@@ -3790,5 +3790,12 @@
   "subscriptionFeatureAI20": "🤖 KI-Funktionen 20x/Monat (Coach/Wachstum/Effekt gesamt)",
   "subscriptionFeatureGrowthAnalysis": "📈 Wachstumsprognose und Effektanalyse",
   "subscriptionFeatureAIUnlimited": "🤖 Unbegrenzte KI-Funktionen (Coach/Wachstum/Effekt)",
-  "paywallGrowthPredictionMessage": "Verpassen Sie nicht Ihre Wachstumsprognose"
+  "paywallGrowthPredictionMessage": "Verpassen Sie nicht Ihre Wachstumsprognose",
+  "aiMenuParseFailedMessage": "Bitte versuchen Sie, das Menü erneut zu generieren.\nWenn das Problem weiterhin besteht, wenden Sie sich an den Support.",
+  "aiMenuDebugTitle": "🐛 Debug: Generierten Text anzeigen",
+  "aiMenuScientificAnalysis": "Wissenschaftliche Analyse",
+  "aiMenuHistoryTitle": "Frühere Vorschläge",
+  "aiMenuSetsSuffix": " Sätze",
+  "aiMenuRepsSuffix": " Wdh.",
+  "aiMenuMinutesSuffix": " Min"
 }
