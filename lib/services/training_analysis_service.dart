@@ -360,7 +360,7 @@ class TrainingAnalysisService {
             'topK': 40,
           },
         }),
-      ).timeout(const Duration(seconds: 5)); // 5秒タイムアウト（高速フォールバック）
+      ).timeout(const Duration(seconds: 10)); // 🆕 Build #24.1 Hotfix9.6: 10秒タイムアウト（安定性向上）
 
       if (response.statusCode == 200) {
         final data = jsonDecode(utf8.decode(response.bodyBytes));

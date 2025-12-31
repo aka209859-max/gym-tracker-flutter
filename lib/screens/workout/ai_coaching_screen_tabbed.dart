@@ -1476,7 +1476,6 @@ class _AIMenuTabState extends State<_AIMenuTab>
           _generatedMenu = finalMenu;
           _parsedExercises = parsedExercises;
           _selectedExerciseIndices.clear(); // 選択をリセット
-          _isGenerating = false;
         });
         }
         
@@ -1499,8 +1498,14 @@ class _AIMenuTabState extends State<_AIMenuTab>
       if (mounted) {
       setState(() {
         _errorMessage = '${AppLocalizations.of(context)!.ai_menuGenerationError}: $e';
-        _isGenerating = false;
       });
+      }
+    } finally {
+      // 🆕 Build #24.1 Hotfix9.6: 確実にローディング状態をクリア
+      if (mounted) {
+        setState(() {
+          _isGenerating = false;
+        });
       }
     }
   }
@@ -1651,29 +1656,45 @@ class _AIMenuTabState extends State<_AIMenuTab>
         }
         
         // 🔧 v1.0.226: 種目名の抽出（4パターンに対応）
+        // 🆕 Build #24.1 Hotfix9.6: 安全なグループ抽出（境界チェック）
         var name = '';
-        if (match != null) {
-          name = match.group(2)!.trim();
-        } else if (altMatch != null) {
-          name = altMatch.group(1)!.trim();
-        } else if (markdownMatch != null) {
-          name = markdownMatch.group(1)!.trim();
-        } else if (alphaNumMatch != null) {
-          name = alphaNumMatch.group(1)!.trim();
+        if (match != null && match.groupCount >= 2) {
+          name = match.group(2)?.trim() ?? '';
+        } else if (altMatch != null && altMatch.groupCount >= 1) {
+          name = altMatch.group(1)?.trim() ?? '';
+        } else if (markdownMatch != null && markdownMatch.groupCount >= 1) {
+          name = markdownMatch.group(1)?.trim() ?? '';
+        } else if (alphaNumMatch != null && alphaNumMatch.groupCount >= 1) {
+          name = alphaNumMatch.group(1)?.trim() ?? '';
+        }
+        
+        // 名前が取得できなかった場合はスキップ
+        if (name.isEmpty) {
+          debugPrint('  ⚠️ 種目名を抽出できませんでした: $line');
+          continue;
         }
         
         // **で囲まれた部分があれば除去
         name = name.replaceAll('**', '').trim();
         
         // 🔧 v1.0.226-fix: コロンがあれば後ろの部分（実際の種目名）を取得
+        // 🆕 Build #24.1 Hotfix9.6: 安全な分割処理（境界チェック）
         if (name.contains('：')) {
           // 「種目1：ショルダープレス」→「ショルダープレス」
           final parts = name.split('：');
-          name = parts.length > 1 ? parts[1].trim() : parts[0].trim();
+          if (parts.length > 1 && parts[1].trim().isNotEmpty) {
+            name = parts[1].trim();
+          } else if (parts.isNotEmpty) {
+            name = parts[0].trim();
+          }
         }
         if (name.contains(':')) {
           final parts = name.split(':');
-          name = parts.length > 1 ? parts[1].trim() : parts[0].trim();
+          if (parts.length > 1 && parts[1].trim().isNotEmpty) {
+            name = parts[1].trim();
+          } else if (parts.isNotEmpty) {
+            name = parts[0].trim();
+          }
         }
         
         // 括弧内の補足情報を除去（例: ベンチプレス（バーベル）→ ベンチプレス）
@@ -1699,13 +1720,20 @@ class _AIMenuTabState extends State<_AIMenuTab>
         final setsMatch = setsPattern.firstMatch(line);
         final timeMatch = timePattern.firstMatch(line);
         
-        if (weightMatch != null) currentWeight = double.tryParse(weightMatch.group(1)!);
-        if (repsMatch != null) currentReps = int.tryParse(repsMatch.group(1)!);
-        // 🔧 v1.0.226: 有酸素運動の場合のみ、時間をrepsとして扱う
-        if (timeMatch != null && currentReps == null && currentBodyPart == AppLocalizations.of(context)!.exerciseCardio) {
-          currentReps = int.tryParse(timeMatch.group(1)!);
+        // 🆕 Build #24.1 Hotfix9.6: 安全なグループ抽出（境界チェック）
+        if (weightMatch != null && weightMatch.groupCount >= 1) {
+          currentWeight = double.tryParse(weightMatch.group(1) ?? '');
         }
-        if (setsMatch != null) currentSets = int.tryParse(setsMatch.group(1)!);
+        if (repsMatch != null && repsMatch.groupCount >= 1) {
+          currentReps = int.tryParse(repsMatch.group(1) ?? '');
+        }
+        // 🔧 v1.0.226: 有酸素運動の場合のみ、時間をrepsとして扱う
+        if (timeMatch != null && timeMatch.groupCount >= 1 && currentReps == null && currentBodyPart == AppLocalizations.of(context)!.exerciseCardio) {
+          currentReps = int.tryParse(timeMatch.group(1) ?? '');
+        }
+        if (setsMatch != null && setsMatch.groupCount >= 1) {
+          currentSets = int.tryParse(setsMatch.group(1) ?? '');
+        }
       } else if (currentExerciseName.isNotEmpty) {
         // 種目の説明や詳細情報
         if (line.startsWith(AppLocalizations.of(context)!.workout_f517d9ec) || line.startsWith(AppLocalizations.of(context)!.workout_5071705c)) {
@@ -1765,20 +1793,23 @@ class _AIMenuTabState extends State<_AIMenuTab>
           if (setsMatch == null) setsMatch = setsPattern2.firstMatch(cleanLine);
           if (timeMatch == null) timeMatch = timePattern2.firstMatch(cleanLine);
           
-          if (weightMatch != null && currentWeight == null) {
-            currentWeight = double.tryParse(weightMatch.group(1)!);
+          // 🆕 Build #24.1 Hotfix9.6: 安全なグループ抽出（境界チェック）
+          if (weightMatch != null && weightMatch.groupCount >= 1 && currentWeight == null) {
+            currentWeight = double.tryParse(weightMatch.group(1) ?? '');
           }
-          if (repsMatch != null && currentReps == null) {
-            currentReps = int.tryParse(repsMatch.group(1)!);
+          if (repsMatch != null && repsMatch.groupCount >= 1 && currentReps == null) {
+            currentReps = int.tryParse(repsMatch.group(1) ?? '');
           }
           // 🔧 v1.0.226: 有酸素運動の場合のみ、時間をrepsとして扱う
-          if (timeMatch != null && currentReps == null && currentBodyPart == AppLocalizations.of(context)!.exerciseCardio) {
-            currentReps = int.tryParse(timeMatch.group(1)!);
-            debugPrint('  ⏱️ 有酸素時間検出: ${timeMatch.group(1)}分 → reps=$currentReps (line: $cleanLine)');
+          if (timeMatch != null && timeMatch.groupCount >= 1 && currentReps == null && currentBodyPart == AppLocalizations.of(context)!.exerciseCardio) {
+            final timeStr = timeMatch.group(1) ?? '';
+            currentReps = int.tryParse(timeStr);
+            debugPrint('  ⏱️ 有酸素時間検出: ${timeStr}分 → reps=$currentReps (line: $cleanLine)');
           }
-          if (setsMatch != null && currentSets == null) {
-            currentSets = int.tryParse(setsMatch.group(1)!);
-            debugPrint('  📊 セット数検出: ${setsMatch.group(1)}セット');
+          if (setsMatch != null && setsMatch.groupCount >= 1 && currentSets == null) {
+            final setsStr = setsMatch.group(1) ?? '';
+            currentSets = int.tryParse(setsStr);
+            debugPrint('  📊 セット数検出: ${setsStr}セット');
           }
           
           // デバッグ: パース状態を確認
