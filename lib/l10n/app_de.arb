@@ -3643,5 +3643,6 @@ und visualisiere deinen Fortschritt",
   "subscriptionFeatureAI20": "🤖 KI-Funktionen 20x/Monat (Coach/Wachstum/Effekt gesamt)",
   "subscriptionFeatureGrowthAnalysis": "📈 Wachstumsprognose und Effektanalyse",
   "subscriptionFeatureAIUnlimited": "🤖 Unbegrenzte KI-Funktionen (Coach/Wachstum/Effekt)",
-  "ai_menuGenerationError": "Menügenerierung fehlgeschlagen"
+  "ai_menuGenerationError": "Menügenerierung fehlgeschlagen",
+  "paywallGrowthPredictionMessage": "Verpassen Sie nicht Ihre Wachstumsprognose"
 }

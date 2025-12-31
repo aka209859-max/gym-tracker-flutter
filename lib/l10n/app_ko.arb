@@ -3641,5 +3641,6 @@ Epley 공식을 사용하여 추정 1RM을 계산합니다.",
   "subscriptionFeatureAI20": "🤖 AI 기능 월 20회 (코치/성장/효과 합계)",
   "subscriptionFeatureGrowthAnalysis": "📈 성장 예측 및 효과 분석",
   "subscriptionFeatureAIUnlimited": "🤖 무제한 AI 기능 (코치/성장/효과)",
-  "ai_menuGenerationError": "메뉴 생성 실패"
+  "ai_menuGenerationError": "메뉴 생성 실패",
+  "paywallGrowthPredictionMessage": "성장 예측을 놓치지 마세요"
 }

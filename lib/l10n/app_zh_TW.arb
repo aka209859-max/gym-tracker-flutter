@@ -3644,5 +3644,6 @@
   "subscriptionFeatureAI20": "🤖 AI功能每月20次（教練/成長/效果總計）",
   "subscriptionFeatureGrowthAnalysis": "📈 成長預測和效果分析",
   "subscriptionFeatureAIUnlimited": "🤖 無限AI功能（教練/成長/效果）",
-  "ai_menuGenerationError": "菜單生成失敗"
+  "ai_menuGenerationError": "菜單生成失敗",
+  "paywallGrowthPredictionMessage": "不要錯過您的成長預測"
 }

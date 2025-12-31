@@ -84,7 +84,7 @@ class PaywallDialog extends StatelessWidget {
             
             // 説明
             Text(
-              'あなたの成長予測を見逃さないために',
+              AppLocalizations.of(context)!.paywallGrowthPredictionMessage,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white.withOpacity(0.7),

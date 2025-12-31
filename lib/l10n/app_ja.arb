@@ -3794,5 +3794,6 @@ AIが科学的に分析します",
   "subscriptionFeatureAI20": "🤖 AI機能月20回（AIコーチ・成長予測・効果分析合計）",
   "subscriptionFeatureGrowthAnalysis": "📈 成長予測と効果分析",
   "subscriptionFeatureAIUnlimited": "🤖 AI機能無制限（AIコーチ・成長予測・効果分析）",
-  "ai_menuGenerationError": "メニュー生成に失敗しました"
+  "ai_menuGenerationError": "メニュー生成に失敗しました",
+  "paywallGrowthPredictionMessage": "あなたの成長予測を見逃さないために"
 }

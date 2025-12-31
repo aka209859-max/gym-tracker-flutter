@@ -3638,5 +3638,6 @@ and visualize your progress",
   "subscriptionFeatureAI20": "🤖 AI features 20x/month (Coach/Growth/Effect total)",
   "subscriptionFeatureGrowthAnalysis": "📈 Growth prediction and effect analysis",
   "subscriptionFeatureAIUnlimited": "🤖 Unlimited AI features (Coach/Growth/Effect)",
-  "ai_menuGenerationError": "Menu generation failed"
+  "ai_menuGenerationError": "Menu generation failed",
+  "paywallGrowthPredictionMessage": "Don't miss your growth prediction"
 }
