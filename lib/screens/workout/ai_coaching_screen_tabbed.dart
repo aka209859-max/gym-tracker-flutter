@@ -4526,7 +4526,7 @@ class _EffectAnalysisTabState extends State<_EffectAnalysisTab>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'トレーニング効果分析',
+                    AppLocalizations.of(context)!.aiEffectAnalysis,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

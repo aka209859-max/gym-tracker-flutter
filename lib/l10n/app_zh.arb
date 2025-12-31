@@ -46,14 +46,7 @@
   "reps": "时代",
   "weight": "重量",
   "weightKg": "{weight}公斤",
-  "@weightKg": {
-    "placeholders": {
-      "weight": {
-        "type": "double",
-        "format": "decimalPattern"
-      }
-    }
-  },
+  "@weightKg": "[('placeholders', [('weight', [('type', 'double'), ('format', 'decimalPattern')])])]",
   "restTime": "休息时间",
   "duration": "时间",
   "distance": "距离",
@@ -965,13 +958,7 @@
   "aiMenuRetryPrompt": "重新生成菜单。",
   "bodyPartBalance30Days": "过去 30 天的余额",
   "bodyPartBalanceDays": "过去 {days} 天的余额",
-  "@bodyPartBalanceDays": {
-    "placeholders": {
-      "days": {
-        "type": "Object"
-      }
-    }
-  },
+  "@bodyPartBalanceDays": "[('placeholders', [('days', [('type', 'Object')])])]",
   "buttonAdd": "添加",
   "buttonCancel": "取消",
   "buttonClose": "关闭",
@@ -992,33 +979,15 @@
   "subscriptionDetailedStats": "详细的拥堵统计数据",
   "subscriptionFreeFeatures": "免费套餐包含所有功能",
   "subscriptionFreeTrialDays": "{days} 天免费试用",
-  "@subscriptionFreeTrialDays": {
-    "placeholders": {
-      "days": {
-        "type": "String"
-      }
-    }
-  },
+  "@subscriptionFreeTrialDays": "[('placeholders', [('days', [('type', 'String')])])]",
   "subscriptionGrowthPrediction": "增长预测和影响分析",
   "subscriptionGymReviews": "健身房评价提交",
   "subscriptionMonthlyEquivalent": "月费¥{price}",
-  "@subscriptionMonthlyEquivalent": {
-    "placeholders": {
-      "price": {
-        "type": "String"
-      }
-    }
-  },
+  "@subscriptionMonthlyEquivalent": "[('placeholders', [('price', [('type', 'String')])])]",
   "subscriptionNoAds": "无广告",
   "subscriptionPopularBadge": "人气排名第一",
   "subscriptionSavings": "¥{amount}超值优惠！",
-  "@subscriptionSavings": {
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      }
-    }
-  },
+  "@subscriptionSavings": "[('placeholders', [('amount', [('type', 'String')])])]",
   "subscriptionStartFreeTrial": "开始免费试用",
   "subscriptionUnlimitedFavorites": "无限收藏",
   "workoutRepsLabel": "时代",
@@ -1500,8 +1469,8 @@
   "general_5c1f42bf": "直到我筋疲力尽为止",
   "general_6c0544e0": "最适合你的培训",
   "general_a0f6a560": "价格：300日元",
-  "workout_684f2433": "描述[::]\\s*",
-  "workout_8cd2b320": "（\\d+）\\s* 倍",
+  "workout_684f2433": "描述[::]\s*",
+  "workout_8cd2b320": "（\d+）\s* 倍",
   "workout_9de8907b": "# 基于科学的训练计划",
   "general_8e53814f": "鹿儿岛",
   "gym_dd5a565b": "电路机器",
@@ -2522,7 +2491,7 @@
   "profile_81578c7e": "无法获取文件数据。",
   "profile_29ca7fb7": "销售价格",
   "gym_58208487": "这是一个适合全家参与的综合性体育俱乐部。此外，这里还有一所设施齐全的儿童学校。",
-  "general_s": "[\\s\\-_&・]",
+  "general_s": "[\s\-_&・]",
   "general_07cf822c": "埼玉",
   "workout_f894e7b4": "➕ 创建新记录",
   "general_06bcf409": "从主屏幕快速访问",
@@ -2612,7 +2581,7 @@
   "exercise_0afc8ed2": "罗马尼亚硬拉",
   "general_e965eb2c": "你觉得今天训练的整体强度如何？",
   "general_08f3d852": "立即开始！",
-  "workout_27f8dd3a": "(\\d+)\\s* 集",
+  "workout_27f8dd3a": "(\d+)\s* 集",
   "profile_5cd65c3e": "请输入您的留言",
   "bodyPart_c158cb15": "三头肌",
   "general_0f944350": "大分县",
@@ -2964,28 +2933,28 @@
   "autoGen_20458277": "输入您的目标重量，我们将计算杠铃两侧所需的杠铃片数量。",
   "autoGen_56b65fc2": "输入总重量，包括杠铃重量（$_barWeight kg）",
   "autoGen_201ea826": "无需车牌（仅限酒吧）",
-  "autoGen_e9fe8032": "所示盘子数量为单侧数量。\\n请在两侧设置相同的配置。",
+  "autoGen_e9fe8032": "所示盘子数量为单侧数量。\n请在两侧设置相同的配置。",
   "autoGen_9ff70568": "🎁 获得 1 次 AI 会话！（报告 {result_reportCount} 次）",
   "autoGen_f0f0c7f4": "距离您下次获得奖励仅剩 {nextMilestone_remaining} 个里程碑！",
   "autoGen_24950e16": "正式版（App Store 版本）中不显示，仅在 TestFlight 版本中可用。",
-  "autoGen_de9021b8": "由于苹果公司的审查，开发者菜单中的方案更改功能已被移除。\\n\\n",
-  "autoGen_25deda5a": "方案变更仅对通过 RevenueCat 进行的常规计费有效。\\n\\n",
+  "autoGen_de9021b8": "由于苹果公司的审查，开发者菜单中的方案更改功能已被移除。\n\n",
+  "autoGen_25deda5a": "方案变更仅对通过 RevenueCat 进行的常规计费有效。\n\n",
   "autoGen_5657d91f": "• 入职培训导览",
   "autoGen_9c5698dd": "• 审核请求对话框",
   "autoGen_91c9449a": "1. 您可以使用上面的按钮更改为任何套餐。",
   "autoGen_734a59b9": "2. 如果您升级到专业版套餐，所有功能都将可用。",
   "autoGen_a0b3c8d7": "3. 您使用 AI 的次数将每月自动重置。",
-  "autoGen_3a6be6b1": "那真是一次很棒的锻炼！\\n记得做一些轻柔的拉伸运动，并多喝水。",
+  "autoGen_3a6be6b1": "那真是一次很棒的锻炼！\n记得做一些轻柔的拉伸运动，并多喝水。",
   "autoGen_26470233": "这是一次强度适中的训练。请确保睡够7-8小时并摄入蛋白质。",
   "autoGen_2cfbd017": "这是高强度训练。你需要充足的休息和营养。不要过度训练，一定要把恢复放在首位。",
   "autoGen_6627b2ca": "这次训练强度非常大。今天我建议你彻底休息。请务必保证充足的睡眠、均衡的营养和适当的拉伸运动。",
   "autoGen_6fc271f8": "$totalSets 集合",
-  "autoGen_365b72d7": "我们将提供最佳的恢复时间和建议。\\n\\n",
+  "autoGen_365b72d7": "我们将提供最佳的恢复时间和建议。\n\n",
   "autoGen_e177a676": "您想从收藏夹中移除“{gym_name}”吗？",
   "autoGen_298342bb": "{gym_name} 已从您的收藏夹中移除。",
   "autoGen_248390f0": "最喜欢的健身房（{favoriteGyms_length}）",
   "autoGen_8413b8f0": "目标 {goal_period__GoalPeriod_weekly_AppLocalizations_ofcontext_thisWeek__AppLocalizations_ofcontext_thisMonth}",
-  "autoGen_799ab9f4": "是否要删除“$goalName”？\\n此操作无法撤销。",
+  "autoGen_799ab9f4": "是否要删除“$goalName”？\n此操作无法撤销。",
   "autoGen_2a5ffab4": "编辑 {goal_name}",
   "autoGen_1605acad": "已入住 {widget_gym_name}",
   "autoGen_51d4147a": "更新于 $minutesAgo 分钟前",
@@ -2994,21 +2963,21 @@
   "autoGen_88e64c29": "AI剩余时间：$剩余积分时间",
   "autoGen_9cabffba": "人工智能将对您的个性化训练菜单进行科学分析。",
   "autoGen_5ff6013e": "距离你上次锻炼已经两天了。你今天想再锻炼一次吗？",
-  "autoGen_e199031a": "你已经很久没有记录锻炼情况了。\\n何不重新开始呢？",
+  "autoGen_e199031a": "你已经很久没有记录锻炼情况了。\n何不重新开始呢？",
   "autoGen_16ea699e": "记录你的训练并可视化你的进度",
   "autoGen_62bb229b": "🏋️ 重量显示：$exerciseName - weight: $weight, isBodyweightMode: $isBodyweightMode, isAbs: $isAbs",
   "autoGen_cd7a5e77": "📋 准备额外的训练组（通过 + 按钮）：$exerciseName",
-  "autoGen_c676bfd2": "是否要删除“$exerciseName”的记录？\\n此操作无法撤销。",
+  "autoGen_c676bfd2": "是否要删除“$exerciseName”的记录？\n此操作无法撤销。",
   "autoGen_3ff76bd8": "“$exerciseName” 已被删除（剩余{totalRemainingExercises} 个练习）",
-  "autoGen_a215dfab": "0-1：休息\\n2-3：轻度运动\\n4-6：中度运动\\n7-8：剧烈运动\\n9-10：全力以赴",
+  "autoGen_a215dfab": "0-1：休息\n2-3：轻度运动\n4-6：中度运动\n7-8：剧烈运动\n9-10：全力以赴",
   "autoGen_e5d37f36": "$recoveryHours 小时",
-  "autoGen_9beb17d9": "[基本分析]\\n$baseAdvice",
-  "autoGen_71f910d6": "[ACWR 分析]\\n$acwrAdvice",
+  "autoGen_9beb17d9": "[基本分析]\n$baseAdvice",
+  "autoGen_71f910d6": "[ACWR 分析]\n$acwrAdvice",
   "autoGen_838efe8a": "剩余 {goal_daysRemaining} 天 | 保持当前速度",
   "autoGen_9bae24d2": "您的推荐码：$_referralCode",
   "autoGen_d0688916": "邀请人：1 个 AI 附加组件包（5 次，价值 300 日元）",
-  "autoGen_b8db302a": "来 GYM MATCH 一起训练吧！邀请码：$_referralCode\\n\\n",
-  "autoGen_f4f68181": "{AppLocalizations_ofcontext_searchGym}\\n*位置信息仅用于搜索，不会被保存。",
+  "autoGen_b8db302a": "来 GYM MATCH 一起训练吧！邀请码：$_referralCode\n\n",
+  "autoGen_f4f68181": "{AppLocalizations_ofcontext_searchGym}\n*位置信息仅用于搜索，不会被保存。",
   "autoGen_4087785c": "⏱️ Google Places API 超时：$e",
   "autoGen_d014a7b1": "ℹ️ 0 条结果（可能该地区没有健身房）",
   "autoGen_e197bc84": "找到 {gyms_length} 家健身房",
@@ -3025,7 +2994,7 @@
   "autoGen_f9998737": "1 年以下：1.10 倍，3-5 年：0.95 倍，5 年以上：0.90 倍",
   "autoGen_99e6fba7": "每单位增加 5%（350 毫升啤酒 ≈ 1.4 单位）",
   "autoGen_2b6b9ab2": "个人因素乘数 (PFM) 通过整合五个因素来调整个人的疲劳敏感性：年龄、经验、睡眠、营养和酒精。",
-  "autoGen_38fecd64": "不常变化的元素：\\n",
+  "autoGen_38fecd64": "不常变化的元素：\n",
   "autoGen_ecb9080a": "• 年龄：恢复能力随年龄的变化",
   "autoGen_b9c37a72": "这些因素每天都在变化：",
   "autoGen_fb6e8bd2": "• 睡眠时长：恢复质量",
@@ -3034,10 +3003,10 @@
   "autoGen_9772ef29": "由专业教练进行一对一指导",
   "autoGen_c3070099": "📋 堆栈跟踪：$stackTrace",
   "autoGen_b82404b5": "你想和我们一起在 GYM MATCH 训练吗？",
-  "autoGen_6738f579": "推荐码：$referralCode\\n",
+  "autoGen_6738f579": "推荐码：$referralCode\n",
   "autoGen_db4ebdd3": "您将获得 3 次 AI 使用机会！",
   "autoGen_dee40980": "$featureName 是一项仅供付费会员使用的功能。",
-  "autoGen_1d067291": "$featureName 目前正在开发中。\\n它将在下次更新中推出。",
+  "autoGen_1d067291": "$featureName 目前正在开发中。\n它将在下次更新中推出。",
   "autoGen_8e38c4b2": "输入您朋友的推荐码，即可获得专属优惠！",
   "autoGen_1cd8d542": "* 邀请码只能使用一次。* 已被其他用户使用过的邀请码无效。",
   "autoGen_8bc67a22": "* 预订成功后，店铺会联系您确认。* 此预订为暂定预订，最终以店铺确认为准。",
@@ -3047,7 +3016,7 @@
   "autoGen_5f00a229": "• 免费试用期：高级版 30 天 / 专业版 14 天",
   "autoGen_87c8ba71": "• 试用期结束后，您将自动转为付费计划。",
   "autoGen_97af1fdc": "• 可随时取消（可在有效期结束前使用）",
-  "autoGen_27f6a7d8": "将其更改为 {subscriptionService_getPlanNamenewPlan}。\\n\\n",
+  "autoGen_27f6a7d8": "将其更改为 {subscriptionService_getPlanNamenewPlan}。\n\n",
   "autoGen_dfce8f7b": "已更改为 {subscriptionService_getPlanNamenewPlan}！",
   "autoGen_a3361465": "更改为 $targetPlanName",
   "autoGen_ea012ccb": "将目标计划名称更改为 $targetPlanName 会限制以下功能：",
@@ -3058,14 +3027,14 @@
   "autoGen_3aa92e14": "已更改为 {localeInfo_nativeName}。",
   "autoGen_81de7e28": "健身房比赛 - 提供 6 种语言版本",
   "autoGen_ead97a43": "广告 ID：$bannerAdUnitId",
-  "autoGen_dfb8009a": "你的训练负荷太低了。\\n通过逐步增加负荷，你可以期待提高你的表现。",
+  "autoGen_dfb8009a": "你的训练负荷太低了。\n通过逐步增加负荷，你可以期待提高你的表现。",
   "autoGen_b49536ed": "理想的训练负荷！保持目前的训练强度。受伤风险极低。",
   "autoGen_8bcd57bf": "这是一个警戒区域。受伤风险略有增加。请优先考虑恢复，下次适当减轻负荷。",
   "autoGen_7a24bc71": "危险区域！受伤风险极高。建议今日完全休息。",
   "autoGen_fc1a79ee": "每小时通话次数已达上限（{MAX_AI_CALLS_PER_HOUR}）。请稍候片刻。",
   "autoGen_8ed6a095": "您已达到今日使用限额（{MAX_AI_CALLS_PER_DAY}）。请明天再试。",
   "autoGen_4cf248d0": "您本月的使用额度已达上限（{MAX_AI_CALLS_PER_MONTH}）。",
-  "autoGen_0efa33de": "检测到异常使用模式。\\n",
+  "autoGen_0efa33de": "检测到异常使用模式。\n",
   "autoGen_4d7afd8b": "🚩 用户标记：$userId - $flagType - $reason",
   "autoGen_ba165086": "您的账户已被封禁。请联系客服。",
   "autoGen_873ee19b": "🎁推荐奖励：$referralBonus 次",
@@ -3073,14 +3042,14 @@
   "autoGen_d90cbf45": "AI积分：$credits",
   "autoGen_d293bb2d": "在您目前的级别，您可以预期每月增长 +{monthlyRate__100_round}%。",
   "autoGen_df68039d": "目前体重 {currentWeight_round}kg → 根据科学预测，4 个月后体重将增加 {predictedWeight_round}kg (+{predictedWeight__currentWeight_round}kg)。",
-  "autoGen_dde51564": "\\n## 建议行动计划",
+  "autoGen_dde51564": "\n## 建议行动计划",
   "autoGen_88d87130": "* 增加负荷：每周增加重量的速率为 +{weeklyRate__100__10_round__10}%。",
   "autoGen_a18ea9fb": "* 充分休息（身体部位之间必须至少间隔 48 小时）",
   "autoGen_cb2b318c": "* 充足的营养摄入（蛋白质 1.6-2.2 克/公斤/天）",
   "autoGen_e9e092c8": "每增加一套，增长0.37%。",
   "autoGen_0a0a8439": "澄清",
   "autoGen_aee3d6b6": "发生错误：{e_toString}",
-  "autoGen_99ca4bf5": "在 GYM MATCH 上分享你的训练记录！#GYMMATCH #肌肉训练记录 #健身房\\n\\nhttps://gym-match-e560d.web.app",
+  "autoGen_99ca4bf5": "在 GYM MATCH 上分享你的训练记录！#GYMMATCH #肌肉训练记录 #健身房\n\nhttps://gym-match-e560d.web.app",
   "autoGen_efdeb364": "你在 $exerciseName 中创造了新的记录！",
   "autoGen_3f7f8f41": "训练量适中。请确保睡眠7-8小时，并摄入蛋白质（每公斤体重1.6克或更多）。",
   "autoGen_07ee9ffa": "这次训练强度非常大。今天我建议你彻底休息。请保证至少8小时睡眠，摄入高蛋白饮食，并进行拉伸运动。",
@@ -3093,7 +3062,7 @@
   "autoGen_8679dd9c": "⏱️ GPS定位超时（15秒）",
   "autoGen_5dd7baf1": "这是一个好的开始！再添加 {magicNumberRecords__count} 条记录，就能养成习惯了！",
   "autoGen_69df4973": "养成习惯，每天记录5件事，持续30天！何不从今天开始呢？",
-  "autoGen_1a0782d5": "再完成 4 项记录就能养成习惯了！\\n还剩 {daysRemaining} 天。",
+  "autoGen_1a0782d5": "再完成 4 项记录就能养成习惯了！\n还剩 {daysRemaining} 天。",
   "autoGen_ec0ce4f0": "接下来，目标是连续达到 {streakDays__7} 天。",
   "autoGen_6f3ae622": "$gymName 已开业！",
   "autoGen_b9e68d6a": "$levelText - 现在就是你的机会！",
@@ -3104,10 +3073,10 @@
   "autoGen_61b4bd56": "⏭️ 跳过：{doc_id} - 能力差异很大",
   "autoGen_f3cdae64": "发送匹配请求是专业版套餐的专属功能。升级到专业版套餐，即可与您的伴侣建立联系！",
   "autoGen_44750f0a": "🚀 快速入门：$templateName",
-  "autoGen_081f30b2": "未找到任何 AI 附加组件包产品。\\n",
-  "autoGen_bd2d5ba0": "正在查找产品 ID：$aiAdditionalPackProductId\\n",
-  "autoGen_371e13e6": "可用产品 ID：$availableIds\\n\\n",
-  "autoGen_02e74dc3": "解决方案：\\n",
+  "autoGen_081f30b2": "未找到任何 AI 附加组件包产品。\n",
+  "autoGen_bd2d5ba0": "正在查找产品 ID：$aiAdditionalPackProductId\n",
+  "autoGen_371e13e6": "可用产品 ID：$availableIds\n\n",
+  "autoGen_02e74dc3": "解决方案：\n",
   "autoGen_9021f412": "1. 在 App Store Connect 中创建您的产品",
   "autoGen_722dc403": "如果您喜欢这款应用，请在 App Store 上留下评论。您的反馈将帮助我们改进应用！",
   "autoGen_c6000590": "ℹ️ 审核拒绝：未在 {cooldownDays} 天内提出申请",
@@ -3129,12 +3098,12 @@
   "autoGen_c23f34d7": "📦 出错时使用缓存：$cachedPlan",
   "autoGen_5815bad8": "每月 20 次 AI 功能（AI 指导、增长预测、效果分析）+ 无限收藏 + 评论提交",
   "autoGen_3124e6e1": "无限AI功能（AI辅导、增长预测和效果分析）+合作伙伴搜索+消息传递",
-  "autoGen_19653147": "您本月的 AI 使用额度已用完（{currentUsage}/{totalLimit} 次）\\n💰 您可以购买额外额度继续使用。",
+  "autoGen_19653147": "您本月的 AI 使用额度已用完（{currentUsage}/{totalLimit} 次）\n💰 您可以购买额外额度继续使用。",
   "autoGen_c6a86fbe": "预计每周增加 {suggestedChange} 个集合将带来 +{suggestedChange__0_37_toStringAsFixed1}% 的增长（Schoenfeld 2017）。",
   "autoGen_d4c99375": "每周增长 + {weeklyGrowth_toStringAsFixed1}%：稳定增长",
   "autoGen_1a22c661": "周增长速度 + {weeklyGrowth_toStringAsFixed1}%：增长速度放缓",
   "autoGen_c42311e6": "同一部位两次治疗之间需间隔 {restDays} 天（MPS 增加期：48 小时）",
-  "autoGen_2462056f": "\\n## 首要改进",
+  "autoGen_2462056f": "\n## 首要改进",
   "autoGen_4b2314e5": "增加组数可以增强肌肉肥大效果（Schoenfeld 2017）。",
   "autoGen_09692629": "当前交易量过大。",
   "autoGen_2c6c48e2": "减少训练组数，以便留出恢复时间。",
@@ -3143,13 +3112,13 @@
   "autoGen_9da152f4": "试验完成进度：$progress%",
   "autoGen_f1d9a7a9": "当前版本：$currentVersion（内部版本号：$currentBuildNumber）",
   "autoGen_3142cb33": "新版本已发布，请更新。",
-  "autoGen_a5e97b2b": "有必要的更新可用。\\n请将应用更新至最新版本。",
+  "autoGen_a5e97b2b": "有必要的更新可用。\n请将应用更新至最新版本。",
   "autoGen_d9ad81bc": "🚨 需要强制更新：$currentBuildNumber < $minBuildNumber",
   "autoGen_96c869d4": "💡 建议更新：$currentBuildNumber < $recommendedBuildNumber",
-  "autoGen_588e8dd8": "图片大小过大（{imageBytes_length__1024__1024_toStringAsFixed1}MB）。\\n",
+  "autoGen_588e8dd8": "图片大小过大（{imageBytes_length__1024__1024_toStringAsFixed1}MB）。\n",
   "autoGen_b2a0fa05": "📄 响应正文（前 200 个字符）：{response_body_substring0_response_body_length_gt_200_200__response_body_length}",
-  "autoGen_fafd554e": "深蓝色 x 活力橙色\\n激发活力和动力",
-  "autoGen_1a20cd60": "力量红 x 银色\\n表达激情与力量",
+  "autoGen_fafd554e": "深蓝色 x 活力橙色\n激发活力和动力",
+  "autoGen_1a20cd60": "力量红 x 银色\n表达激情与力量",
   "autoGen_124470ff": "流畅性极佳！享受更舒适的训练体验",
   "autoGen_7210fc11": "寻找训练伙伴",
   "autoGen_067c77b6": "告别独自训练，与朋友们在同一家健身房，朝着共同的目标不断成长。",
@@ -3157,7 +3126,7 @@
   "autoGen_1397c615": "$premiumDays 天",
   "autoGen_32518a63": "$friendName 已加入 GYM MATCH！",
   "autoGen_3efd8f7d": "🎁 介绍奖励（豪华版）",
-  "autoGen_5db1bca7": "【网页版测试模式】\\n按下按钮，2秒内即可获得AI积分",
+  "autoGen_5db1bca7": "【网页版测试模式】\n按下按钮，2秒内即可获得AI积分",
   "autoGen_54f0f5d8": "您本月还剩 $_remainingAds 可供观看",
   "autoGen_ee3d2398": "💡 如果您想要无限制地使用我们的 AI 功能，请考虑升级到我们的高级套餐（每月 10 次通话）或专业套餐（每月 30 次通话）。",
   "autoGen_d6ef4230": "{widget_basis_length} 篇同行评审论文",
@@ -3169,7 +3138,7 @@
   "autoGen_0a9c8389": "发送消息，开始对话",
   "autoGen_b6a2b2e7": "您是否要屏蔽 {widget_partner_displayName}？",
   "autoGen_f073e2b1": "• 您将无法发送或接收消息。",
-  "autoGen_3f52e845": "• 它将不再出现在搜索结果中\\n",
+  "autoGen_3f52e845": "• 它将不再出现在搜索结果中\n",
   "autoGen_8ab9dcf9": "发送匹配请求是专业版用户专属功能。",
   "autoGen_152ba977": "每月980元（年付套餐享78折优惠）",
   "autoGen_055759b3": "仅限能力相近的人（±15% 1RM）",
@@ -3188,13 +3157,13 @@
   "autoGen_360787f9": "提醒时间设置为 {formatTime_reminderTime}",
   "autoGen_e67c4c69": "您也可以在设备设置中管理通知。请查看“设置”应用 > “通知”。",
   "autoGen_68142d17": "本使用条款（以下简称“本条款”）规定了由 Gen Inoue（以下简称“开发者”）提供的 GYM MATCH 应用程序（以下简称“本应用”）的使用条款。使用本应用即视为用户同意本条款。",
-  "autoGen_49167046": "此应用提供以下功能：\\n\\n",
+  "autoGen_49167046": "此应用提供以下功能：\n\n",
   "autoGen_5db26dd7": "• 培训记录管理",
   "autoGen_54eb522c": "• 健身房搜索和位置信息显示",
   "autoGen_3482f20a": "• 人工智能提供的训练菜单建议",
   "autoGen_6e6ed0f3": "• 分析和可视化训练数据",
   "autoGen_cfee6527": "• 付费订阅计划（高级版、专业版）",
-  "autoGen_78cd69ae": "用户在使用此应用时，禁止进行以下操作：\\n\\n",
+  "autoGen_78cd69ae": "用户在使用此应用时，禁止进行以下操作：\n\n",
   "autoGen_0b46001b": "• 任何违反法律、公共秩序和道德的行为。",
   "autoGen_bfe041dc": "• 任何破坏或干扰本应用程序服务器或网络功能的行为。",
   "autoGen_bd7bdb16": "• 收集或存储其他用户的个人信息。",
@@ -3216,7 +3185,7 @@
   "autoGen_a85490c9": "• 如果符合苹果应用商店退款政策规定的正当理由。",
   "autoGen_2d7a5883": "• 如果由于技术问题导致服务无法正常提供。",
   "autoGen_2652cd9c": "• 如果您误购了商品（您必须在购买后立即申请）",
-  "autoGen_76d3507e": "备注：\\n",
+  "autoGen_76d3507e": "备注：\n",
   "autoGen_93a4cf92": "• 取消续订必须至少在下次续订日期前 24 小时进行。",
   "autoGen_22bad042": "• 取消后，您可以继续使用该服务直至当前计费周期结束。",
   "autoGen_95741c60": "健身房比赛 - 训练管理应用程序",
@@ -3249,7 +3218,7 @@
   "autoGen_0d5c4fc8": "$exerciseName 的历史记录",
   "autoGen_6184b271": "记录值：$weight kg × $reps 次数",
   "autoGen_74da9166": "批量输入 $exerciseName",
-  "autoGen_c80b15f5": "是否要删除“$exerciseName”？\\n此操作无法撤销。",
+  "autoGen_c80b15f5": "是否要删除“$exerciseName”？\n此操作无法撤销。",
   "autoGen_0a84ceba": "“$exerciseName”已被删除",
   "autoGen_d9074687": "“$result”已保存为自定义事件",
   "autoGen_0c183ad8": "📴 保存休假日期：$_selectedDate",
@@ -3257,7 +3226,7 @@
   "autoGen_f36e4e45": "$_selectedMuscleGroup 事件",
   "autoGen_7ce1d4dd": "🔘 最后点击按钮：$exerciseName",
   "autoGen_7b01524a": "重量和重复次数根据您的级别（$userLevel）设置。",
-  "autoGen_2873d010": "首次破纪录\\n今天的纪录就是你的下一个目标。全力以赴！",
+  "autoGen_2873d010": "首次破纪录\n今天的纪录就是你的下一个目标。全力以赴！",
   "autoGen_61221654": "已从 AI 教练处加载 {exercises_length} 个练习",
   "autoGen_79ab5374": "• 您可以通过观看视频广告使用一次 AI 功能。",
   "autoGen_46daa8ca": "• 广告每月最多可展示 3 次。",
@@ -3265,7 +3234,7 @@
   "autoGen_c85769fb": "canEarnFromAdResult：$canEarnFromAd",
   "autoGen_5a65e7d3": "广告观看结果：$watchedAd",
   "autoGen_a2170a7d": "# 基于科学的训练计划",
-  "autoGen_8627ad90": "💡人工智能暂时无法使用，因此我们将根据科学研究为您提供菜单推荐。\\n",
+  "autoGen_8627ad90": "💡人工智能暂时无法使用，因此我们将根据科学研究为您提供菜单推荐。\n",
   "autoGen_3921a074": "全身平衡训练",
   "autoGen_63dfa8fd": "重复次数：10-12次",
   "autoGen_f48e246a": "要点：注重动作规范，从较轻的重量开始。",
@@ -3276,14 +3245,14 @@
   "autoGen_7d332e7f": "休息：2-3分钟",
   "autoGen_9c54dcf8": "- 套数：3-4套",
   "autoGen_64963de8": "休息：3-4分钟",
-  "autoGen_7fb65399": "## 部分培训\\n",
+  "autoGen_7fb65399": "## 部分培训\n",
   "autoGen_7f25816c": "- 套数：2-3套",
   "autoGen_7ae0e831": "重复次数：10-15次",
   "autoGen_22068d85": "重复次数：8-12次",
   "autoGen_e420dac1": "休息时间：60-90秒",
   "autoGen_530c8f16": "💰 AI 附加组件包（¥300）：",
-  "autoGen_2482dab0": "请重新生成菜单。\\n如果问题仍然存在，请联系客服。",
-  "autoGen_a900ede4": "📄 生成的菜单（前 500 个字符）：\\n{text_substring0_text_length_gt_500_500__text_length}",
+  "autoGen_2482dab0": "请重新生成菜单。\n如果问题仍然存在，请联系客服。",
+  "autoGen_a900ede4": "📄 生成的菜单（前 500 个字符）：\n{text_substring0_text_length_gt_500_500__text_length}",
   "autoGen_61691a5f": "📄 处理中：$line",
   "autoGen_dc7f876e": "⏭️ 跳过小节：$line",
   "autoGen_160fcdc4": "📝 当前状态（$currentExerciseName）：重量=$currentWeight，次数=$currentReps，组数=$currentSets",
@@ -3388,115 +3357,38 @@
   "home_shareFailed": "分享失败: {error}",
   "home_deleteError": "删除错误: {error}",
   "home_weightMinutes": "{weight} 分钟",
-  "home_deleteRecordConfirm": "删除\"{exerciseName}\"的记录？\n此操作无法撤消。",
-  "home_deleteRecordSuccess": "已删除\"{exerciseName}\"（剩余{count}个项目）",
+  "home_deleteRecordConfirm": "删除"{exerciseName}"的记录？
+此操作无法撤消。",
+  "home_deleteRecordSuccess": "已删除"{exerciseName}"（剩余{count}个项目）",
   "home_deleteFailed": "删除失败: {error}",
   "home_generalError": "❌ 错误: {error}",
   "goals_loadFailed": "加载目标失败: {error}",
-  "goals_deleteConfirm": "删除\"{goalName}\"？\n此操作无法撤消。",
+  "goals_deleteConfirm": "删除"{goalName}"？
+此操作无法撤消。",
   "goals_updateFailed": "更新失败: {error}",
   "goals_editTitle": "编辑 {goalName}",
-  "body_offlineSaved": "📴 已离线保存\n在线恢复时自动同步",
+  "body_offlineSaved": "📴 已离线保存
+在线恢复时自动同步",
   "body_weightKg": "体重: {weight}kg",
   "body_bodyFatPercent": "体脂率: {bodyFat}%",
   "reward_adLoadFailed": "加载广告失败。请重试。",
   "reward_adDisplayFailed": "显示广告失败。请稍后重试。",
   "reward_creditEarnedTest": "✅ 获得1次AI积分！（测试模式）",
-  "@home_shareFailed": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "@home_deleteError": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "@home_weightMinutes": {
-    "placeholders": {
-      "weight": {
-        "type": "String"
-      }
-    }
-  },
-  "@home_deleteRecordConfirm": {
-    "placeholders": {
-      "exerciseName": {
-        "type": "String"
-      }
-    }
-  },
-  "@home_deleteRecordSuccess": {
-    "placeholders": {
-      "exerciseName": {
-        "type": "String"
-      },
-      "count": {
-        "type": "String"
-      }
-    }
-  },
-  "@home_deleteFailed": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "@home_generalError": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "@goals_loadFailed": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "@goals_deleteConfirm": {
-    "placeholders": {
-      "goalName": {
-        "type": "String"
-      }
-    }
-  },
-  "@goals_updateFailed": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "@goals_editTitle": {
-    "placeholders": {
-      "goalName": {
-        "type": "String"
-      }
-    }
-  },
-  "@body_weightKg": {
-    "placeholders": {
-      "weight": {
-        "type": "String"
-      }
-    }
-  },
-  "@body_bodyFatPercent": {
-    "placeholders": {
-      "bodyFat": {
-        "type": "String"
-      }
-    }
-  },
-  "workout_offlineSaved": "📴 已离线保存\n恢复在线时将自动同步",
+  "@home_shareFailed": "[('placeholders', [('error', [('type', 'String')])])]",
+  "@home_deleteError": "[('placeholders', [('error', [('type', 'String')])])]",
+  "@home_weightMinutes": "[('placeholders', [('weight', [('type', 'String')])])]",
+  "@home_deleteRecordConfirm": "[('placeholders', [('exerciseName', [('type', 'String')])])]",
+  "@home_deleteRecordSuccess": "[('placeholders', [('exerciseName', [('type', 'String')]), ('count', [('type', 'String')])])]",
+  "@home_deleteFailed": "[('placeholders', [('error', [('type', 'String')])])]",
+  "@home_generalError": "[('placeholders', [('error', [('type', 'String')])])]",
+  "@goals_loadFailed": "[('placeholders', [('error', [('type', 'String')])])]",
+  "@goals_deleteConfirm": "[('placeholders', [('goalName', [('type', 'String')])])]",
+  "@goals_updateFailed": "[('placeholders', [('error', [('type', 'String')])])]",
+  "@goals_editTitle": "[('placeholders', [('goalName', [('type', 'String')])])]",
+  "@body_weightKg": "[('placeholders', [('weight', [('type', 'String')])])]",
+  "@body_bodyFatPercent": "[('placeholders', [('bodyFat', [('type', 'String')])])]",
+  "workout_offlineSaved": "📴 已离线保存
+恢复在线时将自动同步",
   "workout_iconAI": "🤖",
   "workout_iconIdea": "💡",
   "workout_iconStats": "📊",
@@ -3506,9 +3398,10 @@
   "workout_noHistory": "{exerciseName}没有历史记录",
   "workout_pastRecords": "{exerciseName}的过去记录",
   "workout_bulkInput": "{exerciseName}的批量输入",
-  "workout_deleteConfirm": "删除\"{exerciseName}\"？\n此操作无法撤消。",
-  "workout_deleteSuccess": "已删除\"{exerciseName}\"",
-  "workout_customExerciseSaved": "已将\"{exerciseName}\"保存为自定义动作",
+  "workout_deleteConfirm": "删除"{exerciseName}"？
+此操作无法撤消。",
+  "workout_deleteSuccess": "已删除"{exerciseName}"",
+  "workout_customExerciseSaved": "已将"{exerciseName}"保存为自定义动作",
   "profile_importFromPhoto": "📸 从照片导入",
   "profile_importFromCSV": "📄 从CSV导入",
   "profile_fileSizeTooLarge": "❌ 文件大小过大（最大5MB）",
@@ -3527,7 +3420,7 @@
   "subscription_step1": "1. 打开iPhone设置应用",
   "subscription_step2": "2. 点击顶部的[Apple ID]",
   "workout_deleteDebug": "🔍 删除调试",
-  "workout_deleteConfirmExercise": "删除\"{exerciseName}\"？",
+  "workout_deleteConfirmExercise": "删除"{exerciseName}"？",
   "workout_debugTargetInfo": "🎯 {targetInfo}",
   "workout_debugCurrentExercises": "📊 当前动作：{exercises}",
   "workout_debugAfterDeleteExercises": "📊 删除后：{exercises}",
@@ -3536,8 +3429,8 @@
   "workout_debugSetDetails": "🔍 组详情：",
   "workout_debugExercisesField": "⚠️ 检测到exercises字段：{type}",
   "workout_preventFullDelete": "⚠️ 防止全部删除",
-  "workout_exerciseDeletedWithCount": "已删除\"{exerciseName}\"（剩余：{remainingExercises}）",
-  "workout_exerciseDeletedWithCountNum": "已删除\"{exerciseName}\"（剩余{count}个动作）",
+  "workout_exerciseDeletedWithCount": "已删除"{exerciseName}"（剩余：{remainingExercises}）",
+  "workout_exerciseDeletedWithCountNum": "已删除"{exerciseName}"（剩余{count}个动作）",
   "ai_generationComplete": "AI生成完成！（{status}）",
   "ai_rewardEarned": "🎁 获得AI功能使用1次！",
   "ai_predictionComplete": "AI预测完成！（{status}）",
@@ -3548,11 +3441,14 @@
   "gym_aiUsageLimit": "• 每月使用AI功能10次",
   "gym_unlimitedFavorites": "• 无限收藏",
   "gym_detailedStats": "• 详细拥挤度统计",
-  "dev_uidCopied": "✅ 已复制UID\n{uid}",
+  "dev_uidCopied": "✅ 已复制UID
+{uid}",
   "dev_aiUsageReset": "✅ AI使用次数已重置",
   "dev_resetFailed": "❌ 重置失败：{error}",
-  "dev_onboardingReset": "✅ 引导流程已重置\n请重启应用",
-  "dev_phase1Reset": "✅ Phase 1功能已全部重置\n请重启应用",
+  "dev_onboardingReset": "✅ 引导流程已重置
+请重启应用",
+  "dev_phase1Reset": "✅ Phase 1功能已全部重置
+请重启应用",
   "dev_resetAiUsage": "重置AI使用次数",
   "dev_resetOnboarding": "重置引导流程",
   "dev_resetPhase1": "重置所有Phase 1功能",
@@ -3564,7 +3460,8 @@
   "calculators_title": "计算工具",
   "calculators_invalidInput": "请输入有效的重量和次数",
   "calculators_oneRMCalculator": "1RM计算器",
-  "calculators_oneRMDescription": "1RM（1次最大重复）是您可以举起一次的最大重量。\n使用Epley公式计算估计的1RM。",
+  "calculators_oneRMDescription": "1RM（1次最大重复）是您可以举起一次的最大重量。
+使用Epley公式计算估计的1RM。",
   "calculators_barWeightError": "请输入大于杠铃重量（{barWeight}kg）的重量",
   "invite_registrationComplete": "🎉 注册完成！",
   "invite_codeApplied": "邀请码已成功应用！",
@@ -3573,9 +3470,11 @@
   "invite_benefitsApplied": "奖励将立即生效！",
   "gym_checkedIn": "已签到{gymName}",
   "aiAddon_purchaseConfirm": "购买AI附加包？",
-  "aiAddon_packDetails": "AI附加包（5次）\n价格：¥300",
+  "aiAddon_packDetails": "AI附加包（5次）
+价格：¥300",
   "aiAddon_purchase": "购买",
-  "aiAddon_purchaseFailed": "购买失败。\n请重试。",
+  "aiAddon_purchaseFailed": "购买失败。
+请重试。",
   "weeklyReports_recommendation": "每周推荐",
   "weeklyReports_recommendationSubtitle": "显示推荐的日期和菜单建议",
   "bodyPart_days7": "7天",
@@ -3594,7 +3493,7 @@
   "personalFactors_saved": "✅ 保存完成！当前PFM：{pfm}x",
   "personalFactors_saveError": "❌ 保存错误：{error}",
   "personalFactors_title": "🔬 个人因素设置",
-  "favorites_removeConfirm": "从收藏中删除\"{gymName}\"？",
+  "favorites_removeConfirm": "从收藏中删除"{gymName}"？",
   "favorites_removed": "已从收藏中删除{gymName}",
   "favorites_removeAll": "全部删除",
   "gymDetail_shareFailed": "分享失败：{error}",
@@ -3617,36 +3516,23 @@
   "partnerPhotos_deleteConfirm": "删除图片",
   "partnerPhotos_title": "店铺图片管理",
   "home_streakTitle": "连续7天达成！",
-  "home_streakMessage": "恭喜！\n您已连续记录训练7天。\n继续保持！💪",
-  "home_milestoneMessage": "太棒了！达成里程碑！\n继续保持这个节奏！💪",
+  "home_streakMessage": "恭喜！
+您已连续记录训练7天。
+继续保持！💪",
+  "home_milestoneMessage": "太棒了！达成里程碑！
+继续保持这个节奏！💪",
   "home_tapToShowStats": "点击显示详细统计",
   "home_aiSuggestionTitle": "💡 今日AI建议",
-  "home_aiSuggestionPrompt": "AI科学分析\n您的专属训练菜单",
+  "home_aiSuggestionPrompt": "AI科学分析
+您的专属训练菜单",
   "home_currentStreakDays": "连续 {days} 天",
-  "@home_currentStreakDays": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      }
-    }
-  },
+  "@home_currentStreakDays": "[('placeholders', [('days', [('type', 'int')])])]",
   "home_streakRecording": "连续记录 {days} 天！",
-  "@home_streakRecording": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      }
-    }
-  },
+  "@home_streakRecording": "[('placeholders', [('days', [('type', 'int')])])]",
   "home_weeklyProgressPercent": "完成 {percent}%",
-  "@home_weeklyProgressPercent": {
-    "placeholders": {
-      "percent": {
-        "type": "int"
-      }
-    }
-  },
-  "home_recordPrompt": "记录训练\n可视化您的进度",
+  "@home_weeklyProgressPercent": "[('placeholders', [('percent', [('type', 'int')])])]",
+  "home_recordPrompt": "记录训练
+可视化您的进度",
   "subscription_restore": "恢复",
   "subscription_lifetimeProPlan": "终身Pro计划（∞）",
   "subscription_lifetimePlanDescription": "无限AI功能 | 无广告 | 永久使用所有功能",
@@ -3656,55 +3542,22 @@
   "subscription_privacyPolicy": "隐私政策",
   "subscription_agreementText": "订阅即表示您同意我们的使用条款和隐私政策",
   "subscription_aiAddonPrice": "¥300 / 5次",
-  "subscription_cancelInstruction3": "3. 点击\\\"订阅\\\"",
+  "subscription_cancelInstruction3": "3. 点击\"订阅\"",
   "profile_referralBonusTitle": "🎁 推荐奖励",
   "profile_referralBonusHint": "💡 当您的朋友输入此代码时，双方都将获得奖励！",
-  "profile_referralShareMessage": "一起在GYM MATCH上训练吧！\\n\\n推荐码：{referralCode}\\n获得3次AI使用！\\n\\nhttps://gym-match-e560d.web.app",
-  "@profile_referralShareMessage": {
-    "placeholders": {
-      "referralCode": {
-        "type": "String"
-      }
-    }
-  },
+  "profile_referralShareMessage": "一起在GYM MATCH上训练吧！\n\n推荐码：{referralCode}\n获得3次AI使用！\n\nhttps://gym-match-e560d.web.app",
+  "@profile_referralShareMessage": "[('placeholders', [('referralCode', [('type', 'String')])])]",
   "profile_errorMessage": "❌ 错误：{error}",
-  "@profile_errorMessage": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
+  "@profile_errorMessage": "[('placeholders', [('error', [('type', 'String')])])]",
   "profile_rewardItem": "{title}：{reward}",
-  "@profile_rewardItem": {
-    "placeholders": {
-      "title": {
-        "type": "String"
-      },
-      "reward": {
-        "type": "String"
-      }
-    }
-  },
+  "@profile_rewardItem": "[('placeholders', [('title', [('type', 'String')]), ('reward', [('type', 'String')])])]",
   "profile_defaultUsername": "训练用户",
   "profile_defaultBio": "欢迎来到GYM MATCH",
   "profile_referralRewardDescription": "AI x5次 + 被推荐人也获得AI x3次",
   "profile_premiumOnlyFeature": "{featureName}是高级计划会员专属功能。",
-  "@profile_premiumOnlyFeature": {
-    "placeholders": {
-      "featureName": {
-        "type": "String"
-      }
-    }
-  },
-  "profile_featureInDevelopment": "{featureName}目前正在开发中。\\n下次更新时即可使用。",
-  "@profile_featureInDevelopment": {
-    "placeholders": {
-      "featureName": {
-        "type": "String"
-      }
-    }
-  },
+  "@profile_premiumOnlyFeature": "[('placeholders', [('featureName', [('type', 'String')])])]",
+  "profile_featureInDevelopment": "{featureName}目前正在开发中。\n下次更新时即可使用。",
+  "@profile_featureInDevelopment": "[('placeholders', [('featureName', [('type', 'String')])])]",
   "partnerCampaign_imageLoadError": "图片加载失败：{error}",
   "partnerCampaign_saved": "✅ 活动已保存！立即反映到用户应用",
   "partnerCampaign_saveError": "❌ 保存失败：{error}",
@@ -3739,13 +3592,14 @@
   "trainerRecords_reload": "重新加载",
   "poMembers_allMembers": "全部会员",
   "poMembers_dormant": "休眠中",
-  "profileEdit_imageLoadError": "图片加载失败\n{error}",
+  "profileEdit_imageLoadError": "图片加载失败
+{error}",
   "profileEdit_proOnlyFeature": "Pro计划专属功能",
   "profile_termsAndSubscription": "服务条款·订阅",
   "profile_privacyPolicy": "个人信息处理",
   "reservation_submitted": "✅ 预约申请已发送！店铺将与您联系。",
   "reservation_submitError": "❌ 预约发送失败：{error}",
-  "subscription_step4": "4. 选择\"GYM MATCH\"",
+  "subscription_step4": "4. 选择"GYM MATCH"",
   "subscription_step5": "5. 选择希望的计划",
   "visitHistory_deleteHistory": "删除访问历史",
   "visitHistory_reload": "重新加载",
@@ -3770,7 +3624,7 @@
   "rmCalculator_barWeightError": "请输入大于杠铃重量（{barWeight}kg）的值",
   "statisticsDashboard_title": "统计仪表板",
   "workoutTemplate_title": "训练模板",
-  "workoutTemplate_deleteConfirm": "是否删除\"{name}\"？",
+  "workoutTemplate_deleteConfirm": "是否删除"{name}"？",
   "weeklyReports_workoutsSummary": "{workouts}次 • {minutes}分钟",
   "workoutMemo_updated": "备忘录已更新",
   "workoutMemo_delete": "删除备忘录",
@@ -3787,5 +3641,8 @@
   "announcementType_newEquipment": "新设备",
   "announcementType_hours": "营业时间",
   "reward_adCreditEarned": "获得了1次AI积分！",
+  "subscriptionFeatureAI20": "🤖 AI功能每月20次（教练/成长/效果总计）",
+  "subscriptionFeatureGrowthAnalysis": "📈 成长预测和效果分析",
+  "subscriptionFeatureAIUnlimited": "🤖 无限AI功能（教练/成长/效果）",
   "ai_menuGenerationError": "菜单生成失败"
 }

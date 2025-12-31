@@ -46,14 +46,7 @@
   "reps": "시간",
   "weight": "무게",
   "weightKg": "{weight}kg",
-  "@weightKg": {
-    "placeholders": {
-      "weight": {
-        "type": "double",
-        "format": "decimalPattern"
-      }
-    }
-  },
+  "@weightKg": "[('placeholders', [('weight', [('type', 'double'), ('format', 'decimalPattern')])])]",
   "restTime": "휴식 시간",
   "duration": "시간",
   "distance": "거리",
@@ -965,13 +958,7 @@
   "aiMenuRetryPrompt": "다시 메뉴를 생성합니다.",
   "bodyPartBalance30Days": "지난 30일간의 균형",
   "bodyPartBalanceDays": "지난 {days}일간의 균형",
-  "@bodyPartBalanceDays": {
-    "placeholders": {
-      "days": {
-        "type": "Object"
-      }
-    }
-  },
+  "@bodyPartBalanceDays": "[('placeholders', [('days', [('type', 'Object')])])]",
   "buttonAdd": "추가",
   "buttonCancel": "취소",
   "buttonClose": "닫다",
@@ -992,33 +979,15 @@
   "subscriptionDetailedStats": "상세한 혼잡도 통계",
   "subscriptionFreeFeatures": "무료 플랜의 모든 기능",
   "subscriptionFreeTrialDays": "{days}일간 무료 체험",
-  "@subscriptionFreeTrialDays": {
-    "placeholders": {
-      "days": {
-        "type": "String"
-      }
-    }
-  },
+  "@subscriptionFreeTrialDays": "[('placeholders', [('days', [('type', 'String')])])]",
   "subscriptionGrowthPrediction": "성장 예측 및 효과 분석",
   "subscriptionGymReviews": "체육관 리뷰 게시물",
   "subscriptionMonthlyEquivalent": "월 변환 ¥{price}",
-  "@subscriptionMonthlyEquivalent": {
-    "placeholders": {
-      "price": {
-        "type": "String"
-      }
-    }
-  },
+  "@subscriptionMonthlyEquivalent": "[('placeholders', [('price', [('type', 'String')])])]",
   "subscriptionNoAds": "광고 표시 없음",
   "subscriptionPopularBadge": "인기 No.1",
   "subscriptionSavings": "¥{amount}유익!",
-  "@subscriptionSavings": {
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      }
-    }
-  },
+  "@subscriptionSavings": "[('placeholders', [('amount', [('type', 'String')])])]",
   "subscriptionStartFreeTrial": "무료 평가판 시작",
   "subscriptionUnlimitedFavorites": "즐겨찾기 무제한",
   "workoutRepsLabel": "시간",
@@ -1360,7 +1329,7 @@
   "general_879adce1": "• 메시지를 보내고받을 수 없습니다.",
   "subscription_a9e04143": "계획 유형:",
   "workout_b23db97f": "휴식 시간 설정",
-  "general_38e0a1b9": "🎖️ 배지 \"혼잡 리포터\"",
+  "general_38e0a1b9": "🎖️ 배지 "혼잡 리포터"",
   "general_80e87040": "🌐 웹 환경: 모의 광고 표시",
   "workout_61db805d": "리어레이즈",
   "gym_a28954a8": "전속 트레이너",
@@ -1500,8 +1469,8 @@
   "general_5c1f42bf": "완전히 힘을 다할 때까지",
   "general_6c0544e0": "당신에게 가장 적합한 교육",
   "general_a0f6a560": "요금: ¥300",
-  "workout_684f2433": "설명[::]\\s*",
-  "workout_8cd2b320": "(\\d+)\\s*회",
+  "workout_684f2433": "설명[::]\s*",
+  "workout_8cd2b320": "(\d+)\s*회",
   "workout_9de8907b": "# 과학적 근거에 기초한 교육 메뉴",
   "general_8e53814f": "가고시마",
   "gym_dd5a565b": "회로 기계",
@@ -2283,7 +2252,7 @@
   "workout_e03f69fa": "부족 부위",
   "gym_ec2f08b5": "24시간 운영 피트니스 체육관. 초보자부터 상급자까지 폭넓게 대응.",
   "workout_903c82de": "기본 세트",
-  "general_fb9d742c": "체육관 상세 화면에서 \"체크인\"하면 여기에 기록이 표시됩니다.",
+  "general_fb9d742c": "체육관 상세 화면에서 "체크인"하면 여기에 기록이 표시됩니다.",
   "workout_f00eef45": "오버헤드 트라이셉스 확장",
   "general_94ebce72": "메시지 입력...",
   "general_168034dd": "메시지 전송 성공",
@@ -2443,7 +2412,7 @@
   "gym_2caec863": "미국에서 화제의 그룹 훈련 스튜디오.",
   "workout_da75109e": "오프 날짜로 등록했습니다.",
   "general_7db7cd79": "엘리트",
-  "general_2474b23c": "테스트에 \"TestFlight 샌드박스 요금\"을 사용합니다.",
+  "general_2474b23c": "테스트에 "TestFlight 샌드박스 요금"을 사용합니다.",
   "general_f499f3a7": "계약 정보",
   "exercise_1602d233": "불가리안 스쿼트",
   "workout_837b9b2e": "청용번체중문제공 상세설명",
@@ -2522,7 +2491,7 @@
   "profile_81578c7e": "파일 데이터를 검색할 수 없습니다.",
   "profile_29ca7fb7": "판매 가격",
   "gym_58208487": "가족이 다닐 수 있는 종합 스포츠 클럽. 키즈 스쿨도 충실.",
-  "general_s": "[\\s\\-_&·]",
+  "general_s": "[\s\-_&·]",
   "general_07cf822c": "사이타마",
   "workout_f894e7b4": "➕ 새 기록 만들기",
   "general_06bcf409": "홈 화면에서 빠르게 액세스",
@@ -2612,7 +2581,7 @@
   "exercise_0afc8ed2": "루마니안 데드 리프트",
   "general_e965eb2c": "오늘의 교육 전체의 주관적 강도는?",
   "general_08f3d852": "지금 시작하자!",
-  "workout_27f8dd3a": "(\\d+)\\s*세트",
+  "workout_27f8dd3a": "(\d+)\s*세트",
   "profile_5cd65c3e": "메시지를 입력하세요.",
   "bodyPart_c158cb15": "상완 삼두근",
   "general_0f944350": "오이타",
@@ -2910,9 +2879,9 @@
   "autoGen_3a8ab63e": "⭐ 영년 플랜(무기한)",
   "autoGen_f7cf4b71": "ATT 상태: $status",
   "autoGen_872bf7a3": "📤 같은 예상 데이터: $pendingCount건",
-  "autoGen_d1f54967": "1단계: 통계 기반 + 사용자 보고(비용\\$0/월)",
-  "autoGen_cbcfc076": "2단계: 하이브리드 전략(Cost\\$170/월)",
-  "autoGen_7d8a2d8a": "3단계: 전체 API 도입(비용\\$850/월)",
+  "autoGen_d1f54967": "1단계: 통계 기반 + 사용자 보고(비용\$0/월)",
+  "autoGen_cbcfc076": "2단계: 하이브리드 전략(Cost\$170/월)",
+  "autoGen_7d8a2d8a": "3단계: 전체 API 도입(비용\$850/월)",
   "autoGen_e899fff0": "Effect of high intensity study - 6주 동안 +31.2%",
   "autoGen_0caa3e2f": "목표 렙 수를 1-2회 초과 달성",
   "autoGen_10359595": "주요 종목의 1RM 추정치가 3-4주, 2% 미만의 변화",
@@ -2947,143 +2916,143 @@
   "autoGen_aeacdbe7": "도쿄도 세타가야구 산겐자야 15-15-15",
   "autoGen_386a19ab": "평일 10:00-23:00, 주말 10:00-21:00",
   "autoGen_d363c8dd": "시즈오카현 후지에다시 스에히로 4가 1-17",
-  "autoGen_96475ff8": "AI 추가 팩(5회분)\\n",
-  "autoGen_b71ac08e": "요금: ¥300\\n\\n",
-  "autoGen_1ea406c3": "AI 추가팩(5회분)을 구입했습니다! \\n",
-  "autoGen_7a59299a": "이 상품은 현재 사용할 수 없습니다. \\n",
+  "autoGen_96475ff8": "AI 추가 팩(5회분)\n",
+  "autoGen_b71ac08e": "요금: ¥300\n\n",
+  "autoGen_1ea406c3": "AI 추가팩(5회분)을 구입했습니다! \n",
+  "autoGen_7a59299a": "이 상품은 현재 사용할 수 없습니다. \n",
   "autoGen_031e7ade": "나머지: $remaining 시간",
-  "autoGen_9db89838": "• 추가 구매 분은 이달 말까지 유효합니다 \\ n",
-  "autoGen_c77de40c": "• 달이 바뀌면 추가 구매도 재설정됩니다.\\n",
-  "autoGen_1775a032": "• 추가 구매는 언제든지 가능합니다\\n",
+  "autoGen_9db89838": "• 추가 구매 분은 이달 말까지 유효합니다 \ n",
+  "autoGen_c77de40c": "• 달이 바뀌면 추가 구매도 재설정됩니다.\n",
+  "autoGen_1775a032": "• 추가 구매는 언제든지 가능합니다\n",
   "autoGen_c825e1b3": "/$aiCount회",
   "autoGen_f9edcc24": "스택 추적: $stackTrace",
-  "autoGen_11b93b24": "📴 오프라인 저장됨\\n온라인 복귀 시 자동 동기화됨",
+  "autoGen_11b93b24": "📴 오프라인 저장됨\n온라인 복귀 시 자동 동기화됨",
   "autoGen_837372a4": "🗑️ 기록 삭제 중... ID: $documentId",
-  "autoGen_7cf32853": "1RM(1 Rep Max)은 한 번만 들어올릴 수 있는 최대 중량입니다. \\n",
+  "autoGen_7cf32853": "1RM(1 Rep Max)은 한 번만 들어올릴 수 있는 최대 중량입니다. \n",
   "autoGen_ef30a8d3": "바 중량({barWeight}kg)보다 큰 중량을 입력하세요.",
-  "autoGen_20458277": "목표 중량을 입력하면 바벨의 한쪽에 필요한 플레이트의 \\n",
+  "autoGen_20458277": "목표 중량을 입력하면 바벨의 한쪽에 필요한 플레이트의 \n",
   "autoGen_56b65fc2": "막대 중량($_barWeight kg)을 포함한 총 중량 입력",
   "autoGen_201ea826": "플레이트 필요 없음 (바 전용)",
-  "autoGen_e9fe8032": "표시는 한쪽의 플레이트 수입니다. \\n 양쪽에 동일한 구성을 설정하십시오.",
+  "autoGen_e9fe8032": "표시는 한쪽의 플레이트 수입니다. \n 양쪽에 동일한 구성을 설정하십시오.",
   "autoGen_9ff70568": "🎁 AI 1회분을 선물! (보고 {result_reportCount}번째)",
   "autoGen_f0f0c7f4": "다음 보상까지 나중에 {nextMilestone_remaining}회!",
-  "autoGen_24950e16": "릴리스 빌드(App Store용)에서는 표시되지 않습니다.\\nTestFlight 빌드에서만 사용 가능",
-  "autoGen_de9021b8": "Apple 검토를 위해 개발자 메뉴에서 계획 변경 기능이 삭제되었습니다. \\n\\n",
-  "autoGen_25deda5a": "플랜 변경은 RevenueCat을 통한 정규 과금에만 유효합니다. \\n\\n",
-  "autoGen_5657d91f": "• 온보딩 투어\\n",
-  "autoGen_9c5698dd": "• 리뷰 요청 대화 상자\\n",
-  "autoGen_91c9449a": "1. 위의 버튼으로 모든 플랜으로 변경할 수 있습니다\\n",
-  "autoGen_734a59b9": "2. 프로플랜으로 변경하면 모든 기능을 사용할 수 있습니다\\n",
-  "autoGen_a0b3c8d7": "3. AI 사용 횟수는 월별로 자동 재설정됩니다\\n",
-  "autoGen_3a6be6b1": "좋은 훈련이었습니다! \\n 가벼운 스트레칭과 충분한 수분을 공급합시다.",
-  "autoGen_26470233": "적당한 부하 훈련이었습니다. \\n7-8시간의 수면과 단백질 보충을 유의합시다.",
-  "autoGen_2cfbd017": "고강도 훈련이었습니다. \\n 충분한 휴식과 영양 보충이 필요합니다. 무리하지 않고 회복을 우선합시다.",
-  "autoGen_6627b2ca": "매우 고강도 훈련이었습니다. \\n오늘은 완전 휴양을 추천합니다. 수면, 영양, 스트레칭을 중시하십시오.",
+  "autoGen_24950e16": "릴리스 빌드(App Store용)에서는 표시되지 않습니다.\nTestFlight 빌드에서만 사용 가능",
+  "autoGen_de9021b8": "Apple 검토를 위해 개발자 메뉴에서 계획 변경 기능이 삭제되었습니다. \n\n",
+  "autoGen_25deda5a": "플랜 변경은 RevenueCat을 통한 정규 과금에만 유효합니다. \n\n",
+  "autoGen_5657d91f": "• 온보딩 투어\n",
+  "autoGen_9c5698dd": "• 리뷰 요청 대화 상자\n",
+  "autoGen_91c9449a": "1. 위의 버튼으로 모든 플랜으로 변경할 수 있습니다\n",
+  "autoGen_734a59b9": "2. 프로플랜으로 변경하면 모든 기능을 사용할 수 있습니다\n",
+  "autoGen_a0b3c8d7": "3. AI 사용 횟수는 월별로 자동 재설정됩니다\n",
+  "autoGen_3a6be6b1": "좋은 훈련이었습니다! \n 가벼운 스트레칭과 충분한 수분을 공급합시다.",
+  "autoGen_26470233": "적당한 부하 훈련이었습니다. \n7-8시간의 수면과 단백질 보충을 유의합시다.",
+  "autoGen_2cfbd017": "고강도 훈련이었습니다. \n 충분한 휴식과 영양 보충이 필요합니다. 무리하지 않고 회복을 우선합시다.",
+  "autoGen_6627b2ca": "매우 고강도 훈련이었습니다. \n오늘은 완전 휴양을 추천합니다. 수면, 영양, 스트레칭을 중시하십시오.",
   "autoGen_6fc271f8": "$totalSets 세트",
-  "autoGen_365b72d7": "최적의 복구 기간과 조언을 제공합니다. \\n\\n",
+  "autoGen_365b72d7": "최적의 복구 기간과 조언을 제공합니다. \n\n",
   "autoGen_e177a676": "'{gym_name}'을 즐겨찾기에서 삭제하시겠습니까?",
   "autoGen_298342bb": "{gym_name}님이 즐겨찾기에서 삭제했습니다.",
   "autoGen_248390f0": "좋아하는 체육관 ({favoriteGyms_length})",
   "autoGen_8413b8f0": "{goal_period__GoalPeriod_weekly_AppLocalizations_ofcontext_thisWeek__AppLocalizations_ofcontext_thisMonth} 목표",
-  "autoGen_799ab9f4": "$goalName을 삭제하시겠습니까? \\n이 작업은 취소할 수 없습니다.",
+  "autoGen_799ab9f4": "$goalName을 삭제하시겠습니까? \n이 작업은 취소할 수 없습니다.",
   "autoGen_2a5ffab4": "{goal_name} 수정",
   "autoGen_1605acad": "{widget_gym_name}에 체크인했습니다.",
   "autoGen_51d4147a": "$minutesAgo 분 전 업데이트",
-  "autoGen_161e491d": "아직 리뷰가 없습니다.\\n첫 리뷰를 게시하세요!",
+  "autoGen_161e491d": "아직 리뷰가 없습니다.\n첫 리뷰를 게시하세요!",
   "autoGen_c930c91e": "현재 혼잡도: {gym_crowdLevelText}",
   "autoGen_88e64c29": "AI 잔량: $remainingCredits회",
-  "autoGen_9cabffba": "\\nAI가 전문 교육 메뉴를 과학적으로 분석합니다.",
-  "autoGen_5ff6013e": "지난 훈련에서 이틀이 지났습니다. \\n오늘도 훈련하지 않겠습니까?",
-  "autoGen_e199031a": "잠시 훈련을 기록하지 않았습니다. \\n다시 시작하지 않겠습니까?",
-  "autoGen_16ea699e": "교육을 기록하여 \\n 진행 상황을 시각화하세요.",
+  "autoGen_9cabffba": "\nAI가 전문 교육 메뉴를 과학적으로 분석합니다.",
+  "autoGen_5ff6013e": "지난 훈련에서 이틀이 지났습니다. \n오늘도 훈련하지 않겠습니까?",
+  "autoGen_e199031a": "잠시 훈련을 기록하지 않았습니다. \n다시 시작하지 않겠습니까?",
+  "autoGen_16ea699e": "교육을 기록하여 \n 진행 상황을 시각화하세요.",
   "autoGen_62bb229b": "🏋️ 무게 표시: $exerciseName - weight: $weight, isBodyweightMode: $isBodyweightMode, isAbs: $isAbs",
   "autoGen_cd7a5e77": "📋 추가 세트 준비(+버튼에서): $exerciseName",
-  "autoGen_c676bfd2": "'$exerciseName'의 기록을 삭제하시겠습니까? \\n이 작업은 취소할 수 없습니다.",
+  "autoGen_c676bfd2": "'$exerciseName'의 기록을 삭제하시겠습니까? \n이 작업은 취소할 수 없습니다.",
   "autoGen_3ff76bd8": "'$exerciseName'이(가 남아있습니다 {totalRemainingExercises}종목)",
-  "autoGen_a215dfab": "0-1: 휴식\\n2-3: 가벼운 운동\\n4-6: 중간 운동\\n7-8: 힘든 운동\\n9-10: 최대 노력",
+  "autoGen_a215dfab": "0-1: 휴식\n2-3: 가벼운 운동\n4-6: 중간 운동\n7-8: 힘든 운동\n9-10: 최대 노력",
   "autoGen_e5d37f36": "$recoveryHours 시간",
-  "autoGen_9beb17d9": "【기초 분석】\\n$baseAdvice",
-  "autoGen_71f910d6": "【ACWR 분석】\\n$acwrAdvice",
+  "autoGen_9beb17d9": "【기초 분석】\n$baseAdvice",
+  "autoGen_71f910d6": "【ACWR 분석】\n$acwrAdvice",
   "autoGen_838efe8a": "나머지 {goal_daysRemaining}일 | 현재 페이스를 유지하자",
   "autoGen_9bae24d2": "초대 코드: $_referralCode",
   "autoGen_d0688916": "초대한 측: AI 추가 팩×1개(5회분, ¥300 상당)",
-  "autoGen_b8db302a": "GYM MATCH에서 함께 훈련합시다! 초대 코드: $_referralCode\\n\\n",
-  "autoGen_f4f68181": "{AppLocalizations_ofcontext_searchGym}\\n※위치 정보는 검색에만 사용되며 저장되지 않습니다.",
+  "autoGen_b8db302a": "GYM MATCH에서 함께 훈련합시다! 초대 코드: $_referralCode\n\n",
+  "autoGen_f4f68181": "{AppLocalizations_ofcontext_searchGym}\n※위치 정보는 검색에만 사용되며 저장되지 않습니다.",
   "autoGen_4087785c": "⏱️ Google Places API 제한시간: $e",
   "autoGen_d014a7b1": "ℹ️ 검색 결과가 0건(이 지역에 체육관이 없을 가능성)",
   "autoGen_e197bc84": "{gyms_length}개의 체육관을 찾았습니다.",
   "autoGen_934c5ba2": "근처의 체육관 {nearbyGyms_length}개 보기",
-  "autoGen_159877ec": "교육을 기록하고 \\nAI가 나만의 메뉴를 제안합니다.",
-  "autoGen_1628fbdf": "종목・중량・횟수를 입력할 뿐! \\n캘린더로 성장 시각화",
-  "autoGen_b8679c80": "Google Gemini 2.0은 \\ n 당신에게 가장 적합한 메뉴를 자동 생성",
+  "autoGen_159877ec": "교육을 기록하고 \nAI가 나만의 메뉴를 제안합니다.",
+  "autoGen_1628fbdf": "종목・중량・횟수를 입력할 뿐! \n캘린더로 성장 시각화",
+  "autoGen_b8679c80": "Google Gemini 2.0은 \ n 당신에게 가장 적합한 메뉴를 자동 생성",
   "autoGen_97fc7921": "첫 번째 교육을 기록하십시오.",
   "autoGen_98bff4f1": "위 양식을 입력하면 여기에 미리보기가 표시됩니다.",
   "autoGen_66304a49": "매장 분위기와 기계 및 장비의 사진을 업로드하십시오.",
-  "autoGen_78d3c5fd": "※ 복수 점포를 운영되고 있는 경우는, 각 점포마다 다른 메일 주소를 설정해 주세요. \\n※ 예약 알림은 현재 Firebase Functions를 통해 전송됩니다(별도 설정 필요).",
+  "autoGen_78d3c5fd": "※ 복수 점포를 운영되고 있는 경우는, 각 점포마다 다른 메일 주소를 설정해 주세요. \n※ 예약 알림은 현재 Firebase Functions를 통해 전송됩니다(별도 설정 필요).",
   "autoGen_5f66300d": "변경 빈도: 높음(매일 업데이트 권장)",
   "autoGen_47b8a545": "<25세: 0.95x, 40-50세: 1.05x, 50+세: 1.10x",
   "autoGen_f9998737": "<1년: 1.10x, 3-5년: 0.95x, 5+년: 0.90x",
   "autoGen_99e6fba7": "1유닛마다 +5% (맥주 350ml≒1.4유닛)",
-  "autoGen_2b6b9ab2": "Personal Factor Multiplier (PFM)는 연령, 경험, 수면, 영양 및 알코올의 5 가지 요소를 통합하여 개인의 피로 감수성을 보정합니다. \\n\\n",
-  "autoGen_38fecd64": "변경 빈도가 낮은 요소입니다:\\n",
-  "autoGen_ecb9080a": "• 나이: 나이로 인한 회복력 변화\\n",
-  "autoGen_b9c37a72": "매일 변하는 요소입니다: \\ n",
-  "autoGen_fb6e8bd2": "• 수면 시간: 회복 품질\\n",
-  "autoGen_b905afe2": "• 단백질 섭취: 근육 회복 재료\\n",
-  "autoGen_43279a59": "• 정적 요인: 몇 달에 한 번\\n",
-  "autoGen_9772ef29": "전문 트레이너의 \\n맨투맨 지도",
+  "autoGen_2b6b9ab2": "Personal Factor Multiplier (PFM)는 연령, 경험, 수면, 영양 및 알코올의 5 가지 요소를 통합하여 개인의 피로 감수성을 보정합니다. \n\n",
+  "autoGen_38fecd64": "변경 빈도가 낮은 요소입니다:\n",
+  "autoGen_ecb9080a": "• 나이: 나이로 인한 회복력 변화\n",
+  "autoGen_b9c37a72": "매일 변하는 요소입니다: \ n",
+  "autoGen_fb6e8bd2": "• 수면 시간: 회복 품질\n",
+  "autoGen_b905afe2": "• 단백질 섭취: 근육 회복 재료\n",
+  "autoGen_43279a59": "• 정적 요인: 몇 달에 한 번\n",
+  "autoGen_9772ef29": "전문 트레이너의 \n맨투맨 지도",
   "autoGen_c3070099": "📋 스택 추적: $stackTrace",
-  "autoGen_b82404b5": "GYM MATCH에서 함께 훈련하지 않겠습니까? \\n\\n",
-  "autoGen_6738f579": "추천 코드: $referralCode\\n",
-  "autoGen_db4ebdd3": "AI 사용 횟수 3회를 받을 수 있습니다! \\n\\n",
+  "autoGen_b82404b5": "GYM MATCH에서 함께 훈련하지 않겠습니까? \n\n",
+  "autoGen_6738f579": "추천 코드: $referralCode\n",
+  "autoGen_db4ebdd3": "AI 사용 횟수 3회를 받을 수 있습니다! \n\n",
   "autoGen_dee40980": "$featureName은 유료 플랜 회원 한정 기능입니다.",
-  "autoGen_1d067291": "$featureName은 현재 개발 중입니다. \\n다음 업데이트에서 사용할 수 있습니다.",
-  "autoGen_8e38c4b2": "친구 소개 코드를 입력하여 \\n 혜택을 받으세요!",
-  "autoGen_1cd8d542": "※ 초대 코드는 한 번만 사용할 수 있습니다 \\ n ※ 이미 다른 사용자가 사용한 코드는 유효하지 않습니다.",
-  "autoGen_8bc67a22": "※ 예약 신청 후, 점포로부터 확인의 연락이 있습니다. \\n※ 이 신청은 임시 예약입니다. 점포 확인으로 예약 확정됩니다.",
+  "autoGen_1d067291": "$featureName은 현재 개발 중입니다. \n다음 업데이트에서 사용할 수 있습니다.",
+  "autoGen_8e38c4b2": "친구 소개 코드를 입력하여 \n 혜택을 받으세요!",
+  "autoGen_1cd8d542": "※ 초대 코드는 한 번만 사용할 수 있습니다 \ n ※ 이미 다른 사용자가 사용한 코드는 유효하지 않습니다.",
+  "autoGen_8bc67a22": "※ 예약 신청 후, 점포로부터 확인의 연락이 있습니다. \n※ 이 신청은 임시 예약입니다. 점포 확인으로 예약 확정됩니다.",
   "autoGen_5c140a75": "전체 {sortedGyms_length}건 중 {startIndex__1}-{endIndex_gt_sortedGyms_length_sortedGyms_length__endIndex}개 보기",
   "autoGen_3503018a": "🤖 AI 기능 월 20회(AI 코치·성장 예측·효과 분석 합계)",
   "autoGen_680465c2": "🤖 AI 기능 무제한(AI 코치·성장 예측·효과 분석)",
-  "autoGen_5f00a229": "• 무료 평가판 기간: Premium 30일 / Pro 14일\\n",
-  "autoGen_87c8ba71": "• 평가판이 끝나면 자동으로 유료 플랜으로 이동합니다.\\n",
+  "autoGen_5f00a229": "• 무료 평가판 기간: Premium 30일 / Pro 14일\n",
+  "autoGen_87c8ba71": "• 평가판이 끝나면 자동으로 유료 플랜으로 이동합니다.\n",
   "autoGen_97af1fdc": "• 언제든지 취소 가능(기간 만료까지 이용 가능)",
-  "autoGen_27f6a7d8": "{subscriptionService_getPlanNamenewPlan}로 변경합니다. \\n\\n",
+  "autoGen_27f6a7d8": "{subscriptionService_getPlanNamenewPlan}로 변경합니다. \n\n",
   "autoGen_dfce8f7b": "{subscriptionService_getPlanNamenewPlan}로 변경되었습니다!",
   "autoGen_a3361465": "$targetPlanName으로 변경",
   "autoGen_ea012ccb": "$targetPlanName으로 변경하면 다음 기능이 제한됩니다.",
   "autoGen_d90386be": "App Store 설정에서 $targetPlanName으로 변경하세요.",
   "autoGen_62bcb620": "2. 상단의 Apple ID를 탭합니다.",
-  "autoGen_6d64f0af": "체육관 세부정보 화면에서 '체크인'하면 \\n여기에 기록이 표시됩니다.",
+  "autoGen_6d64f0af": "체육관 세부정보 화면에서 '체크인'하면 \n여기에 기록이 표시됩니다.",
   "autoGen_fbe877fb": "🔙 [IMPORT] 오류 후에도 미리보기 화면에 남아 있습니다 (사용자가 닫을 때까지)",
   "autoGen_3aa92e14": "{localeInfo_nativeName}로 변경되었습니다.",
   "autoGen_81de7e28": "GYM MATCH - 6개 언어 지원",
   "autoGen_ead97a43": "광고 ID: $bannerAdUnitId",
-  "autoGen_dfb8009a": "훈련 부하가 너무 낮습니다. \\n점차적으로 부하를 올리는 것으로 퍼포먼스 향상을 기대할 수 있습니다.",
-  "autoGen_b49536ed": "이상적인 훈련 부하입니다! \\n현재의 페이스를 유지합시다. 부상 위험은 최소입니다.",
-  "autoGen_8bcd57bf": "경계 구역입니다. \\n 부상 위험이 다소 증가하고 있습니다. 회복을 우선하고 다음에 부하를 조금 낮추자.",
-  "autoGen_7a24bc71": "위험 구역입니다! \\n 부상 위험이 높습니다. 오늘은 완전 휴양을 추천합니다.",
-  "autoGen_fc1a79ee": "1시간 사용 한도({MAX_AI_CALLS_PER_HOUR}회)에 도달했습니다. \\n 잠시 기다려 주세요.",
-  "autoGen_8ed6a095": "오늘 사용 한도({MAX_AI_CALLS_PER_DAY}회)에 도달했습니다. \\n내일 다시 이용해 주세요.",
-  "autoGen_4cf248d0": "이달의 사용 한도({MAX_AI_CALLS_PER_MONTH}회)에 도달했습니다. \\n",
-  "autoGen_0efa33de": "비정상적인 사용 패턴이 감지되었습니다. \\n",
+  "autoGen_dfb8009a": "훈련 부하가 너무 낮습니다. \n점차적으로 부하를 올리는 것으로 퍼포먼스 향상을 기대할 수 있습니다.",
+  "autoGen_b49536ed": "이상적인 훈련 부하입니다! \n현재의 페이스를 유지합시다. 부상 위험은 최소입니다.",
+  "autoGen_8bcd57bf": "경계 구역입니다. \n 부상 위험이 다소 증가하고 있습니다. 회복을 우선하고 다음에 부하를 조금 낮추자.",
+  "autoGen_7a24bc71": "위험 구역입니다! \n 부상 위험이 높습니다. 오늘은 완전 휴양을 추천합니다.",
+  "autoGen_fc1a79ee": "1시간 사용 한도({MAX_AI_CALLS_PER_HOUR}회)에 도달했습니다. \n 잠시 기다려 주세요.",
+  "autoGen_8ed6a095": "오늘 사용 한도({MAX_AI_CALLS_PER_DAY}회)에 도달했습니다. \n내일 다시 이용해 주세요.",
+  "autoGen_4cf248d0": "이달의 사용 한도({MAX_AI_CALLS_PER_MONTH}회)에 도달했습니다. \n",
+  "autoGen_0efa33de": "비정상적인 사용 패턴이 감지되었습니다. \n",
   "autoGen_4d7afd8b": "🚩 사용자 플래그: $userId - $flagType - $reason",
-  "autoGen_ba165086": "계정이 차단되었습니다. \\n지원팀에 문의하세요.",
+  "autoGen_ba165086": "계정이 차단되었습니다. \n지원팀에 문의하세요.",
   "autoGen_873ee19b": "🎁소개 보너스: $referralBonus회",
   "autoGen_c6156f0e": "AI 추가 팩: $addonUsage 회",
   "autoGen_d90cbf45": "AI 크레딧: $credits 회",
   "autoGen_d293bb2d": "$level 레벨에서 월 +{monthlyRate__100_round}%의 성장을 기대할 수 있습니다.",
   "autoGen_df68039d": "현재 {currentWeight_round}kg → 4개월 후 {predictedWeight_round}kg(+{predictedWeight__currentWeight_round}kg)의 성장이 과학적으로 전망됩니다.",
-  "autoGen_dde51564": "\\n## 추천 액션 플랜",
+  "autoGen_dde51564": "\n## 추천 액션 플랜",
   "autoGen_88d87130": "* 부하 증가: 주 +{weeklyRate__100__10_round__10}%의 속도로 무게 올리기",
   "autoGen_a18ea9fb": "* 충분한 휴식($bodyPart는 최소 48시간 비운다)",
   "autoGen_cb2b318c": "* 적절한 영양 섭취(단백질 1.6-2.2g/kg/일)",
   "autoGen_e9e092c8": "세트 추가당 +0.37% 성장",
   "autoGen_0a0a8439": "명확화",
   "autoGen_aee3d6b6": "오류가 발생했습니다: {e_toString}",
-  "autoGen_99ca4bf5": "GYM MATCH로 트레이닝 기록을 공유! \\n#GYMMATCH #근육 트레이닝 기록 #헬스\\n\\nhttps://gym-match-e560d.web.app",
+  "autoGen_99ca4bf5": "GYM MATCH로 트레이닝 기록을 공유! \n#GYMMATCH #근육 트레이닝 기록 #헬스\n\nhttps://gym-match-e560d.web.app",
   "autoGen_efdeb364": "$exerciseName으로 새로운 기록을 달성했습니다!",
-  "autoGen_3f7f8f41": "적당한 부하 훈련이었습니다. \\n7-8시간의 수면과 단백질 보급(체중 1kg당 1.6g 이상)을 유의합시다.",
-  "autoGen_07ee9ffa": "매우 고강도 훈련이었습니다. \\n오늘은 완전 휴양을 추천합니다. 수면 8시간 이상, 고단백 음식, 스트레칭을 중시합니다.",
+  "autoGen_3f7f8f41": "적당한 부하 훈련이었습니다. \n7-8시간의 수면과 단백질 보급(체중 1kg당 1.6g 이상)을 유의합시다.",
+  "autoGen_07ee9ffa": "매우 고강도 훈련이었습니다. \n오늘은 완전 휴양을 추천합니다. 수면 8시간 이상, 고단백 음식, 스트레칭을 중시합니다.",
   "autoGen_76426959": "⏳ Firestore 쿼리 실행: $cacheKey",
   "autoGen_901fff2b": "🗑️ 목표 삭제: $goalId",
   "autoGen_10698ef0": "✏️ 목표 업데이트: $goalId",
@@ -3092,8 +3061,8 @@
   "autoGen_6fe636e4": "📋 권한 요청 결과: $permission",
   "autoGen_8679dd9c": "⏱️ GPS 위치 정보 취득 타임 아웃(15초)",
   "autoGen_5dd7baf1": "좋은 시작입니다! 그리고 {magicNumberRecords__count} 기록으로 습관화 달성!",
-  "autoGen_69df4973": "30일 이내에 5기록으로 습관화! \\n오늘부터 시작하지 않겠습니까?",
-  "autoGen_1a0782d5": "그리고 4기록으로 습관화 달성! \\n남은 {daysRemaining}일입니다.",
+  "autoGen_69df4973": "30일 이내에 5기록으로 습관화! \n오늘부터 시작하지 않겠습니까?",
+  "autoGen_1a0782d5": "그리고 4기록으로 습관화 달성! \n남은 {daysRemaining}일입니다.",
   "autoGen_ec0ce4f0": "다음은 {streakDays__7} 일간 연속을 목표로 합시다.",
   "autoGen_6f3ae622": "$gymName이 비어 있습니다!",
   "autoGen_b9e68d6a": "$levelText - 지금 기회!",
@@ -3102,14 +3071,14 @@
   "autoGen_65c6cedc": "🕐 시공간 필터 사용 - 검색자 체육관: $userGymId, 시간: $userPreferredHours",
   "autoGen_7f8184e6": "⏭️ Skip: {doc_id} (Free/Premium) - 검색자가 Non-Pro",
   "autoGen_61b4bd56": "⏭️ Skip: {doc_id} - 실력 차이가 크다",
-  "autoGen_f3cdae64": "매칭 요청 전송은 Pro 플랜 한정 기능입니다. \\nPro 플랜으로 업그레이드하여 파트너와 연결하세요!",
+  "autoGen_f3cdae64": "매칭 요청 전송은 Pro 플랜 한정 기능입니다. \nPro 플랜으로 업그레이드하여 파트너와 연결하세요!",
   "autoGen_44750f0a": "🚀 빠른 시작: $templateName",
-  "autoGen_081f30b2": "AI 추가 팩 상품을 찾을 수 없습니다. \\n",
-  "autoGen_bd2d5ba0": "원하는 제품 ID: $aiAdditionalPackProductId\\n",
-  "autoGen_371e13e6": "사용 가능한 제품 ID: $availableIds\\n\\n",
-  "autoGen_02e74dc3": "해결 방법:\\n",
-  "autoGen_9021f412": "1. App Store Connect에서 제품을 만드세요\\n",
-  "autoGen_722dc403": "원한다면 App Store에서 리뷰를 요청하십시오. \\n귀하의 피드백이 앱 개선에 도움이 됩니다!",
+  "autoGen_081f30b2": "AI 추가 팩 상품을 찾을 수 없습니다. \n",
+  "autoGen_bd2d5ba0": "원하는 제품 ID: $aiAdditionalPackProductId\n",
+  "autoGen_371e13e6": "사용 가능한 제품 ID: $availableIds\n\n",
+  "autoGen_02e74dc3": "해결 방법:\n",
+  "autoGen_9021f412": "1. App Store Connect에서 제품을 만드세요\n",
+  "autoGen_722dc403": "원한다면 App Store에서 리뷰를 요청하십시오. \n귀하의 피드백이 앱 개선에 도움이 됩니다!",
   "autoGen_c6000590": "ℹ️ 리뷰 거부: {cooldownDays}일간 요청하지 않음",
   "autoGen_041feef7": "회복 시간 확보(Grgic 2018)",
   "autoGen_3609eb69": "볼륨 증가(Grgic 2018)",
@@ -3129,32 +3098,32 @@
   "autoGen_c23f34d7": "📦 오류시 캐시 사용: $cachedPlan",
   "autoGen_5815bad8": "AI 기능 월 20회(AI 코치·성장 예측·효과 분석) + 즐겨찾기 무제한 + 리뷰 투고",
   "autoGen_3124e6e1": "AI 기능 무제한(AI 코치·성장 예측·효과 분석) + 파트너 검색 + 메시징",
-  "autoGen_19653147": "이달의 AI 사용 횟수를 소진했습니다 ({currentUsage}/{totalLimit}회)\\n💰 추가 구매로 계속 이용 가능",
+  "autoGen_19653147": "이달의 AI 사용 횟수를 소진했습니다 ({currentUsage}/{totalLimit}회)\n💰 추가 구매로 계속 이용 가능",
   "autoGen_c6a86fbe": "주 {suggestedChange} 세트 추가로 +{suggestedChange__0_37_toStringAsFixed1}%의 성장 기대(Schoenfeld 2017)",
   "autoGen_d4c99375": "주 +{weeklyGrowth_toStringAsFixed1}%: 순조롭게 성장 중",
   "autoGen_1a22c661": "주 +{weeklyGrowth_toStringAsFixed1}%: 성장 속도가 느려짐",
   "autoGen_c42311e6": "동일 부위는 {restDays}일 비우기(MPS 상승 기간: 48시간)",
-  "autoGen_2462056f": "\\n## 최우선 개선 포인트",
-  "autoGen_1ab642e9": "\\n## 구체적인 액션 플랜",
+  "autoGen_2462056f": "\n## 최우선 개선 포인트",
+  "autoGen_1ab642e9": "\n## 구체적인 액션 플랜",
   "autoGen_1f550f64": "* 복구 시간: $bodyPart는 {ScientificDatabase_getRecommendedRestDayslevel_bodyPart}",
   "autoGen_9da152f4": "평가판 달성 진행: $progress%",
   "autoGen_f1d9a7a9": "현재 버전: $currentVersion (Build: $currentBuildNumber)",
-  "autoGen_3142cb33": "새 버전을 사용할 수 있습니다. \\n업데이트를 부탁합니다.",
-  "autoGen_a5e97b2b": "필수 업데이트가 있습니다. \\n앱을 최신 버전으로 업데이트하세요.",
+  "autoGen_3142cb33": "새 버전을 사용할 수 있습니다. \n업데이트를 부탁합니다.",
+  "autoGen_a5e97b2b": "필수 업데이트가 있습니다. \n앱을 최신 버전으로 업데이트하세요.",
   "autoGen_d9ad81bc": "🚨 강제 업데이트 필요: $currentBuildNumber < $minBuildNumber",
   "autoGen_96c869d4": "💡 업데이트 권장: $currentBuildNumber < $recommendedBuildNumber",
-  "autoGen_588e8dd8": "이미지 크기가 너무 큽니다({imageBytes_length__1024__1024_toStringAsFixed1}MB). \\n",
+  "autoGen_588e8dd8": "이미지 크기가 너무 큽니다({imageBytes_length__1024__1024_toStringAsFixed1}MB). \n",
   "autoGen_b2a0fa05": "📄 응답 본문(첫 200자): {response_body_substring0_response_body_length_gt_200_200__response_body_length}",
-  "autoGen_fafd554e": "다크 블루 × 에너지 오렌지 \\ n 활력과 동기 부여를 자극",
-  "autoGen_1a20cd60": "파워 레드 × 실버 \\ n 열정과 힘을 표현",
-  "autoGen_124470ff": "훌륭한 지속력입니다! \\n보다 편안한 교육 경험을 즐겨보세요",
+  "autoGen_fafd554e": "다크 블루 × 에너지 오렌지 \ n 활력과 동기 부여를 자극",
+  "autoGen_1a20cd60": "파워 레드 × 실버 \ n 열정과 힘을 표현",
+  "autoGen_124470ff": "훌륭한 지속력입니다! \n보다 편안한 교육 경험을 즐겨보세요",
   "autoGen_7210fc11": "트레이닝 파트너를 찾으십시오.",
-  "autoGen_067c77b6": "외로운 훈련에서 졸업 \\ n 같은 체육관과 같은 목표의 동료와 함께 성장",
+  "autoGen_067c77b6": "외로운 훈련에서 졸업 \ n 같은 체육관과 같은 목표의 동료와 함께 성장",
   "autoGen_57df266a": "🎁 AI 기능 1회분을 획득했습니다! (남은 {remaining}회)",
   "autoGen_1397c615": "$premiumDays 일",
   "autoGen_32518a63": "$friendName 님이 GYM MATCH에 가입했습니다!",
   "autoGen_3efd8f7d": "🎁 소개 특전(호화판)",
-  "autoGen_5db1bca7": "【웹 버전 테스트 모드】\\n버튼을 누르면 2초 후에 AI 크레딧을 획득할 수 있습니다",
+  "autoGen_5db1bca7": "【웹 버전 테스트 모드】\n버튼을 누르면 2초 후에 AI 크레딧을 획득할 수 있습니다",
   "autoGen_54f0f5d8": "이달 이후 $_remainingAds회 시청할 수 있습니다.",
   "autoGen_ee3d2398": "💡 무제한으로 AI 기능을 사용하고 싶은 분은 Premium 플랜(월 10회) 또는 Pro 플랜(월 30회)으로 업그레이드를 고려해 주십시오.",
   "autoGen_d6ef4230": "{widget_basis_length} 도서 검토 논문",
@@ -3163,15 +3132,15 @@
   "autoGen_2e811d78": "0~100만엔/월",
   "autoGen_776a9503": "100~300만엔/월",
   "autoGen_674539cb": "$benefit 획득 조건",
-  "autoGen_0a9c8389": "메시지를 보내고 \\n 대화를 시작합시다.",
+  "autoGen_0a9c8389": "메시지를 보내고 \n 대화를 시작합시다.",
   "autoGen_b6a2b2e7": "{widget_partner_displayName} 님을 차단하시겠습니까?",
-  "autoGen_f073e2b1": "• 메시지를 주고받을 수 없습니다 \\ n",
-  "autoGen_3f52e845": "• 검색결과에 더 이상 표시되지 않음\\n",
-  "autoGen_8ab9dcf9": "일치 요청 전송은 \\nPro 플랜 한정 기능입니다.",
+  "autoGen_f073e2b1": "• 메시지를 주고받을 수 없습니다 \ n",
+  "autoGen_3f52e845": "• 검색결과에 더 이상 표시되지 않음\n",
+  "autoGen_8ab9dcf9": "일치 요청 전송은 \nPro 플랜 한정 기능입니다.",
   "autoGen_152ba977": "월액¥980(연간 플랜 32% OFF)",
   "autoGen_055759b3": "실력이 가까운 사람만(±15% 1RM)",
-  "autoGen_b55f1ed0": "프로 트레이너의 \\n 맨투맨 지도",
-  "autoGen_5df71c9c": "트레이너가 기록을 공유하면 \\n 여기에 표시됩니다.",
+  "autoGen_b55f1ed0": "프로 트레이너의 \n 맨투맨 지도",
+  "autoGen_5df71c9c": "트레이너가 기록을 공유하면 \n 여기에 표시됩니다.",
   "autoGen_b5f192dd": "$totalMembers 이름",
   "autoGen_d21b7749": "$activeMembers 이름",
   "autoGen_7a54ae1f": "$dormantMembers 이름",
@@ -3183,59 +3152,59 @@
   "autoGen_133c129a": "$dormantCount 이름",
   "autoGen_0bbe6198": "마지막: $daysSince 일 전",
   "autoGen_360787f9": "알림 시간을 {formatTime_reminderTime}으로 설정했습니다.",
-  "autoGen_e67c4c69": "알림은 기기 설정에서도 관리할 수 있습니다. \\ n 설정 앱> 알림에서 확인하십시오.",
+  "autoGen_e67c4c69": "알림은 기기 설정에서도 관리할 수 있습니다. \ n 설정 앱> 알림에서 확인하십시오.",
   "autoGen_68142d17": "이 이용 약관(이하 “본 약관”)은 이노우에 모토(이하 “개발자”)가 제공하는 GYM MATCH 앱(이하 “본 앱”)의 이용 조건을 정하는 것입니다. 사용자는 본 앱을 이용함으로써 본 약관에 동의한 것으로 간주됩니다.",
-  "autoGen_49167046": "이 앱은 다음 기능을 제공합니다.\\n\\n",
-  "autoGen_5db26dd7": "• 교육 기록 관리\\n",
-  "autoGen_54eb522c": "• 체육관 검색 및 위치 정보 표시 \\ n",
-  "autoGen_3482f20a": "• AI를 통한 교육 메뉴 제안\\n",
-  "autoGen_6e6ed0f3": "• 교육 데이터 분석 및 시각화\\n",
+  "autoGen_49167046": "이 앱은 다음 기능을 제공합니다.\n\n",
+  "autoGen_5db26dd7": "• 교육 기록 관리\n",
+  "autoGen_54eb522c": "• 체육관 검색 및 위치 정보 표시 \ n",
+  "autoGen_3482f20a": "• AI를 통한 교육 메뉴 제안\n",
+  "autoGen_6e6ed0f3": "• 교육 데이터 분석 및 시각화\n",
   "autoGen_cfee6527": "• 유료 구독 플랜(Premium, Pro)",
-  "autoGen_78cd69ae": "사용자는 앱을 사용할 때 다음 행위를 해서는 안됩니다.\\n\\n",
-  "autoGen_0b46001b": "• 법령 또는 공서양속을 위반하는 행위\\n",
-  "autoGen_bfe041dc": "• 이 앱의 서버 또는 네트워크 기능을 파괴하거나 방해하는 행위\\n",
-  "autoGen_bd7bdb16": "• 다른 사용자에 관한 개인정보 등을 수집 또는 축적하는 행위\\n",
-  "autoGen_cfb0b943": "• 무단 액세스를 시도하거나 이를 시도하는 행위\\n",
-  "autoGen_37dfeeec": "• 개발자는 이 앱으로 인해 사용자에게 발생한 모든 손해에 대해 어떠한 책임도 지지 않습니다. \\n",
-  "autoGen_c4938e35": "• 본 약관의 해석에 있어서는 일본법을 준거법으로 합니다. \\n",
+  "autoGen_78cd69ae": "사용자는 앱을 사용할 때 다음 행위를 해서는 안됩니다.\n\n",
+  "autoGen_0b46001b": "• 법령 또는 공서양속을 위반하는 행위\n",
+  "autoGen_bfe041dc": "• 이 앱의 서버 또는 네트워크 기능을 파괴하거나 방해하는 행위\n",
+  "autoGen_bd7bdb16": "• 다른 사용자에 관한 개인정보 등을 수집 또는 축적하는 행위\n",
+  "autoGen_cfb0b943": "• 무단 액세스를 시도하거나 이를 시도하는 행위\n",
+  "autoGen_37dfeeec": "• 개발자는 이 앱으로 인해 사용자에게 발생한 모든 손해에 대해 어떠한 책임도 지지 않습니다. \n",
+  "autoGen_c4938e35": "• 본 약관의 해석에 있어서는 일본법을 준거법으로 합니다. \n",
   "autoGen_e73b7aa2": "인앱 결제(Apple App Store)를 통해 결제가 이루어집니다.",
   "autoGen_8033527d": "(대응 시간: 평일 10:00-18:00)",
-  "autoGen_1ec20187": "〒839-0817\\n후쿠오카현 구루메시 세시타마치 243",
-  "autoGen_ba922250": "메일 주소: i.hajime1219@outlook.jp\\n(대응 시간: 평일 10:00-18:00)",
-  "autoGen_c447e5fe": "Premium 플랜: ¥500/월(세금 포함)\\n",
-  "autoGen_04bd9020": "Pro 플랜: ¥980/월(세금 포함)\\n\\n",
-  "autoGen_b2e622ca": "※Free 플랜은 무료입니다\\n",
-  "autoGen_c623275e": "Apple App Store 결제(App 내 결제)\\n",
-  "autoGen_7beebd4f": "• 구독 구매 시 즉시 결제\\n",
-  "autoGen_891f16d9": "• 이후 매월 자동 갱신(해제하지 않는 한 계속 요금)\\n",
-  "autoGen_fd5eb9a3": "디지털 컨텐츠의 성질상, 원칙적으로 반품·환불은 받아들일 수 없습니다. \\n\\n",
-  "autoGen_3d8c1928": "하지만 다음과 같은 경우 환불 신청이 가능합니다.\\n",
-  "autoGen_a85490c9": "• Apple App Store 환불 정책에 따라 정당한 이유가 있는 경우\\n",
-  "autoGen_2d7a5883": "• 기술적 문제로 인해 서비스가 정상적으로 제공되지 않는 경우 \\n",
-  "autoGen_2652cd9c": "• 실수로 구입한 경우(구입 후 즉시 신청 필요)\\n\\n",
-  "autoGen_76d3507e": "참고:\\n",
-  "autoGen_93a4cf92": "• 취소는 다음 갱신일 24시간 전까지 진행해야 합니다.\\n",
-  "autoGen_22bad042": "• 해지 후에도 현재 청구 기간이 끝날 때까지 서비스를 사용할 수 있습니다. \\ n",
-  "autoGen_95741c60": "GYM MATCH - 교육 관리 앱\\n\\n",
-  "autoGen_b66b06a2": "주요 기능:\\n",
-  "autoGen_f987d5f9": "• 교육 기록 관리 및 저장\\n",
-  "autoGen_49049c3c": "• 체육관 검색 및 위치 정보 표시(Google Maps 협력)\\n",
-  "autoGen_a24921c0": "• AI 교육 메뉴 제안(Gemini API 사용)\\n",
-  "autoGen_256ecf27": "• 과거 교육 내역 보기\\n\\n",
-  "autoGen_18b95e82": "플랜별 기능:\\n",
-  "autoGen_e5304f66": "• Free 플랜: 기본 기능, 광고 표시 있음, AI 기능은 광고 시청으로 월 3회까지\\n",
-  "autoGen_bc653d48": "• 프리미엄 플랜: 광고 숨기기, AI 기능 월 10회 사용 가능\\n",
-  "autoGen_a677a322": "iOS 12.0 이후의 iPhone/iPad\\n※안정된 동작에는 iOS 14.0 이후를 추천",
-  "autoGen_d23452bf": "• 본 서비스는 계속 과금형 구독 서비스입니다\\n",
-  "autoGen_0cd63622": "• 자동 갱신을 중지하지 않는 한 매월 자동으로 청구됩니다.\\n",
-  "autoGen_0d5aaa39": "• 구독 관리 및 취소는 Apple App Store 설정에서 수행할 수 있습니다.\\n",
-  "autoGen_be3339ff": "• 본 서비스의 교육 제안은 참고 정보이며 의학적 조언이 아닙니다.\\n",
+  "autoGen_1ec20187": "〒839-0817\n후쿠오카현 구루메시 세시타마치 243",
+  "autoGen_ba922250": "메일 주소: i.hajime1219@outlook.jp\n(대응 시간: 평일 10:00-18:00)",
+  "autoGen_c447e5fe": "Premium 플랜: ¥500/월(세금 포함)\n",
+  "autoGen_04bd9020": "Pro 플랜: ¥980/월(세금 포함)\n\n",
+  "autoGen_b2e622ca": "※Free 플랜은 무료입니다\n",
+  "autoGen_c623275e": "Apple App Store 결제(App 내 결제)\n",
+  "autoGen_7beebd4f": "• 구독 구매 시 즉시 결제\n",
+  "autoGen_891f16d9": "• 이후 매월 자동 갱신(해제하지 않는 한 계속 요금)\n",
+  "autoGen_fd5eb9a3": "디지털 컨텐츠의 성질상, 원칙적으로 반품·환불은 받아들일 수 없습니다. \n\n",
+  "autoGen_3d8c1928": "하지만 다음과 같은 경우 환불 신청이 가능합니다.\n",
+  "autoGen_a85490c9": "• Apple App Store 환불 정책에 따라 정당한 이유가 있는 경우\n",
+  "autoGen_2d7a5883": "• 기술적 문제로 인해 서비스가 정상적으로 제공되지 않는 경우 \n",
+  "autoGen_2652cd9c": "• 실수로 구입한 경우(구입 후 즉시 신청 필요)\n\n",
+  "autoGen_76d3507e": "참고:\n",
+  "autoGen_93a4cf92": "• 취소는 다음 갱신일 24시간 전까지 진행해야 합니다.\n",
+  "autoGen_22bad042": "• 해지 후에도 현재 청구 기간이 끝날 때까지 서비스를 사용할 수 있습니다. \ n",
+  "autoGen_95741c60": "GYM MATCH - 교육 관리 앱\n\n",
+  "autoGen_b66b06a2": "주요 기능:\n",
+  "autoGen_f987d5f9": "• 교육 기록 관리 및 저장\n",
+  "autoGen_49049c3c": "• 체육관 검색 및 위치 정보 표시(Google Maps 협력)\n",
+  "autoGen_a24921c0": "• AI 교육 메뉴 제안(Gemini API 사용)\n",
+  "autoGen_256ecf27": "• 과거 교육 내역 보기\n\n",
+  "autoGen_18b95e82": "플랜별 기능:\n",
+  "autoGen_e5304f66": "• Free 플랜: 기본 기능, 광고 표시 있음, AI 기능은 광고 시청으로 월 3회까지\n",
+  "autoGen_bc653d48": "• 프리미엄 플랜: 광고 숨기기, AI 기능 월 10회 사용 가능\n",
+  "autoGen_a677a322": "iOS 12.0 이후의 iPhone/iPad\n※안정된 동작에는 iOS 14.0 이후를 추천",
+  "autoGen_d23452bf": "• 본 서비스는 계속 과금형 구독 서비스입니다\n",
+  "autoGen_0cd63622": "• 자동 갱신을 중지하지 않는 한 매월 자동으로 청구됩니다.\n",
+  "autoGen_0d5aaa39": "• 구독 관리 및 취소는 Apple App Store 설정에서 수행할 수 있습니다.\n",
+  "autoGen_be3339ff": "• 본 서비스의 교육 제안은 참고 정보이며 의학적 조언이 아닙니다.\n",
   "autoGen_46e40811": "X(구 Twitter): @MatchGym71830",
   "autoGen_87967650": "나머지 $_remainingDays일 동안 프리미엄 기능을 즐기세요.",
-  "autoGen_5117983a": "• AI 기능 월 10회\\n",
-  "autoGen_d42111dd": "• 즐겨찾기 등록 무제한\\n",
-  "autoGen_496b48ae": "• 체육관 리뷰 게시물\\n",
-  "autoGen_7a7b91ca": "• 혼잡도 알림 알림\\n",
+  "autoGen_5117983a": "• AI 기능 월 10회\n",
+  "autoGen_d42111dd": "• 즐겨찾기 등록 무제한\n",
+  "autoGen_496b48ae": "• 체육관 리뷰 게시물\n",
+  "autoGen_7a7b91ca": "• 혼잡도 알림 알림\n",
   "autoGen_4cfb6b51": "사용자 수준: $userLevel",
   "autoGen_d4d0a508": "AI 코치 추천 메뉴를 로드했습니다({selectedExercises_length}종목)",
   "autoGen_d79a4e44": "스택 추적: $stackTrace",
@@ -3246,7 +3215,7 @@
   "autoGen_0d5c4fc8": "$exerciseName의 과거 기록",
   "autoGen_6184b271": "기록을 반영: $weight kg × $reps reps",
   "autoGen_74da9166": "$exerciseName 일괄 입력",
-  "autoGen_c80b15f5": "$exerciseName을 삭제하시겠습니까? \\n이 작업은 취소할 수 없습니다.",
+  "autoGen_c80b15f5": "$exerciseName을 삭제하시겠습니까? \n이 작업은 취소할 수 없습니다.",
   "autoGen_0a84ceba": "$exerciseName을 삭제했습니다.",
   "autoGen_d9074687": "'$result'를 맞춤 항목으로 저장했습니다.",
   "autoGen_0c183ad8": "📴 오프 날짜 저장: $_selectedDate",
@@ -3254,47 +3223,47 @@
   "autoGen_f36e4e45": "$_selectedMuscleGroup 종목",
   "autoGen_7ce1d4dd": "🔘 마지막 버튼 탭: $exerciseName",
   "autoGen_7b01524a": "레벨 ($userLevel)에 맞는 무게 및 횟수를 설정합니다.",
-  "autoGen_2873d010": "첫 녹화\\n오늘 녹음이 다음 목표가 됩니다. 전력으로 도전합시다!",
+  "autoGen_2873d010": "첫 녹화\n오늘 녹음이 다음 목표가 됩니다. 전력으로 도전합시다!",
   "autoGen_61221654": "AI 코치에서 {exercises_length} 종목을 로드했습니다.",
-  "autoGen_79ab5374": "• 동영상 광고를 시청하면 AI 기능을 한 번 사용할 수 있습니다.\\n",
-  "autoGen_46daa8ca": "• 월 3회까지 광고 시청 가능\\n",
+  "autoGen_79ab5374": "• 동영상 광고를 시청하면 AI 기능을 한 번 사용할 수 있습니다.\n",
+  "autoGen_46daa8ca": "• 월 3회까지 광고 시청 가능\n",
   "autoGen_b657787b": "canUseAI 결과: $canUse",
   "autoGen_c85769fb": "canEarnCreditFromAd 결과: $canEarnFromAd",
   "autoGen_5a65e7d3": "광고 시청 결과: $watchedAd",
-  "autoGen_a2170a7d": "# 과학적 근거 기반 교육 메뉴 \\ n",
-  "autoGen_8627ad90": "💡 AI를 일시적으로 사용할 수 없기 때문에 과학적 연구를 기반으로 추천 메뉴를 제안합니다. \\n",
-  "autoGen_3921a074": "## 전신 균형 훈련 \\ n",
+  "autoGen_a2170a7d": "# 과학적 근거 기반 교육 메뉴 \ n",
+  "autoGen_8627ad90": "💡 AI를 일시적으로 사용할 수 없기 때문에 과학적 연구를 기반으로 추천 메뉴를 제안합니다. \n",
+  "autoGen_3921a074": "## 전신 균형 훈련 \ n",
   "autoGen_63dfa8fd": "- 횟수: 10-12회",
-  "autoGen_f48e246a": "- 포인트: 폼 중시, 가벼운 무게에서 \\n",
-  "autoGen_9dbcd380": "- 휴식: 90초\\n",
-  "autoGen_e3c1b530": "- 휴식: 60초\\n",
+  "autoGen_f48e246a": "- 포인트: 폼 중시, 가벼운 무게에서 \n",
+  "autoGen_9dbcd380": "- 휴식: 90초\n",
+  "autoGen_e3c1b530": "- 휴식: 60초\n",
   "autoGen_95eff134": "- 세트 수: 4-5 세트",
   "autoGen_7b69d2d1": "- 횟수: 6-10회",
-  "autoGen_7d332e7f": "- 휴식: 2-3분\\n",
+  "autoGen_7d332e7f": "- 휴식: 2-3분\n",
   "autoGen_9c54dcf8": "- 세트 수: 3-4 세트",
-  "autoGen_64963de8": "- 휴식: 3-4분\\n",
-  "autoGen_7fb65399": "## $part 교육\\n",
+  "autoGen_64963de8": "- 휴식: 3-4분\n",
+  "autoGen_7fb65399": "## $part 교육\n",
   "autoGen_7f25816c": "- 세트 수: 2-3 세트",
   "autoGen_7ae0e831": "- 횟수: 10-15회",
   "autoGen_22068d85": "- 횟수: 8-12회",
-  "autoGen_e420dac1": "- 휴식: 60-90초\\n",
+  "autoGen_e420dac1": "- 휴식: 60-90초\n",
   "autoGen_530c8f16": "💰 AI 추가 팩(¥300):",
-  "autoGen_2482dab0": "다시 메뉴를 생성합니다. \\n문제가 계속되면 지원팀에 문의하세요.",
-  "autoGen_a900ede4": "📄 생성된 메뉴(첫 500자):\\n{text_substring0_text_length_gt_500_500__text_length}",
+  "autoGen_2482dab0": "다시 메뉴를 생성합니다. \n문제가 계속되면 지원팀에 문의하세요.",
+  "autoGen_a900ede4": "📄 생성된 메뉴(첫 500자):\n{text_substring0_text_length_gt_500_500__text_length}",
   "autoGen_61691a5f": "📄 처리 중: $line",
   "autoGen_dc7f876e": "⏭️ 하위 섹션 건너뛰기: $line",
   "autoGen_160fcdc4": "📝 현재 상태($currentExerciseName): weight=$currentWeight, reps=$currentReps, sets=$currentSets",
-  "autoGen_8b926449": "\\n[최근 1개월의 트레이닝 이력]\\n",
-  "autoGen_8e3d3911": "\\n위의 기록을 참고하여 적절한 무게와 횟수를 제안해 주세요. \\n",
+  "autoGen_8b926449": "\n[최근 1개월의 트레이닝 이력]\n",
+  "autoGen_8e3d3911": "\n위의 기록을 참고하여 적절한 무게와 횟수를 제안해 주세요. \n",
   "autoGen_6809c323": "- **유산소 운동만**을 제안(근육 트레이닝 종목은 포함하지 않는다)",
   "autoGen_f6c819db": "**절대 엄수: 유산소 운동 데이터베이스의 종목만 사용하는 것. 벤치 프레스, 스쿼트 등의 근육 트레이닝 종목은 절대로 포함하지 않을 것. **",
   "autoGen_1e50fa08": "전신 균형이 잘",
   "autoGen_a4e8ab60": "중점적으로",
   "autoGen_130d85e6": "- **유산소 운동만**을 제안(근육 트레이닝 종목은 포함하지 않는다)",
-  "autoGen_ed8be540": "- 프리웨이트 중심\\n- 근비대를 중시",
+  "autoGen_ed8be540": "- 프리웨이트 중심\n- 근비대를 중시",
   "autoGen_d8a431d6": "**절대 엄수: 유산소 운동 데이터베이스의 종목만 사용하는 것. 벤치 프레스, 스쿼트, 데드 리프트 등의 근육 트레이닝 종목은 절대로 포함하지 않을 것. **",
   "autoGen_de5ee3b4": "- **유산소 운동만**을 제안(근육 트레이닝 종목은 포함하지 않는다)",
-  "autoGen_32442929": "- 고중량 프리웨이트 중심\\n- 최대 근력 향상을 중시",
+  "autoGen_32442929": "- 고중량 프리웨이트 중심\n- 최대 근력 향상을 중시",
   "autoGen_7669a5d7": "**절대 엄수: 유산소 운동 데이터베이스의 종목만 사용하는 것. 벤치 프레스, 스쿼트, 데드 리프트, 어깨 프레스 등의 근육 트레이닝 종목은 절대로 포함하지 말 것. **",
   "autoGen_c157b7e9": "이 부위의 훈련 빈도",
   "autoGen_2748529d": "※ 선택한 부위($_selectedBodyPart)를 일주일에 몇 번 훈련할 것인가",
@@ -3306,9 +3275,9 @@
   "autoGen_1a33d843": "현재: {currentWeight_round}kg → +$growthPercentage% 성장",
   "autoGen_7a1d4370": "프리미엄 플랜으로 업그레이드",
   "autoGen_9d99af7f": "프리미엄 플랜의 경우 :",
-  "autoGen_67a989a2": "• 월 10 회까지 AI 기능이 무제한 \\n",
-  "autoGen_465a0c43": "• 광고 없이 편안하게 사용\\n",
-  "autoGen_6aa1053b": "• 즐겨찾는 체육관 무제한\\n",
+  "autoGen_67a989a2": "• 월 10 회까지 AI 기능이 무제한 \n",
+  "autoGen_465a0c43": "• 광고 없이 편안하게 사용\n",
+  "autoGen_6aa1053b": "• 즐겨찾는 체육관 무제한\n",
   "autoGen_583fa8ea": "RPE $rpe(여유 있음)",
   "autoGen_63907130": "RPE $rpe(적정)",
   "autoGen_7eeda4db": "RPE $rpe(한계)",
@@ -3341,14 +3310,14 @@
   "autoGen_6d344dc3": "{period}의 성장",
   "autoGen_fef4f34a": "$bodyPart - PR 기록",
   "autoGen_b9c14a1a": "아직 $bodyPart 기록이 없습니다.",
-  "autoGen_6731dc9d": "• RM(Repetition Maximum): 특정 횟수로 거상 가능한 최대 중량\\n",
-  "autoGen_780e4b39": "• 1RM: 한 번만 거상할 수 있는 최대 중량\\n",
-  "autoGen_bafa2012": "• 이 계산은 Epley 표현식을 사용합니다.\\n",
+  "autoGen_6731dc9d": "• RM(Repetition Maximum): 특정 횟수로 거상 가능한 최대 중량\n",
+  "autoGen_780e4b39": "• 1RM: 한 번만 거상할 수 있는 최대 중량\n",
+  "autoGen_bafa2012": "• 이 계산은 Epley 표현식을 사용합니다.\n",
   "autoGen_fdc9c9f2": "막대 무게({barWeight}kg)보다 큰 값을 입력하세요.",
   "autoGen_a2dd7366": "$plateCount",
-  "autoGen_508a83f8": "• 체육관에 있는 판만 선택하세요\\n",
-  "autoGen_cf1cfa23": "• 프리셋에서 선택하면 빠르게 설정할 수 있습니다.\\n",
-  "autoGen_f897a66f": "• 설정이 자동으로 저장됩니다.\\n",
+  "autoGen_508a83f8": "• 체육관에 있는 판만 선택하세요\n",
+  "autoGen_cf1cfa23": "• 프리셋에서 선택하면 빠르게 설정할 수 있습니다.\n",
+  "autoGen_f897a66f": "• 설정이 자동으로 저장됩니다.\n",
   "autoGen_6f7f8448": "• 표시되는 것은 한쪽의 매수입니다 (양쪽에 장착)",
   "autoGen_6ece374b": "$exerciseName을 삭제하시겠습니까?",
   "autoGen_758d777e": "'$exerciseName'이(가 남은 {remainingExerciseNames}종목)이 삭제되었습니다.",
@@ -3359,7 +3328,7 @@
   "autoGen_74f074ea": "유산소 시간: $totalMinutes분",
   "autoGen_b714e319": "📋 템플릿 데이터 전달: $templateData",
   "autoGen_51ce78c9": "'{template_name}'을 삭제하시겠습니까?",
-  "autoGen_8a87562e": "매주 월요일에 자동으로 생성됩니다.\\n(데모 모드에서는 Cloud Function을 구현하지 않으므로 수동 데이터 필요)",
+  "autoGen_8a87562e": "매주 월요일에 자동으로 생성됩니다.\n(데모 모드에서는 Cloud Function을 구현하지 않으므로 수동 데이터 필요)",
   "autoGen_15000674": "시도 $retryCount/$maxRetries...",
   "showDetailsSection": "세부 정보 표시",
   "weightRatio": "웨이트 비율",
@@ -3385,115 +3354,38 @@
   "home_shareFailed": "공유 실패: {error}",
   "home_deleteError": "삭제 오류: {error}",
   "home_weightMinutes": "{weight} 분",
-  "home_deleteRecordConfirm": "\"{exerciseName}\" 기록을 삭제하시겠습니까?\n이 작업은 취소할 수 없습니다.",
-  "home_deleteRecordSuccess": "\"{exerciseName}\"을(를) 삭제했습니다 (남은 운동 {count}개)",
+  "home_deleteRecordConfirm": ""{exerciseName}" 기록을 삭제하시겠습니까?
+이 작업은 취소할 수 없습니다.",
+  "home_deleteRecordSuccess": ""{exerciseName}"을(를) 삭제했습니다 (남은 운동 {count}개)",
   "home_deleteFailed": "삭제 실패: {error}",
   "home_generalError": "❌ 오류: {error}",
   "goals_loadFailed": "목표 로드 실패: {error}",
-  "goals_deleteConfirm": "\"{goalName}\"을(를) 삭제하시겠습니까?\n이 작업은 취소할 수 없습니다.",
+  "goals_deleteConfirm": ""{goalName}"을(를) 삭제하시겠습니까?
+이 작업은 취소할 수 없습니다.",
   "goals_updateFailed": "업데이트 실패: {error}",
   "goals_editTitle": "{goalName} 편집",
-  "body_offlineSaved": "📴 오프라인 저장됨\n온라인 복구 시 자동 동기화",
+  "body_offlineSaved": "📴 오프라인 저장됨
+온라인 복구 시 자동 동기화",
   "body_weightKg": "체중: {weight}kg",
   "body_bodyFatPercent": "체지방률: {bodyFat}%",
   "reward_adLoadFailed": "광고 로드 실패. 다시 시도해주세요.",
   "reward_adDisplayFailed": "광고 표시 실패. 잠시 후 다시 시도해주세요.",
   "reward_creditEarnedTest": "✅ AI 크레딧 1회분 획득! (테스트 모드)",
-  "@home_shareFailed": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "@home_deleteError": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "@home_weightMinutes": {
-    "placeholders": {
-      "weight": {
-        "type": "String"
-      }
-    }
-  },
-  "@home_deleteRecordConfirm": {
-    "placeholders": {
-      "exerciseName": {
-        "type": "String"
-      }
-    }
-  },
-  "@home_deleteRecordSuccess": {
-    "placeholders": {
-      "exerciseName": {
-        "type": "String"
-      },
-      "count": {
-        "type": "String"
-      }
-    }
-  },
-  "@home_deleteFailed": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "@home_generalError": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "@goals_loadFailed": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "@goals_deleteConfirm": {
-    "placeholders": {
-      "goalName": {
-        "type": "String"
-      }
-    }
-  },
-  "@goals_updateFailed": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "@goals_editTitle": {
-    "placeholders": {
-      "goalName": {
-        "type": "String"
-      }
-    }
-  },
-  "@body_weightKg": {
-    "placeholders": {
-      "weight": {
-        "type": "String"
-      }
-    }
-  },
-  "@body_bodyFatPercent": {
-    "placeholders": {
-      "bodyFat": {
-        "type": "String"
-      }
-    }
-  },
-  "workout_offlineSaved": "📴 오프라인으로 저장됨\n온라인 복귀 시 자동 동기화됩니다",
+  "@home_shareFailed": "[('placeholders', [('error', [('type', 'String')])])]",
+  "@home_deleteError": "[('placeholders', [('error', [('type', 'String')])])]",
+  "@home_weightMinutes": "[('placeholders', [('weight', [('type', 'String')])])]",
+  "@home_deleteRecordConfirm": "[('placeholders', [('exerciseName', [('type', 'String')])])]",
+  "@home_deleteRecordSuccess": "[('placeholders', [('exerciseName', [('type', 'String')]), ('count', [('type', 'String')])])]",
+  "@home_deleteFailed": "[('placeholders', [('error', [('type', 'String')])])]",
+  "@home_generalError": "[('placeholders', [('error', [('type', 'String')])])]",
+  "@goals_loadFailed": "[('placeholders', [('error', [('type', 'String')])])]",
+  "@goals_deleteConfirm": "[('placeholders', [('goalName', [('type', 'String')])])]",
+  "@goals_updateFailed": "[('placeholders', [('error', [('type', 'String')])])]",
+  "@goals_editTitle": "[('placeholders', [('goalName', [('type', 'String')])])]",
+  "@body_weightKg": "[('placeholders', [('weight', [('type', 'String')])])]",
+  "@body_bodyFatPercent": "[('placeholders', [('bodyFat', [('type', 'String')])])]",
+  "workout_offlineSaved": "📴 오프라인으로 저장됨
+온라인 복귀 시 자동 동기화됩니다",
   "workout_iconAI": "🤖",
   "workout_iconIdea": "💡",
   "workout_iconStats": "📊",
@@ -3503,9 +3395,10 @@
   "workout_noHistory": "{exerciseName}의 기록이 없습니다",
   "workout_pastRecords": "{exerciseName}의 과거 기록",
   "workout_bulkInput": "{exerciseName}의 일괄 입력",
-  "workout_deleteConfirm": "\"{exerciseName}\"를 삭제하시겠습니까?\n이 작업은 취소할 수 없습니다.",
-  "workout_deleteSuccess": "\"{exerciseName}\"를 삭제했습니다",
-  "workout_customExerciseSaved": "\"{exerciseName}\"를 맞춤 운동으로 저장했습니다",
+  "workout_deleteConfirm": ""{exerciseName}"를 삭제하시겠습니까?
+이 작업은 취소할 수 없습니다.",
+  "workout_deleteSuccess": ""{exerciseName}"를 삭제했습니다",
+  "workout_customExerciseSaved": ""{exerciseName}"를 맞춤 운동으로 저장했습니다",
   "profile_importFromPhoto": "📸 사진에서 가져오기",
   "profile_importFromCSV": "📄 CSV에서 가져오기",
   "profile_fileSizeTooLarge": "❌ 파일 크기가 너무 큽니다 (5MB 이하)",
@@ -3524,7 +3417,7 @@
   "subscription_step1": "1. iPhone 설정 앱 열기",
   "subscription_step2": "2. 맨 위의 [Apple ID] 탭하기",
   "workout_deleteDebug": "🔍 삭제 디버그",
-  "workout_deleteConfirmExercise": "\"{exerciseName}\"를 삭제하시겠습니까?",
+  "workout_deleteConfirmExercise": ""{exerciseName}"를 삭제하시겠습니까?",
   "workout_debugTargetInfo": "🎯 {targetInfo}",
   "workout_debugCurrentExercises": "📊 현재 운동: {exercises}",
   "workout_debugAfterDeleteExercises": "📊 삭제 후: {exercises}",
@@ -3533,8 +3426,8 @@
   "workout_debugSetDetails": "🔍 세트 상세:",
   "workout_debugExercisesField": "⚠️ exercises 필드 감지: {type}",
   "workout_preventFullDelete": "⚠️ 전체 삭제 방지",
-  "workout_exerciseDeletedWithCount": "\"{exerciseName}\" 삭제됨 (남은 운동: {remainingExercises})",
-  "workout_exerciseDeletedWithCountNum": "\"{exerciseName}\" 삭제됨 (남은 운동: {count}개)",
+  "workout_exerciseDeletedWithCount": ""{exerciseName}" 삭제됨 (남은 운동: {remainingExercises})",
+  "workout_exerciseDeletedWithCountNum": ""{exerciseName}" 삭제됨 (남은 운동: {count}개)",
   "ai_generationComplete": "AI 생성 완료! ({status})",
   "ai_rewardEarned": "🎁 AI 기능 1회 획득!",
   "ai_predictionComplete": "AI 예측 완료! ({status})",
@@ -3545,11 +3438,14 @@
   "gym_aiUsageLimit": "• AI 기능 월 10회 사용",
   "gym_unlimitedFavorites": "• 무제한 즐겨찾기",
   "gym_detailedStats": "• 상세 혼잡도 통계",
-  "dev_uidCopied": "✅ UID 복사됨\n{uid}",
+  "dev_uidCopied": "✅ UID 복사됨
+{uid}",
   "dev_aiUsageReset": "✅ AI 사용 횟수 초기화됨",
   "dev_resetFailed": "❌ 초기화 실패: {error}",
-  "dev_onboardingReset": "✅ 온보딩 초기화됨\n앱을 재시작하세요",
-  "dev_phase1Reset": "✅ Phase 1 기능 모두 초기화됨\n앱을 재시작하세요",
+  "dev_onboardingReset": "✅ 온보딩 초기화됨
+앱을 재시작하세요",
+  "dev_phase1Reset": "✅ Phase 1 기능 모두 초기화됨
+앱을 재시작하세요",
   "dev_resetAiUsage": "AI 사용 횟수 초기화",
   "dev_resetOnboarding": "온보딩 초기화",
   "dev_resetPhase1": "Phase 1 기능 모두 초기화",
@@ -3561,7 +3457,8 @@
   "calculators_title": "계산 도구",
   "calculators_invalidInput": "유효한 무게와 횟수를 입력하세요",
   "calculators_oneRMCalculator": "1RM 계산기",
-  "calculators_oneRMDescription": "1RM (1 Rep Max)은 1회 들어올릴 수 있는 최대 무게입니다.\nEpley 공식을 사용하여 추정 1RM을 계산합니다.",
+  "calculators_oneRMDescription": "1RM (1 Rep Max)은 1회 들어올릴 수 있는 최대 무게입니다.
+Epley 공식을 사용하여 추정 1RM을 계산합니다.",
   "calculators_barWeightError": "바 무게 ({barWeight}kg)보다 큰 무게를 입력하세요",
   "invite_registrationComplete": "🎉 등록 완료!",
   "invite_codeApplied": "초대 코드가 성공적으로 적용되었습니다!",
@@ -3570,9 +3467,11 @@
   "invite_benefitsApplied": "혜택이 즉시 적용됩니다!",
   "gym_checkedIn": "{gymName}에 체크인했습니다",
   "aiAddon_purchaseConfirm": "AI 추가 팩을 구매하시겠습니까?",
-  "aiAddon_packDetails": "AI 추가 팩 (5회)\n가격: ¥300",
+  "aiAddon_packDetails": "AI 추가 팩 (5회)
+가격: ¥300",
   "aiAddon_purchase": "구매",
-  "aiAddon_purchaseFailed": "구매 실패.\n다시 시도해 주세요.",
+  "aiAddon_purchaseFailed": "구매 실패.
+다시 시도해 주세요.",
   "weeklyReports_recommendation": "주간 추천",
   "weeklyReports_recommendationSubtitle": "추천 요일 및 메뉴 제안 표시",
   "bodyPart_days7": "7일",
@@ -3591,7 +3490,7 @@
   "personalFactors_saved": "✅ 저장 완료! 현재 PFM: {pfm}x",
   "personalFactors_saveError": "❌ 저장 오류: {error}",
   "personalFactors_title": "🔬 개인 요인 설정",
-  "favorites_removeConfirm": "\"{gymName}\"을(를) 즐겨찾기에서 제거하시겠습니까?",
+  "favorites_removeConfirm": ""{gymName}"을(를) 즐겨찾기에서 제거하시겠습니까?",
   "favorites_removed": "{gymName}을(를) 즐겨찾기에서 제거했습니다",
   "favorites_removeAll": "모두 제거",
   "gymDetail_shareFailed": "공유 실패: {error}",
@@ -3614,36 +3513,23 @@
   "partnerPhotos_deleteConfirm": "이미지 삭제",
   "partnerPhotos_title": "매장 이미지 관리",
   "home_streakTitle": "7일 연속 달성!",
-  "home_streakMessage": "축하합니다!\n7일 연속으로 운동을 기록했습니다.\n계속 힘내세요! 💪",
-  "home_milestoneMessage": "대단해요! 이정표 달성!\n이 페이스로 계속하세요! 💪",
+  "home_streakMessage": "축하합니다!
+7일 연속으로 운동을 기록했습니다.
+계속 힘내세요! 💪",
+  "home_milestoneMessage": "대단해요! 이정표 달성!
+이 페이스로 계속하세요! 💪",
   "home_tapToShowStats": "탭하여 상세 통계 표시",
   "home_aiSuggestionTitle": "💡 오늘의 AI 제안",
-  "home_aiSuggestionPrompt": "AI가 과학적으로 분석한\n맞춤형 운동 메뉴",
+  "home_aiSuggestionPrompt": "AI가 과학적으로 분석한
+맞춤형 운동 메뉴",
   "home_currentStreakDays": "연속 {days}일",
-  "@home_currentStreakDays": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      }
-    }
-  },
+  "@home_currentStreakDays": "[('placeholders', [('days', [('type', 'int')])])]",
   "home_streakRecording": "{days}일 연속 기록 중!",
-  "@home_streakRecording": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      }
-    }
-  },
+  "@home_streakRecording": "[('placeholders', [('days', [('type', 'int')])])]",
   "home_weeklyProgressPercent": "{percent}% 달성",
-  "@home_weeklyProgressPercent": {
-    "placeholders": {
-      "percent": {
-        "type": "int"
-      }
-    }
-  },
-  "home_recordPrompt": "운동을 기록하고\n진척도를 시각화하세요",
+  "@home_weeklyProgressPercent": "[('placeholders', [('percent', [('type', 'int')])])]",
+  "home_recordPrompt": "운동을 기록하고
+진척도를 시각화하세요",
   "subscription_restore": "복원",
   "subscription_lifetimeProPlan": "평생 Pro 플랜（∞）",
   "subscription_lifetimePlanDescription": "무제한 AI 기능 | 광고 없음 | 모든 기능 영구 이용",
@@ -3653,55 +3539,22 @@
   "subscription_privacyPolicy": "개인정보 보호정책",
   "subscription_agreementText": "구독하면 이용 약관 및 개인정보 보호정책에 동의하는 것입니다",
   "subscription_aiAddonPrice": "¥300 / 5회",
-  "subscription_cancelInstruction3": "3. \\\"구독\\\"을 탭하세요",
+  "subscription_cancelInstruction3": "3. \"구독\"을 탭하세요",
   "profile_referralBonusTitle": "🎁 추천 보너스",
   "profile_referralBonusHint": "💡 친구가 이 코드를 입력하면 둘 다 보상을 받습니다!",
-  "profile_referralShareMessage": "GYM MATCH에서 함께 운동해요!\\n\\n추천 코드: {referralCode}\\nAI 사용 3회 받기!\\n\\nhttps://gym-match-e560d.web.app",
-  "@profile_referralShareMessage": {
-    "placeholders": {
-      "referralCode": {
-        "type": "String"
-      }
-    }
-  },
+  "profile_referralShareMessage": "GYM MATCH에서 함께 운동해요!\n\n추천 코드: {referralCode}\nAI 사용 3회 받기!\n\nhttps://gym-match-e560d.web.app",
+  "@profile_referralShareMessage": "[('placeholders', [('referralCode', [('type', 'String')])])]",
   "profile_errorMessage": "❌ 오류: {error}",
-  "@profile_errorMessage": {
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
+  "@profile_errorMessage": "[('placeholders', [('error', [('type', 'String')])])]",
   "profile_rewardItem": "{title}: {reward}",
-  "@profile_rewardItem": {
-    "placeholders": {
-      "title": {
-        "type": "String"
-      },
-      "reward": {
-        "type": "String"
-      }
-    }
-  },
+  "@profile_rewardItem": "[('placeholders', [('title', [('type', 'String')]), ('reward', [('type', 'String')])])]",
   "profile_defaultUsername": "트레이닝 사용자",
   "profile_defaultBio": "GYM MATCH에 오신 것을 환영합니다",
   "profile_referralRewardDescription": "AI x5회 + 추천받은 사람도 AI x3회",
   "profile_premiumOnlyFeature": "{featureName}은(는) 프리미엄 플랜 회원 전용 기능입니다.",
-  "@profile_premiumOnlyFeature": {
-    "placeholders": {
-      "featureName": {
-        "type": "String"
-      }
-    }
-  },
-  "profile_featureInDevelopment": "{featureName}은(는) 현재 개발 중입니다.\\n다음 업데이트에서 사용할 수 있습니다.",
-  "@profile_featureInDevelopment": {
-    "placeholders": {
-      "featureName": {
-        "type": "String"
-      }
-    }
-  },
+  "@profile_premiumOnlyFeature": "[('placeholders', [('featureName', [('type', 'String')])])]",
+  "profile_featureInDevelopment": "{featureName}은(는) 현재 개발 중입니다.\n다음 업데이트에서 사용할 수 있습니다.",
+  "@profile_featureInDevelopment": "[('placeholders', [('featureName', [('type', 'String')])])]",
   "partnerCampaign_imageLoadError": "이미지 로드 실패: {error}",
   "partnerCampaign_saved": "✅ 캠페인이 저장되었습니다! 사용자 앱에 즉시 반영됩니다",
   "partnerCampaign_saveError": "❌ 저장 실패: {error}",
@@ -3736,13 +3589,14 @@
   "trainerRecords_reload": "새로고침",
   "poMembers_allMembers": "전체 회원",
   "poMembers_dormant": "휴면",
-  "profileEdit_imageLoadError": "이미지 로드 실패\n{error}",
+  "profileEdit_imageLoadError": "이미지 로드 실패
+{error}",
   "profileEdit_proOnlyFeature": "Pro 플랜 전용 기능",
   "profile_termsAndSubscription": "서비스 이용약관·구독",
   "profile_privacyPolicy": "개인정보 처리방침",
   "reservation_submitted": "✅ 예약 신청이 전송되었습니다! 매장에서 연락드립니다.",
   "reservation_submitError": "❌ 예약 전송 실패: {error}",
-  "subscription_step4": "4. \"GYM MATCH\" 선택",
+  "subscription_step4": "4. "GYM MATCH" 선택",
   "subscription_step5": "5. 원하는 플랜 선택",
   "visitHistory_deleteHistory": "방문 기록 삭제",
   "visitHistory_reload": "새로고침",
@@ -3767,7 +3621,7 @@
   "rmCalculator_barWeightError": "바 무게({barWeight}kg)보다 큰 값을 입력하세요",
   "statisticsDashboard_title": "통계 대시보드",
   "workoutTemplate_title": "운동 템플릿",
-  "workoutTemplate_deleteConfirm": "\"{name}\"을(를) 삭제하시겠습니까?",
+  "workoutTemplate_deleteConfirm": ""{name}"을(를) 삭제하시겠습니까?",
   "weeklyReports_workoutsSummary": "{workouts}회 • {minutes}분",
   "workoutMemo_updated": "메모가 업데이트되었습니다",
   "workoutMemo_delete": "메모 삭제",
@@ -3784,5 +3638,8 @@
   "announcementType_newEquipment": "신규 장비",
   "announcementType_hours": "영업 시간",
   "reward_adCreditEarned": "AI 크레딧 1회를 획득했습니다!",
+  "subscriptionFeatureAI20": "🤖 AI 기능 월 20회 (코치/성장/효과 합계)",
+  "subscriptionFeatureGrowthAnalysis": "📈 성장 예측 및 효과 분석",
+  "subscriptionFeatureAIUnlimited": "🤖 무제한 AI 기능 (코치/성장/효과)",
   "ai_menuGenerationError": "메뉴 생성 실패"
 }
