@@ -3796,5 +3796,12 @@
   "aiMenuHistoryTitle": "Sugerencias Anteriores",
   "aiMenuSetsSuffix": " series",
   "aiMenuRepsSuffix": " reps",
-  "aiMenuMinutesSuffix": " min"
+  "aiMenuMinutesSuffix": " min",
+  "parserExercisePrefix": "Ejercicio",
+  "parserWeightLabel": "Peso",
+  "parserRepsLabel": "Repeticiones",
+  "parserSetsLabel": "Series",
+  "parserRestLabel": "Tiempo de descanso",
+  "parserDurationLabel": "Duración",
+  "parserDistanceLabel": "Distancia"
 }

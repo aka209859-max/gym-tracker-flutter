@@ -3798,5 +3798,12 @@
   "aiMenuHistoryTitle": "历史建议",
   "aiMenuSetsSuffix": "组",
   "aiMenuRepsSuffix": "次",
-  "aiMenuMinutesSuffix": "分钟"
+  "aiMenuMinutesSuffix": "分钟",
+  "parserExercisePrefix": "项目",
+  "parserWeightLabel": "重量",
+  "parserRepsLabel": "次数",
+  "parserSetsLabel": "组数",
+  "parserRestLabel": "休息时间",
+  "parserDurationLabel": "时间",
+  "parserDistanceLabel": "距离"
 }

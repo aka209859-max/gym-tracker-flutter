@@ -4792,5 +4792,12 @@
   "aiMenuHistoryTitle": "過去の提案",
   "aiMenuSetsSuffix": "セット",
   "aiMenuRepsSuffix": "回",
-  "aiMenuMinutesSuffix": "分"
+  "aiMenuMinutesSuffix": "分",
+  "parserExercisePrefix": "種目",
+  "parserWeightLabel": "重量",
+  "parserRepsLabel": "回数",
+  "parserSetsLabel": "セット数",
+  "parserRestLabel": "休憩時間",
+  "parserDurationLabel": "時間",
+  "parserDistanceLabel": "距離"
 }

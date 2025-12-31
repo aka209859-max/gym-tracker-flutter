@@ -1506,8 +1506,17 @@ class _AIMenuTabState extends State<_AIMenuTab>
   }
   
   /// 🔧 v1.0.223: AI生成メニューをパースして種目データを抽出（完全内部処理）
+  /// 🆕 Build #24.1 Hotfix9.3: 多言語対応パーサー
   List<ParsedExercise> _parseGeneratedMenu(String menu, List<String> bodyParts) {
     debugPrint('🔍 パース開始: 全${menu.length}文字, ${menu.split('\n').length}行');
+    
+    // Get localized parser keywords
+    final l10n = AppLocalizations.of(context)!;
+    final exercisePrefix = l10n.parserExercisePrefix;
+    final weightLabel = l10n.parserWeightLabel;
+    final repsLabel = l10n.parserRepsLabel;
+    final setsLabel = l10n.parserSetsLabel;
+    final durationLabel = l10n.parserDurationLabel;
     
     final exercises = <ParsedExercise>[];
     final lines = menu.split('\n');
@@ -1585,7 +1594,8 @@ class _AIMenuTabState extends State<_AIMenuTab>
       final altMatch = altExercisePattern.firstMatch(line);
       
       // パターン3: "**種目1：種目名**" のようなマークダウン形式
-      final markdownPattern = RegExp(r'^\*\*種目\d+[:：](.+?)\*\*');
+      // 🆕 Build #24.1 Hotfix9.3: 多言語対応（種目 → Exercise, 종목, 项目, etc.）
+      final markdownPattern = RegExp(r'^\*\*' + exercisePrefix + r'\d+[:：](.+?)\*\*');
       final markdownMatch = markdownPattern.firstMatch(line);
       
       // パターン4: "**A1. EZバーカール**" のような英数字番号付き形式
@@ -1678,10 +1688,11 @@ class _AIMenuTabState extends State<_AIMenuTab>
         debugPrint('  ✅ 種目検出: $currentExerciseName (部位: $currentBodyPart)');
         
         // 同じ行に重量・回数・セット情報があるか確認
+        // 🆕 Build #24.1 Hotfix9.3: 多言語対応パターン
         final weightPattern = RegExp(r'(\d+(?:\.\d+)?)\s*kg');
-        final repsPattern = RegExp(r'(\d+)\s*(?:回|reps?)');
-        final setsPattern = RegExp(r'(\d+)\s*(?:セット|sets?)');
-        final timePattern = RegExp(r'(\d+)\s*分(?:\s*（|\s*\()?');
+        final repsPattern = RegExp(r'(\d+)\s*(?:' + repsLabel + r'|回|reps?)');
+        final setsPattern = RegExp(r'(\d+)\s*(?:' + setsLabel + r'|セット|sets?)');
+        final timePattern = RegExp(r'(\d+)\s*(?:' + durationLabel + r'|分)(?:\s*（|\s*\()?');
         
         final weightMatch = weightPattern.firstMatch(line);
         final repsMatch = repsPattern.firstMatch(line);
@@ -1714,19 +1725,34 @@ class _AIMenuTabState extends State<_AIMenuTab>
           cleanLine = cleanLine.trim();
           
           // 🔧 v1.0.224: 重量・回数・セット数の抽出（複数パターン対応）
-          // パターン1: "重量: XXkg" または "重量: 男性: XX-XXkg"
-          final weightPattern = RegExp(r'重量[:：]?\s*(?:男性[:：]?\s*)?(\d+(?:\.\d+)?)(?:-\d+(?:\.\d+)?)?(?:kg)?');
-          final repsPattern = RegExp(r'回数[:：]?\s*(\d+)\s*(?:回|reps?)?');
-          final setsPattern = RegExp(r'セット数[:：]?\s*(\d+)\s*(?:セット|sets?)?');
+          // 🆕 Build #24.1 Hotfix9.3: 多言語対応パターン
+          // パターン1: "重量: XXkg" または "Weight: XXkg" または "무게: XXkg"
+          final weightPattern = RegExp(
+            '(?:' + weightLabel + r'|重量|Weight|Peso|Gewicht)[:：]?\s*(?:男性[:：]?\s*)?(\d+(?:\.\d+)?)(?:-\d+(?:\.\d+)?)?(?:kg)?',
+            caseSensitive: false
+          );
+          final repsPattern = RegExp(
+            '(?:' + repsLabel + r'|回数|Reps?|Repeticiones|횟수|次数|Wiederholungen)[:：]?\s*(\d+)\s*(?:' + repsLabel + r'|回|reps?)?',
+            caseSensitive: false
+          );
+          final setsPattern = RegExp(
+            '(?:' + setsLabel + r'|セット数|Sets?|Series|세트 수|组数|組數|Sätze)[:：]?\s*(\d+)\s*(?:' + setsLabel + r'|セット|sets?)?',
+            caseSensitive: false
+          );
           
-          // パターン2: 単純な "XXkg", AppLocalizations.of(context)!.workout_b47211da, AppLocalizations.of(context)!.workout_fa854190
+          // パターン2: 単純な "XXkg", "XX회", "XX回", "XX reps"
+          // 🆕 Build #24.1 Hotfix9.3: 多言語対応
           final weightPattern2 = RegExp(r'(\d+(?:\.\d+)?)\s*(?:-\d+(?:\.\d+)?)?\s*kg');
-          final repsPattern2 = RegExp(r'(\d+)\s*回');
-          final setsPattern2 = RegExp(r'(\d+)\s*セット');
+          final repsPattern2 = RegExp(r'(\d+)\s*(?:' + repsLabel + r'|회|回|reps?)');
+          final setsPattern2 = RegExp(r'(\d+)\s*(?:' + setsLabel + r'|세트|セット|sets?)');
           
           // 🔧 v1.0.226: 有酸素運動用のパターン（時間）- 括弧付き説明にも対応
-          final timePattern = RegExp(r'(?:時間|HIIT形式)[:：]?\s*(\d+)\s*分');
-          final timePattern2 = RegExp(r'(\d+)\s*分(?:\s*（|\s*\()?');
+          // 🆕 Build #24.1 Hotfix9.3: 多言語対応
+          final timePattern = RegExp(
+            '(?:' + durationLabel + r'|時間|Duration|Duración|시간|分钟|分鐘|Dauer|HIIT形式)[:：]?\s*(\d+)\s*(?:' + durationLabel + r'|분|分|min)?',
+            caseSensitive: false
+          );
+          final timePattern2 = RegExp(r'(\d+)\s*(?:' + durationLabel + r'|분|分|min)(?:\s*（|\s*\()?');
           
           var weightMatch = weightPattern.firstMatch(cleanLine);
           var repsMatch = repsPattern.firstMatch(cleanLine);
@@ -2108,7 +2134,19 @@ $japaneseMenu
   /// 🔧 v1.0.217: プロンプト構築（レベル別 + トレーニング履歴考慮 + v1.0.219: レベル別種目DB）
   /// 🆕 v1.0.301: 多言語対応追加
   /// 🔄 Build #24.1 Hotfix10: 日本語で生成→翻訳方式（種目DBと互換性保持）
+  /// 🆕 Build #24.1 Hotfix9.3: ロケールに応じてプロンプトを切り替え
   String _buildPrompt(List<String> bodyParts) {
+    final locale = AppLocalizations.of(context)!.localeName;
+    
+    if (locale == 'ja') {
+      return _buildJapanesePrompt(bodyParts);
+    } else {
+      return _buildEnglishPrompt(bodyParts);
+    }
+  }
+  
+  /// 🆕 Build #24.1 Hotfix9: 日本語プロンプト構築
+  String _buildJapanesePrompt(List<String> bodyParts) {
     final languageInstruction = _getLanguageInstruction();
     // トレーニング履歴情報を構築
     String historyInfo = '';
@@ -2325,8 +2363,243 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
     }
   }
   
-  /// 🆕 Build #24.1 Hotfix9: English prompt construction for non-Japanese users
+  /// 🆕 Build #24.1 Hotfix9.3: English prompt construction for multilingual support
+  String _buildEnglishPrompt(List<String> bodyParts) {
+    final locale = AppLocalizations.of(context)!.localeName;
+    String languageInstruction = 'Please provide detailed explanations in English';
+    
+    // Customize language instruction based on locale
+    switch (locale) {
+      case 'es':
+        languageInstruction = 'Por favor proporciona explicaciones detalladas en español';
+        break;
+      case 'ko':
+        languageInstruction = '한국어로 자세한 설명을 제공하세요';
+        break;
+      case 'zh':
+      case 'zh_TW':
+        languageInstruction = '请用中文提供详细说明';
+        break;
+      case 'de':
+        languageInstruction = 'Bitte geben Sie detaillierte Erklärungen auf Deutsch';
+        break;
+    }
+    
+    // Build training history info in English
+    String historyInfo = '';
+    if (_exerciseHistory.isNotEmpty) {
+      historyInfo = '\n【Recent Training History (Last 30 days)】\n';
+      for (final entry in _exerciseHistory.entries) {
+        final exerciseName = entry.key;
+        final maxWeight = entry.value['maxWeight'];
+        final max1RM = entry.value['max1RM'];
+        final totalSets = entry.value['totalSets'];
+        historyInfo += '- $exerciseName: Max Weight=${maxWeight}kg, Est. 1RM=${max1RM?.toStringAsFixed(1)}kg, Total Sets=$totalSets\n';
+      }
+      historyInfo += '\nPlease use the above history to suggest appropriate weights and reps.\n';
+    }
+    
+    final targetParts = bodyParts;
+    final currentLevel = _selectedLevel;
+    
+    // Beginner level
+    if (currentLevel == AppLocalizations.of(context)!.levelBeginner) {
+      if (targetParts.isEmpty) {
+        return '''
+You are a professional personal trainer. Please suggest a full-body training menu for beginners.
 
+$_beginnerExerciseDatabase
+$historyInfo
+【Target Audience】
+- Gym beginners (1-3 months of experience)
+- Those aiming to build basic fitness
+- Those who want to learn proper form
+
+【Output Format】
+**Please strictly follow this format:**
+
+\`\`\`
+## Body Part Training Menu
+
+**Exercise 1: Exercise Name**
+* Weight: XXkg
+* Reps: XX
+* Sets: X
+* Rest Time: XXsec
+* Form Tips: Explanation
+
+**Exercise 2: Exercise Name**
+* Weight: XXkg
+* Reps: XX
+* Sets: X
+\`\`\`
+
+Please include the following information for each exercise:
+- Exercise name (selected from exercise database)
+- **Specific weight (kg)** ← Use history as reference, or suggest beginner-friendly weights
+  ※For cardio exercises, use "Weight: 0kg" and specify "Duration: XX minutes" instead of reps
+- **Reps (10-15)** ← For cardio, use "Duration: 20-30 minutes"
+- Sets (2-3 sets) ← For cardio, use "1 set"
+- Rest time (90-120 seconds)
+- Form tips for beginners
+
+【Conditions】
+- Balance training across all body parts
+- Focus on basic exercises
+- Completable in 30-45 minutes
+- $languageInstruction
+
+**Important: Always specify concrete weight and reps for each exercise. For cardio exercises, use weight 0kg and specify duration in XX minutes format.**
+''';
+      } else {
+        return '''
+You are a professional personal trainer. Please suggest a "${targetParts.join(', ')}" training menu for beginners.
+
+$_beginnerExerciseDatabase
+$historyInfo
+【Target Audience】
+- Gym beginners (1-3 months of experience)
+- Those who want to focus on training ${targetParts.join(', ')}
+
+【Output Format】
+**Please strictly follow this format:**
+
+\`\`\`
+## Body Part Training Menu
+
+**Exercise 1: Exercise Name**
+* Weight: XXkg
+* Reps: XX
+* Sets: X
+* Rest Time: XXsec
+* Form Tips: Explanation
+
+**Exercise 2: Exercise Name**
+* Weight: XXkg
+* Reps: XX
+* Sets: X
+\`\`\`
+
+Please include the following information for each exercise:
+- Exercise name (selected from exercise database)
+- **Specific weight (kg)** ← Use history as reference, or suggest beginner-friendly weights
+  ※For cardio exercises, use "Weight: 0kg" and specify "Duration: XX minutes" instead of reps
+- **Reps (10-15)** ← For cardio, use "Duration: 20-30 minutes"
+- Sets (2-3 sets) ← For cardio, use "1 set"
+- Rest time (90-120 seconds)
+- Form tips
+
+【Conditions】
+- Focus on training ${targetParts.join(', ')}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- Suggest **cardio exercises ONLY** (do not include weight training)" : "- Focus on basic exercises"}
+- Completable in 30-45 minutes
+- $languageInstruction
+
+**Important: Always specify concrete weight and reps for each exercise. For cardio exercises, use weight 0kg and specify duration in XX minutes format.**
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**STRICTLY: Use ONLY exercises from cardio database. Never include bench press, squats, or other weight training exercises.**" : ""}
+''';
+      }
+    } else if (currentLevel == AppLocalizations.of(context)!.levelIntermediate) {
+      // Intermediate level
+      return '''
+You are a professional personal trainer. Please suggest a "${targetParts.isEmpty ? "full-body" : targetParts.join(', ')}" training menu for intermediate trainees.
+
+$_advancedExerciseDatabase
+$historyInfo
+【Target Audience】
+- Intermediate trainees (6 months to 2 years of experience)
+- Those aiming for strength and muscle hypertrophy
+- Those who want to master more advanced techniques
+
+【Output Format】
+**Please strictly follow this format:**
+
+\`\`\`
+## Body Part Training Menu
+
+**Exercise 1: Exercise Name**
+* Weight: XXkg
+* Reps: XX
+* Sets: X
+* Rest Time: XXsec
+* Tips: Explanation
+
+**Exercise 2: Exercise Name**
+* Weight: XXkg
+* Reps: XX
+* Sets: X
+\`\`\`
+
+Please include the following information for each exercise:
+- Exercise name (selected from exercise database)
+- **Specific weight (kg)** ← Suggest 70-85% of historical 1RM
+  ※For cardio exercises, use "Weight: 0kg" and specify "Duration: XX minutes" instead of reps
+- **Reps (8-12)** ← For cardio, use "Duration: 30-45 minutes" or "Interval format"
+- Sets (3-4 sets) ← For cardio, use "1 set"
+- Rest time (60-90 seconds)
+- Technique tips (drop sets, supersets, etc.)
+
+【Conditions】
+- ${targetParts.isEmpty ? "Balance training across all body parts" : "Focus intensively on ${targetParts.join(', ')}"}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- Suggest **cardio exercises ONLY** (do not include weight training)\n- Variety of cardio: HIIT, endurance running, intervals, etc." : "- Focus on free weights\n- Emphasize muscle hypertrophy"}
+- Completable in 45-60 minutes
+- $languageInstruction
+
+**Important: Always specify concrete weight and reps for each exercise. For cardio exercises, use weight 0kg and specify duration in XX minutes format.**
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**STRICTLY: Use ONLY exercises from cardio database. Never include bench press, squats, deadlifts, or other weight training exercises.**" : ""}
+''';
+    } else {
+      // Advanced level
+      return '''
+You are a professional personal trainer. Please suggest a "${targetParts.isEmpty ? "full-body" : targetParts.join(', ')}" training menu for advanced trainees.
+
+$_advancedExerciseDatabase
+$historyInfo
+【Target Audience】
+- Advanced trainees (2+ years of experience)
+- Those aiming for maximum strength and muscle growth
+- Those experienced with high-intensity training
+
+【Output Format】
+**Please strictly follow this format:**
+
+\`\`\`
+## Body Part Training Menu
+
+**Exercise 1: Exercise Name**
+* Weight: XXkg (based on 1RM history: 85-95%)
+* Reps: XX (5-8 reps, or for cardio: HIIT XX minutes or Endurance run XX minutes)
+* Sets: X (4-5 sets, for cardio: 1 set)
+* Rest Time: XXsec (120-180 seconds)
+* Advanced Techniques: Pyramid method, 5x5 method, etc.
+
+**Exercise 2: Exercise Name**
+* Weight: XXkg
+* Reps: XX
+* Sets: X
+\`\`\`
+
+Please include the following information for each exercise:
+- Exercise name (selected from database)
+- **Specific weight (kg)** ← Suggest 85-95% of historical 1RM
+  ※For cardio exercises, use "Weight: 0kg" and specify "Duration: XX minutes" instead of reps
+- **Reps (5-8)** ← For cardio, use "HIIT format XX minutes" or "Endurance run XX minutes"
+- Sets (4-5 sets) ← For cardio, use "1 set"
+- Rest time (120-180 seconds)
+- Advanced techniques (pyramid, 5x5, etc.)
+
+【Conditions】
+- ${targetParts.isEmpty ? "Full-body training with maximum load" : "Train ${targetParts.join(', ')} to the absolute limit"}
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- Suggest **cardio exercises ONLY**\n- Mix of HIIT, endurance, intervals, etc." : "- Emphasize compound movements\n- Maximize strength"}
+- Completable in 60-90 minutes
+- $languageInstruction
+
+**Important: Always specify concrete weight and reps for each exercise. For cardio exercises, use weight 0kg and duration in XX minutes format. Use only cardio exercises when cardio is selected.**
+${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**STRICTLY: Use ONLY exercises from cardio database. Never include bench press, squats, deadlifts, shoulder press, or other weight training exercises.**" : ""}
+''';
+    }
+  }
+  
   /// リワード広告ダイアログ表示
   Future<bool?> _showRewardAdDialog() async {
     return showDialog<bool>(

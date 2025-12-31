@@ -3797,5 +3797,12 @@
   "aiMenuHistoryTitle": "Frühere Vorschläge",
   "aiMenuSetsSuffix": " Sätze",
   "aiMenuRepsSuffix": " Wdh.",
-  "aiMenuMinutesSuffix": " Min"
+  "aiMenuMinutesSuffix": " Min",
+  "parserExercisePrefix": "Übung",
+  "parserWeightLabel": "Gewicht",
+  "parserRepsLabel": "Wiederholungen",
+  "parserSetsLabel": "Sätze",
+  "parserRestLabel": "Ruhezeit",
+  "parserDurationLabel": "Dauer",
+  "parserDistanceLabel": "Entfernung"
 }

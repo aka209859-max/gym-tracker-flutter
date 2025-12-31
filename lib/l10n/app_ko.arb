@@ -3795,5 +3795,12 @@
   "aiMenuHistoryTitle": "이전 제안",
   "aiMenuSetsSuffix": "세트",
   "aiMenuRepsSuffix": "회",
-  "aiMenuMinutesSuffix": "분"
+  "aiMenuMinutesSuffix": "분",
+  "parserExercisePrefix": "종목",
+  "parserWeightLabel": "무게",
+  "parserRepsLabel": "횟수",
+  "parserSetsLabel": "세트 수",
+  "parserRestLabel": "휴식 시간",
+  "parserDurationLabel": "시간",
+  "parserDistanceLabel": "거리"
 }
