@@ -4,6 +4,7 @@ import '../services/reward_ad_service.dart';
 import '../services/ai_credit_service.dart';
 import '../screens/subscription_screen.dart';
 import '../screens/ai_addon_purchase_screen.dart';
+import 'package:gym_match/gen/app_localizations.dart';
 
 /// ペイウォールダイアログ種別
 enum PaywallType {
