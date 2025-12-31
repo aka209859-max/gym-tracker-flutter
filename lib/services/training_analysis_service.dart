@@ -33,6 +33,7 @@ class TrainingAnalysisService {
     required List<Map<String, dynamic>> recentHistory,
     required String gender,
     required int age,
+    String locale = 'ja', // 🆕 Build #24.1 Hotfix9: Add locale support
   }) async {
     try {
       // 推奨値の取得
@@ -75,6 +76,8 @@ class TrainingAnalysisService {
         recommendedFreq: recommendedFreq,
         gender: gender,
         age: age,
+        locale: locale, // 🆕 Build #24.1 Hotfix9: Pass locale
+
       );
 
       return {
@@ -293,6 +296,7 @@ class TrainingAnalysisService {
     required Map<String, dynamic> recommendedFreq,
     required String gender,
     required int age,
+    String locale = 'ja', // 🆕 Build #24.1 Hotfix9: Add locale support
   }) async {
     // キャッシュキーを生成
     final cacheKey = AIResponseOptimizer.generateCacheKey({
@@ -318,43 +322,16 @@ class TrainingAnalysisService {
     
     print('⏳ トレーニング分析: API呼び出し中...');
     
-    final prompt = '''
-${ScientificDatabase.getSystemPrompt()}
-
-【分析対象】
-・部位：$bodyPart
-・レベル：$level
-・性別：$gender
-・年齢：${age}歳
-
-【現在の状況】
-・$bodyPart のトレーニング：週${currentSetsPerWeek}セット実施中
-・$bodyPart のトレーニング頻度：週${currentFrequency}回
-・ボリューム評価：${volumeAnalysis['status']}
-・頻度評価：${frequencyAnalysis['status']}
-・成長トレンド：${growthTrend['trend']}
-・プラトー検出：${plateauDetected ? 'あり' : 'なし'}
-
-【推奨プログラム】
-・$bodyPart のボリューム：週${recommendedVolume['optimal']}セット（${recommendedVolume['min']}-${recommendedVolume['max']}セット）
-・$bodyPart のトレーニング頻度：週${recommendedFreq['frequency']}回
-・効果量：ES=${recommendedFreq['effectSize']}
-
-【重要】
-「週${recommendedFreq['frequency']}回」= 同一部位（$bodyPart）を週に${recommendedFreq['frequency']}回トレーニングすること
-例：月曜・水曜・金曜に$bodyPart のトレーニングを実施（週3回）
-
-以下の形式で簡潔に回答してください（300文字以内）：
-
-## トレーニング効果の評価
-（現在のプログラムの科学的評価）
-
-## 最優先改善ポイント
-（最も効果的な改善策を1つ）
-
-## 具体的アクションプラン
-（今週から実行できる3つのアクション）
-''';
+    // 🆕 Build #24.1 Hotfix9: Multilingual prompt construction
+    final prompt = locale == 'ja' 
+        ? _buildJapaneseAnalysisPrompt(
+            bodyPart, level, gender, age, currentSetsPerWeek, currentFrequency,
+            volumeAnalysis, frequencyAnalysis, growthTrend, plateauDetected,
+            recommendedVolume, recommendedFreq)
+        : _buildEnglishAnalysisPrompt(
+            bodyPart, level, gender, age, currentSetsPerWeek, currentFrequency,
+            volumeAnalysis, frequencyAnalysis, growthTrend, plateauDetected,
+            recommendedVolume, recommendedFreq, locale);
 
     try {
       final response = await http.post(
@@ -476,4 +453,136 @@ ${ScientificDatabase.getSystemPrompt()}
       };
     }).toList();
   }
+  
+  /// 🆕 Build #24.1 Hotfix9: Japanese analysis prompt construction
+  static String _buildJapaneseAnalysisPrompt(
+    String bodyPart,
+    String level,
+    String gender,
+    int age,
+    int currentSetsPerWeek,
+    int currentFrequency,
+    Map<String, dynamic> volumeAnalysis,
+    Map<String, dynamic> frequencyAnalysis,
+    Map<String, dynamic> growthTrend,
+    bool plateauDetected,
+    Map<String, int> recommendedVolume,
+    Map<String, dynamic> recommendedFreq,
+  ) {
+    return '''
+${ScientificDatabase.getSystemPrompt()}
+
+【分析対象】
+・部位：$bodyPart
+・レベル：$level
+・性別：$gender
+・年齢：${age}歳
+
+【現在の状況】
+・$bodyPart のトレーニング：週${currentSetsPerWeek}セット実施中
+・$bodyPart のトレーニング頻度：週${currentFrequency}回
+・ボリューム評価：${volumeAnalysis['status']}
+・頻度評価：${frequencyAnalysis['status']}
+・成長トレンド：${growthTrend['trend']}
+・プラトー検出：${plateauDetected ? 'あり' : 'なし'}
+
+【推奨プログラム】
+・$bodyPart のボリューム：週${recommendedVolume['optimal']}セット（${recommendedVolume['min']}-${recommendedVolume['max']}セット）
+・$bodyPart のトレーニング頻度：週${recommendedFreq['frequency']}回
+・効果量：ES=${recommendedFreq['effectSize']}
+
+【重要】
+「週${recommendedFreq['frequency']}回」= 同一部位（$bodyPart）を週に${recommendedFreq['frequency']}回トレーニングすること
+例：月曜・水曜・金曜に$bodyPart のトレーニングを実施（週3回）
+
+以下の形式で簡潔に回答してください（300文字以内）：
+
+## トレーニング効果の評価
+（現在のプログラムの科学的評価）
+
+## 最優先改善ポイント
+（最も効果的な改善策を1つ）
+
+## 具体的アクションプラン
+（今週から実行できる3つのアクション）
+''';
+  }
+  
+  /// 🆕 Build #24.1 Hotfix9: English analysis prompt construction
+  static String _buildEnglishAnalysisPrompt(
+    String bodyPart,
+    String level,
+    String gender,
+    int age,
+    int currentSetsPerWeek,
+    int currentFrequency,
+    Map<String, dynamic> volumeAnalysis,
+    Map<String, dynamic> frequencyAnalysis,
+    Map<String, dynamic> growthTrend,
+    bool plateauDetected,
+    Map<String, int> recommendedVolume,
+    Map<String, dynamic> recommendedFreq,
+    String locale,
+  ) {
+    // Determine language instruction
+    String languageInstruction;
+    switch (locale) {
+      case 'es':
+        languageInstruction = 'Por favor responda en español';
+        break;
+      case 'ko':
+        languageInstruction = '한국어로 답변해 주세요';
+        break;
+      case 'zh':
+      case 'zh_TW':
+        languageInstruction = '请用中文回答';
+        break;
+      case 'de':
+        languageInstruction = 'Bitte antworten Sie auf Deutsch';
+        break;
+      default:
+        languageInstruction = 'Please respond in English';
+    }
+    
+    return '''
+${ScientificDatabase.getSystemPrompt()}
+
+【Analysis Target】
+・Body Part: $bodyPart
+・Level: $level
+・Gender: $gender
+・Age: $age years old
+
+【Current Situation】
+・$bodyPart training: ${currentSetsPerWeek} sets/week currently implemented
+・$bodyPart training frequency: ${currentFrequency} times/week
+・Volume assessment: ${volumeAnalysis['status']}
+・Frequency assessment: ${frequencyAnalysis['status']}
+・Growth trend: ${growthTrend['trend']}
+・Plateau detection: ${plateauDetected ? 'Detected' : 'Not detected'}
+
+【Recommended Program】
+・$bodyPart volume: ${recommendedVolume['optimal']} sets/week (${recommendedVolume['min']}-${recommendedVolume['max']} sets)
+・$bodyPart training frequency: ${recommendedFreq['frequency']} times/week
+・Effect size: ES=${recommendedFreq['effectSize']}
+
+【Important】
+"${recommendedFreq['frequency']} times/week" = Train the same body part ($bodyPart) ${recommendedFreq['frequency']} times per week
+Example: Train $bodyPart on Monday, Wednesday, Friday (3 times/week)
+
+Please respond concisely in the following format (within 300 words):
+
+## Training Effect Assessment
+(Scientific evaluation of current program)
+
+## Top Priority Improvement
+(Most effective improvement strategy - one item)
+
+## Specific Action Plan
+(Three actions to implement starting this week)
+
+$languageInstruction
+''';
+  }
 }
+
