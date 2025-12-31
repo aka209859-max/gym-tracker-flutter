@@ -386,7 +386,7 @@ class AIPredictionService {
     required Map<String, int> recommendedVolume,
     required Map<String, dynamic> recommendedFreq,
   }) {
-    final systemPrompt = ScientificDatabase.getSystemPrompt();
+    final systemPrompt = ScientificDatabase.getSystemPrompt(locale: locale); // 🆕 Build #24.1 Hotfix9.7: Pass locale for multilingual system prompt
     
     switch (locale) {
       case 'es':

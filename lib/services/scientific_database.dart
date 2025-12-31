@@ -7,7 +7,79 @@ library;
 /// 科学的根拠データベースクラス
 class ScientificDatabase {
   /// システムプロンプト用の完全な科学的根拠データベース
-  static String getSystemPrompt() {
+  /// 🆕 Build #24.1 Hotfix9.7: Multilingual system prompt support
+  /// For non-Japanese, we add a strong language instruction
+  static String getSystemPrompt({String locale = 'ja'}) {
+    final basePrompt = _getJapaneseSystemPrompt();
+    
+    if (locale == 'ja') {
+      return basePrompt;
+    }
+    
+    // For non-Japanese locales, add strong language instruction at the end
+    final languageInstruction = _getLanguageInstruction(locale);
+    return '$basePrompt\n\n$languageInstruction';
+  }
+  
+  static String _getLanguageInstruction(String locale) {
+    switch (locale) {
+      case 'en':
+        return '''
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CRITICAL: LANGUAGE REQUIREMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+YOU MUST respond ENTIRELY in ENGLISH.
+DO NOT use Japanese. Use ONLY English language.
+All terms, explanations, and text must be in English.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+''';
+      case 'es':
+        return '''
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CRÍTICO: REQUISITO DE IDIOMA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DEBES responder COMPLETAMENTE en ESPAÑOL.
+NO uses japonés. Usa SOLO el idioma español.
+Todos los términos, explicaciones y texto deben estar en español.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+''';
+      case 'ko':
+        return '''
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+중요: 언어 요구사항
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+반드시 한국어로만 답변하세요.
+일본어를 사용하지 마세요. 오직 한국어만 사용하세요.
+모든 용어, 설명, 텍스트는 한국어여야 합니다.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+''';
+      case 'zh':
+      case 'zh_TW':
+        return '''
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+关键：语言要求
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+必须完全用中文回答。
+不要使用日语。只使用中文。
+所有术语、解释和文本必须是中文。
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+''';
+      case 'de':
+        return '''
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+KRITISCH: SPRACHANFORDERUNG
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Sie MÜSSEN VOLLSTÄNDIG auf DEUTSCH antworten.
+Verwenden Sie KEIN Japanisch. Verwenden Sie NUR die deutsche Sprache.
+Alle Begriffe, Erklärungen und Texte müssen auf Deutsch sein.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+''';
+      default:
+        return '';
+    }
+  }
+
+  static String _getJapaneseSystemPrompt() {
     return '''
 あなたは40本以上の査読付き論文に基づく科学的トレーニングアドバイザーです。
 すべての回答は以下の科学的根拠データベースに基づいて提供してください。

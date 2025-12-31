@@ -883,34 +883,35 @@ class _AIMenuTabState extends State<_AIMenuTab>
                 ),
                 Row(
                   children: [
-                    // 全選択/全解除ボタン
-                    TextButton.icon(
-                      onPressed: () {
-                        if (mounted) {
-                        setState(() {
-                          if (_selectedExerciseIndices.length == _parsedExercises.length) {
-                            _selectedExerciseIndices.clear();
-                          } else {
-                            _selectedExerciseIndices = Set.from(
-                              List.generate(_parsedExercises.length, (i) => i)
-                            );
+                    // 🆕 Build #24.1 Hotfix9.7: 全選択/全解除ボタンは日本語のみ表示
+                    if (AppLocalizations.of(context)!.localeName == 'ja')
+                      TextButton.icon(
+                        onPressed: () {
+                          if (mounted) {
+                          setState(() {
+                            if (_selectedExerciseIndices.length == _parsedExercises.length) {
+                              _selectedExerciseIndices.clear();
+                            } else {
+                              _selectedExerciseIndices = Set.from(
+                                List.generate(_parsedExercises.length, (i) => i)
+                              );
+                            }
+                          });
                           }
-                        });
-                        }
-                      },
-                      icon: Icon(
-                        _selectedExerciseIndices.length == _parsedExercises.length
-                            ? Icons.check_box
-                            : Icons.check_box_outline_blank,
-                        size: 20,
+                        },
+                        icon: Icon(
+                          _selectedExerciseIndices.length == _parsedExercises.length
+                              ? Icons.check_box
+                              : Icons.check_box_outline_blank,
+                          size: 20,
+                        ),
+                        label: Text(
+                          _selectedExerciseIndices.length == _parsedExercises.length
+                              ? AppLocalizations.of(context)!.workout_69593f57
+                              : AppLocalizations.of(context)!.workout_219e609f,
+                          style: const TextStyle(fontSize: 12),
+                        ),
                       ),
-                      label: Text(
-                        _selectedExerciseIndices.length == _parsedExercises.length
-                            ? AppLocalizations.of(context)!.workout_69593f57
-                            : AppLocalizations.of(context)!.workout_219e609f,
-                        style: const TextStyle(fontSize: 12),
-                      ),
-                    ),
                     IconButton(
                       icon: Icon(Icons.save),
                       onPressed: _saveMenu,
@@ -924,29 +925,33 @@ class _AIMenuTabState extends State<_AIMenuTab>
             SizedBox(height: 8),
             
             // 🔧 v1.0.220: パース済み種目リスト（チェックボックス付き）
+            // 🆕 Build #24.1 Hotfix9.7: 日本語のみ選択可能、他言語はテキスト表示
             if (_parsedExercises.isNotEmpty) ...[
               ..._parsedExercises.asMap().entries.map((entry) {
                 final index = entry.key;
                 final exercise = entry.value;
                 final isSelected = _selectedExerciseIndices.contains(index);
+                final isJapanese = AppLocalizations.of(context)!.localeName == 'ja';
                 
-                return Card(
-                  margin: const EdgeInsets.only(bottom: 8),
-                  color: isSelected ? Colors.blue.shade50 : null,
-                  child: CheckboxListTile(
-                    value: isSelected,
-                    onChanged: (value) {
-                      if (mounted) {
-                      setState(() {
-                        if (value == true) {
-                          _selectedExerciseIndices.add(index);
-                        } else {
-                          _selectedExerciseIndices.remove(index);
+                // 🆕 Build #24.1 Hotfix9.7: 日本語の場合のみチェックボックス表示
+                if (isJapanese) {
+                  return Card(
+                    margin: const EdgeInsets.only(bottom: 8),
+                    color: isSelected ? Colors.blue.shade50 : null,
+                    child: CheckboxListTile(
+                      value: isSelected,
+                      onChanged: (value) {
+                        if (mounted) {
+                        setState(() {
+                          if (value == true) {
+                            _selectedExerciseIndices.add(index);
+                          } else {
+                            _selectedExerciseIndices.remove(index);
+                          }
+                        });
                         }
-                      });
-                      }
-                    },
-                    title: Row(
+                      },
+                      title: Row(
                       children: [
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -1020,28 +1025,112 @@ class _AIMenuTabState extends State<_AIMenuTab>
                     ),
                   ),
                 );
+                } else {
+                  // 🆕 Build #24.1 Hotfix9.7: 非日本語の場合はテキストのみ表示（選択不可）
+                  return Card(
+                    margin: const EdgeInsets.only(bottom: 8),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: _getBodyPartColor(exercise.bodyPart),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: Text(
+                                  exercise.bodyPart,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  exercise.name,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 8),
+                          // 🔧 v1.0.237: 有酸素運動と筋トレで表示を分ける
+                          if (exercise.isCardio) 
+                            // 有酸素運動の表示: 距離/時間
+                            Wrap(
+                              spacing: 12,
+                              children: [
+                                if (exercise.distance != null && exercise.distance! > 0)
+                                  _buildInfoChip(Icons.straighten, '${exercise.distance}km'),
+                                if (exercise.duration != null)
+                                  _buildInfoChip(Icons.timer, '${exercise.duration}${AppLocalizations.of(context)!.aiMenuMinutesSuffix}'),
+                                if (exercise.sets != null)
+                                  _buildInfoChip(Icons.layers, '${exercise.sets}${AppLocalizations.of(context)!.aiMenuSetsSuffix}'),
+                              ],
+                            )
+                          else
+                            // 筋トレの表示: 重さ/回数
+                            Wrap(
+                              spacing: 12,
+                              children: [
+                                if (exercise.weight != null)
+                                  _buildInfoChip(Icons.fitness_center, '${exercise.weight}kg'),
+                                if (exercise.reps != null)
+                                  _buildInfoChip(Icons.repeat, '${exercise.reps}${AppLocalizations.of(context)!.aiMenuRepsSuffix}'),
+                                if (exercise.sets != null)
+                                  _buildInfoChip(Icons.layers, '${exercise.sets}${AppLocalizations.of(context)!.aiMenuSetsSuffix}'),
+                              ],
+                            ),
+                          if (exercise.description != null) ...[
+                            SizedBox(height: 6),
+                            Text(
+                              exercise.description!,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey.shade700,
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                  );
+                }
               }).toList(),
               
               // 🔧 v1.0.222: トレーニングを開始ボタン（記録画面に遷移）
-              SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton.icon(
-                  onPressed: _selectedExerciseIndices.isEmpty
-                      ? null
-                      : _saveSelectedExercisesToWorkoutLog,
-                  icon: Icon(Icons.fitness_center),
-                  label: Text(
-                    'トレーニングを開始 (${_selectedExerciseIndices.length}種目)',
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    backgroundColor: Colors.green.shade600,
-                    foregroundColor: Colors.white,
-                    disabledBackgroundColor: Colors.grey.shade300,
+              // 🆕 Build #24.1 Hotfix9.7: 日本語のみ表示
+              if (AppLocalizations.of(context)!.localeName == 'ja') ...[
+                SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    onPressed: _selectedExerciseIndices.isEmpty
+                        ? null
+                        : _saveSelectedExercisesToWorkoutLog,
+                    icon: Icon(Icons.fitness_center),
+                    label: Text(
+                      'トレーニングを開始 (${_selectedExerciseIndices.length}種目)',
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      backgroundColor: Colors.green.shade600,
+                      foregroundColor: Colors.white,
+                      disabledBackgroundColor: Colors.grey.shade300,
+                    ),
                   ),
                 ),
-              ),
+              ],
             ] else ...[
               // 🔧 v1.0.223-debug: パースに失敗した場合はエラーメッセージと生テキストを表示（デバッグ用）
               Card(
