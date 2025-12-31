@@ -33,7 +33,7 @@ class TrainingAnalysisService {
     required List<Map<String, dynamic>> recentHistory,
     required String gender,
     required int age,
-    String locale = 'ja', // 🆕 Build #24.1 Hotfix9: Add locale support
+    String locale = 'ja', // 🔄 Build #24.1 Hotfix10: Keep for future translation support
   }) async {
     try {
       // 推奨値の取得
@@ -322,16 +322,11 @@ class TrainingAnalysisService {
     
     print('⏳ トレーニング分析: API呼び出し中...');
     
-    // 🆕 Build #24.1 Hotfix9: Multilingual prompt construction
-    final prompt = locale == 'ja' 
-        ? _buildJapaneseAnalysisPrompt(
-            bodyPart, level, gender, age, currentSetsPerWeek, currentFrequency,
-            volumeAnalysis, frequencyAnalysis, growthTrend, plateauDetected,
-            recommendedVolume, recommendedFreq)
-        : _buildEnglishAnalysisPrompt(
-            bodyPart, level, gender, age, currentSetsPerWeek, currentFrequency,
-            volumeAnalysis, frequencyAnalysis, growthTrend, plateauDetected,
-            recommendedVolume, recommendedFreq, locale);
+    // 🔄 Build #24.1 Hotfix10: 日本語で生成（翻訳は今後実装予定）
+    final prompt = _buildJapaneseAnalysisPrompt(
+        bodyPart, level, gender, age, currentSetsPerWeek, currentFrequency,
+        volumeAnalysis, frequencyAnalysis, growthTrend, plateauDetected,
+        recommendedVolume, recommendedFreq);
 
     try {
       final response = await http.post(
@@ -509,80 +504,4 @@ ${ScientificDatabase.getSystemPrompt()}
   }
   
   /// 🆕 Build #24.1 Hotfix9: English analysis prompt construction
-  static String _buildEnglishAnalysisPrompt(
-    String bodyPart,
-    String level,
-    String gender,
-    int age,
-    int currentSetsPerWeek,
-    int currentFrequency,
-    Map<String, dynamic> volumeAnalysis,
-    Map<String, dynamic> frequencyAnalysis,
-    Map<String, dynamic> growthTrend,
-    bool plateauDetected,
-    Map<String, int> recommendedVolume,
-    Map<String, dynamic> recommendedFreq,
-    String locale,
-  ) {
-    // Determine language instruction
-    String languageInstruction;
-    switch (locale) {
-      case 'es':
-        languageInstruction = 'Por favor responda en español';
-        break;
-      case 'ko':
-        languageInstruction = '한국어로 답변해 주세요';
-        break;
-      case 'zh':
-      case 'zh_TW':
-        languageInstruction = '请用中文回答';
-        break;
-      case 'de':
-        languageInstruction = 'Bitte antworten Sie auf Deutsch';
-        break;
-      default:
-        languageInstruction = 'Please respond in English';
-    }
-    
-    return '''
-${ScientificDatabase.getSystemPrompt()}
-
-【Analysis Target】
-・Body Part: $bodyPart
-・Level: $level
-・Gender: $gender
-・Age: $age years old
-
-【Current Situation】
-・$bodyPart training: ${currentSetsPerWeek} sets/week currently implemented
-・$bodyPart training frequency: ${currentFrequency} times/week
-・Volume assessment: ${volumeAnalysis['status']}
-・Frequency assessment: ${frequencyAnalysis['status']}
-・Growth trend: ${growthTrend['trend']}
-・Plateau detection: ${plateauDetected ? 'Detected' : 'Not detected'}
-
-【Recommended Program】
-・$bodyPart volume: ${recommendedVolume['optimal']} sets/week (${recommendedVolume['min']}-${recommendedVolume['max']} sets)
-・$bodyPart training frequency: ${recommendedFreq['frequency']} times/week
-・Effect size: ES=${recommendedFreq['effectSize']}
-
-【Important】
-"${recommendedFreq['frequency']} times/week" = Train the same body part ($bodyPart) ${recommendedFreq['frequency']} times per week
-Example: Train $bodyPart on Monday, Wednesday, Friday (3 times/week)
-
-Please respond concisely in the following format (within 300 words):
-
-## Training Effect Assessment
-(Scientific evaluation of current program)
-
-## Top Priority Improvement
-(Most effective improvement strategy - one item)
-
-## Specific Action Plan
-(Three actions to implement starting this week)
-
-$languageInstruction
-''';
-  }
-}
 

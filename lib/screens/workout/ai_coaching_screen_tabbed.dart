@@ -1451,9 +1451,20 @@ class _AIMenuTabState extends State<_AIMenuTab>
         debugPrint('📄 生成されたメニュー（最初の500文字）:\n${text.substring(0, text.length > 500 ? 500 : text.length)}');
         
         // ========================================
-        // 🆕 Build #24.1 Hotfix9: プロンプトから直接ユーザー言語で生成されるため翻訳不要
+        // 🔄 Build #24.1 Hotfix10: 日本語生成→翻訳方式（種目DB互換性保持）
         // ========================================
-        final parsedExercises = _parseGeneratedMenu(text, bodyParts);
+        String finalMenu = text;
+        final locale = AppLocalizations.of(context)!.localeName;
+        
+        if (locale != 'ja') {
+          debugPrint('🌐 非日本語ユーザー検出（$locale）→ 翻訳開始');
+          finalMenu = await _translateMenuToLanguage(text);
+          debugPrint('✅ 翻訳完了: ${finalMenu.length}文字');
+        } else {
+          debugPrint('🇯🇵 日本語ユーザー → 翻訳スキップ');
+        }
+        
+        final parsedExercises = _parseGeneratedMenu(finalMenu, bodyParts);
         
         debugPrint('✅ メニュー生成成功: ${parsedExercises.length}種目抽出');
         if (parsedExercises.isEmpty) {
@@ -1462,7 +1473,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
         
         if (mounted) {
         setState(() {
-          _generatedMenu = text;
+          _generatedMenu = finalMenu;
           _parsedExercises = parsedExercises;
           _selectedExerciseIndices.clear(); // 選択をリセット
           _isGenerating = false;
@@ -1974,8 +1985,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
 
   /// 🆕 Build #24.1: AI生成メニューを他言語に翻訳（Gemini 2.0 Flash Exp使用）
   /// 日本語以外のユーザー向けに、生成されたメニューを翻訳する
-  /// 🚫 Build #24.1 Hotfix9: DEPRECATED - プロンプトから直接対応言語で生成するため不要
-  /*
+  /// 🔄 Build #24.1 Hotfix10: 翻訳品質改善（リトライ、フォーマット保持強化）
   Future<String> _translateMenuToLanguage(String japaneseMenu) async {
     final locale = AppLocalizations.of(context)!.localeName;
     
@@ -2012,6 +2022,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
     debugPrint('🌐 メニュー翻訳開始: 日本語 → $targetLanguage');
     
     try {
+      // 🔄 Build #24.1 Hotfix10: 翻訳品質改善（フォーマット保持強化）
       // Gemini 2.0 Flash Exp API呼び出し（翻訳用）
       final response = await http.post(
         Uri.parse(
@@ -2025,19 +2036,39 @@ class _AIMenuTabState extends State<_AIMenuTab>
                   'text': '''
 You are a professional translator specializing in fitness and training content.
 
-Please translate the following Japanese workout menu to $targetLanguage.
+Translate the following Japanese workout menu to $targetLanguage.
 
-**IMPORTANT RULES:**
-1. Keep the exact same format and structure
-2. Preserve all numbers (weight, reps, sets, rest time)
-3. Keep markdown formatting (##, **, *, etc.)
-4. Translate exercise names accurately
-5. Translate explanations and notes
-6. Keep "kg", "回" (reps), "セット" (sets) format or translate appropriately
+**CRITICAL FORMAT RULES (MUST FOLLOW EXACTLY):**
+1. **Preserve exact markdown structure:** Keep ALL ##, **, *, formatting
+2. **Keep numbers intact:** All weights (Xkg), reps (X回 or X reps), sets (Xセット or X sets), rest times (X秒 or Xsec)
+3. **Translate ONLY text, NOT structure:**
+   - Translate: Exercise names, explanations, tips
+   - Keep: Numbers, units (kg, 回, セット, 秒), bullet points (*, -), headers (##)
+4. **Line breaks:** Preserve ALL line breaks exactly as they appear
+5. **Special terms:**
+   - 重量 → Weight
+   - 回数 → Reps
+   - セット数 → Sets
+   - 休憩時間 → Rest Time
+   - フォームのポイント → Form Tips
+
+**Example Format to Preserve:**
+\`\`\`
+## Body Part Training Menu
+
+**Exercise 1: Exercise Name**
+* Weight: XXkg
+* Reps: XX
+* Sets: X
+* Rest Time: XXsec
+* Form Tips: explanation text
+\`\`\`
 
 **Japanese Menu to Translate:**
 
 $japaneseMenu
+
+**Your Task:** Translate to $targetLanguage while keeping EXACT same structure and numbers.
 
 **Translated Menu in $targetLanguage:**
 ''',
@@ -2046,10 +2077,10 @@ $japaneseMenu
             }
           ],
           'generationConfig': {
-            'temperature': 0.3, // 一貫性のある翻訳のため低く設定
-            'topK': 20,
-            'topP': 0.85,
-            'maxOutputTokens': 3000, // 翻訳結果用に少し多めに確保
+            'temperature': 0.2, // 🔄 更に低く設定（フォーマット一貫性向上）
+            'topK': 10,
+            'topP': 0.8,
+            'maxOutputTokens': 3000,
           }
         }),
       ).timeout(
@@ -2073,26 +2104,11 @@ $japaneseMenu
       return japaneseMenu;
     }
   }
-  */
 
   /// 🔧 v1.0.217: プロンプト構築（レベル別 + トレーニング履歴考慮 + v1.0.219: レベル別種目DB）
   /// 🆕 v1.0.301: 多言語対応追加
-  /// 🆕 Build #24.1 Hotfix9: 言語別プロンプト生成（翻訳APIを使わず最初から対応言語で生成）
+  /// 🔄 Build #24.1 Hotfix10: 日本語で生成→翻訳方式（種目DBと互換性保持）
   String _buildPrompt(List<String> bodyParts) {
-    final locale = AppLocalizations.of(context)!.localeName;
-    
-    // 日本語の場合は日本語プロンプト
-    if (locale == 'ja') {
-      return _buildJapanesePrompt(bodyParts);
-    }
-    
-    // その他の言語は英語ベースのプロンプトで生成
-    // Gemini APIが自動的に適切な言語で応答
-    return _buildEnglishPrompt(bodyParts);
-  }
-  
-  /// 🆕 Build #24.1 Hotfix9: 日本語プロンプト構築
-  String _buildJapanesePrompt(List<String> bodyParts) {
     final languageInstruction = _getLanguageInstruction();
     // トレーニング履歴情報を構築
     String historyInfo = '';
@@ -2310,241 +2326,6 @@ ${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**絶対
   }
   
   /// 🆕 Build #24.1 Hotfix9: English prompt construction for non-Japanese users
-  String _buildEnglishPrompt(List<String> bodyParts) {
-    final locale = AppLocalizations.of(context)!.localeName;
-    String languageInstruction = 'Please provide detailed explanations in English';
-    
-    // Customize language instruction based on locale
-    switch (locale) {
-      case 'es':
-        languageInstruction = 'Por favor proporciona explicaciones detalladas en español';
-        break;
-      case 'ko':
-        languageInstruction = '한국어로 자세한 설명을 제공하세요';
-        break;
-      case 'zh':
-      case 'zh_TW':
-        languageInstruction = '请用中文提供详细说明';
-        break;
-      case 'de':
-        languageInstruction = 'Bitte geben Sie detaillierte Erklärungen auf Deutsch';
-        break;
-    }
-    
-    // Build training history info in English
-    String historyInfo = '';
-    if (_exerciseHistory.isNotEmpty) {
-      historyInfo = '\n【Recent Training History (Last 30 days)】\n';
-      for (final entry in _exerciseHistory.entries) {
-        final exerciseName = entry.key;
-        final maxWeight = entry.value['maxWeight'];
-        final max1RM = entry.value['max1RM'];
-        final totalSets = entry.value['totalSets'];
-        historyInfo += '- $exerciseName: Max Weight=${maxWeight}kg, Est. 1RM=${max1RM?.toStringAsFixed(1)}kg, Total Sets=$totalSets\n';
-      }
-      historyInfo += '\nPlease use the above history to suggest appropriate weights and reps.\n';
-    }
-    
-    final targetParts = bodyParts;
-    final currentLevel = _selectedLevel;
-    
-    // Beginner level
-    if (currentLevel == AppLocalizations.of(context)!.levelBeginner) {
-      if (targetParts.isEmpty) {
-        return '''
-You are a professional personal trainer. Please suggest a full-body training menu for beginners.
-
-$_beginnerExerciseDatabase
-$historyInfo
-【Target Audience】
-- Gym beginners (1-3 months of experience)
-- Those aiming to build basic fitness
-- Those who want to learn proper form
-
-【Output Format】
-**Please strictly follow this format:**
-
-\`\`\`
-## Body Part Training Menu
-
-**Exercise 1: Exercise Name**
-* Weight: XXkg
-* Reps: XX
-* Sets: X
-* Rest Time: XXsec
-* Form Tips: Explanation
-
-**Exercise 2: Exercise Name**
-* Weight: XXkg
-* Reps: XX
-* Sets: X
-\`\`\`
-
-Please include the following information for each exercise:
-- Exercise name (selected from exercise database)
-- **Specific weight (kg)** ← Use history as reference, or suggest beginner-friendly weights
-  ※For cardio exercises, use "Weight: 0kg" and specify "Duration: XX minutes" instead of reps
-- **Reps (10-15)** ← For cardio, use "Duration: 20-30 minutes"
-- Sets (2-3 sets) ← For cardio, use "1 set"
-- Rest time (90-120 seconds)
-- Form tips for beginners
-
-【Conditions】
-- Balance training across all body parts
-- Focus on basic exercises
-- Completable in 30-45 minutes
-- $languageInstruction
-
-**Important: Always specify concrete weight and reps for each exercise. For cardio exercises, use weight 0kg and specify duration in XX minutes format.**
-''';
-      } else {
-        return '''
-You are a professional personal trainer. Please suggest a "${targetParts.join(', ')}" training menu for beginners.
-
-$_beginnerExerciseDatabase
-$historyInfo
-【Target Audience】
-- Gym beginners (1-3 months of experience)
-- Those who want to focus on training ${targetParts.join(', ')}
-
-【Output Format】
-**Please strictly follow this format:**
-
-\`\`\`
-## Body Part Training Menu
-
-**Exercise 1: Exercise Name**
-* Weight: XXkg
-* Reps: XX
-* Sets: X
-* Rest Time: XXsec
-* Form Tips: Explanation
-
-**Exercise 2: Exercise Name**
-* Weight: XXkg
-* Reps: XX
-* Sets: X
-\`\`\`
-
-Please include the following information for each exercise:
-- Exercise name (selected from exercise database)
-- **Specific weight (kg)** ← Use history as reference, or suggest beginner-friendly weights
-  ※For cardio exercises, use "Weight: 0kg" and specify "Duration: XX minutes" instead of reps
-- **Reps (10-15)** ← For cardio, use "Duration: 20-30 minutes"
-- Sets (2-3 sets) ← For cardio, use "1 set"
-- Rest time (90-120 seconds)
-- Form tips
-
-【Conditions】
-- Focus on training ${targetParts.join(', ')}
-${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- Suggest **cardio exercises ONLY** (do not include weight training)" : "- Focus on basic exercises"}
-- Completable in 30-45 minutes
-- $languageInstruction
-
-**Important: Always specify concrete weight and reps for each exercise. For cardio exercises, use weight 0kg and specify duration in XX minutes format.**
-${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**STRICTLY: Use ONLY exercises from cardio database. Never include bench press, squats, or other weight training exercises.**" : ""}
-''';
-      }
-    } else if (currentLevel == AppLocalizations.of(context)!.levelIntermediate) {
-      // Intermediate level
-      return '''
-You are a professional personal trainer. Please suggest a "${targetParts.isEmpty ? "full-body" : targetParts.join(', ')}" training menu for intermediate trainees.
-
-$_advancedExerciseDatabase
-$historyInfo
-【Target Audience】
-- Intermediate trainees (6 months to 2 years of experience)
-- Those aiming for strength and muscle hypertrophy
-- Those who want to master more advanced techniques
-
-【Output Format】
-**Please strictly follow this format:**
-
-\`\`\`
-## Body Part Training Menu
-
-**Exercise 1: Exercise Name**
-* Weight: XXkg
-* Reps: XX
-* Sets: X
-* Rest Time: XXsec
-* Tips: Explanation
-
-**Exercise 2: Exercise Name**
-* Weight: XXkg
-* Reps: XX
-* Sets: X
-\`\`\`
-
-Please include the following information for each exercise:
-- Exercise name (selected from exercise database)
-- **Specific weight (kg)** ← Suggest 70-85% of historical 1RM
-  ※For cardio exercises, use "Weight: 0kg" and specify "Duration: XX minutes" instead of reps
-- **Reps (8-12)** ← For cardio, use "Duration: 30-45 minutes" or "Interval format"
-- Sets (3-4 sets) ← For cardio, use "1 set"
-- Rest time (60-90 seconds)
-- Technique tips (drop sets, supersets, etc.)
-
-【Conditions】
-- ${targetParts.isEmpty ? "Balance training across all body parts" : "Focus intensively on ${targetParts.join(', ')}"}
-${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- Suggest **cardio exercises ONLY** (do not include weight training)\n- Variety of cardio: HIIT, endurance running, intervals, etc." : "- Focus on free weights\n- Emphasize muscle hypertrophy"}
-- Completable in 45-60 minutes
-- $languageInstruction
-
-**Important: Always specify concrete weight and reps for each exercise. For cardio exercises, use weight 0kg and specify duration in XX minutes format.**
-${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**STRICTLY: Use ONLY exercises from cardio database. Never include bench press, squats, deadlifts, or other weight training exercises.**" : ""}
-''';
-    } else {
-      // Advanced level
-      return '''
-You are a professional personal trainer. Please suggest a "${targetParts.isEmpty ? "full-body" : targetParts.join(', ')}" training menu for advanced trainees.
-
-$_advancedExerciseDatabase
-$historyInfo
-【Target Audience】
-- Advanced trainees (2+ years of experience)
-- Those aiming for maximum strength and muscle growth
-- Those experienced with high-intensity training
-
-【Output Format】
-**Please strictly follow this format:**
-
-\`\`\`
-## Body Part Training Menu
-
-**Exercise 1: Exercise Name**
-* Weight: XXkg
-* Reps: XX
-* Sets: X
-* Rest Time: XXsec
-* Advanced Technique: Explanation
-
-**Exercise 2: Exercise Name**
-* Weight: XXkg
-* Reps: XX
-* Sets: X
-\`\`\`
-
-Please include the following information for each exercise:
-- Exercise name (selected from exercise database)
-- **Specific weight (kg)** ← Suggest 85-95% of historical 1RM
-  ※For cardio exercises, use "Weight: 0kg" and specify "Duration: XX minutes" instead of reps
-- **Reps (5-8)** ← For cardio, use "HIIT format: XX minutes" or "Endurance: XX minutes"
-- Sets (4-5 sets) ← For cardio, use "1 set"
-- Rest time (120-180 seconds)
-- Advanced techniques (pyramid method, 5x5 method, etc.)
-
-【Conditions】
-- ${targetParts.isEmpty ? "Maximum full-body training" : "Push ${targetParts.join(', ')} to the limit"}
-${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "- Suggest **cardio exercises ONLY** (do not include weight training)\n- High-intensity cardio: HIIT, Tabata, endurance running, etc." : "- Focus on heavy free weights\n- Emphasize maximum strength development"}
-- Completable in 60-90 minutes
-- $languageInstruction
-
-**Important: Always specify concrete weight and reps for each exercise. For cardio exercises, use weight 0kg and specify duration in XX minutes format.**
-${targetParts.contains(AppLocalizations.of(context)!.exerciseCardio) ? "**STRICTLY: Use ONLY exercises from cardio database. Never include bench press, squats, deadlifts, shoulder press, or other weight training exercises.**" : ""}
-''';
-    }
-  }
 
   /// リワード広告ダイアログ表示
   Future<bool?> _showRewardAdDialog() async {
