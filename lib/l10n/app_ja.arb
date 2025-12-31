@@ -2,9 +2,13 @@
   "@@locale": "ja",
   "@@context": "GYM MATCH v1.04 - 日本語ベース多言語対応ファイル",
   "appName": "GYM MATCH",
-  "@appName": "[('description', 'アプリケーション名')]",
+  "@appName": {
+    "description": "アプリケーション名"
+  },
   "appTagline": "ジム検索・混雑度・トレーニング記録",
-  "@appTagline": "[('description', 'アプリのキャッチコピー')]",
+  "@appTagline": {
+    "description": "アプリのキャッチコピー"
+  },
   "navHome": "ホーム",
   "navGym": "ジム",
   "navWorkout": "記録",
@@ -49,7 +53,14 @@
   "reps": "回",
   "weight": "重量",
   "weightKg": "{weight}kg",
-  "@weightKg": "[('placeholders', [('weight', [('type', 'double'), ('format', 'decimalPattern')])])]",
+  "@weightKg": {
+    "placeholders": {
+      "weight": {
+        "type": "double",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "restTime": "休憩時間",
   "duration": "時間",
   "distance": "距離",
@@ -68,15 +79,36 @@
   "prTitle": "PR記録",
   "prAchieved": "達成",
   "prDaysAgo": "{days}日前",
-  "@prDaysAgo": "[('description', 'PR達成からの経過日数'), ('placeholders', [('days', [('type', 'int')])])]",
+  "@prDaysAgo": {
+    "description": "PR達成からの経過日数",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
   "prMonthsAgo": "{months}ヶ月前",
-  "@prMonthsAgo": "[('description', 'PR達成からの経過月数'), ('placeholders', [('months', [('type', 'int')])])]",
+  "@prMonthsAgo": {
+    "description": "PR達成からの経過月数",
+    "placeholders": {
+      "months": {
+        "type": "int"
+      }
+    }
+  },
   "aiCoach": "AIコーチ",
   "aiMenu": "AIメニュー提案",
   "aiGrowthPrediction": "AI成長予測",
   "aiEffectAnalysis": "効果分析",
   "aiUsageRemaining": "AI残り{count}回",
-  "@aiUsageRemaining": "[('description', 'AI使用可能回数の残り'), ('placeholders', [('count', [('type', 'int')])])]",
+  "@aiUsageRemaining": {
+    "description": "AI使用可能回数の残り",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "aiUnlimited": "AI無制限",
   "scientificBasis": "科学的根拠",
   "basedOnPapers": "40本以上の論文に基づく",
@@ -89,12 +121,32 @@
   "monthlyPrice": "月額",
   "annualPrice": "年額",
   "pricePerMonth": "{price}/月",
-  "@pricePerMonth": "[('description', '月額料金の表示'), ('placeholders', [('price', [('type', 'String')])])]",
+  "@pricePerMonth": {
+    "description": "月額料金の表示",
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
   "pricePerYear": "{price}/年",
-  "@pricePerYear": "[('description', '年額料金の表示'), ('placeholders', [('price', [('type', 'String')])])]",
+  "@pricePerYear": {
+    "description": "年額料金の表示",
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
   "freeTrial": "無料トライアル",
   "freeTrialDays": "{days}日間無料トライアル",
-  "@freeTrialDays": "[('placeholders', [('days', [('type', 'int')])])]",
+  "@freeTrialDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
   "noAds": "広告なし",
   "adSupported": "広告表示あり",
   "profile": "プロフィール",
@@ -129,7 +181,17 @@
   "workoutRecords": "トレーニング記録",
   "monthlyArchive": "MONTHLY ARCHIVE",
   "noWorkoutRecordsForDate": "{month}月{day}日のトレーニング記録はありません",
-  "@noWorkoutRecordsForDate": "[('description', '選択した日にトレーニング記録がない時のメッセージ'), ('placeholders', [('month', [('type', 'int')]), ('day', [('type', 'int')])])]",
+  "@noWorkoutRecordsForDate": {
+    "description": "選択した日にトレーニング記録がない時のメッセージ",
+    "placeholders": {
+      "month": {
+        "type": "int"
+      },
+      "day": {
+        "type": "int"
+      }
+    }
+  },
   "detailsSection": "詳細セクション",
   "hideDetailsSection": "詳細セクションを閉じる",
   "settingsMenu": "設定メニュー",
@@ -155,15 +217,33 @@
   "aiAddonSubtitle": "AIコーチング回数を追加購入",
   "favorites": "お気に入りジム",
   "favoritesCount": "{count}件",
-  "@favoritesCount": "[('placeholders', [('count', [('type', 'int')])])]",
+  "@favoritesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "bodyMeasurement": "体重・体組成記録",
   "visitHistory": "訪問履歴",
   "messages": "メッセージ",
   "unreadMessages": "{count}件の未読",
-  "@unreadMessages": "[('placeholders', [('count', [('type', 'int')])])]",
+  "@unreadMessages": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "trainingPartners": "トレーニングパートナー",
   "partnersCount": "{count}人",
-  "@partnersCount": "[('placeholders', [('count', [('type', 'int')])])]",
+  "@partnersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "inviteCode": "招待コード入力",
   "campaignRegistration": "キャンペーン登録",
   "legalInfo": "法的情報",
@@ -171,7 +251,13 @@
   "workoutLog": "トレーニング記録",
   "addSet": "セット追加",
   "setNumber": "セット{number}",
-  "@setNumber": "[('placeholders', [('number', [('type', 'int')])])]",
+  "@setNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
   "warmupSet": "ウォームアップ",
   "workingSet": "ワーキング",
   "dropSet": "ドロップ",
@@ -324,19 +410,37 @@
   "offline": "オフライン",
   "lastSeen": "最終ログイン",
   "lastSeenAt": "{time}にログイン",
-  "@lastSeenAt": "[('placeholders', [('time', [('type', 'String')])])]",
+  "@lastSeenAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "aiCoaching": "AIコーチング",
   "aiAnalyzing": "AI分析中...",
   "aiRecommendation": "AI推奨メニュー",
   "aiCredits": "AI利用回数",
   "aiCreditsRemaining": "残り{count}回",
-  "@aiCreditsRemaining": "[('placeholders', [('count', [('type', 'int')])])]",
+  "@aiCreditsRemaining": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "purchaseAICredits": "AI追加購入",
   "aiPurchaseSuccess": "AI利用回数を追加しました",
   "aiPurchaseError": "購入に失敗しました",
   "visitCount": "訪問回数",
   "visitCountTimes": "{count}回",
-  "@visitCountTimes": "[('placeholders', [('count', [('type', 'int')])])]",
+  "@visitCountTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "noVisitHistory": "訪問履歴がありません",
   "errorOccurred": "エラーが発生しました",
   "networkError": "ネットワークエラー: API接続に失敗しました",
@@ -350,7 +454,13 @@
   "noResults": "結果が見つかりません",
   "searchResults": "検索結果",
   "resultsCount": "{count}件",
-  "@resultsCount": "[('placeholders', [('count', [('type', 'int')])])]",
+  "@resultsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "confirmAction": "この操作を実行しますか？",
   "areYouSure": "よろしいですか？",
   "cannotUndo": "この操作は取り消せません",
@@ -430,7 +540,13 @@
   "noExercisesToShare": "シェアできる種目がありません",
   "shareFailed": "シェアに失敗しました: {error}",
   "shareError": "シェアエラー: {error}",
-  "@shareError": "[('placeholders', [('error', [('type', 'String')])])]",
+  "@shareError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "sortByRating": "評価順",
   "sortByCrowd": "混雑度順",
   "sortByPrice": "料金順",
@@ -441,9 +557,24 @@
   "unknownExercise": "不明な種目",
   "prRecords": "PR記録",
   "exercisesAndSets": "{count}種目 • {sets} セット",
-  "@exercisesAndSets": "[('placeholders', [('count', [('type', 'int')]), ('sets', [('type', 'int')])])]",
+  "@exercisesAndSets": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "sets": {
+        "type": "int"
+      }
+    }
+  },
   "durationMinutes": "{duration}分",
-  "@durationMinutes": "[('placeholders', [('duration', [('type', 'int')])])]",
+  "@durationMinutes": {
+    "placeholders": {
+      "duration": {
+        "type": "int"
+      }
+    }
+  },
   "sortByDistance": "距離順",
   "sortByName": "名前順",
   "filterAll": "すべて",
@@ -573,7 +704,13 @@
   "checkedOut": "チェックアウトしました",
   "checkInFailed": "チェックインに失敗しました",
   "checkInAt": "{gymName}にチェックインしました",
-  "@checkInAt": "[('placeholders', [('gymName', [('type', 'String')])])]",
+  "@checkInAt": {
+    "placeholders": {
+      "gymName": {
+        "type": "String"
+      }
+    }
+  },
   "shareGym": "このジムをシェア",
   "shared": "シェアしました！",
   "routeGuidance": "ルート案内",
@@ -590,17 +727,53 @@
   "visitorWelcome": "ビジター可",
   "visitorBooking": "ビジター予約申込",
   "couponCode": "クーポンコード: {code}",
-  "@couponCode": "[('placeholders', [('code', [('type', 'String')])])]",
+  "@couponCode": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
   "validUntil": "{date}まで",
-  "@validUntil": "[('placeholders', [('date', [('type', 'String')])])]",
+  "@validUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "moderatelyCrowded": "やや混雑",
   "moderatelyEmpty": "やや空き",
   "updatedMinutesAgo": "{minutes}分前更新",
-  "@updatedMinutesAgo": "[('placeholders', [('minutes', [('type', 'int')])])]",
+  "@updatedMinutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "equipmentCount": "{name} × {count}台",
-  "@equipmentCount": "[('placeholders', [('name', [('type', 'String')]), ('count', [('type', 'int')])])]",
+  "@equipmentCount": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "ratingWithCount": "{rating} ({count}件)",
-  "@ratingWithCount": "[('placeholders', [('rating', [('type', 'double')]), ('count', [('type', 'int')])])]",
+  "@ratingWithCount": {
+    "placeholders": {
+      "rating": {
+        "type": "double"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "changePlan": "プラン変更",
   "cancelSubscription": "サブスクリプションをキャンセル",
   "trialEndsAutoRenew": "トライアル終了後、自動的に有料プランに移行します",
@@ -611,17 +784,56 @@
   "postGymReviews": "ジムレビュー投稿",
   "gpsLocationSearch": "GPS位置検索",
   "aiLimitedTo": "AI機能が{from}→{to}に制限",
-  "@aiLimitedTo": "[('placeholders', [('from', [('type', 'String')]), ('to', [('type', 'String')])])]",
+  "@aiLimitedTo": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
   "switchToPlan": "{planName}に変更",
-  "@switchToPlan": "[('placeholders', [('planName', [('type', 'String')])])]",
+  "@switchToPlan": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
   "switchToPlanConfirm": "{planName}に変更すると、以下の機能が制限されます：",
-  "@switchToPlanConfirm": "[('placeholders', [('planName', [('type', 'String')])])]",
+  "@switchToPlanConfirm": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
   "purchaseCompleted": "{planName}の購入が完了しました！",
-  "@purchaseCompleted": "[('placeholders', [('planName', [('type', 'String')])])]",
+  "@purchaseCompleted": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
   "planSwitched": "{planName}に変更しました！",
-  "@planSwitched": "[('placeholders', [('planName', [('type', 'String')])])]",
+  "@planSwitched": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
   "changeInAppStore": "App Store設定から{planName}へ変更してください",
-  "@changeInAppStore": "[('placeholders', [('planName', [('type', 'String')])])]",
+  "@changeInAppStore": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
   "appStoreInstructions": "1. iPhoneの設定アプリを開く 2. 一番上の[Apple ID]をタップ 3. サブスクリプションをタップ 4. GYM MATCHを選択 5. 希望のプランを選択",
   "aiAddonPack": "AI追加パック",
   "purchaseAiAddon": "AI使用回数を追加購入",
@@ -685,47 +897,170 @@
   "enterAtLeast1kg": "1kg以上を入力してください",
   "max500kg": "500kg以下を入力してください",
   "rpeModerate": "RPE {rpe}（余裕あり）",
-  "@rpeModerate": "[('placeholders', [('rpe', [('type', 'int')])])]",
+  "@rpeModerate": {
+    "placeholders": {
+      "rpe": {
+        "type": "int"
+      }
+    }
+  },
   "rpeOptimal": "RPE {rpe}（適正）",
-  "@rpeOptimal": "[('placeholders', [('rpe', [('type', 'int')])])]",
+  "@rpeOptimal": {
+    "placeholders": {
+      "rpe": {
+        "type": "int"
+      }
+    }
+  },
   "rpeMaximal": "RPE {rpe}（限界）",
-  "@rpeMaximal": "[('placeholders', [('rpe', [('type', 'int')])])]",
+  "@rpeMaximal": {
+    "placeholders": {
+      "rpe": {
+        "type": "int"
+      }
+    }
+  },
   "setCount": "{count}セット",
-  "@setCount": "[('placeholders', [('count', [('type', 'int')])])]",
+  "@setCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "minutes": "分",
   "minuteCount": "{count}分",
-  "@minuteCount": "[('placeholders', [('count', [('type', 'int')])])]",
+  "@minuteCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "repCount": "{count}回",
-  "@repCount": "[('placeholders', [('count', [('type', 'int')])])]",
+  "@repCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "aiPromptUserInfo": "【ユーザー情報】",
   "aiPromptTargetBodyPart": "・対象部位：{bodyPart}",
-  "@aiPromptTargetBodyPart": "[('placeholders', [('bodyPart', [('type', 'String')])])]",
+  "@aiPromptTargetBodyPart": {
+    "placeholders": {
+      "bodyPart": {
+        "type": "String"
+      }
+    }
+  },
   "aiPromptCurrentOneRM": "・現在の1RM：{weight}kg",
-  "@aiPromptCurrentOneRM": "[('placeholders', [('weight', [('type', 'String')])])]",
+  "@aiPromptCurrentOneRM": {
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
   "aiPromptTrainingLevel": "・トレーニングレベル：{level}",
-  "@aiPromptTrainingLevel": "[('placeholders', [('level', [('type', 'String')])])]",
+  "@aiPromptTrainingLevel": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
   "aiPromptFrequency": "・現在の頻度：{bodyPart} を週{frequency}回トレーニング",
-  "@aiPromptFrequency": "[('placeholders', [('bodyPart', [('type', 'String')]), ('frequency', [('type', 'int')])])]",
+  "@aiPromptFrequency": {
+    "placeholders": {
+      "bodyPart": {
+        "type": "String"
+      },
+      "frequency": {
+        "type": "int"
+      }
+    }
+  },
   "aiPromptGender": "・性別：{gender}",
-  "@aiPromptGender": "[('placeholders', [('gender', [('type', 'String')])])]",
+  "@aiPromptGender": {
+    "placeholders": {
+      "gender": {
+        "type": "String"
+      }
+    }
+  },
   "aiPromptAge": "・年齢：{age}歳",
-  "@aiPromptAge": "[('placeholders', [('age', [('type', 'int')])])]",
+  "@aiPromptAge": {
+    "placeholders": {
+      "age": {
+        "type": "int"
+      }
+    }
+  },
   "aiPromptPredictionResult": "【予測結果】",
   "aiPromptPredictionPeriod": "・予測期間：{months}ヶ月",
-  "@aiPromptPredictionPeriod": "[('placeholders', [('months', [('type', 'int')])])]",
+  "@aiPromptPredictionPeriod": {
+    "placeholders": {
+      "months": {
+        "type": "int"
+      }
+    }
+  },
   "aiPromptPredictedOneRM": "・予測1RM：{weight}kg",
-  "@aiPromptPredictedOneRM": "[('placeholders', [('weight', [('type', 'int')])])]",
+  "@aiPromptPredictedOneRM": {
+    "placeholders": {
+      "weight": {
+        "type": "int"
+      }
+    }
+  },
   "aiPromptGrowthRate": "・成長率：月+{rate}%",
-  "@aiPromptGrowthRate": "[('placeholders', [('rate', [('type', 'int')])])]",
+  "@aiPromptGrowthRate": {
+    "placeholders": {
+      "rate": {
+        "type": "int"
+      }
+    }
+  },
   "aiPromptWeeklyGrowthRate": "・週次成長率：週+{rate}%",
-  "@aiPromptWeeklyGrowthRate": "[('placeholders', [('rate', [('type', 'String')])])]",
+  "@aiPromptWeeklyGrowthRate": {
+    "placeholders": {
+      "rate": {
+        "type": "String"
+      }
+    }
+  },
   "aiPromptRecommendedProgram": "【推奨プログラム】",
   "aiPromptRecommendedFrequency": "・{bodyPart} のトレーニング：週{frequency}回",
-  "@aiPromptRecommendedFrequency": "[('placeholders', [('bodyPart', [('type', 'String')]), ('frequency', [('type', 'int')])])]",
+  "@aiPromptRecommendedFrequency": {
+    "placeholders": {
+      "bodyPart": {
+        "type": "String"
+      },
+      "frequency": {
+        "type": "int"
+      }
+    }
+  },
   "aiPromptRecommendedVolume": "・{bodyPart} のボリューム：週{volume}セット",
-  "@aiPromptRecommendedVolume": "[('placeholders', [('bodyPart', [('type', 'String')]), ('volume', [('type', 'int')])])]",
+  "@aiPromptRecommendedVolume": {
+    "placeholders": {
+      "bodyPart": {
+        "type": "String"
+      },
+      "volume": {
+        "type": "int"
+      }
+    }
+  },
   "aiPromptEffectSize": "・効果量：ES={effectSize}",
-  "@aiPromptEffectSize": "[('placeholders', [('effectSize', [('type', 'String')])])]",
+  "@aiPromptEffectSize": {
+    "placeholders": {
+      "effectSize": {
+        "type": "String"
+      }
+    }
+  },
   "aiResponseScientificBasis": "## 成長予測の科学的根拠",
   "aiResponseActionPlan": "## 推奨アクションプラン",
   "aiResponseSuccessKeys": "## 成功のカギ",
@@ -984,10 +1319,34 @@
   "stackTrace": "スタックトレース",
   "documentId": "ドキュメントID",
   "totalDocuments": "全ドキュメント数",
-  "@snapshotError": "[('placeholders', [('error', [('type', 'String')])])]",
-  "@deleteFailed": "[('placeholders', [('e', [('type', 'String')])])]",
-  "@dataLoadError": "[('placeholders', [('e', [('type', 'String')])])]",
-  "@saveFailed": "[('placeholders', [('e', [('type', 'String')])])]",
+  "@snapshotError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@deleteFailed": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "@dataLoadError": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
+  "@saveFailed": {
+    "placeholders": {
+      "e": {
+        "type": "String"
+      }
+    }
+  },
   "workoutDetail": "トレーニング詳細",
   "addNote": "メモを追加",
   "editNote": "メモを編集",
@@ -996,9 +1355,21 @@
   "noteUpdated": "メモを更新しました",
   "noteDeleted": "メモを削除しました",
   "noteSaveFailed": "メモの保存に失敗しました: {error}",
-  "@noteSaveFailed": "[('placeholders', [('error', [('type', 'String')])])]",
+  "@noteSaveFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "noteDeleteFailed": "メモの削除に失敗しました: {error}",
-  "@noteDeleteFailed": "[('placeholders', [('error', [('type', 'String')])])]",
+  "@noteDeleteFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "rir": "RIR",
   "workoutNotes": "ワークアウトメモ",
   "exerciseList": "種目一覧",
@@ -1012,7 +1383,13 @@
   "cableCrunch": "ケーブルクランチ",
   "bodyPartBalance30Days": "過去30日間のバランス",
   "bodyPartBalanceDays": "過去{days}日間のバランス",
-  "@bodyPartBalanceDays": "[('placeholders', [('days', [('type', 'Object')])])]",
+  "@bodyPartBalanceDays": {
+    "placeholders": {
+      "days": {
+        "type": "Object"
+      }
+    }
+  },
   "aiMenuParseFailed": "メニューの解析に失敗しました",
   "aiMenuRetryPrompt": "もう一度メニューを生成してください。",
   "aiMenuRetryButton": "再生成する",
@@ -1027,9 +1404,21 @@
   "profileMessages": "mensaje",
   "subscriptionPopularBadge": "人気No.1",
   "subscriptionMonthlyEquivalent": "月換算 ¥{price}",
-  "@subscriptionMonthlyEquivalent": "[('placeholders', [('price', [('type', 'String')])])]",
+  "@subscriptionMonthlyEquivalent": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
   "subscriptionSavings": "¥{amount}お得！",
-  "@subscriptionSavings": "[('placeholders', [('amount', [('type', 'String')])])]",
+  "@subscriptionSavings": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "subscriptionFreeFeatures": "無料プランの全機能",
   "subscriptionUnlimitedFavorites": "お気に入り無制限",
   "subscriptionDetailedStats": "詳細な混雑度統計",
@@ -1037,7 +1426,13 @@
   "subscriptionGrowthPrediction": "成長予測と効果分析",
   "subscriptionNoAds": "広告表示なし",
   "subscriptionFreeTrialDays": "{days}日間無料トライアル",
-  "@subscriptionFreeTrialDays": "[('placeholders', [('days', [('type', 'String')])])]",
+  "@subscriptionFreeTrialDays": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
   "subscriptionStartFreeTrial": "無料トライアルを始める",
   "workoutSetsLabel": "セット",
   "workoutRepsLabel": "回",
@@ -1531,7 +1926,7 @@
   "general_d53a30ce": "AI コーチング",
   "profile_780e92e8": "• 本アプリのサーバーまたはネットワークの機能を破壊したり、妨害したりする行為",
   "general_2b180dc8": "宮城",
-  "general_s": "[\s\-_&・]",
+  "general_s": "[\\s\\-_&・]",
   "general_d9c86932": "コピーしたテンプレートを貼り付けて投稿",
   "general_48fc40c0": "ログアウト成功",
   "workout_34d70475": "秒数",
@@ -1974,7 +2369,7 @@
   "general_3a087c8f": "野球場",
   "personalFactor_6a75ad83": "⚡ 動的要因",
   "general_6d30ff95": "⚠️ ユーザー未ログイン",
-  "workout_27f8dd3a": "(\d+)\s*セット",
+  "workout_27f8dd3a": "(\\d+)\\s*セット",
   "general_1df69d21": "累計1,000kg達成",
   "general_c51a7dc2": "セットを削除しました",
   "profile_b2818710": "マッチングリクエスト送信",
@@ -2016,7 +2411,7 @@
   "personalFactor_ec2007be": "ユニット",
   "general_ed434def": "目標達成",
   "workout_01411783": "メモを入力してください",
-  "workout_684f2433": "説明[:：]\s*",
+  "workout_684f2433": "説明[:：]\\s*",
   "profile_35399a27": "Pro限定機能です",
   "workout_4a60472d": "休憩時間設定",
   "general_01dd1fe6": "🏆 β版パートナー",
@@ -2194,7 +2589,7 @@
   "general_fe7a7194": "この地域にはジムが見つかりませんでした",
   "general_07b4f5d1": "最新バージョンに更新",
   "workout_065a723e": "基本種目",
-  "workout_8cd2b320": "(\d+)\s*回",
+  "workout_8cd2b320": "(\\d+)\\s*回",
   "workout_cfdd5f75": "バイブレーション成功",
   "profile_94636bb4": "第3条（禁止事項）",
   "general_3066e00f": "統計計算完了:",
@@ -2937,9 +3332,9 @@
   "autoGen_3a8ab63e": "⭐ 永年プラン（無期限）",
   "autoGen_f7cf4b71": "ATTステータス: $status",
   "autoGen_872bf7a3": "📤 同期待ちデータ: $pendingCount件",
-  "autoGen_d1f54967": "フェーズ1: 統計ベース + ユーザー報告（コスト\$0/月）",
-  "autoGen_cbcfc076": "フェーズ2: ハイブリッド戦略（コスト\$170/月）",
-  "autoGen_7d8a2d8a": "フェーズ3: フルAPI導入（コスト\$850/月）",
+  "autoGen_d1f54967": "フェーズ1: 統計ベース + ユーザー報告（コスト\\$0/月）",
+  "autoGen_cbcfc076": "フェーズ2: ハイブリッド戦略（コスト\\$170/月）",
+  "autoGen_7d8a2d8a": "フェーズ3: フルAPI導入（コスト\\$850/月）",
   "autoGen_e899fff0": "Effect of high intensity study - 6週間で+31.2%",
   "autoGen_0caa3e2f": "目標レップ数を1-2回超過達成",
   "autoGen_10359595": "主要種目の1RM推定値が3-4週間、2%未満の変化",
@@ -2974,143 +3369,143 @@
   "autoGen_aeacdbe7": "東京都世田谷区三軒茶屋15-15-15",
   "autoGen_386a19ab": "平日 10:00-23:00, 土日 10:00-21:00",
   "autoGen_d363c8dd": "静岡県藤枝市末広4丁目1-17",
-  "autoGen_96475ff8": "AI追加パック（5回分）\n",
-  "autoGen_b71ac08e": "料金: ¥300\n\n",
-  "autoGen_1ea406c3": "AI追加パック（5回分）を購入しました！\n",
-  "autoGen_7a59299a": "この商品は現在利用できません。\n",
+  "autoGen_96475ff8": "AI追加パック（5回分）\\n",
+  "autoGen_b71ac08e": "料金: ¥300\\n\\n",
+  "autoGen_1ea406c3": "AI追加パック（5回分）を購入しました！\\n",
+  "autoGen_7a59299a": "この商品は現在利用できません。\\n",
   "autoGen_031e7ade": "残り: $remaining回",
-  "autoGen_9db89838": "• 追加購入分は今月末まで有効です\n",
-  "autoGen_c77de40c": "• 月が変わると追加購入分もリセットされます\n",
-  "autoGen_1775a032": "• 追加購入はいつでも可能です\n",
+  "autoGen_9db89838": "• 追加購入分は今月末まで有効です\\n",
+  "autoGen_c77de40c": "• 月が変わると追加購入分もリセットされます\\n",
+  "autoGen_1775a032": "• 追加購入はいつでも可能です\\n",
   "autoGen_c825e1b3": "/ $aiCount回",
   "autoGen_f9edcc24": "スタックトレース: $stackTrace",
-  "autoGen_11b93b24": "📴 オフライン保存しました\nオンライン復帰時に自動同期されます",
+  "autoGen_11b93b24": "📴 オフライン保存しました\\nオンライン復帰時に自動同期されます",
   "autoGen_837372a4": "🗑️ 記録を削除中... ID: $documentId",
-  "autoGen_7cf32853": "1RM (1 Rep Max) は、1回だけ持ち上げられる最大重量です。\n",
+  "autoGen_7cf32853": "1RM (1 Rep Max) は、1回だけ持ち上げられる最大重量です。\\n",
   "autoGen_ef30a8d3": "バー重量 ({barWeight}kg) より大きい重量を入力してください",
-  "autoGen_20458277": "目標重量を入力すると、バーベルの片側に必要なプレートの\n",
+  "autoGen_20458277": "目標重量を入力すると、バーベルの片側に必要なプレートの\\n",
   "autoGen_56b65fc2": "バー重量 ($_barWeight kg) を含む総重量を入力",
   "autoGen_201ea826": "プレート不要 (バーのみ)",
-  "autoGen_e9fe8032": "表示は片側のプレート数です。\n両側に同じ構成をセットしてください。",
+  "autoGen_e9fe8032": "表示は片側のプレート数です。\\n両側に同じ構成をセットしてください。",
   "autoGen_9ff70568": "🎁 AI 1回分をプレゼント！（報告{result_reportCount}回目）",
   "autoGen_f0f0c7f4": "次の報酬まであと{nextMilestone_remaining}回！",
-  "autoGen_24950e16": "リリースビルド（App Store版）では表示されません\nTestFlightビルドのみで利用可能",
-  "autoGen_de9021b8": "Apple審査対応のため、開発者メニューからのプラン変更機能は削除されました。\n\n",
-  "autoGen_25deda5a": "プラン変更はRevenueCat経由の正規課金のみ有効です。\n\n",
-  "autoGen_5657d91f": "• オンボーディングツアー\n",
-  "autoGen_9c5698dd": "• レビュー依頼ダイアログ\n",
-  "autoGen_91c9449a": "1. 上記のボタンで任意のプランに変更できます\n",
-  "autoGen_734a59b9": "2. プロプランに変更すると全機能が使用可能になります\n",
-  "autoGen_a0b3c8d7": "3. AI使用回数は月次で自動リセットされます\n",
-  "autoGen_3a6be6b1": "良好なトレーニングでした！\n軽いストレッチと十分な水分補給をしましょう。",
-  "autoGen_26470233": "適度な負荷のトレーニングでした。\n7-8時間の睡眠とタンパク質補給を心がけましょう。",
-  "autoGen_2cfbd017": "高強度のトレーニングでした。\n十分な休息と栄養補給が必要です。無理せず回復を優先しましょう。",
-  "autoGen_6627b2ca": "非常に高強度のトレーニングでした。\n今日は完全休養を推奨します。睡眠・栄養・ストレッチを重視してください。",
+  "autoGen_24950e16": "リリースビルド（App Store版）では表示されません\\nTestFlightビルドのみで利用可能",
+  "autoGen_de9021b8": "Apple審査対応のため、開発者メニューからのプラン変更機能は削除されました。\\n\\n",
+  "autoGen_25deda5a": "プラン変更はRevenueCat経由の正規課金のみ有効です。\\n\\n",
+  "autoGen_5657d91f": "• オンボーディングツアー\\n",
+  "autoGen_9c5698dd": "• レビュー依頼ダイアログ\\n",
+  "autoGen_91c9449a": "1. 上記のボタンで任意のプランに変更できます\\n",
+  "autoGen_734a59b9": "2. プロプランに変更すると全機能が使用可能になります\\n",
+  "autoGen_a0b3c8d7": "3. AI使用回数は月次で自動リセットされます\\n",
+  "autoGen_3a6be6b1": "良好なトレーニングでした！\\n軽いストレッチと十分な水分補給をしましょう。",
+  "autoGen_26470233": "適度な負荷のトレーニングでした。\\n7-8時間の睡眠とタンパク質補給を心がけましょう。",
+  "autoGen_2cfbd017": "高強度のトレーニングでした。\\n十分な休息と栄養補給が必要です。無理せず回復を優先しましょう。",
+  "autoGen_6627b2ca": "非常に高強度のトレーニングでした。\\n今日は完全休養を推奨します。睡眠・栄養・ストレッチを重視してください。",
   "autoGen_6fc271f8": "$totalSets セット",
-  "autoGen_365b72d7": "最適な回復期間とアドバイスを提供します。\n\n",
+  "autoGen_365b72d7": "最適な回復期間とアドバイスを提供します。\\n\\n",
   "autoGen_e177a676": "{gym_name}をお気に入りから削除しますか？",
   "autoGen_298342bb": "{gym_name} をお気に入りから削除しました",
   "autoGen_248390f0": "お気に入りのジム ({favoriteGyms_length}件)",
   "autoGen_8413b8f0": "{goal_period__GoalPeriod_weekly_AppLocalizations_ofcontext_thisWeek__AppLocalizations_ofcontext_thisMonth}の目標",
-  "autoGen_799ab9f4": "$goalNameを削除しますか？\nこの操作は取り消せません。",
+  "autoGen_799ab9f4": "$goalNameを削除しますか？\\nこの操作は取り消せません。",
   "autoGen_2a5ffab4": "{goal_name}を編集",
   "autoGen_1605acad": "{widget_gym_name}にチェックインしました",
   "autoGen_51d4147a": "$minutesAgo分前更新",
-  "autoGen_161e491d": "まだレビューがありません\n最初のレビューを投稿してください！",
+  "autoGen_161e491d": "まだレビューがありません\\n最初のレビューを投稿してください！",
   "autoGen_c930c91e": "現在の混雑度: {gym_crowdLevelText}",
   "autoGen_88e64c29": "AI残回数: $remainingCredits回",
-  "autoGen_9cabffba": "あなた専用のトレーニングメニューを\nAIが科学的に分析します",
-  "autoGen_5ff6013e": "前回のトレーニングから2日経過しました。\n今日もトレーニングしませんか？",
-  "autoGen_e199031a": "しばらくトレーニングを記録していませんね。\nまた始めませんか？",
-  "autoGen_16ea699e": "トレーニングを記録して、\n進捗を可視化しましょう",
+  "autoGen_9cabffba": "あなた専用のトレーニングメニューを\\nAIが科学的に分析します",
+  "autoGen_5ff6013e": "前回のトレーニングから2日経過しました。\\n今日もトレーニングしませんか？",
+  "autoGen_e199031a": "しばらくトレーニングを記録していませんね。\\nまた始めませんか？",
+  "autoGen_16ea699e": "トレーニングを記録して、\\n進捗を可視化しましょう",
   "autoGen_62bb229b": "🏋️ 重量表示: $exerciseName - weight: $weight, isBodyweightMode: $isBodyweightMode, isAbs: $isAbs",
   "autoGen_cd7a5e77": "📋 追加セット準備（＋ボタンから）: $exerciseName",
-  "autoGen_c676bfd2": "$exerciseNameの記録を削除しますか？\nこの操作は取り消せません。",
+  "autoGen_c676bfd2": "$exerciseNameの記録を削除しますか？\\nこの操作は取り消せません。",
   "autoGen_3ff76bd8": "$exerciseNameを削除しました（残り{totalRemainingExercises}種目）",
-  "autoGen_a215dfab": "0-1: 休息\n2-3: 軽い運動\n4-6: 中程度の運動\n7-8: きつい運動\n9-10: 最大努力",
+  "autoGen_a215dfab": "0-1: 休息\\n2-3: 軽い運動\\n4-6: 中程度の運動\\n7-8: きつい運動\\n9-10: 最大努力",
   "autoGen_e5d37f36": "$recoveryHours時間",
-  "autoGen_9beb17d9": "【基礎分析】\n$baseAdvice",
-  "autoGen_71f910d6": "【ACWR分析】\n$acwrAdvice",
+  "autoGen_9beb17d9": "【基礎分析】\\n$baseAdvice",
+  "autoGen_71f910d6": "【ACWR分析】\\n$acwrAdvice",
   "autoGen_838efe8a": "残り{goal_daysRemaining}日 | 現在のペースを維持しよう",
   "autoGen_9bae24d2": "あなたの招待コード: $_referralCode",
   "autoGen_d0688916": "招待した側: AI追加パック×1個（5回分、¥300相当）",
-  "autoGen_b8db302a": "GYM MATCHで一緒にトレーニングしよう！招待コード: $_referralCode\n\n",
-  "autoGen_f4f68181": "{AppLocalizations_ofcontext_searchGym}\n※位置情報は検索のみに使用され、保存されません。",
+  "autoGen_b8db302a": "GYM MATCHで一緒にトレーニングしよう！招待コード: $_referralCode\\n\\n",
+  "autoGen_f4f68181": "{AppLocalizations_ofcontext_searchGym}\\n※位置情報は検索のみに使用され、保存されません。",
   "autoGen_4087785c": "⏱️ Google Places APIタイムアウト: $e",
   "autoGen_d014a7b1": "ℹ️ 検索結果が0件です（この地域にジムが存在しない可能性）",
   "autoGen_e197bc84": "{gyms_length}件のジムが見つかりました",
   "autoGen_934c5ba2": "あなたの近くのジム {nearbyGyms_length}件を表示中",
-  "autoGen_159877ec": "トレーニングを記録して、\nAIがあなた専用のメニューを提案します",
-  "autoGen_1628fbdf": "種目・重量・回数を入力するだけ！\nカレンダーで成長を可視化",
-  "autoGen_b8679c80": "Google Gemini 2.0 が\nあなたに最適なメニューを自動生成",
-  "autoGen_97fc7921": "最初のトレーニングを\n記録してみましょう",
-  "autoGen_98bff4f1": "上記のフォームに入力すると\nここにプレビューが表示されます",
-  "autoGen_66304a49": "店舗の雰囲気やマシン・設備の写真を\nアップロードしましょう",
-  "autoGen_78d3c5fd": "※ 複数店舗を運営されている場合は、各店舗ごとに異なるメールアドレスを設定してください。\n※ 予約通知は現在Firebase Functions経由で送信されます（別途設定が必要です）。",
+  "autoGen_159877ec": "トレーニングを記録して、\\nAIがあなた専用のメニューを提案します",
+  "autoGen_1628fbdf": "種目・重量・回数を入力するだけ！\\nカレンダーで成長を可視化",
+  "autoGen_b8679c80": "Google Gemini 2.0 が\\nあなたに最適なメニューを自動生成",
+  "autoGen_97fc7921": "最初のトレーニングを\\n記録してみましょう",
+  "autoGen_98bff4f1": "上記のフォームに入力すると\\nここにプレビューが表示されます",
+  "autoGen_66304a49": "店舗の雰囲気やマシン・設備の写真を\\nアップロードしましょう",
+  "autoGen_78d3c5fd": "※ 複数店舗を運営されている場合は、各店舗ごとに異なるメールアドレスを設定してください。\\n※ 予約通知は現在Firebase Functions経由で送信されます（別途設定が必要です）。",
   "autoGen_5f66300d": "変更頻度: 高（日々更新推奨）",
   "autoGen_47b8a545": "<25歳: 0.95x, 40-50歳: 1.05x, 50+歳: 1.10x",
   "autoGen_f9998737": "<1年: 1.10x, 3-5年: 0.95x, 5+年: 0.90x",
   "autoGen_99e6fba7": "1ユニット毎に+5% (ビール350ml≒1.4ユニット)",
-  "autoGen_2b6b9ab2": "Personal Factor Multiplier (PFM) は、年齢・経験・睡眠・栄養・アルコールの5要素を統合して個人の疲労感受性を補正します。\n\n",
-  "autoGen_38fecd64": "変更頻度が低い要素です:\n",
-  "autoGen_ecb9080a": "• 年齢: 加齢による回復力の変化\n",
-  "autoGen_b9c37a72": "日々変動する要素です:\n",
-  "autoGen_fb6e8bd2": "• 睡眠時間: 回復の質\n",
-  "autoGen_b905afe2": "• タンパク質摂取: 筋肉回復の材料\n",
-  "autoGen_43279a59": "• 静的要因: 数ヶ月に1回\n",
-  "autoGen_9772ef29": "プロのトレーナーによる\nマンツーマン指導",
+  "autoGen_2b6b9ab2": "Personal Factor Multiplier (PFM) は、年齢・経験・睡眠・栄養・アルコールの5要素を統合して個人の疲労感受性を補正します。\\n\\n",
+  "autoGen_38fecd64": "変更頻度が低い要素です:\\n",
+  "autoGen_ecb9080a": "• 年齢: 加齢による回復力の変化\\n",
+  "autoGen_b9c37a72": "日々変動する要素です:\\n",
+  "autoGen_fb6e8bd2": "• 睡眠時間: 回復の質\\n",
+  "autoGen_b905afe2": "• タンパク質摂取: 筋肉回復の材料\\n",
+  "autoGen_43279a59": "• 静的要因: 数ヶ月に1回\\n",
+  "autoGen_9772ef29": "プロのトレーナーによる\\nマンツーマン指導",
   "autoGen_c3070099": "📋 スタックトレース: $stackTrace",
-  "autoGen_b82404b5": "GYM MATCHで一緒にトレーニングしませんか？\n\n",
-  "autoGen_6738f579": "紹介コード: $referralCode\n",
-  "autoGen_db4ebdd3": "AI使用回数3回がもらえます！\n\n",
+  "autoGen_b82404b5": "GYM MATCHで一緒にトレーニングしませんか？\\n\\n",
+  "autoGen_6738f579": "紹介コード: $referralCode\\n",
+  "autoGen_db4ebdd3": "AI使用回数3回がもらえます！\\n\\n",
   "autoGen_dee40980": "$featureNameは有料プラン会員限定の機能です。",
-  "autoGen_1d067291": "$featureNameは現在開発中です。\n次回のアップデートでご利用いただけます。",
-  "autoGen_8e38c4b2": "友達の紹介コードを入力して\n特典をゲットしよう！",
-  "autoGen_1cd8d542": "※ 招待コードは1回のみ使用可能です\n※ 既に他のユーザーが使用したコードは無効です",
-  "autoGen_8bc67a22": "※ 予約申込後、店舗から確認のご連絡があります。\n※ この申込は仮予約です。店舗の確認をもって予約確定となります。",
+  "autoGen_1d067291": "$featureNameは現在開発中です。\\n次回のアップデートでご利用いただけます。",
+  "autoGen_8e38c4b2": "友達の紹介コードを入力して\\n特典をゲットしよう！",
+  "autoGen_1cd8d542": "※ 招待コードは1回のみ使用可能です\\n※ 既に他のユーザーが使用したコードは無効です",
+  "autoGen_8bc67a22": "※ 予約申込後、店舗から確認のご連絡があります。\\n※ この申込は仮予約です。店舗の確認をもって予約確定となります。",
   "autoGen_5c140a75": "全{sortedGyms_length}件中 {startIndex__1}-{endIndex__sortedGyms_length_sortedGyms_length__endIndex}件を表示",
   "autoGen_3503018a": "🤖 AI機能月20回（AIコーチ・成長予測・効果分析合計）",
   "autoGen_680465c2": "🤖 AI機能無制限（AIコーチ・成長予測・効果分析）",
-  "autoGen_5f00a229": "• 無料トライアル期間: Premium 30日間 / Pro 14日間\n",
-  "autoGen_87c8ba71": "• トライアル終了後、自動的に有料プランに移行します\n",
+  "autoGen_5f00a229": "• 無料トライアル期間: Premium 30日間 / Pro 14日間\\n",
+  "autoGen_87c8ba71": "• トライアル終了後、自動的に有料プランに移行します\\n",
   "autoGen_97af1fdc": "• いつでもキャンセル可能（期間満了まで利用可）",
-  "autoGen_27f6a7d8": "{subscriptionService_getPlanNamenewPlan}に変更します。\n\n",
+  "autoGen_27f6a7d8": "{subscriptionService_getPlanNamenewPlan}に変更します。\\n\\n",
   "autoGen_dfce8f7b": "{subscriptionService_getPlanNamenewPlan}に変更しました！",
   "autoGen_a3361465": "$targetPlanName に変更",
   "autoGen_ea012ccb": "$targetPlanName に変更すると、以下の機能が制限されます：",
   "autoGen_d90386be": "App Store設定から$targetPlanNameへ変更してください",
   "autoGen_62bcb620": "2. 一番上の[Apple ID]をタップ",
-  "autoGen_6d64f0af": "ジム詳細画面でチェックインすると\nここに履歴が表示されます",
+  "autoGen_6d64f0af": "ジム詳細画面でチェックインすると\\nここに履歴が表示されます",
   "autoGen_fbe877fb": "🔙 [IMPORT] エラー後もプレビュー画面に留まります（ユーザーが閉じるまで）",
   "autoGen_3aa92e14": "{localeInfo_nativeName}に変更されました。",
   "autoGen_81de7e28": "GYM MATCH - 6言語対応",
   "autoGen_ead97a43": "広告ID: $bannerAdUnitId",
-  "autoGen_dfb8009a": "トレーニング負荷が低すぎます。\n徐々に負荷を上げることでパフォーマンス向上が期待できます。",
-  "autoGen_b49536ed": "理想的なトレーニング負荷です！\n現在のペースを維持しましょう。怪我リスクは最小です。",
-  "autoGen_8bcd57bf": "警戒ゾーンです。\n怪我のリスクがやや高まっています。回復を優先し、次回は負荷を少し下げましょう。",
-  "autoGen_7a24bc71": "危険ゾーンです！\n怪我のリスクが高い状態です。今日は完全休養を推奨します。",
-  "autoGen_fc1a79ee": "1時間の利用上限（{MAX_AI_CALLS_PER_HOUR}回）に達しました。\nしばらくお待ちください。",
-  "autoGen_8ed6a095": "本日の利用上限（{MAX_AI_CALLS_PER_DAY}回）に達しました。\n明日またご利用ください。",
-  "autoGen_4cf248d0": "今月の利用上限（{MAX_AI_CALLS_PER_MONTH}回）に達しました。\n",
-  "autoGen_0efa33de": "異常な利用パターンが検出されました。\n",
+  "autoGen_dfb8009a": "トレーニング負荷が低すぎます。\\n徐々に負荷を上げることでパフォーマンス向上が期待できます。",
+  "autoGen_b49536ed": "理想的なトレーニング負荷です！\\n現在のペースを維持しましょう。怪我リスクは最小です。",
+  "autoGen_8bcd57bf": "警戒ゾーンです。\\n怪我のリスクがやや高まっています。回復を優先し、次回は負荷を少し下げましょう。",
+  "autoGen_7a24bc71": "危険ゾーンです！\\n怪我のリスクが高い状態です。今日は完全休養を推奨します。",
+  "autoGen_fc1a79ee": "1時間の利用上限（{MAX_AI_CALLS_PER_HOUR}回）に達しました。\\nしばらくお待ちください。",
+  "autoGen_8ed6a095": "本日の利用上限（{MAX_AI_CALLS_PER_DAY}回）に達しました。\\n明日またご利用ください。",
+  "autoGen_4cf248d0": "今月の利用上限（{MAX_AI_CALLS_PER_MONTH}回）に達しました。\\n",
+  "autoGen_0efa33de": "異常な利用パターンが検出されました。\\n",
   "autoGen_4d7afd8b": "🚩 ユーザーフラグ: $userId - $flagType - $reason",
-  "autoGen_ba165086": "アカウントがブロックされています。\nサポートにお問い合わせください。",
+  "autoGen_ba165086": "アカウントがブロックされています。\\nサポートにお問い合わせください。",
   "autoGen_873ee19b": "🎁紹介ボーナス: $referralBonus回",
   "autoGen_c6156f0e": "AI追加パック: $addonUsage回",
   "autoGen_d90cbf45": "AIクレジット: $credits回",
   "autoGen_d293bb2d": "あなたの$level レベルでは、月+{monthlyRate__100_round}%の成長が期待できます。",
   "autoGen_df68039d": "現在{currentWeight_round}kg → 4ヶ月後{predictedWeight_round}kg（+{predictedWeight__currentWeight_round}kg）の成長が科学的に見込まれます。",
-  "autoGen_dde51564": "\n## 推奨アクションプラン",
+  "autoGen_dde51564": "\\n## 推奨アクションプラン",
   "autoGen_88d87130": "* 負荷増加: 週+{weeklyRate__100__10_round__10}%のペースで重量を上げる",
   "autoGen_a18ea9fb": "* 十分な休息（$bodyPartは最低48時間空ける）",
   "autoGen_cb2b318c": "* 適切な栄養摂取（タンパク質1.6-2.2g/kg/日）",
   "autoGen_e9e092c8": "セット追加ごとに+0.37%の成長",
   "autoGen_0a0a8439": "明確化",
   "autoGen_aee3d6b6": "エラーが発生しました: {e_toString}",
-  "autoGen_99ca4bf5": "GYM MATCHでトレーニング記録をシェア！\n#GYMMATCH #筋トレ記録 #ジム\n\nhttps://gym-match-e560d.web.app",
+  "autoGen_99ca4bf5": "GYM MATCHでトレーニング記録をシェア！\\n#GYMMATCH #筋トレ記録 #ジム\\n\\nhttps://gym-match-e560d.web.app",
   "autoGen_efdeb364": "$exerciseName で新記録を達成しました！",
-  "autoGen_3f7f8f41": "適度な負荷のトレーニングでした。\n7-8時間の睡眠とタンパク質補給（体重1kgあたり1.6g以上）を心がけましょう。",
-  "autoGen_07ee9ffa": "非常に高強度のトレーニングでした。\n今日は完全休養を推奨します。睡眠8時間以上、高タンパク質食、ストレッチを重視してください。",
+  "autoGen_3f7f8f41": "適度な負荷のトレーニングでした。\\n7-8時間の睡眠とタンパク質補給（体重1kgあたり1.6g以上）を心がけましょう。",
+  "autoGen_07ee9ffa": "非常に高強度のトレーニングでした。\\n今日は完全休養を推奨します。睡眠8時間以上、高タンパク質食、ストレッチを重視してください。",
   "autoGen_76426959": "⏳ Firestoreクエリ実行: $cacheKey",
   "autoGen_901fff2b": "🗑️ 目標を削除しました: $goalId",
   "autoGen_10698ef0": "✏️ 目標を更新しました: $goalId",
@@ -3119,8 +3514,8 @@
   "autoGen_6fe636e4": "📋 権限リクエスト結果: $permission",
   "autoGen_8679dd9c": "⏱️ GPS位置情報取得タイムアウト（15秒）",
   "autoGen_5dd7baf1": "いいスタートです！あと{magicNumberRecords__count}記録で習慣化達成！",
-  "autoGen_69df4973": "30日以内に5記録で習慣化！\n今日からスタートしませんか？",
-  "autoGen_1a0782d5": "あと4記録で習慣化達成！\n残り{daysRemaining}日です。",
+  "autoGen_69df4973": "30日以内に5記録で習慣化！\\n今日からスタートしませんか？",
+  "autoGen_1a0782d5": "あと4記録で習慣化達成！\\n残り{daysRemaining}日です。",
   "autoGen_ec0ce4f0": "次は{streakDays__7}日間連続を目指そう",
   "autoGen_6f3ae622": "$gymName が空いています！",
   "autoGen_b9e68d6a": "$levelText - 今がチャンス！",
@@ -3129,14 +3524,14 @@
   "autoGen_65c6cedc": "🕐 時空間フィルター有効 - 検索者のジム: $userGymId, 時間: $userPreferredHours",
   "autoGen_7f8184e6": "⏭️ Skip: {doc_id} (Free/Premium) - 検索者がNon-Pro",
   "autoGen_61b4bd56": "⏭️ Skip: {doc_id} - 実力差が大きい",
-  "autoGen_f3cdae64": "マッチングリクエスト送信はProプラン限定機能です。\nProプランにアップグレードしてパートナーとつながりましょう！",
+  "autoGen_f3cdae64": "マッチングリクエスト送信はProプラン限定機能です。\\nProプランにアップグレードしてパートナーとつながりましょう！",
   "autoGen_44750f0a": "🚀 クイックスタート: $templateName",
-  "autoGen_081f30b2": "AI追加パック商品が見つかりません。\n",
-  "autoGen_bd2d5ba0": "探している商品ID: $aiAdditionalPackProductId\n",
-  "autoGen_371e13e6": "利用可能な商品ID: $availableIds\n\n",
-  "autoGen_02e74dc3": "対処方法:\n",
-  "autoGen_9021f412": "1. App Store Connectで商品を作成してください\n",
-  "autoGen_722dc403": "よろしければ、App Store でレビューをお願いします。\nあなたのフィードバックがアプリの改善に役立ちます！",
+  "autoGen_081f30b2": "AI追加パック商品が見つかりません。\\n",
+  "autoGen_bd2d5ba0": "探している商品ID: $aiAdditionalPackProductId\\n",
+  "autoGen_371e13e6": "利用可能な商品ID: $availableIds\\n\\n",
+  "autoGen_02e74dc3": "対処方法:\\n",
+  "autoGen_9021f412": "1. App Store Connectで商品を作成してください\\n",
+  "autoGen_722dc403": "よろしければ、App Store でレビューをお願いします。\\nあなたのフィードバックがアプリの改善に役立ちます！",
   "autoGen_c6000590": "ℹ️ レビュー拒否: {cooldownDays}日間はリクエストしません",
   "autoGen_041feef7": "回復時間確保（Grgic 2018）",
   "autoGen_3609eb69": "ボリューム増加（Grgic 2018）",
@@ -3156,32 +3551,32 @@
   "autoGen_c23f34d7": "📦 エラー時キャッシュ使用: $cachedPlan",
   "autoGen_5815bad8": "AI機能月20回（AIコーチ・成長予測・効果分析） + お気に入り無制限 + レビュー投稿",
   "autoGen_3124e6e1": "AI機能無制限（AIコーチ・成長予測・効果分析） + パートナー検索 + メッセージング",
-  "autoGen_19653147": "今月のAI使用回数を使い切りました ({currentUsage}/{totalLimit}回)\n💰 追加購入で継続利用可能",
+  "autoGen_19653147": "今月のAI使用回数を使い切りました ({currentUsage}/{totalLimit}回)\\n💰 追加購入で継続利用可能",
   "autoGen_c6a86fbe": "週{suggestedChange}セット追加で、+{suggestedChange__0_37_toStringAsFixed1}%の成長期待（Schoenfeld 2017）",
   "autoGen_d4c99375": "週+{weeklyGrowth_toStringAsFixed1}%：順調に成長中",
   "autoGen_1a22c661": "週+{weeklyGrowth_toStringAsFixed1}%：成長ペースが遅め",
   "autoGen_c42311e6": "同一部位は{restDays}日空ける（MPS上昇期間：48時間）",
-  "autoGen_2462056f": "\n## 最優先改善ポイント",
-  "autoGen_1ab642e9": "\n## 具体的アクションプラン",
+  "autoGen_2462056f": "\\n## 最優先改善ポイント",
+  "autoGen_1ab642e9": "\\n## 具体的アクションプラン",
   "autoGen_1f550f64": "* 回復時間: $bodyPartは{ScientificDatabase_getRecommendedRestDayslevel_bodyPart}日空ける",
   "autoGen_9da152f4": "トライアル達成進捗: $progress%",
   "autoGen_f1d9a7a9": "現在のバージョン: $currentVersion (Build: $currentBuildNumber)",
-  "autoGen_3142cb33": "新しいバージョンが利用可能です。\nアップデートをお願いします。",
-  "autoGen_a5e97b2b": "必須アップデートがあります。\nアプリを最新版に更新してください。",
+  "autoGen_3142cb33": "新しいバージョンが利用可能です。\\nアップデートをお願いします。",
+  "autoGen_a5e97b2b": "必須アップデートがあります。\\nアプリを最新版に更新してください。",
   "autoGen_d9ad81bc": "🚨 強制アップデートが必要: $currentBuildNumber < $minBuildNumber",
   "autoGen_96c869d4": "💡 アップデート推奨: $currentBuildNumber < $recommendedBuildNumber",
-  "autoGen_588e8dd8": "画像サイズが大きすぎます ({imageBytes_length__1024__1024_toStringAsFixed1}MB)。\n",
+  "autoGen_588e8dd8": "画像サイズが大きすぎます ({imageBytes_length__1024__1024_toStringAsFixed1}MB)。\\n",
   "autoGen_b2a0fa05": "📄 レスポンスボディ（最初の200文字）: {response_body_substring0_response_body_length__200_200__response_body_length}",
-  "autoGen_fafd554e": "ダークブルー × エナジーオレンジ\n活力とモチベーションを刺激",
-  "autoGen_1a20cd60": "パワーレッド × シルバー\n情熱と力強さを表現",
-  "autoGen_124470ff": "素晴らしい継続力です！\nさらに快適なトレーニング体験をお楽しみください",
-  "autoGen_7210fc11": "トレーニングパートナーを\n見つけよう",
-  "autoGen_067c77b6": "孤独なトレーニングから卒業\n同じジム・同じ目標の仲間と一緒に成長",
+  "autoGen_fafd554e": "ダークブルー × エナジーオレンジ\\n活力とモチベーションを刺激",
+  "autoGen_1a20cd60": "パワーレッド × シルバー\\n情熱と力強さを表現",
+  "autoGen_124470ff": "素晴らしい継続力です！\\nさらに快適なトレーニング体験をお楽しみください",
+  "autoGen_7210fc11": "トレーニングパートナーを\\n見つけよう",
+  "autoGen_067c77b6": "孤独なトレーニングから卒業\\n同じジム・同じ目標の仲間と一緒に成長",
   "autoGen_57df266a": "🎁 AI機能1回分を獲得しました！(残り{remaining}回)",
   "autoGen_1397c615": "$premiumDays日間",
   "autoGen_32518a63": "$friendNameさんがGYM MATCHに参加しました！",
   "autoGen_3efd8f7d": "🎁 紹介特典（豪華版）",
-  "autoGen_5db1bca7": "【Web版テストモード】\nボタンを押すと2秒後にAIクレジットを獲得できます",
+  "autoGen_5db1bca7": "【Web版テストモード】\\nボタンを押すと2秒後にAIクレジットを獲得できます",
   "autoGen_54f0f5d8": "今月あと$_remainingAds回視聴できます",
   "autoGen_ee3d2398": "💡 無制限にAI機能を使いたい方は、Premiumプラン（月10回）またはProプラン（月30回）へのアップグレードをご検討ください",
   "autoGen_d6ef4230": "{widget_basis_length}本の査読付き論文",
@@ -3190,79 +3585,79 @@
   "autoGen_2e811d78": "0 - 100万円/月",
   "autoGen_776a9503": "100 - 300万円/月",
   "autoGen_674539cb": "$benefit獲得条件",
-  "autoGen_0a9c8389": "メッセージを送信して\n会話を始めましょう",
+  "autoGen_0a9c8389": "メッセージを送信して\\n会話を始めましょう",
   "autoGen_b6a2b2e7": "{widget_partner_displayName}さんをブロックしますか？",
-  "autoGen_f073e2b1": "• メッセージの送受信ができなくなります\n",
-  "autoGen_3f52e845": "• 検索結果に表示されなくなります\n",
-  "autoGen_8ab9dcf9": "マッチングリクエスト送信は\nProプラン限定機能です",
+  "autoGen_f073e2b1": "• メッセージの送受信ができなくなります\\n",
+  "autoGen_3f52e845": "• 検索結果に表示されなくなります\\n",
+  "autoGen_8ab9dcf9": "マッチングリクエスト送信は\\nProプラン限定機能です",
   "autoGen_152ba977": "月額¥980（年間プラン32% OFF）",
   "autoGen_055759b3": "実力が近い人のみ（±15% 1RM）",
-  "autoGen_b55f1ed0": "プロトレーナーによる\nマンツーマン指導",
-  "autoGen_5df71c9c": "トレーナーが記録を共有すると\nここに表示されます",
+  "autoGen_b55f1ed0": "プロトレーナーによる\\nマンツーマン指導",
+  "autoGen_5df71c9c": "トレーナーが記録を共有すると\\nここに表示されます",
   "autoGen_b5f192dd": "$totalMembers名",
   "autoGen_d21b7749": "$activeMembers名",
   "autoGen_7a54ae1f": "$dormantMembers名",
   "autoGen_39bbf3e2": "$totalSessions回",
   "autoGen_dc33a754": "休眠会員: $dormantMembers名",
-  "autoGen_fe73ede6": "PO管理者専用のログイン画面です\nアクセスコードをお持ちの方はアクセスコードタブから\nログインしてください",
+  "autoGen_fe73ede6": "PO管理者専用のログイン画面です\\nアクセスコードをお持ちの方はアクセスコードタブから\\nログインしてください",
   "autoGen_39cc3687": "例: RF-AKA-2024",
   "autoGen_f02ab35b": "$activeCount名",
   "autoGen_133c129a": "$dormantCount名",
   "autoGen_0bbe6198": "最終: $daysSince日前",
   "autoGen_360787f9": "リマインダー時刻を{formatTime_reminderTime}に設定しました",
-  "autoGen_e67c4c69": "通知は端末の設定でも管理できます。\n設定アプリ > 通知 からご確認ください。",
+  "autoGen_e67c4c69": "通知は端末の設定でも管理できます。\\n設定アプリ > 通知 からご確認ください。",
   "autoGen_68142d17": "この利用規約（以下本規約）は、井上元（以下開発者）が提供するGYM MATCHアプリ（以下本アプリ）の利用条件を定めるものです。ユーザーは、本アプリを利用することにより、本規約に同意したものとみなされます。",
-  "autoGen_49167046": "本アプリは、以下の機能を提供します：\n\n",
-  "autoGen_5db26dd7": "• トレーニング記録の管理\n",
-  "autoGen_54eb522c": "• ジム検索・位置情報表示\n",
-  "autoGen_3482f20a": "• AIによるトレーニングメニュー提案\n",
-  "autoGen_6e6ed0f3": "• トレーニングデータの分析・可視化\n",
+  "autoGen_49167046": "本アプリは、以下の機能を提供します：\\n\\n",
+  "autoGen_5db26dd7": "• トレーニング記録の管理\\n",
+  "autoGen_54eb522c": "• ジム検索・位置情報表示\\n",
+  "autoGen_3482f20a": "• AIによるトレーニングメニュー提案\\n",
+  "autoGen_6e6ed0f3": "• トレーニングデータの分析・可視化\\n",
   "autoGen_cfee6527": "• 有料サブスクリプションプラン（Premium、Pro）",
-  "autoGen_78cd69ae": "ユーザーは、本アプリの利用にあたり、以下の行為をしてはなりません：\n\n",
-  "autoGen_0b46001b": "• 法令または公序良俗に違反する行為\n",
-  "autoGen_bfe041dc": "• 本アプリのサーバーまたはネットワークの機能を破壊したり、妨害したりする行為\n",
-  "autoGen_bd7bdb16": "• 他のユーザーに関する個人情報等を収集または蓄積する行為\n",
-  "autoGen_cfb0b943": "• 不正アクセスをし、またはこれを試みる行為\n",
-  "autoGen_37dfeeec": "• 開発者は、本アプリに起因してユーザーに生じたあらゆる損害について、一切の責任を負いません。\n",
-  "autoGen_c4938e35": "• 本規約の解釈にあたっては、日本法を準拠法とします。\n",
+  "autoGen_78cd69ae": "ユーザーは、本アプリの利用にあたり、以下の行為をしてはなりません：\\n\\n",
+  "autoGen_0b46001b": "• 法令または公序良俗に違反する行為\\n",
+  "autoGen_bfe041dc": "• 本アプリのサーバーまたはネットワークの機能を破壊したり、妨害したりする行為\\n",
+  "autoGen_bd7bdb16": "• 他のユーザーに関する個人情報等を収集または蓄積する行為\\n",
+  "autoGen_cfb0b943": "• 不正アクセスをし、またはこれを試みる行為\\n",
+  "autoGen_37dfeeec": "• 開発者は、本アプリに起因してユーザーに生じたあらゆる損害について、一切の責任を負いません。\\n",
+  "autoGen_c4938e35": "• 本規約の解釈にあたっては、日本法を準拠法とします。\\n",
   "autoGen_e73b7aa2": "App内課金（Apple App Store）を通じて支払いが行われます。",
   "autoGen_8033527d": "（対応時間: 平日 10:00-18:00）",
-  "autoGen_1ec20187": "〒839-0817\n福岡県久留米市瀬下町243",
-  "autoGen_ba922250": "メールアドレス: i.hajime1219@outlook.jp\n（対応時間: 平日 10:00-18:00）",
-  "autoGen_c447e5fe": "Premiumプラン: ¥500/月（税込）\n",
-  "autoGen_04bd9020": "Proプラン: ¥980/月（税込）\n\n",
-  "autoGen_b2e622ca": "※Freeプランは無料です\n",
-  "autoGen_c623275e": "Apple App Store決済（App内課金）\n",
-  "autoGen_7beebd4f": "• サブスクリプション購入時に即時決済\n",
-  "autoGen_891f16d9": "• 以降、毎月自動更新（解約しない限り継続課金）\n",
-  "autoGen_fd5eb9a3": "デジタルコンテンツの性質上、原則として返品・返金はお受けできません。\n\n",
-  "autoGen_3d8c1928": "ただし、以下の場合は返金申請が可能です：\n",
-  "autoGen_a85490c9": "• Apple App Storeの返金ポリシーに基づく正当な理由がある場合\n",
-  "autoGen_2d7a5883": "• 技術的な問題により正常にサービスが提供されない場合\n",
-  "autoGen_2652cd9c": "• 誤って購入した場合（購入後すぐに申請が必要）\n\n",
-  "autoGen_76d3507e": "注意事項:\n",
-  "autoGen_93a4cf92": "• 解約は次回更新日の24時間前までに行ってください\n",
-  "autoGen_22bad042": "• 解約後も、現在の請求期間終了まではサービスをご利用いただけます\n",
-  "autoGen_95741c60": "GYM MATCH - トレーニング管理アプリ\n\n",
-  "autoGen_b66b06a2": "主な機能:\n",
-  "autoGen_f987d5f9": "• トレーニング記録の管理・保存\n",
-  "autoGen_49049c3c": "• ジム検索・位置情報表示（Google Maps連携）\n",
-  "autoGen_a24921c0": "• AIによるトレーニングメニュー提案（Gemini API使用）\n",
-  "autoGen_256ecf27": "• 過去のトレーニング履歴閲覧\n\n",
-  "autoGen_18b95e82": "プラン別機能:\n",
-  "autoGen_e5304f66": "• Freeプラン: 基本機能、広告表示あり、AI機能は広告視聴で月3回まで\n",
-  "autoGen_bc653d48": "• Premiumプラン: 広告非表示、AI機能月10回利用可能\n",
-  "autoGen_a677a322": "iOS 12.0以降のiPhone/iPad\n※安定した動作にはiOS 14.0以降を推奨",
-  "autoGen_d23452bf": "• 本サービスは継続課金型のサブスクリプションサービスです\n",
-  "autoGen_0cd63622": "• 自動更新を停止しない限り、毎月自動的に課金されます\n",
-  "autoGen_0d5aaa39": "• サブスクリプションの管理・解約は、Apple App Storeの設定から行えます\n",
-  "autoGen_be3339ff": "• 本サービスのトレーニング提案は参考情報であり、医学的アドバイスではありません\n",
+  "autoGen_1ec20187": "〒839-0817\\n福岡県久留米市瀬下町243",
+  "autoGen_ba922250": "メールアドレス: i.hajime1219@outlook.jp\\n（対応時間: 平日 10:00-18:00）",
+  "autoGen_c447e5fe": "Premiumプラン: ¥500/月（税込）\\n",
+  "autoGen_04bd9020": "Proプラン: ¥980/月（税込）\\n\\n",
+  "autoGen_b2e622ca": "※Freeプランは無料です\\n",
+  "autoGen_c623275e": "Apple App Store決済（App内課金）\\n",
+  "autoGen_7beebd4f": "• サブスクリプション購入時に即時決済\\n",
+  "autoGen_891f16d9": "• 以降、毎月自動更新（解約しない限り継続課金）\\n",
+  "autoGen_fd5eb9a3": "デジタルコンテンツの性質上、原則として返品・返金はお受けできません。\\n\\n",
+  "autoGen_3d8c1928": "ただし、以下の場合は返金申請が可能です：\\n",
+  "autoGen_a85490c9": "• Apple App Storeの返金ポリシーに基づく正当な理由がある場合\\n",
+  "autoGen_2d7a5883": "• 技術的な問題により正常にサービスが提供されない場合\\n",
+  "autoGen_2652cd9c": "• 誤って購入した場合（購入後すぐに申請が必要）\\n\\n",
+  "autoGen_76d3507e": "注意事項:\\n",
+  "autoGen_93a4cf92": "• 解約は次回更新日の24時間前までに行ってください\\n",
+  "autoGen_22bad042": "• 解約後も、現在の請求期間終了まではサービスをご利用いただけます\\n",
+  "autoGen_95741c60": "GYM MATCH - トレーニング管理アプリ\\n\\n",
+  "autoGen_b66b06a2": "主な機能:\\n",
+  "autoGen_f987d5f9": "• トレーニング記録の管理・保存\\n",
+  "autoGen_49049c3c": "• ジム検索・位置情報表示（Google Maps連携）\\n",
+  "autoGen_a24921c0": "• AIによるトレーニングメニュー提案（Gemini API使用）\\n",
+  "autoGen_256ecf27": "• 過去のトレーニング履歴閲覧\\n\\n",
+  "autoGen_18b95e82": "プラン別機能:\\n",
+  "autoGen_e5304f66": "• Freeプラン: 基本機能、広告表示あり、AI機能は広告視聴で月3回まで\\n",
+  "autoGen_bc653d48": "• Premiumプラン: 広告非表示、AI機能月10回利用可能\\n",
+  "autoGen_a677a322": "iOS 12.0以降のiPhone/iPad\\n※安定した動作にはiOS 14.0以降を推奨",
+  "autoGen_d23452bf": "• 本サービスは継続課金型のサブスクリプションサービスです\\n",
+  "autoGen_0cd63622": "• 自動更新を停止しない限り、毎月自動的に課金されます\\n",
+  "autoGen_0d5aaa39": "• サブスクリプションの管理・解約は、Apple App Storeの設定から行えます\\n",
+  "autoGen_be3339ff": "• 本サービスのトレーニング提案は参考情報であり、医学的アドバイスではありません\\n",
   "autoGen_46e40811": "X（旧Twitter）: @MatchGym71830",
   "autoGen_87967650": "残り$_remainingDays日間、プレミアム機能をお楽しみください",
-  "autoGen_5117983a": "• AI機能 月10回\n",
-  "autoGen_d42111dd": "• お気に入り登録無制限\n",
-  "autoGen_496b48ae": "• ジムレビュー投稿\n",
-  "autoGen_7a7b91ca": "• 混雑度アラート通知\n",
+  "autoGen_5117983a": "• AI機能 月10回\\n",
+  "autoGen_d42111dd": "• お気に入り登録無制限\\n",
+  "autoGen_496b48ae": "• ジムレビュー投稿\\n",
+  "autoGen_7a7b91ca": "• 混雑度アラート通知\\n",
   "autoGen_4cfb6b51": "ユーザーレベル: $userLevel",
   "autoGen_d4d0a508": "AIコーチの推奨メニューを読み込みました ({selectedExercises_length}種目)",
   "autoGen_d79a4e44": "スタックトレース: $stackTrace",
@@ -3273,7 +3668,7 @@
   "autoGen_0d5c4fc8": "$exerciseNameの過去記録",
   "autoGen_6184b271": "記録を反映しました: $weight kg × $reps reps",
   "autoGen_74da9166": "$exerciseNameの一括入力",
-  "autoGen_c80b15f5": "$exerciseNameを削除しますか？\nこの操作は取り消せません。",
+  "autoGen_c80b15f5": "$exerciseNameを削除しますか？\\nこの操作は取り消せません。",
   "autoGen_0a84ceba": "$exerciseNameを削除しました",
   "autoGen_d9074687": "$resultをカスタム種目として保存しました",
   "autoGen_0c183ad8": "📴 オフ日を保存: $_selectedDate",
@@ -3281,47 +3676,47 @@
   "autoGen_f36e4e45": "$_selectedMuscleGroupの種目",
   "autoGen_7ce1d4dd": "🔘 前回ボタンタップ: $exerciseName",
   "autoGen_7b01524a": "あなたのレベル ($userLevel) に合わせた重量・回数を設定しています",
-  "autoGen_2873d010": "初回記録\n今日の記録が次回の目標になります。全力で挑戦しましょう！",
+  "autoGen_2873d010": "初回記録\\n今日の記録が次回の目標になります。全力で挑戦しましょう！",
   "autoGen_61221654": "AIコーチから{exercises_length}種目を読み込みました",
-  "autoGen_79ab5374": "• 動画広告を視聴すると、AI機能を1回使用できます\n",
-  "autoGen_46daa8ca": "• 月3回まで広告視聴可能\n",
+  "autoGen_79ab5374": "• 動画広告を視聴すると、AI機能を1回使用できます\\n",
+  "autoGen_46daa8ca": "• 月3回まで広告視聴可能\\n",
   "autoGen_b657787b": "canUseAI結果: $canUse",
   "autoGen_c85769fb": "canEarnCreditFromAd結果: $canEarnFromAd",
   "autoGen_5a65e7d3": "広告視聴結果: $watchedAd",
-  "autoGen_a2170a7d": "# 科学的根拠に基づくトレーニングメニュー\n",
-  "autoGen_8627ad90": "💡 AIが一時的に利用できないため、科学的研究に基づいた推奨メニューを提案します。\n",
-  "autoGen_3921a074": "## 全身バランストレーニング\n",
+  "autoGen_a2170a7d": "# 科学的根拠に基づくトレーニングメニュー\\n",
+  "autoGen_8627ad90": "💡 AIが一時的に利用できないため、科学的研究に基づいた推奨メニューを提案します。\\n",
+  "autoGen_3921a074": "## 全身バランストレーニング\\n",
   "autoGen_63dfa8fd": "- 回数: 10-12回",
-  "autoGen_f48e246a": "- ポイント: フォーム重視、軽い重量から\n",
-  "autoGen_9dbcd380": "- 休憩: 90秒\n",
-  "autoGen_e3c1b530": "- 休憩: 60秒\n",
+  "autoGen_f48e246a": "- ポイント: フォーム重視、軽い重量から\\n",
+  "autoGen_9dbcd380": "- 休憩: 90秒\\n",
+  "autoGen_e3c1b530": "- 休憩: 60秒\\n",
   "autoGen_95eff134": "- セット数: 4-5セット",
   "autoGen_7b69d2d1": "- 回数: 6-10回",
-  "autoGen_7d332e7f": "- 休憩: 2-3分\n",
+  "autoGen_7d332e7f": "- 休憩: 2-3分\\n",
   "autoGen_9c54dcf8": "- セット数: 3-4セット",
-  "autoGen_64963de8": "- 休憩: 3-4分\n",
-  "autoGen_7fb65399": "## $part トレーニング\n",
+  "autoGen_64963de8": "- 休憩: 3-4分\\n",
+  "autoGen_7fb65399": "## $part トレーニング\\n",
   "autoGen_7f25816c": "- セット数: 2-3セット",
   "autoGen_7ae0e831": "- 回数: 10-15回",
   "autoGen_22068d85": "- 回数: 8-12回",
-  "autoGen_e420dac1": "- 休憩: 60-90秒\n",
+  "autoGen_e420dac1": "- 休憩: 60-90秒\\n",
   "autoGen_530c8f16": "💰 AI追加パック（¥300）:",
-  "autoGen_2482dab0": "もう一度メニューを生成してください。\n問題が続く場合は、サポートにお問い合わせください。",
-  "autoGen_a900ede4": "📄 生成されたメニュー（最初の500文字）:\n{text_substring0_text_length__500_500__text_length}",
+  "autoGen_2482dab0": "もう一度メニューを生成してください。\\n問題が続く場合は、サポートにお問い合わせください。",
+  "autoGen_a900ede4": "📄 生成されたメニュー（最初の500文字）:\\n{text_substring0_text_length__500_500__text_length}",
   "autoGen_61691a5f": "📄 処理中: $line",
   "autoGen_dc7f876e": "⏭️ サブセクションをスキップ: $line",
   "autoGen_160fcdc4": "📝 現在の状態 ($currentExerciseName): weight=$currentWeight, reps=$currentReps, sets=$currentSets",
-  "autoGen_8b926449": "\n【直近1ヶ月のトレーニング履歴】\n",
-  "autoGen_8e3d3911": "\n上記の履歴を参考に、適切な重量と回数を提案してください。\n",
+  "autoGen_8b926449": "\\n【直近1ヶ月のトレーニング履歴】\\n",
+  "autoGen_8e3d3911": "\\n上記の履歴を参考に、適切な重量と回数を提案してください。\\n",
   "autoGen_6809c323": "- **有酸素運動のみ**を提案（筋トレ種目は含めない）",
   "autoGen_f6c819db": "**絶対厳守: 有酸素運動データベースの種目のみ使用すること。ベンチプレス、スクワットなどの筋トレ種目は絶対に含めないこと。**",
   "autoGen_1e50fa08": "全身バランスよく",
   "autoGen_a4e8ab60": "を重点的に",
-  "autoGen_130d85e6": "- **有酸素運動のみ**を提案（筋トレ種目は含めない）\n- HIIT、持久走、インターバルなど多様な有酸素トレーニング",
-  "autoGen_ed8be540": "- フリーウェイト中心\n- 筋肥大を重視",
+  "autoGen_130d85e6": "- **有酸素運動のみ**を提案（筋トレ種目は含めない）\\n- HIIT、持久走、インターバルなど多様な有酸素トレーニング",
+  "autoGen_ed8be540": "- フリーウェイト中心\\n- 筋肥大を重視",
   "autoGen_d8a431d6": "**絶対厳守: 有酸素運動データベースの種目のみ使用すること。ベンチプレス、スクワット、デッドリフトなどの筋トレ種目は絶対に含めないこと。**",
-  "autoGen_de5ee3b4": "- **有酸素運動のみ**を提案（筋トレ種目は含めない）\n- HIIT、タバタ式、持久走など高強度有酸素トレーニング",
-  "autoGen_32442929": "- 高重量フリーウェイト中心\n- 最大筋力向上を重視",
+  "autoGen_de5ee3b4": "- **有酸素運動のみ**を提案（筋トレ種目は含めない）\\n- HIIT、タバタ式、持久走など高強度有酸素トレーニング",
+  "autoGen_32442929": "- 高重量フリーウェイト中心\\n- 最大筋力向上を重視",
   "autoGen_7669a5d7": "**絶対厳守: 有酸素運動データベースの種目のみ使用すること。ベンチプレス、スクワット、デッドリフト、ショルダープレスなどの筋トレ種目は絶対に含めないこと。**",
   "autoGen_c157b7e9": "この部位のトレーニング頻度",
   "autoGen_2748529d": "※ 選択した部位（$_selectedBodyPart）を週に何回トレーニングするか",
@@ -3333,9 +3728,9 @@
   "autoGen_1a33d843": "現在: {currentWeight_round}kg → +$growthPercentage%の成長",
   "autoGen_7a1d4370": "プレミアムプランにアップグレード",
   "autoGen_9d99af7f": "プレミアムプランなら:",
-  "autoGen_67a989a2": "• 月10回までAI機能が使い放題\n",
-  "autoGen_465a0c43": "• 広告なしで快適に利用\n",
-  "autoGen_6aa1053b": "• お気に入りジム無制限\n",
+  "autoGen_67a989a2": "• 月10回までAI機能が使い放題\\n",
+  "autoGen_465a0c43": "• 広告なしで快適に利用\\n",
+  "autoGen_6aa1053b": "• お気に入りジム無制限\\n",
   "autoGen_583fa8ea": "RPE $rpe（余裕あり）",
   "autoGen_63907130": "RPE $rpe（適正）",
   "autoGen_7eeda4db": "RPE $rpe（限界）",
@@ -3368,14 +3763,14 @@
   "autoGen_6d344dc3": "{period}の成長",
   "autoGen_fef4f34a": "$bodyPart - PR記録",
   "autoGen_b9c14a1a": "まだ$bodyPartの記録がありません",
-  "autoGen_6731dc9d": "• RM (Repetition Maximum)：特定の回数で挙上可能な最大重量\n",
-  "autoGen_780e4b39": "• 1RM：1回だけ挙上できる最大重量\n",
-  "autoGen_bafa2012": "• この計算はEpley式を使用しています\n",
+  "autoGen_6731dc9d": "• RM (Repetition Maximum)：特定の回数で挙上可能な最大重量\\n",
+  "autoGen_780e4b39": "• 1RM：1回だけ挙上できる最大重量\\n",
+  "autoGen_bafa2012": "• この計算はEpley式を使用しています\\n",
   "autoGen_fdc9c9f2": "バーの重量（{barWeight}kg）より大きい値を入力してください",
   "autoGen_a2dd7366": "$plateCount枚",
-  "autoGen_508a83f8": "• ジムにあるプレートだけを選択してください\n",
-  "autoGen_cf1cfa23": "• プリセットから選択すると素早く設定できます\n",
-  "autoGen_f897a66f": "• 設定は自動保存されます\n",
+  "autoGen_508a83f8": "• ジムにあるプレートだけを選択してください\\n",
+  "autoGen_cf1cfa23": "• プリセットから選択すると素早く設定できます\\n",
+  "autoGen_f897a66f": "• 設定は自動保存されます\\n",
   "autoGen_6f7f8448": "• 表示されるのは片側の枚数です（両側に装着）",
   "autoGen_6ece374b": "$exerciseNameを削除しますか？",
   "autoGen_758d777e": "$exerciseNameを削除しました（残り{remainingExerciseNames}種目）",
@@ -3386,7 +3781,7 @@
   "autoGen_74f074ea": "有酸素時間: $totalMinutes分",
   "autoGen_b714e319": "📋 テンプレートデータを渡す: $templateData",
   "autoGen_51ce78c9": "{template_name}を削除しますか？",
-  "autoGen_8a87562e": "毎週月曜日に自動生成されます\n（デモモードではCloud Function未実装のため手動データが必要です）",
+  "autoGen_8a87562e": "毎週月曜日に自動生成されます\\n（デモモードではCloud Function未実装のため手動データが必要です）",
   "autoGen_15000674": "試行 $retryCount/$maxRetries...",
   "showDetailsSection": "詳細セクションを表示",
   "weightRatio": "ウェイトレシオ",
@@ -3412,277 +3807,840 @@
   "home_shareFailed": "シェアに失敗しました: {error}",
   "home_deleteError": "削除エラー: {error}",
   "home_weightMinutes": "{weight} 分",
-  "home_deleteRecordConfirm": "「{exerciseName}」の記録を削除しますか？
-この操作は取り消せません。",
+  "home_deleteRecordConfirm": "「{exerciseName}」の記録を削除しますか？\nこの操作は取り消せません。",
   "home_deleteRecordSuccess": "「{exerciseName}」を削除しました（残り{count}種目）",
   "home_deleteFailed": "削除に失敗しました: {error}",
   "home_generalError": "❌ エラー: {error}",
   "goals_loadFailed": "目標の読み込みに失敗しました: {error}",
-  "goals_deleteConfirm": "「{goalName}」を削除しますか？
-この操作は取り消せません。",
+  "goals_deleteConfirm": "「{goalName}」を削除しますか？\nこの操作は取り消せません。",
   "goals_updateFailed": "更新に失敗しました: {error}",
   "goals_editTitle": "{goalName}を編集",
-  "body_offlineSaved": "📴 オフライン保存しました
-オンライン復帰時に自動同期されます",
+  "body_offlineSaved": "📴 オフライン保存しました\nオンライン復帰時に自動同期されます",
   "body_weightKg": "体重: {weight}kg",
   "body_bodyFatPercent": "体脂肪率: {bodyFat}%",
   "reward_adLoadFailed": "広告の読み込みに失敗しました。もう一度お試しください。",
   "reward_adDisplayFailed": "広告の表示に失敗しました。しばらく待ってからお試しください。",
   "reward_creditEarnedTest": "✅ AIクレジット1回分を獲得しました！（テストモード）",
-  "@home_shareFailed": "[('placeholders', [('error', [('type', 'String')])])]",
-  "@home_deleteError": "[('placeholders', [('error', [('type', 'String')])])]",
-  "@home_weightMinutes": "[('placeholders', [('weight', [('type', 'String')])])]",
-  "@home_deleteRecordConfirm": "[('placeholders', [('exerciseName', [('type', 'String')])])]",
-  "@home_deleteRecordSuccess": "[('placeholders', [('exerciseName', [('type', 'String')]), ('count', [('type', 'String')])])]",
-  "@home_deleteFailed": "[('placeholders', [('error', [('type', 'String')])])]",
-  "@home_generalError": "[('placeholders', [('error', [('type', 'String')])])]",
-  "@goals_loadFailed": "[('placeholders', [('error', [('type', 'String')])])]",
-  "@goals_deleteConfirm": "[('placeholders', [('goalName', [('type', 'String')])])]",
-  "@goals_updateFailed": "[('placeholders', [('error', [('type', 'String')])])]",
-  "@goals_editTitle": "[('placeholders', [('goalName', [('type', 'String')])])]",
-  "@body_weightKg": "[('placeholders', [('weight', [('type', 'String')])])]",
-  "@body_bodyFatPercent": "[('placeholders', [('bodyFat', [('type', 'String')])])]",
-  "workout_offlineSaved": "📴 オフライン保存しました
-オンライン復帰時に自動同期されます",
+  "@home_shareFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_deleteError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_weightMinutes": {
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_deleteRecordConfirm": {
+    "placeholders": {
+      "exerciseName": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_deleteRecordSuccess": {
+    "placeholders": {
+      "exerciseName": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_deleteFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_generalError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@goals_loadFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@goals_deleteConfirm": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      }
+    }
+  },
+  "@goals_updateFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@goals_editTitle": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      }
+    }
+  },
+  "@body_weightKg": {
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
+  "@body_bodyFatPercent": {
+    "placeholders": {
+      "bodyFat": {
+        "type": "String"
+      }
+    }
+  },
+  "workout_offlineSaved": "📴 オフライン保存しました\nオンライン復帰時に自動同期されます",
   "workout_iconAI": "🤖",
   "workout_iconIdea": "💡",
   "workout_iconStats": "📊",
   "workout_setsCopied": "{count}セットをコピーしました",
-  "@workout_offlineSaved": "[('description', 'オフライン保存完了メッセージ')]",
-  "@workout_iconAI": "[('description', 'AIアイコン絵文字')]",
-  "@workout_iconIdea": "[('description', 'アイデアアイコン絵文字')]",
-  "@workout_iconStats": "[('description', '統計アイコン絵文字')]",
-  "@workout_setsCopied": "[('description', 'セットコピー完了メッセージ'), ('placeholders', [('count', [('type', 'int')])])]",
+  "@workout_offlineSaved": {
+    "description": "オフライン保存完了メッセージ"
+  },
+  "@workout_iconAI": {
+    "description": "AIアイコン絵文字"
+  },
+  "@workout_iconIdea": {
+    "description": "アイデアアイコン絵文字"
+  },
+  "@workout_iconStats": {
+    "description": "統計アイコン絵文字"
+  },
+  "@workout_setsCopied": {
+    "description": "セットコピー完了メッセージ",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "workout_aiMenuLoaded": "AIコーチの推奨メニューを読み込みました ({count}種目)",
-  "@workout_aiMenuLoaded": "[('description', 'AIコーチのメニュー読み込み成功メッセージ'), ('placeholders', [('count', [('type', 'int'), ('example', '5')])])]",
+  "@workout_aiMenuLoaded": {
+    "description": "AIコーチのメニュー読み込み成功メッセージ",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
   "workout_aiMenuLoadFailed": "AIコーチデータの読み込みに失敗しました: {error}",
-  "@workout_aiMenuLoadFailed": "[('description', 'AIコーチのメニュー読み込み失敗メッセージ'), ('placeholders', [('error', [('type', 'String'), ('example', 'Connection timeout')])])]",
+  "@workout_aiMenuLoadFailed": {
+    "description": "AIコーチのメニュー読み込み失敗メッセージ",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Connection timeout"
+      }
+    }
+  },
   "workout_noHistory": "{exerciseName}の履歴がありません",
-  "@workout_noHistory": "[('description', '種目の履歴がない場合のメッセージ'), ('placeholders', [('exerciseName', [('type', 'String'), ('example', 'ベンチプレス')])])]",
+  "@workout_noHistory": {
+    "description": "種目の履歴がない場合のメッセージ",
+    "placeholders": {
+      "exerciseName": {
+        "type": "String",
+        "example": "ベンチプレス"
+      }
+    }
+  },
   "workout_pastRecords": "{exerciseName}の過去記録",
-  "@workout_pastRecords": "[('description', '種目の過去記録ダイアログタイトル'), ('placeholders', [('exerciseName', [('type', 'String'), ('example', 'ベンチプレス')])])]",
+  "@workout_pastRecords": {
+    "description": "種目の過去記録ダイアログタイトル",
+    "placeholders": {
+      "exerciseName": {
+        "type": "String",
+        "example": "ベンチプレス"
+      }
+    }
+  },
   "workout_bulkInput": "{exerciseName}の一括入力",
-  "@workout_bulkInput": "[('description', '種目の一括入力ダイアログタイトル'), ('placeholders', [('exerciseName', [('type', 'String'), ('example', 'ベンチプレス')])])]",
-  "workout_deleteConfirm": "「{exerciseName}」を削除しますか？
-この操作は取り消せません。",
-  "@workout_deleteConfirm": "[('description', '種目削除の確認メッセージ'), ('placeholders', [('exerciseName', [('type', 'String'), ('example', 'ベンチプレス')])])]",
+  "@workout_bulkInput": {
+    "description": "種目の一括入力ダイアログタイトル",
+    "placeholders": {
+      "exerciseName": {
+        "type": "String",
+        "example": "ベンチプレス"
+      }
+    }
+  },
+  "workout_deleteConfirm": "「{exerciseName}」を削除しますか？\nこの操作は取り消せません。",
+  "@workout_deleteConfirm": {
+    "description": "種目削除の確認メッセージ",
+    "placeholders": {
+      "exerciseName": {
+        "type": "String",
+        "example": "ベンチプレス"
+      }
+    }
+  },
   "workout_deleteSuccess": "「{exerciseName}」を削除しました",
-  "@workout_deleteSuccess": "[('description', '種目削除成功メッセージ'), ('placeholders', [('exerciseName', [('type', 'String'), ('example', 'ベンチプレス')])])]",
+  "@workout_deleteSuccess": {
+    "description": "種目削除成功メッセージ",
+    "placeholders": {
+      "exerciseName": {
+        "type": "String",
+        "example": "ベンチプレス"
+      }
+    }
+  },
   "workout_customExerciseSaved": "「{exerciseName}」をカスタム種目として保存しました",
-  "@workout_customExerciseSaved": "[('description', 'カスタム種目保存成功メッセージ'), ('placeholders', [('exerciseName', [('type', 'String'), ('example', 'マイトレーニング')])])]",
+  "@workout_customExerciseSaved": {
+    "description": "カスタム種目保存成功メッセージ",
+    "placeholders": {
+      "exerciseName": {
+        "type": "String",
+        "example": "マイトレーニング"
+      }
+    }
+  },
   "profile_importFromPhoto": "📸 写真から取り込み",
   "profile_importFromCSV": "📄 CSVから取り込み",
   "profile_fileSizeTooLarge": "❌ ファイルサイズが大きすぎます（5MB以下）",
   "profile_parsingCSV": "CSVファイルを解析しています...",
   "profile_multiLanguageSupport": "6言語対応 - グローバル展開中",
-  "@profile_imageAnalysisError": "[('description', '画像解析失敗時のエラーメッセージ'), ('placeholders', [('error', [('type', 'String'), ('example', 'Invalid format')])])]",
-  "@profile_csvParseError": "[('description', 'CSV解析失敗時のエラーメッセージ'), ('placeholders', [('error', [('type', 'String'), ('example', 'Invalid CSV format')])])]",
+  "@profile_imageAnalysisError": {
+    "description": "画像解析失敗時のエラーメッセージ",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Invalid format"
+      }
+    }
+  },
+  "@profile_csvParseError": {
+    "description": "CSV解析失敗時のエラーメッセージ",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Invalid CSV format"
+      }
+    }
+  },
   "profile_codeCopied": "✅ コードをコピーしました！",
   "profile_shareMessageCopied": "✅ シェア用メッセージをコピーしました！",
   "subscription_planManagement": "プラン管理",
   "subscription_termsOpenFailed": "利用規約を開けませんでした",
   "subscription_cancelInAppStore": "無料プランへの変更は、App Store設定でサブスクリプションをキャンセルしてください",
   "subscription_purchaseFailed": "購入に失敗しました: {error}",
-  "@subscription_purchaseFailed": "[('description', 'サブスクリプション購入失敗メッセージ'), ('placeholders', [('error', [('type', 'String'), ('example', 'Payment declined')])])]",
+  "@subscription_purchaseFailed": {
+    "description": "サブスクリプション購入失敗メッセージ",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Payment declined"
+      }
+    }
+  },
   "subscription_restoreFailed": "復元に失敗しました: {error}",
-  "@subscription_restoreFailed": "[('description', 'サブスクリプション復元失敗メッセージ'), ('placeholders', [('error', [('type', 'String'), ('example', 'No purchases found')])])]",
+  "@subscription_restoreFailed": {
+    "description": "サブスクリプション復元失敗メッセージ",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "No purchases found"
+      }
+    }
+  },
   "subscription_changeTo": "{planName} に変更",
-  "@subscription_changeTo": "[('description', 'プラン変更ボタンラベル'), ('placeholders', [('planName', [('type', 'String'), ('example', 'プレミアムプラン')])])]",
+  "@subscription_changeTo": {
+    "description": "プラン変更ボタンラベル",
+    "placeholders": {
+      "planName": {
+        "type": "String",
+        "example": "プレミアムプラン"
+      }
+    }
+  },
   "subscription_changeWarning": "{planName} に変更すると、以下の機能が制限されます：",
-  "@subscription_changeWarning": "[('description', 'プラン変更時の警告メッセージ'), ('placeholders', [('planName', [('type', 'String'), ('example', '無料プラン')])])]",
+  "@subscription_changeWarning": {
+    "description": "プラン変更時の警告メッセージ",
+    "placeholders": {
+      "planName": {
+        "type": "String",
+        "example": "無料プラン"
+      }
+    }
+  },
   "subscription_changeInAppStore": "App Store設定から{planName}へ変更してください",
-  "@subscription_changeInAppStore": "[('description', 'App Storeでのプラン変更案内'), ('placeholders', [('planName', [('type', 'String'), ('example', '無料プラン')])])]",
+  "@subscription_changeInAppStore": {
+    "description": "App Storeでのプラン変更案内",
+    "placeholders": {
+      "planName": {
+        "type": "String",
+        "example": "無料プラン"
+      }
+    }
+  },
   "subscription_step1": "1. iPhoneの「設定」アプリを開く",
   "subscription_step2": "2. 一番上の[Apple ID]をタップ",
   "workout_deleteDebug": "🔍 削除デバッグ",
   "workout_deleteConfirmExercise": "「{exerciseName}」を削除しますか？",
-  "@workout_deleteConfirmExercise": "[('description', '種目削除の確認メッセージ（デバッグ用）'), ('placeholders', [('exerciseName', [('type', 'String'), ('example', 'ベンチプレス')])])]",
+  "@workout_deleteConfirmExercise": {
+    "description": "種目削除の確認メッセージ（デバッグ用）",
+    "placeholders": {
+      "exerciseName": {
+        "type": "String",
+        "example": "ベンチプレス"
+      }
+    }
+  },
   "workout_debugTargetInfo": "🎯 {targetInfo}",
-  "@workout_debugTargetInfo": "[('description', 'デバッグ用ターゲット情報'), ('placeholders', [('targetInfo', [('type', 'String'), ('example', 'Exercise index: 2')])])]",
+  "@workout_debugTargetInfo": {
+    "description": "デバッグ用ターゲット情報",
+    "placeholders": {
+      "targetInfo": {
+        "type": "String",
+        "example": "Exercise index: 2"
+      }
+    }
+  },
   "workout_debugCurrentExercises": "📊 現在の種目: {exercises}",
-  "@workout_debugCurrentExercises": "[('description', 'デバッグ用現在の種目一覧'), ('placeholders', [('exercises', [('type', 'String'), ('example', 'ベンチプレス, スクワット')])])]",
+  "@workout_debugCurrentExercises": {
+    "description": "デバッグ用現在の種目一覧",
+    "placeholders": {
+      "exercises": {
+        "type": "String",
+        "example": "ベンチプレス, スクワット"
+      }
+    }
+  },
   "workout_debugAfterDeleteExercises": "📊 削除後の種目: {exercises}",
-  "@workout_debugAfterDeleteExercises": "[('description', 'デバッグ用削除後の種目一覧'), ('placeholders', [('exercises', [('type', 'String'), ('example', 'スクワット')])])]",
+  "@workout_debugAfterDeleteExercises": {
+    "description": "デバッグ用削除後の種目一覧",
+    "placeholders": {
+      "exercises": {
+        "type": "String",
+        "example": "スクワット"
+      }
+    }
+  },
   "workout_debugCurrentSetsCount": "📊 現在のセット数: {count}",
-  "@workout_debugCurrentSetsCount": "[('description', 'デバッグ用現在のセット数'), ('placeholders', [('count', [('type', 'int'), ('example', '5')])])]",
+  "@workout_debugCurrentSetsCount": {
+    "description": "デバッグ用現在のセット数",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
   "workout_debugAfterDeleteSetsCount": "📊 削除後のセット数: {count}",
-  "@workout_debugAfterDeleteSetsCount": "[('description', 'デバッグ用削除後のセット数'), ('placeholders', [('count', [('type', 'int'), ('example', '3')])])]",
+  "@workout_debugAfterDeleteSetsCount": {
+    "description": "デバッグ用削除後のセット数",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
   "workout_debugSetDetails": "🔍 セット詳細:",
   "workout_debugExercisesField": "⚠️ exercises フィールド検出: {type}",
-  "@workout_debugExercisesField": "[('description', 'デバッグ用exercisesフィールド型情報'), ('placeholders', [('type', [('type', 'String'), ('example', 'List<String>')])])]",
+  "@workout_debugExercisesField": {
+    "description": "デバッグ用exercisesフィールド型情報",
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "example": "List<String>"
+      }
+    }
+  },
   "workout_preventFullDelete": "⚠️ 全削除防止",
   "workout_exerciseDeletedWithCount": "「{exerciseName}」を削除しました（残り{remainingExercises}種目）",
-  "@workout_exerciseDeletedWithCount": "[('description', '種目削除成功メッセージ（残り種目数付き）'), ('placeholders', [('exerciseName', [('type', 'String'), ('example', 'ベンチプレス')]), ('remainingExercises', [('type', 'String'), ('example', 'スクワット, デッドリフト')])])]",
+  "@workout_exerciseDeletedWithCount": {
+    "description": "種目削除成功メッセージ（残り種目数付き）",
+    "placeholders": {
+      "exerciseName": {
+        "type": "String",
+        "example": "ベンチプレス"
+      },
+      "remainingExercises": {
+        "type": "String",
+        "example": "スクワット, デッドリフト"
+      }
+    }
+  },
   "workout_exerciseDeletedWithCountNum": "「{exerciseName}」を削除しました（残り{count}種目）",
-  "@workout_exerciseDeletedWithCountNum": "[('description', '種目削除成功メッセージ（残り種目数）'), ('placeholders', [('exerciseName', [('type', 'String'), ('example', 'ベンチプレス')]), ('count', [('type', 'int'), ('example', '2')])])]",
+  "@workout_exerciseDeletedWithCountNum": {
+    "description": "種目削除成功メッセージ（残り種目数）",
+    "placeholders": {
+      "exerciseName": {
+        "type": "String",
+        "example": "ベンチプレス"
+      },
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
   "ai_generationComplete": "AI生成完了! ({status})",
-  "@ai_generationComplete": "[('description', 'AI生成完了通知'), ('placeholders', [('status', [('type', 'String'), ('example', 'メニュー生成成功')])])]",
+  "@ai_generationComplete": {
+    "description": "AI生成完了通知",
+    "placeholders": {
+      "status": {
+        "type": "String",
+        "example": "メニュー生成成功"
+      }
+    }
+  },
   "ai_rewardEarned": "🎁 AI機能1回分を獲得しました!",
   "ai_predictionComplete": "AI予測完了! ({status})",
-  "@ai_predictionComplete": "[('description', 'AI予測完了通知'), ('placeholders', [('status', [('type', 'String'), ('example', '予測成功')])])]",
+  "@ai_predictionComplete": {
+    "description": "AI予測完了通知",
+    "placeholders": {
+      "status": {
+        "type": "String",
+        "example": "予測成功"
+      }
+    }
+  },
   "ai_analysisComplete": "AI分析完了! ({status})",
-  "@ai_analysisComplete": "[('description', 'AI分析完了通知'), ('placeholders', [('status', [('type', 'String'), ('example', '分析成功')])])]",
+  "@ai_analysisComplete": {
+    "description": "AI分析完了通知",
+    "placeholders": {
+      "status": {
+        "type": "String",
+        "example": "分析成功"
+      }
+    }
+  },
   "gym_reviewPostFailed": "レビュー投稿に失敗しました: {error}",
-  "@gym_reviewPostFailed": "[('description', 'レビュー投稿失敗メッセージ'), ('placeholders', [('error', [('type', 'String'), ('example', 'ネットワークエラー')])])]",
+  "@gym_reviewPostFailed": {
+    "description": "レビュー投稿失敗メッセージ",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "ネットワークエラー"
+      }
+    }
+  },
   "gym_premiumFeature": "Premium機能",
   "gym_reviewFeature": "• ジムレビューの投稿",
   "gym_aiUsageLimit": "• AI機能を月10回使用",
   "gym_unlimitedFavorites": "• お気に入り無制限",
   "gym_detailedStats": "• 詳細な混雑度統計",
-  "dev_uidCopied": "✅ UIDをコピーしました
-{uid}",
-  "@dev_uidCopied": "[('description', '開発者メニュー: UID コピー成功'), ('placeholders', [('uid', [('type', 'String'), ('example', 'abc123xyz')])])]",
+  "dev_uidCopied": "✅ UIDをコピーしました\n{uid}",
+  "@dev_uidCopied": {
+    "description": "開発者メニュー: UID コピー成功",
+    "placeholders": {
+      "uid": {
+        "type": "String",
+        "example": "abc123xyz"
+      }
+    }
+  },
   "dev_aiUsageReset": "✅ AI使用回数をリセットしました",
   "dev_resetFailed": "❌ リセット失敗: {error}",
-  "@dev_resetFailed": "[('description', '開発者メニュー: リセット失敗'), ('placeholders', [('error', [('type', 'String'), ('example', 'Network error')])])]",
-  "dev_onboardingReset": "✅ オンボーディングをリセットしました
-アプリを再起動してください",
-  "dev_phase1Reset": "✅ Phase 1機能をすべてリセットしました
-アプリを再起動してください",
+  "@dev_resetFailed": {
+    "description": "開発者メニュー: リセット失敗",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+  "dev_onboardingReset": "✅ オンボーディングをリセットしました\nアプリを再起動してください",
+  "dev_phase1Reset": "✅ Phase 1機能をすべてリセットしました\nアプリを再起動してください",
   "dev_resetAiUsage": "AI使用回数をリセット",
   "dev_resetOnboarding": "オンボーディングをリセット",
   "dev_resetPhase1": "Phase 1機能をすべてリセット",
   "workout_aiCoachLoaded": "AIコーチから{count}種目を読み込みました",
-  "@workout_aiCoachLoaded": "[('description', 'Message shown when exercises are loaded from AI Coach'), ('placeholders', [('count', [('type', 'int'), ('example', '5')])])]",
+  "@workout_aiCoachLoaded": {
+    "description": "Message shown when exercises are loaded from AI Coach",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
   "workout_restDurationSeconds": "{seconds}秒",
-  "@workout_restDurationSeconds": "[('description', 'Rest duration in seconds'), ('placeholders', [('seconds', [('type', 'int'), ('example', '60')])])]",
+  "@workout_restDurationSeconds": {
+    "description": "Rest duration in seconds",
+    "placeholders": {
+      "seconds": {
+        "type": "int",
+        "example": "60"
+      }
+    }
+  },
   "workout_setsCopiedCount": "{count}セットをコピーしました",
-  "@workout_setsCopiedCount": "[('description', 'Message shown when sets are copied'), ('placeholders', [('count', [('type', 'int'), ('example', '3')])])]",
+  "@workout_setsCopiedCount": {
+    "description": "Message shown when sets are copied",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
   "workout_restSeconds": "休憩 {seconds}秒",
-  "@workout_restSeconds": "[('description', 'Rest time display in seconds'), ('placeholders', [('seconds', [('type', 'int'), ('example', '60')])])]",
+  "@workout_restSeconds": {
+    "description": "Rest time display in seconds",
+    "placeholders": {
+      "seconds": {
+        "type": "int",
+        "example": "60"
+      }
+    }
+  },
   "workout_addCustomExercise": "種目を追加（カスタム）",
-  "@workout_addCustomExercise": "[('description', 'Button label to add custom exercise')]",
+  "@workout_addCustomExercise": {
+    "description": "Button label to add custom exercise"
+  },
   "calculators_title": "計算ツール",
-  "@calculators_title": "[('description', 'Title for calculators screen')]",
+  "@calculators_title": {
+    "description": "Title for calculators screen"
+  },
   "calculators_invalidInput": "有効な重量と回数を入力してください",
-  "@calculators_invalidInput": "[('description', 'Error message for invalid weight and reps input')]",
+  "@calculators_invalidInput": {
+    "description": "Error message for invalid weight and reps input"
+  },
   "calculators_oneRMCalculator": "1RM計算機",
-  "@calculators_oneRMCalculator": "[('description', 'Title for 1RM calculator section')]",
-  "calculators_oneRMDescription": "1RM (1 Rep Max) は、1回だけ持ち上げられる最大重量です。
-Epley式を使用して推定1RMを計算します。",
-  "@calculators_oneRMDescription": "[('description', 'Description of 1RM calculator using Epley formula')]",
+  "@calculators_oneRMCalculator": {
+    "description": "Title for 1RM calculator section"
+  },
+  "calculators_oneRMDescription": "1RM (1 Rep Max) は、1回だけ持ち上げられる最大重量です。\nEpley式を使用して推定1RMを計算します。",
+  "@calculators_oneRMDescription": {
+    "description": "Description of 1RM calculator using Epley formula"
+  },
   "calculators_barWeightError": "バー重量 ({barWeight}kg) より大きい重量を入力してください",
-  "@calculators_barWeightError": "[('description', 'Error message when entered weight is less than bar weight'), ('placeholders', [('barWeight', [('type', 'double'), ('format', 'decimalPattern'), ('example', '20.0')])])]",
+  "@calculators_barWeightError": {
+    "description": "Error message when entered weight is less than bar weight",
+    "placeholders": {
+      "barWeight": {
+        "type": "double",
+        "format": "decimalPattern",
+        "example": "20.0"
+      }
+    }
+  },
   "invite_registrationComplete": "🎉 登録完了！",
-  "@invite_registrationComplete": "[('description', 'Success message title when invitation code is registered')]",
+  "@invite_registrationComplete": {
+    "description": "Success message title when invitation code is registered"
+  },
   "invite_codeApplied": "招待コードが正常に適用されました！",
-  "@invite_codeApplied": "[('description', 'Success message when invitation code is applied')]",
+  "@invite_codeApplied": {
+    "description": "Success message when invitation code is applied"
+  },
   "invite_yourReward": "✅ あなた: AI使用回数 +5回",
-  "@invite_yourReward": "[('description', 'Your reward for using invitation code')]",
+  "@invite_yourReward": {
+    "description": "Your reward for using invitation code"
+  },
   "invite_friendReward": "✅ 友達: AI使用回数 +3回",
-  "@invite_friendReward": "[('description', "Friend's reward for invitation code")]",
+  "@invite_friendReward": {
+    "description": "Friend's reward for invitation code"
+  },
   "invite_benefitsApplied": "特典はすぐに反映されます！",
-  "@invite_benefitsApplied": "[('description', 'Message that benefits are applied immediately')]",
+  "@invite_benefitsApplied": {
+    "description": "Message that benefits are applied immediately"
+  },
   "gym_checkedIn": "{gymName}にチェックインしました",
-  "@gym_checkedIn": "[('description', 'Message shown when checked in to a gym'), ('placeholders', [('gymName', [('type', 'String'), ('example', "Gold's Gym")])])]",
+  "@gym_checkedIn": {
+    "description": "Message shown when checked in to a gym",
+    "placeholders": {
+      "gymName": {
+        "type": "String",
+        "example": "Gold's Gym"
+      }
+    }
+  },
   "aiAddon_purchaseConfirm": "AI追加パックを購入しますか？",
-  "@aiAddon_purchaseConfirm": "[('description', 'Confirmation dialog title for AI addon purchase')]",
-  "aiAddon_packDetails": "AI追加パック（5回分）
-料金: ¥300",
-  "@aiAddon_packDetails": "[('description', 'AI addon pack details with price')]",
+  "@aiAddon_purchaseConfirm": {
+    "description": "Confirmation dialog title for AI addon purchase"
+  },
+  "aiAddon_packDetails": "AI追加パック（5回分）\n料金: ¥300",
+  "@aiAddon_packDetails": {
+    "description": "AI addon pack details with price"
+  },
   "aiAddon_purchase": "購入する",
-  "@aiAddon_purchase": "[('description', 'Purchase button label')]",
-  "aiAddon_purchaseFailed": "購入処理に失敗しました。
-もう一度お試しください。",
-  "@aiAddon_purchaseFailed": "[('description', 'Error message when purchase fails')]",
+  "@aiAddon_purchase": {
+    "description": "Purchase button label"
+  },
+  "aiAddon_purchaseFailed": "購入処理に失敗しました。\nもう一度お試しください。",
+  "@aiAddon_purchaseFailed": {
+    "description": "Error message when purchase fails"
+  },
   "weeklyReports_recommendation": "週次レコメンデーション",
-  "@weeklyReports_recommendation": "[('description', 'Title for weekly recommendation feature')]",
+  "@weeklyReports_recommendation": {
+    "description": "Title for weekly recommendation feature"
+  },
   "weeklyReports_recommendationSubtitle": "推奨曜日とメニュー提案を表示",
-  "@weeklyReports_recommendationSubtitle": "[('description', 'Subtitle explaining weekly recommendation feature')]",
+  "@weeklyReports_recommendationSubtitle": {
+    "description": "Subtitle explaining weekly recommendation feature"
+  },
   "bodyPart_days7": "7日",
-  "@bodyPart_days7": "[('description', '7 days period selector')]",
+  "@bodyPart_days7": {
+    "description": "7 days period selector"
+  },
   "bodyPart_days30": "30日",
-  "@bodyPart_days30": "[('description', '30 days period selector')]",
+  "@bodyPart_days30": {
+    "description": "30 days period selector"
+  },
   "bodyPart_days90": "90日",
-  "@bodyPart_days90": "[('description', '90 days period selector')]",
+  "@bodyPart_days90": {
+    "description": "90 days period selector"
+  },
   "campaign_templateCopied": "✅ テンプレートをコピーしました！",
-  "@campaign_templateCopied": "[('description', 'Success message when campaign template is copied')]",
+  "@campaign_templateCopied": {
+    "description": "Success message when campaign template is copied"
+  },
   "campaign_snsShare": "📱 SNSでシェア",
-  "@campaign_snsShare": "[('description', 'Title for SNS share screen')]",
+  "@campaign_snsShare": {
+    "description": "Title for SNS share screen"
+  },
   "campaign_copyTemplate": "テンプレートをコピー",
-  "@campaign_copyTemplate": "[('description', 'Button label to copy template')]",
+  "@campaign_copyTemplate": {
+    "description": "Button label to copy template"
+  },
   "partner_friendRequestSent": "友達申請を送信しました",
-  "@partner_friendRequestSent": "[('description', 'Success message when friend request is sent')]",
+  "@partner_friendRequestSent": {
+    "description": "Success message when friend request is sent"
+  },
   "partner_friendRequiredForMessage": "友達になってからメッセージを送信できます",
-  "@partner_friendRequiredForMessage": "[('description', 'Message explaining that friendship is required to send messages')]",
+  "@partner_friendRequiredForMessage": {
+    "description": "Message explaining that friendship is required to send messages"
+  },
   "partner_detailTitle": "パートナー詳細",
-  "@partner_detailTitle": "[('description', 'Title for partner detail screen')]",
+  "@partner_detailTitle": {
+    "description": "Title for partner detail screen"
+  },
   "partner_sendFriendRequest": "友達申請",
-  "@partner_sendFriendRequest": "[('description', 'Button label to send friend request')]",
+  "@partner_sendFriendRequest": {
+    "description": "Button label to send friend request"
+  },
   "achievements_loadFailed": "バッジの読み込みに失敗しました: {error}",
-  "@achievements_loadFailed": "[('description', 'Error message when badge loading fails'), ('placeholders', [('error', [('type', 'String'), ('example', 'Network error')])])]",
+  "@achievements_loadFailed": {
+    "description": "Error message when badge loading fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
   "achievements_title": "達成バッジ",
-  "@achievements_title": "[('description', 'Title for achievements screen')]",
+  "@achievements_title": {
+    "description": "Title for achievements screen"
+  },
   "achievements_noBadges": "バッジがありません",
-  "@achievements_noBadges": "[('description', 'Message when user has no badges')]",
+  "@achievements_noBadges": {
+    "description": "Message when user has no badges"
+  },
   "personalFactors_saved": "✅ 保存完了！現在のPFM: {pfm}x",
-  "@personalFactors_saved": "[('description', 'Success message after saving personal factors'), ('placeholders', [('pfm', [('type', 'String'), ('example', '1.23')])])]",
+  "@personalFactors_saved": {
+    "description": "Success message after saving personal factors",
+    "placeholders": {
+      "pfm": {
+        "type": "String",
+        "example": "1.23"
+      }
+    }
+  },
   "personalFactors_saveError": "❌ 保存エラー: {error}",
-  "@personalFactors_saveError": "[('description', 'Error message when saving fails'), ('placeholders', [('error', [('type', 'String'), ('example', 'Network error')])])]",
+  "@personalFactors_saveError": {
+    "description": "Error message when saving fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
   "personalFactors_title": "🔬 個人要因設定",
-  "@personalFactors_title": "[('description', 'Title for personal factors settings screen')]",
+  "@personalFactors_title": {
+    "description": "Title for personal factors settings screen"
+  },
   "favorites_removeConfirm": "「{gymName}」をお気に入りから削除しますか？",
-  "@favorites_removeConfirm": "[('description', 'Confirmation dialog to remove gym from favorites'), ('placeholders', [('gymName', [('type', 'String'), ('example', "Gold's Gym")])])]",
+  "@favorites_removeConfirm": {
+    "description": "Confirmation dialog to remove gym from favorites",
+    "placeholders": {
+      "gymName": {
+        "type": "String",
+        "example": "Gold's Gym"
+      }
+    }
+  },
   "favorites_removed": "{gymName} をお気に入りから削除しました",
-  "@favorites_removed": "[('description', 'Success message after removing from favorites'), ('placeholders', [('gymName', [('type', 'String'), ('example', "Gold's Gym")])])]",
+  "@favorites_removed": {
+    "description": "Success message after removing from favorites",
+    "placeholders": {
+      "gymName": {
+        "type": "String",
+        "example": "Gold's Gym"
+      }
+    }
+  },
   "favorites_removeAll": "すべて削除",
-  "@favorites_removeAll": "[('description', 'Button label to remove all favorites')]",
+  "@favorites_removeAll": {
+    "description": "Button label to remove all favorites"
+  },
   "gymDetail_shareFailed": "シェアに失敗しました: {error}",
-  "@gymDetail_shareFailed": "[('description', 'Error message when sharing fails'), ('placeholders', [('error', [('type', 'String'), ('example', 'No share target')])])]",
+  "@gymDetail_shareFailed": {
+    "description": "Error message when sharing fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "No share target"
+      }
+    }
+  },
   "gymDetail_trophy": "🏆",
-  "@gymDetail_trophy": "[('description', 'Trophy emoji')]",
+  "@gymDetail_trophy": {
+    "description": "Trophy emoji"
+  },
   "gymDetail_error": "エラー: {error}",
-  "@gymDetail_error": "[('description', 'Generic error message'), ('placeholders', [('error', [('type', 'String'), ('example', 'Unknown error')])])]",
+  "@gymDetail_error": {
+    "description": "Generic error message",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Unknown error"
+      }
+    }
+  },
   "chat_blockConfirm": "{name}さんをブロックしますか？",
-  "@chat_blockConfirm": "[('description', 'Confirmation dialog to block a user'), ('placeholders', [('name', [('type', 'String'), ('example', '田中太郎')])])]",
+  "@chat_blockConfirm": {
+    "description": "Confirmation dialog to block a user",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "田中太郎"
+      }
+    }
+  },
   "chat_blockButton": "ブロック",
-  "@chat_blockButton": "[('description', 'Block button label')]",
+  "@chat_blockButton": {
+    "description": "Block button label"
+  },
   "chat_blocked": "ブロックしました",
-  "@chat_blocked": "[('description', 'Success message after blocking')]",
+  "@chat_blocked": {
+    "description": "Success message after blocking"
+  },
   "chat_reported": "通報を受け付けました。ご協力ありがとうございます。",
-  "@chat_reported": "[('description', 'Success message after reporting')]",
+  "@chat_reported": {
+    "description": "Success message after reporting"
+  },
   "chat_blockAction": "ブロックする",
-  "@chat_blockAction": "[('description', 'Block action label')]",
+  "@chat_blockAction": {
+    "description": "Block action label"
+  },
   "debug_title": "デバッグログ",
-  "@debug_title": "[('description', 'Debug log screen title')]",
+  "@debug_title": {
+    "description": "Debug log screen title"
+  },
   "debug_logCopied": "ログをクリップボードにコピーしました",
-  "@debug_logCopied": "[('description', 'Success message when log is copied')]",
+  "@debug_logCopied": {
+    "description": "Success message when log is copied"
+  },
   "debug_logCleared": "ログをクリアしました",
-  "@debug_logCleared": "[('description', 'Success message when log is cleared')]",
+  "@debug_logCleared": {
+    "description": "Success message when log is cleared"
+  },
   "po_dashboardTitle": "PO管理ダッシュボード",
-  "@po_dashboardTitle": "[('description', 'PO management dashboard title')]",
+  "@po_dashboardTitle": {
+    "description": "PO management dashboard title"
+  },
   "po_memberManagementComingSoon": "会員管理画面は次のフェーズで実装予定",
-  "@po_memberManagementComingSoon": "[('description', 'Coming soon message for member management')]",
+  "@po_memberManagementComingSoon": {
+    "description": "Coming soon message for member management"
+  },
   "po_sessionManagementComingSoon": "セッション管理画面は次のフェーズで実装予定",
-  "@po_sessionManagementComingSoon": "[('description', 'Coming soon message for session management')]",
+  "@po_sessionManagementComingSoon": {
+    "description": "Coming soon message for session management"
+  },
   "po_analyticsComingSoon": "分析画面は次のフェーズで実装予定",
-  "@po_analyticsComingSoon": "[('description', 'Coming soon message for analytics')]",
+  "@po_analyticsComingSoon": {
+    "description": "Coming soon message for analytics"
+  },
   "partnerPhotos_uploadSuccess": "✅ {count}枚の画像をアップロードしました！",
-  "@partnerPhotos_uploadSuccess": "[('description', 'Success message after uploading photos'), ('placeholders', [('count', [('type', 'int'), ('example', '5')])])]",
+  "@partnerPhotos_uploadSuccess": {
+    "description": "Success message after uploading photos",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
   "partnerPhotos_uploadFailed": "❌ アップロード失敗: {error}",
-  "@partnerPhotos_uploadFailed": "[('description', 'Error message when upload fails'), ('placeholders', [('error', [('type', 'String'), ('example', 'Network error')])])]",
+  "@partnerPhotos_uploadFailed": {
+    "description": "Error message when upload fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
   "partnerPhotos_deleteConfirm": "画像を削除",
-  "@partnerPhotos_deleteConfirm": "[('description', 'Delete image confirmation title')]",
+  "@partnerPhotos_deleteConfirm": {
+    "description": "Delete image confirmation title"
+  },
   "partnerPhotos_title": "店舗画像管理",
-  "@partnerPhotos_title": "[('description', 'Store photo management screen title')]",
+  "@partnerPhotos_title": {
+    "description": "Store photo management screen title"
+  },
   "home_streakTitle": "7日連続達成！",
-  "home_streakMessage": "おめでとうございます！
-7日間連続でトレーニングを記録しました。
-この調子で続けましょう！💪",
-  "home_milestoneMessage": "すごい！マイルストーン達成です！
-この調子で続けていきましょう！💪",
+  "home_streakMessage": "おめでとうございます！\n7日間連続でトレーニングを記録しました。\nこの調子で続けましょう！💪",
+  "home_milestoneMessage": "すごい！マイルストーン達成です！\nこの調子で続けていきましょう！💪",
   "home_tapToShowStats": "タップして詳細統計を表示",
   "home_aiSuggestionTitle": "💡 今日のAI提案",
-  "home_aiSuggestionPrompt": "あなた専用のトレーニングメニューを
-AIが科学的に分析します",
+  "home_aiSuggestionPrompt": "あなた専用のトレーニングメニューを\nAIが科学的に分析します",
   "home_currentStreakDays": "連続 {days} 日",
-  "@home_currentStreakDays": "[('placeholders', [('days', [('type', 'int')])])]",
+  "@home_currentStreakDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
   "home_streakRecording": "{days}日連続記録中！",
-  "@home_streakRecording": "[('placeholders', [('days', [('type', 'int')])])]",
+  "@home_streakRecording": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
   "home_weeklyProgressPercent": "{percent}% 達成",
-  "@home_weeklyProgressPercent": "[('placeholders', [('percent', [('type', 'int')])])]",
-  "home_recordPrompt": "トレーニングを記録して、
-進捗を可視化しましょう",
+  "@home_weeklyProgressPercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "home_recordPrompt": "トレーニングを記録して、\n進捗を可視化しましょう",
   "subscription_restore": "Restore",
   "subscription_lifetimeProPlan": "永年Proプラン（∞）",
   "subscription_lifetimePlanDescription": "AI機能無制限 | 広告なし | すべての機能を永久利用",
@@ -3695,19 +4653,52 @@ AIが科学的に分析します",
   "subscription_cancelInstruction3": "3. 「サブスクリプション」をタップ",
   "profile_referralBonusTitle": "🎁 紹介特典",
   "profile_referralBonusHint": "💡 友達がこのコードを入力すると、両方に特典が届きます！",
-  "profile_referralShareMessage": "GYM MATCHで一緒にトレーニングしませんか？\n\n紹介コード: {referralCode}\nAI使用回数3回がもらえます！\n\nhttps://gym-match-e560d.web.app",
-  "@profile_referralShareMessage": "[('placeholders', [('referralCode', [('type', 'String')])])]",
+  "profile_referralShareMessage": "GYM MATCHで一緒にトレーニングしませんか？\\n\\n紹介コード: {referralCode}\\nAI使用回数3回がもらえます！\\n\\nhttps://gym-match-e560d.web.app",
+  "@profile_referralShareMessage": {
+    "placeholders": {
+      "referralCode": {
+        "type": "String"
+      }
+    }
+  },
   "profile_errorMessage": "❌ エラー: {error}",
-  "@profile_errorMessage": "[('placeholders', [('error', [('type', 'String')])])]",
+  "@profile_errorMessage": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "profile_rewardItem": "{title}: {reward}",
-  "@profile_rewardItem": "[('placeholders', [('title', [('type', 'String')]), ('reward', [('type', 'String')])])]",
+  "@profile_rewardItem": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "reward": {
+        "type": "String"
+      }
+    }
+  },
   "profile_defaultUsername": "トレーニングユーザー",
   "profile_defaultBio": "GYM MATCHへようこそ",
   "profile_referralRewardDescription": "AI x5回 + 紹介された人もAI x3回",
   "profile_premiumOnlyFeature": "{featureName}は有料プラン会員限定の機能です。",
-  "@profile_premiumOnlyFeature": "[('placeholders', [('featureName', [('type', 'String')])])]",
-  "profile_featureInDevelopment": "{featureName}は現在開発中です。\n次回のアップデートでご利用いただけます。",
-  "@profile_featureInDevelopment": "[('placeholders', [('featureName', [('type', 'String')])])]",
+  "@profile_premiumOnlyFeature": {
+    "placeholders": {
+      "featureName": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_featureInDevelopment": "{featureName}は現在開発中です。\\n次回のアップデートでご利用いただけます。",
+  "@profile_featureInDevelopment": {
+    "placeholders": {
+      "featureName": {
+        "type": "String"
+      }
+    }
+  },
   "partnerCampaign_imageLoadError": "画像の読み込みに失敗しました: {error}",
   "partnerCampaign_saved": "✅ キャンペーンを保存しました！ユーザーアプリに即反映されます",
   "partnerCampaign_saveError": "❌ 保存に失敗しました: {error}",
@@ -3742,8 +4733,7 @@ AIが科学的に分析します",
   "trainerRecords_reload": "再読み込み",
   "poMembers_allMembers": "全会員",
   "poMembers_dormant": "休眠中",
-  "profileEdit_imageLoadError": "画像の読み込みに失敗しました
-{error}",
+  "profileEdit_imageLoadError": "画像の読み込みに失敗しました\n{error}",
   "profileEdit_proOnlyFeature": "Proプラン限定機能",
   "profile_termsAndSubscription": "サービス利用条件・サブスクリプション",
   "profile_privacyPolicy": "個人情報の取扱い",
@@ -3791,9 +4781,9 @@ AIが科学的に分析します",
   "announcementType_newEquipment": "新規設備",
   "announcementType_hours": "営業時間",
   "reward_adCreditEarned": "AIクレジット1回分を獲得しました！",
+  "ai_menuGenerationError": "メニュー生成に失敗しました",
   "subscriptionFeatureAI20": "🤖 AI機能月20回（AIコーチ・成長予測・効果分析合計）",
   "subscriptionFeatureGrowthAnalysis": "📈 成長予測と効果分析",
   "subscriptionFeatureAIUnlimited": "🤖 AI機能無制限（AIコーチ・成長予測・効果分析）",
-  "ai_menuGenerationError": "メニュー生成に失敗しました",
   "paywallGrowthPredictionMessage": "あなたの成長予測を見逃さないために"
 }

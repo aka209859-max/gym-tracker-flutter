@@ -46,7 +46,14 @@
   "reps": "veces",
   "weight": "peso",
   "weightKg": "{weight}kg",
-  "@weightKg": "[('placeholders', [('weight', [('type', 'double'), ('format', 'decimalPattern')])])]",
+  "@weightKg": {
+    "placeholders": {
+      "weight": {
+        "type": "double",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "restTime": "Tiempo de descanso",
   "duration": "tiempo",
   "distance": "distancia",
@@ -589,7 +596,7 @@
   "purchaseCompleted": "¡Tu compra de {planName} se ha completado!",
   "planSwitched": "¡Cambiado a {planName}!",
   "changeInAppStore": "Cambie a {planName} en la configuración de su App Store",
-  "appStoreInstructions": "1. Abre la app Ajustes en tu iPhone. 2. Pulsa [ID de Apple] en la parte superior. 3. Pulsa "Suscripciones". 4. Selecciona "GYM MATCH". 5. Selecciona el plan que desees.",
+  "appStoreInstructions": "1. Abre la app Ajustes en tu iPhone. 2. Pulsa [ID de Apple] en la parte superior. 3. Pulsa \"Suscripciones\". 4. Selecciona \"GYM MATCH\". 5. Selecciona el plan que desees.",
   "aiAddonPack": "Paquete complementario de IA",
   "purchaseAiAddon": "Comprar uso adicional de IA",
   "loadPlanError": "Error de carga del plan",
@@ -958,7 +965,13 @@
   "aiMenuRetryPrompt": "Generar el menú nuevamente.",
   "bodyPartBalance30Days": "Saldo de los últimos 30 días",
   "bodyPartBalanceDays": "Saldo de los últimos {days} días",
-  "@bodyPartBalanceDays": "[('placeholders', [('days', [('type', 'Object')])])]",
+  "@bodyPartBalanceDays": {
+    "placeholders": {
+      "days": {
+        "type": "Object"
+      }
+    }
+  },
   "buttonAdd": "suma",
   "buttonCancel": "Cancelar",
   "buttonClose": "cerca",
@@ -979,15 +992,33 @@
   "subscriptionDetailedStats": "Estadísticas detalladas de congestión",
   "subscriptionFreeFeatures": "Todas las funciones del plan gratuito",
   "subscriptionFreeTrialDays": "{days} día de prueba gratuita",
-  "@subscriptionFreeTrialDays": "[('placeholders', [('days', [('type', 'String')])])]",
+  "@subscriptionFreeTrialDays": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
   "subscriptionGrowthPrediction": "Previsión de crecimiento y análisis de impacto",
   "subscriptionGymReviews": "Envío de reseñas de gimnasios",
   "subscriptionMonthlyEquivalent": "Precio mensual ¥{price}",
-  "@subscriptionMonthlyEquivalent": "[('placeholders', [('price', [('type', 'String')])])]",
+  "@subscriptionMonthlyEquivalent": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
   "subscriptionNoAds": "Sin anuncios",
   "subscriptionPopularBadge": "Número 1 en popularidad",
   "subscriptionSavings": "¥{amount}¡Gran oferta!",
-  "@subscriptionSavings": "[('placeholders', [('amount', [('type', 'String')])])]",
+  "@subscriptionSavings": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "subscriptionStartFreeTrial": "Comience su prueba gratuita",
   "subscriptionUnlimitedFavorites": "Favoritos ilimitados",
   "workoutRepsLabel": "veces",
@@ -1104,7 +1135,7 @@
   "general_97925d41": "Motivación",
   "general_b08e3e55": "¡Gran oferta!",
   "workout_85f9fe6e": "Este día ya está registrado como día libre.",
-  "subscription_e965bd1e": "1. Abre la aplicación "Ajustes" en tu iPhone.",
+  "subscription_e965bd1e": "1. Abre la aplicación \"Ajustes\" en tu iPhone.",
   "workout_27e98563": "Con el plan gratuito, puedes usar la función de IA una vez viendo un anuncio de video.",
   "general_c8efbf80": "ℹ️ Primer Bono: Ya otorgado",
   "general_d837067a": "Aomori",
@@ -1205,7 +1236,7 @@
   "profile_09c89631": "💡 ¡Cuando tu amigo ingrese este código, ambos recibirán una recompensa!",
   "general_3ef233eb": "Shizuoka",
   "workout_5d109fc7": "Panel de estadísticas: Autenticación anónima exitosa",
-  "general_1e7b4bc4": "Esta es la pantalla de inicio de sesión exclusiva para administradores de órdenes de compra. Si tiene un código de acceso, inicie sesión desde la pestaña "Código de acceso".",
+  "general_1e7b4bc4": "Esta es la pantalla de inicio de sesión exclusiva para administradores de órdenes de compra. Si tiene un código de acceso, inicie sesión desde la pestaña \"Código de acceso\".",
   "general_e404b9b2": "Inicialización en segundo plano completada",
   "general_f6e9e28d": "Este fue un entrenamiento de alta intensidad. Necesitarás mucho descanso y buena nutrición. No te esfuerces demasiado y prioriza la recuperación.",
   "workout_cb9ef699": "💾 Guardar menú",
@@ -1329,7 +1360,7 @@
   "general_879adce1": "• No podrás enviar ni recibir mensajes.",
   "subscription_a9e04143": "Tipo de plan:",
   "workout_b23db97f": "Establezca un tiempo de descanso",
-  "general_38e0a1b9": "Insignia de "Reportero de multitudes"",
+  "general_38e0a1b9": "Insignia de \"Reportero de multitudes\"",
   "general_80e87040": "Entorno web: Mostrar anuncios simulados",
   "workout_61db805d": "Aumento real",
   "gym_a28954a8": "Entrenador personal",
@@ -1469,8 +1500,8 @@
   "general_5c1f42bf": "Hasta que esté completamente exhausto",
   "general_6c0544e0": "La mejor formación para ti",
   "general_a0f6a560": "Precio: ¥300",
-  "workout_684f2433": "Descripción[::]\s*",
-  "workout_8cd2b320": "(\d+)\s* veces",
+  "workout_684f2433": "Descripción[::]\\s*",
+  "workout_8cd2b320": "(\\d+)\\s* veces",
   "workout_9de8907b": "# Menú de entrenamiento con base científica",
   "general_8e53814f": "Kagoshima",
   "gym_dd5a565b": "Máquina de circuito",
@@ -1509,7 +1540,7 @@
   "general_a5612ca8": "¥980/mes por 30 sesiones al mes",
   "general_c051f8e9": "Envía un mensaje e inicia una conversación.",
   "gym_0edea1b7": "Texto principal",
-  "profile_a54b51da": "Aparecerá una insignia de "Visitantes permitidos" en la aplicación del usuario.",
+  "profile_a54b51da": "Aparecerá una insignia de \"Visitantes permitidos\" en la aplicación del usuario.",
   "workout_2375b9ab": "No se ha registrado su peso. Por favor, regístrelo.",
   "general_eb6619e3": "Entrenamiento de esta semana",
   "general_4b85b706": "Comprueba tu conexión de red",
@@ -1527,7 +1558,7 @@
   "profile_4347a89b": "Su suscripción se renovará automáticamente y se le cobrará automáticamente cada mes a menos que la cancele.",
   "exercise_f48ee2b4": "Presione hacia abajo con agarre inverso",
   "general_bb332935": "No se encontraron registros para eliminar",
-  "general_35e3ba11": "💡 Consejo: Ve a Ajustes de tu dispositivo → Aplicaciones → GYM MATCH → Cambiar Ubicación a "Siempre"",
+  "general_35e3ba11": "💡 Consejo: Ve a Ajustes de tu dispositivo → Aplicaciones → GYM MATCH → Cambiar Ubicación a \"Siempre\"",
   "general_84f02dd9": "esfuerzo supremo",
   "general_c312150e": "Prueba el Plan Pro",
   "general_e7627f41": "Titular del Plan Pro de por vida - Sin anuncios",
@@ -1589,7 +1620,7 @@
   "workout_e8d8ddef": "Después de tu entrenamiento, la IA analizará científicamente tu nivel de fatiga y te brindará un tiempo de recuperación óptimo y sugerencias de entrenamiento.",
   "workout_762fc148": "Tu nivel de fatiga se analiza científicamente en función de tus datos de entrenamiento.",
   "general_58b51061": "No tienes la autoridad para rechazar esta solicitud.",
-  "general_a07846c5": "Toque "Agregar a la pantalla de inicio" en el menú",
+  "general_a07846c5": "Toque \"Agregar a la pantalla de inicio\" en el menú",
   "gym_972e9a95": "Limpieza",
   "profile_a793420c": "Un plan pago desbloquea las siguientes funciones:",
   "gym_831d90bb": "Power Rack",
@@ -1858,7 +1889,7 @@
   "subscription_8232b2c6": "Encuentra un compañero de entrenamiento",
   "subscription_0cdfb519": "Temporalmente fuera de uso",
   "profile_4e1f5c12": "• Este servicio es de suscripción recurrente.",
-  "subscription_2675e97c": "3. Toca "Suscripciones".",
+  "subscription_2675e97c": "3. Toca \"Suscripciones\".",
   "general_3c2f1bee": "* Un código de invitación solo se puede usar una vez. * Los códigos ya utilizados por otros usuarios no son válidos.",
   "workout_20388583": "Ahorro...",
   "general_c6a1902b": "¡Comparte tus récords de entrenamiento en GYM MATCH! #GYMMATCH #récorddeentrenamientomuscular #gimnasio https://gym-match-e560d.web.app",
@@ -2014,10 +2045,10 @@
   "general_9afb9ad5": "Fiabilidad media",
   "profile_a479de60": "no especificado",
   "general_8b3d7068": "🚀 ¡Invita a más amigos y obtén más recompensas!",
-  "general_3ad25210": "Toca "Copiar plantilla"",
+  "general_3ad25210": "Toca \"Copiar plantilla\"",
   "general_5c408dba": "Hay un número moderado de personas",
   "general_40dd331a": "3. Has iniciado sesión con una cuenta de usuario diferente.",
-  "general_4da5e52b": "Regresa a la aplicación y toca "Publicado".",
+  "general_4da5e52b": "Regresa a la aplicación y toca \"Publicado\".",
   "general_fd5ea9a1": "Eliminar:",
   "workout_34d70475": "Número de segundos",
   "gym_6de2294c": "Club deportivo Konami Ikebukuro",
@@ -2252,7 +2283,7 @@
   "workout_e03f69fa": "Pieza faltante",
   "gym_ec2f08b5": "Un gimnasio abierto las 24 horas que atiende a una amplia gama de niveles de condición física, desde principiantes hasta atletas avanzados.",
   "workout_903c82de": "Conjunto básico",
-  "general_fb9d742c": "Cuando "realices el check-in" en la pantalla de detalles del gimnasio, tu historial se mostrará aquí.",
+  "general_fb9d742c": "Cuando \"realices el check-in\" en la pantalla de detalles del gimnasio, tu historial se mostrará aquí.",
   "workout_f00eef45": "Extensión de tríceps por encima de la cabeza",
   "general_94ebce72": "Escribe tu mensaje...",
   "general_168034dd": "Mensaje enviado exitosamente",
@@ -2412,7 +2443,7 @@
   "gym_2caec863": "Un popular estudio de entrenamiento grupal originario de los Estados Unidos.",
   "workout_da75109e": "Lo registré como día libre.",
   "general_7db7cd79": "élite",
-  "general_2474b23c": "Utilice "TestFlight Sandbox Billing" para realizar pruebas.",
+  "general_2474b23c": "Utilice \"TestFlight Sandbox Billing\" para realizar pruebas.",
   "general_f499f3a7": "Información del contrato",
   "exercise_1602d233": "Sentadilla búlgara",
   "workout_837b9b2e": "Detalles de la solicitud proporcionados en chino",
@@ -2491,7 +2522,7 @@
   "profile_81578c7e": "No se pudieron obtener los datos del archivo",
   "profile_29ca7fb7": "Precio de venta",
   "gym_58208487": "Un club deportivo integral al que puede asistir toda la familia. También hay una escuela infantil integral.",
-  "general_s": "[\s\-_&·]",
+  "general_s": "[\\s\\-_&·]",
   "general_07cf822c": "Saitama",
   "workout_f894e7b4": "➕ Crear un nuevo registro",
   "general_06bcf409": "Acceso rápido desde la pantalla de inicio",
@@ -2528,7 +2559,7 @@
   "gym_0be017ad": "Por favor, introduzca un título",
   "workout_a19f4e60": "Estocada",
   "profile_91e0eed0": "ubicación",
-  "subscription_32e26933": "4. Selecciona "GYM MATCH"",
+  "subscription_32e26933": "4. Selecciona \"GYM MATCH\"",
   "error_31ac752d": "Error al mostrar el anuncio. Espere un momento y vuelva a intentarlo.",
   "profile_780e92e8": "• Cualquier acción que interrumpa o interfiera con la funcionalidad de los servidores o la red de la aplicación.",
   "workout_4378d5d9": "¡Pasemos al siguiente conjunto! 💪",
@@ -2551,7 +2582,7 @@
   "general_2779463b": "Resultados del análisis de fatiga",
   "general_47a803a5": "Han pasado dos días desde tu último entrenamiento. ¿Te gustaría volver a entrenar hoy?",
   "workout_54f8ade3": "Ver días recomendados y sugerencias de menú",
-  "general_7458083c": "Seleccione "Agregar a la pantalla de inicio"",
+  "general_7458083c": "Seleccione \"Agregar a la pantalla de inicio\"",
   "general_67ea6ba1": "⏳ Análisis de IA: Llamada API...",
   "gym_15550205": "Gimnasio Muscle House",
   "general_5f560fbc": "👑¡Reportero de multitudes legendario!",
@@ -2581,7 +2612,7 @@
   "exercise_0afc8ed2": "Peso muerto rumano",
   "general_e965eb2c": "¿Cuál fue la intensidad general percibida del entrenamiento de hoy?",
   "general_08f3d852": "¡Empieza ahora!",
-  "workout_27f8dd3a": "(\d+)\s* conjunto",
+  "workout_27f8dd3a": "(\\d+)\\s* conjunto",
   "profile_5cd65c3e": "Por favor ingrese su mensaje",
   "bodyPart_c158cb15": "tríceps",
   "general_0f944350": "Oita",
@@ -2918,7 +2949,7 @@
   "autoGen_d363c8dd": "4-1-17 Suehiro, ciudad de Fujieda, prefectura de Shizuoka",
   "autoGen_96475ff8": "Paquete adicional de IA (5 veces)",
   "autoGen_b71ac08e": "Precio: ¥300",
-  "autoGen_1ea406c3": "¡Compré el paquete complementario de IA (5 veces)!\n",
+  "autoGen_1ea406c3": "¡Compré el paquete complementario de IA (5 veces)!\\n",
   "autoGen_7a59299a": "Este producto no está disponible actualmente.",
   "autoGen_031e7ade": "Restante: $tiempos restantes",
   "autoGen_9db89838": "• Las compras adicionales son válidas hasta fin de este mes.",
@@ -2933,14 +2964,14 @@
   "autoGen_20458277": "Ingrese su peso objetivo y calcularemos la cantidad de discos necesarios en cada lado de la barra.",
   "autoGen_56b65fc2": "Ingrese el peso total incluido el peso de la barra ($_barWeight kg)",
   "autoGen_201ea826": "No se requiere plato (solo barra)",
-  "autoGen_e9fe8032": "La cantidad de placas que se muestra es para un lado.\nConfigure la misma configuración en ambos lados.",
+  "autoGen_e9fe8032": "La cantidad de placas que se muestra es para un lado.\\nConfigure la misma configuración en ambos lados.",
   "autoGen_9ff70568": "¡Consigue una sesión de IA! (Reportar {result_reportCount} veces)",
   "autoGen_f0f0c7f4": "¡Solo quedan {nextMilestone_remaining} para tu próxima recompensa!",
-  "autoGen_24950e16": "No se muestra en las versiones de lanzamiento (versión de la App Store)\nDisponible solo en las versiones de TestFlight",
-  "autoGen_de9021b8": "Debido a la revisión de Apple, se ha eliminado la función de cambio de plan del menú de desarrollador.\n\n",
-  "autoGen_25deda5a": "Los cambios de plan solo son válidos para la facturación regular a través de RevenueCat.\n\n",
+  "autoGen_24950e16": "No se muestra en las versiones de lanzamiento (versión de la App Store)\\nDisponible solo en las versiones de TestFlight",
+  "autoGen_de9021b8": "Debido a la revisión de Apple, se ha eliminado la función de cambio de plan del menú de desarrollador.\\n\\n",
+  "autoGen_25deda5a": "Los cambios de plan solo son válidos para la facturación regular a través de RevenueCat.\\n\\n",
   "autoGen_5657d91f": "• Visita de incorporación",
-  "autoGen_9c5698dd": "• Diálogo de solicitud de revisión\n",
+  "autoGen_9c5698dd": "• Diálogo de solicitud de revisión\\n",
   "autoGen_91c9449a": "1. Puedes cambiar a cualquier plan utilizando el botón de arriba.",
   "autoGen_734a59b9": "2. Si cambia al plan Pro, todas las funciones estarán disponibles.",
   "autoGen_a0b3c8d7": "3. La cantidad de veces que puedes usar la IA se restablecerá automáticamente cada mes.",
@@ -2950,11 +2981,11 @@
   "autoGen_6627b2ca": "Esta fue una sesión de entrenamiento muy intensa. Hoy recomiendo reposo absoluto. Prioriza el sueño, la nutrición y los estiramientos.",
   "autoGen_6fc271f8": "$totalSets Conjuntos",
   "autoGen_365b72d7": "Le brindaremos un tiempo de recuperación óptimo y asesoramiento.",
-  "autoGen_e177a676": "¿Quieres eliminar "{gym_name}" de tus favoritos?",
+  "autoGen_e177a676": "¿Quieres eliminar \"{gym_name}\" de tus favoritos?",
   "autoGen_298342bb": "{gym_name} ha sido eliminado de tus favoritos",
   "autoGen_248390f0": "Gimnasios favoritos ({favoriteGyms_length})",
   "autoGen_8413b8f0": "Objetivo {goal_period__GoalPeriod_weekly_AppLocalizations_ofcontext_thisWeek__AppLocalizations_ofcontext_thisMonth}",
-  "autoGen_799ab9f4": "¿Desea eliminar "$goalName"?\nEsta acción no se puede deshacer.",
+  "autoGen_799ab9f4": "¿Desea eliminar \"$goalName\"?\\nEsta acción no se puede deshacer.",
   "autoGen_2a5ffab4": "Editar {goal_name}",
   "autoGen_1605acad": "Se registró en {widget_gym_name}",
   "autoGen_51d4147a": "Actualizado hace $minutesAgo minutos atrás",
@@ -2963,21 +2994,21 @@
   "autoGen_88e64c29": "Tiempos restantes de IA: $remainingCredits veces",
   "autoGen_9cabffba": "La IA analizará científicamente tu menú de entrenamiento personalizado.",
   "autoGen_5ff6013e": "Han pasado dos días desde tu último entrenamiento. ¿Te gustaría volver a entrenar hoy?",
-  "autoGen_e199031a": "Ha pasado un tiempo desde la última vez que registraste un entrenamiento.\n¿Por qué no empezar de nuevo?",
+  "autoGen_e199031a": "Ha pasado un tiempo desde la última vez que registraste un entrenamiento.\\n¿Por qué no empezar de nuevo?",
   "autoGen_16ea699e": "Registra tu entrenamiento y visualiza tu progreso",
   "autoGen_62bb229b": "🏋️ Visualización de peso: $exerciseName - peso: $weight, isBodyweightMode: $isBodyweightMode, isAbs: $isAbs",
   "autoGen_cd7a5e77": "📋 Preparar conjunto adicional (mediante el botón +): $exerciseName",
-  "autoGen_c676bfd2": "¿Desea eliminar la grabación de "$exerciseName"?\nEsta acción no se puede deshacer.",
-  "autoGen_3ff76bd8": ""$exerciseName" se ha eliminado (quedan {totalRemainingExercises})",
-  "autoGen_a215dfab": "0-1: Descanso\n2-3: Ejercicio ligero\n4-6: Ejercicio moderado\n7-8: Ejercicio duro\n9-10: Esfuerzo máximo",
+  "autoGen_c676bfd2": "¿Desea eliminar la grabación de \"$exerciseName\"?\\nEsta acción no se puede deshacer.",
+  "autoGen_3ff76bd8": "\"$exerciseName\" se ha eliminado (quedan {totalRemainingExercises})",
+  "autoGen_a215dfab": "0-1: Descanso\\n2-3: Ejercicio ligero\\n4-6: Ejercicio moderado\\n7-8: Ejercicio duro\\n9-10: Esfuerzo máximo",
   "autoGen_e5d37f36": "$recoveryHours horas",
-  "autoGen_9beb17d9": "[Análisis básico]\n$baseAdvice",
-  "autoGen_71f910d6": "[Análisis ACWR]\n$acwrAdvice",
+  "autoGen_9beb17d9": "[Análisis básico]\\n$baseAdvice",
+  "autoGen_71f910d6": "[Análisis ACWR]\\n$acwrAdvice",
   "autoGen_838efe8a": "{goal_daysRemaining} días restantes | Mantener el ritmo actual",
   "autoGen_9bae24d2": "Su código de referencia: $_referralCode",
   "autoGen_d0688916": "Invitador: 1 paquete adicional de IA (5 veces, valor de ¥300)",
-  "autoGen_b8db302a": "¡Entrenemos juntos en GYM MATCH! Código de invitación: $_referralCode\n\n",
-  "autoGen_f4f68181": "{AppLocalizations_ofcontext_searchGym}\n*La información de ubicación se utiliza solo para búsquedas y no se guarda.",
+  "autoGen_b8db302a": "¡Entrenemos juntos en GYM MATCH! Código de invitación: $_referralCode\\n\\n",
+  "autoGen_f4f68181": "{AppLocalizations_ofcontext_searchGym}\\n*La información de ubicación se utiliza solo para búsquedas y no se guarda.",
   "autoGen_4087785c": "⏱️ Tiempo de espera de la API de Google Places: $e",
   "autoGen_d014a7b1": "ℹ️ 0 resultados (quizás no haya gimnasios en esta zona)",
   "autoGen_e197bc84": "{gyms_length} gimnasios encontrados",
@@ -2988,25 +3019,25 @@
   "autoGen_97fc7921": "Graba tu primer entrenamiento",
   "autoGen_98bff4f1": "Complete el formulario de arriba y aparecerá una vista previa aquí",
   "autoGen_66304a49": "Sube fotos del ambiente, las máquinas y el equipo de tu tienda.",
-  "autoGen_78d3c5fd": "*Si opera varias tiendas, configure una dirección de correo electrónico diferente para cada tienda. \n*Las notificaciones de reserva se envían actualmente a través de Firebase Functions (se requiere configuración por separado).",
+  "autoGen_78d3c5fd": "*Si opera varias tiendas, configure una dirección de correo electrónico diferente para cada tienda. \\n*Las notificaciones de reserva se envían actualmente a través de Firebase Functions (se requiere configuración por separado).",
   "autoGen_5f66300d": "Frecuencia de cambio: Alta (se recomiendan actualizaciones diarias)",
   "autoGen_47b8a545": "<25 años: 0,95x, 40-50 años: 1,05x, 50+ años: 1,10x",
   "autoGen_f9998737": "<1 año: 1,10x, 3-5 años: 0,95x, 5+ años: 0,90x",
   "autoGen_99e6fba7": "+5% por cada unidad (350ml de cerveza ≒ 1,4 unidades)",
   "autoGen_2b6b9ab2": "El Multiplicador de Factores Personales (PFM) ajusta la susceptibilidad de un individuo a la fatiga integrando cinco factores: edad, experiencia, sueño, nutrición y alcohol.",
-  "autoGen_38fecd64": "Elementos que cambian con poca frecuencia:\n",
+  "autoGen_38fecd64": "Elementos que cambian con poca frecuencia:\\n",
   "autoGen_ecb9080a": "• Edad: Cambios en la capacidad de recuperación con la edad.",
   "autoGen_b9c37a72": "Estos son factores que cambian diariamente:",
-  "autoGen_fb6e8bd2": "• Duración del sueño: calidad de la recuperación\n",
+  "autoGen_fb6e8bd2": "• Duración del sueño: calidad de la recuperación\\n",
   "autoGen_b905afe2": "• Ingesta de proteínas: componentes básicos para la recuperación muscular",
   "autoGen_43279a59": "• Factores estáticos: Una vez cada pocos meses",
   "autoGen_9772ef29": "Instrucción individualizada por entrenadores profesionales",
   "autoGen_c3070099": "📋 Rastreo de pila: $stackTrace",
   "autoGen_b82404b5": "¿Te gustaría entrenar con nosotros en GYM MATCH?",
-  "autoGen_6738f579": "Código de referencia: $referralCode\n",
-  "autoGen_db4ebdd3": "¡Recibirás 3 usos de IA!\n\n",
+  "autoGen_6738f579": "Código de referencia: $referralCode\\n",
+  "autoGen_db4ebdd3": "¡Recibirás 3 usos de IA!\\n\\n",
   "autoGen_dee40980": "$featureName es una función disponible solo para miembros del plan pago.",
-  "autoGen_1d067291": "$featureName está actualmente en desarrollo.\nEstará disponible en la próxima actualización.",
+  "autoGen_1d067291": "$featureName está actualmente en desarrollo.\\nEstará disponible en la próxima actualización.",
   "autoGen_8e38c4b2": "¡Ingresa el código de referencia de tu amigo para recibir beneficios especiales!",
   "autoGen_1cd8d542": "* Un código de invitación solo se puede utilizar una vez. * Los códigos ya utilizados por otros usuarios no son válidos.",
   "autoGen_8bc67a22": "* Después de hacer su reserva, la tienda se pondrá en contacto con usted para confirmarla. * Esta reserva es provisional. Su reserva se confirmará una vez que la tienda la confirme.",
@@ -3016,42 +3047,42 @@
   "autoGen_5f00a229": "• Periodo de prueba gratuito: Premium 30 días / Pro 14 días",
   "autoGen_87c8ba71": "• Una vez finalizada la prueba, se le transferirá automáticamente a un plan pago.",
   "autoGen_97af1fdc": "• Cancelar en cualquier momento (se puede utilizar hasta el final del período)",
-  "autoGen_27f6a7d8": "Cámbielo a {subscriptionService_getPlanNamenewPlan}.\n\n",
+  "autoGen_27f6a7d8": "Cámbielo a {subscriptionService_getPlanNamenewPlan}.\\n\\n",
   "autoGen_dfce8f7b": "¡Cambiado a {subscriptionService_getPlanNamenewPlan}!",
   "autoGen_a3361465": "Cambiar a $targetPlanName",
   "autoGen_ea012ccb": "Cambiar a $targetPlanName restringe la siguiente funcionalidad:",
   "autoGen_d90386be": "Cámbielo a $targetPlanName en la configuración de la App Store",
   "autoGen_62bcb620": "2. Toca [ID de Apple] en la parte superior",
-  "autoGen_6d64f0af": "Cuando "realices el check-in" en la pantalla de detalles del gimnasio, tu historial se mostrará aquí.",
+  "autoGen_6d64f0af": "Cuando \"realices el check-in\" en la pantalla de detalles del gimnasio, tu historial se mostrará aquí.",
   "autoGen_fbe877fb": "🔙 [IMPORTAR] Permanecer en la pantalla de vista previa después del error (hasta que el usuario la cierre)",
   "autoGen_3aa92e14": "Cambiado a {localeInfo_nativeName}.",
   "autoGen_81de7e28": "GYM MATCH - Disponible en 6 idiomas",
   "autoGen_ead97a43": "ID de anuncio: $bannerAdUnitId",
-  "autoGen_dfb8009a": "Tu carga de entrenamiento es demasiado baja.\nAl aumentar gradualmente la carga, puedes esperar mejorar tu rendimiento.",
+  "autoGen_dfb8009a": "Tu carga de entrenamiento es demasiado baja.\\nAl aumentar gradualmente la carga, puedes esperar mejorar tu rendimiento.",
   "autoGen_b49536ed": "¡Carga de entrenamiento ideal! Mantén tu ritmo actual. Riesgo mínimo de lesiones.",
   "autoGen_8bcd57bf": "Esta es una zona de advertencia. El riesgo de lesión es ligeramente mayor. Prioriza la recuperación y reduce un poco la carga la próxima vez.",
   "autoGen_7a24bc71": "¡Zona de peligro! Alto riesgo de lesiones. Se recomienda reposo absoluto hoy.",
-  "autoGen_fc1a79ee": "Se ha alcanzado el límite de llamadas por hora ({MAX_AI_CALLS_PER_HOUR}). \nPor favor espere un momento.",
-  "autoGen_8ed6a095": "Ha alcanzado el límite de uso de hoy ({MAX_AI_CALLS_PER_DAY}).\nInténtelo nuevamente mañana.",
-  "autoGen_4cf248d0": "Has alcanzado tu límite de uso para este mes ({MAX_AI_CALLS_PER_MONTH}).\n",
+  "autoGen_fc1a79ee": "Se ha alcanzado el límite de llamadas por hora ({MAX_AI_CALLS_PER_HOUR}). \\nPor favor espere un momento.",
+  "autoGen_8ed6a095": "Ha alcanzado el límite de uso de hoy ({MAX_AI_CALLS_PER_DAY}).\\nInténtelo nuevamente mañana.",
+  "autoGen_4cf248d0": "Has alcanzado tu límite de uso para este mes ({MAX_AI_CALLS_PER_MONTH}).\\n",
   "autoGen_0efa33de": "Se ha detectado un patrón de uso inusual.",
   "autoGen_4d7afd8b": "🚩 Bandera de usuario: $userId - $flagType - $reason",
-  "autoGen_ba165086": "Su cuenta ha sido bloqueada.\nPor favor, póngase en contacto con el soporte técnico.",
+  "autoGen_ba165086": "Su cuenta ha sido bloqueada.\\nPor favor, póngase en contacto con el soporte técnico.",
   "autoGen_873ee19b": "Bono por recomendación: $referralBonus veces",
   "autoGen_c6156f0e": "Paquete complementario de IA: $addonTiempos de uso",
   "autoGen_d90cbf45": "Créditos de IA: $créditos",
   "autoGen_d293bb2d": "En su nivel $level, puede esperar un crecimiento de +{monthlyRate__100_round}% por mes.",
   "autoGen_df68039d": "Actualmente {currentWeight_round}kg → Se predice científicamente que crecerás {predictedWeight_round}kg (+{predictedWeight__currentWeight_round}kg) en 4 meses.",
-  "autoGen_dde51564": "\n## Plan de acción recomendado",
+  "autoGen_dde51564": "\\n## Plan de acción recomendado",
   "autoGen_88d87130": "* Aumentar la carga: aumenta el peso a una tasa de +{weeklyRate__100__10_round__10}% por semana",
   "autoGen_a18ea9fb": "* Descanse mucho (las partes del cuerpo deben estar separadas al menos 48 horas)",
   "autoGen_cb2b318c": "* Ingesta nutricional adecuada (proteínas 1,6-2,2 g/kg/día)",
   "autoGen_e9e092c8": "+0,37% de crecimiento por conjunto adicional",
   "autoGen_0a0a8439": "Clarificación",
   "autoGen_aee3d6b6": "Se produjo un error: {e_toString}",
-  "autoGen_99ca4bf5": "¡Comparte tus récords de entrenamiento en GYM MATCH! #GYMMATCH #récordsdeentrenamientomuscular #gym\n\nhttps://gym-match-e560d.web.app",
+  "autoGen_99ca4bf5": "¡Comparte tus récords de entrenamiento en GYM MATCH! #GYMMATCH #récordsdeentrenamientomuscular #gym\\n\\nhttps://gym-match-e560d.web.app",
   "autoGen_efdeb364": "¡Has establecido un nuevo récord en $exerciseName!",
-  "autoGen_3f7f8f41": "Fue una carga de entrenamiento moderada. \nAsegúrese de dormir entre 7 y 8 horas y consumir proteínas (1,6 g o más por kg de peso corporal).",
+  "autoGen_3f7f8f41": "Fue una carga de entrenamiento moderada. \\nAsegúrese de dormir entre 7 y 8 horas y consumir proteínas (1,6 g o más por kg de peso corporal).",
   "autoGen_07ee9ffa": "Esta fue una sesión de entrenamiento muy intensa. Hoy recomiendo descanso absoluto. Por favor, concéntrate en dormir al menos 8 horas, seguir una dieta rica en proteínas y hacer estiramientos.",
   "autoGen_76426959": "⏳ Consulta Firestore: $cacheKey",
   "autoGen_901fff2b": "🗑️ Objetivo eliminado: $goalId",
@@ -3062,7 +3093,7 @@
   "autoGen_8679dd9c": "⏱️ Tiempo de espera de ubicación GPS (15 segundos)",
   "autoGen_5dd7baf1": "¡Buen comienzo! ¡Solo {magicNumberRecords__count} registros más para que se convierta en un hábito!",
   "autoGen_69df4973": "¡Conviértelo en un hábito y registra 5 cosas en 30 días! ¿Por qué no empiezas hoy?",
-  "autoGen_1a0782d5": "¡Solo faltan 4 registros para convertirlo en un hábito! \n{daysRemaining} días restantes.",
+  "autoGen_1a0782d5": "¡Solo faltan 4 registros para convertirlo en un hábito! \\n{daysRemaining} días restantes.",
   "autoGen_ec0ce4f0": "A continuación, intente conseguir {streakDays__7} días seguidos.",
   "autoGen_6f3ae622": "¡$gymName está abierto!",
   "autoGen_b9e68d6a": "$levelText - ¡Ahora es tu oportunidad!",
@@ -3073,10 +3104,10 @@
   "autoGen_61b4bd56": "⏭️ Saltar: {doc_id} - Gran diferencia en habilidad",
   "autoGen_f3cdae64": "Enviar una solicitud de coincidencia es una función disponible solo con el plan Pro. ¡Actualízate al plan Pro para conectarte con tu pareja!",
   "autoGen_44750f0a": "🚀 Inicio rápido: $templateName",
-  "autoGen_081f30b2": "No se encontraron productos del paquete complementario de IA.\n",
-  "autoGen_bd2d5ba0": "Buscando el ID del producto: $aiAdditionalPackProductId\n",
-  "autoGen_371e13e6": "ID de productos disponibles: $availableIds\n\n",
-  "autoGen_02e74dc3": "Solución:\n",
+  "autoGen_081f30b2": "No se encontraron productos del paquete complementario de IA.\\n",
+  "autoGen_bd2d5ba0": "Buscando el ID del producto: $aiAdditionalPackProductId\\n",
+  "autoGen_371e13e6": "ID de productos disponibles: $availableIds\\n\\n",
+  "autoGen_02e74dc3": "Solución:\\n",
   "autoGen_9021f412": "1. Crea tu producto en App Store Connect",
   "autoGen_722dc403": "Si te gusta, deja una reseña en la App Store. ¡Tus comentarios nos ayudarán a mejorar la app!",
   "autoGen_c6000590": "ℹ️ Rechazo de revisión: No solicitado durante {cooldownDays} días",
@@ -3098,33 +3129,33 @@
   "autoGen_c23f34d7": "📦 Usar caché en caso de error: $cachedPlan",
   "autoGen_5815bad8": "Funciones de IA 20 veces al mes (coaching de IA, predicción de crecimiento, análisis de efectividad) + favoritos ilimitados + envío de reseñas",
   "autoGen_3124e6e1": "Funciones de IA ilimitadas (coaching de IA, predicciones de crecimiento y análisis de eficacia) + búsqueda de socios + mensajería",
-  "autoGen_19653147": "Has agotado todo tu uso de IA para este mes ({currentUsage}/{totalLimit} veces)\n💰 Puedes seguir usándolo comprando más",
+  "autoGen_19653147": "Has agotado todo tu uso de IA para este mes ({currentUsage}/{totalLimit} veces)\\n💰 Puedes seguir usándolo comprando más",
   "autoGen_c6a86fbe": "Crecimiento esperado de +{suggestedChange__0_37_toStringAsFixed1}% por cada {suggestedChange} conjunto agregado por semana (Schoenfeld 2017)",
   "autoGen_d4c99375": "Semanal + {weeklyGrowth_toStringAsFixed1}%: Crecimiento constante",
   "autoGen_1a22c661": "Semana + {weeklyGrowth_toStringAsFixed1}%: Crecimiento más lento",
   "autoGen_c42311e6": "Espere {restDays} días entre tratamientos en la misma área (período de aumento de MPS: 48 horas)",
-  "autoGen_2462056f": "\n## Mejoras de máxima prioridad",
+  "autoGen_2462056f": "\\n## Mejoras de máxima prioridad",
   "autoGen_09692629": "El volumen actual es excesivo.",
   "autoGen_1ab642e9": "Plan de acción específico",
   "autoGen_1f550f64": "* Tiempo de recuperación: $bodyPart debe estar separado por {ScientificDatabase_getRecommendedRestDayslevel_bodyPart} días",
   "autoGen_9da152f4": "Progreso de finalización de la prueba: $progress%",
   "autoGen_f1d9a7a9": "Versión actual: $currentVersion (Compilación: $currentBuildNumber)",
   "autoGen_3142cb33": "Hay una nueva versión disponible. Por favor, actualízala.",
-  "autoGen_a5e97b2b": "Hay una actualización requerida disponible.\nActualice la aplicación a la última versión.",
+  "autoGen_a5e97b2b": "Hay una actualización requerida disponible.\\nActualice la aplicación a la última versión.",
   "autoGen_d9ad81bc": "🚨 Se requiere actualización forzada: $currentBuildNumber < $minBuildNumber",
   "autoGen_96c869d4": "💡 Actualización recomendada: $currentBuildNumber < $recommendedBuildNumber",
-  "autoGen_588e8dd8": "El tamaño de la imagen es demasiado grande ({imageBytes_length__1024__1024_toStringAsFixed1}MB).\n",
+  "autoGen_588e8dd8": "El tamaño de la imagen es demasiado grande ({imageBytes_length__1024__1024_toStringAsFixed1}MB).\\n",
   "autoGen_b2a0fa05": "📄 Cuerpo de la respuesta (primeros 200 caracteres): {response_body_substring0_response_body_length_gt_200_200__response_body_length}",
-  "autoGen_fafd554e": "Azul oscuro x Naranja energético\nEstimula la vitalidad y la motivación",
-  "autoGen_1a20cd60": "Power Red x Silver\nExpresa pasión y fuerza.",
-  "autoGen_124470ff": "¡Gran continuidad! \nDisfruta de una experiencia de entrenamiento más cómoda.",
+  "autoGen_fafd554e": "Azul oscuro x Naranja energético\\nEstimula la vitalidad y la motivación",
+  "autoGen_1a20cd60": "Power Red x Silver\\nExpresa pasión y fuerza.",
+  "autoGen_124470ff": "¡Gran continuidad! \\nDisfruta de una experiencia de entrenamiento más cómoda.",
   "autoGen_7210fc11": "Encuentra un compañero de entrenamiento",
   "autoGen_067c77b6": "Deja de entrenar solo y crece con amigos en el mismo gimnasio y con los mismos objetivos.",
   "autoGen_57df266a": "¡Has ganado 1 función de IA! ({remaining} restantes)",
   "autoGen_1397c615": "$premiumDays días",
   "autoGen_32518a63": "¡$friendName se ha unido a GYM MATCH!",
   "autoGen_3efd8f7d": "Bono por recomendación (Edición Deluxe)",
-  "autoGen_5db1bca7": "[Modo de prueba de la versión web] \nPresione el botón para ganar créditos de IA en 2 segundos",
+  "autoGen_5db1bca7": "[Modo de prueba de la versión web] \\nPresione el botón para ganar créditos de IA en 2 segundos",
   "autoGen_54f0f5d8": "Te quedan $_remainingAds para ver este mes",
   "autoGen_ee3d2398": "💡 Si desea acceso ilimitado a nuestras funciones de IA, considere actualizar a nuestro plan Premium (10 llamadas por mes) o plan Pro (30 llamadas por mes).",
   "autoGen_d6ef4230": "{widget_basis_length} artículos revisados por pares",
@@ -3147,7 +3178,7 @@
   "autoGen_7a54ae1f": "$dormantMembers nombre",
   "autoGen_39bbf3e2": "$totalSesiones",
   "autoGen_dc33a754": "Miembros inactivos: $dormantMembers nombre",
-  "autoGen_fe73ede6": "Esta es la pantalla de inicio de sesión exclusiva para administradores de órdenes de compra. Si tiene un código de acceso, inicie sesión desde la pestaña "Código de acceso".",
+  "autoGen_fe73ede6": "Esta es la pantalla de inicio de sesión exclusiva para administradores de órdenes de compra. Si tiene un código de acceso, inicie sesión desde la pestaña \"Código de acceso\".",
   "autoGen_39cc3687": "Ejemplo: RF-AKA-2024",
   "autoGen_f02ab35b": "$activeCount nombre",
   "autoGen_133c129a": "$dormantCount nombre",
@@ -3155,13 +3186,13 @@
   "autoGen_360787f9": "Hora de recordatorio establecida en {formatTime_reminderTime}",
   "autoGen_e67c4c69": "También puedes administrar las notificaciones en la configuración de tu dispositivo. Consulta la aplicación Configuración > Notificaciones.",
   "autoGen_68142d17": "Estas Condiciones de Uso (en adelante, «estas Condiciones») establecen las condiciones de uso de la aplicación GYM MATCH (en adelante, «esta Aplicación») proporcionada por Gen Inoue (en adelante, «el Desarrollador»). Al usar esta Aplicación, se considera que los usuarios aceptan estas Condiciones.",
-  "autoGen_49167046": "Esta aplicación proporciona las siguientes funciones:\n\n",
+  "autoGen_49167046": "Esta aplicación proporciona las siguientes funciones:\\n\\n",
   "autoGen_5db26dd7": "• Gestión de registros de formación",
-  "autoGen_54eb522c": "• Búsqueda de gimnasio y visualización de información de ubicación\n",
-  "autoGen_3482f20a": "• Sugerencias de menú de entrenamiento por IA\n",
-  "autoGen_6e6ed0f3": "• Analizar y visualizar datos de entrenamiento\n",
+  "autoGen_54eb522c": "• Búsqueda de gimnasio y visualización de información de ubicación\\n",
+  "autoGen_3482f20a": "• Sugerencias de menú de entrenamiento por IA\\n",
+  "autoGen_6e6ed0f3": "• Analizar y visualizar datos de entrenamiento\\n",
   "autoGen_cfee6527": "• Planes de suscripción de pago (Premium, Pro)",
-  "autoGen_78cd69ae": "Los usuarios tienen prohibido realizar las siguientes acciones al usar esta aplicación:\n\n",
+  "autoGen_78cd69ae": "Los usuarios tienen prohibido realizar las siguientes acciones al usar esta aplicación:\\n\\n",
   "autoGen_0b46001b": "• Cualquier acto que atente contra la ley, el orden público y la moral.",
   "autoGen_bfe041dc": "• Cualquier acto que destruya o interfiera con la función del servidor o red de esta aplicación.",
   "autoGen_bd7bdb16": "• Recopilar o almacenar información personal sobre otros usuarios.",
@@ -3183,7 +3214,7 @@
   "autoGen_a85490c9": "• Si existe una razón válida de acuerdo con la política de reembolso de Apple App Store.",
   "autoGen_2d7a5883": "• Si el servicio no se presta correctamente debido a problemas técnicos.",
   "autoGen_2652cd9c": "• Si realizó una compra por error (debe presentar la solicitud inmediatamente después de la compra)",
-  "autoGen_76d3507e": "Notas:\n",
+  "autoGen_76d3507e": "Notas:\\n",
   "autoGen_93a4cf92": "• La cancelación debe realizarse al menos 24 horas antes de la próxima fecha de renovación.",
   "autoGen_22bad042": "• Después de la cancelación, podrá continuar utilizando el servicio hasta el final de su período de facturación actual.",
   "autoGen_95741c60": "GYM MATCH - Aplicación de gestión de entrenamiento",
@@ -3191,7 +3222,7 @@
   "autoGen_f987d5f9": "• Administrar y almacenar registros de capacitación",
   "autoGen_49049c3c": "• Búsqueda de gimnasios y visualización de información de ubicación (integración con Google Maps)",
   "autoGen_a24921c0": "• Sugerencias de menú de entrenamiento basadas en IA (usando la API de Gemini)",
-  "autoGen_256ecf27": "• Ver historial de entrenamiento pasado\n\n",
+  "autoGen_256ecf27": "• Ver historial de entrenamiento pasado\\n\\n",
   "autoGen_18b95e82": "Características específicas del plan:",
   "autoGen_e5304f66": "• Plan gratuito: Funciones básicas, anuncios mostrados, función de IA limitada a 3 veces al mes con visualización de anuncios.",
   "autoGen_bc653d48": "• Plan Premium: Sin anuncios, funciones de IA disponibles 10 veces al mes.",
@@ -3202,10 +3233,10 @@
   "autoGen_be3339ff": "• Las sugerencias de entrenamiento en este servicio son sólo para fines informativos y no constituyen asesoramiento médico.",
   "autoGen_46e40811": "X (antiguo Twitter): @MatchGym71830",
   "autoGen_87967650": "Disfrute de funciones premium por $_remainingDays restantes",
-  "autoGen_5117983a": "• Función de IA 10 veces al mes\n",
-  "autoGen_d42111dd": "• Favoritos ilimitados\n",
-  "autoGen_496b48ae": "• Publica una reseña del gimnasio\n",
-  "autoGen_7a7b91ca": "• Notificación de alerta de congestión\n",
+  "autoGen_5117983a": "• Función de IA 10 veces al mes\\n",
+  "autoGen_d42111dd": "• Favoritos ilimitados\\n",
+  "autoGen_496b48ae": "• Publica una reseña del gimnasio\\n",
+  "autoGen_7a7b91ca": "• Notificación de alerta de congestión\\n",
   "autoGen_4cfb6b51": "Nivel de usuario: $userLevel",
   "autoGen_d4d0a508": "Recomendaciones de AI Coach cargadas (ejercicios {selectedExercises_length})",
   "autoGen_d79a4e44": "Rastreo de pila: $stackTrace",
@@ -3216,46 +3247,46 @@
   "autoGen_0d5c4fc8": "Registros anteriores de $exerciseName",
   "autoGen_6184b271": "Registrado: $peso kg × $reps repeticiones",
   "autoGen_74da9166": "Entrada masiva de $exerciseName",
-  "autoGen_c80b15f5": "¿Desea eliminar "$exerciseName"?\nEsta acción no se puede deshacer.",
-  "autoGen_0a84ceba": ""$exerciseName" ha sido eliminado",
-  "autoGen_d9074687": ""$result" guardado como un evento personalizado",
+  "autoGen_c80b15f5": "¿Desea eliminar \"$exerciseName\"?\\nEsta acción no se puede deshacer.",
+  "autoGen_0a84ceba": "\"$exerciseName\" ha sido eliminado",
+  "autoGen_d9074687": "\"$result\" guardado como un evento personalizado",
   "autoGen_0c183ad8": "📴 Guarda la fecha de cierre: $_selectedDate",
   "autoGen_7c8d26de": "{exerciseSets_length} conjuntos copiados",
   "autoGen_f36e4e45": "Eventos de $_selectedMuscleGroup",
   "autoGen_7ce1d4dd": "🔘 Último botón pulsado: $exerciseName",
   "autoGen_7b01524a": "El peso y el número de repeticiones se establecen según tu nivel ($userLevel)",
-  "autoGen_2873d010": "Primer récord\nEl récord de hoy será tu próximo objetivo. ¡Dalo todo!",
+  "autoGen_2873d010": "Primer récord\\nEl récord de hoy será tu próximo objetivo. ¡Dalo todo!",
   "autoGen_61221654": "Se cargaron {exercises_length} ejercicios del entrenador de IA",
   "autoGen_79ab5374": "• Puedes utilizar la función IA una vez viendo un anuncio de vídeo.",
   "autoGen_46daa8ca": "• Los anuncios se pueden ver hasta 3 veces al mes.",
   "autoGen_b657787b": "Resultado de canUseAI: $canUse",
   "autoGen_c85769fb": "Resultado de canEarnCreditFromAd: $canEarnFromAd",
   "autoGen_5a65e7d3": "Resultado del anuncio visto: $watchedAd",
-  "autoGen_a2170a7d": "# Menú de entrenamiento con base científica\n",
-  "autoGen_8627ad90": "💡 La IA no está disponible temporalmente, por lo que le brindaremos recomendaciones de menú basadas en investigaciones científicas.\n",
-  "autoGen_3921a074": "## Entrenamiento de equilibrio de todo el cuerpo\n",
+  "autoGen_a2170a7d": "# Menú de entrenamiento con base científica\\n",
+  "autoGen_8627ad90": "💡 La IA no está disponible temporalmente, por lo que le brindaremos recomendaciones de menú basadas en investigaciones científicas.\\n",
+  "autoGen_3921a074": "## Entrenamiento de equilibrio de todo el cuerpo\\n",
   "autoGen_63dfa8fd": "- Número de repeticiones: 10-12",
   "autoGen_f48e246a": "- Puntos clave: Concéntrese en la forma y comience con pesos ligeros.",
-  "autoGen_9dbcd380": "- Pausa: 90 segundos\n",
-  "autoGen_e3c1b530": "- Pausa: 60 segundos\n",
+  "autoGen_9dbcd380": "- Pausa: 90 segundos\\n",
+  "autoGen_e3c1b530": "- Pausa: 60 segundos\\n",
   "autoGen_95eff134": "- Número de series: 4-5 series",
   "autoGen_7b69d2d1": "- Número de repeticiones: 6-10",
   "autoGen_7d332e7f": "- Descanso: 2-3 minutos",
   "autoGen_9c54dcf8": "- Número de series: 3-4 series",
   "autoGen_64963de8": "- Descanso: 3-4 minutos",
-  "autoGen_7fb65399": "## $entrenamiento parcial\n",
+  "autoGen_7fb65399": "## $entrenamiento parcial\\n",
   "autoGen_7f25816c": "- Número de series: 2-3 series",
   "autoGen_7ae0e831": "- Número de repeticiones: 10-15",
   "autoGen_22068d85": "- Número de repeticiones: 8-12",
   "autoGen_e420dac1": "- Descanso: 60-90 segundos",
   "autoGen_530c8f16": "Paquete adicional de IA (¥300):",
-  "autoGen_2482dab0": "Por favor genere el menú nuevamente.\nSi el problema persiste, por favor contacte al soporte.",
-  "autoGen_a900ede4": "📄 Menú generado (primeros 500 caracteres): \n{text_substring0_text_length_gt_500_500__text_length}",
+  "autoGen_2482dab0": "Por favor genere el menú nuevamente.\\nSi el problema persiste, por favor contacte al soporte.",
+  "autoGen_a900ede4": "📄 Menú generado (primeros 500 caracteres): \\n{text_substring0_text_length_gt_500_500__text_length}",
   "autoGen_61691a5f": "📄 Procesando: $line",
   "autoGen_dc7f876e": "⏭️ Saltar subsección: $line",
   "autoGen_160fcdc4": "📝 Estado actual ($currentExerciseName): peso=$currentWeight, repeticiones=$currentReps, series=$currentSets",
-  "autoGen_8b926449": "\n[Historial de entrenamiento del último mes]\n",
-  "autoGen_8e3d3911": "\nConsulte el historial anterior y sugiera el peso y el número de repeticiones adecuados.\n",
+  "autoGen_8b926449": "\\n[Historial de entrenamiento del último mes]\\n",
+  "autoGen_8e3d3911": "\\nConsulte el historial anterior y sugiera el peso y el número de repeticiones adecuados.\\n",
   "autoGen_6809c323": "- Se recomienda **solo ejercicio aeróbico** (no se incluyen ejercicios de entrenamiento de fuerza)",
   "autoGen_f6c819db": "**IMPORTANTE: Utiliza solo ejercicios de la base de datos de cardio. Nunca incluyas ejercicios de fuerza como press de banca, sentadillas, etc.**",
   "autoGen_1e50fa08": "Cuerpo entero equilibrado",
@@ -3276,9 +3307,9 @@
   "autoGen_1a33d843": "Actual: {currentWeight_round}kg → +$growthPercentage% crecimiento",
   "autoGen_7a1d4370": "Actualice a un plan Premium",
   "autoGen_9d99af7f": "Con el Plan Premium:",
-  "autoGen_67a989a2": "• Uso ilimitado de funciones de IA hasta 10 veces al mes\n",
+  "autoGen_67a989a2": "• Uso ilimitado de funciones de IA hasta 10 veces al mes\\n",
   "autoGen_465a0c43": "• Disfrute de una experiencia cómoda y sin publicidad.",
-  "autoGen_6aa1053b": "• Gimnasios favoritos ilimitados\n",
+  "autoGen_6aa1053b": "• Gimnasios favoritos ilimitados\\n",
   "autoGen_583fa8ea": "RPE $rpe (con margen)",
   "autoGen_63907130": "RPE $rpe (adecuación)",
   "autoGen_7eeda4db": "RPE $rpe (límite)",
@@ -3290,8 +3321,8 @@
   "autoGen_63037294": "1RM actual (kg)",
   "autoGen_2119ad31": "Por favor, introduzca un número",
   "autoGen_1a7bfb82": "De su relación de peso ({weightRatio_toStringAsFixed2})",
-  "autoGen_3c9b6149": "El nivel objetivo se determinó como "$_objectiveLevel".",
-  "autoGen_a5688ebc": "Nivel seleccionado: "$_selectedLevel"",
+  "autoGen_3c9b6149": "El nivel objetivo se determinó como \"$_objectiveLevel\".",
+  "autoGen_a5688ebc": "Nivel seleccionado: \"$_selectedLevel\"",
   "autoGen_306c1cc0": "Utilice niveles objetivos",
   "autoGen_4a776041": "Análisis científico del volumen y frecuencia óptimos",
   "autoGen_9d44cf62": "Estado actual de la formación",
@@ -3320,15 +3351,15 @@
   "autoGen_cf1cfa23": "• Elija entre ajustes preestablecidos para una configuración rápida.",
   "autoGen_f897a66f": "• Las configuraciones se guardan automáticamente.",
   "autoGen_6f7f8448": "• El número que se muestra es para un lado (adjunto a ambos lados)",
-  "autoGen_6ece374b": "¿Quieres eliminar "$exerciseName"?",
-  "autoGen_758d777e": ""$exerciseName" ha sido eliminado ({remainingExerciseNames} ejercicios restantes)",
-  "autoGen_08aedbf7": ""$exerciseName" ha sido eliminado (quedan {exercises_length} ejercicios)",
+  "autoGen_6ece374b": "¿Quieres eliminar \"$exerciseName\"?",
+  "autoGen_758d777e": "\"$exerciseName\" ha sido eliminado ({remainingExerciseNames} ejercicios restantes)",
+  "autoGen_08aedbf7": "\"$exerciseName\" ha sido eliminado (quedan {exercises_length} ejercicios)",
   "autoGen_08b72f35": "Fecha: $date",
   "autoGen_62a594cf": "Grupo muscular: $muscleGroup",
   "autoGen_fd2964d7": "Conjuntos totales: $totalSets",
   "autoGen_74f074ea": "Minutos aeróbicos: $totalMinutes",
   "autoGen_b714e319": "📋 Pasando datos de plantilla: $templateData",
-  "autoGen_51ce78c9": "¿Quieres eliminar "{template_name}"?",
+  "autoGen_51ce78c9": "¿Quieres eliminar \"{template_name}\"?",
   "autoGen_8a87562e": "Generado automáticamente todos los lunes (en modo de demostración, se requieren datos manuales ya que la función Cloud no está implementada)",
   "autoGen_15000674": "Intentos $retryCount/$maxRetries...",
   "showDetailsSection": "Mostrar detalles",
@@ -3355,38 +3386,115 @@
   "home_shareFailed": "Error al compartir: {error}",
   "home_deleteError": "Error al eliminar: {error}",
   "home_weightMinutes": "{weight} min",
-  "home_deleteRecordConfirm": "¿Eliminar registro de "{exerciseName}"?
-Esta acción no se puede deshacer.",
-  "home_deleteRecordSuccess": ""{exerciseName}" eliminado ({count} ejercicios restantes)",
+  "home_deleteRecordConfirm": "¿Eliminar registro de \"{exerciseName}\"?\nEsta acción no se puede deshacer.",
+  "home_deleteRecordSuccess": "\"{exerciseName}\" eliminado ({count} ejercicios restantes)",
   "home_deleteFailed": "Error al eliminar: {error}",
   "home_generalError": "❌ Error: {error}",
   "goals_loadFailed": "Error al cargar objetivos: {error}",
-  "goals_deleteConfirm": "¿Eliminar "{goalName}"?
-Esta acción no se puede deshacer.",
+  "goals_deleteConfirm": "¿Eliminar \"{goalName}\"?\nEsta acción no se puede deshacer.",
   "goals_updateFailed": "Error al actualizar: {error}",
   "goals_editTitle": "Editar {goalName}",
-  "body_offlineSaved": "📴 Guardado sin conexión
-Se sincronizará cuando esté en línea",
+  "body_offlineSaved": "📴 Guardado sin conexión\nSe sincronizará cuando esté en línea",
   "body_weightKg": "Peso: {weight}kg",
   "body_bodyFatPercent": "Grasa corporal: {bodyFat}%",
   "reward_adLoadFailed": "Error al cargar anuncio. Por favor, inténtelo de nuevo.",
   "reward_adDisplayFailed": "Error al mostrar anuncio. Por favor, inténtelo más tarde.",
   "reward_creditEarnedTest": "✅ ¡Ganaste 1 crédito de IA! (Modo de prueba)",
-  "@home_shareFailed": "[('placeholders', [('error', [('type', 'String')])])]",
-  "@home_deleteError": "[('placeholders', [('error', [('type', 'String')])])]",
-  "@home_weightMinutes": "[('placeholders', [('weight', [('type', 'String')])])]",
-  "@home_deleteRecordConfirm": "[('placeholders', [('exerciseName', [('type', 'String')])])]",
-  "@home_deleteRecordSuccess": "[('placeholders', [('exerciseName', [('type', 'String')]), ('count', [('type', 'String')])])]",
-  "@home_deleteFailed": "[('placeholders', [('error', [('type', 'String')])])]",
-  "@home_generalError": "[('placeholders', [('error', [('type', 'String')])])]",
-  "@goals_loadFailed": "[('placeholders', [('error', [('type', 'String')])])]",
-  "@goals_deleteConfirm": "[('placeholders', [('goalName', [('type', 'String')])])]",
-  "@goals_updateFailed": "[('placeholders', [('error', [('type', 'String')])])]",
-  "@goals_editTitle": "[('placeholders', [('goalName', [('type', 'String')])])]",
-  "@body_weightKg": "[('placeholders', [('weight', [('type', 'String')])])]",
-  "@body_bodyFatPercent": "[('placeholders', [('bodyFat', [('type', 'String')])])]",
-  "workout_offlineSaved": "📴 Guardado sin conexión
-Se sincronizará automáticamente al volver a conectarse",
+  "@home_shareFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_deleteError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_weightMinutes": {
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_deleteRecordConfirm": {
+    "placeholders": {
+      "exerciseName": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_deleteRecordSuccess": {
+    "placeholders": {
+      "exerciseName": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_deleteFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@home_generalError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@goals_loadFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@goals_deleteConfirm": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      }
+    }
+  },
+  "@goals_updateFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@goals_editTitle": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      }
+    }
+  },
+  "@body_weightKg": {
+    "placeholders": {
+      "weight": {
+        "type": "String"
+      }
+    }
+  },
+  "@body_bodyFatPercent": {
+    "placeholders": {
+      "bodyFat": {
+        "type": "String"
+      }
+    }
+  },
+  "workout_offlineSaved": "📴 Guardado sin conexión\nSe sincronizará automáticamente al volver a conectarse",
   "workout_iconAI": "🤖",
   "workout_iconIdea": "💡",
   "workout_iconStats": "📊",
@@ -3396,10 +3504,9 @@ Se sincronizará automáticamente al volver a conectarse",
   "workout_noHistory": "Sin historial para {exerciseName}",
   "workout_pastRecords": "Registros anteriores de {exerciseName}",
   "workout_bulkInput": "Entrada masiva para {exerciseName}",
-  "workout_deleteConfirm": "¿Eliminar "{exerciseName}"?
-Esta acción no se puede deshacer.",
-  "workout_deleteSuccess": ""{exerciseName}" eliminado",
-  "workout_customExerciseSaved": ""{exerciseName}" guardado como ejercicio personalizado",
+  "workout_deleteConfirm": "¿Eliminar \"{exerciseName}\"?\nEsta acción no se puede deshacer.",
+  "workout_deleteSuccess": "\"{exerciseName}\" eliminado",
+  "workout_customExerciseSaved": "\"{exerciseName}\" guardado como ejercicio personalizado",
   "profile_importFromPhoto": "📸 Importar desde foto",
   "profile_importFromCSV": "📄 Importar desde CSV",
   "profile_fileSizeTooLarge": "❌ Tamaño de archivo demasiado grande (máx. 5MB)",
@@ -3418,7 +3525,7 @@ Esta acción no se puede deshacer.",
   "subscription_step1": "1. Abra la aplicación Ajustes de iPhone",
   "subscription_step2": "2. Toque [Apple ID] en la parte superior",
   "workout_deleteDebug": "🔍 Debug de eliminación",
-  "workout_deleteConfirmExercise": "¿Eliminar "{exerciseName}"?",
+  "workout_deleteConfirmExercise": "¿Eliminar \"{exerciseName}\"?",
   "workout_debugTargetInfo": "🎯 {targetInfo}",
   "workout_debugCurrentExercises": "📊 Ejercicios actuales: {exercises}",
   "workout_debugAfterDeleteExercises": "📊 Después de eliminar: {exercises}",
@@ -3427,8 +3534,8 @@ Esta acción no se puede deshacer.",
   "workout_debugSetDetails": "🔍 Detalles de series:",
   "workout_debugExercisesField": "⚠️ Campo exercises detectado: {type}",
   "workout_preventFullDelete": "⚠️ Prevenir eliminación total",
-  "workout_exerciseDeletedWithCount": ""{exerciseName}" eliminado (restantes: {remainingExercises})",
-  "workout_exerciseDeletedWithCountNum": ""{exerciseName}" eliminado ({count} ejercicios restantes)",
+  "workout_exerciseDeletedWithCount": "\"{exerciseName}\" eliminado (restantes: {remainingExercises})",
+  "workout_exerciseDeletedWithCountNum": "\"{exerciseName}\" eliminado ({count} ejercicios restantes)",
   "ai_generationComplete": "¡Generación de IA completa! ({status})",
   "ai_rewardEarned": "🎁 ¡1 uso de IA obtenido!",
   "ai_predictionComplete": "¡Predicción de IA completa! ({status})",
@@ -3439,14 +3546,11 @@ Esta acción no se puede deshacer.",
   "gym_aiUsageLimit": "• Usar funciones de IA 10 veces al mes",
   "gym_unlimitedFavorites": "• Favoritos ilimitados",
   "gym_detailedStats": "• Estadísticas detalladas de aforo",
-  "dev_uidCopied": "✅ UID copiado
-{uid}",
+  "dev_uidCopied": "✅ UID copiado\n{uid}",
   "dev_aiUsageReset": "✅ Contador de uso de IA restablecido",
   "dev_resetFailed": "❌ Error al restablecer: {error}",
-  "dev_onboardingReset": "✅ Onboarding restablecido
-Por favor, reinicie la app",
-  "dev_phase1Reset": "✅ Todas las funciones de Phase 1 restablecidas
-Por favor, reinicie la app",
+  "dev_onboardingReset": "✅ Onboarding restablecido\nPor favor, reinicie la app",
+  "dev_phase1Reset": "✅ Todas las funciones de Phase 1 restablecidas\nPor favor, reinicie la app",
   "dev_resetAiUsage": "Restablecer contador de uso de IA",
   "dev_resetOnboarding": "Restablecer onboarding",
   "dev_resetPhase1": "Restablecer todas las funciones de Phase 1",
@@ -3458,8 +3562,7 @@ Por favor, reinicie la app",
   "calculators_title": "Calculadoras",
   "calculators_invalidInput": "Por favor ingrese peso y repeticiones válidos",
   "calculators_oneRMCalculator": "Calculadora 1RM",
-  "calculators_oneRMDescription": "1RM (1 Rep Max) es el peso máximo que puedes levantar una vez.
-Calcula el 1RM estimado usando la fórmula de Epley.",
+  "calculators_oneRMDescription": "1RM (1 Rep Max) es el peso máximo que puedes levantar una vez.\nCalcula el 1RM estimado usando la fórmula de Epley.",
   "calculators_barWeightError": "Por favor ingrese un peso mayor que el peso de la barra ({barWeight}kg)",
   "invite_registrationComplete": "🎉 ¡Registro Completo!",
   "invite_codeApplied": "¡Código de invitación aplicado con éxito!",
@@ -3468,11 +3571,9 @@ Calcula el 1RM estimado usando la fórmula de Epley.",
   "invite_benefitsApplied": "¡Los beneficios se aplicarán de inmediato!",
   "gym_checkedIn": "Registrado en {gymName}",
   "aiAddon_purchaseConfirm": "¿Comprar Paquete Adicional de IA?",
-  "aiAddon_packDetails": "Paquete Adicional de IA (5 usos)
-Precio: ¥300",
+  "aiAddon_packDetails": "Paquete Adicional de IA (5 usos)\nPrecio: ¥300",
   "aiAddon_purchase": "Comprar",
-  "aiAddon_purchaseFailed": "Compra fallida.
-Por favor, inténtelo de nuevo.",
+  "aiAddon_purchaseFailed": "Compra fallida.\nPor favor, inténtelo de nuevo.",
   "weeklyReports_recommendation": "Recomendación Semanal",
   "weeklyReports_recommendationSubtitle": "Mostrar días recomendados y sugerencias de menú",
   "bodyPart_days7": "7 días",
@@ -3491,7 +3592,7 @@ Por favor, inténtelo de nuevo.",
   "personalFactors_saved": "✅ ¡Guardado! PFM actual: {pfm}x",
   "personalFactors_saveError": "❌ Error al guardar: {error}",
   "personalFactors_title": "🔬 Configuración de Factores Personales",
-  "favorites_removeConfirm": "¿Eliminar "{gymName}" de favoritos?",
+  "favorites_removeConfirm": "¿Eliminar \"{gymName}\" de favoritos?",
   "favorites_removed": "Se eliminó {gymName} de favoritos",
   "favorites_removeAll": "Eliminar Todo",
   "gymDetail_shareFailed": "Error al compartir: {error}",
@@ -3514,23 +3615,36 @@ Por favor, inténtelo de nuevo.",
   "partnerPhotos_deleteConfirm": "Eliminar Imagen",
   "partnerPhotos_title": "Gestión de Imágenes de Tienda",
   "home_streakTitle": "¡7 días seguidos logrados!",
-  "home_streakMessage": "¡Felicidades!
-Has registrado entrenamientos durante 7 días seguidos.
-¡Sigue así! 💪",
-  "home_milestoneMessage": "¡Increíble! ¡Hito alcanzado!
-¡Sigue a este ritmo! 💪",
+  "home_streakMessage": "¡Felicidades!\nHas registrado entrenamientos durante 7 días seguidos.\n¡Sigue así! 💪",
+  "home_milestoneMessage": "¡Increíble! ¡Hito alcanzado!\n¡Sigue a este ritmo! 💪",
   "home_tapToShowStats": "Toca para mostrar estadísticas detalladas",
   "home_aiSuggestionTitle": "💡 Sugerencia de IA de hoy",
-  "home_aiSuggestionPrompt": "IA analiza científicamente
-tu menú de entrenamiento personalizado",
+  "home_aiSuggestionPrompt": "IA analiza científicamente\ntu menú de entrenamiento personalizado",
   "home_currentStreakDays": "{days} días seguidos",
-  "@home_currentStreakDays": "[('placeholders', [('days', [('type', 'int')])])]",
+  "@home_currentStreakDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
   "home_streakRecording": "¡Registrando durante {days} días seguidos!",
-  "@home_streakRecording": "[('placeholders', [('days', [('type', 'int')])])]",
+  "@home_streakRecording": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
   "home_weeklyProgressPercent": "{percent}% logrado",
-  "@home_weeklyProgressPercent": "[('placeholders', [('percent', [('type', 'int')])])]",
-  "home_recordPrompt": "Registra tu entrenamiento
-y visualiza tu progreso",
+  "@home_weeklyProgressPercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "home_recordPrompt": "Registra tu entrenamiento\ny visualiza tu progreso",
   "subscription_restore": "Restaurar",
   "subscription_lifetimeProPlan": "Plan Pro de por vida (∞)",
   "subscription_lifetimePlanDescription": "Funciones de IA ilimitadas | Sin anuncios | Todas las funciones para siempre",
@@ -3540,22 +3654,55 @@ y visualiza tu progreso",
   "subscription_privacyPolicy": "Política de privacidad",
   "subscription_agreementText": "Al suscribirte, aceptas nuestros Términos de uso y Política de privacidad",
   "subscription_aiAddonPrice": "¥300 / 5 veces",
-  "subscription_cancelInstruction3": "3. Toca \"Suscripciones\"",
+  "subscription_cancelInstruction3": "3. Toca \\\"Suscripciones\\\"",
   "profile_referralBonusTitle": "🎁 Bono de referencia",
   "profile_referralBonusHint": "💡 Cuando tu amigo ingrese este código, ¡ambos recibirán recompensas!",
-  "profile_referralShareMessage": "¡Entrenemos juntos en GYM MATCH!\n\nCódigo de referencia: {referralCode}\n¡Obtén 3 usos de IA!\n\nhttps://gym-match-e560d.web.app",
-  "@profile_referralShareMessage": "[('placeholders', [('referralCode', [('type', 'String')])])]",
+  "profile_referralShareMessage": "¡Entrenemos juntos en GYM MATCH!\\n\\nCódigo de referencia: {referralCode}\\n¡Obtén 3 usos de IA!\\n\\nhttps://gym-match-e560d.web.app",
+  "@profile_referralShareMessage": {
+    "placeholders": {
+      "referralCode": {
+        "type": "String"
+      }
+    }
+  },
   "profile_errorMessage": "❌ Error: {error}",
-  "@profile_errorMessage": "[('placeholders', [('error', [('type', 'String')])])]",
+  "@profile_errorMessage": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "profile_rewardItem": "{title}: {reward}",
-  "@profile_rewardItem": "[('placeholders', [('title', [('type', 'String')]), ('reward', [('type', 'String')])])]",
+  "@profile_rewardItem": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "reward": {
+        "type": "String"
+      }
+    }
+  },
   "profile_defaultUsername": "Usuario de entrenamiento",
   "profile_defaultBio": "Bienvenido a GYM MATCH",
   "profile_referralRewardDescription": "AI x5 veces + La persona referida también obtiene AI x3 veces",
   "profile_premiumOnlyFeature": "{featureName} es una función exclusiva para miembros del plan premium.",
-  "@profile_premiumOnlyFeature": "[('placeholders', [('featureName', [('type', 'String')])])]",
-  "profile_featureInDevelopment": "{featureName} está actualmente en desarrollo.\nEstará disponible en la próxima actualización.",
-  "@profile_featureInDevelopment": "[('placeholders', [('featureName', [('type', 'String')])])]",
+  "@profile_premiumOnlyFeature": {
+    "placeholders": {
+      "featureName": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_featureInDevelopment": "{featureName} está actualmente en desarrollo.\\nEstará disponible en la próxima actualización.",
+  "@profile_featureInDevelopment": {
+    "placeholders": {
+      "featureName": {
+        "type": "String"
+      }
+    }
+  },
   "partnerCampaign_imageLoadError": "Error al cargar imagen: {error}",
   "partnerCampaign_saved": "✅ ¡Campaña guardada! Cambios reflejados inmediatamente",
   "partnerCampaign_saveError": "❌ Error al guardar: {error}",
@@ -3590,14 +3737,13 @@ y visualiza tu progreso",
   "trainerRecords_reload": "Recargar",
   "poMembers_allMembers": "Todos los Miembros",
   "poMembers_dormant": "Inactivo",
-  "profileEdit_imageLoadError": "Error al cargar imagen
-{error}",
+  "profileEdit_imageLoadError": "Error al cargar imagen\n{error}",
   "profileEdit_proOnlyFeature": "Función Exclusiva del Plan Pro",
   "profile_termsAndSubscription": "Términos de Servicio y Suscripción",
   "profile_privacyPolicy": "Política de Privacidad",
   "reservation_submitted": "✅ ¡Reserva enviada! El gimnasio se pondrá en contacto.",
   "reservation_submitError": "❌ Error al enviar reserva: {error}",
-  "subscription_step4": "4. Seleccione "GYM MATCH"",
+  "subscription_step4": "4. Seleccione \"GYM MATCH\"",
   "subscription_step5": "5. Seleccione el plan deseado",
   "visitHistory_deleteHistory": "Eliminar Historial de Visitas",
   "visitHistory_reload": "Recargar",
@@ -3622,7 +3768,7 @@ y visualiza tu progreso",
   "rmCalculator_barWeightError": "Ingrese un valor mayor que el peso de la barra ({barWeight}kg)",
   "statisticsDashboard_title": "Panel de Estadísticas",
   "workoutTemplate_title": "Plantillas de Entrenamiento",
-  "workoutTemplate_deleteConfirm": "¿Eliminar "{name}"?",
+  "workoutTemplate_deleteConfirm": "¿Eliminar \"{name}\"?",
   "weeklyReports_workoutsSummary": "{workouts} entrenamientos • {minutes} min",
   "workoutMemo_updated": "Nota actualizada",
   "workoutMemo_delete": "Eliminar Nota",
@@ -3639,9 +3785,9 @@ y visualiza tu progreso",
   "announcementType_newEquipment": "Nuevo Equipo",
   "announcementType_hours": "Horario",
   "reward_adCreditEarned": "¡Has ganado 1 crédito de AI!",
+  "ai_menuGenerationError": "Error al generar el menú",
   "subscriptionFeatureAI20": "🤖 Funciones AI 20x/mes (Coach/Crecimiento/Efecto total)",
   "subscriptionFeatureGrowthAnalysis": "📈 Predicción de crecimiento y análisis de efectos",
   "subscriptionFeatureAIUnlimited": "🤖 Funciones AI ilimitadas (Coach/Crecimiento/Efecto)",
-  "ai_menuGenerationError": "Error al generar el menú",
   "paywallGrowthPredictionMessage": "No te pierdas tu predicción de crecimiento"
 }
