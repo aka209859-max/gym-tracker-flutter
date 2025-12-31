@@ -46,6 +46,14 @@
   "reps": "Wdh.",
   "weight": "Gewicht",
   "weightKg": "Gewicht kg",
+  "@weightKg": {
+    "placeholders": {
+      "weight": {
+        "type": "double",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "restTime": "Pause",
   "duration": "Dauer",
   "distance": "Distanz",
@@ -3778,13 +3786,5 @@
   "announcementType_newEquipment": "Neue Ausrüstung",
   "announcementType_hours": "Öffnungszeiten",
   "reward_adCreditEarned": "Sie haben 1 KI-Guthaben verdient!",
-  "ai_menuGenerationError": "Menügenerierung fehlgeschlagen",
-  "@weightKg": {
-    "placeholders": {
-      "weight": {
-        "type": "double",
-        "format": "decimalPattern"
-      }
-    }
-  }
+  "ai_menuGenerationError": "Menügenerierung fehlgeschlagen"
 }

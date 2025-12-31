@@ -46,6 +46,14 @@
   "reps": "时代",
   "weight": "重量",
   "weightKg": "重量（公斤）",
+  "@weightKg": {
+    "placeholders": {
+      "weight": {
+        "type": "double",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "restTime": "休息时间",
   "duration": "时间",
   "distance": "距离",
@@ -3779,13 +3787,5 @@
   "announcementType_newEquipment": "新设备",
   "announcementType_hours": "营业时间",
   "reward_adCreditEarned": "获得了1次AI积分！",
-  "ai_menuGenerationError": "菜单生成失败",
-  "@weightKg": {
-    "placeholders": {
-      "weight": {
-        "type": "double",
-        "format": "decimalPattern"
-      }
-    }
-  }
+  "ai_menuGenerationError": "菜单生成失败"
 }

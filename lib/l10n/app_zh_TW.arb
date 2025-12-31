@@ -46,6 +46,14 @@
   "reps": "時代",
   "weight": "重量",
   "weightKg": "重量（公斤）",
+  "@weightKg": {
+    "placeholders": {
+      "weight": {
+        "type": "double",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "restTime": "休息時間",
   "duration": "時間",
   "distance": "距離",
@@ -3779,13 +3787,5 @@
   "announcementType_newEquipment": "新設備",
   "announcementType_hours": "營業時間",
   "reward_adCreditEarned": "獲得了1次AI積分！",
-  "ai_menuGenerationError": "菜單生成失敗",
-  "@weightKg": {
-    "placeholders": {
-      "weight": {
-        "type": "double",
-        "format": "decimalPattern"
-      }
-    }
-  }
+  "ai_menuGenerationError": "菜單生成失敗"
 }
