@@ -469,6 +469,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
   
   // 🔧 v1.0.217: レベル選択（初心者・中級者・上級者）
   late String _selectedLevel; // デフォルトは初心者（didChangeDependenciesで初期化）
+  bool _selectedLevelInitialized = false; // 🆕 Build #24.1 Hotfix9.8: レベル初期化フラグ
 
   // UI状態
   bool _isGenerating = false;
@@ -500,7 +501,11 @@ class _AIMenuTabState extends State<_AIMenuTab>
   void didChangeDependencies() {
     super.didChangeDependencies();
     // 🔧 Phase 2 Fix: context依存の初期化はここで実行
-    _selectedLevel = AppLocalizations.of(context)!.beginner;
+    // 🆕 Build #24.1 Hotfix9.8: レベルは一度だけ初期化（ユーザー選択を保持）
+    if (!_selectedLevelInitialized) {
+      _selectedLevel = AppLocalizations.of(context)!.levelBeginner;
+      _selectedLevelInitialized = true;
+    }
     
     // 🔧 Build #24.1 Hotfix8: 部位選択状態を多言語で初期化（初期化フラグ使用）
     if (!_selectedBodyPartsInitialized) {
