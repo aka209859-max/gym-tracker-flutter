@@ -275,7 +275,7 @@ class PaywallDialog extends StatelessWidget {
                       color: Colors.amber,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Text(
+                    child: Text(
                       AppLocalizations.of(context)!.paywall_firstMonthFree + '🎁',
                       style: TextStyle(
                         color: Colors.black,
@@ -452,7 +452,7 @@ class PaywallDialog extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Text(
+                    child: Text(
                       AppLocalizations.of(context)!.paywall_trial14Days + '🎁',
                       style: TextStyle(
                         color: Colors.amber,
@@ -553,7 +553,7 @@ class PaywallDialog extends StatelessWidget {
         // 広告がまだ準備できていない場合はロード試行
         if (!rewardAdService.isAdReady()) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text(AppLocalizations.of(context)!.paywall_adPreparingMessage),
               duration: Duration(seconds: 2),
             ),
@@ -588,7 +588,7 @@ class PaywallDialog extends StatelessWidget {
           // 失敗時の処理
           if (!context.mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text(AppLocalizations.of(context)!.paywall_adFailedMessage),
               duration: Duration(seconds: 2),
             ),
