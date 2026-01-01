@@ -125,7 +125,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   
                   // プラン選択セクション
                   Text(
-                    'プランを選択',
+                    AppLocalizations.of(context)!.planSelection,
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -145,9 +145,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       AppLocalizations.of(context)!.subscription_0a2805b1,
                       AppLocalizations.of(context)!.subscription_cd8c3359,
                       AppLocalizations.of(context)!.subscription_1c65be25,
-                      '📝 トレーニング記録',
-                      '🤖 AI機能月3回',
-                      '📢 広告表示あり',
+                      AppLocalizations.of(context)!.freePlanFeature_trainingLog,
+                      AppLocalizations.of(context)!.freePlanFeature_aiMonthly3,
+                      AppLocalizations.of(context)!.freePlanFeature_adsIncluded,
                     ],
                     color: Colors.grey,
                     icon: Icons.account_circle,
@@ -164,17 +164,17 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     name: 'Premium',
                     price: _getPriceForPlan(SubscriptionType.premium),
                     priceUnit: _isYearlySelected ? AppLocalizations.of(context)!.yearly : AppLocalizations.of(context)!.monthly,
-                    monthlyEquivalent: _isYearlySelected ? '月換算 ¥400' : null,
+                    monthlyEquivalent: _isYearlySelected ? AppLocalizations.of(context)!.monthlyEquivalent.replaceAll('{amount}', '400') : null,
                     discount: _isYearlySelected ? '20% OFF' : null,
-                    savings: _isYearlySelected ? '¥1,200お得！' : null,
+                    savings: _isYearlySelected ? AppLocalizations.of(context)!.savingsAmount.replaceAll('{amount}', '1,200') : null,
                     features: [
-                      '✨ 無料プランの全機能',
+                      AppLocalizations.of(context)!.premiumFeature_allFree,
                       AppLocalizations.of(context)!.subscriptionFeatureAI20,
-                      '❤️ お気に入り無制限',
-                      '📊 詳細な混雑度統計',
-                      '⭐ ジムレビュー投稿',
+                      AppLocalizations.of(context)!.premiumFeature_unlimitedFavorites,
+                      AppLocalizations.of(context)!.premiumFeature_detailedStats,
+                      AppLocalizations.of(context)!.premiumFeature_gymReviews,
                       AppLocalizations.of(context)!.subscriptionFeatureGrowthAnalysis,
-                      '🚫 広告表示なし',
+                      AppLocalizations.of(context)!.premiumFeature_noAds,
                     ],
                     color: Colors.blue,
                     icon: Icons.workspace_premium,
@@ -188,14 +188,14 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     name: 'Pro',
                     price: _getPriceForPlan(SubscriptionType.pro),
                     priceUnit: _isYearlySelected ? AppLocalizations.of(context)!.yearly : AppLocalizations.of(context)!.monthly,
-                    monthlyEquivalent: _isYearlySelected ? '月換算 ¥667' : null,
+                    monthlyEquivalent: _isYearlySelected ? AppLocalizations.of(context)!.monthlyEquivalent.replaceAll('{amount}', '667') : null,
                     discount: _isYearlySelected ? '32% OFF' : null,
-                    savings: _isYearlySelected ? '¥3,760お得！' : null,
+                    savings: _isYearlySelected ? AppLocalizations.of(context)!.savingsAmount.replaceAll('{amount}', '3,760') : null,
                     features: [
-                      '✨ Premiumプランの全機能',
+                      AppLocalizations.of(context)!.proFeature_allPremium,
                       AppLocalizations.of(context)!.subscriptionFeatureAIUnlimited,
-                      '👥 トレーニングパートナー検索', // 検索条件: 距離・目標・経験・年齢・性別・曜日・時間帯でマッチング
-                      '💬 メッセージング機能',
+                      AppLocalizations.of(context)!.proFeature_partnerSearch, // 検索条件: 距離・目標・経験・年齢・性別・曜日・時間帯でマッチング
+                      AppLocalizations.of(context)!.proFeature_messaging,
                     ],
                     color: Colors.amber,
                     icon: Icons.emoji_events,
@@ -365,7 +365,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               },
             ),
             _buildToggleButton(
-              label: '年額 (💥お得)',
+              label: AppLocalizations.of(context)!.annualSavingsBadge,
               isSelected: _isYearlySelected,
               onTap: () {
                 setState(() {
@@ -778,9 +778,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             ),
             SizedBox(height: 12),
             Text(
-              '• 無料トライアル期間: Premium 30日間 / Pro 14日間\n'
-              '• トライアル終了後、自動的に有料プランに移行します\n'
-              '• いつでもキャンセル可能（期間満了まで利用可）',
+              '${AppLocalizations.of(context)!.trialNotice_period}\n'
+              '${AppLocalizations.of(context)!.trialNotice_autoRenewal}\n'
+              '${AppLocalizations.of(context)!.trialNotice_cancellation}',
               style: TextStyle(
                 fontSize: 13,
                 color: Colors.grey[700],
@@ -1453,8 +1453,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               const SizedBox(height: 8),
               Text(AppLocalizations.of(context)!.subscription_step5),
               const SizedBox(height: 12),
-              const Text(
-                '※ 現在のプラン期間が終了後に新プランが適用されます',
+              Text(
+                AppLocalizations.of(context)!.appStorePlanNote,
                 style: TextStyle(fontSize: 12, color: Colors.grey),
               ),
             ],

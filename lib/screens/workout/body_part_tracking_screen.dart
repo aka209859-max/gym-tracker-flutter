@@ -28,7 +28,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
     'legs': AppLocalizations.of(context)!.bodyPartLegs,
     'shoulders': AppLocalizations.of(context)!.bodyPartShoulders,
     'arms': AppLocalizations.of(context)!.bodyPartArms,
-    'core': '体幹',
+    'core': AppLocalizations.of(context)!.bodyPartCore,
   };
 
   @override
@@ -144,8 +144,8 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                '集計期間',
+              Text(
+                AppLocalizations.of(context)!.bodyPart_periodLabel,
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey),
               ),
               const SizedBox(height: 8),
@@ -269,7 +269,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
               Row(
                 children: [
                   Text(
-                    '$count回',
+                    AppLocalizations.of(context)!.bodyPart_timesCount.replaceAll('{count}', count.toString()),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -323,7 +323,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
                    size: 24),
               const SizedBox(width: 12),
               Text(
-                '不足部位',
+                AppLocalizations.of(context)!.bodyPart_insufficientTitle,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -357,7 +357,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
           ),
           const SizedBox(height: 12),
           Text(
-            'これらの部位を次回のトレーニングで強化しましょう',
+            AppLocalizations.of(context)!.bodyPart_insufficientMessage,
             style: TextStyle(
               fontSize: 13,
               color: Colors.grey.shade700,
@@ -403,7 +403,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              'ワークアウトを記録すると、部位別の統計が表示されます',
+              AppLocalizations.of(context)!.bodyPart_emptyMessage,
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.grey.shade600),
             ),
