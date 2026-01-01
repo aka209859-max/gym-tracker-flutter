@@ -262,7 +262,7 @@ class PaywallDialog extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  _buildFeatureRow(Icons.psychology, AppLocalizations.of(context)!.paywall_aiAnalysisPerMonth.replaceAll('{count}', '10')),
+                  _buildFeatureRow(Icons.psychology, AppLocalizations.of(context)!.paywall_aiAnalysisPerMonth('10')),
                   _buildFeatureRow(Icons.block, AppLocalizations.of(context)!.premiumFeature_noAds.replaceAll('🚫 ', '')),
                   _buildFeatureRow(Icons.show_chart, AppLocalizations.of(context)!.premiumFeature_detailedStats.replaceAll('📊 ', '')),
                   const SizedBox(height: 16),
@@ -577,8 +577,7 @@ class PaywallDialog extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                AppLocalizations.of(context)!.paywall_adSuccessMessage
-                    .replaceAll('{remaining}', remaining.toString()),
+                AppLocalizations.of(context)!.paywall_adSuccessMessage(remaining.toString()),
               ),
               duration: const Duration(seconds: 3),
               backgroundColor: Colors.green,

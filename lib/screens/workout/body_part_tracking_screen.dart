@@ -269,7 +269,7 @@ class _BodyPartTrackingScreenState extends State<BodyPartTrackingScreen> {
               Row(
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.bodyPart_timesCount.replaceAll('{count}', count.toString()),
+                    AppLocalizations.of(context)!.bodyPart_timesCount(count.toString()),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

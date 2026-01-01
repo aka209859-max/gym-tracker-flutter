@@ -164,9 +164,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     name: 'Premium',
                     price: _getPriceForPlan(SubscriptionType.premium),
                     priceUnit: _isYearlySelected ? AppLocalizations.of(context)!.yearly : AppLocalizations.of(context)!.monthly,
-                    monthlyEquivalent: _isYearlySelected ? AppLocalizations.of(context)!.monthlyEquivalent.replaceAll('{amount}', '400') : null,
+                    monthlyEquivalent: _isYearlySelected ? AppLocalizations.of(context)!.monthlyEquivalent('400') : null,
                     discount: _isYearlySelected ? '20% OFF' : null,
-                    savings: _isYearlySelected ? AppLocalizations.of(context)!.savingsAmount.replaceAll('{amount}', '1,200') : null,
+                    savings: _isYearlySelected ? AppLocalizations.of(context)!.savingsAmount('1,200') : null,
                     features: [
                       AppLocalizations.of(context)!.premiumFeature_allFree,
                       AppLocalizations.of(context)!.subscriptionFeatureAI20,
@@ -188,9 +188,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     name: 'Pro',
                     price: _getPriceForPlan(SubscriptionType.pro),
                     priceUnit: _isYearlySelected ? AppLocalizations.of(context)!.yearly : AppLocalizations.of(context)!.monthly,
-                    monthlyEquivalent: _isYearlySelected ? AppLocalizations.of(context)!.monthlyEquivalent.replaceAll('{amount}', '667') : null,
+                    monthlyEquivalent: _isYearlySelected ? AppLocalizations.of(context)!.monthlyEquivalent('667') : null,
                     discount: _isYearlySelected ? '32% OFF' : null,
-                    savings: _isYearlySelected ? AppLocalizations.of(context)!.savingsAmount.replaceAll('{amount}', '3,760') : null,
+                    savings: _isYearlySelected ? AppLocalizations.of(context)!.savingsAmount('3,760') : null,
                     features: [
                       AppLocalizations.of(context)!.proFeature_allPremium,
                       AppLocalizations.of(context)!.subscriptionFeatureAIUnlimited,
