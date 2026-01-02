@@ -1506,7 +1506,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       // Gemini 2.0 Flash API呼び出し
       final response = await http.post(
         Uri.parse(
-            'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=AIzaSyAFVfcWzXDTtc9Rk3Zr5OGRx63FXpMAHqY'),
+            'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAFVfcWzXDTtc9Rk3Zr5OGRx63FXpMAHqY'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'contents': [
@@ -2177,7 +2177,7 @@ class _AIMenuTabState extends State<_AIMenuTab>
       // Gemini 2.0 Flash Exp API呼び出し（翻訳用）
       final response = await http.post(
         Uri.parse(
-            'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=AIzaSyAFVfcWzXDTtc9Rk3Zr5OGRx63FXpMAHqY'),
+            'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAFVfcWzXDTtc9Rk3Zr5OGRx63FXpMAHqY'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'contents': [
