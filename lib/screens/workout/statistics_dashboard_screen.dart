@@ -143,7 +143,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
     
     // メモリ内でフィルタリング
     final filteredDocs = snapshot.docs.where((doc) {
-      final data = doc.data();
+      final data = doc.data() as Map<String, dynamic>;
       final date = (data['date'] as Timestamp).toDate();
       return date.isAfter(weekStart.subtract(const Duration(seconds: 1)));
     }).toList();
@@ -155,7 +155,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
     int totalMinutes = 0;
 
     for (final doc in filteredDocs) {
-      final data = doc.data();
+      final data = doc.data() as Map<String, dynamic>;
       print('   ドキュメントID: ${doc.id}');
       print('   データ: ${data.keys.toList()}');
       
@@ -231,7 +231,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
     
     // メモリ内でフィルタリング
     final filteredDocs = snapshot.docs.where((doc) {
-      final data = doc.data();
+      final data = doc.data() as Map<String, dynamic>;
       final date = (data['date'] as Timestamp).toDate();
       return date.isAfter(monthStart.subtract(const Duration(seconds: 1)));
     }).toList();
@@ -243,7 +243,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
     final muscleGroupVolume = <String, double>{}; // 部位別総負荷量
 
     for (final doc in filteredDocs) {
-      final data = doc.data();
+      final data = doc.data() as Map<String, dynamic>;
       final date = (data['date'] as Timestamp).toDate();
       workoutDates.add(DateFormat('yyyy-MM-dd').format(date));
       
@@ -311,7 +311,7 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
 
     // 日付でソート
     final dates = snapshot.docs
-        .map((doc) => (doc.data()['date'] as Timestamp).toDate())
+        .map((doc) => ((doc.data() as Map<String, dynamic>)['date'] as Timestamp).toDate())
         .toList()
       ..sort((a, b) => b.compareTo(a));
 
