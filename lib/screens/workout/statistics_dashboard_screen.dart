@@ -122,11 +122,22 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
     print('   User ID: $userId');
     print('   期間開始: $weekStart');
     
-    // シンプルなクエリ（インデックス不要）
-    final snapshot = await FirebaseFirestore.instance
-        .collection('workout_logs')
-        .where('user_id', isEqualTo: userId)
-        .get(const GetOptions(source: Source.server));
+    // 🚀 v1.0.307: キャッシュファースト戦略
+    QuerySnapshot snapshot;
+    try {
+      snapshot = await FirebaseFirestore.instance
+          .collection('workout_logs')
+          .where('user_id', isEqualTo: userId)
+          .get(const GetOptions(source: Source.cache));
+      print('✅ キャッシュから${snapshot.docs.length}件読み込み');
+    } catch (e) {
+      print('⚠️ キャッシュ取得失敗、サーバーから取得: $e');
+      snapshot = await FirebaseFirestore.instance
+          .collection('workout_logs')
+          .where('user_id', isEqualTo: userId)
+          .get(const GetOptions(source: Source.server));
+      print('✅ サーバーから${snapshot.docs.length}件読み込み');
+    }
 
     print('📊 全ドキュメント数: ${snapshot.docs.length}');
     
@@ -199,11 +210,22 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
     print('📊 月間統計クエリ開始...');
     print('   期間開始: $monthStart');
     
-    // シンプルなクエリ（インデックス不要）
-    final snapshot = await FirebaseFirestore.instance
-        .collection('workout_logs')
-        .where('user_id', isEqualTo: userId)
-        .get(const GetOptions(source: Source.server));
+    // 🚀 v1.0.307: キャッシュファースト戦略
+    QuerySnapshot snapshot;
+    try {
+      snapshot = await FirebaseFirestore.instance
+          .collection('workout_logs')
+          .where('user_id', isEqualTo: userId)
+          .get(const GetOptions(source: Source.cache));
+      print('✅ キャッシュから${snapshot.docs.length}件読み込み');
+    } catch (e) {
+      print('⚠️ キャッシュ取得失敗、サーバーから取得: $e');
+      snapshot = await FirebaseFirestore.instance
+          .collection('workout_logs')
+          .where('user_id', isEqualTo: userId)
+          .get(const GetOptions(source: Source.server));
+      print('✅ サーバーから${snapshot.docs.length}件読み込み');
+    }
 
     print('📊 全ドキュメント数: ${snapshot.docs.length}');
     
@@ -263,10 +285,22 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
   }
 
   Future<void> _calculateStreak(String userId) async {
-    final snapshot = await FirebaseFirestore.instance
-        .collection('workout_logs')
-        .where('user_id', isEqualTo: userId)
-        .get(const GetOptions(source: Source.server));
+    // 🚀 v1.0.307: キャッシュファースト戦略
+    QuerySnapshot snapshot;
+    try {
+      snapshot = await FirebaseFirestore.instance
+          .collection('workout_logs')
+          .where('user_id', isEqualTo: userId)
+          .get(const GetOptions(source: Source.cache));
+      print('✅ キャッシュから${snapshot.docs.length}件読み込み (連続日数計算)');
+    } catch (e) {
+      print('⚠️ キャッシュ取得失敗、サーバーから取得: $e');
+      snapshot = await FirebaseFirestore.instance
+          .collection('workout_logs')
+          .where('user_id', isEqualTo: userId)
+          .get(const GetOptions(source: Source.server));
+      print('✅ サーバーから${snapshot.docs.length}件読み込み (連続日数計算)');
+    }
 
     if (snapshot.docs.isEmpty) {
       setState(() => _currentStreak = 0);
