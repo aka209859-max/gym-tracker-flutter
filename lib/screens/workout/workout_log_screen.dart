@@ -379,19 +379,36 @@ class _WorkoutLogScreenState extends State<WorkoutLogScreen> {
       final serverSnapshot = await FirebaseFirestore.instance
           .collection('workout_logs')
           .where('user_id', isEqualTo: user.uid)
-          .get(const GetOptions(source: Source.server));
+          .get(const GetOptions(source: Source.cache));
       
       if (mounted) {
         setState(() {
           _cachedWorkouts = serverSnapshot.docs;
           _isLoadingFromServer = false;
         });
-        print('✅ サーバーから${serverSnapshot.docs.length}件読み込み');
+        print('✅ キャッシュから${serverSnapshot.docs.length}件読み込み');
       }
     } catch (e) {
-      print('❌ データ読み込みエラー: $e');
-      if (mounted) {
-        setState(() => _isLoadingFromServer = false);
+      print('⚠️ キャッシュなし、サーバーから取得: $e');
+      // フォールバック: サーバーから取得
+      try {
+        final serverSnapshot = await FirebaseFirestore.instance
+            .collection('workout_logs')
+            .where('user_id', isEqualTo: user.uid)
+            .get(const GetOptions(source: Source.server));
+        
+        if (mounted) {
+          setState(() {
+            _cachedWorkouts = serverSnapshot.docs;
+            _isLoadingFromServer = false;
+          });
+          print('✅ サーバーから${serverSnapshot.docs.length}件読み込み');
+        }
+      } catch (serverError) {
+        print('❌ データ読み込みエラー: $serverError');
+        if (mounted) {
+          setState(() => _isLoadingFromServer = false);
+        }
       }
     }
   }

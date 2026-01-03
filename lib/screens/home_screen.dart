@@ -48,6 +48,7 @@ import '../services/crowd_alert_service.dart';
 import '../services/referral_service.dart';
 import 'debug_log_screen.dart';
 import 'package:gym_match/gen/app_localizations.dart';
+import '../utils/async_error_handler.dart'; // 🛡️ v1.0.307: Global error handler
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -150,21 +151,21 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     _selectedDay = _focusedDay;
     // ⚡ v1.0.307: 並列処理で高速化 - すべてのデータ読み込みを同時実行
     _cleanupEmptySets().then((_) {
-      // 🚀 Phase 1: 必須データを並列読み込み（爆速）
+      // 🚀 Phase 1: 必須データを並列読み込み（爆速） + 🛡️ 個別エラーハンドリング
       Future.wait([
-        _loadWorkoutDates(), // トレーニング記録がある日付を読み込む
-        _loadRestDays(), // ✅ v1.0.178: オフ日を読み込む
-        _loadWorkoutsForSelectedDay(),
-        _loadBadgeStats(),
-        _loadActiveGoals(),
-        _loadStatistics(), // 統計データを読み込む
-        _loadHabitData(), // 🔥 習慣形成データ読み込み
-        _loadReferralData(), // 🎁 紹介コードデータ読み込み（Task 10）
+        safeAsyncVoid(() => _loadWorkoutDates(), debugLabel: 'LoadWorkoutDates'),
+        safeAsyncVoid(() => _loadRestDays(), debugLabel: 'LoadRestDays'),
+        safeAsyncVoid(() => _loadWorkoutsForSelectedDay(), debugLabel: 'LoadWorkouts'),
+        safeAsyncVoid(() => _loadBadgeStats(), debugLabel: 'LoadBadges'),
+        safeAsyncVoid(() => _loadActiveGoals(), debugLabel: 'LoadGoals'),
+        safeAsyncVoid(() => _loadStatistics(), debugLabel: 'LoadStatistics'),
+        safeAsyncVoid(() => _loadHabitData(), debugLabel: 'LoadHabitData'),
+        safeAsyncVoid(() => _loadReferralData(), debugLabel: 'LoadReferralData'),
       ]).then((_) {
-        // 🚀 Phase 2: UI関連の処理（遅延実行OK）
-        _checkDay7Paywall(); // 🎯 Day 7ペイウォールトリガーチェック
-        _checkReminders(); // 🔔 リマインダーチェック
-        _checkAndShowReferralBanner(); // 🎁 紹介バナー表示チェック（週1回）
+        // 🚀 Phase 2: UI関連の処理（遅延実行OK） + 🛡️ エラーハンドリング
+        safeAsyncVoid(() => _checkDay7Paywall(), debugLabel: 'CheckDay7Paywall');
+        safeAsyncVoid(() => _checkReminders(), debugLabel: 'CheckReminders');
+        safeAsyncVoid(() => _checkAndShowReferralBanner(), debugLabel: 'CheckReferralBanner');
       }).catchError((error) {
         // 🛡️ エラーハンドリング：データ読み込み失敗時もアプリは起動可能
         if (kDebugMode) {
@@ -341,21 +342,22 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   
   /// 🔥 習慣形成データを読み込む
   Future<void> _loadHabitData() async {
-    await Future.delayed(const Duration(milliseconds: 1000));
-    
-    if (!mounted) return;
-    
-    // 連続トレーニング日数を取得
-    final streak = await _habitService.getCurrentStreak();
-    
-    // 今週の進捗を取得
-    final weeklyProgress = await _habitService.getWeeklyProgress();
-    
-    // 最もトレーニングしている曜日TOP3を取得
-    final topDays = await _habitService.getTopTrainingDays();
-    
-    // ✨ マジックナンバー進捗を取得（5記録/30日）
-    final magicData = await _magicNumberService.getProgress();
+    try {
+      await Future.delayed(const Duration(milliseconds: 1000));
+      
+      if (!mounted) return;
+      
+      // 連続トレーニング日数を取得
+      final streak = await _habitService.getCurrentStreak();
+      
+      // 今週の進捗を取得
+      final weeklyProgress = await _habitService.getWeeklyProgress();
+      
+      // 最もトレーニングしている曜日TOP3を取得
+      final topDays = await _habitService.getTopTrainingDays();
+      
+      // ✨ マジックナンバー進捗を取得（5記録/30日）
+      final magicData = await _magicNumberService.getProgress();
     
     if (mounted) {
       setState(() {
@@ -372,6 +374,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       
       // ✨ マジックナンバー達成チェック
       await _checkMagicNumberAchievement();
+    }
+    } catch (e) {
+      if (kDebugMode) {
+        print('⚠️ 習慣データ読み込みエラー: $e');
+      }
+      // エラー時もアプリは継続動作
     }
   }
   
