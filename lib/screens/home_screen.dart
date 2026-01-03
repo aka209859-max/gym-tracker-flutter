@@ -148,29 +148,34 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _selectedDay = _focusedDay;
-    // 空セットをクリーンアップしてからデータ読み込み
+    // ⚡ v1.0.307: 並列処理で高速化 - すべてのデータ読み込みを同時実行
     _cleanupEmptySets().then((_) {
-      _loadWorkoutDates(); // トレーニング記録がある日付を読み込む
-      _loadRestDays(); // ✅ v1.0.178: オフ日を読み込む
-      _loadWorkoutsForSelectedDay();
-      _loadBadgeStats();
-      _loadActiveGoals();
-      _loadStatistics(); // 統計データを読み込む
-      
-      // 🎯 Day 7ペイウォールトリガーチェック
-      _checkDay7Paywall();
-      
-      // 🔔 リマインダーチェック
-      _checkReminders();
-      
-      // 🔥 習慣形成データ読み込み
-      _loadHabitData();
-      
-      // 🎁 紹介コードデータ読み込み（Task 10）
-      _loadReferralData();
-      
-      // 🎁 紹介バナー表示チェック（週1回）
-      _checkAndShowReferralBanner();
+      // 🚀 Phase 1: 必須データを並列読み込み（爆速）
+      Future.wait([
+        _loadWorkoutDates(), // トレーニング記録がある日付を読み込む
+        _loadRestDays(), // ✅ v1.0.178: オフ日を読み込む
+        _loadWorkoutsForSelectedDay(),
+        _loadBadgeStats(),
+        _loadActiveGoals(),
+        _loadStatistics(), // 統計データを読み込む
+        _loadHabitData(), // 🔥 習慣形成データ読み込み
+        _loadReferralData(), // 🎁 紹介コードデータ読み込み（Task 10）
+      ]).then((_) {
+        // 🚀 Phase 2: UI関連の処理（遅延実行OK）
+        _checkDay7Paywall(); // 🎯 Day 7ペイウォールトリガーチェック
+        _checkReminders(); // 🔔 リマインダーチェック
+        _checkAndShowReferralBanner(); // 🎁 紹介バナー表示チェック（週1回）
+      }).catchError((error) {
+        // 🛡️ エラーハンドリング：データ読み込み失敗時もアプリは起動可能
+        if (kDebugMode) {
+          print('⚠️ データ読み込みエラー: $error');
+        }
+      });
+    }).catchError((error) {
+      // 🛡️ クリーンアップエラーハンドリング
+      if (kDebugMode) {
+        print('⚠️ クリーンアップエラー: $error');
+      }
     });
     
     // 🔧 v1.0.225-fix: プラン状態をチェックしてから広告を読み込む
@@ -645,11 +650,19 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     try {
       print('📊 統計データを計算中...');
       
-      // 全トレーニング記録を取得（シンプルクエリ - インデックス不要）
-      final querySnapshot = await FirebaseFirestore.instance
-          .collection('workout_logs')
-          .where('user_id', isEqualTo: user.uid)
-          .get();
+      // ⚡ v1.0.307: キャッシュファースト - 統計データ計算も高速化
+      QuerySnapshot<Map<String, dynamic>> querySnapshot;
+      try {
+        querySnapshot = await FirebaseFirestore.instance
+            .collection('workout_logs')
+            .where('user_id', isEqualTo: user.uid)
+            .get(const GetOptions(source: Source.cache));
+      } catch (e) {
+        querySnapshot = await FirebaseFirestore.instance
+            .collection('workout_logs')
+            .where('user_id', isEqualTo: user.uid)
+            .get();
+      }
       
       print('📊 全記録件数: ${querySnapshot.docs.length}');
       
@@ -766,11 +779,19 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     try {
       print('📅 トレーニング記録日付を取得中...');
       
-      // 全トレーニング記録の日付を取得
-      final querySnapshot = await FirebaseFirestore.instance
-          .collection('workout_logs')
-          .where('user_id', isEqualTo: user.uid)
-          .get();
+      // ⚡ v1.0.307: キャッシュファースト - カレンダーマーカー用の日付取得も高速化
+      QuerySnapshot<Map<String, dynamic>> querySnapshot;
+      try {
+        querySnapshot = await FirebaseFirestore.instance
+            .collection('workout_logs')
+            .where('user_id', isEqualTo: user.uid)
+            .get(const GetOptions(source: Source.cache));
+      } catch (e) {
+        querySnapshot = await FirebaseFirestore.instance
+            .collection('workout_logs')
+            .where('user_id', isEqualTo: user.uid)
+            .get();
+      }
       
       final workoutDates = <DateTime>{};
       for (final doc in querySnapshot.docs) {
@@ -803,11 +824,19 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     try {
       print('📅 オフ日を取得中...');
       
-      // 全オフ日を取得
-      final querySnapshot = await FirebaseFirestore.instance
-          .collection('rest_days')
-          .where('user_id', isEqualTo: user.uid)
-          .get();
+      // ⚡ v1.0.307: キャッシュファースト - オフ日取得も高速化
+      QuerySnapshot<Map<String, dynamic>> querySnapshot;
+      try {
+        querySnapshot = await FirebaseFirestore.instance
+            .collection('rest_days')
+            .where('user_id', isEqualTo: user.uid)
+            .get(const GetOptions(source: Source.cache));
+      } catch (e) {
+        querySnapshot = await FirebaseFirestore.instance
+            .collection('rest_days')
+            .where('user_id', isEqualTo: user.uid)
+            .get();
+      }
       
       final restDays = <DateTime>{};
       for (final doc in querySnapshot.docs) {
@@ -944,12 +973,29 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       DebugLogger.instance.log('📧 User Email: ${user.email}');
 
       // シンプルなクエリ（インデックス不要）
-      DebugLogger.instance.log('🔍 ユーザーの全記録を取得中...');
+      // ⚡ v1.0.307: キャッシュファースト戦略 - 爆速起動のためキャッシュ優先
+      DebugLogger.instance.log('⚡ ユーザーの全記録を取得中（キャッシュ優先）...');
 
-      final querySnapshot = await FirebaseFirestore.instance
-          .collection('workout_logs')
-          .where('user_id', isEqualTo: user.uid)
-          .get(const GetOptions(source: Source.server));
+      QuerySnapshot<Map<String, dynamic>> querySnapshot;
+      
+      try {
+        // 🚀 Step 1: キャッシュから取得（超高速 & 無料）
+        querySnapshot = await FirebaseFirestore.instance
+            .collection('workout_logs')
+            .where('user_id', isEqualTo: user.uid)
+            .get(const GetOptions(source: Source.cache));
+        
+        DebugLogger.instance.log('✅ キャッシュから取得成功: ${querySnapshot.docs.length}件');
+      } catch (e) {
+        // 📡 Step 2: キャッシュがない場合はサーバーから取得（初回起動時）
+        DebugLogger.instance.log('⚠️ キャッシュなし、サーバーから取得: $e');
+        querySnapshot = await FirebaseFirestore.instance
+            .collection('workout_logs')
+            .where('user_id', isEqualTo: user.uid)
+            .get(const GetOptions(source: Source.server));
+        
+        DebugLogger.instance.log('✅ サーバーから取得成功: ${querySnapshot.docs.length}件');
+      }
 
       DebugLogger.instance.log('📊 全記録件数: ${querySnapshot.docs.length}');
       
