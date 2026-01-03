@@ -303,7 +303,9 @@ class _StatisticsDashboardScreenState extends State<StatisticsDashboardScreen> w
     }
 
     if (snapshot.docs.isEmpty) {
-      setState(() => _currentStreak = 0);
+      if (mounted) {
+        setState(() => _currentStreak = 0);
+      }
       return;
     }
 
